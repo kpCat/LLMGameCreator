@@ -8,15 +8,9 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceGoal115Tests
 {
     [Fact]
-    public async Task Goal115HumanResultRevalidationGroupSurfacesManualGateStatus()
+    public void Goal115HumanResultRevalidationGroupSurfacesManualGateStatus()
     {
         var root = ProjectRoot();
-        var manualResultExists = File.Exists(Path.Combine(
-            root,
-            OfflineGeoworldAlphaHumanResultRevalidationVocabulary.ManualResultRelativePath
-                .Replace('/', Path.DirectorySeparatorChar)));
-        await new OfflineGeoworldAlphaHumanResultRevalidationService().BuildAndWriteAsync(root);
-
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         var group = Assert.Single(
             workspace.Catalog.Groups,
@@ -34,34 +28,21 @@ public sealed class VisualWorldStreamPreviewWorkspaceGoal115Tests
         Assert.True(summary.OfflineGeoworldAlphaHumanResultRevalidationHumanAcceptanceStillRequired);
         Assert.True(summary.OfflineGeoworldAlphaHumanResultRevalidationManualGateRemainsHumanDecision);
         Assert.True(summary.OfflineGeoworldAlphaHumanResultRevalidationManualInputNotCommitted);
-
-        if (manualResultExists)
-        {
-            Assert.Equal(
-                OfflineGeoworldAlphaHumanResultRevalidationVocabulary.DecisionStatusGreenCandidate,
-                summary.OfflineGeoworldAlphaHumanResultRevalidationDecisionStatus);
-            Assert.Equal(
-                OfflineGeoworldAlphaManualResultIntakeVocabulary.DecisionStatusGreenCandidate,
-                summary.OfflineGeoworldAlphaHumanResultRevalidationGoal111DecisionStatus);
-            Assert.True(summary.OfflineGeoworldAlphaHumanResultRevalidationAcceptableCandidate);
-            Assert.True(workspace.QualityGateScan
-                .OfflineGeoworldAlphaHumanResultRevalidationQualityGatePassed);
-            Assert.True(workspace.QualityGateScan.Goal115FilesDiscoveredByRelativePaths);
-            Assert.Contains(
-                "offlineGeoworldAlphaHumanResultRevalidationDecisionStatus: "
-                + OfflineGeoworldAlphaHumanResultRevalidationVocabulary.DecisionStatusGreenCandidate,
-                workspace.ReportMarkdown,
-                StringComparison.Ordinal);
-        }
-        else
-        {
-            Assert.Equal(
-                OfflineGeoworldAlphaHumanResultRevalidationVocabulary.DecisionStatusPending,
-                summary.OfflineGeoworldAlphaHumanResultRevalidationDecisionStatus);
-            Assert.False(summary.OfflineGeoworldAlphaHumanResultRevalidationAcceptableCandidate);
-            Assert.False(workspace.QualityGateScan
-                .OfflineGeoworldAlphaHumanResultRevalidationQualityGatePassed);
-        }
+        Assert.Equal(
+            OfflineGeoworldAlphaHumanResultRevalidationVocabulary.DecisionStatusGreenCandidate,
+            summary.OfflineGeoworldAlphaHumanResultRevalidationDecisionStatus);
+        Assert.Equal(
+            OfflineGeoworldAlphaManualResultIntakeVocabulary.DecisionStatusGreenCandidate,
+            summary.OfflineGeoworldAlphaHumanResultRevalidationGoal111DecisionStatus);
+        Assert.True(summary.OfflineGeoworldAlphaHumanResultRevalidationAcceptableCandidate);
+        Assert.True(workspace.QualityGateScan
+            .OfflineGeoworldAlphaHumanResultRevalidationQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.Goal115FilesDiscoveredByRelativePaths);
+        Assert.Contains(
+            "offlineGeoworldAlphaHumanResultRevalidationDecisionStatus: "
+            + OfflineGeoworldAlphaHumanResultRevalidationVocabulary.DecisionStatusGreenCandidate,
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
     }
 
     private static string ProjectRoot()

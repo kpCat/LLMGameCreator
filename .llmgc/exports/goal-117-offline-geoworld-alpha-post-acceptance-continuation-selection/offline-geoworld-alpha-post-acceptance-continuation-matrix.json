@@ -1,0 +1,103 @@
+{
+  "goalId": "goal_117_offline_geoworld_alpha_post_acceptance_continuation_selection",
+  "manualGateStatus": "ACCEPTED_BY_HUMAN",
+  "humanAccepted": true,
+  "recommendedNextLane": "accepted_alpha_baseline_review",
+  "recommendedNextGoalId": "goal-118-offline-geoworld-accepted-alpha-baseline-review",
+  "doNotStartAutomatically": true,
+  "laneCount": 7,
+  "lanes": [
+    {
+      "laneId": "accepted_alpha_baseline_review",
+      "status": "READY",
+      "recommendedNextGoalId": "goal-118-offline-geoworld-accepted-alpha-baseline-review",
+      "isRecommended": true,
+      "requiresExplicitFutureApproval": false,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "review accepted Goal116 baseline",
+        "no live geodata",
+        "no providers",
+        "no Runtime/schema/Lua/generator-library changes"
+      ]
+    },
+    {
+      "laneId": "offline_bundle_import_policy_scaffold",
+      "status": "CANDIDATE_REQUIRES_EXPLICIT_APPROVAL",
+      "recommendedNextGoalId": "",
+      "isRecommended": false,
+      "requiresExplicitFutureApproval": true,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "no network",
+        "no providers",
+        "no Runtime",
+        "no public schema"
+      ]
+    },
+    {
+      "laneId": "unity_visual_consumption_or_playable_rendering",
+      "status": "CANDIDATE_REQUIRES_EXPLICIT_APPROVAL",
+      "recommendedNextGoalId": "",
+      "isRecommended": false,
+      "requiresExplicitFutureApproval": true,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "no Unity scenes",
+        "no Unity prefabs",
+        "no Unity project settings in Goal117"
+      ]
+    },
+    {
+      "laneId": "runtime_or_gamepackage_consumers",
+      "status": "BLOCKED_REQUIRES_EXPLICIT_SCHEMA_RUNTIME_TASK",
+      "recommendedNextGoalId": "",
+      "isRecommended": false,
+      "requiresExplicitFutureApproval": true,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "requires explicit schema task",
+        "requires explicit Runtime task",
+        "not authorized by Goal117"
+      ]
+    },
+    {
+      "laneId": "live_geodata_provider_network",
+      "status": "BLOCKED_BY_POLICY",
+      "recommendedNextGoalId": "",
+      "isRecommended": false,
+      "requiresExplicitFutureApproval": true,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "blocked by provider policy",
+        "blocked by live network policy",
+        "requires legal/provider review"
+      ]
+    },
+    {
+      "laneId": "release_packaging",
+      "status": "BLOCKED_NOT_RELEASE_READY",
+      "recommendedNextGoalId": "",
+      "isRecommended": false,
+      "requiresExplicitFutureApproval": true,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "not release ready",
+        "requires separate release packaging gate"
+      ]
+    },
+    {
+      "laneId": "visual_final_renderer_atlas",
+      "status": "CANDIDATE_REQUIRES_RENDERER_DECISION",
+      "recommendedNextGoalId": "",
+      "isRecommended": false,
+      "requiresExplicitFutureApproval": true,
+      "doNotStartAutomatically": true,
+      "boundaries": [
+        "requires renderer decision",
+        "requires atlas/output contract decision",
+        "not started by Goal117"
+      ]
+    }
+  ]
+}

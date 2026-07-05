@@ -219,6 +219,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var manualResultWorkbench = BuildGoal113AlphaManualResultWorkbenchQuality(groups, proofs);
         var humanResultRevalidation = BuildGoal115AlphaHumanResultRevalidationQuality(groups, proofs);
         var manualGateAcceptance = BuildGoal116AlphaManualGateAcceptanceQuality(groups, proofs);
+        var postAcceptanceContinuation =
+            BuildGoal117AlphaPostAcceptanceContinuationQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -391,6 +393,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal113AlphaManualResultWorkbenchQualityDiagnostics(manualResultWorkbench, binding, diagnostics);
         AddGoal115AlphaHumanResultRevalidationQualityDiagnostics(humanResultRevalidation, binding, diagnostics);
         AddGoal116AlphaManualGateAcceptanceQualityDiagnostics(manualGateAcceptance, binding, diagnostics);
+        AddGoal117AlphaPostAcceptanceContinuationQualityDiagnostics(
+            postAcceptanceContinuation,
+            binding,
+            diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -552,20 +558,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 interactiveTravel.ActiveChunkCounts,
             OfflineGeoworldInteractiveTravelBoundaryPrefetchCounts =
                 interactiveTravel.BoundaryPrefetchCounts,
-            OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts =
-                interactiveTravel.ExpectedVisibleObjectCounts,
-            OfflineGeoworldInteractiveTravelUnityScriptsReady =
-                interactiveTravel.UnityScriptsReady,
-            OfflineGeoworldInteractiveTravelEditorWindowReady =
-                interactiveTravel.EditorWindowReady,
-            OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed =
-                interactiveTravel.SimulatedExecutionProofPassed,
-            OfflineGeoworldInteractiveTravelNegativeProofPassed =
-                interactiveTravel.NegativeProofPassed,
-            OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged =
-                interactiveTravel.AlphaRuntimeBootstrapUnchanged,
-            OfflineGeoworldInteractiveTravelQualityGatePassed =
-                interactiveTravel.QualityGatePassed,
+            OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts = interactiveTravel.ExpectedVisibleObjectCounts,
+            OfflineGeoworldInteractiveTravelUnityScriptsReady = interactiveTravel.UnityScriptsReady,
+            OfflineGeoworldInteractiveTravelEditorWindowReady = interactiveTravel.EditorWindowReady,
+            OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed = interactiveTravel.SimulatedExecutionProofPassed,
+            OfflineGeoworldInteractiveTravelNegativeProofPassed = interactiveTravel.NegativeProofPassed,
+            OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged = interactiveTravel.AlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldInteractiveTravelQualityGatePassed = interactiveTravel.QualityGatePassed,
             Goal104FilesDiscoveredByRelativePaths = interactiveTravel.RelativePaths,
             OfflineGeoworldInteractionGroupPresent = interactions.GroupPresent,
             OfflineGeoworldInteractionTargetCount = interactions.TargetCount,
@@ -574,20 +573,14 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             OfflineGeoworldInteractionScriptedEventCount = interactions.ScriptedEventCount,
             OfflineGeoworldInteractionStateDeltaCount = interactions.StateDeltaCount,
             OfflineGeoworldInteractionFinalStateHash = interactions.FinalStateHash,
-            OfflineGeoworldInteractionStateHashChainPassed =
-                interactions.StateHashChainPassed,
+            OfflineGeoworldInteractionStateHashChainPassed = interactions.StateHashChainPassed,
             OfflineGeoworldInteractionUnityScriptsReady = interactions.UnityScriptsReady,
             OfflineGeoworldInteractionEditorWindowReady = interactions.EditorWindowReady,
-            OfflineGeoworldInteractionUnitySafetyScanPassed =
-                interactions.UnitySafetyScanPassed,
-            OfflineGeoworldInteractionSimulatedSessionProofPassed =
-                interactions.SimulatedSessionProofPassed,
-            OfflineGeoworldInteractionNegativeProofPassed =
-                interactions.NegativeProofPassed,
-            OfflineGeoworldInteractionAlphaRuntimeBootstrapUnchanged =
-                interactions.AlphaRuntimeBootstrapUnchanged,
-            OfflineGeoworldInteractionQualityGatePassed =
-                interactions.QualityGatePassed,
+            OfflineGeoworldInteractionUnitySafetyScanPassed = interactions.UnitySafetyScanPassed,
+            OfflineGeoworldInteractionSimulatedSessionProofPassed = interactions.SimulatedSessionProofPassed,
+            OfflineGeoworldInteractionNegativeProofPassed = interactions.NegativeProofPassed,
+            OfflineGeoworldInteractionAlphaRuntimeBootstrapUnchanged = interactions.AlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldInteractionQualityGatePassed = interactions.QualityGatePassed,
             Goal105FilesDiscoveredByRelativePaths = interactions.RelativePaths,
             OfflineGeoworldSessionReplayGroupPresent = sessionReplay.GroupPresent,
             OfflineGeoworldSessionReplayStepCount = sessionReplay.ReplayStepCount,
@@ -644,18 +637,12 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             WinFormsCacheExportBindingReal = binding.PageBindDisplaysCacheExports,
             WinFormsUnityHandoffBindingReal = binding.PageBindDisplaysUnityHandoff,
             WinFormsGeoworldBindingReal = binding.PageBindDisplaysGeoworld,
-            WinFormsOfflineGeoworldHandoffBindingReal =
-                binding.PageBindDisplaysOfflineGeoworldHandoff,
-            WinFormsOfflineGeoworldUnityPreviewBindingReal =
-                binding.PageBindDisplaysOfflineGeoworldUnityPreview,
-            WinFormsOfflineGeoworldUnityEditorPreviewBindingReal =
-                binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview,
-            WinFormsOfflineGeoworldPlayModeTravelBindingReal =
-                binding.PageBindDisplaysOfflineGeoworldPlayModeTravel,
-            WinFormsOfflineGeoworldInteractiveTravelBindingReal =
-                binding.PageBindDisplaysOfflineGeoworldInteractiveTravel,
-            WinFormsOfflineGeoworldInteractionBindingReal =
-                binding.PageBindDisplaysOfflineGeoworldInteractions,
+            WinFormsOfflineGeoworldHandoffBindingReal = binding.PageBindDisplaysOfflineGeoworldHandoff,
+            WinFormsOfflineGeoworldUnityPreviewBindingReal = binding.PageBindDisplaysOfflineGeoworldUnityPreview,
+            WinFormsOfflineGeoworldUnityEditorPreviewBindingReal = binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview,
+            WinFormsOfflineGeoworldPlayModeTravelBindingReal = binding.PageBindDisplaysOfflineGeoworldPlayModeTravel,
+            WinFormsOfflineGeoworldInteractiveTravelBindingReal = binding.PageBindDisplaysOfflineGeoworldInteractiveTravel,
+            WinFormsOfflineGeoworldInteractionBindingReal = binding.PageBindDisplaysOfflineGeoworldInteractions,
             WinFormsOfflineGeoworldSessionReplayBindingReal = binding.PageBindDisplaysOfflineGeoworldSessionReplay,
             WinFormsOfflineGeoworldObjectiveAcceptanceBindingReal =
                 binding.PageBindDisplaysOfflineGeoworldObjectiveAcceptance,
@@ -686,11 +673,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal111 = ApplyGoal111AlphaManualResultIntakeQuality(withGoal110, manualResultIntake, binding);
         var withGoal112 = ApplyGoal112AlphaAcceptanceOperatorQuality(withGoal111, operatorPack, binding);
         var withGoal113 = ApplyGoal113AlphaManualResultWorkbenchQuality(withGoal112, manualResultWorkbench, binding);
-        var withGoal115 = ApplyGoal115AlphaHumanResultRevalidationQuality(
-            withGoal113,
-            humanResultRevalidation,
-            binding);
-        return ApplyGoal116AlphaManualGateAcceptanceQuality(withGoal115, manualGateAcceptance, binding);
+        var withGoal115 = ApplyGoal115AlphaHumanResultRevalidationQuality(withGoal113, humanResultRevalidation, binding);
+        var withGoal116 = ApplyGoal116AlphaManualGateAcceptanceQuality(withGoal115, manualGateAcceptance, binding);
+        return ApplyGoal117AlphaPostAcceptanceContinuationQuality(withGoal116, postAcceptanceContinuation, binding);
     }
 
 }

@@ -113,6 +113,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal116OfflineGeoworldAlphaManualGateAcceptanceRecordProofStatus(
             projectRoot,
             proofDiagnostics));
+        proofs.AddRange(BuildGoal117OfflineGeoworldAlphaPostAcceptanceContinuationProofStatus(
+            projectRoot,
+            proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);

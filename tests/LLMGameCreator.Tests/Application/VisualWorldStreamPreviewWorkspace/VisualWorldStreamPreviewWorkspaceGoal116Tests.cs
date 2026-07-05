@@ -7,10 +7,9 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceGoal116Tests
 {
     [Fact]
-    public async Task Goal116ManualGateAcceptanceRecordSurfacesInWorkspaceAndUiBinding()
+    public void Goal116ManualGateAcceptanceRecordSurfacesInWorkspaceAndUiBinding()
     {
         var root = ProjectRoot();
-        await new OfflineGeoworldAlphaManualGateAcceptanceRecordService().BuildAndWriteAsync(root);
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         var group = Assert.Single(

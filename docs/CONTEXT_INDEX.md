@@ -211,6 +211,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-114-unity-safe-mode-compile-hotfix/GOAL.md` | Goal 114 hotfix task: repair the Unity Safe Mode compile blockers found during Goal110/111/112/113 manual acceptance by removing unqualified `JsonUtility` usage from concrete Unity helper scripts and adding low-risk `RefreshPayloadStatus()` compatibility wrappers. Produces compact source-scan, dashboard, negative-proof, file-index and report evidence under `.llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix/` and `.llmgc/exports/goal-114-unity-safe-mode-compile-hotfix/`; keeps `offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`, writes no `.llmgc/manual/**` result and changes no `AlphaRuntimeBootstrap.cs`, Unity scenes/prefabs/ProjectSettings/Packages/StreamingAssets, Runtime, public schema, providers, Lua, generator-library or project/dependency files. |
 | `docs/agent-tasks/goal-115-offline-geoworld-alpha-human-result-revalidation/GOAL.md` | Goal 115 task: revalidate the real local offline geoworld Alpha human result without committing `.llmgc/manual/**`. Produces a BCL-only Application revalidation service, deterministic dashboard/decision-snapshot/report/file-index/quality/negative-proof evidence, export metadata, short decision note and Visual World Stream Preview Workspace/WinForms visibility. Current result is `GREEN_ACCEPTABLE_CANDIDATE` with manualResultSha256 `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`, 12/12 required steps passed, acceptedByCodex=false and humanAcceptanceStillRequired=true; the active gate remains `offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`. |
 | `docs/agent-tasks/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/GOAL.md` | Goal 116 task: record explicit human acceptance of `offline_geoworld_alpha_manual_acceptance_verification` from Goal115 GREEN candidate evidence without committing `.llmgc/manual/**`. Produces a BCL-only Application acceptance-record service, deterministic acceptance/dashboard/report/file-index/quality/negative-proof evidence, export metadata, short acceptance note and Visual World Stream Preview Workspace/WinForms visibility. Current result is `ACCEPTED_BY_HUMAN`, humanAccepted=true, acceptedByCodex=false, manualInputNotCommitted=true, rawManualResultEmbeddedInArtifacts=false and recommendedNextDecision=`POST_ACCEPTANCE_CONTINUATION_SELECTION`. |
+| `docs/agent-tasks/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/GOAL.md` | Goal 117 task: create the post-acceptance continuation-selection matrix after Goal116. Current result is `GREEN`, recommendedNextLane=`accepted_alpha_baseline_review`, recommendedNextGoalId=`goal-118-offline-geoworld-accepted-alpha-baseline-review`, doNotStartAutomatically=true and no Goal118 task files created. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -741,6 +742,14 @@ rawManualResultEmbeddedInArtifacts=false. The next safe step is `POST_ACCEPTANCE
 final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas, Unity
 scene/prefab/project-settings or release-packaging approval.
 
+Goal117 records the post-acceptance continuation-selection matrix after Goal116. It writes deterministic evidence under
+`.llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/` and export metadata under
+`.llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/`. The matrix recommends
+`accepted_alpha_baseline_review` / `goal-118-offline-geoworld-accepted-alpha-baseline-review`, sets
+`doNotStartAutomatically=true` and creates no Goal118 task files. Live geodata/provider/network, Runtime/schema, Lua,
+generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets and
+release-packaging work remain unauthorized without a separate explicit task.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -821,6 +830,7 @@ Allowed next sequence:
 76. Review Goal 114 Unity Safe Mode compile hotfix while keeping the active human gate at `offline_geoworld_alpha_manual_acceptance_verification`; it unblocks the reported Unity compile errors only, writes no `.llmgc/manual/**` result and still requires a real human-created result JSON at the preferred `.llmgc/manual` path plus explicit human gate decision.
 77. Review Goal 115 human-result revalidation while keeping the active human gate at `offline_geoworld_alpha_manual_acceptance_verification`; it validates the real local human result as `GREEN_ACCEPTABLE_CANDIDATE`, commits no `.llmgc/manual/**` input and still requires explicit human gate decision.
 78. Use Goal 116 as the accepted manual gate record for `offline_geoworld_alpha_manual_acceptance_verification`; select the post-acceptance continuation explicitly and do not start Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/release-packaging work without a separate task.
+79. Use Goal117 as the GREEN continuation-selection matrix: recommended next lane is `accepted_alpha_baseline_review` and recommended next goal id is `goal-118-offline-geoworld-accepted-alpha-baseline-review`; do not create/start Goal118 without a separate explicit task.
 
 Kill criterion:
 

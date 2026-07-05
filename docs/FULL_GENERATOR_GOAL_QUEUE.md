@@ -2080,18 +2080,32 @@ World Stream Preview Workspace. This is not final release, not Runtime approval,
 approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity
 scene/prefab/project-settings or release-packaging approval.
 
+### Goal 117: Offline Geoworld Alpha Post-Acceptance Continuation Selection
+
+Goal 117 is produced for review as a GREEN continuation-selection matrix after Goal116 manual gate acceptance.
+It writes deterministic evidence under
+`.llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/`, export metadata under
+`.llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/`, and the short decision note at
+`docs/manual-acceptance/offline-geoworld-alpha-post-acceptance-continuation-selection.md`.
+
+It records `recommendedNextLane=accepted_alpha_baseline_review`,
+`recommendedNextGoalId=goal-118-offline-geoworld-accepted-alpha-baseline-review`, `doNotStartAutomatically=true`,
+`readyLaneCount=1`, `candidateLaneCount=3`, `blockedLaneCount=3` and `implementationStatus=GREEN`. It does not create
+Goal118 task files and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library, final
+renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-post_acceptance_continuation_selection
+accepted_alpha_baseline_review
 ```
 
-Use the Goal116 human acceptance record as the boundary for selecting the next bounded continuation. Do not start live
-geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity
-scene/prefab/settings/packages or release packaging work from this handoff.
+Use the Goal117 matrix to explicitly select `goal-118-offline-geoworld-accepted-alpha-baseline-review` as the next
+bounded task. Do not start live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art,
+atlas, Unity scene/prefab/settings/packages or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_116_offline_geoworld_alpha_manual_gate_acceptance_record_green_post_acceptance_selection_required
+goal_117_offline_geoworld_alpha_post_acceptance_continuation_selection_green_baseline_review_recommended
 ```

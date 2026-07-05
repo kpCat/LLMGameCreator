@@ -1,0 +1,54 @@
+{
+  "goalId": "goal_117_offline_geoworld_alpha_post_acceptance_continuation_selection",
+  "sourceGoalIds": [
+    "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record"
+  ],
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "manualGateStatus": "ACCEPTED_BY_HUMAN",
+  "humanAccepted": true,
+  "sourceDecisionStatus": "GREEN_ACCEPTABLE_CANDIDATE",
+  "manualResultSha256": "8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb",
+  "acceptedByCodex": false,
+  "manualInputNotCommitted": true,
+  "rawManualResultEmbeddedInArtifacts": false,
+  "recommendedNextLane": "accepted_alpha_baseline_review",
+  "recommendedNextGoalId": "goal-118-offline-geoworld-accepted-alpha-baseline-review",
+  "readyLaneCount": 1,
+  "candidateLaneCount": 3,
+  "blockedLaneCount": 3,
+  "doNotStartAutomatically": true,
+  "evidencePath": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection",
+  "exportPath": ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection",
+  "goal116AcceptanceRecordPresent": true,
+  "goal116AcceptanceRecordValid": true,
+  "goal115DecisionSnapshotPresent": true,
+  "goal115DecisionSnapshotGreen": true,
+  "laneIds": [
+    "accepted_alpha_baseline_review",
+    "offline_bundle_import_policy_scaffold",
+    "unity_visual_consumption_or_playable_rendering",
+    "runtime_or_gamepackage_consumers",
+    "live_geodata_provider_network",
+    "release_packaging",
+    "visual_final_renderer_atlas"
+  ],
+  "evidenceArtifactPaths": [
+    ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-dashboard.json",
+    ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-matrix.json",
+    ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-report.md",
+    ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-file-index.json",
+    ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-quality-gate-scan.json",
+    ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-negative-proof.json"
+  ],
+  "exportArtifactPaths": [
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-dashboard.json",
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-matrix.json",
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-report.md",
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-quality-gate-scan.json",
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-negative-proof.json",
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-readme.md",
+    ".llmgc/exports/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-file-index.json"
+  ],
+  "errors": [],
+  "warnings": []
+}

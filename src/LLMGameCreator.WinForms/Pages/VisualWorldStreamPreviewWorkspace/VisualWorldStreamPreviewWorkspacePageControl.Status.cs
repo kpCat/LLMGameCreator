@@ -59,5 +59,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         + result.Report.OfflineGeoworldAlphaManualGateAcceptanceManualGateStatus
         + " | manualGateHumanAccepted="
         + result.Report.OfflineGeoworldAlphaManualGateAcceptanceHumanAccepted
-            .ToString().ToLowerInvariant();
+            .ToString().ToLowerInvariant()
+        + " | recommendedNextLane="
+        + result.Report.OfflineGeoworldAlphaPostAcceptanceRecommendedNextLane
+        + " | recommendedNextGoal="
+        + result.Report.OfflineGeoworldAlphaPostAcceptanceRecommendedNextGoalId;
 }

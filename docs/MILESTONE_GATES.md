@@ -22,6 +22,8 @@ Goal 115 note: the human-result revalidation reads the real local `.llmgc/manual
 
 Goal 116 note: explicit human acceptance for `offline_geoworld_alpha_manual_acceptance_verification` is recorded with manualGateStatus=`ACCEPTED_BY_HUMAN`, humanAccepted=true and the exact statement `Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.` This closes only that manual gate decision. It does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art/atlas or Unity scene/prefab/project-settings/release-packaging work.
 
+Goal 117 note: the post-acceptance continuation matrix is GREEN and recommends `accepted_alpha_baseline_review` / `goal-118-offline-geoworld-accepted-alpha-baseline-review` as the next bounded lane. This does not start Goal118 automatically and does not approve live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

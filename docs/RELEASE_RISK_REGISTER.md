@@ -20,6 +20,8 @@ Goal 115 review note: the real local human result now validates as `GREEN_ACCEPT
 
 Goal 116 review note: the explicit human gate decision is recorded as `ACCEPTED_BY_HUMAN` for `offline_geoworld_alpha_manual_acceptance_verification` using Goal115 GREEN candidate evidence. This closes only the manual gate decision; release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/release-packaging approval.
 
+Goal 117 review note: the continuation matrix recommends `accepted_alpha_baseline_review` / `goal-118-offline-geoworld-accepted-alpha-baseline-review` and keeps `doNotStartAutomatically=true`. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

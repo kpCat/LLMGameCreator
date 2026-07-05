@@ -1,0 +1,40 @@
+{
+  "goalId": "goal_117_offline_geoworld_alpha_post_acceptance_continuation_selection",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 5,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-dashboard.json",
+      "role": "goal117_post_acceptance_continuation_selection_evidence",
+      "required": true,
+      "sha256": "57229bcf50f7e50af9a2c8cb017313ae660d389466dd2c433c0ddd4216eeff78"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-matrix.json",
+      "role": "goal117_post_acceptance_continuation_selection_evidence",
+      "required": true,
+      "sha256": "361c96c997bac1e527a04994c235c689737871501133807c988847db4d80ee36"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-negative-proof.json",
+      "role": "goal117_post_acceptance_continuation_selection_evidence",
+      "required": true,
+      "sha256": "5def89c3cedc568c5c233545b662a9b6ba4b6e47626171c6bd1c7b341125fe1a"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-quality-gate-scan.json",
+      "role": "goal117_post_acceptance_continuation_selection_evidence",
+      "required": true,
+      "sha256": "27520b51f7702bd50d7b5fc6914cf1f2f502c7282fce1b650268a3e0ddaad47e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/offline-geoworld-alpha-post-acceptance-continuation-report.md",
+      "role": "goal117_post_acceptance_continuation_selection_evidence",
+      "required": true,
+      "sha256": "71950a8bbd61816d451a5bfcfce4de2691d7b637e00191b631a7e44675a17abc"
+    }
+  ]
+}

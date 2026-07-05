@@ -10,6 +10,8 @@ Goal 115 note: the real local human result validates as `GREEN_ACCEPTABLE_CANDID
 
 Goal 116 note: the explicit human gate acceptance is recorded as `ACCEPTED_BY_HUMAN` for `offline_geoworld_alpha_manual_acceptance_verification` with the statement `Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.` The Goal115 pending-decision debt is superseded/resolved by this record, while final release, Runtime/player, provider/live geodata/network, public schema, Lua, generator-library, final art/atlas and Unity release-packaging debts remain separate future gates.
 
+Goal 117 note: the GREEN continuation-selection matrix recommends `accepted_alpha_baseline_review` / `goal-118-offline-geoworld-accepted-alpha-baseline-review` but does not resolve geospatial ingestion, provider/legal, Runtime/schema, Unity consumption, final renderer/atlas or release-packaging debts. Those remain open until selected by separate explicit tasks.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |
