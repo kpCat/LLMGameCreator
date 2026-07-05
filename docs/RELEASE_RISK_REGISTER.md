@@ -18,6 +18,8 @@ Goal 114 review note: the Unity Safe Mode compile hotfix removes the reported Un
 
 Goal 115 review note: the real local human result now validates as `GREEN_ACCEPTABLE_CANDIDATE` with 12/12 required steps passed and manualResultSha256 `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`. This still does not close release blockers or mark Alpha accepted; it is evidence for explicit human gate decision only, and the `.llmgc/manual/**` input remains uncommitted local human input.
 
+Goal 116 review note: the explicit human gate decision is recorded as `ACCEPTED_BY_HUMAN` for `offline_geoworld_alpha_manual_acceptance_verification` using Goal115 GREEN candidate evidence. This closes only the manual gate decision; release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

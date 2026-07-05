@@ -102,11 +102,12 @@ offline_geoworld_session_persistence_replay_verification required
 offline_geoworld_objective_acceptance_run_verification required
 offline_geoworld_alpha_slice_orchestrator_verification required
 offline_geoworld_alpha_slice_export_package_verification required
-offline_geoworld_alpha_manual_acceptance_verification required
+offline_geoworld_alpha_manual_acceptance_verification accepted by explicit Goal116 human decision
 offline_geoworld_alpha_manual_result_intake_verification produced, blocked pending real manual result
 offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator ready pending human run
 offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
 unity_safe_mode_compile_hotfix_verification produced, manual gate still required
+offline_geoworld_alpha_manual_gate_acceptance_record produced, manual gate accepted by human, post-acceptance continuation selection required
 ```
 
 Current capabilities:
@@ -153,6 +154,7 @@ Current capabilities:
 - Goal 113 offline geoworld Alpha manual-result workbench evidence with a BCL-only Application workbench service, deterministic dashboard/runbook/field-map/draft-template/quality/negative-proof artifacts, export metadata, short manual-result guide and Visual World Stream Preview Workspace workbench visibility; its produced artifact snapshot remains `WORKBENCH_READY_PENDING_HUMAN_RESULT`;
 - Goal 114 Unity Safe Mode compile hotfix evidence with local deterministic JSON helpers replacing unqualified `JsonUtility` calls, low-risk `RefreshPayloadStatus()` wrappers, compact source scan, negative proof and file index while the manual gate remains `offline_geoworld_alpha_manual_acceptance_verification required`;
 - Goal 115 offline geoworld Alpha human-result revalidation evidence with a BCL-only Application service over the real local `.llmgc/manual` result, deterministic dashboard/decision-snapshot/report/file-index/quality/negative-proof artifacts, export metadata, short decision note and Visual World Stream Preview Workspace visibility; current decision is `GREEN_ACCEPTABLE_CANDIDATE`, manualResultSha256 is `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`, all 12 required steps passed, acceptedByCodex=false, humanAcceptanceStillRequired=true and the manual gate remains `offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`;
+- Goal 116 offline geoworld Alpha manual gate acceptance record evidence with a BCL-only Application service over Goal115 GREEN candidate summary/hash evidence, deterministic acceptance/dashboard/report/file-index/quality/negative-proof artifacts, export metadata, short acceptance note and Visual World Stream Preview Workspace visibility; it records the exact human statement `Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.`, manualGateStatus=`ACCEPTED_BY_HUMAN`, humanAccepted=true, acceptedByCodex=false, manualInputNotCommitted=true, rawManualResultEmbeddedInArtifacts=false and recommendedNextDecision=`POST_ACCEPTANCE_CONTINUATION_SELECTION`;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -2058,18 +2060,38 @@ does not stage or commit `.llmgc/manual/**` and does not mark Alpha accepted. It
 human action is to explicitly decide the manual gate from this GREEN candidate. Goal115, Goal114, Goal113, Goal112,
 Goal111, Goal110, Goal109, Goal108A, Goal108 and prior geoworld gates remain `accepted=false`.
 
+### Goal 116: Offline Geoworld Alpha Manual Gate Acceptance Record
+
+Goal 116 records explicit human acceptance for `offline_geoworld_alpha_manual_acceptance_verification` using the exact
+statement: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.
+
+Goal 116 writes deterministic evidence under
+`.llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/`, export metadata under
+`.llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/`, and the short acceptance note at
+`docs/manual-acceptance/offline-geoworld-alpha-manual-gate-acceptance-record.md`. It records
+`manualGateStatus=ACCEPTED_BY_HUMAN`, `humanAccepted=true`, `sourceDecisionStatus=GREEN_ACCEPTABLE_CANDIDATE`,
+`manualResultSha256=8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`, `acceptedByCodex=false`,
+`manualInputNotCommitted=true`, `rawManualResultEmbeddedInArtifacts=false`, `requiredStepCount=12`,
+`passedStepCount=12` and `recommendedNextDecision=POST_ACCEPTANCE_CONTINUATION_SELECTION`.
+
+Goal 116 consumes Goal115 summary/hash evidence and the local manual result hash only; it does not embed, stage or
+commit `.llmgc/manual/**`. It surfaces `offline_geoworld_alpha_manual_gate_acceptance_record` in the existing Visual
+World Stream Preview Workspace. This is not final release, not Runtime approval, not provider/live geodata/network
+approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity
+scene/prefab/project-settings or release-packaging approval.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_alpha_manual_acceptance_verification
+post_acceptance_continuation_selection
 ```
 
-Use the Goal115 GREEN candidate as the evidence for the explicit human decision. Do not start live geodata/provider,
-Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages or
-release packaging work from this handoff.
+Use the Goal116 human acceptance record as the boundary for selecting the next bounded continuation. Do not start live
+geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity
+scene/prefab/settings/packages or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_114_unity_safe_mode_compile_hotfix_produced_for_review_manual_gate_still_required
+goal_116_offline_geoworld_alpha_manual_gate_acceptance_record_green_post_acceptance_selection_required
 ```

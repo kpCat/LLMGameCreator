@@ -1,0 +1,40 @@
+{
+  "goalId": "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
+  "accepted": true,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 5,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-dashboard.json",
+      "role": "goal116_manual_gate_acceptance_record_evidence",
+      "required": true,
+      "sha256": "d6bef097fa0d966f771cdd4928d8193d05ed6fc7f9031608c9fae5e94fbaffb3"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-negative-proof.json",
+      "role": "goal116_manual_gate_acceptance_record_evidence",
+      "required": true,
+      "sha256": "19dbbbd7207446e538f93482eef745b961c6bfed714091d9a33b4b71d142394e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-quality-gate-scan.json",
+      "role": "goal116_manual_gate_acceptance_record_evidence",
+      "required": true,
+      "sha256": "a033ede32d27c38c9a3e16acbce319ce83627a70d258b669bf14e651a5cfeca7"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-record.json",
+      "role": "goal116_manual_gate_acceptance_record_evidence",
+      "required": true,
+      "sha256": "1db076ee37844ea623534abe48805cf9326ae0fc63201fe95718e3a18f9b4071"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-report.md",
+      "role": "goal116_manual_gate_acceptance_record_evidence",
+      "required": true,
+      "sha256": "d53056ee468e92c08b31a7d1313d1fd8b586b7913b48cdf9ae31a6aa84887dbe"
+    }
+  ]
+}

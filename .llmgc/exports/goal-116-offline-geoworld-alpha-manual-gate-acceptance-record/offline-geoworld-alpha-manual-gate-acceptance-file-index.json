@@ -1,0 +1,28 @@
+{
+  "goalId": "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
+  "accepted": true,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 3,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-dashboard.json",
+      "role": "goal116_manual_gate_acceptance_record_export",
+      "required": true,
+      "sha256": "d6bef097fa0d966f771cdd4928d8193d05ed6fc7f9031608c9fae5e94fbaffb3"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-readme.md",
+      "role": "goal116_manual_gate_acceptance_record_export",
+      "required": true,
+      "sha256": "199ee4796fd8275d30fd17efa7295d232cc2919b6377e244327073057ee6b194"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-record.json",
+      "role": "goal116_manual_gate_acceptance_record_export",
+      "required": true,
+      "sha256": "460bda8109597fe6fa6479f6efbd63cc335f7b3bace0b97cff94c2cbb168888f"
+    }
+  ]
+}

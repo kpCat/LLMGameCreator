@@ -26,6 +26,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         "offline_geoworld_alpha_manual_result_intake",
         "offline_geoworld_alpha_acceptance_operator_pack",
         "offline_geoworld_alpha_manual_result_workbench",
-        "offline_geoworld_alpha_human_result_revalidation"
+        "offline_geoworld_alpha_human_result_revalidation",
+        "offline_geoworld_alpha_manual_gate_acceptance_record"
     ];
 }

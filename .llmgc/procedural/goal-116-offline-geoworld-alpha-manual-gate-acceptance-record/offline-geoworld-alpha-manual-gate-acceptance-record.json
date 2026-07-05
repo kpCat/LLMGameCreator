@@ -1,0 +1,31 @@
+{
+  "goalId": "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
+  "sourceGoalIds": [
+    "goal_115_offline_geoworld_alpha_human_result_revalidation"
+  ],
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "manualGateStatus": "ACCEPTED_BY_HUMAN",
+  "humanAccepted": true,
+  "humanDecisionStatement": "Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.",
+  "sourceDecisionStatus": "GREEN_ACCEPTABLE_CANDIDATE",
+  "sourceDecisionSnapshotRelativePath": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-decision-snapshot.json",
+  "manualResultRelativePath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "manualResultSha256": "8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb",
+  "manualInputNotCommitted": true,
+  "rawManualResultEmbeddedInArtifacts": false,
+  "acceptedByCodex": false,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "noUnityFileChangesRequired": true,
+  "recommendedNextDecision": "POST_ACCEPTANCE_CONTINUATION_SELECTION",
+  "goal115SnapshotPresent": true,
+  "goal115SnapshotValid": true,
+  "manualResultPresent": true,
+  "manualResultHashMatchesGoal115": true,
+  "goal115ErrorsEmpty": true,
+  "goal115WarningsEmpty": true,
+  "requiredStepCount": 12,
+  "passedStepCount": 12,
+  "errors": [],
+  "warnings": []
+}

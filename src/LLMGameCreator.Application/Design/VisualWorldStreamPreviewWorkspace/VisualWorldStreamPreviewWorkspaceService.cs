@@ -64,7 +64,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildOfflineGeoworldAlphaManualResultIntakeGroup(projectRoot, diagnostics),
             BuildOfflineGeoworldAlphaAcceptanceOperatorPackGroup(projectRoot, diagnostics),
             BuildOfflineGeoworldAlphaManualResultWorkbenchGroup(projectRoot, diagnostics),
-            BuildOfflineGeoworldAlphaHumanResultRevalidationGroup(projectRoot, diagnostics)
+            BuildOfflineGeoworldAlphaHumanResultRevalidationGroup(projectRoot, diagnostics),
+            BuildOfflineGeoworldAlphaManualGateAcceptanceRecordGroup(projectRoot, diagnostics)
         };
         groups = NormalizeHistoricalManualAcceptanceGroups(groups).ToList();
 

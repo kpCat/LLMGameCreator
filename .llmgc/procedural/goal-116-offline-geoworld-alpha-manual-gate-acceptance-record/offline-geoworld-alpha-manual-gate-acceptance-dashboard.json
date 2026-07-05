@@ -1,0 +1,33 @@
+{
+  "goalId": "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "manualGateStatus": "ACCEPTED_BY_HUMAN",
+  "humanAccepted": true,
+  "sourceDecisionStatus": "GREEN_ACCEPTABLE_CANDIDATE",
+  "manualResultSha256": "8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb",
+  "acceptedByCodex": false,
+  "manualInputNotCommitted": true,
+  "rawManualResultEmbeddedInArtifacts": false,
+  "recommendedNextDecision": "POST_ACCEPTANCE_CONTINUATION_SELECTION",
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "noUnityFileChangesRequired": true,
+  "requiredStepCount": 12,
+  "passedStepCount": 12,
+  "evidenceArtifactPaths": [
+    ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-record.json",
+    ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-dashboard.json",
+    ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-report.md",
+    ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-file-index.json",
+    ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-quality-gate-scan.json",
+    ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-negative-proof.json"
+  ],
+  "exportArtifactPaths": [
+    ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-record.json",
+    ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-dashboard.json",
+    ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-readme.md",
+    ".llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/offline-geoworld-alpha-manual-gate-acceptance-file-index.json"
+  ],
+  "errors": [],
+  "warnings": []
+}

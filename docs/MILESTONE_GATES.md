@@ -20,6 +20,8 @@ Goal 114 note: the Unity Safe Mode compile hotfix unblocks reported Unity compil
 
 Goal 115 note: the human-result revalidation reads the real local `.llmgc/manual/**` result and records `GREEN_ACCEPTABLE_CANDIDATE`, 12/12 passed required steps and manualResultSha256 `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`. It does not mean Alpha accepted, does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and still requires explicit human decision for `offline_geoworld_alpha_manual_acceptance_verification`.
 
+Goal 116 note: explicit human acceptance for `offline_geoworld_alpha_manual_acceptance_verification` is recorded with manualGateStatus=`ACCEPTED_BY_HUMAN`, humanAccepted=true and the exact statement `Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.` This closes only that manual gate decision. It does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art/atlas or Unity scene/prefab/project-settings/release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

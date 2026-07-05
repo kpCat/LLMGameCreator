@@ -30,6 +30,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageGoal115RelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Goal115.cs";
+        var pageGoal116RelativePath =
+            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
+            + "VisualWorldStreamPreviewWorkspacePageControl.Goal116.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
@@ -48,7 +51,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                        + "\n"
                        + ReadOptionalText(projectRoot, pageGoal113RelativePath)
                        + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal115RelativePath);
+                       + ReadOptionalText(projectRoot, pageGoal115RelativePath)
+                       + "\n"
+                       + ReadOptionalText(projectRoot, pageGoal116RelativePath);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -360,6 +365,33 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "offlineGeoworldAlphaHumanResultRevalidationManualInputNotCommitted",
                 StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord = pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceManualGate",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceManualGateStatus",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceHumanAccepted",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceSourceDecisionStatus",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceManualResultSha256",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceAcceptedByCodex",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceManualInputNotCommitted",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceRawManualResultEmbeddedInArtifacts",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaManualGateAcceptanceRecommendedNextDecision",
+                StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -458,6 +490,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal115.winforms.offline_geoworld_alpha_human_result_revalidation_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord,
+            "goal116.winforms.offline_geoworld_alpha_manual_gate_acceptance_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -501,6 +538,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldAlphaManualResultWorkbench,
             PageBindDisplaysOfflineGeoworldAlphaHumanResultRevalidation =
                 bindDisplaysOfflineGeoworldAlphaHumanResultRevalidation,
+            PageBindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord =
+                bindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord,
             Diagnostics = diagnostics
         };
     }

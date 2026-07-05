@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-05T03:10:00Z",
+    "updated_at_utc":  "2026-07-05T05:20:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 115 human result revalidation produced as GREEN candidate with manual gate still required",
+    "current_phase_title":  "Goal 116 records explicit human acceptance for the offline geoworld Alpha manual gate; post-acceptance continuation selection required",
     "gate_status":  "offline_geoworld_alpha_manual_acceptance_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 115 Offline Geoworld Alpha Human Result Revalidation is produced as a GREEN_ACCEPTABLE_CANDIDATE decision snapshot over the real local human result at .llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json. The validated manual result SHA-256 is 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, Goal111 decisionStatus is GREEN_ACCEPTABLE_CANDIDATE, all 12 required steps are present exactly once and passed, acceptedByCodex=false, humanAcceptanceStillRequired=true, and manualGateRemainsHumanDecision=true. The active human gate remains offline_geoworld_alpha_manual_acceptance_verification required and accepted=false; Goal 115 is not Alpha acceptance, not final Runtime gameplay, not release packaging, not live geodata/provider/network work, and not schema/Lua/generator-library work. Goal 115, Goal 114, Goal 113, Goal 112, Goal 111, Goal 110, Goal 109, Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review the Goal115 decision snapshot and explicitly decide offline_geoworld_alpha_manual_acceptance_verification. The current local result is a GREEN_ACCEPTABLE_CANDIDATE with manualResultSha256=8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, acceptableCandidate=true and recommendedHumanDecision=READY_FOR_EXPLICIT_HUMAN_ACCEPTANCE_DECISION, but Codex has not accepted the gate and the .llmgc/manual input remains local human input. Keep Goal115, Goal114, Goal113, Goal112, Goal111, Goal110, Goal109, Goal108A, Goal108 and previous geoworld gates accepted=false unless the user explicitly accepts the manual gate.",
-    "recommended_next_decision":  "Explicitly decide whether the validated Goal115 GREEN_ACCEPTABLE_CANDIDATE is acceptable for offline_geoworld_alpha_manual_acceptance_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings, binary media or release packaging work from this handoff.",
+    "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
+    "current_user_action":  "Select the post-acceptance continuation explicitly. The manual gate offline_geoworld_alpha_manual_acceptance_verification is accepted by human decision in Goal116, but Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings or release packaging work.",
+    "recommended_next_decision":  "POST_ACCEPTANCE_CONTINUATION_SELECTION after offline_geoworld_alpha_manual_acceptance_verification was accepted by explicit Goal116 human decision. Choose the next bounded work item; no automatic Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/release-packaging work without a separate explicit task.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "offline_geoworld_alpha_manual_acceptance_verification",
+                                                        "post_acceptance_continuation_selection",
                                                         "offline_geoworld_alpha_slice_export_package_verification",
                                                         "offline_geoworld_alpha_slice_orchestrator_verification",
                                                         "offline_geoworld_objective_acceptance_run_verification",
@@ -168,7 +168,8 @@
                            "goal_111_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
                            "goal_112_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
                            "goal_113_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
-                           "goal_115_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification"
+                           "goal_115_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
+                           "goal_116_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -459,7 +460,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "offline_geoworld_alpha_manual_acceptance_verification",
+                                          "post_acceptance_continuation_selection",
+                                          "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
+                                          "manual_review_goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
                                           "unity_safe_mode_compile_hotfix_verification",
                                           "goal_114_unity_safe_mode_compile_hotfix",
                                           "manual_review_goal_114_unity_safe_mode_compile_hotfix",
@@ -575,13 +578,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "offline_geoworld_alpha_manual_acceptance_verification",
-    "recommended_next_work_item_title":  "Run Goal110 Unity Alpha manual acceptance after the Goal114 Safe Mode compile hotfix and provide the real result JSON for Goal111/112/113 validation",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-114-unity-safe-mode-compile-hotfix/GOAL.md",
+    "recommended_next_work_item":  "post_acceptance_continuation_selection",
+    "recommended_next_work_item_title":  "Select the next bounded post-acceptance continuation after Goal116 human manual gate acceptance",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Run Goal110 Unity Alpha manual acceptance after the Goal114 Safe Mode compile hotfix, use the Goal113 draft only as a copy/edit starting point, place the real human-created result JSON at the preferred .llmgc/manual path, and re-run Goal111/Goal112/Goal113 validation before deciding offline_geoworld_alpha_manual_acceptance_verification",
-                                              "Keep Goal114, Goal113, Goal112, Goal111 and Goal110 accepted=false until explicit human review accepts the active manual gate",
-                                              "Use Goal113 manual-result workbench artifacts only as authoring/review visibility; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
+                                              "Select the next bounded post-acceptance continuation after Goal116 human acceptance of offline_geoworld_alpha_manual_acceptance_verification",
+                                              "Keep Goal116 limits in force: this is not final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas or Unity scene/prefab/project-settings/release-packaging approval",
+                                              "Use Goal116 acceptance evidence only as a manual gate record until a separate explicit task selects the continuation",
                                               "Review Goal 107 offline geoworld objective acceptance run evidence",
                                               "Keep Goal 107 accepted=false until user review accepts it",
                                               "Use Goal 107 metadata-only objective acceptance payloads, standalone Unity Alpha objective tracker/state/acceptance controller scripts, manual Unity Editor helper, simulated acceptance proof and workspace quality consolidation only as future review handoff input; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
@@ -2617,19 +2620,18 @@
                                                                     "next_action":  "review_goal_109_offline_geoworld_alpha_slice_export_package"
                                                                 },
     "offline_geoworld_alpha_manual_acceptance_verification":  {
-                                                                 "status":  "produced_for_review",
-                                                                 "accepted":  false,
-                                                                 "evidence_source":  "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+                                                                 "status":  "accepted_by_human_goal116",
+                                                                 "accepted":  true,
+                                                                 "evidence_source":  "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
                                                                  "observed_result":  [
-                                                                                         "Goal 110 produces an offline geoworld Alpha manual acceptance gate package under .llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate, .llmgc/exports/goal-110-offline-geoworld-alpha-acceptance and unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110 with accepted=false.",
-                                                                                         "implementationStatus=GREEN, checklistStepCount=12, payloadFileCount=5, exportFileCount=7, automatedGatePassed=true, manualAcceptancePending=true, simulatedProofPassed=true, negativeProofPassed=true, workspaceBindingPassed=true, alphaRuntimeBootstrapUnchanged=true and qualityGatePassed=true.",
-                                                                                         "The BCL-only Application seam lives under src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceManualAcceptanceGate/ and consumes the real Goal109 export package by repository-relative path.",
-                                                                                         "The package contains manifest, checklist, result template, release gate dashboard and readme payloads, plus file index/checksums in the export package; evidence records simulated result readback, 13 rejected negative cases, Unity script/editor-window inventories, workspace binding inventory and quality gate scan.",
-                                                                                         "Unity Alpha adds standalone result/result-store scripts and an Editor acceptance runner window without depending on AlphaRuntimeBootstrap and without mutating scenes, prefabs, project settings, packages or build settings.",
-                                                                                         "The existing Visual World Stream Preview Workspace surfaces the offline_geoworld_alpha_manual_acceptance group, checklist/payload/export counts, manual-pending status, Unity runner readiness, simulated proof, negative proof, workspace binding, release-risk links, milestone-gate links and unchanged AlphaRuntimeBootstrap status.",
-                                                                                         "Goal 110 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation, final release build or prompt dump."
+                                                                                         "Goal 116 records explicit human acceptance for offline_geoworld_alpha_manual_acceptance_verification using the exact statement: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE.",
+                                                                                         "Goal116 consumes the Goal115 GREEN_ACCEPTABLE_CANDIDATE decision snapshot and the local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb without embedding the raw .llmgc/manual result.",
+                                                                                         "implementationStatus=GREEN, manualGateStatus=ACCEPTED_BY_HUMAN, humanAccepted=true, sourceDecisionStatus=GREEN_ACCEPTABLE_CANDIDATE, requiredStepCount=12, passedStepCount=12, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false.",
+                                                                                         "Goal116 writes deterministic acceptance artifacts under .llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record and .llmgc/exports/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record plus docs/manual-acceptance/offline-geoworld-alpha-manual-gate-acceptance-record.md.",
+                                                                                         "The existing Visual World Stream Preview Workspace surfaces the offline_geoworld_alpha_manual_gate_acceptance_record group, manualGateStatus, humanAccepted flag, manual result hash, acceptedByCodex=false, manualInputNotCommitted=true, rawManualResultEmbedded=false and recommendedNextDecision=POST_ACCEPTANCE_CONTINUATION_SELECTION.",
+                                                                                         "Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval."
                                                                                      ],
-                                                                 "next_action":  "review_goal_110_offline_geoworld_alpha_manual_acceptance_gate"
+                                                                 "next_action":  "select_post_acceptance_continuation_explicitly"
                                                              },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
                                                                      "status":  "produced_for_review",

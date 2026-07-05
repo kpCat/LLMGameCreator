@@ -433,6 +433,40 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaHumanResultRevalidationQualityGatePassed,
             Goal115FilesDiscoveredByRelativePaths =
                 qualityGate.Goal115FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaManualGateAcceptanceManualGate =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceManualGate,
+            OfflineGeoworldAlphaManualGateAcceptanceManualGateStatus =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceManualGateStatus,
+            OfflineGeoworldAlphaManualGateAcceptanceHumanAccepted =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceHumanAccepted,
+            OfflineGeoworldAlphaManualGateAcceptanceHumanDecisionStatement =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceHumanDecisionStatement,
+            OfflineGeoworldAlphaManualGateAcceptanceSourceDecisionStatus =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceSourceDecisionStatus,
+            OfflineGeoworldAlphaManualGateAcceptanceManualResultSha256 =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceManualResultSha256,
+            OfflineGeoworldAlphaManualGateAcceptanceAcceptedByCodex =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceAcceptedByCodex,
+            OfflineGeoworldAlphaManualGateAcceptanceManualInputNotCommitted =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceManualInputNotCommitted,
+            OfflineGeoworldAlphaManualGateAcceptanceRawManualResultEmbeddedInArtifacts =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceRawManualResultEmbeddedInArtifacts,
+            OfflineGeoworldAlphaManualGateAcceptanceRecommendedNextDecision =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceRecommendedNextDecision,
+            OfflineGeoworldAlphaManualGateAcceptanceNotFinalReleaseOrRuntimeBuild =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceNotFinalReleaseOrRuntimeBuild,
+            OfflineGeoworldAlphaManualGateAcceptanceNoRuntimeProviderOrNetworkChanges =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceNoRuntimeProviderOrNetworkChanges,
+            OfflineGeoworldAlphaManualGateAcceptanceNoUnityFileChangesRequired =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceNoUnityFileChangesRequired,
+            OfflineGeoworldAlphaManualGateAcceptanceRequiredStepCount =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceRequiredStepCount,
+            OfflineGeoworldAlphaManualGateAcceptancePassedStepCount =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptancePassedStepCount,
+            OfflineGeoworldAlphaManualGateAcceptanceQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaManualGateAcceptanceQualityGatePassed,
+            Goal116FilesDiscoveredByRelativePaths =
+                qualityGate.Goal116FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,
