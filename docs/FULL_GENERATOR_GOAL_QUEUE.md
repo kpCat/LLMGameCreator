@@ -2127,6 +2127,21 @@ gate scan and Visual World Stream Preview Workspace visibility. It embeds no raw
 not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final
 renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 119A: Accepted Alpha Unity Material Warning Hotfix
+
+Goal 119A is a focused hotfix for the manual Goal119 Unity verification material warning.
+It keeps Goal119 as the product deliverable and keeps the same manual route:
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`.
+
+It replaces accepted Alpha projection marker material mutation with an edit-mode-safe `MaterialPropertyBlock` path,
+adds `RunBatchmodeProjectionSmoke` for Unity batchmode validation, and records compact source/log scan evidence under
+`.llmgc/procedural/goal-119a-accepted-alpha-unity-material-warning-hotfix/` plus export metadata under
+`.llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix/`.
+
+The expected next manual Console result is no edit-mode material-leak warning from the accepted Alpha projection. This
+hotfix does not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final
+renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
@@ -2134,12 +2149,13 @@ accepted_alpha_unity_playable_projection_verification
 ```
 
 Run hands-on Unity verification for Goal119 through
-`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, then explicitly decide the manual gate. Do not start
-live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity
-scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, confirm the Unity Console has no accepted Alpha
+projection edit-mode material-leak warning, then explicitly decide the manual gate. Do not start live geodata/provider,
+Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
+StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_119_accepted_alpha_unity_playable_projection_green_manual_verification_required
+goal_119a_material_warning_hotfix_green_goal119_manual_verification_required
 ```

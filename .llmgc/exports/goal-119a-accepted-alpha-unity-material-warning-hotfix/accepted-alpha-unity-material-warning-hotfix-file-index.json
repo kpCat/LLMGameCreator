@@ -1,0 +1,38 @@
+{
+  "goalId": "goal_119a_accepted_alpha_unity_material_warning_hotfix",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 5,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix/accepted-alpha-unity-material-warning-hotfix-dashboard.json",
+      "role": "goal119a_accepted_alpha_unity_material_warning_hotfix_export",
+      "required": true,
+      "sha256": "299ba5f4551383ee0f02d8358e2dc9d001a0711078a90e9a6f3d2a3e330aee46"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix/accepted-alpha-unity-material-warning-hotfix-log-scan.json",
+      "role": "goal119a_accepted_alpha_unity_material_warning_hotfix_export",
+      "required": true,
+      "sha256": "1e103bbc655bec3df718c2e12ef36b6ebd87f3fe3ad109c96a56ef9f109ea5b3"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix/accepted-alpha-unity-material-warning-hotfix-negative-proof.json",
+      "role": "goal119a_accepted_alpha_unity_material_warning_hotfix_export",
+      "required": true,
+      "sha256": "ab4e40bf946f7e7a58dd05f9900ed6db1c9c8fe992379611432d21e911551b97"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix/accepted-alpha-unity-material-warning-hotfix-report.md",
+      "role": "goal119a_accepted_alpha_unity_material_warning_hotfix_export",
+      "required": true,
+      "sha256": "76d07f023ba6f3b03d76419e8a366cc567056dd5eb3d90bf6e6517a7613860c1"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix/accepted-alpha-unity-material-warning-hotfix-script-scan.json",
+      "role": "goal119a_accepted_alpha_unity_material_warning_hotfix_export",
+      "required": true,
+      "sha256": "a2385842d615b4b7ae2a1b9cc91dfde26ea63bc242723c7f1234f7ce79300b17"
+    }
+  ]
+}

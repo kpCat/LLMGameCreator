@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 119 accepted Alpha Unity playable projection
+Updated by: Goal 119A accepted Alpha Unity material warning hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -18,6 +18,19 @@ Goal 119 creates a hands-on Unity Editor entrypoint over the Goal118 accepted Al
 `.llmgc/procedural/goal-119-accepted-alpha-unity-playable-projection/`, export metadata under
 `.llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/`, and the short manual note at
 `docs/manual-acceptance/accepted-alpha-unity-playable-projection.md`.
+
+Goal 119A fixes the Unity edit-mode material-instantiation warning found during manual Goal119 verification:
+
+```text
+accepted_alpha_unity_material_warning_hotfix_verification required
+implementationStatus=GREEN
+accepted=false
+unityBatchmodeSmoke=GOAL119A_PROJECTION_SMOKE_PASS required
+```
+
+Goal119 remains the product deliverable and manual Unity route. The next manual check is still
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, but the expected Console result is no
+edit-mode material-leak warning from the accepted Alpha projection scripts.
 
 This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.

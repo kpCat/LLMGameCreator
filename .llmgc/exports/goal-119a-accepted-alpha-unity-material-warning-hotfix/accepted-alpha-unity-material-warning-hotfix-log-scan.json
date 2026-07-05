@@ -1,0 +1,13 @@
+{
+  "goalId": "goal_119a_accepted_alpha_unity_material_warning_hotfix",
+  "relativePath": ".llmgc/procedural/goal-119a-accepted-alpha-unity-material-warning-hotfix/unity-batchmode-projection-smoke.log",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "materialInstantiationWarningAbsent": true,
+  "rendererGetMaterialStackAbsent": true,
+  "passed": true,
+  "status": "GREEN",
+  "sha256": "fb618eb33344546a4f2486006b3b8352faf9c4a198a35ea7c983a89f0a1b128a",
+  "forbiddenMarkersFound": []
+}

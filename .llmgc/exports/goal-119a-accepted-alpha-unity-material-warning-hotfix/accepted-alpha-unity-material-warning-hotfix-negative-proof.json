@@ -1,0 +1,24 @@
+{
+  "goalId": "goal_119a_accepted_alpha_unity_material_warning_hotfix",
+  "passed": true,
+  "manualInputRejected": true,
+  "runtimeSchemaProviderLuaGeneratorLibraryRejected": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsRejected": true,
+  "finalReleasePackagingRejected": true,
+  "liveGeodataProviderNetworkRejected": true,
+  "rejectedPathSamples": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    "src/LLMGameCreator.Runtime/GameRuntime.cs",
+    "src/LLMGameCreator.Runtime.Abstractions/IGameRuntime.cs",
+    "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+    "src/LLMGameCreator.Scripting/LuaSandbox.cs",
+    "generator-library/example.json",
+    "unity/LLMGameCreatorAlpha/Assets/Scenes/Main.unity",
+    "unity/LLMGameCreatorAlpha/Assets/Prefabs/AcceptedAlpha.prefab",
+    "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectSettings.asset",
+    "unity/LLMGameCreatorAlpha/Packages/manifest.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal119/example.json",
+    ".llmgc/exports/final-release/package.zip",
+    "provider/live-geodata/Adapter.cs"
+  ]
+}

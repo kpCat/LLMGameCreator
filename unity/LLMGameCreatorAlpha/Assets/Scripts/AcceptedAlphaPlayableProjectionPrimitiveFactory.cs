@@ -4,6 +4,9 @@ namespace LLMGameCreatorAlpha
 {
     public static class AcceptedAlphaPlayableProjectionPrimitiveFactory
     {
+        private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
+        private static readonly int BaseColorPropertyId = Shader.PropertyToID("_BaseColor");
+
         public static GameObject CreateSection(Transform parent, string name, Vector3 localPosition)
         {
             var section = new GameObject(name);
@@ -28,9 +31,11 @@ namespace LLMGameCreatorAlpha
             var renderer = marker.GetComponent<Renderer>();
             if (renderer != null)
             {
-                var shader = Shader.Find("Standard");
-                renderer.material = shader == null ? new Material(Shader.Find("Sprites/Default")) : new Material(shader);
-                renderer.material.color = color;
+                var block = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(block);
+                block.SetColor(ColorPropertyId, color);
+                block.SetColor(BaseColorPropertyId, color);
+                renderer.SetPropertyBlock(block);
             }
 
             return marker;

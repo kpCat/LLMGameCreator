@@ -16,6 +16,8 @@ Goal 118 note: the GREEN accepted Alpha baseline review package records baseline
 
 Goal 119 note: the GREEN accepted Alpha Unity playable projection entrypoint adds a hands-on Unity Editor menu route over the Goal118 accepted baseline with script inventory, smoke plan, negative proof, quality scan and Visual World Stream Preview Workspace visibility, but it does not resolve geospatial ingestion, provider/legal, Runtime/schema, final renderer/atlas, Unity scene/prefab/project-settings/StreamingAssets or release-packaging debts. Those remain open until a separate explicit task selects and scopes them.
 
+Goal 119A note: the accepted Alpha Unity material warning hotfix resolves the Goal119 edit-mode projection marker material-instantiation warning by using property-block color overrides plus source/log guards. It does not resolve geospatial ingestion, provider/legal, Runtime/schema, final renderer/atlas, Unity scene/prefab/project-settings/StreamingAssets or release-packaging debts. Those remain open until a separate explicit task selects and scopes them.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

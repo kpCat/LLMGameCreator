@@ -1,0 +1,58 @@
+{
+  "goalId": "goal_119a_accepted_alpha_unity_material_warning_hotfix",
+  "passed": true,
+  "scannedFileCount": 5,
+  "rendererMaterialAccessAbsent": true,
+  "materialAssignmentAbsent": true,
+  "materialPropertyBlockUsed": true,
+  "colorPropertySet": true,
+  "baseColorPropertySet": true,
+  "noNewMaterialInPrimitiveFactory": true,
+  "files": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs",
+      "exists": true,
+      "containsRendererMaterialAccess": false,
+      "containsMaterialAssignment": false,
+      "containsNewMaterial": false,
+      "containsMaterialPropertyBlock": false,
+      "sha256": "76f9f9c56e1f4da33b4439d744784492788179a88766f9bfefa40264ddc917b4"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionController.cs",
+      "exists": true,
+      "containsRendererMaterialAccess": false,
+      "containsMaterialAssignment": false,
+      "containsNewMaterial": false,
+      "containsMaterialPropertyBlock": false,
+      "sha256": "029b5b81d24f7ef959df442c56d37764a922826d97fc503b2c0d27bb49a8e4bd"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDiagnostics.cs",
+      "exists": true,
+      "containsRendererMaterialAccess": false,
+      "containsMaterialAssignment": false,
+      "containsNewMaterial": false,
+      "containsMaterialPropertyBlock": false,
+      "sha256": "bc7008dcd0484f7ea9884a4e97df7d485efa247fde084ed7756bee5c4b0e2f9d"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionModels.cs",
+      "exists": true,
+      "containsRendererMaterialAccess": false,
+      "containsMaterialAssignment": false,
+      "containsNewMaterial": false,
+      "containsMaterialPropertyBlock": false,
+      "sha256": "2eb010c1a1240821718dd7609d68a0bc1ceeb78f0e77b6aeeb77af1a756ca256"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionPrimitiveFactory.cs",
+      "exists": true,
+      "containsRendererMaterialAccess": false,
+      "containsMaterialAssignment": false,
+      "containsNewMaterial": false,
+      "containsMaterialPropertyBlock": true,
+      "sha256": "64b76622fff2723b62b90056e15839262062b274e6ae034d6ae073db10753f86"
+    }
+  ]
+}

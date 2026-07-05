@@ -12,6 +12,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         var root = ProjectRoot();
         var write = await new AcceptedAlphaUnityPlayableProjectionService()
             .BuildAndWriteAsync(root);
+        var hotfix = await new AcceptedAlphaUnityMaterialWarningHotfixService()
+            .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", write.Result.QualityGateScan.ImplementationStatus);
         Assert.True(write.Result.QualityGateScan.Passed);
@@ -37,6 +39,23 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             path.StartsWith("unity/", StringComparison.Ordinal));
         Assert.DoesNotContain(write.WrittenFiles, path =>
             path.Contains("StreamingAssets", StringComparison.Ordinal));
+        Assert.True(hotfix.Result.ScriptScan.Passed);
+        Assert.True(hotfix.Result.Dashboard.RendererMaterialSourceAccessAbsent);
+        Assert.True(hotfix.Result.Dashboard.MaterialAssignmentSourceAccessAbsent);
+        Assert.True(hotfix.Result.Dashboard.MaterialPropertyBlockUsed);
+        Assert.True(hotfix.Result.NegativeProof.Passed);
+        Assert.Contains(hotfix.WrittenFiles, path =>
+            path == AcceptedAlphaUnityMaterialWarningHotfixVocabulary
+                .ProceduralOutputDirectory
+            + "/"
+            + AcceptedAlphaUnityMaterialWarningHotfixVocabulary.DashboardFileName);
+        Assert.Contains(hotfix.WrittenFiles, path =>
+            path == AcceptedAlphaUnityMaterialWarningHotfixVocabulary
+                .ProceduralOutputDirectory
+            + "/"
+            + AcceptedAlphaUnityMaterialWarningHotfixVocabulary.LogScanFileName);
+        Assert.DoesNotContain(hotfix.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory

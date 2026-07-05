@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +19,50 @@ namespace LLMGameCreatorAlpha
         public static void Open()
         {
             GetWindow<AcceptedAlphaPlayableProjectionWindow>(WindowTitle);
+        }
+
+        public static void RunBatchmodeProjectionSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureController();
+                controller.RefreshAcceptedBaseline();
+                controller.BuildOrRefreshProjection();
+                var passed = controller.RunLocalProjectionSmoke();
+                var diagnostics = controller.LastDiagnostics + "\n" + controller.LastSmokeDiagnostics;
+                if (passed)
+                {
+                    Debug.Log("GOAL119A_PROJECTION_SMOKE_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL119A_PROJECTION_SMOKE_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL119A_PROJECTION_SMOKE_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL119A_PROJECTION_SMOKE_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
         }
 
         private void OnEnable()
@@ -100,6 +145,15 @@ namespace LLMGameCreatorAlpha
             statusLine = "Projection root cleared.";
             diagnostics = "Removed only " + AcceptedAlphaPlayableProjectionController.GeneratedRootName + ".";
             smokeDiagnostics = string.Empty;
+        }
+
+        private static void ClearProjectionRootImmediate()
+        {
+            var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
+            if (root != null)
+            {
+                DestroyImmediate(root);
+            }
         }
 
         private static AcceptedAlphaPlayableProjectionController EnsureController()

@@ -28,6 +28,8 @@ Goal 118 note: the accepted Alpha baseline review package is GREEN with baseline
 
 Goal 119 note: the accepted Alpha Unity playable projection entrypoint is GREEN with Unity menu path `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and generated root `__LLMGC_AcceptedAlphaPlayableProjection__`. This creates a hands-on Unity verification route over the Goal118 accepted baseline only; it does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 119A note: the accepted Alpha Unity material warning hotfix keeps the Goal119 route and removes the edit-mode marker material-instantiation warning from the projection. The next manual check is still the Goal119 Unity menu route, now with the expected Console result that no material-leak warning is emitted. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

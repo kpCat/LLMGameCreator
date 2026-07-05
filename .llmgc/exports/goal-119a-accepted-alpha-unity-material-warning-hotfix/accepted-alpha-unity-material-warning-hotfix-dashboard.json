@@ -1,0 +1,22 @@
+{
+  "goalId": "goal_119a_accepted_alpha_unity_material_warning_hotfix",
+  "implementationStatus": "GREEN",
+  "unitySmokeStatus": "GREEN",
+  "unityBatchmodeExecuteMethod": "LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeProjectionSmoke",
+  "unityBatchmodeLogPath": ".llmgc/procedural/goal-119a-accepted-alpha-unity-material-warning-hotfix/unity-batchmode-projection-smoke.log",
+  "unityLogExists": true,
+  "unityLogContainsPassMarker": true,
+  "materialWarningAbsent": true,
+  "rendererMaterialSourceAccessAbsent": true,
+  "materialAssignmentSourceAccessAbsent": true,
+  "materialPropertyBlockUsed": true,
+  "colorAndBaseColorPropertyBlocksSet": true,
+  "noPerMarkerMaterialInstantiation": true,
+  "negativeProofPassed": true,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderNetworkSchemaLuaGeneratorLibrary": true,
+  "noUnityScenePrefabSettingsPackagesStreamingAssets": true,
+  "evidencePath": ".llmgc/procedural/goal-119a-accepted-alpha-unity-material-warning-hotfix",
+  "exportPath": ".llmgc/exports/goal-119a-accepted-alpha-unity-material-warning-hotfix",
+  "diagnostics": []
+}

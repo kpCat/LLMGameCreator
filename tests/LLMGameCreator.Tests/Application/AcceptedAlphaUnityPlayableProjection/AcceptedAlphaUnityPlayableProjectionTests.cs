@@ -57,6 +57,28 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
             path.Contains("StreamingAssets", StringComparison.Ordinal));
     }
 
+    [Fact]
+    public void MaterialWarningHotfixSourceScanRejectsMaterialInstantiatingAccessors()
+    {
+        var result = new AcceptedAlphaUnityMaterialWarningHotfixService()
+            .Build(ProjectRoot());
+
+        Assert.True(result.ScriptScan.Passed);
+        Assert.True(result.ScriptScan.RendererMaterialAccessAbsent);
+        Assert.True(result.ScriptScan.MaterialAssignmentAbsent);
+        Assert.True(result.ScriptScan.MaterialPropertyBlockUsed);
+        Assert.True(result.ScriptScan.ColorPropertySet);
+        Assert.True(result.ScriptScan.BaseColorPropertySet);
+        Assert.True(result.ScriptScan.NoNewMaterialInPrimitiveFactory);
+        Assert.All(result.ScriptScan.Files, file =>
+        {
+            Assert.True(file.Exists);
+            Assert.False(file.ContainsRendererMaterialAccess);
+            Assert.False(file.ContainsMaterialAssignment);
+        });
+        Assert.True(result.NegativeProof.Passed);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;
