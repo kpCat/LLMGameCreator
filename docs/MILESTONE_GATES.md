@@ -16,6 +16,8 @@ Goal 112 note: the acceptance operator pack surfaces Goal110 checklist instructi
 
 Goal 113 note: the manual-result workbench surfaces Goal110 required steps, Goal111/Goal112 statuses, the preferred real result path and a draft/template for human copy/edit. Current repository state is `WORKBENCH_READY_PENDING_HUMAN_RESULT` because no real manual result JSON exists; this does not mean Alpha accepted, does not close `vertical_slice_final_verification`, does not write `.llmgc/manual/**`, and does not start live geodata/provider/network/runtime/schema/Lua/generator-library/final-art/final-release work.
 
+Goal 114 note: the Unity Safe Mode compile hotfix unblocks reported Unity compile errors in the manual acceptance helper scripts only. It does not mean Alpha accepted, does not close `vertical_slice_final_verification`, does not write `.llmgc/manual/**`, and does not start live geodata/provider/network/runtime/schema/Lua/generator-library/final-art/final-release work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

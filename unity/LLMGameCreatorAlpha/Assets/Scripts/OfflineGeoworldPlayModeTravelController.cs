@@ -92,6 +92,11 @@ namespace LLMGameCreatorAlpha
                          + " diagnostics=" + diagnostics.Count;
         }
 
+        public void RefreshPayloadStatus()
+        {
+            RefreshPayload();
+        }
+
         [ContextMenu("Next Goal103 Travel Step")]
         public void NextStep()
         {

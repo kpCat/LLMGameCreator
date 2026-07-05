@@ -4,6 +4,8 @@ Source: Goal 072 generator spine quality consolidation; Goal 073 repaired the P0
 
 Goal 113 note: the manual-result workbench adds authoring/review evidence, draft-template visibility and WinForms workbench status over Goal110/Goal111/Goal112 only. It does not close the manual Alpha gate, does not create a real `.llmgc/manual/**` result, and the existing release/source-health/proof-quality debt remains tracked until a real human result JSON is supplied and accepted.
 
+Goal 114 note: the Unity Safe Mode compile hotfix removes reported `JsonUtility` and `RefreshPayloadStatus` compile blockers in bounded Unity helper scripts only. It does not close the manual Alpha gate, does not create a real `.llmgc/manual/**` result, and leaves real Unity/manual acceptance proof as the next human-run requirement.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "unity_safe_mode_compile_hotfix_dashboard_v1",
+  "scenario": "goal-114-unity-safe-mode-compile-hotfix",
+  "implementationStatus": "GREEN",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "manualGateStatus": "required",
+  "accepted": false,
+  "manualGateRemainsOpen": true,
+  "manualResultCreatedOrCommitted": false,
+  "jsonUtilityReferencesRemoved": true,
+  "refreshPayloadStatusWrappersAdded": true,
+  "sourceScanPassed": true,
+  "negativeProofPassed": true,
+  "artifactScopeScenario": "goal-114-unity-safe-mode-compile-hotfix",
+  "validationStatus": "passed_required_checks",
+  "validationCommands": [
+    "dotnet restore",
+    "dotnet build .\\LLMGameCreator.sln -c Debug",
+    "dotnet test .\\LLMGameCreator.sln -c Debug --no-build --filter \"FullyQualifiedName~UnitySafeModeCompileHotfix|FullyQualifiedName~Goal113|FullyQualifiedName~VisualWorldStreamPreviewWorkspace\"",
+    ".\\.devflow\\scripts\\check-current-goal.ps1",
+    ".\\.devflow\\scripts\\check-spine-fast.ps1",
+    ".\\.devflow\\scripts\\check-artifact-scope.ps1 -Scenario goal-114-unity-safe-mode-compile-hotfix",
+    "git diff --check",
+    "git diff --cached --check",
+    "Unity.exe -batchmode -quit -projectPath .\\unity\\LLMGameCreatorAlpha -logFile .\\.llmgc\\procedural\\goal-114-unity-safe-mode-compile-hotfix\\unity-batchmode-compile.log"
+  ],
+  "unityBatchmodeCompileObserved": true,
+  "unityBatchmodeCompileResult": "passed_exit_code_0_log_recorded",
+  "unityBatchmodeCompileLog": ".llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix/unity-batchmode-compile.log",
+  "sourceHealthMaxChangedCSharpLogicalLines": 410,
+  "preExistingTinyAssertionFileLineCount": 747,
+  "remainingDebt": [
+    "Manual Alpha acceptance still requires a human-created result JSON at the preferred .llmgc/manual path."
+  ]
+}

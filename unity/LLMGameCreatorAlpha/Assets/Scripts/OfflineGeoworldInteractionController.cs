@@ -181,6 +181,11 @@ namespace LLMGameCreatorAlpha
                          + " diagnostics=" + diagnostics.Count;
         }
 
+        public void RefreshPayloadStatus()
+        {
+            RefreshPayload();
+        }
+
         public void BindTargetsByIdOrName()
         {
             boundTargetsById.Clear();

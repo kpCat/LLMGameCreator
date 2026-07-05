@@ -106,6 +106,7 @@ offline_geoworld_alpha_manual_acceptance_verification required
 offline_geoworld_alpha_manual_result_intake_verification produced, blocked pending real manual result
 offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator ready pending human run
 offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
+unity_safe_mode_compile_hotfix_verification produced, manual gate still required
 ```
 
 Current capabilities:
@@ -150,6 +151,7 @@ Current capabilities:
 - Goal 111 offline geoworld Alpha manual-result intake evidence with a BCL-only Application verifier, deterministic decision/report/index/quality/negative-proof artifacts, export dashboard/readme/index metadata and Visual World Stream Preview Workspace decision visibility; current decision is `BLOCKED_PENDING_MANUAL_RESULT` because no real human result JSON exists yet;
 - Goal 112 offline geoworld Alpha acceptance operator pack evidence with a BCL-only Application operator service, deterministic dashboard/runbook/path-map/preflight/notary/quality/negative-proof artifacts, export metadata, short manual-acceptance runbook and Visual World Stream Preview Workspace RC readiness visibility; current operator status is `OPERATOR_READY_PENDING_HUMAN_RUN` because no real human result JSON exists yet;
 - Goal 113 offline geoworld Alpha manual-result workbench evidence with a BCL-only Application workbench service, deterministic dashboard/runbook/field-map/draft-template/quality/negative-proof artifacts, export metadata, short manual-result guide and Visual World Stream Preview Workspace workbench visibility; current workbench status is `WORKBENCH_READY_PENDING_HUMAN_RESULT` because no real human result JSON exists yet;
+- Goal 114 Unity Safe Mode compile hotfix evidence with local deterministic JSON helpers replacing unqualified `JsonUtility` calls, low-risk `RefreshPayloadStatus()` wrappers, compact source scan, negative proof and file index while the manual gate remains `offline_geoworld_alpha_manual_acceptance_verification required`;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -2016,6 +2018,24 @@ not final release, not final Runtime build, not final art/final gameplay, and no
 schema/Lua or generator-library work. Goal113, Goal112, Goal111, Goal110, Goal109, Goal108A, Goal108 and prior
 geoworld gates remain `accepted=false`.
 
+### Goal 114: Unity Safe Mode Compile Hotfix
+
+Goal 114 is produced for review as a GREEN P0 Unity Safe Mode compile hotfix, while the active human gate remains
+`offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`.
+
+Goal 114 writes compact evidence under `.llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix/` and
+`.llmgc/exports/goal-114-unity-safe-mode-compile-hotfix/`. It records `jsonUtilityReferencesRemoved=true`,
+`refreshPayloadStatusWrappersAdded=true`, `manualGateRemainsOpen=true`, `manualResultCreatedOrCommitted=false`,
+`sourceScanPassed=true` and `negativeProofPassed=true`.
+
+The hotfix removes the reported unqualified `JsonUtility` references from the concrete Unity acceptance/session helper
+scripts, adds compatibility `RefreshPayloadStatus()` wrappers that call the existing local refresh methods, and leaves
+the manual acceptance state open. Goal 114 changes no `AlphaRuntimeBootstrap.cs`, Unity scenes, prefabs, ProjectSettings,
+Packages, StreamingAssets, `.llmgc/manual/**` result, Runtime, public schema, provider/LLM/RAG/media execution,
+Lua/generator-library, project/dependency files, final art, atlas or final release packaging. The next human action
+remains running the Goal110 Unity checklist after this Safe Mode unblock and placing a real human-created result JSON
+for Goal111/Goal112/Goal113 validation.
+
 ## Current Recommended Next Work
 
 ```text
@@ -2025,5 +2045,5 @@ offline_geoworld_alpha_manual_acceptance_verification
 Status:
 
 ```text
-goal_113_offline_geoworld_alpha_manual_result_workbench_produced_for_review_workbench_ready_pending_human_result
+goal_114_unity_safe_mode_compile_hotfix_produced_for_review_manual_gate_still_required
 ```

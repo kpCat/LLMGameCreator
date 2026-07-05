@@ -154,6 +154,11 @@ namespace LLMGameCreatorAlpha
                          + " diagnostics=" + diagnostics.Count;
         }
 
+        public void RefreshPayloadStatus()
+        {
+            RefreshPayload();
+        }
+
         public void ApplyManualMovement(float deltaX, float deltaZ)
         {
             if (motor != null)

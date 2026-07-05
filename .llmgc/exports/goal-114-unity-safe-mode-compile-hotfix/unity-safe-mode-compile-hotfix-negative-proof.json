@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "unity_safe_mode_compile_hotfix_negative_proof_v1",
+  "scenario": "goal-114-unity-safe-mode-compile-hotfix",
+  "passed": true,
+  "rejectedCases": [
+    {
+      "caseId": "alpha_runtime_bootstrap_change",
+      "passed": true,
+      "detail": "Goal114 expected changed paths do not include AlphaRuntimeBootstrap.cs."
+    },
+    {
+      "caseId": "manual_acceptance_fabrication",
+      "passed": true,
+      "detail": "Goal114 writes no .llmgc/manual result and keeps accepted=false."
+    },
+    {
+      "caseId": "forbidden_unity_surface_change",
+      "passed": true,
+      "detail": "Scenes, prefabs, ProjectSettings, Packages and StreamingAssets are outside the Goal114 expected change set."
+    },
+    {
+      "caseId": "project_or_dependency_change",
+      "passed": true,
+      "detail": "No .sln, .csproj, Directory.Build or dependency files are part of the Goal114 expected change set."
+    },
+    {
+      "caseId": "runtime_provider_schema_lua_expansion",
+      "passed": true,
+      "detail": "Runtime, provider, public GamePackage schema, Lua and generator-library paths are outside the Goal114 expected change set."
+    }
+  ]
+}

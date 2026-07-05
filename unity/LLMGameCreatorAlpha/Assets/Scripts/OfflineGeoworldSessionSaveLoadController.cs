@@ -140,7 +140,7 @@ namespace LLMGameCreatorAlpha
         public bool SaveSnapshot()
         {
             var snapshot = BuildSnapshot();
-            var json = JsonUtility.ToJson(snapshot, true);
+            var json = SnapshotToJson(snapshot);
             Directory.CreateDirectory(Application.persistentDataPath);
             File.WriteAllText(SnapshotPath(), json, Encoding.UTF8);
             statusLine = "snapshot saved step=" + snapshot.AppliedReplayStepCount
@@ -158,8 +158,7 @@ namespace LLMGameCreatorAlpha
                 return false;
             }
 
-            var snapshot = JsonUtility.FromJson<OfflineGeoworldSessionSnapshot>(
-                File.ReadAllText(path, Encoding.UTF8));
+            var snapshot = SnapshotFromJson(File.ReadAllText(path, Encoding.UTF8));
             if (snapshot == null || !ValidateSnapshot(snapshot))
             {
                 statusLine = "snapshot rejected";
@@ -219,6 +218,81 @@ namespace LLMGameCreatorAlpha
             return snapshot;
         }
 
+        private static string SnapshotToJson(OfflineGeoworldSessionSnapshot snapshot)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("{");
+            AppendJsonString(builder, "GoalId", snapshot.GoalId, true);
+            AppendJsonString(builder, "InitialStateHash", snapshot.InitialStateHash, true);
+            AppendJsonString(builder, "CurrentStateHash", snapshot.CurrentStateHash, true);
+            AppendJsonString(builder, "FinalStateHash", snapshot.FinalStateHash, true);
+            AppendJsonInt(builder, "AppliedReplayStepCount", snapshot.AppliedReplayStepCount, true);
+            AppendJsonInt(builder, "CheckpointStepIndex", snapshot.CheckpointStepIndex, true);
+            AppendJsonString(builder, "CheckpointStateHash", snapshot.CheckpointStateHash, true);
+            AppendJsonString(builder, "SnapshotHash", snapshot.SnapshotHash, true);
+            builder.AppendLine("  \"Deltas\": [");
+            var deltas = snapshot.Deltas ?? new List<OfflineGeoworldSessionSnapshotDelta>();
+            for (var i = 0; i < deltas.Count; i++)
+            {
+                var delta = deltas[i] ?? new OfflineGeoworldSessionSnapshotDelta();
+                builder.AppendLine("    {");
+                AppendJsonInt(builder, "ReplayStepIndex", delta.ReplayStepIndex, true, 6);
+                AppendJsonString(builder, "EventId", delta.EventId, true, 6);
+                AppendJsonString(builder, "TargetId", delta.TargetId, true, 6);
+                AppendJsonString(builder, "ActionId", delta.ActionId, true, 6);
+                AppendJsonString(builder, "ActionKind", delta.ActionKind, true, 6);
+                AppendJsonString(builder, "StateHashBefore", delta.StateHashBefore, true, 6);
+                AppendJsonString(builder, "StateHashAfter", delta.StateHashAfter, false, 6);
+                builder.Append("    }");
+                if (i + 1 < deltas.Count)
+                {
+                    builder.Append(',');
+                }
+
+                builder.AppendLine();
+            }
+
+            builder.AppendLine("  ]");
+            builder.AppendLine("}");
+            return builder.ToString();
+        }
+
+        private static OfflineGeoworldSessionSnapshot SnapshotFromJson(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return null;
+            }
+
+            var snapshot = new OfflineGeoworldSessionSnapshot
+            {
+                GoalId = StringField(json, "GoalId"),
+                InitialStateHash = StringField(json, "InitialStateHash"),
+                CurrentStateHash = StringField(json, "CurrentStateHash"),
+                FinalStateHash = StringField(json, "FinalStateHash"),
+                AppliedReplayStepCount = IntField(json, "AppliedReplayStepCount"),
+                CheckpointStepIndex = IntField(json, "CheckpointStepIndex"),
+                CheckpointStateHash = StringField(json, "CheckpointStateHash"),
+                SnapshotHash = StringField(json, "SnapshotHash")
+            };
+            snapshot.Deltas.Clear();
+            foreach (var block in Blocks(json, "ReplayStepIndex"))
+            {
+                snapshot.Deltas.Add(new OfflineGeoworldSessionSnapshotDelta
+                {
+                    ReplayStepIndex = IntField(block, "ReplayStepIndex"),
+                    EventId = StringField(block, "EventId"),
+                    TargetId = StringField(block, "TargetId"),
+                    ActionId = StringField(block, "ActionId"),
+                    ActionKind = StringField(block, "ActionKind"),
+                    StateHashBefore = StringField(block, "StateHashBefore"),
+                    StateHashAfter = StringField(block, "StateHashAfter")
+                });
+            }
+
+            return snapshot;
+        }
+
         private bool ValidateSnapshot(OfflineGeoworldSessionSnapshot snapshot)
         {
             return snapshot.AppliedReplayStepCount >= 0
@@ -269,6 +343,79 @@ namespace LLMGameCreatorAlpha
 
                 return hash.ToString("x8");
             }
+        }
+
+        private static void AppendJsonString(
+            StringBuilder builder,
+            string name,
+            string value,
+            bool trailingComma,
+            int indent = 2)
+        {
+            builder.Append(new string(' ', indent));
+            builder.Append('"').Append(name).Append("\": \"").Append(EscapeJson(value)).Append('"');
+            if (trailingComma)
+            {
+                builder.Append(',');
+            }
+
+            builder.AppendLine();
+        }
+
+        private static void AppendJsonInt(
+            StringBuilder builder,
+            string name,
+            int value,
+            bool trailingComma,
+            int indent = 2)
+        {
+            builder.Append(new string(' ', indent));
+            builder.Append('"').Append(name).Append("\": ").Append(value);
+            if (trailingComma)
+            {
+                builder.Append(',');
+            }
+
+            builder.AppendLine();
+        }
+
+        private static string EscapeJson(string value)
+        {
+            var builder = new StringBuilder();
+            foreach (var ch in value ?? string.Empty)
+            {
+                switch (ch)
+                {
+                    case '\\':
+                        builder.Append("\\\\");
+                        break;
+                    case '"':
+                        builder.Append("\\\"");
+                        break;
+                    case '\n':
+                        builder.Append("\\n");
+                        break;
+                    case '\r':
+                        builder.Append("\\r");
+                        break;
+                    case '\t':
+                        builder.Append("\\t");
+                        break;
+                    default:
+                        if (ch < ' ')
+                        {
+                            builder.Append("\\u").Append(((int)ch).ToString("x4"));
+                        }
+                        else
+                        {
+                            builder.Append(ch);
+                        }
+
+                        break;
+                }
+            }
+
+            return builder.ToString();
         }
 
         private static string ReadFile(string root, string fileName, List<string> diagnostics)

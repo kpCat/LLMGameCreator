@@ -44,6 +44,11 @@ namespace LLMGameCreatorAlpha
             Debug.Log(lastStatus);
         }
 
+        public void RefreshPayloadStatus()
+        {
+            Refresh();
+        }
+
         public PreviewResult RunPreview()
         {
             ClearSpawned();

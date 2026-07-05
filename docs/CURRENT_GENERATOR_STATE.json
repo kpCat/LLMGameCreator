@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-05T01:36:09Z",
+    "updated_at_utc":  "2026-07-05T02:23:16Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 113 offline geoworld Alpha manual result workbench produced with pending human result",
+    "current_phase_title":  "Goal 114 Unity Safe Mode compile hotfix produced with pending human result",
     "gate_status":  "offline_geoworld_alpha_manual_acceptance_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 113 Offline Geoworld Alpha Manual Result Workbench is produced for review as GREEN workbench tooling, but the active human gate remains offline_geoworld_alpha_manual_acceptance_verification required and accepted=false. Goal 113 builds deterministic workbench evidence under .llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench and .llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench, reads the real Goal110 acceptance package plus Goal111 decision bridge and Goal112 operator pack, and surfaces workbenchStatus=WORKBENCH_READY_PENDING_HUMAN_RESULT because no real manual result JSON exists in the deterministic candidate paths. It keeps acceptedByCodex=false, humanAcceptanceStillRequired=true, manualResultPresent=false, draftTemplateOnly=true, doesNotWritePreferredManualResultPath=true, notFinalReleaseOrRuntimeBuild=true, noRuntimeProviderOrNetworkChanges=true and noUnityFileChangesRequired=true. Goal 113 is manual-result authoring/review tooling only, not Alpha acceptance, final Runtime gameplay, release packaging, live geodata/provider/network work, schema/Lua/generator-library work or a Codex acceptance flip. Goal 113, Goal 112, Goal 111, Goal 110, Goal 109, Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Open the Visual World Stream Preview Workspace or docs/manual-acceptance/offline-geoworld-alpha-manual-result-workbench.md, use the Goal113 draft template only as a copy/edit starting point, run the Goal110 Unity Alpha manual acceptance checklist, and place the real result JSON at .llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json for Goal111/Goal112/Goal113 validation before explicitly deciding offline_geoworld_alpha_manual_acceptance_verification. Do not mark the gate passed while Goal113 reports WORKBENCH_READY_PENDING_HUMAN_RESULT and Goal111 decisionStatus is BLOCKED_PENDING_MANUAL_RESULT. Keep Goal113, Goal112, Goal111, Goal110, Goal109, Goal108A, Goal108 and previous geoworld gates accepted=false as historical produced-for-review evidence.",
-    "recommended_next_decision":  "Run the manual Unity Alpha acceptance checklist from the Goal110 package, copy/edit the Goal113 draft only into a real human-created result, save that real JSON at the preferred .llmgc/manual path for Goal111 intake, re-run Goal111/Goal112/Goal113 validation, and decide whether a valid candidate is acceptable for offline_geoworld_alpha_manual_acceptance_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings, binary media or release packaging work from this handoff.",
+    "active_manual_gate":  "Goal 114 Unity Safe Mode Compile Hotfix is produced as a GREEN P0 compile-unblock hotfix over the Goal110/111/112/113 manual acceptance path, but the active human gate remains offline_geoworld_alpha_manual_acceptance_verification required and accepted=false. Goal 114 builds compact source-scan and negative-proof evidence under .llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix and .llmgc/exports/goal-114-unity-safe-mode-compile-hotfix, removes the reported unqualified JsonUtility compile blockers from the concrete Unity helper scripts, adds RefreshPayloadStatus compatibility wrappers, and keeps manualResultCreatedOrCommitted=false. Goal 114 is not Alpha acceptance, not a real manual result, not final Runtime gameplay, not release packaging, not live geodata/provider/network work, and not schema/Lua/generator-library work. Goal 114, Goal 113, Goal 112, Goal 111, Goal 110, Goal 109, Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "After the Goal114 Safe Mode compile hotfix, reopen or rerun the Goal110 Unity Alpha manual acceptance checklist, use the Goal113 draft template only as a copy/edit starting point, and place the real result JSON at .llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json for Goal111/Goal112/Goal113 validation before explicitly deciding offline_geoworld_alpha_manual_acceptance_verification. Do not mark the gate passed while Goal113 reports WORKBENCH_READY_PENDING_HUMAN_RESULT, Goal111 decisionStatus is BLOCKED_PENDING_MANUAL_RESULT and no real human result JSON exists. Keep Goal114, Goal113, Goal112, Goal111, Goal110, Goal109, Goal108A, Goal108 and previous geoworld gates accepted=false as historical produced-for-review evidence.",
+    "recommended_next_decision":  "Run the manual Unity Alpha acceptance checklist from the Goal110 package after the Safe Mode compile hotfix, copy/edit the Goal113 draft only into a real human-created result, save that real JSON at the preferred .llmgc/manual path for Goal111 intake, re-run Goal111/Goal112/Goal113 validation, and decide whether a valid candidate is acceptable for offline_geoworld_alpha_manual_acceptance_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings, binary media or release packaging work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -459,6 +459,9 @@
                                         },
     "allowed_next_codex_task_types":  [
                                           "offline_geoworld_alpha_manual_acceptance_verification",
+                                          "unity_safe_mode_compile_hotfix_verification",
+                                          "goal_114_unity_safe_mode_compile_hotfix",
+                                          "manual_review_goal_114_unity_safe_mode_compile_hotfix",
                                           "goal_113_offline_geoworld_alpha_manual_result_workbench",
                                           "manual_review_goal_113_offline_geoworld_alpha_manual_result_workbench",
                                           "offline_geoworld_objective_acceptance_run_verification",
@@ -572,11 +575,11 @@
                                  "C# code generation for mechanics"
                              ],
     "recommended_next_work_item":  "offline_geoworld_alpha_manual_acceptance_verification",
-    "recommended_next_work_item_title":  "Run Goal110 Unity Alpha manual acceptance and provide the real result JSON for Goal111/112/113 validation",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-113-offline-geoworld-alpha-manual-result-workbench/GOAL.md",
+    "recommended_next_work_item_title":  "Run Goal110 Unity Alpha manual acceptance after the Goal114 Safe Mode compile hotfix and provide the real result JSON for Goal111/112/113 validation",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-114-unity-safe-mode-compile-hotfix/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Run Goal110 Unity Alpha manual acceptance, use the Goal113 draft only as a copy/edit starting point, place the real human-created result JSON at the preferred .llmgc/manual path, and re-run Goal111/Goal112/Goal113 validation before deciding offline_geoworld_alpha_manual_acceptance_verification",
-                                              "Keep Goal113, Goal112, Goal111 and Goal110 accepted=false until explicit human review accepts the active manual gate",
+                                              "Run Goal110 Unity Alpha manual acceptance after the Goal114 Safe Mode compile hotfix, use the Goal113 draft only as a copy/edit starting point, place the real human-created result JSON at the preferred .llmgc/manual path, and re-run Goal111/Goal112/Goal113 validation before deciding offline_geoworld_alpha_manual_acceptance_verification",
+                                              "Keep Goal114, Goal113, Goal112, Goal111 and Goal110 accepted=false until explicit human review accepts the active manual gate",
                                               "Use Goal113 manual-result workbench artifacts only as authoring/review visibility; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
                                               "Review Goal 107 offline geoworld objective acceptance run evidence",
                                               "Keep Goal 107 accepted=false until user review accepts it",
@@ -2668,5 +2671,18 @@
                                                                                                 "Goal 113 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity file, Unity scene/prefab/settings/package/build-settings mutation, final release build or prompt dump."
                                                                                             ],
                                                                         "next_action":  "run_goal110_manual_unity_checklist_copy_edit_goal113_draft_and_place_real_result_json_for_goal111_goal112_goal113_validation"
-                                                                    }
+                                                                    },
+    "unity_safe_mode_compile_hotfix_verification":  {
+                                                        "status":  "produced_for_review",
+                                                        "accepted":  false,
+                                                        "evidence_source":  "goal_114_unity_safe_mode_compile_hotfix",
+                                                        "observed_result":  [
+                                                                                "Goal 114 produces a P0 Unity Safe Mode compile hotfix under .llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix and .llmgc/exports/goal-114-unity-safe-mode-compile-hotfix with accepted=false.",
+                                                                                "implementationStatus=GREEN, manualGate=offline_geoworld_alpha_manual_acceptance_verification, manualGateRemainsOpen=true, manualResultCreatedOrCommitted=false, jsonUtilityReferencesRemoved=true, refreshPayloadStatusWrappersAdded=true, sourceScanPassed=true and negativeProofPassed=true.",
+                                                                                "The hotfix removes the reported unqualified JsonUtility references from OfflineGeoworldAlphaAcceptanceResult.cs, OfflineGeoworldAlphaAcceptanceResultStore.cs and OfflineGeoworldSessionSaveLoadController.cs by using local deterministic JSON helpers for the concrete result and snapshot shapes.",
+                                                                                "The hotfix adds low-risk RefreshPayloadStatus compatibility wrappers to OfflineGeoworldPreviewRunner.cs, OfflineGeoworldPlayModeTravelController.cs, OfflineGeoworldInteractiveTravelController.cs and OfflineGeoworldInteractionController.cs while preserving existing public refresh methods.",
+                                                                                "Goal 114 changes no AlphaRuntimeBootstrap.cs, Unity scenes, prefabs, ProjectSettings, Packages, StreamingAssets, .llmgc/manual result, Runtime, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file, dependency, binary/raster media, final art, atlas, final release build or prompt dump."
+                                                                            ],
+                                                        "next_action":  "run_goal110_manual_unity_checklist_after_safe_mode_compile_hotfix_and_place_real_result_json_for_goal111_goal112_goal113_validation"
+                                                    }
 }

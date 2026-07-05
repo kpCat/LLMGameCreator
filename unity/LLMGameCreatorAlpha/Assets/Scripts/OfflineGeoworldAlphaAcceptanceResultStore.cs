@@ -61,10 +61,13 @@ namespace LLMGameCreatorAlpha
             }
 
             var json = File.ReadAllText(path, Encoding.UTF8);
-            lastResult = JsonUtility.FromJson<OfflineGeoworldAlphaAcceptanceResult>(json);
+            lastResult = OfflineGeoworldAlphaAcceptanceResult.FromJson(json);
             lastStatus = lastResult == null
                 ? "Load failed: result JSON was empty."
-                : "Loaded Alpha acceptance result.";
+                : "Loaded Alpha acceptance result status="
+                  + lastResult.resultStatus
+                  + " steps="
+                  + (lastResult.steps == null ? 0 : lastResult.steps.Count);
             return lastResult;
         }
 

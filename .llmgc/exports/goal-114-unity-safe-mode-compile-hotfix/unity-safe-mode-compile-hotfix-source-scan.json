@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "unity_safe_mode_compile_hotfix_source_scan_v1",
+  "scenario": "goal-114-unity-safe-mode-compile-hotfix",
+  "implementationStatus": "GREEN",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "accepted": false,
+  "manualGateRemainsOpen": true,
+  "affectedUnityFiles": [
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResult.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResultStore.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSaveLoadController.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaSliceCoordinator.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewRunner.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionController.cs"
+  ],
+  "jsonUtilityReferenceCounts": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResult.cs",
+      "unqualifiedJsonUtilityReferenceCount": 0
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResultStore.cs",
+      "unqualifiedJsonUtilityReferenceCount": 0
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSaveLoadController.cs",
+      "unqualifiedJsonUtilityReferenceCount": 0
+    }
+  ],
+  "refreshPayloadStatusWrappers": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewRunner.cs",
+      "wrapperPresent": true,
+      "callsExistingRefreshMethod": true,
+      "existingMethodCalled": "Refresh"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
+      "wrapperPresent": true,
+      "callsExistingRefreshMethod": true,
+      "existingMethodCalled": "RefreshPayload"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+      "wrapperPresent": true,
+      "callsExistingRefreshMethod": true,
+      "existingMethodCalled": "RefreshPayload"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionController.cs",
+      "wrapperPresent": true,
+      "callsExistingRefreshMethod": true,
+      "existingMethodCalled": "RefreshPayload"
+    }
+  ],
+  "noAlphaRuntimeBootstrapChanges": true,
+  "alphaRuntimeBootstrapExpectedChangedPath": false,
+  "noScenePrefabProjectPackageSettingsChanges": true,
+  "noStreamingAssetsChanges": true,
+  "noManualResultWrites": true,
+  "manualRootExistsDuringScan": false,
+  "manualAcceptanceResultCreated": false,
+  "forbiddenZonesUntouched": true,
+  "unityBatchmodeCompileObserved": true,
+  "unityBatchmodeCompileResult": "passed_exit_code_0_log_recorded"
+}
