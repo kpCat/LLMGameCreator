@@ -333,6 +333,36 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaManualAcceptanceMilestoneGateLinks,
             Goal110FilesDiscoveredByRelativePaths =
                 qualityGate.Goal110FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaManualResultIntakeGoal110PackagePresent =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeGoal110PackagePresent,
+            OfflineGeoworldAlphaManualResultIntakeResultFilePresent =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeResultFilePresent,
+            OfflineGeoworldAlphaManualResultIntakeDecisionStatus =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeDecisionStatus,
+            OfflineGeoworldAlphaManualResultIntakeAcceptableCandidate =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeAcceptableCandidate,
+            OfflineGeoworldAlphaManualResultIntakeAcceptedByCodex =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeAcceptedByCodex,
+            OfflineGeoworldAlphaManualResultIntakeHumanAcceptanceStillRequired =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeHumanAcceptanceStillRequired,
+            OfflineGeoworldAlphaManualResultIntakeChecklistHashMatched =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeChecklistHashMatched,
+            OfflineGeoworldAlphaManualResultIntakePassedStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakePassedStepCount,
+            OfflineGeoworldAlphaManualResultIntakeFailedStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeFailedStepCount,
+            OfflineGeoworldAlphaManualResultIntakePendingStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakePendingStepCount,
+            OfflineGeoworldAlphaManualResultIntakeSkippedStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeSkippedStepCount,
+            OfflineGeoworldAlphaManualResultIntakeMissingStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeMissingStepCount,
+            OfflineGeoworldAlphaManualResultIntakeDuplicateStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeDuplicateStepCount,
+            OfflineGeoworldAlphaManualResultIntakeQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaManualResultIntakeQualityGatePassed,
+            Goal111FilesDiscoveredByRelativePaths =
+                qualityGate.Goal111FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

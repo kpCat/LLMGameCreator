@@ -1,0 +1,83 @@
+{
+  "sampleOnly": true,
+  "notRealHumanAcceptance": true,
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "resultSchema": "offline_geoworld_alpha_acceptance_result_v1",
+  "accepted": true,
+  "checklistHash": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "steps": [
+    {
+      "stepId": "complete_objectives",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "complete_objectivesEvidence"
+    },
+    {
+      "stepId": "load_snapshot",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "load_snapshotEvidence"
+    },
+    {
+      "stepId": "open_alpha_slice_window",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "open_alpha_slice_windowEvidence"
+    },
+    {
+      "stepId": "open_unity_project",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "open_unity_projectEvidence"
+    },
+    {
+      "stepId": "record_diagnostics",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "record_diagnosticsEvidence"
+    },
+    {
+      "stepId": "replay",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "replayEvidence"
+    },
+    {
+      "stepId": "run_interaction",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "run_interactionEvidence"
+    },
+    {
+      "stepId": "run_package_verifier",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "run_package_verifierEvidence"
+    },
+    {
+      "stepId": "run_travel",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "run_travelEvidence"
+    },
+    {
+      "stepId": "save_snapshot",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "save_snapshotEvidence"
+    },
+    {
+      "stepId": "setup_rig",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "setup_rigEvidence"
+    },
+    {
+      "stepId": "verify_package",
+      "status": "passed",
+      "notes": "sample fixture only; not real human acceptance",
+      "evidenceRef": "verify_packageEvidence"
+    }
+  ]
+}

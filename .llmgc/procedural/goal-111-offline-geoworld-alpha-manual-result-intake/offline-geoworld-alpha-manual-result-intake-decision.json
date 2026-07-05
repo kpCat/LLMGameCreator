@@ -1,0 +1,66 @@
+{
+  "goalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+  "sourceGoalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "decisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "acceptableCandidate": false,
+  "resultFilePresent": false,
+  "resultFilePath": "",
+  "candidateResultPaths": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    ".llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake/input/offline-geoworld-alpha-acceptance-result.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-result.json"
+  ],
+  "checklistHashExpected": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "checklistHashActual": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "stepSummary": {
+    "requiredStepCount": 12,
+    "resultStepCount": 0,
+    "passedCount": 0,
+    "failedCount": 0,
+    "pendingCount": 0,
+    "skippedCount": 0,
+    "missingCount": 0,
+    "duplicateCount": 0,
+    "unknownCount": 0,
+    "invalidStatusCount": 0,
+    "missingStatusCount": 0,
+    "requiredStepsPresentExactlyOnce": false,
+    "missingStepIds": [],
+    "duplicateStepIds": [],
+    "unknownStepIds": []
+  },
+  "errors": [],
+  "warnings": [
+    "manual result file is missing from deterministic candidate paths"
+  ],
+  "inputPackageLineage": {
+    "goal110ExportPackagePresent": true,
+    "goal110ProceduralEvidencePresent": true,
+    "goal110StreamingAssetsPresent": true,
+    "checklistRead": true,
+    "resultTemplateRead": true,
+    "dashboardRead": true,
+    "checksumsRead": true,
+    "fileIndexRead": true,
+    "manifestRead": true,
+    "goal110AcceptedFalse": true,
+    "goal110ManualAcceptancePending": true,
+    "goal110AutomatedGatePassed": true,
+    "checklistStepCount": 12,
+    "loadedMetadataFileCount": 6,
+    "sha256ByRelativePath": {
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-checklist.json": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-checksums.json": "ed83e6c8e55ea5dc93e738747ec50fa8e99503584515f53b88e5478f55cae5e1",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-file-index.json": "b1d018620d1d582ed8c1a64a3c7e75326c2b1fe5ba86de8d3c803c926b499a73",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-manifest.json": "e8db331ac353e00d999c1696086a26fa10c148a2018132d1d2cece8e760f63c1",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result-template.json": "b75bee4c9853182bee19ec94b7799ae45eb500e63ee46e106f24cbd77c19a1ac",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-release-gate-dashboard.json": "c98a19e5af637f17265fc01446221b4fe606d545ea9c6e74a8a999986c616641"
+    }
+  },
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "decisionSummary": "valid manual result available for human gate decision: false"
+}

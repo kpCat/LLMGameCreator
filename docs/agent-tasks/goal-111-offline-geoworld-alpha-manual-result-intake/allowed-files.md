@@ -1,0 +1,1 @@
+Allowed paths are defined in GOAL.md. Keep edits inside Goal111 task/evidence/docs/Application/VisualWorldWorkspace/WinForms/tests metadata-only Unity StreamingAssets paths. Do not touch Runtime, schema, providers, Lua, generator-library, project files, AlphaRuntimeBootstrap, Unity scenes/prefabs/settings.

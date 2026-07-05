@@ -103,6 +103,7 @@ offline_geoworld_objective_acceptance_run_verification required
 offline_geoworld_alpha_slice_orchestrator_verification required
 offline_geoworld_alpha_slice_export_package_verification required
 offline_geoworld_alpha_manual_acceptance_verification required
+offline_geoworld_alpha_manual_result_intake_verification produced, blocked pending real manual result
 ```
 
 Current capabilities:
@@ -144,6 +145,7 @@ Current capabilities:
 - Goal 108A alpha slice source split and immutability audit evidence with the Goal108 orchestrator Application source split below 700 physical/logical lines, actual `14ad9f38..989a79ab` git diff/blob audit, 17 Goal108 evidence/payload additions, zero Goal101-107 artifact modifications, matching Goal108 `historicalArtifactsUnchanged=true`, no evidence-trust debt and unchanged AlphaRuntimeBootstrap;
 - Goal 109 portable offline geoworld Alpha Slice export package evidence with a BCL-only Application package service, deterministic directory package, clean-import proof, 16-case negative proof, standalone Unity package verifier/editor window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
 - Goal 110 offline geoworld Alpha manual acceptance gate evidence with a BCL-only Application acceptance service, checklist/result-template/dashboard payloads, simulated result readback proof, 13-case negative proof, standalone Unity result/store scripts, Editor acceptance runner window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
+- Goal 111 offline geoworld Alpha manual-result intake evidence with a BCL-only Application verifier, deterministic decision/report/index/quality/negative-proof artifacts, export dashboard/readme/index metadata and Visual World Stream Preview Workspace decision visibility; current decision is `BLOCKED_PENDING_MANUAL_RESULT` because no real human result JSON exists yet;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1940,6 +1942,27 @@ live network fetching, raw geodata dump, binary/raster media, prompt-dump, final
 scene/prefab/settings/packages/build-settings files or historical Goal101-109 artifacts. Goal110, Goal109, Goal108A,
 Goal108 and prior geoworld gates remain `accepted=false`.
 
+### Goal 111: Offline Geoworld Alpha Manual Result Intake
+
+Goal 111 is produced for review as a GREEN manual-result intake and decision bridge, while the active human gate remains
+`offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`.
+
+Goal 111 writes deterministic evidence under
+`.llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake/` and export metadata under
+`.llmgc/exports/goal-111-offline-geoworld-alpha-manual-result-intake/`. It records
+`decisionStatus=BLOCKED_PENDING_MANUAL_RESULT`, `acceptableCandidate=false`, `acceptedByCodex=false`,
+`humanAcceptanceStillRequired=true`, `goal110PackagePresent=true`, `requiredStepCount=12`, `proceduralFileCount=7`,
+`exportFileCount=3`, `missingResultProofPassed=true`, `invalidResultProofPassed=true`,
+`notFinalReleaseOrRuntimeBuild=true`, `noRuntimeProviderOrNetworkChanges=true` and `qualityGatePassed=true`.
+
+Goal 111 consumes the real Goal110 acceptance package by repository-relative path and surfaces
+`offline_geoworld_alpha_manual_result_intake` in the existing Visual World Stream Preview Workspace. It is a manual
+result intake and decision-visibility bridge only: no real manual result JSON currently exists, so the state remains
+pending/blocked until a human provides a valid result and explicitly decides the manual acceptance gate. Goal 111 is not
+a final release, not final Runtime build, not final art/final gameplay, and not live geodata/provider/network/schema/Lua
+or generator-library work. Goal111, Goal110, Goal109, Goal108A, Goal108 and prior geoworld gates remain
+`accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
@@ -1949,5 +1972,5 @@ offline_geoworld_alpha_manual_acceptance_verification
 Status:
 
 ```text
-goal_110_offline_geoworld_alpha_manual_acceptance_gate_produced_for_review
+goal_111_offline_geoworld_alpha_manual_result_intake_produced_for_review_blocked_pending_manual_result
 ```

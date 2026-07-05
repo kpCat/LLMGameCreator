@@ -1,0 +1,7 @@
+{
+  "goalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+  "scenarioId": "malformed_manual_result_json",
+  "passed": true,
+  "decisionStatus": "FAILED_INVALID_RESULT",
+  "diagnostic": "Malformed manual result JSON is rejected deterministically."
+}

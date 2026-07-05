@@ -1,0 +1,1 @@
+Validation requirements are in GOAL.md: restore/build, focused tests, product smoke, current-goal/spine/artifact-scope gates when present, git diff checks, mojibake/escaped-Cyrillic scan, source-health scan, final GREEN/BLOCKED/FAILED commit and push.

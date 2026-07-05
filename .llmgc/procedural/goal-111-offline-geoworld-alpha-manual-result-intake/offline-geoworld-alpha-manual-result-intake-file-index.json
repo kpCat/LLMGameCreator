@@ -1,0 +1,45 @@
+{
+  "goalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 6,
+  "selfHashExcluded": true,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-decision.json",
+      "role": "goal111_manual_result_intake_evidence",
+      "required": true,
+      "sha256": "c347da2e55cb1a564de8d4878d5ddbb554d145da8136e8ea61e33e10b464e617"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-negative-proof-invalid-result.json",
+      "role": "goal111_manual_result_intake_evidence",
+      "required": true,
+      "sha256": "320c22a8b7a3cda889edb0e0cb0f435b30791166f4e7f94d7afe8db9acb20a8b"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-negative-proof-missing-result.json",
+      "role": "goal111_manual_result_intake_evidence",
+      "required": true,
+      "sha256": "57ab737e3011163ec9e169a0badfa66e542b7cb0162481aec573197309ecb6a0"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-quality-gate-scan.json",
+      "role": "goal111_manual_result_intake_evidence",
+      "required": true,
+      "sha256": "c3bfcba5c2409a0b740973f09942d35e060188a783e7eee99ef514de359a7225"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-report.md",
+      "role": "goal111_manual_result_intake_evidence",
+      "required": true,
+      "sha256": "87822b80dae64505fd7a185982cfdeb5d13e8e9b1229607bc73e00a96f8038e8"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-valid-sample-result.json",
+      "role": "goal111_manual_result_intake_evidence",
+      "required": true,
+      "sha256": "70813fe138a547bbea534dda41c4efa1e7866b806ec921e203c3f9d186b8560b"
+    }
+  ]
+}

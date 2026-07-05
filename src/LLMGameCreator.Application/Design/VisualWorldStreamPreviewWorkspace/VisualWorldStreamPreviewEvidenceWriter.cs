@@ -214,28 +214,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var alphaSlice = BuildGoal108AlphaSliceQuality(groups, proofs);
         var alphaExport = BuildGoal109AlphaExportPackageQuality(groups, proofs);
         var manualAcceptance = BuildGoal110AlphaManualAcceptanceQuality(groups, proofs);
-        var requiredGroups = new[]
-        {
-            "microtiles",
-            "map_patches",
-            "region_composer",
-            "world_profiles",
-            "chunk_stream_windows",
-            "cache_exports",
-            "unity_handoff",
-            "geoworld",
-            "offline_geoworld_handoff",
-            "offline_geoworld_unity_preview",
-            "offline_geoworld_unity_editor_preview",
-            "offline_geoworld_playmode_travel",
-            "offline_geoworld_interactive_travel",
-            "offline_geoworld_interactions",
-            "offline_geoworld_session_replay",
-            "offline_geoworld_objective_acceptance",
-            "offline_geoworld_alpha_slice",
-            "offline_geoworld_alpha_export_package",
-            "offline_geoworld_alpha_manual_acceptance"
-        };
+        var manualResultIntake = BuildGoal111AlphaManualResultIntakeQuality(groups, proofs);
+        var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
         var noAbsolutePaths = groups.SelectMany(group => group.Entries)
@@ -402,6 +382,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal108AlphaSliceQualityDiagnostics(alphaSlice, diagnostics);
         AddGoal109AlphaExportPackageQualityDiagnostics(alphaExport, diagnostics);
         AddGoal110AlphaManualAcceptanceQualityDiagnostics(manualAcceptance, diagnostics);
+        AddGoal111AlphaManualResultIntakeQualityDiagnostics(
+            manualResultIntake,
+            binding,
+            diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -693,7 +677,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 .ToList()
         };
         var withGoal109 = ApplyGoal109AlphaExportPackageQuality(baseQualityGate, alphaExport, binding);
-        return ApplyGoal110AlphaManualAcceptanceQuality(withGoal109, manualAcceptance, binding);
+        var withGoal110 = ApplyGoal110AlphaManualAcceptanceQuality(withGoal109, manualAcceptance, binding);
+        return ApplyGoal111AlphaManualResultIntakeQuality(withGoal110, manualResultIntake, binding);
     }
 
 }

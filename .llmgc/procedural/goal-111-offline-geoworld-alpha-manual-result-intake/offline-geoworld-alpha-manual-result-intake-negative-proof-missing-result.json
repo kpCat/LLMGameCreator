@@ -1,0 +1,7 @@
+{
+  "goalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+  "scenarioId": "missing_manual_result",
+  "passed": true,
+  "decisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+  "diagnostic": "Missing or empty manual result is blocked as pending, not accepted."
+}

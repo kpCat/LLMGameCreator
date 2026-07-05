@@ -1,0 +1,14 @@
+{
+  "goalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+  "sourceGoalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "decisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+  "acceptableCandidate": false,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "resultFilePath": "",
+  "qualityGatePassed": true,
+  "validManualResultAvailableForHumanGateDecision": false,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true
+}

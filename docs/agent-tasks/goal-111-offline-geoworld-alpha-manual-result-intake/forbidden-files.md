@@ -1,0 +1,1 @@
+Forbidden by default: Runtime/Runtime.Abstractions, public GamePackage schema, providers/LLM/RAG/media, Lua/Scripting, generator-library, .sln/.csproj/dependencies, AlphaRuntimeBootstrap.cs, Unity scenes/prefabs/project settings/packages/build settings, live geodata/network fetching, LFZ source import/copy.

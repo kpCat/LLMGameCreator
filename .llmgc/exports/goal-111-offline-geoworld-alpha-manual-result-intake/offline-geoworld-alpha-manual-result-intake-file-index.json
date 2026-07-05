@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 2,
+  "selfHashExcluded": true,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-dashboard.json",
+      "role": "goal111_manual_result_intake_export",
+      "required": true,
+      "sha256": "98a6322d636377d4aa94a074d3efa274139e8be964ce7ece231a7583a0b5cbf4"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-manual-result-intake-readme.md",
+      "role": "goal111_manual_result_intake_export",
+      "required": true,
+      "sha256": "f5d5c1116713e2d9b4358f00d96ffb95c7276d37b5b87c7fcc7ade7a398ad04a"
+    }
+  ]
+}

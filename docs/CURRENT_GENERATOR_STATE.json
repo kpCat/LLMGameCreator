@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-04T20:40:31Z",
+    "updated_at_utc":  "2026-07-04T23:33:56Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 110 offline geoworld Alpha manual acceptance gate produced for review",
+    "current_phase_title":  "Goal 111 offline geoworld Alpha manual result intake bridge produced with pending manual result",
     "gate_status":  "offline_geoworld_alpha_manual_acceptance_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 110 Offline Geoworld Alpha Manual Acceptance Gate is produced for review as GREEN with offline_geoworld_alpha_manual_acceptance_verification required and accepted=false. Goal 110 builds a deterministic manual acceptance gate package under .llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate, .llmgc/exports/goal-110-offline-geoworld-alpha-acceptance and unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110. It consumes the real Goal109 export package, keeps manual acceptance pending, adds checklist/result-template/dashboard payloads, simulated result readback proof, negative proof, Unity result-store/editor-runner inventories, workspace binding inventory and quality gate scan. Gate metrics are checklistStepCount=12, payloadFileCount=5, exportFileCount=7, negativeRejectedCount=13, manualAcceptancePending=true, alphaRuntimeBootstrapUnchanged=true and qualityGatePassed=true. Goal 110 is manual acceptance tooling, not final Runtime gameplay or release packaging. Goal 110, Goal 109, Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 110 manual acceptance checklist, result template, release-gate dashboard, Unity acceptance runner/store scripts and Visual World Stream Preview Workspace integration. Do not mark offline_geoworld_alpha_manual_acceptance_verification passed until explicit user acceptance. Keep Goal110, Goal109, Goal108A, Goal108, Goal107, Goal106, Goal105, Goal104, Goal103, Goal102B and previous geoworld gates accepted=false as historical produced-for-review evidence.",
-    "recommended_next_decision":  "Run the manual Unity Alpha acceptance checklist from the Goal110 package and decide whether to accept offline_geoworld_alpha_manual_acceptance_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings, binary media or release packaging work from this handoff.",
+    "active_manual_gate":  "Goal 111 Offline Geoworld Alpha Manual Result Intake is produced for review as GREEN, but the active human gate remains offline_geoworld_alpha_manual_acceptance_verification required and accepted=false. Goal 111 builds a deterministic manual-result intake bridge under .llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake and .llmgc/exports/goal-111-offline-geoworld-alpha-manual-result-intake, reads the real Goal110 acceptance package, and surfaces decisionStatus=BLOCKED_PENDING_MANUAL_RESULT because no real manual result JSON exists in the deterministic candidate paths. It keeps acceptedByCodex=false, humanAcceptanceStillRequired=true, acceptableCandidate=false, notFinalReleaseOrRuntimeBuild=true, noRuntimeProviderOrNetworkChanges=true and qualityGatePassed=true. Goal 111 is manual-result intake and decision visibility only, not final Runtime gameplay, release packaging, live geodata/provider/network work or a Codex acceptance flip. Goal 111, Goal 110, Goal 109, Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Place a real Goal110 manual acceptance result JSON in one of the deterministic candidate paths, then review the Goal111 decision bridge in the Visual World Stream Preview Workspace before explicitly deciding offline_geoworld_alpha_manual_acceptance_verification. Do not mark the gate passed while decisionStatus is BLOCKED_PENDING_MANUAL_RESULT. Keep Goal111, Goal110, Goal109, Goal108A, Goal108 and previous geoworld gates accepted=false as historical produced-for-review evidence.",
+    "recommended_next_decision":  "Run the manual Unity Alpha acceptance checklist from the Goal110 package, save the result JSON for Goal111 intake, and decide whether a valid GREEN_ACCEPTABLE_CANDIDATE result is acceptable for offline_geoworld_alpha_manual_acceptance_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings, binary media or release packaging work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -164,7 +164,8 @@
                            "goal_107_manual_gate":  "offline_geoworld_objective_acceptance_run_verification",
                            "goal_108_manual_gate":  "offline_geoworld_alpha_slice_orchestrator_verification",
                            "goal_109_manual_gate":  "offline_geoworld_alpha_slice_export_package_verification",
-                           "goal_110_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification"
+                           "goal_110_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
+                           "goal_111_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -2617,5 +2618,19 @@
                                                                                          "Goal 110 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation, final release build or prompt dump."
                                                                                      ],
                                                                  "next_action":  "review_goal_110_offline_geoworld_alpha_manual_acceptance_gate"
-                                                             }
+                                                             },
+    "offline_geoworld_alpha_manual_result_intake_verification":  {
+                                                                     "status":  "produced_for_review",
+                                                                     "accepted":  false,
+                                                                     "evidence_source":  "goal_111_offline_geoworld_alpha_manual_result_intake",
+                                                                     "observed_result":  [
+                                                                                             "Goal 111 produces an offline geoworld Alpha manual-result intake decision bridge under .llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake and .llmgc/exports/goal-111-offline-geoworld-alpha-manual-result-intake with accepted=false.",
+                                                                                             "implementationStatus=GREEN, decisionStatus=BLOCKED_PENDING_MANUAL_RESULT, acceptableCandidate=false, acceptedByCodex=false, humanAcceptanceStillRequired=true, goal110PackagePresent=true, requiredStepCount=12, missingResultProofPassed=true, invalidResultProofPassed=true, noRuntimeProviderOrNetworkChanges=true and qualityGatePassed=true.",
+                                                                                             "The BCL-only Application seam lives under src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaManualResultIntake/ and consumes the real Goal110 acceptance package by repository-relative path.",
+                                                                                             "No real manual result JSON exists in the deterministic candidate paths, so current state remains pending/blocked until a human supplies a valid result and explicitly decides offline_geoworld_alpha_manual_acceptance_verification.",
+                                                                                             "The existing Visual World Stream Preview Workspace surfaces the offline_geoworld_alpha_manual_result_intake group, Goal110 package presence, result-file presence, decision status, acceptable-candidate state, acceptedByCodex=false, humanAcceptanceStillRequired=true, checklist hash status, step counts, diagnostics and evidence/export paths.",
+                                                                                             "Goal 111 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation, final release build or prompt dump."
+                                                                                         ],
+                                                                     "next_action":  "provide_goal110_manual_result_json_for_goal111_intake_before_human_gate_decision"
+                                                                 }
 }
