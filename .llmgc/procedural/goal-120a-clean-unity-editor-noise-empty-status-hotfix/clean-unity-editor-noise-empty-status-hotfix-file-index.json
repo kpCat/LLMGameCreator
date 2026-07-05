@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "goal_120a_clean_unity_editor_noise_empty_status_hotfix_file_index_v1",
+  "taskId": "goal-120a-clean-unity-editor-noise-empty-status-hotfix",
+  "proceduralFiles": [
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-dashboard.json",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-script-scan.json",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-report.md",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-negative-proof.json",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-file-index.json"
+  ],
+  "exportFiles": [
+    ".llmgc/exports/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-export-index.json"
+  ],
+  "sourceFiles": [
+    ".devflow/scripts/clean-unity-editor-noise.ps1",
+    ".devflow/scripts/clean-unity-editor-noise.cmd",
+    "tests/LLMGameCreator.Tests/DevFlow/CleanUnityEditorNoiseScriptTests.cs",
+    ".devflow/artifact-scope/artifact-scope-policy.json",
+    "docs/CURRENT_GENERATOR_STATE.json",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/CONTEXT_INDEX.md",
+    "docs/FULL_GENERATOR_GOAL_QUEUE.md"
+  ]
+}

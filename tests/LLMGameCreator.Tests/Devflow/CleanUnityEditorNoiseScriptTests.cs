@@ -23,6 +23,15 @@ public sealed class CleanUnityEditorNoiseScriptTests
         Assert.Contains("[switch]$Apply", script, StringComparison.Ordinal);
         Assert.Contains("[switch]$AllowStaged", script, StringComparison.Ordinal);
         Assert.Contains("git status --porcelain=v1 --untracked-files=all", script, StringComparison.Ordinal);
+        Assert.Contains("[string[]]$statusLines = @(", script, StringComparison.Ordinal);
+        Assert.Contains("return ,$statusLines", script, StringComparison.Ordinal);
+        Assert.Contains("[AllowEmptyCollection()]", script, StringComparison.Ordinal);
+        Assert.Contains("[AllowNull()]", script, StringComparison.Ordinal);
+        Assert.Contains("[string[]]$StatusLines = @()", script, StringComparison.Ordinal);
+        Assert.Contains("foreach ($line in @($StatusLines))", script, StringComparison.Ordinal);
+        Assert.Contains("[string[]]$afterStatusLines = Invoke-CleanupGitStatus", script, StringComparison.Ordinal);
+        Assert.Contains("[string[]]$finalStatusLines = Invoke-CleanupGitStatus", script, StringComparison.Ordinal);
+        Assert.Contains("Write-Host \"Final status:\"", script, StringComparison.Ordinal);
         Assert.Contains("Refusing cleanup because staged files are present", script, StringComparison.Ordinal);
         Assert.Contains("unity/LLMGameCreatorAlpha/Assets/", script, StringComparison.Ordinal);
         Assert.Contains(".meta", script, StringComparison.Ordinal);

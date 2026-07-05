@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "goal_120a_clean_unity_editor_noise_empty_status_hotfix_dashboard_v1",
+  "taskId": "goal-120a-clean-unity-editor-noise-empty-status-hotfix",
+  "manualGate": "goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "sourceBug": "clean git status output was represented as null before Get-CleanupTargets binding",
+  "fixedBehavior": {
+    "emptyGitStatusBecomesEmptyArray": true,
+    "getCleanupTargetsAcceptsEmptyStatusList": true,
+    "dryRunOnCleanWorktreeExitsZero": true,
+    "applyOnCleanWorktreeExitsZero": true,
+    "finalStatusHeaderPrintedWhenNoLinesRemain": true
+  },
+  "supportedCommands": [
+    ".devflow/scripts/clean-unity-editor-noise.ps1 -DryRun",
+    ".devflow/scripts/clean-unity-editor-noise.ps1 -Apply",
+    ".devflow/scripts/clean-unity-editor-noise.cmd"
+  ],
+  "safetyContract": {
+    "broadGitCleanAllowed": false,
+    "stagedFilesRefusedByDefault": true,
+    "projectVersionRestoreOnly": "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectVersion.txt",
+    "neverRemoveExtensions": [
+      ".cs",
+      ".json",
+      ".md",
+      ".unity",
+      ".prefab"
+    ]
+  },
+  "evidenceFiles": [
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-script-scan.json",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-negative-proof.json",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-report.md",
+    ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-file-index.json"
+  ]
+}

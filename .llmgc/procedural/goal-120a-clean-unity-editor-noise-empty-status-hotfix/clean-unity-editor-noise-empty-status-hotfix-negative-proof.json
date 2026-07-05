@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "goal_120a_clean_unity_editor_noise_empty_status_hotfix_negative_proof_v1",
+  "taskId": "goal-120a-clean-unity-editor-noise-empty-status-hotfix",
+  "forbiddenScope": {
+    "manualArtifactsCommitted": false,
+    "unitySourceOrSettingsChanged": false,
+    "runtimeChanged": false,
+    "runtimeAbstractionsChanged": false,
+    "publicGamePackageSchemaChanged": false,
+    "providerOrLlmOrRagOrMediaProviderChanged": false,
+    "luaOrScriptingChanged": false,
+    "generatorLibraryChanged": false,
+    "solutionOrProjectFilesChanged": false,
+    "dependencyFilesChanged": false
+  },
+  "cleanupSafetyNegativeChecks": {
+    "broadGitCleanUsed": false,
+    "deleteCsJsonMdUnityPrefabAllowed": false,
+    "restoreTargetsBeyondProjectVersionAllowed": false,
+    "applyPromotionPathChanged": false
+  },
+  "notes": [
+    "Goal120A is a process hotfix only.",
+    "The hotfix does not change Unity gameplay, Runtime, schema, provider, Lua or generator-library lanes.",
+    "The cleanup command remains bounded to Unity editor noise."
+  ]
+}

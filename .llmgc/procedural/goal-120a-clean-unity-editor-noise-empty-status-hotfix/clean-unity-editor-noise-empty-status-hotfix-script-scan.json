@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "goal_120a_clean_unity_editor_noise_empty_status_hotfix_script_scan_v1",
+  "taskId": "goal-120a-clean-unity-editor-noise-empty-status-hotfix",
+  "scannedFiles": [
+    ".devflow/scripts/clean-unity-editor-noise.ps1",
+    ".devflow/scripts/clean-unity-editor-noise.cmd",
+    "tests/LLMGameCreator.Tests/DevFlow/CleanUnityEditorNoiseScriptTests.cs"
+  ],
+  "sourceContract": {
+    "invokeCleanupGitStatusReturnsCommaPreservedStatusArray": true,
+    "invokeCleanupGitStatusUsesStringArrayStatusLines": true,
+    "getCleanupTargetsAllowsEmptyCollection": true,
+    "getCleanupTargetsAllowsNull": true,
+    "getCleanupTargetsDefaultsToEmptyArray": true,
+    "getCleanupTargetsIteratesNormalizedStatusLines": true,
+    "finalStatusUsesExplicitFinalStatusArray": true
+  },
+  "cleanupSafety": {
+    "refusesStagedFilesByDefault": true,
+    "containsBroadGitCleanFd": false,
+    "usesGitRestoreOnlyForProjectVersion": true,
+    "allowedUntrackedTargets": [
+      "unity/LLMGameCreatorAlpha/Assets/**/*.meta",
+      "unity/LLMGameCreatorAlpha/Packages/packages-lock.json",
+      "unity/LLMGameCreatorAlpha/ProjectSettings/*.asset"
+    ],
+    "neverRemoveExtensions": [
+      ".cs",
+      ".json",
+      ".md",
+      ".unity",
+      ".prefab"
+    ]
+  },
+  "testCoverage": {
+    "sourceContractTestUpdated": true,
+    "emptyStatusHandlingAsserted": true,
+    "stagedRefusalAsserted": true,
+    "broadGitCleanAbsenceAsserted": true,
+    "neverRemoveExtensionsAsserted": true,
+    "boundedUnityNoiseTargetsAsserted": true
+  }
+}

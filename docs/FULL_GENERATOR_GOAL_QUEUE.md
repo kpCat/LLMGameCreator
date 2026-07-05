@@ -2155,20 +2155,41 @@ Use `.devflow/scripts/clean-unity-editor-noise.ps1 -DryRun` before applying clea
 task. This does not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 120A: Clean Unity Editor Noise Empty-Status Hotfix
+
+Goal 120A fixes the cleanup script null/empty-status bug found during manual Goal120 cleanup verification. A clean
+`git status --porcelain=v1 --untracked-files=all` result is treated as an empty status list, so `-DryRun` and `-Apply`
+can exit 0 on a clean worktree while still printing `Final status:`.
+
+After Unity manual checks, the supported command remains:
+
+```text
+.devflow\scripts\clean-unity-editor-noise.cmd
+```
+
+or:
+
+```text
+.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply
+```
+
+The hotfix does not broaden cleanup rules: no broad `git clean`, no Unity source/settings/package mutation, no
+`.llmgc/manual/**`, Runtime/schema/provider/Lua/generator-library, final renderer/atlas or release-packaging work is
+authorized.
+
 ## Current Recommended Next Work
 
 ```text
-accepted_alpha_unity_playable_projection_verification
+goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification
 ```
 
-Run hands-on Unity verification for Goal119 through
-`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, confirm the Unity Console has no accepted Alpha
-projection edit-mode material-leak warning, then explicitly decide the manual gate. Do not start live geodata/provider,
-Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
-StreamingAssets or release packaging work from this handoff.
+Review the Goal120A cleanup script hotfix evidence, then continue Goal120/Goal119 hands-on Unity verification through
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and use the supported cleanup command only for bounded
+Unity editor noise. Do not start live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final
+art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_119a_material_warning_hotfix_green_goal119_manual_verification_required
+goal_120a_cleanup_empty_status_hotfix_green_goal120_manual_cleanup_supported
 ```

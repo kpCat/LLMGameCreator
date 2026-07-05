@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal_120a_clean_unity_editor_noise_empty_status_hotfix_export_index_v1",
+  "taskId": "goal-120a-clean-unity-editor-noise-empty-status-hotfix",
+  "exportStatus": "metadata_only",
+  "dashboard": ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-dashboard.json",
+  "report": ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/clean-unity-editor-noise-empty-status-hotfix-report.md",
+  "manualInputEmbedded": false,
+  "unityFilesEmbedded": false,
+  "supportedCleanupCommand": ".devflow/scripts/clean-unity-editor-noise.cmd"
+}

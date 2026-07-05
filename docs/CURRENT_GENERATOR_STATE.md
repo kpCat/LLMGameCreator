@@ -50,6 +50,21 @@ Target, Select Next Objective, Select Diagnostics Marker and Toggle/Refresh Lege
 `.llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/`, and the short manual note at
 `docs/manual-acceptance/accepted-alpha-projection-usability-and-cleanup.md`.
 
+Goal 120A hotfixes the cleanup script null/empty-status bug found during manual Goal120 cleanup verification:
+
+```text
+goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification required
+implementationStatus=GREEN
+accepted=false
+cleanupDryRun=.devflow/scripts/clean-unity-editor-noise.ps1 -DryRun
+cleanupApply=.devflow/scripts/clean-unity-editor-noise.ps1 -Apply
+supportedCleanupCommand=.devflow\scripts\clean-unity-editor-noise.cmd
+```
+
+After Unity manual checks, the supported cleanup command remains `.devflow\scripts\clean-unity-editor-noise.cmd` or
+`.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply`. Goal120A only makes clean/empty `git status` output an empty
+status list; it does not broaden cleanup targets or authorize forbidden lanes.
+
 This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 

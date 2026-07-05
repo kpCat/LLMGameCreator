@@ -37,7 +37,13 @@ function Invoke-CleanupGitStatus {
         throw "git status --porcelain=v1 --untracked-files=all failed: $($output -join [Environment]::NewLine)"
     }
 
-    return @($output | ForEach-Object { "$_" } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    [string[]]$statusLines = @(
+        $output |
+            ForEach-Object { "$_" } |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    )
+
+    return ,$statusLines
 }
 
 function ConvertTo-CleanupPath {
@@ -119,13 +125,21 @@ function Resolve-CleanupPath {
 }
 
 function Get-CleanupTargets {
-    param([Parameter(Mandatory=$true)][string[]]$StatusLines)
+    param(
+        [AllowEmptyCollection()]
+        [AllowNull()]
+        [string[]]$StatusLines = @()
+    )
 
     $remove = New-Object System.Collections.Generic.List[string]
     $restore = New-Object System.Collections.Generic.List[string]
     $staged = New-Object System.Collections.Generic.List[string]
 
-    foreach ($line in $StatusLines) {
+    foreach ($line in @($StatusLines)) {
+        if ([string]::IsNullOrWhiteSpace($line)) {
+            continue
+        }
+
         $path = ConvertTo-CleanupPath -StatusLine $line
         if ([string]::IsNullOrWhiteSpace($path)) {
             continue
@@ -155,7 +169,7 @@ function Get-CleanupTargets {
     }
 }
 
-$statusLines = Invoke-CleanupGitStatus
+[string[]]$statusLines = Invoke-CleanupGitStatus
 $targets = Get-CleanupTargets -StatusLines $statusLines
 
 Write-Host "Unity editor noise cleanup mode: $(if ($Apply) { 'apply' } else { 'dry-run' })"
@@ -200,7 +214,7 @@ foreach ($path in $targets.restore) {
 }
 
 if ($Apply) {
-    $afterStatusLines = Invoke-CleanupGitStatus
+    [string[]]$afterStatusLines = Invoke-CleanupGitStatus
     $remaining = Get-CleanupTargets -StatusLines $afterStatusLines
     if ($remaining.remove.Count -gt 0 -or $remaining.restore.Count -gt 0) {
         Write-Host "Unity editor noise cleanup targets remain after apply."
@@ -211,4 +225,7 @@ if ($Apply) {
 }
 
 Write-Host "Final status:"
-Invoke-CleanupGitStatus | ForEach-Object { Write-Host $_ }
+[string[]]$finalStatusLines = Invoke-CleanupGitStatus
+foreach ($line in $finalStatusLines) {
+    Write-Host $line
+}
