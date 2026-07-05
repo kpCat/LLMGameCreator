@@ -18,6 +18,8 @@ Goal 113 note: the manual-result workbench surfaces Goal110 required steps, Goal
 
 Goal 114 note: the Unity Safe Mode compile hotfix unblocks reported Unity compile errors in the manual acceptance helper scripts only. It does not mean Alpha accepted, does not close `vertical_slice_final_verification`, does not write `.llmgc/manual/**`, and does not start live geodata/provider/network/runtime/schema/Lua/generator-library/final-art/final-release work.
 
+Goal 115 note: the human-result revalidation reads the real local `.llmgc/manual/**` result and records `GREEN_ACCEPTABLE_CANDIDATE`, 12/12 passed required steps and manualResultSha256 `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`. It does not mean Alpha accepted, does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and still requires explicit human decision for `offline_geoworld_alpha_manual_acceptance_verification`.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

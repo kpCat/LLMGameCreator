@@ -1,0 +1,31 @@
+{
+  "goalId": "goal_115_offline_geoworld_alpha_human_result_revalidation",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "decisionStatus": "GREEN_ACCEPTABLE_CANDIDATE",
+  "acceptableCandidate": true,
+  "recommendedHumanDecision": "READY_FOR_EXPLICIT_HUMAN_ACCEPTANCE_DECISION",
+  "manualResultPresent": true,
+  "manualResultRelativePath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "manualResultSha256": "8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb",
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "manualGateRemainsHumanDecision": true,
+  "requiredStepCount": 12,
+  "passedStepCount": 12,
+  "blockingStepIssueCount": 0,
+  "evidenceArtifactPaths": [
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-dashboard.json",
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-decision-snapshot.json",
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-report.md",
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-file-index.json",
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-quality-gate-scan.json",
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-negative-proof.json"
+  ],
+  "exportArtifactPaths": [
+    ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-dashboard.json",
+    ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-readme.md",
+    ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-file-index.json"
+  ],
+  "errors": [],
+  "warnings": []
+}

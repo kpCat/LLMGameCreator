@@ -405,6 +405,34 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaManualResultWorkbenchQualityGatePassed,
             Goal113FilesDiscoveredByRelativePaths =
                 qualityGate.Goal113FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaHumanResultRevalidationDecisionStatus =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationDecisionStatus,
+            OfflineGeoworldAlphaHumanResultRevalidationGoal111DecisionStatus =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationGoal111DecisionStatus,
+            OfflineGeoworldAlphaHumanResultRevalidationManualResultPresent =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationManualResultPresent,
+            OfflineGeoworldAlphaHumanResultRevalidationManualResultJsonValid =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationManualResultJsonValid,
+            OfflineGeoworldAlphaHumanResultRevalidationAcceptableCandidate =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationAcceptableCandidate,
+            OfflineGeoworldAlphaHumanResultRevalidationRecommendedHumanDecision =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationRecommendedHumanDecision,
+            OfflineGeoworldAlphaHumanResultRevalidationAcceptedByCodex =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationAcceptedByCodex,
+            OfflineGeoworldAlphaHumanResultRevalidationHumanAcceptanceStillRequired =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationHumanAcceptanceStillRequired,
+            OfflineGeoworldAlphaHumanResultRevalidationManualGateRemainsHumanDecision =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationManualGateRemainsHumanDecision,
+            OfflineGeoworldAlphaHumanResultRevalidationRequiredStepCount =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationRequiredStepCount,
+            OfflineGeoworldAlphaHumanResultRevalidationPassedStepCount =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationPassedStepCount,
+            OfflineGeoworldAlphaHumanResultRevalidationManualInputNotCommitted =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationManualInputNotCommitted,
+            OfflineGeoworldAlphaHumanResultRevalidationQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaHumanResultRevalidationQualityGatePassed,
+            Goal115FilesDiscoveredByRelativePaths =
+                qualityGate.Goal115FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

@@ -1,0 +1,12 @@
+{
+  "goalId": "goal_115_offline_geoworld_alpha_human_result_revalidation",
+  "passed": true,
+  "missingManualResultDecisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+  "missingManualResultBlocked": true,
+  "malformedManualResultDecisionStatus": "FAILED_INVALID_RESULT",
+  "malformedManualResultRejected": true,
+  "draftTemplateLikeDecisionStatus": "BLOCKED_INCOMPLETE_RESULT",
+  "draftTemplateLikeResultBlocked": true,
+  "manualResultRawJsonCopied": false,
+  "diagnostic": "Missing, malformed and Goal113 draft-template-like inputs do not become Alpha acceptance."
+}

@@ -1,0 +1,40 @@
+{
+  "goalId": "goal_115_offline_geoworld_alpha_human_result_revalidation",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 5,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-dashboard.json",
+      "role": "goal115_human_result_revalidation_evidence",
+      "required": true,
+      "sha256": "28ba4aa2fdb02d20f3eb67095b41c7347bd3211b2c39d3f1edfee63492fd6370"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-decision-snapshot.json",
+      "role": "goal115_human_result_revalidation_evidence",
+      "required": true,
+      "sha256": "1f8538505c161763841e7dbbb4966b98e2357e3c7771d9d91dab4e939ee0f555"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-negative-proof.json",
+      "role": "goal115_human_result_revalidation_evidence",
+      "required": true,
+      "sha256": "b32fee63eaf156ead233eb1526acba07974e8c5aaa445bf155661b30d8fb521b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-quality-gate-scan.json",
+      "role": "goal115_human_result_revalidation_evidence",
+      "required": true,
+      "sha256": "11e3bd718389f3d9d3b8950e4b9f0250caa70b368550e78b61be4864fd73a927"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-report.md",
+      "role": "goal115_human_result_revalidation_evidence",
+      "required": true,
+      "sha256": "8b59c7eaad360843159e871af1b151e1980606788aefdf72844718b890a6549b"
+    }
+  ]
+}

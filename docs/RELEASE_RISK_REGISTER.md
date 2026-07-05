@@ -16,6 +16,8 @@ Goal 113 review note: the manual-result workbench exposes `WORKBENCH_READY_PENDI
 
 Goal 114 review note: the Unity Safe Mode compile hotfix removes the reported Unity helper compile blockers and records source-scan evidence, but it does not close release blockers, does not fabricate or commit a real manual result, and does not mark the Alpha manual gate accepted. Manual acceptance still requires a human-created `.llmgc/manual/**` result and explicit gate decision.
 
+Goal 115 review note: the real local human result now validates as `GREEN_ACCEPTABLE_CANDIDATE` with 12/12 required steps passed and manualResultSha256 `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`. This still does not close release blockers or mark Alpha accepted; it is evidence for explicit human gate decision only, and the `.llmgc/manual/**` input remains uncommitted local human input.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

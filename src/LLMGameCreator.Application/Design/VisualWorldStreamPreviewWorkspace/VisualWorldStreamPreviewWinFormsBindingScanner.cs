@@ -27,6 +27,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageGoal113RelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Goal113.cs";
+        var pageGoal115RelativePath =
+            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
+            + "VisualWorldStreamPreviewWorkspacePageControl.Goal115.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
@@ -43,7 +46,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                        + "\n"
                        + ReadOptionalText(projectRoot, pageGoal112RelativePath)
                        + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal113RelativePath);
+                       + ReadOptionalText(projectRoot, pageGoal113RelativePath)
+                       + "\n"
+                       + ReadOptionalText(projectRoot, pageGoal115RelativePath);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -334,6 +339,27 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "offlineGeoworldAlphaManualResultWorkbenchDoNotStartYet",
                 StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldAlphaHumanResultRevalidation = pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationDecisionStatus",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationGoal111DecisionStatus",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationManualResultSha256",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationAcceptableCandidate",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationRecommendedHumanDecision",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationHumanAcceptanceStillRequired",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaHumanResultRevalidationManualInputNotCommitted",
+                StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -427,6 +453,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal113.winforms.offline_geoworld_alpha_manual_result_workbench_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldAlphaHumanResultRevalidation,
+            "goal115.winforms.offline_geoworld_alpha_human_result_revalidation_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -468,6 +499,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldAlphaAcceptanceOperatorPack,
             PageBindDisplaysOfflineGeoworldAlphaManualResultWorkbench =
                 bindDisplaysOfflineGeoworldAlphaManualResultWorkbench,
+            PageBindDisplaysOfflineGeoworldAlphaHumanResultRevalidation =
+                bindDisplaysOfflineGeoworldAlphaHumanResultRevalidation,
             Diagnostics = diagnostics
         };
     }

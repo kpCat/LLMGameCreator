@@ -107,7 +107,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal113OfflineGeoworldAlphaManualResultWorkbenchProofStatus(
             projectRoot,
             proofDiagnostics));
+        proofs.AddRange(BuildGoal115OfflineGeoworldAlphaHumanResultRevalidationProofStatus(
+            projectRoot,
+            proofDiagnostics));
 
+        proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
     }

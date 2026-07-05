@@ -148,10 +148,11 @@ Current capabilities:
 - Goal 108A alpha slice source split and immutability audit evidence with the Goal108 orchestrator Application source split below 700 physical/logical lines, actual `14ad9f38..989a79ab` git diff/blob audit, 17 Goal108 evidence/payload additions, zero Goal101-107 artifact modifications, matching Goal108 `historicalArtifactsUnchanged=true`, no evidence-trust debt and unchanged AlphaRuntimeBootstrap;
 - Goal 109 portable offline geoworld Alpha Slice export package evidence with a BCL-only Application package service, deterministic directory package, clean-import proof, 16-case negative proof, standalone Unity package verifier/editor window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
 - Goal 110 offline geoworld Alpha manual acceptance gate evidence with a BCL-only Application acceptance service, checklist/result-template/dashboard payloads, simulated result readback proof, 13-case negative proof, standalone Unity result/store scripts, Editor acceptance runner window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
-- Goal 111 offline geoworld Alpha manual-result intake evidence with a BCL-only Application verifier, deterministic decision/report/index/quality/negative-proof artifacts, export dashboard/readme/index metadata and Visual World Stream Preview Workspace decision visibility; current decision is `BLOCKED_PENDING_MANUAL_RESULT` because no real human result JSON exists yet;
-- Goal 112 offline geoworld Alpha acceptance operator pack evidence with a BCL-only Application operator service, deterministic dashboard/runbook/path-map/preflight/notary/quality/negative-proof artifacts, export metadata, short manual-acceptance runbook and Visual World Stream Preview Workspace RC readiness visibility; current operator status is `OPERATOR_READY_PENDING_HUMAN_RUN` because no real human result JSON exists yet;
-- Goal 113 offline geoworld Alpha manual-result workbench evidence with a BCL-only Application workbench service, deterministic dashboard/runbook/field-map/draft-template/quality/negative-proof artifacts, export metadata, short manual-result guide and Visual World Stream Preview Workspace workbench visibility; current workbench status is `WORKBENCH_READY_PENDING_HUMAN_RESULT` because no real human result JSON exists yet;
+- Goal 111 offline geoworld Alpha manual-result intake evidence with a BCL-only Application verifier, deterministic decision/report/index/quality/negative-proof artifacts, export dashboard/readme/index metadata and Visual World Stream Preview Workspace decision visibility; its produced artifact snapshot remains the pre-result `BLOCKED_PENDING_MANUAL_RESULT` bridge;
+- Goal 112 offline geoworld Alpha acceptance operator pack evidence with a BCL-only Application operator service, deterministic dashboard/runbook/path-map/preflight/notary/quality/negative-proof artifacts, export metadata, short manual-acceptance runbook and Visual World Stream Preview Workspace RC readiness visibility; its produced artifact snapshot remains `OPERATOR_READY_PENDING_HUMAN_RUN`;
+- Goal 113 offline geoworld Alpha manual-result workbench evidence with a BCL-only Application workbench service, deterministic dashboard/runbook/field-map/draft-template/quality/negative-proof artifacts, export metadata, short manual-result guide and Visual World Stream Preview Workspace workbench visibility; its produced artifact snapshot remains `WORKBENCH_READY_PENDING_HUMAN_RESULT`;
 - Goal 114 Unity Safe Mode compile hotfix evidence with local deterministic JSON helpers replacing unqualified `JsonUtility` calls, low-risk `RefreshPayloadStatus()` wrappers, compact source scan, negative proof and file index while the manual gate remains `offline_geoworld_alpha_manual_acceptance_verification required`;
+- Goal 115 offline geoworld Alpha human-result revalidation evidence with a BCL-only Application service over the real local `.llmgc/manual` result, deterministic dashboard/decision-snapshot/report/file-index/quality/negative-proof artifacts, export metadata, short decision note and Visual World Stream Preview Workspace visibility; current decision is `GREEN_ACCEPTABLE_CANDIDATE`, manualResultSha256 is `8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`, all 12 required steps passed, acceptedByCodex=false, humanAcceptanceStillRequired=true and the manual gate remains `offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -2036,11 +2037,36 @@ Lua/generator-library, project/dependency files, final art, atlas or final relea
 remains running the Goal110 Unity checklist after this Safe Mode unblock and placing a real human-created result JSON
 for Goal111/Goal112/Goal113 validation.
 
+### Goal 115: Offline Geoworld Alpha Human Result Revalidation
+
+Goal 115 is produced for review as a GREEN human-result revalidation candidate, while the active human gate remains
+`offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`.
+
+Goal 115 writes deterministic evidence under
+`.llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/`, export metadata under
+`.llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/`, and the short decision note at
+`docs/manual-acceptance/offline-geoworld-alpha-human-result-revalidation.md`. It records
+`decisionStatus=GREEN_ACCEPTABLE_CANDIDATE`, `goal111DecisionStatus=GREEN_ACCEPTABLE_CANDIDATE`,
+`manualResultSha256=8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`,
+`acceptableCandidate=true`, `recommendedHumanDecision=READY_FOR_EXPLICIT_HUMAN_ACCEPTANCE_DECISION`,
+`acceptedByCodex=false`, `humanAcceptanceStillRequired=true`, `manualGateRemainsHumanDecision=true`,
+`requiredStepCount=12`, `passedStepCount=12` and `manualInputNotCommitted=true`.
+
+Goal 115 consumes the real local human result by repository-relative path but commits only summary/hash evidence; it
+does not stage or commit `.llmgc/manual/**` and does not mark Alpha accepted. It surfaces
+`offline_geoworld_alpha_human_result_revalidation` in the existing Visual World Stream Preview Workspace. The next
+human action is to explicitly decide the manual gate from this GREEN candidate. Goal115, Goal114, Goal113, Goal112,
+Goal111, Goal110, Goal109, Goal108A, Goal108 and prior geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
 offline_geoworld_alpha_manual_acceptance_verification
 ```
+
+Use the Goal115 GREEN candidate as the evidence for the explicit human decision. Do not start live geodata/provider,
+Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages or
+release packaging work from this handoff.
 
 Status:
 

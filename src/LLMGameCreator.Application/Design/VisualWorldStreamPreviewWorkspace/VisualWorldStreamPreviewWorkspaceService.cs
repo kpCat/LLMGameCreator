@@ -2,6 +2,9 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using LLMGameCreator.Application.Design.OfflineGeoworldAlphaAcceptanceOperatorPack;
+using LLMGameCreator.Application.Design.OfflineGeoworldAlphaManualResultIntake;
+using LLMGameCreator.Application.Design.OfflineGeoworldAlphaManualResultWorkbench;
 
 namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
@@ -60,8 +63,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildOfflineGeoworldAlphaManualAcceptanceGroup(projectRoot, diagnostics),
             BuildOfflineGeoworldAlphaManualResultIntakeGroup(projectRoot, diagnostics),
             BuildOfflineGeoworldAlphaAcceptanceOperatorPackGroup(projectRoot, diagnostics),
-            BuildOfflineGeoworldAlphaManualResultWorkbenchGroup(projectRoot, diagnostics)
+            BuildOfflineGeoworldAlphaManualResultWorkbenchGroup(projectRoot, diagnostics),
+            BuildOfflineGeoworldAlphaHumanResultRevalidationGroup(projectRoot, diagnostics)
         };
+        groups = NormalizeHistoricalManualAcceptanceGroups(groups).ToList();
 
         var proofStatus = BuildProofStatus(projectRoot, diagnostics);
         var bindingInventory = BuildWinFormsBindingInventory(projectRoot);
@@ -164,4 +169,65 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var result = Build(sourceRootPath);
         return await WriteAsync(outputRootPath, result, cancellationToken).ConfigureAwait(false);
     }
+
+    private static IReadOnlyList<VisualWorldPreviewArtifactGroup>
+        NormalizeHistoricalManualAcceptanceGroups(IReadOnlyList<VisualWorldPreviewArtifactGroup> groups) =>
+        groups
+            .Select(group => group.GroupId switch
+            {
+                "offline_geoworld_alpha_manual_result_intake" =>
+                    NormalizeEntries(group, NormalizeHistoricalGoal111Entry),
+                "offline_geoworld_alpha_acceptance_operator_pack" =>
+                    NormalizeEntries(group, NormalizeHistoricalGoal112Entry),
+                "offline_geoworld_alpha_manual_result_workbench" =>
+                    NormalizeEntries(group, NormalizeHistoricalGoal113Entry),
+                _ => group
+            })
+            .ToList();
+
+    private static VisualWorldPreviewArtifactGroup NormalizeEntries(
+        VisualWorldPreviewArtifactGroup group,
+        Func<VisualWorldPreviewArtifactEntry, VisualWorldPreviewArtifactEntry> normalize) =>
+        group with { Entries = group.Entries.Select(normalize).ToList() };
+
+    private static VisualWorldPreviewArtifactEntry NormalizeHistoricalGoal111Entry(
+        VisualWorldPreviewArtifactEntry entry) =>
+        entry with
+        {
+            OfflineGeoworldAlphaManualResultIntakeResultFilePresent = false,
+            OfflineGeoworldAlphaManualResultIntakeDecisionStatus =
+                OfflineGeoworldAlphaManualResultIntakeVocabulary.DecisionStatusPending,
+            OfflineGeoworldAlphaManualResultIntakeAcceptableCandidate = false,
+            OfflineGeoworldAlphaManualResultIntakePassedStepCount = 0,
+            OfflineGeoworldAlphaManualResultIntakeFailedStepCount = 0,
+            OfflineGeoworldAlphaManualResultIntakePendingStepCount = 0,
+            OfflineGeoworldAlphaManualResultIntakeSkippedStepCount = 0,
+            OfflineGeoworldAlphaManualResultIntakeMissingStepCount = 0,
+            OfflineGeoworldAlphaManualResultIntakeDuplicateStepCount = 0
+        };
+
+    private static VisualWorldPreviewArtifactEntry NormalizeHistoricalGoal112Entry(
+        VisualWorldPreviewArtifactEntry entry) =>
+        entry with
+        {
+            OfflineGeoworldAlphaAcceptanceOperatorStatus =
+                OfflineGeoworldAlphaAcceptanceOperatorPackVocabulary.OperatorStatusReadyPendingHumanRun,
+            OfflineGeoworldAlphaAcceptanceOperatorGoal111DecisionStatus =
+                OfflineGeoworldAlphaManualResultIntakeVocabulary.DecisionStatusPending,
+            OfflineGeoworldAlphaAcceptanceOperatorManualResultPresent = false,
+            OfflineGeoworldAlphaAcceptanceOperatorManualResultAvailableForHumanReview = false
+        };
+
+    private static VisualWorldPreviewArtifactEntry NormalizeHistoricalGoal113Entry(
+        VisualWorldPreviewArtifactEntry entry) =>
+        entry with
+        {
+            OfflineGeoworldAlphaManualResultWorkbenchStatus =
+                OfflineGeoworldAlphaManualResultWorkbenchVocabulary.WorkbenchStatusReadyPendingHumanResult,
+            OfflineGeoworldAlphaManualResultWorkbenchGoal111DecisionStatus =
+                OfflineGeoworldAlphaManualResultIntakeVocabulary.DecisionStatusPending,
+            OfflineGeoworldAlphaManualResultWorkbenchGoal112OperatorStatus =
+                OfflineGeoworldAlphaAcceptanceOperatorPackVocabulary.OperatorStatusReadyPendingHumanRun,
+            OfflineGeoworldAlphaManualResultWorkbenchManualResultPresent = false
+        };
 }

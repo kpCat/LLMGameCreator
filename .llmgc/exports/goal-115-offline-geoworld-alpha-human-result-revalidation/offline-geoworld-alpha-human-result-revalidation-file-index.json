@@ -1,0 +1,22 @@
+{
+  "goalId": "goal_115_offline_geoworld_alpha_human_result_revalidation",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 2,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-dashboard.json",
+      "role": "goal115_human_result_revalidation_export",
+      "required": true,
+      "sha256": "19a942522f2538b97c872d82d3b9076835ae7c4319e161099dbedef79876089d"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/offline-geoworld-alpha-human-result-revalidation-readme.md",
+      "role": "goal115_human_result_revalidation_export",
+      "required": true,
+      "sha256": "c679218ebb3ed3cc591f39333776a157bffd001bed3968f6852c50e30ad3638a"
+    }
+  ]
+}

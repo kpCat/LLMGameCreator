@@ -93,7 +93,9 @@
     ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/",
     ".llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/",
     ".llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix/",
-    ".llmgc/exports/goal-114-unity-safe-mode-compile-hotfix/"
+    ".llmgc/exports/goal-114-unity-safe-mode-compile-hotfix/",
+    ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/",
+    ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -114,6 +116,7 @@
     ".llmgc/procedural/**/logs/**",
     ".llmgc/procedural/**/unity-work/**",
     ".llmgc/procedural/**/review-package/**",
+    ".llmgc/manual/**",
     "unity/LLMGameCreatorAlpha/Library/**",
     "unity/LLMGameCreatorAlpha/Temp/**",
     "unity/LLMGameCreatorAlpha/Builds/**"
@@ -1727,6 +1730,37 @@
         "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaManualResultWorkbench/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ]
+    },
+    {
+      "scenario": "goal-115-offline-geoworld-alpha-human-result-revalidation",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "docs/manual-acceptance/offline-geoworld-alpha-human-result-revalidation.md",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldAlphaHumanResultRevalidationProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Status.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal115.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation/",
+        ".llmgc/exports/goal-115-offline-geoworld-alpha-human-result-revalidation/",
+        "docs/agent-tasks/goal-115-offline-geoworld-alpha-human-result-revalidation/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaHumanResultRevalidation/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaHumanResultRevalidation/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/"
       ]
     },
     {
