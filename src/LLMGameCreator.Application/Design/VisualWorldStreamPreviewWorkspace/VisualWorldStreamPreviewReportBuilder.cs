@@ -489,6 +489,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaPostAcceptanceQualityGatePassed,
             Goal117FilesDiscoveredByRelativePaths =
                 qualityGate.Goal117FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAcceptedAlphaBaselineId =
+                qualityGate.OfflineGeoworldAcceptedAlphaBaselineId,
+            OfflineGeoworldAcceptedAlphaBaselineHash =
+                qualityGate.OfflineGeoworldAcceptedAlphaBaselineHash,
+            OfflineGeoworldAcceptedAlphaBaselineReady =
+                qualityGate.OfflineGeoworldAcceptedAlphaBaselineReady,
+            OfflineGeoworldAcceptedAlphaManualGateStatus =
+                qualityGate.OfflineGeoworldAcceptedAlphaManualGateStatus,
+            OfflineGeoworldAcceptedAlphaRecommendedNextDecision =
+                qualityGate.OfflineGeoworldAcceptedAlphaRecommendedNextDecision,
+            OfflineGeoworldAcceptedAlphaIncludedSourceGoalCount =
+                qualityGate.OfflineGeoworldAcceptedAlphaIncludedSourceGoalCount,
+            OfflineGeoworldAcceptedAlphaAcceptedEvidenceRootCount =
+                qualityGate.OfflineGeoworldAcceptedAlphaAcceptedEvidenceRootCount,
+            OfflineGeoworldAcceptedAlphaProducedOnlyRootCount =
+                qualityGate.OfflineGeoworldAcceptedAlphaProducedOnlyRootCount,
+            OfflineGeoworldAcceptedAlphaBlockedOrSupersededNoteCount =
+                qualityGate.OfflineGeoworldAcceptedAlphaBlockedOrSupersededNoteCount,
+            OfflineGeoworldAcceptedAlphaDoNotStartAutomatically =
+                qualityGate.OfflineGeoworldAcceptedAlphaDoNotStartAutomatically,
+            OfflineGeoworldAcceptedAlphaQualityGatePassed =
+                qualityGate.OfflineGeoworldAcceptedAlphaQualityGatePassed,
+            Goal118FilesDiscoveredByRelativePaths =
+                qualityGate.Goal118FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

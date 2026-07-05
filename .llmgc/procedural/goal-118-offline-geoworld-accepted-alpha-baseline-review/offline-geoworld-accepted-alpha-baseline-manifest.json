@@ -1,0 +1,18 @@
+{
+  "goalId": "goal_118_offline_geoworld_accepted_alpha_baseline_review",
+  "baselineId": "offline_geoworld_alpha_accepted_baseline_v1",
+  "baselineHash": "655181d011bd3bf26447e77ca463a703e5fdfe02ca6e7c56cdbd38b469da4adf",
+  "acceptedBaselineReady": true,
+  "manualGateStatus": "ACCEPTED_BY_HUMAN",
+  "manualResultSha256": "8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb",
+  "sourceGoalRange": "Goal098-Goal117",
+  "includedSourceGoalCount": 23,
+  "acceptedEvidenceRootCount": 6,
+  "producedOnlyRootCount": 17,
+  "recommendedNextDecision": "EXPLICIT_NEXT_LANE_SELECTION",
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "noUnityFileChangesRequired": true,
+  "sourceIndexSha256": "6c445342ade9b69f702b2505315b81bde6341a9b6ef87f024ce0a0306c10042b",
+  "dashboardSha256": "c8407087de4cec83a60061aa1fce62d8b32cf48e9af50a58d66bc689f5c485fb"
+}

@@ -221,6 +221,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var manualGateAcceptance = BuildGoal116AlphaManualGateAcceptanceQuality(groups, proofs);
         var postAcceptanceContinuation =
             BuildGoal117AlphaPostAcceptanceContinuationQuality(groups, proofs);
+        var acceptedAlphaBaseline = BuildGoal118AcceptedAlphaBaselineQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -395,6 +396,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal116AlphaManualGateAcceptanceQualityDiagnostics(manualGateAcceptance, binding, diagnostics);
         AddGoal117AlphaPostAcceptanceContinuationQualityDiagnostics(
             postAcceptanceContinuation,
+            binding,
+            diagnostics);
+        AddGoal118AcceptedAlphaBaselineQualityDiagnostics(
+            acceptedAlphaBaseline,
             binding,
             diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
@@ -675,7 +680,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal113 = ApplyGoal113AlphaManualResultWorkbenchQuality(withGoal112, manualResultWorkbench, binding);
         var withGoal115 = ApplyGoal115AlphaHumanResultRevalidationQuality(withGoal113, humanResultRevalidation, binding);
         var withGoal116 = ApplyGoal116AlphaManualGateAcceptanceQuality(withGoal115, manualGateAcceptance, binding);
-        return ApplyGoal117AlphaPostAcceptanceContinuationQuality(withGoal116, postAcceptanceContinuation, binding);
+        var withGoal117 = ApplyGoal117AlphaPostAcceptanceContinuationQuality(
+            withGoal116,
+            postAcceptanceContinuation,
+            binding);
+        return ApplyGoal118AcceptedAlphaBaselineQuality(withGoal117, acceptedAlphaBaseline, binding);
     }
 
 }

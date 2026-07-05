@@ -1,0 +1,170 @@
+{
+  "goalId": "goal_118_offline_geoworld_accepted_alpha_baseline_review",
+  "sourceGoalRange": "Goal098-Goal117",
+  "includedSourceGoalCount": 23,
+  "goal098To117ChainIncluded": true,
+  "manualInputExcluded": true,
+  "entries": [
+    {
+      "sourceGoalId": "goal_098_geoworld_source_adapter_streaming_contract",
+      "relativeRoot": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+      "relativeRoot": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativeRoot": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_101_offline_geoworld_unity_preview_runner",
+      "relativeRoot": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+      "relativeRoot": ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_102a_unity_editor_source_format_guard",
+      "relativeRoot": ".llmgc/procedural/goal-102a-unity-editor-source-format-guard",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_102b_actual_unity_editor_source_reformat",
+      "relativeRoot": ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_103_offline_geoworld_playmode_travel_preview",
+      "relativeRoot": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_104_offline_geoworld_interactive_travel_preview",
+      "relativeRoot": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_105_offline_geoworld_interaction_playable_probe",
+      "relativeRoot": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_106_offline_geoworld_session_persistence_replay",
+      "relativeRoot": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_107_offline_geoworld_objective_acceptance_run",
+      "relativeRoot": ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+      "relativeRoot": ".llmgc/procedural/goal-108-offline-geoworld-alpha-slice-orchestrator",
+      "classification": "accepted_baseline_proof",
+      "present": true,
+      "requiredForAcceptedBaseline": true
+    },
+    {
+      "sourceGoalId": "goal_108a_alpha_slice_source_split_immutability_audit",
+      "relativeRoot": ".llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+      "relativeRoot": ".llmgc/procedural/goal-109-offline-geoworld-alpha-slice-export-package",
+      "classification": "accepted_baseline_proof",
+      "present": true,
+      "requiredForAcceptedBaseline": true
+    },
+    {
+      "sourceGoalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+      "relativeRoot": ".llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_111_offline_geoworld_alpha_manual_result_intake",
+      "relativeRoot": ".llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+      "relativeRoot": ".llmgc/procedural/goal-112-offline-geoworld-alpha-acceptance-operator-pack",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+      "relativeRoot": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench",
+      "classification": "produced_only_historical",
+      "present": true,
+      "requiredForAcceptedBaseline": false
+    },
+    {
+      "sourceGoalId": "goal_114_unity_safe_mode_compile_hotfix",
+      "relativeRoot": ".llmgc/procedural/goal-114-unity-safe-mode-compile-hotfix",
+      "classification": "accepted_baseline_proof",
+      "present": true,
+      "requiredForAcceptedBaseline": true
+    },
+    {
+      "sourceGoalId": "goal_115_offline_geoworld_alpha_human_result_revalidation",
+      "relativeRoot": ".llmgc/procedural/goal-115-offline-geoworld-alpha-human-result-revalidation",
+      "classification": "accepted_baseline_proof",
+      "present": true,
+      "requiredForAcceptedBaseline": true
+    },
+    {
+      "sourceGoalId": "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
+      "relativeRoot": ".llmgc/procedural/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record",
+      "classification": "accepted_baseline_proof",
+      "present": true,
+      "requiredForAcceptedBaseline": true
+    },
+    {
+      "sourceGoalId": "goal_117_offline_geoworld_alpha_post_acceptance_continuation_selection",
+      "relativeRoot": ".llmgc/procedural/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection",
+      "classification": "accepted_baseline_proof",
+      "present": true,
+      "requiredForAcceptedBaseline": true
+    }
+  ]
+}

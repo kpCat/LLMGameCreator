@@ -1,0 +1,27 @@
+{
+  "goalId": "goal_118_offline_geoworld_accepted_alpha_baseline_review",
+  "passed": true,
+  "missingGoal116AcceptedEvidenceRejected": true,
+  "missingGoal117PostAcceptanceRoutingRejected": true,
+  "manualInputStagedOrEmbeddedRejected": true,
+  "liveGeodataProviderNetworkStartRejected": true,
+  "runtimeSchemaLuaGeneratorLibraryChangesRejected": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsRejected": true,
+  "finalReleasePackagingRejected": true,
+  "manualInputExcluded": true,
+  "rejectedPathSamples": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    "src/LLMGameCreator.Runtime/GameRuntime.cs",
+    "src/LLMGameCreator.Runtime.Abstractions/IGameRuntime.cs",
+    "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+    "src/LLMGameCreator.Scripting/LuaSandbox.cs",
+    "generator-library/example.json",
+    "unity/LLMGameCreatorAlpha/Assets/Scenes/Main.unity",
+    "unity/LLMGameCreatorAlpha/Assets/Prefabs/World.prefab",
+    "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectSettings.asset",
+    "unity/LLMGameCreatorAlpha/Packages/manifest.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/example.json",
+    ".llmgc/exports/final-release/package.zip"
+  ],
+  "diagnostic": "Goal118 records an accepted Alpha baseline review only; future implementation lanes require explicit approval."
+}

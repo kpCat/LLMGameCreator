@@ -4,6 +4,7 @@ using LLMGameCreator.Application.Design.OfflineGeoworldUnityPlayModeTravelPrevie
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
+using LLMGameCreator.Application.Design.OfflineGeoworldAcceptedAlphaBaselineReview;
 namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
 {
@@ -114,6 +115,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             projectRoot,
             proofDiagnostics));
         proofs.AddRange(BuildGoal117OfflineGeoworldAlphaPostAcceptanceContinuationProofStatus(
+            projectRoot,
+            proofDiagnostics));
+        proofs.AddRange(BuildGoal118OfflineGeoworldAcceptedAlphaBaselineReviewProofStatus(
             projectRoot,
             proofDiagnostics));
 

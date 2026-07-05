@@ -2094,18 +2094,35 @@ It records `recommendedNextLane=accepted_alpha_baseline_review`,
 Goal118 task files and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library, final
 renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 118: Offline Geoworld Accepted Alpha Baseline Review
+
+Goal 118 is produced for review as a GREEN accepted Alpha baseline package after Goal116 human acceptance.
+It writes deterministic evidence under
+`.llmgc/procedural/goal-118-offline-geoworld-accepted-alpha-baseline-review/`, export metadata under
+`.llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/`, and the short review note at
+`docs/manual-acceptance/offline-geoworld-accepted-alpha-baseline-review.md`.
+
+It records `baselineId=offline_geoworld_alpha_accepted_baseline_v1`, `manualGateStatus=ACCEPTED_BY_HUMAN`,
+`acceptedBaselineReady=true`, `manualResultSha256=8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb`,
+`acceptedByCodex=false`, `sourceGoalRange=Goal098-Goal117`, `includedSourceGoalCount=23`,
+`acceptedEvidenceRootCount=6`, `producedOnlyRootCount=17`, `blockedOrSupersededNoteCount=8`,
+`implementationStatus=GREEN` and `recommendedNextDecision=EXPLICIT_NEXT_LANE_SELECTION`. It embeds no raw
+`.llmgc/manual/**` input and does not authorize final release, live geodata/provider/network, Runtime/schema, Lua,
+generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or
+release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-accepted_alpha_baseline_review
+EXPLICIT_NEXT_LANE_SELECTION
 ```
 
-Use the Goal117 matrix to explicitly select `goal-118-offline-geoworld-accepted-alpha-baseline-review` as the next
-bounded task. Do not start live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art,
-atlas, Unity scene/prefab/settings/packages or release packaging work from this handoff.
+Review the Goal118 accepted baseline package, then explicitly select the next lane. Do not start live geodata/provider,
+Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
+StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_117_offline_geoworld_alpha_post_acceptance_continuation_selection_green_baseline_review_recommended
+goal_118_offline_geoworld_accepted_alpha_baseline_review_green_next_lane_selection_required
 ```

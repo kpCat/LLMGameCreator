@@ -1,23 +1,24 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-05T05:51:23Z",
+    "updated_at_utc":  "2026-07-05T07:50:28Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 117 recommends offline geoworld accepted Alpha baseline review after Goal116 manual gate acceptance",
+    "current_phase_title":  "Goal 118 produced offline geoworld accepted Alpha baseline review package after Goal116 manual gate acceptance",
     "gate_status":  "offline_geoworld_alpha_manual_acceptance_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
     "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
-    "current_user_action":  "Select the next bounded task explicitly from the Goal117 continuation matrix. The recommended lane is accepted_alpha_baseline_review and the recommended next goal id is goal-118-offline-geoworld-accepted-alpha-baseline-review. Codex must not automatically start Goal118 or live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings or release packaging work.",
-    "recommended_next_decision":  "POST_ACCEPTANCE_CONTINUATION_SELECTION for offline_geoworld_alpha_manual_acceptance_verification: Goal117 recommends accepted_alpha_baseline_review and goal-118-offline-geoworld-accepted-alpha-baseline-review. Next task must be explicitly selected from the matrix; no automatic Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/release-packaging work is authorized.",
+    "current_user_action":  "Review the Goal118 accepted Alpha baseline package, then explicitly select the next lane. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
+    "recommended_next_decision":  "EXPLICIT_NEXT_LANE_SELECTION after reviewing offline_geoworld_alpha_accepted_baseline_v1 for offline_geoworld_alpha_manual_acceptance_verification. Goal118 is a baseline review package only; no automatic Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work is authorized.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "post_acceptance_continuation_selection",
+                                                        "explicit_next_lane_selection_after_accepted_alpha_baseline_review",
+                                                        "offline_geoworld_accepted_alpha_baseline_review_verification",
                                                         "offline_geoworld_alpha_slice_export_package_verification",
                                                         "offline_geoworld_alpha_slice_orchestrator_verification",
                                                         "offline_geoworld_objective_acceptance_run_verification",
@@ -169,7 +170,8 @@
                            "goal_112_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
                            "goal_113_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
                            "goal_115_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
-                           "goal_116_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification"
+                           "goal_116_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
+                           "goal_118_manual_gate":  "offline_geoworld_accepted_alpha_baseline_review_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -460,6 +462,10 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "explicit_next_lane_selection_after_accepted_alpha_baseline_review",
+                                          "offline_geoworld_accepted_alpha_baseline_review_verification",
+                                          "goal_118_offline_geoworld_accepted_alpha_baseline_review",
+                                          "manual_review_goal_118_offline_geoworld_accepted_alpha_baseline_review",
                                           "post_acceptance_continuation_selection",
                                           "goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
                                           "manual_review_goal_116_offline_geoworld_alpha_manual_gate_acceptance_record",
@@ -578,13 +584,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "post_acceptance_continuation_selection",
-    "recommended_next_work_item_title":  "Select the next bounded post-acceptance continuation after Goal116 human manual gate acceptance",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/GOAL.md",
+    "recommended_next_work_item":  "explicit_next_lane_selection_after_accepted_alpha_baseline_review",
+    "recommended_next_work_item_title":  "Review Goal118 accepted Alpha baseline package and explicitly select the next lane",
+    "recommended_next_task_file":  "docs/manual-acceptance/offline-geoworld-accepted-alpha-baseline-review.md",
     "candidate_product_vertical_slices":  [
-                                              "Select the next bounded post-acceptance continuation after Goal116 human acceptance of offline_geoworld_alpha_manual_acceptance_verification",
-                                              "Keep Goal116 limits in force: this is not final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas or Unity scene/prefab/project-settings/release-packaging approval",
-                                              "Use Goal116 acceptance evidence only as a manual gate record until a separate explicit task selects the continuation",
+                                              "Review Goal118 accepted Alpha baseline package offline_geoworld_alpha_accepted_baseline_v1 before selecting the next lane explicitly",
+                                              "Keep Goal118 limits in force: this is not final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas, Unity scene/prefab/project-settings/StreamingAssets or release-packaging approval",
+                                              "Use Goal118 baseline evidence only as a review/handoff package until a separate explicit task selects the next implementation lane",
                                               "Review Goal 107 offline geoworld objective acceptance run evidence",
                                               "Keep Goal 107 accepted=false until user review accepts it",
                                               "Use Goal 107 metadata-only objective acceptance payloads, standalone Unity Alpha objective tracker/state/acceptance controller scripts, manual Unity Editor helper, simulated acceptance proof and workspace quality consolidation only as future review handoff input; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
@@ -2633,6 +2639,20 @@
                                                                                      ],
                                                                  "next_action":  "select_post_acceptance_continuation_explicitly"
                                                              },
+    "offline_geoworld_accepted_alpha_baseline_review_verification":  {
+                                                                         "status":  "produced_for_review",
+                                                                         "accepted":  false,
+                                                                         "evidence_source":  "goal_118_offline_geoworld_accepted_alpha_baseline_review",
+                                                                         "observed_result":  [
+                                                                                                 "Goal 118 produces the offline geoworld accepted Alpha baseline review package after Goal116 human acceptance.",
+                                                                                                 "Evidence is under .llmgc/procedural/goal-118-offline-geoworld-accepted-alpha-baseline-review and export metadata is under .llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review.",
+                                                                                                 "baselineId=offline_geoworld_alpha_accepted_baseline_v1, manualGateStatus=ACCEPTED_BY_HUMAN, acceptedBaselineReady=true, manualResultSha256=8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, acceptedByCodex=false, sourceGoalRange=Goal098-Goal117, includedSourceGoalCount=23, acceptedEvidenceRootCount=6, producedOnlyRootCount=17 and recommendedNextDecision=EXPLICIT_NEXT_LANE_SELECTION.",
+                                                                                                 "Goal118 surfaces the accepted baseline in the existing Visual World Stream Preview Workspace with baseline id, readiness, manual gate status, included evidence counts, blocked notes, evidence path and export path.",
+                                                                                                 "Goal118 does not embed, stage or commit .llmgc/manual/** and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.",
+                                                                                                 "Geospatial/legal/provider/runtime/schema/Unity consumption/final renderer debts remain open until a separate explicit next-lane task selects them."
+                                                                                             ],
+                                                                         "next_action":  "review_goal_118_baseline_and_select_next_lane_explicitly"
+                                                                     },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
                                                                      "status":  "produced_for_review",
                                                                      "accepted":  false,

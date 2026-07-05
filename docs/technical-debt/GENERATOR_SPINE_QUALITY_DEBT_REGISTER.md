@@ -12,6 +12,8 @@ Goal 116 note: the explicit human gate acceptance is recorded as `ACCEPTED_BY_HU
 
 Goal 117 note: the GREEN continuation-selection matrix recommends `accepted_alpha_baseline_review` / `goal-118-offline-geoworld-accepted-alpha-baseline-review` but does not resolve geospatial ingestion, provider/legal, Runtime/schema, Unity consumption, final renderer/atlas or release-packaging debts. Those remain open until selected by separate explicit tasks.
 
+Goal 118 note: the GREEN accepted Alpha baseline review package records baselineId `offline_geoworld_alpha_accepted_baseline_v1`, acceptedBaselineReady=true and recommendedNextDecision=`EXPLICIT_NEXT_LANE_SELECTION`, but it does not resolve geospatial ingestion, provider/legal, Runtime/schema, Unity consumption, final renderer/atlas or release-packaging debts. Those remain open until the next lane is explicitly selected and scoped.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

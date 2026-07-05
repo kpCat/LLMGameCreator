@@ -22,12 +22,7 @@ public sealed partial class OfflineGeoworldAlphaPostAcceptanceContinuationSelect
             .ToList();
         var maxLines = sourceTexts.Count == 0 ? 0 : sourceTexts.Max(CountLines);
         var sourceHealthPassed = sourceTexts.All(text => CountLines(text) < 700);
-        var goal118TaskPath = Resolve(
-            root,
-            "docs/agent-tasks/"
-            + OfflineGeoworldAlphaPostAcceptanceContinuationSelectionVocabulary
-                .RecommendedNextGoalId);
-        var noGoal118TaskFiles = !Directory.Exists(goal118TaskPath);
+        var noGoal118TaskFiles = Goal117DoesNotWriteGoal118TaskFiles(expectedPaths);
 
         Require(dashboard.Goal116AcceptanceRecordPresent,
             "goal117.goal116_acceptance_record_present", diagnostics);
@@ -151,12 +146,7 @@ public sealed partial class OfflineGeoworldAlphaPostAcceptanceContinuationSelect
         OfflineGeoworldAlphaPostAcceptanceContinuationMatrix matrix)
     {
         var rejectedPaths = BuildRejectedPathSamples();
-        var goal118TaskPath = Resolve(
-            root,
-            "docs/agent-tasks/"
-            + OfflineGeoworldAlphaPostAcceptanceContinuationSelectionVocabulary
-                .RecommendedNextGoalId);
-        var noGoal118TaskFiles = !Directory.Exists(goal118TaskPath);
+        var noGoal118TaskFiles = Goal117DoesNotWriteGoal118TaskFiles(BuildExpectedChangedPathPrefixes());
         var runtimeBlocked = HasLane(
             matrix.Lanes,
             "runtime_or_gamepackage_consumers",
@@ -263,6 +253,14 @@ public sealed partial class OfflineGeoworldAlphaPostAcceptanceContinuationSelect
     private static bool IsAllowedChangedPath(string path) =>
         BuildExpectedChangedPathPrefixes().Any(prefix =>
             path.StartsWith(prefix, StringComparison.Ordinal));
+
+    private static bool Goal117DoesNotWriteGoal118TaskFiles(IReadOnlyList<string> expectedPaths) =>
+        expectedPaths.All(path =>
+            !path.StartsWith(
+                "docs/agent-tasks/"
+                + OfflineGeoworldAlphaPostAcceptanceContinuationSelectionVocabulary
+                    .RecommendedNextGoalId,
+                StringComparison.Ordinal));
 
     private static bool HasLane(
         IReadOnlyList<OfflineGeoworldAlphaPostAcceptanceContinuationLane> lanes,

@@ -1,0 +1,46 @@
+{
+  "goalId": "goal_118_offline_geoworld_accepted_alpha_baseline_review",
+  "baselineId": "offline_geoworld_alpha_accepted_baseline_v1",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 6,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/offline-geoworld-accepted-alpha-baseline-dashboard.json",
+      "role": "goal118_accepted_alpha_baseline_review_export",
+      "required": true,
+      "sha256": "c8407087de4cec83a60061aa1fce62d8b32cf48e9af50a58d66bc689f5c485fb"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/offline-geoworld-accepted-alpha-baseline-manifest.json",
+      "role": "goal118_accepted_alpha_baseline_review_export",
+      "required": true,
+      "sha256": "311d41145ad74b1a7c682a3ab3a7fc787ac4bf7bc11507564447260126d080dd"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/offline-geoworld-accepted-alpha-baseline-negative-proof.json",
+      "role": "goal118_accepted_alpha_baseline_review_export",
+      "required": true,
+      "sha256": "40bc22fe054cf8eb162715bbe5acd2c2b27a226462cfd648d501d83c90fe14a9"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/offline-geoworld-accepted-alpha-baseline-quality-gate-scan.json",
+      "role": "goal118_accepted_alpha_baseline_review_export",
+      "required": true,
+      "sha256": "8a168975f766289927ccb8684d6e29828666424e5f97f86ca62b78b006d13b0a"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/offline-geoworld-accepted-alpha-baseline-report.md",
+      "role": "goal118_accepted_alpha_baseline_review_export",
+      "required": true,
+      "sha256": "076f8d67113855c5efa5bb2ecc2ede1026ed07219082206a223eb1a80eb90b70"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-118-offline-geoworld-accepted-alpha-baseline-review/offline-geoworld-accepted-alpha-baseline-source-index.json",
+      "role": "goal118_accepted_alpha_baseline_review_export",
+      "required": true,
+      "sha256": "6c445342ade9b69f702b2505315b81bde6341a9b6ef87f024ce0a0306c10042b"
+    }
+  ]
+}

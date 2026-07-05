@@ -63,5 +63,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         + " | recommendedNextLane="
         + result.Report.OfflineGeoworldAlphaPostAcceptanceRecommendedNextLane
         + " | recommendedNextGoal="
-        + result.Report.OfflineGeoworldAlphaPostAcceptanceRecommendedNextGoalId;
+        + result.Report.OfflineGeoworldAlphaPostAcceptanceRecommendedNextGoalId
+        + " | acceptedBaseline="
+        + result.Report.OfflineGeoworldAcceptedAlphaBaselineId
+        + " | acceptedBaselineReady="
+        + result.Report.OfflineGeoworldAcceptedAlphaBaselineReady.ToString().ToLowerInvariant()
+        + " | nextDecision="
+        + result.Report.OfflineGeoworldAcceptedAlphaRecommendedNextDecision;
 }
