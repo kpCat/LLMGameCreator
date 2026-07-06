@@ -109,7 +109,9 @@
     ".llmgc/procedural/goal-120-accepted-alpha-projection-usability-and-cleanup/",
     ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/",
     ".llmgc/procedural/goal-120a-clean-unity-editor-noise-empty-status-hotfix/",
-    ".llmgc/exports/goal-120a-clean-unity-editor-noise-empty-status-hotfix/"
+    ".llmgc/exports/goal-120a-clean-unity-editor-noise-empty-status-hotfix/",
+    ".llmgc/procedural/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/",
+    ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -2066,6 +2068,54 @@
         "src/LLMGameCreator.Scripting/",
         "generator-library/",
         "unity/LLMGameCreatorAlpha/Assets/",
+        "unity/LLMGameCreatorAlpha/ProjectSettings/",
+        "unity/LLMGameCreatorAlpha/Packages/"
+      ]
+    },
+    {
+      "scenario": "goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "docs/manual-acceptance/accepted-alpha-interaction-drilldown-and-one-click-verification.md",
+        "tests/LLMGameCreator.Tests/ProductSmoke/AcceptedAlphaUnityPlayableProjectionProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/DevFlow/CleanUnityEditorNoiseScriptTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal121.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDiagnostics.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionModels.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionPrimitiveFactory.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDrilldown.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionActionPreview.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/",
+        ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/",
+        "docs/agent-tasks/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "unity/LLMGameCreatorAlpha/Assets/Scenes/",
+        "unity/LLMGameCreatorAlpha/Assets/Prefabs/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/",
         "unity/LLMGameCreatorAlpha/ProjectSettings/",
         "unity/LLMGameCreatorAlpha/Packages/"
       ]

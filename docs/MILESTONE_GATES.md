@@ -32,6 +32,8 @@ Goal 119A note: the accepted Alpha Unity material warning hotfix keeps the Goal1
 
 Goal 120 note: the accepted Alpha projection usability and cleanup pass keeps the Goal119 route, adds descriptor-backed selection controls, a visible legend and bounded Unity editor-noise cleanup commands. The next manual check is still the accepted Alpha Unity menu route, now with focus/select/legend controls and cleanup dry-run/apply proof. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 121 note: the accepted Alpha interaction drilldown and one-click verification pass keeps the Goal119 route and makes the primary manual check one menu action plus `Run Full Projection Verification`. It adds selected-marker details, interaction/action preview, objective/replay details, a compact event log and batchmode full verification proof. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

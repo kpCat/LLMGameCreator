@@ -1,0 +1,13 @@
+{
+  "goalId": "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "materialInstantiationWarningAbsent": true,
+  "rendererGetMaterialStackAbsent": true,
+  "smokeRequiredFieldsPresent": true,
+  "passed": true,
+  "status": "GREEN",
+  "sha256": "7ff2f6d24d8a927434d065341f97332f59e21e2f95048b75fd5c9a9eae002ea8",
+  "forbiddenMarkersFound": []
+}

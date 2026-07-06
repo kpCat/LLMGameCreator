@@ -1,0 +1,82 @@
+{
+  "goalId": "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
+  "oneClickManualPath": true,
+  "refreshBaselineStep": true,
+  "buildProjectionStep": true,
+  "playerProxySelectionStep": true,
+  "interactionTargetSelectionStep": true,
+  "interactionPreviewStep": true,
+  "objectiveSelectionStep": true,
+  "objectiveReplayDetailsStep": true,
+  "diagnosticsMarkerStep": true,
+  "legendStep": true,
+  "localSmokeStep": true,
+  "stepCount": 13,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "refresh_accepted_baseline",
+      "expectedResult": "Accepted baseline refresh runs first."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "build_refresh_projection",
+      "expectedResult": "Playable projection root is rebuilt or refreshed."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "focus_generated_root",
+      "expectedResult": "Generated root is focused for inspection."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "select_player_proxy",
+      "expectedResult": "Player proxy marker is selected."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "select_first_interaction_target",
+      "expectedResult": "First descriptor-backed interaction target is selected."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "populate_selected_marker_details",
+      "expectedResult": "Selected marker details text is populated."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "populate_interaction_preview",
+      "expectedResult": "Interaction/action preview text is populated."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "select_first_objective",
+      "expectedResult": "First descriptor-backed objective marker is selected."
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "populate_objective_replay_details",
+      "expectedResult": "Objective/replay details text is populated."
+    },
+    {
+      "stepIndex": 10,
+      "stepId": "select_diagnostics_marker",
+      "expectedResult": "Diagnostics marker is selected."
+    },
+    {
+      "stepIndex": 11,
+      "stepId": "refresh_show_legend",
+      "expectedResult": "Legend is visible after the one-click run."
+    },
+    {
+      "stepIndex": 12,
+      "stepId": "run_local_projection_smoke",
+      "expectedResult": "Local projection smoke reports fullVerificationPassed=True."
+    },
+    {
+      "stepIndex": 13,
+      "stepId": "write_event_log",
+      "expectedResult": "Compact verification event log is visible in the window."
+    }
+  ]
+}

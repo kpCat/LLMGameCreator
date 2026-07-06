@@ -33,10 +33,18 @@ namespace LLMGameCreatorAlpha
         [SerializeField] private int fatalErrorCount;
         [SerializeField] private string lastDiagnostics = string.Empty;
         [SerializeField] private string lastSmokeDiagnostics = string.Empty;
+        [SerializeField] private string selectedMarkerDetails = string.Empty;
+        [SerializeField] private string interactionPreview = string.Empty;
+        [SerializeField] private string objectiveReplayDetails = string.Empty;
+        [SerializeField] private string verificationEventLog = string.Empty;
 
         public string StatusLine { get { return statusLine; } }
         public string LastDiagnostics { get { return lastDiagnostics; } }
         public string LastSmokeDiagnostics { get { return lastSmokeDiagnostics; } }
+        public string SelectedMarkerDetails { get { return selectedMarkerDetails; } }
+        public string InteractionPreview { get { return interactionPreview; } }
+        public string ObjectiveReplayDetails { get { return objectiveReplayDetails; } }
+        public string VerificationEventLog { get { return verificationEventLog; } }
 
         private void Start()
         {
@@ -118,6 +126,103 @@ namespace LLMGameCreatorAlpha
         [ContextMenu("Run Local Projection Smoke")]
         public bool RunLocalProjectionSmoke()
         {
+            return RunProjectionSmoke(false);
+        }
+
+        public bool RunFullProjectionVerification()
+        {
+            var events = new List<string>();
+            selectedMarkerDetails = string.Empty;
+            interactionPreview = string.Empty;
+            objectiveReplayDetails = string.Empty;
+            verificationEventLog = string.Empty;
+
+            try
+            {
+                events.Add("refreshAcceptedBaseline");
+                RefreshAcceptedBaseline();
+                events.Add("baselineLoaded=" + acceptedBaselineReady);
+
+                events.Add("buildRefreshProjection");
+                BuildOrRefreshProjection();
+                events.Add("rootPresent=" + string.Equals(name, GeneratedRootName, System.StringComparison.Ordinal));
+
+                events.Add("focusGeneratedRoot=" + name);
+                var player = FindPlayerProxy();
+                events.Add("selectPlayerProxy=" + (player != null));
+
+                var interaction = FindNextMarkerByKind("interaction", 0);
+                events.Add("selectFirstInteractionTarget=" + (interaction != null));
+                var interactionDescriptor =
+                    interaction == null ? null : interaction.GetComponent<AcceptedAlphaPlayableProjectionMarkerDescriptor>();
+                if (interactionDescriptor != null)
+                {
+                    var actions = ReadAcceptedStreamingPayload(
+                        "OfflineGeoworldGoal105",
+                        "offline-geoworld-interaction-actions.json");
+                    var deltas = ReadAcceptedStreamingPayload(
+                        "OfflineGeoworldGoal105",
+                        "offline-geoworld-interaction-state-delta-plan.json");
+                    interactionPreview = AcceptedAlphaPlayableProjectionActionPreview.BuildInteractionPreview(
+                        interactionDescriptor.MarkerId,
+                        interactionDescriptor.DisplayLabel,
+                        actions,
+                        deltas);
+                }
+
+                events.Add("interactionPreviewPresent=" + !string.IsNullOrWhiteSpace(interactionPreview));
+
+                var objective = FindNextMarkerByKind("objective", 0);
+                events.Add("selectFirstObjective=" + (objective != null));
+                var objectiveDescriptor =
+                    objective == null ? null : objective.GetComponent<AcceptedAlphaPlayableProjectionMarkerDescriptor>();
+                if (objectiveDescriptor != null)
+                {
+                    var objectives = ReadAcceptedStreamingPayload(
+                        "OfflineGeoworldGoal107",
+                        "offline-geoworld-objectives.json");
+                    var replay = ReadAcceptedStreamingPayload(
+                        "OfflineGeoworldGoal106",
+                        "offline-geoworld-session-replay-script.json");
+                    objectiveReplayDetails = AcceptedAlphaPlayableProjectionDrilldown.BuildObjectiveReplayDetails(
+                        objectiveDescriptor.MarkerId,
+                        objectives,
+                        replay);
+                }
+
+                events.Add("objectiveReplayDetailsPresent=" + !string.IsNullOrWhiteSpace(objectiveReplayDetails));
+
+                var diagnostics = FindDiagnosticsMarker();
+                events.Add("selectDiagnosticsMarker=" + (diagnostics != null));
+                EnsureLegendVisible();
+                events.Add("legendPresent=" + HasDescendantWithPrefix(transform, LegendObjectName));
+                selectedMarkerDetails = JoinMarkerDetails(player, interaction, objective, diagnostics);
+
+                var passed = RunProjectionSmoke(true);
+                events.Add("localSmokePassed=" + passed);
+                events.Add(passed
+                    ? "Goal121 full projection verification passed"
+                    : "Goal121 full projection verification failed");
+                statusLine = passed
+                    ? "Goal121 full projection verification passed"
+                    : "Goal121 full projection verification failed";
+                verificationEventLog = string.Join("\n", events.ToArray());
+                return passed;
+            }
+            catch (System.Exception ex)
+            {
+                fatalErrorCount++;
+                statusLine = "Goal121 full projection verification fatal error: " + ex.GetType().Name;
+                lastDiagnostics = statusLine + "\n" + ex.Message;
+                events.Add(statusLine);
+                verificationEventLog = string.Join("\n", events.ToArray());
+                RunProjectionSmoke(true);
+                return false;
+            }
+        }
+
+        private bool RunProjectionSmoke(bool fullVerification)
+        {
             var result = new AcceptedAlphaProjectionSmokeResult
             {
                 RootPresent = string.Equals(name, GeneratedRootName, System.StringComparison.Ordinal),
@@ -131,13 +236,27 @@ namespace LLMGameCreatorAlpha
                 LegendPresent = HasDescendantWithPrefix(transform, LegendObjectName),
                 MarkerDescriptorPresent = HasDescendantWithDescriptor(transform),
                 SelectableInteractionTargetPresent = FindNextMarkerByKind("interaction", 0) != null,
+                InteractionPreviewPresent = !string.IsNullOrWhiteSpace(interactionPreview),
                 SelectableObjectivePresent = FindNextMarkerByKind("objective", 0) != null,
+                ObjectiveReplayDetailsPresent = !string.IsNullOrWhiteSpace(objectiveReplayDetails),
                 MaterialWarningGuardPresent =
                     AcceptedAlphaPlayableProjectionPrimitiveFactory.MaterialWarningGuardPresent,
                 ZeroFatalErrors = fatalErrorCount == 0,
                 StatusLine = statusLine
             };
+            result.FullVerificationPassed = fullVerification
+                                            && result.Passed
+                                            && result.InteractionPreviewPresent
+                                            && result.ObjectiveReplayDetailsPresent;
             lastSmokeDiagnostics = result.ToDiagnosticText();
+            if (fullVerification)
+            {
+                statusLine = result.FullVerificationPassed
+                    ? "Goal121 full projection verification passed"
+                    : "Goal121 full projection verification failed";
+                return result.FullVerificationPassed;
+            }
+
             statusLine = result.Passed ? "Goal119 local projection smoke passed" : "Goal119 local projection smoke failed";
             return result.Passed;
         }
@@ -187,6 +306,29 @@ namespace LLMGameCreatorAlpha
                 new Vector3(-7f, 0f, 0f));
             BuildOrRefreshLegend(section.transform);
             statusLine = "Goal120 legend refreshed";
+        }
+
+        public void EnsureLegendVisible()
+        {
+            var legend = FindDescendantObjectWithPrefix(transform, LegendObjectName);
+            if (legend != null)
+            {
+                legend.SetActive(true);
+                statusLine = "Goal121 legend visible";
+                return;
+            }
+
+            var section = FindDescendantObjectWithPrefix(transform, "goal120_legend_diagnostics");
+            if (section == null)
+            {
+                section = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateSection(
+                    transform,
+                    "goal120_legend_diagnostics",
+                    new Vector3(-7f, 0f, 0f));
+            }
+
+            BuildOrRefreshLegend(section.transform);
+            statusLine = "Goal121 legend refreshed and visible";
         }
 
         private AcceptedAlphaProjectionSummary LoadSummary()
@@ -360,9 +502,25 @@ namespace LLMGameCreatorAlpha
             var json = ReadAcceptedStreamingPayload(
                 "OfflineGeoworldGoal105",
                 "offline-geoworld-interaction-targets.json");
+            var actionsJson = ReadAcceptedStreamingPayload(
+                "OfflineGeoworldGoal105",
+                "offline-geoworld-interaction-actions.json");
+            var deltasJson = ReadAcceptedStreamingPayload(
+                "OfflineGeoworldGoal105",
+                "offline-geoworld-interaction-state-delta-plan.json");
             var index = 0;
             foreach (var target in LoadTargets(json))
             {
+                target.ActionCount =
+                    AcceptedAlphaPlayableProjectionActionPreview.CountActionsForTarget(actionsJson, target.TargetId);
+                target.FirstActionSummary =
+                    AcceptedAlphaPlayableProjectionActionPreview.FirstActionSummaryForTarget(
+                        actionsJson,
+                        target.TargetId);
+                target.ExpectedStateDeltaSummary =
+                    AcceptedAlphaPlayableProjectionActionPreview.StateDeltaSummaryForTarget(
+                        deltasJson,
+                        target.TargetId);
                 var markerName =
                     "goal119_interaction_target_" + AcceptedAlphaPlayableProjectionDiagnostics.Compact(target.TargetId);
                 var labelText = string.IsNullOrWhiteSpace(target.TargetName)
@@ -377,7 +535,13 @@ namespace LLMGameCreatorAlpha
                     Vector3.one * Mathf.Max(0.45f, target.InteractionRadius * 0.18f));
                 AttachDescriptor(marker, target.TargetId, markerName, "interaction", "goal105",
                     "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-targets.json",
-                    labelText, "selectable", "commandKind=" + target.CommandKind + "; radius=" + target.InteractionRadius);
+                    labelText,
+                    "selectable",
+                    "commandKind=" + target.CommandKind
+                    + "; radius=" + target.InteractionRadius
+                    + "; actionCount=" + target.ActionCount
+                    + "; firstAction=" + target.FirstActionSummary
+                    + "; expectedStateDelta=" + target.ExpectedStateDeltaSummary);
                 var label = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateText(
                     parent,
                     "goal120_interaction_label_" + index,
@@ -396,6 +560,9 @@ namespace LLMGameCreatorAlpha
             var json = ReadAcceptedStreamingPayload(
                 "OfflineGeoworldGoal107",
                 "offline-geoworld-objectives.json");
+            var replayJson = ReadAcceptedStreamingPayload(
+                "OfflineGeoworldGoal106",
+                "offline-geoworld-session-replay-script.json");
             var index = 0;
             foreach (var objective in LoadObjectives(json))
             {
@@ -411,7 +578,12 @@ namespace LLMGameCreatorAlpha
                 AttachDescriptor(label, objective.ObjectiveId, markerName, "objective", "goal107",
                     "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objectives.json",
                     string.IsNullOrWhiteSpace(objective.Title) ? objective.ObjectiveId : objective.Title,
-                    objective.CompletionState, "Accepted alpha objective checklist entry.");
+                    objective.CompletionState,
+                    "Accepted alpha objective checklist entry; "
+                    + AcceptedAlphaPlayableProjectionDrilldown.BuildObjectiveReplayDetails(
+                        objective.ObjectiveId,
+                        json,
+                        replayJson).Replace("\n", "; "));
                 index++;
             }
         }
@@ -604,6 +776,27 @@ namespace LLMGameCreatorAlpha
                 goalFolder,
                 fileName);
             return File.Exists(path) ? File.ReadAllText(path, Encoding.UTF8) : string.Empty;
+        }
+
+        private static string JoinMarkerDetails(params GameObject[] markers)
+        {
+            var lines = new List<string>();
+            foreach (var marker in markers)
+            {
+                if (marker == null)
+                {
+                    continue;
+                }
+
+                if (lines.Count > 0)
+                {
+                    lines.Add(string.Empty);
+                }
+
+                lines.Add(AcceptedAlphaPlayableProjectionDrilldown.DescribeMarker(marker));
+            }
+
+            return string.Join("\n", lines.ToArray());
         }
 
         private static void ClearChildren(Transform root)

@@ -561,6 +561,32 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.AcceptedAlphaProjectionUsabilityQualityGatePassed,
             Goal120FilesDiscoveredByRelativePaths =
                 qualityGate.Goal120FilesDiscoveredByRelativePaths,
+            AcceptedAlphaInteractionDrilldownFullVerificationStatus =
+                qualityGate.AcceptedAlphaInteractionDrilldownFullVerificationStatus,
+            AcceptedAlphaInteractionDrilldownUnityMenuPath =
+                qualityGate.AcceptedAlphaInteractionDrilldownUnityMenuPath,
+            AcceptedAlphaInteractionDrilldownOneClickButtonPresent =
+                qualityGate.AcceptedAlphaInteractionDrilldownOneClickButtonPresent,
+            AcceptedAlphaInteractionDrilldownDrilldownFieldsPresent =
+                qualityGate.AcceptedAlphaInteractionDrilldownDrilldownFieldsPresent,
+            AcceptedAlphaInteractionDrilldownInteractionPreviewPresent =
+                qualityGate.AcceptedAlphaInteractionDrilldownInteractionPreviewPresent,
+            AcceptedAlphaInteractionDrilldownObjectiveReplayDetailsPresent =
+                qualityGate.AcceptedAlphaInteractionDrilldownObjectiveReplayDetailsPresent,
+            AcceptedAlphaInteractionDrilldownBatchmodeFullVerificationMarker =
+                qualityGate.AcceptedAlphaInteractionDrilldownBatchmodeFullVerificationMarker,
+            AcceptedAlphaInteractionDrilldownCleanupScriptAvailable =
+                qualityGate.AcceptedAlphaInteractionDrilldownCleanupScriptAvailable,
+            AcceptedAlphaInteractionDrilldownMaterialWarningGuardPresent =
+                qualityGate.AcceptedAlphaInteractionDrilldownMaterialWarningGuardPresent,
+            AcceptedAlphaInteractionDrilldownHumanManualStepsReducedToOneButton =
+                qualityGate.AcceptedAlphaInteractionDrilldownHumanManualStepsReducedToOneButton,
+            AcceptedAlphaInteractionDrilldownUnityBatchmodeLogStatus =
+                qualityGate.AcceptedAlphaInteractionDrilldownUnityBatchmodeLogStatus,
+            AcceptedAlphaInteractionDrilldownQualityGatePassed =
+                qualityGate.AcceptedAlphaInteractionDrilldownQualityGatePassed,
+            Goal121FilesDiscoveredByRelativePaths =
+                qualityGate.Goal121FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

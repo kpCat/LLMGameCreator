@@ -377,6 +377,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildOfflineGeoworldAcceptedAlphaBaselineDiagnosticLines(result));
         lines.AddRange(BuildAcceptedAlphaUnityPlayableProjectionDiagnosticLines(result));
         lines.AddRange(BuildAcceptedAlphaProjectionUsabilityDiagnosticLines(result));
+        lines.AddRange(BuildAcceptedAlphaInteractionDrilldownDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -655,6 +656,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildOfflineGeoworldAcceptedAlphaBaselineEntryLines(entry));
         lines.AddRange(BuildAcceptedAlphaUnityPlayableProjectionEntryLines(entry));
         lines.AddRange(BuildAcceptedAlphaProjectionUsabilityEntryLines(entry));
+        lines.AddRange(BuildAcceptedAlphaInteractionDrilldownEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

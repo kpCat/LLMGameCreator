@@ -2177,19 +2177,36 @@ The hotfix does not broaden cleanup rules: no broad `git clean`, no Unity source
 `.llmgc/manual/**`, Runtime/schema/provider/Lua/generator-library, final renderer/atlas or release-packaging work is
 authorized.
 
+### Goal 121: Accepted Alpha Interaction Drilldown And One-Click Verification
+
+Goal 121 is produced for review as a GREEN interaction drilldown and one-click verification pass for the accepted Alpha
+Unity projection. It keeps the same menu route and makes the primary manual path one button: `Run Full Projection
+Verification`. That button refreshes the accepted baseline, builds the projection, selects player/interaction/objective
+and diagnostics markers, shows the legend, populates selected marker details, interaction/action preview,
+objective/replay details and a compact event log, then runs local smoke. Evidence is under
+`.llmgc/procedural/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/` plus export metadata
+under `.llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/`.
+
+The user should not have to click every debug button after each goal. After Unity manual checks, use
+`.devflow\scripts\clean-unity-editor-noise.cmd` or `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` only for
+bounded Unity editor noise. Next goals must continue product-visible work or automated verification, not proof-only
+churn. This does not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library,
+final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification
+goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification
 ```
 
-Review the Goal120A cleanup script hotfix evidence, then continue Goal120/Goal119 hands-on Unity verification through
-`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and use the supported cleanup command only for bounded
-Unity editor noise. Do not start live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final
-art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
+Review the Goal121 one-click verification evidence, then continue accepted Alpha hands-on Unity verification through
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and click `Run Full Projection Verification`. Use the
+supported cleanup command only for bounded Unity editor noise. Do not start live geodata/provider, Runtime, schema, Lua,
+generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release
+packaging work from this handoff.
 
 Status:
 
 ```text
-goal_120a_cleanup_empty_status_hotfix_green_goal120_manual_cleanup_supported
+goal_121_one_click_interaction_drilldown_green_manual_verification_simplified
 ```

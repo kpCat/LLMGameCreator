@@ -717,21 +717,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     {
         var root = ProjectRoot();
         new OfflineGeoworldObjectiveAcceptanceRunEvidenceService()
-            .BuildAndWriteAsync(root)
-            .GetAwaiter()
-            .GetResult();
+            .Build(root);
         new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
-            .BuildAndWriteAsync(root)
-            .GetAwaiter()
-            .GetResult();
+            .Build(root);
         new OfflineGeoworldAlphaSliceExportPackageEvidenceService()
-            .BuildAndWriteAsync(root)
-            .GetAwaiter()
-            .GetResult();
+            .Build(root);
         new OfflineGeoworldAlphaSliceManualAcceptanceGateEvidenceService()
-            .BuildAndWriteAsync(root)
-            .GetAwaiter()
-            .GetResult();
+            .Build(root);
         return new VisualWorldStreamPreviewWorkspaceService().Build(root);
     }
 

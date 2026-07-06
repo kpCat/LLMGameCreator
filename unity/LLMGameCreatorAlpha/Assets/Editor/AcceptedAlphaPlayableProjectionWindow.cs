@@ -14,6 +14,10 @@ namespace LLMGameCreatorAlpha
         private string statusLine = "Not loaded";
         private string diagnostics = string.Empty;
         private string smokeDiagnostics = string.Empty;
+        private string selectedMarkerDetails = string.Empty;
+        private string interactionPreview = string.Empty;
+        private string objectiveReplayDetails = string.Empty;
+        private string verificationEventLog = string.Empty;
         private int interactionSelectionIndex;
         private int objectiveSelectionIndex;
 
@@ -115,6 +119,53 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeProjectionFullVerification()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureController();
+                var passed = controller.RunFullProjectionVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\n" + controller.SelectedMarkerDetails
+                                  + "\n" + controller.InteractionPreview
+                                  + "\n" + controller.ObjectiveReplayDetails
+                                  + "\n" + controller.VerificationEventLog;
+                if (passed)
+                {
+                    Debug.Log("GOAL121_FULL_PROJECTION_VERIFICATION_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL121_FULL_PROJECTION_VERIFICATION_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL121_FULL_PROJECTION_VERIFICATION_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL121_FULL_PROJECTION_VERIFICATION_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -132,6 +183,25 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Smoke");
             EditorGUILayout.TextArea(smokeDiagnostics, GUILayout.MinHeight(120));
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Selected Marker Details");
+            EditorGUILayout.TextArea(selectedMarkerDetails, GUILayout.MinHeight(100));
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Interaction Preview");
+            EditorGUILayout.TextArea(interactionPreview, GUILayout.MinHeight(80));
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Objective / Replay Details");
+            EditorGUILayout.TextArea(objectiveReplayDetails, GUILayout.MinHeight(80));
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Verification Event Log");
+            EditorGUILayout.TextArea(verificationEventLog, GUILayout.MinHeight(100));
+            EditorGUILayout.Space();
+
+            if (GUILayout.Button("Run Full Projection Verification", GUILayout.Height(32)))
+            {
+                RunFullProjectionVerification();
+            }
+
             EditorGUILayout.Space();
 
             if (GUILayout.Button("Refresh Accepted Baseline"))
@@ -267,6 +337,16 @@ namespace LLMGameCreatorAlpha
             Capture(controller);
         }
 
+        private void RunFullProjectionVerification()
+        {
+            var controller = EnsureController();
+            controller.RunFullProjectionVerification();
+            SelectAndFrame(controller.FindDiagnosticsMarker());
+            interactionSelectionIndex = 1;
+            objectiveSelectionIndex = 1;
+            Capture(controller);
+        }
+
         private void ClearProjection()
         {
             var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
@@ -278,6 +358,10 @@ namespace LLMGameCreatorAlpha
             statusLine = "Projection root cleared.";
             diagnostics = "Removed only " + AcceptedAlphaPlayableProjectionController.GeneratedRootName + ".";
             smokeDiagnostics = string.Empty;
+            selectedMarkerDetails = string.Empty;
+            interactionPreview = string.Empty;
+            objectiveReplayDetails = string.Empty;
+            verificationEventLog = string.Empty;
         }
 
         private static void ClearProjectionRootImmediate()
@@ -326,6 +410,10 @@ namespace LLMGameCreatorAlpha
             statusLine = controller.StatusLine;
             diagnostics = controller.LastDiagnostics;
             smokeDiagnostics = controller.LastSmokeDiagnostics;
+            selectedMarkerDetails = controller.SelectedMarkerDetails;
+            interactionPreview = controller.InteractionPreview;
+            objectiveReplayDetails = controller.ObjectiveReplayDetails;
+            verificationEventLog = controller.VerificationEventLog;
         }
     }
 }

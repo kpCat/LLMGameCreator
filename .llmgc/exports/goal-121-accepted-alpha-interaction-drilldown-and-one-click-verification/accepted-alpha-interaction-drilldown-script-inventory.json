@@ -1,0 +1,82 @@
+{
+  "goalId": "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
+  "passed": true,
+  "scriptCount": 8,
+  "oneClickButtonPresent": true,
+  "batchmodeMethodPresent": true,
+  "batchmodePassMarkerPresent": true,
+  "batchmodeFailMarkerPresent": true,
+  "drilldownFieldsPresent": true,
+  "interactionPreviewFieldsPresent": true,
+  "objectiveReplayDetailsFieldsPresent": true,
+  "verificationEventLogPresent": true,
+  "smokeRequiredFieldsPresent": true,
+  "materialWarningGuardPresent": true,
+  "materialWarningSourceClean": true,
+  "scripts": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs",
+      "role": "unity_editor_window",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "Run Full Projection Verification",
+      "sha256": "3ffd945d548bdf9d7af79d23fd1f14985c3c6c4b21379a79460da04d1ea8f17c"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionController.cs",
+      "role": "unity_projection_controller",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "RunFullProjectionVerification",
+      "sha256": "d1648426991fbfba6a7b5d35783aeb0eb9341ef9551aa9050041ba82745eae6a"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDiagnostics.cs",
+      "role": "unity_projection_diagnostics",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "AcceptedAlphaPlayableProjectionDiagnostics",
+      "sha256": "bc7008dcd0484f7ea9884a4e97df7d485efa247fde084ed7756bee5c4b0e2f9d"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionModels.cs",
+      "role": "unity_projection_models",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "fullVerificationPassed",
+      "sha256": "b58220b2598c4b0313072788a565305ca6d5b0456c61c03419ad84722e87c6c8"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionPrimitiveFactory.cs",
+      "role": "unity_projection_primitive_factory",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "MaterialWarningGuardPresent",
+      "sha256": "3599c25f9290919a417cf5f3d4a41d8d828a364d9f0e9a747a66e3be4ddb19bc"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDrilldown.cs",
+      "role": "unity_projection_drilldown",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "BuildObjectiveReplayDetails",
+      "sha256": "26c144f66ace1105a2c5ed0ba928630882030a74698ed939c6633b5598bac8ff"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionActionPreview.cs",
+      "role": "unity_projection_action_preview",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "BuildInteractionPreview",
+      "sha256": "9323d9bf0b0cb34a0b251cb5f93297aaf7b67e5898bd1af0b26d12c46b5d29d5"
+    },
+    {
+      "relativePath": ".devflow/scripts/clean-unity-editor-noise.ps1",
+      "role": "cleanup_script",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "Unity editor noise cleanup mode",
+      "sha256": "1b0f985af9f6bb979f8ee985487c373e633163ddb0c0191d15dbbf9301ee2405"
+    }
+  ]
+}

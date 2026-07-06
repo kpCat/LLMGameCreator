@@ -42,6 +42,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageGoal119RelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Goal119.cs";
+        var pageGoal121RelativePath =
+            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
+            + "VisualWorldStreamPreviewWorkspacePageControl.Goal121.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
@@ -70,7 +73,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                        + ReadGoal120WinFormsPageText(projectRoot);
+                        + ReadGoal120WinFormsPageText(projectRoot)
+                        + "\n"
+                        + ReadOptionalText(projectRoot, pageGoal121RelativePath);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -501,6 +506,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 StringComparison.Ordinal);
         var bindDisplaysAcceptedAlphaProjectionUsability =
             PageBindsGoal120AcceptedAlphaProjectionUsability(pageText);
+        var bindDisplaysAcceptedAlphaInteractionDrilldown =
+            PageBindsGoal121AcceptedAlphaInteractionDrilldown(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -624,6 +631,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal120.winforms.accepted_alpha_projection_usability_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysAcceptedAlphaInteractionDrilldown,
+            "goal121.winforms.accepted_alpha_interaction_drilldown_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -677,6 +689,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysAcceptedAlphaUnityPlayableProjection,
             PageBindDisplaysAcceptedAlphaProjectionUsability =
                 bindDisplaysAcceptedAlphaProjectionUsability,
+            PageBindDisplaysAcceptedAlphaInteractionDrilldown =
+                bindDisplaysAcceptedAlphaInteractionDrilldown,
             Diagnostics = diagnostics
         };
     }

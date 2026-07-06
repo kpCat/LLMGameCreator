@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 120 accepted Alpha projection usability and cleanup
+Updated by: Goal 121 accepted Alpha interaction drilldown and one-click verification
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -64,6 +64,29 @@ supportedCleanupCommand=.devflow\scripts\clean-unity-editor-noise.cmd
 After Unity manual checks, the supported cleanup command remains `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply`. Goal120A only makes clean/empty `git status` output an empty
 status list; it does not broaden cleanup targets or authorize forbidden lanes.
+
+Goal 121 reduces the accepted Alpha Unity verification path to one menu action plus one button:
+
+```text
+goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification required
+implementationStatus=GREEN
+accepted=false
+manualPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection -> Run Full Projection Verification
+unityBatchmodeSmoke=GOAL121_FULL_PROJECTION_VERIFICATION_PASS required
+```
+
+The user should not have to click every debug button after each goal. Goal121 keeps the granular debug controls for
+diagnostics, but the primary hands-on route is `Run Full Projection Verification`, which refreshes the accepted
+baseline, builds the projection, selects player/interaction/objective/diagnostics markers, shows the legend, populates
+selected marker details, interaction/action preview, objective/replay details and a compact event log, then runs local
+smoke. Evidence lives under
+`.llmgc/procedural/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/`, export metadata under
+`.llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/`, and the short manual note
+at `docs/manual-acceptance/accepted-alpha-interaction-drilldown-and-one-click-verification.md`.
+
+After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
+`.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue
+product-visible work or automated verification, not proof-only churn.
 
 This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.

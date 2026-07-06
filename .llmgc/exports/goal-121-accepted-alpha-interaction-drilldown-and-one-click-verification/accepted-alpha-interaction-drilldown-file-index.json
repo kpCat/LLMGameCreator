@@ -1,0 +1,44 @@
+{
+  "goalId": "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 6,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/accepted-alpha-interaction-drilldown-dashboard.json",
+      "role": "goal121_accepted_alpha_interaction_drilldown_export",
+      "required": true,
+      "sha256": "e10249d64a7bb07166f69151c1808bd7ad4002e5b77ca62581df2c3fa627ff70"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/accepted-alpha-interaction-drilldown-log-scan.json",
+      "role": "goal121_accepted_alpha_interaction_drilldown_export",
+      "required": true,
+      "sha256": "6bfbda3a95073cf13ee5cd27e46a082ef69a59e64a29190dbcaff8a781e1825f"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/accepted-alpha-interaction-drilldown-negative-proof.json",
+      "role": "goal121_accepted_alpha_interaction_drilldown_export",
+      "required": true,
+      "sha256": "719fd08e4fb58fa0bb5db853df81d9c1509376f2c4405103409f4ab747895f96"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/accepted-alpha-interaction-drilldown-report.md",
+      "role": "goal121_accepted_alpha_interaction_drilldown_export",
+      "required": true,
+      "sha256": "a2196e861740871a296b235d3e981f498c281de141eb69b5a9ec71a2c89c0d95"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/accepted-alpha-interaction-drilldown-script-inventory.json",
+      "role": "goal121_accepted_alpha_interaction_drilldown_export",
+      "required": true,
+      "sha256": "d8a1108bfac1ac9874c4d82c6e1b4a3b4b088867f117e2df91737e9545aa6d26"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/accepted-alpha-interaction-drilldown-smoke-plan.json",
+      "role": "goal121_accepted_alpha_interaction_drilldown_export",
+      "required": true,
+      "sha256": "599395b8d7c159d12158d085219c8b818ff9107d6e474a2781762eeee74a2340"
+    }
+  ]
+}

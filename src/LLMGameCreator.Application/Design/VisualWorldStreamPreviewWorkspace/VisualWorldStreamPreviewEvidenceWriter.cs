@@ -227,6 +227,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var acceptedAlphaProjectionUsability = BuildGoal120AcceptedAlphaProjectionUsabilityQuality(
             groups,
             proofs);
+        var acceptedAlphaInteractionDrilldown =
+            BuildGoal121AcceptedAlphaInteractionDrilldownQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -405,6 +407,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             acceptedAlphaUnityPlayableProjection, binding, diagnostics);
         AddGoal120AcceptedAlphaProjectionUsabilityQualityDiagnostics(
             acceptedAlphaProjectionUsability, binding, diagnostics);
+        AddGoal121AcceptedAlphaInteractionDrilldownQualityDiagnostics(acceptedAlphaInteractionDrilldown, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -683,17 +686,14 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal113 = ApplyGoal113AlphaManualResultWorkbenchQuality(withGoal112, manualResultWorkbench, binding);
         var withGoal115 = ApplyGoal115AlphaHumanResultRevalidationQuality(withGoal113, humanResultRevalidation, binding);
         var withGoal116 = ApplyGoal116AlphaManualGateAcceptanceQuality(withGoal115, manualGateAcceptance, binding);
-        var withGoal117 = ApplyGoal117AlphaPostAcceptanceContinuationQuality(
-            withGoal116, postAcceptanceContinuation, binding);
+        var withGoal117 = ApplyGoal117AlphaPostAcceptanceContinuationQuality(withGoal116, postAcceptanceContinuation, binding);
         var withGoal118 = ApplyGoal118AcceptedAlphaBaselineQuality(withGoal117, acceptedAlphaBaseline, binding);
-        var withGoal119 = ApplyGoal119AcceptedAlphaUnityPlayableProjectionQuality(
-            withGoal118,
-            acceptedAlphaUnityPlayableProjection,
-            binding);
-        return ApplyGoal120AcceptedAlphaProjectionUsabilityQuality(
+        var withGoal119 = ApplyGoal119AcceptedAlphaUnityPlayableProjectionQuality(withGoal118, acceptedAlphaUnityPlayableProjection, binding);
+        var withGoal120 = ApplyGoal120AcceptedAlphaProjectionUsabilityQuality(
             withGoal119,
             acceptedAlphaProjectionUsability,
             binding);
+        return ApplyGoal121AcceptedAlphaInteractionDrilldownQuality(withGoal120, acceptedAlphaInteractionDrilldown, binding);
     }
 
 }

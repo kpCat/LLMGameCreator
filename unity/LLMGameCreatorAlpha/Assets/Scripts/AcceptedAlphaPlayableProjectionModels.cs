@@ -22,6 +22,9 @@ namespace LLMGameCreatorAlpha
         public string TargetId = string.Empty;
         public string TargetName = string.Empty;
         public string CommandKind = string.Empty;
+        public int ActionCount;
+        public string FirstActionSummary = string.Empty;
+        public string ExpectedStateDeltaSummary = string.Empty;
         public int GridX;
         public int GridZ;
         public int Elevation;
@@ -65,9 +68,12 @@ namespace LLMGameCreatorAlpha
         public bool LegendPresent;
         public bool MarkerDescriptorPresent;
         public bool SelectableInteractionTargetPresent;
+        public bool InteractionPreviewPresent;
         public bool SelectableObjectivePresent;
+        public bool ObjectiveReplayDetailsPresent;
         public bool MaterialWarningGuardPresent;
         public bool ZeroFatalErrors;
+        public bool FullVerificationPassed;
         public string StatusLine = string.Empty;
 
         public bool Passed
@@ -101,9 +107,12 @@ namespace LLMGameCreatorAlpha
                    + "\nlegendPresent=" + LegendPresent
                    + "\nmarkerDescriptorPresent=" + MarkerDescriptorPresent
                    + "\nselectableInteractionTargetPresent=" + SelectableInteractionTargetPresent
+                   + "\ninteractionPreviewPresent=" + InteractionPreviewPresent
                    + "\nselectableObjectivePresent=" + SelectableObjectivePresent
+                   + "\nobjectiveReplayDetailsPresent=" + ObjectiveReplayDetailsPresent
                    + "\nmaterialWarningGuardPresent=" + MaterialWarningGuardPresent
                    + "\nzeroFatalErrors=" + ZeroFatalErrors
+                   + "\nfullVerificationPassed=" + FullVerificationPassed
                    + "\nstatusLine=" + StatusLine;
         }
     }

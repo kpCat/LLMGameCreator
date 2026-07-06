@@ -285,7 +285,15 @@ public sealed partial class AcceptedAlphaUnityPlayableProjectionService
             Entry(root,
                 AcceptedAlphaUnityPlayableProjectionVocabulary.UnityPrimitiveFactoryPath,
                 "unity_projection_primitive_factory",
-                "AcceptedAlphaPlayableProjectionPrimitiveFactory")
+                "AcceptedAlphaPlayableProjectionPrimitiveFactory"),
+            Entry(root,
+                AcceptedAlphaUnityPlayableProjectionVocabulary.UnityDrilldownPath,
+                "unity_projection_drilldown",
+                "AcceptedAlphaPlayableProjectionDrilldown"),
+            Entry(root,
+                AcceptedAlphaUnityPlayableProjectionVocabulary.UnityActionPreviewPath,
+                "unity_projection_action_preview",
+                "AcceptedAlphaPlayableProjectionActionPreview")
         }.ToList();
 
         return new AcceptedAlphaUnityPlayableProjectionScriptInventory

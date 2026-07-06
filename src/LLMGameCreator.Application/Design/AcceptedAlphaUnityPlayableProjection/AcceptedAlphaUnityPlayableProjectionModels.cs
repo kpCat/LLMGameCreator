@@ -52,6 +52,10 @@ public static class AcceptedAlphaUnityPlayableProjectionVocabulary
         "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionModels.cs";
     public const string UnityPrimitiveFactoryPath =
         "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionPrimitiveFactory.cs";
+    public const string UnityDrilldownPath =
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDrilldown.cs";
+    public const string UnityActionPreviewPath =
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionActionPreview.cs";
 
     public static IReadOnlyList<string> RequiredProceduralFileNames =>
     [
@@ -72,7 +76,9 @@ public static class AcceptedAlphaUnityPlayableProjectionVocabulary
         UnityControllerPath,
         UnityDiagnosticsPath,
         UnityModelsPath,
-        UnityPrimitiveFactoryPath
+        UnityPrimitiveFactoryPath,
+        UnityDrilldownPath,
+        UnityActionPreviewPath
     ];
 }
 

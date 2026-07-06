@@ -7,11 +7,11 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceGoal119Tests
 {
     [Fact]
-    public async Task Goal119ProjectionSurfacesInWorkspaceAndUiBinding()
+    public void Goal119ProjectionSurfacesInWorkspaceAndUiBinding()
     {
         var root = ProjectRoot();
-        await new AcceptedAlphaUnityPlayableProjectionService()
-            .BuildAndWriteAsync(root);
+        new AcceptedAlphaUnityPlayableProjectionService()
+            .Build(root);
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         var group = Assert.Single(

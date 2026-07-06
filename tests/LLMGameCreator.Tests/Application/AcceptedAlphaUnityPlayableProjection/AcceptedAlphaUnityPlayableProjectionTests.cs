@@ -24,7 +24,7 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.Equal(
             AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
             result.Dashboard.ExpectedGeneratedRootName);
-        Assert.Equal(5, result.ScriptInventory.ScriptCount);
+        Assert.Equal(7, result.ScriptInventory.ScriptCount);
         Assert.True(result.ScriptInventory.AllScriptsPresent);
         Assert.True(result.ScriptInventory.MenuPathExistsExactly);
         Assert.True(result.SmokePlan.BaselineLoaded);
@@ -99,6 +99,41 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
         Assert.True(result.CleanupScriptScan.Passed);
         Assert.True(result.SmokePlan.StepCount >= 8);
+        Assert.True(result.NegativeProof.Passed);
+    }
+
+    [Fact]
+    public void Goal121FullVerificationSourceScanFindsOneClickDrilldownBatchmodeAndSmokeFields()
+    {
+        var result = new AcceptedAlphaInteractionDrilldownVerificationService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.FullVerificationStatus);
+        Assert.True(result.Dashboard.OneClickButtonPresent);
+        Assert.True(result.Dashboard.DrilldownFieldsPresent);
+        Assert.True(result.Dashboard.InteractionPreviewPresent);
+        Assert.True(result.Dashboard.ObjectiveReplayDetailsPresent);
+        Assert.Equal(
+            "GOAL121_FULL_PROJECTION_VERIFICATION_PASS",
+            result.Dashboard.BatchmodeFullVerificationMarker);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.True(result.Dashboard.MaterialWarningGuardPresent);
+        Assert.True(result.Dashboard.HumanManualStepsReducedToOneButton);
+        Assert.NotEqual(
+            "BLOCKED_UNITY_BATCHMODE_FULL_VERIFICATION",
+            result.Dashboard.UnityBatchmodeLogStatus);
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.BatchmodeMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.ScriptInventory.BatchmodeFailMarkerPresent);
+        Assert.True(result.ScriptInventory.DrilldownFieldsPresent);
+        Assert.True(result.ScriptInventory.InteractionPreviewFieldsPresent);
+        Assert.True(result.ScriptInventory.ObjectiveReplayDetailsFieldsPresent);
+        Assert.True(result.ScriptInventory.VerificationEventLogPresent);
+        Assert.True(result.ScriptInventory.SmokeRequiredFieldsPresent);
+        Assert.True(result.ScriptInventory.MaterialWarningSourceClean);
+        Assert.True(result.SmokePlan.OneClickManualPath);
+        Assert.True(result.SmokePlan.StepCount >= 12);
         Assert.True(result.NegativeProof.Passed);
     }
 
