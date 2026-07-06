@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                        + ReadGoal120Through125WinFormsPageText(projectRoot);
+                        + ReadGoal120Through126WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -503,8 +503,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysAcceptedAlphaInteractionDrilldown = PageBindsGoal121AcceptedAlphaInteractionDrilldown(pageText);
         var bindDisplaysAcceptedAlphaProjectionActionLoop = PageBindsGoal122AcceptedAlphaProjectionActionLoop(pageText);
         var bindDisplaysGenericGamePackageProjection = PageBindsGoal123GenericGamePackageProjection(pageText);
-        bool bindDisplaysGenericGamePackageLoop = PageBindsGoal124GenericGamePackageLoop(pageText),
-            bindDisplaysGenericGamePackageSystems = PageBindsGoal125GenericGamePackageSystems(pageText);
+        var bindDisplaysGenericGamePackageLoop = PageBindsGoal124GenericGamePackageLoop(pageText);
+        var bindDisplaysGenericGamePackageSystems = PageBindsGoal125GenericGamePackageSystems(pageText);
+        var bindDisplaysGenericGamePackageFullPlaythrough = PageBindsGoal126GenericGamePackageFullPlaythrough(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -634,7 +635,14 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             pageRelativePath,
             diagnostics);
         AddIfFalse(bindDisplaysAcceptedAlphaProjectionActionLoop, "goal122.winforms.accepted_alpha_projection_action_loop_bind_missing", pageRelativePath, diagnostics);
-        AddIfFalse(bindDisplaysGenericGamePackageProjection, "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics); AddIfFalse(bindDisplaysGenericGamePackageLoop, "goal124.winforms.generic_gamepackage_loop_bind_missing", pageRelativePath, diagnostics); AddIfFalse(bindDisplaysGenericGamePackageSystems, "goal125.winforms.generic_gamepackage_systems_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageProjection, "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageLoop, "goal124.winforms.generic_gamepackage_loop_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageSystems, "goal125.winforms.generic_gamepackage_systems_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(
+            bindDisplaysGenericGamePackageFullPlaythrough,
+            "goal126.winforms.generic_gamepackage_full_playthrough_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -650,49 +658,31 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysUnityHandoff = bindDisplaysUnityHandoff,
             PageBindDisplaysGeoworld = bindDisplaysGeoworld,
             PageBindDisplaysOfflineGeoworldHandoff = bindDisplaysOfflineGeoworldHandoff,
-            PageBindDisplaysOfflineGeoworldUnityPreview =
-                bindDisplaysOfflineGeoworldUnityPreview,
-            PageBindDisplaysOfflineGeoworldUnityEditorPreview =
-                bindDisplaysOfflineGeoworldUnityEditorPreview,
-            PageBindDisplaysOfflineGeoworldPlayModeTravel =
-                bindDisplaysOfflineGeoworldPlayModeTravel,
-            PageBindDisplaysOfflineGeoworldInteractiveTravel =
-                bindDisplaysOfflineGeoworldInteractiveTravel,
-            PageBindDisplaysOfflineGeoworldInteractions =
-                bindDisplaysOfflineGeoworldInteractions,
-            PageBindDisplaysOfflineGeoworldSessionReplay =
-                bindDisplaysOfflineGeoworldSessionReplay,
-            PageBindDisplaysOfflineGeoworldObjectiveAcceptance =
-                bindDisplaysOfflineGeoworldObjectiveAcceptance,
-            PageBindDisplaysOfflineGeoworldAlphaSlice =
-                bindDisplaysOfflineGeoworldAlphaSlice,
-            PageBindDisplaysOfflineGeoworldAlphaExportPackage =
-                bindDisplaysOfflineGeoworldAlphaExportPackage,
-            PageBindDisplaysOfflineGeoworldAlphaManualAcceptance =
-                bindDisplaysOfflineGeoworldAlphaManualAcceptance,
-            PageBindDisplaysOfflineGeoworldAlphaManualResultIntake =
-                bindDisplaysOfflineGeoworldAlphaManualResultIntake,
-            PageBindDisplaysOfflineGeoworldAlphaAcceptanceOperatorPack =
-                bindDisplaysOfflineGeoworldAlphaAcceptanceOperatorPack,
-            PageBindDisplaysOfflineGeoworldAlphaManualResultWorkbench =
-                bindDisplaysOfflineGeoworldAlphaManualResultWorkbench,
-            PageBindDisplaysOfflineGeoworldAlphaHumanResultRevalidation =
-                bindDisplaysOfflineGeoworldAlphaHumanResultRevalidation,
-            PageBindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord =
-                bindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord,
-            PageBindDisplaysOfflineGeoworldAlphaPostAcceptanceContinuationSelection =
-                bindDisplaysOfflineGeoworldAlphaPostAcceptanceContinuation,
-            PageBindDisplaysOfflineGeoworldAcceptedAlphaBaselineReview =
-                bindDisplaysOfflineGeoworldAcceptedAlphaBaseline,
-            PageBindDisplaysAcceptedAlphaUnityPlayableProjection =
-                bindDisplaysAcceptedAlphaUnityPlayableProjection,
-            PageBindDisplaysAcceptedAlphaProjectionUsability =
-                bindDisplaysAcceptedAlphaProjectionUsability,
-            PageBindDisplaysAcceptedAlphaInteractionDrilldown =
-                bindDisplaysAcceptedAlphaInteractionDrilldown,
+            PageBindDisplaysOfflineGeoworldUnityPreview = bindDisplaysOfflineGeoworldUnityPreview,
+            PageBindDisplaysOfflineGeoworldUnityEditorPreview = bindDisplaysOfflineGeoworldUnityEditorPreview,
+            PageBindDisplaysOfflineGeoworldPlayModeTravel = bindDisplaysOfflineGeoworldPlayModeTravel,
+            PageBindDisplaysOfflineGeoworldInteractiveTravel = bindDisplaysOfflineGeoworldInteractiveTravel,
+            PageBindDisplaysOfflineGeoworldInteractions = bindDisplaysOfflineGeoworldInteractions,
+            PageBindDisplaysOfflineGeoworldSessionReplay = bindDisplaysOfflineGeoworldSessionReplay,
+            PageBindDisplaysOfflineGeoworldObjectiveAcceptance = bindDisplaysOfflineGeoworldObjectiveAcceptance,
+            PageBindDisplaysOfflineGeoworldAlphaSlice = bindDisplaysOfflineGeoworldAlphaSlice,
+            PageBindDisplaysOfflineGeoworldAlphaExportPackage = bindDisplaysOfflineGeoworldAlphaExportPackage,
+            PageBindDisplaysOfflineGeoworldAlphaManualAcceptance = bindDisplaysOfflineGeoworldAlphaManualAcceptance,
+            PageBindDisplaysOfflineGeoworldAlphaManualResultIntake = bindDisplaysOfflineGeoworldAlphaManualResultIntake,
+            PageBindDisplaysOfflineGeoworldAlphaAcceptanceOperatorPack = bindDisplaysOfflineGeoworldAlphaAcceptanceOperatorPack,
+            PageBindDisplaysOfflineGeoworldAlphaManualResultWorkbench = bindDisplaysOfflineGeoworldAlphaManualResultWorkbench,
+            PageBindDisplaysOfflineGeoworldAlphaHumanResultRevalidation = bindDisplaysOfflineGeoworldAlphaHumanResultRevalidation,
+            PageBindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord = bindDisplaysOfflineGeoworldAlphaManualGateAcceptanceRecord,
+            PageBindDisplaysOfflineGeoworldAlphaPostAcceptanceContinuationSelection = bindDisplaysOfflineGeoworldAlphaPostAcceptanceContinuation,
+            PageBindDisplaysOfflineGeoworldAcceptedAlphaBaselineReview = bindDisplaysOfflineGeoworldAcceptedAlphaBaseline,
+            PageBindDisplaysAcceptedAlphaUnityPlayableProjection = bindDisplaysAcceptedAlphaUnityPlayableProjection,
+            PageBindDisplaysAcceptedAlphaProjectionUsability = bindDisplaysAcceptedAlphaProjectionUsability,
+            PageBindDisplaysAcceptedAlphaInteractionDrilldown = bindDisplaysAcceptedAlphaInteractionDrilldown,
             PageBindDisplaysAcceptedAlphaProjectionActionLoop = bindDisplaysAcceptedAlphaProjectionActionLoop,
-            PageBindDisplaysGenericGamePackageProjection = bindDisplaysGenericGamePackageProjection, PageBindDisplaysGenericGamePackageLoop = bindDisplaysGenericGamePackageLoop,
+            PageBindDisplaysGenericGamePackageProjection = bindDisplaysGenericGamePackageProjection,
+            PageBindDisplaysGenericGamePackageLoop = bindDisplaysGenericGamePackageLoop,
             PageBindDisplaysGenericGamePackageSystems = bindDisplaysGenericGamePackageSystems,
+            PageBindDisplaysGenericGamePackageFullPlaythrough = bindDisplaysGenericGamePackageFullPlaythrough,
             Diagnostics = diagnostics
         };
     }

@@ -335,6 +335,75 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.UnityScenesPrefabsSettingsPackagesStreamingAssetsRejected);
     }
 
+    [Fact]
+    public void Goal126GenericPackageFullPlaythroughSourceScanFindsOneClickBatchmodeAndTranscript()
+    {
+        var result = new GenericGamePackageFullPlaythroughProjectionService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.FullPlaythroughStatus);
+        Assert.Equal(
+            GenericGamePackageFullPlaythroughProjectionVocabulary.SamplePackagePath,
+            result.Dashboard.SamplePackagePath);
+        Assert.Equal("game/minimal-map-game", result.Dashboard.PackageId);
+        Assert.Equal("Minimal Map Game", result.Dashboard.PackageTitle);
+        Assert.Equal("map/village", result.Dashboard.MapId);
+        Assert.True(result.Dashboard.MapPathPreviewPresent);
+        Assert.True(result.Dashboard.SignInteractionApplied);
+        Assert.True(result.Dashboard.DialogueSummaryPresent);
+        Assert.True(result.Dashboard.QuestObjectiveStatusPresent);
+        Assert.True(result.Dashboard.InventorySummaryPresent);
+        Assert.True(result.Dashboard.ResourceSummaryPresent);
+        Assert.True(result.Dashboard.SystemsSummaryPresent);
+        Assert.True(result.Dashboard.RecipeApplyPassed);
+        Assert.True(result.Dashboard.HarvestApplyPassed);
+        Assert.True(result.Dashboard.TransactionPreviewPresent);
+        Assert.True(result.Dashboard.CombatRoundPreviewPresent);
+        Assert.True(result.Dashboard.EventTranscriptPresent);
+        Assert.True(result.Dashboard.Goal125StillGreen);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.True(result.Dashboard.ProjectionOnly);
+        Assert.True(result.Dashboard.SamplePackageReadOnly);
+        Assert.True(result.Dashboard.NoRuntimeProviderSchemaLuaGeneratorLibrary);
+        Assert.True(result.Dashboard.NoUnityScenePrefabSettingsPackagesStreamingAssets);
+        Assert.NotEqual(
+            "BLOCKED_UNITY_BATCHMODE_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH",
+            result.Dashboard.UnitySmokeStatus);
+        Assert.True(result.SamplePackage.Exists);
+        Assert.True(result.SamplePackage.Parsed);
+        Assert.True(result.SamplePackage.ReadOnlySource);
+        Assert.True(result.SamplePackage.ExcludedFromExpectedChangedPaths);
+        Assert.True(result.SamplePackage.StartPositionPresent);
+        Assert.True(result.SamplePackage.PathTargetPresent);
+        Assert.True(result.SamplePackage.PathWalkable);
+        Assert.True(result.SamplePackage.SignInteractionPresent);
+        Assert.True(result.SamplePackage.OldGuardDialoguePresent);
+        Assert.True(result.SamplePackage.HelpHealerQuestIncomplete);
+        Assert.True(result.SamplePackage.PlayerInventoryPresent);
+        Assert.True(result.SamplePackage.ResourceDefaultsPresent);
+        Assert.True(result.SamplePackage.RecipeRequirementsMatchExpected);
+        Assert.True(result.SamplePackage.HarvestContractPresent);
+        Assert.True(result.SamplePackage.TransactionPresent);
+        Assert.True(result.SamplePackage.CombatRoundMatchesExpected);
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.WindowActionPresent);
+        Assert.True(result.ScriptInventory.BatchmodeMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.ScriptInventory.BatchmodeFailMarkerPresent);
+        Assert.True(result.ScriptInventory.StateClassTracksFullPlaythroughFields);
+        Assert.True(result.ScriptInventory.PlaythroughRunsRequiredSequence);
+        Assert.True(result.ScriptInventory.ControllerRendersFullPlaythroughMarkers);
+        Assert.True(result.ScriptInventory.ModelsExposeFullPlaythroughSmokeFields);
+        Assert.True(result.ScriptInventory.ExistingGoal125VerificationStillPresent);
+        Assert.True(result.ScriptInventory.NoSourceWriteMarkers);
+        Assert.True(result.SmokePlan.StepCount >= 15);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.True(result.NegativeProof.ManualInputRejected);
+        Assert.True(result.NegativeProof.SamplePackageMutationRejected);
+        Assert.True(result.NegativeProof.RuntimeSchemaProviderLuaGeneratorLibraryRejected);
+        Assert.True(result.NegativeProof.UnityScenesPrefabsSettingsPackagesStreamingAssetsRejected);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

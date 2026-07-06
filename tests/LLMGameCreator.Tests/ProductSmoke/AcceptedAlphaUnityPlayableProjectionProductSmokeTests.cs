@@ -26,6 +26,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .BuildAndWriteAsync(root);
         var genericSystems = await new GenericGamePackageSystemsProjectionService()
             .BuildAndWriteAsync(root);
+        var genericFullPlaythrough = await new GenericGamePackageFullPlaythroughProjectionService()
+            .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -172,6 +174,36 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             path == GenericGamePackageSystemsProjectionVocabulary.DocumentationPath);
         Assert.DoesNotContain(genericSystems.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.Equal("GREEN", genericFullPlaythrough.Result.Dashboard.FullPlaythroughStatus);
+        Assert.Equal("game/minimal-map-game", genericFullPlaythrough.Result.Dashboard.PackageId);
+        Assert.Equal("map/village", genericFullPlaythrough.Result.Dashboard.MapId);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.MapPathPreviewPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.SignInteractionApplied);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.DialogueSummaryPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.QuestObjectiveStatusPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.InventorySummaryPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.ResourceSummaryPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.SystemsSummaryPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.CombatRoundPreviewPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.EventTranscriptPresent);
+        Assert.True(genericFullPlaythrough.Result.Dashboard.Goal125StillGreen);
+        Assert.True(genericFullPlaythrough.Result.ScriptInventory.Passed);
+        Assert.True(genericFullPlaythrough.Result.SamplePackage.Passed);
+        Assert.True(genericFullPlaythrough.Result.NegativeProof.Passed);
+        Assert.Contains(genericFullPlaythrough.WrittenFiles, path =>
+            path == GenericGamePackageFullPlaythroughProjectionVocabulary
+                .ProceduralOutputDirectory
+            + "/"
+            + GenericGamePackageFullPlaythroughProjectionVocabulary.DashboardFileName);
+        Assert.Contains(genericFullPlaythrough.WrittenFiles, path =>
+            path == GenericGamePackageFullPlaythroughProjectionVocabulary
+                .ExportPackageDirectory
+            + "/"
+            + GenericGamePackageFullPlaythroughProjectionVocabulary.LogScanFileName);
+        Assert.Contains(genericFullPlaythrough.WrittenFiles, path =>
+            path == GenericGamePackageFullPlaythroughProjectionVocabulary.DocumentationPath);
+        Assert.DoesNotContain(genericFullPlaythrough.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -188,6 +220,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysGenericGamePackageLoop);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysGenericGamePackageSystems);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysGenericGamePackageFullPlaythrough);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -202,6 +236,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "generic_gamepackage_loop");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "generic_gamepackage_systems_loop");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "generic_gamepackage_full_playthrough");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -216,6 +252,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.Goal124FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.GenericGamePackageSystemsQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal125FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.GenericGamePackageFullPlaythroughQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.Goal126FilesDiscoveredByRelativePaths);
         Assert.Contains(
             "acceptedAlphaUnityPlayableProjectionGeneratedRootName: "
             + AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
@@ -244,6 +282,10 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "genericSystemsStatus: GREEN",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "fullPlaythroughStatus: GREEN",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }

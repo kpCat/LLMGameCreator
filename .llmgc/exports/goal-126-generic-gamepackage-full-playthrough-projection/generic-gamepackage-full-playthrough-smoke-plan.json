@@ -1,0 +1,82 @@
+{
+  "goalId": "goal_126_generic_gamepackage_full_playthrough_projection",
+  "oneClickManualPath": true,
+  "stepCount": 15,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "open_projection_window",
+      "expectedResult": "Open the accepted Alpha projection menu path."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "run_generic_package_full_playthrough",
+      "expectedResult": "Click Run Generic Package Full Playthrough Verification."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "load_sample_package",
+      "expectedResult": "Read samples/minimal-map-game/package.json without mutating it."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "build_generic_projection",
+      "expectedResult": "Build the generic map projection root."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "preview_map_path",
+      "expectedResult": "Preview deterministic walk path from start to sign target."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "apply_sign_interaction",
+      "expectedResult": "Apply interaction/sign_inspect in projection state only."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "summarize_dialogue",
+      "expectedResult": "Show dialogue/old_guard_intro summary."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "check_quest_objective",
+      "expectedResult": "Show quest/help_healer incomplete red herb objective."
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "summarize_inventory_resources",
+      "expectedResult": "Show inventory/player_start and resource ledger summary."
+    },
+    {
+      "stepIndex": 10,
+      "stepId": "apply_recipe",
+      "expectedResult": "Preview and apply recipe/healing_potion."
+    },
+    {
+      "stepIndex": 11,
+      "stepId": "apply_harvest",
+      "expectedResult": "Preview and apply node/apple_tree harvest."
+    },
+    {
+      "stepIndex": 12,
+      "stepId": "preview_transaction",
+      "expectedResult": "Preview transaction/buy_healing_potion affordability."
+    },
+    {
+      "stepIndex": 13,
+      "stepId": "preview_combat_round",
+      "expectedResult": "Compute combat round resource deltas."
+    },
+    {
+      "stepIndex": 14,
+      "stepId": "render_event_transcript",
+      "expectedResult": "Render deterministic final state and event transcript."
+    },
+    {
+      "stepIndex": 15,
+      "stepId": "cleanup_after_unity",
+      "expectedResult": "Use the existing clean-unity-editor-noise command after Unity checks."
+    }
+  ]
+}

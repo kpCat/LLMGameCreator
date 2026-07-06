@@ -1,0 +1,98 @@
+{
+  "goalId": "goal_126_generic_gamepackage_full_playthrough_projection",
+  "passed": true,
+  "scriptCount": 10,
+  "windowActionPresent": true,
+  "batchmodeMethodPresent": true,
+  "batchmodePassMarkerPresent": true,
+  "batchmodeFailMarkerPresent": true,
+  "stateClassTracksFullPlaythroughFields": true,
+  "playthroughRunsRequiredSequence": true,
+  "controllerRendersFullPlaythroughMarkers": true,
+  "modelsExposeFullPlaythroughSmokeFields": true,
+  "existingGoal125VerificationStillPresent": true,
+  "noSourceWriteMarkers": true,
+  "forbiddenSourceMarkersFound": [],
+  "scripts": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs",
+      "role": "unity_editor_window",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "Run Generic Package Full Playthrough Verification",
+      "sha256": "ea96138eb5613f3c8428269f4208473449bdfb4a7d8338444190884875b2c704"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionAdapter.cs",
+      "role": "unity_generic_projection_adapter",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "SamplePackageRelativePath",
+      "sha256": "591bd2987f7a4bb322914b53e3b458986ea1b58e2a19c25534f4ef4cae3eba2a"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionModels.cs",
+      "role": "unity_generic_projection_models",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "GenericGamePackageProjectionFullPlaythroughSmokeResult",
+      "sha256": "e89685b6dfb7d00054c7c8bf3f36ce7077e3ee5486bee57a8668db3482c30803"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionController.cs",
+      "role": "unity_generic_projection_controller",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "RunGenericPackageFullPlaythroughVerification",
+      "sha256": "96a233e9c00cb3cb63a1b3519f1be72cc06a1c31cc4feb2d7874d643579c2702"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionState.cs",
+      "role": "unity_generic_projection_state",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "fullPlaythroughStatus",
+      "sha256": "2f98f61663732ed87ee79ac7598c4aa50efea23af296f9eaecc77e9bc5a3b7c4"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionPlaythrough.cs",
+      "role": "unity_generic_projection_playthrough",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "GenericGamePackageProjectionPlaythrough",
+      "sha256": "9a70f774a7c86443308342c780cbace9b6e8fe636f36d8fd72be46a882f5a3a6"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionLoop.cs",
+      "role": "unity_generic_projection_loop",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "quest/help_healer",
+      "sha256": "ca1725bb5bcb05ccb823cdf0357478ba18d2f8ea2e25254ac976bc10792ae211"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/GenericGamePackageProjectionSystems.cs",
+      "role": "unity_generic_projection_systems",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "recipe/healing_potion",
+      "sha256": "e3ac9cedf1bc802cc5c312bf3b5bb22b72052b3bdb04802efe091712a1da7b44"
+    },
+    {
+      "relativePath": ".devflow/scripts/clean-unity-editor-noise.ps1",
+      "role": "cleanup_script",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "Unity editor noise cleanup mode",
+      "sha256": "1b0f985af9f6bb979f8ee985487c373e633163ddb0c0191d15dbbf9301ee2405"
+    },
+    {
+      "relativePath": ".devflow/scripts/clean-unity-editor-noise.cmd",
+      "role": "cleanup_cmd_wrapper",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "clean-unity-editor-noise.ps1",
+      "sha256": "5b82bff36003d4e93a9c864afbedf42cf3d3dae8e81b7656adc94d6a5cb09630"
+    }
+  ]
+}

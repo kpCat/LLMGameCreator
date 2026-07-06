@@ -1,0 +1,50 @@
+{
+  "goalId": "goal_126_generic_gamepackage_full_playthrough_projection",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 7,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/generic-gamepackage-full-playthrough-dashboard.json",
+      "role": "goal126_generic_gamepackage_full_playthrough_export",
+      "required": true,
+      "sha256": "97cd6b43cae9a5dc0c979ef1c7739cba5942bacba26160d6c79018f6d5f3fa71"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/generic-gamepackage-full-playthrough-log-scan.json",
+      "role": "goal126_generic_gamepackage_full_playthrough_export",
+      "required": true,
+      "sha256": "09954a16a149e7c3996f8fbb5ec4a295d12c01760b8f8b1ba8001fa77a081d5c"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/generic-gamepackage-full-playthrough-negative-proof.json",
+      "role": "goal126_generic_gamepackage_full_playthrough_export",
+      "required": true,
+      "sha256": "53c32723fc010c61732106524f0677c731490aedecb81fc2dd41b794b64477bb"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/generic-gamepackage-full-playthrough-report.md",
+      "role": "goal126_generic_gamepackage_full_playthrough_export",
+      "required": true,
+      "sha256": "57211ab5282a94f8fa03adb6e9bb9c4469916bd58426a5217af7417c53ee6bd8"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/generic-gamepackage-full-playthrough-script-inventory.json",
+      "role": "goal126_generic_gamepackage_full_playthrough_export",
+      "required": true,
+      "sha256": "2c0dfd6737692e4315ecb3258b6f76f655a45bb9aacda01a42d9ff6e70898269"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/generic-gamepackage-full-playthrough-smoke-plan.json",
+      "role": "goal126_generic_gamepackage_full_playthrough_export",
+      "required": true,
+      "sha256": "929edd165edd061fa421e362c5af1dfdf584f03a2cad5823b454c0a5fd087b06"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/unity-batchmode-generic-gamepackage-full-playthrough.log",
+      "role": "goal126_unity_batchmode_generic_gamepackage_full_playthrough_log",
+      "required": true,
+      "sha256": "94c876e3edcb174d9cb3e5b299f8b01a7fca691139fa0ec24e8255630c8c04a0"
+    }
+  ]
+}

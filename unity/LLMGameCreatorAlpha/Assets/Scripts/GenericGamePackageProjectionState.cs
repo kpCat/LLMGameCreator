@@ -21,6 +21,16 @@ namespace LLMGameCreatorAlpha
         public string encounterPreview = string.Empty;
         public string combatRoundPreview = string.Empty;
         public string systemsEventLog = string.Empty;
+        public string fullPlaythroughStatus = string.Empty;
+        public string movementPathSummary = string.Empty;
+        public string signInteractionResult = string.Empty;
+        public string dialogueSummary = string.Empty;
+        public string questObjectiveStatus = string.Empty;
+        public string inventoryResourceFinalSummary = string.Empty;
+        public string systemsSummary = string.Empty;
+        public string combatSummary = string.Empty;
+        public string eventTranscriptSummary = string.Empty;
+        public string finalStateSummary = string.Empty;
         public int appliedInteractionCount;
         public int startedQuestCount;
 
@@ -55,6 +65,12 @@ namespace LLMGameCreatorAlpha
         public bool CombatRoundPreviewPresent;
         public bool SystemsEventLogPresent;
         public bool GenericSystemsPassed;
+        public bool FullPlaythroughPassed;
+        public bool MapPathPreviewPresent;
+        public bool SignInteractionApplied;
+        public bool QuestObjectiveStatusPresent;
+        public bool SystemsSummaryPresent;
+        public bool EventTranscriptPresent;
 
         public void AppendEvent(string value)
         {

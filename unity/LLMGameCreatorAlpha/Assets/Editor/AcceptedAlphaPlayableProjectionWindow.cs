@@ -24,6 +24,7 @@ namespace LLMGameCreatorAlpha
         private string projectionStateStatus = "not initialized";
         private string genericProjectionStatus = "not run";
         private string genericSystemsStatus = "not run";
+        private string genericFullPlaythroughStatus = "not run";
         private bool diagnosticsExpanded;
         private bool smokeExpanded = true;
         private bool selectedMarkerExpanded = true;
@@ -374,6 +375,61 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeGenericGamePackageFullPlaythroughSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureGenericController();
+                var passed = controller.RunGenericPackageFullPlaythroughVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\n" + controller.SelectedMarkerDetails
+                                  + "\n" + controller.MovementPathSummary
+                                  + "\n" + controller.SignInteractionResult
+                                  + "\n" + controller.DialogueSummary
+                                  + "\n" + controller.QuestObjectiveStatus
+                                  + "\n" + controller.InventoryResourceFinalSummary
+                                  + "\n" + controller.SystemsSummary
+                                  + "\n" + controller.CombatSummary
+                                  + "\n" + controller.EventTranscriptSummary
+                                  + "\n" + controller.FinalStateSummary
+                                  + "\n" + controller.VerificationEventLog;
+                if (passed)
+                {
+                    Debug.Log("GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError(
+                        "GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -398,6 +454,10 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Generic GamePackage Projection", EditorStyles.boldLabel);
             EditorGUILayout.LabelField("Status", genericProjectionStatus);
+            if (GUILayout.Button("Run Generic Package Full Playthrough Verification", GUILayout.Height(36)))
+            {
+                RunGenericPackageFullPlaythroughVerification();
+            }
             if (GUILayout.Button("Run Generic Package Projection Verification", GUILayout.Height(28)))
             {
                 RunGenericPackageProjectionVerification();
@@ -512,6 +572,7 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.LabelField("Projection State", projectionStateStatus);
             EditorGUILayout.LabelField("Generic Package Projection", genericProjectionStatus);
             EditorGUILayout.LabelField("Generic Package Systems", genericSystemsStatus);
+            EditorGUILayout.LabelField("Generic Package Full Playthrough", genericFullPlaythroughStatus);
             EditorGUILayout.EndVertical();
         }
 
@@ -660,6 +721,14 @@ namespace LLMGameCreatorAlpha
             CaptureGeneric(controller);
         }
 
+        private void RunGenericPackageFullPlaythroughVerification()
+        {
+            var controller = EnsureGenericController();
+            controller.RunGenericPackageFullPlaythroughVerification();
+            SelectAndFrame(controller.FindGenericProjectionRoot());
+            CaptureGeneric(controller);
+        }
+
         private void ClearProjection()
         {
             var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
@@ -681,6 +750,7 @@ namespace LLMGameCreatorAlpha
             projectionStateStatus = "not initialized";
             genericProjectionStatus = "not run";
             genericSystemsStatus = "not run";
+            genericFullPlaythroughStatus = "not run";
         }
 
         private static void ClearProjectionRootImmediate()
@@ -818,22 +888,50 @@ namespace LLMGameCreatorAlpha
                                      + "\nencounterPreview="
                                      + EmptyAsNone(controller.EncounterPreview)
                                      + "\ncombatRoundPreview="
-                                     + EmptyAsNone(controller.CombatRoundPreview);
+                                     + EmptyAsNone(controller.CombatRoundPreview)
+                                     + "\nfullPlaythroughStatus="
+                                     + EmptyAsNone(controller.FullPlaythroughStatus)
+                                     + "\nmovementPathSummary="
+                                     + EmptyAsNone(controller.MovementPathSummary)
+                                     + "\nsignInteractionResult="
+                                     + EmptyAsNone(controller.SignInteractionResult)
+                                     + "\ndialogueSummary="
+                                     + EmptyAsNone(controller.DialogueSummary)
+                                     + "\nquestObjectiveStatus="
+                                     + EmptyAsNone(controller.QuestObjectiveStatus)
+                                     + "\ninventoryResourceFinalSummary="
+                                     + EmptyAsNone(controller.InventoryResourceFinalSummary)
+                                     + "\nsystemsSummary="
+                                     + EmptyAsNone(controller.SystemsSummary)
+                                     + "\ncombatSummary="
+                                     + EmptyAsNone(controller.CombatSummary)
+                                     + "\neventTranscriptSummary="
+                                     + EmptyAsNone(controller.EventTranscriptSummary)
+                                     + "\nfinalStateSummary="
+                                     + EmptyAsNone(controller.FinalStateSummary);
             verificationEventLog = controller.VerificationEventLog;
             genericProjectionStatus =
-                controller.LastGenericSystemsVerificationPassed
+                controller.LastGenericFullPlaythroughVerificationPassed
+                    ? "full playthrough passed"
+                    : controller.LastGenericSystemsVerificationPassed
                     ? "systems passed"
                     : controller.LastGenericLoopVerificationPassed
                     ? "loop passed"
                     : controller.LastVerificationPassed ? "projection passed" : "not passed";
             genericSystemsStatus =
                 controller.LastGenericSystemsVerificationPassed ? "systems passed" : "not passed";
+            genericFullPlaythroughStatus =
+                controller.LastGenericFullPlaythroughVerificationPassed ? "passed" : "not passed";
             fullVerificationStatus = "genericPackageProjection="
                                      + (controller.LastVerificationPassed ? "passed" : "not passed")
                                      + "; genericPackageLoop="
                                      + (controller.LastGenericLoopVerificationPassed ? "passed" : "not passed")
                                      + "; genericPackageSystems="
-                                     + (controller.LastGenericSystemsVerificationPassed ? "passed" : "not passed");
+                                     + (controller.LastGenericSystemsVerificationPassed ? "passed" : "not passed")
+                                     + "; genericPackageFullPlaythrough="
+                                     + (controller.LastGenericFullPlaythroughVerificationPassed
+                                         ? "passed"
+                                         : "not passed");
             selectedMarkerStatus = "id=" + EmptyAsNone(controller.SelectedMarkerId)
                                    + "; kind=" + EmptyAsNone(controller.SelectedMarkerKind);
         }

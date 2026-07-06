@@ -108,6 +108,7 @@ offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator 
 offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
 unity_safe_mode_compile_hotfix_verification produced, manual gate still required
 offline_geoworld_alpha_manual_gate_acceptance_record produced, manual gate accepted by human, post-acceptance continuation selection required
+goal_126_generic_gamepackage_full_playthrough_projection required
 ```
 
 Current capabilities:
@@ -2267,16 +2268,36 @@ Evidence is under `.llmgc/procedural/goal-125-generic-gamepackage-systems-loop-p
 release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity
 scene/prefab project settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 126: Generic GamePackage Full Playthrough Projection
+
+Goal 126 is produced for review as a GREEN projection-only full playthrough over the generic sample GamePackage. It
+keeps the same menu route, `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, and adds
+`Run Generic Package Full Playthrough Verification`.
+
+The playthrough reads `samples/minimal-map-game/package.json` as a read-only sample, builds the map path, applies
+`interaction/sign_inspect` into projection-local state, shows `dialogue/old_guard_intro`, checks
+`quest/help_healer`, summarizes inventory/resources/systems, previews transaction and combat, then records a final
+state/event transcript. The sample is not mutated and generated package data is not applied to Runtime, schema, Lua,
+generator-library, scenes, prefabs, ProjectSettings, Packages or StreamingAssets.
+
+Evidence is under `.llmgc/procedural/goal-126-generic-gamepackage-full-playthrough-projection/` plus export metadata
+under `.llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/`. Unity batchmode uses
+`LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageFullPlaythroughSmoke` and
+must log `GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS` for GREEN. Goal126 remains projection-only and does not
+authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas,
+Unity scene/prefab project settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-goal_125_generic_gamepackage_systems_loop_projection
+goal_126_generic_gamepackage_full_playthrough_projection
 ```
 
-Review the Goal125 generic GamePackage systems loop evidence, then continue accepted Alpha hands-on Unity verification
+Review the Goal126 generic GamePackage full playthrough evidence, then continue accepted Alpha hands-on Unity verification
 through `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and click
-`Run Generic Package Systems Loop Verification`. Inspect the read-only minimal-map package recipe, harvest,
-transaction, encounter/combat, inventory/resource summaries and systems event log, then use the supported cleanup
+`Run Generic Package Full Playthrough Verification`. Inspect the read-only minimal-map package map path, sign
+inspection, dialogue summary, quest objective status, inventory/resource/systems summaries, transaction preview,
+combat preview and event transcript, then use the supported cleanup
 command only for bounded Unity editor noise. Do not start sample mutation, live geodata/provider, Runtime, schema, Lua,
 generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release
 packaging work from this handoff.
@@ -2284,5 +2305,5 @@ packaging work from this handoff.
 Status:
 
 ```text
-goal_125_generic_gamepackage_systems_loop_green_projection_only
+goal_126_generic_gamepackage_full_playthrough_green_projection_only
 ```

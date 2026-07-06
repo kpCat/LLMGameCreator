@@ -18,6 +18,7 @@ namespace LLMGameCreatorAlpha
         private bool lastVerificationPassed;
         private bool lastGenericLoopVerificationPassed;
         private bool lastGenericSystemsVerificationPassed;
+        private bool lastGenericFullPlaythroughVerificationPassed;
         private int fatalErrorCount;
         private GenericGamePackageProjectionState loopState = new GenericGamePackageProjectionState();
 
@@ -31,6 +32,10 @@ namespace LLMGameCreatorAlpha
         public bool LastVerificationPassed { get { return lastVerificationPassed; } }
         public bool LastGenericLoopVerificationPassed { get { return lastGenericLoopVerificationPassed; } }
         public bool LastGenericSystemsVerificationPassed { get { return lastGenericSystemsVerificationPassed; } }
+        public bool LastGenericFullPlaythroughVerificationPassed
+        {
+            get { return lastGenericFullPlaythroughVerificationPassed; }
+        }
         public string PackageId { get { return model.PackageId; } }
         public string PackageTitle { get { return model.PackageTitle; } }
         public string MapId { get { return model.MapId; } }
@@ -50,6 +55,19 @@ namespace LLMGameCreatorAlpha
         public string EncounterPreview { get { return loopState.encounterPreview; } }
         public string CombatRoundPreview { get { return loopState.combatRoundPreview; } }
         public string SystemsEventLog { get { return loopState.systemsEventLog; } }
+        public string FullPlaythroughStatus { get { return loopState.fullPlaythroughStatus; } }
+        public string MovementPathSummary { get { return loopState.movementPathSummary; } }
+        public string SignInteractionResult { get { return loopState.signInteractionResult; } }
+        public string DialogueSummary { get { return loopState.dialogueSummary; } }
+        public string QuestObjectiveStatus { get { return loopState.questObjectiveStatus; } }
+        public string InventoryResourceFinalSummary
+        {
+            get { return loopState.inventoryResourceFinalSummary; }
+        }
+        public string SystemsSummary { get { return loopState.systemsSummary; } }
+        public string CombatSummary { get { return loopState.combatSummary; } }
+        public string EventTranscriptSummary { get { return loopState.eventTranscriptSummary; } }
+        public string FinalStateSummary { get { return loopState.finalStateSummary; } }
         public string SelectedDialogueId { get { return loopState.selectedDialogueId; } }
         public string SelectedQuestId { get { return loopState.selectedQuestId; } }
         public int AppliedInteractionCount { get { return loopState.appliedInteractionCount; } }
@@ -65,6 +83,7 @@ namespace LLMGameCreatorAlpha
             lastVerificationPassed = false;
             lastGenericLoopVerificationPassed = false;
             lastGenericSystemsVerificationPassed = false;
+            lastGenericFullPlaythroughVerificationPassed = false;
             loopState = new GenericGamePackageProjectionState();
 
             try
@@ -225,6 +244,48 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public bool RunGenericPackageFullPlaythroughVerification()
+        {
+            var events = new List<string>();
+            try
+            {
+                events.Add("loadSamplePackage=" + GenericGamePackageProjectionAdapter.SamplePackageRelativePath);
+                BuildOrRefreshGenericPackageProjection();
+                var section = FindGenericProjectionRoot();
+                events.Add("sectionPresent=" + (section != null));
+                loopState = new GenericGamePackageProjectionPlaythrough().Run(model, events);
+                RenderFullPlaythroughPanels(section == null ? transform : section.transform);
+                SelectMarker(
+                    FindDescendantObjectWithPrefix(transform, "goal126_full_playthrough_status")
+                    ?? FindGenericProjectionRoot());
+
+                var smoke = RunGenericPackageFullPlaythroughSmoke(events);
+                lastGenericFullPlaythroughVerificationPassed = smoke;
+                lastGenericLoopVerificationPassed = smoke;
+                lastGenericSystemsVerificationPassed = smoke;
+                lastVerificationPassed = smoke;
+                events.Add(smoke
+                    ? "Goal126 generic package full playthrough verification passed"
+                    : "Goal126 generic package full playthrough verification failed");
+                verificationEventLog = string.Join("\n", events.ToArray());
+                statusLine = smoke
+                    ? "Goal126 generic package full playthrough verification passed"
+                    : "Goal126 generic package full playthrough verification failed";
+                return smoke;
+            }
+            catch (System.Exception ex)
+            {
+                fatalErrorCount++;
+                statusLine = "Goal126 generic package full playthrough verification fatal error: "
+                             + ex.GetType().Name;
+                events.Add(statusLine);
+                events.Add(ex.Message);
+                verificationEventLog = string.Join("\n", events.ToArray());
+                RunGenericPackageFullPlaythroughSmoke(events);
+                return false;
+            }
+        }
+
         public GameObject FindGenericProjectionRoot()
         {
             return FindDescendantObjectWithPrefix(transform, GenericSectionName);
@@ -368,6 +429,59 @@ namespace LLMGameCreatorAlpha
             if (events != null)
             {
                 events.Add("genericSystemsPassed=" + result.Passed);
+            }
+
+            return result.Passed;
+        }
+
+        private bool RunGenericPackageFullPlaythroughSmoke(List<string> events)
+        {
+            var result = new GenericGamePackageProjectionFullPlaythroughSmokeResult
+            {
+                FullPlaythroughPassed = loopState.FullPlaythroughPassed,
+                SamplePackageLoaded = loopState.SamplePackageLoaded,
+                GenericProjectionBuilt =
+                    FindGenericProjectionRoot() != null
+                    && HasDescendantWithPrefix(transform, "goal126_full_playthrough_status"),
+                MapPathPreviewPresent =
+                    loopState.MapPathPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal126_movement_path_summary"),
+                SignInteractionApplied =
+                    loopState.SignInteractionApplied
+                    && HasDescendantWithPrefix(transform, "goal126_sign_interaction_result"),
+                DialogueSummaryPresent =
+                    loopState.DialogueSummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal126_dialogue_summary"),
+                QuestObjectiveStatusPresent =
+                    loopState.QuestObjectiveStatusPresent
+                    && HasDescendantWithPrefix(transform, "goal126_quest_objective_status"),
+                InventorySummaryPresent =
+                    loopState.InventorySummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal126_inventory_resource_final_summary"),
+                ResourceSummaryPresent =
+                    loopState.ResourceSummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal126_inventory_resource_final_summary"),
+                RecipeApplyPassed = loopState.RecipeApplyPassed,
+                HarvestApplyPassed = loopState.HarvestApplyPassed,
+                TransactionPreviewPresent =
+                    loopState.TransactionPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal126_systems_summary"),
+                CombatRoundPreviewPresent =
+                    loopState.CombatRoundPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal126_combat_round_summary"),
+                EventTranscriptPresent =
+                    loopState.EventTranscriptPresent
+                    && HasDescendantWithPrefix(transform, "goal126_event_transcript_summary"),
+                ZeroFatalErrors = fatalErrorCount == 0,
+                PackageId = model.PackageId,
+                PackageTitle = model.PackageTitle,
+                MapId = model.MapId,
+                StatusLine = statusLine
+            };
+            lastSmokeDiagnostics = result.ToDiagnosticText();
+            if (events != null)
+            {
+                events.Add("fullPlaythroughPassed=" + result.Passed);
             }
 
             return result.Passed;
@@ -665,6 +779,68 @@ namespace LLMGameCreatorAlpha
                 Color.magenta,
                 "systems_event_log_summary",
                 loopState.systemsEventLog);
+        }
+
+        private void RenderFullPlaythroughPanels(Transform parent)
+        {
+            var panel = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateSection(
+                parent,
+                "goal126_generic_full_playthrough_panel",
+                new Vector3(0f, 0f, model.MapHeight * 0.92f + 5.05f));
+            RenderLoopLine(panel.transform, "goal126_full_playthrough_status",
+                "Full playthrough: " + EmptyAsNone(loopState.fullPlaythroughStatus),
+                0f,
+                Color.white,
+                "full_playthrough_status",
+                "fullPlaythroughPassed=" + loopState.FullPlaythroughPassed);
+            RenderLoopLine(panel.transform, "goal126_movement_path_summary",
+                "Movement/path: " + EmptyAsNone(loopState.movementPathSummary),
+                -0.35f,
+                Color.cyan,
+                "movement_path_summary",
+                loopState.movementPathSummary);
+            RenderLoopLine(panel.transform, "goal126_sign_interaction_result",
+                "Sign interaction: " + EmptyAsNone(loopState.signInteractionResult),
+                -0.7f,
+                new Color(1f, 0.75f, 0.25f),
+                "sign_interaction_result",
+                loopState.signInteractionResult);
+            RenderLoopLine(panel.transform, "goal126_dialogue_summary",
+                "Dialogue: " + EmptyAsNone(loopState.dialogueSummary),
+                -1.05f,
+                new Color(0.7f, 0.85f, 1f),
+                "dialogue_summary",
+                loopState.dialogueSummary);
+            RenderLoopLine(panel.transform, "goal126_quest_objective_status",
+                "Quest objective: " + EmptyAsNone(loopState.questObjectiveStatus),
+                -1.4f,
+                Color.green,
+                "quest_objective_status",
+                loopState.questObjectiveStatus);
+            RenderLoopLine(panel.transform, "goal126_inventory_resource_final_summary",
+                "Inventory/resources: " + EmptyAsNone(loopState.inventoryResourceFinalSummary),
+                -1.75f,
+                new Color(0.75f, 1f, 0.75f),
+                "inventory_resource_final_summary",
+                loopState.inventoryResourceFinalSummary);
+            RenderLoopLine(panel.transform, "goal126_systems_summary",
+                "Systems: " + EmptyAsNone(loopState.systemsSummary),
+                -2.1f,
+                new Color(1f, 0.55f, 0.15f),
+                "craft_harvest_transaction_summary",
+                loopState.systemsSummary);
+            RenderLoopLine(panel.transform, "goal126_combat_round_summary",
+                "Combat: " + EmptyAsNone(loopState.combatSummary),
+                -2.45f,
+                new Color(0.7f, 0.85f, 1f),
+                "combat_round_summary",
+                loopState.combatSummary);
+            RenderLoopLine(panel.transform, "goal126_event_transcript_summary",
+                "Event transcript: " + EmptyAsNone(loopState.eventTranscriptSummary),
+                -2.8f,
+                Color.magenta,
+                "event_transcript_summary",
+                loopState.eventTranscriptSummary + "\n" + loopState.projectionEventLog);
         }
 
         private static void RenderLoopLine(

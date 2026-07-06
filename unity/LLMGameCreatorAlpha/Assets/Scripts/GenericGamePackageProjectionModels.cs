@@ -731,4 +731,72 @@ namespace LLMGameCreatorAlpha
                    + "\nstatusLine=" + StatusLine;
         }
     }
+
+    public sealed class GenericGamePackageProjectionFullPlaythroughSmokeResult
+    {
+        public bool FullPlaythroughPassed;
+        public bool SamplePackageLoaded;
+        public bool GenericProjectionBuilt;
+        public bool MapPathPreviewPresent;
+        public bool SignInteractionApplied;
+        public bool DialogueSummaryPresent;
+        public bool QuestObjectiveStatusPresent;
+        public bool InventorySummaryPresent;
+        public bool ResourceSummaryPresent;
+        public bool RecipeApplyPassed;
+        public bool HarvestApplyPassed;
+        public bool TransactionPreviewPresent;
+        public bool CombatRoundPreviewPresent;
+        public bool EventTranscriptPresent;
+        public bool ZeroFatalErrors;
+        public string PackageId = string.Empty;
+        public string PackageTitle = string.Empty;
+        public string MapId = string.Empty;
+        public string StatusLine = string.Empty;
+
+        public bool Passed
+        {
+            get
+            {
+                return FullPlaythroughPassed
+                       && SamplePackageLoaded
+                       && GenericProjectionBuilt
+                       && MapPathPreviewPresent
+                       && SignInteractionApplied
+                       && DialogueSummaryPresent
+                       && QuestObjectiveStatusPresent
+                       && InventorySummaryPresent
+                       && ResourceSummaryPresent
+                       && RecipeApplyPassed
+                       && HarvestApplyPassed
+                       && TransactionPreviewPresent
+                       && CombatRoundPreviewPresent
+                       && EventTranscriptPresent
+                       && ZeroFatalErrors;
+            }
+        }
+
+        public string ToDiagnosticText()
+        {
+            return "fullPlaythroughPassed=" + FullPlaythroughPassed
+                   + "\nsamplePackageLoaded=" + SamplePackageLoaded
+                   + "\ngenericProjectionBuilt=" + GenericProjectionBuilt
+                   + "\nmapPathPreviewPresent=" + MapPathPreviewPresent
+                   + "\nsignInteractionApplied=" + SignInteractionApplied
+                   + "\ndialogueSummaryPresent=" + DialogueSummaryPresent
+                   + "\nquestObjectiveStatusPresent=" + QuestObjectiveStatusPresent
+                   + "\ninventorySummaryPresent=" + InventorySummaryPresent
+                   + "\nresourceSummaryPresent=" + ResourceSummaryPresent
+                   + "\nrecipeApplyPassed=" + RecipeApplyPassed
+                   + "\nharvestApplyPassed=" + HarvestApplyPassed
+                   + "\ntransactionPreviewPresent=" + TransactionPreviewPresent
+                   + "\ncombatRoundPreviewPresent=" + CombatRoundPreviewPresent
+                   + "\neventTranscriptPresent=" + EventTranscriptPresent
+                   + "\nzeroFatalErrors=" + ZeroFatalErrors
+                   + "\npackageId=" + PackageId
+                   + "\npackageTitle=" + PackageTitle
+                   + "\nmapId=" + MapId
+                   + "\nstatusLine=" + StatusLine;
+        }
+    }
 }

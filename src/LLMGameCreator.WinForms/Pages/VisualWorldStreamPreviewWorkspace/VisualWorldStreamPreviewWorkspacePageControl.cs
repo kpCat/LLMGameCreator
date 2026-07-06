@@ -382,6 +382,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageProjectionDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageLoopDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageSystemsDiagnosticLines(result));
+        lines.AddRange(BuildGenericGamePackageFullPlaythroughDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -665,6 +666,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageProjectionEntryLines(entry));
         lines.AddRange(BuildGenericGamePackageLoopEntryLines(entry));
         lines.AddRange(BuildGenericGamePackageSystemsEntryLines(entry));
+        lines.AddRange(BuildGenericGamePackageFullPlaythroughEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

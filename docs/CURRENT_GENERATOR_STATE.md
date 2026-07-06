@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 125 generic GamePackage systems loop projection
+Updated by: Goal 126 generic GamePackage full playthrough projection
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -161,6 +161,26 @@ systems event log. Evidence lives under
 `.llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/`, export metadata under
 `.llmgc/exports/goal-125-generic-gamepackage-systems-loop-projection/`, and the short manual note at
 `docs/manual-acceptance/generic-gamepackage-systems-loop-projection.md`.
+
+Goal 126 ties the generic sample GamePackage projection pieces into a one-click projection-only full playthrough:
+
+```text
+goal_126_generic_gamepackage_full_playthrough_projection required
+implementationStatus=GREEN
+accepted=false
+manualPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection -> Run Generic Package Full Playthrough Verification
+unityBatchmodeSmoke=GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS required
+samplePackagePath=samples/minimal-map-game/package.json read-only
+```
+
+Goal126 keeps the sample package read-only and does not apply package data to Runtime, schema, Lua, generator-library,
+scenes, prefabs, ProjectSettings, Packages or StreamingAssets. The Unity window runs the full projection sequence:
+load package, build map path, apply sign inspection, summarize dialogue and quest objective status, summarize
+inventory/resources/systems, preview recipe, harvest, transaction and combat, then render a final state/event
+transcript. Evidence lives under
+`.llmgc/procedural/goal-126-generic-gamepackage-full-playthrough-projection/`, export metadata under
+`.llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/`, and the short manual note at
+`docs/manual-acceptance/generic-gamepackage-full-playthrough-projection.md`.
 
 After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue
