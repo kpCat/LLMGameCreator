@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_127_winforms_unity_projection_verification_runner",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "materialWarningAbsent": true,
+  "passed": true,
+  "sha256": "c69faf1351e4369cfee9d25339d7ac9dddeb0e9d454fade4c8ca5f29e7ca42a6",
+  "forbiddenMarkersFound": []
+}

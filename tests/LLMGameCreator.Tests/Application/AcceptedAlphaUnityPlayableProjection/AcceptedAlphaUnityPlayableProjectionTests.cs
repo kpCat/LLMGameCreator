@@ -404,6 +404,48 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.UnityScenesPrefabsSettingsPackagesStreamingAssetsRejected);
     }
 
+    [Fact]
+    public void Goal127UnityProjectionVerificationRunnerScansScriptsAndGoal126Evidence()
+    {
+        var result = new UnityProjectionVerificationRunnerService()
+            .Build(ProjectRoot());
+
+        Assert.True(result.Goal126Evidence.Passed);
+        Assert.True(result.ScriptScan.Passed);
+        Assert.True(result.ScriptScan.RunnerScriptExists);
+        Assert.True(result.ScriptScan.RunnerCmdExists);
+        Assert.True(result.ScriptScan.SupportsGenericFullPlaythroughMode);
+        Assert.True(result.ScriptScan.SupportsUnityPath);
+        Assert.True(result.ScriptScan.SupportsDryRun);
+        Assert.True(result.ScriptScan.SupportsApplyCleanup);
+        Assert.True(result.ScriptScan.ExecuteMethodPresent);
+        Assert.True(result.ScriptScan.PassMarkerScanPresent);
+        Assert.True(result.ScriptScan.FailMarkerScanPresent);
+        Assert.True(result.ScriptScan.MaterialWarningScanPresent);
+        Assert.True(result.ScriptScan.CleanupDelegatesToBoundedScript);
+        Assert.True(result.ScriptScan.CmdWrapperUsesApplyCleanup);
+        Assert.True(result.ScriptScan.NoBroadGitClean);
+        Assert.True(result.ScriptScan.NoForbiddenMutationTargets);
+        Assert.True(result.ScriptScan.WritesRequiredResultJsonFields);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.False(result.Dashboard.ManualUnityClickingRequired);
+        Assert.Equal(
+            ".devflow\\scripts\\run-unity-projection-verification.cmd",
+            result.Dashboard.RunnerCommand);
+        Assert.Equal(
+            UnityProjectionVerificationRunnerVocabulary.UnityBatchmodeExecuteMethod,
+            result.Dashboard.UnityExecuteMethod);
+        if (result.ResultScan.ResultExists)
+        {
+            Assert.True(result.ResultScan.RequiredFieldsPresent);
+            Assert.Equal(UnityProjectionVerificationRunnerVocabulary.Mode, result.ResultScan.Mode);
+            Assert.Equal(
+                UnityProjectionVerificationRunnerVocabulary.UnityBatchmodeLogRelativePath,
+                result.ResultScan.LogPath);
+        }
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

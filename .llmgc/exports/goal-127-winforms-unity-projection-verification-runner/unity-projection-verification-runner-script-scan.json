@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_127_winforms_unity_projection_verification_runner",
+  "runnerScriptExists": true,
+  "runnerCmdExists": true,
+  "supportsGenericFullPlaythroughMode": true,
+  "supportsUnityPath": true,
+  "supportsDryRun": true,
+  "supportsApplyCleanup": true,
+  "executeMethodPresent": true,
+  "passMarkerScanPresent": true,
+  "failMarkerScanPresent": true,
+  "materialWarningScanPresent": true,
+  "cleanupDelegatesToBoundedScript": true,
+  "cmdWrapperUsesApplyCleanup": true,
+  "noBroadGitClean": true,
+  "noForbiddenMutationTargets": true,
+  "writesRequiredResultJsonFields": true,
+  "passed": true,
+  "forbiddenMarkersFound": []
+}

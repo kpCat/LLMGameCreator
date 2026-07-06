@@ -33,6 +33,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         "accepted_alpha_unity_playable_projection",
         "accepted_alpha_projection_usability",
         "accepted_alpha_interaction_drilldown_verification",
-        "accepted_alpha_projection_action_loop"
+        "accepted_alpha_projection_action_loop",
+        "generic_gamepackage_projection",
+        "generic_gamepackage_loop",
+        "generic_gamepackage_systems_loop",
+        "generic_gamepackage_full_playthrough",
+        "unity_projection_verification_runner"
     ];
 }

@@ -44,6 +44,8 @@ Goal 125 note: the generic GamePackage systems loop pass adds `Run Generic Packa
 
 Goal 126 note: the generic GamePackage full playthrough pass adds `Run Generic Package Full Playthrough Verification` to the accepted Alpha Unity projection route and proves a projection-only map path, sign inspection, dialogue summary, quest objective status, inventory/resource/systems summaries, transaction preview, combat preview and event transcript over `samples/minimal-map-game/package.json` as read-only input. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 127 note: the WinForms Unity projection verification runner makes `.devflow\scripts\run-unity-projection-verification.cmd` the normal repo-local verification path for the Goal126 batchmode full playthrough, with result/log scan and bounded cleanup surfaced in Visual World Stream Preview Workspace. Manual Unity inspection remains optional. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

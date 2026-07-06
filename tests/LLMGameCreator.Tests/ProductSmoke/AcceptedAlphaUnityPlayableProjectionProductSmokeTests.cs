@@ -28,6 +28,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .BuildAndWriteAsync(root);
         var genericFullPlaythrough = await new GenericGamePackageFullPlaythroughProjectionService()
             .BuildAndWriteAsync(root);
+        var unityProjectionRunner = await new UnityProjectionVerificationRunnerService()
+            .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -204,6 +206,27 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             path == GenericGamePackageFullPlaythroughProjectionVocabulary.DocumentationPath);
         Assert.DoesNotContain(genericFullPlaythrough.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.True(unityProjectionRunner.Result.Goal126Evidence.Passed);
+        Assert.True(unityProjectionRunner.Result.ScriptScan.Passed);
+        Assert.True(unityProjectionRunner.Result.NegativeProof.Passed);
+        Assert.False(unityProjectionRunner.Result.Dashboard.ManualUnityClickingRequired);
+        Assert.Equal(
+            ".devflow\\scripts\\run-unity-projection-verification.cmd",
+            unityProjectionRunner.Result.Dashboard.RunnerCommand);
+        Assert.Contains(unityProjectionRunner.WrittenFiles, path =>
+            path == UnityProjectionVerificationRunnerVocabulary
+                .ProceduralOutputDirectory
+            + "/"
+            + UnityProjectionVerificationRunnerVocabulary.DashboardFileName);
+        Assert.Contains(unityProjectionRunner.WrittenFiles, path =>
+            path == UnityProjectionVerificationRunnerVocabulary
+                .ExportPackageDirectory
+            + "/"
+            + UnityProjectionVerificationRunnerVocabulary.ScriptScanFileName);
+        Assert.Contains(unityProjectionRunner.WrittenFiles, path =>
+            path == UnityProjectionVerificationRunnerVocabulary.DocumentationPath);
+        Assert.DoesNotContain(unityProjectionRunner.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -222,6 +245,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysGenericGamePackageSystems);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysGenericGamePackageFullPlaythrough);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysUnityProjectionVerificationRunner);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -238,6 +263,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "generic_gamepackage_systems_loop");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "generic_gamepackage_full_playthrough");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "unity_projection_verification_runner");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -254,6 +281,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.Goal125FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.GenericGamePackageFullPlaythroughQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal126FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.UnityProjectionVerificationRunnerGroupPresent);
+        Assert.True(workspace.QualityGateScan.Goal127FilesDiscoveredByRelativePaths);
         Assert.Contains(
             "acceptedAlphaUnityPlayableProjectionGeneratedRootName: "
             + AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
@@ -286,6 +315,10 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "fullPlaythroughStatus: GREEN",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "runnerCommand: .devflow\\scripts\\run-unity-projection-verification.cmd",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }

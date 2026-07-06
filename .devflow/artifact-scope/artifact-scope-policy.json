@@ -121,7 +121,9 @@
     ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/",
     ".llmgc/exports/goal-125-generic-gamepackage-systems-loop-projection/",
     ".llmgc/procedural/goal-126-generic-gamepackage-full-playthrough-projection/",
-    ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/"
+    ".llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/",
+    ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/",
+    ".llmgc/exports/goal-127-winforms-unity-projection-verification-runner/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -2361,6 +2363,49 @@
         "unity/LLMGameCreatorAlpha/Assets/Scenes/",
         "unity/LLMGameCreatorAlpha/Assets/Prefabs/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/",
+        "unity/LLMGameCreatorAlpha/ProjectSettings/",
+        "unity/LLMGameCreatorAlpha/Packages/"
+      ]
+    },
+    {
+      "scenario": "goal-127-winforms-unity-projection-verification-runner",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-unity-projection-verification.ps1",
+        ".devflow/scripts/run-unity-projection-verification.cmd",
+        "docs/manual-acceptance/winforms-unity-projection-verification-runner.md",
+        "tests/LLMGameCreator.Tests/DevFlow/RunUnityProjectionVerificationScriptTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/AcceptedAlphaUnityPlayableProjectionProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal127.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/",
+        ".llmgc/exports/goal-127-winforms-unity-projection-verification-runner/",
+        "docs/agent-tasks/goal-127-winforms-unity-projection-verification-runner/",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/minimal-map-game/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Generation/",
+        "src/LLMGameCreator.AssetPipeline/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "unity/LLMGameCreatorAlpha/Assets/",
         "unity/LLMGameCreatorAlpha/ProjectSettings/",
         "unity/LLMGameCreatorAlpha/Packages/"
       ]

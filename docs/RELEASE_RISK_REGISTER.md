@@ -42,6 +42,8 @@ Goal 125 review note: the generic GamePackage systems loop pass adds projection-
 
 Goal 126 review note: the generic GamePackage full playthrough pass ties the projection-local map path, sign inspection, dialogue, quest objective, inventory/resource/systems, transaction, combat and event transcript checks over `samples/minimal-map-game/package.json` into one accepted Alpha Unity projection route. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 127 review note: the WinForms Unity projection verification runner makes the Goal126 batchmode route repo-local, dry-run visible, cleanup-aware and surfaced in the existing Visual World Stream Preview Workspace. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

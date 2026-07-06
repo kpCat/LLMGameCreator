@@ -2,67 +2,6 @@
 
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
 {
-    public async Task<VisualWorldStreamPreviewWorkspaceWriteResult> WriteAsync(
-        string projectRootPath,
-        VisualWorldStreamPreviewWorkspaceResult result,
-        CancellationToken cancellationToken = default)
-    {
-        ArgumentNullException.ThrowIfNull(result);
-        var projectRoot = Path.GetFullPath(projectRootPath);
-        var outputDirectory = Path.GetFullPath(Path.Combine(
-            projectRoot,
-            VisualWorldStreamPreviewWorkspaceVocabulary.RelativeOutputDirectory
-                .Replace('/', Path.DirectorySeparatorChar)));
-        EnsureContained(projectRoot, outputDirectory);
-        Directory.CreateDirectory(outputDirectory);
-
-        var write = new VisualWorldStreamPreviewWorkspaceWriteResult
-        {
-            OutputDirectoryPath = outputDirectory,
-            ReportMarkdownPath = Path.Combine(outputDirectory, ReportMarkdownFileName),
-            CatalogJsonPath = Path.Combine(outputDirectory, CatalogJsonFileName),
-            ProofStatusJsonPath = Path.Combine(outputDirectory, ProofStatusJsonFileName),
-            WinFormsBindingInventoryJsonPath =
-                Path.Combine(outputDirectory, WinFormsBindingInventoryJsonFileName),
-            QualityGateScanJsonPath = Path.Combine(outputDirectory, QualityGateScanJsonFileName),
-            SourceHealthScanJsonPath = Path.Combine(outputDirectory, SourceHealthScanJsonFileName),
-            Result = result
-        };
-
-        await File.WriteAllTextAsync(
-            write.ReportMarkdownPath,
-            result.ReportMarkdown,
-            Utf8WithoutBom,
-            cancellationToken).ConfigureAwait(false);
-        await File.WriteAllTextAsync(
-            write.CatalogJsonPath,
-            result.CatalogJson,
-            Utf8WithoutBom,
-            cancellationToken).ConfigureAwait(false);
-        await File.WriteAllTextAsync(
-            write.ProofStatusJsonPath,
-            result.ProofStatusJson,
-            Utf8WithoutBom,
-            cancellationToken).ConfigureAwait(false);
-        await File.WriteAllTextAsync(
-            write.WinFormsBindingInventoryJsonPath,
-            result.WinFormsBindingInventoryJson,
-            Utf8WithoutBom,
-            cancellationToken).ConfigureAwait(false);
-        await File.WriteAllTextAsync(
-            write.QualityGateScanJsonPath,
-            result.QualityGateScanJson,
-            Utf8WithoutBom,
-            cancellationToken).ConfigureAwait(false);
-        await File.WriteAllTextAsync(
-            write.SourceHealthScanJsonPath,
-            result.SourceHealthScanJson,
-            Utf8WithoutBom,
-            cancellationToken).ConfigureAwait(false);
-
-        return write;
-    }
-
     private static VisualWorldPreviewWorkspaceQualityGate BuildQualityGate(
         IReadOnlyList<VisualWorldPreviewArtifactGroup> groups,
         IReadOnlyList<VisualWorldPreviewSvgEntry> svgEntries,
@@ -227,6 +166,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var acceptedAlphaProjectionActionLoop = BuildGoal122AcceptedAlphaProjectionActionLoopQuality(groups, proofs);
         var genericGamePackageProjection = BuildGoal123GenericGamePackageProjectionQuality(groups, proofs); var genericGamePackageLoop = BuildGoal124GenericGamePackageLoopQuality(groups, proofs); var genericGamePackageSystems = BuildGoal125GenericGamePackageSystemsQuality(groups, proofs);
         var genericGamePackageFullPlaythrough = BuildGoal126GenericGamePackageFullPlaythroughQuality(groups, proofs);
+        var unityProjectionVerificationRunner =
+            BuildGoal127UnityProjectionVerificationRunnerQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -406,6 +347,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal121AcceptedAlphaInteractionDrilldownQualityDiagnostics(acceptedAlphaInteractionDrilldown, binding, diagnostics);
         AddGoal122AcceptedAlphaProjectionActionLoopQualityDiagnostics(acceptedAlphaProjectionActionLoop, binding, diagnostics);
         AddGoal123GenericGamePackageProjectionQualityDiagnostics(genericGamePackageProjection, binding, diagnostics); AddGoal124GenericGamePackageLoopQualityDiagnostics(genericGamePackageLoop, binding, diagnostics); AddGoal125GenericGamePackageSystemsQualityDiagnostics(genericGamePackageSystems, binding, diagnostics); AddGoal126GenericGamePackageFullPlaythroughQualityDiagnostics(genericGamePackageFullPlaythrough, binding, diagnostics);
+        AddGoal127UnityProjectionVerificationRunnerQualityDiagnostics(
+            unityProjectionVerificationRunner,
+            binding,
+            diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -691,7 +636,15 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal121 = ApplyGoal121AcceptedAlphaInteractionDrilldownQuality(withGoal120, acceptedAlphaInteractionDrilldown, binding);
         var withGoal122 = ApplyGoal122AcceptedAlphaProjectionActionLoopQuality(withGoal121, acceptedAlphaProjectionActionLoop, binding);
         var withGoal123 = ApplyGoal123GenericGamePackageProjectionQuality(withGoal122, genericGamePackageProjection, binding); var withGoal124 = ApplyGoal124GenericGamePackageLoopQuality(withGoal123, genericGamePackageLoop, binding); var withGoal125 = ApplyGoal125GenericGamePackageSystemsQuality(withGoal124, genericGamePackageSystems, binding);
-        return ApplyGoal126GenericGamePackageFullPlaythroughQuality(withGoal125, genericGamePackageFullPlaythrough, binding);
+        var withGoal126 =
+            ApplyGoal126GenericGamePackageFullPlaythroughQuality(
+                withGoal125,
+                genericGamePackageFullPlaythrough,
+                binding);
+        return ApplyGoal127UnityProjectionVerificationRunnerQuality(
+            withGoal126,
+            unityProjectionVerificationRunner,
+            binding);
     }
 
 }

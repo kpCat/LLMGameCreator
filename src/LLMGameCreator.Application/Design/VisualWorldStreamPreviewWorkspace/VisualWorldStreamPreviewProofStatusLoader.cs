@@ -135,6 +135,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal123GenericGamePackageProjectionProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal124GenericGamePackageLoopProofStatus(projectRoot, proofDiagnostics)); proofs.AddRange(BuildGoal125GenericGamePackageSystemsProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal126GenericGamePackageFullPlaythroughProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal127UnityProjectionVerificationRunnerProofStatus(projectRoot, proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);
@@ -618,7 +619,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)
         ];
-
     private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal104OfflineGeoworldInteractiveTravelProofStatus(
         string projectRoot,
         List<VisualWorldPreviewDiagnostic> diagnostics) =>

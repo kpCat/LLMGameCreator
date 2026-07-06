@@ -1,0 +1,50 @@
+{
+  "goalId": "goal_127_winforms_unity_projection_verification_runner",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 7,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-batchmode-generic-full-playthrough-runner.log",
+      "role": "goal127_unity_batchmode_generic_full_playthrough_runner_log",
+      "required": true,
+      "sha256": "c69faf1351e4369cfee9d25339d7ac9dddeb0e9d454fade4c8ca5f29e7ca42a6"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-projection-verification-runner-dashboard.json",
+      "role": "goal127_unity_projection_verification_runner_unity-projection-verification-runner-dashboard",
+      "required": true,
+      "sha256": "c802340a827c041224e90be373999cd46a34cbee41c22c927508a6959d9e528b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-projection-verification-runner-log-scan.json",
+      "role": "goal127_unity_projection_verification_runner_unity-projection-verification-runner-log-scan",
+      "required": true,
+      "sha256": "15d5fc3117985a29612b7973f44fa083d646e99bc463aa0ed131901ffff1c958"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-projection-verification-runner-negative-proof.json",
+      "role": "goal127_unity_projection_verification_runner_unity-projection-verification-runner-negative-proof",
+      "required": true,
+      "sha256": "f5dcd8af103ac543547260a5f335e5b707835b226b82437d954381c590f392ed"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-projection-verification-runner-report.md",
+      "role": "goal127_unity_projection_verification_runner_unity-projection-verification-runner-report",
+      "required": true,
+      "sha256": "66fc2e7d4c5073188e795f703d5a1bfe1f206f07137d024253e8c4668ced7744"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-projection-verification-runner-result.json",
+      "role": "goal127_unity_projection_verification_runner_result",
+      "required": true,
+      "sha256": "3a7002817b31af52787656195dbf9ca85f9b4473f7ff19799b8a35e96406bdd9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-projection-verification-runner-script-scan.json",
+      "role": "goal127_unity_projection_verification_runner_unity-projection-verification-runner-script-scan",
+      "required": true,
+      "sha256": "b867a9e95d769c79245fa835b3e9f1c76cae3ff83bfa18e0e9ba83a9c99e9365"
+    }
+  ]
+}

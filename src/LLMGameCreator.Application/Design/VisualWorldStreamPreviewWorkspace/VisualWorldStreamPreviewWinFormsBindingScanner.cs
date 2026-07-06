@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                        + ReadGoal120Through126WinFormsPageText(projectRoot);
+                        + ReadGoal120Through127WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -506,6 +506,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysGenericGamePackageLoop = PageBindsGoal124GenericGamePackageLoop(pageText);
         var bindDisplaysGenericGamePackageSystems = PageBindsGoal125GenericGamePackageSystems(pageText);
         var bindDisplaysGenericGamePackageFullPlaythrough = PageBindsGoal126GenericGamePackageFullPlaythrough(pageText);
+        var bindDisplaysUnityProjectionVerificationRunner =
+            PageBindsGoal127UnityProjectionVerificationRunner(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -643,6 +645,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal126.winforms.generic_gamepackage_full_playthrough_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysUnityProjectionVerificationRunner,
+            "goal127.winforms.unity_projection_runner_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -683,6 +690,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGenericGamePackageLoop = bindDisplaysGenericGamePackageLoop,
             PageBindDisplaysGenericGamePackageSystems = bindDisplaysGenericGamePackageSystems,
             PageBindDisplaysGenericGamePackageFullPlaythrough = bindDisplaysGenericGamePackageFullPlaythrough,
+            PageBindDisplaysUnityProjectionVerificationRunner =
+                bindDisplaysUnityProjectionVerificationRunner,
             Diagnostics = diagnostics
         };
     }

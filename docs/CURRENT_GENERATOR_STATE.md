@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 126 generic GamePackage full playthrough projection
+Updated by: Goal 127 WinForms Unity projection verification runner
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -182,7 +182,28 @@ transcript. Evidence lives under
 `.llmgc/exports/goal-126-generic-gamepackage-full-playthrough-projection/`, and the short manual note at
 `docs/manual-acceptance/generic-gamepackage-full-playthrough-projection.md`.
 
-After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
+Goal 127 adds a repo-local and WinForms-visible Unity projection verification runner:
+
+```text
+goal_127_winforms_unity_projection_verification_runner required
+implementationStatus=GREEN
+accepted=false
+normalVerificationCommand=.devflow\scripts\run-unity-projection-verification.cmd
+unityBatchmodeSmoke=GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS required
+manualUnityClickingRequired=false
+```
+
+Goal127 makes the normal verification path `.devflow\scripts\run-unity-projection-verification.cmd`. The runner executes
+Unity batchmode method
+`LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageFullPlaythroughSmoke`, scans the
+log for `GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS`, fails on the Goal126 fail marker or edit-mode material
+warning markers, applies bounded cleanup through `.devflow/scripts/clean-unity-editor-noise.ps1 -Apply`, and writes the
+result/log under `.llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/`. Visual World Stream Preview
+Workspace shows runner status, mode, script/cmd paths, execute method, latest result/log paths, pass marker, cleanup
+status, cleanup command, evidence/export paths and `manualUnityClickingRequired=false`. Manual Unity inspection remains
+optional, not required after every goal.
+
+After optional Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue
 product-visible work or automated verification, not proof-only churn.
 

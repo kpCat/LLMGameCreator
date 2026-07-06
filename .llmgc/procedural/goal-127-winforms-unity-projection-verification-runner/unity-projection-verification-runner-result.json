@@ -1,0 +1,12 @@
+﻿{
+    "mode":  "GenericFullPlaythrough",
+    "unityPath":  "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+    "unityExitCode":  0,
+    "passMarkerPresent":  true,
+    "failMarkerAbsent":  true,
+    "materialWarningAbsent":  true,
+    "cleanupApplied":  true,
+    "cleanupExitCode":  0,
+    "passed":  true,
+    "logPath":  ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner/unity-batchmode-generic-full-playthrough-runner.log"
+}
