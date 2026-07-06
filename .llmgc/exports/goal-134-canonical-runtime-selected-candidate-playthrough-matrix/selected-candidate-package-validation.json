@@ -1,0 +1,34 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packageId": "game/minimal-map-game",
+  "packageTitle": "Minimal Map Game",
+  "packagePath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+  "handoffPath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/selected-candidate-handoff.json",
+  "selectedCandidateLoaded": true,
+  "handoffMatchesPackage": true,
+  "existingValidatorPassed": true,
+  "requiredAnchorsPresent": true,
+  "packageValidationPassed": true,
+  "requiredAnchors": [
+    "map/village",
+    "entity/village/sign",
+    "interaction/sign_inspect",
+    "entity/village/old_guard",
+    "dialogue/old_guard_intro",
+    "quest/help_healer",
+    "inventory/player_start",
+    "recipe/healing_potion",
+    "node/apple_tree",
+    "transaction/buy_healing_potion",
+    "encounter/goblin_duel"
+  ],
+  "missingAnchors": [],
+  "diagnostics": [
+    "Warning:asset.path.missing",
+    "Warning:asset.path.missing",
+    "Warning:asset.path.missing",
+    "Warning:asset.path.missing",
+    "Error:script.path.missing"
+  ]
+}

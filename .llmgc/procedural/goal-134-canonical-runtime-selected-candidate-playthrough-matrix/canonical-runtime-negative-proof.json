@@ -1,0 +1,12 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "manualInputRejected": true,
+  "outputRootUnderGoal134": true,
+  "samplePackageReadOnly": true,
+  "gamePackageSchemaUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesUnchanged": true,
+  "projectionOnly": false,
+  "selectedCandidateExecutedByRuntime": true,
+  "passed": true
+}

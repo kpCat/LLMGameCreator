@@ -1,0 +1,30 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "status": "GREEN",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "selectedCandidateLoaded": true,
+  "packageValidationPassed": true,
+  "canonicalRuntimeStarted": true,
+  "canonicalRuntimePassed": true,
+  "runtimeCommandCount": 13,
+  "runtimeEventCount": 45,
+  "stateHashChainPresent": true,
+  "saveLoadReplayPassed": true,
+  "unityConsumedCanonicalTranscript": true,
+  "projectionOnly": false,
+  "selectedCandidateExecutedByRuntime": true,
+  "manualUnityOptional": true,
+  "runtimePrimitiveMissing": false,
+  "missingRuntimePrimitives": [],
+  "normalCommand": ".devflow\\scripts\\run-canonical-runtime-selected-candidate-playthrough.cmd",
+  "reportPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/one-click-canonical-runtime-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-selected-candidate-playthrough-matrix-result.json",
+  "diagnostics": [
+    "Warning:asset.path.missing",
+    "Warning:asset.path.missing",
+    "Warning:asset.path.missing",
+    "Warning:asset.path.missing",
+    "Error:script.path.missing",
+    "unityExitCode=0"
+  ]
+}

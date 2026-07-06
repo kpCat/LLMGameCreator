@@ -1,0 +1,18 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "unityAvailable": true,
+  "transcriptPathExists": true,
+  "stateSummaryPathExists": true,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "unityPlayerConsumedCanonicalTranscript": true,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/unity-player-canonical-transcript-smoke.log",
+  "transcriptPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-transcript.json",
+  "stateSummaryPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-summary.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

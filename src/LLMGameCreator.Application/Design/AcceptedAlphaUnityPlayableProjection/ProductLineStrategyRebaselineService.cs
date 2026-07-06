@@ -193,12 +193,10 @@ public sealed class ProductLineStrategyRebaselineService
                 && Contains(context, "Codex task shaping")
                 && Contains(context, "roadmap/rebaseline decisions"),
             CurrentStateUpdated = CurrentStateJsonUpdated(stateJson)
-                                  && Contains(stateMarkdown, ProductLineStrategyRebaselineVocabulary.Gate)
-                                  && Contains(stateMarkdown, "projectionOnlyStopCondition=true")
-                                  && Contains(stateMarkdown, ProductLineStrategyRebaselineVocabulary.NextGoal),
+                                  && CurrentStateMarkdownUpdated(stateMarkdown),
             QueueUpdated =
                 Contains(queue, ProductLineStrategyRebaselineVocabulary.Gate)
-                && Contains(queue, ProductLineStrategyRebaselineVocabulary.NextGoal),
+                && ContainsAnyGoal134State(queue),
             MilestoneGateUpdated =
                 Contains(milestone, ProductLineStrategyRebaselineVocabulary.Gate)
                 && Contains(milestone, ProductLineStrategyRebaselineVocabulary.NextGoal),
@@ -506,7 +504,8 @@ public sealed class ProductLineStrategyRebaselineService
         {
             using var document = JsonDocument.Parse(json);
             var root = document.RootElement;
-            return StringValue(root, "gate_status")
+            var goal133AState =
+                StringValue(root, "gate_status")
                    == ProductLineStrategyRebaselineVocabulary.Gate
                    && BoolValue(root, "accepted") == false
                    && BoolValue(root, "manualUnityOptional")
@@ -518,12 +517,37 @@ public sealed class ProductLineStrategyRebaselineService
                            StringComparison.Ordinal)
                    && StringValue(root, "current_user_action")
                        .Contains("canonical runtime path", StringComparison.Ordinal);
+            var postGoal134State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal134Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "manualUnityOptional")
+                   && BoolValue(root, "canonicalRuntimeCoverage")
+                   && BoolValue(root, "saveLoadReplayCoverage")
+                   && BoolValue(root, "selectedCandidateExecutedByRuntime")
+                   && BoolValue(root, "unityConsumesCanonicalTranscript")
+                   && StringValue(root, "nextProductGoal")
+                   == ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal;
+            return goal133AState || postGoal134State;
         }
         catch (JsonException)
         {
             return false;
         }
     }
+
+    private static bool CurrentStateMarkdownUpdated(string markdown) =>
+        Contains(markdown, ProductLineStrategyRebaselineVocabulary.Gate)
+        && Contains(markdown, "projectionOnlyStopCondition=true")
+        && Contains(markdown, ProductLineStrategyRebaselineVocabulary.NextGoal)
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal134Gate)
+        && Contains(markdown, "projectionOnly=false")
+        && Contains(markdown, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal);
+
+    private static bool ContainsAnyGoal134State(string text) =>
+        Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal134Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

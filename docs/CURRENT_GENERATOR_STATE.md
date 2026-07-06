@@ -1,38 +1,43 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 133A product-line strategy rebaseline and canonical runtime pivot
+Updated by: Goal 134 canonical runtime selected-candidate playthrough matrix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 133A produced for review:
+Goal 134 produced for review:
 
 ```text
-product_line_strategy_rebaseline_verification required
+canonical_runtime_selected_candidate_playthrough_matrix_verification required
 implementationStatus=GREEN
 accepted=false
 manualUnityOptional=true
-projectionOnlyStopCondition=true
-nextProductGoal=goal_134_canonical_runtime_selected_candidate_playthrough_matrix
+projectionOnly=false
+canonicalRuntimeCoverage=true
+saveLoadReplayCoverage=true
+selectedCandidateExecutedByRuntime=true
+unityConsumesCanonicalTranscript=true
+nextProductGoal=goal_135_canonical_runtime_playable_player_loop_readiness
 ```
 
-Goal133A rebases the project identity around a data-driven game product-line
-combiner, not prompt-to-game. LLM is optional local authoring assistance only;
-`GamePackage` plus canonical runtime state are the source of truth. Future broad
-product work must preserve `FeatureModule`, `RuntimePrimitive`, `SemanticPack`,
-`VisualPartPack`, `WorldSourceAdapter` and `PlayerAdapter` seams.
-
-After Goal132/133A, the next product milestone is not another projection-only
-wrapper. Goal134 must start the canonical runtime path:
-candidate package -> package validation -> canonical runtime playthrough ->
-save/load/replay proof -> Unity/player consumes canonical transcript/state
-summary -> one-click report.
+Goal134 consumes the Goal131 selected candidate
+`minimal-map-game-balanced-baseline`, validates the selected-candidate handoff
+and required anchors, executes the package through canonical Runtime-owned map
+and gameplay services, writes transcript/state/hash-chain artifacts, proves
+save/load/replay determinism and lets Unity/player consume the canonical
+transcript/state summary as presentation proof only.
 
 Evidence lives under
-`.llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/`,
+`.llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/`,
 export metadata under
-`.llmgc/exports/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/`,
+`.llmgc/exports/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/`,
 and the short manual note at
-`docs/manual-acceptance/product-line-strategy-rebaseline-and-canonical-runtime-pivot.md`.
+`docs/manual-acceptance/canonical-runtime-selected-candidate-playthrough-matrix.md`.
+
+Goal133A remains the strategy rebaseline that routed this work away from
+projection-only wrappers. Goal134 is the first canonical runtime pivot after
+that rebaseline; it does not mutate the sample package, public GamePackage
+schema, provider/media/LLM/Lua/generator-library code or Unity scenes/prefabs/
+ProjectSettings/Packages/StreamingAssets.
 
 Goal 119 produced for review:
 

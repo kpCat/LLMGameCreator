@@ -1,0 +1,15 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "passed": true,
+  "rows": [
+    {
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "packagePath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+      "packageValidationPassed": true,
+      "canonicalRuntimePassed": true,
+      "saveLoadReplayPassed": true,
+      "unityPlayerConsumedCanonicalTranscript": true,
+      "passed": true
+    }
+  ]
+}

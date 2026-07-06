@@ -56,6 +56,8 @@ Goal 132 review note: the WinForms candidate pipeline operator panel exposes the
 
 Goal 133A review note: the product-line strategy rebaseline records that LLMGameCreator is a data-driven game product-line combiner, not prompt-to-game; LLM is optional authoring assistance only; GamePackage plus canonical runtime state are source of truth. Release blockers remain open until Goal134 or later proves selected-candidate package validation, canonical runtime playthrough, save/load/replay and Unity/player consumption of canonical transcript/state summary. Projection-only candidate/operator evidence is explicitly not enough for product readiness.
 
+Goal 134 review note: the canonical Runtime selected-candidate playthrough matrix proves the Goal131 selected candidate through package validation, Runtime-owned command/event transcript and state summary, state hash chain, save/load/replay and Unity/player consumption of canonical transcript/state summary. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, deeper playable player-loop quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

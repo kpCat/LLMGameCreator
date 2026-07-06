@@ -1,0 +1,10 @@
+{
+  "saveStateHash": "1293bdb0323979747937e563f0df2c4897d681ea99b37ff7f12cca7cb4339844",
+  "loadStateHash": "1293bdb0323979747937e563f0df2c4897d681ea99b37ff7f12cca7cb4339844",
+  "replayStateHash": "1293bdb0323979747937e563f0df2c4897d681ea99b37ff7f12cca7cb4339844",
+  "saveLoadHashMatch": true,
+  "replayHashMatch": true,
+  "eventHashChainMatch": true,
+  "passed": true,
+  "diagnostics": []
+}

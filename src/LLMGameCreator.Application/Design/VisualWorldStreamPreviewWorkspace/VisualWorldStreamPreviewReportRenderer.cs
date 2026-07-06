@@ -694,6 +694,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal128ReportLines(lines, report); AddGoal128QualityLines(lines, qualityGate);
         AddGoal129ReportLines(lines, report); AddGoal129QualityLines(lines, qualityGate);
         AddGoal130ReportLines(lines, report); AddGoal130QualityLines(lines, qualityGate);
-        return RenderWithGoal132Lines(lines, report, qualityGate);
+        return RenderWithGoal134Lines(lines, report, qualityGate);
     }
 }

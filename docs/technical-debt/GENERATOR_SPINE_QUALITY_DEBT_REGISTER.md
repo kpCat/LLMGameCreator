@@ -46,6 +46,8 @@ Goal 132 note: the WinForms candidate pipeline operator panel makes the existing
 
 Goal 133A note: the product-line strategy rebaseline makes the projection-only risk explicit and sets `goal_134_canonical_runtime_selected_candidate_playthrough_matrix` as the next product goal. The remaining debt is canonical runtime execution of the selected candidate, package validation, save/load/replay and Unity/player consumption of canonical transcript/state summary. Candidate review packages that do not close that gap remain deferred.
 
+Goal 134 note: the canonical Runtime selected-candidate playthrough matrix resolves the immediate projection-only pivot debt for the Goal131 selected candidate by recording package validation, Runtime-owned command/event transcript and state summary, state hash chain, save/load/replay and Unity/player transcript consumption. Remaining debt is deeper playable player-loop readiness, final release quality, public schema decisions, provider/legal, Lua/generator-library, final renderer/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

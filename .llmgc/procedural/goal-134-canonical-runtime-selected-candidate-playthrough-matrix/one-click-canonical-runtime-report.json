@@ -1,0 +1,16 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packageValidationPassed": true,
+  "canonicalRuntimePassed": true,
+  "runtimeCommandCount": 13,
+  "runtimeEventCount": 45,
+  "saveLoadReplayPassed": true,
+  "unityPlayerConsumedCanonicalTranscript": true,
+  "projectionOnly": false,
+  "selectedCandidateExecutedByRuntime": true,
+  "manualUnityOptional": true,
+  "nextRecommendedGoal": "Goal135 canonical runtime playable player loop readiness",
+  "reportPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/one-click-canonical-runtime-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-selected-candidate-playthrough-matrix-result.json"
+}

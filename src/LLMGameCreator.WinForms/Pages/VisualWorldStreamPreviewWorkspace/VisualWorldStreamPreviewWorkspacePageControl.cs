@@ -17,7 +17,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         VisualWorldStreamPreviewWorkspaceService service)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
-        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel();
+        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel();
         ConfigureControls();
         WireEvents(); WireGoal132CandidatePipelineOperatorEvents();
     }
@@ -38,7 +38,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         _statusLabel.Text = BuildStatusText(result);
         BindGroups(result);
         BindProofs(result);
-        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result);
+        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result);
     }
 
     private void ConfigureControls()

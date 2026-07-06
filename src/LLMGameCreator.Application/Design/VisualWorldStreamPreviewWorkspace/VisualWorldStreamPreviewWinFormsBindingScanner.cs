@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                         + ReadGoal120Through132WinFormsPageText(projectRoot);
+                         + ReadGoal120Through134WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -511,6 +511,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysGamePackageCandidateFactory = PageBindsGoal130GamePackageCandidateFactory(pageText);
         var bindDisplaysGamePackageCandidateRecipePipeline = ScanGoal131GamePackageCandidateRecipePipelineBinding(pageText, pageRelativePath, diagnostics);
         var bindDisplaysCandidatePipelineOperator = ScanGoal132CandidatePipelineOperatorBinding(pageText, pageRelativePath, diagnostics);
+        var bindDisplaysCanonicalRuntimeSelectedCandidate = ScanGoal134CanonicalRuntimeSelectedCandidateBinding(pageText, pageRelativePath, diagnostics);
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
         AddIfFalse(serviceRegistered, "goal092.winforms.service_not_registered", compositionRelativePath, diagnostics);
@@ -628,11 +629,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal119.winforms.accepted_alpha_unity_playable_projection_bind_missing",
             pageRelativePath,
             diagnostics);
-        AddIfFalse(
-            bindDisplaysAcceptedAlphaProjectionUsability,
-            "goal120.winforms.accepted_alpha_projection_usability_bind_missing",
-            pageRelativePath,
-            diagnostics);
+        AddIfFalse(bindDisplaysAcceptedAlphaProjectionUsability, "goal120.winforms.accepted_alpha_projection_usability_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(
             bindDisplaysAcceptedAlphaInteractionDrilldown,
             "goal121.winforms.accepted_alpha_interaction_drilldown_bind_missing",
@@ -692,6 +689,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGamePackageCandidateFactory = bindDisplaysGamePackageCandidateFactory,
             PageBindDisplaysGamePackageCandidateRecipePipeline = bindDisplaysGamePackageCandidateRecipePipeline,
             PageBindDisplaysCandidatePipelineOperator = bindDisplaysCandidatePipelineOperator,
+            PageBindDisplaysCanonicalRuntimeSelectedCandidate = bindDisplaysCanonicalRuntimeSelectedCandidate,
             Diagnostics = diagnostics
         };
     }

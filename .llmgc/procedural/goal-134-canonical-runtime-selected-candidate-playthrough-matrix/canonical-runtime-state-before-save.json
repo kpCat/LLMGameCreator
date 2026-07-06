@@ -1,0 +1,581 @@
+{
+  "format": "canonical_runtime_selected_candidate_state_before_save_v1",
+  "stateHash": "1293bdb0323979747937e563f0df2c4897d681ea99b37ff7f12cca7cb4339844",
+  "session": {
+    "mapState": {
+      "currentMapId": "map/village",
+      "playerPosition": {
+        "x": 2,
+        "y": 1
+      },
+      "mode": "map",
+      "flags": {}
+    },
+    "gameplayState": {
+      "packageId": "game/minimal-map-game",
+      "currentMapId": "map/village",
+      "playerEntityId": "player",
+      "tick": 0,
+      "inventories": [
+        {
+          "id": "inventory/player_start",
+          "ownerKind": "player",
+          "ownerId": null,
+          "stacks": [
+            {
+              "itemId": "item/healing_potion",
+              "amount": 3,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": null,
+              "charge": null,
+              "metadata": {}
+            },
+            {
+              "itemId": "item/fuel_can",
+              "amount": 1,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": null,
+              "charge": null,
+              "metadata": {}
+            },
+            {
+              "itemId": "item/woodcutting_axe",
+              "amount": 1,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": 9,
+              "charge": null,
+              "metadata": {}
+            },
+            {
+              "itemId": "item/log",
+              "amount": 1,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": null,
+              "charge": null,
+              "metadata": {}
+            },
+            {
+              "itemId": "item/apple",
+              "amount": 1,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": null,
+              "charge": null,
+              "metadata": {}
+            }
+          ],
+          "metadata": {}
+        },
+        {
+          "id": "inventory/chest_start",
+          "ownerKind": "container",
+          "ownerId": "entity/chest/start",
+          "stacks": [
+            {
+              "itemId": "item/rusty_knife",
+              "amount": 1,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": null,
+              "charge": null,
+              "metadata": {}
+            },
+            {
+              "itemId": "item/apple",
+              "amount": 2,
+              "uniqueInstanceId": null,
+              "questItem": false,
+              "durability": null,
+              "charge": null,
+              "metadata": {}
+            }
+          ],
+          "metadata": {}
+        }
+      ],
+      "equipment": [
+        {
+          "ownerKind": "player",
+          "ownerId": "player",
+          "slots": [],
+          "metadata": {}
+        }
+      ],
+      "resources": [
+        {
+          "resourceId": "resource/health",
+          "amount": 30,
+          "capacity": 30,
+          "scope": "global",
+          "ownerId": null
+        },
+        {
+          "resourceId": "resource/stamina",
+          "amount": 10,
+          "capacity": 10,
+          "scope": "global",
+          "ownerId": null
+        },
+        {
+          "resourceId": "resource/gold",
+          "amount": 0,
+          "capacity": null,
+          "scope": "global",
+          "ownerId": null
+        },
+        {
+          "resourceId": "resource/mana",
+          "amount": 5,
+          "capacity": 100,
+          "scope": "global",
+          "ownerId": null
+        },
+        {
+          "resourceId": "resource/electricity",
+          "amount": 0,
+          "capacity": null,
+          "scope": "global",
+          "ownerId": null
+        }
+      ],
+      "progressions": [
+        {
+          "progressionId": "progression/character_level",
+          "amount": 0,
+          "stageId": "level/1",
+          "metadata": {}
+        }
+      ],
+      "flags": [
+        {
+          "id": "flag/sign_inspected",
+          "value": "true"
+        }
+      ],
+      "statuses": [],
+      "activeEncounter": {
+        "encounterId": "encounter/goblin_duel",
+        "kind": "combat",
+        "active": true,
+        "round": 2,
+        "turnIndex": 0,
+        "participants": [
+          {
+            "id": "player",
+            "name": "Player",
+            "team": "player",
+            "alive": true,
+            "stats": [
+              {
+                "statId": "stat/strength",
+                "value": 5
+              }
+            ],
+            "resources": [
+              {
+                "resourceId": "resource/health",
+                "amount": 26,
+                "capacity": 30,
+                "scope": "participant",
+                "ownerId": "player"
+              },
+              {
+                "resourceId": "resource/stamina",
+                "amount": 10,
+                "capacity": 10,
+                "scope": "participant",
+                "ownerId": "player"
+              }
+            ],
+            "statuses": [],
+            "cooldowns": {},
+            "inventoryId": "inventory/player_start",
+            "metadata": {}
+          },
+          {
+            "id": "goblin",
+            "name": "Goblin",
+            "team": "enemy",
+            "alive": true,
+            "stats": [
+              {
+                "statId": "stat/strength",
+                "value": 5
+              }
+            ],
+            "resources": [
+              {
+                "resourceId": "resource/health",
+                "amount": 8,
+                "capacity": 30,
+                "scope": "participant",
+                "ownerId": "goblin"
+              }
+            ],
+            "statuses": [],
+            "cooldowns": {},
+            "inventoryId": null,
+            "metadata": {}
+          }
+        ],
+        "actionHistory": [
+          "player:ability/basic_attack:goblin",
+          "goblin:ability/basic_attack:player"
+        ],
+        "metadata": {
+          "default_attack_ability_id": "ability/basic_attack",
+          "seed": "134"
+        }
+      },
+      "questStates": {
+        "quest/help_healer": "active"
+      },
+      "quests": [
+        {
+          "questId": "quest/help_healer",
+          "state": "active",
+          "currentStageId": null,
+          "objectives": [
+            {
+              "objectiveId": "objective/collect_red_herbs",
+              "kind": "has_item",
+              "targetId": "item/red_herb",
+              "currentAmount": 2,
+              "requiredAmount": 3,
+              "completed": false,
+              "metadata": {}
+            }
+          ],
+          "startedTick": 0,
+          "completedTick": null,
+          "metadata": {}
+        }
+      ],
+      "activeDialogue": {
+        "dialogueId": "dialogue/old_guard_intro",
+        "currentNodeId": "start",
+        "speakerId": "npc/old_guard",
+        "open": true,
+        "history": [
+          "start"
+        ],
+        "metadata": {}
+      },
+      "factions": [
+        {
+          "factionId": "faction/village",
+          "reputation": 0,
+          "relationKind": "neutral",
+          "metadata": {}
+        }
+      ],
+      "metadata": {}
+    },
+    "mapEvents": [
+      {
+        "type": "message",
+        "message": "Игра запущена: Minimal Map Game",
+        "targetId": null,
+        "args": {}
+      },
+      {
+        "type": "playerMoved",
+        "message": "Игрок переместился: 2, 1",
+        "targetId": null,
+        "args": {
+          "x": "2",
+          "y": "1"
+        }
+      },
+      {
+        "type": "interactionTriggered",
+        "message": "Взаимодействие: entity/village/sign",
+        "targetId": "entity/village/sign",
+        "args": {}
+      },
+      {
+        "type": "message",
+        "message": "На табличке написано: северная дорога закрыта.",
+        "targetId": null,
+        "args": {}
+      }
+    ],
+    "gameplayEvents": [
+      {
+        "type": "gameStarted",
+        "message": "Game started: Minimal Map Game",
+        "targetId": "game/minimal-map-game",
+        "args": {}
+      },
+      {
+        "type": "outputApplied",
+        "message": "Set flag flag/sign_inspected = true",
+        "targetId": "flag/sign_inspected",
+        "args": {}
+      },
+      {
+        "type": "logMessageAdded",
+        "message": "The sign was inspected through InteractionDefinition v1.",
+        "targetId": "log/sign_inspected",
+        "args": {}
+      },
+      {
+        "type": "outputApplied",
+        "message": "Applied log output: The sign was inspected through InteractionDefinition v1.",
+        "targetId": "log/sign_inspected",
+        "args": {}
+      },
+      {
+        "type": "interactionTriggered",
+        "message": "Interaction triggered: inspect",
+        "targetId": "interaction/sign_inspect",
+        "args": {
+          "kind": "inspect",
+          "targetId": ""
+        }
+      },
+      {
+        "type": "dialogueOpened",
+        "message": "Dialogue opened: dialogue/old_guard_intro",
+        "targetId": "dialogue/old_guard_intro",
+        "args": {
+          "dialogueId": "dialogue/old_guard_intro",
+          "nodeId": "start",
+          "choiceIds": ""
+        }
+      },
+      {
+        "type": "questStarted",
+        "message": "Quest started: quest/help_healer",
+        "targetId": "quest/help_healer",
+        "args": {}
+      },
+      {
+        "type": "journalUpdated",
+        "message": "Journal updated: quest/help_healer",
+        "targetId": "quest/help_healer",
+        "args": {}
+      },
+      {
+        "type": "questObjectiveUpdated",
+        "message": "Quest objective updated: objective/collect_red_herbs",
+        "targetId": "objective/collect_red_herbs",
+        "args": {}
+      },
+      {
+        "type": "costConsumed",
+        "message": "Consumed item item/red_herb x2",
+        "targetId": "item/red_herb",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "costConsumed",
+        "message": "Consumed item item/water_flask x1",
+        "targetId": "item/water_flask",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "costConsumed",
+        "message": "Consumed resource resource/mana x5",
+        "targetId": "resource/mana",
+        "args": {}
+      },
+      {
+        "type": "resourceChanged",
+        "message": "Resource changed: resource/mana",
+        "targetId": "resource/mana",
+        "args": {}
+      },
+      {
+        "type": "outputApplied",
+        "message": "Added item item/healing_potion x1",
+        "targetId": "item/healing_potion",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "recipeCrafted",
+        "message": "Recipe crafted: Healing Potion",
+        "targetId": "recipe/healing_potion",
+        "args": {}
+      },
+      {
+        "type": "costConsumed",
+        "message": "Consumed durability item/woodcutting_axe x1",
+        "targetId": "item/woodcutting_axe",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "outputApplied",
+        "message": "Added item item/log x1",
+        "targetId": "item/log",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "outputApplied",
+        "message": "Added item item/apple x1",
+        "targetId": "item/apple",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "lootRolled",
+        "message": "Loot rolled: loot/apple_tree -> entry/apple",
+        "targetId": "loot/apple_tree",
+        "args": {}
+      },
+      {
+        "type": "resourceHarvested",
+        "message": "Resource harvested: Apple Tree",
+        "targetId": "node/apple_tree",
+        "args": {}
+      },
+      {
+        "type": "logMessageAdded",
+        "message": "Harvested Apple Tree.",
+        "targetId": "node/apple_tree",
+        "args": {}
+      },
+      {
+        "type": "resourceChanged",
+        "message": "Changed resource resource/gold by 25",
+        "targetId": "resource/gold",
+        "args": {}
+      },
+      {
+        "type": "costConsumed",
+        "message": "Consumed resource resource/gold x25",
+        "targetId": "resource/gold",
+        "args": {}
+      },
+      {
+        "type": "resourceChanged",
+        "message": "Resource changed: resource/gold",
+        "targetId": "resource/gold",
+        "args": {}
+      },
+      {
+        "type": "outputApplied",
+        "message": "Added item item/healing_potion x1",
+        "targetId": "item/healing_potion",
+        "args": {}
+      },
+      {
+        "type": "inventoryChanged",
+        "message": "Inventory changed: inventory/player_start",
+        "targetId": "inventory/player_start",
+        "args": {}
+      },
+      {
+        "type": "transactionExecuted",
+        "message": "Transaction executed: Buy Healing Potion",
+        "targetId": "transaction/buy_healing_potion",
+        "args": {}
+      },
+      {
+        "type": "encounterStarted",
+        "message": "Encounter started: encounter/goblin_duel",
+        "targetId": "encounter/goblin_duel",
+        "args": {}
+      },
+      {
+        "type": "turnStarted",
+        "message": "Turn started: player",
+        "targetId": "player",
+        "args": {
+          "encounterId": "encounter/goblin_duel",
+          "round": "1"
+        }
+      },
+      {
+        "type": "damageApplied",
+        "message": "Damage applied: resource/health -4",
+        "targetId": "goblin",
+        "args": {}
+      },
+      {
+        "type": "abilityUsed",
+        "message": "Ability used: ability/basic_attack",
+        "targetId": "ability/basic_attack",
+        "args": {
+          "source": "player",
+          "target": "goblin"
+        }
+      },
+      {
+        "type": "turnStarted",
+        "message": "Turn started: goblin",
+        "targetId": "goblin",
+        "args": {
+          "encounterId": "encounter/goblin_duel",
+          "round": "1"
+        }
+      },
+      {
+        "type": "damageApplied",
+        "message": "Damage applied: resource/health -4",
+        "targetId": "player",
+        "args": {}
+      },
+      {
+        "type": "abilityUsed",
+        "message": "Ability used: ability/basic_attack",
+        "targetId": "ability/basic_attack",
+        "args": {
+          "source": "goblin",
+          "target": "player"
+        }
+      },
+      {
+        "type": "turnStarted",
+        "message": "Turn started: player",
+        "targetId": "player",
+        "args": {
+          "encounterId": "encounter/goblin_duel",
+          "round": "2"
+        }
+      }
+    ],
+    "metadata": {
+      "runtimeBridge": "unified-v1"
+    }
+  }
+}

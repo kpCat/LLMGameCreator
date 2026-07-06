@@ -1,0 +1,30 @@
+{
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packageId": "game/minimal-map-game",
+  "packageTitle": "Minimal Map Game",
+  "currentMapId": "map/village",
+  "playerX": 2,
+  "playerY": 1,
+  "tick": 0,
+  "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:1,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+  "resourceSummary": "resource/electricity:0; resource/gold:0; resource/health:30; resource/mana:5; resource/stamina:10",
+  "questSummary": "quest/help_healer:active:",
+  "activeDialogueSummary": "dialogue/old_guard_intro:start:True",
+  "activeEncounterSummary": "encounter/goblin_duel:round=2:turn=0:active=True",
+  "finalStateHash": "1293bdb0323979747937e563f0df2c4897d681ea99b37ff7f12cca7cb4339844",
+  "stateHashChain": [
+    "12f118c9a81db66faaa1371ed05943694abe0dd1969ddcc6264f7811d2c27ab9",
+    "8cdb8b914519b5e62215a8ad31e21333c0b75b15f54b5460ef608335823aa8c9",
+    "9db22a14ed49e94a88a9912af6ed3213f2714a98f901136fbfdb44ca8f7b9980",
+    "c9217844ea8b320c39d36160d5ee6d29913001e0a9125ac9dd06631f9dc74fa8",
+    "28f1eacafb5d6277e690e4ea108cdc325808373227e46dd929e4e4000c0b0356",
+    "b4a0feeef3aecc3254c07cc8bb5ce7a07d0a8d9126d2eed4c05dcfb9782a3729",
+    "e189ceb8fb9287472962add2d6a56f5ce1aac2112d236d01074aa51cec0fa8df",
+    "1b9350a5f76d8bd72240c994ef0a660409d50a4d3ca7dbb2bf0e8d5dc60ece0e",
+    "6dc8fd2584840de39bd2ffbc3779427d7b1ee7cb0f88a9a5dc40addb56408cab",
+    "73059ca32df478dcdb6c060675a468a8b7d488330fee263560aa37070ddd9520",
+    "384c9a8cec75ecfe8febc075dc5cc224f49cc550e5fb19d553d47251bb3c2c89",
+    "64f6a7139f03322ecb8df3c73feeb3a8078089a7987f6ff79c60ebc85a42a268",
+    "1293bdb0323979747937e563f0df2c4897d681ea99b37ff7f12cca7cb4339844"
+  ]
+}

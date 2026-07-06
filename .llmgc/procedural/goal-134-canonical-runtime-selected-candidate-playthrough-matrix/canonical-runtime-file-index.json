@@ -1,0 +1,83 @@
+{
+  "goalId": "goal_134_canonical_runtime_selected_candidate_playthrough_matrix",
+  "rootPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix",
+  "indexedFileCount": 15,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-dashboard.json",
+      "role": "goal134_canonical_runtime_dashboard",
+      "sha256": "5574cceb8da3e47947bae8959546c90a83805f77a716f9735a31c3c7a0fd7009"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-negative-proof.json",
+      "role": "goal134_canonical_runtime_negative_proof",
+      "sha256": "c3e469d3f173b21ac6ca64229830f4a8c5fe480e35596e0e60967ffcb59f6781"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-playthrough-script.json",
+      "role": "goal134_canonical_runtime_playthrough_script",
+      "sha256": "18557c169284a34ca02f9890f02cb789419d8e7ef8e4b834d12e4507b794ce09"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-replay-transcript.json",
+      "role": "goal134_canonical_runtime_replay_transcript",
+      "sha256": "462afc1f8b18080619415f681ddc35b929c7b2d69d1073a3d45ffd2730b06fb6"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-save-load-replay-result.json",
+      "role": "goal134_canonical_runtime_save_load_replay_result",
+      "sha256": "16cea8c7a25da26b5b7bad2f81754015f1316ecff81537244b17697e5c1289ae"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-selected-candidate-playthrough-matrix-result.json",
+      "role": "goal134_canonical_runtime_selected_candidate_playthrough_matrix_result",
+      "sha256": "fe9007091da73d3905c6a120bba404b995aaf6a9638c7e9fd2dcf07bc00eb0fc"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-after-load.json",
+      "role": "goal134_canonical_runtime_state_after_load",
+      "sha256": "fb3edcdbe21f1bc26f87b0eaac8757fc125652b70811658372e3e10f7ad82db5"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-before-save.json",
+      "role": "goal134_canonical_runtime_state_before_save",
+      "sha256": "55220cdd7bc7df79d723e7ec854aaf58f949f500e8f7b9f39fa689266306db5c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-save.json",
+      "role": "goal134_canonical_runtime_state_save",
+      "sha256": "c5065dbc918ff5d74f3aa2bbcc0eee66f0a4511ac05160565113fead39e33a6e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-summary.json",
+      "role": "goal134_canonical_runtime_state_summary",
+      "sha256": "f89b77c9c6351c66e3236d601e47519dac2f4c9c9747c09247116eb280c80404"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-transcript.json",
+      "role": "goal134_canonical_runtime_transcript",
+      "sha256": "462afc1f8b18080619415f681ddc35b929c7b2d69d1073a3d45ffd2730b06fb6"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/one-click-canonical-runtime-report.json",
+      "role": "goal134_one_click_canonical_runtime_report",
+      "sha256": "04cc85fa2d67688d529d71d2c224766ba7fde01183f4b832ac4c3292f1598ee6"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/one-click-canonical-runtime-report.md",
+      "role": "goal134_one_click_canonical_runtime_report",
+      "sha256": "143145e8f6651b8624f8f333dc0c386d74f989e90a2345a7c5b07c0725042e0f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/selected-candidate-package-validation.json",
+      "role": "goal134_selected_candidate_package_validation",
+      "sha256": "442ba4a49106454b0bfe72f75c88c9d38e0acf707181677e34f582103e85832a"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/unity-player-canonical-transcript-smoke.json",
+      "role": "goal134_unity_player_canonical_transcript_smoke",
+      "sha256": "3f5d6430f53198d4925502ebda193008d4d934c2f5ac726702ed5017af092d95"
+    }
+  ]
+}
