@@ -689,10 +689,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal124QualityLines(lines, qualityGate);
         AddGoal125ReportLines(lines, report);
         AddGoal125QualityLines(lines, qualityGate);
-        AddGoal126ReportLines(lines, report);
-        AddGoal126QualityLines(lines, qualityGate);
-        AddGoal127ReportLines(lines, report);
-        AddGoal127QualityLines(lines, qualityGate);
+        AddGoal126ReportLines(lines, report); AddGoal126QualityLines(lines, qualityGate);
+        AddGoal127ReportLines(lines, report); AddGoal127QualityLines(lines, qualityGate);
+        AddGoal128ReportLines(lines, report); AddGoal128QualityLines(lines, qualityGate);
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
     }
 }

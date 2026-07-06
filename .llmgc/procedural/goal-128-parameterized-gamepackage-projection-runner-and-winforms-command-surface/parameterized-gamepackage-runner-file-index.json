@@ -1,0 +1,56 @@
+{
+  "goalId": "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 8,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-dashboard.json",
+      "role": "goal128_parameterized_gamepackage_runner_parameterized-gamepackage-runner-dashboard",
+      "required": true,
+      "sha256": "dc08c7a25702bd6d2b4d415cad12781381f2bad69ab8049814365160e0dc3ee5"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-log-scan.json",
+      "role": "goal128_parameterized_gamepackage_runner_parameterized-gamepackage-runner-log-scan",
+      "required": true,
+      "sha256": "10e5a4eb84146b0be28aad559fe6bc1612356514bdc41ee252184c54f5b97fb1"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-negative-proof.json",
+      "role": "goal128_parameterized_gamepackage_runner_parameterized-gamepackage-runner-negative-proof",
+      "required": true,
+      "sha256": "34afb828899759753e989d11b31623a84de54b918688e8b4aba1ada5ea82d622"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-report.md",
+      "role": "goal128_parameterized_gamepackage_runner_parameterized-gamepackage-runner-report",
+      "required": true,
+      "sha256": "394612db884b1c372f5e5b5bd1f94294319ef2a8d5cb3a7ba4268fb283794afc"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-result.json",
+      "role": "goal128_parameterized_gamepackage_runner_result",
+      "required": true,
+      "sha256": "cf2090322ca50ef727fbb65f2fa2438eff0597e09100a5bd37ba1f91a2a5eaa8"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-script-scan.json",
+      "role": "goal128_parameterized_gamepackage_runner_parameterized-gamepackage-runner-script-scan",
+      "required": true,
+      "sha256": "691a68665acac400c734dabdc05fa2cfdbc45e73bd7ffbb33a0bcfbcc57d0dcf"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/parameterized-gamepackage-runner-unity-source-scan.json",
+      "role": "goal128_parameterized_gamepackage_runner_parameterized-gamepackage-runner-unity-source-scan",
+      "required": true,
+      "sha256": "2a17af84e3e8f220f1852b7ba5d162b9aa5ab3954f0418739a9c5beab9776e28"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/unity-batchmode-parameterized-gamepackage-full-playthrough.log",
+      "role": "goal128_parameterized_gamepackage_unity_log",
+      "required": true,
+      "sha256": "f2c29d7ef4eda04618cc3e488e43e5e8d702ef5536236f590c8506b83f236722"
+    }
+  ]
+}

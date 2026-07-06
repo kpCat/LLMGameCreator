@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 127 WinForms Unity projection verification runner
+Updated by: Goal 128 parameterized GamePackage projection runner and WinForms command surface
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -210,6 +210,33 @@ product-visible work or automated verification, not proof-only churn.
 This is not final release and does not authorize `samples/minimal-map-game/package.json` mutation,
 live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas,
 Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
+Goal 128 parameterizes that repo-local Unity projection verification runner:
+
+```text
+goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface required
+implementationStatus=GREEN
+accepted=false
+normalVerificationCommand=.devflow\scripts\run-unity-projection-verification.cmd
+optionalPackagePath=-PackagePath <repo-local GamePackage JSON>
+defaultPackagePath=samples/minimal-map-game/package.json read-only
+unityBatchmodeSmoke=GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS required
+manualUnityOptional=true
+projectionOnly=true
+```
+
+Goal128 keeps `.devflow\scripts\run-unity-projection-verification.cmd` as the normal command and adds optional
+`-PackagePath`. The runner resolves repo-relative or absolute package paths, rejects paths outside the repository and
+rejects `.llmgc/manual/**`, then passes the resolved path to Unity as `-llmgcPackagePath`. The Unity batchmode method is
+`LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeParameterizedGamePackageFullPlaythroughSmoke`;
+the result JSON records `packagePath`, `packagePathRelative`, Unity exit code, pass/fail/material-warning checks,
+cleanup status and log path under
+`.llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/`. Visual World
+Stream Preview Workspace and WinForms show `parameterizedRunnerStatus`, package path fields, normal/example commands,
+result/log paths, Unity exit code, pass marker, cleanup status, `manualUnityOptional=true` and `projectionOnly=true`.
+
+Goal128 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
+authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
 Goal 053 handoff acceptance recorded before Goal 054:
 

@@ -44,6 +44,8 @@ Goal 126 review note: the generic GamePackage full playthrough pass ties the pro
 
 Goal 127 review note: the WinForms Unity projection verification runner makes the Goal126 batchmode route repo-local, dry-run visible, cleanup-aware and surfaced in the existing Visual World Stream Preview Workspace. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 128 review note: the repo-local Unity projection verification runner now accepts optional `-PackagePath`, keeps `samples/minimal-map-game/package.json` as the read-only default, rejects paths outside the repository or under `.llmgc/manual/**`, forwards the resolved path to Unity and surfaces package-path/result/log/cleanup status in WinForms. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

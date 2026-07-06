@@ -18,8 +18,6 @@ public sealed class UnityProjectionVerificationRunnerService
 
     private static readonly string[] ForbiddenMutationMarkers =
     [
-        ".llmgc/manual/",
-        "samples/minimal-map-game",
         "ProjectSettings",
         "Packages/manifest",
         "StreamingAssets",
@@ -276,14 +274,23 @@ public sealed class UnityProjectionVerificationRunnerService
             ExecuteMethodPresent =
                 script.Contains(
                     UnityProjectionVerificationRunnerVocabulary.UnityBatchmodeExecuteMethod,
+                    StringComparison.Ordinal)
+                || script.Contains(
+                    ParameterizedGamePackageProjectionRunnerVocabulary.UnityBatchmodeExecuteMethod,
                     StringComparison.Ordinal),
             PassMarkerScanPresent =
                 script.Contains(
                     UnityProjectionVerificationRunnerVocabulary.PassMarker,
+                    StringComparison.Ordinal)
+                || script.Contains(
+                    ParameterizedGamePackageProjectionRunnerVocabulary.PassMarker,
                     StringComparison.Ordinal),
             FailMarkerScanPresent =
                 script.Contains(
                     UnityProjectionVerificationRunnerVocabulary.FailMarker,
+                    StringComparison.Ordinal)
+                || script.Contains(
+                    ParameterizedGamePackageProjectionRunnerVocabulary.FailMarker,
                     StringComparison.Ordinal),
             MaterialWarningScanPresent =
                 script.Contains(

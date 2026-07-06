@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "materialWarningAbsent": true,
+  "passed": true,
+  "sha256": "f2c29d7ef4eda04618cc3e488e43e5e8d702ef5536236f590c8506b83f236722",
+  "forbiddenMarkersFound": []
+}

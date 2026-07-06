@@ -446,6 +446,55 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         }
     }
 
+    [Fact]
+    public void Goal128ParameterizedGamePackageRunnerScansRunnerUnitySourcesAndResultWhenPresent()
+    {
+        var result = new ParameterizedGamePackageProjectionRunnerService()
+            .Build(ProjectRoot());
+
+        Assert.True(result.Goal127Evidence.Passed);
+        Assert.True(result.ScriptScan.Passed);
+        Assert.True(result.ScriptScan.SupportsPackagePathParameter);
+        Assert.True(result.ScriptScan.SupportsDefaultPackagePath);
+        Assert.True(result.ScriptScan.RejectsOutsideRepository);
+        Assert.True(result.ScriptScan.RejectsManualInputRoot);
+        Assert.True(result.ScriptScan.PassesUnityPackageArgument);
+        Assert.True(result.ScriptScan.ExecuteMethodPresent);
+        Assert.True(result.ScriptScan.PassMarkerScanPresent);
+        Assert.True(result.ScriptScan.FailMarkerScanPresent);
+        Assert.True(result.ScriptScan.WritesRequiredResultJsonFields);
+        Assert.True(result.ScriptScan.CmdWrapperPreservesDefaultAndExtraParams);
+        Assert.True(result.UnitySourceScan.Passed);
+        Assert.True(result.UnitySourceScan.AdapterReadsCommandLineArgument);
+        Assert.True(result.UnitySourceScan.AdapterFallsBackToDefaultSample);
+        Assert.True(result.UnitySourceScan.AdapterRejectsOutsideRepository);
+        Assert.True(result.UnitySourceScan.AdapterRejectsManualInputRoot);
+        Assert.True(result.UnitySourceScan.ControllerRunsParameterizedFullPlaythrough);
+        Assert.True(result.UnitySourceScan.BatchmodeEntrypointPresent);
+        Assert.True(result.UnitySourceScan.BatchmodeMarkersPresent);
+        Assert.True(result.UnitySourceScan.SmokeFieldsPresent);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.Equal(
+            ParameterizedGamePackageProjectionRunnerVocabulary.DefaultPackageRelativePath,
+            result.Dashboard.PackagePathRelative);
+        Assert.True(result.Dashboard.ManualUnityOptional);
+        Assert.True(result.Dashboard.ProjectionOnly);
+
+        if (result.ResultScan.ResultExists)
+        {
+            Assert.True(result.ResultScan.RequiredFieldsPresent);
+            Assert.True(result.ResultScan.Passed);
+            Assert.Equal(
+                ParameterizedGamePackageProjectionRunnerVocabulary.DefaultPackageRelativePath,
+                result.ResultScan.PackagePathRelative);
+            Assert.Equal(
+                ParameterizedGamePackageProjectionRunnerVocabulary.UnityBatchmodeLogRelativePath,
+                result.ResultScan.LogPath);
+            Assert.True(result.LogScan.Passed);
+            Assert.Equal("GREEN", result.Dashboard.ParameterizedRunnerStatus);
+        }
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

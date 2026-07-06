@@ -2,6 +2,7 @@ param(
     [ValidateSet("GenericFullPlaythrough")]
     [string]$Mode = "GenericFullPlaythrough",
     [string]$UnityPath = "",
+    [string]$PackagePath = "samples/minimal-map-game/package.json",
     [switch]$DryRun,
     [switch]$ApplyCleanup
 )
@@ -15,13 +16,13 @@ Initialize-DevflowScriptEnvironment
 
 $RepoRoot = Resolve-DevflowRepoRoot -ScriptPath $ScriptPath
 $ProjectPath = Join-Path $RepoRoot "unity/LLMGameCreatorAlpha"
-$EvidenceRoot = Join-Path $RepoRoot ".llmgc/procedural/goal-127-winforms-unity-projection-verification-runner"
-$LogPath = Join-Path $EvidenceRoot "unity-batchmode-generic-full-playthrough-runner.log"
-$ResultPath = Join-Path $EvidenceRoot "unity-projection-verification-runner-result.json"
+$EvidenceRoot = Join-Path $RepoRoot ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface"
+$LogPath = Join-Path $EvidenceRoot "unity-batchmode-parameterized-gamepackage-full-playthrough.log"
+$ResultPath = Join-Path $EvidenceRoot "parameterized-gamepackage-runner-result.json"
 $CleanupScript = Join-Path $RepoRoot ".devflow/scripts/clean-unity-editor-noise.ps1"
-$ExecuteMethod = "LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageFullPlaythroughSmoke"
-$PassMarker = "GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS"
-$FailMarker = "GOAL126_GENERIC_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL"
+$ExecuteMethod = "LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeParameterizedGamePackageFullPlaythroughSmoke"
+$PassMarker = "GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS"
+$FailMarker = "GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL"
 $MaterialWarningMarker = "Instantiating material due to calling renderer.material during edit mode"
 $RendererMaterialMarker = "UnityEngine.Renderer:get_material()"
 $FallbackUnityPath = "C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Unity.exe"
@@ -48,6 +49,50 @@ function ConvertTo-RunnerRelativePath {
     $root = [System.IO.Path]::GetFullPath($RepoRoot).TrimEnd([System.IO.Path]::DirectorySeparatorChar)
     if ($full.StartsWith($root + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)) {
         return $full.Substring($root.Length).TrimStart([System.IO.Path]::DirectorySeparatorChar).Replace('\', '/')
+    }
+
+    return $full
+}
+
+function Test-RunnerPathUnderRoot {
+    param(
+        [Parameter(Mandatory=$true)][string]$RootPath,
+        [Parameter(Mandatory=$true)][string]$CandidatePath
+    )
+
+    $root = [System.IO.Path]::GetFullPath($RootPath).TrimEnd([System.IO.Path]::DirectorySeparatorChar)
+    $candidate = [System.IO.Path]::GetFullPath($CandidatePath)
+    return $candidate.StartsWith(
+        $root + [System.IO.Path]::DirectorySeparatorChar,
+        [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Resolve-RunnerPackagePath {
+    param([string]$ExplicitPath)
+
+    $candidate = $ExplicitPath
+    if ([string]::IsNullOrWhiteSpace($candidate)) {
+        $candidate = "samples/minimal-map-game/package.json"
+    }
+
+    if ([System.IO.Path]::IsPathRooted($candidate)) {
+        $full = [System.IO.Path]::GetFullPath($candidate)
+    }
+    else {
+        $full = [System.IO.Path]::GetFullPath((Join-Path $RepoRoot $candidate))
+    }
+
+    if (-not (Test-RunnerPathUnderRoot -RootPath $RepoRoot -CandidatePath $full)) {
+        throw "PackagePath must stay under the repository root: $candidate"
+    }
+
+    $relative = ConvertTo-RunnerRelativePath -Path $full
+    if ($relative.StartsWith(".llmgc/manual/", [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "PackagePath must not point under .llmgc/manual: $relative"
+    }
+
+    if (-not (Test-Path -LiteralPath $full -PathType Leaf)) {
+        throw "PackagePath does not exist: $relative"
     }
 
     return $full
@@ -131,6 +176,7 @@ function Normalize-RunnerLogFile {
 function Write-RunnerResult {
     param(
         [Parameter(Mandatory=$true)][string]$ResolvedUnityPath,
+        [Parameter(Mandatory=$true)][string]$ResolvedPackagePath,
         [Parameter(Mandatory=$true)][int]$UnityExitCode,
         [Parameter(Mandatory=$true)][bool]$PassMarkerPresent,
         [Parameter(Mandatory=$true)][bool]$FailMarkerAbsent,
@@ -142,6 +188,8 @@ function Write-RunnerResult {
 
     $result = [ordered]@{
         mode = $Mode
+        packagePath = $ResolvedPackagePath
+        packagePathRelative = ConvertTo-RunnerRelativePath -Path $ResolvedPackagePath
         unityPath = $ResolvedUnityPath
         unityExitCode = $UnityExitCode
         passMarkerPresent = $PassMarkerPresent
@@ -163,6 +211,7 @@ if ($Mode -ne "GenericFullPlaythrough") {
 
 [System.IO.Directory]::CreateDirectory($EvidenceRoot) | Out-Null
 $ResolvedUnityPath = Resolve-RunnerUnityPath -ExplicitPath $UnityPath
+$ResolvedPackagePath = Resolve-RunnerPackagePath -ExplicitPath $PackagePath
 $UnityArgs = @(
     "-batchmode",
     "-quit",
@@ -171,13 +220,16 @@ $UnityArgs = @(
     "-executeMethod",
     $ExecuteMethod,
     "-logFile",
-    $LogPath
+    $LogPath,
+    "-llmgcPackagePath",
+    $ResolvedPackagePath
 )
 $UnityCommandText = Format-RunnerCommand -Exe $ResolvedUnityPath -ArgsList $UnityArgs
 $CleanupArgs = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $CleanupScript, "-Apply")
 $CleanupCommandText = Format-RunnerCommand -Exe "powershell" -ArgsList $CleanupArgs
 
 Write-Host "Unity projection verification mode: $Mode"
+Write-Host "GamePackage path: $(ConvertTo-RunnerRelativePath -Path $ResolvedPackagePath)"
 Write-Host "Unity command: $UnityCommandText"
 Write-Host "Cleanup command: $CleanupCommandText"
 
@@ -189,6 +241,7 @@ if ($DryRun) {
 if (-not (Test-Path -LiteralPath $ResolvedUnityPath)) {
     Write-RunnerResult `
         -ResolvedUnityPath $ResolvedUnityPath `
+        -ResolvedPackagePath $ResolvedPackagePath `
         -UnityExitCode -1 `
         -PassMarkerPresent $false `
         -FailMarkerAbsent $false `
@@ -239,6 +292,7 @@ $passed = $unityExit -eq 0 `
 
 Write-RunnerResult `
     -ResolvedUnityPath $ResolvedUnityPath `
+    -ResolvedPackagePath $ResolvedPackagePath `
     -UnityExitCode $unityExit `
     -PassMarkerPresent $passMarkerPresent `
     -FailMarkerAbsent $failMarkerAbsent `
@@ -253,6 +307,7 @@ Write-Host "Fail marker absent: $failMarkerAbsent"
 Write-Host "Material warning absent: $materialWarningAbsent"
 Write-Host "Cleanup applied: $cleanupApplied"
 Write-Host "Cleanup exit code: $cleanupExit"
+Write-Host "Package path: $(ConvertTo-RunnerRelativePath -Path $ResolvedPackagePath)"
 Write-Host "Result path: $(ConvertTo-RunnerRelativePath -Path $ResultPath)"
 Write-Host "Log path: $(ConvertTo-RunnerRelativePath -Path $LogPath)"
 

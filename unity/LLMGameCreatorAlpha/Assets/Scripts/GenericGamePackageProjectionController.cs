@@ -38,6 +38,10 @@ namespace LLMGameCreatorAlpha
         }
         public string PackageId { get { return model.PackageId; } }
         public string PackageTitle { get { return model.PackageTitle; } }
+        public string PackagePathRelative { get { return model.PackagePathRelative; } }
+        public string PackagePathFull { get { return model.PackagePathFull; } }
+        public bool PackagePathResolved { get { return model.PackagePathResolved; } }
+        public bool PackagePathUnderRepo { get { return model.PackagePathUnderRepo; } }
         public string MapId { get { return model.MapId; } }
         public int MapWidth { get { return model.MapWidth; } }
         public int MapHeight { get { return model.MapHeight; } }
@@ -75,6 +79,11 @@ namespace LLMGameCreatorAlpha
 
         public void BuildOrRefreshGenericPackageProjection()
         {
+            BuildOrRefreshGenericPackageProjection(false);
+        }
+
+        private void BuildOrRefreshGenericPackageProjection(bool useParameterizedPackagePath)
+        {
             fatalErrorCount = 0;
             selectedMarkerDetails = string.Empty;
             verificationEventLog = string.Empty;
@@ -89,7 +98,9 @@ namespace LLMGameCreatorAlpha
             try
             {
                 var diagnostics = new List<string>();
-                model = GenericGamePackageProjectionAdapter.LoadSamplePackageProjection(diagnostics);
+                model = useParameterizedPackagePath
+                    ? GenericGamePackageProjectionAdapter.LoadParameterizedPackageProjection(diagnostics)
+                    : GenericGamePackageProjectionAdapter.LoadSamplePackageProjection(diagnostics);
                 ClearGenericSection();
 
                 var section = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateSection(
@@ -98,7 +109,7 @@ namespace LLMGameCreatorAlpha
                     new Vector3(-2f, 0f, -10f));
                 AttachDescriptor(section, "goal123_generic_projection_root", "generic_package_root",
                     "Generic GamePackage Projection", "ready",
-                    "Projection-only preview for " + GenericGamePackageProjectionAdapter.SamplePackageRelativePath);
+                    "Projection-only preview for " + model.PackagePathRelative);
 
                 RenderPackageHeader(section.transform);
                 RenderMapGrid(section.transform);
@@ -282,6 +293,51 @@ namespace LLMGameCreatorAlpha
                 events.Add(ex.Message);
                 verificationEventLog = string.Join("\n", events.ToArray());
                 RunGenericPackageFullPlaythroughSmoke(events);
+                return false;
+            }
+        }
+
+        public bool RunParameterizedGamePackageFullPlaythroughVerification()
+        {
+            var events = new List<string>();
+            try
+            {
+                BuildOrRefreshGenericPackageProjection(true);
+                events.Add("packagePath=" + model.PackagePathFull);
+                events.Add("packagePathRelative=" + model.PackagePathRelative);
+                events.Add("packagePathResolved=" + model.PackagePathResolved);
+                events.Add("packagePathUnderRepo=" + model.PackagePathUnderRepo);
+                var section = FindGenericProjectionRoot();
+                events.Add("sectionPresent=" + (section != null));
+                loopState = new GenericGamePackageProjectionPlaythrough().Run(model, events);
+                RenderFullPlaythroughPanels(section == null ? transform : section.transform);
+                SelectMarker(
+                    FindDescendantObjectWithPrefix(transform, "goal126_full_playthrough_status")
+                    ?? FindGenericProjectionRoot());
+
+                var smoke = RunParameterizedGamePackageFullPlaythroughSmoke(events);
+                lastGenericFullPlaythroughVerificationPassed = smoke;
+                lastGenericLoopVerificationPassed = smoke;
+                lastGenericSystemsVerificationPassed = smoke;
+                lastVerificationPassed = smoke;
+                events.Add(smoke
+                    ? "Goal128 parameterized package full playthrough verification passed"
+                    : "Goal128 parameterized package full playthrough verification failed");
+                verificationEventLog = string.Join("\n", events.ToArray());
+                statusLine = smoke
+                    ? "Goal128 parameterized package full playthrough verification passed"
+                    : "Goal128 parameterized package full playthrough verification failed";
+                return smoke;
+            }
+            catch (System.Exception ex)
+            {
+                fatalErrorCount++;
+                statusLine = "Goal128 parameterized package full playthrough verification fatal error: "
+                             + ex.GetType().Name;
+                events.Add(statusLine);
+                events.Add(ex.Message);
+                verificationEventLog = string.Join("\n", events.ToArray());
+                RunParameterizedGamePackageFullPlaythroughSmoke(events);
                 return false;
             }
         }
@@ -482,6 +538,38 @@ namespace LLMGameCreatorAlpha
             if (events != null)
             {
                 events.Add("fullPlaythroughPassed=" + result.Passed);
+            }
+
+            return result.Passed;
+        }
+
+        private bool RunParameterizedGamePackageFullPlaythroughSmoke(List<string> events)
+        {
+            var genericFullPlaythroughPassed = RunGenericPackageFullPlaythroughSmoke(events);
+            var result = new ParameterizedGamePackageProjectionFullPlaythroughSmokeResult
+            {
+                ParameterizedRunnerPassed = genericFullPlaythroughPassed,
+                PackagePathResolved = model.PackagePathResolved,
+                PackagePathUnderRepo = model.PackagePathUnderRepo,
+                SamplePackageLoaded = loopState.SamplePackageLoaded,
+                FullPlaythroughPassed = loopState.FullPlaythroughPassed,
+                EventTranscriptPresent =
+                    loopState.EventTranscriptPresent
+                    && HasDescendantWithPrefix(transform, "goal126_event_transcript_summary"),
+                ZeroFatalErrors = fatalErrorCount == 0,
+                PackagePathRelative = model.PackagePathRelative,
+                PackagePathFull = model.PackagePathFull,
+                PackageId = model.PackageId,
+                PackageTitle = model.PackageTitle,
+                MapId = model.MapId,
+                StatusLine = statusLine
+            };
+            lastSmokeDiagnostics = result.ToDiagnosticText();
+            if (events != null)
+            {
+                events.Add("parameterizedRunnerPassed=" + result.Passed);
+                events.Add("packagePathResolved=" + result.PackagePathResolved);
+                events.Add("packagePathUnderRepo=" + result.PackagePathUnderRepo);
             }
 
             return result.Passed;

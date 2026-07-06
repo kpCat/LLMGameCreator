@@ -430,6 +430,52 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeParameterizedGamePackageFullPlaythroughSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureGenericController();
+                var passed = controller.RunParameterizedGamePackageFullPlaythroughVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\npackagePath=" + controller.PackagePathFull
+                                  + "\npackagePathRelative=" + controller.PackagePathRelative
+                                  + "\npackagePathResolved=" + controller.PackagePathResolved
+                                  + "\npackagePathUnderRepo=" + controller.PackagePathUnderRepo
+                                  + "\n" + string.Join("\n", controller.SelectedMarkerDetails, controller.MovementPathSummary, controller.SignInteractionResult, controller.DialogueSummary, controller.QuestObjectiveStatus, controller.InventoryResourceFinalSummary, controller.SystemsSummary, controller.CombatSummary, controller.EventTranscriptSummary, controller.FinalStateSummary, controller.VerificationEventLog);
+                if (passed)
+                {
+                    Debug.Log("GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError(
+                        "GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode) { EditorApplication.Exit(exitCode); }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -846,7 +892,13 @@ namespace LLMGameCreatorAlpha
                 ? "Generic package projection is read-only; no Runtime action is executed."
                 : controller.InteractionEffectPreview;
             objectiveReplayDetails = "samplePackagePath="
-                                     + GenericGamePackageProjectionAdapter.SamplePackageRelativePath
+                                     + controller.PackagePathRelative
+                                     + "\npackagePath="
+                                     + controller.PackagePathFull
+                                     + "\npackagePathResolved="
+                                     + controller.PackagePathResolved
+                                     + "\npackagePathUnderRepo="
+                                     + controller.PackagePathUnderRepo
                                      + "\npackageId="
                                      + controller.PackageId
                                      + "\npackageTitle="

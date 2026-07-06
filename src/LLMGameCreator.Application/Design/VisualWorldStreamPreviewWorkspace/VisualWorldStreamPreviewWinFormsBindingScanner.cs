@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                        + ReadGoal120Through127WinFormsPageText(projectRoot);
+                         + ReadGoal120Through128WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -508,6 +508,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysGenericGamePackageFullPlaythrough = PageBindsGoal126GenericGamePackageFullPlaythrough(pageText);
         var bindDisplaysUnityProjectionVerificationRunner =
             PageBindsGoal127UnityProjectionVerificationRunner(pageText);
+        var bindDisplaysParameterizedGamePackageRunner = PageBindsGoal128ParameterizedGamePackageRunner(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -640,16 +641,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(bindDisplaysGenericGamePackageProjection, "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGenericGamePackageLoop, "goal124.winforms.generic_gamepackage_loop_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGenericGamePackageSystems, "goal125.winforms.generic_gamepackage_systems_bind_missing", pageRelativePath, diagnostics);
-        AddIfFalse(
-            bindDisplaysGenericGamePackageFullPlaythrough,
-            "goal126.winforms.generic_gamepackage_full_playthrough_bind_missing",
-            pageRelativePath,
-            diagnostics);
-        AddIfFalse(
-            bindDisplaysUnityProjectionVerificationRunner,
-            "goal127.winforms.unity_projection_runner_bind_missing",
-            pageRelativePath,
-            diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageFullPlaythrough, "goal126.winforms.generic_gamepackage_full_playthrough_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysUnityProjectionVerificationRunner, "goal127.winforms.unity_projection_runner_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysParameterizedGamePackageRunner, "goal128.winforms.parameterized_gamepackage_runner_bind_missing", pageRelativePath, diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -690,8 +684,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGenericGamePackageLoop = bindDisplaysGenericGamePackageLoop,
             PageBindDisplaysGenericGamePackageSystems = bindDisplaysGenericGamePackageSystems,
             PageBindDisplaysGenericGamePackageFullPlaythrough = bindDisplaysGenericGamePackageFullPlaythrough,
-            PageBindDisplaysUnityProjectionVerificationRunner =
-                bindDisplaysUnityProjectionVerificationRunner,
+            PageBindDisplaysUnityProjectionVerificationRunner = bindDisplaysUnityProjectionVerificationRunner,
+            PageBindDisplaysParameterizedGamePackageRunner = bindDisplaysParameterizedGamePackageRunner,
             Diagnostics = diagnostics
         };
     }

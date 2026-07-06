@@ -13,6 +13,20 @@ namespace LLMGameCreatorAlpha
 
         public static GenericGamePackageProjectionModel LoadSamplePackageProjection(List<string> diagnostics)
         {
+            return LoadPackageProjection(SamplePackageRelativePath, false, diagnostics);
+        }
+
+        public static GenericGamePackageProjectionModel LoadParameterizedPackageProjection(
+            List<string> diagnostics)
+        {
+            return LoadPackageProjection(ReadPackagePathArgument(), true, diagnostics);
+        }
+
+        private static GenericGamePackageProjectionModel LoadPackageProjection(
+            string packagePathArgument,
+            bool fromCommandLine,
+            List<string> diagnostics)
+        {
             var model = new GenericGamePackageProjectionModel();
             var repoRoot = AcceptedAlphaPlayableProjectionDiagnostics.ResolveRepositoryRoot(diagnostics);
             if (string.IsNullOrWhiteSpace(repoRoot))
@@ -21,22 +35,36 @@ namespace LLMGameCreatorAlpha
                 return model;
             }
 
-            var packagePath = Path.GetFullPath(Path.Combine(
-                repoRoot,
-                SamplePackageRelativePath.Replace('/', Path.DirectorySeparatorChar)));
+            var packagePath = ResolveRequestedPackagePath(repoRoot, packagePathArgument);
+            var relativePackagePath = ToRepositoryRelativePath(repoRoot, packagePath);
             if (!IsUnderRoot(repoRoot, packagePath))
             {
-                diagnostics.Add("goal123_sample_package_outside_repository:" + packagePath);
+                diagnostics.Add("goal128_package_path_outside_repository:" + packagePath);
+                model.Diagnostics.AddRange(diagnostics);
+                return model;
+            }
+
+            if (relativePackagePath.StartsWith(".llmgc/manual/", StringComparison.OrdinalIgnoreCase))
+            {
+                diagnostics.Add("goal128_package_path_manual_input_rejected:" + relativePackagePath);
                 model.Diagnostics.AddRange(diagnostics);
                 return model;
             }
 
             if (!File.Exists(packagePath))
             {
-                diagnostics.Add("goal123_sample_package_missing:" + SamplePackageRelativePath);
+                diagnostics.Add("goal128_package_path_missing:" + relativePackagePath);
                 model.Diagnostics.AddRange(diagnostics);
                 return model;
             }
+
+            model.SamplePackagePath = relativePackagePath;
+            model.PackagePathRelative = relativePackagePath;
+            model.PackagePathFull = packagePath;
+            model.PackagePathResolved = true;
+            model.PackagePathUnderRepo = true;
+            model.PackagePathFromCommandLine = fromCommandLine;
+            diagnostics.Add("goal128_package_path_resolved:" + relativePackagePath);
 
             var json = File.ReadAllText(packagePath, Encoding.UTF8);
             var manifestJson = ObjectField(json, "manifest");
@@ -795,6 +823,52 @@ namespace LLMGameCreatorAlpha
                 .Replace("\\n", "\n")
                 .Replace("\\r", "\r")
                 .Replace("\\t", "\t");
+        }
+
+        private static string ReadPackagePathArgument()
+        {
+            var args = Environment.GetCommandLineArgs();
+            for (var i = 0; i < args.Length; i++)
+            {
+                if (!string.Equals(args[i], "-llmgcPackagePath", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                if (i + 1 < args.Length && !string.IsNullOrWhiteSpace(args[i + 1]))
+                {
+                    return args[i + 1];
+                }
+            }
+
+            return SamplePackageRelativePath;
+        }
+
+        private static string ResolveRequestedPackagePath(string repoRoot, string packagePathArgument)
+        {
+            var requested = string.IsNullOrWhiteSpace(packagePathArgument)
+                ? SamplePackageRelativePath
+                : packagePathArgument;
+            return Path.IsPathRooted(requested)
+                ? Path.GetFullPath(requested)
+                : Path.GetFullPath(Path.Combine(
+                    repoRoot,
+                    requested.Replace('/', Path.DirectorySeparatorChar)));
+        }
+
+        private static string ToRepositoryRelativePath(string root, string path)
+        {
+            var fullRoot = Path.GetFullPath(root).TrimEnd(
+                               Path.DirectorySeparatorChar,
+                               Path.AltDirectorySeparatorChar)
+                           + Path.DirectorySeparatorChar;
+            var fullPath = Path.GetFullPath(path);
+            if (!fullPath.StartsWith(fullRoot, StringComparison.OrdinalIgnoreCase))
+            {
+                return fullPath;
+            }
+
+            return fullPath.Substring(fullRoot.Length).Replace('\\', '/');
         }
 
         private static bool IsUnderRoot(string root, string path)

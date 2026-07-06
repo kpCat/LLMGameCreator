@@ -1,0 +1,12 @@
+{
+  "goalId": "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
+  "adapterReadsCommandLineArgument": true,
+  "adapterFallsBackToDefaultSample": true,
+  "adapterRejectsOutsideRepository": true,
+  "adapterRejectsManualInputRoot": true,
+  "controllerRunsParameterizedFullPlaythrough": true,
+  "batchmodeEntrypointPresent": true,
+  "batchmodeMarkersPresent": true,
+  "smokeFieldsPresent": true,
+  "passed": true
+}

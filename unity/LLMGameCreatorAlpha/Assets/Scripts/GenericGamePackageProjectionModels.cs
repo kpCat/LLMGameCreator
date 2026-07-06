@@ -308,6 +308,11 @@ namespace LLMGameCreatorAlpha
     public sealed class GenericGamePackageProjectionModel
     {
         public string SamplePackagePath = GenericGamePackageProjectionAdapter.SamplePackageRelativePath;
+        public string PackagePathRelative = GenericGamePackageProjectionAdapter.SamplePackageRelativePath;
+        public string PackagePathFull = string.Empty;
+        public bool PackagePathResolved;
+        public bool PackagePathUnderRepo;
+        public bool PackagePathFromCommandLine;
         public string PackageId = string.Empty;
         public string PackageTitle = string.Empty;
         public string StartMapId = string.Empty;
@@ -793,6 +798,54 @@ namespace LLMGameCreatorAlpha
                    + "\ncombatRoundPreviewPresent=" + CombatRoundPreviewPresent
                    + "\neventTranscriptPresent=" + EventTranscriptPresent
                    + "\nzeroFatalErrors=" + ZeroFatalErrors
+                   + "\npackageId=" + PackageId
+                   + "\npackageTitle=" + PackageTitle
+                   + "\nmapId=" + MapId
+                   + "\nstatusLine=" + StatusLine;
+        }
+    }
+
+    public sealed class ParameterizedGamePackageProjectionFullPlaythroughSmokeResult
+    {
+        public bool ParameterizedRunnerPassed;
+        public bool PackagePathResolved;
+        public bool PackagePathUnderRepo;
+        public bool SamplePackageLoaded;
+        public bool FullPlaythroughPassed;
+        public bool EventTranscriptPresent;
+        public bool ZeroFatalErrors;
+        public string PackagePathRelative = string.Empty;
+        public string PackagePathFull = string.Empty;
+        public string PackageId = string.Empty;
+        public string PackageTitle = string.Empty;
+        public string MapId = string.Empty;
+        public string StatusLine = string.Empty;
+
+        public bool Passed
+        {
+            get
+            {
+                return ParameterizedRunnerPassed
+                       && PackagePathResolved
+                       && PackagePathUnderRepo
+                       && SamplePackageLoaded
+                       && FullPlaythroughPassed
+                       && EventTranscriptPresent
+                       && ZeroFatalErrors;
+            }
+        }
+
+        public string ToDiagnosticText()
+        {
+            return "parameterizedRunnerPassed=" + ParameterizedRunnerPassed
+                   + "\npackagePathResolved=" + PackagePathResolved
+                   + "\npackagePathUnderRepo=" + PackagePathUnderRepo
+                   + "\nsamplePackageLoaded=" + SamplePackageLoaded
+                   + "\nfullPlaythroughPassed=" + FullPlaythroughPassed
+                   + "\neventTranscriptPresent=" + EventTranscriptPresent
+                   + "\nzeroFatalErrors=" + ZeroFatalErrors
+                   + "\npackagePathRelative=" + PackagePathRelative
+                   + "\npackagePathFull=" + PackagePathFull
                    + "\npackageId=" + PackageId
                    + "\npackageTitle=" + PackageTitle
                    + "\nmapId=" + MapId

@@ -134,8 +134,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             proofDiagnostics));
         proofs.AddRange(BuildGoal123GenericGamePackageProjectionProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal124GenericGamePackageLoopProofStatus(projectRoot, proofDiagnostics)); proofs.AddRange(BuildGoal125GenericGamePackageSystemsProofStatus(projectRoot, proofDiagnostics));
-        proofs.AddRange(BuildGoal126GenericGamePackageFullPlaythroughProofStatus(projectRoot, proofDiagnostics));
-        proofs.AddRange(BuildGoal127UnityProjectionVerificationRunnerProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal126GenericGamePackageFullPlaythroughProofStatus(projectRoot, proofDiagnostics)); proofs.AddRange(BuildGoal127UnityProjectionVerificationRunnerProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal128ParameterizedGamePackageRunnerProofStatus(projectRoot, proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);

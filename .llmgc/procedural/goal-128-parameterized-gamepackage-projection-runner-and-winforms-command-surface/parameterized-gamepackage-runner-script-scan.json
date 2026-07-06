@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
+  "runnerScriptExists": true,
+  "runnerCmdExists": true,
+  "supportsPackagePathParameter": true,
+  "supportsDefaultPackagePath": true,
+  "rejectsOutsideRepository": true,
+  "rejectsManualInputRoot": true,
+  "passesUnityPackageArgument": true,
+  "executeMethodPresent": true,
+  "passMarkerScanPresent": true,
+  "failMarkerScanPresent": true,
+  "writesRequiredResultJsonFields": true,
+  "cleanupDelegatesToBoundedScript": true,
+  "cmdWrapperPreservesDefaultAndExtraParams": true,
+  "noBroadGitClean": true,
+  "noForbiddenMutationTargets": true,
+  "passed": true,
+  "forbiddenMarkersFound": []
+}

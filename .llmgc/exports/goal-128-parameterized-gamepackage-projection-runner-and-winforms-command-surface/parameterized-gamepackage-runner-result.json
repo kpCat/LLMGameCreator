@@ -1,0 +1,14 @@
+﻿{
+    "mode":  "GenericFullPlaythrough",
+    "packagePath":  "C:\\Users\\endim\\LLMGameCreator\\samples\\minimal-map-game\\package.json",
+    "packagePathRelative":  "samples/minimal-map-game/package.json",
+    "unityPath":  "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+    "unityExitCode":  0,
+    "passMarkerPresent":  true,
+    "failMarkerAbsent":  true,
+    "materialWarningAbsent":  true,
+    "cleanupApplied":  true,
+    "cleanupExitCode":  0,
+    "passed":  true,
+    "logPath":  ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/unity-batchmode-parameterized-gamepackage-full-playthrough.log"
+}

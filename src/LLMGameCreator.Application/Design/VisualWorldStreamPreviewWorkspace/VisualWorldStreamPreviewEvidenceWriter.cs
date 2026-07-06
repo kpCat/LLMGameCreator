@@ -168,6 +168,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var genericGamePackageFullPlaythrough = BuildGoal126GenericGamePackageFullPlaythroughQuality(groups, proofs);
         var unityProjectionVerificationRunner =
             BuildGoal127UnityProjectionVerificationRunnerQuality(groups, proofs);
+        var parameterizedGamePackageRunner =
+            BuildGoal128ParameterizedGamePackageRunnerQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -349,6 +351,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal123GenericGamePackageProjectionQualityDiagnostics(genericGamePackageProjection, binding, diagnostics); AddGoal124GenericGamePackageLoopQualityDiagnostics(genericGamePackageLoop, binding, diagnostics); AddGoal125GenericGamePackageSystemsQualityDiagnostics(genericGamePackageSystems, binding, diagnostics); AddGoal126GenericGamePackageFullPlaythroughQualityDiagnostics(genericGamePackageFullPlaythrough, binding, diagnostics);
         AddGoal127UnityProjectionVerificationRunnerQualityDiagnostics(
             unityProjectionVerificationRunner,
+            binding,
+            diagnostics);
+        AddGoal128ParameterizedGamePackageRunnerQualityDiagnostics(
+            parameterizedGamePackageRunner,
             binding,
             diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
@@ -641,9 +647,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 withGoal125,
                 genericGamePackageFullPlaythrough,
                 binding);
-        return ApplyGoal127UnityProjectionVerificationRunnerQuality(
+        var withGoal127 = ApplyGoal127UnityProjectionVerificationRunnerQuality(
             withGoal126,
             unityProjectionVerificationRunner,
+            binding);
+        return ApplyGoal128ParameterizedGamePackageRunnerQuality(
+            withGoal127,
+            parameterizedGamePackageRunner,
             binding);
     }
 
