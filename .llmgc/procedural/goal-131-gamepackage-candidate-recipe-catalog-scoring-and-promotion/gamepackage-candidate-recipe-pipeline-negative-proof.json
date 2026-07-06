@@ -1,0 +1,14 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_recipe_pipeline_negative_proof_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "manualInputRejected":  true,
+    "templateUnderRepo":  true,
+    "recipeCatalogUnderRepo":  true,
+    "samplePackageReadOnly":  true,
+    "candidatePathsUnderGoal131Artifacts":  true,
+    "selectedCandidateUnderGoal131Artifacts":  true,
+    "runtimeSchemaProviderLuaGeneratorLibraryUnchanged":  true,
+    "unityAssetsProjectSettingsPackagesUnchanged":  true,
+    "noForbiddenPathsExpected":  true,
+    "passed":  true
+}

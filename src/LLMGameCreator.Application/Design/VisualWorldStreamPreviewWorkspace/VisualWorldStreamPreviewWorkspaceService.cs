@@ -79,7 +79,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildUnityProjectionVerificationRunnerGroup(projectRoot, diagnostics),
             BuildParameterizedGamePackageRunnerGroup(projectRoot, diagnostics),
             BuildGamePackageCandidateMatrixGroup(projectRoot, diagnostics),
-            BuildGamePackageCandidateFactoryGroup(projectRoot, diagnostics)
+            BuildGamePackageCandidateFactoryGroup(projectRoot, diagnostics),
+            BuildGamePackageCandidateRecipePipelineGroup(projectRoot, diagnostics)
         };
         groups = NormalizeHistoricalManualAcceptanceGroups(groups).ToList();
 

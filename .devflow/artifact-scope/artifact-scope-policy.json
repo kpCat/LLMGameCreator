@@ -2559,6 +2559,53 @@
       ]
     },
     {
+      "scenario": "goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-gamepackage-candidate-recipe-pipeline.ps1",
+        ".devflow/scripts/run-gamepackage-candidate-recipe-pipeline.cmd",
+        ".devflow/scripts/run-gamepackage-projection-matrix.ps1",
+        ".devflow/scripts/run-unity-projection-verification.ps1",
+        "docs/manual-acceptance/gamepackage-candidate-recipe-catalog-scoring-and-promotion.md",
+        "tests/LLMGameCreator.Tests/Devflow/RunGamePackageCandidateRecipePipelineScriptTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunGamePackageProjectionMatrixScriptTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunUnityProjectionVerificationScriptTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/AcceptedAlphaUnityPlayableProjectionProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal131.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/",
+        ".llmgc/exports/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/",
+        "docs/agent-tasks/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/minimal-map-game/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Generation/",
+        "src/LLMGameCreator.AssetPipeline/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "unity/LLMGameCreatorAlpha/Assets/",
+        "unity/LLMGameCreatorAlpha/ProjectSettings/",
+        "unity/LLMGameCreatorAlpha/Packages/"
+      ]
+    },
+    {
       "scenario": "goal-114-unity-safe-mode-compile-hotfix",
       "allowedPaths": [
         "docs/CURRENT_GENERATOR_STATE.json",

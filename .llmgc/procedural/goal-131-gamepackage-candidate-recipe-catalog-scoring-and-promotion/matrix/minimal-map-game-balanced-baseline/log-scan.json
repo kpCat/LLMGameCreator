@@ -1,0 +1,14 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_matrix_log_scan_v1",
+    "goalId":  "goal_129_gamepackage_candidate_matrix_projection_runner",
+    "candidateId":  "minimal-map-game-balanced-baseline",
+    "logPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-balanced-baseline/unity.log",
+    "logExists":  true,
+    "passMarkerPresent":  true,
+    "failMarkerAbsent":  true,
+    "materialWarningAbsent":  true,
+    "forbiddenMarkersFound":  [
+
+                              ],
+    "passed":  true
+}

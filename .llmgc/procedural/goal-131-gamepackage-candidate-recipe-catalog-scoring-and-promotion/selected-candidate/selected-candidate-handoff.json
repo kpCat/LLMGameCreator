@@ -1,0 +1,15 @@
+﻿{
+    "schemaVersion":  "selected_gamepackage_candidate_handoff_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "selectedCandidateId":  "minimal-map-game-balanced-baseline",
+    "selectedRecipeId":  "balanced_baseline",
+    "selectedCandidateScore":  100,
+    "selectedCandidatePackagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+    "sourceCandidatePackagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-balanced-baseline/package.json",
+    "recipeCatalogPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-recipe-catalog.json",
+    "scoringResultPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-scoring-result.json",
+    "matrixResultPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-projection-matrix-result.json",
+    "manualUnityOptional":  true,
+    "projectionOnly":  true,
+    "samplePackageUnmodified":  true
+}

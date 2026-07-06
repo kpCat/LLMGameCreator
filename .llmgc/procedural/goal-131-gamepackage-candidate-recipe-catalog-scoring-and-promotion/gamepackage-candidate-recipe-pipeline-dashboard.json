@@ -1,0 +1,23 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_recipe_pipeline_dashboard_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "recipePipelineStatus":  "GREEN",
+    "recipeCount":  4,
+    "candidateCount":  4,
+    "passedCandidates":  4,
+    "failedCandidates":  0,
+    "matrixPassed":  true,
+    "selectedCandidateId":  "minimal-map-game-balanced-baseline",
+    "selectedCandidateScore":  100,
+    "selectedCandidatePackagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+    "normalCommand":  ".devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd",
+    "recipeCatalogPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-recipe-catalog.json",
+    "pipelineResultPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-recipe-pipeline-result.json",
+    "scoringResultPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-scoring-result.json",
+    "manualUnityOptional":  true,
+    "samplePackageUnmodified":  true,
+    "projectionOnly":  true,
+    "metadataOnlyRecipeMutation":  true,
+    "evidencePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion",
+    "exportPath":  ".llmgc/exports/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion"
+}

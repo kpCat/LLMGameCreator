@@ -41,6 +41,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         "unity_projection_verification_runner",
         "parameterized_gamepackage_projection_runner",
         "gamepackage_candidate_matrix_projection_runner",
-        "gamepackage_candidate_factory_and_matrix_pipeline"
+        "gamepackage_candidate_factory_and_matrix_pipeline",
+        "gamepackage_candidate_recipe_catalog_scoring_and_promotion"
     ];
 }

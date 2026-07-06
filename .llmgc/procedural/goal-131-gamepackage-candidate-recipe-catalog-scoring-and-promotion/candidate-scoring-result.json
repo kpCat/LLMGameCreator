@@ -1,0 +1,108 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_scoring_result_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "scoringStatus":  "GREEN",
+    "scoreComponents":  [
+                            "matrixPassed",
+                            "fullPlaythroughPassed",
+                            "anchorCoverage",
+                            "candidateDistinctness",
+                            "questSystemsCoverage",
+                            "noForbiddenMarkers"
+                        ],
+    "selectionRule":  "eligible matrix-passed candidates sorted by score desc, recipeOrder asc, candidateId asc",
+    "recipeCount":  4,
+    "candidateCount":  4,
+    "passedCandidates":  4,
+    "failedCandidates":  0,
+    "selectedCandidateId":  "minimal-map-game-balanced-baseline",
+    "selectedCandidateScore":  100,
+    "selectedCandidatePackagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+    "passed":  true,
+    "candidates":  [
+                       {
+                           "recipeOrder":  0,
+                           "recipeId":  "balanced_baseline",
+                           "candidateId":  "minimal-map-game-balanced-baseline",
+                           "packagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-balanced-baseline/package.json",
+                           "matrixPassed":  true,
+                           "eligible":  true,
+                           "score":  100,
+                           "components":  {
+                                              "matrixPassed":  40,
+                                              "fullPlaythroughPassed":  20,
+                                              "anchorCoverage":  15,
+                                              "candidateDistinctness":  10,
+                                              "questSystemsCoverage":  10,
+                                              "noForbiddenMarkers":  5,
+                                              "presentAnchorCount":  11,
+                                              "requiredAnchorCount":  11,
+                                              "presentQuestSystemCount":  5,
+                                              "requiredQuestSystemCount":  5
+                                          }
+                       },
+                       {
+                           "recipeOrder":  1,
+                           "recipeId":  "alchemy_focus",
+                           "candidateId":  "minimal-map-game-alchemy-focus",
+                           "packagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-alchemy-focus/package.json",
+                           "matrixPassed":  true,
+                           "eligible":  true,
+                           "score":  100,
+                           "components":  {
+                                              "matrixPassed":  40,
+                                              "fullPlaythroughPassed":  20,
+                                              "anchorCoverage":  15,
+                                              "candidateDistinctness":  10,
+                                              "questSystemsCoverage":  10,
+                                              "noForbiddenMarkers":  5,
+                                              "presentAnchorCount":  11,
+                                              "requiredAnchorCount":  11,
+                                              "presentQuestSystemCount":  5,
+                                              "requiredQuestSystemCount":  5
+                                          }
+                       },
+                       {
+                           "recipeOrder":  2,
+                           "recipeId":  "combat_focus",
+                           "candidateId":  "minimal-map-game-combat-focus",
+                           "packagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-combat-focus/package.json",
+                           "matrixPassed":  true,
+                           "eligible":  true,
+                           "score":  100,
+                           "components":  {
+                                              "matrixPassed":  40,
+                                              "fullPlaythroughPassed":  20,
+                                              "anchorCoverage":  15,
+                                              "candidateDistinctness":  10,
+                                              "questSystemsCoverage":  10,
+                                              "noForbiddenMarkers":  5,
+                                              "presentAnchorCount":  11,
+                                              "requiredAnchorCount":  11,
+                                              "presentQuestSystemCount":  5,
+                                              "requiredQuestSystemCount":  5
+                                          }
+                       },
+                       {
+                           "recipeOrder":  3,
+                           "recipeId":  "exploration_focus",
+                           "candidateId":  "minimal-map-game-exploration-focus",
+                           "packagePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-exploration-focus/package.json",
+                           "matrixPassed":  true,
+                           "eligible":  true,
+                           "score":  100,
+                           "components":  {
+                                              "matrixPassed":  40,
+                                              "fullPlaythroughPassed":  20,
+                                              "anchorCoverage":  15,
+                                              "candidateDistinctness":  10,
+                                              "questSystemsCoverage":  10,
+                                              "noForbiddenMarkers":  5,
+                                              "presentAnchorCount":  11,
+                                              "requiredAnchorCount":  11,
+                                              "presentQuestSystemCount":  5,
+                                              "requiredQuestSystemCount":  5
+                                          }
+                       }
+                   ]
+}

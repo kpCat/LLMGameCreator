@@ -1,0 +1,159 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_recipe_pipeline_file_index_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "rootPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion",
+    "indexedFileCount":  25,
+    "manualInputExcluded":  true,
+    "files":  [
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-alchemy-focus/runner-result.json",
+                      "role":  "goal131_recipe_pipeline_runner-result",
+                      "required":  true,
+                      "sha256":  "44d1e1109929024339d0e2e0d57243f2eb74ab945bd550b2b955d8fd11516770"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-balanced-baseline/log-scan.json",
+                      "role":  "goal131_recipe_pipeline_log-scan",
+                      "required":  true,
+                      "sha256":  "8d28cc0e6ee27adfd1552fad283204e88a4751b003b5411008b5cee2b28adb7a"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-balanced-baseline/runner-result.json",
+                      "role":  "goal131_recipe_pipeline_runner-result",
+                      "required":  true,
+                      "sha256":  "d648d7e3cda206ac429a9c6e81fb66e9645ca163fba6419f24c73d777ae58de9"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-combat-focus/package.json",
+                      "role":  "goal131_recipe_pipeline_package",
+                      "required":  true,
+                      "sha256":  "4d76ea8413a90ffef576a6f5cfbff9dec8242ad3ba676af73a396bfd2a3ae915"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-exploration-focus/package.json",
+                      "role":  "goal131_recipe_pipeline_package",
+                      "required":  true,
+                      "sha256":  "1137fb7684d35e4a19de3797246128820f3966f389c42d0d9979ac0ad8adfee8"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-alchemy-focus/log-scan.json",
+                      "role":  "goal131_recipe_pipeline_log-scan",
+                      "required":  true,
+                      "sha256":  "7c2623bfa1a218e16c17f97516b67fdd978fed16d0cb1fdc2fc5c47d2e5b19e6"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-exploration-focus/runner-result.json",
+                      "role":  "goal131_recipe_pipeline_runner-result",
+                      "required":  true,
+                      "sha256":  "bf0997e1b8dc471163b97cf121f608b8ba822ecb34d5162cc00c1eacb65757c7"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+                      "role":  "goal131_recipe_pipeline_package",
+                      "required":  true,
+                      "sha256":  "15d1ec6363cd6e8b0f889bed9f4ab7d6c8fc3c3d5beaaf575b8ef96264920ba6"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/selected-candidate-handoff.json",
+                      "role":  "goal131_recipe_pipeline_selected-candidate-handoff",
+                      "required":  true,
+                      "sha256":  "5cd2f96a16dae6556b74f589ea6bc6826292563f9e4e25271caf5ebab0bcc62f"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-combat-focus/log-scan.json",
+                      "role":  "goal131_recipe_pipeline_log-scan",
+                      "required":  true,
+                      "sha256":  "3c6ca161016f73ef93562c71a69be230226f61d850ae734b658ba2b5e243e495"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-combat-focus/runner-result.json",
+                      "role":  "goal131_recipe_pipeline_runner-result",
+                      "required":  true,
+                      "sha256":  "ae2a3840e040fe898edc29da58b851d3ddbf7f4e58be1db016a75f652b2d1ca4"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-exploration-focus/log-scan.json",
+                      "role":  "goal131_recipe_pipeline_log-scan",
+                      "required":  true,
+                      "sha256":  "b01b26aafad643f24af84ba2f1c6717574c34b4d53927a7c01431e1b4894e42a"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-balanced-baseline/package.json",
+                      "role":  "goal131_recipe_pipeline_package",
+                      "required":  true,
+                      "sha256":  "15d1ec6363cd6e8b0f889bed9f4ab7d6c8fc3c3d5beaaf575b8ef96264920ba6"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-recipe-pipeline-dashboard.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-recipe-pipeline-dashboard",
+                      "required":  true,
+                      "sha256":  "7848bf00bd5006e3249e8559b787f72feb11ec213bd2c1ddfd3f23981295b2b1"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-recipe-pipeline-file-index.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-recipe-pipeline-file-index",
+                      "required":  true,
+                      "sha256":  "fe7527bf651b5686efd8f02a1fcca2d5ab037604d2ec84d55625a51e9904a032"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-recipe-pipeline-log-scan.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-recipe-pipeline-log-scan",
+                      "required":  true,
+                      "sha256":  "8f70ddb3f8e7aef038e4c92c3763bf5c26e1dd071ed48ea7bc6e9d9edad86eb8"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-recipe-catalog.json",
+                      "role":  "goal131_recipe_pipeline_candidate-recipe-catalog",
+                      "required":  true,
+                      "sha256":  "4effb9bef5e53f9d9ac8bc761c298c86369b72f1296fca459fed9fd3342248bd"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-scoring-result.json",
+                      "role":  "goal131_recipe_pipeline_candidate-scoring-result",
+                      "required":  true,
+                      "sha256":  "4a1940b131981a03f17cd3fea028eaf763121049a201e9e47eb28f91fd6d03bc"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-index.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-index",
+                      "required":  true,
+                      "sha256":  "df1dd644b452254d5e8cc5d5ae009c404d6f63523f85b4459930d26ac2ab54fd"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-projection-matrix-result.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-projection-matrix-result",
+                      "required":  true,
+                      "sha256":  "4af502902c597b058dba8b3f03a00d07acdcedae3cc09adba2eae9d40cde90ae"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-recipe-pipeline-result.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-recipe-pipeline-result",
+                      "required":  true,
+                      "sha256":  "8987a0584137469b08ecc4d3c6a89ac7f435e1973498a13925d143c643816a81"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-alchemy-focus/package.json",
+                      "role":  "goal131_recipe_pipeline_package",
+                      "required":  true,
+                      "sha256":  "b56697c6c5147906d00ebc15a640253b8b920c1b55907ce3a8fb1ad9b827eec7"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-recipe-pipeline-negative-proof.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-recipe-pipeline-negative-proof",
+                      "required":  true,
+                      "sha256":  "e138d9bdb8b2f0f3e9bbb00fb7f2398980843ed251d8a48d0f7d6956e3b46bfe"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-recipe-pipeline-report.md",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-recipe-pipeline-report",
+                      "required":  true,
+                      "sha256":  "fa75d3bccdb008ecf4dcdaf8b005d39fdffadcd7e14fc24c2f796d8f4055cf04"
+                  },
+                  {
+                      "relativePath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-recipe-pipeline-script-scan.json",
+                      "role":  "goal131_recipe_pipeline_gamepackage-candidate-recipe-pipeline-script-scan",
+                      "required":  true,
+                      "sha256":  "1d89d6ac57450b241ce3055cf2a41f4cfaa8fc3189a544e69852e80a6024f77a"
+                  }
+              ]
+}

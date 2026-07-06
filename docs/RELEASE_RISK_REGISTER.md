@@ -50,6 +50,8 @@ Goal 129 review note: the candidate matrix runner verifies multiple repo-local G
 
 Goal 130 review note: the candidate factory materializes three repo-local projection-compatible GamePackage candidates from the read-only sample template, feeds the generated candidate index into the Goal129 matrix runner and records GREEN 3/3 factory plus matrix proof in Goal130 artifacts. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 131 review note: the candidate recipe catalog scoring and promotion pipeline materializes four metadata-only repo-local projection-compatible GamePackage candidates from the read-only sample template, feeds the generated candidate index into the Goal129 matrix runner, scores GREEN 4/4 matrix-passed candidates and promotes `minimal-map-game-balanced-baseline` as the selected candidate with score 100 in Goal131 artifacts. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

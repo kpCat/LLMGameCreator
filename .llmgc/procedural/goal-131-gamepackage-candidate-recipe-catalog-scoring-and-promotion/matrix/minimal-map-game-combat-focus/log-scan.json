@@ -1,0 +1,14 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_matrix_log_scan_v1",
+    "goalId":  "goal_129_gamepackage_candidate_matrix_projection_runner",
+    "candidateId":  "minimal-map-game-combat-focus",
+    "logPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-combat-focus/unity.log",
+    "logExists":  true,
+    "passMarkerPresent":  true,
+    "failMarkerAbsent":  true,
+    "materialWarningAbsent":  true,
+    "forbiddenMarkersFound":  [
+
+                              ],
+    "passed":  true
+}

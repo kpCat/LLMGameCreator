@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "gamepackage_candidate_recipe_catalog_v1",
+  "goalId": "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+  "sourceTemplate": "samples/minimal-map-game/package.json",
+  "deterministic": true,
+  "manualUnityOptional": true,
+  "projectionOnly": true,
+  "safeTuningPolicy": "metadata_only_preserve_goal126_full_playthrough_contract",
+  "recipes": [
+    {
+      "recipeId": "balanced_baseline",
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "displayName": "Balanced Baseline",
+      "variantKind": "balanced-baseline",
+      "description": "Goal131 balanced recipe candidate preserving the accepted full playthrough contract.",
+      "safeTuningPolicy": {
+        "mode": "metadata_only",
+        "preserveManifestTitle": true,
+        "preserveInventory": true,
+        "preserveResources": true,
+        "preserveQuestObjectives": true,
+        "preserveEncounterStats": true
+      },
+      "scoringWeights": {
+        "matrixPassed": 40,
+        "fullPlaythroughPassed": 20,
+        "anchorCoverage": 15,
+        "candidateDistinctness": 10,
+        "questSystemsCoverage": 10,
+        "noForbiddenMarkers": 5,
+        "recipePriority": 0
+      },
+      "expectedFullPlaythroughAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    },
+    {
+      "recipeId": "alchemy_focus",
+      "candidateId": "minimal-map-game-alchemy-focus",
+      "displayName": "Alchemy Focus",
+      "variantKind": "alchemy-focus",
+      "description": "Goal131 alchemy-focused recipe candidate scored for preserved recipe and resource anchors.",
+      "safeTuningPolicy": {
+        "mode": "metadata_only",
+        "preserveManifestTitle": true,
+        "preserveInventory": true,
+        "preserveResources": true,
+        "preserveQuestObjectives": true,
+        "preserveEncounterStats": true
+      },
+      "scoringWeights": {
+        "matrixPassed": 40,
+        "fullPlaythroughPassed": 20,
+        "anchorCoverage": 15,
+        "candidateDistinctness": 10,
+        "questSystemsCoverage": 10,
+        "noForbiddenMarkers": 5,
+        "recipePriority": 1
+      },
+      "expectedFullPlaythroughAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    },
+    {
+      "recipeId": "combat_focus",
+      "candidateId": "minimal-map-game-combat-focus",
+      "displayName": "Combat Focus",
+      "variantKind": "combat-focus",
+      "description": "Goal131 combat-focused recipe candidate scored for preserved combat and encounter anchors.",
+      "safeTuningPolicy": {
+        "mode": "metadata_only",
+        "preserveManifestTitle": true,
+        "preserveInventory": true,
+        "preserveResources": true,
+        "preserveQuestObjectives": true,
+        "preserveEncounterStats": true
+      },
+      "scoringWeights": {
+        "matrixPassed": 40,
+        "fullPlaythroughPassed": 20,
+        "anchorCoverage": 15,
+        "candidateDistinctness": 10,
+        "questSystemsCoverage": 10,
+        "noForbiddenMarkers": 5,
+        "recipePriority": 2
+      },
+      "expectedFullPlaythroughAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    },
+    {
+      "recipeId": "exploration_focus",
+      "candidateId": "minimal-map-game-exploration-focus",
+      "displayName": "Exploration Focus",
+      "variantKind": "exploration-focus",
+      "description": "Goal131 exploration-focused recipe candidate scored for preserved route and map anchors.",
+      "safeTuningPolicy": {
+        "mode": "metadata_only",
+        "preserveManifestTitle": true,
+        "preserveInventory": true,
+        "preserveResources": true,
+        "preserveQuestObjectives": true,
+        "preserveEncounterStats": true
+      },
+      "scoringWeights": {
+        "matrixPassed": 40,
+        "fullPlaythroughPassed": 20,
+        "anchorCoverage": 15,
+        "candidateDistinctness": 10,
+        "questSystemsCoverage": 10,
+        "noForbiddenMarkers": 5,
+        "recipePriority": 3
+      },
+      "expectedFullPlaythroughAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 130 GamePackage candidate factory and matrix pipeline
+Updated by: Goal 131 GamePackage candidate recipe catalog scoring and promotion
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -288,6 +288,39 @@ candidate index/factory/matrix result paths, normal command, `manualUnityOptiona
 and `projectionOnly=true`.
 
 Goal130 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
+authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
+Goal 131 adds a deterministic GamePackage candidate recipe catalog, scoring pass and selected-candidate promotion over the Goal130/Goal129 pipeline:
+
+```text
+goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
+implementationStatus=GREEN
+accepted=false
+normalVerificationCommand=.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd
+recipeCount=4
+candidateCount=4
+passedCandidates=4
+failedCandidates=0
+matrixPassed=true
+selectedCandidateId=minimal-map-game-balanced-baseline
+selectedCandidateScore=100
+samplePackageUnmodified=true
+manualUnityOptional=true
+projectionOnly=true
+metadataOnlyRecipeMutation=true
+```
+
+Goal131 reads `samples/minimal-map-game/package.json` as a read-only template, reads the deterministic recipe catalog
+under `.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-recipe-catalog.json`,
+materializes four metadata-only candidate packages under the Goal131 `candidates/` artifact root, invokes the Goal129
+matrix runner with its output redirected into Goal131 artifacts, scores the matrix-passed candidates, and promotes the
+selected candidate to `selected-candidate/package.json` with `selected-candidate-handoff.json`.
+Visual World Stream Preview Workspace and WinForms show the recipe pipeline status, recipe/candidate counts,
+`matrixPassed`, selected candidate id/score, recipe catalog/candidate index/result/scoring/matrix/selected handoff paths,
+normal command, `manualUnityOptional=true`, `samplePackageUnmodified=true`, `projectionOnly=true`,
+`metadataOnlyRecipeMutation=true`, evidence path and export path.
+
+Goal131 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
 authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
 Goal 053 handoff acceptance recorded before Goal 054:

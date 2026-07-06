@@ -1,0 +1,11 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_recipe_pipeline_log_scan_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "matrixResultExists":  true,
+    "matrixPassed":  true,
+    "candidateLogScanCount":  4,
+    "forbiddenMarkersFound":  [
+
+                              ],
+    "passed":  true
+}

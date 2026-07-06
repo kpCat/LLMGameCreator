@@ -1,0 +1,14 @@
+﻿{
+    "mode":  "GenericFullPlaythrough",
+    "packagePath":  "C:\\Users\\endim\\LLMGameCreator\\.llmgc\\procedural\\goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion\\candidates\\minimal-map-game-balanced-baseline\\package.json",
+    "packagePathRelative":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidates/minimal-map-game-balanced-baseline/package.json",
+    "unityPath":  "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+    "unityExitCode":  0,
+    "passMarkerPresent":  true,
+    "failMarkerAbsent":  true,
+    "materialWarningAbsent":  true,
+    "cleanupApplied":  true,
+    "cleanupExitCode":  0,
+    "passed":  true,
+    "logPath":  ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/matrix/minimal-map-game-balanced-baseline/unity.log"
+}

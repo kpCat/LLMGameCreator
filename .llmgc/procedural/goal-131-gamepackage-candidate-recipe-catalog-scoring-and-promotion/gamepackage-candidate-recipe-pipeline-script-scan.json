@@ -1,0 +1,23 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_recipe_pipeline_script_scan_v1",
+    "goalId":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "recipePipelineScriptExists":  true,
+    "recipePipelineCmdExists":  true,
+    "matrixRunnerScriptExists":  true,
+    "supportsTemplatePackagePath":  true,
+    "supportsRecipeCatalogPath":  true,
+    "supportsOutputRoot":  true,
+    "supportsUnityPath":  true,
+    "supportsDryRun":  true,
+    "supportsApplyCleanup":  true,
+    "rejectsOutsideRepository":  true,
+    "rejectsManualInputRoot":  true,
+    "refusesWritesOutsideGoal131Root":  true,
+    "materializesCandidatesFromRecipes":  true,
+    "invokesGoal129MatrixRunner":  true,
+    "scoresCandidates":  true,
+    "promotesSelectedCandidate":  true,
+    "metadataOnlyRecipeMutation":  true,
+    "noLlmProviderNetwork":  true,
+    "passed":  true
+}
