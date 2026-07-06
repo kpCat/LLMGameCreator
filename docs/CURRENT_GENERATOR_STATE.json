@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-06T02:03:58Z",
+    "updated_at_utc":  "2026-07-06T02:55:22Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 122 adds accepted Alpha projection action loop and window polish",
-    "gate_status":  "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
+    "current_phase_title":  "Goal 123 adds generic GamePackage playable projection adapter",
+    "gate_status":  "goal_123_generic_gamepackage_playable_projection_adapter",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
     "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
-    "current_user_action":  "Review Goal122 accepted Alpha projection action-loop/window-polish evidence, then run hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Full Projection Verification. The window should be readable at typical editor sizes, with the main path first and optional debug/details panels bounded. Use Select Next Interaction Target, Preview Selected Action, Apply Preview Action To Projection State and Reset Projection State for projection-only action-loop checks. After Unity manual checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply only for bounded Unity editor noise. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
-    "recommended_next_decision":  "goal_122_accepted_alpha_projection_action_loop_and_window_polish after reviewing the action-loop and window-polish evidence. Goal122 keeps manual Unity verification to one main button, adds projection-local preview/apply/reset state, keeps cleanup bounded with .devflow\\scripts\\clean-unity-editor-noise.cmd after Unity checks, and still authorizes no Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
+    "current_user_action":  "Review Goal123 generic GamePackage projection evidence, then run hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Generic Package Projection Verification. The projection reads samples/minimal-map-game/package.json as a read-only sample, shows package identity, map dimensions, start/player proxy, tile markers, entities, interactions, item summary and event log without applying package data or writing Unity scenes, prefabs, ProjectSettings, Packages or StreamingAssets. After Unity checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply only for bounded Unity editor noise. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
+    "recommended_next_decision":  "goal_123_generic_gamepackage_playable_projection_adapter after reviewing the generic sample GamePackage projection evidence. Goal123 starts moving accepted Alpha projection away from geoworld-only assumptions by adding a projection-only adapter over samples/minimal-map-game/package.json, keeps cleanup bounded with .devflow\\scripts\\clean-unity-editor-noise.cmd after Unity checks, and still authorizes no Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "goal_123_generic_gamepackage_playable_projection_adapter",
                                                         "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
                                                         "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
                                                         "goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification",
@@ -472,6 +473,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "goal_123_generic_gamepackage_playable_projection_adapter",
+                                          "generic_gamepackage_playable_projection_adapter_verification",
                                           "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
                                           "goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification",
                                           "goal_120a_clean_unity_editor_noise_empty_status_hotfix",
@@ -604,14 +607,14 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
-    "recommended_next_work_item_title":  "Review the Goal121 accepted Alpha interaction drilldown and one-click verification",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/GOAL.md",
+    "recommended_next_work_item":  "goal_123_generic_gamepackage_playable_projection_adapter",
+    "recommended_next_work_item_title":  "Review the Goal123 generic GamePackage playable projection adapter",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-123-generic-gamepackage-playable-projection-adapter/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal121 one-click verification evidence before continuing accepted Alpha hands-on Unity verification",
-                                              "Run Goal121 hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Full Projection Verification; do not require the user to click every debug button after each goal",
+                                              "Review Goal123 generic GamePackage projection evidence before broadening accepted Alpha projection further",
+                                              "Run Goal123 hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Generic Package Projection Verification",
                                               "Use .devflow/scripts/clean-unity-editor-noise.ps1 -DryRun first, then .devflow/scripts/clean-unity-editor-noise.cmd or ./.devflow/scripts/clean-unity-editor-noise.ps1 -Apply only for bounded Unity editor noise after Unity checks",
-                                              "Keep Goal121 limits in force: no .llmgc/manual/**, no Unity scene/prefab/settings/packages/StreamingAssets, Runtime, schema, provider, Lua, generator-library, final renderer/atlas or release packaging work",
+                                              "Keep Goal123 limits in force: samples/minimal-map-game/package.json is read-only and excluded from expected changes; no .llmgc/manual/**, no Unity scene/prefab/settings/packages/StreamingAssets, Runtime, schema, provider, Lua, generator-library, final renderer/atlas or release packaging work",
                                               "Next goals must continue product-visible work or automated verification, not proof-only churn",
                                               "Keep Goal119 limits in force: this is not final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas, Unity scene/prefab/project-settings/StreamingAssets or release-packaging approval",
                                               "Use Goal119 accepted Alpha Unity playable projection evidence only as a manual verification entrypoint until accepted_alpha_unity_playable_projection_verification is reviewed",
@@ -2750,6 +2753,21 @@
                                                                                                 ],
                                                                             "next_action":  "review_goal122_action_loop_and_window_polish_then_continue_product_visible_or_automated_verification_work"
                                                                         },
+    "goal_123_generic_gamepackage_playable_projection_adapter":  {
+                                                                     "status":  "produced_for_review",
+                                                                     "accepted":  false,
+                                                                     "evidence_source":  "goal_123_generic_gamepackage_playable_projection_adapter",
+                                                                     "observed_result":  [
+                                                                                             "Goal123 adds a generic GamePackage projection-only path to the accepted Alpha Unity projection window.",
+                                                                                             "The Unity Editor route remains LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and adds the Run Generic Package Projection Verification button.",
+                                                                                             "The adapter reads samples/minimal-map-game/package.json as read-only input and visualizes package identity, map dimensions, start/player proxy, tile markers, entities, interaction markers, item summary and event log.",
+                                                                                             "Unity batchmode method LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageProjectionSmoke writes GOAL123_GENERIC_PACKAGE_PROJECTION_PASS or GOAL123_GENERIC_PACKAGE_PROJECTION_FAIL and verifies packageIdentityPresent, mapDimensionsPresent, startPlayerMarkerPresent, tileMarkerPresent, entityMarkerPresent, interactionMarkerPresent, itemSummaryEntryPresent, eventLogPresent and zeroFatalErrors.",
+                                                                                             "Evidence is under .llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter and export metadata is under .llmgc/exports/goal-123-generic-gamepackage-playable-projection-adapter.",
+                                                                                             "After Unity manual checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply for bounded editor-noise cleanup.",
+                                                                                             "Goal123 does not authorize samples/minimal-map-game/package.json mutation, .llmgc/manual/**, Unity scene/prefab/project-settings/packages/StreamingAssets, Runtime/schema/provider/Lua/generator-library, final renderer/atlas or release-packaging work."
+                                                                                         ],
+                                                                     "next_action":  "review_goal123_generic_gamepackage_projection_then_continue_product_visible_or_automated_verification_work"
+                                                                 },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
                                                                      "status":  "produced_for_review",
                                                                      "accepted":  false,

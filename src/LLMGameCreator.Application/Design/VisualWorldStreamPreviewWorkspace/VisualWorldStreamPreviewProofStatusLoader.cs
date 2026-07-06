@@ -132,6 +132,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal122AcceptedAlphaProjectionActionLoopProofStatus(
             projectRoot,
             proofDiagnostics));
+        proofs.AddRange(BuildGoal123GenericGamePackageProjectionProofStatus(
+            projectRoot,
+            proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);
@@ -693,5 +696,4 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)
         ];
-
 }

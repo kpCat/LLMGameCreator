@@ -1,0 +1,11 @@
+{
+  "goalId": "goal_123_generic_gamepackage_playable_projection_adapter",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "smokeRequiredFieldsPresent": true,
+  "passed": true,
+  "status": "GREEN",
+  "sha256": "eb5611efa931f0fbe92fbba52b448d9ababdc50d790d00001a0c0c71cf311d32",
+  "forbiddenMarkersFound": []
+}

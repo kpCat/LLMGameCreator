@@ -168,6 +168,52 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.Passed);
     }
 
+    [Fact]
+    public void Goal123GenericPackageProjectionSourceScanFindsAdapterWindowBatchmodeAndSamplePackage()
+    {
+        var result = new GenericGamePackageProjectionService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.GenericProjectionStatus);
+        Assert.Equal(
+            GenericGamePackageProjectionVocabulary.SamplePackagePath,
+            result.Dashboard.SamplePackagePath);
+        Assert.Equal("game/minimal-map-game", result.Dashboard.PackageId);
+        Assert.Equal("Minimal Map Game", result.Dashboard.PackageTitle);
+        Assert.Equal("map/village", result.Dashboard.MapId);
+        Assert.Equal("12x8", result.Dashboard.MapSize);
+        Assert.True(result.Dashboard.EntityCount >= 2);
+        Assert.True(result.Dashboard.ItemCount >= 1);
+        Assert.True(result.Dashboard.Goal122StillGreen);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.NotEqual(
+            "BLOCKED_UNITY_BATCHMODE_GENERIC_PACKAGE_PROJECTION",
+            result.Dashboard.UnitySmokeStatus);
+        Assert.True(result.SamplePackage.Exists);
+        Assert.True(result.SamplePackage.Parsed);
+        Assert.True(result.SamplePackage.ReadOnlySource);
+        Assert.True(result.SamplePackage.ExcludedFromExpectedChangedPaths);
+        Assert.True(result.SamplePackage.WallTilePresent);
+        Assert.True(result.SamplePackage.RoadTilePresent);
+        Assert.True(result.SamplePackage.InteractableEntityCount >= 1);
+        Assert.False(string.IsNullOrWhiteSpace(result.SamplePackage.Sha256));
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.WindowActionPresent);
+        Assert.True(result.ScriptInventory.BatchmodeMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.ScriptInventory.BatchmodeFailMarkerPresent);
+        Assert.True(result.ScriptInventory.AdapterReadsSamplePackage);
+        Assert.True(result.ScriptInventory.ControllerBuildsGenericSection);
+        Assert.True(result.ScriptInventory.ControllerVerifiesRequiredMarkers);
+        Assert.True(result.ScriptInventory.ModelsExposeSmokeFields);
+        Assert.True(result.ScriptInventory.ExistingGoal122VerificationStillPresent);
+        Assert.True(result.ScriptInventory.MarkerDescriptorCompatible);
+        Assert.True(result.ScriptInventory.NoSourceWriteMarkers);
+        Assert.True(result.SmokePlan.StepCount >= 10);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.True(result.NegativeProof.SamplePackageMutationRejected);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

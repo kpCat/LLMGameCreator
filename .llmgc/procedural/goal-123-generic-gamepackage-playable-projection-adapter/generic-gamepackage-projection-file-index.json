@@ -1,0 +1,50 @@
+{
+  "goalId": "goal_123_generic_gamepackage_playable_projection_adapter",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 7,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/generic-gamepackage-projection-dashboard.json",
+      "role": "goal123_generic_gamepackage_projection_evidence",
+      "required": true,
+      "sha256": "e88e4ee1f1fa0f5aa2883a32a31b9cfe1b7cdb943beaf4e906453e30fbf0c506"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/generic-gamepackage-projection-log-scan.json",
+      "role": "goal123_generic_gamepackage_projection_evidence",
+      "required": true,
+      "sha256": "ec5bf5389da8e7d871639bd2c885e2b81042daffa6fa822441f092c1416ff33b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/generic-gamepackage-projection-negative-proof.json",
+      "role": "goal123_generic_gamepackage_projection_evidence",
+      "required": true,
+      "sha256": "39abcf96b1d6beeebea651ce4a19c4ab6887888e220b9c09046a742757f7dc1c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/generic-gamepackage-projection-report.md",
+      "role": "goal123_generic_gamepackage_projection_evidence",
+      "required": true,
+      "sha256": "917eb53ca81f610563988125dd9ce8ab89b618523f8c5fc0ee113d26a2f10322"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/generic-gamepackage-projection-script-inventory.json",
+      "role": "goal123_generic_gamepackage_projection_evidence",
+      "required": true,
+      "sha256": "aac907e4fad1f4dbcfc2c249d19b55ecd1c30b1f12ad2f9748c35d1ab67623cf"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/generic-gamepackage-projection-smoke-plan.json",
+      "role": "goal123_generic_gamepackage_projection_evidence",
+      "required": true,
+      "sha256": "0cb56dfcac72e35d945c8e16d052423eca23ec14f63b531a0697a1bebb308a07"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/unity-batchmode-generic-gamepackage-projection.log",
+      "role": "goal123_unity_batchmode_generic_gamepackage_projection_log",
+      "required": true,
+      "sha256": "eb5611efa931f0fbe92fbba52b448d9ababdc50d790d00001a0c0c71cf311d32"
+    }
+  ]
+}

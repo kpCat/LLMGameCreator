@@ -2211,20 +2211,39 @@ metadata under `.llmgc/exports/goal-122-accepted-alpha-projection-action-loop-an
 geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project
 settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 123: Generic GamePackage Playable Projection Adapter
+
+Goal 123 is produced for review as a GREEN generic GamePackage projection-only adapter for the accepted Alpha Unity
+projection shell. It keeps the same menu route, `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, and
+adds `Run Generic Package Projection Verification`.
+
+The adapter reads `samples/minimal-map-game/package.json` as a read-only sample and visualizes package identity, map
+dimensions, start/player proxy, tile markers, entities, interaction markers, item summary and event log. The sample is
+not mutated and generated package data is not applied to Runtime, schema, Lua, generator-library, scenes, prefabs,
+ProjectSettings, Packages or StreamingAssets.
+
+Evidence is under `.llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/` plus export metadata
+under `.llmgc/exports/goal-123-generic-gamepackage-playable-projection-adapter/`. Unity batchmode uses
+`LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageProjectionSmoke` and must log
+`GOAL123_GENERIC_PACKAGE_PROJECTION_PASS` for GREEN. Goal123 remains projection-only and does not authorize final
+release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab
+project settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-goal_122_accepted_alpha_projection_action_loop_and_window_polish
+goal_123_generic_gamepackage_playable_projection_adapter
 ```
 
-Review the Goal122 action-loop/window-polish evidence, then continue accepted Alpha hands-on Unity verification through
-`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and click `Run Full Projection Verification`. Use the
-projection-only action loop buttons for preview/apply/reset checks, then use the supported cleanup command only for
-bounded Unity editor noise. Do not start live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay,
-final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
+Review the Goal123 generic GamePackage projection evidence, then continue accepted Alpha hands-on Unity verification
+through `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and click
+`Run Generic Package Projection Verification`. Inspect the read-only minimal-map package projection, then use the
+supported cleanup command only for bounded Unity editor noise. Do not start sample mutation, live geodata/provider,
+Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
+StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_122_projection_action_loop_window_polish_green_manual_verification_simplified
+goal_123_generic_gamepackage_projection_green_projection_only
 ```

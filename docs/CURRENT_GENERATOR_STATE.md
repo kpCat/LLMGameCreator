@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 122 accepted Alpha projection action loop and window polish
+Updated by: Goal 123 generic GamePackage playable projection adapter
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -104,12 +104,31 @@ StreamingAssets. Evidence lives under
 `.llmgc/exports/goal-122-accepted-alpha-projection-action-loop-and-window-polish/`, and the short manual note at
 `docs/manual-acceptance/accepted-alpha-projection-action-loop-and-window-polish.md`.
 
+Goal 123 starts moving the accepted Alpha projection shell beyond geoworld-only assumptions:
+
+```text
+goal_123_generic_gamepackage_playable_projection_adapter required
+implementationStatus=GREEN
+accepted=false
+manualPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection -> Run Generic Package Projection Verification
+unityBatchmodeSmoke=GOAL123_GENERIC_PACKAGE_PROJECTION_PASS required
+samplePackagePath=samples/minimal-map-game/package.json read-only
+```
+
+Goal123 adds a projection-only adapter for `samples/minimal-map-game/package.json`. The Unity window reads the sample
+as read-only input and visualizes package identity, map dimensions, start/player proxy, tile markers, entities,
+interaction markers, item summary and event log. Evidence lives under
+`.llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/`, export metadata under
+`.llmgc/exports/goal-123-generic-gamepackage-playable-projection-adapter/`, and the short manual note at
+`docs/manual-acceptance/generic-gamepackage-playable-projection-adapter.md`.
+
 After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue
 product-visible work or automated verification, not proof-only churn.
 
-This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
-final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+This is not final release and does not authorize `samples/minimal-map-game/package.json` mutation,
+live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas,
+Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
 Goal 053 handoff acceptance recorded before Goal 054:
 

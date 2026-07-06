@@ -36,6 +36,8 @@ Goal 121 note: the accepted Alpha interaction drilldown and one-click verificati
 
 Goal 122 note: the accepted Alpha projection action-loop and window-polish pass keeps the same one-button verification path, adds projection-local Preview/Apply/Reset state and makes the EditorWindow readable with compact status plus bounded panels. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 123 note: the generic GamePackage playable projection adapter pass adds `Run Generic Package Projection Verification` to the accepted Alpha Unity projection route and visualizes `samples/minimal-map-game/package.json` as read-only projection data. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

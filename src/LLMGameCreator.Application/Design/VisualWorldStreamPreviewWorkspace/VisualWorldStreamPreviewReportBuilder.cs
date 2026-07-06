@@ -611,6 +611,32 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.AcceptedAlphaProjectionActionLoopQualityGatePassed,
             Goal122FilesDiscoveredByRelativePaths =
                 qualityGate.Goal122FilesDiscoveredByRelativePaths,
+            GenericProjectionStatus =
+                qualityGate.GenericProjectionStatus,
+            GenericProjectionSamplePackagePath =
+                qualityGate.GenericProjectionSamplePackagePath,
+            GenericProjectionPackageId =
+                qualityGate.GenericProjectionPackageId,
+            GenericProjectionPackageTitle =
+                qualityGate.GenericProjectionPackageTitle,
+            GenericProjectionMapId =
+                qualityGate.GenericProjectionMapId,
+            GenericProjectionMapSize =
+                qualityGate.GenericProjectionMapSize,
+            GenericProjectionEntityCount =
+                qualityGate.GenericProjectionEntityCount,
+            GenericProjectionItemCount =
+                qualityGate.GenericProjectionItemCount,
+            GenericProjectionUnitySmokeStatus =
+                qualityGate.GenericProjectionUnitySmokeStatus,
+            GenericProjectionGoal122StillGreen =
+                qualityGate.GenericProjectionGoal122StillGreen,
+            GenericProjectionCleanupScriptAvailable =
+                qualityGate.GenericProjectionCleanupScriptAvailable,
+            GenericGamePackageProjectionQualityGatePassed =
+                qualityGate.GenericGamePackageProjectionQualityGatePassed,
+            Goal123FilesDiscoveredByRelativePaths =
+                qualityGate.Goal123FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

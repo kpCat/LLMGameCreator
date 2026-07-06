@@ -22,6 +22,7 @@ namespace LLMGameCreatorAlpha
         private string fullVerificationStatus = "not run";
         private string selectedMarkerStatus = "none";
         private string projectionStateStatus = "not initialized";
+        private string genericProjectionStatus = "not run";
         private bool diagnosticsExpanded;
         private bool smokeExpanded = true;
         private bool selectedMarkerExpanded = true;
@@ -224,6 +225,51 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeGenericGamePackageProjectionSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureGenericController();
+                var passed = controller.RunGenericPackageProjectionVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\n" + controller.SelectedMarkerDetails
+                                  + "\n" + controller.VerificationEventLog;
+                if (passed)
+                {
+                    Debug.Log("GOAL123_GENERIC_PACKAGE_PROJECTION_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL123_GENERIC_PACKAGE_PROJECTION_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL123_GENERIC_PACKAGE_PROJECTION_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL123_GENERIC_PACKAGE_PROJECTION_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -242,6 +288,17 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.HelpBox(
                 "Manual check path: Run Full Projection Verification, then .devflow\\scripts\\clean-unity-editor-noise.cmd.",
                 MessageType.Info);
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("Generic GamePackage Projection", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Status", genericProjectionStatus);
+            if (GUILayout.Button("Run Generic Package Projection Verification", GUILayout.Height(28)))
+            {
+                RunGenericPackageProjectionVerification();
+            }
+            EditorGUILayout.EndVertical();
 
             EditorGUILayout.Space();
 
@@ -341,6 +398,7 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.LabelField("Full Verification", fullVerificationStatus);
             EditorGUILayout.LabelField("Selected Marker", selectedMarkerStatus);
             EditorGUILayout.LabelField("Projection State", projectionStateStatus);
+            EditorGUILayout.LabelField("Generic Package Projection", genericProjectionStatus);
             EditorGUILayout.EndVertical();
         }
 
@@ -463,6 +521,14 @@ namespace LLMGameCreatorAlpha
             Capture(controller);
         }
 
+        private void RunGenericPackageProjectionVerification()
+        {
+            var controller = EnsureGenericController();
+            controller.RunGenericPackageProjectionVerification();
+            SelectAndFrame(controller.FindFirstGenericEntityMarker() ?? controller.FindGenericProjectionRoot());
+            CaptureGeneric(controller);
+        }
+
         private void ClearProjection()
         {
             var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
@@ -482,6 +548,7 @@ namespace LLMGameCreatorAlpha
             fullVerificationStatus = "not run";
             selectedMarkerStatus = "none";
             projectionStateStatus = "not initialized";
+            genericProjectionStatus = "not run";
         }
 
         private static void ClearProjectionRootImmediate()
@@ -525,6 +592,30 @@ namespace LLMGameCreatorAlpha
             return controller;
         }
 
+        private static GenericGamePackageProjectionController EnsureGenericController()
+        {
+            var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
+            if (root == null)
+            {
+                root = new GameObject(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
+                Undo.RegisterCreatedObjectUndo(root, "Create Accepted Alpha Playable Projection");
+            }
+
+            var acceptedController = root.GetComponent<AcceptedAlphaPlayableProjectionController>();
+            if (acceptedController == null)
+            {
+                root.AddComponent<AcceptedAlphaPlayableProjectionController>();
+            }
+
+            var controller = root.GetComponent<GenericGamePackageProjectionController>();
+            if (controller == null)
+            {
+                controller = root.AddComponent<GenericGamePackageProjectionController>();
+            }
+
+            return controller;
+        }
+
         private void Capture(AcceptedAlphaPlayableProjectionController controller)
         {
             statusLine = controller.StatusLine;
@@ -541,6 +632,37 @@ namespace LLMGameCreatorAlpha
             selectedMarkerStatus = "id=" + EmptyAsNone(controller.SelectedMarkerId)
                                    + "; kind=" + EmptyAsNone(controller.SelectedMarkerKind);
             projectionStateStatus = controller.ProjectionStateStatus;
+        }
+
+        private void CaptureGeneric(GenericGamePackageProjectionController controller)
+        {
+            statusLine = controller.StatusLine;
+            diagnostics = controller.LastDiagnostics;
+            smokeDiagnostics = controller.LastSmokeDiagnostics;
+            selectedMarkerDetails = controller.SelectedMarkerDetails;
+            interactionPreview = "Generic package projection is read-only; no Runtime action is executed.";
+            objectiveReplayDetails = "samplePackagePath="
+                                     + GenericGamePackageProjectionAdapter.SamplePackageRelativePath
+                                     + "\npackageId="
+                                     + controller.PackageId
+                                     + "\npackageTitle="
+                                     + controller.PackageTitle
+                                     + "\nmapId="
+                                     + controller.MapId
+                                     + "\nmapSize="
+                                     + controller.MapWidth
+                                     + "x"
+                                     + controller.MapHeight
+                                     + "\nentityCount="
+                                     + controller.EntityCount
+                                     + "\nitemCount="
+                                     + controller.ItemCount;
+            verificationEventLog = controller.VerificationEventLog;
+            genericProjectionStatus = controller.LastVerificationPassed ? "passed" : "not passed";
+            fullVerificationStatus = "genericPackageProjection="
+                                     + (controller.LastVerificationPassed ? "passed" : "not passed");
+            selectedMarkerStatus = "id=" + EmptyAsNone(controller.SelectedMarkerId)
+                                   + "; kind=" + EmptyAsNone(controller.SelectedMarkerKind);
         }
 
         private static string EmptyAsNone(string value)

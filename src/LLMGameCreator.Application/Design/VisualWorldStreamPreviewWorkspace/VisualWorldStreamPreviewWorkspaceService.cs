@@ -71,7 +71,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildAcceptedAlphaUnityPlayableProjectionGroup(projectRoot, diagnostics),
             BuildAcceptedAlphaProjectionUsabilityGroup(projectRoot, diagnostics),
             BuildAcceptedAlphaInteractionDrilldownGroup(projectRoot, diagnostics),
-            BuildAcceptedAlphaProjectionActionLoopGroup(projectRoot, diagnostics)
+            BuildAcceptedAlphaProjectionActionLoopGroup(projectRoot, diagnostics),
+            BuildGenericGamePackageProjectionGroup(projectRoot, diagnostics)
         };
         groups = NormalizeHistoricalManualAcceptanceGroups(groups).ToList();
 

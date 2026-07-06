@@ -1,0 +1,57 @@
+{
+  "goalId": "goal_123_generic_gamepackage_playable_projection_adapter",
+  "oneClickManualPath": true,
+  "stepCount": 10,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "open_projection_window",
+      "expectedResult": "Open the accepted Alpha projection menu path."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "run_generic_package_projection_verification",
+      "expectedResult": "Click Run Generic Package Projection Verification."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "load_sample_package",
+      "expectedResult": "Read samples/minimal-map-game/package.json without mutating it."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "render_package_identity",
+      "expectedResult": "Title and package id are visible."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "render_map_grid",
+      "expectedResult": "Map id and dimensions plus tile/road/wall markers are visible."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "render_start_player_proxy",
+      "expectedResult": "Start/player proxy marker is present."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "render_entities_and_interactions",
+      "expectedResult": "Entity markers and interaction details are present."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "render_item_summary",
+      "expectedResult": "Item list panel has at least one item entry."
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "read_event_log",
+      "expectedResult": "Package verification event log reports pass/fail."
+    },
+    {
+      "stepIndex": 10,
+      "stepId": "cleanup_after_unity",
+      "expectedResult": "Use the existing clean-unity-editor-noise command after Unity checks."
+    }
+  ]
+}

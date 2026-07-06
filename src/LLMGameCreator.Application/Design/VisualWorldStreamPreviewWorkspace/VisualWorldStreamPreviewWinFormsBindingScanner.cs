@@ -70,11 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                        + ReadGoal120WinFormsPageText(projectRoot)
-                        + "\n"
-                        + ReadGoal121WinFormsPageText(projectRoot)
-                        + "\n"
-                        + ReadGoal122WinFormsPageText(projectRoot);
+                        + ReadGoal120Through123WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -506,6 +502,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysAcceptedAlphaProjectionUsability = PageBindsGoal120AcceptedAlphaProjectionUsability(pageText);
         var bindDisplaysAcceptedAlphaInteractionDrilldown = PageBindsGoal121AcceptedAlphaInteractionDrilldown(pageText);
         var bindDisplaysAcceptedAlphaProjectionActionLoop = PageBindsGoal122AcceptedAlphaProjectionActionLoop(pageText);
+        var bindDisplaysGenericGamePackageProjection = PageBindsGoal123GenericGamePackageProjection(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -636,6 +633,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             diagnostics);
         AddIfFalse(bindDisplaysAcceptedAlphaProjectionActionLoop,
             "goal122.winforms.accepted_alpha_projection_action_loop_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageProjection,
+            "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -692,6 +691,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysAcceptedAlphaInteractionDrilldown =
                 bindDisplaysAcceptedAlphaInteractionDrilldown,
             PageBindDisplaysAcceptedAlphaProjectionActionLoop = bindDisplaysAcceptedAlphaProjectionActionLoop,
+            PageBindDisplaysGenericGamePackageProjection = bindDisplaysGenericGamePackageProjection,
             Diagnostics = diagnostics
         };
     }
