@@ -156,10 +156,14 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             projectRoot,
             root + "/" + ParameterizedGamePackageProjectionRunnerVocabulary.LogScanFileName,
             diagnostics);
+        var packagePathRelative = Goal128String(dashboard?.RootElement, "packagePathRelative");
+        var packagePath = string.IsNullOrWhiteSpace(packagePathRelative)
+            ? Goal128String(dashboard?.RootElement, "packagePath")
+            : packagePathRelative;
         return new ParameterizedGamePackageRunnerWorkspaceSummary(
             RunnerStatus: Goal128String(dashboard?.RootElement, "parameterizedRunnerStatus"),
-            PackagePath: Goal128String(dashboard?.RootElement, "packagePath"),
-            PackagePathRelative: Goal128String(dashboard?.RootElement, "packagePathRelative"),
+            PackagePath: packagePath,
+            PackagePathRelative: packagePathRelative,
             NormalCommand: Goal128String(dashboard?.RootElement, "normalCommand"),
             ExampleCommandWithPackagePath:
                 Goal128String(dashboard?.RootElement, "exampleCommandWithPackagePath"),

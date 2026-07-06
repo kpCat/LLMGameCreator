@@ -3,6 +3,9 @@ param(
     [string]$Mode = "GenericFullPlaythrough",
     [string]$UnityPath = "",
     [string]$PackagePath = "samples/minimal-map-game/package.json",
+    [string]$EvidenceRoot = "",
+    [string]$ResultPath = "",
+    [string]$LogPath = "",
     [switch]$DryRun,
     [switch]$ApplyCleanup
 )
@@ -16,9 +19,6 @@ Initialize-DevflowScriptEnvironment
 
 $RepoRoot = Resolve-DevflowRepoRoot -ScriptPath $ScriptPath
 $ProjectPath = Join-Path $RepoRoot "unity/LLMGameCreatorAlpha"
-$EvidenceRoot = Join-Path $RepoRoot ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface"
-$LogPath = Join-Path $EvidenceRoot "unity-batchmode-parameterized-gamepackage-full-playthrough.log"
-$ResultPath = Join-Path $EvidenceRoot "parameterized-gamepackage-runner-result.json"
 $CleanupScript = Join-Path $RepoRoot ".devflow/scripts/clean-unity-editor-noise.ps1"
 $ExecuteMethod = "LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeParameterizedGamePackageFullPlaythroughSmoke"
 $PassMarker = "GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS"
@@ -49,6 +49,60 @@ function ConvertTo-RunnerRelativePath {
     $root = [System.IO.Path]::GetFullPath($RepoRoot).TrimEnd([System.IO.Path]::DirectorySeparatorChar)
     if ($full.StartsWith($root + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)) {
         return $full.Substring($root.Length).TrimStart([System.IO.Path]::DirectorySeparatorChar).Replace('\', '/')
+    }
+
+    return $full
+}
+
+function Resolve-RunnerOutputRoot {
+    param([string]$ExplicitPath)
+
+    $candidate = $ExplicitPath
+    if ([string]::IsNullOrWhiteSpace($candidate)) {
+        $candidate = ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface"
+    }
+
+    if ([System.IO.Path]::IsPathRooted($candidate)) {
+        $full = [System.IO.Path]::GetFullPath($candidate)
+    }
+    else {
+        $full = [System.IO.Path]::GetFullPath((Join-Path $RepoRoot $candidate))
+    }
+
+    if (-not (Test-RunnerPathUnderRoot -RootPath $RepoRoot -CandidatePath $full)) {
+        throw "EvidenceRoot must stay under the repository root: $candidate"
+    }
+
+    $relative = ConvertTo-RunnerRelativePath -Path $full
+    if ($relative.StartsWith(".llmgc/manual/", [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "EvidenceRoot must not point under .llmgc/manual: $relative"
+    }
+
+    return $full
+}
+
+function Resolve-RunnerOutputFile {
+    param(
+        [Parameter(Mandatory=$true)][string]$ExplicitPath,
+        [Parameter(Mandatory=$true)][string]$DefaultFileName
+    )
+
+    $candidate = $ExplicitPath
+    if ([string]::IsNullOrWhiteSpace($candidate)) {
+        $candidate = Join-Path $EvidenceRoot $DefaultFileName
+    }
+    elseif (-not [System.IO.Path]::IsPathRooted($candidate)) {
+        $candidate = Join-Path $RepoRoot $candidate
+    }
+
+    $full = [System.IO.Path]::GetFullPath($candidate)
+    if (-not (Test-RunnerPathUnderRoot -RootPath $RepoRoot -CandidatePath $full)) {
+        throw "Output path must stay under the repository root: $ExplicitPath"
+    }
+
+    $relative = ConvertTo-RunnerRelativePath -Path $full
+    if ($relative.StartsWith(".llmgc/manual/", [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Output path must not point under .llmgc/manual: $relative"
     }
 
     return $full
@@ -209,7 +263,13 @@ if ($Mode -ne "GenericFullPlaythrough") {
     throw "Unsupported Unity projection verification mode: $Mode"
 }
 
+$EvidenceRoot = Resolve-RunnerOutputRoot -ExplicitPath $EvidenceRoot
+$ResultPath = Resolve-RunnerOutputFile -ExplicitPath $ResultPath -DefaultFileName "parameterized-gamepackage-runner-result.json"
+$LogPath = Resolve-RunnerOutputFile -ExplicitPath $LogPath -DefaultFileName "unity-batchmode-parameterized-gamepackage-full-playthrough.log"
+
 [System.IO.Directory]::CreateDirectory($EvidenceRoot) | Out-Null
+[System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($ResultPath)) | Out-Null
+[System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($LogPath)) | Out-Null
 $ResolvedUnityPath = Resolve-RunnerUnityPath -ExplicitPath $UnityPath
 $ResolvedPackagePath = Resolve-RunnerPackagePath -ExplicitPath $PackagePath
 $UnityArgs = @(

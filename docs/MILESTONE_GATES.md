@@ -48,6 +48,8 @@ Goal 127 note: the WinForms Unity projection verification runner makes `.devflow
 
 Goal 128 note: the same normal runner now accepts optional `-PackagePath`, resolves only repo-local GamePackage JSON outside `.llmgc/manual/**`, forwards it to Unity as `-llmgcPackagePath`, and surfaces package-path/result/log/cleanup status in Visual World Stream Preview Workspace and WinForms. Manual Unity inspection remains optional. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 129 note: the GamePackage candidate matrix runner makes `.devflow\scripts\run-gamepackage-projection-matrix.cmd` the normal repo-local candidate verification command over the Goal128 parameterized runner. It creates a byte-copy baseline candidate and a sample-derived variant under Goal129 artifacts, records per-candidate runner result/log scans and an aggregate matrix result, and keeps manual Unity inspection optional. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

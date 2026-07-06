@@ -170,6 +170,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildGoal127UnityProjectionVerificationRunnerQuality(groups, proofs);
         var parameterizedGamePackageRunner =
             BuildGoal128ParameterizedGamePackageRunnerQuality(groups, proofs);
+        var gamePackageCandidateMatrix =
+            BuildGoal129GamePackageCandidateMatrixQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -355,6 +357,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             diagnostics);
         AddGoal128ParameterizedGamePackageRunnerQualityDiagnostics(
             parameterizedGamePackageRunner,
+            binding,
+            diagnostics);
+        AddGoal129GamePackageCandidateMatrixQualityDiagnostics(
+            gamePackageCandidateMatrix,
             binding,
             diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
@@ -651,9 +657,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             withGoal126,
             unityProjectionVerificationRunner,
             binding);
-        return ApplyGoal128ParameterizedGamePackageRunnerQuality(
+        var withGoal128 = ApplyGoal128ParameterizedGamePackageRunnerQuality(
             withGoal127,
             parameterizedGamePackageRunner,
+            binding);
+        return ApplyGoal129GamePackageCandidateMatrixQuality(
+            withGoal128,
+            gamePackageCandidateMatrix,
             binding);
     }
 

@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                         + ReadGoal120Through128WinFormsPageText(projectRoot);
+                         + ReadGoal120Through129WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -509,6 +509,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysUnityProjectionVerificationRunner =
             PageBindsGoal127UnityProjectionVerificationRunner(pageText);
         var bindDisplaysParameterizedGamePackageRunner = PageBindsGoal128ParameterizedGamePackageRunner(pageText);
+        var bindDisplaysGamePackageCandidateMatrix =
+            PageBindsGoal129GamePackageCandidateMatrix(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -644,6 +646,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(bindDisplaysGenericGamePackageFullPlaythrough, "goal126.winforms.generic_gamepackage_full_playthrough_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysUnityProjectionVerificationRunner, "goal127.winforms.unity_projection_runner_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysParameterizedGamePackageRunner, "goal128.winforms.parameterized_gamepackage_runner_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGamePackageCandidateMatrix, "goal129.winforms.gamepackage_candidate_matrix_bind_missing", pageRelativePath, diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -686,6 +689,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGenericGamePackageFullPlaythrough = bindDisplaysGenericGamePackageFullPlaythrough,
             PageBindDisplaysUnityProjectionVerificationRunner = bindDisplaysUnityProjectionVerificationRunner,
             PageBindDisplaysParameterizedGamePackageRunner = bindDisplaysParameterizedGamePackageRunner,
+            PageBindDisplaysGamePackageCandidateMatrix = bindDisplaysGamePackageCandidateMatrix,
             Diagnostics = diagnostics
         };
     }

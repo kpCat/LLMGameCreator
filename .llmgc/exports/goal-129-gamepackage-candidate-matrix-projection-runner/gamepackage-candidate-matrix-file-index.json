@@ -1,0 +1,86 @@
+{
+  "goalId": "goal_129_gamepackage_candidate_matrix_projection_runner",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 13,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/candidates/minimal-map-game-baseline/package.json",
+      "role": "goal129_candidate_package",
+      "required": true,
+      "sha256": "edb728bd1eb4921e502d4cf7ffa8e083f4dd5414629d227ca4125a6735c5d776"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/candidates/minimal-map-game-variant/package.json",
+      "role": "goal129_candidate_package",
+      "required": true,
+      "sha256": "324d3759914749385cf3aab453b79eaa5eedc889e26d3c93d857fcae98c00cde"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-index.json",
+      "role": "goal129_gamepackage_candidate_matrix_gamepackage-candidate-index",
+      "required": true,
+      "sha256": "47370052b1c62d62f098aaff4245260498527ce94002ba0734cba8e331bd1d79"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-matrix-dashboard.json",
+      "role": "goal129_gamepackage_candidate_matrix_gamepackage-candidate-matrix-dashboard",
+      "required": true,
+      "sha256": "98adabff54b2297cdc66f21300646f73159b6f9f16cc8cf581d91d616d991eaa"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-matrix-log-scan.json",
+      "role": "goal129_gamepackage_candidate_matrix_gamepackage-candidate-matrix-log-scan",
+      "required": true,
+      "sha256": "dcd04a64f7abc82ce15e2a1d909dfcd994d0808e30a5e0b080639cf0f958c260"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-matrix-negative-proof.json",
+      "role": "goal129_gamepackage_candidate_matrix_gamepackage-candidate-matrix-negative-proof",
+      "required": true,
+      "sha256": "501d2721359a060bba6166f0a1b5612c468f4e9ca4da3184c4a04ca1932d3f1f"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-matrix-report.md",
+      "role": "goal129_gamepackage_candidate_matrix_gamepackage-candidate-matrix-report",
+      "required": true,
+      "sha256": "50650a75ddd2f2c7d79a9f4036e4616cbe659a19317c2a5593667808c479305b"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-matrix-script-scan.json",
+      "role": "goal129_gamepackage_candidate_matrix_gamepackage-candidate-matrix-script-scan",
+      "required": true,
+      "sha256": "2fbfb9ee896aa92882390536d8aae987743ff97465fc55362a1dc9bcf94db857"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-projection-matrix-result.json",
+      "role": "goal129_matrix_runner_artifact",
+      "required": true,
+      "sha256": "fba80a510deaebddfa44cb30b9d2e5f5301d85f838b596f25f002396da6db83b"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/matrix/minimal-map-game-baseline/log-scan.json",
+      "role": "goal129_matrix_runner_artifact",
+      "required": true,
+      "sha256": "da428a27b70194107b68aa7714abd8a454270a5261bd1a9f80db0402e49d5462"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/matrix/minimal-map-game-baseline/runner-result.json",
+      "role": "goal129_matrix_runner_artifact",
+      "required": true,
+      "sha256": "75f49147cc012d0b5c26d2ec1729e5ffd2e7ebf130c9a7786da57c332b052e81"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/matrix/minimal-map-game-variant/log-scan.json",
+      "role": "goal129_matrix_runner_artifact",
+      "required": true,
+      "sha256": "2ad87cb5efefefb73ce5f2e45c6d7d1723d38ade0e3585589c98c59ec2f801d9"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-129-gamepackage-candidate-matrix-projection-runner/matrix/minimal-map-game-variant/runner-result.json",
+      "role": "goal129_matrix_runner_artifact",
+      "required": true,
+      "sha256": "f4ea00a9b3163c64e039d27b1da0682f2c131c435773c37fa21aa05507d47d9b"
+    }
+  ]
+}

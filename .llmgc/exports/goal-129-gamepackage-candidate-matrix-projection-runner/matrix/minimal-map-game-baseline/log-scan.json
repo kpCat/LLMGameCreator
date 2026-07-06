@@ -1,0 +1,14 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_matrix_log_scan_v1",
+    "goalId":  "goal_129_gamepackage_candidate_matrix_projection_runner",
+    "candidateId":  "minimal-map-game-baseline",
+    "logPath":  ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/matrix/minimal-map-game-baseline/unity.log",
+    "logExists":  true,
+    "passMarkerPresent":  true,
+    "failMarkerAbsent":  true,
+    "materialWarningAbsent":  true,
+    "forbiddenMarkersFound":  [
+
+                              ],
+    "passed":  true
+}

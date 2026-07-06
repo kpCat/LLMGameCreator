@@ -1,0 +1,19 @@
+{
+  "goalId": "goal_129_gamepackage_candidate_matrix_projection_runner",
+  "matrixRunnerScriptExists": true,
+  "matrixRunnerCmdExists": true,
+  "supportsDefaultCandidateIndexPath": true,
+  "supportsDryRun": true,
+  "invokesParameterizedUnityProjectionRunner": true,
+  "callsGenericFullPlaythroughMode": true,
+  "passesCandidatePackagePath": true,
+  "passesApplyCleanup": true,
+  "supportsPerCandidateResultAndLogPaths": true,
+  "rejectsOutsideRepository": true,
+  "rejectsManualInputRoot": true,
+  "writesAggregateMatrixResult": true,
+  "noBroadGitClean": true,
+  "noForbiddenMutationTargets": true,
+  "passed": true,
+  "forbiddenMarkersFound": []
+}

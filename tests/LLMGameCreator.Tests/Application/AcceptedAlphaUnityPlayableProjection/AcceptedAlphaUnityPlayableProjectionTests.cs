@@ -495,6 +495,79 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         }
     }
 
+    [Fact]
+    public async Task Goal129GamePackageCandidateMatrixBuildsCandidatesAndScansMatrixWhenPresent()
+    {
+        var root = ProjectRoot();
+        var write = await new GamePackageCandidateMatrixProjectionService()
+            .BuildAndWriteAsync(root);
+        var result = write.Result;
+
+        Assert.True(result.CandidateIndex.Passed);
+        Assert.Equal(2, result.CandidateIndex.CandidateCount);
+        Assert.Contains(result.CandidateIndex.Candidates, candidate =>
+            candidate.CandidateId
+            == GamePackageCandidateMatrixProjectionVocabulary.BaselineCandidateId
+            && candidate.PackagePathRelative
+            == GamePackageCandidateMatrixProjectionVocabulary.BaselineCandidatePackagePath
+            && candidate.SourceKind == "sample-byte-copy");
+        Assert.Contains(result.CandidateIndex.Candidates, candidate =>
+            candidate.CandidateId
+            == GamePackageCandidateMatrixProjectionVocabulary.VariantCandidateId
+            && candidate.PackagePathRelative
+            == GamePackageCandidateMatrixProjectionVocabulary.VariantCandidatePackagePath
+            && candidate.PackageId == "game/minimal-map-game"
+            && candidate.Title == "Minimal Map Game"
+            && candidate.Sha256 != result.CandidateIndex.Candidates.First(item =>
+                item.CandidateId == GamePackageCandidateMatrixProjectionVocabulary.BaselineCandidateId).Sha256);
+        Assert.All(result.CandidateIndex.Candidates, candidate =>
+            Assert.Equal(
+                GamePackageCandidateMatrixProjectionVocabulary.RequiredCompatibilityIds,
+                candidate.RequiredCompatibilityIds));
+        Assert.True(result.ScriptScan.Passed);
+        Assert.True(result.ScriptScan.InvokesParameterizedUnityProjectionRunner);
+        Assert.True(result.ScriptScan.CallsGenericFullPlaythroughMode);
+        Assert.True(result.ScriptScan.PassesCandidatePackagePath);
+        Assert.True(result.ScriptScan.PassesApplyCleanup);
+        Assert.True(result.ScriptScan.SupportsPerCandidateResultAndLogPaths);
+        Assert.True(result.ScriptScan.RejectsOutsideRepository);
+        Assert.True(result.ScriptScan.RejectsManualInputRoot);
+        Assert.True(result.ScriptScan.NoBroadGitClean);
+        Assert.True(result.ScriptScan.NoForbiddenMutationTargets);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.True(result.NegativeProof.ManualInputRejected);
+        Assert.True(result.NegativeProof.SamplePackageReadOnly);
+        Assert.True(result.NegativeProof.CandidatePathsUnderGoalArtifacts);
+        Assert.True(result.Dashboard.ManualUnityOptional);
+        Assert.True(result.Dashboard.ProjectionOnly);
+
+        Assert.Contains(write.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.CandidateIndexRelativePath);
+        Assert.Contains(write.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.BaselineCandidatePackagePath);
+        Assert.Contains(write.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.VariantCandidatePackagePath);
+        Assert.Contains(write.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.DocumentationPath);
+        Assert.DoesNotContain(write.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+
+        if (result.MatrixResultScan.ResultExists)
+        {
+            Assert.True(result.MatrixResultScan.Passed);
+            Assert.True(result.LogScan.Passed);
+            Assert.Equal("GREEN", result.Dashboard.MatrixStatus);
+            Assert.Equal(2, result.Dashboard.CandidateCount);
+            Assert.Equal(2, result.Dashboard.PassedCandidateCount);
+            Assert.Equal(0, result.Dashboard.FailedCandidateCount);
+        }
+        else
+        {
+            Assert.Equal("BLOCKED", result.Dashboard.MatrixStatus);
+            Assert.Contains("goal129.matrix_result_missing", result.Dashboard.Diagnostics);
+        }
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

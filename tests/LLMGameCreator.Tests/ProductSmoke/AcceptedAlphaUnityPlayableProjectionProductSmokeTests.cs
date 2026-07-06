@@ -33,6 +33,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         var parameterizedGamePackageRunner =
             await new ParameterizedGamePackageProjectionRunnerService()
                 .BuildAndWriteAsync(root);
+        var gamePackageCandidateMatrix =
+            await new GamePackageCandidateMatrixProjectionService()
+                .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -262,6 +265,28 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             path == ParameterizedGamePackageProjectionRunnerVocabulary.DocumentationPath);
         Assert.DoesNotContain(parameterizedGamePackageRunner.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.True(gamePackageCandidateMatrix.Result.CandidateIndex.Passed);
+        Assert.Equal(2, gamePackageCandidateMatrix.Result.CandidateIndex.CandidateCount);
+        Assert.True(gamePackageCandidateMatrix.Result.ScriptScan.Passed);
+        Assert.True(gamePackageCandidateMatrix.Result.NegativeProof.Passed);
+        Assert.True(gamePackageCandidateMatrix.Result.Dashboard.ManualUnityOptional);
+        Assert.True(gamePackageCandidateMatrix.Result.Dashboard.ProjectionOnly);
+        Assert.Contains(gamePackageCandidateMatrix.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.CandidateIndexRelativePath);
+        Assert.Contains(gamePackageCandidateMatrix.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.BaselineCandidatePackagePath);
+        Assert.Contains(gamePackageCandidateMatrix.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.VariantCandidatePackagePath);
+        Assert.Contains(gamePackageCandidateMatrix.WrittenFiles, path =>
+            path == GamePackageCandidateMatrixProjectionVocabulary.DocumentationPath);
+        Assert.DoesNotContain(gamePackageCandidateMatrix.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        if (gamePackageCandidateMatrix.Result.MatrixResultScan.ResultExists)
+        {
+            Assert.True(gamePackageCandidateMatrix.Result.MatrixResultScan.Passed);
+            Assert.True(gamePackageCandidateMatrix.Result.LogScan.Passed);
+            Assert.Equal("GREEN", gamePackageCandidateMatrix.Result.Dashboard.MatrixStatus);
+        }
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -284,6 +309,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysUnityProjectionVerificationRunner);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysParameterizedGamePackageRunner);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysGamePackageCandidateMatrix);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -304,6 +331,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "unity_projection_verification_runner");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "parameterized_gamepackage_projection_runner");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "gamepackage_candidate_matrix_projection_runner");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -324,6 +353,16 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.Goal127FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.ParameterizedGamePackageRunnerGroupPresent);
         Assert.True(workspace.QualityGateScan.Goal128FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.GamePackageCandidateMatrixGroupPresent);
+        Assert.True(workspace.QualityGateScan.Goal129FilesDiscoveredByRelativePaths);
+        if (workspace.QualityGateScan.GamePackageCandidateMatrixStatus == "GREEN")
+        {
+            Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixCandidateCount);
+            Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixPassedCandidateCount);
+            Assert.Equal(0, workspace.QualityGateScan.GamePackageCandidateMatrixFailedCandidateCount);
+            Assert.True(workspace.QualityGateScan.GamePackageCandidateMatrixCleanupApplied);
+            Assert.True(workspace.QualityGateScan.GamePackageCandidateMatrixQualityGatePassed);
+        }
         Assert.Contains(
             "acceptedAlphaUnityPlayableProjectionGeneratedRootName: "
             + AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
@@ -364,6 +403,10 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "parameterizedRunnerStatus:",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "gamePackageCandidateMatrixStatus:",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }

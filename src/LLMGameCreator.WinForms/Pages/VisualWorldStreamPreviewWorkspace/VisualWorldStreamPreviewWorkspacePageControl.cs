@@ -383,7 +383,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageLoopDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageSystemsDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageFullPlaythroughDiagnosticLines(result));
-        lines.AddRange(BuildUnityProjectionVerificationRunnerDiagnosticLines(result)); lines.AddRange(BuildParameterizedGamePackageRunnerDiagnosticLines(result));
+        lines.AddRange(BuildUnityProjectionVerificationRunnerDiagnosticLines(result)); lines.AddRange(BuildParameterizedGamePackageRunnerDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateMatrixDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -668,7 +668,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageLoopEntryLines(entry));
         lines.AddRange(BuildGenericGamePackageSystemsEntryLines(entry));
         lines.AddRange(BuildGenericGamePackageFullPlaythroughEntryLines(entry));
-        lines.AddRange(BuildUnityProjectionVerificationRunnerEntryLines(entry)); lines.AddRange(BuildParameterizedGamePackageRunnerEntryLines(entry));
+        lines.AddRange(BuildUnityProjectionVerificationRunnerEntryLines(entry)); lines.AddRange(BuildParameterizedGamePackageRunnerEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateMatrixEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

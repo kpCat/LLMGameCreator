@@ -1,0 +1,26 @@
+{
+  "goalId": "goal_129_gamepackage_candidate_matrix_projection_runner",
+  "passed": true,
+  "manualInputRejected": true,
+  "samplePackageReadOnly": true,
+  "candidatePathsUnderGoalArtifacts": true,
+  "runtimeSchemaProviderLuaGeneratorLibraryRejected": true,
+  "unitySourceProjectSettingsPackagesRejected": true,
+  "noForbiddenPathsExpected": true,
+  "rejectedPathSamples": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    "samples/minimal-map-game/package.json",
+    "src/LLMGameCreator.Runtime/GameRuntime.cs",
+    "src/LLMGameCreator.Runtime.Abstractions/IGameRuntime.cs",
+    "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+    "src/LLMGameCreator.Generation/Generator.cs",
+    "src/LLMGameCreator.AssetPipeline/Provider.cs",
+    "src/LLMGameCreator.Scripting/LuaSandbox.cs",
+    "generator-library/example.json",
+    "unity/LLMGameCreatorAlpha/Assets/Scenes/Main.unity",
+    "unity/LLMGameCreatorAlpha/Assets/Prefabs/AcceptedAlpha.prefab",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/example.json",
+    "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectSettings.asset",
+    "unity/LLMGameCreatorAlpha/Packages/manifest.json"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "gamepackage_candidate_index_v1",
+  "goalId": "goal_129_gamepackage_candidate_matrix_projection_runner",
+  "sourceSamplePath": "samples/minimal-map-game/package.json",
+  "candidateCount": 2,
+  "passed": true,
+  "candidates": [
+    {
+      "candidateId": "minimal-map-game-baseline",
+      "packagePath": ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/candidates/minimal-map-game-baseline/package.json",
+      "packagePathRelative": ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/candidates/minimal-map-game-baseline/package.json",
+      "packageId": "game/minimal-map-game",
+      "title": "Minimal Map Game",
+      "sourceKind": "sample-byte-copy",
+      "expectedProjectionMode": "GenericFullPlaythrough",
+      "requiredCompatibilityIds": [
+        "map/village",
+        "entity/village/sign",
+        "entity/village/old_guard",
+        "interaction/sign_inspect",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ],
+      "sha256": "edb728bd1eb4921e502d4cf7ffa8e083f4dd5414629d227ca4125a6735c5d776"
+    },
+    {
+      "candidateId": "minimal-map-game-variant",
+      "packagePath": ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/candidates/minimal-map-game-variant/package.json",
+      "packagePathRelative": ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/candidates/minimal-map-game-variant/package.json",
+      "packageId": "game/minimal-map-game",
+      "title": "Minimal Map Game",
+      "sourceKind": "sample-derived-variant",
+      "expectedProjectionMode": "GenericFullPlaythrough",
+      "requiredCompatibilityIds": [
+        "map/village",
+        "entity/village/sign",
+        "entity/village/old_guard",
+        "interaction/sign_inspect",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ],
+      "sha256": "324d3759914749385cf3aab453b79eaa5eedc889e26d3c93d857fcae98c00cde"
+    }
+  ]
+}

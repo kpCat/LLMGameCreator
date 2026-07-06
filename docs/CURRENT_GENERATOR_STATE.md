@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 128 parameterized GamePackage projection runner and WinForms command surface
+Updated by: Goal 129 GamePackage candidate matrix projection runner
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -236,6 +236,31 @@ Stream Preview Workspace and WinForms show `parameterizedRunnerStatus`, package 
 result/log paths, Unity exit code, pass marker, cleanup status, `manualUnityOptional=true` and `projectionOnly=true`.
 
 Goal128 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
+authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
+Goal 129 adds a deterministic GamePackage candidate matrix over the Goal128 parameterized runner:
+
+```text
+goal_129_gamepackage_candidate_matrix_projection_runner required
+implementationStatus=GREEN
+accepted=false
+normalVerificationCommand=.devflow\scripts\run-gamepackage-projection-matrix.cmd
+candidateIndexPath=.llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-index.json
+matrixResultPath=.llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-projection-matrix-result.json
+manualUnityOptional=true
+projectionOnly=true
+```
+
+Goal129 creates a candidate index with a byte-copy baseline of `samples/minimal-map-game/package.json` and a derived
+variant package that keeps required compatibility IDs while changing package identity and visible labels. The matrix
+runner invokes the Goal128 parameterized Unity projection runner once per candidate in `GenericFullPlaythrough` mode,
+passes each candidate package through `-PackagePath`, applies bounded cleanup, writes per-candidate
+`runner-result.json` and `log-scan.json`, and writes the aggregate matrix result under
+`.llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/`. Visual World Stream Preview Workspace and
+WinForms show `gamePackageCandidateMatrixStatus`, candidate counts, candidate index/result paths, normal/example
+commands, baseline/variant package paths, cleanup status, `manualUnityOptional=true` and `projectionOnly=true`.
+
+Goal129 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
 authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
 Goal 053 handoff acceptance recorded before Goal 054:

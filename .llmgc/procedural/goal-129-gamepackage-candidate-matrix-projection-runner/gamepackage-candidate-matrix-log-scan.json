@@ -1,0 +1,11 @@
+{
+  "goalId": "goal_129_gamepackage_candidate_matrix_projection_runner",
+  "matrixResultExists": true,
+  "candidateLogScanCount": 2,
+  "passMarkersPresent": true,
+  "failMarkersAbsent": true,
+  "materialWarningAbsent": true,
+  "passed": true,
+  "missingLogScans": [],
+  "forbiddenMarkersFound": []
+}
