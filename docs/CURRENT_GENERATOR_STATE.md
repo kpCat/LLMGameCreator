@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 121 accepted Alpha interaction drilldown and one-click verification
+Updated by: Goal 122 accepted Alpha projection action loop and window polish
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -83,6 +83,26 @@ smoke. Evidence lives under
 `.llmgc/procedural/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/`, export metadata under
 `.llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification/`, and the short manual note
 at `docs/manual-acceptance/accepted-alpha-interaction-drilldown-and-one-click-verification.md`.
+
+Goal 122 keeps that one-button path and makes the projection window usable for hands-on action checks:
+
+```text
+goal_122_accepted_alpha_projection_action_loop_and_window_polish required
+implementationStatus=GREEN
+accepted=false
+manualPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection -> Run Full Projection Verification
+unityBatchmodeSmoke=GOAL122_ACTION_LOOP_SMOKE_PASS required
+```
+
+Goal122 adds a compact top status area, keeps `Run Full Projection Verification` as the first/main action, separates
+optional debug controls and bounds/collapses Smoke, Selected Marker Details, Interaction Preview, Objective / Replay
+Details and Verification Event Log panels. It also adds a projection-local action loop: `Select Next Interaction
+Target`, `Preview Selected Action`, `Apply Preview Action To Projection State` and `Reset Projection State`. This state
+is Editor projection state only; it writes no files and does not mutate scenes, prefabs, ProjectSettings, Packages or
+StreamingAssets. Evidence lives under
+`.llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/`, export metadata under
+`.llmgc/exports/goal-122-accepted-alpha-projection-action-loop-and-window-polish/`, and the short manual note at
+`docs/manual-acceptance/accepted-alpha-projection-action-loop-and-window-polish.md`.
 
 After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue

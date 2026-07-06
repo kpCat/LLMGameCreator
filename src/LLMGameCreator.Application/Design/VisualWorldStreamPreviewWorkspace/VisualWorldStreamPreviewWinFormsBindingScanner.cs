@@ -42,9 +42,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageGoal119RelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Goal119.cs";
-        var pageGoal121RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal121.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
@@ -75,7 +72,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadGoal120WinFormsPageText(projectRoot)
                         + "\n"
-                        + ReadOptionalText(projectRoot, pageGoal121RelativePath);
+                        + ReadGoal121WinFormsPageText(projectRoot)
+                        + "\n"
+                        + ReadGoal122WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -504,10 +503,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "acceptedAlphaUnityPlayableProjectionExportPath",
                 StringComparison.Ordinal);
-        var bindDisplaysAcceptedAlphaProjectionUsability =
-            PageBindsGoal120AcceptedAlphaProjectionUsability(pageText);
-        var bindDisplaysAcceptedAlphaInteractionDrilldown =
-            PageBindsGoal121AcceptedAlphaInteractionDrilldown(pageText);
+        var bindDisplaysAcceptedAlphaProjectionUsability = PageBindsGoal120AcceptedAlphaProjectionUsability(pageText);
+        var bindDisplaysAcceptedAlphaInteractionDrilldown = PageBindsGoal121AcceptedAlphaInteractionDrilldown(pageText);
+        var bindDisplaysAcceptedAlphaProjectionActionLoop = PageBindsGoal122AcceptedAlphaProjectionActionLoop(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -636,6 +634,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal121.winforms.accepted_alpha_interaction_drilldown_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(bindDisplaysAcceptedAlphaProjectionActionLoop,
+            "goal122.winforms.accepted_alpha_projection_action_loop_bind_missing", pageRelativePath, diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -691,6 +691,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysAcceptedAlphaProjectionUsability,
             PageBindDisplaysAcceptedAlphaInteractionDrilldown =
                 bindDisplaysAcceptedAlphaInteractionDrilldown,
+            PageBindDisplaysAcceptedAlphaProjectionActionLoop = bindDisplaysAcceptedAlphaProjectionActionLoop,
             Diagnostics = diagnostics
         };
     }

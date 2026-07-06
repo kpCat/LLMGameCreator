@@ -32,6 +32,8 @@ Goal 120 review note: the accepted Alpha projection usability and cleanup pass a
 
 Goal 121 review note: the accepted Alpha interaction drilldown and one-click verification pass reduces manual Unity checking to the same accepted Alpha menu route plus `Run Full Projection Verification`, adds selected marker details, interaction/action preview, objective/replay details, compact event log and batchmode full verification proof. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 122 review note: the accepted Alpha projection action-loop and window-polish pass keeps the same one-button Unity verification route, adds projection-local Preview/Apply/Reset state and makes the EditorWindow readable with compact status plus bounded panels. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

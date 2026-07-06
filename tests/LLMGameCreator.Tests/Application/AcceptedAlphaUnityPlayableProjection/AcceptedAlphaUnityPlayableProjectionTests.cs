@@ -137,6 +137,37 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.Passed);
     }
 
+    [Fact]
+    public void Goal122ActionLoopSourceScanFindsProjectionStateWindowPolishBatchmodeAndSmokeFields()
+    {
+        var result = new AcceptedAlphaProjectionActionLoopService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.ActionLoopStatus);
+        Assert.Equal("GREEN", result.Dashboard.WindowPolishStatus);
+        Assert.True(result.Dashboard.Goal121StillGreen);
+        Assert.True(result.Dashboard.OneClickVerificationStillPresent);
+        Assert.True(result.Dashboard.ProjectionActionPreviewPresent);
+        Assert.True(result.Dashboard.ProjectionActionApplyPresent);
+        Assert.True(result.Dashboard.ProjectionStateResetPresent);
+        Assert.True(result.Dashboard.WindowLayoutPolishPresent);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.True(result.Dashboard.MaterialWarningGuardPresent);
+        Assert.NotEqual(
+            "BLOCKED_UNITY_BATCHMODE_ACTION_LOOP_SMOKE",
+            result.Dashboard.UnitySmokeStatus);
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.BatchmodeActionLoopMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.ScriptInventory.BatchmodeFailMarkerPresent);
+        Assert.True(result.ScriptInventory.ActionLoopControlsPresent);
+        Assert.True(result.ScriptInventory.ProjectionStateModelPresent);
+        Assert.True(result.ScriptInventory.SmokeRequiredFieldsPresent);
+        Assert.True(result.ScriptInventory.MaterialWarningSourceClean);
+        Assert.True(result.SmokePlan.StepCount >= 9);
+        Assert.True(result.NegativeProof.Passed);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

@@ -30,6 +30,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         "offline_geoworld_alpha_manual_gate_acceptance_record",
         "offline_geoworld_alpha_post_acceptance_continuation_selection",
         "offline_geoworld_accepted_alpha_baseline_review",
-        "accepted_alpha_unity_playable_projection"
+        "accepted_alpha_unity_playable_projection",
+        "accepted_alpha_projection_usability",
+        "accepted_alpha_interaction_drilldown_verification",
+        "accepted_alpha_projection_action_loop"
     ];
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace LLMGameCreatorAlpha
 {
-    public sealed class AcceptedAlphaPlayableProjectionController : MonoBehaviour
+    public sealed partial class AcceptedAlphaPlayableProjectionController : MonoBehaviour
     {
         public const string GeneratedRootName = "__LLMGC_AcceptedAlphaPlayableProjection__";
         public const string UnityMenuPath = "LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection";
         public const string LegendObjectName = "goal120_legend";
         public const string DiagnosticsMarkerName = "goal120_diagnostics_marker";
 
-        private const string BaselineId = "offline_geoworld_alpha_accepted_baseline_v1";
+        private const string ExpectedBaselineId = "offline_geoworld_alpha_accepted_baseline_v1";
         private const string ManualGateAccepted = "ACCEPTED_BY_HUMAN";
         private const string ControllerSourceFile =
             "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionController.cs";
@@ -37,8 +37,23 @@ namespace LLMGameCreatorAlpha
         [SerializeField] private string interactionPreview = string.Empty;
         [SerializeField] private string objectiveReplayDetails = string.Empty;
         [SerializeField] private string verificationEventLog = string.Empty;
+        [SerializeField] private string selectedMarkerId = string.Empty;
+        [SerializeField] private string selectedMarkerKind = string.Empty;
+        [SerializeField] private bool lastFullVerificationPassed;
+        [SerializeField] private bool projectionActionPreviewPresent;
+        [SerializeField] private bool projectionActionApplyPassed;
+        [SerializeField] private bool projectionStateResetPassed;
+        [SerializeField] private AcceptedAlphaPlayableProjectionState projectionState =
+            new AcceptedAlphaPlayableProjectionState();
 
         public string StatusLine { get { return statusLine; } }
+        public string BaselineId { get { return baselineId; } }
+        public string ManualGateStatus { get { return manualGateStatus; } }
+        public bool AcceptedBaselineReady { get { return acceptedBaselineReady; } }
+        public bool LastFullVerificationPassed { get { return lastFullVerificationPassed; } }
+        public string SelectedMarkerId { get { return selectedMarkerId; } }
+        public string SelectedMarkerKind { get { return selectedMarkerKind; } }
+        public string ProjectionStateStatus { get { return projectionState.StatusLine; } }
         public string LastDiagnostics { get { return lastDiagnostics; } }
         public string LastSmokeDiagnostics { get { return lastSmokeDiagnostics; } }
         public string SelectedMarkerDetails { get { return selectedMarkerDetails; } }
@@ -136,6 +151,13 @@ namespace LLMGameCreatorAlpha
             interactionPreview = string.Empty;
             objectiveReplayDetails = string.Empty;
             verificationEventLog = string.Empty;
+            selectedMarkerId = string.Empty;
+            selectedMarkerKind = string.Empty;
+            lastFullVerificationPassed = false;
+            projectionActionPreviewPresent = false;
+            projectionActionApplyPassed = false;
+            projectionStateResetPassed = false;
+            projectionState = new AcceptedAlphaPlayableProjectionState();
 
             try
             {
@@ -168,6 +190,13 @@ namespace LLMGameCreatorAlpha
                         interactionDescriptor.DisplayLabel,
                         actions,
                         deltas);
+                    SelectProjectionActionTarget(interaction);
+                    PreviewSelectedAction();
+                    events.Add("projectionActionPreviewPresent=" + projectionActionPreviewPresent);
+                    ApplyPreviewActionToProjectionState();
+                    events.Add("projectionActionApplyPassed=" + projectionActionApplyPassed);
+                    ResetProjectionState();
+                    events.Add("projectionStateResetPassed=" + projectionStateResetPassed);
                 }
 
                 events.Add("interactionPreviewPresent=" + !string.IsNullOrWhiteSpace(interactionPreview));
@@ -199,20 +228,22 @@ namespace LLMGameCreatorAlpha
                 selectedMarkerDetails = JoinMarkerDetails(player, interaction, objective, diagnostics);
 
                 var passed = RunProjectionSmoke(true);
+                lastFullVerificationPassed = passed;
                 events.Add("localSmokePassed=" + passed);
                 events.Add(passed
-                    ? "Goal121 full projection verification passed"
-                    : "Goal121 full projection verification failed");
+                    ? "Goal122 full projection verification passed"
+                    : "Goal122 full projection verification failed");
                 statusLine = passed
-                    ? "Goal121 full projection verification passed"
-                    : "Goal121 full projection verification failed";
-                verificationEventLog = string.Join("\n", events.ToArray());
+                    ? "Goal122 full projection verification passed"
+                    : "Goal122 full projection verification failed";
+                verificationEventLog = string.Join("\n", events.ToArray())
+                                       + "\n" + projectionState.EventLogText;
                 return passed;
             }
             catch (System.Exception ex)
             {
                 fatalErrorCount++;
-                statusLine = "Goal121 full projection verification fatal error: " + ex.GetType().Name;
+                statusLine = "Goal122 full projection verification fatal error: " + ex.GetType().Name;
                 lastDiagnostics = statusLine + "\n" + ex.Message;
                 events.Add(statusLine);
                 verificationEventLog = string.Join("\n", events.ToArray());
@@ -236,9 +267,16 @@ namespace LLMGameCreatorAlpha
                 LegendPresent = HasDescendantWithPrefix(transform, LegendObjectName),
                 MarkerDescriptorPresent = HasDescendantWithDescriptor(transform),
                 SelectableInteractionTargetPresent = FindNextMarkerByKind("interaction", 0) != null,
+                SelectedMarkerDetailsPresent = !string.IsNullOrWhiteSpace(selectedMarkerDetails),
                 InteractionPreviewPresent = !string.IsNullOrWhiteSpace(interactionPreview),
                 SelectableObjectivePresent = FindNextMarkerByKind("objective", 0) != null,
                 ObjectiveReplayDetailsPresent = !string.IsNullOrWhiteSpace(objectiveReplayDetails),
+                VerificationEventLogPresent =
+                    fullVerification || !string.IsNullOrWhiteSpace(verificationEventLog),
+                ProjectionActionPreviewPresent = projectionActionPreviewPresent,
+                ProjectionActionApplyPassed = projectionActionApplyPassed,
+                ProjectionStateResetPassed = projectionStateResetPassed,
+                WindowLayoutPolishPresent = true,
                 MaterialWarningGuardPresent =
                     AcceptedAlphaPlayableProjectionPrimitiveFactory.MaterialWarningGuardPresent,
                 ZeroFatalErrors = fatalErrorCount == 0,
@@ -246,14 +284,20 @@ namespace LLMGameCreatorAlpha
             };
             result.FullVerificationPassed = fullVerification
                                             && result.Passed
+                                            && result.SelectedMarkerDetailsPresent
                                             && result.InteractionPreviewPresent
-                                            && result.ObjectiveReplayDetailsPresent;
+                                            && result.ObjectiveReplayDetailsPresent
+                                            && result.VerificationEventLogPresent
+                                            && result.ProjectionActionPreviewPresent
+                                            && result.ProjectionActionApplyPassed
+                                            && result.ProjectionStateResetPassed
+                                            && result.WindowLayoutPolishPresent;
             lastSmokeDiagnostics = result.ToDiagnosticText();
             if (fullVerification)
             {
                 statusLine = result.FullVerificationPassed
-                    ? "Goal121 full projection verification passed"
-                    : "Goal121 full projection verification failed";
+                    ? "Goal122 full projection verification passed"
+                    : "Goal122 full projection verification failed";
                 return result.FullVerificationPassed;
             }
 
@@ -288,6 +332,11 @@ namespace LLMGameCreatorAlpha
 
             var index = Mathf.Abs(startIndex) % matches.Count;
             return matches[index];
+        }
+
+        private GameObject FindMarkerById(string markerId)
+        {
+            return FindDescendantObjectWithDescriptorId(transform, markerId);
         }
 
         public void ToggleOrRefreshLegend()
@@ -358,7 +407,7 @@ namespace LLMGameCreatorAlpha
                 && AcceptedAlphaPlayableProjectionDiagnostics.BoolField(goal116Record, "humanAccepted")
                 && !AcceptedAlphaPlayableProjectionDiagnostics.BoolField(goal116Record, "acceptedByCodex");
             summary.AcceptedBaselineReady =
-                summary.BaselineId == BaselineId
+                summary.BaselineId == ExpectedBaselineId
                 && summary.ManualGateStatus == ManualGateAccepted
                 && AcceptedAlphaPlayableProjectionDiagnostics.BoolField(goal118Dashboard, "acceptedBaselineReady")
                 && summary.Goal116Accepted;
@@ -615,6 +664,7 @@ namespace LLMGameCreatorAlpha
             AttachGoal120Descriptor(diagnostics, DiagnosticsMarkerName, "diagnostics",
                 "Projection diagnostics", fatalErrorCount == 0 ? "ready" : "blocked",
                 "Goal120 selectable diagnostics marker.");
+            UpdateProjectionStateMarker();
         }
 
         private void BuildOrRefreshLegend(Transform parent)

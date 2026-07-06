@@ -1,0 +1,13 @@
+{
+  "goalId": "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "materialInstantiationWarningAbsent": true,
+  "rendererGetMaterialStackAbsent": true,
+  "smokeRequiredFieldsPresent": true,
+  "passed": true,
+  "status": "GREEN",
+  "sha256": "788f658fca7c4f0018aaa1eb5d0a8e9f067cd018cdd2bac03cc49e98889cda19",
+  "forbiddenMarkersFound": []
+}

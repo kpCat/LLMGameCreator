@@ -2193,20 +2193,38 @@ bounded Unity editor noise. Next goals must continue product-visible work or aut
 churn. This does not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 122: Accepted Alpha Projection Action Loop And Window Polish
+
+Goal 122 is produced for review as a GREEN projection-local action-loop and EditorWindow readability pass for the
+accepted Alpha Unity projection. It keeps the same menu route and primary button: `LLMGameCreator/Accepted Alpha/Build/Refresh
+Playable Projection` plus `Run Full Projection Verification`.
+
+The window now has a compact status area, a prominent main verification button, separated optional debug controls and
+bounded/collapsible panels for Smoke, Selected Marker Details, Interaction Preview, Objective / Replay Details and
+Verification Event Log. The projection-local action loop supports `Select Next Interaction Target`, `Preview Selected
+Action`, `Apply Preview Action To Projection State` and `Reset Projection State`.
+
+Evidence is under `.llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/` plus export
+metadata under `.llmgc/exports/goal-122-accepted-alpha-projection-action-loop-and-window-polish/`. Unity batchmode uses
+`LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeProjectionActionLoopSmoke` and must log
+`GOAL122_ACTION_LOOP_SMOKE_PASS` for GREEN. Goal122 remains projection-only and does not authorize final release, live
+geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project
+settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification
+goal_122_accepted_alpha_projection_action_loop_and_window_polish
 ```
 
-Review the Goal121 one-click verification evidence, then continue accepted Alpha hands-on Unity verification through
+Review the Goal122 action-loop/window-polish evidence, then continue accepted Alpha hands-on Unity verification through
 `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and click `Run Full Projection Verification`. Use the
-supported cleanup command only for bounded Unity editor noise. Do not start live geodata/provider, Runtime, schema, Lua,
-generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release
-packaging work from this handoff.
+projection-only action loop buttons for preview/apply/reset checks, then use the supported cleanup command only for
+bounded Unity editor noise. Do not start live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay,
+final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_121_one_click_interaction_drilldown_green_manual_verification_simplified
+goal_122_projection_action_loop_window_polish_green_manual_verification_simplified
 ```

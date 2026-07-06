@@ -18,6 +18,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .Build(root);
         var drilldown = await new AcceptedAlphaInteractionDrilldownVerificationService()
             .BuildAndWriteAsync(root);
+        var actionLoop = await new AcceptedAlphaProjectionActionLoopService()
+            .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -60,6 +62,29 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             path == AcceptedAlphaInteractionDrilldownVerificationVocabulary.DocumentationPath);
         Assert.DoesNotContain(drilldown.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.Equal("GREEN", actionLoop.Result.Dashboard.ActionLoopStatus);
+        Assert.Equal("GREEN", actionLoop.Result.Dashboard.WindowPolishStatus);
+        Assert.True(actionLoop.Result.Dashboard.OneClickVerificationStillPresent);
+        Assert.True(actionLoop.Result.Dashboard.ProjectionActionPreviewPresent);
+        Assert.True(actionLoop.Result.Dashboard.ProjectionActionApplyPresent);
+        Assert.True(actionLoop.Result.Dashboard.ProjectionStateResetPresent);
+        Assert.True(actionLoop.Result.Dashboard.WindowLayoutPolishPresent);
+        Assert.True(actionLoop.Result.ScriptInventory.Passed);
+        Assert.True(actionLoop.Result.NegativeProof.Passed);
+        Assert.Contains(actionLoop.WrittenFiles, path =>
+            path == AcceptedAlphaProjectionActionLoopVocabulary
+                .ProceduralOutputDirectory
+            + "/"
+            + AcceptedAlphaProjectionActionLoopVocabulary.DashboardFileName);
+        Assert.Contains(actionLoop.WrittenFiles, path =>
+            path == AcceptedAlphaProjectionActionLoopVocabulary
+                .ExportPackageDirectory
+            + "/"
+            + AcceptedAlphaProjectionActionLoopVocabulary.LogScanFileName);
+        Assert.Contains(actionLoop.WrittenFiles, path =>
+            path == AcceptedAlphaProjectionActionLoopVocabulary.DocumentationPath);
+        Assert.DoesNotContain(actionLoop.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -68,18 +93,24 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysAcceptedAlphaProjectionUsability);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysAcceptedAlphaInteractionDrilldown);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysAcceptedAlphaProjectionActionLoop);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_projection_usability");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_interaction_drilldown_verification");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "accepted_alpha_projection_action_loop");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal120FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaInteractionDrilldownQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal121FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionActionLoopQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.Goal122FilesDiscoveredByRelativePaths);
         Assert.Contains(
             "acceptedAlphaUnityPlayableProjectionGeneratedRootName: "
             + AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
@@ -92,6 +123,10 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "acceptedAlphaInteractionDrilldownHumanManualStepsReducedToOneButton: true",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "acceptedAlphaProjectionActionLoopStatus: GREEN",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }

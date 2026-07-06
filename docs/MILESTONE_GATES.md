@@ -34,6 +34,8 @@ Goal 120 note: the accepted Alpha projection usability and cleanup pass keeps th
 
 Goal 121 note: the accepted Alpha interaction drilldown and one-click verification pass keeps the Goal119 route and makes the primary manual check one menu action plus `Run Full Projection Verification`. It adds selected-marker details, interaction/action preview, objective/replay details, a compact event log and batchmode full verification proof. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 122 note: the accepted Alpha projection action-loop and window-polish pass keeps the same one-button verification path, adds projection-local Preview/Apply/Reset state and makes the EditorWindow readable with compact status plus bounded panels. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

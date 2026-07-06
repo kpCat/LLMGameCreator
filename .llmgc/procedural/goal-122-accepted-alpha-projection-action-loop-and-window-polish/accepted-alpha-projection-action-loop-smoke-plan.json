@@ -1,0 +1,52 @@
+{
+  "goalId": "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
+  "oneClickManualPath": true,
+  "stepCount": 9,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "open_projection_window",
+      "expectedResult": "Open the accepted Alpha projection menu path."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "run_full_projection_verification",
+      "expectedResult": "The primary verification button remains the main path."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "read_compact_status",
+      "expectedResult": "Top status shows baseline, full verification, selected marker and projection state."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "select_next_interaction_target",
+      "expectedResult": "A descriptor-backed interaction target is selected."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "preview_selected_action",
+      "expectedResult": "Projection action preview text is populated from accepted Goal105 payloads."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "apply_preview_to_projection_state",
+      "expectedResult": "Projection-only state count and event log update without file writes."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "reset_projection_state",
+      "expectedResult": "Projection-only state is reset and event log records the reset."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "inspect_bounded_panels",
+      "expectedResult": "Smoke/details/preview/objective/log panels are foldout and bounded-height."
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "run_cleanup_after_unity",
+      "expectedResult": "Use .devflow scripts clean-unity-editor-noise after Unity verification."
+    }
+  ]
+}

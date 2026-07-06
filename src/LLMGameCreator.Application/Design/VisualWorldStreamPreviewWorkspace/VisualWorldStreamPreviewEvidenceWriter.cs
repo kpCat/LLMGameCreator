@@ -221,14 +221,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var manualGateAcceptance = BuildGoal116AlphaManualGateAcceptanceQuality(groups, proofs);
         var postAcceptanceContinuation = BuildGoal117AlphaPostAcceptanceContinuationQuality(groups, proofs);
         var acceptedAlphaBaseline = BuildGoal118AcceptedAlphaBaselineQuality(groups, proofs);
-        var acceptedAlphaUnityPlayableProjection = BuildGoal119AcceptedAlphaUnityPlayableProjectionQuality(
-            groups,
-            proofs);
-        var acceptedAlphaProjectionUsability = BuildGoal120AcceptedAlphaProjectionUsabilityQuality(
-            groups,
-            proofs);
-        var acceptedAlphaInteractionDrilldown =
-            BuildGoal121AcceptedAlphaInteractionDrilldownQuality(groups, proofs);
+        var acceptedAlphaUnityPlayableProjection = BuildGoal119AcceptedAlphaUnityPlayableProjectionQuality(groups, proofs);
+        var acceptedAlphaProjectionUsability = BuildGoal120AcceptedAlphaProjectionUsabilityQuality(groups, proofs);
+        var acceptedAlphaInteractionDrilldown = BuildGoal121AcceptedAlphaInteractionDrilldownQuality(groups, proofs);
+        var acceptedAlphaProjectionActionLoop = BuildGoal122AcceptedAlphaProjectionActionLoopQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -403,11 +399,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal116AlphaManualGateAcceptanceQualityDiagnostics(manualGateAcceptance, binding, diagnostics);
         AddGoal117AlphaPostAcceptanceContinuationQualityDiagnostics(postAcceptanceContinuation, binding, diagnostics);
         AddGoal118AcceptedAlphaBaselineQualityDiagnostics(acceptedAlphaBaseline, binding, diagnostics);
-        AddGoal119AcceptedAlphaUnityPlayableProjectionQualityDiagnostics(
-            acceptedAlphaUnityPlayableProjection, binding, diagnostics);
-        AddGoal120AcceptedAlphaProjectionUsabilityQualityDiagnostics(
-            acceptedAlphaProjectionUsability, binding, diagnostics);
+        AddGoal119AcceptedAlphaUnityPlayableProjectionQualityDiagnostics(acceptedAlphaUnityPlayableProjection, binding, diagnostics);
+        AddGoal120AcceptedAlphaProjectionUsabilityQualityDiagnostics(acceptedAlphaProjectionUsability, binding, diagnostics);
         AddGoal121AcceptedAlphaInteractionDrilldownQualityDiagnostics(acceptedAlphaInteractionDrilldown, binding, diagnostics);
+        AddGoal122AcceptedAlphaProjectionActionLoopQualityDiagnostics(acceptedAlphaProjectionActionLoop, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -689,11 +684,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal117 = ApplyGoal117AlphaPostAcceptanceContinuationQuality(withGoal116, postAcceptanceContinuation, binding);
         var withGoal118 = ApplyGoal118AcceptedAlphaBaselineQuality(withGoal117, acceptedAlphaBaseline, binding);
         var withGoal119 = ApplyGoal119AcceptedAlphaUnityPlayableProjectionQuality(withGoal118, acceptedAlphaUnityPlayableProjection, binding);
-        var withGoal120 = ApplyGoal120AcceptedAlphaProjectionUsabilityQuality(
-            withGoal119,
-            acceptedAlphaProjectionUsability,
-            binding);
-        return ApplyGoal121AcceptedAlphaInteractionDrilldownQuality(withGoal120, acceptedAlphaInteractionDrilldown, binding);
+        var withGoal120 = ApplyGoal120AcceptedAlphaProjectionUsabilityQuality(withGoal119, acceptedAlphaProjectionUsability, binding);
+        var withGoal121 = ApplyGoal121AcceptedAlphaInteractionDrilldownQuality(withGoal120, acceptedAlphaInteractionDrilldown, binding);
+        return ApplyGoal122AcceptedAlphaProjectionActionLoopQuality(withGoal121, acceptedAlphaProjectionActionLoop, binding);
     }
 
 }

@@ -1,0 +1,50 @@
+{
+  "goalId": "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 7,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/accepted-alpha-projection-action-loop-dashboard.json",
+      "role": "goal122_accepted_alpha_projection_action_loop_evidence",
+      "required": true,
+      "sha256": "00dddff7e27bc6e8986d8f81876c2c334daf6e0425b2149c73f0253f48398ad1"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/accepted-alpha-projection-action-loop-log-scan.json",
+      "role": "goal122_accepted_alpha_projection_action_loop_evidence",
+      "required": true,
+      "sha256": "ddf36d3257b711ed5d3bb6f83cb1515c1a4169dde8e4f2dce04ea115c7411ce3"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/accepted-alpha-projection-action-loop-negative-proof.json",
+      "role": "goal122_accepted_alpha_projection_action_loop_evidence",
+      "required": true,
+      "sha256": "01d2ace078427d76c41dedfb0574d9a84c696b04223b8a3f3f33852f5bed208f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/accepted-alpha-projection-action-loop-report.md",
+      "role": "goal122_accepted_alpha_projection_action_loop_evidence",
+      "required": true,
+      "sha256": "c91099f6e8902d493fbe01873ebcbb150314a737e20c69cff10181c07fe8a645"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/accepted-alpha-projection-action-loop-script-inventory.json",
+      "role": "goal122_accepted_alpha_projection_action_loop_evidence",
+      "required": true,
+      "sha256": "2ea31e4a575b152e233d8c0f0d0e98959630d833df69543284fda03acf808cdb"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/accepted-alpha-projection-action-loop-smoke-plan.json",
+      "role": "goal122_accepted_alpha_projection_action_loop_evidence",
+      "required": true,
+      "sha256": "4ce4b92d5528e6fa4dfa92521c52af63b3a59dd20d4d68513d80c8c389cefac9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish/unity-batchmode-action-loop-smoke.log",
+      "role": "goal122_unity_batchmode_action_loop_smoke_log",
+      "required": true,
+      "sha256": "788f658fca7c4f0018aaa1eb5d0a8e9f067cd018cdd2bac03cc49e98889cda19"
+    }
+  ]
+}

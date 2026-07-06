@@ -20,6 +20,20 @@ namespace LLMGameCreatorAlpha
                    + "\nexpectedStateDelta=" + delta;
         }
 
+        public static string BuildProjectionActionSummary(
+            string targetId,
+            string targetName,
+            string actionsJson,
+            string stateDeltaJson)
+        {
+            var firstAction = FirstActionSummaryForTarget(actionsJson, targetId);
+            var delta = StateDeltaSummaryForTarget(stateDeltaJson, targetId);
+            return "projectionActionTargetId=" + targetId
+                   + "\nprojectionActionTargetName=" + targetName
+                   + "\nprojectionActionPreview=" + firstAction
+                   + "\nprojectionActionExpectedDelta=" + delta;
+        }
+
         public static int CountActionsForTarget(string actionsJson, string targetId)
         {
             var count = 0;

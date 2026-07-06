@@ -587,6 +587,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.AcceptedAlphaInteractionDrilldownQualityGatePassed,
             Goal121FilesDiscoveredByRelativePaths =
                 qualityGate.Goal121FilesDiscoveredByRelativePaths,
+            AcceptedAlphaProjectionActionLoopStatus =
+                qualityGate.AcceptedAlphaProjectionActionLoopStatus,
+            AcceptedAlphaProjectionActionLoopWindowPolishStatus =
+                qualityGate.AcceptedAlphaProjectionActionLoopWindowPolishStatus,
+            AcceptedAlphaProjectionActionLoopUnityMenuPath =
+                qualityGate.AcceptedAlphaProjectionActionLoopUnityMenuPath,
+            AcceptedAlphaProjectionActionLoopOneClickVerificationStillPresent =
+                qualityGate.AcceptedAlphaProjectionActionLoopOneClickVerificationStillPresent,
+            AcceptedAlphaProjectionActionLoopProjectionActionPreviewPresent =
+                qualityGate.AcceptedAlphaProjectionActionLoopProjectionActionPreviewPresent,
+            AcceptedAlphaProjectionActionLoopProjectionActionApplyPresent =
+                qualityGate.AcceptedAlphaProjectionActionLoopProjectionActionApplyPresent,
+            AcceptedAlphaProjectionActionLoopProjectionStateResetPresent =
+                qualityGate.AcceptedAlphaProjectionActionLoopProjectionStateResetPresent,
+            AcceptedAlphaProjectionActionLoopWindowLayoutPolishPresent =
+                qualityGate.AcceptedAlphaProjectionActionLoopWindowLayoutPolishPresent,
+            AcceptedAlphaProjectionActionLoopUnitySmokeStatus =
+                qualityGate.AcceptedAlphaProjectionActionLoopUnitySmokeStatus,
+            AcceptedAlphaProjectionActionLoopCleanupScriptAvailable =
+                qualityGate.AcceptedAlphaProjectionActionLoopCleanupScriptAvailable,
+            AcceptedAlphaProjectionActionLoopQualityGatePassed =
+                qualityGate.AcceptedAlphaProjectionActionLoopQualityGatePassed,
+            Goal122FilesDiscoveredByRelativePaths =
+                qualityGate.Goal122FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

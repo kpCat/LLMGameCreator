@@ -129,6 +129,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal121AcceptedAlphaInteractionDrilldownProofStatus(
             projectRoot,
             proofDiagnostics));
+        proofs.AddRange(BuildGoal122AcceptedAlphaProjectionActionLoopProofStatus(
+            projectRoot,
+            proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);

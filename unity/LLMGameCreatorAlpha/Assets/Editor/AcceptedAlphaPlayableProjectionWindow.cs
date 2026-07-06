@@ -18,6 +18,16 @@ namespace LLMGameCreatorAlpha
         private string interactionPreview = string.Empty;
         private string objectiveReplayDetails = string.Empty;
         private string verificationEventLog = string.Empty;
+        private string baselineStatus = "unknown";
+        private string fullVerificationStatus = "not run";
+        private string selectedMarkerStatus = "none";
+        private string projectionStateStatus = "not initialized";
+        private bool diagnosticsExpanded;
+        private bool smokeExpanded = true;
+        private bool selectedMarkerExpanded = true;
+        private bool interactionPreviewExpanded = true;
+        private bool objectiveReplayExpanded;
+        private bool verificationEventLogExpanded;
         private int interactionSelectionIndex;
         private int objectiveSelectionIndex;
 
@@ -166,6 +176,54 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeProjectionActionLoopSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureController();
+                var passed = controller.RunFullProjectionVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\n" + controller.SelectedMarkerDetails
+                                  + "\n" + controller.InteractionPreview
+                                  + "\n" + controller.ObjectiveReplayDetails
+                                  + "\n" + controller.VerificationEventLog
+                                  + "\nprojectionStateStatus=" + controller.ProjectionStateStatus;
+                if (passed)
+                {
+                    Debug.Log("GOAL122_ACTION_LOOP_SMOKE_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL122_ACTION_LOOP_SMOKE_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL122_ACTION_LOOP_SMOKE_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL122_ACTION_LOOP_SMOKE_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -174,36 +232,51 @@ namespace LLMGameCreatorAlpha
         private void OnGUI()
         {
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
-            EditorGUILayout.LabelField("Menu Path", MenuPath);
-            EditorGUILayout.LabelField("Generated Root", AcceptedAlphaPlayableProjectionController.GeneratedRootName);
-            EditorGUILayout.LabelField("Status", statusLine);
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Diagnostics");
-            EditorGUILayout.TextArea(diagnostics, GUILayout.MinHeight(120));
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Smoke");
-            EditorGUILayout.TextArea(smokeDiagnostics, GUILayout.MinHeight(120));
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Selected Marker Details");
-            EditorGUILayout.TextArea(selectedMarkerDetails, GUILayout.MinHeight(100));
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Interaction Preview");
-            EditorGUILayout.TextArea(interactionPreview, GUILayout.MinHeight(80));
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Objective / Replay Details");
-            EditorGUILayout.TextArea(objectiveReplayDetails, GUILayout.MinHeight(80));
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Verification Event Log");
-            EditorGUILayout.TextArea(verificationEventLog, GUILayout.MinHeight(100));
-            EditorGUILayout.Space();
+            DrawStatusArea();
 
             if (GUILayout.Button("Run Full Projection Verification", GUILayout.Height(32)))
             {
                 RunFullProjectionVerification();
             }
 
+            EditorGUILayout.HelpBox(
+                "Manual check path: Run Full Projection Verification, then .devflow\\scripts\\clean-unity-editor-noise.cmd.",
+                MessageType.Info);
+
             EditorGUILayout.Space();
 
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("Projection Action Loop", EditorStyles.boldLabel);
+            if (GUILayout.Button("Select Next Interaction Target"))
+            {
+                SelectNextInteractionTarget();
+            }
+
+            if (GUILayout.Button("Preview Selected Action"))
+            {
+                PreviewSelectedAction();
+            }
+
+            if (GUILayout.Button("Apply Preview Action To Projection State"))
+            {
+                ApplyPreviewActionToProjectionState();
+            }
+
+            if (GUILayout.Button("Reset Projection State"))
+            {
+                ResetProjectionState();
+            }
+            EditorGUILayout.EndVertical();
+
+            DrawFoldoutTextPanel(ref smokeExpanded, "Smoke", smokeDiagnostics, 96f);
+            DrawFoldoutTextPanel(ref selectedMarkerExpanded, "Selected Marker Details", selectedMarkerDetails, 96f);
+            DrawFoldoutTextPanel(ref interactionPreviewExpanded, "Interaction Preview", interactionPreview, 96f);
+            DrawFoldoutTextPanel(ref objectiveReplayExpanded, "Objective / Replay Details", objectiveReplayDetails, 96f);
+            DrawFoldoutTextPanel(ref verificationEventLogExpanded, "Verification Event Log", verificationEventLog, 120f);
+            DrawFoldoutTextPanel(ref diagnosticsExpanded, "Diagnostics", diagnostics, 120f);
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("Debug / Optional Inspection", EditorStyles.boldLabel);
             if (GUILayout.Button("Refresh Accepted Baseline"))
             {
                 RefreshAcceptedBaseline();
@@ -222,11 +295,6 @@ namespace LLMGameCreatorAlpha
             if (GUILayout.Button("Select Player Proxy"))
             {
                 SelectPlayerProxy();
-            }
-
-            if (GUILayout.Button("Select Next Interaction Target"))
-            {
-                SelectNextInteractionTarget();
             }
 
             if (GUILayout.Button("Select Next Objective"))
@@ -258,8 +326,33 @@ namespace LLMGameCreatorAlpha
             {
                 EditorGUIUtility.systemCopyBuffer = diagnostics + "\n\n" + smokeDiagnostics;
             }
+            EditorGUILayout.EndVertical();
 
             EditorGUILayout.EndScrollView();
+        }
+
+        private void DrawStatusArea()
+        {
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.LabelField("Menu Path", MenuPath);
+            EditorGUILayout.LabelField("Generated Root", AcceptedAlphaPlayableProjectionController.GeneratedRootName);
+            EditorGUILayout.LabelField("Status", statusLine);
+            EditorGUILayout.LabelField("Baseline", baselineStatus);
+            EditorGUILayout.LabelField("Full Verification", fullVerificationStatus);
+            EditorGUILayout.LabelField("Selected Marker", selectedMarkerStatus);
+            EditorGUILayout.LabelField("Projection State", projectionStateStatus);
+            EditorGUILayout.EndVertical();
+        }
+
+        private static void DrawFoldoutTextPanel(ref bool expanded, string title, string text, float maxHeight)
+        {
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            expanded = EditorGUILayout.Foldout(expanded, title, true);
+            if (expanded)
+            {
+                EditorGUILayout.TextArea(text ?? string.Empty, GUILayout.MinHeight(48f), GUILayout.MaxHeight(maxHeight));
+            }
+            EditorGUILayout.EndVertical();
         }
 
         private void RefreshAcceptedBaseline()
@@ -299,9 +392,32 @@ namespace LLMGameCreatorAlpha
         private void SelectNextInteractionTarget()
         {
             var controller = EnsureController();
-            SelectAndFrame(controller.FindNextMarkerByKind("interaction", interactionSelectionIndex));
+            var marker = controller.FindNextMarkerByKind("interaction", interactionSelectionIndex);
+            SelectAndFrame(marker);
+            controller.SelectProjectionActionTarget(marker);
             interactionSelectionIndex++;
             statusLine = "Selected next interaction target.";
+            Capture(controller);
+        }
+
+        private void PreviewSelectedAction()
+        {
+            var controller = EnsureController();
+            controller.PreviewSelectedAction();
+            Capture(controller);
+        }
+
+        private void ApplyPreviewActionToProjectionState()
+        {
+            var controller = EnsureController();
+            controller.ApplyPreviewActionToProjectionState();
+            Capture(controller);
+        }
+
+        private void ResetProjectionState()
+        {
+            var controller = EnsureController();
+            controller.ResetProjectionState();
             Capture(controller);
         }
 
@@ -362,6 +478,10 @@ namespace LLMGameCreatorAlpha
             interactionPreview = string.Empty;
             objectiveReplayDetails = string.Empty;
             verificationEventLog = string.Empty;
+            baselineStatus = "unknown";
+            fullVerificationStatus = "not run";
+            selectedMarkerStatus = "none";
+            projectionStateStatus = "not initialized";
         }
 
         private static void ClearProjectionRootImmediate()
@@ -414,6 +534,18 @@ namespace LLMGameCreatorAlpha
             interactionPreview = controller.InteractionPreview;
             objectiveReplayDetails = controller.ObjectiveReplayDetails;
             verificationEventLog = controller.VerificationEventLog;
+            baselineStatus = "loaded=" + controller.AcceptedBaselineReady
+                             + "; baselineId=" + controller.BaselineId
+                             + "; manualGate=" + controller.ManualGateStatus;
+            fullVerificationStatus = controller.LastFullVerificationPassed ? "passed" : "not passed";
+            selectedMarkerStatus = "id=" + EmptyAsNone(controller.SelectedMarkerId)
+                                   + "; kind=" + EmptyAsNone(controller.SelectedMarkerKind);
+            projectionStateStatus = controller.ProjectionStateStatus;
+        }
+
+        private static string EmptyAsNone(string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? "none" : value;
         }
     }
 }

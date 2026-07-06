@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-06T00:38:31Z",
+    "updated_at_utc":  "2026-07-06T02:03:58Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 121 adds accepted Alpha interaction drilldown and one-click verification",
-    "gate_status":  "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
+    "current_phase_title":  "Goal 122 adds accepted Alpha projection action loop and window polish",
+    "gate_status":  "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
     "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
-    "current_user_action":  "Review Goal121 interaction drilldown and one-click verification evidence, then run hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Full Projection Verification. The user should not have to click every debug button after each goal. After Unity manual checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply only for bounded Unity editor noise. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
-    "recommended_next_decision":  "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification after reviewing the one-click verification evidence. Goal121 reduces manual Unity verification to one main button, adds selected-marker drilldown plus interaction/action and objective/replay details, keeps cleanup bounded with .devflow\\scripts\\clean-unity-editor-noise.cmd after Unity checks, and still authorizes no Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
+    "current_user_action":  "Review Goal122 accepted Alpha projection action-loop/window-polish evidence, then run hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Full Projection Verification. The window should be readable at typical editor sizes, with the main path first and optional debug/details panels bounded. Use Select Next Interaction Target, Preview Selected Action, Apply Preview Action To Projection State and Reset Projection State for projection-only action-loop checks. After Unity manual checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply only for bounded Unity editor noise. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
+    "recommended_next_decision":  "goal_122_accepted_alpha_projection_action_loop_and_window_polish after reviewing the action-loop and window-polish evidence. Goal122 keeps manual Unity verification to one main button, adds projection-local preview/apply/reset state, keeps cleanup bounded with .devflow\\scripts\\clean-unity-editor-noise.cmd after Unity checks, and still authorizes no Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
                                                         "goal_121_accepted_alpha_interaction_drilldown_and_one_click_verification",
                                                         "goal_120a_clean_unity_editor_noise_empty_status_hotfix_verification",
                                                         "accepted_alpha_projection_usability_and_cleanup_verification",
@@ -2731,9 +2732,24 @@
                                                                                                            "Evidence is under .llmgc/procedural/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification and export metadata is under .llmgc/exports/goal-121-accepted-alpha-interaction-drilldown-and-one-click-verification.",
                                                                                                            "After Unity manual checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply for bounded editor-noise cleanup.",
                                                                                                            "Goal121 does not authorize .llmgc/manual/**, Unity scene/prefab/project-settings/packages/StreamingAssets, Runtime/schema/provider/Lua/generator-library, final renderer/atlas or release-packaging work."
-                                                                                                       ],
+                                                                                   ],
                                                                                    "next_action":  "review_goal121_one_click_verification_then_continue_product_visible_or_automated_verification_work"
                                                                                },
+    "goal_122_accepted_alpha_projection_action_loop_and_window_polish":  {
+                                                                            "status":  "produced_for_review",
+                                                                            "accepted":  false,
+                                                                            "evidence_source":  "goal_122_accepted_alpha_projection_action_loop_and_window_polish",
+                                                                            "observed_result":  [
+                                                                                                    "Goal122 keeps accepted Alpha Unity manual verification to LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection plus the Run Full Projection Verification button.",
+                                                                                                    "The Unity EditorWindow now shows a compact top status area, keeps Run Full Projection Verification as the main action, separates debug controls and bounds/collapses Smoke, Selected Marker Details, Interaction Preview, Objective / Replay Details and Verification Event Log panels.",
+                                                                                                    "Goal122 adds projection-only action-loop state with Select Next Interaction Target, Preview Selected Action, Apply Preview Action To Projection State and Reset Projection State. The state is local Editor projection state and writes no files, scenes, prefabs, ProjectSettings, Packages or StreamingAssets.",
+                                                                                                    "Unity batchmode method LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeProjectionActionLoopSmoke writes GOAL122_ACTION_LOOP_SMOKE_PASS or GOAL122_ACTION_LOOP_SMOKE_FAIL and verifies fullVerificationPassed, selectedMarkerDetailsPresent, interactionPreviewPresent, objectiveReplayDetailsPresent, verificationEventLogPresent, projectionActionPreviewPresent, projectionActionApplyPassed, projectionStateResetPassed, windowLayoutPolishPresent and materialWarningGuardPresent.",
+                                                                                                    "Evidence is under .llmgc/procedural/goal-122-accepted-alpha-projection-action-loop-and-window-polish and export metadata is under .llmgc/exports/goal-122-accepted-alpha-projection-action-loop-and-window-polish.",
+                                                                                                    "After Unity manual checks, use .devflow\\scripts\\clean-unity-editor-noise.cmd or .\\.devflow\\scripts\\clean-unity-editor-noise.ps1 -Apply for bounded editor-noise cleanup.",
+                                                                                                    "Goal122 does not authorize .llmgc/manual/**, Unity scene/prefab/project-settings/packages/StreamingAssets, Runtime/schema/provider/Lua/generator-library, final renderer/atlas or release-packaging work."
+                                                                                                ],
+                                                                            "next_action":  "review_goal122_action_loop_and_window_polish_then_continue_product_visible_or_automated_verification_work"
+                                                                        },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
                                                                      "status":  "produced_for_review",
                                                                      "accepted":  false,

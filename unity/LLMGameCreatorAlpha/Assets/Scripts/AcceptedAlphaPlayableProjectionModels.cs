@@ -68,9 +68,15 @@ namespace LLMGameCreatorAlpha
         public bool LegendPresent;
         public bool MarkerDescriptorPresent;
         public bool SelectableInteractionTargetPresent;
+        public bool SelectedMarkerDetailsPresent;
         public bool InteractionPreviewPresent;
         public bool SelectableObjectivePresent;
         public bool ObjectiveReplayDetailsPresent;
+        public bool VerificationEventLogPresent;
+        public bool ProjectionActionPreviewPresent;
+        public bool ProjectionActionApplyPassed;
+        public bool ProjectionStateResetPassed;
+        public bool WindowLayoutPolishPresent;
         public bool MaterialWarningGuardPresent;
         public bool ZeroFatalErrors;
         public bool FullVerificationPassed;
@@ -107,9 +113,15 @@ namespace LLMGameCreatorAlpha
                    + "\nlegendPresent=" + LegendPresent
                    + "\nmarkerDescriptorPresent=" + MarkerDescriptorPresent
                    + "\nselectableInteractionTargetPresent=" + SelectableInteractionTargetPresent
+                   + "\nselectedMarkerDetailsPresent=" + SelectedMarkerDetailsPresent
                    + "\ninteractionPreviewPresent=" + InteractionPreviewPresent
                    + "\nselectableObjectivePresent=" + SelectableObjectivePresent
                    + "\nobjectiveReplayDetailsPresent=" + ObjectiveReplayDetailsPresent
+                   + "\nverificationEventLogPresent=" + VerificationEventLogPresent
+                   + "\nprojectionActionPreviewPresent=" + ProjectionActionPreviewPresent
+                   + "\nprojectionActionApplyPassed=" + ProjectionActionApplyPassed
+                   + "\nprojectionStateResetPassed=" + ProjectionStateResetPassed
+                   + "\nwindowLayoutPolishPresent=" + WindowLayoutPolishPresent
                    + "\nmaterialWarningGuardPresent=" + MaterialWarningGuardPresent
                    + "\nzeroFatalErrors=" + ZeroFatalErrors
                    + "\nfullVerificationPassed=" + FullVerificationPassed
