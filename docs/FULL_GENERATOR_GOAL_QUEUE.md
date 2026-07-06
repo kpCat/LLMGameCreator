@@ -108,6 +108,7 @@ offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator 
 offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
 unity_safe_mode_compile_hotfix_verification produced, manual gate still required
 offline_geoworld_alpha_manual_gate_acceptance_record produced, manual gate accepted by human, post-acceptance continuation selection required
+goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
 goal_129_gamepackage_candidate_matrix_projection_runner required
 goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface required
 goal_127_winforms_unity_projection_verification_runner required
@@ -162,6 +163,7 @@ Current capabilities:
 - Goal 127 WinForms Unity projection verification runner evidence with a repo-local `.devflow\scripts\run-unity-projection-verification.cmd` command, Unity batchmode full-playthrough execution, log/result scan, bounded cleanup and Visual World Stream Preview Workspace visibility; manual Unity inspection remains optional and the goal does not authorize sample, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - Goal 128 parameterized GamePackage projection runner evidence with the same normal `.devflow\scripts\run-unity-projection-verification.cmd` command, optional `-PackagePath`, default read-only `samples/minimal-map-game/package.json`, Unity `-llmgcPackagePath` forwarding, result/log/package-path scan, bounded cleanup and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - Goal 129 GamePackage candidate matrix projection runner evidence with normal `.devflow\scripts\run-gamepackage-projection-matrix.cmd`, a deterministic candidate index, byte-copy baseline, sample-derived variant, per-candidate Goal128 runner result/log-scan JSON, aggregate matrix result and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
+- Goal 130 GamePackage candidate factory and matrix pipeline evidence with normal `.devflow\scripts\run-gamepackage-candidate-factory.cmd`, three deterministic projection-compatible candidates under Goal130 artifacts, candidate index/factory result/matrix result proof with GREEN 3/3 status and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -2296,18 +2298,18 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-goal_129_gamepackage_candidate_matrix_projection_runner
+goal_130_gamepackage_candidate_factory_and_matrix_pipeline
 ```
 
-Review the Goal129 GamePackage candidate matrix projection runner evidence, then use
-`.devflow\scripts\run-gamepackage-projection-matrix.cmd` for normal repo-local candidate verification. Inspect the
-deterministic candidate index, byte-copy baseline, sample-derived variant, per-candidate runner result/log-scan JSON
-and aggregate matrix result. Manual Unity inspection remains optional. Do not start sample mutation, live
-geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity
+Review the Goal130 GamePackage candidate factory and matrix pipeline evidence, then use
+`.devflow\scripts\run-gamepackage-candidate-factory.cmd` for normal repo-local candidate factory verification. Inspect the
+generated candidate index, three Goal130 candidate packages, factory result, per-candidate matrix result/log-scan JSON
+and aggregate matrix result. Manual Unity inspection remains optional. Do not start sample mutation, `.llmgc/manual/**`,
+live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity
 scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_129_gamepackage_candidate_matrix_green_projection_only
+goal_130_gamepackage_candidate_factory_green_projection_only
 ```

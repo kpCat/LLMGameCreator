@@ -1,0 +1,24 @@
+{
+  "goalId": "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+  "passed": true,
+  "manualInputRejected": true,
+  "templateUnderRepo": true,
+  "samplePackageReadOnly": true,
+  "candidatePathsUnderGoal130Artifacts": true,
+  "runtimeSchemaProviderLuaGeneratorLibraryUnchanged": true,
+  "unityAssetsProjectSettingsPackagesUnchanged": true,
+  "noForbiddenPathsExpected": true,
+  "rejectedPathSamples": [
+    ".llmgc/manual/example.json",
+    "samples/minimal-map-game/package.json",
+    "src/LLMGameCreator.Runtime/GameRuntime.cs",
+    "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+    "src/LLMGameCreator.Generation/Generator.cs",
+    "src/LLMGameCreator.AssetPipeline/Provider.cs",
+    "src/LLMGameCreator.Scripting/LuaSandbox.cs",
+    "generator-library/example.json",
+    "unity/LLMGameCreatorAlpha/Assets/Scenes/Main.unity",
+    "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectSettings.asset",
+    "unity/LLMGameCreatorAlpha/Packages/manifest.json"
+  ]
+}

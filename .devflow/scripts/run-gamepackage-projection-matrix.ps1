@@ -1,5 +1,6 @@
 param(
     [string]$CandidateIndexPath = ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-index.json",
+    [string]$OutputRoot = "",
     [string]$UnityPath = "",
     [switch]$DryRun,
     [switch]$ApplyCleanup
@@ -13,10 +14,7 @@ $ScriptPath = $MyInvocation.MyCommand.Path
 Initialize-DevflowScriptEnvironment
 
 $RepoRoot = Resolve-DevflowRepoRoot -ScriptPath $ScriptPath
-$GoalRootRelative = ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner"
-$GoalRoot = Join-Path $RepoRoot $GoalRootRelative
-$MatrixRoot = Join-Path $GoalRoot "matrix"
-$MatrixResultPath = Join-Path $GoalRoot "gamepackage-projection-matrix-result.json"
+$DefaultGoalRootRelative = ".llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner"
 $RunnerScript = Join-Path $RepoRoot ".devflow/scripts/run-unity-projection-verification.ps1"
 $PassMarker = "GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_PASS"
 $FailMarker = "GOAL128_PARAMETERIZED_GAMEPACKAGE_FULL_PLAYTHROUGH_FAIL"
@@ -77,6 +75,33 @@ function Resolve-MatrixInputPath {
 
     if ($MustExist -and -not (Test-Path -LiteralPath $full -PathType Leaf)) {
         throw "$Label does not exist: $relative"
+    }
+
+    return $full
+}
+
+function Resolve-MatrixOutputRoot {
+    param([string]$Path)
+
+    $candidate = $Path
+    if ([string]::IsNullOrWhiteSpace($candidate)) {
+        $candidate = $DefaultGoalRootRelative
+    }
+
+    if ([System.IO.Path]::IsPathRooted($candidate)) {
+        $full = [System.IO.Path]::GetFullPath($candidate)
+    }
+    else {
+        $full = [System.IO.Path]::GetFullPath((Join-Path $RepoRoot $candidate))
+    }
+
+    if (-not (Test-MatrixPathUnderRoot -RootPath $RepoRoot -CandidatePath $full)) {
+        throw "OutputRoot must stay under the repository root: $candidate"
+    }
+
+    $relative = ConvertTo-MatrixRelativePath -Path $full
+    if ($relative.StartsWith(".llmgc/manual/", [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "OutputRoot must not point under .llmgc/manual: $relative"
     }
 
     return $full
@@ -203,6 +228,9 @@ function New-LogScan {
 }
 
 $ResolvedCandidateIndexPath = Resolve-MatrixInputPath -Path $CandidateIndexPath -Label "CandidateIndexPath"
+$GoalRoot = Resolve-MatrixOutputRoot -Path $OutputRoot
+$MatrixRoot = Join-Path $GoalRoot "matrix"
+$MatrixResultPath = Join-Path $GoalRoot "gamepackage-projection-matrix-result.json"
 if (-not (Test-Path -LiteralPath $RunnerScript -PathType Leaf)) {
     throw "Unity projection runner script was not found: $(ConvertTo-MatrixRelativePath -Path $RunnerScript)"
 }

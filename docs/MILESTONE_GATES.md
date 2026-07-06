@@ -50,6 +50,8 @@ Goal 128 note: the same normal runner now accepts optional `-PackagePath`, resol
 
 Goal 129 note: the GamePackage candidate matrix runner makes `.devflow\scripts\run-gamepackage-projection-matrix.cmd` the normal repo-local candidate verification command over the Goal128 parameterized runner. It creates a byte-copy baseline candidate and a sample-derived variant under Goal129 artifacts, records per-candidate runner result/log scans and an aggregate matrix result, and keeps manual Unity inspection optional. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 130 note: the GamePackage candidate factory makes `.devflow\scripts\run-gamepackage-candidate-factory.cmd` the normal repo-local candidate factory command over the Goal129 matrix runner. It creates three projection-compatible candidates under Goal130 artifacts, records the candidate index, factory result, per-candidate matrix runner result/log scans and aggregate matrix result, and keeps manual Unity inspection optional. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

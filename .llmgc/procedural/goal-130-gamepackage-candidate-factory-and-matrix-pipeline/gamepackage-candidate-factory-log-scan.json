@@ -1,0 +1,9 @@
+{
+  "goalId": "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+  "logScanExists": true,
+  "matrixResultExists": true,
+  "matrixPassed": true,
+  "candidateLogScanCount": 3,
+  "passed": true,
+  "forbiddenMarkersFound": []
+}

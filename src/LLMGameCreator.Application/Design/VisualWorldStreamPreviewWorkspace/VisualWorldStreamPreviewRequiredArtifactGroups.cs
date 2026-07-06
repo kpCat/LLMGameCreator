@@ -38,6 +38,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         "generic_gamepackage_loop",
         "generic_gamepackage_systems_loop",
         "generic_gamepackage_full_playthrough",
-        "unity_projection_verification_runner"
+        "unity_projection_verification_runner",
+        "parameterized_gamepackage_projection_runner",
+        "gamepackage_candidate_matrix_projection_runner",
+        "gamepackage_candidate_factory_and_matrix_pipeline"
     ];
 }

@@ -36,6 +36,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         var gamePackageCandidateMatrix =
             await new GamePackageCandidateMatrixProjectionService()
                 .BuildAndWriteAsync(root);
+        var gamePackageCandidateFactory =
+            await new GamePackageCandidateFactoryProjectionService()
+                .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -287,6 +290,34 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             Assert.True(gamePackageCandidateMatrix.Result.LogScan.Passed);
             Assert.Equal("GREEN", gamePackageCandidateMatrix.Result.Dashboard.MatrixStatus);
         }
+        Assert.True(gamePackageCandidateFactory.Result.CandidateIndexScan.Passed);
+        Assert.Equal(3, gamePackageCandidateFactory.Result.CandidateIndexScan.CandidateCount);
+        Assert.True(gamePackageCandidateFactory.Result.ScriptScan.Passed);
+        Assert.True(gamePackageCandidateFactory.Result.FactoryResultScan.Passed);
+        Assert.True(gamePackageCandidateFactory.Result.MatrixResultScan.Passed);
+        Assert.True(gamePackageCandidateFactory.Result.LogScan.Passed);
+        Assert.True(gamePackageCandidateFactory.Result.NegativeProof.Passed);
+        Assert.Equal("GREEN", gamePackageCandidateFactory.Result.Dashboard.CandidateFactoryStatus);
+        Assert.True(gamePackageCandidateFactory.Result.Dashboard.MatrixPassed);
+        Assert.True(gamePackageCandidateFactory.Result.Dashboard.SamplePackageUnmodified);
+        Assert.Contains(gamePackageCandidateFactory.Result.ProceduralFileIndex.Files, file =>
+            file.RelativePath == GamePackageCandidateFactoryProjectionVocabulary.CandidateIndexRelativePath);
+        Assert.Contains(gamePackageCandidateFactory.WrittenFiles, path =>
+            path == GamePackageCandidateFactoryProjectionVocabulary.ExportPackageDirectory
+            + "/"
+            + GamePackageCandidateFactoryProjectionVocabulary.CandidateIndexFileName);
+        Assert.Contains(gamePackageCandidateFactory.WrittenFiles, path =>
+            path == GamePackageCandidateFactoryProjectionVocabulary.ExportPackageDirectory
+            + "/"
+            + GamePackageCandidateFactoryProjectionVocabulary.FactoryResultFileName);
+        Assert.Contains(gamePackageCandidateFactory.WrittenFiles, path =>
+            path == GamePackageCandidateFactoryProjectionVocabulary.ExportPackageDirectory
+            + "/"
+            + GamePackageCandidateFactoryProjectionVocabulary.MatrixResultFileName);
+        Assert.Contains(gamePackageCandidateFactory.WrittenFiles, path =>
+            path == GamePackageCandidateFactoryProjectionVocabulary.DocumentationPath);
+        Assert.DoesNotContain(gamePackageCandidateFactory.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -311,6 +342,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysParameterizedGamePackageRunner);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysGamePackageCandidateMatrix);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysGamePackageCandidateFactory);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -333,6 +366,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "parameterized_gamepackage_projection_runner");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "gamepackage_candidate_matrix_projection_runner");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "gamepackage_candidate_factory_and_matrix_pipeline");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -355,6 +390,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.Goal128FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.GamePackageCandidateMatrixGroupPresent);
         Assert.True(workspace.QualityGateScan.Goal129FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.GamePackageCandidateFactoryGroupPresent);
+        Assert.True(workspace.QualityGateScan.Goal130FilesDiscoveredByRelativePaths);
         if (workspace.QualityGateScan.GamePackageCandidateMatrixStatus == "GREEN")
         {
             Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixCandidateCount);
@@ -363,6 +400,12 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             Assert.True(workspace.QualityGateScan.GamePackageCandidateMatrixCleanupApplied);
             Assert.True(workspace.QualityGateScan.GamePackageCandidateMatrixQualityGatePassed);
         }
+        Assert.Equal("GREEN", workspace.QualityGateScan.GamePackageCandidateFactoryStatus);
+        Assert.Equal(3, workspace.QualityGateScan.GamePackageCandidateFactoryCandidateCount);
+        Assert.Equal(3, workspace.QualityGateScan.GamePackageCandidateFactoryPassedCandidates);
+        Assert.Equal(0, workspace.QualityGateScan.GamePackageCandidateFactoryFailedCandidates);
+        Assert.True(workspace.QualityGateScan.GamePackageCandidateFactoryMatrixPassed);
+        Assert.True(workspace.QualityGateScan.GamePackageCandidateFactoryQualityGatePassed);
         Assert.Contains(
             "acceptedAlphaUnityPlayableProjectionGeneratedRootName: "
             + AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
@@ -407,6 +450,10 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "gamePackageCandidateMatrixStatus:",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "candidateFactoryStatus:",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 129 GamePackage candidate matrix projection runner
+Updated by: Goal 130 GamePackage candidate factory and matrix pipeline
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -261,6 +261,33 @@ WinForms show `gamePackageCandidateMatrixStatus`, candidate counts, candidate in
 commands, baseline/variant package paths, cleanup status, `manualUnityOptional=true` and `projectionOnly=true`.
 
 Goal129 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
+authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
+Goal 130 connects a deterministic GamePackage candidate factory to the candidate matrix runner:
+
+```text
+goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
+implementationStatus=GREEN
+accepted=false
+normalVerificationCommand=.devflow\scripts\run-gamepackage-candidate-factory.cmd
+candidateCount=3
+passedCandidates=3
+failedCandidates=0
+matrixPassed=true
+samplePackageUnmodified=true
+manualUnityOptional=true
+projectionOnly=true
+```
+
+Goal130 reads `samples/minimal-map-game/package.json` as a read-only template, materializes baseline, alchemy and combat
+candidate packages under `.llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/`,
+writes `gamepackage-candidate-index.json`, invokes the Goal129 matrix runner with its output redirected into Goal130
+artifacts, and records `gamepackage-candidate-factory-result.json` plus `gamepackage-projection-matrix-result.json`.
+Visual World Stream Preview Workspace and WinForms show `candidateFactoryStatus`, candidate counts, `matrixPassed`,
+candidate index/factory/matrix result paths, normal command, `manualUnityOptional=true`, `samplePackageUnmodified=true`
+and `projectionOnly=true`.
+
+Goal130 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
 authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
 Goal 053 handoff acceptance recorded before Goal 054:

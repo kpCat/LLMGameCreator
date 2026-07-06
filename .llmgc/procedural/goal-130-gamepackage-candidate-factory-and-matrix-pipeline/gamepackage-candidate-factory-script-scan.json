@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+  "factoryScriptExists": true,
+  "factoryCmdExists": true,
+  "matrixRunnerScriptExists": true,
+  "supportsTemplatePackagePath": true,
+  "supportsOutputRoot": true,
+  "supportsUnityPath": true,
+  "supportsDryRun": true,
+  "supportsApplyCleanup": true,
+  "rejectsOutsideRepository": true,
+  "rejectsManualInputRoot": true,
+  "refusesWritesOutsideGoal130Root": true,
+  "materializesCandidatesBeforeMatrix": true,
+  "invokesGoal129MatrixRunner": true,
+  "cmdWrapperUsesApplyCleanup": true,
+  "noBroadGitClean": true,
+  "noLlmProviderNetwork": true,
+  "passed": true
+}

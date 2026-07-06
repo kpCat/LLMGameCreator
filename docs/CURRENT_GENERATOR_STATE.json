@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-06T11:14:25Z",
+    "updated_at_utc":  "2026-07-06T17:16:52Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 129 adds the GamePackage candidate matrix projection runner",
-    "gate_status":  "goal_129_gamepackage_candidate_matrix_projection_runner",
+    "current_phase_title":  "Goal 130 adds the GamePackage candidate factory and matrix pipeline",
+    "gate_status":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
     "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
-    "current_user_action":  "Review Goal129 GamePackage candidate matrix projection runner evidence and use .devflow\\scripts\\run-gamepackage-projection-matrix.cmd for normal repo-local candidate verification. The matrix runner reads .llmgc/procedural/goal-129-gamepackage-candidate-matrix-projection-runner/gamepackage-candidate-index.json, runs the Goal128 parameterized Unity projection runner for each repo-local candidate package with -ApplyCleanup, records per-candidate runner-result/log-scan JSON and writes gamepackage-projection-matrix-result.json. Manual Unity inspection remains optional, not required after every goal. Codex must not automatically start sample mutation, live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
-    "recommended_next_decision":  "goal_129_gamepackage_candidate_matrix_projection_runner after reviewing the candidate matrix runner and WinForms evidence. Goal129 makes .devflow\\scripts\\run-gamepackage-projection-matrix.cmd the normal candidate matrix command, keeps manual Unity inspection optional, keeps the sample package read-only, and still authorizes no .llmgc/manual/**, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
+    "current_user_action":  "Review Goal130 GamePackage candidate factory and matrix pipeline evidence and use .devflow\\scripts\\run-gamepackage-candidate-factory.cmd for normal repo-local candidate factory verification. The factory reads samples/minimal-map-game/package.json as a read-only template, materializes three projection-compatible candidate packages under .llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates, writes gamepackage-candidate-index.json, invokes the Goal129 matrix runner through the Goal128 parameterized Unity projection runner with -ApplyCleanup, and writes gamepackage-candidate-factory-result.json plus gamepackage-projection-matrix-result.json with GREEN 3/3 candidate proof. Manual Unity inspection remains optional, not required after every goal. Codex must not automatically start sample mutation, .llmgc/manual/**, live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
+    "recommended_next_decision":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline after reviewing the candidate factory, matrix runner and WinForms evidence. Goal130 makes .devflow\\scripts\\run-gamepackage-candidate-factory.cmd the normal candidate factory command, keeps manual Unity inspection optional, keeps the sample package read-only, and still authorizes no .llmgc/manual/**, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
                                                         "goal_129_gamepackage_candidate_matrix_projection_runner",
                                                         "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
                                                         "goal_127_winforms_unity_projection_verification_runner",
@@ -197,7 +198,8 @@
                            "goal_126_manual_gate":  "goal_126_generic_gamepackage_full_playthrough_projection",
                            "goal_127_manual_gate":  "goal_127_winforms_unity_projection_verification_runner",
                            "goal_128_manual_gate":  "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
-                           "goal_129_manual_gate":  "goal_129_gamepackage_candidate_matrix_projection_runner"
+                           "goal_129_manual_gate":  "goal_129_gamepackage_candidate_matrix_projection_runner",
+                           "goal_130_manual_gate":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -488,6 +490,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+                                          "gamepackage_candidate_factory_and_matrix_pipeline_verification",
                                           "goal_129_gamepackage_candidate_matrix_projection_runner",
                                           "gamepackage_candidate_matrix_projection_runner_verification",
                                           "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
@@ -634,14 +638,14 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "goal_129_gamepackage_candidate_matrix_projection_runner",
-    "recommended_next_work_item_title":  "Review the Goal129 GamePackage candidate matrix projection runner",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-129-gamepackage-candidate-matrix-projection-runner/GOAL.md",
+    "recommended_next_work_item":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+    "recommended_next_work_item_title":  "Review the Goal130 GamePackage candidate factory and matrix pipeline",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal129 GamePackage candidate matrix projection runner evidence before broadening accepted Alpha projection further",
-                                              "Use .devflow\\scripts\\run-gamepackage-projection-matrix.cmd for normal repo-local candidate matrix verification; candidate packages must stay under Goal129 artifacts and outside .llmgc/manual/**",
+                                              "Review Goal130 GamePackage candidate factory and matrix pipeline evidence before broadening accepted Alpha projection further",
+                                              "Use .devflow\\scripts\\run-gamepackage-candidate-factory.cmd for normal repo-local candidate factory verification; candidate packages must stay under Goal130 artifacts and outside .llmgc/manual/**",
                                               "Treat manual Unity inspection as optional unless a hands-on review is explicitly needed",
-                                              "Keep Goal129 limits in force: no .llmgc/manual/**, no samples/minimal-map-game mutation, no Unity scene/prefab/settings/packages/StreamingAssets, Runtime, schema, provider, Lua, generator-library, final renderer/atlas or release packaging work",
+                                              "Keep Goal130 limits in force: no .llmgc/manual/**, no samples/minimal-map-game mutation, no Unity scene/prefab/settings/packages/StreamingAssets, Runtime, schema, provider, Lua, generator-library, final renderer/atlas or release packaging work",
                                               "Review Goal127 Unity projection verification runner evidence before broadening accepted Alpha projection further",
                                               "Review Goal126 generic GamePackage full playthrough evidence before broadening accepted Alpha projection further",
                                               "Run Goal126 hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and click Run Generic Package Full Playthrough Verification",
@@ -2888,10 +2892,23 @@
                                                                                            "Visual World Stream Preview Workspace and WinForms surface gamePackageCandidateMatrixStatus, candidate counts, candidate index path, matrix result path, normal/example commands, baseline/variant package paths, cleanup status, manualUnityOptional and projectionOnly.",
                                                                                            "Manual Unity inspection remains optional. Goal129 does not authorize samples/minimal-map-game mutation, .llmgc/manual/**, Unity scene/prefab/project-settings/packages/StreamingAssets, Runtime/schema/provider/Lua/generator-library, final renderer/atlas or release-packaging work."
                                                                                        ],
-                                                                   "next_action":  "use_gamepackage_candidate_matrix_projection_runner_then_continue_product_visible_or_automated_verification_work"
-                                                               },
+                                                                    "next_action":  "use_gamepackage_candidate_matrix_projection_runner_then_continue_product_visible_or_automated_verification_work"
+                                                                },
+    "goal_130_gamepackage_candidate_factory_and_matrix_pipeline":  {
+                                                                       "status":  "produced_for_review",
+                                                                       "accepted":  false,
+                                                                       "evidence_source":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+                                                                       "observed_result":  [
+                                                                                               "Goal130 adds a deterministic repo-local GamePackage candidate factory over samples/minimal-map-game/package.json as read-only template.",
+                                                                                               "The normal command is .devflow\\scripts\\run-gamepackage-candidate-factory.cmd; it materializes baseline, alchemy and combat candidates under .llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates, writes gamepackage-candidate-index.json and invokes the Goal129 matrix runner with -OutputRoot pointing at Goal130 artifacts.",
+                                                                                               "The factory/matrix proof is GREEN: candidateCount=3, passedCandidates=3, failedCandidates=0, matrixPassed=true, samplePackageUnmodified=true, manualUnityOptional=true, projectionOnly=true.",
+                                                                                               "Visual World Stream Preview Workspace and WinForms surface candidateFactoryStatus, candidate counts, matrixPassed, candidateIndexPath, factoryResultPath, matrixResultPath, normalCommand, manualUnityOptional, samplePackageUnmodified, projectionOnly, evidencePath and exportPath.",
+                                                                                               "Manual Unity inspection remains optional. Goal130 does not authorize samples/minimal-map-game mutation, .llmgc/manual/**, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets or release-packaging work."
+                                                                                           ],
+                                                                       "next_action":  "use_gamepackage_candidate_factory_runner_then_continue_product_visible_or_automated_verification_work"
+                                                                   },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
-                                                                     "status":  "produced_for_review",
+                                                                      "status":  "produced_for_review",
                                                                      "accepted":  false,
                                                                      "evidence_source":  "goal_111_offline_geoworld_alpha_manual_result_intake",
                                                                      "observed_result":  [

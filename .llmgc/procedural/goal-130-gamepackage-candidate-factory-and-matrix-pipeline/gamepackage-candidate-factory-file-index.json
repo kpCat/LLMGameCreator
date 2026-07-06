@@ -1,0 +1,110 @@
+{
+  "goalId": "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+  "rootPath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline",
+  "indexedFileCount": 17,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-alchemy-route/package.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "871f2dee5ac1b9b43c84174f23856609aa0cf5ada363a3e284131cd870d90ac4"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-baseline/package.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "d5aa811cbcc302068f48f3954276aa061345808497fa4d566af73f8f6dd19374"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-combat-route/package.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "d82aaf6aff4f4f48c68b27209b37b42703c817909563a2f619fd123e438432e1"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-dashboard.json",
+      "role": "goal130_candidate_factory_gamepackage-candidate-factory-dashboard",
+      "required": true,
+      "sha256": "fea569b6b44402a2e9dff2dc941f0379fda3e2797e05e32de2a3cfd7a5e5b279"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-log-scan.json",
+      "role": "goal130_candidate_factory_gamepackage-candidate-factory-log-scan",
+      "required": true,
+      "sha256": "90fedc4e0a01ef3b2af167eb9052e0c788a3388756aa12305678e09caeba043b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-negative-proof.json",
+      "role": "goal130_candidate_factory_gamepackage-candidate-factory-negative-proof",
+      "required": true,
+      "sha256": "e2ea75cae18e40d59f0e0ae138828f642c3da52c943c0a659c0242bae68b2212"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-report.md",
+      "role": "goal130_candidate_factory_gamepackage-candidate-factory-report",
+      "required": true,
+      "sha256": "14940d0fa39c591d502e64774ab9f33e2662e22711f54531c091df91dee5447e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-result.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "3ebb4c55b3fec1512adb6296eba3b4886f01c816dc2006d05d8e71e9ecc9da02"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-script-scan.json",
+      "role": "goal130_candidate_factory_gamepackage-candidate-factory-script-scan",
+      "required": true,
+      "sha256": "055d0fb11096bdfa248dbe1b9f51789c27b09f9e755bea77910aa389fa5cc20a"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-index.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "8c8f84581835b6e3e5b42b8516e7c75a3e784e45d9d37a70416f18a09501662c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-projection-matrix-result.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "0c574ab5eb8aaf6696baa1eec91ddbac12f4c68566f14d74980452bb73f015d5"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/matrix/minimal-map-game-alchemy-route/log-scan.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "317cbf706d5d8be0bd5541a4e8e57af1426b09f05d74f0b4daa0ca64b3957158"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/matrix/minimal-map-game-alchemy-route/runner-result.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "716b1e7f8e04e961a6aac7eee04b75ac45ae4e7022affd3f5a500f2a6d8c67f0"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/matrix/minimal-map-game-baseline/log-scan.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "d5d295b822b1e299d732cfe38a58f79cf4885359849d3d474bb72b09092d01ff"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/matrix/minimal-map-game-baseline/runner-result.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "5335c11077b3f363cc222517136079c6c85070a312db0f6bfb93cdfc7c6f0e83"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/matrix/minimal-map-game-combat-route/log-scan.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "419074b987b31a440527f035bd5ea41cb749b82010aff23bf60e1c9bc458f7e6"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/matrix/minimal-map-game-combat-route/runner-result.json",
+      "role": "goal130_candidate_factory_existing_artifact",
+      "required": true,
+      "sha256": "8a21cd95c9b97ff8841dbe4932295e2392109abee901f2675c00398fb1f470db"
+    }
+  ]
+}

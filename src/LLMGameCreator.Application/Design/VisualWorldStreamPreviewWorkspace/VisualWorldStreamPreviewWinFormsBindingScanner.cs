@@ -70,11 +70,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                         + ReadGoal120Through129WinFormsPageText(projectRoot);
+                         + ReadGoal120Through130WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
-
         var pageExists = pageText.Length > 0;
         var designerExists = designerText.Length > 0;
         var serviceRegistered = compositionText.Contains(
@@ -511,6 +510,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysParameterizedGamePackageRunner = PageBindsGoal128ParameterizedGamePackageRunner(pageText);
         var bindDisplaysGamePackageCandidateMatrix =
             PageBindsGoal129GamePackageCandidateMatrix(pageText);
+        var bindDisplaysGamePackageCandidateFactory =
+            PageBindsGoal130GamePackageCandidateFactory(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -647,6 +648,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(bindDisplaysUnityProjectionVerificationRunner, "goal127.winforms.unity_projection_runner_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysParameterizedGamePackageRunner, "goal128.winforms.parameterized_gamepackage_runner_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGamePackageCandidateMatrix, "goal129.winforms.gamepackage_candidate_matrix_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGamePackageCandidateFactory, "goal130.winforms.gamepackage_candidate_factory_bind_missing", pageRelativePath, diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -690,6 +692,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysUnityProjectionVerificationRunner = bindDisplaysUnityProjectionVerificationRunner,
             PageBindDisplaysParameterizedGamePackageRunner = bindDisplaysParameterizedGamePackageRunner,
             PageBindDisplaysGamePackageCandidateMatrix = bindDisplaysGamePackageCandidateMatrix,
+            PageBindDisplaysGamePackageCandidateFactory = bindDisplaysGamePackageCandidateFactory,
             Diagnostics = diagnostics
         };
     }

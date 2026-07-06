@@ -1,0 +1,76 @@
+﻿{
+    "schemaVersion":  "gamepackage_candidate_index_v1",
+    "goalId":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
+    "sourceTemplate":  "samples/minimal-map-game/package.json",
+    "sourceTemplateSha256":  "edb728bd1eb4921e502d4cf7ffa8e083f4dd5414629d227ca4125a6735c5d776",
+    "candidateCount":  3,
+    "passed":  true,
+    "candidates":  [
+                       {
+                           "candidateId":  "minimal-map-game-baseline",
+                           "packagePath":  ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-baseline/package.json",
+                           "packagePathRelative":  ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-baseline/package.json",
+                           "title":  "Minimal Map Game",
+                           "sourceTemplate":  "samples/minimal-map-game/package.json",
+                           "variantKind":  "baseline",
+                           "expectedProjectionMode":  "GenericFullPlaythrough",
+                           "requiredCompatibilityIds":  [
+                                                            "entity/village/sign",
+                                                            "interaction/sign_inspect",
+                                                            "entity/village/old_guard",
+                                                            "dialogue/old_guard_intro",
+                                                            "quest/help_healer",
+                                                            "inventory/player_start",
+                                                            "recipe/healing_potion",
+                                                            "node/apple_tree",
+                                                            "transaction/buy_healing_potion",
+                                                            "encounter/goblin_duel"
+                                                        ],
+                           "sha256":  "d5aa811cbcc302068f48f3954276aa061345808497fa4d566af73f8f6dd19374"
+                       },
+                       {
+                           "candidateId":  "minimal-map-game-alchemy-route",
+                           "packagePath":  ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-alchemy-route/package.json",
+                           "packagePathRelative":  ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-alchemy-route/package.json",
+                           "title":  "Minimal Map Game",
+                           "sourceTemplate":  "samples/minimal-map-game/package.json",
+                           "variantKind":  "alchemy-route",
+                           "expectedProjectionMode":  "GenericFullPlaythrough",
+                           "requiredCompatibilityIds":  [
+                                                            "entity/village/sign",
+                                                            "interaction/sign_inspect",
+                                                            "entity/village/old_guard",
+                                                            "dialogue/old_guard_intro",
+                                                            "quest/help_healer",
+                                                            "inventory/player_start",
+                                                            "recipe/healing_potion",
+                                                            "node/apple_tree",
+                                                            "transaction/buy_healing_potion",
+                                                            "encounter/goblin_duel"
+                                                        ],
+                           "sha256":  "871f2dee5ac1b9b43c84174f23856609aa0cf5ada363a3e284131cd870d90ac4"
+                       },
+                       {
+                           "candidateId":  "minimal-map-game-combat-route",
+                           "packagePath":  ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-combat-route/package.json",
+                           "packagePathRelative":  ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/candidates/minimal-map-game-combat-route/package.json",
+                           "title":  "Minimal Map Game",
+                           "sourceTemplate":  "samples/minimal-map-game/package.json",
+                           "variantKind":  "combat-route",
+                           "expectedProjectionMode":  "GenericFullPlaythrough",
+                           "requiredCompatibilityIds":  [
+                                                            "entity/village/sign",
+                                                            "interaction/sign_inspect",
+                                                            "entity/village/old_guard",
+                                                            "dialogue/old_guard_intro",
+                                                            "quest/help_healer",
+                                                            "inventory/player_start",
+                                                            "recipe/healing_potion",
+                                                            "node/apple_tree",
+                                                            "transaction/buy_healing_potion",
+                                                            "encounter/goblin_duel"
+                                                        ],
+                           "sha256":  "d82aaf6aff4f4f48c68b27209b37b42703c817909563a2f619fd123e438432e1"
+                       }
+                   ]
+}

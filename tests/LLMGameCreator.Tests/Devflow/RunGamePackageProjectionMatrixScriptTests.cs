@@ -20,12 +20,14 @@ public sealed class RunGamePackageProjectionMatrixScriptTests
             "run-gamepackage-projection-matrix.cmd"));
 
         Assert.Contains("[string]$CandidateIndexPath", script, StringComparison.Ordinal);
+        Assert.Contains("[string]$OutputRoot", script, StringComparison.Ordinal);
         Assert.Contains("gamepackage-candidate-index.json", script, StringComparison.Ordinal);
         Assert.Contains("[switch]$DryRun", script, StringComparison.Ordinal);
         Assert.Contains("[switch]$ApplyCleanup", script, StringComparison.Ordinal);
         Assert.Contains("Read-CandidateIndex", script, StringComparison.Ordinal);
         Assert.Contains("Test-MatrixPathUnderRoot", script, StringComparison.Ordinal);
         Assert.Contains("Resolve-MatrixInputPath", script, StringComparison.Ordinal);
+        Assert.Contains("Resolve-MatrixOutputRoot", script, StringComparison.Ordinal);
         Assert.Contains(".llmgc/manual/", script, StringComparison.Ordinal);
         Assert.Contains("must not point under .llmgc/manual", script, StringComparison.Ordinal);
         Assert.Contains("run-unity-projection-verification.ps1", script, StringComparison.Ordinal);
