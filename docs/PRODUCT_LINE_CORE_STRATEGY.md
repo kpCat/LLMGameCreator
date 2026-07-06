@@ -32,6 +32,10 @@ FeatureModule selection
 A goal that improves projection, evidence, dashboards or candidate selection is
 only product-progress if it reduces the distance to this path.
 
+Narrow alpha must be an expansion-safe kernel, not a hardcoded demo.
+Projection-only goals are not enough for product readiness.
+Canonical runtime playthrough is required for the next product milestone.
+
 ## Product-Line Building Blocks
 
 ### FeatureModule

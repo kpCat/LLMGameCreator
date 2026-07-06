@@ -45,6 +45,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         var candidatePipelineOperator =
             await new GamePackageCandidatePipelineOperatorService()
                 .BuildAndWriteAsync(root);
+        var productLineStrategyRebaseline =
+            await new ProductLineStrategyRebaselineService()
+                .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -347,6 +350,28 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.Contains(candidatePipelineOperator.WrittenFiles, path =>
             path == GamePackageCandidatePipelineOperatorVocabulary.DocumentationPath);
         Assert.DoesNotContain(candidatePipelineOperator.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.Equal("GREEN", productLineStrategyRebaseline.Result.Dashboard.ImplementationStatus);
+        Assert.Equal(
+            ProductLineStrategyRebaselineVocabulary.Gate,
+            productLineStrategyRebaseline.Result.Dashboard.Gate);
+        Assert.False(productLineStrategyRebaseline.Result.Dashboard.Accepted);
+        Assert.Equal(
+            ProductLineStrategyRebaselineVocabulary.NextGoal,
+            productLineStrategyRebaseline.Result.Dashboard.NextGoal);
+        Assert.True(productLineStrategyRebaseline.Result.Dashboard.ProductLineCombiner);
+        Assert.True(productLineStrategyRebaseline.Result.Dashboard.NotPromptToGame);
+        Assert.True(productLineStrategyRebaseline.Result.Dashboard.LlmOptionalAuthoringOnly);
+        Assert.True(productLineStrategyRebaseline.Result.Dashboard.CurrentStateUpdated);
+        Assert.True(productLineStrategyRebaseline.Result.Dashboard.QueueUpdated);
+        Assert.True(productLineStrategyRebaseline.Result.NegativeProof.Passed);
+        Assert.Contains(productLineStrategyRebaseline.WrittenFiles, path =>
+            path == ProductLineStrategyRebaselineVocabulary.ExportPackageDirectory
+            + "/"
+            + ProductLineStrategyRebaselineVocabulary.DashboardFileName);
+        Assert.Contains(productLineStrategyRebaseline.WrittenFiles, path =>
+            path == ProductLineStrategyRebaselineVocabulary.DocumentationPath);
+        Assert.DoesNotContain(productLineStrategyRebaseline.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);

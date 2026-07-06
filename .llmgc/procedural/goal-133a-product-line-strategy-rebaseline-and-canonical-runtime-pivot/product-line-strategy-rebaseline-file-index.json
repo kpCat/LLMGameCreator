@@ -1,0 +1,32 @@
+{
+  "goalId": "goal_133a_product_line_strategy_rebaseline_and_canonical_runtime_pivot",
+  "rootPath": ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot",
+  "indexedFileCount": 4,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/product-line-strategy-rebaseline-dashboard.json",
+      "role": "goal133a_product_line_strategy_rebaseline_product-line-strategy-rebaseline-dashboard",
+      "required": true,
+      "sha256": "00f187cbb33fc9e9423b7c153a88ab526f5a331166e6876ad621e21f1037993f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/product-line-strategy-rebaseline-doc-scan.json",
+      "role": "goal133a_product_line_strategy_rebaseline_product-line-strategy-rebaseline-doc-scan",
+      "required": true,
+      "sha256": "ab658990658dc8fe152e4c652fa0f1058fc4560ebec6357bce740c843ad3df1f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/product-line-strategy-rebaseline-negative-proof.json",
+      "role": "goal133a_product_line_strategy_rebaseline_product-line-strategy-rebaseline-negative-proof",
+      "required": true,
+      "sha256": "8681f71ae89b2e41304ed80cce3c044e3f5405bd64f5cf3c09b1c243ce576d53"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/product-line-strategy-rebaseline-report.md",
+      "role": "goal133a_product_line_strategy_rebaseline_product-line-strategy-rebaseline-report",
+      "required": true,
+      "sha256": "030aa9d09ad4060cd958d1597b4f67854df5b7a1e2b7fbd2a1d67e7855539e86"
+    }
+  ]
+}

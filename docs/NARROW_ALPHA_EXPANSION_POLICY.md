@@ -11,6 +11,14 @@ The alpha should not attempt the whole dream scope. It should prove that selecte
 feature modules can produce a real, validated, playable package through the
 canonical runtime path.
 
+Narrow alpha must be an expansion-safe kernel, not a hardcoded demo.
+Projection-only goals are not enough for product readiness.
+Canonical runtime playthrough is required for the next product milestone.
+
+This policy uses the seams defined in `docs/PRODUCT_LINE_CORE_STRATEGY.md`:
+`FeatureModule`, `RuntimePrimitive`, `SemanticPack`, `VisualPartPack`,
+`WorldSourceAdapter` and `PlayerAdapter`.
+
 ## Alpha Scope
 
 The preferred alpha scope is:

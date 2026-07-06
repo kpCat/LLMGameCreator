@@ -5,9 +5,16 @@
 1. Read this AGENTS.md.
 2. Read docs/CONTEXT_INDEX.md.
 3. Read docs/CURRENT_GENERATOR_STATE.md.
-4. For generator tasks, read docs/ROADMAP_TO_FULL_GENERATOR.md and the docs named by CURRENT_GENERATOR_STATE.
+4. Read docs/PRODUCT_LINE_CORE_STRATEGY.md.
+5. Read docs/NARROW_ALPHA_EXPANSION_POLICY.md.
+6. Read docs/AUTOMATED_VALIDATION_TIERS.md.
+7. For generator tasks, read docs/ROADMAP_TO_FULL_GENERATOR.md and the docs named by CURRENT_GENERATOR_STATE.
 
 If a task changes generator milestones, roadmap, LLM generation flow, artifact review flow, capability selection, evaluation, Lua integration, package assembly or recommended next steps, it must update docs/CURRENT_GENERATOR_STATE.md and docs/CURRENT_GENERATOR_STATE.json.
+
+LLMGameCreator is a data-driven game product-line combiner, not prompt-to-game.
+LLM is optional local authoring assistance only.
+Next broad product work must preserve FeatureModule / RuntimePrimitive / SemanticPack / VisualPartPack / WorldSourceAdapter / PlayerAdapter seams.
 
 ## Главная цель проекта
 

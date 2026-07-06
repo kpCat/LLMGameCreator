@@ -11,9 +11,12 @@ For any generator/Codex task:
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-5. `docs/ROADMAP_TO_FULL_GENERATOR.md`
-6. only then task-specific docs
+4. `docs/PRODUCT_LINE_CORE_STRATEGY.md`
+5. `docs/NARROW_ALPHA_EXPANSION_POLICY.md`
+6. `docs/AUTOMATED_VALIDATION_TIERS.md`
+7. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
+8. `docs/ROADMAP_TO_FULL_GENERATOR.md`
+9. only then task-specific docs
 
 For Goal 029 specifically, read:
 
@@ -37,6 +40,26 @@ Infrastructure-only work is frozen unless explicitly requested by the user or di
 
 Old apply READMEs, old product-slice prompts, old task-pack prompts and historical archive manifests are not current planning authority.
 
+## Product-Line Strategy Routing
+
+Read the product-line strategy docs before broad generation work, candidate
+pipeline work, WinForms operator pipeline work, Runtime/player pivot work,
+Codex task shaping and roadmap/rebaseline decisions:
+
+Read-first categories: broad generation work; candidate pipeline work; WinForms
+operator pipeline work; Runtime/player pivot work; Codex task shaping;
+roadmap/rebaseline decisions.
+
+1. `docs/PRODUCT_LINE_CORE_STRATEGY.md`
+2. `docs/NARROW_ALPHA_EXPANSION_POLICY.md`
+3. `docs/AUTOMATED_VALIDATION_TIERS.md`
+
+These docs define the FeatureModule / RuntimePrimitive / SemanticPack /
+VisualPartPack / WorldSourceAdapter / PlayerAdapter seams. Next broad product
+work must reduce the projection-only gap and route selected candidates toward
+canonical runtime playthrough, save/load/replay proof and player-adapter
+consumption of canonical transcript/state summaries.
+
 ## Full Generator Source-Of-Truth Docs
 
 Read these before broad generation, capability, prompt, Lua integration, artifact-contract, roadmap or Codex-task-shaping work:
@@ -45,6 +68,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 |---|---|
 | `docs/CURRENT_GENERATOR_STATE.md` | Starting any generator/Codex task; checking the active phase, recommended next action and blocked milestones. |
 | `docs/CURRENT_GENERATOR_STATE.json` | Machine-readable mirror of current state for tooling/tests. |
+| `docs/PRODUCT_LINE_CORE_STRATEGY.md` | Read-first for broad generation, candidate pipeline, WinForms operator pipeline, Runtime/player pivot, Codex task shaping and roadmap/rebaseline decisions; defines FeatureModule / RuntimePrimitive / SemanticPack / VisualPartPack / WorldSourceAdapter / PlayerAdapter seams. |
+| `docs/NARROW_ALPHA_EXPANSION_POLICY.md` | Read-first for alpha scope choices and Runtime/player pivot work; narrow alpha must be expansion-safe, not a hardcoded demo. |
+| `docs/AUTOMATED_VALIDATION_TIERS.md` | Read-first for validation planning; normal goals should strengthen package, canonical runtime, candidate matrix and player smoke tiers before rare manual gates. |
 | `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md` | Enforcing the post-S028 pivot from infrastructure growth to a generated playable/simulatable procedural kernel. |
 | `docs/NEXT_PRODUCT_SLICE_029_SEEDED_PROCEDURAL_GAME_KERNEL_TASK.md` | Completed Product Slice 029 task: Seeded Procedural Game Kernel v1. |
 | `docs/NEXT_PRODUCT_SLICE_030_FORMULA_EFFECT_ACTION_REGISTRY_TASK.md` | Completed Product Slice 030 task: Formula/Effect/Action Registry Foundation. |
@@ -229,6 +255,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/GOAL.md` | Goal 130 task: add a deterministic GamePackage candidate factory and matrix pipeline over the Goal129 matrix runner. Current gate=`goal_130_gamepackage_candidate_factory_and_matrix_pipeline`, normal command=`.devflow\scripts\run-gamepackage-candidate-factory.cmd`, candidate index=`.llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-index.json`, factory result=`.llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-candidate-factory-result.json`, matrix result=`.llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/gamepackage-projection-matrix-result.json`, generated candidate count is 3 with GREEN 3/3 matrix proof, and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/GOAL.md` | Goal 131 task: add a deterministic GamePackage candidate recipe catalog, scoring pass and selected-candidate promotion over the Goal130/Goal129 pipeline. Current gate=`goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion`, normal command=`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd`, recipe catalog=`.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-recipe-catalog.json`, candidate index=`.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-candidate-index.json`, scoring result=`.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-scoring-result.json`, selected handoff=`.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/selected-candidate-handoff.json`, generated candidate count is 4 with GREEN 4/4 matrix proof, selectedCandidateId=`minimal-map-game-balanced-baseline`, selectedCandidateScore=100, metadataOnlyRecipeMutation=true and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-132-winforms-candidate-pipeline-operator-panel/GOAL.md` | Goal 132 task: add a WinForms Candidate Pipeline Operator panel over the existing Goal131 candidate recipe pipeline. Current gate=`goal_132_winforms_candidate_pipeline_operator_panel`, normal command=`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd`, result path=`.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-recipe-pipeline-result.json`, selectedCandidateId=`minimal-map-game-balanced-baseline`, selectedCandidateScore=100, candidateCount=4, passedCandidates=4, failedCandidates=0, matrixPassed=true, operatorStatus=`GREEN_READY`, and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/settings/packages/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/GOAL.md` | Goal 133A task: product-line strategy rebaseline and canonical runtime pivot. Current gate=`product_line_strategy_rebaseline_verification`, accepted=false, nextProductGoal=`goal_134_canonical_runtime_selected_candidate_playthrough_matrix`; it routes the Goal131/132 selected candidate toward package validation, canonical runtime playthrough, save/load/replay proof and Unity/player consumption of canonical transcript/state summary instead of another projection-only wrapper. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -306,13 +333,22 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-goal_132_winforms_candidate_pipeline_operator_panel
+goal_134_canonical_runtime_selected_candidate_playthrough_matrix
 ```
 
-Goal132 WinForms candidate pipeline operator panel is produced for review. It makes the existing Goal131 command
-`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` visible from the Visual World Stream Preview Workspace,
-surfaces the selected candidate proof and run output tail, and keeps manual Unity inspection optional. It does not start
-sample mutation, `.llmgc/manual/**`, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/settings/packages/StreamingAssets or release packaging work.
+Goal133A product-line strategy rebaseline is produced for review with
+`product_line_strategy_rebaseline_verification required`, `accepted=false`,
+`manualUnityOptional=true` and `projectionOnlyStopCondition=true`. After
+Goal132/133A, the next product milestone is not another projection-only
+wrapper. Goal134 must start the canonical runtime path: candidate package ->
+package validation -> canonical runtime playthrough -> save/load/replay proof ->
+Unity/player consumes canonical transcript/state summary -> one-click report.
+
+Goal132 WinForms candidate pipeline operator panel remains useful context: use
+`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` and the Goal131
+selected candidate handoff as the source candidate input, but do not treat
+selected-candidate review as the immediate next goal unless it is tied to
+canonical runtime execution.
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
 `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop

@@ -1,8 +1,38 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 132 WinForms candidate pipeline operator panel
+Updated by: Goal 133A product-line strategy rebaseline and canonical runtime pivot
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 133A produced for review:
+
+```text
+product_line_strategy_rebaseline_verification required
+implementationStatus=GREEN
+accepted=false
+manualUnityOptional=true
+projectionOnlyStopCondition=true
+nextProductGoal=goal_134_canonical_runtime_selected_candidate_playthrough_matrix
+```
+
+Goal133A rebases the project identity around a data-driven game product-line
+combiner, not prompt-to-game. LLM is optional local authoring assistance only;
+`GamePackage` plus canonical runtime state are the source of truth. Future broad
+product work must preserve `FeatureModule`, `RuntimePrimitive`, `SemanticPack`,
+`VisualPartPack`, `WorldSourceAdapter` and `PlayerAdapter` seams.
+
+After Goal132/133A, the next product milestone is not another projection-only
+wrapper. Goal134 must start the canonical runtime path:
+candidate package -> package validation -> canonical runtime playthrough ->
+save/load/replay proof -> Unity/player consumes canonical transcript/state
+summary -> one-click report.
+
+Evidence lives under
+`.llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/`,
+export metadata under
+`.llmgc/exports/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/`,
+and the short manual note at
+`docs/manual-acceptance/product-line-strategy-rebaseline-and-canonical-runtime-pivot.md`.
 
 Goal 119 produced for review:
 
@@ -352,6 +382,12 @@ Refresh, Copy Command, Dry Run and Run buttons with async process execution. Evi
 
 Goal132 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
 authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work. Manual Unity inspection remains optional.
+
+Goal132 remains the source for selected-candidate operator evidence, but it is
+not the immediate next product milestone after Goal133A. The old selected
+candidate review package lane is rerouted to a later candidate review task only
+after the canonical runtime pivot is established, or if that review is directly
+tied to the canonical runtime playthrough matrix.
 
 Goal 053 handoff acceptance recorded before Goal 054:
 

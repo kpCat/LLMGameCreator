@@ -56,6 +56,8 @@ Goal 131 note: the GamePackage candidate recipe catalog scoring and promotion pi
 
 Goal 132 note: the WinForms Candidate Pipeline Operator panel makes the existing `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` visible and runnable from the Visual World Stream Preview Workspace, surfaces the Goal131 result path, selected candidate proof, matrix counts and output-tail capture, and keeps manual Unity inspection optional. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 133A note: the product-line strategy rebaseline records `product_line_strategy_rebaseline_verification required`, `accepted=false`, `manualUnityOptional=true`, `projectionOnlyStopCondition=true` and nextProductGoal=`goal_134_canonical_runtime_selected_candidate_playthrough_matrix`. This does not close `vertical_slice_final_verification`; it explicitly routes the next product milestone away from projection-only wrappers and toward candidate package validation, canonical runtime playthrough, save/load/replay proof and Unity/player consumption of canonical transcript/state summary.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

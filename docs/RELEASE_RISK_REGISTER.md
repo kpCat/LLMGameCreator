@@ -54,6 +54,8 @@ Goal 131 review note: the candidate recipe catalog scoring and promotion pipelin
 
 Goal 132 review note: the WinForms candidate pipeline operator panel exposes the existing Goal131 recipe pipeline command, selected candidate proof, matrix counts and output-tail capture in the workspace with GREEN_READY operator evidence. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 133A review note: the product-line strategy rebaseline records that LLMGameCreator is a data-driven game product-line combiner, not prompt-to-game; LLM is optional authoring assistance only; GamePackage plus canonical runtime state are source of truth. Release blockers remain open until Goal134 or later proves selected-candidate package validation, canonical runtime playthrough, save/load/replay and Unity/player consumption of canonical transcript/state summary. Projection-only candidate/operator evidence is explicitly not enough for product readiness.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

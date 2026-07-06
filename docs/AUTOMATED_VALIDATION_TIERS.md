@@ -8,6 +8,14 @@ The owner should not have to manually launch, inspect and debug every goal.
 Manual checks should be rare milestone gates. Normal goals must strengthen
 automated validation.
 
+Narrow alpha must be an expansion-safe kernel, not a hardcoded demo.
+Projection-only goals are not enough for product readiness.
+Canonical runtime playthrough is required for the next product milestone.
+
+Validation tiers protect the product-line seams defined in
+`docs/PRODUCT_LINE_CORE_STRATEGY.md`: `FeatureModule`, `RuntimePrimitive`,
+`SemanticPack`, `VisualPartPack`, `WorldSourceAdapter` and `PlayerAdapter`.
+
 ## Tier 0 — Source and Scope Gate
 
 Runs on every goal.

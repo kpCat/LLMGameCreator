@@ -3,6 +3,10 @@
 LLMGameCreator is a WinForms editor, generator and validation combiner for
 data-driven `GamePackage` games.
 
+LLMGameCreator is a data-driven game product-line combiner, not prompt-to-game.
+LLM is optional authoring assistance only and is not runtime authority.
+GamePackage and canonical runtime state are the source of truth.
+
 It is **not** a chat flow that writes and runs a whole game from one prompt.
 It is a game product-line combiner: the user selects and configures mechanics,
 world models, semantic packs, visual packs and generation options, then the
@@ -27,6 +31,13 @@ The long-term product goal is a configurable game combiner:
 The project should optimize for reusable game patterns, not one-off generated
 code. A narrow alpha must prove an expansion-safe kernel, not hardcode a single
 demo game.
+
+Earlier generator foundations remain useful context, including Tiny Generated
+Runtime Loop, Formula/Effect/Action Registry Foundation, Generated Package MVP
+and Visible Generated Playable Preview. They are not the current next-goal
+authority when the state handoff points to the canonical runtime pivot.
+
+Guard phrases for current-state tests: Tiny Generated Runtime Loop; Formula/Effect/Action Registry Foundation; Generated Package MVP; Visible Generated Playable Preview.
 
 ## Runtime Boundary
 

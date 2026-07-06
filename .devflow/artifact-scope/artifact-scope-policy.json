@@ -129,7 +129,9 @@
     ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/",
     ".llmgc/exports/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/",
     ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/",
-    ".llmgc/exports/goal-132-winforms-candidate-pipeline-operator-panel/"
+    ".llmgc/exports/goal-132-winforms-candidate-pipeline-operator-panel/",
+    ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/",
+    ".llmgc/exports/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -2645,6 +2647,51 @@
         "unity/LLMGameCreatorAlpha/Assets/",
         "unity/LLMGameCreatorAlpha/ProjectSettings/",
         "unity/LLMGameCreatorAlpha/Packages/"
+      ]
+    },
+    {
+      "scenario": "goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot",
+      "allowedPaths": [
+        "README.md",
+        "AGENTS.md",
+        "docs/PRODUCT_LINE_CORE_STRATEGY.md",
+        "docs/NARROW_ALPHA_EXPANSION_POLICY.md",
+        "docs/AUTOMATED_VALIDATION_TIERS.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/product-line-strategy-rebaseline-and-canonical-runtime-pivot.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/ProductLineStrategyRebaselineModels.cs",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/ProductLineStrategyRebaselineService.cs",
+        "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/ProductLineStrategyRebaselineServiceTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/AcceptedAlphaUnityPlayableProjectionProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/",
+        ".llmgc/exports/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/",
+        "docs/agent-tasks/goal-133a-product-line-strategy-rebaseline/",
+        "docs/agent-tasks/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/minimal-map-game/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Generation/",
+        "src/LLMGameCreator.AssetPipeline/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "unity/LLMGameCreatorAlpha/",
+        "Directory.Build.",
+        "provider/",
+        "LLM/",
+        "RAG/"
       ]
     },
     {

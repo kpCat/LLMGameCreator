@@ -12,6 +12,14 @@ goal would only add another projection/evidence wrapper. The selected candidate
 review lane remains useful, but the next product direction must explicitly pivot
 toward canonical runtime execution.
 
+Goal133A canonical-runtime-pivot routing supersedes this earlier selected-candidate
+review-package framing. Do not treat this older task as the immediate next
+product goal unless it is explicitly tied to the canonical runtime path:
+candidate package -> package validation -> canonical runtime playthrough ->
+save/load/replay proof -> Unity/player consumes canonical transcript/state
+summary -> one-click report. A selected-candidate review package may return
+later only after the canonical runtime pivot is established.
+
 ## Read First
 
 1. `AGENTS.md`

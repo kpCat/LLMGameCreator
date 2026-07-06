@@ -108,6 +108,8 @@ offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator 
 offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
 unity_safe_mode_compile_hotfix_verification produced, manual gate still required
 offline_geoworld_alpha_manual_gate_acceptance_record produced, manual gate accepted by human, post-acceptance continuation selection required
+product_line_strategy_rebaseline_verification required
+goal_134_canonical_runtime_selected_candidate_playthrough_matrix recommended next product goal
 goal_132_winforms_candidate_pipeline_operator_panel required
 goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
 goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
@@ -2302,18 +2304,30 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-goal_132_winforms_candidate_pipeline_operator_panel
+goal_134_canonical_runtime_selected_candidate_playthrough_matrix
 ```
 
-Review the Goal132 WinForms Candidate Pipeline Operator panel, then use
-`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` as the normal repo-local recipe pipeline command.
-Inspect the command/result path, selected candidate id/score, candidate counts, matrix status, async dry-run/full-run
-controls and output-tail capture in the workspace. Manual Unity inspection remains optional. Do not start sample
-mutation, `.llmgc/manual/**`, live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art,
-atlas, Unity scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
+Goal133A product-line strategy rebaseline is produced for review with
+`product_line_strategy_rebaseline_verification required`, `accepted=false`,
+`manualUnityOptional=true` and `projectionOnlyStopCondition=true`.
+
+After Goal132/133A, the next product milestone is not another projection-only
+wrapper. Goal134 must start the canonical runtime path:
+
+```text
+candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> Unity/player consumes canonical transcript/state summary -> one-click report
+```
+
+Use the Goal131 selected candidate and Goal132 operator evidence as input, but
+make canonical runtime state and transcript the authority. Selected-candidate
+review package work is later candidate review only unless explicitly tied to
+this canonical runtime matrix. Do not start sample mutation, `.llmgc/manual/**`,
+live geodata/provider, Runtime contract/schema changes, Lua, generator-library,
+final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
+StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_132_winforms_candidate_pipeline_operator_panel_green_projection_only
+product_line_strategy_rebaseline_verification_required_accepted_false_next_goal134_canonical_runtime
 ```
