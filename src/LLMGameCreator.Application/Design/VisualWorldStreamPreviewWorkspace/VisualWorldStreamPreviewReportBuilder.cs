@@ -12,7 +12,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         string bindingJson,
         string qualityJson,
         string sourceHealthJson) =>
-        WithGoal131ReportFields(WithGoal130ReportFields(WithGoal129ReportFields(WithGoal128ReportFields(WithGoal127ReportFields(WithGoal126ReportFields(WithGoal125ReportFields(new()
+        WithGoal132ReportFields(WithGoal131ReportFields(WithGoal130ReportFields(WithGoal129ReportFields(WithGoal128ReportFields(WithGoal127ReportFields(WithGoal126ReportFields(WithGoal125ReportFields(new()
         {
             Accepted = false,
             GroupCount = catalog.GroupCount,
@@ -693,5 +693,5 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             WinFormsBindingInventoryHash = Sha256Text(bindingJson),
             QualityGateHash = Sha256Text(qualityJson),
             DeterministicReportHash = Sha256Text(sourceHealthJson)
-        }, qualityGate), qualityGate), qualityGate), qualityGate), qualityGate), qualityGate), qualityGate);
+        }, qualityGate), qualityGate), qualityGate), qualityGate), qualityGate), qualityGate), qualityGate), qualityGate);
 }

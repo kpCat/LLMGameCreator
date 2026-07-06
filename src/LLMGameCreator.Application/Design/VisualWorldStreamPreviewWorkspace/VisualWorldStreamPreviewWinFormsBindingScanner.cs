@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                         + ReadGoal120Through131WinFormsPageText(projectRoot);
+                         + ReadGoal120Through132WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -505,14 +505,12 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysGenericGamePackageLoop = PageBindsGoal124GenericGamePackageLoop(pageText);
         var bindDisplaysGenericGamePackageSystems = PageBindsGoal125GenericGamePackageSystems(pageText);
         var bindDisplaysGenericGamePackageFullPlaythrough = PageBindsGoal126GenericGamePackageFullPlaythrough(pageText);
-        var bindDisplaysUnityProjectionVerificationRunner =
-            PageBindsGoal127UnityProjectionVerificationRunner(pageText);
+        var bindDisplaysUnityProjectionVerificationRunner = PageBindsGoal127UnityProjectionVerificationRunner(pageText);
         var bindDisplaysParameterizedGamePackageRunner = PageBindsGoal128ParameterizedGamePackageRunner(pageText);
-        var bindDisplaysGamePackageCandidateMatrix =
-            PageBindsGoal129GamePackageCandidateMatrix(pageText);
-        var bindDisplaysGamePackageCandidateFactory =
-            PageBindsGoal130GamePackageCandidateFactory(pageText);
+        var bindDisplaysGamePackageCandidateMatrix = PageBindsGoal129GamePackageCandidateMatrix(pageText);
+        var bindDisplaysGamePackageCandidateFactory = PageBindsGoal130GamePackageCandidateFactory(pageText);
         var bindDisplaysGamePackageCandidateRecipePipeline = ScanGoal131GamePackageCandidateRecipePipelineBinding(pageText, pageRelativePath, diagnostics);
+        var bindDisplaysCandidatePipelineOperator = ScanGoal132CandidatePipelineOperatorBinding(pageText, pageRelativePath, diagnostics);
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
         AddIfFalse(serviceRegistered, "goal092.winforms.service_not_registered", compositionRelativePath, diagnostics);
@@ -693,6 +691,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGamePackageCandidateMatrix = bindDisplaysGamePackageCandidateMatrix,
             PageBindDisplaysGamePackageCandidateFactory = bindDisplaysGamePackageCandidateFactory,
             PageBindDisplaysGamePackageCandidateRecipePipeline = bindDisplaysGamePackageCandidateRecipePipeline,
+            PageBindDisplaysCandidatePipelineOperator = bindDisplaysCandidatePipelineOperator,
             Diagnostics = diagnostics
         };
     }

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 131 GamePackage candidate recipe catalog scoring and promotion
+Updated by: Goal 132 WinForms candidate pipeline operator panel
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -322,6 +322,36 @@ normal command, `manualUnityOptional=true`, `samplePackageUnmodified=true`, `pro
 
 Goal131 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
 authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
+Goal 132 adds a WinForms Candidate Pipeline Operator panel over the existing Goal131 candidate recipe pipeline:
+
+```text
+goal_132_winforms_candidate_pipeline_operator_panel required
+implementationStatus=GREEN
+accepted=false
+operatorStatus=GREEN_READY
+normalCommand=.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd
+resultPath=.llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-recipe-pipeline-result.json
+selectedCandidateId=minimal-map-game-balanced-baseline
+selectedCandidateScore=100
+candidateCount=4
+passedCandidates=4
+failedCandidates=0
+matrixPassed=true
+manualUnityOptional=true
+projectionOnly=true
+samplePackageReadOnly=true
+```
+
+Goal132 adds a code-only WinForms partial, not a Designer edit. The panel surfaces the normal command, Goal131 result
+path, selected candidate id/score, candidate counts, matrix status, run exit/duration and output tail, and provides
+Refresh, Copy Command, Dry Run and Run buttons with async process execution. Evidence lives under
+`.llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/`, export metadata under
+`.llmgc/exports/goal-132-winforms-candidate-pipeline-operator-panel/`, and the short manual note at
+`docs/manual-acceptance/winforms-candidate-pipeline-operator-panel.md`.
+
+Goal132 does not mutate `samples/minimal-map-game/package.json`, does not commit `.llmgc/manual/**`, and does not
+authorize Runtime/schema/provider/Lua/generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work. Manual Unity inspection remains optional.
 
 Goal 053 handoff acceptance recorded before Goal 054:
 

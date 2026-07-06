@@ -1,0 +1,15 @@
+{
+  "goalId": "goal_132_winforms_candidate_pipeline_operator_panel",
+  "panelPartialExists": true,
+  "winFormsPanelPresent": true,
+  "refreshButtonPresent": true,
+  "copyCommandButtonPresent": true,
+  "dryRunButtonPresent": true,
+  "runButtonPresent": true,
+  "asyncRunPresent": true,
+  "marshalUiUpdatesPresent": true,
+  "usesApplicationOperatorService": true,
+  "showsOutputTail": true,
+  "noDesignerChangeRequired": true,
+  "passed": true
+}

@@ -1,0 +1,12 @@
+{
+  "goalId": "goal_132_winforms_candidate_pipeline_operator_panel",
+  "passed": true,
+  "manualUnityOptional": true,
+  "projectionOnly": true,
+  "samplePackageReadOnly": true,
+  "doesNotWriteSamplePackage": true,
+  "runtimeSchemaProviderLuaGeneratorLibraryUnchanged": true,
+  "unityAssetsProjectSettingsPackagesUnchanged": true,
+  "existingDevflowRunnerScriptsReadOnly": true,
+  "noManualInputArtifacts": true
+}

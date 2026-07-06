@@ -1,0 +1,44 @@
+{
+  "goalId": "goal_132_winforms_candidate_pipeline_operator_panel",
+  "rootPath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel",
+  "indexedFileCount": 6,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/candidate-pipeline-operator-dashboard.json",
+      "role": "goal132_candidate_pipeline_operator_candidate-pipeline-operator-dashboard",
+      "required": true,
+      "sha256": "77054a1582bb02bac5e6b1d86ecbcd3ac4aac2631f2c05455eeecfa3c7b939d9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/candidate-pipeline-operator-negative-proof.json",
+      "role": "goal132_candidate_pipeline_operator_candidate-pipeline-operator-negative-proof",
+      "required": true,
+      "sha256": "36115763545cadb9e20d28bbd34e1cc8a9d1261970797bd3330ad2823964d12b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/candidate-pipeline-operator-report.md",
+      "role": "goal132_candidate_pipeline_operator_candidate-pipeline-operator-report",
+      "required": true,
+      "sha256": "46376b68f97c453b77cbd4759a5dcbce17762593bfde580ee63cf2e4f0d948ba"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/candidate-pipeline-operator-result.json",
+      "role": "goal132_candidate_pipeline_operator_candidate-pipeline-operator-result",
+      "required": true,
+      "sha256": "27bb5f026e83e0a7422aaeb86d97f415231b474c733657513c604e67fea79720"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/candidate-pipeline-operator-script-scan.json",
+      "role": "goal132_candidate_pipeline_operator_candidate-pipeline-operator-script-scan",
+      "required": true,
+      "sha256": "66e0ec0792797bd5ee7f9ae5728d3a7271c226fffded956c6b3e47bff0075f5e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/candidate-pipeline-operator-winforms-scan.json",
+      "role": "goal132_candidate_pipeline_operator_candidate-pipeline-operator-winforms-scan",
+      "required": true,
+      "sha256": "72af0ee4004940deefb31a6a5db5a400146e742044f539fb299ea9b1ede0fd8d"
+    }
+  ]
+}

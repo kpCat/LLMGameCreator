@@ -17,9 +17,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         VisualWorldStreamPreviewWorkspaceService service)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
-        InitializeComponent();
+        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel();
         ConfigureControls();
-        WireEvents();
+        WireEvents(); WireGoal132CandidatePipelineOperatorEvents();
     }
 
     public string Id => "visual-world-stream-preview-workspace";
@@ -38,7 +38,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         _statusLabel.Text = BuildStatusText(result);
         BindGroups(result);
         BindProofs(result);
-        BindDiagnostics(result);
+        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result);
     }
 
     private void ConfigureControls()
@@ -383,7 +383,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageLoopDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageSystemsDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageFullPlaythroughDiagnosticLines(result));
-        lines.AddRange(BuildUnityProjectionVerificationRunnerDiagnosticLines(result)); lines.AddRange(BuildParameterizedGamePackageRunnerDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateMatrixDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateFactoryDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateRecipePipelineDiagnosticLines(result));
+        lines.AddRange(BuildUnityProjectionVerificationRunnerDiagnosticLines(result)); lines.AddRange(BuildParameterizedGamePackageRunnerDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateMatrixDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateFactoryDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateRecipePipelineDiagnosticLines(result)); lines.AddRange(BuildCandidatePipelineOperatorDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -668,7 +668,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageLoopEntryLines(entry));
         lines.AddRange(BuildGenericGamePackageSystemsEntryLines(entry));
         lines.AddRange(BuildGenericGamePackageFullPlaythroughEntryLines(entry));
-        lines.AddRange(BuildUnityProjectionVerificationRunnerEntryLines(entry)); lines.AddRange(BuildParameterizedGamePackageRunnerEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateMatrixEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateFactoryEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateRecipePipelineEntryLines(entry));
+        lines.AddRange(BuildUnityProjectionVerificationRunnerEntryLines(entry)); lines.AddRange(BuildParameterizedGamePackageRunnerEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateMatrixEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateFactoryEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateRecipePipelineEntryLines(entry)); lines.AddRange(BuildCandidatePipelineOperatorEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_132_winforms_candidate_pipeline_operator_panel",
+  "operatorResultCaptured": true,
+  "runMode": "status_refresh",
+  "command": ".devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd",
+  "exitCode": -1,
+  "durationMilliseconds": 0,
+  "outputTail": "No operator run has been captured yet.",
+  "errorTail": "",
+  "resultPath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/gamepackage-recipe-pipeline-result.json",
+  "selectedCandidateId": "minimal-map-game-balanced-baseline",
+  "selectedCandidateScore": 100,
+  "candidateCount": 4,
+  "passedCandidates": 4,
+  "failedCandidates": 0,
+  "matrixPassed": true,
+  "manualUnityOptional": true,
+  "projectionOnly": true,
+  "samplePackageReadOnly": true
+}

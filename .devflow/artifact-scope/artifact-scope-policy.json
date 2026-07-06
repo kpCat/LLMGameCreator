@@ -127,7 +127,9 @@
     ".llmgc/procedural/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/",
     ".llmgc/exports/goal-128-parameterized-gamepackage-projection-runner-and-winforms-command-surface/",
     ".llmgc/procedural/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/",
-    ".llmgc/exports/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/"
+    ".llmgc/exports/goal-130-gamepackage-candidate-factory-and-matrix-pipeline/",
+    ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/",
+    ".llmgc/exports/goal-132-winforms-candidate-pipeline-operator-panel/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -2585,6 +2587,46 @@
         ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/",
         ".llmgc/exports/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/",
         "docs/agent-tasks/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/minimal-map-game/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Generation/",
+        "src/LLMGameCreator.AssetPipeline/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "unity/LLMGameCreatorAlpha/Assets/",
+        "unity/LLMGameCreatorAlpha/ProjectSettings/",
+        "unity/LLMGameCreatorAlpha/Packages/"
+      ]
+    },
+    {
+      "scenario": "goal-132-winforms-candidate-pipeline-operator-panel",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "docs/manual-acceptance/winforms-candidate-pipeline-operator-panel.md",
+        "tests/LLMGameCreator.Tests/ProductSmoke/AcceptedAlphaUnityPlayableProjectionProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal132.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-132-winforms-candidate-pipeline-operator-panel/",
+        ".llmgc/exports/goal-132-winforms-candidate-pipeline-operator-panel/",
+        "docs/agent-tasks/goal-132-winforms-candidate-pipeline-operator-panel/",
         "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/",
         "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
         "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/",

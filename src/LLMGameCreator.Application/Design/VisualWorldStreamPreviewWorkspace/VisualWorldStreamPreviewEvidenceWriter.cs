@@ -176,6 +176,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildGoal130GamePackageCandidateFactoryQuality(groups, proofs);
         var gamePackageCandidateRecipePipeline =
             BuildGoal131GamePackageCandidateRecipePipelineQuality(groups, proofs);
+        var candidatePipelineOperator = BuildGoal132CandidatePipelineOperatorQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -375,6 +376,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             gamePackageCandidateRecipePipeline,
             binding,
             diagnostics);
+        AddGoal132CandidatePipelineOperatorQualityDiagnostics(candidatePipelineOperator, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -681,10 +683,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             withGoal129,
             gamePackageCandidateFactory,
             binding);
-        return ApplyGoal131GamePackageCandidateRecipePipelineQuality(
+        var withGoal131 = ApplyGoal131GamePackageCandidateRecipePipelineQuality(
             withGoal130,
             gamePackageCandidateRecipePipeline,
             binding);
+        return ApplyGoal132CandidatePipelineOperatorQuality(withGoal131, candidatePipelineOperator, binding);
     }
 
 }

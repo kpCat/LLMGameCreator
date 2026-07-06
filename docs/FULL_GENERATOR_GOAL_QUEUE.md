@@ -108,6 +108,7 @@ offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator 
 offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
 unity_safe_mode_compile_hotfix_verification produced, manual gate still required
 offline_geoworld_alpha_manual_gate_acceptance_record produced, manual gate accepted by human, post-acceptance continuation selection required
+goal_132_winforms_candidate_pipeline_operator_panel required
 goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
 goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
 goal_129_gamepackage_candidate_matrix_projection_runner required
@@ -166,6 +167,7 @@ Current capabilities:
 - Goal 129 GamePackage candidate matrix projection runner evidence with normal `.devflow\scripts\run-gamepackage-projection-matrix.cmd`, a deterministic candidate index, byte-copy baseline, sample-derived variant, per-candidate Goal128 runner result/log-scan JSON, aggregate matrix result and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - Goal 130 GamePackage candidate factory and matrix pipeline evidence with normal `.devflow\scripts\run-gamepackage-candidate-factory.cmd`, three deterministic projection-compatible candidates under Goal130 artifacts, candidate index/factory result/matrix result proof with GREEN 3/3 status and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - Goal 131 GamePackage candidate recipe catalog scoring and promotion evidence with normal `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd`, four metadata-only projection-compatible candidates under Goal131 artifacts, recipe catalog/candidate index/scoring result/selected handoff/matrix result proof with GREEN 4/4 status, selectedCandidateId=`minimal-map-game-balanced-baseline`, selectedCandidateScore=100 and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
+- Goal 132 WinForms candidate pipeline operator panel evidence with normal `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd`, Goal131 result path visibility, selectedCandidateId=`minimal-map-game-balanced-baseline`, selectedCandidateScore=100, candidateCount=4, passedCandidates=4, failedCandidates=0, matrixPassed=true, async dry-run/full-run buttons, command copy, refresh status and output-tail capture; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -2300,19 +2302,18 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion
+goal_132_winforms_candidate_pipeline_operator_panel
 ```
 
-Review the Goal131 GamePackage candidate recipe catalog scoring and promotion evidence, then use
-`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` for normal repo-local recipe pipeline verification.
-Inspect the recipe catalog, generated candidate index, four metadata-only Goal131 candidate packages, scoring result,
-selected-candidate handoff, per-candidate matrix result/log-scan JSON and aggregate matrix result. Manual Unity inspection
-remains optional. Do not start sample mutation, `.llmgc/manual/**`, live geodata/provider, Runtime, schema, Lua,
-generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release
-packaging work from this handoff.
+Review the Goal132 WinForms Candidate Pipeline Operator panel, then use
+`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` as the normal repo-local recipe pipeline command.
+Inspect the command/result path, selected candidate id/score, candidate counts, matrix status, async dry-run/full-run
+controls and output-tail capture in the workspace. Manual Unity inspection remains optional. Do not start sample
+mutation, `.llmgc/manual/**`, live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art,
+atlas, Unity scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_131_gamepackage_candidate_recipe_pipeline_green_projection_only
+goal_132_winforms_candidate_pipeline_operator_panel_green_projection_only
 ```

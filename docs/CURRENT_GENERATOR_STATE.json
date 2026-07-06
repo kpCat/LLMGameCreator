@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-06T19:04:07Z",
+    "updated_at_utc":  "2026-07-06T19:57:33Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 131 adds the GamePackage candidate recipe catalog scoring and promotion pipeline",
-    "gate_status":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+    "current_phase_title":  "Goal 132 adds the WinForms candidate pipeline operator panel",
+    "gate_status":  "goal_132_winforms_candidate_pipeline_operator_panel",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
     "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
-    "current_user_action":  "Review Goal131 GamePackage candidate recipe catalog scoring and promotion evidence and use .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd for normal repo-local recipe pipeline verification. The pipeline reads samples/minimal-map-game/package.json as a read-only template and .llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/candidate-recipe-catalog.json as deterministic recipe input, materializes four metadata-only projection-compatible candidate packages under the Goal131 candidates root, invokes the Goal129 matrix runner through the Goal128 parameterized Unity projection runner with -ApplyCleanup, scores matrix-passed candidates and promotes selected-candidate/package.json plus selected-candidate-handoff.json. Current proof is GREEN with recipeCount=4, candidateCount=4, passedCandidates=4, failedCandidates=0, matrixPassed=true, selectedCandidateId=minimal-map-game-balanced-baseline, selectedCandidateScore=100, samplePackageUnmodified=true, manualUnityOptional=true, projectionOnly=true and metadataOnlyRecipeMutation=true. Manual Unity inspection remains optional, not required after every goal. Codex must not automatically start sample mutation, .llmgc/manual/**, live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
-    "recommended_next_decision":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion after reviewing the recipe catalog, candidate index, scoring result, selected handoff, matrix runner and WinForms evidence. Goal131 makes .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd the normal candidate recipe pipeline command, keeps manual Unity inspection optional, keeps the sample package read-only, keeps recipe mutations metadata-only, and still authorizes no .llmgc/manual/**, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
+    "current_user_action":  "Review Goal132 WinForms candidate pipeline operator panel evidence and use .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd as the normal repo-local candidate recipe pipeline command. The operator panel surfaces the existing Goal131 pipeline result path, selectedCandidateId=minimal-map-game-balanced-baseline, selectedCandidateScore=100, candidateCount=4, passedCandidates=4, failedCandidates=0, matrixPassed=true, async dry-run/full-run buttons, command copy, refresh status and output-tail capture. Current proof is GREEN_READY with manualUnityOptional=true, projectionOnly=true and samplePackageReadOnly=true. Manual Unity inspection remains optional, not required after every goal. Codex must not automatically start sample mutation, .llmgc/manual/**, live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
+    "recommended_next_decision":  "goal_132_winforms_candidate_pipeline_operator_panel after reviewing the WinForms operator panel, command path, Goal131 result path, selected-candidate proof, run-result capture, script scan, WinForms scan and negative proof. Goal132 keeps .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd as the normal candidate recipe pipeline command, keeps manual Unity inspection optional, keeps the sample package read-only, keeps the operator projection-only, and still authorizes no .llmgc/manual/**, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "goal_132_winforms_candidate_pipeline_operator_panel",
                                                         "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
                                                         "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
                                                         "goal_129_gamepackage_candidate_matrix_projection_runner",
@@ -201,7 +202,8 @@
                            "goal_128_manual_gate":  "goal_128_parameterized_gamepackage_projection_runner_and_winforms_command_surface",
                            "goal_129_manual_gate":  "goal_129_gamepackage_candidate_matrix_projection_runner",
                            "goal_130_manual_gate":  "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
-                           "goal_131_manual_gate":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion"
+                           "goal_131_manual_gate":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
+                           "goal_132_manual_gate":  "goal_132_winforms_candidate_pipeline_operator_panel"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -492,6 +494,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "goal_132_winforms_candidate_pipeline_operator_panel",
+                                          "winforms_candidate_pipeline_operator_panel_verification",
                                           "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
                                           "gamepackage_candidate_recipe_catalog_scoring_and_promotion_verification",
                                           "goal_130_gamepackage_candidate_factory_and_matrix_pipeline",
@@ -642,10 +646,14 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion",
-    "recommended_next_work_item_title":  "Review the Goal131 GamePackage candidate recipe catalog scoring and promotion pipeline",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/GOAL.md",
+    "recommended_next_work_item":  "goal_132_winforms_candidate_pipeline_operator_panel",
+    "recommended_next_work_item_title":  "Review the Goal132 WinForms candidate pipeline operator panel",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-132-winforms-candidate-pipeline-operator-panel/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal132 WinForms candidate pipeline operator panel evidence before broadening accepted Alpha projection further",
+                                              "Use .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd as the normal repo-local candidate recipe pipeline command from the operator panel; operator output must stay under Goal132 artifacts and outside .llmgc/manual/**",
+                                              "Treat Goal132 as projection-only WinForms operator surface over existing Goal131 pipeline proof, not sample promotion, Runtime/player consumption or Unity asset work",
+                                              "Keep Goal132 limits in force: no .llmgc/manual/**, no samples/minimal-map-game mutation, no Unity scene/prefab/settings/packages/StreamingAssets, Runtime, schema, provider, Lua, generator-library, final renderer/atlas or release packaging work",
                                               "Review Goal131 GamePackage candidate recipe catalog scoring and promotion evidence before broadening accepted Alpha projection further",
                                               "Use .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd for normal repo-local candidate recipe pipeline verification; candidate packages and selected promotion must stay under Goal131 artifacts and outside .llmgc/manual/**",
                                               "Treat Goal131 recipe mutations as metadata-only so the Goal126 full playthrough contract stays intact",
@@ -2928,6 +2936,19 @@
                                                                                                     ],
                                                                                 "next_action":  "use_gamepackage_candidate_recipe_pipeline_runner_then_continue_product_visible_or_automated_verification_work"
                                                                             },
+    "goal_132_winforms_candidate_pipeline_operator_panel":  {
+                                                               "status":  "produced_for_review",
+                                                               "accepted":  false,
+                                                               "evidence_source":  "goal_132_winforms_candidate_pipeline_operator_panel",
+                                                               "observed_result":  [
+                                                                                       "Goal132 adds a WinForms Candidate Pipeline Operator panel over the existing Goal131 GamePackage candidate recipe pipeline.",
+                                                                                       "The normal command remains .devflow\\scripts\\run-gamepackage-candidate-recipe-pipeline.cmd; the panel shows the command, Goal131 result path, selected candidate id and score, candidate counts, matrix status, run exit/duration and output tail.",
+                                                                                       "The operator proof is GREEN_READY: selectedCandidateId=minimal-map-game-balanced-baseline, selectedCandidateScore=100, candidateCount=4, passedCandidates=4, failedCandidates=0, matrixPassed=true, refresh/copy/dry-run/run buttons present, asyncRunPresent=true, operatorResultPresent=true, manualUnityOptional=true, projectionOnly=true and samplePackageReadOnly=true.",
+                                                                                       "Visual World Stream Preview Workspace and WinForms surface candidatePipelineOperatorStatus, command/result paths, selected candidate fields, counts, matrix flag, operator result details, button presence, async execution proof, evidencePath and exportPath.",
+                                                                                       "Manual Unity inspection remains optional. Goal132 does not authorize samples/minimal-map-game mutation, .llmgc/manual/**, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets or release-packaging work."
+                                                                                   ],
+                                                               "next_action":  "review_winforms_candidate_pipeline_operator_panel_then_continue_product_visible_or_automated_verification_work"
+                                                           },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
                                                                       "status":  "produced_for_review",
                                                                      "accepted":  false,

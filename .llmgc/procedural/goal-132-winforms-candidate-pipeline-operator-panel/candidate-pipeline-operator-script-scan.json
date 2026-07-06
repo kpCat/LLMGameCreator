@@ -1,0 +1,14 @@
+{
+  "goalId": "goal_132_winforms_candidate_pipeline_operator_panel",
+  "pipelineScriptExists": true,
+  "pipelineCmdExists": true,
+  "supportsDryRun": true,
+  "supportsApplyCleanup": true,
+  "normalCommandUsesCmdWrapper": true,
+  "dryRunCommandUsesScriptDryRun": true,
+  "fullRunCommandUsesApplyCleanup": true,
+  "rejectsManualInputRoot": true,
+  "noLlmProviderNetwork": true,
+  "noBroadGitClean": true,
+  "passed": true
+}
