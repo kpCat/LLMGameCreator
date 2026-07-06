@@ -16,7 +16,9 @@ namespace LLMGameCreatorAlpha
         private string selectedMarkerId = string.Empty;
         private string selectedMarkerKind = string.Empty;
         private bool lastVerificationPassed;
+        private bool lastGenericLoopVerificationPassed;
         private int fatalErrorCount;
+        private GenericGamePackageProjectionState loopState = new GenericGamePackageProjectionState();
 
         public string StatusLine { get { return statusLine; } }
         public string LastDiagnostics { get { return lastDiagnostics; } }
@@ -26,6 +28,7 @@ namespace LLMGameCreatorAlpha
         public string SelectedMarkerId { get { return selectedMarkerId; } }
         public string SelectedMarkerKind { get { return selectedMarkerKind; } }
         public bool LastVerificationPassed { get { return lastVerificationPassed; } }
+        public bool LastGenericLoopVerificationPassed { get { return lastGenericLoopVerificationPassed; } }
         public string PackageId { get { return model.PackageId; } }
         public string PackageTitle { get { return model.PackageTitle; } }
         public string MapId { get { return model.MapId; } }
@@ -33,6 +36,14 @@ namespace LLMGameCreatorAlpha
         public int MapHeight { get { return model.MapHeight; } }
         public int EntityCount { get { return model.Entities.Count; } }
         public int ItemCount { get { return model.Items.Count; } }
+        public string InventorySummary { get { return loopState.inventorySummary; } }
+        public string ResourceSummary { get { return loopState.resourceSummary; } }
+        public string QuestObjectiveSummary { get { return loopState.questObjectiveSummary; } }
+        public string InteractionEffectPreview { get { return loopState.interactionEffectPreview; } }
+        public string SelectedDialogueId { get { return loopState.selectedDialogueId; } }
+        public string SelectedQuestId { get { return loopState.selectedQuestId; } }
+        public int AppliedInteractionCount { get { return loopState.appliedInteractionCount; } }
+        public int StartedQuestCount { get { return loopState.startedQuestCount; } }
 
         public void BuildOrRefreshGenericPackageProjection()
         {
@@ -42,6 +53,8 @@ namespace LLMGameCreatorAlpha
             selectedMarkerId = string.Empty;
             selectedMarkerKind = string.Empty;
             lastVerificationPassed = false;
+            lastGenericLoopVerificationPassed = false;
+            loopState = new GenericGamePackageProjectionState();
 
             try
             {
@@ -123,6 +136,44 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public bool RunGenericPackageGameplayLoopVerification()
+        {
+            var events = new List<string>();
+            try
+            {
+                events.Add("loadSamplePackage=" + GenericGamePackageProjectionAdapter.SamplePackageRelativePath);
+                BuildOrRefreshGenericPackageProjection();
+                var section = FindGenericProjectionRoot();
+                events.Add("sectionPresent=" + (section != null));
+                loopState = new GenericGamePackageProjectionLoop().Run(model, events);
+                RenderLoopPanels(section == null ? transform : section.transform);
+                SelectMarker(FindSignEntityMarker() ?? FindFirstGenericEntityMarker() ?? section);
+
+                var smoke = RunGenericPackageLoopSmoke(events);
+                lastGenericLoopVerificationPassed = smoke;
+                lastVerificationPassed = smoke;
+                events.Add(smoke
+                    ? "Goal124 generic package loop verification passed"
+                    : "Goal124 generic package loop verification failed");
+                verificationEventLog = string.Join("\n", events.ToArray());
+                statusLine = smoke
+                    ? "Goal124 generic package loop verification passed"
+                    : "Goal124 generic package loop verification failed";
+                return smoke;
+            }
+            catch (System.Exception ex)
+            {
+                fatalErrorCount++;
+                statusLine = "Goal124 generic package loop verification fatal error: "
+                             + ex.GetType().Name;
+                events.Add(statusLine);
+                events.Add(ex.Message);
+                verificationEventLog = string.Join("\n", events.ToArray());
+                RunGenericPackageLoopSmoke(events);
+                return false;
+            }
+        }
+
         public GameObject FindGenericProjectionRoot()
         {
             return FindDescendantObjectWithPrefix(transform, GenericSectionName);
@@ -131,6 +182,13 @@ namespace LLMGameCreatorAlpha
         public GameObject FindFirstGenericEntityMarker()
         {
             return FindNextMarkerByKind("entity", 0);
+        }
+
+        public GameObject FindSignEntityMarker()
+        {
+            return FindDescendantObjectWithPrefix(
+                transform,
+                "goal123_entity_marker_entity_village_sign");
         }
 
         private bool RunGenericPackageProjectionSmoke(List<string> events)
@@ -163,6 +221,59 @@ namespace LLMGameCreatorAlpha
                 StatusLine = statusLine
             };
             lastSmokeDiagnostics = result.ToDiagnosticText();
+            return result.Passed;
+        }
+
+        private bool RunGenericPackageLoopSmoke(List<string> events)
+        {
+            var result = new GenericGamePackageProjectionLoopSmokeResult
+            {
+                GenericLoopPassed =
+                    loopState.InteractionApplyPassed
+                    && loopState.DialogueSummaryPresent
+                    && loopState.QuestObjectiveSummaryPresent
+                    && loopState.InventorySummaryPresent
+                    && loopState.ResourceSummaryPresent,
+                SamplePackageLoaded = loopState.SamplePackageLoaded,
+                GenericProjectionBuilt =
+                    FindGenericProjectionRoot() != null
+                    && HasDescendantWithPrefix(transform, "goal124_generic_loop_status"),
+                InteractionPreviewPresent =
+                    loopState.InteractionPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal124_interaction_preview"),
+                InteractionApplyPassed =
+                    loopState.InteractionApplyPassed
+                    && HasDescendantWithPrefix(transform, "goal124_interaction_effect"),
+                DialogueSummaryPresent =
+                    loopState.DialogueSummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal124_dialogue_summary"),
+                QuestObjectiveSummaryPresent =
+                    loopState.QuestObjectiveSummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal124_quest_objective_status"),
+                InventorySummaryPresent =
+                    loopState.InventorySummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal124_inventory_summary"),
+                ResourceSummaryPresent =
+                    loopState.ResourceSummaryPresent
+                    && HasDescendantWithPrefix(transform, "goal124_resource_summary"),
+                EventLogPresent =
+                    loopState.EventLogPresent
+                    && HasDescendantWithPrefix(transform, "goal124_event_log_summary"),
+                ZeroFatalErrors = fatalErrorCount == 0,
+                SelectedEntityId = loopState.selectedEntityId,
+                SelectedInteractionId = loopState.selectedInteractionId,
+                SelectedDialogueId = loopState.selectedDialogueId,
+                SelectedQuestId = loopState.selectedQuestId,
+                AppliedInteractionCount = loopState.appliedInteractionCount,
+                StartedQuestCount = loopState.startedQuestCount,
+                StatusLine = statusLine
+            };
+            lastSmokeDiagnostics = result.ToDiagnosticText();
+            if (events != null)
+            {
+                events.Add("genericLoopPassed=" + result.Passed);
+            }
+
             return result.Passed;
         }
 
@@ -335,6 +446,92 @@ namespace LLMGameCreatorAlpha
                 "Package verification event log", "ready",
                 "samplePackagePath=" + GenericGamePackageProjectionAdapter.SamplePackageRelativePath
                 + "; diagnostics=" + model.Diagnostics.Count);
+        }
+
+        private void RenderLoopPanels(Transform parent)
+        {
+            var panel = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateSection(
+                parent,
+                "goal124_generic_loop_panel",
+                new Vector3(0f, 0f, model.MapHeight * 0.92f + 1.75f));
+            RenderLoopLine(panel.transform, "goal124_generic_loop_status",
+                "Generic loop: "
+                + (loopState.GenericProjectionBuilt ? "passed" : "not passed")
+                + " appliedInteractions="
+                + loopState.appliedInteractionCount
+                + " startedQuests="
+                + loopState.startedQuestCount,
+                0f,
+                Color.white,
+                "generic_package_loop_status",
+                "genericLoopPassed=" + loopState.GenericProjectionBuilt);
+            RenderLoopLine(panel.transform, "goal124_selected_entity",
+                "Selected entity: " + EmptyAsNone(loopState.selectedEntityId),
+                -0.35f,
+                Color.cyan,
+                "selected_entity",
+                "selectedEntityId=" + loopState.selectedEntityId);
+            RenderLoopLine(panel.transform, "goal124_interaction_preview",
+                "Interaction preview: " + EmptyAsNone(loopState.selectedInteractionId),
+                -0.7f,
+                new Color(1f, 0.75f, 0.25f),
+                "interaction_preview",
+                loopState.interactionEffectPreview);
+            RenderLoopLine(panel.transform, "goal124_interaction_effect",
+                "Applied effect: " + EmptyAsNone(loopState.interactionEffectPreview),
+                -1.05f,
+                new Color(1f, 0.55f, 0.15f),
+                "interaction_effect",
+                "appliedInteractionCount=" + loopState.appliedInteractionCount);
+            RenderLoopLine(panel.transform, "goal124_dialogue_summary",
+                "Dialogue: " + EmptyAsNone(loopState.selectedDialogueId),
+                -1.4f,
+                new Color(0.7f, 0.85f, 1f),
+                "dialogue_summary",
+                "dialogueSummaryPresent=" + loopState.DialogueSummaryPresent);
+            RenderLoopLine(panel.transform, "goal124_quest_objective_status",
+                "Quest objective: " + EmptyAsNone(loopState.questObjectiveSummary),
+                -1.75f,
+                Color.green,
+                "quest_objective_status",
+                loopState.questObjectiveSummary);
+            RenderLoopLine(panel.transform, "goal124_inventory_summary",
+                "Inventory: " + EmptyAsNone(loopState.inventorySummary),
+                -2.1f,
+                new Color(0.75f, 1f, 0.75f),
+                "inventory_summary",
+                loopState.inventorySummary);
+            RenderLoopLine(panel.transform, "goal124_resource_summary",
+                "Resources: " + EmptyAsNone(loopState.resourceSummary),
+                -2.45f,
+                new Color(0.85f, 0.75f, 1f),
+                "resource_summary",
+                loopState.resourceSummary);
+            RenderLoopLine(panel.transform, "goal124_event_log_summary",
+                "Event log: " + loopState.events.Count + " entries",
+                -2.8f,
+                Color.magenta,
+                "event_log_summary",
+                loopState.projectionEventLog);
+        }
+
+        private static void RenderLoopLine(
+            Transform parent,
+            string name,
+            string text,
+            float y,
+            Color color,
+            string markerKind,
+            string details)
+        {
+            var obj = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateText(
+                parent,
+                name,
+                text,
+                new Vector3(0f, y, 0f),
+                color,
+                0.18f);
+            AttachDescriptor(obj, name, markerKind, text, "ready", details);
         }
 
         private void SelectMarker(GameObject marker)

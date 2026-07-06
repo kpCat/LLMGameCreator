@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                        + ReadGoal120Through123WinFormsPageText(projectRoot);
+                        + ReadGoal120Through124WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -503,6 +503,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysAcceptedAlphaInteractionDrilldown = PageBindsGoal121AcceptedAlphaInteractionDrilldown(pageText);
         var bindDisplaysAcceptedAlphaProjectionActionLoop = PageBindsGoal122AcceptedAlphaProjectionActionLoop(pageText);
         var bindDisplaysGenericGamePackageProjection = PageBindsGoal123GenericGamePackageProjection(pageText);
+        var bindDisplaysGenericGamePackageLoop = PageBindsGoal124GenericGamePackageLoop(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -631,10 +632,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal121.winforms.accepted_alpha_interaction_drilldown_bind_missing",
             pageRelativePath,
             diagnostics);
-        AddIfFalse(bindDisplaysAcceptedAlphaProjectionActionLoop,
-            "goal122.winforms.accepted_alpha_projection_action_loop_bind_missing", pageRelativePath, diagnostics);
-        AddIfFalse(bindDisplaysGenericGamePackageProjection,
-            "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysAcceptedAlphaProjectionActionLoop, "goal122.winforms.accepted_alpha_projection_action_loop_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageProjection, "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysGenericGamePackageLoop, "goal124.winforms.generic_gamepackage_loop_bind_missing", pageRelativePath, diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -692,6 +692,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysAcceptedAlphaInteractionDrilldown,
             PageBindDisplaysAcceptedAlphaProjectionActionLoop = bindDisplaysAcceptedAlphaProjectionActionLoop,
             PageBindDisplaysGenericGamePackageProjection = bindDisplaysGenericGamePackageProjection,
+            PageBindDisplaysGenericGamePackageLoop = bindDisplaysGenericGamePackageLoop,
             Diagnostics = diagnostics
         };
     }

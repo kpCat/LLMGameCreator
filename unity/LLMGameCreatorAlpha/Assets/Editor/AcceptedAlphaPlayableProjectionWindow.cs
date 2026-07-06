@@ -270,6 +270,55 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeGenericGamePackageLoopSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureGenericController();
+                var passed = controller.RunGenericPackageGameplayLoopVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\n" + controller.SelectedMarkerDetails
+                                  + "\n" + controller.InteractionEffectPreview
+                                  + "\n" + controller.QuestObjectiveSummary
+                                  + "\n" + controller.InventorySummary
+                                  + "\n" + controller.ResourceSummary
+                                  + "\n" + controller.VerificationEventLog;
+                if (passed)
+                {
+                    Debug.Log("GOAL124_GENERIC_GAMEPACKAGE_LOOP_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL124_GENERIC_GAMEPACKAGE_LOOP_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL124_GENERIC_GAMEPACKAGE_LOOP_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL124_GENERIC_GAMEPACKAGE_LOOP_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -297,6 +346,10 @@ namespace LLMGameCreatorAlpha
             if (GUILayout.Button("Run Generic Package Projection Verification", GUILayout.Height(28)))
             {
                 RunGenericPackageProjectionVerification();
+            }
+            if (GUILayout.Button("Run Generic Package Gameplay Loop Verification", GUILayout.Height(32)))
+            {
+                RunGenericPackageGameplayLoopVerification();
             }
             EditorGUILayout.EndVertical();
 
@@ -529,6 +582,16 @@ namespace LLMGameCreatorAlpha
             CaptureGeneric(controller);
         }
 
+        private void RunGenericPackageGameplayLoopVerification()
+        {
+            var controller = EnsureGenericController();
+            controller.RunGenericPackageGameplayLoopVerification();
+            SelectAndFrame(controller.FindSignEntityMarker()
+                           ?? controller.FindFirstGenericEntityMarker()
+                           ?? controller.FindGenericProjectionRoot());
+            CaptureGeneric(controller);
+        }
+
         private void ClearProjection()
         {
             var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
@@ -640,7 +703,9 @@ namespace LLMGameCreatorAlpha
             diagnostics = controller.LastDiagnostics;
             smokeDiagnostics = controller.LastSmokeDiagnostics;
             selectedMarkerDetails = controller.SelectedMarkerDetails;
-            interactionPreview = "Generic package projection is read-only; no Runtime action is executed.";
+            interactionPreview = string.IsNullOrWhiteSpace(controller.InteractionEffectPreview)
+                ? "Generic package projection is read-only; no Runtime action is executed."
+                : controller.InteractionEffectPreview;
             objectiveReplayDetails = "samplePackagePath="
                                      + GenericGamePackageProjectionAdapter.SamplePackageRelativePath
                                      + "\npackageId="
@@ -656,11 +721,30 @@ namespace LLMGameCreatorAlpha
                                      + "\nentityCount="
                                      + controller.EntityCount
                                      + "\nitemCount="
-                                     + controller.ItemCount;
+                                     + controller.ItemCount
+                                     + "\nselectedDialogueId="
+                                     + EmptyAsNone(controller.SelectedDialogueId)
+                                     + "\nselectedQuestId="
+                                     + EmptyAsNone(controller.SelectedQuestId)
+                                     + "\nquestObjectiveSummary="
+                                     + EmptyAsNone(controller.QuestObjectiveSummary)
+                                     + "\ninventorySummary="
+                                     + EmptyAsNone(controller.InventorySummary)
+                                     + "\nresourceSummary="
+                                     + EmptyAsNone(controller.ResourceSummary)
+                                     + "\nappliedInteractionCount="
+                                     + controller.AppliedInteractionCount
+                                     + "\nstartedQuestCount="
+                                     + controller.StartedQuestCount;
             verificationEventLog = controller.VerificationEventLog;
-            genericProjectionStatus = controller.LastVerificationPassed ? "passed" : "not passed";
+            genericProjectionStatus =
+                controller.LastGenericLoopVerificationPassed
+                    ? "loop passed"
+                    : controller.LastVerificationPassed ? "projection passed" : "not passed";
             fullVerificationStatus = "genericPackageProjection="
-                                     + (controller.LastVerificationPassed ? "passed" : "not passed");
+                                     + (controller.LastVerificationPassed ? "passed" : "not passed")
+                                     + "; genericPackageLoop="
+                                     + (controller.LastGenericLoopVerificationPassed ? "passed" : "not passed");
             selectedMarkerStatus = "id=" + EmptyAsNone(controller.SelectedMarkerId)
                                    + "; kind=" + EmptyAsNone(controller.SelectedMarkerKind);
         }

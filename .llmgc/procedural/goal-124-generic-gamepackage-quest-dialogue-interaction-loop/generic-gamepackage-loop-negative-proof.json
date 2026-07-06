@@ -1,0 +1,26 @@
+{
+  "goalId": "goal_124_generic_gamepackage_quest_dialogue_interaction_loop",
+  "passed": true,
+  "manualInputRejected": true,
+  "samplePackageMutationRejected": true,
+  "runtimeSchemaProviderLuaGeneratorLibraryRejected": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsRejected": true,
+  "finalReleasePackagingRejected": true,
+  "noForbiddenPathExpected": true,
+  "rejectedPathSamples": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    "samples/minimal-map-game/package.json",
+    "src/LLMGameCreator.Runtime/GameRuntime.cs",
+    "src/LLMGameCreator.Runtime.Abstractions/IGameRuntime.cs",
+    "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+    "src/LLMGameCreator.Scripting/LuaSandbox.cs",
+    "generator-library/example.json",
+    "unity/LLMGameCreatorAlpha/Assets/Scenes/Main.unity",
+    "unity/LLMGameCreatorAlpha/Assets/Prefabs/AcceptedAlpha.prefab",
+    "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectSettings.asset",
+    "unity/LLMGameCreatorAlpha/Packages/manifest.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/example.json",
+    ".llmgc/exports/final-release/package.zip",
+    "provider/live-geodata/Adapter.cs"
+  ]
+}

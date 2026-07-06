@@ -1,0 +1,67 @@
+{
+  "goalId": "goal_124_generic_gamepackage_quest_dialogue_interaction_loop",
+  "oneClickManualPath": true,
+  "stepCount": 12,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "open_projection_window",
+      "expectedResult": "Open the accepted Alpha projection menu path."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "run_generic_package_gameplay_loop_verification",
+      "expectedResult": "Click Run Generic Package Gameplay Loop Verification."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "load_sample_package",
+      "expectedResult": "Read samples/minimal-map-game/package.json without mutating it."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "build_generic_projection",
+      "expectedResult": "Build the generic package projection markers."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "select_sign",
+      "expectedResult": "Select entity/village/sign or the first inspectable interaction target."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "preview_sign_inspect",
+      "expectedResult": "Preview interaction/sign_inspect and its effect list."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "apply_sign_inspect",
+      "expectedResult": "Set projection flag/log state and increment appliedInteractionCount."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "show_old_guard_dialogue",
+      "expectedResult": "Show dialogue/old_guard_intro summary."
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "show_help_healer_objective",
+      "expectedResult": "Show quest/help_healer red herb objective as incomplete: required 3, inventory has 2."
+    },
+    {
+      "stepIndex": 10,
+      "stepId": "show_inventory_resources",
+      "expectedResult": "Show inventory/player_start and resource summaries."
+    },
+    {
+      "stepIndex": 11,
+      "stepId": "show_loop_markers",
+      "expectedResult": "Visible TextMesh markers summarize loop status, selected entity, interaction, dialogue, quest, inventory, resources and event log."
+    },
+    {
+      "stepIndex": 12,
+      "stepId": "cleanup_after_unity",
+      "expectedResult": "Use the existing clean-unity-editor-noise command after Unity checks."
+    }
+  ]
+}

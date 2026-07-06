@@ -1,0 +1,518 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-endim" at "2026-07-06T04:02:52.7216478Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 1288, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              d6d0fb932aa24b2a92e8fa757c010af2
+  Correlation Id:          2cb1d50819de4c878e44172a817051ab
+  External correlation Id: 5283034685764599952
+  Machine Id:              T9z/CSV4JRByE6/U7wnarwBQW64=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-endim" (connect: 0.00s, validation: 0.01s, handshake: 0.04s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-endim-notifications" at "2026-07-06T04:02:52.7715559Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "6006070-UnityPersXXXX"
+[Licensing::Client] Successfully updated license, isAync: True, time: 0.01
+Built from '6000.1/staging' branch; Version is '6000.1.10f1 (3c681a6c22ff) revision 3958810'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'ru' Physical Memory: 32682 MB
+[Licensing::Client] Successfully resolved entitlement details
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+Date: 2026-07-06T04:02:52Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Unity.exe
+-batchmode
+-quit
+-projectPath
+.\unity\LLMGameCreatorAlpha
+-executeMethod
+LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageLoopSmoke
+-logFile
+.\.llmgc\procedural\goal-124-generic-gamepackage-quest-dialogue-interaction-loop\unity-batchmode-generic-gamepackage-loop.log
+Successfully changed project path to: C:/Users/endim/LLMGameCreator/unity/LLMGameCreatorAlpha
+C:/Users/endim/LLMGameCreator/unity/LLMGameCreatorAlpha
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [33088]  Target information:
+
+Player connection [33088]  * "[IP] 192.168.50.62 [Port] 55504 [Flags] 2 [Guid] 781091275 [EditorId] 781091275 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-SM838SH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor"
+
+Player connection [33088] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [33088] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-29048" after 0.4 seconds.
+Library Redirect Path: Library/
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 3 packages:
+  Built-in packages:
+    com.unity.modules.audio@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.audio)
+    com.unity.modules.imgui@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imgui)
+    com.unity.modules.physics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics)
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 0.82 seconds
+[Package Manager] Done resolving packages in 0.55 seconds
+[Package Manager] Lock file was created
+[Package Manager] Registered 3 packages:
+  Built-in packages:
+    com.unity.modules.audio@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.audio)
+    com.unity.modules.imgui@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.imgui)
+    com.unity.modules.physics@1.0.0 (location: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.physics)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.00 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.1.10f1 (3c681a6c22ff)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/endim/LLMGameCreator/unity/LLMGameCreatorAlpha/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:         Direct3D 12 [level 12.1]
+    Renderer:        NVIDIA GeForce RTX 2070 SUPER (ID=0x1e84)
+    Vendor:          NVIDIA
+    VRAM:            7989 MB
+    App VRAM Budget: 7221 MB
+    Driver:          32.0.15.9636
+[Licensing::Client] Successfully resolved entitlement details
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56048
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.1.10f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.016619 seconds.
+- Loaded All Assemblies, in  0.511 seconds
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 2292 ms
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.773 seconds
+Domain Reload Profiling: 3279ms
+	BeginReloadAssembly (141ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (47ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (75ms)
+	LoadAllAssembliesAndSetupDomain (225ms)
+		LoadAssemblies (140ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (222ms)
+			TypeCache.Refresh (220ms)
+				TypeCache.ScanAssembly (201ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (2774ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2731ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2425ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (80ms)
+			ProcessInitializeOnLoadAttributes (141ms)
+			ProcessInitializeOnLoadMethodAttributes (80ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+Starting: C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Data\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/endim/LLMGameCreator/unity/LLMGameCreatorAlpha
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s79ms
+*** Tundra build success (0.04 seconds), 0 items updated, 141 evaluated
+AssetDatabase: script compilation time: 0.464231s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.453 seconds
+Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '44dcc69abf2727a6af00b5d79c143736') in 0.0216199 seconds
+Start importing Assets/Editor using Guid(4387f0a3e2a3ebf41b494476a47fb310) (DefaultImporter) -> (artifact id: 'a8a741e8af4a83c5ce1dd9f1047a0cc5') in 0.0088923 seconds
+Start importing Assets/StreamingAssets using Guid(e441411628bf3ac46802c073b69933e8) (DefaultImporter) -> (artifact id: '89d44bf80f6dce77f86a2e8e2cd3d35d') in 0.0076406 seconds
+Start importing Assets/Scripts using Guid(965a7cfe433e17b4f985a5ffa750b2d8) (DefaultImporter) -> (artifact id: 'd02cb988793a95c77556afdbf3d2dc12') in 0.0024816 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator using Guid(8397ac475054cbb47baa78cf4255c961) (DefaultImporter) -> (artifact id: '75004d058a29b0cd4576fbdc402e5649') in 0.0035177 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109 using Guid(2007e558d93d7ea48b0a4da6afbe5d45) (DefaultImporter) -> (artifact id: '8785b768c1ed0b4455a056cd653c82e2') in 0.0022025 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110 using Guid(605be9de28a7daf4d97381813ecce995) (DefaultImporter) -> (artifact id: '84fed7b8005f22b4c5b840ab2034a690') in 0.002019 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095 using Guid(71832b8aa0ff0a148b5a7da2980a6c35) (DefaultImporter) -> (artifact id: '3af5045d1b884f52a336d29569c4c0fb') in 0.0018284 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105 using Guid(81f3407074194aa4da6c4e4cad746a0a) (DefaultImporter) -> (artifact id: 'bb28880448ea5cea45c4636d9b5396f9') in 0.0023271 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101 using Guid(b2b14b7b6ac12934a9dc1dee0854d44d) (DefaultImporter) -> (artifact id: 'b7b58ff2a28ab472256e8708cd675bd8') in 0.0023587 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106 using Guid(7358356d6fa0c3c44800672907fa030a) (DefaultImporter) -> (artifact id: 'c7f4404302a79c10e349b0c40d7e4cec') in 0.0041335 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108 using Guid(55183124231971742aa18368bb792fcf) (DefaultImporter) -> (artifact id: '09d95c28ae774a26fb7e025a84d759d1') in 0.0023101 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107 using Guid(65024f59c4e9bb74db498707d97c5702) (DefaultImporter) -> (artifact id: '52bee132269a6eca2077099100f16f10') in 0.0079135 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104 using Guid(07d51a5c259f27f42acb87ec7811c733) (DefaultImporter) -> (artifact id: '4742b4c9e4184c62acbee9097ca40808') in 0.002775 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103 using Guid(c761d500638892b409ec113804234375) (DefaultImporter) -> (artifact id: '12cf698f1363d1730970556d19aa8f22') in 0.0036411 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082 using Guid(2d55b5ceca42690498408d27a90a03d9) (DefaultImporter) -> (artifact id: 'e25fbc0c800a37d67976eea811bf4505') in 0.0025673 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100 using Guid(efaf35d7b7f592f44ba1e12aa7aee7c5) (DefaultImporter) -> (artifact id: '8cd20a03cfd94c4805c4a76457c277b6') in 0.0018571 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.510 seconds
+Domain Reload Profiling: 962ms
+	BeginReloadAssembly (330ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (145ms)
+	RebuildCommonClasses (50ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (27ms)
+	LoadAllAssembliesAndSetupDomain (26ms)
+		LoadAssemblies (130ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (21ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (10ms)
+			BuildScriptInfoCaches (2ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (511ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (351ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (53ms)
+			SetLoadedEditorAssemblies (2ms)
+			BeforeProcessingInitializeOnLoad (119ms)
+			ProcessInitializeOnLoadAttributes (144ms)
+			ProcessInitializeOnLoadMethodAttributes (26ms)
+			AfterProcessingInitializeOnLoad (6ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/README.md using Guid(10377f01e7d70d547974dfb30d2a93c8) (DefaultImporter) -> (artifact id: '32a785c77059a1eaf233193cd6c0ea38') in 0.0216463 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108/offline-geoworld-alpha-slice-acceptance-runbook.json using Guid(5071cfdaf4f360f45bb088122f29f90e) (DefaultImporter) -> (artifact id: '8db3c6dc467fc80c76bfc89aa606bdb3') in 0.0068862 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-actions.json using Guid(80e3e0c75382013478a1ad7abe8eaa36) (DefaultImporter) -> (artifact id: '7f4ebd0678053ce7fda5bdb16032d2a4') in 0.0073517 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/offline-geoworld-alpha-export-manifest.json using Guid(905da824f1b022f4cbfb2775c291fafb) (DefaultImporter) -> (artifact id: '9ac119d79ea5ed64bd6b8dced7fb0422') in 0.0037097 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/visual-chunk-cache-runtime-readme.json using Guid(e0b44a233d7958545aeb6db55c1b5ff2) (DefaultImporter) -> (artifact id: '3267b98721455a93f8854a047f261b0b') in 0.0037938 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-stream-window-index.json using Guid(e0ef317fbd16eb54ab69c16ca435b8ba) (DefaultImporter) -> (artifact id: 'd61543056abcd9127937d78334dd5a49') in 0.0022427 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-session-script.json using Guid(718674fc195fdf847a9f97ffe5d73c11) (DefaultImporter) -> (artifact id: 'a0cc636a7e87c104e2ca3437a56c3331') in 0.0018433 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-feature-commands.json using Guid(d1a45e7d47e21754bafefdc2c5f6ee05) (DefaultImporter) -> (artifact id: '9f53e01c6b380fa903b504a03b2c04a8') in 0.0016091 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-state-delta-plan.json using Guid(02c234a1a11ce95409b18c72307e7770) (DefaultImporter) -> (artifact id: 'd474cd8ee1a5e80375e51468405c9b9e') in 0.0016007 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-acceptance-checklist.json using Guid(5245c623c9e683640badd58e304cb47a) (DefaultImporter) -> (artifact id: '03f3e9837fcce5d9cb580e56e378cbc2') in 0.0026365 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-readme.md using Guid(62ee93826fbbf8d40abaf0d46456ab3d) (DefaultImporter) -> (artifact id: '1e2d45e0c2c758c184dac2182164817f') in 0.0023306 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/offline-geoworld-alpha-export-file-index.json using Guid(8201e8d206f38cb44a944b213495db13) (DefaultImporter) -> (artifact id: '9f07d44b9f20b1cd9cc81d936f8a9f90') in 0.0044755 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/expected-hashes.json using Guid(d25a8b1cf95a80840bff985f848b4140) (DefaultImporter) -> (artifact id: '29e992266d5460768431463f678e4d80') in 0.0020902 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-manifest.json using Guid(2370dc73bfd994947940ca1acce6c30c) (DefaultImporter) -> (artifact id: 'caf3f60d9049e40e02a2d96a6872bcc8') in 0.0019142 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-acceptance-run.json using Guid(43bf4b5a57b467d4eb5f815cd73c1860) (DefaultImporter) -> (artifact id: '288ea4defb6083d89c2db6ba5f1afae6') in 0.0017623 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/visual-chunk-cache-unity-handoff-manifest.json using Guid(63720c5c81120944cbf76e554d001ad0) (DefaultImporter) -> (artifact id: '9063ec4e5e99b0d22a28f04886ff2a90') in 0.0022835 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-manifest.json using Guid(a3f3d5e6786f7d84982ac2b4ef16e8d8) (DefaultImporter) -> (artifact id: '1d3bafdf3fb944492b3f7b01c29aa7bd') in 0.002258 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-replay-script.json using Guid(14c754b1f0112f246bc23af528e18464) (DefaultImporter) -> (artifact id: 'cb7538cef49658e523fd2702abdf4f9a') in 0.0037097 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-boundary-zones.json using Guid(54a585da107ded742be4aed7e2249378) (DefaultImporter) -> (artifact id: 'c612942a46c80371cf2d54803c6fa5d1') in 0.0075258 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108/offline-geoworld-alpha-slice-readme.json using Guid(64d5db134346f1f4cae1df36befb3d55) (DefaultImporter) -> (artifact id: 'cb8ade48557c4d6aff7355ebfeaea1b5') in 0.0115812 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/visual-chunk-cache-stream-window-index.json using Guid(94beb869a0fecce4aaa6fa8af9bf23ee) (DefaultImporter) -> (artifact id: 'ddee56b41a788de4fc1e835ad29b5e76') in 0.0020601 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-readme.json using Guid(f4955a8d3fafe3d45b916d4258eb2608) (DefaultImporter) -> (artifact id: 'b523738da03c8f38692bdd9d13b3a31b') in 0.0017109 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-movement-path.json using Guid(f45a0318d4f030844b4929b448673149) (DefaultImporter) -> (artifact id: '809e5bc99fc88578df7f2f9c7bbecf44') in 0.0022787 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-readme.json using Guid(55e95d30597d1b44e927542888f1b2ef) (DefaultImporter) -> (artifact id: 'f1541e8eb02872ef3646e00c0cddfa77') in 0.0024401 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-feature-chunk-ledger.json using Guid(2629488497a9679408951884544715ba) (DefaultImporter) -> (artifact id: 'dfa8308683149550547d1615369dce5b') in 0.0047545 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108/offline-geoworld-alpha-slice-readiness-matrix.json using Guid(4687f03a8d7606f47b3a6e3571da2ac7) (DefaultImporter) -> (artifact id: '5c4e615bffb530ff5410963ac2b99a1e') in 0.0024138 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-readme.json using Guid(46976b9cb646fe6488288a93a78d8293) (DefaultImporter) -> (artifact id: '1c3c511fdd0b9233b55fee7bcc612409') in 0.0019082 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-object-state-index.json using Guid(461e4fac261bbf34599d0a49f80350ce) (DefaultImporter) -> (artifact id: '1ff608c773523cae78dcc944b5b4c786') in 0.001834 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108/offline-geoworld-alpha-slice-manifest.json using Guid(567b671695fc66c4c85dcd892d6b0933) (DefaultImporter) -> (artifact id: '5a01421f9f76a48bb443c98ac92476b3') in 0.0034248 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-runtime-readme.json using Guid(96d36f875d3e4384aab0a191269b9a7a) (DefaultImporter) -> (artifact id: '05fadfa7e7d852c4a452dfa508845480') in 0.0028063 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-replay-acceptance-proof.json using Guid(d6d281e8e558cfd4ca54a20f0c7b7c1c) (DefaultImporter) -> (artifact id: '18b078457e1bc29a80fac05389a12f91') in 0.0114577 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/handoff-manifest.json using Guid(f608360431747b24393d6dc695ec796c) (DefaultImporter) -> (artifact id: '27dc9ad1207f1b44ae7ec4b1e88e7994') in 0.0044507 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-style-legend.json using Guid(179768a43931db0498f0065a172003a1) (DefaultImporter) -> (artifact id: '92d3c77ed3cbfe5e8d202872858f5822') in 0.0112079 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-chunk-visibility.json using Guid(476c92cdce2f0cf4295fa564a0e52eea) (DefaultImporter) -> (artifact id: 'f76ae904928f4d374ad7f6514ba5eee8') in 0.0034707 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-release-gate-dashboard.json using Guid(674ba37ec09d17b44bcf6529f01d9f23) (DefaultImporter) -> (artifact id: '643a6dbe8033e11721decd2fc43deb80') in 0.0028328 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-checklist.json using Guid(97e704889e1735640903994606e0b42a) (DefaultImporter) -> (artifact id: '0047484e9a5be01683f34f60af2ac2c0') in 0.0043445 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objectives.json using Guid(c7053ae33ba0c9541a58d9e5e2f52174) (DefaultImporter) -> (artifact id: '05e614b3b441e70708b54acc2adac737') in 0.0020461 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/playthrough-command-index.json using Guid(e70ec5d2980f98a47baca13bc303adf6) (DefaultImporter) -> (artifact id: 'fefc1ceb5b1b6e548434c96dfbe911ad') in 0.001785 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-prefetch-plan.json using Guid(49536631e65ff10418191d0d658bcb74) (DefaultImporter) -> (artifact id: '5feb4937f15b18d9fb09e197cf8f5faa') in 0.0030501 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/offline-geoworld-alpha-export-acceptance-gate.json using Guid(5970bc09996d63a449a942ea1a19a54d) (DefaultImporter) -> (artifact id: '9aa26e84da1a97cae574a682a8548ffe') in 0.0025644 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-readme.json using Guid(796217988550efb4281813cc4a1ca517) (DefaultImporter) -> (artifact id: '9259e3161d810f2be31ea67ddc8a6120') in 0.0092877 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/offline-geoworld-alpha-export-readme.md using Guid(f9414094221face4b9eabca0e870a81e) (DefaultImporter) -> (artifact id: '5715a2a950c0175635f2d81d6ca07393') in 0.0018934 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-result-template.json using Guid(f95ea7d8a21605243bd1658a0c6809b3) (DefaultImporter) -> (artifact id: 'e0e9777deb82535505762d0df915afc5') in 0.0033335 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-package-index.json using Guid(0a789a435cc961640b20a166aa7a9877) (DefaultImporter) -> (artifact id: 'f797111daa80ab8eb3779a481803518a') in 0.0037247 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/projected-package-index.json using Guid(1a2af10fe7cd8f342997d8d85366a87f) (DefaultImporter) -> (artifact id: '28f5364a695e15f0cfd77d886141fc53') in 0.0026576 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/playthrough-transcript-index.json using Guid(5a34aa062b6b4db4187e4528e247efed) (DefaultImporter) -> (artifact id: '1d00fa25560e46962445f5ab2bd95ffb') in 0.0019104 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/offline-geoworld-alpha-export-checksums.json using Guid(7a3bc30733c895e46a9c1f89ff4d807e) (DefaultImporter) -> (artifact id: '2e46e3e51f8031c4d780dfac49d277c9') in 0.0016446 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-completion-state.json using Guid(9aab973e1b264f04ea54a3861d6b79a6) (DefaultImporter) -> (artifact id: '710c6e9e8d63805c45cb009e876845b7') in 0.0080266 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-readme.json using Guid(daea08b2d66e14c45bb0a58c93c6082d) (DefaultImporter) -> (artifact id: '2668d5cf726b9d67dd1574eaaa19176f') in 0.0038501 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/offline-geoworld-alpha-export-runbook.md using Guid(eae5a9ea2b3512045917d12e75751d1b) (DefaultImporter) -> (artifact id: 'be5097d6f5e1f33a4e7f59eef13c9d6c') in 0.0074847 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-travel-manifest.json using Guid(3bc6b22f64413814aaa3303b737a417e) (DefaultImporter) -> (artifact id: '79abd76f1fff7d6c1c6a80ef48a153e0') in 0.0099863 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-targets.json using Guid(4bb7a08cc54d64c498f12a92dc6a8a92) (DefaultImporter) -> (artifact id: '41a1442a868357cf3bb96fb0bf12a4c9') in 0.0019059 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-manifest.json using Guid(6b680cc27b4123a4f848aaf7c125855a) (DefaultImporter) -> (artifact id: 'f03291e44c6e9e0ba02221cfb8c99d69') in 0.001676 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-initial-state.json using Guid(bb7ac7314e812b14d9e4fd400b9e6eec) (DefaultImporter) -> (artifact id: '83a887e78727b35a4b3d7c7ce211d423') in 0.0016633 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/visual-chunk-cache-chunk-key-ledger.json using Guid(0cf5ce4226b6e044190e6f404cc9b933) (DefaultImporter) -> (artifact id: '9eff8062aa0659eb8a9578730af0892d') in 0.001617 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-readme.json using Guid(0c5a94b331c63d84f9cf0e313e929eef) (DefaultImporter) -> (artifact id: 'd5a46debd9ae2b3ada22b52ebc7e5aab') in 0.003586 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-runner-manifest.json using Guid(0c5e1e7d45a653f488721c9bf19769cb) (DefaultImporter) -> (artifact id: 'bcfa29fdf0fe4157198da0d16a734493') in 0.0096293 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108/offline-geoworld-alpha-slice-components.json using Guid(cc3b74a8a2e47e44aac86f20e1b41bd3) (DefaultImporter) -> (artifact id: 'a5d1eb10c018d4ba706973434549f036') in 0.001986 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-delta-log.json using Guid(1d62dd13128e35a41afddb0ca3cb4563) (DefaultImporter) -> (artifact id: '91e2b11df1069d20254384ed5c379539') in 0.010869 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-travel-window-script.json using Guid(cda51296b0e67324b8bc2e0a720fb0dc) (DefaultImporter) -> (artifact id: 'ec5fd6fdbcaa576cf9b9d4a9909def9c') in 0.0020142 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-steps.json using Guid(9e257a6250fbac04c88bed68495c6934) (DefaultImporter) -> (artifact id: '7723ed84a801e11491ded4e107efa091') in 0.0017196 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-unity-handoff-manifest.json using Guid(dee7c614a81ecd84d928264710c7869f) (DefaultImporter) -> (artifact id: 'd17376ff8ed02ddc015ff2a9c1807763') in 0.0115343 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-manifest.json using Guid(2f1630e09a34d16429c4538fd57b27b9) (DefaultImporter) -> (artifact id: 'ec8bf2672194a64f77a7b376f5c62e3b') in 0.0021093 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/visual-chunk-cache-package-index.json using Guid(5f68c0a4051e7b348bbaae7676f6e7ef) (DefaultImporter) -> (artifact id: 'c8fc7de2c0f9b7341e9bda7e786f2931') in 0.001958 seconds
+Start importing Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-travel-manifest.json using Guid(df2675d08e3374743a2417154e753aae) (DefaultImporter) -> (artifact id: '5cad9aec1a26713b9ea19daea0d9936c') in 0.0019547 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=c4e0da455a769f748ba5ec61438d3a06): Total: 2.193 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=82 (actual=82, local cache=0, cache server=0)
+		Asset DB Process Time: managed=7 ms, native=1184 ms
+		Asset DB Callback time: managed=70 ms, native=6 ms
+		Scripting: domain reloads=1, domain reload time=453 ms, compile time=466 ms, other=4 ms
+		Project Asset Count: scripts=43, non-scripts=69
+		Asset File Changes: new=0, changed=131, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 2.397ms
+	ApplyChangesToAssetFolders: 1.966ms
+	Scan: 240.847ms
+	OnSourceAssetsModified: 0.848ms
+	CategorizeAssetsWithTransientArtifact: 0.262ms
+	ProcessAssetsWithTransientArtifactChanges: 2.841ms
+	CategorizeAssets: 0.520ms
+	ImportOutOfDateAssets: 886.404ms (45.211ms without children)
+		ImportManagerImport: 374.801ms (6.649ms without children)
+			ImportInProcess: 367.973ms
+			UpdateCategorizedAssets: 0.180ms
+		CompileScripts: 465.898ms
+		ReloadNativeAssets: 0.000ms
+		UnloadImportedAssets: 0.258ms
+		ReloadImportedAssets: 0.007ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.013ms
+		InitializingProgressBar: 0.004ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.000ms
+		OnDemandSchedulerStart: 0.211ms
+	PostProcessAllAssets: 73.910ms
+	Hotreload: 2.108ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.002ms
+	UnloadStreamsBegin: 0.116ms
+	PersistCurrentRevisions: 0.034ms
+	UnloadStreamsEnd: 0.000ms
+	GenerateScriptTypeHashes: 0.001ms
+	Untracked: 981.119ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Scanning for USB devices : 3.373ms
+Initializing Unity extensions:
+[Licensing::Client] Successfully resolved entitlement details
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-LLMGameCreatorAlpha
+GetVirtualKey: Could not map char: z (122) to any virtual key
+GetVirtualKey: Could not map char: y (121) to any virtual key
+GetVirtualKey: Could not map char: x (120) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: v (118) to any virtual key
+GetVirtualKey: Could not map char: V (86) to any virtual key
+GetVirtualKey: Could not map char: d (100) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: a (97) to any virtual key
+GetVirtualKey: Could not map char: d (100) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: r (114) to any virtual key
+GetVirtualKey: Could not map char: i (105) to any virtual key
+GetVirtualKey: Could not map char: l (108) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: k (107) to any virtual key
+GetVirtualKey: Could not map char: p (112) to any virtual key
+GetVirtualKey: Could not map char: p (112) to any virtual key
+GetVirtualKey: Could not map char: p (112) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: r (114) to any virtual key
+GetVirtualKey: Could not map char: P (80) to any virtual key
+GetVirtualKey: Could not map char: n (110) to any virtual key
+GetVirtualKey: Could not map char: n (110) to any virtual key
+GetVirtualKey: Could not map char: g (103) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: a (97) to any virtual key
+GetVirtualKey: Could not map char: a (97) to any virtual key
+GetVirtualKey: Could not map char: n (110) to any virtual key
+GetVirtualKey: Could not map char: o (111) to any virtual key
+GetVirtualKey: Could not map char: s (115) to any virtual key
+GetVirtualKey: Could not map char: s (115) to any virtual key
+GetVirtualKey: Could not map char: b (98) to any virtual key
+GetVirtualKey: Could not map char: b (98) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: u (117) to any virtual key
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 63 unused Assets / (459.2 KB). Loaded Objects now: 586.
+Memory consumption went from 85.9 MB to 85.4 MB.
+Total: 4.185200 ms (FindLiveObjects: 0.044100 ms CreateObjectMapping: 0.005700 ms MarkObjects: 3.946700 ms  DeleteObjects: 0.187700 ms)
+
+GetVirtualKey: Could not map char: z (122) to any virtual key
+GetVirtualKey: Could not map char: y (121) to any virtual key
+GetVirtualKey: Could not map char: x (120) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: v (118) to any virtual key
+GetVirtualKey: Could not map char: V (86) to any virtual key
+GetVirtualKey: Could not map char: d (100) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: a (97) to any virtual key
+GetVirtualKey: Could not map char: d (100) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: r (114) to any virtual key
+GetVirtualKey: Could not map char: i (105) to any virtual key
+GetVirtualKey: Could not map char: l (108) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: k (107) to any virtual key
+GetVirtualKey: Could not map char: p (112) to any virtual key
+GetVirtualKey: Could not map char: p (112) to any virtual key
+GetVirtualKey: Could not map char: p (112) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: r (114) to any virtual key
+GetVirtualKey: Could not map char: P (80) to any virtual key
+GetVirtualKey: Could not map char: n (110) to any virtual key
+GetVirtualKey: Could not map char: n (110) to any virtual key
+GetVirtualKey: Could not map char: g (103) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: f (102) to any virtual key
+GetVirtualKey: Could not map char: a (97) to any virtual key
+GetVirtualKey: Could not map char: a (97) to any virtual key
+GetVirtualKey: Could not map char: n (110) to any virtual key
+GetVirtualKey: Could not map char: o (111) to any virtual key
+GetVirtualKey: Could not map char: s (115) to any virtual key
+GetVirtualKey: Could not map char: s (115) to any virtual key
+GetVirtualKey: Could not map char: b (98) to any virtual key
+GetVirtualKey: Could not map char: b (98) to any virtual key
+GetVirtualKey: Could not map char: c (99) to any virtual key
+GetVirtualKey: Could not map char: u (117) to any virtual key
+GOAL124_GENERIC_GAMEPACKAGE_LOOP_PASS
+No diagnostics.
+genericLoopPassed=True
+samplePackageLoaded=True
+genericProjectionBuilt=True
+interactionPreviewPresent=True
+interactionApplyPassed=True
+dialogueSummaryPresent=True
+questObjectiveSummaryPresent=True
+inventorySummaryPresent=True
+resourceSummaryPresent=True
+eventLogPresent=True
+zeroFatalErrors=True
+selectedEntityId=entity/village/old_guard
+selectedInteractionId=interaction/sign_inspect
+selectedDialogueId=dialogue/old_guard_intro
+selectedQuestId=quest/help_healer
+appliedInteractionCount=1
+startedQuestCount=1
+statusLine=Goal123 generic package projection built for Minimal Map Game (game/minimal-map-game)
+markerSelected=true
+markerId=entity/village/sign
+markerName=goal123_entity_marker_entity_village_sign
+markerKind=entity
+sourceGoal=goal123
+sourceFile=samples/minimal-map-game/package.json
+displayLabel=Указатель
+status=ready
+details=entityId=entity/village/sign; prototypeId=prototype/object/sign; position=(2,2); interactable=True; interactionId=interaction/sign_inspect; dialogueId=none; text=На табличке написано: северная дорога закрыта.
+interactionId=interaction/sign_inspect; kind=inspect; effects=set_flag:flag/sign_inspected=true, log:log/sign_inspected=The sign was inspected through InteractionDefinition v1.
+questId=quest/help_healer; objectiveId=objective/collect_red_herbs; targetId=item/red_herb; required=3; inventoryHas=2; status=incomplete
+inventoryId=inventory/player_start; slots=16; stacks=item/red_herbx2, item/water_flaskx1, item/healing_potionx1, item/fuel_canx1, item/woodcutting_axex1
+resource/health(health) default=30 range=0-30, resource/stamina(combat) default=10 range=0-10, resource/gold(currency) default=0 range=0-0, resource/mana(magic) default=10 range=0-100, resource/electricity(network_resource) default=0 range=0-0
+loadSamplePackage=samples/minimal-map-game/package.json
+sectionPresent=True
+goal124.samplePackageLoaded=True
+goal124.genericProjectionBuilt=True
+goal124.selectedEntityId=entity/village/sign
+goal124.selectedInteractionId=interaction/sign_inspect
+goal124.interactionPreview=interactionId=interaction/sign_inspect; kind=inspect; effects=set_flag:flag/sign_inspected=true, log:log/sign_inspected=The sign was inspected through InteractionDefinition v1.
+goal124.projectionFlag.flag/sign_inspected=true
+goal124.interactionLog=The sign was inspected through InteractionDefinition v1.
+goal124.appliedInteractionCount=1
+goal124.interactionApplyPassed=True
+goal124.selectedDialogueEntityId=entity/village/old_guard
+goal124.selectedDialogueId=dialogue/old_guard_intro
+goal124.dialogueSummary=dialogueId=dialogue/old_guard_intro; title=Старый стражник; startNodeId=start; speakerId=npc/old_guard; text=Дальше дороги нет. Пока нет.
+goal124.selectedQuestId=quest/help_healer
+goal124.questObjectiveSummary=questId=quest/help_healer; objectiveId=objective/collect_red_herbs; targetId=item/red_herb; required=3; inventoryHas=2; status=incomplete
+goal124.inventorySummary=inventoryId=inventory/player_start; slots=16; stacks=item/red_herbx2, item/water_flaskx1, item/healing_potionx1, item/fuel_canx1, item/woodcutting_axex1
+goal124.resourceSummary=resource/health(health) default=30 range=0-30, resource/stamina(combat) default=10 range=0-10, resource/gold(currency) default=0 range=0-0, resource/mana(magic) default=10 range=0-100, resource/electricity(network_resource) default=0 range=0-0
+goal124.genericLoopPassed=True
+genericLoopPassed=True
+Goal124 generic package loop verification passed
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow:RunBatchmodeGenericGamePackageLoopSmoke () (at Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs:290)
+
+(Filename: Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs Line: 290)
+
+Curl error 42: Callback aborted
+Killing ADB server in 0,18846 seconds.
+Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: 'eabb2fd4a723ba94b69b7d158696a64c') in 0.0034333 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=d7f7bed0dc776e34d9f2d0f8700b24de): Total: 0.018 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[Physics::Module] Cleanup current backned.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-endim-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-endim channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1783310581670,"processId":29048,"allocatedMemory":9977260,"memoryLabels":[{"Default":26077},{"Permanent":15412},{"NewDelete":67841},{"Thread":4238000},{"Manager":27458},{"VertexData":8},{"Geometry":816},{"VFX":-104},{"Texture":160},{"Shader":78823},{"Material":24},{"GfxDevice":57312},{"Animation":328},{"Audio":4040},{"FontEngine":256},{"Physics":1241},{"Serialization":776},{"Input":14824},{"JobScheduler":33880},{"TextLib":160},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1620056},{"Resource":1304},{"Renderer":2928},{"Transform":4646},{"File":1016},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":11218},{"DynamicArray":80729},{"HashMap":57440},{"Utility":2664102},{"Curl":48},{"PoolAlloc":1960},{"AI":40},{"TypeTree":5005},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7824},{"Director":8240},{"CloudService":6632},{"WebRequest":845},{"VR":46066},{"SceneManager":496},{"Video":64},{"LazyScriptCache":32},{"NativeArray":8},{"Camera":17},{"Secure":1},{"Image":8192},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":560},{"Hierarchy":272},{"Gui":80},{"EditorUtility":67395},{"VersionControl":4},{"Undo":947},{"AssetDatabase":239728},{"EditorGi":328},{"UnityConnect":24512},{"Upm":1972},{"DrivenProperties":72},{"LocalIPC":260},{"ProfilerEditor":9738},{"CoreBusinessMetrics":14929},{"Licensing":3624},{"AssetReference":32},{"IPCStream":32}]}
+~StackAllocator(ALLOC_TEMP_MAIN) m_LastAlloc not NULL. Did you forget to call FreeAllStackAllocations()? To get more information, run app with -diag-temp-memory-leak-validation cmd line argument

@@ -214,6 +214,64 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.SamplePackageMutationRejected);
     }
 
+    [Fact]
+    public void Goal124GenericPackageLoopSourceScanFindsStateLoopWindowBatchmodeAndSampleQuest()
+    {
+        var result = new GenericGamePackageLoopProjectionService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.GenericLoopStatus);
+        Assert.Equal(
+            GenericGamePackageLoopProjectionVocabulary.SamplePackagePath,
+            result.Dashboard.SamplePackagePath);
+        Assert.Equal("game/minimal-map-game", result.Dashboard.PackageId);
+        Assert.Equal("map/village", result.Dashboard.MapId);
+        Assert.True(result.Dashboard.InteractionPreviewPresent);
+        Assert.True(result.Dashboard.InteractionApplyPassed);
+        Assert.True(result.Dashboard.DialogueSummaryPresent);
+        Assert.True(result.Dashboard.QuestObjectiveSummaryPresent);
+        Assert.True(result.Dashboard.InventorySummaryPresent);
+        Assert.True(result.Dashboard.ResourceSummaryPresent);
+        Assert.True(result.Dashboard.Goal123StillGreen);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.True(result.Dashboard.ProjectionOnly);
+        Assert.Equal(1, result.Dashboard.AppliedInteractionCount);
+        Assert.Equal(1, result.Dashboard.StartedQuestCount);
+        Assert.NotEqual(
+            "BLOCKED_UNITY_BATCHMODE_GENERIC_GAMEPACKAGE_LOOP",
+            result.Dashboard.UnitySmokeStatus);
+        Assert.True(result.SamplePackage.Exists);
+        Assert.True(result.SamplePackage.Parsed);
+        Assert.True(result.SamplePackage.ReadOnlySource);
+        Assert.True(result.SamplePackage.ExcludedFromExpectedChangedPaths);
+        Assert.True(result.SamplePackage.SignEntityPresent);
+        Assert.True(result.SamplePackage.SignInspectInteractionPresent);
+        Assert.True(result.SamplePackage.SignInspectSetFlagEffectPresent);
+        Assert.True(result.SamplePackage.SignInspectLogEffectPresent);
+        Assert.True(result.SamplePackage.OldGuardEntityPresent);
+        Assert.True(result.SamplePackage.OldGuardDialoguePresent);
+        Assert.True(result.SamplePackage.HelpHealerQuestPresent);
+        Assert.Equal(3, result.SamplePackage.RequiredRedHerbAmount);
+        Assert.Equal(2, result.SamplePackage.PlayerRedHerbAmount);
+        Assert.True(result.SamplePackage.HelpHealerIncomplete);
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.WindowActionPresent);
+        Assert.True(result.ScriptInventory.BatchmodeMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.ScriptInventory.BatchmodeFailMarkerPresent);
+        Assert.True(result.ScriptInventory.StateClassTracksRequiredFields);
+        Assert.True(result.ScriptInventory.LoopRunsRequiredSequence);
+        Assert.True(result.ScriptInventory.ControllerRendersLoopMarkers);
+        Assert.True(result.ScriptInventory.AdapterParsesLoopData);
+        Assert.True(result.ScriptInventory.ModelsExposeLoopSmokeFields);
+        Assert.True(result.ScriptInventory.ExistingGoal123VerificationStillPresent);
+        Assert.True(result.ScriptInventory.NoSourceWriteMarkers);
+        Assert.True(result.SmokePlan.StepCount >= 12);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.True(result.NegativeProof.ManualInputRejected);
+        Assert.True(result.NegativeProof.SamplePackageMutationRejected);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

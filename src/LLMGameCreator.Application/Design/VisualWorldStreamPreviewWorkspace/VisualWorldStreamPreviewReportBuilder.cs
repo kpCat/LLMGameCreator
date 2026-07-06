@@ -637,6 +637,48 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.GenericGamePackageProjectionQualityGatePassed,
             Goal123FilesDiscoveredByRelativePaths =
                 qualityGate.Goal123FilesDiscoveredByRelativePaths,
+            GenericLoopStatus =
+                qualityGate.GenericLoopStatus,
+            GenericLoopSamplePackagePath =
+                qualityGate.GenericLoopSamplePackagePath,
+            GenericLoopPackageId =
+                qualityGate.GenericLoopPackageId,
+            GenericLoopMapId =
+                qualityGate.GenericLoopMapId,
+            GenericLoopInteractionPreviewPresent =
+                qualityGate.GenericLoopInteractionPreviewPresent,
+            GenericLoopInteractionApplyPassed =
+                qualityGate.GenericLoopInteractionApplyPassed,
+            GenericLoopDialogueSummaryPresent =
+                qualityGate.GenericLoopDialogueSummaryPresent,
+            GenericLoopQuestObjectiveSummaryPresent =
+                qualityGate.GenericLoopQuestObjectiveSummaryPresent,
+            GenericLoopInventorySummaryPresent =
+                qualityGate.GenericLoopInventorySummaryPresent,
+            GenericLoopResourceSummaryPresent =
+                qualityGate.GenericLoopResourceSummaryPresent,
+            GenericLoopUnitySmokeStatus =
+                qualityGate.GenericLoopUnitySmokeStatus,
+            GenericLoopCleanupScriptAvailable =
+                qualityGate.GenericLoopCleanupScriptAvailable,
+            GenericLoopCleanupCommand =
+                qualityGate.GenericLoopCleanupCommand,
+            GenericLoopGoal123StillGreen =
+                qualityGate.GenericLoopGoal123StillGreen,
+            GenericLoopProjectionOnly =
+                qualityGate.GenericLoopProjectionOnly,
+            GenericLoopAppliedInteractionCount =
+                qualityGate.GenericLoopAppliedInteractionCount,
+            GenericLoopStartedQuestCount =
+                qualityGate.GenericLoopStartedQuestCount,
+            GenericLoopEvidencePath =
+                qualityGate.GenericLoopEvidencePath,
+            GenericLoopExportPath =
+                qualityGate.GenericLoopExportPath,
+            GenericGamePackageLoopQualityGatePassed =
+                qualityGate.GenericGamePackageLoopQualityGatePassed,
+            Goal124FilesDiscoveredByRelativePaths =
+                qualityGate.Goal124FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

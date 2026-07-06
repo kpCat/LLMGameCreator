@@ -1,0 +1,50 @@
+{
+  "goalId": "goal_124_generic_gamepackage_quest_dialogue_interaction_loop",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 7,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/generic-gamepackage-loop-dashboard.json",
+      "role": "goal124_generic_gamepackage_loop_evidence",
+      "required": true,
+      "sha256": "5d4873c304ecb82db029a7a3fde8cf89a8c8968044d19209343c63102b6f2c17"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/generic-gamepackage-loop-log-scan.json",
+      "role": "goal124_generic_gamepackage_loop_evidence",
+      "required": true,
+      "sha256": "ba59042b0ec5e1b0962fa94f9fb3567d917085be55f083a5b7193734de4a8e53"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/generic-gamepackage-loop-negative-proof.json",
+      "role": "goal124_generic_gamepackage_loop_evidence",
+      "required": true,
+      "sha256": "b8b44baa0dea33262ea03e4804f4f15631e88cf981ef3d3450006ca9f879ab9c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/generic-gamepackage-loop-report.md",
+      "role": "goal124_generic_gamepackage_loop_evidence",
+      "required": true,
+      "sha256": "5de9b75f82a188898aef1b1f615477b8f796812585a3a499b52a04598f0b5ae2"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/generic-gamepackage-loop-script-inventory.json",
+      "role": "goal124_generic_gamepackage_loop_evidence",
+      "required": true,
+      "sha256": "a3470e81dc0361cb84aefb1c610043425c87a24170045b43a03037618cfe6b88"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/generic-gamepackage-loop-smoke-plan.json",
+      "role": "goal124_generic_gamepackage_loop_evidence",
+      "required": true,
+      "sha256": "7f7aeeafb8812d447c8cbdf75ab004b0b5ae950ff22a52f2685f6d9908bea5f5"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/unity-batchmode-generic-gamepackage-loop.log",
+      "role": "goal124_unity_batchmode_generic_gamepackage_loop_log",
+      "required": true,
+      "sha256": "1578d3ef822219a3eaba0461f99036798f47278053d676dedd924b1ae2c93c63"
+    }
+  ]
+}

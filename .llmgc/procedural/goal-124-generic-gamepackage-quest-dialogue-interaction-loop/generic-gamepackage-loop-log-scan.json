@@ -1,0 +1,11 @@
+{
+  "goalId": "goal_124_generic_gamepackage_quest_dialogue_interaction_loop",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "smokeRequiredFieldsPresent": true,
+  "passed": true,
+  "status": "GREEN",
+  "sha256": "1578d3ef822219a3eaba0461f99036798f47278053d676dedd924b1ae2c93c63",
+  "forbiddenMarkersFound": []
+}

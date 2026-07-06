@@ -26,6 +26,11 @@ namespace LLMGameCreatorAlpha
         public GenericGamePackageEntityPrototype[] entityPrototypes = Array.Empty<GenericGamePackageEntityPrototype>();
         public GenericGamePackageMap[] maps = Array.Empty<GenericGamePackageMap>();
         public GenericGamePackageItem[] items = Array.Empty<GenericGamePackageItem>();
+        public GenericGamePackageResource[] resources = Array.Empty<GenericGamePackageResource>();
+        public GenericGamePackageInventory[] inventories = Array.Empty<GenericGamePackageInventory>();
+        public GenericGamePackageQuest[] quests = Array.Empty<GenericGamePackageQuest>();
+        public GenericGamePackageDialogue[] dialogues = Array.Empty<GenericGamePackageDialogue>();
+        public GenericGamePackageInteraction[] interactions = Array.Empty<GenericGamePackageInteraction>();
     }
 
     [Serializable]
@@ -106,6 +111,94 @@ namespace LLMGameCreatorAlpha
         public string kind = string.Empty;
     }
 
+    [Serializable]
+    public sealed class GenericGamePackageResource
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public string kind = string.Empty;
+        public int defaultValue;
+        public int minValue;
+        public int maxValue;
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageInventory
+    {
+        public string id = string.Empty;
+        public string ownerKind = string.Empty;
+        public string ownerId = string.Empty;
+        public int slots;
+        public GenericGamePackageInventoryStack[] stacks = Array.Empty<GenericGamePackageInventoryStack>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageInventoryStack
+    {
+        public string itemId = string.Empty;
+        public int amount;
+        public int durability;
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageQuest
+    {
+        public string id = string.Empty;
+        public string title = string.Empty;
+        public string description = string.Empty;
+        public GenericGamePackageQuestObjective[] objectives =
+            Array.Empty<GenericGamePackageQuestObjective>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageQuestObjective
+    {
+        public string id = string.Empty;
+        public string kind = string.Empty;
+        public string targetId = string.Empty;
+        public int requiredAmount;
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageDialogue
+    {
+        public string id = string.Empty;
+        public string title = string.Empty;
+        public string startNodeId = string.Empty;
+        public GenericGamePackageDialogueNode[] nodes = Array.Empty<GenericGamePackageDialogueNode>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageDialogueNode
+    {
+        public string id = string.Empty;
+        public string speakerId = string.Empty;
+        public string text = string.Empty;
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageInteraction
+    {
+        public string id = string.Empty;
+        public string kind = string.Empty;
+        public GenericGamePackageEffect[] effects = Array.Empty<GenericGamePackageEffect>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageEffect
+    {
+        public string type = string.Empty;
+        public GenericGamePackageEffectArgs args = new GenericGamePackageEffectArgs();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageEffectArgs
+    {
+        public string id = string.Empty;
+        public string value = string.Empty;
+        public string message = string.Empty;
+    }
+
     public sealed class GenericGamePackageProjectionModel
     {
         public string SamplePackagePath = GenericGamePackageProjectionAdapter.SamplePackageRelativePath;
@@ -121,6 +214,16 @@ namespace LLMGameCreatorAlpha
         public readonly List<GenericGamePackageProjectionTile> Tiles = new List<GenericGamePackageProjectionTile>();
         public readonly List<GenericGamePackageProjectionEntity> Entities = new List<GenericGamePackageProjectionEntity>();
         public readonly List<GenericGamePackageProjectionItem> Items = new List<GenericGamePackageProjectionItem>();
+        public readonly List<GenericGamePackageProjectionResource> Resources =
+            new List<GenericGamePackageProjectionResource>();
+        public readonly List<GenericGamePackageProjectionInventory> Inventories =
+            new List<GenericGamePackageProjectionInventory>();
+        public readonly List<GenericGamePackageProjectionQuest> Quests =
+            new List<GenericGamePackageProjectionQuest>();
+        public readonly List<GenericGamePackageProjectionDialogue> Dialogues =
+            new List<GenericGamePackageProjectionDialogue>();
+        public readonly List<GenericGamePackageProjectionInteraction> Interactions =
+            new List<GenericGamePackageProjectionInteraction>();
         public readonly List<string> Diagnostics = new List<string>();
     }
 
@@ -153,6 +256,77 @@ namespace LLMGameCreatorAlpha
         public string ItemId = string.Empty;
         public string Name = string.Empty;
         public string Kind = string.Empty;
+    }
+
+    public sealed class GenericGamePackageProjectionResource
+    {
+        public string ResourceId = string.Empty;
+        public string Name = string.Empty;
+        public string Kind = string.Empty;
+        public int DefaultValue;
+        public int MinValue;
+        public int MaxValue;
+    }
+
+    public sealed class GenericGamePackageProjectionInventory
+    {
+        public string InventoryId = string.Empty;
+        public string OwnerKind = string.Empty;
+        public string OwnerId = string.Empty;
+        public int Slots;
+        public readonly List<GenericGamePackageProjectionInventoryStack> Stacks =
+            new List<GenericGamePackageProjectionInventoryStack>();
+    }
+
+    public sealed class GenericGamePackageProjectionInventoryStack
+    {
+        public string ItemId = string.Empty;
+        public string ItemName = string.Empty;
+        public int Amount;
+        public int Durability;
+    }
+
+    public sealed class GenericGamePackageProjectionQuest
+    {
+        public string QuestId = string.Empty;
+        public string Title = string.Empty;
+        public string Description = string.Empty;
+        public readonly List<GenericGamePackageProjectionQuestObjective> Objectives =
+            new List<GenericGamePackageProjectionQuestObjective>();
+    }
+
+    public sealed class GenericGamePackageProjectionQuestObjective
+    {
+        public string ObjectiveId = string.Empty;
+        public string Kind = string.Empty;
+        public string TargetId = string.Empty;
+        public string TargetName = string.Empty;
+        public int RequiredAmount;
+    }
+
+    public sealed class GenericGamePackageProjectionDialogue
+    {
+        public string DialogueId = string.Empty;
+        public string Title = string.Empty;
+        public string StartNodeId = string.Empty;
+        public string StartSpeakerId = string.Empty;
+        public string StartText = string.Empty;
+    }
+
+    public sealed class GenericGamePackageProjectionInteraction
+    {
+        public string InteractionId = string.Empty;
+        public string Kind = string.Empty;
+        public readonly List<GenericGamePackageProjectionEffect> Effects =
+            new List<GenericGamePackageProjectionEffect>();
+    }
+
+    public sealed class GenericGamePackageProjectionEffect
+    {
+        public string Type = string.Empty;
+        public string Id = string.Empty;
+        public string Value = string.Empty;
+        public string Message = string.Empty;
     }
 
     public sealed class GenericGamePackageProjectionSmokeResult
@@ -216,6 +390,68 @@ namespace LLMGameCreatorAlpha
                    + "\nmapHeight=" + MapHeight
                    + "\nentityCount=" + EntityCount
                    + "\nitemCount=" + ItemCount
+                   + "\nstatusLine=" + StatusLine;
+        }
+    }
+
+    public sealed class GenericGamePackageProjectionLoopSmokeResult
+    {
+        public bool GenericLoopPassed;
+        public bool SamplePackageLoaded;
+        public bool GenericProjectionBuilt;
+        public bool InteractionPreviewPresent;
+        public bool InteractionApplyPassed;
+        public bool DialogueSummaryPresent;
+        public bool QuestObjectiveSummaryPresent;
+        public bool InventorySummaryPresent;
+        public bool ResourceSummaryPresent;
+        public bool EventLogPresent;
+        public bool ZeroFatalErrors;
+        public string SelectedEntityId = string.Empty;
+        public string SelectedInteractionId = string.Empty;
+        public string SelectedDialogueId = string.Empty;
+        public string SelectedQuestId = string.Empty;
+        public int AppliedInteractionCount;
+        public int StartedQuestCount;
+        public string StatusLine = string.Empty;
+
+        public bool Passed
+        {
+            get
+            {
+                return GenericLoopPassed
+                       && SamplePackageLoaded
+                       && GenericProjectionBuilt
+                       && InteractionPreviewPresent
+                       && InteractionApplyPassed
+                       && DialogueSummaryPresent
+                       && QuestObjectiveSummaryPresent
+                       && InventorySummaryPresent
+                       && ResourceSummaryPresent
+                       && EventLogPresent
+                       && ZeroFatalErrors;
+            }
+        }
+
+        public string ToDiagnosticText()
+        {
+            return "genericLoopPassed=" + GenericLoopPassed
+                   + "\nsamplePackageLoaded=" + SamplePackageLoaded
+                   + "\ngenericProjectionBuilt=" + GenericProjectionBuilt
+                   + "\ninteractionPreviewPresent=" + InteractionPreviewPresent
+                   + "\ninteractionApplyPassed=" + InteractionApplyPassed
+                   + "\ndialogueSummaryPresent=" + DialogueSummaryPresent
+                   + "\nquestObjectiveSummaryPresent=" + QuestObjectiveSummaryPresent
+                   + "\ninventorySummaryPresent=" + InventorySummaryPresent
+                   + "\nresourceSummaryPresent=" + ResourceSummaryPresent
+                   + "\neventLogPresent=" + EventLogPresent
+                   + "\nzeroFatalErrors=" + ZeroFatalErrors
+                   + "\nselectedEntityId=" + SelectedEntityId
+                   + "\nselectedInteractionId=" + SelectedInteractionId
+                   + "\nselectedDialogueId=" + SelectedDialogueId
+                   + "\nselectedQuestId=" + SelectedQuestId
+                   + "\nappliedInteractionCount=" + AppliedInteractionCount
+                   + "\nstartedQuestCount=" + StartedQuestCount
                    + "\nstatusLine=" + StatusLine;
         }
     }

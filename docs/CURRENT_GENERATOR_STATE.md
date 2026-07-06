@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 123 generic GamePackage playable projection adapter
+Updated by: Goal 124 generic GamePackage quest dialogue interaction loop
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -121,6 +121,25 @@ interaction markers, item summary and event log. Evidence lives under
 `.llmgc/procedural/goal-123-generic-gamepackage-playable-projection-adapter/`, export metadata under
 `.llmgc/exports/goal-123-generic-gamepackage-playable-projection-adapter/`, and the short manual note at
 `docs/manual-acceptance/generic-gamepackage-playable-projection-adapter.md`.
+
+Goal 124 adds a projection-local quest/dialogue/interaction loop over the generic sample GamePackage:
+
+```text
+goal_124_generic_gamepackage_quest_dialogue_interaction_loop required
+implementationStatus=GREEN
+accepted=false
+manualPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection -> Run Generic Package Gameplay Loop Verification
+unityBatchmodeSmoke=GOAL124_GENERIC_GAMEPACKAGE_LOOP_PASS required
+samplePackagePath=samples/minimal-map-game/package.json read-only
+```
+
+Goal124 keeps the sample package read-only and does not apply package data to Runtime, schema, Lua, generator-library,
+scenes, prefabs, ProjectSettings, Packages or StreamingAssets. The Unity window previews and applies
+`interaction/sign_inspect` in projection-local state, shows `dialogue/old_guard_intro`, `quest/help_healer` red-herb
+objective status, inventory/resource summaries and event log markers. Evidence lives under
+`.llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/`, export metadata under
+`.llmgc/exports/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/`, and the short manual note at
+`docs/manual-acceptance/generic-gamepackage-quest-dialogue-interaction-loop.md`.
 
 After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue

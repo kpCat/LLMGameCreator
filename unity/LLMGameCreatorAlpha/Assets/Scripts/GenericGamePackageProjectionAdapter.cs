@@ -113,6 +113,40 @@ namespace LLMGameCreatorAlpha
                 });
             }
 
+            var itemNames = BuildItemNameMap(model.Items);
+            foreach (var resourceJson in TopLevelObjectBlocks(ArrayField(gameJson, "resources")))
+            {
+                model.Resources.Add(new GenericGamePackageProjectionResource
+                {
+                    ResourceId = StringField(resourceJson, "id"),
+                    Name = StringField(resourceJson, "name"),
+                    Kind = StringField(resourceJson, "kind"),
+                    DefaultValue = IntField(resourceJson, "defaultValue"),
+                    MinValue = IntField(resourceJson, "minValue"),
+                    MaxValue = IntField(resourceJson, "maxValue")
+                });
+            }
+
+            foreach (var inventoryJson in TopLevelObjectBlocks(ArrayField(gameJson, "inventories")))
+            {
+                model.Inventories.Add(BuildInventoryProjection(inventoryJson, itemNames));
+            }
+
+            foreach (var questJson in TopLevelObjectBlocks(ArrayField(gameJson, "quests")))
+            {
+                model.Quests.Add(BuildQuestProjection(questJson, itemNames));
+            }
+
+            foreach (var dialogueJson in TopLevelObjectBlocks(ArrayField(gameJson, "dialogues")))
+            {
+                model.Dialogues.Add(BuildDialogueProjection(dialogueJson));
+            }
+
+            foreach (var interactionJson in TopLevelObjectBlocks(ArrayField(gameJson, "interactions")))
+            {
+                model.Interactions.Add(BuildInteractionProjection(interactionJson));
+            }
+
             model.Diagnostics.AddRange(diagnostics);
             return model;
         }
@@ -194,6 +228,21 @@ namespace LLMGameCreatorAlpha
             return result;
         }
 
+        private static Dictionary<string, string> BuildItemNameMap(
+            List<GenericGamePackageProjectionItem> items)
+        {
+            var map = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (var item in items)
+            {
+                if (!string.IsNullOrWhiteSpace(item.ItemId) && !map.ContainsKey(item.ItemId))
+                {
+                    map.Add(item.ItemId, item.Name);
+                }
+            }
+
+            return map;
+        }
+
         private static GenericGamePackageProjectionEntity BuildEntityProjection(
             string entityJson,
             GenericGamePackageEntityPrototype prototype)
@@ -213,6 +262,108 @@ namespace LLMGameCreatorAlpha
             ApplyInteraction(projection, prototype == null ? Array.Empty<GenericGamePackageComponent>() : prototype.components);
             ApplyInteraction(projection, BuildComponents(ArrayField(entityJson, "components")).ToArray());
             return projection;
+        }
+
+        private static GenericGamePackageProjectionInventory BuildInventoryProjection(
+            string inventoryJson,
+            Dictionary<string, string> itemNames)
+        {
+            var inventory = new GenericGamePackageProjectionInventory
+            {
+                InventoryId = StringField(inventoryJson, "id"),
+                OwnerKind = StringField(inventoryJson, "ownerKind"),
+                OwnerId = StringField(inventoryJson, "ownerId"),
+                Slots = IntField(inventoryJson, "slots")
+            };
+            foreach (var stackJson in TopLevelObjectBlocks(ArrayField(inventoryJson, "stacks")))
+            {
+                var itemId = StringField(stackJson, "itemId");
+                string itemName;
+                itemNames.TryGetValue(itemId, out itemName);
+                inventory.Stacks.Add(new GenericGamePackageProjectionInventoryStack
+                {
+                    ItemId = itemId,
+                    ItemName = itemName ?? string.Empty,
+                    Amount = IntField(stackJson, "amount"),
+                    Durability = IntField(stackJson, "durability")
+                });
+            }
+
+            return inventory;
+        }
+
+        private static GenericGamePackageProjectionQuest BuildQuestProjection(
+            string questJson,
+            Dictionary<string, string> itemNames)
+        {
+            var quest = new GenericGamePackageProjectionQuest
+            {
+                QuestId = StringField(questJson, "id"),
+                Title = StringField(questJson, "title"),
+                Description = StringField(questJson, "description")
+            };
+            foreach (var objectiveJson in TopLevelObjectBlocks(ArrayField(questJson, "objectives")))
+            {
+                var targetId = StringField(objectiveJson, "targetId");
+                string targetName;
+                itemNames.TryGetValue(targetId, out targetName);
+                quest.Objectives.Add(new GenericGamePackageProjectionQuestObjective
+                {
+                    ObjectiveId = StringField(objectiveJson, "id"),
+                    Kind = StringField(objectiveJson, "kind"),
+                    TargetId = targetId,
+                    TargetName = targetName ?? string.Empty,
+                    RequiredAmount = IntField(objectiveJson, "requiredAmount")
+                });
+            }
+
+            return quest;
+        }
+
+        private static GenericGamePackageProjectionDialogue BuildDialogueProjection(string dialogueJson)
+        {
+            var dialogue = new GenericGamePackageProjectionDialogue
+            {
+                DialogueId = StringField(dialogueJson, "id"),
+                Title = StringField(dialogueJson, "title"),
+                StartNodeId = StringField(dialogueJson, "startNodeId")
+            };
+            foreach (var nodeJson in TopLevelObjectBlocks(ArrayField(dialogueJson, "nodes")))
+            {
+                if (!string.Equals(StringField(nodeJson, "id"), dialogue.StartNodeId, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                dialogue.StartSpeakerId = StringField(nodeJson, "speakerId");
+                dialogue.StartText = StringField(nodeJson, "text");
+                break;
+            }
+
+            return dialogue;
+        }
+
+        private static GenericGamePackageProjectionInteraction BuildInteractionProjection(
+            string interactionJson)
+        {
+            var interaction = new GenericGamePackageProjectionInteraction
+            {
+                InteractionId = StringField(interactionJson, "id"),
+                Kind = StringField(interactionJson, "kind")
+            };
+            foreach (var effectJson in TopLevelObjectBlocks(ArrayField(interactionJson, "effects")))
+            {
+                var argsJson = ObjectField(effectJson, "args");
+                interaction.Effects.Add(new GenericGamePackageProjectionEffect
+                {
+                    Type = StringField(effectJson, "type"),
+                    Id = StringField(argsJson, "id"),
+                    Value = StringField(argsJson, "value"),
+                    Message = StringField(argsJson, "message")
+                });
+            }
+
+            return interaction;
         }
 
         private static List<GenericGamePackageComponent> BuildComponents(string componentsJson)
