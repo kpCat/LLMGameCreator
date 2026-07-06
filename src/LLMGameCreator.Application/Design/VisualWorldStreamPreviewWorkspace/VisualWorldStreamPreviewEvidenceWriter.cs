@@ -226,7 +226,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var acceptedAlphaInteractionDrilldown = BuildGoal121AcceptedAlphaInteractionDrilldownQuality(groups, proofs);
         var acceptedAlphaProjectionActionLoop = BuildGoal122AcceptedAlphaProjectionActionLoopQuality(groups, proofs);
         var genericGamePackageProjection = BuildGoal123GenericGamePackageProjectionQuality(groups, proofs);
-        var genericGamePackageLoop = BuildGoal124GenericGamePackageLoopQuality(groups, proofs);
+        var genericGamePackageLoop = BuildGoal124GenericGamePackageLoopQuality(groups, proofs); var genericGamePackageSystems = BuildGoal125GenericGamePackageSystemsQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -405,8 +405,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal120AcceptedAlphaProjectionUsabilityQualityDiagnostics(acceptedAlphaProjectionUsability, binding, diagnostics);
         AddGoal121AcceptedAlphaInteractionDrilldownQualityDiagnostics(acceptedAlphaInteractionDrilldown, binding, diagnostics);
         AddGoal122AcceptedAlphaProjectionActionLoopQualityDiagnostics(acceptedAlphaProjectionActionLoop, binding, diagnostics);
-        AddGoal123GenericGamePackageProjectionQualityDiagnostics(genericGamePackageProjection, binding, diagnostics);
-        AddGoal124GenericGamePackageLoopQualityDiagnostics(genericGamePackageLoop, binding, diagnostics);
+        AddGoal123GenericGamePackageProjectionQualityDiagnostics(genericGamePackageProjection, binding, diagnostics); AddGoal124GenericGamePackageLoopQualityDiagnostics(genericGamePackageLoop, binding, diagnostics);
+        AddGoal125GenericGamePackageSystemsQualityDiagnostics(genericGamePackageSystems, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -691,8 +691,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal120 = ApplyGoal120AcceptedAlphaProjectionUsabilityQuality(withGoal119, acceptedAlphaProjectionUsability, binding);
         var withGoal121 = ApplyGoal121AcceptedAlphaInteractionDrilldownQuality(withGoal120, acceptedAlphaInteractionDrilldown, binding);
         var withGoal122 = ApplyGoal122AcceptedAlphaProjectionActionLoopQuality(withGoal121, acceptedAlphaProjectionActionLoop, binding);
-        var withGoal123 = ApplyGoal123GenericGamePackageProjectionQuality(withGoal122, genericGamePackageProjection, binding);
-        return ApplyGoal124GenericGamePackageLoopQuality(withGoal123, genericGamePackageLoop, binding);
+        var withGoal123 = ApplyGoal123GenericGamePackageProjectionQuality(withGoal122, genericGamePackageProjection, binding); var withGoal124 = ApplyGoal124GenericGamePackageLoopQuality(withGoal123, genericGamePackageLoop, binding);
+        return ApplyGoal125GenericGamePackageSystemsQuality(withGoal124, genericGamePackageSystems, binding);
     }
 
 }

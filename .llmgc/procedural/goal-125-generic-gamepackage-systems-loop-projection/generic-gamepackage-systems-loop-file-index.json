@@ -1,0 +1,50 @@
+{
+  "goalId": "goal_125_generic_gamepackage_systems_loop_projection",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 7,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/generic-gamepackage-systems-loop-dashboard.json",
+      "role": "goal125_generic_gamepackage_systems_evidence",
+      "required": true,
+      "sha256": "175533f0f749eddbd455fe52ffa861ffba960b4e6a9a16feb16a967920d61957"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/generic-gamepackage-systems-loop-log-scan.json",
+      "role": "goal125_generic_gamepackage_systems_evidence",
+      "required": true,
+      "sha256": "2f7a72ad20d7ecddd6cfee5fe326b487040403bf2463fee943808c9a34fb0e1a"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/generic-gamepackage-systems-loop-negative-proof.json",
+      "role": "goal125_generic_gamepackage_systems_evidence",
+      "required": true,
+      "sha256": "149345110d1e7364b28f32c5e9512c9a5190f53ef1fd4e2b82d38fc5b07db3b0"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/generic-gamepackage-systems-loop-report.md",
+      "role": "goal125_generic_gamepackage_systems_evidence",
+      "required": true,
+      "sha256": "a889048d8df1c283c2e013cca9cd63e29eb1496f42792b3c76da8e2e8998bb52"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/generic-gamepackage-systems-loop-script-inventory.json",
+      "role": "goal125_generic_gamepackage_systems_evidence",
+      "required": true,
+      "sha256": "fd1dd3914bcf4998e17fbea3dde6785c24ce07078ab6b9a07a6cf26536344e85"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/generic-gamepackage-systems-loop-smoke-plan.json",
+      "role": "goal125_generic_gamepackage_systems_evidence",
+      "required": true,
+      "sha256": "805ca92362013ebcc64fe7afe4495fb79a02c2c68463df8614a252a4bde18d09"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/unity-batchmode-generic-gamepackage-systems-loop.log",
+      "role": "goal125_unity_batchmode_generic_gamepackage_systems_log",
+      "required": true,
+      "sha256": "f513f887346788601a42b8cecf51902c10776a1932edc006d0f36fe9b1e28b7c"
+    }
+  ]
+}

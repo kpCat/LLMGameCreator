@@ -23,6 +23,7 @@ namespace LLMGameCreatorAlpha
         private string selectedMarkerStatus = "none";
         private string projectionStateStatus = "not initialized";
         private string genericProjectionStatus = "not run";
+        private string genericSystemsStatus = "not run";
         private bool diagnosticsExpanded;
         private bool smokeExpanded = true;
         private bool selectedMarkerExpanded = true;
@@ -319,6 +320,60 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeGenericGamePackageSystemsSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureGenericController();
+                var passed = controller.RunGenericPackageSystemsLoopVerification();
+                var diagnostics = controller.LastDiagnostics
+                                  + "\n" + controller.LastSmokeDiagnostics
+                                  + "\n" + controller.SelectedMarkerDetails
+                                  + "\n" + controller.InventorySummary
+                                  + "\n" + controller.ResourceSummary
+                                  + "\n" + controller.RecipePreview
+                                  + "\n" + controller.RecipeApplyResult
+                                  + "\n" + controller.HarvestPreview
+                                  + "\n" + controller.HarvestApplyResult
+                                  + "\n" + controller.TransactionPreview
+                                  + "\n" + controller.EncounterPreview
+                                  + "\n" + controller.CombatRoundPreview
+                                  + "\n" + controller.SystemsEventLog;
+                if (passed)
+                {
+                    Debug.Log("GOAL125_GENERIC_GAMEPACKAGE_SYSTEMS_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL125_GENERIC_GAMEPACKAGE_SYSTEMS_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL125_GENERIC_GAMEPACKAGE_SYSTEMS_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL125_GENERIC_GAMEPACKAGE_SYSTEMS_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -350,6 +405,10 @@ namespace LLMGameCreatorAlpha
             if (GUILayout.Button("Run Generic Package Gameplay Loop Verification", GUILayout.Height(32)))
             {
                 RunGenericPackageGameplayLoopVerification();
+            }
+            if (GUILayout.Button("Run Generic Package Systems Loop Verification", GUILayout.Height(32)))
+            {
+                RunGenericPackageSystemsLoopVerification();
             }
             EditorGUILayout.EndVertical();
 
@@ -452,6 +511,7 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.LabelField("Selected Marker", selectedMarkerStatus);
             EditorGUILayout.LabelField("Projection State", projectionStateStatus);
             EditorGUILayout.LabelField("Generic Package Projection", genericProjectionStatus);
+            EditorGUILayout.LabelField("Generic Package Systems", genericSystemsStatus);
             EditorGUILayout.EndVertical();
         }
 
@@ -592,6 +652,14 @@ namespace LLMGameCreatorAlpha
             CaptureGeneric(controller);
         }
 
+        private void RunGenericPackageSystemsLoopVerification()
+        {
+            var controller = EnsureGenericController();
+            controller.RunGenericPackageSystemsLoopVerification();
+            SelectAndFrame(controller.FindGenericProjectionRoot());
+            CaptureGeneric(controller);
+        }
+
         private void ClearProjection()
         {
             var root = GameObject.Find(AcceptedAlphaPlayableProjectionController.GeneratedRootName);
@@ -612,6 +680,7 @@ namespace LLMGameCreatorAlpha
             selectedMarkerStatus = "none";
             projectionStateStatus = "not initialized";
             genericProjectionStatus = "not run";
+            genericSystemsStatus = "not run";
         }
 
         private static void ClearProjectionRootImmediate()
@@ -735,16 +804,36 @@ namespace LLMGameCreatorAlpha
                                      + "\nappliedInteractionCount="
                                      + controller.AppliedInteractionCount
                                      + "\nstartedQuestCount="
-                                     + controller.StartedQuestCount;
+                                     + controller.StartedQuestCount
+                                     + "\nrecipePreview="
+                                     + EmptyAsNone(controller.RecipePreview)
+                                     + "\nrecipeApplyResult="
+                                     + EmptyAsNone(controller.RecipeApplyResult)
+                                     + "\nharvestPreview="
+                                     + EmptyAsNone(controller.HarvestPreview)
+                                     + "\nharvestApplyResult="
+                                     + EmptyAsNone(controller.HarvestApplyResult)
+                                     + "\ntransactionPreview="
+                                     + EmptyAsNone(controller.TransactionPreview)
+                                     + "\nencounterPreview="
+                                     + EmptyAsNone(controller.EncounterPreview)
+                                     + "\ncombatRoundPreview="
+                                     + EmptyAsNone(controller.CombatRoundPreview);
             verificationEventLog = controller.VerificationEventLog;
             genericProjectionStatus =
-                controller.LastGenericLoopVerificationPassed
+                controller.LastGenericSystemsVerificationPassed
+                    ? "systems passed"
+                    : controller.LastGenericLoopVerificationPassed
                     ? "loop passed"
                     : controller.LastVerificationPassed ? "projection passed" : "not passed";
+            genericSystemsStatus =
+                controller.LastGenericSystemsVerificationPassed ? "systems passed" : "not passed";
             fullVerificationStatus = "genericPackageProjection="
                                      + (controller.LastVerificationPassed ? "passed" : "not passed")
                                      + "; genericPackageLoop="
-                                     + (controller.LastGenericLoopVerificationPassed ? "passed" : "not passed");
+                                     + (controller.LastGenericLoopVerificationPassed ? "passed" : "not passed")
+                                     + "; genericPackageSystems="
+                                     + (controller.LastGenericSystemsVerificationPassed ? "passed" : "not passed");
             selectedMarkerStatus = "id=" + EmptyAsNone(controller.SelectedMarkerId)
                                    + "; kind=" + EmptyAsNone(controller.SelectedMarkerKind);
         }

@@ -17,6 +17,7 @@ namespace LLMGameCreatorAlpha
         private string selectedMarkerKind = string.Empty;
         private bool lastVerificationPassed;
         private bool lastGenericLoopVerificationPassed;
+        private bool lastGenericSystemsVerificationPassed;
         private int fatalErrorCount;
         private GenericGamePackageProjectionState loopState = new GenericGamePackageProjectionState();
 
@@ -29,6 +30,7 @@ namespace LLMGameCreatorAlpha
         public string SelectedMarkerKind { get { return selectedMarkerKind; } }
         public bool LastVerificationPassed { get { return lastVerificationPassed; } }
         public bool LastGenericLoopVerificationPassed { get { return lastGenericLoopVerificationPassed; } }
+        public bool LastGenericSystemsVerificationPassed { get { return lastGenericSystemsVerificationPassed; } }
         public string PackageId { get { return model.PackageId; } }
         public string PackageTitle { get { return model.PackageTitle; } }
         public string MapId { get { return model.MapId; } }
@@ -40,6 +42,14 @@ namespace LLMGameCreatorAlpha
         public string ResourceSummary { get { return loopState.resourceSummary; } }
         public string QuestObjectiveSummary { get { return loopState.questObjectiveSummary; } }
         public string InteractionEffectPreview { get { return loopState.interactionEffectPreview; } }
+        public string RecipePreview { get { return loopState.recipePreview; } }
+        public string RecipeApplyResult { get { return loopState.recipeApplyResult; } }
+        public string HarvestPreview { get { return loopState.harvestPreview; } }
+        public string HarvestApplyResult { get { return loopState.harvestApplyResult; } }
+        public string TransactionPreview { get { return loopState.transactionPreview; } }
+        public string EncounterPreview { get { return loopState.encounterPreview; } }
+        public string CombatRoundPreview { get { return loopState.combatRoundPreview; } }
+        public string SystemsEventLog { get { return loopState.systemsEventLog; } }
         public string SelectedDialogueId { get { return loopState.selectedDialogueId; } }
         public string SelectedQuestId { get { return loopState.selectedQuestId; } }
         public int AppliedInteractionCount { get { return loopState.appliedInteractionCount; } }
@@ -54,6 +64,7 @@ namespace LLMGameCreatorAlpha
             selectedMarkerKind = string.Empty;
             lastVerificationPassed = false;
             lastGenericLoopVerificationPassed = false;
+            lastGenericSystemsVerificationPassed = false;
             loopState = new GenericGamePackageProjectionState();
 
             try
@@ -174,6 +185,46 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public bool RunGenericPackageSystemsLoopVerification()
+        {
+            var events = new List<string>();
+            try
+            {
+                events.Add("loadSamplePackage=" + GenericGamePackageProjectionAdapter.SamplePackageRelativePath);
+                BuildOrRefreshGenericPackageProjection();
+                var section = FindGenericProjectionRoot();
+                events.Add("sectionPresent=" + (section != null));
+                loopState = new GenericGamePackageProjectionSystems().Run(model, events);
+                RenderSystemsPanels(section == null ? transform : section.transform);
+                SelectMarker(
+                    FindDescendantObjectWithPrefix(transform, "goal125_systems_loop_status")
+                    ?? FindGenericProjectionRoot());
+
+                var smoke = RunGenericPackageSystemsSmoke(events);
+                lastGenericSystemsVerificationPassed = smoke;
+                lastVerificationPassed = smoke;
+                events.Add(smoke
+                    ? "Goal125 generic package systems loop verification passed"
+                    : "Goal125 generic package systems loop verification failed");
+                verificationEventLog = string.Join("\n", events.ToArray());
+                statusLine = smoke
+                    ? "Goal125 generic package systems loop verification passed"
+                    : "Goal125 generic package systems loop verification failed";
+                return smoke;
+            }
+            catch (System.Exception ex)
+            {
+                fatalErrorCount++;
+                statusLine = "Goal125 generic package systems loop verification fatal error: "
+                             + ex.GetType().Name;
+                events.Add(statusLine);
+                events.Add(ex.Message);
+                verificationEventLog = string.Join("\n", events.ToArray());
+                RunGenericPackageSystemsSmoke(events);
+                return false;
+            }
+        }
+
         public GameObject FindGenericProjectionRoot()
         {
             return FindDescendantObjectWithPrefix(transform, GenericSectionName);
@@ -272,6 +323,51 @@ namespace LLMGameCreatorAlpha
             if (events != null)
             {
                 events.Add("genericLoopPassed=" + result.Passed);
+            }
+
+            return result.Passed;
+        }
+
+        private bool RunGenericPackageSystemsSmoke(List<string> events)
+        {
+            var result = new GenericGamePackageProjectionSystemsSmokeResult
+            {
+                GenericSystemsPassed = loopState.GenericSystemsPassed,
+                SamplePackageLoaded = loopState.SamplePackageLoaded,
+                GenericProjectionBuilt =
+                    FindGenericProjectionRoot() != null
+                    && HasDescendantWithPrefix(transform, "goal125_systems_loop_status"),
+                InventoryInitialized = loopState.InventoryInitialized,
+                ResourcesInitialized = loopState.ResourcesInitialized,
+                RecipePreviewPresent =
+                    loopState.RecipePreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal125_recipe_craft_result"),
+                RecipeApplyPassed = loopState.RecipeApplyPassed,
+                HarvestPreviewPresent =
+                    loopState.HarvestPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal125_harvest_result"),
+                HarvestApplyPassed = loopState.HarvestApplyPassed,
+                TransactionPreviewPresent =
+                    loopState.TransactionPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal125_transaction_preview"),
+                EncounterPreviewPresent =
+                    loopState.EncounterPreviewPresent
+                    && HasDescendantWithPrefix(transform, "goal125_encounter_combat_preview"),
+                CombatRoundPreviewPresent = loopState.CombatRoundPreviewPresent,
+                SystemsEventLogPresent =
+                    loopState.SystemsEventLogPresent
+                    && HasDescendantWithPrefix(transform, "goal125_systems_event_log_summary"),
+                ZeroFatalErrors = fatalErrorCount == 0,
+                RecipeId = "recipe/healing_potion",
+                ResourceNodeId = "node/apple_tree",
+                TransactionId = "transaction/buy_healing_potion",
+                EncounterId = "encounter/goblin_duel",
+                StatusLine = statusLine
+            };
+            lastSmokeDiagnostics = result.ToDiagnosticText();
+            if (events != null)
+            {
+                events.Add("genericSystemsPassed=" + result.Passed);
             }
 
             return result.Passed;
@@ -513,6 +609,62 @@ namespace LLMGameCreatorAlpha
                 Color.magenta,
                 "event_log_summary",
                 loopState.projectionEventLog);
+        }
+
+        private void RenderSystemsPanels(Transform parent)
+        {
+            var panel = AcceptedAlphaPlayableProjectionPrimitiveFactory.CreateSection(
+                parent,
+                "goal125_generic_systems_loop_panel",
+                new Vector3(model.MapWidth * 0.95f + 1.8f, 0f, model.MapHeight * 0.92f + 1.75f));
+            RenderLoopLine(panel.transform, "goal125_systems_loop_status",
+                "Systems loop: " + (loopState.GenericSystemsPassed ? "passed" : "not passed"),
+                0f,
+                Color.white,
+                "systems_loop_status",
+                "genericSystemsPassed=" + loopState.GenericSystemsPassed);
+            RenderLoopLine(panel.transform, "goal125_inventory_summary",
+                "Inventory: " + EmptyAsNone(loopState.inventorySummary),
+                -0.35f,
+                new Color(0.75f, 1f, 0.75f),
+                "inventory_summary",
+                loopState.inventorySummary);
+            RenderLoopLine(panel.transform, "goal125_resource_ledger_summary",
+                "Resources: " + EmptyAsNone(loopState.resourceSummary),
+                -0.7f,
+                new Color(0.85f, 0.75f, 1f),
+                "resource_ledger_summary",
+                loopState.resourceSummary);
+            RenderLoopLine(panel.transform, "goal125_recipe_craft_result",
+                "Recipe: " + EmptyAsNone(loopState.recipeApplyResult),
+                -1.05f,
+                new Color(1f, 0.75f, 0.25f),
+                "recipe_craft_preview",
+                loopState.recipePreview + "\n" + loopState.recipeApplyResult);
+            RenderLoopLine(panel.transform, "goal125_harvest_result",
+                "Harvest: " + EmptyAsNone(loopState.harvestApplyResult),
+                -1.4f,
+                Color.green,
+                "harvest_preview",
+                loopState.harvestPreview + "\n" + loopState.harvestApplyResult);
+            RenderLoopLine(panel.transform, "goal125_transaction_preview",
+                "Transaction: " + EmptyAsNone(loopState.transactionPreview),
+                -1.75f,
+                new Color(1f, 0.55f, 0.15f),
+                "transaction_preview",
+                loopState.transactionPreview);
+            RenderLoopLine(panel.transform, "goal125_encounter_combat_preview",
+                "Combat: " + EmptyAsNone(loopState.combatRoundPreview),
+                -2.1f,
+                new Color(0.7f, 0.85f, 1f),
+                "encounter_combat_preview",
+                loopState.encounterPreview + "\n" + loopState.combatRoundPreview);
+            RenderLoopLine(panel.transform, "goal125_systems_event_log_summary",
+                "Systems event log: " + loopState.systemsEvents.Count + " entries",
+                -2.45f,
+                Color.magenta,
+                "systems_event_log_summary",
+                loopState.systemsEventLog);
         }
 
         private static void RenderLoopLine(

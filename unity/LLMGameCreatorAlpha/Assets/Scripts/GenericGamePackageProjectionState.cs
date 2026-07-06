@@ -13,12 +13,27 @@ namespace LLMGameCreatorAlpha
         public string questObjectiveSummary = string.Empty;
         public string interactionEffectPreview = string.Empty;
         public string projectionEventLog = string.Empty;
+        public string recipePreview = string.Empty;
+        public string recipeApplyResult = string.Empty;
+        public string harvestPreview = string.Empty;
+        public string harvestApplyResult = string.Empty;
+        public string transactionPreview = string.Empty;
+        public string encounterPreview = string.Empty;
+        public string combatRoundPreview = string.Empty;
+        public string systemsEventLog = string.Empty;
         public int appliedInteractionCount;
         public int startedQuestCount;
 
         public readonly Dictionary<string, string> projectionFlags =
             new Dictionary<string, string>(System.StringComparer.Ordinal);
+        public readonly Dictionary<string, int> playerInventory =
+            new Dictionary<string, int>(System.StringComparer.Ordinal);
+        public readonly Dictionary<string, int> resourceLedger =
+            new Dictionary<string, int>(System.StringComparer.Ordinal);
+        public readonly Dictionary<string, int> itemDurability =
+            new Dictionary<string, int>(System.StringComparer.Ordinal);
         public readonly List<string> events = new List<string>();
+        public readonly List<string> systemsEvents = new List<string>();
 
         public bool SamplePackageLoaded;
         public bool GenericProjectionBuilt;
@@ -29,6 +44,17 @@ namespace LLMGameCreatorAlpha
         public bool InventorySummaryPresent;
         public bool ResourceSummaryPresent;
         public bool EventLogPresent;
+        public bool InventoryInitialized;
+        public bool ResourcesInitialized;
+        public bool RecipePreviewPresent;
+        public bool RecipeApplyPassed;
+        public bool HarvestPreviewPresent;
+        public bool HarvestApplyPassed;
+        public bool TransactionPreviewPresent;
+        public bool EncounterPreviewPresent;
+        public bool CombatRoundPreviewPresent;
+        public bool SystemsEventLogPresent;
+        public bool GenericSystemsPassed;
 
         public void AppendEvent(string value)
         {
@@ -40,6 +66,18 @@ namespace LLMGameCreatorAlpha
             events.Add(value);
             projectionEventLog = string.Join("\n", events.ToArray());
             EventLogPresent = events.Count > 0;
+        }
+
+        public void AppendSystemsEvent(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return;
+            }
+
+            systemsEvents.Add(value);
+            systemsEventLog = string.Join("\n", systemsEvents.ToArray());
+            SystemsEventLogPresent = systemsEvents.Count > 0;
         }
     }
 }

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 124 generic GamePackage quest dialogue interaction loop
+Updated by: Goal 125 generic GamePackage systems loop projection
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -140,6 +140,27 @@ objective status, inventory/resource summaries and event log markers. Evidence l
 `.llmgc/procedural/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/`, export metadata under
 `.llmgc/exports/goal-124-generic-gamepackage-quest-dialogue-interaction-loop/`, and the short manual note at
 `docs/manual-acceptance/generic-gamepackage-quest-dialogue-interaction-loop.md`.
+
+Goal 125 adds a projection-local inventory/resource/crafting/harvest/transaction/encounter/combat systems loop over
+the generic sample GamePackage:
+
+```text
+goal_125_generic_gamepackage_systems_loop_projection required
+implementationStatus=GREEN
+accepted=false
+manualPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection -> Run Generic Package Systems Loop Verification
+unityBatchmodeSmoke=GOAL125_GENERIC_GAMEPACKAGE_SYSTEMS_PASS required
+samplePackagePath=samples/minimal-map-game/package.json read-only
+```
+
+Goal125 keeps the sample package read-only and does not apply package data to Runtime, schema, Lua, generator-library,
+scenes, prefabs, ProjectSettings, Packages or StreamingAssets. The Unity window runs a projection-local systems loop
+that previews/applies `recipe/healing_potion`, previews/applies `node/apple_tree` harvest, previews
+`transaction/buy_healing_potion`, previews `encounter/goblin_duel`, shows inventory/resource summaries and records a
+systems event log. Evidence lives under
+`.llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/`, export metadata under
+`.llmgc/exports/goal-125-generic-gamepackage-systems-loop-projection/`, and the short manual note at
+`docs/manual-acceptance/generic-gamepackage-systems-loop-projection.md`.
 
 After Unity manual checks, use `.devflow\scripts\clean-unity-editor-noise.cmd` or
 `.\.devflow\scripts\clean-unity-editor-noise.ps1 -Apply` for bounded editor-noise cleanup. Next goals must continue

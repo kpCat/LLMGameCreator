@@ -2248,21 +2248,41 @@ metadata under `.llmgc/exports/goal-124-generic-gamepackage-quest-dialogue-inter
 live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab project
 settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 125: Generic GamePackage Inventory Resource Systems Loop
+
+Goal 125 is produced for review as a GREEN projection-local systems loop over the generic sample GamePackage. It keeps
+the same menu route, `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, and adds
+`Run Generic Package Systems Loop Verification`.
+
+The loop reads `samples/minimal-map-game/package.json` as a read-only sample, initializes `inventory/player_start`,
+previews/applies `recipe/healing_potion`, previews/applies `node/apple_tree` harvest, previews
+`transaction/buy_healing_potion`, previews `encounter/goblin_duel`, runs one deterministic combat round and displays
+inventory/resource summaries plus a systems event log. The sample is not mutated and generated package data is not
+applied to Runtime, schema, Lua, generator-library, scenes, prefabs, ProjectSettings, Packages or StreamingAssets.
+
+Evidence is under `.llmgc/procedural/goal-125-generic-gamepackage-systems-loop-projection/` plus export metadata under
+`.llmgc/exports/goal-125-generic-gamepackage-systems-loop-projection/`. Unity batchmode uses
+`LLMGameCreatorAlpha.AcceptedAlphaPlayableProjectionWindow.RunBatchmodeGenericGamePackageSystemsSmoke` and must log
+`GOAL125_GENERIC_GAMEPACKAGE_SYSTEMS_PASS` for GREEN. Goal125 remains projection-only and does not authorize final
+release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity
+scene/prefab project settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-goal_124_generic_gamepackage_quest_dialogue_interaction_loop
+goal_125_generic_gamepackage_systems_loop_projection
 ```
 
-Review the Goal124 generic GamePackage quest/dialogue/interaction loop evidence, then continue accepted Alpha hands-on Unity verification
+Review the Goal125 generic GamePackage systems loop evidence, then continue accepted Alpha hands-on Unity verification
 through `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and click
-`Run Generic Package Gameplay Loop Verification`. Inspect the read-only minimal-map package interaction/dialogue/quest
-loop, then use the supported cleanup command only for bounded Unity editor noise. Do not start sample mutation, live geodata/provider,
-Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
-StreamingAssets or release packaging work from this handoff.
+`Run Generic Package Systems Loop Verification`. Inspect the read-only minimal-map package recipe, harvest,
+transaction, encounter/combat, inventory/resource summaries and systems event log, then use the supported cleanup
+command only for bounded Unity editor noise. Do not start sample mutation, live geodata/provider, Runtime, schema, Lua,
+generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages, StreamingAssets or release
+packaging work from this handoff.
 
 Status:
 
 ```text
-goal_124_generic_gamepackage_loop_green_projection_only
+goal_125_generic_gamepackage_systems_loop_green_projection_only
 ```

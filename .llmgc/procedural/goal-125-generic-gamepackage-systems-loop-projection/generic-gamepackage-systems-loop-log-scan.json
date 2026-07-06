@@ -1,0 +1,11 @@
+{
+  "goalId": "goal_125_generic_gamepackage_systems_loop_projection",
+  "logExists": true,
+  "passMarkerPresent": true,
+  "failMarkerAbsent": true,
+  "smokeRequiredFieldsPresent": true,
+  "passed": true,
+  "status": "GREEN",
+  "sha256": "f513f887346788601a42b8cecf51902c10776a1932edc006d0f36fe9b1e28b7c",
+  "forbiddenMarkersFound": []
+}

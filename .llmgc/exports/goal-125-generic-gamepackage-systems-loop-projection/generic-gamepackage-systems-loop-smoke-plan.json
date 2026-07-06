@@ -1,0 +1,72 @@
+{
+  "goalId": "goal_125_generic_gamepackage_systems_loop_projection",
+  "oneClickManualPath": true,
+  "stepCount": 13,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "open_projection_window",
+      "expectedResult": "Open the accepted Alpha projection menu path."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "run_generic_package_systems_loop",
+      "expectedResult": "Click Run Generic Package Systems Loop Verification."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "load_sample_package",
+      "expectedResult": "Read samples/minimal-map-game/package.json without mutating it."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "build_generic_projection",
+      "expectedResult": "Build the existing generic projection root."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "initialize_inventory_resources",
+      "expectedResult": "Initialize player inventory and resource ledger in memory."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "preview_apply_recipe",
+      "expectedResult": "Preview and apply recipe/healing_potion."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "preview_apply_harvest",
+      "expectedResult": "Preview and apply node/apple_tree harvest."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "preview_transaction",
+      "expectedResult": "Preview transaction/buy_healing_potion affordability."
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "preview_encounter",
+      "expectedResult": "Preview encounter/goblin_duel."
+    },
+    {
+      "stepIndex": 10,
+      "stepId": "preview_combat_round",
+      "expectedResult": "Compute goblin health 8 and player health 27."
+    },
+    {
+      "stepIndex": 11,
+      "stepId": "render_systems_markers",
+      "expectedResult": "Render systems status, inventory, resources and summaries."
+    },
+    {
+      "stepIndex": 12,
+      "stepId": "read_event_log",
+      "expectedResult": "Show deterministic systems event log."
+    },
+    {
+      "stepIndex": 13,
+      "stepId": "cleanup_after_unity",
+      "expectedResult": "Use the existing clean-unity-editor-noise command after Unity checks."
+    }
+  ]
+}

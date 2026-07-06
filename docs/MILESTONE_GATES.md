@@ -40,6 +40,8 @@ Goal 123 note: the generic GamePackage playable projection adapter pass adds `Ru
 
 Goal 124 note: the generic GamePackage quest/dialogue/interaction loop pass adds `Run Generic Package Gameplay Loop Verification` to the accepted Alpha Unity projection route and proves a projection-local sign inspect, old guard dialogue, help healer objective, inventory/resource summary and event log over `samples/minimal-map-game/package.json` as read-only input. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 125 note: the generic GamePackage systems loop pass adds `Run Generic Package Systems Loop Verification` to the accepted Alpha Unity projection route and proves projection-local recipe craft, harvest, transaction preview, encounter/combat preview, inventory/resource summary and systems event log over `samples/minimal-map-game/package.json` as read-only input. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

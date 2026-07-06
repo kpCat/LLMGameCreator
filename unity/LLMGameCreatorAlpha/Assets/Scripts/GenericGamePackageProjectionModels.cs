@@ -31,6 +31,14 @@ namespace LLMGameCreatorAlpha
         public GenericGamePackageQuest[] quests = Array.Empty<GenericGamePackageQuest>();
         public GenericGamePackageDialogue[] dialogues = Array.Empty<GenericGamePackageDialogue>();
         public GenericGamePackageInteraction[] interactions = Array.Empty<GenericGamePackageInteraction>();
+        public GenericGamePackageRecipe[] recipes = Array.Empty<GenericGamePackageRecipe>();
+        public GenericGamePackageLootTable[] lootTables = Array.Empty<GenericGamePackageLootTable>();
+        public GenericGamePackageTransaction[] transactions =
+            Array.Empty<GenericGamePackageTransaction>();
+        public GenericGamePackageResourceNode[] resourceNodes =
+            Array.Empty<GenericGamePackageResourceNode>();
+        public GenericGamePackageAbility[] abilities = Array.Empty<GenericGamePackageAbility>();
+        public GenericGamePackageEncounter[] encounters = Array.Empty<GenericGamePackageEncounter>();
     }
 
     [Serializable]
@@ -109,6 +117,10 @@ namespace LLMGameCreatorAlpha
         public string id = string.Empty;
         public string name = string.Empty;
         public string kind = string.Empty;
+        public int maxDurability;
+        public string[] tags = Array.Empty<string>();
+        public GenericGamePackageMetadataEntry[] metadata =
+            Array.Empty<GenericGamePackageMetadataEntry>();
     }
 
     [Serializable]
@@ -199,6 +211,100 @@ namespace LLMGameCreatorAlpha
         public string message = string.Empty;
     }
 
+    [Serializable]
+    public sealed class GenericGamePackageAmount
+    {
+        public string kind = string.Empty;
+        public string id = string.Empty;
+        public int amount;
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageRecipe
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public GenericGamePackageAmount[] inputs = Array.Empty<GenericGamePackageAmount>();
+        public GenericGamePackageAmount[] costs = Array.Empty<GenericGamePackageAmount>();
+        public GenericGamePackageAmount[] outputs = Array.Empty<GenericGamePackageAmount>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageLootTable
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public GenericGamePackageLootEntry[] entries = Array.Empty<GenericGamePackageLootEntry>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageLootEntry
+    {
+        public string id = string.Empty;
+        public int minCount;
+        public int maxCount;
+        public GenericGamePackageAmount output = new GenericGamePackageAmount();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageTransaction
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public GenericGamePackageAmount[] costs = Array.Empty<GenericGamePackageAmount>();
+        public GenericGamePackageAmount[] outputs = Array.Empty<GenericGamePackageAmount>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageResourceNode
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public GenericGamePackageAmount[] production = Array.Empty<GenericGamePackageAmount>();
+        public GenericGamePackageMetadataEntry[] metadata =
+            Array.Empty<GenericGamePackageMetadataEntry>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageAbility
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public string kind = string.Empty;
+        public int power;
+        public string resourceId = string.Empty;
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageEncounter
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public string kind = string.Empty;
+        public GenericGamePackageEncounterParticipant[] participants =
+            Array.Empty<GenericGamePackageEncounterParticipant>();
+        public GenericGamePackageMetadataEntry[] metadata =
+            Array.Empty<GenericGamePackageMetadataEntry>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageEncounterParticipant
+    {
+        public string id = string.Empty;
+        public string name = string.Empty;
+        public string kind = string.Empty;
+        public string team = string.Empty;
+        public GenericGamePackageAmount[] resources = Array.Empty<GenericGamePackageAmount>();
+        public string[] abilities = Array.Empty<string>();
+    }
+
+    [Serializable]
+    public sealed class GenericGamePackageMetadataEntry
+    {
+        public string key = string.Empty;
+        public string value = string.Empty;
+    }
+
     public sealed class GenericGamePackageProjectionModel
     {
         public string SamplePackagePath = GenericGamePackageProjectionAdapter.SamplePackageRelativePath;
@@ -224,6 +330,18 @@ namespace LLMGameCreatorAlpha
             new List<GenericGamePackageProjectionDialogue>();
         public readonly List<GenericGamePackageProjectionInteraction> Interactions =
             new List<GenericGamePackageProjectionInteraction>();
+        public readonly List<GenericGamePackageProjectionRecipe> Recipes =
+            new List<GenericGamePackageProjectionRecipe>();
+        public readonly List<GenericGamePackageProjectionLootTable> LootTables =
+            new List<GenericGamePackageProjectionLootTable>();
+        public readonly List<GenericGamePackageProjectionTransaction> Transactions =
+            new List<GenericGamePackageProjectionTransaction>();
+        public readonly List<GenericGamePackageProjectionResourceNode> ResourceNodes =
+            new List<GenericGamePackageProjectionResourceNode>();
+        public readonly List<GenericGamePackageProjectionAbility> Abilities =
+            new List<GenericGamePackageProjectionAbility>();
+        public readonly List<GenericGamePackageProjectionEncounter> Encounters =
+            new List<GenericGamePackageProjectionEncounter>();
         public readonly List<string> Diagnostics = new List<string>();
     }
 
@@ -256,6 +374,10 @@ namespace LLMGameCreatorAlpha
         public string ItemId = string.Empty;
         public string Name = string.Empty;
         public string Kind = string.Empty;
+        public int MaxDurability;
+        public readonly List<string> Tags = new List<string>();
+        public readonly Dictionary<string, string> Metadata =
+            new Dictionary<string, string>(StringComparer.Ordinal);
     }
 
     public sealed class GenericGamePackageProjectionResource
@@ -327,6 +449,93 @@ namespace LLMGameCreatorAlpha
         public string Id = string.Empty;
         public string Value = string.Empty;
         public string Message = string.Empty;
+    }
+
+    public sealed class GenericGamePackageProjectionAmount
+    {
+        public string Kind = string.Empty;
+        public string Id = string.Empty;
+        public int Amount;
+    }
+
+    public sealed class GenericGamePackageProjectionRecipe
+    {
+        public string RecipeId = string.Empty;
+        public string Name = string.Empty;
+        public readonly List<GenericGamePackageProjectionAmount> Inputs =
+            new List<GenericGamePackageProjectionAmount>();
+        public readonly List<GenericGamePackageProjectionAmount> Costs =
+            new List<GenericGamePackageProjectionAmount>();
+        public readonly List<GenericGamePackageProjectionAmount> Outputs =
+            new List<GenericGamePackageProjectionAmount>();
+    }
+
+    public sealed class GenericGamePackageProjectionLootTable
+    {
+        public string LootTableId = string.Empty;
+        public string Name = string.Empty;
+        public readonly List<GenericGamePackageProjectionLootEntry> Entries =
+            new List<GenericGamePackageProjectionLootEntry>();
+    }
+
+    public sealed class GenericGamePackageProjectionLootEntry
+    {
+        public string EntryId = string.Empty;
+        public int MinCount;
+        public int MaxCount;
+        public GenericGamePackageProjectionAmount Output =
+            new GenericGamePackageProjectionAmount();
+    }
+
+    public sealed class GenericGamePackageProjectionTransaction
+    {
+        public string TransactionId = string.Empty;
+        public string Name = string.Empty;
+        public readonly List<GenericGamePackageProjectionAmount> Costs =
+            new List<GenericGamePackageProjectionAmount>();
+        public readonly List<GenericGamePackageProjectionAmount> Outputs =
+            new List<GenericGamePackageProjectionAmount>();
+    }
+
+    public sealed class GenericGamePackageProjectionResourceNode
+    {
+        public string ResourceNodeId = string.Empty;
+        public string Name = string.Empty;
+        public readonly List<GenericGamePackageProjectionAmount> Production =
+            new List<GenericGamePackageProjectionAmount>();
+        public readonly Dictionary<string, string> Metadata =
+            new Dictionary<string, string>(StringComparer.Ordinal);
+    }
+
+    public sealed class GenericGamePackageProjectionAbility
+    {
+        public string AbilityId = string.Empty;
+        public string Name = string.Empty;
+        public string Kind = string.Empty;
+        public int Power;
+        public string ResourceId = string.Empty;
+    }
+
+    public sealed class GenericGamePackageProjectionEncounter
+    {
+        public string EncounterId = string.Empty;
+        public string Name = string.Empty;
+        public string Kind = string.Empty;
+        public readonly List<GenericGamePackageProjectionEncounterParticipant> Participants =
+            new List<GenericGamePackageProjectionEncounterParticipant>();
+        public readonly Dictionary<string, string> Metadata =
+            new Dictionary<string, string>(StringComparer.Ordinal);
+    }
+
+    public sealed class GenericGamePackageProjectionEncounterParticipant
+    {
+        public string ParticipantId = string.Empty;
+        public string Name = string.Empty;
+        public string Kind = string.Empty;
+        public string Team = string.Empty;
+        public readonly List<GenericGamePackageProjectionAmount> Resources =
+            new List<GenericGamePackageProjectionAmount>();
+        public readonly List<string> Abilities = new List<string>();
     }
 
     public sealed class GenericGamePackageProjectionSmokeResult
@@ -452,6 +661,73 @@ namespace LLMGameCreatorAlpha
                    + "\nselectedQuestId=" + SelectedQuestId
                    + "\nappliedInteractionCount=" + AppliedInteractionCount
                    + "\nstartedQuestCount=" + StartedQuestCount
+                   + "\nstatusLine=" + StatusLine;
+        }
+    }
+
+    public sealed class GenericGamePackageProjectionSystemsSmokeResult
+    {
+        public bool GenericSystemsPassed;
+        public bool SamplePackageLoaded;
+        public bool GenericProjectionBuilt;
+        public bool InventoryInitialized;
+        public bool ResourcesInitialized;
+        public bool RecipePreviewPresent;
+        public bool RecipeApplyPassed;
+        public bool HarvestPreviewPresent;
+        public bool HarvestApplyPassed;
+        public bool TransactionPreviewPresent;
+        public bool EncounterPreviewPresent;
+        public bool CombatRoundPreviewPresent;
+        public bool SystemsEventLogPresent;
+        public bool ZeroFatalErrors;
+        public string RecipeId = string.Empty;
+        public string ResourceNodeId = string.Empty;
+        public string TransactionId = string.Empty;
+        public string EncounterId = string.Empty;
+        public string StatusLine = string.Empty;
+
+        public bool Passed
+        {
+            get
+            {
+                return GenericSystemsPassed
+                       && SamplePackageLoaded
+                       && GenericProjectionBuilt
+                       && InventoryInitialized
+                       && ResourcesInitialized
+                       && RecipePreviewPresent
+                       && RecipeApplyPassed
+                       && HarvestPreviewPresent
+                       && HarvestApplyPassed
+                       && TransactionPreviewPresent
+                       && EncounterPreviewPresent
+                       && CombatRoundPreviewPresent
+                       && SystemsEventLogPresent
+                       && ZeroFatalErrors;
+            }
+        }
+
+        public string ToDiagnosticText()
+        {
+            return "genericSystemsPassed=" + GenericSystemsPassed
+                   + "\nsamplePackageLoaded=" + SamplePackageLoaded
+                   + "\ngenericProjectionBuilt=" + GenericProjectionBuilt
+                   + "\ninventoryInitialized=" + InventoryInitialized
+                   + "\nresourcesInitialized=" + ResourcesInitialized
+                   + "\nrecipePreviewPresent=" + RecipePreviewPresent
+                   + "\nrecipeApplyPassed=" + RecipeApplyPassed
+                   + "\nharvestPreviewPresent=" + HarvestPreviewPresent
+                   + "\nharvestApplyPassed=" + HarvestApplyPassed
+                   + "\ntransactionPreviewPresent=" + TransactionPreviewPresent
+                   + "\nencounterPreviewPresent=" + EncounterPreviewPresent
+                   + "\ncombatRoundPreviewPresent=" + CombatRoundPreviewPresent
+                   + "\nsystemsEventLogPresent=" + SystemsEventLogPresent
+                   + "\nzeroFatalErrors=" + ZeroFatalErrors
+                   + "\nrecipeId=" + RecipeId
+                   + "\nresourceNodeId=" + ResourceNodeId
+                   + "\ntransactionId=" + TransactionId
+                   + "\nencounterId=" + EncounterId
                    + "\nstatusLine=" + StatusLine;
         }
     }

@@ -38,6 +38,8 @@ Goal 123 review note: the generic GamePackage playable projection adapter pass a
 
 Goal 124 review note: the generic GamePackage quest/dialogue/interaction loop pass adds projection-local sign inspect preview/apply, old guard dialogue, help healer objective, inventory/resource summary and event log over `samples/minimal-map-game/package.json` to the accepted Alpha Unity projection route. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 125 review note: the generic GamePackage systems loop pass adds projection-local recipe craft, harvest, transaction preview, encounter/combat preview, inventory/resource summary and systems event log over `samples/minimal-map-game/package.json` to the accepted Alpha Unity projection route. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

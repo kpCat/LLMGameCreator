@@ -272,6 +272,69 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.SamplePackageMutationRejected);
     }
 
+    [Fact]
+    public void Goal125GenericPackageSystemsSourceScanFindsProjectionOnlySystemsLoop()
+    {
+        var result = new GenericGamePackageSystemsProjectionService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.GenericSystemsStatus);
+        Assert.Equal(
+            GenericGamePackageSystemsProjectionVocabulary.SamplePackagePath,
+            result.Dashboard.SamplePackagePath);
+        Assert.Equal("game/minimal-map-game", result.Dashboard.PackageId);
+        Assert.True(result.Dashboard.RecipePreviewPresent);
+        Assert.True(result.Dashboard.RecipeApplyPassed);
+        Assert.True(result.Dashboard.HarvestPreviewPresent);
+        Assert.True(result.Dashboard.HarvestApplyPassed);
+        Assert.True(result.Dashboard.TransactionPreviewPresent);
+        Assert.True(result.Dashboard.EncounterPreviewPresent);
+        Assert.True(result.Dashboard.CombatRoundPreviewPresent);
+        Assert.True(result.Dashboard.InventorySummaryPresent);
+        Assert.True(result.Dashboard.ResourceSummaryPresent);
+        Assert.True(result.Dashboard.SystemsEventLogPresent);
+        Assert.True(result.Dashboard.Goal124StillGreen);
+        Assert.True(result.Dashboard.CleanupScriptAvailable);
+        Assert.True(result.Dashboard.ProjectionOnly);
+        Assert.True(result.Dashboard.SamplePackageReadOnly);
+        Assert.True(result.Dashboard.NoRuntimeProviderSchemaLuaGeneratorLibrary);
+        Assert.True(result.Dashboard.NoUnityScenePrefabSettingsPackagesStreamingAssets);
+        Assert.NotEqual(
+            "BLOCKED_UNITY_BATCHMODE_GENERIC_GAMEPACKAGE_SYSTEMS",
+            result.Dashboard.UnitySmokeStatus);
+        Assert.True(result.SamplePackage.Exists);
+        Assert.True(result.SamplePackage.Parsed);
+        Assert.True(result.SamplePackage.ReadOnlySource);
+        Assert.True(result.SamplePackage.ExcludedFromExpectedChangedPaths);
+        Assert.True(result.SamplePackage.PlayerInventoryPresent);
+        Assert.True(result.SamplePackage.ResourceDefaultsPresent);
+        Assert.True(result.SamplePackage.RecipeHealingPotionPresent);
+        Assert.True(result.SamplePackage.RecipeRequirementsMatchExpected);
+        Assert.True(result.SamplePackage.HarvestNodePresent);
+        Assert.True(result.SamplePackage.HarvestLootPresent);
+        Assert.True(result.SamplePackage.TransactionPresent);
+        Assert.True(result.SamplePackage.EncounterPresent);
+        Assert.True(result.SamplePackage.CombatRoundMatchesExpected);
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.WindowActionPresent);
+        Assert.True(result.ScriptInventory.BatchmodeMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.ScriptInventory.BatchmodeFailMarkerPresent);
+        Assert.True(result.ScriptInventory.StateClassTracksRequiredFields);
+        Assert.True(result.ScriptInventory.SystemsLoopRunsRequiredSequence);
+        Assert.True(result.ScriptInventory.ControllerRendersSystemsMarkers);
+        Assert.True(result.ScriptInventory.AdapterParsesSystemsData);
+        Assert.True(result.ScriptInventory.ModelsExposeSystemsSmokeFields);
+        Assert.True(result.ScriptInventory.ExistingGoal124VerificationStillPresent);
+        Assert.True(result.ScriptInventory.NoSourceWriteMarkers);
+        Assert.True(result.SmokePlan.StepCount >= 13);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.True(result.NegativeProof.ManualInputRejected);
+        Assert.True(result.NegativeProof.SamplePackageMutationRejected);
+        Assert.True(result.NegativeProof.RuntimeSchemaProviderLuaGeneratorLibraryRejected);
+        Assert.True(result.NegativeProof.UnityScenesPrefabsSettingsPackagesStreamingAssetsRejected);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

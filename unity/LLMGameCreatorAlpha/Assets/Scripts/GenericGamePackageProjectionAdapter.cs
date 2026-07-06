@@ -105,12 +105,7 @@ namespace LLMGameCreatorAlpha
 
             foreach (var itemJson in TopLevelObjectBlocks(ArrayField(gameJson, "items")))
             {
-                model.Items.Add(new GenericGamePackageProjectionItem
-                {
-                    ItemId = StringField(itemJson, "id"),
-                    Name = StringField(itemJson, "name"),
-                    Kind = StringField(itemJson, "kind")
-                });
+                model.Items.Add(BuildItemProjection(itemJson));
             }
 
             var itemNames = BuildItemNameMap(model.Items);
@@ -145,6 +140,36 @@ namespace LLMGameCreatorAlpha
             foreach (var interactionJson in TopLevelObjectBlocks(ArrayField(gameJson, "interactions")))
             {
                 model.Interactions.Add(BuildInteractionProjection(interactionJson));
+            }
+
+            foreach (var recipeJson in TopLevelObjectBlocks(ArrayField(gameJson, "recipes")))
+            {
+                model.Recipes.Add(BuildRecipeProjection(recipeJson));
+            }
+
+            foreach (var lootTableJson in TopLevelObjectBlocks(ArrayField(gameJson, "lootTables")))
+            {
+                model.LootTables.Add(BuildLootTableProjection(lootTableJson));
+            }
+
+            foreach (var transactionJson in TopLevelObjectBlocks(ArrayField(gameJson, "transactions")))
+            {
+                model.Transactions.Add(BuildTransactionProjection(transactionJson));
+            }
+
+            foreach (var nodeJson in TopLevelObjectBlocks(ArrayField(gameJson, "resourceNodes")))
+            {
+                model.ResourceNodes.Add(BuildResourceNodeProjection(nodeJson));
+            }
+
+            foreach (var abilityJson in TopLevelObjectBlocks(ArrayField(gameJson, "abilities")))
+            {
+                model.Abilities.Add(BuildAbilityProjection(abilityJson));
+            }
+
+            foreach (var encounterJson in TopLevelObjectBlocks(ArrayField(gameJson, "encounters")))
+            {
+                model.Encounters.Add(BuildEncounterProjection(encounterJson));
             }
 
             model.Diagnostics.AddRange(diagnostics);
@@ -241,6 +266,20 @@ namespace LLMGameCreatorAlpha
             }
 
             return map;
+        }
+
+        private static GenericGamePackageProjectionItem BuildItemProjection(string itemJson)
+        {
+            var item = new GenericGamePackageProjectionItem
+            {
+                ItemId = StringField(itemJson, "id"),
+                Name = StringField(itemJson, "name"),
+                Kind = StringField(itemJson, "kind"),
+                MaxDurability = IntField(itemJson, "maxDurability")
+            };
+            item.Tags.AddRange(StringArray(ArrayField(itemJson, "tags")));
+            CopyMetadata(ObjectField(itemJson, "metadata"), item.Metadata);
+            return item;
         }
 
         private static GenericGamePackageProjectionEntity BuildEntityProjection(
@@ -364,6 +403,125 @@ namespace LLMGameCreatorAlpha
             }
 
             return interaction;
+        }
+
+        private static GenericGamePackageProjectionRecipe BuildRecipeProjection(string recipeJson)
+        {
+            var recipe = new GenericGamePackageProjectionRecipe
+            {
+                RecipeId = StringField(recipeJson, "id"),
+                Name = StringField(recipeJson, "name")
+            };
+            recipe.Inputs.AddRange(BuildAmounts(ArrayField(recipeJson, "inputs")));
+            recipe.Costs.AddRange(BuildAmounts(ArrayField(recipeJson, "costs")));
+            recipe.Outputs.AddRange(BuildAmounts(ArrayField(recipeJson, "outputs")));
+            return recipe;
+        }
+
+        private static GenericGamePackageProjectionLootTable BuildLootTableProjection(string lootTableJson)
+        {
+            var table = new GenericGamePackageProjectionLootTable
+            {
+                LootTableId = StringField(lootTableJson, "id"),
+                Name = StringField(lootTableJson, "name")
+            };
+            foreach (var entryJson in TopLevelObjectBlocks(ArrayField(lootTableJson, "entries")))
+            {
+                table.Entries.Add(new GenericGamePackageProjectionLootEntry
+                {
+                    EntryId = StringField(entryJson, "id"),
+                    MinCount = IntField(entryJson, "minCount"),
+                    MaxCount = IntField(entryJson, "maxCount"),
+                    Output = BuildAmount(ObjectField(entryJson, "output"))
+                });
+            }
+
+            return table;
+        }
+
+        private static GenericGamePackageProjectionTransaction BuildTransactionProjection(
+            string transactionJson)
+        {
+            var transaction = new GenericGamePackageProjectionTransaction
+            {
+                TransactionId = StringField(transactionJson, "id"),
+                Name = StringField(transactionJson, "name")
+            };
+            transaction.Costs.AddRange(BuildAmounts(ArrayField(transactionJson, "costs")));
+            transaction.Outputs.AddRange(BuildAmounts(ArrayField(transactionJson, "outputs")));
+            return transaction;
+        }
+
+        private static GenericGamePackageProjectionResourceNode BuildResourceNodeProjection(
+            string nodeJson)
+        {
+            var node = new GenericGamePackageProjectionResourceNode
+            {
+                ResourceNodeId = StringField(nodeJson, "id"),
+                Name = StringField(nodeJson, "name")
+            };
+            node.Production.AddRange(BuildAmounts(ArrayField(nodeJson, "production")));
+            CopyMetadata(ObjectField(nodeJson, "metadata"), node.Metadata);
+            return node;
+        }
+
+        private static GenericGamePackageProjectionAbility BuildAbilityProjection(string abilityJson)
+        {
+            return new GenericGamePackageProjectionAbility
+            {
+                AbilityId = StringField(abilityJson, "id"),
+                Name = StringField(abilityJson, "name"),
+                Kind = StringField(abilityJson, "kind"),
+                Power = IntField(abilityJson, "power"),
+                ResourceId = StringField(abilityJson, "resourceId")
+            };
+        }
+
+        private static GenericGamePackageProjectionEncounter BuildEncounterProjection(string encounterJson)
+        {
+            var encounter = new GenericGamePackageProjectionEncounter
+            {
+                EncounterId = StringField(encounterJson, "id"),
+                Name = StringField(encounterJson, "name"),
+                Kind = StringField(encounterJson, "kind")
+            };
+            CopyMetadata(ObjectField(encounterJson, "metadata"), encounter.Metadata);
+            foreach (var participantJson in TopLevelObjectBlocks(ArrayField(encounterJson, "participants")))
+            {
+                var participant = new GenericGamePackageProjectionEncounterParticipant
+                {
+                    ParticipantId = StringField(participantJson, "id"),
+                    Name = StringField(participantJson, "name"),
+                    Kind = StringField(participantJson, "kind"),
+                    Team = StringField(participantJson, "team")
+                };
+                participant.Resources.AddRange(BuildAmounts(ArrayField(participantJson, "resources")));
+                participant.Abilities.AddRange(StringArray(ArrayField(participantJson, "abilities")));
+                encounter.Participants.Add(participant);
+            }
+
+            return encounter;
+        }
+
+        private static List<GenericGamePackageProjectionAmount> BuildAmounts(string arrayJson)
+        {
+            var amounts = new List<GenericGamePackageProjectionAmount>();
+            foreach (var amountJson in TopLevelObjectBlocks(arrayJson))
+            {
+                amounts.Add(BuildAmount(amountJson));
+            }
+
+            return amounts;
+        }
+
+        private static GenericGamePackageProjectionAmount BuildAmount(string amountJson)
+        {
+            return new GenericGamePackageProjectionAmount
+            {
+                Kind = StringField(amountJson, "kind"),
+                Id = StringField(amountJson, "id"),
+                Amount = IntField(amountJson, "amount")
+            };
         }
 
         private static List<GenericGamePackageComponent> BuildComponents(string componentsJson)
@@ -500,6 +658,48 @@ namespace LLMGameCreatorAlpha
             }
 
             return result;
+        }
+
+        private static List<string> StringArray(string arrayJson)
+        {
+            var result = new List<string>();
+            if (string.IsNullOrWhiteSpace(arrayJson))
+            {
+                return result;
+            }
+
+            var matches = Regex.Matches(arrayJson, "\"(?<value>(?:\\\\.|[^\"])*)\"");
+            foreach (Match match in matches)
+            {
+                result.Add(UnescapeJsonString(match.Groups["value"].Value));
+            }
+
+            return result;
+        }
+
+        private static void CopyMetadata(
+            string objectJson,
+            Dictionary<string, string> target)
+        {
+            if (string.IsNullOrWhiteSpace(objectJson) || target == null)
+            {
+                return;
+            }
+
+            var matches = Regex.Matches(
+                objectJson,
+                "\"(?<key>[^\"]+)\"\\s*:\\s*\"(?<value>(?:\\\\.|[^\"])*)\"",
+                RegexOptions.Singleline);
+            foreach (Match match in matches)
+            {
+                var key = UnescapeJsonString(match.Groups["key"].Value);
+                if (string.IsNullOrWhiteSpace(key) || target.ContainsKey(key))
+                {
+                    continue;
+                }
+
+                target.Add(key, UnescapeJsonString(match.Groups["value"].Value));
+            }
         }
 
         private static string ExtractBalanced(string text, int start, char open, char close)
