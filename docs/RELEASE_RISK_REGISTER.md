@@ -58,6 +58,8 @@ Goal 133A review note: the product-line strategy rebaseline records that LLMGame
 
 Goal 134 review note: the canonical Runtime selected-candidate playthrough matrix proves the Goal131 selected candidate through package validation, Runtime-owned command/event transcript and state summary, state hash chain, save/load/replay and Unity/player consumption of canonical transcript/state summary. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, deeper playable player-loop quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 135 review note: the canonical Runtime playable player-loop readiness proof turns the Goal134 transcript/state summary into a PlayerAdapter contract, deterministic 13-step player-facing plan, classified diagnostic set and Unity/player readiness smoke while keeping canonical Runtime output as gameplay authority. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, real hands-on playable quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

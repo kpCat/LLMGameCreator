@@ -1,0 +1,27 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "status": "GREEN",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "projectionOnly": false,
+  "canonicalRuntimeSource": true,
+  "playerAdapterContractPresent": true,
+  "playerLoopPlanPresent": true,
+  "playerLoopStepCount": 13,
+  "requiredStepCategoriesPresent": true,
+  "unityPlayerLoopReadinessPassed": true,
+  "unityGameplayTruth": false,
+  "manualUnityOptional": true,
+  "saveLoadReplayStillReferenced": true,
+  "selectedCandidateExecutedByRuntime": true,
+  "noUnclassifiedErrorDiagnostics": true,
+  "normalCommand": ".devflow\\scripts\\run-canonical-runtime-player-loop-readiness.cmd",
+  "reportPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/one-click-player-loop-readiness-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-readiness-matrix-result.json",
+  "missingStepCategories": [],
+  "diagnostics": [
+    "goal135.raw_diagnostic_count=5",
+    "goal135.blocking_diagnostic_count=0",
+    "goal135.nonblocking_diagnostic_count=5",
+    "unityExitCode=0"
+  ]
+}

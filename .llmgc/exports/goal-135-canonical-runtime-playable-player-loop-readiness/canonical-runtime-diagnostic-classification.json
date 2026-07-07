@@ -1,0 +1,51 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "rawDiagnosticCount": 5,
+  "blockingDiagnosticCount": 0,
+  "nonBlockingDiagnosticCount": 5,
+  "blockingDiagnostics": [],
+  "nonBlockingDiagnostics": [
+    {
+      "rawDiagnostic": "Error:script.path.missing",
+      "severity": "Error",
+      "code": "script.path.missing",
+      "blocking": false,
+      "nonBlockingForCanonicalRuntimePath": true,
+      "reason": "script artifact path is not required by the selected canonical runtime command sequence"
+    },
+    {
+      "rawDiagnostic": "Warning:asset.path.missing",
+      "severity": "Warning",
+      "code": "asset.path.missing",
+      "blocking": false,
+      "nonBlockingForCanonicalRuntimePath": true,
+      "reason": "warning diagnostic is not blocking for canonical runtime player-loop readiness"
+    },
+    {
+      "rawDiagnostic": "Warning:asset.path.missing",
+      "severity": "Warning",
+      "code": "asset.path.missing",
+      "blocking": false,
+      "nonBlockingForCanonicalRuntimePath": true,
+      "reason": "warning diagnostic is not blocking for canonical runtime player-loop readiness"
+    },
+    {
+      "rawDiagnostic": "Warning:asset.path.missing",
+      "severity": "Warning",
+      "code": "asset.path.missing",
+      "blocking": false,
+      "nonBlockingForCanonicalRuntimePath": true,
+      "reason": "warning diagnostic is not blocking for canonical runtime player-loop readiness"
+    },
+    {
+      "rawDiagnostic": "Warning:asset.path.missing",
+      "severity": "Warning",
+      "code": "asset.path.missing",
+      "blocking": false,
+      "nonBlockingForCanonicalRuntimePath": true,
+      "reason": "warning diagnostic is not blocking for canonical runtime player-loop readiness"
+    }
+  ],
+  "passAllowsNonBlockingDiagnostics": true,
+  "noUnclassifiedErrorDiagnostics": true
+}

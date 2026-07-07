@@ -1,0 +1,58 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "rootPath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness",
+  "indexedFileCount": 10,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-diagnostic-classification.json",
+      "role": "goal135_canonical_runtime_diagnostic_classification",
+      "sha256": "f13e4abb96643b8c5a5e9519118f4413c770d9f54531f7a7f116edf85d71e024"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-adapter-contract.json",
+      "role": "goal135_canonical_runtime_player_adapter_contract",
+      "sha256": "2ec978d05dca86b24128331fecbac4862fa3d4c12d08ffec8715bf1d124d2ce7"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-negative-proof.json",
+      "role": "goal135_canonical_runtime_player_loop_negative_proof",
+      "sha256": "f2b4037e309962884cddf494bbcaba948bd6d43d003098622d70ffb870c2ed23"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-plan.json",
+      "role": "goal135_canonical_runtime_player_loop_plan",
+      "sha256": "320e83bddc68d608ccf65b47acfc3f5a1c0d090b69472462100c6df9a0e25009"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-readiness-dashboard.json",
+      "role": "goal135_canonical_runtime_player_loop_readiness_dashboard",
+      "sha256": "ca4ffbb4bff3e27d1c81077b084ebf8fdb110a1de9c72741c88c5245fcc1a5f4"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-readiness-matrix-result.json",
+      "role": "goal135_canonical_runtime_player_loop_readiness_matrix_result",
+      "sha256": "3114e62aad8959244f118db4e29e8f8cb852a8dbf9bade7c17a2bc9a93f4cee5"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-readiness-result.json",
+      "role": "goal135_canonical_runtime_player_loop_readiness_result",
+      "sha256": "a5ce296b696dbb1b33e2ce8307a71de695acf3e4b173080636d415fdbcf20122"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/one-click-player-loop-readiness-report.json",
+      "role": "goal135_one_click_player_loop_readiness_report",
+      "sha256": "076b87986fd760d94c7ced77efcd583d540a9b164e2f5b929c2afbc1d00b839d"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/one-click-player-loop-readiness-report.md",
+      "role": "goal135_one_click_player_loop_readiness_report",
+      "sha256": "a021458dba681f531a1815e6a0e722be4cbe660f522595102cba11b9bf82c0b7"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/unity-player-loop-readiness-smoke.json",
+      "role": "goal135_unity_player_loop_readiness_smoke",
+      "sha256": "55bda9bc33dd454ab52e3b94cccc0d11eae6a0026b630b9157a719100255f8f0"
+    }
+  ]
+}

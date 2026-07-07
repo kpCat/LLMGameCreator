@@ -70,7 +70,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal119RelativePath)
                         + "\n"
-                         + ReadGoal120Through134WinFormsPageText(projectRoot);
+                         + ReadGoal120Through135WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -512,6 +512,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysGamePackageCandidateRecipePipeline = ScanGoal131GamePackageCandidateRecipePipelineBinding(pageText, pageRelativePath, diagnostics);
         var bindDisplaysCandidatePipelineOperator = ScanGoal132CandidatePipelineOperatorBinding(pageText, pageRelativePath, diagnostics);
         var bindDisplaysCanonicalRuntimeSelectedCandidate = ScanGoal134CanonicalRuntimeSelectedCandidateBinding(pageText, pageRelativePath, diagnostics);
+        var bindDisplaysCanonicalRuntimePlayerLoop =
+            ScanGoal135CanonicalRuntimePlayerLoopBinding(pageText, pageRelativePath, diagnostics);
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
         AddIfFalse(serviceRegistered, "goal092.winforms.service_not_registered", compositionRelativePath, diagnostics);
@@ -690,6 +692,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGamePackageCandidateRecipePipeline = bindDisplaysGamePackageCandidateRecipePipeline,
             PageBindDisplaysCandidatePipelineOperator = bindDisplaysCandidatePipelineOperator,
             PageBindDisplaysCanonicalRuntimeSelectedCandidate = bindDisplaysCanonicalRuntimeSelectedCandidate,
+            PageBindDisplaysCanonicalRuntimePlayerLoopReadiness = bindDisplaysCanonicalRuntimePlayerLoop,
             Diagnostics = diagnostics
         };
     }

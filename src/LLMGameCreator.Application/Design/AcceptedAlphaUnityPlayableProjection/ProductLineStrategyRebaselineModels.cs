@@ -9,6 +9,8 @@ public static class ProductLineStrategyRebaselineVocabulary
     public const string Gate = "product_line_strategy_rebaseline_verification";
     public const string Goal134Gate =
         "canonical_runtime_selected_candidate_playthrough_matrix_verification";
+    public const string Goal135Gate =
+        "canonical_runtime_playable_player_loop_readiness_verification";
     public const string NextGoal =
         "goal_134_canonical_runtime_selected_candidate_playthrough_matrix";
     public const string PostGoal134NextGoal =

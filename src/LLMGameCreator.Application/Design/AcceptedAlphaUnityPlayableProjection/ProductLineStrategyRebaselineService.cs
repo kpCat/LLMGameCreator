@@ -528,7 +528,17 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "unityConsumesCanonicalTranscript")
                    && StringValue(root, "nextProductGoal")
                    == ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal;
-            return goal133AState || postGoal134State;
+            var postGoal135State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal135Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "manualUnityOptional")
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "canonicalRuntimeSource")
+                   && BoolValue(root, "playerAdapterCoverage")
+                   && BoolValue(root, "unityGameplayTruth") == false
+                   && BoolValue(root, "noUnclassifiedErrorDiagnostics");
+            return goal133AState || postGoal134State || postGoal135State;
         }
         catch (JsonException)
         {
@@ -542,12 +552,16 @@ public sealed class ProductLineStrategyRebaselineService
         && Contains(markdown, ProductLineStrategyRebaselineVocabulary.NextGoal)
         || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal134Gate)
         && Contains(markdown, "projectionOnly=false")
-        && Contains(markdown, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal);
+        && Contains(markdown, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal)
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal135Gate)
+        && Contains(markdown, "canonicalRuntimeSource=true")
+        && Contains(markdown, "playerAdapterCoverage=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal134Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal135Gate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

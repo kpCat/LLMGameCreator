@@ -1,0 +1,43 @@
+{
+  "contractId": "canonical_runtime_player_adapter_contract_v1",
+  "playerAdapterId": "player_adapter.canonical_runtime_step_plan",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packageId": "game/minimal-map-game",
+  "packageTitle": "Minimal Map Game",
+  "transcriptPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-transcript.json",
+  "stateSummaryPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-summary.json",
+  "canonicalRuntimeSource": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false,
+  "gameplayExecutedByPlayerAdapter": false,
+  "requiredStepCategories": [
+    "load_package",
+    "show_start_state",
+    "show_map_position",
+    "show_interaction_result",
+    "show_dialogue",
+    "show_quest_state",
+    "show_inventory_state",
+    "show_crafting_result",
+    "show_harvest_result",
+    "show_transaction_result",
+    "show_encounter_state",
+    "show_combat_round",
+    "show_final_state"
+  ],
+  "featureModuleCoverageHints": [
+    "feature.combat.round",
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.intent_templates",
+    "feature.economy.transaction",
+    "feature.harvest.resource_node",
+    "feature.interaction.inspect",
+    "feature.inventory.basic",
+    "feature.package.load",
+    "feature.quest.objective_chain",
+    "feature.runtime.final_state",
+    "feature.runtime.start_state",
+    "feature.world.grid_position"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "unityAvailable": true,
+  "planPathExists": true,
+  "stateSummaryPathExists": true,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "requiredStepCategoriesPresent": true,
+  "canonicalAuthorityMarkersPresent": true,
+  "unityPlayerLoopReadinessPassed": true,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/unity-player-loop-readiness-smoke.log",
+  "planPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-plan.json",
+  "stateSummaryPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-summary.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

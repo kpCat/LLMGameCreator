@@ -1,42 +1,43 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 134 canonical runtime selected-candidate playthrough matrix
+Updated by: Goal 135 canonical runtime playable player loop readiness
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 134 produced for review:
+Goal 135 produced for review:
 
 ```text
-canonical_runtime_selected_candidate_playthrough_matrix_verification required
+canonical_runtime_playable_player_loop_readiness_verification required
 implementationStatus=GREEN
 accepted=false
 manualUnityOptional=true
 projectionOnly=false
-canonicalRuntimeCoverage=true
-saveLoadReplayCoverage=true
+canonicalRuntimeSource=true
+playerAdapterCoverage=true
+unityGameplayTruth=false
+noUnclassifiedErrorDiagnostics=true
+playerLoopStepCount=13
 selectedCandidateExecutedByRuntime=true
-unityConsumesCanonicalTranscript=true
-nextProductGoal=goal_135_canonical_runtime_playable_player_loop_readiness
 ```
 
-Goal134 consumes the Goal131 selected candidate
-`minimal-map-game-balanced-baseline`, validates the selected-candidate handoff
-and required anchors, executes the package through canonical Runtime-owned map
-and gameplay services, writes transcript/state/hash-chain artifacts, proves
-save/load/replay determinism and lets Unity/player consume the canonical
-transcript/state summary as presentation proof only.
+Goal135 consumes the Goal134 canonical runtime transcript/state summary for the
+Goal131 selected candidate `minimal-map-game-balanced-baseline`, derives a
+PlayerAdapter contract, writes a deterministic 13-step player-loop plan with
+all required presentation categories, keeps canonical Runtime output as gameplay
+authority and records Unity/player readiness as consumption proof only.
 
 Evidence lives under
-`.llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/`,
+`.llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/`,
 export metadata under
-`.llmgc/exports/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/`,
+`.llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/`,
 and the short manual note at
-`docs/manual-acceptance/canonical-runtime-selected-candidate-playthrough-matrix.md`.
+`docs/manual-acceptance/canonical-runtime-playable-player-loop-readiness.md`.
 
 Goal133A remains the strategy rebaseline that routed this work away from
 projection-only wrappers. Goal134 is the first canonical runtime pivot after
-that rebaseline; it does not mutate the sample package, public GamePackage
-schema, provider/media/LLM/Lua/generator-library code or Unity scenes/prefabs/
+that rebaseline; Goal135 builds the player-loop readiness layer on that Runtime
+transcript without mutating the sample package, public GamePackage schema,
+provider/media/LLM/Lua/generator-library code or Unity scenes/prefabs/
 ProjectSettings/Packages/StreamingAssets.
 
 Goal 119 produced for review:

@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "playerAdapterContractPresent": true,
+  "playerLoopPlanPresent": true,
+  "playerLoopStepCount": 13,
+  "requiredStepCategoriesPresent": true,
+  "unityPlayerLoopReadinessPassed": true,
+  "projectionOnly": false,
+  "canonicalRuntimeSource": true,
+  "unityGameplayTruth": false,
+  "saveLoadReplayStillReferenced": true,
+  "selectedCandidateExecutedByRuntime": true,
+  "manualUnityOptional": true,
+  "noUnclassifiedErrorDiagnostics": true,
+  "rawDiagnosticCount": 5,
+  "blockingDiagnosticCount": 0,
+  "nonBlockingDiagnosticCount": 5,
+  "reportPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/one-click-player-loop-readiness-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-readiness-matrix-result.json"
+}

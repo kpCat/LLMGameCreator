@@ -1,0 +1,12 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "manualInputRejected": true,
+  "outputRootUnderGoal135": true,
+  "samplePackageReadOnly": true,
+  "gamePackageSchemaUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged": true,
+  "playerAdapterDoesNotExecuteGameplay": true,
+  "projectionOnly": false,
+  "passed": true
+}

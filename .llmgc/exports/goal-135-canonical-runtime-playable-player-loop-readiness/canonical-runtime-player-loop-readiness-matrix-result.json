@@ -1,0 +1,16 @@
+{
+  "goalId": "goal_135_canonical_runtime_playable_player_loop_readiness",
+  "passed": true,
+  "rows": [
+    {
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "playerAdapterContractPresent": true,
+      "playerLoopPlanPresent": true,
+      "playerLoopStepCount": 13,
+      "requiredStepCategoriesPresent": true,
+      "unityPlayerLoopReadinessPassed": true,
+      "noUnclassifiedErrorDiagnostics": true,
+      "passed": true
+    }
+  ]
+}

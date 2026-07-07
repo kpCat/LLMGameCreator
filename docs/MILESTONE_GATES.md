@@ -60,6 +60,8 @@ Goal 133A note: the product-line strategy rebaseline records `product_line_strat
 
 Goal 134 note: the canonical Runtime selected-candidate playthrough matrix records `canonical_runtime_selected_candidate_playthrough_matrix_verification required`, `accepted=false`, selectedCandidateId=`minimal-map-game-balanced-baseline`, package validation, canonical Runtime command/event transcript and state summary, save/load/replay proof, Unity/player canonical transcript smoke, projectionOnly=false and selectedCandidateExecutedByRuntime=true. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, public schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 135 note: the canonical Runtime playable player-loop readiness proof records `canonical_runtime_playable_player_loop_readiness_verification required`, `accepted=false`, selectedCandidateId=`minimal-map-game-balanced-baseline`, canonicalRuntimeSource=true, playerAdapterCoverage=true, playerLoopStepCount=13, requiredStepCategoriesPresent=true, unityPlayerLoopReadinessPassed=true, unityGameplayTruth=false and noUnclassifiedErrorDiagnostics=true. This does not close `vertical_slice_final_verification`, does not mutate the sample package, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, public schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

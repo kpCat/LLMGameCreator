@@ -110,7 +110,7 @@ unity_safe_mode_compile_hotfix_verification produced, manual gate still required
 offline_geoworld_alpha_manual_gate_acceptance_record produced, manual gate accepted by human, post-acceptance continuation selection required
 product_line_strategy_rebaseline_verification required
 canonical_runtime_selected_candidate_playthrough_matrix_verification required
-goal_135_canonical_runtime_playable_player_loop_readiness recommended next product goal
+canonical_runtime_playable_player_loop_readiness_verification required
 goal_132_winforms_candidate_pipeline_operator_panel required
 goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
 goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
@@ -172,6 +172,7 @@ Current capabilities:
 - Goal 131 GamePackage candidate recipe catalog scoring and promotion evidence with normal `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd`, four metadata-only projection-compatible candidates under Goal131 artifacts, recipe catalog/candidate index/scoring result/selected handoff/matrix result proof with GREEN 4/4 status, selectedCandidateId=`minimal-map-game-balanced-baseline`, selectedCandidateScore=100 and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - Goal 132 WinForms candidate pipeline operator panel evidence with normal `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd`, Goal131 result path visibility, selectedCandidateId=`minimal-map-game-balanced-baseline`, selectedCandidateScore=100, candidateCount=4, passedCandidates=4, failedCandidates=0, matrixPassed=true, async dry-run/full-run buttons, command copy, refresh status and output-tail capture; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, Runtime, schema, provider, Lua, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - Goal 134 canonical Runtime selected-candidate playthrough matrix evidence with normal `.devflow\scripts\run-canonical-runtime-selected-candidate-playthrough.cmd`, selectedCandidateId=`minimal-map-game-balanced-baseline`, package validation, canonical Runtime command/event transcript and state summary, state hash chain, save/load/replay proof, Unity/player transcript smoke, one-click report and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
+- Goal 135 canonical Runtime playable player-loop readiness evidence with normal `.devflow\scripts\run-canonical-runtime-player-loop-readiness.cmd`, selectedCandidateId=`minimal-map-game-balanced-baseline`, PlayerAdapter contract, 13-step player-loop plan, required step categories, classified non-blocking diagnostics, Unity/player readiness smoke, one-click report and Visual World Stream Preview Workspace/WinForms visibility; manual Unity inspection remains optional and the goal does not authorize sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/StreamingAssets or release-packaging work;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -2306,32 +2307,31 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-goal_135_canonical_runtime_playable_player_loop_readiness
+canonical_runtime_playable_player_loop_readiness_verification
 ```
 
-Goal134 canonical runtime selected-candidate playthrough matrix is produced for
-review with `canonical_runtime_selected_candidate_playthrough_matrix_verification
-required`, `accepted=false`, `manualUnityOptional=true`, `projectionOnly=false`,
-`canonicalRuntimeCoverage=true`, `saveLoadReplayCoverage=true`,
-`selectedCandidateExecutedByRuntime=true` and
-`unityConsumesCanonicalTranscript=true`.
+Goal135 canonical runtime playable player-loop readiness is produced for review
+with `canonical_runtime_playable_player_loop_readiness_verification required`,
+`accepted=false`, `manualUnityOptional=true`, `projectionOnly=false`,
+`canonicalRuntimeSource=true`, `playerAdapterCoverage=true`,
+`unityGameplayTruth=false` and `noUnclassifiedErrorDiagnostics=true`.
 
-The selected-candidate path now has the canonical runtime proof chain:
+The selected-candidate path now has the canonical runtime/player proof chain:
 
 ```text
-candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> Unity/player consumes canonical transcript/state summary -> one-click report
+candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Unity/player readiness smoke -> one-click report
 ```
 
-Use the Goal131 selected candidate and Goal132 operator evidence as context, but
-make canonical runtime state and transcript the authority. The next product
-goal should build playable player-loop readiness on this canonical Runtime/Player
-evidence. Do not start sample mutation, `.llmgc/manual/**`, live
-geodata/provider, Runtime contract/schema changes, Lua, generator-library, final
-gameplay, final art, atlas, Unity scene/prefab/settings/packages,
-StreamingAssets or release packaging work from this handoff.
+Review Goal135 evidence before starting a new implementation slice. If accepted,
+the next bounded product step can build an actual playable player loop on the
+canonical Runtime/PlayerAdapter seam. Do not start sample mutation,
+`.llmgc/manual/**`, live geodata/provider, public schema changes, Lua,
+generator-library, final gameplay, final art, atlas, Unity
+scene/prefab/settings/packages, StreamingAssets or release packaging work from
+this handoff.
 
 Status:
 
 ```text
-canonical_runtime_selected_candidate_playthrough_matrix_verification_required_accepted_false_next_goal135_player_loop_readiness
+canonical_runtime_playable_player_loop_readiness_verification_required_accepted_false
 ```
