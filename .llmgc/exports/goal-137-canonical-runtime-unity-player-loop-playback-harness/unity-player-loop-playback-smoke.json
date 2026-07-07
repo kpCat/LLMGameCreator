@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_137_canonical_runtime_unity_player_loop_playback_harness",
+  "unityAvailable": true,
+  "framesPathExists": true,
+  "resultPathExists": true,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "frameCountPassed": true,
+  "requiredFrameCategoriesPresent": true,
+  "runtimeAuthorityMarkersPresent": true,
+  "unityPlayerLoopPlaybackPassed": true,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/unity-player-loop-playback-smoke.log",
+  "framesPath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json",
+  "resultPath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-result.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

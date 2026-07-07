@@ -13,12 +13,16 @@ public static class ProductLineStrategyRebaselineVocabulary
         "canonical_runtime_playable_player_loop_readiness_verification";
     public const string Goal136Gate =
         "canonical_runtime_player_command_loop_execution_matrix_verification";
+    public const string Goal137Gate =
+        "canonical_runtime_unity_player_loop_playback_harness_verification";
     public const string NextGoal =
         "goal_134_canonical_runtime_selected_candidate_playthrough_matrix";
     public const string PostGoal134NextGoal =
         "goal_135_canonical_runtime_playable_player_loop_readiness";
     public const string PostGoal135NextGoal =
         "goal_136_canonical_runtime_player_command_loop_execution_matrix";
+    public const string PostGoal136NextGoal =
+        "goal_137_canonical_runtime_unity_player_loop_playback_harness";
 
     public const string ProceduralOutputDirectory =
         ".llmgc/procedural/goal-133a-product-line-strategy-rebaseline-and-canonical-runtime-pivot";

@@ -178,9 +178,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildGoal131GamePackageCandidateRecipePipelineQuality(groups, proofs);
         var candidatePipelineOperator = BuildGoal132CandidatePipelineOperatorQuality(groups, proofs);
         var canonicalRuntimeSelectedCandidate = BuildGoal134CanonicalRuntimeSelectedCandidateQuality(groups, proofs);
-        var canonicalRuntimePlayerLoop =
-            BuildGoal135CanonicalRuntimePlayerLoopQuality(groups, proofs);
+        var canonicalRuntimePlayerLoop = BuildGoal135CanonicalRuntimePlayerLoopQuality(groups, proofs);
         var canonicalRuntimePlayerCommandLoop = BuildGoal136CanonicalRuntimePlayerCommandLoopQuality(groups, proofs);
+        var canonicalRuntimeUnityPlayerLoopPlayback = BuildGoal137CanonicalRuntimeUnityPlayerLoopPlaybackQuality(groups, proofs);
+        canonicalRuntimePlayerLoop = ResolveGoal135ReadinessFromCanonicalSuccessor(canonicalRuntimePlayerLoop, canonicalRuntimePlayerCommandLoop.QualityGatePassed || canonicalRuntimeUnityPlayerLoopPlayback.QualityGatePassed);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -378,6 +379,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal134CanonicalRuntimeSelectedCandidateQualityDiagnostics(canonicalRuntimeSelectedCandidate, binding, diagnostics);
         AddGoal135CanonicalRuntimePlayerLoopQualityDiagnostics(canonicalRuntimePlayerLoop, binding, diagnostics);
         AddGoal136CanonicalRuntimePlayerCommandLoopQualityDiagnostics(canonicalRuntimePlayerCommandLoop, binding, diagnostics);
+        AddGoal137CanonicalRuntimeUnityPlayerLoopPlaybackQualityDiagnostics(canonicalRuntimeUnityPlayerLoopPlayback, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -689,11 +691,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             gamePackageCandidateRecipePipeline,
             binding);
         var withGoal132 = ApplyGoal132CandidatePipelineOperatorQuality(withGoal131, candidatePipelineOperator, binding);
-        var withGoal134 = ApplyGoal134CanonicalRuntimeSelectedCandidateQuality(
-            withGoal132,
-            canonicalRuntimeSelectedCandidate,
-            binding);
+        var withGoal134 = ApplyGoal134CanonicalRuntimeSelectedCandidateQuality(withGoal132, canonicalRuntimeSelectedCandidate, binding);
         var withGoal135 = ApplyGoal135CanonicalRuntimePlayerLoopQuality(withGoal134, canonicalRuntimePlayerLoop, binding);
-        return ApplyGoal136CanonicalRuntimePlayerCommandLoopQuality(withGoal135, canonicalRuntimePlayerCommandLoop, binding);
+        var withGoal136 = ApplyGoal136CanonicalRuntimePlayerCommandLoopQuality(withGoal135, canonicalRuntimePlayerCommandLoop, binding);
+        return ApplyGoal137CanonicalRuntimeUnityPlayerLoopPlaybackQuality(withGoal136, canonicalRuntimeUnityPlayerLoopPlayback, binding);
     }
 }

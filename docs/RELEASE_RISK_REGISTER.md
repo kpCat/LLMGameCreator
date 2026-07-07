@@ -62,6 +62,8 @@ Goal 135 review note: the canonical Runtime playable player-loop readiness proof
 
 Goal 136 review note: the canonical Runtime player command-loop execution matrix executes the Goal131 selected candidate through 13 Runtime-owned player commands with one snapshot per command, runtime event/state-hash proof, all required command categories, classified diagnostics and Unity/player snapshot consumption smoke. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, real hands-on playable quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 137 review note: the canonical Runtime Unity/player loop playback harness turns the Goal136 Runtime-owned snapshots into 13 deterministic Unity/player playback frames with required HUD/player/interaction/dialogue/quest/inventory/crafting/harvest/transaction/encounter/combat/final-state categories and batchmode playback smoke. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, real hands-on playable quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

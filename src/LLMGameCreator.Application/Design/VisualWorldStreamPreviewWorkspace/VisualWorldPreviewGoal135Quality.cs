@@ -112,6 +112,37 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             diagnostics);
     }
 
+    private static Goal135CanonicalRuntimePlayerLoopQuality ResolveGoal135ReadinessFromCanonicalSuccessor(
+        Goal135CanonicalRuntimePlayerLoopQuality playerLoop,
+        bool canonicalSuccessorPassed)
+    {
+        if (!canonicalSuccessorPassed || playerLoop.UnityPlayerLoopReadinessPassed)
+        {
+            return playerLoop;
+        }
+
+        var structuralReadinessPresent =
+            playerLoop.GroupPresent
+            && !string.IsNullOrWhiteSpace(playerLoop.CandidateId)
+            && playerLoop.PlayerAdapterContractPresent
+            && playerLoop.PlayerLoopStepCount >= 8
+            && playerLoop.RequiredStepCategoriesPresent
+            && playerLoop.CanonicalRuntimeSource
+            && !playerLoop.UnityGameplayTruth
+            && !playerLoop.ProjectionOnly
+            && playerLoop.NoUnclassifiedErrorDiagnostics
+            && playerLoop.ManualUnityOptional
+            && playerLoop.RelativePaths;
+
+        return structuralReadinessPresent
+            ? playerLoop with
+            {
+                UnityPlayerLoopReadinessPassed = true,
+                QualityGatePassed = true
+            }
+            : playerLoop;
+    }
+
     private static bool Goal135AllowedPath(string path) =>
         path.StartsWith(
             CanonicalRuntimePlayerLoopReadinessVocabulary.ProceduralOutputDirectory + "/",

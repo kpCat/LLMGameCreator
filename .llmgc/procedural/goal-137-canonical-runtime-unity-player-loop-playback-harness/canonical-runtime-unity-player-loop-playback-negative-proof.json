@@ -1,0 +1,15 @@
+{
+  "goalId": "goal_137_canonical_runtime_unity_player_loop_playback_harness",
+  "manualInputRejected": true,
+  "outputRootUnderGoal137": true,
+  "samplePackageReadOnly": true,
+  "gamePackageSchemaUnchanged": true,
+  "runtimeContractsUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged": true,
+  "playbackConsumesRuntimeSnapshots": true,
+  "playbackDoesNotRecomputeGameplay": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "passed": true
+}

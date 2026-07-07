@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_137_canonical_runtime_unity_player_loop_playback_harness",
+  "passed": true,
+  "rows": [
+    {
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "playbackFrameCount": 13,
+      "requiredFrameCategoriesPresent": true,
+      "unityPlayerLoopPlaybackPassed": true,
+      "runtimeSnapshotSource": true,
+      "unityGameplayTruth": false,
+      "projectionOnly": false,
+      "selectedCandidateExecutedByRuntime": true,
+      "passed": true
+    }
+  ]
+}

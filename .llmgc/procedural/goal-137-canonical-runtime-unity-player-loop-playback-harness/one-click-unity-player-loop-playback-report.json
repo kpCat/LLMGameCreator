@@ -1,0 +1,18 @@
+{
+  "goalId": "goal_137_canonical_runtime_unity_player_loop_playback_harness",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "playbackFrameCount": 13,
+  "requiredFrameCategoriesPresent": true,
+  "unityPlayerLoopPlaybackPassed": true,
+  "projectionOnly": false,
+  "canonicalRuntimeSource": true,
+  "runtimeSnapshotSource": true,
+  "unityConsumesRuntimeSnapshots": true,
+  "unityGameplayTruth": false,
+  "selectedCandidateExecutedByRuntime": true,
+  "manualUnityOptional": true,
+  "accepted": false,
+  "noUnclassifiedErrorDiagnostics": true,
+  "reportPath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/one-click-unity-player-loop-playback-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-matrix-result.json"
+}

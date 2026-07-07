@@ -1,8 +1,42 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 136 canonical runtime player command loop execution matrix
+Updated by: Goal 137 canonical runtime Unity/player loop playback harness
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 137 produced for review:
+
+```text
+canonical_runtime_unity_player_loop_playback_harness_verification required
+implementationStatus=GREEN
+accepted=false
+manualUnityOptional=true
+projectionOnly=false
+canonicalRuntimeSource=true
+runtimeSnapshotSource=true
+unityConsumesRuntimeSnapshots=true
+unityPlayerLoopPlaybackPassed=true
+unityGameplayTruth=false
+selectedCandidateExecutedByRuntime=true
+noUnclassifiedErrorDiagnostics=true
+playbackFrameCount=13
+requiredFrameCategoriesPresent=true
+```
+
+Goal137 consumes the Goal136 canonical runtime command-loop snapshots for the
+Goal131 selected candidate `minimal-map-game-balanced-baseline`. It derives
+deterministic Unity/player playback frames for HUD, player position,
+interaction, dialogue, quest, inventory, crafting, harvest, transaction,
+encounter, combat and final-state presentation, then verifies Unity/player
+batchmode consumption of those runtime snapshots only. Unity remains a playback
+adapter and does not claim gameplay truth.
+
+Evidence lives under
+`.llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/`,
+export metadata under
+`.llmgc/exports/goal-137-canonical-runtime-unity-player-loop-playback-harness/`,
+and the short manual note at
+`docs/manual-acceptance/canonical-runtime-unity-player-loop-playback-harness.md`.
 
 Goal 136 produced for review:
 
@@ -72,9 +106,10 @@ Goal133A remains the strategy rebaseline that routed this work away from
 projection-only wrappers. Goal134 is the first canonical runtime pivot after
 that rebaseline; Goal135 builds the player-loop readiness layer on that Runtime
 transcript; Goal136 executes the selected candidate through the Runtime-owned
-player command loop without mutating the sample package, public GamePackage
-schema, provider/media/LLM/Lua/generator-library code or Unity scenes/prefabs/
-ProjectSettings/Packages/StreamingAssets.
+player command loop; Goal137 turns those Runtime-owned snapshots into a
+Unity/player playback harness without mutating the sample package, public
+GamePackage schema, provider/media/LLM/Lua/generator-library code or Unity
+scenes/prefabs/ProjectSettings/Packages/StreamingAssets.
 
 Goal 119 produced for review:
 

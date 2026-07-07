@@ -550,7 +550,19 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "unityConsumesRuntimeSnapshots")
                    && BoolValue(root, "unityGameplayTruth") == false
                    && BoolValue(root, "noUnclassifiedErrorDiagnostics");
-            return goal133AState || postGoal134State || postGoal135State || postGoal136State;
+            var postGoal137State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal137Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "manualUnityOptional")
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "canonicalRuntimeSource")
+                   && BoolValue(root, "runtimeSnapshotSource")
+                   && BoolValue(root, "unityConsumesRuntimeSnapshots")
+                   && BoolValue(root, "unityPlayerLoopPlaybackPassed")
+                   && BoolValue(root, "unityGameplayTruth") == false
+                   && BoolValue(root, "noUnclassifiedErrorDiagnostics");
+            return goal133AState || postGoal134State || postGoal135State || postGoal136State || postGoal137State;
         }
         catch (JsonException)
         {
@@ -570,7 +582,10 @@ public sealed class ProductLineStrategyRebaselineService
         && Contains(markdown, "playerAdapterCoverage=true")
         || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal136Gate)
         && Contains(markdown, "playerCommandLoopCoverage=true")
-        && Contains(markdown, "unityConsumesRuntimeSnapshots=true");
+        && Contains(markdown, "unityConsumesRuntimeSnapshots=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal137Gate)
+        && Contains(markdown, "runtimeSnapshotSource=true")
+        && Contains(markdown, "unityPlayerLoopPlaybackPassed=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -578,7 +593,9 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal134NextGoal)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal135Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal135NextGoal)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal136Gate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal136Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal136NextGoal)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal137Gate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

@@ -67,7 +67,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                        + ReadOptionalText(projectRoot, pageGoal117RelativePath)
                        + "\n" + ReadOptionalText(projectRoot, pageGoal118RelativePath)
                        + "\n" + ReadOptionalText(projectRoot, pageGoal119RelativePath)
-                       + "\n" + ReadGoal120Through136WinFormsPageText(projectRoot);
+                       + "\n" + ReadGoal120Through137WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -512,6 +512,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysCanonicalRuntimePlayerLoop =
             ScanGoal135CanonicalRuntimePlayerLoopBinding(pageText, pageRelativePath, diagnostics);
         var bindDisplaysCanonicalRuntimePlayerCommandLoop = ScanGoal136CanonicalRuntimePlayerCommandLoopBinding(pageText, pageRelativePath, diagnostics);
+        var bindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback =
+            ScanGoal137CanonicalRuntimeUnityPlayerLoopPlaybackBinding(pageText, pageRelativePath, diagnostics);
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
         AddIfFalse(serviceRegistered, "goal092.winforms.service_not_registered", compositionRelativePath, diagnostics);
@@ -630,11 +632,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             pageRelativePath,
             diagnostics);
         AddIfFalse(bindDisplaysAcceptedAlphaProjectionUsability, "goal120.winforms.accepted_alpha_projection_usability_bind_missing", pageRelativePath, diagnostics);
-        AddIfFalse(
-            bindDisplaysAcceptedAlphaInteractionDrilldown,
-            "goal121.winforms.accepted_alpha_interaction_drilldown_bind_missing",
-            pageRelativePath,
-            diagnostics);
+        AddIfFalse(bindDisplaysAcceptedAlphaInteractionDrilldown, "goal121.winforms.accepted_alpha_interaction_drilldown_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysAcceptedAlphaProjectionActionLoop, "goal122.winforms.accepted_alpha_projection_action_loop_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGenericGamePackageProjection, "goal123.winforms.generic_gamepackage_projection_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGenericGamePackageLoop, "goal124.winforms.generic_gamepackage_loop_bind_missing", pageRelativePath, diagnostics);
@@ -692,6 +690,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysCanonicalRuntimeSelectedCandidate = bindDisplaysCanonicalRuntimeSelectedCandidate,
             PageBindDisplaysCanonicalRuntimePlayerLoopReadiness = bindDisplaysCanonicalRuntimePlayerLoop,
             PageBindDisplaysCanonicalRuntimePlayerCommandLoop = bindDisplaysCanonicalRuntimePlayerCommandLoop,
+            PageBindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback = bindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback,
             Diagnostics = diagnostics
         };
     }
