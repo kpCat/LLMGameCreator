@@ -59,6 +59,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             await BuildGoal138RuntimeBackedUnityPlayerLoopStepperAsync(root);
         var runtimeBackedUnityPlayerLoopInteractiveControls =
             await BuildGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsAsync(root);
+        var runtimeBackedUnityPlayerLoopControlsUx =
+            await BuildGoal140RuntimeBackedUnityPlayerLoopControlsUxAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -420,6 +422,20 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.RuntimeAuthority);
         Assert.False(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.UnityGameplayTruth);
         Assert.False(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.ProjectionOnly);
+        Assert.Equal("GREEN", runtimeBackedUnityPlayerLoopControlsUx.Dashboard.Status);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.AcceptedGoal139);
+        Assert.Equal(13, runtimeBackedUnityPlayerLoopControlsUx.Dashboard.FrameCount);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.HumanReadableFrameNumbering);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.StepOnceSemanticsClear);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.PlayAllToEndSemanticsClear);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.KnownUnityEditorNoiseClassified);
+        Assert.Equal(0, runtimeBackedUnityPlayerLoopControlsUx.Dashboard.BlockingUnityErrorCount);
+        Assert.Equal(0, runtimeBackedUnityPlayerLoopControlsUx.Dashboard.UnclassifiedUnityErrorCount);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.UnityControlsUxSmokePassed);
+        Assert.True(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.RuntimeAuthority);
+        Assert.False(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.UnityGameplayTruth);
+        Assert.False(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.ProjectionOnly);
+        Assert.False(runtimeBackedUnityPlayerLoopControlsUx.Dashboard.Accepted);
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -458,6 +474,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysRuntimeBackedUnityPlayerLoopStepper);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysRuntimeBackedUnityPlayerLoopControlsUx);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -494,6 +512,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "runtime_backed_unity_player_loop_stepper");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "runtime_backed_unity_player_loop_interactive_controls");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "runtime_backed_unity_player_loop_controls_ux");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -534,6 +554,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopInteractiveControlsGroupPresent);
         Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopInteractiveControlsQualityGatePassed);
         Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopInteractiveControlsFilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopControlsUxGroupPresent);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopControlsUxQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopControlsUxFilesDiscoveredByRelativePaths);
         if (workspace.QualityGateScan.GamePackageCandidateMatrixStatus == "GREEN")
         {
             Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixCandidateCount);
@@ -620,6 +643,14 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "stepperBatchSmokePassed: true",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "unityControlsUxSmokePassed: true",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "knownUnityEditorNoiseClassified: true",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }
@@ -795,6 +826,61 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             Status = "GREEN"
         };
     }
+
+    private static async Task<RuntimeBackedUnityPlayerLoopControlsUxWriteResult>
+        BuildGoal140RuntimeBackedUnityPlayerLoopControlsUxAsync(string root) =>
+        await new RuntimeBackedUnityPlayerLoopControlsUxPolishArtifactService()
+            .BuildAndWriteAsync(
+                root,
+                new RuntimeBackedUnityPlayerLoopControlsUxPolishRequest(),
+                unitySmoke: PassedGoal140UnitySmoke(root),
+                unityNoise: PassedGoal140Noise());
+
+    private static RuntimeBackedUnityPlayerLoopControlsUxUnitySmoke PassedGoal140UnitySmoke(
+        string root)
+    {
+        var model = Path.Combine(
+            root,
+            RuntimeBackedUnityPlayerLoopControlsUxPolishVocabulary.ProceduralOutputDirectory,
+            RuntimeBackedUnityPlayerLoopControlsUxPolishVocabulary.ModelFileName);
+        var script = Path.Combine(
+            root,
+            RuntimeBackedUnityPlayerLoopControlsUxPolishVocabulary.ProceduralOutputDirectory,
+            RuntimeBackedUnityPlayerLoopControlsUxPolishVocabulary.ScriptFileName);
+        return new RuntimeBackedUnityPlayerLoopControlsUxUnitySmoke
+        {
+            UnityAvailable = true,
+            ModelPathExists = true,
+            FrameCountPassed = true,
+            RequiredControlsPresent = true,
+            HumanReadableFrameNumberingPresent = true,
+            StepOnceSemanticsClear = true,
+            PlayAllToEndSemanticsClear = true,
+            CopyFrameSummaryStatusPresent = true,
+            RuntimeAuthorityMarkersPresent = true,
+            UnityGameplayTruth = false,
+            Passed = true,
+            UnityPath = "test-unity",
+            ModelPath = Relative(root, model),
+            ScriptPath = Relative(root, script),
+            Status = "GREEN"
+        };
+    }
+
+    private static RuntimeBackedUnityPlayerLoopControlsUxUnityNoiseClassification PassedGoal140Noise() =>
+        new()
+        {
+            KnownUnityEditorBuildProfileNoiseClassified = true,
+            KnownUnityEditorNoiseCount = 0,
+            BlockingUnityErrorCount = 0,
+            UnclassifiedUnityErrorCount = 0,
+            FixtureKnownUnityEditorBuildProfileNoiseClassified = true,
+            SourceLogPath = "test-unity.log",
+            KnownMarkers = ["BuildProfileContext", "CreateOrLoad", "NullReferenceException"],
+            BlockingMarkers = [],
+            Diagnostics = ["known fixture classified; no blocking Unity errors"],
+            Passed = true
+        };
 
     private static string Relative(string root, string path) =>
         Path.GetRelativePath(root, Path.GetFullPath(path)).Replace('\\', '/');

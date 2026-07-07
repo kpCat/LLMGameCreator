@@ -587,13 +587,26 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "interactiveControlsWindowPresent")
                    && BoolValue(root, "unityInteractiveControlsSmokePassed")
                    && BoolValue(root, "unityGameplayTruth") == false;
+            var postGoal140State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal140Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "goal139Accepted")
+                   && BoolValue(root, "goal140Accepted") == false
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "runtimeAuthority")
+                   && BoolValue(root, "runtimeBackedUnityControlsUxPolish")
+                   && BoolValue(root, "knownUnityEditorNoiseClassified")
+                   && BoolValue(root, "unityControlsUxSmokePassed")
+                   && BoolValue(root, "unityGameplayTruth") == false;
             return goal133AState
                    || postGoal134State
                    || postGoal135State
                    || postGoal136State
                    || postGoal137State
                    || postGoal138State
-                   || postGoal139State;
+                   || postGoal139State
+                   || postGoal140State;
         }
         catch (JsonException)
         {
@@ -624,7 +637,11 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal139Gate)
         && Contains(markdown, "goal138Accepted=true")
         && Contains(markdown, "goal139Accepted=false")
-        && Contains(markdown, "runtimeBackedUnityInteractiveControls=true");
+        && Contains(markdown, "runtimeBackedUnityInteractiveControls=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal140Gate)
+        && Contains(markdown, "goal139Accepted=true")
+        && Contains(markdown, "goal140Accepted=false")
+        && Contains(markdown, "runtimeBackedUnityControlsUxPolish=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -636,7 +653,8 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal136NextGoal)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal137Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal138Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal139Gate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal139Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal140Gate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

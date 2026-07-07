@@ -1,0 +1,23 @@
+{
+  "goalId": "goal_140_runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard",
+  "knownUnityEditorBuildProfileNoiseClassified": true,
+  "knownUnityEditorNoiseCount": 1,
+  "blockingUnityErrorCount": 0,
+  "unclassifiedUnityErrorCount": 0,
+  "fixtureKnownUnityEditorBuildProfileNoiseClassified": true,
+  "sourceLogPath": ".llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/unity-player-loop-controls-ux-smoke.log",
+  "knownMarkers": [
+    "BuildProfileContext",
+    "CreateOrLoad",
+    "NullReferenceException"
+  ],
+  "blockingMarkers": [
+    "GOAL140_RUNTIME_BACKED_UNITY_PLAYER_LOOP_CONTROLS_UX_FAIL",
+    "unpaired NullReferenceException",
+    "player-loop exception"
+  ],
+  "diagnostics": [
+    "knownUnityEditorBuildProfileNoise=classified"
+  ],
+  "passed": true
+}

@@ -1,19 +1,17 @@
 # Goal 139 Runtime-backed Unity Player Loop Interactive Controls Harness
 
-accepted=false
-acceptedByHuman=false
+accepted=true
+acceptedByHuman=true
 acceptedByCodex=false
-manualUnityOptional=true
-acceptedGoal138=true
-candidateId=minimal-map-game-balanced-baseline
-frameCount=13
+selectedCandidate=minimal-map-game-balanced-baseline
+frames=13
+interactiveControlsSmoke=GREEN
 requiredControlsPresent=true
-controlScriptPassed=true
-interactiveControlsWindowPresent=true
-unityInteractiveControlsSmokePassed=true
+controlsWork=true
+projectionOnly=false
 runtimeAuthority=true
 unityGameplayTruth=false
-projectionOnly=false
-normalCommand=.devflow\scripts\run-runtime-backed-unity-player-loop-interactive-controls.cmd
-reportPath=.llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/one-click-runtime-backed-player-loop-interactive-controls-report.md
-status=GREEN
+autoStepAutoPlayAllUxAcceptedWithFollowUpDebt=true
+rawManualInputNotCommitted=true
+
+Source: Goal140 task handoff recorded owner acceptance of Goal139. Raw manual input remains outside committed artifacts.

@@ -1,0 +1,138 @@
+{
+  "goalId": "goal_140_runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "expectedFrameCount": 13,
+  "requiredControls": [
+    "load_model",
+    "first",
+    "previous",
+    "next",
+    "last",
+    "step_once",
+    "play_all_to_end",
+    "copy_current_frame_summary",
+    "show_runtime_hash",
+    "show_hud_lines"
+  ],
+  "steps": [
+    {
+      "stepIndex": 0,
+      "action": "load_model",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "load_model",
+      "expectedStatus": "loaded_goal140_controls_ux_model",
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 1,
+      "action": "assert_frame_count",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "",
+      "expectedStatus": "",
+      "assertion": "frameCount == 13"
+    },
+    {
+      "stepIndex": 2,
+      "action": "assert_human_readable_frame_numbering",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "",
+      "expectedStatus": "",
+      "assertion": "Current Frame: 1/13 and Frame Index: 0 are visible"
+    },
+    {
+      "stepIndex": 3,
+      "action": "first",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "first",
+      "expectedStatus": "reset_to_first_frame",
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 4,
+      "action": "next",
+      "expectedFrameIndex": 1,
+      "expectedLastControlAction": "next",
+      "expectedStatus": "moved_next_frame",
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 5,
+      "action": "previous",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "previous",
+      "expectedStatus": "moved_previous_frame",
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 6,
+      "action": "step_once",
+      "expectedFrameIndex": 1,
+      "expectedLastControlAction": "step_once",
+      "expectedStatus": "stepped_one_frame_tick",
+      "assertion": "step_once advances exactly one frame tick"
+    },
+    {
+      "stepIndex": 7,
+      "action": "step_once",
+      "expectedFrameIndex": 2,
+      "expectedLastControlAction": "step_once",
+      "expectedStatus": "stepped_one_frame_tick",
+      "assertion": "step_once advances exactly one frame tick"
+    },
+    {
+      "stepIndex": 8,
+      "action": "play_all_to_end",
+      "expectedFrameIndex": 12,
+      "expectedLastControlAction": "play_all_to_end",
+      "expectedStatus": "played_all_to_end",
+      "assertion": "play_all_to_end jumps instant-to-final-frame"
+    },
+    {
+      "stepIndex": 9,
+      "action": "copy_current_frame_summary",
+      "expectedFrameIndex": 12,
+      "expectedLastControlAction": "copy_current_frame_summary",
+      "expectedStatus": "copied_frame_summary",
+      "assertion": "copy shows copied_frame_summary status"
+    },
+    {
+      "stepIndex": 10,
+      "action": "assert_copy_frame_summary_status",
+      "expectedFrameIndex": 12,
+      "expectedLastControlAction": "copy_current_frame_summary",
+      "expectedStatus": "copied_frame_summary",
+      "assertion": "status == copied_frame_summary"
+    },
+    {
+      "stepIndex": 11,
+      "action": "first",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "first",
+      "expectedStatus": "reset_to_first_frame",
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 12,
+      "action": "assert_reset_first_status",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "first",
+      "expectedStatus": "reset_to_first_frame",
+      "assertion": "first resets to first frame"
+    },
+    {
+      "stepIndex": 13,
+      "action": "assert_runtime_authority_markers",
+      "expectedFrameIndex": 0,
+      "expectedLastControlAction": "",
+      "expectedStatus": "",
+      "assertion": "runtimeAuthority == true && projectionOnly == false && unityGameplayTruth == false"
+    }
+  ],
+  "deterministic": true,
+  "humanReadableFrameNumberingRequired": true,
+  "stepOnceSemanticsClear": true,
+  "playAllToEndSemanticsClear": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false
+}

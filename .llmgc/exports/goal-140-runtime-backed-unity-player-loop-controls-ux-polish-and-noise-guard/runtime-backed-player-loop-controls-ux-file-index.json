@@ -1,0 +1,58 @@
+{
+  "goalId": "goal_140_runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard",
+  "rootPath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard",
+  "indexedFileCount": 10,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/goal139-human-acceptance-record.json",
+      "role": "goal140_goal139_human_acceptance_record",
+      "sha256": "da88f54082bb679b5c659d536e5b9ace0d6135962eb39dd182fe76a3db0afe7f"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/one-click-runtime-backed-player-loop-controls-ux-report.json",
+      "role": "goal140_one_click_runtime_backed_player_loop_controls_ux_report",
+      "sha256": "81c40b46eb10db76424f856ee3f1c2ed37f913400d4e597004c5623e1889d274"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/one-click-runtime-backed-player-loop-controls-ux-report.md",
+      "role": "goal140_one_click_runtime_backed_player_loop_controls_ux_report",
+      "sha256": "27303fd1b4d1797874960e0063fc58b97dd7062d35d84451cf4c8d44b8ad8f37"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/runtime-backed-player-loop-controls-ux-dashboard.json",
+      "role": "goal140_runtime_backed_player_loop_controls_ux_dashboard",
+      "sha256": "3de13bf3c3a8a320101e9ce32814d8e73a8dc9ca6d206659e7a67ea47bf90172"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/runtime-backed-player-loop-controls-ux-model.json",
+      "role": "goal140_runtime_backed_player_loop_controls_ux_model",
+      "sha256": "a1a2f9f2fec5d9e6a79f97458a6ae6ec5ea5ca3d30a59682499f0b4474eb14f5"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/runtime-backed-player-loop-controls-ux-negative-proof.json",
+      "role": "goal140_runtime_backed_player_loop_controls_ux_negative_proof",
+      "sha256": "0cb96188c2008e0946a6ff97fc7dc8a6d58c13e16bd07d5cfd62c1a59d3c2877"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/runtime-backed-player-loop-controls-ux-result.json",
+      "role": "goal140_runtime_backed_player_loop_controls_ux_result",
+      "sha256": "0216119fe22c7c1bf388a7a396368de356d204b8526c2af44bb6b78f1b194b07"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/runtime-backed-player-loop-controls-ux-script.json",
+      "role": "goal140_runtime_backed_player_loop_controls_ux_script",
+      "sha256": "2e58b85a1018f6a7295482e5f7527d5451b53430971f4b5c5ef497e4607fdf92"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/unity-editor-noise-classification.json",
+      "role": "goal140_unity_editor_noise_classification",
+      "sha256": "9edcbc82077c08cd01fbbd95dabeda78943af646b9c1315b2b668b9a5701a127"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/unity-player-loop-controls-ux-smoke.json",
+      "role": "goal140_unity_player_loop_controls_ux_smoke",
+      "sha256": "a031c8d5384a874de828e5764517b0d00052b2624f498e39804413eca5989eb1"
+    }
+  ]
+}

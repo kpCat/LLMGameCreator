@@ -1,42 +1,78 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 139 runtime-backed Unity player-loop interactive controls harness
+Updated by: Goal 140 runtime-backed Unity player-loop controls UX polish and noise guard
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 139 produced for review:
+Goal 140 produced for review:
 
 ```text
-runtime_backed_unity_player_loop_interactive_controls_harness_verification required
+runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification required
 implementationStatus=GREEN
 accepted=false
-goal139Accepted=false
-acceptedGoal138=true
+goal139Accepted=true
+goal140Accepted=false
+acceptedGoal139=true
 manualUnityOptional=true
 projectionOnly=false
 runtimeAuthority=true
-runtimeBackedUnityInteractiveControls=true
-interactiveControlsWindowPresent=true
-unityInteractiveControlsSmokePassed=true
+runtimeBackedUnityControlsUxPolish=true
+humanReadableFrameNumbering=true
+stepOnceSemanticsClear=true
+playAllToEndSemanticsClear=true
+knownUnityEditorNoiseClassified=true
+blockingUnityErrorCount=0
+unclassifiedUnityErrorCount=0
+unityControlsUxSmokePassed=true
 unityGameplayTruth=false
 frameCount=13
 requiredControlsPresent=true
-controlScriptPassed=true
 ```
 
-Goal139 records the repository owner's human acceptance of Goal138, then
-consumes the Goal138 runtime-backed stepper model/result plus Goal137 playback
-frames, Goal136 canonical runtime command-loop snapshots and the Goal135
-PlayerAdapter contract for the Goal131 selected candidate
-`minimal-map-game-balanced-baseline`. It writes a deterministic 13-frame
-interactive controls model, script and session, verifies Unity/player batchmode
-consumption of those controls and keeps gameplay truth in Runtime artifacts.
+Goal140 records the repository owner's human acceptance of Goal139, then
+consumes the Goal139 runtime-backed interactive controls model/result/script for
+the Goal131 selected candidate `minimal-map-game-balanced-baseline`. It writes
+a deterministic 13-frame controls UX model, script and result, verifies
+Unity/player batchmode consumption of those UX controls, keeps gameplay truth in
+Runtime artifacts and classifies the known Unity BuildProfileContext editor
+noise without ignoring unpaired `NullReferenceException` diagnostics.
 
 Evidence lives under
+`.llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`,
+export metadata under
+`.llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`,
+and the short manual note at
+`docs/manual-acceptance/runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard.md`.
+
+Goal 139 is now recorded as accepted by human handoff:
+
+```text
+goal139Accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+selectedCandidate=minimal-map-game-balanced-baseline
+frames=13
+interactiveControlsSmoke=GREEN
+requiredControlsPresent=true
+controlsWork=true
+projectionOnly=false
+runtimeAuthority=true
+unityGameplayTruth=false
+autoStepAutoPlayAllUxAcceptedWithFollowUpDebt=true
+rawManualInputNotCommitted=true
+```
+
+Goal139 recorded Goal138 acceptance, consumed the Goal138 runtime-backed stepper
+model/result plus Goal137 playback frames, Goal136 canonical runtime
+command-loop snapshots and the Goal135 PlayerAdapter contract, wrote the
+13-frame interactive controls model/script/session and verified Unity/player
+batchmode consumption of those controls.
+
+Goal139 evidence remains under
 `.llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/`,
 export metadata under
 `.llmgc/exports/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/`,
-and the short manual note at
+and the human acceptance note at
 `docs/manual-acceptance/runtime-backed-unity-player-loop-interactive-controls-harness.md`.
 
 Goal 138 is now recorded as accepted by human handoff:
@@ -152,9 +188,11 @@ transcript; Goal136 executes the selected candidate through the Runtime-owned
 player command loop; Goal137 turns those Runtime-owned snapshots into a
 Unity/player playback harness; Goal138 adds a runtime-backed stepper/HUD harness
 over that playback; Goal139 adds interactive controls over the runtime-backed
-stepper model/script without mutating the sample package, public GamePackage
-schema, provider/media/LLM/Lua/generator-library code or Unity
-scenes/prefabs/ProjectSettings/Packages/StreamingAssets.
+stepper model/script; Goal140 polishes the controls UX, records Goal139 human
+acceptance and adds a bounded Unity editor noise guard without mutating the
+sample package, public GamePackage schema, provider/media/LLM/Lua/
+generator-library code or Unity scenes/prefabs/ProjectSettings/Packages/
+StreamingAssets.
 
 Goal 119 produced for review:
 

@@ -1,0 +1,18 @@
+{
+  "goalId": "goal_140_runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard",
+  "manualInputRejected": true,
+  "rawManualInputNotCommitted": true,
+  "outputRootUnderGoal140": true,
+  "samplePackageReadOnly": true,
+  "runtimeContractsUnchanged": true,
+  "gamePackageSchemaUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged": true,
+  "controlsConsumeRuntimeBackedArtifacts": true,
+  "controlsDoNotExecuteGameplay": true,
+  "knownUnityEditorNoiseIsBounded": true,
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "passed": true
+}

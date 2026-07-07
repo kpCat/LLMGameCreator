@@ -1,0 +1,16 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "selectedCandidate": "minimal-map-game-balanced-baseline",
+  "frames": 13,
+  "interactiveControlsSmoke": "GREEN",
+  "requiredControlsPresent": true,
+  "controlsWork": true,
+  "projectionOnly": false,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "autoStepAutoPlayAllUxAcceptedWithFollowUpDebt": true,
+  "rawManualInputNotCommitted": true
+}

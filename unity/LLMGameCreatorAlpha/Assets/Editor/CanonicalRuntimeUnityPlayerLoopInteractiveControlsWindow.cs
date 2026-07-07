@@ -39,33 +39,37 @@ namespace LLMGameCreatorAlpha
             EditorGUILayout.LabelField("Model", string.IsNullOrWhiteSpace(modelPath) ? "(none)" : modelPath);
             EditorGUILayout.LabelField("Status", status);
             EditorGUILayout.LabelField("Candidate", EmptyAsNone(model.CandidateId));
-            EditorGUILayout.LabelField("Current Frame", frameIndex.ToString());
+            EditorGUILayout.LabelField("Current Frame", HumanFrameLabel());
+            EditorGUILayout.LabelField("Frame Index", frameIndex.ToString());
             EditorGUILayout.LabelField("Total Frames", Mathf.Max(model.Frames.Count, model.FrameCount).ToString());
             EditorGUILayout.LabelField("Last Control Action", lastControlAction);
 
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Load Goal139 Controls Model"))
+            if (GUILayout.Button("Load Goal140 Controls UX Model"))
             {
                 LoadDefaultModel();
                 lastControlAction = "load_model";
             }
 
-            if (GUILayout.Button("First"))
+            if (GUILayout.Button("Reset/First"))
             {
                 frameIndex = 0;
                 lastControlAction = "first";
+                status = "reset_to_first_frame";
             }
 
             if (GUILayout.Button("Previous"))
             {
                 frameIndex = Mathf.Max(0, frameIndex - 1);
                 lastControlAction = "previous";
+                status = "moved_previous_frame";
             }
 
             if (GUILayout.Button("Next"))
             {
                 frameIndex = Mathf.Min(Mathf.Max(model.Frames.Count - 1, 0), frameIndex + 1);
                 lastControlAction = "next";
+                status = "moved_next_frame";
             }
             EditorGUILayout.EndHorizontal();
 
@@ -74,24 +78,28 @@ namespace LLMGameCreatorAlpha
             {
                 frameIndex = Mathf.Max(model.Frames.Count - 1, 0);
                 lastControlAction = "last";
+                status = "moved_last_frame";
             }
 
-            if (GUILayout.Button("Auto Step"))
+            if (GUILayout.Button("Step Once"))
             {
                 frameIndex = Mathf.Min(Mathf.Max(model.Frames.Count - 1, 0), frameIndex + 1);
-                lastControlAction = "autoplay_tick";
+                lastControlAction = "step_once";
+                status = "stepped_one_frame_tick";
             }
 
-            if (GUILayout.Button("Auto Play All"))
+            if (GUILayout.Button("Play All To End"))
             {
                 frameIndex = Mathf.Max(model.Frames.Count - 1, 0);
-                lastControlAction = "autoplay_all";
+                lastControlAction = "play_all_to_end";
+                status = "played_all_to_end";
             }
 
             if (GUILayout.Button("Copy Frame Summary"))
             {
                 EditorGUIUtility.systemCopyBuffer = CurrentFrame().PlayerFacingSummary;
                 lastControlAction = "copy_current_frame_summary";
+                status = "copied_frame_summary";
             }
             EditorGUILayout.EndHorizontal();
 
@@ -121,8 +129,8 @@ namespace LLMGameCreatorAlpha
             model = CanonicalRuntimeUnityPlayerLoopInteractiveControlsHarness.LoadModelView(modelPath);
             frameIndex = Mathf.Clamp(model.CurrentFrameIndex, 0, Mathf.Max(model.Frames.Count - 1, 0));
             status = File.Exists(modelPath)
-                ? "Loaded Goal139 runtime-backed interactive controls model."
-                : "Goal139 runtime-backed interactive controls model not found.";
+                ? "Loaded Goal140 runtime-backed controls UX model."
+                : "Goal140 runtime-backed controls UX model not found.";
         }
 
         private CanonicalRuntimeUnityPlayerLoopInteractiveControlsFrameView CurrentFrame()
@@ -144,8 +152,19 @@ namespace LLMGameCreatorAlpha
                 repoRoot?.FullName ?? string.Empty,
                 ".llmgc",
                 "procedural",
-                "goal-139-runtime-backed-unity-player-loop-interactive-controls-harness",
-                "runtime-backed-player-loop-interactive-controls-model.json");
+                "goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard",
+                "runtime-backed-player-loop-controls-ux-model.json");
+        }
+
+        private string HumanFrameLabel()
+        {
+            var total = Mathf.Max(model.Frames.Count, model.FrameCount);
+            if (total <= 0)
+            {
+                return "Current Frame: 0/0";
+            }
+
+            return "Current Frame: " + (frameIndex + 1) + "/" + total;
         }
 
         private static string EmptyAsNone(string value) =>

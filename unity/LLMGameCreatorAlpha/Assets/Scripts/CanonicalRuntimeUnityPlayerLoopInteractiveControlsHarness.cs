@@ -41,6 +41,10 @@ namespace LLMGameCreatorAlpha
             "GOAL139_RUNTIME_BACKED_UNITY_PLAYER_LOOP_INTERACTIVE_CONTROLS_PASS";
         public const string FailMarker =
             "GOAL139_RUNTIME_BACKED_UNITY_PLAYER_LOOP_INTERACTIVE_CONTROLS_FAIL";
+        public const string Goal140PassMarker =
+            "GOAL140_RUNTIME_BACKED_UNITY_PLAYER_LOOP_CONTROLS_UX_PASS";
+        public const string Goal140FailMarker =
+            "GOAL140_RUNTIME_BACKED_UNITY_PLAYER_LOOP_CONTROLS_UX_FAIL";
 
         private static readonly string[] RequiredControls =
         {
@@ -51,6 +55,20 @@ namespace LLMGameCreatorAlpha
             "last",
             "autoplay_tick",
             "autoplay_all",
+            "copy_current_frame_summary",
+            "show_runtime_hash",
+            "show_hud_lines"
+        };
+
+        private static readonly string[] Goal140RequiredControls =
+        {
+            "load_model",
+            "first",
+            "previous",
+            "next",
+            "last",
+            "step_once",
+            "play_all_to_end",
             "copy_current_frame_summary",
             "show_runtime_hash",
             "show_hud_lines"
@@ -74,6 +92,24 @@ namespace LLMGameCreatorAlpha
             "assert_runtime_authority_markers"
         };
 
+        private static readonly string[] Goal140RequiredScriptActions =
+        {
+            "load_model",
+            "assert_frame_count",
+            "assert_human_readable_frame_numbering",
+            "first",
+            "next",
+            "previous",
+            "step_once",
+            "step_once",
+            "play_all_to_end",
+            "copy_current_frame_summary",
+            "assert_copy_frame_summary_status",
+            "first",
+            "assert_reset_first_status",
+            "assert_runtime_authority_markers"
+        };
+
         public static CanonicalRuntimeUnityPlayerLoopInteractiveControlsSmokeResult RunFromCommandLine()
         {
             var args = Environment.GetCommandLineArgs();
@@ -84,6 +120,19 @@ namespace LLMGameCreatorAlpha
                 args,
                 "-llmgcRuntimeBackedUnityPlayerLoopInteractiveControlsScriptPath");
             return Consume(modelPath, controlScriptPath);
+        }
+
+        public static CanonicalRuntimeUnityPlayerLoopInteractiveControlsSmokeResult
+            RunGoal140FromCommandLine()
+        {
+            var args = Environment.GetCommandLineArgs();
+            var modelPath = ReadArgument(
+                args,
+                "-llmgcRuntimeBackedUnityPlayerLoopControlsUxModelPath");
+            var scriptPath = ReadArgument(
+                args,
+                "-llmgcRuntimeBackedUnityPlayerLoopControlsUxScriptPath");
+            return ConsumeGoal140(modelPath, scriptPath);
         }
 
 #if UNITY_EDITOR
@@ -107,6 +156,33 @@ namespace LLMGameCreatorAlpha
             {
                 exitCode = 1;
                 Debug.LogError(FailMarker + "\n" + ex);
+            }
+            finally
+            {
+                if (Application.isBatchMode) { EditorApplication.Exit(exitCode); }
+            }
+        }
+
+        public static void RunBatchmodeRuntimeBackedUnityPlayerLoopControlsUxSmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var result = RunGoal140FromCommandLine();
+                if (result.Passed)
+                {
+                    Debug.Log(Goal140PassMarker + "\n" + result.Diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError(Goal140FailMarker + "\n" + result.Diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError(Goal140FailMarker + "\n" + ex);
             }
             finally
             {
@@ -185,6 +261,115 @@ namespace LLMGameCreatorAlpha
                 + modelPath
                 + "; controlScriptPath="
                 + controlScriptPath;
+            return result;
+        }
+
+        public static CanonicalRuntimeUnityPlayerLoopInteractiveControlsSmokeResult ConsumeGoal140(
+            string modelPath,
+            string scriptPath)
+        {
+            var result = new CanonicalRuntimeUnityPlayerLoopInteractiveControlsSmokeResult
+            {
+                ModelPath = modelPath ?? string.Empty,
+                ControlScriptPath = scriptPath ?? string.Empty
+            };
+
+            var modelPathExists = !string.IsNullOrWhiteSpace(modelPath) && File.Exists(modelPath);
+            var scriptPathExists = !string.IsNullOrWhiteSpace(scriptPath) && File.Exists(scriptPath);
+            if (!modelPathExists)
+            {
+                result.Diagnostics = "modelPathExists=False";
+                return result;
+            }
+
+            if (!scriptPathExists)
+            {
+                result.Diagnostics = "modelPathExists=True; scriptPathExists=False";
+                return result;
+            }
+
+            var model = File.ReadAllText(modelPath);
+            var script = File.ReadAllText(scriptPath);
+            var frameCount = CountJsonProperty(model, "frameIndex");
+            var frameCountPassed = frameCount >= 13
+                                   || ContainsJsonNumber(model, "frameCount", 13);
+            var requiredControlsPresent = true;
+            foreach (var control in Goal140RequiredControls)
+            {
+                requiredControlsPresent = requiredControlsPresent
+                                          && ContainsJsonPair(model, "id", control);
+            }
+
+            var scriptActionsPassed = ContainsJsonNumber(script, "expectedFrameCount", 13);
+            foreach (var action in Goal140RequiredScriptActions)
+            {
+                scriptActionsPassed = scriptActionsPassed
+                                      && ContainsJsonPair(script, "action", action);
+            }
+
+            var humanReadableFrameNumberingPresent =
+                ContainsJsonBool(model, "humanReadableFrameNumbering", true)
+                && model.Contains("Current Frame: 1/13", StringComparison.Ordinal)
+                && model.Contains("Frame Index: 0", StringComparison.Ordinal);
+            var stepOnceSemanticsClear =
+                ContainsJsonBool(model, "stepOnceSemanticsClear", true)
+                && ContainsJsonPair(model, "label", "Step Once")
+                && ContainsJsonPair(model, "lastControlAction", "step_once")
+                && script.Contains("\"action\": \"step_once\"", StringComparison.Ordinal);
+            var playAllToEndSemanticsClear =
+                ContainsJsonBool(model, "playAllToEndSemanticsClear", true)
+                && ContainsJsonPair(model, "label", "Play All To End")
+                && ContainsJsonPair(model, "lastControlAction", "play_all_to_end")
+                && script.Contains("\"action\": \"play_all_to_end\"", StringComparison.Ordinal);
+            var copyFrameSummaryStatusPresent =
+                ContainsJsonBool(model, "copyFrameSummaryStatusPresent", true)
+                && model.Contains("copied_frame_summary", StringComparison.Ordinal);
+            var runtimeAuthorityMarkersPresent =
+                ContainsJsonBool(model, "runtimeAuthority", true)
+                && ContainsJsonBool(model, "unityGameplayTruth", false)
+                && ContainsJsonBool(model, "projectionOnly", false)
+                && model.Contains("\"gameplayTruth\": \"Runtime\"", StringComparison.Ordinal)
+                && model.Contains(
+                    "\"unityMode\": \"PlayerAdapter/HUD controls only\"",
+                    StringComparison.Ordinal)
+                && model.Contains("\"canonicalStateHash\"", StringComparison.Ordinal)
+                && model.Contains("\"hudLines\"", StringComparison.Ordinal);
+            result.Passed = modelPathExists
+                            && scriptPathExists
+                            && frameCountPassed
+                            && requiredControlsPresent
+                            && scriptActionsPassed
+                            && humanReadableFrameNumberingPresent
+                            && stepOnceSemanticsClear
+                            && playAllToEndSemanticsClear
+                            && copyFrameSummaryStatusPresent
+                            && runtimeAuthorityMarkersPresent;
+            result.Diagnostics =
+                "modelPathExists="
+                + modelPathExists
+                + "; frameCount="
+                + frameCount
+                + "; frameCountPassed="
+                + frameCountPassed
+                + "; requiredControlsPresent="
+                + requiredControlsPresent
+                + "; humanReadableFrameNumberingPresent="
+                + humanReadableFrameNumberingPresent
+                + "; stepOnceSemanticsClear="
+                + stepOnceSemanticsClear
+                + "; playAllToEndSemanticsClear="
+                + playAllToEndSemanticsClear
+                + "; copyFrameSummaryStatusPresent="
+                + copyFrameSummaryStatusPresent
+                + "; runtimeAuthorityMarkersPresent="
+                + runtimeAuthorityMarkersPresent
+                + "; scriptActionsPassed="
+                + scriptActionsPassed
+                + "; unityGameplayTruth=False"
+                + "; modelPath="
+                + modelPath
+                + "; scriptPath="
+                + scriptPath;
             return result;
         }
 

@@ -113,7 +113,8 @@ canonical_runtime_selected_candidate_playthrough_matrix_verification required
 canonical_runtime_playable_player_loop_readiness_verification required
 canonical_runtime_player_command_loop_execution_matrix_verification required
 runtime_backed_unity_player_loop_stepper_hud_harness_verification accepted by explicit Goal139 human handoff
-runtime_backed_unity_player_loop_interactive_controls_harness_verification required
+runtime_backed_unity_player_loop_interactive_controls_harness_verification accepted by explicit Goal140 human handoff
+runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification required
 goal_132_winforms_candidate_pipeline_operator_panel required
 goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
 goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
@@ -2313,27 +2314,29 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-runtime_backed_unity_player_loop_interactive_controls_harness_verification
+runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification
 ```
 
-Goal139 runtime-backed Unity player-loop interactive controls harness is produced for
+Goal140 runtime-backed Unity player-loop controls UX polish and noise guard is produced for
 review with
-`runtime_backed_unity_player_loop_interactive_controls_harness_verification required`,
-`accepted=false`, `acceptedGoal138=true`, `manualUnityOptional=true`,
+`runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification required`,
+`accepted=false`, `acceptedGoal139=true`, `manualUnityOptional=true`,
 `projectionOnly=false`, `runtimeAuthority=true`,
-`runtimeBackedUnityInteractiveControls=true`,
-`interactiveControlsWindowPresent=true`,
-`unityInteractiveControlsSmokePassed=true`, `unityGameplayTruth=false`,
+`runtimeBackedUnityControlsUxPolish=true`,
+`humanReadableFrameNumbering=true`, `stepOnceSemanticsClear=true`,
+`playAllToEndSemanticsClear=true`, `knownUnityEditorNoiseClassified=true`,
+`blockingUnityErrorCount=0`, `unclassifiedUnityErrorCount=0`,
+`unityControlsUxSmokePassed=true`, `unityGameplayTruth=false`,
 `frameCount=13`, `requiredControlsPresent=true` and
-`controlScriptPassed=true`.
+`controlsUxPolished=true`.
 
 The selected-candidate path now has the canonical runtime/player proof chain:
 
 ```text
-candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report
+candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report -> Goal139 human acceptance -> controls UX polish -> bounded Unity editor noise classification
 ```
 
-Review Goal139 evidence before starting a new implementation slice. If accepted,
+Review Goal140 evidence before starting a new implementation slice. If accepted,
 the next bounded product step should be a manual review/acceptance checkpoint or
 another explicitly runtime-backed player-loop step. Do not start
 sample mutation, `.llmgc/manual/**`, live geodata/provider, public schema
@@ -2344,5 +2347,5 @@ this handoff.
 Status:
 
 ```text
-runtime_backed_unity_player_loop_interactive_controls_harness_verification_required_accepted_false
+runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification_required_accepted_false
 ```
