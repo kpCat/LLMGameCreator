@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "passed": true,
+  "rows": [
+    {
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "packagePath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+      "playerCommandLoopPassed": true,
+      "playerCommandCount": 13,
+      "snapshotCount": 13,
+      "runtimeEventCount": 43,
+      "allRequiredCategoriesPresent": true,
+      "unityPlayerConsumedCommandLoopSnapshots": true,
+      "passed": true
+    }
+  ]
+}

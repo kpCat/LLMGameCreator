@@ -1,0 +1,63 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "rootPath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix",
+  "indexedFileCount": 11,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-dashboard.json",
+      "role": "goal136_canonical_runtime_player_command_loop_dashboard",
+      "sha256": "16e6001fed5290231898dd8d93cdfaea6b901d1e41945b2de2dfb79fd5f5467c"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-diagnostic-classification.json",
+      "role": "goal136_canonical_runtime_player_command_loop_diagnostic_classification",
+      "sha256": "3fc198fb7a9d0a041d28357b7d7be9e1a549171582c766d4303da286eb951b6d"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-inputs.json",
+      "role": "goal136_canonical_runtime_player_command_loop_inputs",
+      "sha256": "a50e8857d8c9a844a48386f8772ad21349f78f0d2e2b04ed3bebff91c67b059b"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-matrix-result.json",
+      "role": "goal136_canonical_runtime_player_command_loop_matrix_result",
+      "sha256": "aa5128de2b972a866ff5cf280cdad46f01dba8f71601c51bc9311d06c89a932e"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-negative-proof.json",
+      "role": "goal136_canonical_runtime_player_command_loop_negative_proof",
+      "sha256": "baa8c5db2cf243439cb5c1b33d3f27a6590d4d02af782cc1289d7969bf109bb6"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-plan.json",
+      "role": "goal136_canonical_runtime_player_command_loop_plan",
+      "sha256": "9b30218169c3abfbf09822e00e20ae0cb078d09fdf36e9eac9b23b8a6486077e"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-result.json",
+      "role": "goal136_canonical_runtime_player_command_loop_result",
+      "sha256": "83ad75f99509b763ad45ae8ec9b584201019dce9869f964ce1f01d50e60b9f32"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json",
+      "role": "goal136_canonical_runtime_player_command_loop_snapshots",
+      "sha256": "f79d8f49231ddaaab48cf829f7b2f27d27aa8f5e31174d8bce62cda78c785119"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/one-click-player-command-loop-report.json",
+      "role": "goal136_one_click_player_command_loop_report",
+      "sha256": "add3fb5001d2db4c120b6f636ecea0afdbe80ecb6366cd75f831f985ed5ac50d"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/one-click-player-command-loop-report.md",
+      "role": "goal136_one_click_player_command_loop_report",
+      "sha256": "d3bcd224a52ba8c8c24457d0e15de7f9d2747d1340384438fb25911795d1a4d9"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/unity-player-command-loop-smoke.json",
+      "role": "goal136_unity_player_command_loop_smoke",
+      "sha256": "963fa6ae3c0349c3b342797af94877443890ae32364e258d28461950717c9021"
+    }
+  ]
+}

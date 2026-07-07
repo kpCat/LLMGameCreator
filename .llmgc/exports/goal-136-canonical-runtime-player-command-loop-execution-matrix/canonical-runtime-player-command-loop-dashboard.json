@@ -1,0 +1,33 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "status": "GREEN",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "playerCommandLoopPassed": true,
+  "playerCommandCount": 13,
+  "snapshotCount": 13,
+  "runtimeEventCount": 43,
+  "stateHashChainPresent": true,
+  "allRequiredCategoriesPresent": true,
+  "unityPlayerConsumedCommandLoopSnapshots": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "selectedCandidateExecutedByRuntime": true,
+  "runtimePrimitiveMissing": false,
+  "missingRuntimePrimitives": [],
+  "noUnclassifiedErrorDiagnostics": true,
+  "rawDiagnosticCount": 5,
+  "blockingDiagnosticCount": 0,
+  "nonBlockingDiagnosticCount": 5,
+  "manualUnityOptional": true,
+  "accepted": false,
+  "normalCommand": ".devflow\\scripts\\run-canonical-runtime-player-command-loop.cmd",
+  "reportPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/one-click-player-command-loop-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-matrix-result.json",
+  "missingCategories": [],
+  "diagnostics": [
+    "goal136.raw_diagnostic_count=5",
+    "goal136.blocking_diagnostic_count=0",
+    "goal136.nonblocking_diagnostic_count=5",
+    "unityExitCode=0"
+  ]
+}

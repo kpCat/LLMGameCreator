@@ -180,6 +180,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var canonicalRuntimeSelectedCandidate = BuildGoal134CanonicalRuntimeSelectedCandidateQuality(groups, proofs);
         var canonicalRuntimePlayerLoop =
             BuildGoal135CanonicalRuntimePlayerLoopQuality(groups, proofs);
+        var canonicalRuntimePlayerCommandLoop = BuildGoal136CanonicalRuntimePlayerCommandLoopQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -376,6 +377,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal132CandidatePipelineOperatorQualityDiagnostics(candidatePipelineOperator, binding, diagnostics);
         AddGoal134CanonicalRuntimeSelectedCandidateQualityDiagnostics(canonicalRuntimeSelectedCandidate, binding, diagnostics);
         AddGoal135CanonicalRuntimePlayerLoopQualityDiagnostics(canonicalRuntimePlayerLoop, binding, diagnostics);
+        AddGoal136CanonicalRuntimePlayerCommandLoopQualityDiagnostics(canonicalRuntimePlayerCommandLoop, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -691,6 +693,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             withGoal132,
             canonicalRuntimeSelectedCandidate,
             binding);
-        return ApplyGoal135CanonicalRuntimePlayerLoopQuality(withGoal134, canonicalRuntimePlayerLoop, binding);
+        var withGoal135 = ApplyGoal135CanonicalRuntimePlayerLoopQuality(withGoal134, canonicalRuntimePlayerLoop, binding);
+        return ApplyGoal136CanonicalRuntimePlayerCommandLoopQuality(withGoal135, canonicalRuntimePlayerCommandLoop, binding);
     }
 }

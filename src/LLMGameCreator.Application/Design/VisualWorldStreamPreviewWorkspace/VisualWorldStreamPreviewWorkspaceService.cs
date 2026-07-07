@@ -83,7 +83,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildGamePackageCandidateRecipePipelineGroup(projectRoot, diagnostics),
             BuildCandidatePipelineOperatorGroup(projectRoot, diagnostics),
             BuildCanonicalRuntimeSelectedCandidateGroup(projectRoot, diagnostics),
-            BuildCanonicalRuntimePlayerLoopReadinessGroup(projectRoot, diagnostics)
+            BuildCanonicalRuntimePlayerLoopReadinessGroup(projectRoot, diagnostics),
+            BuildCanonicalRuntimePlayerCommandLoopGroup(projectRoot, diagnostics)
         };
         groups = NormalizeHistoricalManualAcceptanceGroups(groups).ToList();
 

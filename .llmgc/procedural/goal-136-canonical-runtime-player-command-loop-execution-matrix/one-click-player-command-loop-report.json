@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "playerCommandLoopPassed": true,
+  "playerCommandCount": 13,
+  "snapshotCount": 13,
+  "runtimeEventCount": 43,
+  "stateHashChainPresent": true,
+  "allRequiredCategoriesPresent": true,
+  "unityPlayerConsumedCommandLoopSnapshots": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "selectedCandidateExecutedByRuntime": true,
+  "manualUnityOptional": true,
+  "noUnclassifiedErrorDiagnostics": true,
+  "rawDiagnosticCount": 5,
+  "blockingDiagnosticCount": 0,
+  "nonBlockingDiagnosticCount": 5,
+  "reportPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/one-click-player-command-loop-report.md",
+  "matrixResultPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-matrix-result.json"
+}

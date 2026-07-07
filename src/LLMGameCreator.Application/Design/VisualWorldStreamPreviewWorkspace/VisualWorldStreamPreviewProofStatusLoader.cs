@@ -142,6 +142,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal132CandidatePipelineOperatorProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal134CanonicalRuntimeSelectedCandidateProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal135CanonicalRuntimePlayerLoopReadinessProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal136CanonicalRuntimePlayerCommandLoopProofStatus(projectRoot, proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);

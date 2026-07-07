@@ -1,0 +1,15 @@
+{
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packagePath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+  "handoffPath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/selected-candidate-handoff.json",
+  "goal134TranscriptPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-transcript.json",
+  "goal134StateSummaryPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-summary.json",
+  "goal135PlayerLoopPlanPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-plan.json",
+  "goal135PlayerAdapterContractPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-adapter-contract.json",
+  "packagePathExists": true,
+  "handoffPathExists": true,
+  "goal134TranscriptPathExists": true,
+  "goal134StateSummaryPathExists": true,
+  "goal135PlayerLoopPlanPathExists": true,
+  "goal135PlayerAdapterContractPathExists": true
+}

@@ -60,6 +60,8 @@ Goal 134 review note: the canonical Runtime selected-candidate playthrough matri
 
 Goal 135 review note: the canonical Runtime playable player-loop readiness proof turns the Goal134 transcript/state summary into a PlayerAdapter contract, deterministic 13-step player-facing plan, classified diagnostic set and Unity/player readiness smoke while keeping canonical Runtime output as gameplay authority. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, real hands-on playable quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 136 review note: the canonical Runtime player command-loop execution matrix executes the Goal131 selected candidate through 13 Runtime-owned player commands with one snapshot per command, runtime event/state-hash proof, all required command categories, classified diagnostics and Unity/player snapshot consumption smoke. Release blockers remain open for final release, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas, sample promotion, real hands-on playable quality and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

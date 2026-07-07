@@ -1,0 +1,19 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "unityAvailable": true,
+  "snapshotsPathExists": true,
+  "resultPathExists": true,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "snapshotContractPresent": true,
+  "unityPlayerConsumedCommandLoopSnapshots": true,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/unity-player-command-loop-smoke.log",
+  "snapshotsPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json",
+  "resultPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-result.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

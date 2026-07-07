@@ -1,0 +1,888 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packagePath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+  "playerCommandLoopPassed": true,
+  "playerCommandCount": 13,
+  "playerSnapshotCount": 13,
+  "runtimeEventCount": 43,
+  "stateHashChainPresent": true,
+  "allRequiredCategoriesPresent": true,
+  "selectedCandidateExecutedByRuntime": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "runtimePrimitiveMissing": false,
+  "missingRuntimePrimitives": [],
+  "requiredCategories": [
+    "load_package",
+    "start_runtime",
+    "move",
+    "interact",
+    "show_dialogue",
+    "start_or_update_quest",
+    "show_inventory",
+    "craft",
+    "harvest",
+    "transaction",
+    "encounter",
+    "combat_round",
+    "final_state"
+  ],
+  "missingCategories": [],
+  "inputs": {
+    "candidateId": "minimal-map-game-balanced-baseline",
+    "packagePath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/package.json",
+    "handoffPath": ".llmgc/procedural/goal-131-gamepackage-candidate-recipe-catalog-scoring-and-promotion/selected-candidate/selected-candidate-handoff.json",
+    "goal134TranscriptPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-transcript.json",
+    "goal134StateSummaryPath": ".llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/canonical-runtime-state-summary.json",
+    "goal135PlayerLoopPlanPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-loop-plan.json",
+    "goal135PlayerAdapterContractPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-adapter-contract.json",
+    "packagePathExists": true,
+    "handoffPathExists": true,
+    "goal134TranscriptPathExists": true,
+    "goal134StateSummaryPathExists": true,
+    "goal135PlayerLoopPlanPathExists": true,
+    "goal135PlayerAdapterContractPathExists": true
+  },
+  "steps": [
+    {
+      "index": 0,
+      "stepId": "load_selected_package",
+      "category": "load_package",
+      "commandLabel": "Load selected package",
+      "runtimeCommandKind": "package",
+      "targetId": "game/minimal-map-game",
+      "runtimePrimitiveHint": "runtime.command.load_package",
+      "runtimeExecuted": false,
+      "requiredForGreen": true
+    },
+    {
+      "index": 1,
+      "stepId": "start_canonical_runtime",
+      "category": "start_runtime",
+      "commandLabel": "Start canonical runtime",
+      "runtimeCommandKind": "Initialize",
+      "targetId": "map/village",
+      "runtimePrimitiveHint": "runtime.command.start_runtime",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 2,
+      "stepId": "move_to_sign",
+      "category": "move",
+      "commandLabel": "Move right to sign",
+      "runtimeCommandKind": "Move",
+      "targetId": "entity/village/sign",
+      "runtimePrimitiveHint": "runtime.command.move",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 3,
+      "stepId": "interact_with_sign",
+      "category": "interact",
+      "commandLabel": "Interact with sign",
+      "runtimeCommandKind": "Interact",
+      "targetId": "interaction/sign_inspect",
+      "runtimePrimitiveHint": "runtime.command.interact",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 4,
+      "stepId": "show_old_guard_dialogue",
+      "category": "show_dialogue",
+      "commandLabel": "Open old guard dialogue",
+      "runtimeCommandKind": "OpenDialogue",
+      "targetId": "dialogue/old_guard_intro",
+      "runtimePrimitiveHint": "runtime.command.show_dialogue",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 5,
+      "stepId": "start_or_update_help_healer_quest",
+      "category": "start_or_update_quest",
+      "commandLabel": "Start and refresh help healer quest",
+      "runtimeCommandKind": "StartQuest",
+      "targetId": "quest/help_healer",
+      "runtimePrimitiveHint": "runtime.command.start_or_update_quest",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 6,
+      "stepId": "show_inventory_state",
+      "category": "show_inventory",
+      "commandLabel": "Show inventory through runtime inventory event",
+      "runtimeCommandKind": "AddItem",
+      "targetId": "inventory/player_start",
+      "runtimePrimitiveHint": "runtime.command.show_inventory",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 7,
+      "stepId": "craft_healing_potion",
+      "category": "craft",
+      "commandLabel": "Craft healing potion",
+      "runtimeCommandKind": "CraftRecipe",
+      "targetId": "recipe/healing_potion",
+      "runtimePrimitiveHint": "runtime.command.craft",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 8,
+      "stepId": "harvest_apple_tree",
+      "category": "harvest",
+      "commandLabel": "Harvest apple tree",
+      "runtimeCommandKind": "HarvestResourceNode",
+      "targetId": "node/apple_tree",
+      "runtimePrimitiveHint": "runtime.command.harvest",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 9,
+      "stepId": "execute_transaction",
+      "category": "transaction",
+      "commandLabel": "Execute healing potion transaction",
+      "runtimeCommandKind": "ExecuteTransaction",
+      "targetId": "transaction/buy_healing_potion",
+      "runtimePrimitiveHint": "runtime.command.transaction",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 10,
+      "stepId": "start_encounter",
+      "category": "encounter",
+      "commandLabel": "Start goblin duel",
+      "runtimeCommandKind": "StartEncounter",
+      "targetId": "encounter/goblin_duel",
+      "runtimePrimitiveHint": "runtime.command.encounter",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 11,
+      "stepId": "combat_round",
+      "category": "combat_round",
+      "commandLabel": "Run combat round",
+      "runtimeCommandKind": "BasicAttack",
+      "targetId": "goblin",
+      "runtimePrimitiveHint": "runtime.command.combat_round",
+      "runtimeExecuted": true,
+      "requiredForGreen": true
+    },
+    {
+      "index": 12,
+      "stepId": "final_state",
+      "category": "final_state",
+      "commandLabel": "Show final runtime state",
+      "runtimeCommandKind": "state-summary",
+      "targetId": "game/minimal-map-game",
+      "runtimePrimitiveHint": "runtime.command.final_state",
+      "runtimeExecuted": false,
+      "requiredForGreen": true
+    }
+  ],
+  "snapshots": [
+    {
+      "stepIndex": 0,
+      "stepId": "load_selected_package",
+      "category": "load_package",
+      "commandLabel": "Load selected package",
+      "stateHashBefore": "not_loaded",
+      "stateHashAfter": "bfbfce6afb9f47d30409c2a3f112a6b955941af8b518807de230f072edd7fb7f",
+      "mapSummary": "map/village @ not_started",
+      "playerX": 0,
+      "playerY": 0,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "",
+      "questSummary": "",
+      "inventorySummary": "",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=1",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 0,
+          "stepIndex": 0,
+          "stepId": "load_selected_package",
+          "source": "command-loop",
+          "eventType": "package-loaded",
+          "targetId": "game/minimal-map-game",
+          "message": "Load selected package"
+        }
+      ]
+    },
+    {
+      "stepIndex": 1,
+      "stepId": "start_canonical_runtime",
+      "category": "start_runtime",
+      "commandLabel": "Start canonical runtime",
+      "stateHashBefore": "bfbfce6afb9f47d30409c2a3f112a6b955941af8b518807de230f072edd7fb7f",
+      "stateHashAfter": "12f118c9a81db66faaa1371ed05943694abe0dd1969ddcc6264f7811d2c27ab9",
+      "mapSummary": "map/village @ 1,1",
+      "playerX": 1,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "",
+      "questSummary": "",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=2",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 1,
+          "stepIndex": 1,
+          "stepId": "start_canonical_runtime",
+          "source": "map-runtime",
+          "eventType": "Message",
+          "targetId": "",
+          "message": "Игра запущена: Minimal Map Game"
+        },
+        {
+          "eventIndex": 2,
+          "stepIndex": 1,
+          "stepId": "start_canonical_runtime",
+          "source": "gameplay-runtime",
+          "eventType": "GameStarted",
+          "targetId": "game/minimal-map-game",
+          "message": "Game started: Minimal Map Game"
+        }
+      ]
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "move_to_sign",
+      "category": "move",
+      "commandLabel": "Move right to sign",
+      "stateHashBefore": "12f118c9a81db66faaa1371ed05943694abe0dd1969ddcc6264f7811d2c27ab9",
+      "stateHashAfter": "8cdb8b914519b5e62215a8ad31e21333c0b75b15f54b5460ef608335823aa8c9",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "",
+      "questSummary": "",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=1",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 3,
+          "stepIndex": 2,
+          "stepId": "move_to_sign",
+          "source": "map-runtime",
+          "eventType": "PlayerMoved",
+          "targetId": "",
+          "message": "Игрок переместился: 2, 1"
+        }
+      ]
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "interact_with_sign",
+      "category": "interact",
+      "commandLabel": "Interact with sign",
+      "stateHashBefore": "8cdb8b914519b5e62215a8ad31e21333c0b75b15f54b5460ef608335823aa8c9",
+      "stateHashAfter": "9db22a14ed49e94a88a9912af6ed3213f2714a98f901136fbfdb44ca8f7b9980",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "Взаимодействие: entity/village/sign",
+      "dialogueSummary": "",
+      "questSummary": "",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=6",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 4,
+          "stepIndex": 3,
+          "stepId": "interact_with_sign",
+          "source": "map-runtime",
+          "eventType": "InteractionTriggered",
+          "targetId": "entity/village/sign",
+          "message": "Взаимодействие: entity/village/sign"
+        },
+        {
+          "eventIndex": 5,
+          "stepIndex": 3,
+          "stepId": "interact_with_sign",
+          "source": "map-runtime",
+          "eventType": "Message",
+          "targetId": "",
+          "message": "На табличке написано: северная дорога закрыта."
+        },
+        {
+          "eventIndex": 6,
+          "stepIndex": 3,
+          "stepId": "interact_with_sign",
+          "source": "gameplay-runtime",
+          "eventType": "OutputApplied",
+          "targetId": "flag/sign_inspected",
+          "message": "Set flag flag/sign_inspected = true"
+        },
+        {
+          "eventIndex": 7,
+          "stepIndex": 3,
+          "stepId": "interact_with_sign",
+          "source": "gameplay-runtime",
+          "eventType": "LogMessageAdded",
+          "targetId": "log/sign_inspected",
+          "message": "The sign was inspected through InteractionDefinition v1."
+        },
+        {
+          "eventIndex": 8,
+          "stepIndex": 3,
+          "stepId": "interact_with_sign",
+          "source": "gameplay-runtime",
+          "eventType": "OutputApplied",
+          "targetId": "log/sign_inspected",
+          "message": "Applied log output: The sign was inspected through InteractionDefinition v1."
+        },
+        {
+          "eventIndex": 9,
+          "stepIndex": 3,
+          "stepId": "interact_with_sign",
+          "source": "gameplay-runtime",
+          "eventType": "InteractionTriggered",
+          "targetId": "interaction/sign_inspect",
+          "message": "Interaction triggered: inspect"
+        }
+      ]
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "show_old_guard_dialogue",
+      "category": "show_dialogue",
+      "commandLabel": "Open old guard dialogue",
+      "stateHashBefore": "9db22a14ed49e94a88a9912af6ed3213f2714a98f901136fbfdb44ca8f7b9980",
+      "stateHashAfter": "c9217844ea8b320c39d36160d5ee6d29913001e0a9125ac9dd06631f9dc74fa8",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=1",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 10,
+          "stepIndex": 4,
+          "stepId": "show_old_guard_dialogue",
+          "source": "gameplay-runtime",
+          "eventType": "DialogueOpened",
+          "targetId": "dialogue/old_guard_intro",
+          "message": "Dialogue opened: dialogue/old_guard_intro"
+        }
+      ]
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "start_or_update_help_healer_quest",
+      "category": "start_or_update_quest",
+      "commandLabel": "Start and refresh help healer quest",
+      "stateHashBefore": "c9217844ea8b320c39d36160d5ee6d29913001e0a9125ac9dd06631f9dc74fa8",
+      "stateHashAfter": "b4a0feeef3aecc3254c07cc8bb5ce7a07d0a8d9126d2eed4c05dcfb9782a3729",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=3",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 11,
+          "stepIndex": 5,
+          "stepId": "start_or_update_help_healer_quest",
+          "source": "gameplay-runtime",
+          "eventType": "QuestStarted",
+          "targetId": "quest/help_healer",
+          "message": "Quest started: quest/help_healer"
+        },
+        {
+          "eventIndex": 12,
+          "stepIndex": 5,
+          "stepId": "start_or_update_help_healer_quest",
+          "source": "gameplay-runtime",
+          "eventType": "JournalUpdated",
+          "targetId": "quest/help_healer",
+          "message": "Journal updated: quest/help_healer"
+        },
+        {
+          "eventIndex": 13,
+          "stepIndex": 5,
+          "stepId": "start_or_update_help_healer_quest",
+          "source": "gameplay-runtime",
+          "eventType": "QuestObjectiveUpdated",
+          "targetId": "objective/collect_red_herbs",
+          "message": "Quest objective updated: objective/collect_red_herbs"
+        }
+      ]
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "show_inventory_state",
+      "category": "show_inventory",
+      "commandLabel": "Show inventory through runtime inventory event",
+      "stateHashBefore": "b4a0feeef3aecc3254c07cc8bb5ce7a07d0a8d9126d2eed4c05dcfb9782a3729",
+      "stateHashAfter": "cf555abeaa1e074354a11b0a12459a387a4433d967eb39fa9ea864166595485b",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:1,item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=1",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 14,
+          "stepIndex": 6,
+          "stepId": "show_inventory_state",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Added item item/apple x1"
+        }
+      ]
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "craft_healing_potion",
+      "category": "craft",
+      "commandLabel": "Craft healing potion",
+      "stateHashBefore": "cf555abeaa1e074354a11b0a12459a387a4433d967eb39fa9ea864166595485b",
+      "stateHashAfter": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:1,item/fuel_can:1,item/healing_potion:2,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=9",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 15,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "CostConsumed",
+          "targetId": "item/red_herb",
+          "message": "Consumed item item/red_herb x2"
+        },
+        {
+          "eventIndex": 16,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 17,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "CostConsumed",
+          "targetId": "item/water_flask",
+          "message": "Consumed item item/water_flask x1"
+        },
+        {
+          "eventIndex": 18,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 19,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "CostConsumed",
+          "targetId": "resource/mana",
+          "message": "Consumed resource resource/mana x5"
+        },
+        {
+          "eventIndex": 20,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "ResourceChanged",
+          "targetId": "resource/mana",
+          "message": "Resource changed: resource/mana"
+        },
+        {
+          "eventIndex": 21,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "OutputApplied",
+          "targetId": "item/healing_potion",
+          "message": "Added item item/healing_potion x1"
+        },
+        {
+          "eventIndex": 22,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 23,
+          "stepIndex": 7,
+          "stepId": "craft_healing_potion",
+          "source": "gameplay-runtime",
+          "eventType": "RecipeCrafted",
+          "targetId": "recipe/healing_potion",
+          "message": "Recipe crafted: Healing Potion"
+        }
+      ]
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "harvest_apple_tree",
+      "category": "harvest",
+      "commandLabel": "Harvest apple tree",
+      "stateHashBefore": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+      "stateHashAfter": "3c80eac88e5f47f63584d0732cc3f65bc9a450c4fa7b9737d0dff33e979c08d9",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:2,item/log:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=9",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 24,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "CostConsumed",
+          "targetId": "item/woodcutting_axe",
+          "message": "Consumed durability item/woodcutting_axe x1"
+        },
+        {
+          "eventIndex": 25,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 26,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "OutputApplied",
+          "targetId": "item/log",
+          "message": "Added item item/log x1"
+        },
+        {
+          "eventIndex": 27,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 28,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "OutputApplied",
+          "targetId": "item/apple",
+          "message": "Added item item/apple x2"
+        },
+        {
+          "eventIndex": 29,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 30,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "LootRolled",
+          "targetId": "loot/apple_tree",
+          "message": "Loot rolled: loot/apple_tree -> entry/apple"
+        },
+        {
+          "eventIndex": 31,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "ResourceHarvested",
+          "targetId": "node/apple_tree",
+          "message": "Resource harvested: Apple Tree"
+        },
+        {
+          "eventIndex": 32,
+          "stepIndex": 8,
+          "stepId": "harvest_apple_tree",
+          "source": "gameplay-runtime",
+          "eventType": "LogMessageAdded",
+          "targetId": "node/apple_tree",
+          "message": "Harvested Apple Tree."
+        }
+      ]
+    },
+    {
+      "stepIndex": 9,
+      "stepId": "execute_transaction",
+      "category": "transaction",
+      "commandLabel": "Execute healing potion transaction",
+      "stateHashBefore": "3c80eac88e5f47f63584d0732cc3f65bc9a450c4fa7b9737d0dff33e979c08d9",
+      "stateHashAfter": "745b43b5b3650f0f65665a5c08fd06f867434fb00231db6384143560a26b8d31",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+      "combatSummary": "",
+      "diagnosticSummary": "eventCount=6",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 33,
+          "stepIndex": 9,
+          "stepId": "execute_transaction",
+          "source": "gameplay-runtime",
+          "eventType": "ResourceChanged",
+          "targetId": "resource/gold",
+          "message": "Changed resource resource/gold by 25"
+        },
+        {
+          "eventIndex": 34,
+          "stepIndex": 9,
+          "stepId": "execute_transaction",
+          "source": "gameplay-runtime",
+          "eventType": "CostConsumed",
+          "targetId": "resource/gold",
+          "message": "Consumed resource resource/gold x25"
+        },
+        {
+          "eventIndex": 35,
+          "stepIndex": 9,
+          "stepId": "execute_transaction",
+          "source": "gameplay-runtime",
+          "eventType": "ResourceChanged",
+          "targetId": "resource/gold",
+          "message": "Resource changed: resource/gold"
+        },
+        {
+          "eventIndex": 36,
+          "stepIndex": 9,
+          "stepId": "execute_transaction",
+          "source": "gameplay-runtime",
+          "eventType": "OutputApplied",
+          "targetId": "item/healing_potion",
+          "message": "Added item item/healing_potion x1"
+        },
+        {
+          "eventIndex": 37,
+          "stepIndex": 9,
+          "stepId": "execute_transaction",
+          "source": "gameplay-runtime",
+          "eventType": "InventoryChanged",
+          "targetId": "inventory/player_start",
+          "message": "Inventory changed: inventory/player_start"
+        },
+        {
+          "eventIndex": 38,
+          "stepIndex": 9,
+          "stepId": "execute_transaction",
+          "source": "gameplay-runtime",
+          "eventType": "TransactionExecuted",
+          "targetId": "transaction/buy_healing_potion",
+          "message": "Transaction executed: Buy Healing Potion"
+        }
+      ]
+    },
+    {
+      "stepIndex": 10,
+      "stepId": "start_encounter",
+      "category": "encounter",
+      "commandLabel": "Start goblin duel",
+      "stateHashBefore": "745b43b5b3650f0f65665a5c08fd06f867434fb00231db6384143560a26b8d31",
+      "stateHashAfter": "7640d694b3d34f64e00faebb1b73271b59d975c15d896be2269f6da4ec3c9da9",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+      "combatSummary": "encounter/goblin_duel:round=1:turn=0:active=True",
+      "diagnosticSummary": "eventCount=2",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 39,
+          "stepIndex": 10,
+          "stepId": "start_encounter",
+          "source": "gameplay-runtime",
+          "eventType": "EncounterStarted",
+          "targetId": "encounter/goblin_duel",
+          "message": "Encounter started: encounter/goblin_duel"
+        },
+        {
+          "eventIndex": 40,
+          "stepIndex": 10,
+          "stepId": "start_encounter",
+          "source": "gameplay-runtime",
+          "eventType": "TurnStarted",
+          "targetId": "player",
+          "message": "Turn started: player"
+        }
+      ]
+    },
+    {
+      "stepIndex": 11,
+      "stepId": "combat_round",
+      "category": "combat_round",
+      "commandLabel": "Run combat round",
+      "stateHashBefore": "7640d694b3d34f64e00faebb1b73271b59d975c15d896be2269f6da4ec3c9da9",
+      "stateHashAfter": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+      "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True",
+      "diagnosticSummary": "eventCount=3",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 41,
+          "stepIndex": 11,
+          "stepId": "combat_round",
+          "source": "gameplay-runtime",
+          "eventType": "DamageApplied",
+          "targetId": "goblin",
+          "message": "Damage applied: resource/health -4"
+        },
+        {
+          "eventIndex": 42,
+          "stepIndex": 11,
+          "stepId": "combat_round",
+          "source": "gameplay-runtime",
+          "eventType": "AbilityUsed",
+          "targetId": "ability/basic_attack",
+          "message": "Ability used: ability/basic_attack"
+        },
+        {
+          "eventIndex": 43,
+          "stepIndex": 11,
+          "stepId": "combat_round",
+          "source": "gameplay-runtime",
+          "eventType": "TurnStarted",
+          "targetId": "goblin",
+          "message": "Turn started: goblin"
+        }
+      ]
+    },
+    {
+      "stepIndex": 12,
+      "stepId": "final_state",
+      "category": "final_state",
+      "commandLabel": "Show final runtime state",
+      "stateHashBefore": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+      "stateHashAfter": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+      "mapSummary": "map/village @ 2,1",
+      "playerX": 2,
+      "playerY": 1,
+      "visibleInteractionSummary": "",
+      "dialogueSummary": "dialogue/old_guard_intro:start:True",
+      "questSummary": "quest/help_healer:active:",
+      "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+      "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True",
+      "diagnosticSummary": "eventCount=1",
+      "projectionOnly": false,
+      "unityGameplayTruth": false,
+      "runtimeEvents": [
+        {
+          "eventIndex": 44,
+          "stepIndex": 12,
+          "stepId": "final_state",
+          "source": "command-loop",
+          "eventType": "final-state",
+          "targetId": "game/minimal-map-game",
+          "message": "Show final runtime state"
+        }
+      ]
+    }
+  ],
+  "stateHashChain": [
+    "bfbfce6afb9f47d30409c2a3f112a6b955941af8b518807de230f072edd7fb7f",
+    "12f118c9a81db66faaa1371ed05943694abe0dd1969ddcc6264f7811d2c27ab9",
+    "8cdb8b914519b5e62215a8ad31e21333c0b75b15f54b5460ef608335823aa8c9",
+    "9db22a14ed49e94a88a9912af6ed3213f2714a98f901136fbfdb44ca8f7b9980",
+    "c9217844ea8b320c39d36160d5ee6d29913001e0a9125ac9dd06631f9dc74fa8",
+    "b4a0feeef3aecc3254c07cc8bb5ce7a07d0a8d9126d2eed4c05dcfb9782a3729",
+    "cf555abeaa1e074354a11b0a12459a387a4433d967eb39fa9ea864166595485b",
+    "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+    "3c80eac88e5f47f63584d0732cc3f65bc9a450c4fa7b9737d0dff33e979c08d9",
+    "745b43b5b3650f0f65665a5c08fd06f867434fb00231db6384143560a26b8d31",
+    "7640d694b3d34f64e00faebb1b73271b59d975c15d896be2269f6da4ec3c9da9",
+    "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+    "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2"
+  ],
+  "diagnostics": []
+}

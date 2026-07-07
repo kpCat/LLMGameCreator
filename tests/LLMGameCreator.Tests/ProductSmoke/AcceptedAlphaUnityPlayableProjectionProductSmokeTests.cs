@@ -1,5 +1,7 @@
 using LLMGameCreator.Application.Design.AcceptedAlphaUnityPlayableProjection;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
+using LLMGameCreator.Runtime;
+using LLMGameCreator.Runtime.Abstractions;
 using Xunit;
 
 namespace LLMGameCreator.Tests.ProductSmoke;
@@ -48,6 +50,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         var productLineStrategyRebaseline =
             await new ProductLineStrategyRebaselineService()
                 .BuildAndWriteAsync(root);
+        var canonicalRuntimePlayerCommandLoop =
+            await BuildGoal136CanonicalRuntimePlayerCommandLoopAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -373,6 +377,15 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             path == ProductLineStrategyRebaselineVocabulary.DocumentationPath);
         Assert.DoesNotContain(productLineStrategyRebaseline.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.Equal("GREEN", canonicalRuntimePlayerCommandLoop.Dashboard.Status);
+        Assert.True(canonicalRuntimePlayerCommandLoop.Dashboard.PlayerCommandLoopPassed);
+        Assert.Equal(13, canonicalRuntimePlayerCommandLoop.Dashboard.PlayerCommandCount);
+        Assert.Equal(13, canonicalRuntimePlayerCommandLoop.Dashboard.SnapshotCount);
+        Assert.True(canonicalRuntimePlayerCommandLoop.Dashboard.RuntimeEventCount >= 10);
+        Assert.True(canonicalRuntimePlayerCommandLoop.Dashboard.UnityPlayerConsumedCommandLoopSnapshots);
+        Assert.False(canonicalRuntimePlayerCommandLoop.Dashboard.ProjectionOnly);
+        Assert.False(canonicalRuntimePlayerCommandLoop.Dashboard.UnityGameplayTruth);
+        Assert.True(canonicalRuntimePlayerCommandLoop.Dashboard.NoUnclassifiedErrorDiagnostics);
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -403,6 +416,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysGamePackageCandidateRecipePipeline);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysCandidatePipelineOperator);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysCanonicalRuntimePlayerCommandLoop);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -431,6 +446,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "gamepackage_candidate_recipe_catalog_scoring_and_promotion");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "candidate_pipeline_operator_panel");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "canonical_runtime_player_command_loop");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -459,6 +476,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.Goal131FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.CandidatePipelineOperatorGroupPresent);
         Assert.True(workspace.QualityGateScan.Goal132FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.CanonicalRuntimePlayerCommandLoopGroupPresent);
+        Assert.True(workspace.QualityGateScan.CanonicalRuntimePlayerCommandLoopQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.CanonicalRuntimePlayerCommandLoopGoal136FilesDiscoveredByRelativePaths);
         if (workspace.QualityGateScan.GamePackageCandidateMatrixStatus == "GREEN")
         {
             Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixCandidateCount);
@@ -535,7 +555,79 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             "candidatePipelineOperatorStatus: GREEN_READY",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
+        Assert.Contains(
+            "playerCommandLoopPassed: true",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
     }
+
+    private static async Task<CanonicalRuntimePlayerCommandLoopWriteResult>
+        BuildGoal136CanonicalRuntimePlayerCommandLoopAsync(string root)
+    {
+        var handoffPath = Path.Combine(
+            root,
+            CanonicalRuntimePlayerCommandLoopVocabulary.DefaultSelectedCandidateHandoffPath);
+        var packagePath = Path.Combine(
+            root,
+            CanonicalRuntimePlayerCommandLoopVocabulary.DefaultSelectedCandidatePackagePath);
+        var request = new CanonicalRuntimePlayerCommandLoopRequest
+        {
+            CandidateId = CanonicalRuntimeSelectedCandidatePlaythroughArtifactService
+                .ReadCandidateId(handoffPath),
+            HandoffPath = Relative(root, handoffPath),
+            PackagePath = Relative(root, packagePath),
+            Goal134TranscriptPath =
+                CanonicalRuntimePlayerCommandLoopVocabulary.DefaultGoal134TranscriptPath,
+            Goal134StateSummaryPath =
+                CanonicalRuntimePlayerCommandLoopVocabulary.DefaultGoal134StateSummaryPath,
+            Goal135PlayerLoopPlanPath =
+                CanonicalRuntimePlayerCommandLoopVocabulary.DefaultGoal135PlayerLoopPlanPath,
+            Goal135PlayerAdapterContractPath =
+                CanonicalRuntimePlayerCommandLoopVocabulary.DefaultGoal135PlayerAdapterContractPath
+        };
+        var package =
+            CanonicalRuntimeSelectedCandidatePlaythroughArtifactService.LoadPackage(packagePath);
+        var runtimeResult = CanonicalRuntimePlayerCommandLoopService
+            .CreateDefault()
+            .Execute(package, request);
+
+        return await new CanonicalRuntimePlayerCommandLoopArtifactService()
+            .BuildAndWriteAsync(
+                root,
+                request,
+                runtimeResult,
+                unitySmoke: PassedGoal136UnitySmoke(root));
+    }
+
+    private static CanonicalRuntimePlayerCommandLoopUnitySmoke PassedGoal136UnitySmoke(string root)
+    {
+        var snapshots = Path.Combine(
+            root,
+            CanonicalRuntimePlayerCommandLoopVocabulary.ProceduralOutputDirectory,
+            CanonicalRuntimePlayerCommandLoopVocabulary.SnapshotsFileName);
+        var result = Path.Combine(
+            root,
+            CanonicalRuntimePlayerCommandLoopVocabulary.ProceduralOutputDirectory,
+            CanonicalRuntimePlayerCommandLoopVocabulary.ResultFileName);
+        return new CanonicalRuntimePlayerCommandLoopUnitySmoke
+        {
+            UnityAvailable = true,
+            SnapshotsPathExists = true,
+            ResultPathExists = true,
+            PassMarkerPresent = true,
+            FailMarkerPresent = false,
+            SnapshotContractPresent = true,
+            UnityPlayerConsumedCommandLoopSnapshots = true,
+            Passed = true,
+            UnityPath = "test-unity",
+            SnapshotsPath = Relative(root, snapshots),
+            ResultPath = Relative(root, result),
+            Status = "GREEN"
+        };
+    }
+
+    private static string Relative(string root, string path) =>
+        Path.GetRelativePath(root, Path.GetFullPath(path)).Replace('\\', '/');
 
     private static string ProjectRoot()
     {

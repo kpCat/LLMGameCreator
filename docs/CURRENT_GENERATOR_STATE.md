@@ -1,8 +1,43 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 135 canonical runtime playable player loop readiness
+Updated by: Goal 136 canonical runtime player command loop execution matrix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 136 produced for review:
+
+```text
+canonical_runtime_player_command_loop_execution_matrix_verification required
+implementationStatus=GREEN
+accepted=false
+manualUnityOptional=true
+projectionOnly=false
+canonicalRuntimeSource=true
+playerCommandLoopCoverage=true
+playerAdapterCoverage=true
+unityGameplayTruth=false
+unityConsumesRuntimeSnapshots=true
+selectedCandidateExecutedByRuntime=true
+noUnclassifiedErrorDiagnostics=true
+playerCommandCount=13
+playerSnapshotCount=13
+runtimeEventCount>=10
+```
+
+Goal136 consumes the Goal134 canonical runtime transcript/state summary and the
+Goal135 PlayerAdapter contract/plan for the Goal131 selected candidate
+`minimal-map-game-balanced-baseline`. It executes a deterministic command loop
+through Runtime-owned services across load, start, movement, interaction,
+dialogue, quest, inventory, crafting, harvest, transaction, encounter, combat
+and final-state categories. Unity/player proof remains consumption of runtime
+snapshots only; Unity is not gameplay truth.
+
+Evidence lives under
+`.llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/`,
+export metadata under
+`.llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/`,
+and the short manual note at
+`docs/manual-acceptance/canonical-runtime-player-command-loop-execution-matrix.md`.
 
 Goal 135 produced for review:
 
@@ -36,8 +71,9 @@ and the short manual note at
 Goal133A remains the strategy rebaseline that routed this work away from
 projection-only wrappers. Goal134 is the first canonical runtime pivot after
 that rebaseline; Goal135 builds the player-loop readiness layer on that Runtime
-transcript without mutating the sample package, public GamePackage schema,
-provider/media/LLM/Lua/generator-library code or Unity scenes/prefabs/
+transcript; Goal136 executes the selected candidate through the Runtime-owned
+player command loop without mutating the sample package, public GamePackage
+schema, provider/media/LLM/Lua/generator-library code or Unity scenes/prefabs/
 ProjectSettings/Packages/StreamingAssets.
 
 Goal 119 produced for review:

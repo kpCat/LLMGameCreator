@@ -1,0 +1,14 @@
+{
+  "goalId": "goal_136_canonical_runtime_player_command_loop_execution_matrix",
+  "manualInputRejected": true,
+  "outputRootUnderGoal136": true,
+  "samplePackageReadOnly": true,
+  "gamePackageSchemaUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged": true,
+  "runtimeOwnsCommandExecution": true,
+  "playerAdapterDoesNotExecuteGameplay": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "passed": true
+}
