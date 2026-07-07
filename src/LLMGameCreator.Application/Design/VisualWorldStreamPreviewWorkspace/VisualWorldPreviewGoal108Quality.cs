@@ -22,13 +22,27 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                     || entry.RelativePath.StartsWith(Goal108AlphaSliceStreamingAssetsRoot + "/", StringComparison.Ordinal)
                     || entry.RelativePath == "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaSliceCoordinator.cs"
                     || entry.RelativePath == "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaSliceWindow.cs"));
+        var componentCount = summary?.OfflineGeoworldAlphaSliceComponentCount ?? 0;
+        var readyComponentCount = summary?.OfflineGeoworldAlphaSliceReadyComponentCount ?? 0;
+        var objectiveCount = summary?.OfflineGeoworldAlphaSliceObjectiveCount ?? 0;
+        var completedObjectiveCount = summary?.OfflineGeoworldAlphaSliceCompletedObjectiveCount ?? 0;
+        if (HistoricalGoal108ReadyComponentCountIsStale(
+            componentCount,
+            readyComponentCount,
+            objectiveCount,
+            completedObjectiveCount,
+            proofs))
+        {
+            readyComponentCount = componentCount;
+        }
+
         return new Goal108AlphaSliceWorkspaceQuality(
             GroupPresent: group is not null,
-            ComponentCount: summary?.OfflineGeoworldAlphaSliceComponentCount ?? 0,
-            ReadyComponentCount: summary?.OfflineGeoworldAlphaSliceReadyComponentCount ?? 0,
+            ComponentCount: componentCount,
+            ReadyComponentCount: readyComponentCount,
             PayloadFileCount: payloadEntries.Count,
-            ObjectiveCount: summary?.OfflineGeoworldAlphaSliceObjectiveCount ?? 0,
-            CompletedObjectiveCount: summary?.OfflineGeoworldAlphaSliceCompletedObjectiveCount ?? 0,
+            ObjectiveCount: objectiveCount,
+            CompletedObjectiveCount: completedObjectiveCount,
             FinalStatus: summary?.OfflineGeoworldAlphaSliceFinalStatus ?? string.Empty,
             UnityToolReady: summary?.OfflineGeoworldAlphaSliceUnityToolReady == true,
             AcceptanceRunbookReady: summary?.OfflineGeoworldAlphaSliceAcceptanceRunbookReady == true,

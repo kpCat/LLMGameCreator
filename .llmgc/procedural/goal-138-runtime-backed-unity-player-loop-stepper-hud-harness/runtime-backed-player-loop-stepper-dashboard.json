@@ -1,0 +1,22 @@
+{
+  "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+  "status": "GREEN",
+  "accepted": false,
+  "acceptedGoal137": true,
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "frameCount": 13,
+  "requiredFrameCategoriesPresent": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false,
+  "stepperWindowPresent": true,
+  "stepperBatchSmokePassed": true,
+  "manualUnityOptional": true,
+  "normalCommand": ".devflow\\scripts\\run-runtime-backed-unity-player-loop-stepper.cmd",
+  "reportPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/one-click-runtime-backed-player-loop-stepper-report.md",
+  "modelPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-model.json",
+  "missingFrameCategories": [],
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+  "rootPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness",
+  "indexedFileCount": 9,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/goal137-human-acceptance-record.json",
+      "role": "goal138_goal137_human_acceptance_record",
+      "sha256": "726eed1605f580d34245847c2bd1ee599f266903e26fe8710e0833097cacc593"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/one-click-runtime-backed-player-loop-stepper-report.json",
+      "role": "goal138_one_click_runtime_backed_player_loop_stepper_report",
+      "sha256": "e07762c7d1dc8ce5b6c71bc91132083daad0800c10969b5dd5eb77f5e6d1cbda"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/one-click-runtime-backed-player-loop-stepper-report.md",
+      "role": "goal138_one_click_runtime_backed_player_loop_stepper_report",
+      "sha256": "697fc218f69b8629b2772a39db330b6864af115a4c933bb3223fa27499f53d7f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-dashboard.json",
+      "role": "goal138_runtime_backed_player_loop_stepper_dashboard",
+      "sha256": "c5c4303a424320238ba20df2f80f6661711b1b874cf9b86974e08e890a6973b0"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-frame-index.json",
+      "role": "goal138_runtime_backed_player_loop_stepper_frame_index",
+      "sha256": "bd9d28d24683d6237ee7b0564e72d1b60c8f85c98ac34d390bf90462dff5d582"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-model.json",
+      "role": "goal138_runtime_backed_player_loop_stepper_model",
+      "sha256": "1a43a87d3c2a0ab21fa240f5d06a1a09539b0b5f343ca6e057aa72ba660c6e0f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-negative-proof.json",
+      "role": "goal138_runtime_backed_player_loop_stepper_negative_proof",
+      "sha256": "e5a0d8cd39796b3a07cdc45bed2ae607ca5c7ca62a851203045e72de642d1fbf"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-result.json",
+      "role": "goal138_runtime_backed_player_loop_stepper_result",
+      "sha256": "a76547ef0db7d116d6bd4f9c830b85a8577b563d40594ca591c54abff551bd63"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/unity-player-loop-stepper-smoke.json",
+      "role": "goal138_unity_player_loop_stepper_smoke",
+      "sha256": "e8e1ee5934edfdcd405f3937bc06a74423ad79357d34afb9d562bae78619e4e7"
+    }
+  ]
+}

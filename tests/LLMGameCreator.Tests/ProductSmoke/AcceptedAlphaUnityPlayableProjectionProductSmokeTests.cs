@@ -6,6 +6,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.ProductSmoke;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
 {
     [Fact]
@@ -54,6 +55,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             await BuildGoal136CanonicalRuntimePlayerCommandLoopAsync(root);
         var canonicalRuntimeUnityPlayerLoopPlayback =
             await BuildGoal137CanonicalRuntimeUnityPlayerLoopPlaybackAsync(root);
+        var runtimeBackedUnityPlayerLoopStepper =
+            await BuildGoal138RuntimeBackedUnityPlayerLoopStepperAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -396,6 +399,15 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.False(canonicalRuntimeUnityPlayerLoopPlayback.Dashboard.UnityGameplayTruth);
         Assert.False(canonicalRuntimeUnityPlayerLoopPlayback.Dashboard.ProjectionOnly);
         Assert.True(canonicalRuntimeUnityPlayerLoopPlayback.Dashboard.SelectedCandidateExecutedByRuntime);
+        Assert.Equal("GREEN", runtimeBackedUnityPlayerLoopStepper.Dashboard.Status);
+        Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.AcceptedGoal137);
+        Assert.Equal(13, runtimeBackedUnityPlayerLoopStepper.Dashboard.FrameCount);
+        Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.RequiredFrameCategoriesPresent);
+        Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.RuntimeAuthority);
+        Assert.False(runtimeBackedUnityPlayerLoopStepper.Dashboard.UnityGameplayTruth);
+        Assert.False(runtimeBackedUnityPlayerLoopStepper.Dashboard.ProjectionOnly);
+        Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.StepperWindowPresent);
+        Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.StepperBatchSmokePassed);
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -430,6 +442,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysCanonicalRuntimePlayerCommandLoop);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysRuntimeBackedUnityPlayerLoopStepper);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -462,6 +476,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "canonical_runtime_player_command_loop");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "canonical_runtime_unity_player_loop_playback");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "runtime_backed_unity_player_loop_stepper");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -496,6 +512,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.CanonicalRuntimeUnityPlayerLoopPlaybackGroupPresent);
         Assert.True(workspace.QualityGateScan.CanonicalRuntimeUnityPlayerLoopPlaybackQualityGatePassed);
         Assert.True(workspace.QualityGateScan.CanonicalRuntimeUnityPlayerLoopPlaybackGoal137FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopStepperGroupPresent);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopStepperQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopStepperFilesDiscoveredByRelativePaths);
         if (workspace.QualityGateScan.GamePackageCandidateMatrixStatus == "GREEN")
         {
             Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixCandidateCount);
@@ -578,6 +597,10 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             StringComparison.Ordinal);
         Assert.Contains(
             "unityPlayerLoopPlaybackPassed: true",
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "stepperBatchSmokePassed: true",
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }
@@ -680,6 +703,38 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             UnityPath = "test-unity",
             FramesPath = Relative(root, frames),
             ResultPath = Relative(root, result),
+            Status = "GREEN"
+        };
+    }
+
+    private static async Task<RuntimeBackedUnityPlayerLoopStepperWriteResult>
+        BuildGoal138RuntimeBackedUnityPlayerLoopStepperAsync(string root) =>
+        await new RuntimeBackedUnityPlayerLoopStepperArtifactService()
+            .BuildAndWriteAsync(
+                root,
+                new RuntimeBackedUnityPlayerLoopStepperRequest(),
+                unitySmoke: PassedGoal138UnitySmoke(root));
+
+    private static RuntimeBackedUnityPlayerLoopStepperUnitySmoke PassedGoal138UnitySmoke(string root)
+    {
+        var model = Path.Combine(
+            root,
+            RuntimeBackedUnityPlayerLoopStepperVocabulary.ProceduralOutputDirectory,
+            RuntimeBackedUnityPlayerLoopStepperVocabulary.ModelFileName);
+        return new RuntimeBackedUnityPlayerLoopStepperUnitySmoke
+        {
+            UnityAvailable = true,
+            ModelPathExists = true,
+            PassMarkerPresent = true,
+            FailMarkerPresent = false,
+            FrameCountPassed = true,
+            RequiredFrameCategoriesPresent = true,
+            RuntimeAuthorityMarkersPresent = true,
+            StepperWindowPresent = true,
+            StepperBatchSmokePassed = true,
+            Passed = true,
+            UnityPath = "test-unity",
+            ModelPath = Relative(root, model),
             Status = "GREEN"
         };
     }

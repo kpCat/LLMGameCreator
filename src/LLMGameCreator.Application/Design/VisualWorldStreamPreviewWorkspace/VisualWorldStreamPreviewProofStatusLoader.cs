@@ -144,8 +144,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal135CanonicalRuntimePlayerLoopReadinessProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal136CanonicalRuntimePlayerCommandLoopProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal137CanonicalRuntimeUnityPlayerLoopPlaybackProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal138RuntimeBackedUnityPlayerLoopStepperProofStatus(projectRoot, proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
+        proofs = NormalizeHistoricalGoal107Goal108SourceHealthProofs(projectRoot, proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
     }

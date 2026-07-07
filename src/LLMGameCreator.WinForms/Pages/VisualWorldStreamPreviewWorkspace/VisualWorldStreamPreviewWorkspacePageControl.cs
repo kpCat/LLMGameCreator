@@ -17,7 +17,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         VisualWorldStreamPreviewWorkspaceService service)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
-        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel();
+        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel(); ConfigureGoal138RuntimeBackedUnityPlayerLoopStepperPanel();
         ConfigureControls();
         WireEvents(); WireGoal132CandidatePipelineOperatorEvents();
     }
@@ -38,7 +38,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         _statusLabel.Text = BuildStatusText(result);
         BindGroups(result);
         BindProofs(result);
-        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result); BindGoal135PlayerLoop(result); BindGoal136PlayerCommandLoop(result); BindGoal137UnityPlayerLoopPlayback(result);
+        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result); BindGoal135PlayerLoop(result); BindGoal136PlayerCommandLoop(result); BindGoal137UnityPlayerLoopPlayback(result); BindGoal138RuntimeBackedUnityPlayerLoopStepper(result);
     }
 
     private void ConfigureControls()

@@ -1,0 +1,13 @@
+{
+  "goalId": "goal_137_canonical_runtime_unity_player_loop_playback_harness",
+  "accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "manualUnityOptional": true,
+  "selectedCandidate": "minimal-map-game-balanced-baseline",
+  "playbackFrames": 13,
+  "unityPlaybackSmoke": "GREEN",
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "rawManualInputNotCommitted": true
+}

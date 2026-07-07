@@ -269,7 +269,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/GOAL.md` | Goal 134 task: canonical Runtime selected-candidate playthrough matrix over the Goal131 selected handoff. Current gate=`canonical_runtime_selected_candidate_playthrough_matrix_verification`, result is `GREEN`, accepted=false, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-canonical-runtime-selected-candidate-playthrough.cmd`, evidence under `.llmgc/procedural/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/`, export metadata under `.llmgc/exports/goal-134-canonical-runtime-selected-candidate-playthrough-matrix/`, package validation, canonical runtime transcript/state summary, save/load/replay proof and Unity/player transcript smoke are present, projectionOnly=false, selectedCandidateExecutedByRuntime=true and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-135-canonical-runtime-playable-player-loop-readiness/GOAL.md` | Goal 135 task: canonical Runtime playable player-loop readiness over the Goal134 canonical transcript/state summary. Current gate=`canonical_runtime_playable_player_loop_readiness_verification`, result is `GREEN`, accepted=false, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-canonical-runtime-player-loop-readiness.cmd`, evidence under `.llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/`, export metadata under `.llmgc/exports/goal-135-canonical-runtime-playable-player-loop-readiness/`, PlayerAdapter contract, 13-step player-loop plan, required categories, diagnostic classification and Unity/player readiness smoke are present, projectionOnly=false, canonicalRuntimeSource=true, playerAdapterCoverage=true, unityGameplayTruth=false and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-136-canonical-runtime-player-command-loop-execution-matrix/GOAL.md` | Goal 136 task: canonical Runtime player command-loop execution matrix over Goal134/Goal135 evidence. Current gate=`canonical_runtime_player_command_loop_execution_matrix_verification`, result is `GREEN`, accepted=false, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-canonical-runtime-player-command-loop.cmd`, evidence under `.llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/`, export metadata under `.llmgc/exports/goal-136-canonical-runtime-player-command-loop-execution-matrix/`, playerCommandCount=13, snapshotCount=13, runtimeEventCount>=10, all required command categories, state hash chain, diagnostic classification and Unity/player snapshot consumption smoke are present, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
-| `docs/agent-tasks/goal-137-canonical-runtime-unity-player-loop-playback-harness/GOAL.md` | Goal 137 task: canonical Runtime Unity/player loop playback harness over Goal136 snapshots. Current gate=`canonical_runtime_unity_player_loop_playback_harness_verification`, result is `GREEN`, accepted=false, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-canonical-runtime-unity-player-loop-playback.cmd`, evidence under `.llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/`, export metadata under `.llmgc/exports/goal-137-canonical-runtime-unity-player-loop-playback-harness/`, playbackFrameCount=13, required frame categories, Unity/player playback smoke, runtimeSnapshotSource=true, unityConsumesRuntimeSnapshots=true, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-137-canonical-runtime-unity-player-loop-playback-harness/GOAL.md` | Goal 137 task: canonical Runtime Unity/player loop playback harness over Goal136 snapshots. Current gate=`canonical_runtime_unity_player_loop_playback_harness_verification`, result is `GREEN`, accepted=true by human handoff, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-canonical-runtime-unity-player-loop-playback.cmd`, evidence under `.llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/`, export metadata under `.llmgc/exports/goal-137-canonical-runtime-unity-player-loop-playback-harness/`, playbackFrameCount=13, required frame categories, Unity/player playback smoke, runtimeSnapshotSource=true, unityConsumesRuntimeSnapshots=true, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/GOAL.md` | Goal 138 task: runtime-backed Unity player-loop stepper/HUD harness over Goal137 playback frames and Goal136 Runtime snapshots. Current gate=`runtime_backed_unity_player_loop_stepper_hud_harness_verification`, result is `GREEN`, accepted=false, acceptedGoal137=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-stepper.cmd`, evidence under `.llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`, export metadata under `.llmgc/exports/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`, frameCount=13, required frame categories, runtimeAuthority=true, stepperWindowPresent=true, stepperBatchSmokePassed=true, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it records Goal137 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -347,30 +348,31 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-canonical_runtime_unity_player_loop_playback_harness_verification
+runtime_backed_unity_player_loop_stepper_hud_harness_verification
 ```
 
-Goal137 canonical runtime Unity/player loop playback harness is produced for
+Goal138 runtime-backed Unity player-loop stepper HUD harness is produced for
 review with
-`canonical_runtime_unity_player_loop_playback_harness_verification required`,
-`accepted=false`, `manualUnityOptional=true`, `projectionOnly=false`,
-`canonicalRuntimeSource=true`, `runtimeSnapshotSource=true`,
-`unityConsumesRuntimeSnapshots=true`, `unityPlayerLoopPlaybackPassed=true`,
-`unityGameplayTruth=false` and
-`noUnclassifiedErrorDiagnostics=true`. The Goal131 selected candidate now has
+`runtime_backed_unity_player_loop_stepper_hud_harness_verification required`,
+`accepted=false`, `acceptedGoal137=true`, `manualUnityOptional=true`,
+`projectionOnly=false`, `runtimeAuthority=true`,
+`runtimeBackedUnityStepper=true`, `stepperBatchSmokePassed=true`,
+`unityGameplayTruth=false`, `frameCount=13` and
+`requiredFrameCategoriesPresent=true`. The Goal131 selected candidate now has
 package validation, canonical runtime transcript/state summary, save/load/replay
 proof, PlayerAdapter contract, 13-step player-loop plan, 13 Runtime-owned
 player commands, one snapshot per command, 13 Unity/player playback frames,
-playback smoke and a one-click report.
+Goal137 human acceptance, a runtime-backed stepper/HUD model, Unity stepper smoke
+and a one-click report.
 
 Goal132 WinForms candidate pipeline operator panel remains useful context: use
 `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` and the Goal131
 selected candidate handoff as the source candidate input, but do not treat
 selected-candidate review as the immediate next goal unless it is tied to
-canonical runtime execution. Review Goal137 evidence before starting the next
-implementation slice; if accepted, the next product step can improve real
-hands-on playable quality on the canonical Runtime/PlayerAdapter/Unity playback
-evidence instead of returning to projection-only verification.
+canonical runtime execution. Review Goal138 evidence before starting the next
+implementation slice; if accepted, the next product step should be a manual
+review/acceptance checkpoint or an explicitly runtime-backed interactive
+HUD/player loop step instead of returning to projection-only verification.
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
 `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop

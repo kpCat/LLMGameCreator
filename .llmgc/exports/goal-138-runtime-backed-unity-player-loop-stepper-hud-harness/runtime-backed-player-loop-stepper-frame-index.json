@@ -1,0 +1,86 @@
+{
+  "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "currentFrameIndex": 0,
+  "frameCount": 13,
+  "frames": [
+    {
+      "frameIndex": 0,
+      "frameCategory": "load_package",
+      "title": "Load selected package",
+      "canonicalStateHash": "bfbfce6afb9f47d30409c2a3f112a6b955941af8b518807de230f072edd7fb7f"
+    },
+    {
+      "frameIndex": 1,
+      "frameCategory": "show_start_state",
+      "title": "Start canonical runtime",
+      "canonicalStateHash": "12f118c9a81db66faaa1371ed05943694abe0dd1969ddcc6264f7811d2c27ab9"
+    },
+    {
+      "frameIndex": 2,
+      "frameCategory": "show_map_position",
+      "title": "Move right to sign",
+      "canonicalStateHash": "8cdb8b914519b5e62215a8ad31e21333c0b75b15f54b5460ef608335823aa8c9"
+    },
+    {
+      "frameIndex": 3,
+      "frameCategory": "show_interaction_result",
+      "title": "Interact with sign",
+      "canonicalStateHash": "9db22a14ed49e94a88a9912af6ed3213f2714a98f901136fbfdb44ca8f7b9980"
+    },
+    {
+      "frameIndex": 4,
+      "frameCategory": "show_dialogue",
+      "title": "Open old guard dialogue",
+      "canonicalStateHash": "c9217844ea8b320c39d36160d5ee6d29913001e0a9125ac9dd06631f9dc74fa8"
+    },
+    {
+      "frameIndex": 5,
+      "frameCategory": "show_quest_state",
+      "title": "Start and refresh help healer quest",
+      "canonicalStateHash": "b4a0feeef3aecc3254c07cc8bb5ce7a07d0a8d9126d2eed4c05dcfb9782a3729"
+    },
+    {
+      "frameIndex": 6,
+      "frameCategory": "show_inventory_state",
+      "title": "Show inventory through runtime inventory event",
+      "canonicalStateHash": "cf555abeaa1e074354a11b0a12459a387a4433d967eb39fa9ea864166595485b"
+    },
+    {
+      "frameIndex": 7,
+      "frameCategory": "show_crafting_result",
+      "title": "Craft healing potion",
+      "canonicalStateHash": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6"
+    },
+    {
+      "frameIndex": 8,
+      "frameCategory": "show_harvest_result",
+      "title": "Harvest apple tree",
+      "canonicalStateHash": "3c80eac88e5f47f63584d0732cc3f65bc9a450c4fa7b9737d0dff33e979c08d9"
+    },
+    {
+      "frameIndex": 9,
+      "frameCategory": "show_transaction_result",
+      "title": "Execute healing potion transaction",
+      "canonicalStateHash": "745b43b5b3650f0f65665a5c08fd06f867434fb00231db6384143560a26b8d31"
+    },
+    {
+      "frameIndex": 10,
+      "frameCategory": "show_encounter_state",
+      "title": "Start goblin duel",
+      "canonicalStateHash": "7640d694b3d34f64e00faebb1b73271b59d975c15d896be2269f6da4ec3c9da9"
+    },
+    {
+      "frameIndex": 11,
+      "frameCategory": "show_combat_round",
+      "title": "Run combat round",
+      "canonicalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2"
+    },
+    {
+      "frameIndex": 12,
+      "frameCategory": "show_final_state",
+      "title": "Show final runtime state",
+      "canonicalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2"
+    }
+  ]
+}

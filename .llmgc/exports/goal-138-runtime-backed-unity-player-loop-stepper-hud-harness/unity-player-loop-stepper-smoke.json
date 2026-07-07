@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+  "unityAvailable": true,
+  "modelPathExists": true,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "frameCountPassed": true,
+  "requiredFrameCategoriesPresent": true,
+  "runtimeAuthorityMarkersPresent": true,
+  "stepperWindowPresent": true,
+  "stepperBatchSmokePassed": true,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/unity-player-loop-stepper-smoke.log",
+  "modelPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-model.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

@@ -15,6 +15,8 @@ public static class ProductLineStrategyRebaselineVocabulary
         "canonical_runtime_player_command_loop_execution_matrix_verification";
     public const string Goal137Gate =
         "canonical_runtime_unity_player_loop_playback_harness_verification";
+    public const string Goal138Gate =
+        "runtime_backed_unity_player_loop_stepper_hud_harness_verification";
     public const string NextGoal =
         "goal_134_canonical_runtime_selected_candidate_playthrough_matrix";
     public const string PostGoal134NextGoal =

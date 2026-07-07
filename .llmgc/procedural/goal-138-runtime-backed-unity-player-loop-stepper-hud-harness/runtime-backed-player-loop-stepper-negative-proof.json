@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+  "manualInputRejected": true,
+  "rawManualInputNotCommitted": true,
+  "outputRootUnderGoal138": true,
+  "samplePackageReadOnly": true,
+  "gamePackageSchemaUnchanged": true,
+  "runtimeContractsUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged": true,
+  "stepperConsumesRuntimeBackedArtifacts": true,
+  "stepperDoesNotExecuteGameplay": true,
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "passed": true
+}

@@ -1,42 +1,56 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 137 canonical runtime Unity/player loop playback harness
+Updated by: Goal 138 runtime-backed Unity player-loop stepper HUD harness
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 137 produced for review:
+Goal 138 produced for review:
 
 ```text
-canonical_runtime_unity_player_loop_playback_harness_verification required
+runtime_backed_unity_player_loop_stepper_hud_harness_verification required
 implementationStatus=GREEN
 accepted=false
+goal138Accepted=false
+acceptedGoal137=true
 manualUnityOptional=true
 projectionOnly=false
-canonicalRuntimeSource=true
-runtimeSnapshotSource=true
-unityConsumesRuntimeSnapshots=true
-unityPlayerLoopPlaybackPassed=true
+runtimeAuthority=true
+runtimeBackedUnityStepper=true
+stepperBatchSmokePassed=true
 unityGameplayTruth=false
-selectedCandidateExecutedByRuntime=true
-noUnclassifiedErrorDiagnostics=true
-playbackFrameCount=13
+frameCount=13
 requiredFrameCategoriesPresent=true
 ```
 
-Goal137 consumes the Goal136 canonical runtime command-loop snapshots for the
-Goal131 selected candidate `minimal-map-game-balanced-baseline`. It derives
-deterministic Unity/player playback frames for HUD, player position,
-interaction, dialogue, quest, inventory, crafting, harvest, transaction,
-encounter, combat and final-state presentation, then verifies Unity/player
-batchmode consumption of those runtime snapshots only. Unity remains a playback
-adapter and does not claim gameplay truth.
+Goal138 records the repository owner's human acceptance of Goal137, then
+consumes Goal137 playback frames, Goal136 canonical runtime command-loop
+snapshots/result and the Goal135 PlayerAdapter contract for the Goal131 selected
+candidate `minimal-map-game-balanced-baseline`. It writes a deterministic
+13-frame stepper/HUD model with all required runtime-backed presentation
+categories, verifies Unity/player batchmode consumption of that model and keeps
+gameplay truth in Runtime artifacts.
 
 Evidence lives under
-`.llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/`,
+`.llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`,
 export metadata under
-`.llmgc/exports/goal-137-canonical-runtime-unity-player-loop-playback-harness/`,
+`.llmgc/exports/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`,
 and the short manual note at
-`docs/manual-acceptance/canonical-runtime-unity-player-loop-playback-harness.md`.
+`docs/manual-acceptance/runtime-backed-unity-player-loop-stepper-hud-harness.md`.
+
+Goal 137 is now recorded as accepted by human handoff:
+
+```text
+goal137Accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+manualUnityOptional=true
+selectedCandidate=minimal-map-game-balanced-baseline
+playbackFrames=13
+Unity playback smoke GREEN
+projectionOnly=false
+unityGameplayTruth=false
+rawManualInputNotCommitted=true
+```
 
 Goal 136 produced for review:
 
@@ -107,8 +121,9 @@ projection-only wrappers. Goal134 is the first canonical runtime pivot after
 that rebaseline; Goal135 builds the player-loop readiness layer on that Runtime
 transcript; Goal136 executes the selected candidate through the Runtime-owned
 player command loop; Goal137 turns those Runtime-owned snapshots into a
-Unity/player playback harness without mutating the sample package, public
-GamePackage schema, provider/media/LLM/Lua/generator-library code or Unity
+Unity/player playback harness; Goal138 adds a runtime-backed stepper/HUD harness
+over that playback without mutating the sample package, public GamePackage
+schema, provider/media/LLM/Lua/generator-library code or Unity
 scenes/prefabs/ProjectSettings/Packages/StreamingAssets.
 
 Goal 119 produced for review:
