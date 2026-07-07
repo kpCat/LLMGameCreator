@@ -67,7 +67,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                        + ReadOptionalText(projectRoot, pageGoal117RelativePath)
                        + "\n" + ReadOptionalText(projectRoot, pageGoal118RelativePath)
                        + "\n" + ReadOptionalText(projectRoot, pageGoal119RelativePath)
-                       + "\n" + ReadGoal120Through138WinFormsPageText(projectRoot);
+                       + "\n" + ReadGoal120Through139WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -512,7 +512,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var bindDisplaysCanonicalRuntimePlayerLoop = ScanGoal135CanonicalRuntimePlayerLoopBinding(pageText, pageRelativePath, diagnostics);
         var bindDisplaysCanonicalRuntimePlayerCommandLoop = ScanGoal136CanonicalRuntimePlayerCommandLoopBinding(pageText, pageRelativePath, diagnostics);
         var bindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback = ScanGoal137CanonicalRuntimeUnityPlayerLoopPlaybackBinding(pageText, pageRelativePath, diagnostics);
-        var bindDisplaysRuntimeBackedUnityPlayerLoopStepper = ScanGoal138RuntimeBackedUnityPlayerLoopStepperBinding(pageText, pageRelativePath, diagnostics);
+        var bindDisplaysRuntimeBackedUnityPlayerLoopStepper = ScanGoal138RuntimeBackedUnityPlayerLoopStepperBinding(pageText, pageRelativePath, diagnostics); var bindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls = ScanGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsBinding(pageText, pageRelativePath, diagnostics);
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
         AddIfFalse(serviceRegistered, "goal092.winforms.service_not_registered", compositionRelativePath, diagnostics);
@@ -641,7 +641,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(bindDisplaysParameterizedGamePackageRunner, "goal128.winforms.parameterized_gamepackage_runner_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGamePackageCandidateMatrix, "goal129.winforms.gamepackage_candidate_matrix_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysGamePackageCandidateFactory, "goal130.winforms.gamepackage_candidate_factory_bind_missing", pageRelativePath, diagnostics);
-        AddIfFalse(bindDisplaysRuntimeBackedUnityPlayerLoopStepper, "goal138.winforms.runtime_backed_unity_player_loop_stepper_bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(bindDisplaysRuntimeBackedUnityPlayerLoopStepper, "goal138.winforms.runtime_backed_unity_player_loop_stepper_bind_missing", pageRelativePath, diagnostics); AddIfFalse(bindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls, "goal139.winforms.runtime_backed_unity_player_loop_interactive_controls_bind_missing", pageRelativePath, diagnostics);
         return new VisualWorldPreviewWinFormsBindingInventory
         {
             Passed = diagnostics.Count == 0,
@@ -691,7 +691,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysCanonicalRuntimePlayerLoopReadiness = bindDisplaysCanonicalRuntimePlayerLoop,
             PageBindDisplaysCanonicalRuntimePlayerCommandLoop = bindDisplaysCanonicalRuntimePlayerCommandLoop,
             PageBindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback = bindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback,
-            PageBindDisplaysRuntimeBackedUnityPlayerLoopStepper = bindDisplaysRuntimeBackedUnityPlayerLoopStepper,
+            PageBindDisplaysRuntimeBackedUnityPlayerLoopStepper = bindDisplaysRuntimeBackedUnityPlayerLoopStepper, PageBindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls = bindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls,
             Diagnostics = diagnostics
         };
     }

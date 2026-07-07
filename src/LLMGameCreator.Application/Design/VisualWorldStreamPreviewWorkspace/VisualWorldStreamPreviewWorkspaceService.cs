@@ -86,7 +86,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildCanonicalRuntimePlayerLoopReadinessGroup(projectRoot, diagnostics),
             BuildCanonicalRuntimePlayerCommandLoopGroup(projectRoot, diagnostics),
             BuildCanonicalRuntimeUnityPlayerLoopPlaybackGroup(projectRoot, diagnostics),
-            BuildRuntimeBackedUnityPlayerLoopStepperGroup(projectRoot, diagnostics)
+            BuildRuntimeBackedUnityPlayerLoopStepperGroup(projectRoot, diagnostics),
+            BuildRuntimeBackedUnityPlayerLoopInteractiveControlsGroup(projectRoot, diagnostics)
         };
         groups = NormalizeHistoricalManualAcceptanceGroups(groups).ToList();
 

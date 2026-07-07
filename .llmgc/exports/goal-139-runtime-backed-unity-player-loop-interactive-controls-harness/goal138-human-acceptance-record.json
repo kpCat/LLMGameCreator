@@ -1,0 +1,13 @@
+{
+  "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+  "accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "selectedCandidate": "minimal-map-game-balanced-baseline",
+  "stepperFrames": 13,
+  "stepperBatchSmoke": "GREEN",
+  "projectionOnly": false,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "rawManualInputNotCommitted": true
+}

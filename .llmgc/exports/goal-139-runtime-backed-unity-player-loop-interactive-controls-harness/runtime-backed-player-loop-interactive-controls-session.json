@@ -1,0 +1,171 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "frameCount": 13,
+  "finalFrameIndex": 12,
+  "controlScriptPassed": true,
+  "finalFrameReachable": true,
+  "runtimeAuthorityMarkersPresent": true,
+  "steps": [
+    {
+      "stepIndex": 0,
+      "action": "load_model",
+      "frameIndexBefore": 0,
+      "frameIndexAfter": 0,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 1,
+      "action": "assert_frame_count",
+      "frameIndexBefore": 0,
+      "frameIndexAfter": 0,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 2,
+      "action": "first",
+      "frameIndexBefore": 0,
+      "frameIndexAfter": 0,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 3,
+      "action": "next",
+      "frameIndexBefore": 0,
+      "frameIndexAfter": 1,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 4,
+      "action": "next",
+      "frameIndexBefore": 1,
+      "frameIndexAfter": 2,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 5,
+      "action": "previous",
+      "frameIndexBefore": 2,
+      "frameIndexAfter": 1,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 6,
+      "action": "last",
+      "frameIndexBefore": 1,
+      "frameIndexAfter": 12,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 7,
+      "action": "first",
+      "frameIndexBefore": 12,
+      "frameIndexAfter": 0,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 8,
+      "action": "autoplay_tick",
+      "frameIndexBefore": 0,
+      "frameIndexAfter": 1,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 9,
+      "action": "autoplay_tick",
+      "frameIndexBefore": 1,
+      "frameIndexAfter": 2,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 10,
+      "action": "autoplay_all",
+      "frameIndexBefore": 2,
+      "frameIndexAfter": 12,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 11,
+      "action": "copy_current_frame_summary",
+      "frameIndexBefore": 12,
+      "frameIndexAfter": 12,
+      "passed": true,
+      "copiedFrameSummary": "Show final runtime state | map/village @ 2,1 player=(2,1)",
+      "runtimeHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+      "hudLines": [
+        "map=map/village @ 2,1",
+        "quest=quest/help_healer:active:",
+        "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+        "combat=encounter/goblin_duel:round=1:turn=1:active=True",
+        "diagnostics=eventCount=1"
+      ],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 12,
+      "action": "assert_final_frame_reachable",
+      "frameIndexBefore": 12,
+      "frameIndexAfter": 12,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "",
+      "hudLines": [],
+      "diagnostic": "passed"
+    },
+    {
+      "stepIndex": 13,
+      "action": "assert_runtime_authority_markers",
+      "frameIndexBefore": 12,
+      "frameIndexAfter": 12,
+      "passed": true,
+      "copiedFrameSummary": "",
+      "runtimeHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+      "hudLines": [],
+      "diagnostic": "passed"
+    }
+  ]
+}

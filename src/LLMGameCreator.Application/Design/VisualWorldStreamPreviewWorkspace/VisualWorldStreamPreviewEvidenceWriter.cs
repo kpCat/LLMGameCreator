@@ -176,8 +176,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var canonicalRuntimePlayerLoop = BuildGoal135CanonicalRuntimePlayerLoopQuality(groups, proofs);
         var canonicalRuntimePlayerCommandLoop = BuildGoal136CanonicalRuntimePlayerCommandLoopQuality(groups, proofs);
         var canonicalRuntimeUnityPlayerLoopPlayback = BuildGoal137CanonicalRuntimeUnityPlayerLoopPlaybackQuality(groups, proofs);
-        var runtimeBackedUnityPlayerLoopStepper = BuildGoal138RuntimeBackedUnityPlayerLoopStepperQuality(groups, proofs);
-        canonicalRuntimePlayerLoop = ResolveGoal135ReadinessFromCanonicalSuccessor(canonicalRuntimePlayerLoop, canonicalRuntimePlayerCommandLoop.QualityGatePassed || canonicalRuntimeUnityPlayerLoopPlayback.QualityGatePassed || runtimeBackedUnityPlayerLoopStepper.QualityGatePassed);
+        var runtimeBackedUnityPlayerLoopStepper = BuildGoal138RuntimeBackedUnityPlayerLoopStepperQuality(groups, proofs); var runtimeBackedUnityPlayerLoopInteractiveControls = BuildGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsQuality(groups, proofs);
+        canonicalRuntimePlayerLoop = ResolveGoal135ReadinessFromCanonicalSuccessor(canonicalRuntimePlayerLoop, canonicalRuntimePlayerCommandLoop.QualityGatePassed || canonicalRuntimeUnityPlayerLoopPlayback.QualityGatePassed || runtimeBackedUnityPlayerLoopStepper.QualityGatePassed || runtimeBackedUnityPlayerLoopInteractiveControls.QualityGatePassed);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -376,7 +376,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal135CanonicalRuntimePlayerLoopQualityDiagnostics(canonicalRuntimePlayerLoop, binding, diagnostics);
         AddGoal136CanonicalRuntimePlayerCommandLoopQualityDiagnostics(canonicalRuntimePlayerCommandLoop, binding, diagnostics);
         AddGoal137CanonicalRuntimeUnityPlayerLoopPlaybackQualityDiagnostics(canonicalRuntimeUnityPlayerLoopPlayback, binding, diagnostics);
-        AddGoal138RuntimeBackedUnityPlayerLoopStepperQualityDiagnostics(runtimeBackedUnityPlayerLoopStepper, binding, diagnostics);
+        AddGoal138RuntimeBackedUnityPlayerLoopStepperQualityDiagnostics(runtimeBackedUnityPlayerLoopStepper, binding, diagnostics); AddGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsQualityDiagnostics(runtimeBackedUnityPlayerLoopInteractiveControls, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -692,6 +692,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal135 = ApplyGoal135CanonicalRuntimePlayerLoopQuality(withGoal134, canonicalRuntimePlayerLoop, binding);
         var withGoal136 = ApplyGoal136CanonicalRuntimePlayerCommandLoopQuality(withGoal135, canonicalRuntimePlayerCommandLoop, binding);
         var withGoal137 = ApplyGoal137CanonicalRuntimeUnityPlayerLoopPlaybackQuality(withGoal136, canonicalRuntimeUnityPlayerLoopPlayback, binding);
-        return ApplyGoal138RuntimeBackedUnityPlayerLoopStepperQuality(withGoal137, runtimeBackedUnityPlayerLoopStepper, binding);
+        var withGoal138 = ApplyGoal138RuntimeBackedUnityPlayerLoopStepperQuality(withGoal137, runtimeBackedUnityPlayerLoopStepper, binding); return ApplyGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsQuality(withGoal138, runtimeBackedUnityPlayerLoopInteractiveControls, binding);
     }
 }

@@ -1,0 +1,107 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "expectedFrameCount": 13,
+  "requiredControls": [
+    "load_model",
+    "first",
+    "previous",
+    "next",
+    "last",
+    "autoplay_tick",
+    "autoplay_all",
+    "copy_current_frame_summary",
+    "show_runtime_hash",
+    "show_hud_lines"
+  ],
+  "steps": [
+    {
+      "stepIndex": 0,
+      "action": "load_model",
+      "expectedFrameIndex": 0,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 1,
+      "action": "assert_frame_count",
+      "expectedFrameIndex": 0,
+      "assertion": "frameCount == 13"
+    },
+    {
+      "stepIndex": 2,
+      "action": "first",
+      "expectedFrameIndex": 0,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 3,
+      "action": "next",
+      "expectedFrameIndex": 1,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 4,
+      "action": "next",
+      "expectedFrameIndex": 2,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 5,
+      "action": "previous",
+      "expectedFrameIndex": 1,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 6,
+      "action": "last",
+      "expectedFrameIndex": 12,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 7,
+      "action": "first",
+      "expectedFrameIndex": 0,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 8,
+      "action": "autoplay_tick",
+      "expectedFrameIndex": 1,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 9,
+      "action": "autoplay_tick",
+      "expectedFrameIndex": 2,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 10,
+      "action": "autoplay_all",
+      "expectedFrameIndex": 12,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 11,
+      "action": "copy_current_frame_summary",
+      "expectedFrameIndex": 12,
+      "assertion": "control exists and does not mutate gameplay"
+    },
+    {
+      "stepIndex": 12,
+      "action": "assert_final_frame_reachable",
+      "expectedFrameIndex": 12,
+      "assertion": "currentFrameIndex == frameCount - 1"
+    },
+    {
+      "stepIndex": 13,
+      "action": "assert_runtime_authority_markers",
+      "expectedFrameIndex": 12,
+      "assertion": "runtimeAuthority == true && projectionOnly == false && unityGameplayTruth == false"
+    }
+  ],
+  "deterministic": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false
+}

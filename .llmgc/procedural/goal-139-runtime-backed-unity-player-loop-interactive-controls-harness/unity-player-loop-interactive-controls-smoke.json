@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "unityAvailable": true,
+  "interactiveModelPathExists": true,
+  "controlScriptPathExists": true,
+  "frameCountPassed": true,
+  "requiredControlsPresent": true,
+  "controlScriptPassed": true,
+  "runtimeAuthorityMarkersPresent": true,
+  "interactiveControlsWindowPresent": true,
+  "unityGameplayTruth": false,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/unity-player-loop-interactive-controls-smoke.log",
+  "interactiveModelPath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-model.json",
+  "controlScriptPath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-script.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

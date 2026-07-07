@@ -1,17 +1,14 @@
-# Goal 138 Runtime-backed Unity Player Loop Stepper HUD Harness
+# Goal 138 Runtime-backed Unity Player Loop Stepper HUD Harness Acceptance
 
-accepted=false
-acceptedByHuman=false
+accepted=true
+acceptedByHuman=true
 acceptedByCodex=false
-manualUnityOptional=true
-candidateId=minimal-map-game-balanced-baseline
-frameCount=13
-requiredFrameCategoriesPresent=true
+selectedCandidate=minimal-map-game-balanced-baseline
+stepperFrames=13
+stepperBatchSmoke=GREEN
+projectionOnly=false
 runtimeAuthority=true
 unityGameplayTruth=false
-projectionOnly=false
-stepperWindowPresent=true
-stepperBatchSmokePassed=true
-normalCommand=.devflow\scripts\run-runtime-backed-unity-player-loop-stepper.cmd
-reportPath=.llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/one-click-runtime-backed-player-loop-stepper-report.md
-status=GREEN
+rawManualInputNotCommitted=true
+
+Source: Goal139 task handoff recorded the owner acceptance. Raw manual input remains outside committed artifacts.

@@ -1,0 +1,58 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "rootPath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness",
+  "indexedFileCount": 10,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/goal138-human-acceptance-record.json",
+      "role": "goal139_goal138_human_acceptance_record",
+      "sha256": "d473aa9ce09f075974e82a70a2637c8dc0cee1761f665a88b90d13eed78ce38c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/one-click-runtime-backed-player-loop-interactive-controls-report.json",
+      "role": "goal139_one_click_runtime_backed_player_loop_interactive_controls_report",
+      "sha256": "aefb2073ed5285c3183f5b0eb2b426682b0df2bf4be988cde4e3013725ade09c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/one-click-runtime-backed-player-loop-interactive-controls-report.md",
+      "role": "goal139_one_click_runtime_backed_player_loop_interactive_controls_report",
+      "sha256": "859cff2d9c799e1fbb57ced6f1cbae8d11b7786f08647f8fcfe682f9865501ac"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-dashboard.json",
+      "role": "goal139_runtime_backed_player_loop_interactive_controls_dashboard",
+      "sha256": "f77c2d64c86cbb46b7a037e5ae16de5bd23d169aa174da7261bb8807f8fec3fa"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-model.json",
+      "role": "goal139_runtime_backed_player_loop_interactive_controls_model",
+      "sha256": "d624ec6305f98c3803391cc60964013d49ce640441746c7eb8b6964758f8d4a4"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-negative-proof.json",
+      "role": "goal139_runtime_backed_player_loop_interactive_controls_negative_proof",
+      "sha256": "2c64621d39ee7d2c6932cc2c78674e18cf6e2cb9e512a385a1b7829b5861cab3"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-result.json",
+      "role": "goal139_runtime_backed_player_loop_interactive_controls_result",
+      "sha256": "bc6d5006250237590165c10ad197002b8f2096191ba0c0749c1ef7906de327e0"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-script.json",
+      "role": "goal139_runtime_backed_player_loop_interactive_controls_script",
+      "sha256": "f8a0df86e2727ae90b585374f3ff97c046abece996ec722703a930a0e476caa3"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-session.json",
+      "role": "goal139_runtime_backed_player_loop_interactive_controls_session",
+      "sha256": "e0f2c566acf13250c818ca7f0559ce4678cb743d859b1248bb4097103d36ded9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/unity-player-loop-interactive-controls-smoke.json",
+      "role": "goal139_unity_player_loop_interactive_controls_smoke",
+      "sha256": "321236d20c6134ec058587d0e074e761a569519507a78e6a3cee8fdc2e4398ec"
+    }
+  ]
+}

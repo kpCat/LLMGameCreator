@@ -1,0 +1,662 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "inputs": {
+    "stepperModelPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-model.json",
+    "stepperResultPath": ".llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/runtime-backed-player-loop-stepper-result.json",
+    "playbackFramesPath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json",
+    "commandLoopSnapshotsPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json",
+    "playerAdapterContractPath": ".llmgc/procedural/goal-135-canonical-runtime-playable-player-loop-readiness/canonical-runtime-player-adapter-contract.json",
+    "stepperModelPathExists": true,
+    "stepperResultPathExists": true,
+    "playbackFramesPathExists": true,
+    "commandLoopSnapshotsPathExists": true,
+    "playerAdapterContractPathExists": true
+  },
+  "goal138Acceptance": {
+    "goalId": "goal_138_runtime_backed_unity_player_loop_stepper_hud_harness",
+    "accepted": true,
+    "acceptedByHuman": true,
+    "acceptedByCodex": false,
+    "selectedCandidate": "minimal-map-game-balanced-baseline",
+    "stepperFrames": 13,
+    "stepperBatchSmoke": "GREEN",
+    "projectionOnly": false,
+    "runtimeAuthority": true,
+    "unityGameplayTruth": false,
+    "rawManualInputNotCommitted": true
+  },
+  "model": {
+    "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+    "candidateId": "minimal-map-game-balanced-baseline",
+    "frameCount": 13,
+    "currentFrameIndex": 0,
+    "frames": [
+      {
+        "frameIndex": 0,
+        "frameCategory": "load_package",
+        "title": "Load selected package",
+        "playerFacingSummary": "Load selected package | map/village @ not_started player=(0,0)",
+        "canonicalStateHash": "bfbfce6afb9f47d30409c2a3f112a6b955941af8b518807de230f072edd7fb7f",
+        "hudLines": [
+          "map=map/village @ not_started",
+          "quest=none",
+          "inventory=none",
+          "combat=none",
+          "diagnostics=eventCount=1"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=0",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=0",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 1,
+        "frameCategory": "show_start_state",
+        "title": "Start canonical runtime",
+        "playerFacingSummary": "Start canonical runtime | map/village @ 1,1 player=(1,1)",
+        "canonicalStateHash": "12f118c9a81db66faaa1371ed05943694abe0dd1969ddcc6264f7811d2c27ab9",
+        "hudLines": [
+          "map=map/village @ 1,1",
+          "quest=none",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=2"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=1",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=1",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 2,
+        "frameCategory": "show_map_position",
+        "title": "Move right to sign",
+        "playerFacingSummary": "Move right to sign | map/village @ 2,1 player=(2,1)",
+        "canonicalStateHash": "8cdb8b914519b5e62215a8ad31e21333c0b75b15f54b5460ef608335823aa8c9",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=none",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=1"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=2",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=2",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 3,
+        "frameCategory": "show_interaction_result",
+        "title": "Interact with sign",
+        "playerFacingSummary": "Interact with sign | Взаимодействие: entity/village/sign",
+        "canonicalStateHash": "9db22a14ed49e94a88a9912af6ed3213f2714a98f901136fbfdb44ca8f7b9980",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=none",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=6"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=3",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=3",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 4,
+        "frameCategory": "show_dialogue",
+        "title": "Open old guard dialogue",
+        "playerFacingSummary": "Open old guard dialogue | dialogue/old_guard_intro:start:True",
+        "canonicalStateHash": "c9217844ea8b320c39d36160d5ee6d29913001e0a9125ac9dd06631f9dc74fa8",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=none",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=1"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=4",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=4",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 5,
+        "frameCategory": "show_quest_state",
+        "title": "Start and refresh help healer quest",
+        "playerFacingSummary": "Start and refresh help healer quest | quest/help_healer:active:",
+        "canonicalStateHash": "b4a0feeef3aecc3254c07cc8bb5ce7a07d0a8d9126d2eed4c05dcfb9782a3729",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=3"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=5",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=5",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 6,
+        "frameCategory": "show_inventory_state",
+        "title": "Show inventory through runtime inventory event",
+        "playerFacingSummary": "Show inventory through runtime inventory event | inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:1,item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+        "canonicalStateHash": "cf555abeaa1e074354a11b0a12459a387a4433d967eb39fa9ea864166595485b",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:1,item/fuel_can:1,item/healing_potion:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=1"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=6",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=6",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 7,
+        "frameCategory": "show_crafting_result",
+        "title": "Craft healing potion",
+        "playerFacingSummary": "Craft healing potion | map/village @ 2,1 player=(2,1)",
+        "canonicalStateHash": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:1,item/fuel_can:1,item/healing_potion:2,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=9"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=7",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=7",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 8,
+        "frameCategory": "show_harvest_result",
+        "title": "Harvest apple tree",
+        "playerFacingSummary": "Harvest apple tree | map/village @ 2,1 player=(2,1)",
+        "canonicalStateHash": "3c80eac88e5f47f63584d0732cc3f65bc9a450c4fa7b9737d0dff33e979c08d9",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:2,item/log:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=9"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=8",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=8",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 9,
+        "frameCategory": "show_transaction_result",
+        "title": "Execute healing potion transaction",
+        "playerFacingSummary": "Execute healing potion transaction | map/village @ 2,1 player=(2,1)",
+        "canonicalStateHash": "745b43b5b3650f0f65665a5c08fd06f867434fb00231db6384143560a26b8d31",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+          "combat=none",
+          "diagnostics=eventCount=6"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=9",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=9",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 10,
+        "frameCategory": "show_encounter_state",
+        "title": "Start goblin duel",
+        "playerFacingSummary": "Start goblin duel | encounter/goblin_duel:round=1:turn=0:active=True",
+        "canonicalStateHash": "7640d694b3d34f64e00faebb1b73271b59d975c15d896be2269f6da4ec3c9da9",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+          "combat=encounter/goblin_duel:round=1:turn=0:active=True",
+          "diagnostics=eventCount=2"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=10",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=10",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 11,
+        "frameCategory": "show_combat_round",
+        "title": "Run combat round",
+        "playerFacingSummary": "Run combat round | encounter/goblin_duel:round=1:turn=1:active=True",
+        "canonicalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+          "combat=encounter/goblin_duel:round=1:turn=1:active=True",
+          "diagnostics=eventCount=3"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=11",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=11",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      },
+      {
+        "frameIndex": 12,
+        "frameCategory": "show_final_state",
+        "title": "Show final runtime state",
+        "playerFacingSummary": "Show final runtime state | map/village @ 2,1 player=(2,1)",
+        "canonicalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+          "combat=encounter/goblin_duel:round=1:turn=1:active=True",
+          "diagnostics=eventCount=1"
+        ],
+        "sourceSnapshotPath": ".llmgc/procedural/goal-136-canonical-runtime-player-command-loop-execution-matrix/canonical-runtime-player-command-loop-snapshots.json#stepIndex=12",
+        "sourceFramePath": ".llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/canonical-runtime-unity-player-loop-playback-frames.json#frameIndex=12",
+        "runtimeAuthority": true,
+        "unityGameplayTruth": false,
+        "projectionOnly": false
+      }
+    ],
+    "controls": [
+      {
+        "id": "load_model",
+        "label": "Load model",
+        "behavior": "Load the Goal139 runtime-backed model into the player adapter view.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "first",
+        "label": "First",
+        "behavior": "Move the selected HUD frame to index 0.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "previous",
+        "label": "Previous",
+        "behavior": "Move the selected HUD frame back by one index.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "next",
+        "label": "Next",
+        "behavior": "Move the selected HUD frame forward by one index.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "last",
+        "label": "Last",
+        "behavior": "Move the selected HUD frame to the final runtime frame.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "autoplay_tick",
+        "label": "Auto Step",
+        "behavior": "Advance one frame using deterministic playback control state.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "autoplay_all",
+        "label": "Auto Play All",
+        "behavior": "Advance to the final runtime frame without gameplay mutation.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "copy_current_frame_summary",
+        "label": "Copy Frame Summary",
+        "behavior": "Copy the current frame summary for review.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "show_runtime_hash",
+        "label": "Show Runtime Hash",
+        "behavior": "Display the current canonical runtime state hash.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      },
+      {
+        "id": "show_hud_lines",
+        "label": "Show HUD Lines",
+        "behavior": "Display HUD lines projected from runtime-backed frames.",
+        "runtimeBacked": true,
+        "mutatesGameplay": false
+      }
+    ],
+    "requiredControlsPresent": true,
+    "requiredControls": [
+      "load_model",
+      "first",
+      "previous",
+      "next",
+      "last",
+      "autoplay_tick",
+      "autoplay_all",
+      "copy_current_frame_summary",
+      "show_runtime_hash",
+      "show_hud_lines"
+    ],
+    "missingControls": [],
+    "runtimeAuthority": true,
+    "unityGameplayTruth": false,
+    "projectionOnly": false,
+    "gameplayTruth": "Runtime",
+    "unityMode": "PlayerAdapter/HUD controls only"
+  },
+  "controlScript": {
+    "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+    "candidateId": "minimal-map-game-balanced-baseline",
+    "expectedFrameCount": 13,
+    "requiredControls": [
+      "load_model",
+      "first",
+      "previous",
+      "next",
+      "last",
+      "autoplay_tick",
+      "autoplay_all",
+      "copy_current_frame_summary",
+      "show_runtime_hash",
+      "show_hud_lines"
+    ],
+    "steps": [
+      {
+        "stepIndex": 0,
+        "action": "load_model",
+        "expectedFrameIndex": 0,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 1,
+        "action": "assert_frame_count",
+        "expectedFrameIndex": 0,
+        "assertion": "frameCount == 13"
+      },
+      {
+        "stepIndex": 2,
+        "action": "first",
+        "expectedFrameIndex": 0,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 3,
+        "action": "next",
+        "expectedFrameIndex": 1,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 4,
+        "action": "next",
+        "expectedFrameIndex": 2,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 5,
+        "action": "previous",
+        "expectedFrameIndex": 1,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 6,
+        "action": "last",
+        "expectedFrameIndex": 12,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 7,
+        "action": "first",
+        "expectedFrameIndex": 0,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 8,
+        "action": "autoplay_tick",
+        "expectedFrameIndex": 1,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 9,
+        "action": "autoplay_tick",
+        "expectedFrameIndex": 2,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 10,
+        "action": "autoplay_all",
+        "expectedFrameIndex": 12,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 11,
+        "action": "copy_current_frame_summary",
+        "expectedFrameIndex": 12,
+        "assertion": "control exists and does not mutate gameplay"
+      },
+      {
+        "stepIndex": 12,
+        "action": "assert_final_frame_reachable",
+        "expectedFrameIndex": 12,
+        "assertion": "currentFrameIndex == frameCount - 1"
+      },
+      {
+        "stepIndex": 13,
+        "action": "assert_runtime_authority_markers",
+        "expectedFrameIndex": 12,
+        "assertion": "runtimeAuthority == true && projectionOnly == false && unityGameplayTruth == false"
+      }
+    ],
+    "deterministic": true,
+    "runtimeAuthority": true,
+    "unityGameplayTruth": false,
+    "projectionOnly": false
+  },
+  "session": {
+    "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+    "candidateId": "minimal-map-game-balanced-baseline",
+    "frameCount": 13,
+    "finalFrameIndex": 12,
+    "controlScriptPassed": true,
+    "finalFrameReachable": true,
+    "runtimeAuthorityMarkersPresent": true,
+    "steps": [
+      {
+        "stepIndex": 0,
+        "action": "load_model",
+        "frameIndexBefore": 0,
+        "frameIndexAfter": 0,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 1,
+        "action": "assert_frame_count",
+        "frameIndexBefore": 0,
+        "frameIndexAfter": 0,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 2,
+        "action": "first",
+        "frameIndexBefore": 0,
+        "frameIndexAfter": 0,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 3,
+        "action": "next",
+        "frameIndexBefore": 0,
+        "frameIndexAfter": 1,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 4,
+        "action": "next",
+        "frameIndexBefore": 1,
+        "frameIndexAfter": 2,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 5,
+        "action": "previous",
+        "frameIndexBefore": 2,
+        "frameIndexAfter": 1,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 6,
+        "action": "last",
+        "frameIndexBefore": 1,
+        "frameIndexAfter": 12,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 7,
+        "action": "first",
+        "frameIndexBefore": 12,
+        "frameIndexAfter": 0,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 8,
+        "action": "autoplay_tick",
+        "frameIndexBefore": 0,
+        "frameIndexAfter": 1,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 9,
+        "action": "autoplay_tick",
+        "frameIndexBefore": 1,
+        "frameIndexAfter": 2,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 10,
+        "action": "autoplay_all",
+        "frameIndexBefore": 2,
+        "frameIndexAfter": 12,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 11,
+        "action": "copy_current_frame_summary",
+        "frameIndexBefore": 12,
+        "frameIndexAfter": 12,
+        "passed": true,
+        "copiedFrameSummary": "Show final runtime state | map/village @ 2,1 player=(2,1)",
+        "runtimeHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "hudLines": [
+          "map=map/village @ 2,1",
+          "quest=quest/help_healer:active:",
+          "inventory=inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+          "combat=encounter/goblin_duel:round=1:turn=1:active=True",
+          "diagnostics=eventCount=1"
+        ],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 12,
+        "action": "assert_final_frame_reachable",
+        "frameIndexBefore": 12,
+        "frameIndexAfter": 12,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "",
+        "hudLines": [],
+        "diagnostic": "passed"
+      },
+      {
+        "stepIndex": 13,
+        "action": "assert_runtime_authority_markers",
+        "frameIndexBefore": 12,
+        "frameIndexAfter": 12,
+        "passed": true,
+        "copiedFrameSummary": "",
+        "runtimeHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "hudLines": [],
+        "diagnostic": "passed"
+      }
+    ]
+  },
+  "sourceStepperResultGreen": true,
+  "sourcePlaybackFramesPresent": true,
+  "sourceCommandLoopSnapshotsPresent": true,
+  "playerAdapterContractPresent": true,
+  "requiredControlsPresent": true,
+  "controlScriptPassed": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false,
+  "diagnostics": []
+}

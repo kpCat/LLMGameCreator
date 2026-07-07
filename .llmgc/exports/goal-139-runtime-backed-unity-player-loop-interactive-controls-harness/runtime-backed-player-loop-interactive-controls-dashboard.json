@@ -1,0 +1,23 @@
+{
+  "goalId": "goal_139_runtime_backed_unity_player_loop_interactive_controls_harness",
+  "status": "GREEN",
+  "accepted": false,
+  "acceptedGoal138": true,
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "frameCount": 13,
+  "requiredControlsPresent": true,
+  "controlScriptPassed": true,
+  "interactiveControlsWindowPresent": true,
+  "unityInteractiveControlsSmokePassed": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false,
+  "manualUnityOptional": true,
+  "normalCommand": ".devflow\\scripts\\run-runtime-backed-unity-player-loop-interactive-controls.cmd",
+  "reportPath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/one-click-runtime-backed-player-loop-interactive-controls-report.md",
+  "modelPath": ".llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/runtime-backed-player-loop-interactive-controls-model.json",
+  "missingControls": [],
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

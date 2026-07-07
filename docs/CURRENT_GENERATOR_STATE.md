@@ -1,40 +1,69 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 138 runtime-backed Unity player-loop stepper HUD harness
+Updated by: Goal 139 runtime-backed Unity player-loop interactive controls harness
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 138 produced for review:
+Goal 139 produced for review:
 
 ```text
-runtime_backed_unity_player_loop_stepper_hud_harness_verification required
+runtime_backed_unity_player_loop_interactive_controls_harness_verification required
 implementationStatus=GREEN
 accepted=false
-goal138Accepted=false
-acceptedGoal137=true
+goal139Accepted=false
+acceptedGoal138=true
 manualUnityOptional=true
 projectionOnly=false
 runtimeAuthority=true
-runtimeBackedUnityStepper=true
-stepperBatchSmokePassed=true
+runtimeBackedUnityInteractiveControls=true
+interactiveControlsWindowPresent=true
+unityInteractiveControlsSmokePassed=true
 unityGameplayTruth=false
 frameCount=13
-requiredFrameCategoriesPresent=true
+requiredControlsPresent=true
+controlScriptPassed=true
 ```
 
-Goal138 records the repository owner's human acceptance of Goal137, then
-consumes Goal137 playback frames, Goal136 canonical runtime command-loop
-snapshots/result and the Goal135 PlayerAdapter contract for the Goal131 selected
-candidate `minimal-map-game-balanced-baseline`. It writes a deterministic
-13-frame stepper/HUD model with all required runtime-backed presentation
-categories, verifies Unity/player batchmode consumption of that model and keeps
-gameplay truth in Runtime artifacts.
+Goal139 records the repository owner's human acceptance of Goal138, then
+consumes the Goal138 runtime-backed stepper model/result plus Goal137 playback
+frames, Goal136 canonical runtime command-loop snapshots and the Goal135
+PlayerAdapter contract for the Goal131 selected candidate
+`minimal-map-game-balanced-baseline`. It writes a deterministic 13-frame
+interactive controls model, script and session, verifies Unity/player batchmode
+consumption of those controls and keeps gameplay truth in Runtime artifacts.
 
 Evidence lives under
+`.llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/`,
+export metadata under
+`.llmgc/exports/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/`,
+and the short manual note at
+`docs/manual-acceptance/runtime-backed-unity-player-loop-interactive-controls-harness.md`.
+
+Goal 138 is now recorded as accepted by human handoff:
+
+```text
+goal138Accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+selectedCandidate=minimal-map-game-balanced-baseline
+stepperFrames=13
+stepperBatchSmoke=GREEN
+projectionOnly=false
+runtimeAuthority=true
+unityGameplayTruth=false
+rawManualInputNotCommitted=true
+```
+
+Goal138 recorded Goal137 acceptance, consumed Goal137 playback frames, Goal136
+Runtime-owned snapshots/result and Goal135 PlayerAdapter contract, wrote the
+13-frame runtime-backed stepper/HUD model and Unity batchmode stepper smoke, and
+kept gameplay truth in Runtime artifacts.
+
+Goal138 evidence remains under
 `.llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`,
 export metadata under
 `.llmgc/exports/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`,
-and the short manual note at
+and the human acceptance note at
 `docs/manual-acceptance/runtime-backed-unity-player-loop-stepper-hud-harness.md`.
 
 Goal 137 is now recorded as accepted by human handoff:
@@ -122,7 +151,8 @@ that rebaseline; Goal135 builds the player-loop readiness layer on that Runtime
 transcript; Goal136 executes the selected candidate through the Runtime-owned
 player command loop; Goal137 turns those Runtime-owned snapshots into a
 Unity/player playback harness; Goal138 adds a runtime-backed stepper/HUD harness
-over that playback without mutating the sample package, public GamePackage
+over that playback; Goal139 adds interactive controls over the runtime-backed
+stepper model/script without mutating the sample package, public GamePackage
 schema, provider/media/LLM/Lua/generator-library code or Unity
 scenes/prefabs/ProjectSettings/Packages/StreamingAssets.
 

@@ -57,6 +57,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             await BuildGoal137CanonicalRuntimeUnityPlayerLoopPlaybackAsync(root);
         var runtimeBackedUnityPlayerLoopStepper =
             await BuildGoal138RuntimeBackedUnityPlayerLoopStepperAsync(root);
+        var runtimeBackedUnityPlayerLoopInteractiveControls =
+            await BuildGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsAsync(root);
 
         Assert.Equal("GREEN", projection.QualityGateScan.ImplementationStatus);
         Assert.True(projection.QualityGateScan.Passed);
@@ -408,6 +410,16 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.False(runtimeBackedUnityPlayerLoopStepper.Dashboard.ProjectionOnly);
         Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.StepperWindowPresent);
         Assert.True(runtimeBackedUnityPlayerLoopStepper.Dashboard.StepperBatchSmokePassed);
+        Assert.Equal("GREEN", runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.Status);
+        Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.AcceptedGoal138);
+        Assert.Equal(13, runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.FrameCount);
+        Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.RequiredControlsPresent);
+        Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.ControlScriptPassed);
+        Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.InteractiveControlsWindowPresent);
+        Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.UnityInteractiveControlsSmokePassed);
+        Assert.True(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.RuntimeAuthority);
+        Assert.False(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.UnityGameplayTruth);
+        Assert.False(runtimeBackedUnityPlayerLoopInteractiveControls.Dashboard.ProjectionOnly);
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
@@ -444,6 +456,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .PageBindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysRuntimeBackedUnityPlayerLoopStepper);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
         Assert.Contains(workspace.Catalog.Groups, group =>
@@ -478,6 +492,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             group.GroupId == "canonical_runtime_unity_player_loop_playback");
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "runtime_backed_unity_player_loop_stepper");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "runtime_backed_unity_player_loop_interactive_controls");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
         Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
@@ -515,6 +531,9 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
         Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopStepperGroupPresent);
         Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopStepperQualityGatePassed);
         Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopStepperFilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopInteractiveControlsGroupPresent);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopInteractiveControlsQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.RuntimeBackedUnityPlayerLoopInteractiveControlsFilesDiscoveredByRelativePaths);
         if (workspace.QualityGateScan.GamePackageCandidateMatrixStatus == "GREEN")
         {
             Assert.Equal(2, workspace.QualityGateScan.GamePackageCandidateMatrixCandidateCount);
@@ -735,6 +754,44 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             Passed = true,
             UnityPath = "test-unity",
             ModelPath = Relative(root, model),
+            Status = "GREEN"
+        };
+    }
+
+    private static async Task<RuntimeBackedUnityPlayerLoopInteractiveControlsWriteResult>
+        BuildGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsAsync(string root) =>
+        await new RuntimeBackedUnityPlayerLoopInteractiveControlsArtifactService()
+            .BuildAndWriteAsync(
+                root,
+                new RuntimeBackedUnityPlayerLoopInteractiveControlsRequest(),
+                unitySmoke: PassedGoal139UnitySmoke(root));
+
+    private static RuntimeBackedUnityPlayerLoopInteractiveControlsUnitySmoke
+        PassedGoal139UnitySmoke(string root)
+    {
+        var model = Path.Combine(
+            root,
+            RuntimeBackedUnityPlayerLoopInteractiveControlsVocabulary.ProceduralOutputDirectory,
+            RuntimeBackedUnityPlayerLoopInteractiveControlsVocabulary.ModelFileName);
+        var script = Path.Combine(
+            root,
+            RuntimeBackedUnityPlayerLoopInteractiveControlsVocabulary.ProceduralOutputDirectory,
+            RuntimeBackedUnityPlayerLoopInteractiveControlsVocabulary.ControlScriptFileName);
+        return new RuntimeBackedUnityPlayerLoopInteractiveControlsUnitySmoke
+        {
+            UnityAvailable = true,
+            InteractiveModelPathExists = true,
+            ControlScriptPathExists = true,
+            FrameCountPassed = true,
+            RequiredControlsPresent = true,
+            ControlScriptPassed = true,
+            RuntimeAuthorityMarkersPresent = true,
+            InteractiveControlsWindowPresent = true,
+            UnityGameplayTruth = false,
+            Passed = true,
+            UnityPath = "test-unity",
+            InteractiveModelPath = Relative(root, model),
+            ControlScriptPath = Relative(root, script),
             Status = "GREEN"
         };
     }
