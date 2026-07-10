@@ -25,12 +25,25 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && summary is not null
             && summary.RuntimeBackedPlayerCommandRoundtripGoal140Accepted
             && !string.IsNullOrWhiteSpace(summary.RuntimeBackedPlayerCommandRoundtripCandidateId)
-            && summary.RuntimeBackedPlayerCommandRoundtripRequestCount >= 6
-            && summary.RuntimeBackedPlayerCommandRoundtripExecutedRequestCount >= 6
+            && summary.RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount == 6
+            && summary.RuntimeBackedPlayerCommandRoundtripRequestCount == 6
+            && summary.RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount == 4
+            && summary.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount == 2
+            && summary.RuntimeBackedPlayerCommandRoundtripExecutedRequestCount == 4
+            && summary.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount == 0
+            && summary.RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount == 0
+            && summary.RuntimeBackedPlayerCommandRoundtripResponseCount == 6
             && summary.RuntimeBackedPlayerCommandRoundtripSnapshotCount
             >= summary.RuntimeBackedPlayerCommandRoundtripExecutedRequestCount
             && summary.RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent
             && summary.RuntimeBackedPlayerCommandRoundtripStateHashChainPresent
+            && summary.RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed
+            && summary.RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed
+            && summary.RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed
+            && summary.RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged
+            && summary.RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged
+            && summary.RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping
+            && summary.RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed
             && summary.RuntimeBackedPlayerCommandRoundtripRuntimeAuthority
             && !summary.RuntimeBackedPlayerCommandRoundtripProjectionOnly
             && !summary.RuntimeBackedPlayerCommandRoundtripUnityGameplayTruth
@@ -44,14 +57,39 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             GroupPresent: group is not null,
             Goal140Accepted: summary?.RuntimeBackedPlayerCommandRoundtripGoal140Accepted == true,
             CandidateId: summary?.RuntimeBackedPlayerCommandRoundtripCandidateId ?? string.Empty,
+            TotalControlRequestCount:
+                summary?.RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount ?? 0,
             RequestCount: summary?.RuntimeBackedPlayerCommandRoundtripRequestCount ?? 0,
+            RuntimeRoutedRequestCount:
+                summary?.RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount ?? 0,
+            PresentationOnlyRequestCount:
+                summary?.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount ?? 0,
             ExecutedRequestCount:
                 summary?.RuntimeBackedPlayerCommandRoundtripExecutedRequestCount ?? 0,
+            PresentationOnlyRuntimeExecutionCount:
+                summary?.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount ?? 0,
+            RuntimeMutatingPresentationRequestCount:
+                summary?.RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount ?? 0,
+            ResponseCount: summary?.RuntimeBackedPlayerCommandRoundtripResponseCount ?? 0,
             SnapshotCount: summary?.RuntimeBackedPlayerCommandRoundtripSnapshotCount ?? 0,
             ControlRequestBridgePresent:
                 summary?.RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent == true,
             StateHashChainPresent:
                 summary?.RuntimeBackedPlayerCommandRoundtripStateHashChainPresent == true,
+            RequestResponseCorrelationPassed:
+                summary?.RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed == true,
+            SequentialCursorContinuityPassed:
+                summary?.RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed == true,
+            StateHashContinuityPassed:
+                summary?.RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed == true,
+            CopySummaryStateUnchanged:
+                summary?.RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged == true,
+            LoadModelStateUnchanged:
+                summary?.RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged == true,
+            NoUnrelatedGameplayMapping:
+                summary?.RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping == true,
+            SemanticCorrectnessPassed:
+                summary?.RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed == true,
             RuntimeAuthority: summary?.RuntimeBackedPlayerCommandRoundtripRuntimeAuthority == true,
             ProjectionOnly: summary?.RuntimeBackedPlayerCommandRoundtripProjectionOnly == true,
             UnityGameplayTruth:
@@ -81,12 +119,36 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal141.quality.goal140_acceptance",
             "runtime_backed_player_command_roundtrip",
             diagnostics);
-        AddIfFalse(roundtrip.RequestCount >= 6,
+        AddIfFalse(roundtrip.TotalControlRequestCount == 6,
+            "goal141.quality.total_control_request_count",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.RequestCount == 6,
             "goal141.quality.request_count",
             "runtime_backed_player_command_roundtrip",
             diagnostics);
-        AddIfFalse(roundtrip.ExecutedRequestCount >= 6,
+        AddIfFalse(roundtrip.RuntimeRoutedRequestCount == 4,
+            "goal141.quality.runtime_routed_request_count",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.PresentationOnlyRequestCount == 2,
+            "goal141.quality.presentation_only_request_count",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.ExecutedRequestCount == 4,
             "goal141.quality.executed_request_count",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.PresentationOnlyRuntimeExecutionCount == 0,
+            "goal141.quality.presentation_only_runtime_execution_count",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.RuntimeMutatingPresentationRequestCount == 0,
+            "goal141.quality.runtime_mutating_presentation_request_count",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.ResponseCount == 6,
+            "goal141.quality.response_count",
             "runtime_backed_player_command_roundtrip",
             diagnostics);
         AddIfFalse(roundtrip.SnapshotCount >= roundtrip.ExecutedRequestCount,
@@ -99,6 +161,34 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             diagnostics);
         AddIfFalse(roundtrip.StateHashChainPresent,
             "goal141.quality.state_hash_chain",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.RequestResponseCorrelationPassed,
+            "goal141.quality.request_response_correlation",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.SequentialCursorContinuityPassed,
+            "goal141.quality.sequential_cursor_continuity",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.StateHashContinuityPassed,
+            "goal141.quality.state_hash_continuity",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.CopySummaryStateUnchanged,
+            "goal141.quality.copy_summary_state_unchanged",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.LoadModelStateUnchanged,
+            "goal141.quality.load_model_state_unchanged",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.NoUnrelatedGameplayMapping,
+            "goal141.quality.no_unrelated_gameplay_mapping",
+            "runtime_backed_player_command_roundtrip",
+            diagnostics);
+        AddIfFalse(roundtrip.SemanticCorrectnessPassed,
+            "goal141.quality.semantic_correctness",
             "runtime_backed_player_command_roundtrip",
             diagnostics);
         AddIfFalse(roundtrip.RuntimeAuthority,
@@ -169,13 +259,38 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             RuntimeBackedPlayerCommandRoundtripGroupPresent = roundtrip.GroupPresent,
             RuntimeBackedPlayerCommandRoundtripGoal140Accepted = roundtrip.Goal140Accepted,
             RuntimeBackedPlayerCommandRoundtripCandidateId = roundtrip.CandidateId,
+            RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount =
+                roundtrip.TotalControlRequestCount,
             RuntimeBackedPlayerCommandRoundtripRequestCount = roundtrip.RequestCount,
+            RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount =
+                roundtrip.RuntimeRoutedRequestCount,
+            RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount =
+                roundtrip.PresentationOnlyRequestCount,
             RuntimeBackedPlayerCommandRoundtripExecutedRequestCount = roundtrip.ExecutedRequestCount,
+            RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount =
+                roundtrip.PresentationOnlyRuntimeExecutionCount,
+            RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount =
+                roundtrip.RuntimeMutatingPresentationRequestCount,
+            RuntimeBackedPlayerCommandRoundtripResponseCount = roundtrip.ResponseCount,
             RuntimeBackedPlayerCommandRoundtripSnapshotCount = roundtrip.SnapshotCount,
             RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent =
                 roundtrip.ControlRequestBridgePresent,
             RuntimeBackedPlayerCommandRoundtripStateHashChainPresent =
                 roundtrip.StateHashChainPresent,
+            RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed =
+                roundtrip.RequestResponseCorrelationPassed,
+            RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed =
+                roundtrip.SequentialCursorContinuityPassed,
+            RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed =
+                roundtrip.StateHashContinuityPassed,
+            RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged =
+                roundtrip.CopySummaryStateUnchanged,
+            RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged =
+                roundtrip.LoadModelStateUnchanged,
+            RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping =
+                roundtrip.NoUnrelatedGameplayMapping,
+            RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed =
+                roundtrip.SemanticCorrectnessPassed,
             RuntimeBackedPlayerCommandRoundtripRuntimeAuthority = roundtrip.RuntimeAuthority,
             RuntimeBackedPlayerCommandRoundtripProjectionOnly = roundtrip.ProjectionOnly,
             RuntimeBackedPlayerCommandRoundtripUnityGameplayTruth = roundtrip.UnityGameplayTruth,
@@ -202,11 +317,24 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         bool GroupPresent,
         bool Goal140Accepted,
         string CandidateId,
+        int TotalControlRequestCount,
         int RequestCount,
+        int RuntimeRoutedRequestCount,
+        int PresentationOnlyRequestCount,
         int ExecutedRequestCount,
+        int PresentationOnlyRuntimeExecutionCount,
+        int RuntimeMutatingPresentationRequestCount,
+        int ResponseCount,
         int SnapshotCount,
         bool ControlRequestBridgePresent,
         bool StateHashChainPresent,
+        bool RequestResponseCorrelationPassed,
+        bool SequentialCursorContinuityPassed,
+        bool StateHashContinuityPassed,
+        bool CopySummaryStateUnchanged,
+        bool LoadModelStateUnchanged,
+        bool NoUnrelatedGameplayMapping,
+        bool SemanticCorrectnessPassed,
         bool RuntimeAuthority,
         bool ProjectionOnly,
         bool UnityGameplayTruth,

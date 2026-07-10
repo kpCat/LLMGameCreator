@@ -35,12 +35,17 @@ public sealed class RuntimeBackedPlayerCommandRoundtripInput
 
 public sealed class RuntimeBackedPlayerCommandRoundtripControlRequest
 {
+    public string RequestId { get; set; } = string.Empty;
     public int RequestIndex { get; set; }
     public string ControlIntent { get; set; } = string.Empty;
+    public string Route { get; set; } = string.Empty;
+    public string RequestedOperation { get; set; } = string.Empty;
     public string SourceControlId { get; set; } = string.Empty;
     public string RuntimeCommandCoverage { get; set; } = string.Empty;
     public string RuntimeCommandKind { get; set; } = string.Empty;
     public string TargetId { get; set; } = string.Empty;
+    public int RuntimeCommandStartIndex { get; set; }
+    public int RuntimeCommandEndIndex { get; set; }
     public int CanonicalStepIndex { get; set; }
     public string CanonicalStepId { get; set; } = string.Empty;
     public bool RuntimeAuthority { get; set; } = true;
@@ -50,9 +55,14 @@ public sealed class RuntimeBackedPlayerCommandRoundtripControlRequest
 
 public sealed class RuntimeBackedPlayerCommandRoundtripSnapshot
 {
+    public string RequestId { get; set; } = string.Empty;
     public int RequestIndex { get; set; }
     public string ControlIntent { get; set; } = string.Empty;
+    public string Route { get; set; } = string.Empty;
+    public string RequestedOperation { get; set; } = string.Empty;
     public string RuntimeCommandCoverage { get; set; } = string.Empty;
+    public int RuntimeCommandStartIndex { get; set; }
+    public int RuntimeCommandEndIndex { get; set; }
     public int CanonicalStepIndex { get; set; }
     public string CanonicalStepId { get; set; } = string.Empty;
     public string StateHashBefore { get; set; } = string.Empty;
@@ -64,6 +74,12 @@ public sealed class RuntimeBackedPlayerCommandRoundtripSnapshot
     public string InventorySummary { get; set; } = string.Empty;
     public string CombatSummary { get; set; } = string.Empty;
     public int RuntimeEventCount { get; set; }
+    public bool RuntimeExecuted { get; set; }
+    public bool RuntimeMutation { get; set; }
+    public int ExecutedCommandCount { get; set; }
+    public int ProducedSnapshotCount { get; set; }
+    public int EventCount { get; set; }
+    public bool CorrelationPassed { get; set; }
     public bool RuntimeAuthority { get; set; } = true;
     public bool ProjectionOnly { get; set; }
     public bool UnityGameplayTruth { get; set; }
@@ -71,12 +87,26 @@ public sealed class RuntimeBackedPlayerCommandRoundtripSnapshot
 
 public sealed class RuntimeBackedPlayerCommandRoundtripResponse
 {
+    public string RequestId { get; set; } = string.Empty;
     public int RequestIndex { get; set; }
     public string ControlIntent { get; set; } = string.Empty;
+    public string Route { get; set; } = string.Empty;
+    public string RequestedOperation { get; set; } = string.Empty;
     public string RuntimeCommandCoverage { get; set; } = string.Empty;
+    public int RuntimeCommandStartIndex { get; set; }
+    public int RuntimeCommandEndIndex { get; set; }
     public bool RuntimeExecuted { get; set; }
     public bool CanonicalStepRuntimeExecuted { get; set; }
+    public bool RuntimeMutation { get; set; }
+    public int ExecutedCommandCount { get; set; }
+    public int ProducedSnapshotCount { get; set; }
+    public string StateHashBefore { get; set; } = string.Empty;
+    public string StateHashAfter { get; set; } = string.Empty;
+    public int EventCount { get; set; }
+    public bool CorrelationPassed { get; set; }
     public RuntimeBackedPlayerCommandRoundtripSnapshot Snapshot { get; set; } = new();
+    public IReadOnlyList<RuntimeBackedPlayerCommandRoundtripSnapshot> ProducedSnapshots { get; set; } =
+        new List<RuntimeBackedPlayerCommandRoundtripSnapshot>();
     public string Status { get; set; } = string.Empty;
 }
 
@@ -88,7 +118,19 @@ public sealed class RuntimeBackedPlayerCommandRoundtripSession
     public int RequestCount { get; set; }
     public int ExecutedRequestCount { get; set; }
     public int SnapshotCount { get; set; }
+    public int RuntimeRoutedRequestCount { get; set; }
+    public int PresentationOnlyRequestCount { get; set; }
+    public int PresentationOnlyRuntimeExecutionCount { get; set; }
+    public int RuntimeMutatingPresentationRequestCount { get; set; }
+    public int ResponseCount { get; set; }
     public bool StateHashChainPresent { get; set; }
+    public bool RequestResponseCorrelationPassed { get; set; }
+    public bool SequentialCursorContinuityPassed { get; set; }
+    public bool StateHashContinuityPassed { get; set; }
+    public bool CopySummaryStateUnchanged { get; set; }
+    public bool LoadModelStateUnchanged { get; set; }
+    public bool PlayAllExecutedRemainingCommands { get; set; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; set; }
     public bool RuntimeAuthority { get; set; } = true;
     public bool ProjectionOnly { get; set; }
     public bool UnityGameplayTruth { get; set; }
@@ -107,16 +149,30 @@ public sealed class RuntimeBackedPlayerCommandRoundtripResult
         "goal_141_runtime_backed_unity_player_command_roundtrip_bridge";
     public string CandidateId { get; set; } = string.Empty;
     public RuntimeBackedPlayerCommandRoundtripInput Inputs { get; set; } = new();
+    public int TotalControlRequestCount { get; set; }
     public int RoundtripRequestCount { get; set; }
+    public int RuntimeRoutedRequestCount { get; set; }
+    public int PresentationOnlyRequestCount { get; set; }
     public int RuntimeExecutedRequestCount { get; set; }
+    public int PresentationOnlyRuntimeExecutionCount { get; set; }
+    public int RuntimeMutatingPresentationRequestCount { get; set; }
+    public int ResponseCount { get; set; }
     public int RoundtripSnapshotCount { get; set; }
     public bool StateHashChainPresent { get; set; }
+    public bool RequestResponseCorrelationPassed { get; set; }
+    public bool SequentialCursorContinuityPassed { get; set; }
+    public bool StateHashContinuityPassed { get; set; }
+    public bool CopySummaryStateUnchanged { get; set; }
+    public bool LoadModelStateUnchanged { get; set; }
+    public bool PlayAllExecutedRemainingCommands { get; set; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; set; }
     public bool RuntimeAuthority { get; set; } = true;
     public bool ProjectionOnly { get; set; }
     public bool UnityGameplayTruth { get; set; }
     public bool ControlRequestBridgePresent { get; set; }
     public bool UnityConsumesRoundtripResult { get; set; } = true;
     public bool NoUnclassifiedErrorDiagnostics { get; set; }
+    public bool RoundtripSemanticCorrectnessPassed { get; set; }
     public bool RuntimeBackedPlayerCommandRoundtripPassed { get; set; }
     public IReadOnlyList<string> RequiredControlIntents { get; set; } = new List<string>();
     public IReadOnlyList<string> MissingControlIntents { get; set; } = new List<string>();

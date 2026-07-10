@@ -75,6 +75,54 @@ public sealed class CanonicalRuntimePlayerCommandLoopSnapshot
         new List<CanonicalRuntimePlayerCommandLoopRuntimeEvent>();
 }
 
+public sealed class CanonicalRuntimePlayerCommandLoopSession
+{
+    public string CandidateId { get; set; } = string.Empty;
+    public string PackagePath { get; set; } = string.Empty;
+    public int CurrentCommandIndex { get; set; }
+    public string CurrentStateHash { get; set; } = "not_loaded";
+    public bool RuntimeStarted { get; set; }
+    public bool RuntimeExecutionSucceeded { get; set; } = true;
+    public int EventIndex { get; set; }
+    public UnifiedRuntimeSession RuntimeSession { get; set; } = new();
+    public IReadOnlyList<CanonicalRuntimePlayerCommandLoopStep> Steps { get; set; } =
+        new List<CanonicalRuntimePlayerCommandLoopStep>();
+    public List<CanonicalRuntimePlayerCommandLoopSnapshot> Snapshots { get; set; } = new();
+    public List<string> StateHashChain { get; set; } = new();
+    public List<string> MissingRuntimePrimitives { get; set; } = new();
+    public List<string> Diagnostics { get; set; } = new();
+}
+
+public sealed class CanonicalRuntimePlayerCommandLoopExecutionRequest
+{
+    public string RequestedOperation { get; set; } = string.Empty;
+    public int RuntimeCommandStartIndex { get; set; }
+    public int RuntimeCommandEndIndex { get; set; }
+}
+
+public sealed class CanonicalRuntimePlayerCommandLoopExecutionResult
+{
+    public string RequestedOperation { get; set; } = string.Empty;
+    public int RuntimeCommandStartIndex { get; set; }
+    public int RuntimeCommandEndIndex { get; set; }
+    public int CursorBefore { get; set; }
+    public int CursorAfter { get; set; }
+    public bool RuntimeExecuted { get; set; }
+    public bool RuntimeMutation { get; set; }
+    public int ExecutedCommandCount { get; set; }
+    public int ProducedSnapshotCount { get; set; }
+    public int EventCount { get; set; }
+    public string StateHashBefore { get; set; } = string.Empty;
+    public string StateHashAfter { get; set; } = string.Empty;
+    public bool Success { get; set; }
+    public CanonicalRuntimePlayerCommandLoopSession Session { get; set; } = new();
+    public IReadOnlyList<CanonicalRuntimePlayerCommandLoopStep> Steps { get; set; } =
+        new List<CanonicalRuntimePlayerCommandLoopStep>();
+    public IReadOnlyList<CanonicalRuntimePlayerCommandLoopSnapshot> Snapshots { get; set; } =
+        new List<CanonicalRuntimePlayerCommandLoopSnapshot>();
+    public IReadOnlyList<string> Diagnostics { get; set; } = new List<string>();
+}
+
 public sealed class CanonicalRuntimePlayerCommandLoopResult
 {
     public string GoalId { get; set; } =
@@ -105,6 +153,15 @@ public sealed class CanonicalRuntimePlayerCommandLoopResult
 
 public interface ICanonicalRuntimePlayerCommandLoopService
 {
+    CanonicalRuntimePlayerCommandLoopSession BeginSession(
+        LLMGameCreator.GamePackage.GamePackageDefinition package,
+        CanonicalRuntimePlayerCommandLoopRequest request);
+
+    CanonicalRuntimePlayerCommandLoopExecutionResult ExecuteRange(
+        LLMGameCreator.GamePackage.GamePackageDefinition package,
+        CanonicalRuntimePlayerCommandLoopSession session,
+        CanonicalRuntimePlayerCommandLoopExecutionRequest request);
+
     CanonicalRuntimePlayerCommandLoopResult Execute(
         LLMGameCreator.GamePackage.GamePackageDefinition package,
         CanonicalRuntimePlayerCommandLoopRequest request);

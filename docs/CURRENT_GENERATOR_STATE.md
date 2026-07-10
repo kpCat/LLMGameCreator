@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 141 runtime-backed Unity player command roundtrip bridge
+Updated by: Goal 141A player command roundtrip semantic correctness hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 141 produced for review:
@@ -22,17 +22,33 @@ stateHashChainPresent=true
 unityConsumesRoundtripResult=true
 unityGameplayTruth=false
 roundtripRequestCount=6
-runtimeExecutedRequestCount=6
-roundtripSnapshotCount=6
+totalControlRequestCount=6
+runtimeRoutedRequestCount=4
+presentationOnlyRequestCount=2
+runtimeExecutedRequestCount=4
+presentationOnlyRuntimeExecutionCount=0
+runtimeMutatingPresentationRequestCount=0
+responseCount=6
+roundtripSnapshotCount=15
+requestResponseCorrelationPassed=true
+sequentialCursorContinuityPassed=true
+stateHashContinuityPassed=true
+copySummaryStateUnchanged=true
+loadModelStateUnchanged=true
+playAllExecutedRemainingCommands=true
+noControlIntentMappedToUnrelatedGameplayCommand=true
+roundtripSemanticCorrectnessPassed=true
 noUnclassifiedErrorDiagnostics=true
 ```
 
 Goal141 records the repository owner's human acceptance of Goal140, then maps
-Unity/PlayerAdapter control intents into Runtime-owned command requests for the
-Goal131 selected candidate `minimal-map-game-balanced-baseline`. It executes
-6 request/response pairs through Runtime, writes updated runtime snapshots and a
-state hash chain, verifies Unity/player batchmode consumption of the roundtrip
-result, and keeps gameplay truth in Runtime artifacts.
+Unity/PlayerAdapter control intents into correlated request/response pairs for
+the Goal131 selected candidate `minimal-map-game-balanced-baseline`. Goal141A
+corrects the semantics: four controls route into Runtime execution, while
+`load_model` and `copy_frame_summary` remain presentation-only and keep state
+hashes unchanged. The proof writes updated runtime snapshots and a state hash
+chain, verifies Unity/player batchmode consumption of the roundtrip result, and
+keeps gameplay truth in Runtime artifacts.
 
 Evidence lives under
 `.llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`,
@@ -54,6 +70,7 @@ stepOnceSemanticsClear=true
 playAllToEndSemanticsClear=true
 copyFrameSummaryStatusPresent=true
 knownUnityEditorNoiseClassified=true
+knownUnityEditorNoiseCount=1
 blockingUnityErrorCount=0
 projectionOnly=false
 runtimeAuthority=true

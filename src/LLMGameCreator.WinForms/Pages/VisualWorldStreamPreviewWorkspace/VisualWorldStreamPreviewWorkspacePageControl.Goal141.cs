@@ -63,15 +63,47 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
                 + result.Report.RuntimeBackedPlayerCommandRoundtripGoal140Accepted
                     .ToString().ToLowerInvariant(),
             "candidateId=" + result.Report.RuntimeBackedPlayerCommandRoundtripCandidateId,
+            "totalControlRequestCount="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount,
             "roundtripRequestCount=" + result.Report.RuntimeBackedPlayerCommandRoundtripRequestCount,
+            "runtimeRoutedRequestCount="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount,
+            "presentationOnlyRequestCount="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount,
             "runtimeExecutedRequestCount="
                 + result.Report.RuntimeBackedPlayerCommandRoundtripExecutedRequestCount,
+            "presentationOnlyRuntimeExecutionCount="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount,
+            "runtimeMutatingPresentationRequestCount="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount,
+            "responseCount=" + result.Report.RuntimeBackedPlayerCommandRoundtripResponseCount,
             "roundtripSnapshotCount=" + result.Report.RuntimeBackedPlayerCommandRoundtripSnapshotCount,
             "controlRequestBridgePresent="
                 + result.Report.RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent
                     .ToString().ToLowerInvariant(),
             "stateHashChainPresent="
                 + result.Report.RuntimeBackedPlayerCommandRoundtripStateHashChainPresent
+                    .ToString().ToLowerInvariant(),
+            "requestResponseCorrelationPassed="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed
+                    .ToString().ToLowerInvariant(),
+            "sequentialCursorContinuityPassed="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed
+                    .ToString().ToLowerInvariant(),
+            "stateHashContinuityPassed="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed
+                    .ToString().ToLowerInvariant(),
+            "copySummaryStateUnchanged="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged
+                    .ToString().ToLowerInvariant(),
+            "loadModelStateUnchanged="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged
+                    .ToString().ToLowerInvariant(),
+            "noControlIntentMappedToUnrelatedGameplayCommand="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping
+                    .ToString().ToLowerInvariant(),
+            "roundtripSemanticCorrectnessPassed="
+                + result.Report.RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed
                     .ToString().ToLowerInvariant(),
             "runtimeAuthority="
                 + result.Report.RuntimeBackedPlayerCommandRoundtripRuntimeAuthority

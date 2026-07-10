@@ -1,0 +1,23 @@
+{
+  "goalId": "goal_141_runtime_backed_unity_player_command_roundtrip_bridge",
+  "rootPath": ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix",
+  "indexedFileCount": 3,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/roundtrip-semantic-correctness-dashboard.json",
+      "role": "goal141_roundtrip_semantic_correctness_dashboard",
+      "sha256": "3858e6a9ac29049b9ccdb3d1e90bcfecaafec8080ac485356e9de3514b06d791"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/roundtrip-semantic-correctness-regression-proof.json",
+      "role": "goal141_roundtrip_semantic_correctness_regression_proof",
+      "sha256": "5ed230597057f320b16c85da3db9887d670fa01be23473277939d9c23d122d6a"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/roundtrip-semantic-correctness-report.md",
+      "role": "goal141_roundtrip_semantic_correctness_report",
+      "sha256": "0618ffd606a8d5131e351d58471403d41aa2fbf36e35609f1b08b5b27c109ebe"
+    }
+  ]
+}

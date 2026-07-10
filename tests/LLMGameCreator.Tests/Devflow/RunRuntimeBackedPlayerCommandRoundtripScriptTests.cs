@@ -42,6 +42,13 @@ public sealed class RunRuntimeBackedPlayerCommandRoundtripScriptTests
             "GOAL141_RUNTIME_BACKED_PLAYER_COMMAND_ROUNDTRIP_FAIL",
             script,
             StringComparison.Ordinal);
+        Assert.Contains("presentationOnlyRequestCountPassed", script, StringComparison.Ordinal);
+        Assert.Contains("presentationOnlyRuntimeExecutionCountPassed", script, StringComparison.Ordinal);
+        Assert.Contains("requestResponseCorrelationPassed", script, StringComparison.Ordinal);
+        Assert.Contains("sequentialCursorContinuityPassed", script, StringComparison.Ordinal);
+        Assert.Contains("copySummaryStateUnchanged", script, StringComparison.Ordinal);
+        Assert.Contains("loadModelStateUnchanged", script, StringComparison.Ordinal);
+        Assert.Contains("noControlIntentMappedToUnrelatedGameplayCommand", script, StringComparison.Ordinal);
         Assert.Contains(
             "RunBatchmodeRuntimeBackedPlayerCommandRoundtripSmoke",
             script,

@@ -147,7 +147,9 @@
     ".llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/",
     ".llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/",
     ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
-    ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/"
+    ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
+    ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/",
+    ".llmgc/exports/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -3159,6 +3161,66 @@
         ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
         ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
         "docs/agent-tasks/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/minimal-map-game/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Generation/",
+        "src/LLMGameCreator.AssetPipeline/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "unity/LLMGameCreatorAlpha/Assets/Scenes/",
+        "unity/LLMGameCreatorAlpha/Assets/Prefabs/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/",
+        "unity/LLMGameCreatorAlpha/ProjectSettings/",
+        "unity/LLMGameCreatorAlpha/Packages/",
+        "Directory.Build.",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
+    },
+    {
+      "scenario": "goal-141a-player-command-roundtrip-semantic-correctness-hotfix",
+      "allowedPaths": [
+        "docs/CONTEXT_INDEX.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/runtime-backed-unity-player-command-roundtrip-bridge.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-runtime-backed-player-command-roundtrip.ps1",
+        ".devflow/scripts/run-runtime-backed-player-command-roundtrip.cmd",
+        "src/LLMGameCreator.Runtime.Abstractions/RuntimeBackedPlayerCommandRoundtripContracts.cs",
+        "src/LLMGameCreator.Runtime/RuntimeBackedPlayerCommandRoundtripService.cs",
+        "src/LLMGameCreator.Runtime.Abstractions/CanonicalRuntimePlayerCommandLoopContracts.cs",
+        "src/LLMGameCreator.Runtime/CanonicalRuntimePlayerCommandLoopService.cs",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/RuntimeBackedPlayerCommandRoundtripModels.cs",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/RuntimeBackedPlayerCommandRoundtripArtifactService.cs",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/ProductLineStrategyRebaselineModels.cs",
+        "src/LLMGameCreator.Application/Design/AcceptedAlphaUnityPlayableProjection/ProductLineStrategyRebaselineService.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal141.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/CanonicalRuntimeUnityPlayerCommandRoundtripHarness.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/CanonicalRuntimeUnityPlayerCommandRoundtripWindow.cs",
+        "tests/LLMGameCreator.Tests/Runtime/RuntimeBackedPlayerCommandRoundtripServiceTests.cs",
+        "tests/LLMGameCreator.Tests/Runtime/CanonicalRuntimePlayerCommandLoopServiceTests.cs",
+        "tests/LLMGameCreator.Tests/Application/AcceptedAlphaUnityPlayableProjection/RuntimeBackedPlayerCommandRoundtripScriptProof.cs",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspaceGoal141Tests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunRuntimeBackedPlayerCommandRoundtripScriptTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/AcceptedAlphaUnityPlayableProjectionProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
+        ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/",
+        ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/",
+        ".llmgc/exports/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/",
+        "docs/agent-tasks/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/",
         "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/"
       ],
       "excludedPathPrefixes": [

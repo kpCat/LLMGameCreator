@@ -113,6 +113,13 @@ namespace LLMGameCreatorAlpha
                     + "; resultPathExists="
                     + resultPathExists
                     + "; roundtripRequestCountPassed=False"
+                    + "; presentationOnlyRequestCountPassed=False"
+                    + "; presentationOnlyRuntimeExecutionCountPassed=False"
+                    + "; requestResponseCorrelationPassed=False"
+                    + "; sequentialCursorContinuityPassed=False"
+                    + "; copySummaryStateUnchanged=False"
+                    + "; loadModelStateUnchanged=False"
+                    + "; noControlIntentMappedToUnrelatedGameplayCommand=False"
                     + "; runtimeSnapshotResponsePresent=False"
                     + "; runtimeAuthorityMarkersPresent=False"
                     + "; unityConsumesRoundtripResult=False"
@@ -140,12 +147,28 @@ namespace LLMGameCreatorAlpha
             }
 
             var runtimeSnapshotResponsePresent =
-                ContainsJsonNumberAtLeast(roundtrip, "runtimeExecutedRequestCount", 6)
+                ContainsJsonNumberAtLeast(roundtrip, "runtimeExecutedRequestCount", 4)
                 && ContainsJsonNumberAtLeast(roundtrip, "roundtripSnapshotCount", 6)
                 && ContainsJsonBool(roundtrip, "runtimeExecuted", true)
+                && ContainsJsonBool(roundtrip, "runtimeExecuted", false)
                 && roundtrip.Contains("\"responses\"", StringComparison.Ordinal)
                 && roundtrip.Contains("\"snapshots\"", StringComparison.Ordinal)
                 && roundtrip.Contains("\"stateHashAfter\"", StringComparison.Ordinal);
+            var presentationOnlyRequestCountPassed =
+                ExtractInt(roundtrip, "presentationOnlyRequestCount") == 2;
+            var presentationOnlyRuntimeExecutionCountPassed =
+                ExtractInt(roundtrip, "presentationOnlyRuntimeExecutionCount") == 0
+                && roundtrip.Contains("\"presentationOnlyRuntimeExecutionCount\"", StringComparison.Ordinal);
+            var requestResponseCorrelationPassed =
+                ContainsJsonBool(roundtrip, "requestResponseCorrelationPassed", true);
+            var sequentialCursorContinuityPassed =
+                ContainsJsonBool(roundtrip, "sequentialCursorContinuityPassed", true);
+            var copySummaryStateUnchanged =
+                ContainsJsonBool(roundtrip, "copySummaryStateUnchanged", true);
+            var loadModelStateUnchanged =
+                ContainsJsonBool(roundtrip, "loadModelStateUnchanged", true);
+            var noControlIntentMappedToUnrelatedGameplayCommand =
+                ContainsJsonBool(roundtrip, "noControlIntentMappedToUnrelatedGameplayCommand", true);
             var runtimeAuthorityMarkersPresent =
                 ContainsJsonBool(model, "runtimeAuthority", true)
                 && ContainsJsonBool(roundtrip, "runtimeAuthority", true)
@@ -164,6 +187,13 @@ namespace LLMGameCreatorAlpha
             result.Passed = modelPathExists
                             && resultPathExists
                             && roundtripRequestCountPassed
+                            && presentationOnlyRequestCountPassed
+                            && presentationOnlyRuntimeExecutionCountPassed
+                            && requestResponseCorrelationPassed
+                            && sequentialCursorContinuityPassed
+                            && copySummaryStateUnchanged
+                            && loadModelStateUnchanged
+                            && noControlIntentMappedToUnrelatedGameplayCommand
                             && runtimeSnapshotResponsePresent
                             && runtimeAuthorityMarkersPresent
                             && unityConsumesRoundtripResult
@@ -173,6 +203,20 @@ namespace LLMGameCreatorAlpha
                 + modelPathExists
                 + "; roundtripRequestCountPassed="
                 + roundtripRequestCountPassed
+                + "; presentationOnlyRequestCountPassed="
+                + presentationOnlyRequestCountPassed
+                + "; presentationOnlyRuntimeExecutionCountPassed="
+                + presentationOnlyRuntimeExecutionCountPassed
+                + "; requestResponseCorrelationPassed="
+                + requestResponseCorrelationPassed
+                + "; sequentialCursorContinuityPassed="
+                + sequentialCursorContinuityPassed
+                + "; copySummaryStateUnchanged="
+                + copySummaryStateUnchanged
+                + "; loadModelStateUnchanged="
+                + loadModelStateUnchanged
+                + "; noControlIntentMappedToUnrelatedGameplayCommand="
+                + noControlIntentMappedToUnrelatedGameplayCommand
                 + "; runtimeSnapshotResponsePresent="
                 + runtimeSnapshotResponsePresent
                 + "; runtimeAuthorityMarkersPresent="

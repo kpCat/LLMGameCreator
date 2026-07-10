@@ -74,11 +74,25 @@ public sealed class RuntimeBackedPlayerCommandRoundtripScriptProof
         Assert.True(write.Dashboard.Goal140Accepted);
         Assert.False(write.Dashboard.Accepted);
         Assert.Equal("minimal-map-game-balanced-baseline", write.Dashboard.CandidateId);
-        Assert.True(write.Dashboard.RoundtripRequestCount >= 6);
-        Assert.True(write.Dashboard.RuntimeExecutedRequestCount >= 6);
+        Assert.True(write.Dashboard.RoundtripSemanticCorrectnessPassed);
+        Assert.Equal(6, write.Dashboard.TotalControlRequestCount);
+        Assert.Equal(6, write.Dashboard.RoundtripRequestCount);
+        Assert.Equal(4, write.Dashboard.RuntimeRoutedRequestCount);
+        Assert.Equal(2, write.Dashboard.PresentationOnlyRequestCount);
+        Assert.Equal(4, write.Dashboard.RuntimeExecutedRequestCount);
+        Assert.Equal(0, write.Dashboard.PresentationOnlyRuntimeExecutionCount);
+        Assert.Equal(0, write.Dashboard.RuntimeMutatingPresentationRequestCount);
+        Assert.Equal(6, write.Dashboard.ResponseCount);
         Assert.True(write.Dashboard.RoundtripSnapshotCount >= write.Dashboard.RuntimeExecutedRequestCount);
         Assert.True(write.Dashboard.ControlRequestBridgePresent);
         Assert.True(write.Dashboard.StateHashChainPresent);
+        Assert.True(write.Dashboard.RequestResponseCorrelationPassed);
+        Assert.True(write.Dashboard.SequentialCursorContinuityPassed);
+        Assert.True(write.Dashboard.StateHashContinuityPassed);
+        Assert.True(write.Dashboard.CopySummaryStateUnchanged);
+        Assert.True(write.Dashboard.LoadModelStateUnchanged);
+        Assert.True(write.Dashboard.PlayAllExecutedRemainingCommands);
+        Assert.True(write.Dashboard.NoControlIntentMappedToUnrelatedGameplayCommand);
         Assert.True(write.Dashboard.RuntimeAuthority);
         Assert.False(write.Dashboard.ProjectionOnly);
         Assert.False(write.Dashboard.UnityGameplayTruth);
@@ -92,6 +106,20 @@ public sealed class RuntimeBackedPlayerCommandRoundtripScriptProof
         {
             Assert.Contains(write.WrittenFiles, path => path == outputRoot + "/" + fileName);
             Assert.Contains(write.WrittenFiles, path => path == exportRoot + "/" + fileName);
+        }
+
+        foreach (var fileName in RequiredGoal141AFiles())
+        {
+            Assert.Contains(write.WrittenFiles, path =>
+                path == RuntimeBackedPlayerCommandRoundtripVocabulary
+                    .SemanticCorrectnessProceduralOutputDirectory
+                + "/"
+                + fileName);
+            Assert.Contains(write.WrittenFiles, path =>
+                path == RuntimeBackedPlayerCommandRoundtripVocabulary
+                    .SemanticCorrectnessExportPackageDirectory
+                + "/"
+                + fileName);
         }
 
         var acceptancePath = Path.Combine(
@@ -120,7 +148,9 @@ public sealed class RuntimeBackedPlayerCommandRoundtripScriptProof
             Path.Combine(root, RuntimeBackedPlayerCommandRoundtripVocabulary.DocumentationPath));
         Assert.Contains("accepted=false", docsText, StringComparison.Ordinal);
         Assert.Contains("goal140Accepted=true", docsText, StringComparison.Ordinal);
-        Assert.Contains("runtimeExecutedRequestCount=", docsText, StringComparison.Ordinal);
+        Assert.Contains("runtimeExecutedRequestCount=4", docsText, StringComparison.Ordinal);
+        Assert.Contains("presentationOnlyRuntimeExecutionCount=0", docsText, StringComparison.Ordinal);
+        Assert.Contains("roundtripSemanticCorrectnessPassed=true", docsText, StringComparison.Ordinal);
     }
 
     private static IReadOnlyList<string> RequiredGoal141Files() =>
@@ -137,6 +167,14 @@ public sealed class RuntimeBackedPlayerCommandRoundtripScriptProof
         RuntimeBackedPlayerCommandRoundtripVocabulary.UnitySmokeFileName,
         RuntimeBackedPlayerCommandRoundtripVocabulary.ReportJsonFileName,
         RuntimeBackedPlayerCommandRoundtripVocabulary.ReportMarkdownFileName
+    ];
+
+    private static IReadOnlyList<string> RequiredGoal141AFiles() =>
+    [
+        RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessDashboardFileName,
+        RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessRegressionProofFileName,
+        RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessReportFileName,
+        RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessFileIndexFileName
     ];
 
     private static RuntimeBackedPlayerCommandRoundtripUnitySmoke PassedUnitySmoke(
@@ -156,6 +194,13 @@ public sealed class RuntimeBackedPlayerCommandRoundtripScriptProof
             UnityAvailable = true,
             ModelPathExists = true,
             RoundtripRequestCountPassed = true,
+            PresentationOnlyRequestCountPassed = true,
+            PresentationOnlyRuntimeExecutionCountPassed = true,
+            RequestResponseCorrelationPassed = true,
+            SequentialCursorContinuityPassed = true,
+            CopySummaryStateUnchanged = true,
+            LoadModelStateUnchanged = true,
+            NoControlIntentMappedToUnrelatedGameplayCommand = true,
             RuntimeSnapshotResponsePresent = true,
             RuntimeAuthorityMarkersPresent = true,
             UnityConsumesRoundtripResult = true,

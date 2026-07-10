@@ -11,16 +11,42 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.RuntimeBackedPlayerCommandRoundtripGoal140Accepted,
             RuntimeBackedPlayerCommandRoundtripCandidateId =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripCandidateId,
+            RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount,
             RuntimeBackedPlayerCommandRoundtripRequestCount =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripRequestCount,
+            RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount,
+            RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount,
             RuntimeBackedPlayerCommandRoundtripExecutedRequestCount =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripExecutedRequestCount,
+            RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount,
+            RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount,
+            RuntimeBackedPlayerCommandRoundtripResponseCount =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripResponseCount,
             RuntimeBackedPlayerCommandRoundtripSnapshotCount =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripSnapshotCount,
             RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent,
             RuntimeBackedPlayerCommandRoundtripStateHashChainPresent =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripStateHashChainPresent,
+            RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed,
+            RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed,
+            RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed,
+            RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged,
+            RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged,
+            RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping,
+            RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed =
+                qualityGate.RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed,
             RuntimeBackedPlayerCommandRoundtripRuntimeAuthority =
                 qualityGate.RuntimeBackedPlayerCommandRoundtripRuntimeAuthority,
             RuntimeBackedPlayerCommandRoundtripProjectionOnly =

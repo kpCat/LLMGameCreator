@@ -1,0 +1,16 @@
+{
+  "goalId": "goal_141a_player_command_roundtrip_semantic_correctness_hotfix",
+  "copyFrameSummaryNotMappedToBasicAttack": true,
+  "copyFrameSummaryRuntimeExecutedFalse": true,
+  "copyFrameSummaryStateHashUnchanged": true,
+  "loadModelRuntimeExecutedFalse": true,
+  "loadModelCanonicalStepRuntimeExecutedFalse": true,
+  "runtimeExecutedNotSourcedFromAggregateLoopPassed": true,
+  "requestsCreatedBeforeRuntimeExecution": true,
+  "noFixedControlToSnapshotIndexExecutionProof": true,
+  "runtimeExecutedRequiresExecutedCommandCount": true,
+  "requestResponseIdsMatch": true,
+  "stateHashContinuityPassed": true,
+  "passed": true,
+  "diagnostics": []
+}

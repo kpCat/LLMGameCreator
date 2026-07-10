@@ -8,10 +8,18 @@ public static class RuntimeBackedPlayerCommandRoundtripVocabulary
         "goal_141_runtime_backed_unity_player_command_roundtrip_bridge";
     public const string ScenarioId =
         "goal-141-runtime-backed-unity-player-command-roundtrip-bridge";
+    public const string SemanticCorrectnessGoalId =
+        "goal_141a_player_command_roundtrip_semantic_correctness_hotfix";
+    public const string SemanticCorrectnessScenarioId =
+        "goal-141a-player-command-roundtrip-semantic-correctness-hotfix";
     public const string ProceduralOutputDirectory =
         ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge";
     public const string ExportPackageDirectory =
         ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge";
+    public const string SemanticCorrectnessProceduralOutputDirectory =
+        ".llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix";
+    public const string SemanticCorrectnessExportPackageDirectory =
+        ".llmgc/exports/goal-141a-player-command-roundtrip-semantic-correctness-hotfix";
     public const string DefaultSelectedCandidatePackagePath =
         CanonicalRuntimePlayerCommandLoopVocabulary.DefaultSelectedCandidatePackagePath;
     public const string DefaultSelectedCandidateHandoffPath =
@@ -73,6 +81,14 @@ public static class RuntimeBackedPlayerCommandRoundtripVocabulary
         "one-click-runtime-backed-player-command-roundtrip-report.json";
     public const string ReportMarkdownFileName =
         "one-click-runtime-backed-player-command-roundtrip-report.md";
+    public const string SemanticCorrectnessDashboardFileName =
+        "roundtrip-semantic-correctness-dashboard.json";
+    public const string SemanticCorrectnessRegressionProofFileName =
+        "roundtrip-semantic-correctness-regression-proof.json";
+    public const string SemanticCorrectnessReportFileName =
+        "roundtrip-semantic-correctness-report.md";
+    public const string SemanticCorrectnessFileIndexFileName =
+        "roundtrip-semantic-correctness-file-index.json";
 
     public const string DashboardRelativePath = ProceduralOutputDirectory + "/" + DashboardFileName;
     public const string ModelRelativePath = ProceduralOutputDirectory + "/" + ModelFileName;
@@ -136,8 +152,14 @@ public sealed record RuntimeBackedPlayerCommandRoundtripModel
 {
     public string GoalId { get; init; } = RuntimeBackedPlayerCommandRoundtripVocabulary.GoalId;
     public string CandidateId { get; init; } = string.Empty;
+    public int TotalControlRequestCount { get; init; }
     public int RoundtripRequestCount { get; init; }
+    public int RuntimeRoutedRequestCount { get; init; }
+    public int PresentationOnlyRequestCount { get; init; }
     public int RuntimeExecutedRequestCount { get; init; }
+    public int PresentationOnlyRuntimeExecutionCount { get; init; }
+    public int RuntimeMutatingPresentationRequestCount { get; init; }
+    public int ResponseCount { get; init; }
     public int RoundtripSnapshotCount { get; init; }
     public RuntimeBackedPlayerCommandRoundtripControlRequest CurrentRequest { get; init; } = new();
     public RuntimeBackedPlayerCommandRoundtripSnapshot CurrentResponseSnapshot { get; init; } = new();
@@ -145,6 +167,14 @@ public sealed record RuntimeBackedPlayerCommandRoundtripModel
     public IReadOnlyList<RuntimeBackedPlayerCommandRoundtripControlRequest> Requests { get; init; } = [];
     public IReadOnlyList<RuntimeBackedPlayerCommandRoundtripResponse> Responses { get; init; } = [];
     public bool StateHashChainPresent { get; init; }
+    public bool RequestResponseCorrelationPassed { get; init; }
+    public bool SequentialCursorContinuityPassed { get; init; }
+    public bool StateHashContinuityPassed { get; init; }
+    public bool CopySummaryStateUnchanged { get; init; }
+    public bool LoadModelStateUnchanged { get; init; }
+    public bool PlayAllExecutedRemainingCommands { get; init; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; init; }
+    public bool RoundtripSemanticCorrectnessPassed { get; init; }
     public bool RuntimeAuthority { get; init; } = true;
     public bool ProjectionOnly { get; init; }
     public bool UnityGameplayTruth { get; init; }
@@ -160,6 +190,13 @@ public sealed record RuntimeBackedPlayerCommandRoundtripUnitySmoke
     public bool UnityAvailable { get; init; }
     public bool ModelPathExists { get; init; }
     public bool RoundtripRequestCountPassed { get; init; }
+    public bool PresentationOnlyRequestCountPassed { get; init; }
+    public bool PresentationOnlyRuntimeExecutionCountPassed { get; init; }
+    public bool RequestResponseCorrelationPassed { get; init; }
+    public bool SequentialCursorContinuityPassed { get; init; }
+    public bool CopySummaryStateUnchanged { get; init; }
+    public bool LoadModelStateUnchanged { get; init; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; init; }
     public bool RuntimeSnapshotResponsePresent { get; init; }
     public bool RuntimeAuthorityMarkersPresent { get; init; }
     public bool UnityConsumesRoundtripResult { get; init; }
@@ -186,6 +223,10 @@ public sealed record RuntimeBackedPlayerCommandRoundtripNegativeProof
     public bool GeneratorLibraryProviderLuaUnchanged { get; init; }
     public bool UnityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged { get; init; }
     public bool RuntimeOwnsRoundtripExecution { get; init; }
+    public bool PresentationOnlyControlsDoNotExecuteRuntime { get; init; }
+    public bool RequestResponseCorrelationPassed { get; init; }
+    public bool StateHashContinuityPassed { get; init; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; init; }
     public bool UnityConsumesResultOnly { get; init; }
     public bool RuntimeAuthority { get; init; }
     public bool ProjectionOnly { get; init; }
@@ -200,11 +241,25 @@ public sealed record RuntimeBackedPlayerCommandRoundtripReport
     public bool Accepted { get; init; }
     public bool Goal140Accepted { get; init; }
     public string CandidateId { get; init; } = string.Empty;
+    public int TotalControlRequestCount { get; init; }
     public int RoundtripRequestCount { get; init; }
+    public int RuntimeRoutedRequestCount { get; init; }
+    public int PresentationOnlyRequestCount { get; init; }
     public int RuntimeExecutedRequestCount { get; init; }
+    public int PresentationOnlyRuntimeExecutionCount { get; init; }
+    public int RuntimeMutatingPresentationRequestCount { get; init; }
+    public int ResponseCount { get; init; }
     public int RoundtripSnapshotCount { get; init; }
     public bool ControlRequestBridgePresent { get; init; }
     public bool StateHashChainPresent { get; init; }
+    public bool RequestResponseCorrelationPassed { get; init; }
+    public bool SequentialCursorContinuityPassed { get; init; }
+    public bool StateHashContinuityPassed { get; init; }
+    public bool CopySummaryStateUnchanged { get; init; }
+    public bool LoadModelStateUnchanged { get; init; }
+    public bool PlayAllExecutedRemainingCommands { get; init; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; init; }
+    public bool RoundtripSemanticCorrectnessPassed { get; init; }
     public bool RuntimeAuthority { get; init; }
     public bool ProjectionOnly { get; init; }
     public bool UnityGameplayTruth { get; init; }
@@ -224,11 +279,25 @@ public sealed record RuntimeBackedPlayerCommandRoundtripDashboard
     public bool Accepted { get; init; }
     public bool Goal140Accepted { get; init; }
     public string CandidateId { get; init; } = string.Empty;
+    public int TotalControlRequestCount { get; init; }
     public int RoundtripRequestCount { get; init; }
+    public int RuntimeRoutedRequestCount { get; init; }
+    public int PresentationOnlyRequestCount { get; init; }
     public int RuntimeExecutedRequestCount { get; init; }
+    public int PresentationOnlyRuntimeExecutionCount { get; init; }
+    public int RuntimeMutatingPresentationRequestCount { get; init; }
+    public int ResponseCount { get; init; }
     public int RoundtripSnapshotCount { get; init; }
     public bool ControlRequestBridgePresent { get; init; }
     public bool StateHashChainPresent { get; init; }
+    public bool RequestResponseCorrelationPassed { get; init; }
+    public bool SequentialCursorContinuityPassed { get; init; }
+    public bool StateHashContinuityPassed { get; init; }
+    public bool CopySummaryStateUnchanged { get; init; }
+    public bool LoadModelStateUnchanged { get; init; }
+    public bool PlayAllExecutedRemainingCommands { get; init; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; init; }
+    public bool RoundtripSemanticCorrectnessPassed { get; init; }
     public bool RuntimeAuthority { get; init; } = true;
     public bool ProjectionOnly { get; init; }
     public bool UnityGameplayTruth { get; init; }
@@ -242,6 +311,51 @@ public sealed record RuntimeBackedPlayerCommandRoundtripDashboard
         RuntimeBackedPlayerCommandRoundtripVocabulary.ReportMarkdownRelativePath;
     public IReadOnlyList<string> MissingControlIntents { get; init; } = [];
     public IReadOnlyList<string> MissingRuntimeCommandCoverage { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessDashboard
+{
+    public string GoalId { get; init; } =
+        RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessGoalId;
+    public string Status { get; init; } = "BLOCKED";
+    public bool RoundtripSemanticCorrectnessPassed { get; init; }
+    public int TotalControlRequestCount { get; init; }
+    public int RuntimeRoutedRequestCount { get; init; }
+    public int PresentationOnlyRequestCount { get; init; }
+    public int RuntimeExecutedRequestCount { get; init; }
+    public int PresentationOnlyRuntimeExecutionCount { get; init; }
+    public int RuntimeMutatingPresentationRequestCount { get; init; }
+    public int ResponseCount { get; init; }
+    public bool RequestResponseCorrelationPassed { get; init; }
+    public bool SequentialCursorContinuityPassed { get; init; }
+    public bool StateHashContinuityPassed { get; init; }
+    public bool CopySummaryStateUnchanged { get; init; }
+    public bool LoadModelStateUnchanged { get; init; }
+    public bool PlayAllExecutedRemainingCommands { get; init; }
+    public bool NoControlIntentMappedToUnrelatedGameplayCommand { get; init; }
+    public bool RuntimeAuthority { get; init; }
+    public bool ProjectionOnly { get; init; }
+    public bool UnityGameplayTruth { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessRegressionProof
+{
+    public string GoalId { get; init; } =
+        RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessGoalId;
+    public bool CopyFrameSummaryNotMappedToBasicAttack { get; init; }
+    public bool CopyFrameSummaryRuntimeExecutedFalse { get; init; }
+    public bool CopyFrameSummaryStateHashUnchanged { get; init; }
+    public bool LoadModelRuntimeExecutedFalse { get; init; }
+    public bool LoadModelCanonicalStepRuntimeExecutedFalse { get; init; }
+    public bool RuntimeExecutedNotSourcedFromAggregateLoopPassed { get; init; }
+    public bool RequestsCreatedBeforeRuntimeExecution { get; init; }
+    public bool NoFixedControlToSnapshotIndexExecutionProof { get; init; }
+    public bool RuntimeExecutedRequiresExecutedCommandCount { get; init; }
+    public bool RequestResponseIdsMatch { get; init; }
+    public bool StateHashContinuityPassed { get; init; }
+    public bool Passed { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 

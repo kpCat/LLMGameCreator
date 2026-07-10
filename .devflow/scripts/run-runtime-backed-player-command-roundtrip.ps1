@@ -206,6 +206,13 @@ function Invoke-Goal141UnitySmoke {
             unityAvailable = $false
             modelPathExists = Test-Path -LiteralPath $modelPath -PathType Leaf
             roundtripRequestCountPassed = $false
+            presentationOnlyRequestCountPassed = $false
+            presentationOnlyRuntimeExecutionCountPassed = $false
+            requestResponseCorrelationPassed = $false
+            sequentialCursorContinuityPassed = $false
+            copySummaryStateUnchanged = $false
+            loadModelStateUnchanged = $false
+            noControlIntentMappedToUnrelatedGameplayCommand = $false
             runtimeSnapshotResponsePresent = $false
             runtimeAuthorityMarkersPresent = $false
             unityConsumesRoundtripResult = $false
@@ -254,6 +261,20 @@ function Invoke-Goal141UnitySmoke {
         -or (Test-Goal141Contains -Text $logText -Needle "modelPathExists=true")
     $requestCountPassed = (Test-Goal141Contains -Text $logText -Needle "roundtripRequestCountPassed=True") `
         -or (Test-Goal141Contains -Text $logText -Needle "roundtripRequestCountPassed=true")
+    $presentationOnlyRequestCountPassed = (Test-Goal141Contains -Text $logText -Needle "presentationOnlyRequestCountPassed=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "presentationOnlyRequestCountPassed=true")
+    $presentationOnlyRuntimeExecutionCountPassed = (Test-Goal141Contains -Text $logText -Needle "presentationOnlyRuntimeExecutionCountPassed=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "presentationOnlyRuntimeExecutionCountPassed=true")
+    $requestResponseCorrelationPassed = (Test-Goal141Contains -Text $logText -Needle "requestResponseCorrelationPassed=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "requestResponseCorrelationPassed=true")
+    $sequentialCursorContinuityPassed = (Test-Goal141Contains -Text $logText -Needle "sequentialCursorContinuityPassed=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "sequentialCursorContinuityPassed=true")
+    $copySummaryStateUnchanged = (Test-Goal141Contains -Text $logText -Needle "copySummaryStateUnchanged=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "copySummaryStateUnchanged=true")
+    $loadModelStateUnchanged = (Test-Goal141Contains -Text $logText -Needle "loadModelStateUnchanged=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "loadModelStateUnchanged=true")
+    $noControlIntentMappedToUnrelatedGameplayCommand = (Test-Goal141Contains -Text $logText -Needle "noControlIntentMappedToUnrelatedGameplayCommand=True") `
+        -or (Test-Goal141Contains -Text $logText -Needle "noControlIntentMappedToUnrelatedGameplayCommand=true")
     $snapshotResponsePresent = (Test-Goal141Contains -Text $logText -Needle "runtimeSnapshotResponsePresent=True") `
         -or (Test-Goal141Contains -Text $logText -Needle "runtimeSnapshotResponsePresent=true")
     $runtimeAuthorityMarkersPresent = (Test-Goal141Contains -Text $logText -Needle "runtimeAuthorityMarkersPresent=True") `
@@ -267,6 +288,13 @@ function Invoke-Goal141UnitySmoke {
         -and -not $failMarkerPresent `
         -and $modelPathExists `
         -and $requestCountPassed `
+        -and $presentationOnlyRequestCountPassed `
+        -and $presentationOnlyRuntimeExecutionCountPassed `
+        -and $requestResponseCorrelationPassed `
+        -and $sequentialCursorContinuityPassed `
+        -and $copySummaryStateUnchanged `
+        -and $loadModelStateUnchanged `
+        -and $noControlIntentMappedToUnrelatedGameplayCommand `
         -and $snapshotResponsePresent `
         -and $runtimeAuthorityMarkersPresent `
         -and $unityConsumesRoundtripResult `
@@ -278,6 +306,13 @@ function Invoke-Goal141UnitySmoke {
         "failMarkerPresent=$failMarkerPresent",
         "modelPathExists=$modelPathExists",
         "roundtripRequestCountPassed=$requestCountPassed",
+        "presentationOnlyRequestCountPassed=$presentationOnlyRequestCountPassed",
+        "presentationOnlyRuntimeExecutionCountPassed=$presentationOnlyRuntimeExecutionCountPassed",
+        "requestResponseCorrelationPassed=$requestResponseCorrelationPassed",
+        "sequentialCursorContinuityPassed=$sequentialCursorContinuityPassed",
+        "copySummaryStateUnchanged=$copySummaryStateUnchanged",
+        "loadModelStateUnchanged=$loadModelStateUnchanged",
+        "noControlIntentMappedToUnrelatedGameplayCommand=$noControlIntentMappedToUnrelatedGameplayCommand",
         "runtimeSnapshotResponsePresent=$snapshotResponsePresent",
         "runtimeAuthorityMarkersPresent=$runtimeAuthorityMarkersPresent",
         "unityConsumesRoundtripResult=$unityConsumesRoundtripResult",
@@ -289,6 +324,13 @@ function Invoke-Goal141UnitySmoke {
         unityAvailable = $true
         modelPathExists = $modelPathExists
         roundtripRequestCountPassed = $requestCountPassed
+        presentationOnlyRequestCountPassed = $presentationOnlyRequestCountPassed
+        presentationOnlyRuntimeExecutionCountPassed = $presentationOnlyRuntimeExecutionCountPassed
+        requestResponseCorrelationPassed = $requestResponseCorrelationPassed
+        sequentialCursorContinuityPassed = $sequentialCursorContinuityPassed
+        copySummaryStateUnchanged = $copySummaryStateUnchanged
+        loadModelStateUnchanged = $loadModelStateUnchanged
+        noControlIntentMappedToUnrelatedGameplayCommand = $noControlIntentMappedToUnrelatedGameplayCommand
         runtimeSnapshotResponsePresent = $snapshotResponsePresent
         runtimeAuthorityMarkersPresent = $runtimeAuthorityMarkersPresent
         unityConsumesRoundtripResult = $unityConsumesRoundtripResult

@@ -106,12 +106,37 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         {
             RuntimeBackedPlayerCommandRoundtripGoal140Accepted = summary.Goal140Accepted,
             RuntimeBackedPlayerCommandRoundtripCandidateId = summary.CandidateId,
+            RuntimeBackedPlayerCommandRoundtripTotalControlRequestCount =
+                summary.TotalControlRequestCount,
             RuntimeBackedPlayerCommandRoundtripRequestCount = summary.RequestCount,
+            RuntimeBackedPlayerCommandRoundtripRuntimeRoutedRequestCount =
+                summary.RuntimeRoutedRequestCount,
+            RuntimeBackedPlayerCommandRoundtripPresentationOnlyRequestCount =
+                summary.PresentationOnlyRequestCount,
             RuntimeBackedPlayerCommandRoundtripExecutedRequestCount = summary.ExecutedRequestCount,
+            RuntimeBackedPlayerCommandRoundtripPresentationOnlyRuntimeExecutionCount =
+                summary.PresentationOnlyRuntimeExecutionCount,
+            RuntimeBackedPlayerCommandRoundtripRuntimeMutatingPresentationRequestCount =
+                summary.RuntimeMutatingPresentationRequestCount,
+            RuntimeBackedPlayerCommandRoundtripResponseCount = summary.ResponseCount,
             RuntimeBackedPlayerCommandRoundtripSnapshotCount = summary.SnapshotCount,
             RuntimeBackedPlayerCommandRoundtripControlRequestBridgePresent =
                 summary.ControlRequestBridgePresent,
             RuntimeBackedPlayerCommandRoundtripStateHashChainPresent = summary.StateHashChainPresent,
+            RuntimeBackedPlayerCommandRoundtripRequestResponseCorrelationPassed =
+                summary.RequestResponseCorrelationPassed,
+            RuntimeBackedPlayerCommandRoundtripSequentialCursorContinuityPassed =
+                summary.SequentialCursorContinuityPassed,
+            RuntimeBackedPlayerCommandRoundtripStateHashContinuityPassed =
+                summary.StateHashContinuityPassed,
+            RuntimeBackedPlayerCommandRoundtripCopySummaryStateUnchanged =
+                summary.CopySummaryStateUnchanged,
+            RuntimeBackedPlayerCommandRoundtripLoadModelStateUnchanged =
+                summary.LoadModelStateUnchanged,
+            RuntimeBackedPlayerCommandRoundtripNoUnrelatedGameplayMapping =
+                summary.NoUnrelatedGameplayMapping,
+            RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessPassed =
+                summary.SemanticCorrectnessPassed,
             RuntimeBackedPlayerCommandRoundtripRuntimeAuthority = summary.RuntimeAuthority,
             RuntimeBackedPlayerCommandRoundtripProjectionOnly = summary.ProjectionOnly,
             RuntimeBackedPlayerCommandRoundtripUnityGameplayTruth = summary.UnityGameplayTruth,
@@ -135,15 +160,55 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         return new RuntimeBackedPlayerCommandRoundtripWorkspaceSummary(
             Goal140Accepted: dashboard is not null && TryGetBool(dashboard.RootElement, "goal140Accepted"),
             CandidateId: Goal138String(dashboard?.RootElement, "candidateId"),
+            TotalControlRequestCount: dashboard is not null
+                ? Goal138Int(dashboard.RootElement, "totalControlRequestCount")
+                : 0,
             RequestCount: dashboard is not null ? Goal138Int(dashboard.RootElement, "roundtripRequestCount") : 0,
+            RuntimeRoutedRequestCount: dashboard is not null
+                ? Goal138Int(dashboard.RootElement, "runtimeRoutedRequestCount")
+                : 0,
+            PresentationOnlyRequestCount: dashboard is not null
+                ? Goal138Int(dashboard.RootElement, "presentationOnlyRequestCount")
+                : 0,
             ExecutedRequestCount: dashboard is not null
                 ? Goal138Int(dashboard.RootElement, "runtimeExecutedRequestCount")
+                : 0,
+            PresentationOnlyRuntimeExecutionCount: dashboard is not null
+                ? Goal138Int(dashboard.RootElement, "presentationOnlyRuntimeExecutionCount")
+                : 0,
+            RuntimeMutatingPresentationRequestCount: dashboard is not null
+                ? Goal138Int(dashboard.RootElement, "runtimeMutatingPresentationRequestCount")
+                : 0,
+            ResponseCount: dashboard is not null
+                ? Goal138Int(dashboard.RootElement, "responseCount")
                 : 0,
             SnapshotCount: dashboard is not null ? Goal138Int(dashboard.RootElement, "roundtripSnapshotCount") : 0,
             ControlRequestBridgePresent: dashboard is not null
                                          && TryGetBool(dashboard.RootElement, "controlRequestBridgePresent"),
             StateHashChainPresent: dashboard is not null
                                    && TryGetBool(dashboard.RootElement, "stateHashChainPresent"),
+            RequestResponseCorrelationPassed: dashboard is not null
+                                              && TryGetBool(
+                                                  dashboard.RootElement,
+                                                  "requestResponseCorrelationPassed"),
+            SequentialCursorContinuityPassed: dashboard is not null
+                                              && TryGetBool(
+                                                  dashboard.RootElement,
+                                                  "sequentialCursorContinuityPassed"),
+            StateHashContinuityPassed: dashboard is not null
+                                       && TryGetBool(dashboard.RootElement, "stateHashContinuityPassed"),
+            CopySummaryStateUnchanged: dashboard is not null
+                                       && TryGetBool(dashboard.RootElement, "copySummaryStateUnchanged"),
+            LoadModelStateUnchanged: dashboard is not null
+                                     && TryGetBool(dashboard.RootElement, "loadModelStateUnchanged"),
+            NoUnrelatedGameplayMapping: dashboard is not null
+                                        && TryGetBool(
+                                            dashboard.RootElement,
+                                            "noControlIntentMappedToUnrelatedGameplayCommand"),
+            SemanticCorrectnessPassed: dashboard is not null
+                                       && TryGetBool(
+                                           dashboard.RootElement,
+                                           "roundtripSemanticCorrectnessPassed"),
             RuntimeAuthority: dashboard is not null && TryGetBool(dashboard.RootElement, "runtimeAuthority"),
             ProjectionOnly: dashboard is not null && TryGetBool(dashboard.RootElement, "projectionOnly"),
             UnityGameplayTruth: dashboard is not null && TryGetBool(dashboard.RootElement, "unityGameplayTruth"),
@@ -204,11 +269,24 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
     private sealed record RuntimeBackedPlayerCommandRoundtripWorkspaceSummary(
         bool Goal140Accepted,
         string CandidateId,
+        int TotalControlRequestCount,
         int RequestCount,
+        int RuntimeRoutedRequestCount,
+        int PresentationOnlyRequestCount,
         int ExecutedRequestCount,
+        int PresentationOnlyRuntimeExecutionCount,
+        int RuntimeMutatingPresentationRequestCount,
+        int ResponseCount,
         int SnapshotCount,
         bool ControlRequestBridgePresent,
         bool StateHashChainPresent,
+        bool RequestResponseCorrelationPassed,
+        bool SequentialCursorContinuityPassed,
+        bool StateHashContinuityPassed,
+        bool CopySummaryStateUnchanged,
+        bool LoadModelStateUnchanged,
+        bool NoUnrelatedGameplayMapping,
+        bool SemanticCorrectnessPassed,
         bool RuntimeAuthority,
         bool ProjectionOnly,
         bool UnityGameplayTruth,

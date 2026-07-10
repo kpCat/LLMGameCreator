@@ -12,52 +12,52 @@
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/one-click-runtime-backed-player-command-roundtrip-report.json",
       "role": "goal141_one_click_runtime_backed_player_command_roundtrip_report",
-      "sha256": "a999bbe39063c0906ebab64bbd453758c6a1e3c096b000962e784409d7286a90"
+      "sha256": "fcdf46a2c7a6d2b1b5b4ef909db1f715c61a161679637745a0b90a65d92c12b8"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/one-click-runtime-backed-player-command-roundtrip-report.md",
       "role": "goal141_one_click_runtime_backed_player_command_roundtrip_report",
-      "sha256": "de2af104ca5251f06a163166da1635a8268fe48a67ef6bcac7dc8061ad425a46"
+      "sha256": "c1729719af0219f44ae076cff2b3cd1d2db0d600ecafbe52030e945de73d1cb9"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-dashboard.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_dashboard",
-      "sha256": "2a062e3ac6e30cf6cea34adb615de9be4d6c15011bb08664d6fb8945f35d7463"
+      "sha256": "8e5dc51e515a8d17e0bc86edaa9b2f1f3d4ab4c92ac6bc3aa9f0f9cff4b252bd"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-model.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_model",
-      "sha256": "b4baabb2fa831cb1376655ac21df99e9461a62aa8b812516337a34b5b7499f44"
+      "sha256": "c89bf6c4c4b55c9f887ecd40d36ecc44376f9fe0c153628f13a375999cc5cfa9"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-negative-proof.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_negative_proof",
-      "sha256": "079301fab75d5d160613ec442b58953b64635cc5204a3806885c5a3e4d7e2b5a"
+      "sha256": "277991ebfe87e1c0e4ea4f0f7389d485453e8e7c1fb3d2fccf10910b2c3f805d"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-request.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_request",
-      "sha256": "9d60d1c39841c2bc45288e98e3e32ff20859cb847f104ab625763f25b5f38b60"
+      "sha256": "31fa8d8d72299dc3e6da9ff9f64ff21dc0dee1c64498d2decce9ced6582f7079"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-result.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_result",
-      "sha256": "c678b0c668c6b5657df34d2d950016f6cf425737f00f22f76211651d88f0ab25"
+      "sha256": "5bf5b0ab0883e0f96d968423c7a0454fae98fdcb5722d075bdd886e2089d3fbb"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-session.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_session",
-      "sha256": "9df5a55b18026071c153a144037a3e441b704f381e8a3404fad854cea3ca0c99"
+      "sha256": "0e25e36cacbb9e1fe3ae0bece1fbbeb70bd7ded8b5595d433ff3b8b1b1bcae51"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-snapshots.json",
       "role": "goal141_runtime_backed_player_command_roundtrip_snapshots",
-      "sha256": "75de9f597c16a53234192a458cb1d2586f1004599fad66059db8ed1c4a51fc51"
+      "sha256": "26a9bd42f73803eb72b032fbcca3d26267bdfaf63a68e564372afd7346976027"
     },
     {
       "relativePath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/unity-player-command-roundtrip-smoke.json",
       "role": "goal141_unity_player_command_roundtrip_smoke",
-      "sha256": "58ed9a344005683198749de1009c6f2b4e8c02df7c18add9770110c13b7fa4fa"
+      "sha256": "1aac62096b2db56c7d0d1435930262818c821b6c990ed604cf28c9e0550a9189"
     }
   ]
 }

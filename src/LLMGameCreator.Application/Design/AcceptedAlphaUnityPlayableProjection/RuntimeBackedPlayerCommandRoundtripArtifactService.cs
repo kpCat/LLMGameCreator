@@ -52,7 +52,10 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
         var report = BuildReport(goal140Acceptance, runtimeResult, smoke);
         var dashboard = BuildDashboard(goal140Acceptance, runtimeResult, smoke);
         var negative = BuildNegativeProof(goal140Acceptance, runtimeResult);
+        var semanticDashboard = BuildSemanticDashboard(runtimeResult, dashboard);
+        var semanticRegression = BuildSemanticRegressionProof(runtimeResult);
         var markdown = RenderReport(report, dashboard, runtimeResult, negative);
+        var semanticMarkdown = RenderSemanticReport(semanticDashboard, semanticRegression);
         var goal140Markdown = RenderGoal140Acceptance(goal140Acceptance);
         var goal141Markdown = RenderGoal141ManualAcceptance(report, dashboard);
         var requestArtifact = new RuntimeBackedPlayerCommandRoundtripRequestArtifact
@@ -87,11 +90,29 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             smoke,
             report,
             markdown);
+        var semanticProceduralFiles = BuildSemanticFilePayloads(
+            RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessProceduralOutputDirectory,
+            semanticDashboard,
+            semanticRegression,
+            semanticMarkdown);
+        var semanticExportFiles = BuildSemanticFilePayloads(
+            RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessExportPackageDirectory,
+            semanticDashboard,
+            semanticRegression,
+            semanticMarkdown);
 
         var procedural = Resolve(root, outputRootRelativePath);
         var export = Resolve(root, exportRootRelativePath);
+        var semanticProcedural = Resolve(
+            root,
+            RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessProceduralOutputDirectory);
+        var semanticExport = Resolve(
+            root,
+            RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessExportPackageDirectory);
         Directory.CreateDirectory(procedural);
         Directory.CreateDirectory(export);
+        Directory.CreateDirectory(semanticProcedural);
+        Directory.CreateDirectory(semanticExport);
 
         var written = new List<string>();
         foreach (var item in proceduralFiles.OrderBy(item => item.Key, StringComparer.Ordinal))
@@ -107,6 +128,24 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
         {
             cancellationToken.ThrowIfCancellationRequested();
             var path = Path.Combine(export, item.Key);
+            GuardGoal141Write(root, path);
+            await WriteTextAsync(path, item.Value, cancellationToken).ConfigureAwait(false);
+            written.Add(Relative(root, path));
+        }
+
+        foreach (var item in semanticProceduralFiles.OrderBy(item => item.Key, StringComparer.Ordinal))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var path = Path.Combine(semanticProcedural, item.Key);
+            GuardGoal141Write(root, path);
+            await WriteTextAsync(path, item.Value, cancellationToken).ConfigureAwait(false);
+            written.Add(Relative(root, path));
+        }
+
+        foreach (var item in semanticExportFiles.OrderBy(item => item.Key, StringComparer.Ordinal))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var path = Path.Combine(semanticExport, item.Key);
             GuardGoal141Write(root, path);
             await WriteTextAsync(path, item.Value, cancellationToken).ConfigureAwait(false);
             written.Add(Relative(root, path));
@@ -191,8 +230,14 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
         return new RuntimeBackedPlayerCommandRoundtripModel
         {
             CandidateId = result.CandidateId,
+            TotalControlRequestCount = result.TotalControlRequestCount,
             RoundtripRequestCount = result.RoundtripRequestCount,
+            RuntimeRoutedRequestCount = result.RuntimeRoutedRequestCount,
+            PresentationOnlyRequestCount = result.PresentationOnlyRequestCount,
             RuntimeExecutedRequestCount = result.RuntimeExecutedRequestCount,
+            PresentationOnlyRuntimeExecutionCount = result.PresentationOnlyRuntimeExecutionCount,
+            RuntimeMutatingPresentationRequestCount = result.RuntimeMutatingPresentationRequestCount,
+            ResponseCount = result.ResponseCount,
             RoundtripSnapshotCount = result.RoundtripSnapshotCount,
             CurrentRequest = result.Requests.FirstOrDefault()
                              ?? new RuntimeBackedPlayerCommandRoundtripControlRequest(),
@@ -201,6 +246,15 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             Requests = result.Requests,
             Responses = result.Responses,
             StateHashChainPresent = result.StateHashChainPresent,
+            RequestResponseCorrelationPassed = result.RequestResponseCorrelationPassed,
+            SequentialCursorContinuityPassed = result.SequentialCursorContinuityPassed,
+            StateHashContinuityPassed = result.StateHashContinuityPassed,
+            CopySummaryStateUnchanged = result.CopySummaryStateUnchanged,
+            LoadModelStateUnchanged = result.LoadModelStateUnchanged,
+            PlayAllExecutedRemainingCommands = result.PlayAllExecutedRemainingCommands,
+            NoControlIntentMappedToUnrelatedGameplayCommand =
+                result.NoControlIntentMappedToUnrelatedGameplayCommand,
+            RoundtripSemanticCorrectnessPassed = result.RoundtripSemanticCorrectnessPassed,
             RuntimeAuthority = result.RuntimeAuthority,
             ProjectionOnly = result.ProjectionOnly,
             UnityGameplayTruth = result.UnityGameplayTruth,
@@ -240,11 +294,26 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             Accepted = false,
             Goal140Accepted = Goal140Accepted(goal140),
             CandidateId = result.CandidateId,
+            TotalControlRequestCount = result.TotalControlRequestCount,
             RoundtripRequestCount = result.RoundtripRequestCount,
+            RuntimeRoutedRequestCount = result.RuntimeRoutedRequestCount,
+            PresentationOnlyRequestCount = result.PresentationOnlyRequestCount,
             RuntimeExecutedRequestCount = result.RuntimeExecutedRequestCount,
+            PresentationOnlyRuntimeExecutionCount = result.PresentationOnlyRuntimeExecutionCount,
+            RuntimeMutatingPresentationRequestCount = result.RuntimeMutatingPresentationRequestCount,
+            ResponseCount = result.ResponseCount,
             RoundtripSnapshotCount = result.RoundtripSnapshotCount,
             ControlRequestBridgePresent = result.ControlRequestBridgePresent,
             StateHashChainPresent = result.StateHashChainPresent,
+            RequestResponseCorrelationPassed = result.RequestResponseCorrelationPassed,
+            SequentialCursorContinuityPassed = result.SequentialCursorContinuityPassed,
+            StateHashContinuityPassed = result.StateHashContinuityPassed,
+            CopySummaryStateUnchanged = result.CopySummaryStateUnchanged,
+            LoadModelStateUnchanged = result.LoadModelStateUnchanged,
+            PlayAllExecutedRemainingCommands = result.PlayAllExecutedRemainingCommands,
+            NoControlIntentMappedToUnrelatedGameplayCommand =
+                result.NoControlIntentMappedToUnrelatedGameplayCommand,
+            RoundtripSemanticCorrectnessPassed = result.RoundtripSemanticCorrectnessPassed,
             RuntimeAuthority = result.RuntimeAuthority,
             ProjectionOnly = result.ProjectionOnly,
             UnityGameplayTruth = result.UnityGameplayTruth,
@@ -265,11 +334,26 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             Accepted = false,
             Goal140Accepted = Goal140Accepted(goal140),
             CandidateId = result.CandidateId,
+            TotalControlRequestCount = result.TotalControlRequestCount,
             RoundtripRequestCount = result.RoundtripRequestCount,
+            RuntimeRoutedRequestCount = result.RuntimeRoutedRequestCount,
+            PresentationOnlyRequestCount = result.PresentationOnlyRequestCount,
             RuntimeExecutedRequestCount = result.RuntimeExecutedRequestCount,
+            PresentationOnlyRuntimeExecutionCount = result.PresentationOnlyRuntimeExecutionCount,
+            RuntimeMutatingPresentationRequestCount = result.RuntimeMutatingPresentationRequestCount,
+            ResponseCount = result.ResponseCount,
             RoundtripSnapshotCount = result.RoundtripSnapshotCount,
             ControlRequestBridgePresent = result.ControlRequestBridgePresent,
             StateHashChainPresent = result.StateHashChainPresent,
+            RequestResponseCorrelationPassed = result.RequestResponseCorrelationPassed,
+            SequentialCursorContinuityPassed = result.SequentialCursorContinuityPassed,
+            StateHashContinuityPassed = result.StateHashContinuityPassed,
+            CopySummaryStateUnchanged = result.CopySummaryStateUnchanged,
+            LoadModelStateUnchanged = result.LoadModelStateUnchanged,
+            PlayAllExecutedRemainingCommands = result.PlayAllExecutedRemainingCommands,
+            NoControlIntentMappedToUnrelatedGameplayCommand =
+                result.NoControlIntentMappedToUnrelatedGameplayCommand,
+            RoundtripSemanticCorrectnessPassed = result.RoundtripSemanticCorrectnessPassed,
             RuntimeAuthority = result.RuntimeAuthority,
             ProjectionOnly = result.ProjectionOnly,
             UnityGameplayTruth = result.UnityGameplayTruth,
@@ -296,7 +380,16 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             GamePackageSchemaUnchanged = true,
             GeneratorLibraryProviderLuaUnchanged = true,
             UnityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged = true,
-            RuntimeOwnsRoundtripExecution = result.RuntimeExecutedRequestCount >= 6,
+            RuntimeOwnsRoundtripExecution = result.RuntimeRoutedRequestCount == 4
+                                             && result.RuntimeExecutedRequestCount == 4,
+            PresentationOnlyControlsDoNotExecuteRuntime =
+                result.PresentationOnlyRequestCount == 2
+                && result.PresentationOnlyRuntimeExecutionCount == 0
+                && result.RuntimeMutatingPresentationRequestCount == 0,
+            RequestResponseCorrelationPassed = result.RequestResponseCorrelationPassed,
+            StateHashContinuityPassed = result.StateHashContinuityPassed,
+            NoControlIntentMappedToUnrelatedGameplayCommand =
+                result.NoControlIntentMappedToUnrelatedGameplayCommand,
             UnityConsumesResultOnly = result.UnityConsumesRoundtripResult,
             RuntimeAuthority = result.RuntimeAuthority,
             ProjectionOnly = result.ProjectionOnly,
@@ -312,10 +405,129 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
                      && proof.GeneratorLibraryProviderLuaUnchanged
                      && proof.UnityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged
                      && proof.RuntimeOwnsRoundtripExecution
+                     && proof.PresentationOnlyControlsDoNotExecuteRuntime
+                     && proof.RequestResponseCorrelationPassed
+                     && proof.StateHashContinuityPassed
+                     && proof.NoControlIntentMappedToUnrelatedGameplayCommand
                      && proof.UnityConsumesResultOnly
                      && proof.RuntimeAuthority
                      && !proof.ProjectionOnly
                      && !proof.UnityGameplayTruth
+        };
+    }
+
+    private static RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessDashboard BuildSemanticDashboard(
+        RuntimeBackedPlayerCommandRoundtripResult result,
+        RuntimeBackedPlayerCommandRoundtripDashboard dashboard) =>
+        new()
+        {
+            Status = result.RoundtripSemanticCorrectnessPassed ? "GREEN" : "BLOCKED",
+            RoundtripSemanticCorrectnessPassed = result.RoundtripSemanticCorrectnessPassed,
+            TotalControlRequestCount = result.TotalControlRequestCount,
+            RuntimeRoutedRequestCount = result.RuntimeRoutedRequestCount,
+            PresentationOnlyRequestCount = result.PresentationOnlyRequestCount,
+            RuntimeExecutedRequestCount = result.RuntimeExecutedRequestCount,
+            PresentationOnlyRuntimeExecutionCount = result.PresentationOnlyRuntimeExecutionCount,
+            RuntimeMutatingPresentationRequestCount = result.RuntimeMutatingPresentationRequestCount,
+            ResponseCount = result.ResponseCount,
+            RequestResponseCorrelationPassed = result.RequestResponseCorrelationPassed,
+            SequentialCursorContinuityPassed = result.SequentialCursorContinuityPassed,
+            StateHashContinuityPassed = result.StateHashContinuityPassed,
+            CopySummaryStateUnchanged = result.CopySummaryStateUnchanged,
+            LoadModelStateUnchanged = result.LoadModelStateUnchanged,
+            PlayAllExecutedRemainingCommands = result.PlayAllExecutedRemainingCommands,
+            NoControlIntentMappedToUnrelatedGameplayCommand =
+                result.NoControlIntentMappedToUnrelatedGameplayCommand,
+            RuntimeAuthority = result.RuntimeAuthority,
+            ProjectionOnly = result.ProjectionOnly,
+            UnityGameplayTruth = result.UnityGameplayTruth,
+            Diagnostics = dashboard.Diagnostics
+        };
+
+    private static RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessRegressionProof
+        BuildSemanticRegressionProof(RuntimeBackedPlayerCommandRoundtripResult result)
+    {
+        var copyRequest = result.Requests.FirstOrDefault(item =>
+            item.ControlIntent == "copy_frame_summary");
+        var copyResponse = result.Responses.FirstOrDefault(item =>
+            item.ControlIntent == "copy_frame_summary");
+        var loadResponse = result.Responses.FirstOrDefault(item =>
+            item.ControlIntent == "load_model");
+        var playAllResponse = result.Responses.FirstOrDefault(item =>
+            item.ControlIntent == "play_all_to_end");
+
+        var proof = new RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessRegressionProof
+        {
+            CopyFrameSummaryNotMappedToBasicAttack =
+                copyRequest is not null
+                && copyRequest.RuntimeCommandKind != nameof(GameRuntimeCommandType.BasicAttack)
+                && copyRequest.CanonicalStepId != "combat_round"
+                && copyResponse?.Snapshot.CanonicalStepId != "combat_round",
+            CopyFrameSummaryRuntimeExecutedFalse =
+                copyResponse is not null && !copyResponse.RuntimeExecuted,
+            CopyFrameSummaryStateHashUnchanged = result.CopySummaryStateUnchanged,
+            LoadModelRuntimeExecutedFalse =
+                loadResponse is not null && !loadResponse.RuntimeExecuted,
+            LoadModelCanonicalStepRuntimeExecutedFalse =
+                loadResponse is not null && !loadResponse.CanonicalStepRuntimeExecuted,
+            RuntimeExecutedNotSourcedFromAggregateLoopPassed =
+                result.RuntimeExecutedRequestCount == 4
+                && result.PresentationOnlyRuntimeExecutionCount == 0
+                && result.Responses.Any(response =>
+                    response.Route == "presentation_only" && !response.RuntimeExecuted)
+                && result.Responses.Any(response =>
+                    response.Route != "presentation_only" && response.RuntimeExecuted),
+            RequestsCreatedBeforeRuntimeExecution =
+                result.SequentialCursorContinuityPassed
+                && result.Requests.FirstOrDefault(item => item.ControlIntent == "load_model")
+                    ?.RuntimeCommandStartIndex == -1
+                && result.Requests.FirstOrDefault(item => item.ControlIntent == "reset_first")
+                    ?.RuntimeCommandStartIndex == 0,
+            NoFixedControlToSnapshotIndexExecutionProof =
+                playAllResponse is not null
+                && playAllResponse.ProducedSnapshotCount > 1
+                && copyResponse?.Snapshot.CanonicalStepIndex == -1,
+            RuntimeExecutedRequiresExecutedCommandCount =
+                result.Responses.All(response =>
+                    !response.RuntimeExecuted || response.ExecutedCommandCount > 0),
+            RequestResponseIdsMatch = result.RequestResponseCorrelationPassed,
+            StateHashContinuityPassed = result.StateHashContinuityPassed
+        };
+        var diagnostics = new List<string>();
+        Require(proof.CopyFrameSummaryNotMappedToBasicAttack,
+            "goal141a.copy_frame_summary_basic_attack_mapping",
+            diagnostics);
+        Require(proof.CopyFrameSummaryRuntimeExecutedFalse,
+            "goal141a.copy_frame_summary_runtime_executed",
+            diagnostics);
+        Require(proof.CopyFrameSummaryStateHashUnchanged,
+            "goal141a.copy_frame_summary_state_hash",
+            diagnostics);
+        Require(proof.LoadModelRuntimeExecutedFalse,
+            "goal141a.load_model_runtime_executed",
+            diagnostics);
+        Require(proof.LoadModelCanonicalStepRuntimeExecutedFalse,
+            "goal141a.load_model_canonical_step_runtime_executed",
+            diagnostics);
+        Require(proof.RuntimeExecutedNotSourcedFromAggregateLoopPassed,
+            "goal141a.aggregate_runtime_executed_source",
+            diagnostics);
+        Require(proof.RequestsCreatedBeforeRuntimeExecution,
+            "goal141a.request_creation_order",
+            diagnostics);
+        Require(proof.NoFixedControlToSnapshotIndexExecutionProof,
+            "goal141a.fixed_snapshot_index_proof",
+            diagnostics);
+        Require(proof.RuntimeExecutedRequiresExecutedCommandCount,
+            "goal141a.runtime_executed_requires_command_count",
+            diagnostics);
+        Require(proof.RequestResponseIdsMatch, "goal141a.request_response_ids", diagnostics);
+        Require(proof.StateHashContinuityPassed, "goal141a.state_hash_continuity", diagnostics);
+
+        return proof with
+        {
+            Passed = diagnostics.Count == 0,
+            Diagnostics = diagnostics
         };
     }
 
@@ -326,13 +538,43 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
     {
         var diagnostics = new List<string>();
         Require(Goal140Accepted(goal140), "goal141.goal140_acceptance_record_invalid", diagnostics);
-        Require(result.RoundtripRequestCount >= 6, "goal141.roundtrip_request_count", diagnostics);
-        Require(result.RuntimeExecutedRequestCount >= 6, "goal141.runtime_executed_request_count", diagnostics);
+        Require(result.TotalControlRequestCount == 6, "goal141.total_control_request_count", diagnostics);
+        Require(result.RoundtripRequestCount == 6, "goal141.roundtrip_request_count", diagnostics);
+        Require(result.RuntimeRoutedRequestCount == 4, "goal141.runtime_routed_request_count", diagnostics);
+        Require(result.PresentationOnlyRequestCount == 2, "goal141.presentation_only_request_count", diagnostics);
+        Require(result.RuntimeExecutedRequestCount == 4, "goal141.runtime_executed_request_count", diagnostics);
+        Require(result.PresentationOnlyRuntimeExecutionCount == 0,
+            "goal141.presentation_only_runtime_execution_count",
+            diagnostics);
+        Require(result.RuntimeMutatingPresentationRequestCount == 0,
+            "goal141.runtime_mutating_presentation_request_count",
+            diagnostics);
+        Require(result.ResponseCount == 6, "goal141.response_count", diagnostics);
         Require(result.RoundtripSnapshotCount >= result.RuntimeExecutedRequestCount,
             "goal141.roundtrip_snapshot_count",
             diagnostics);
         Require(result.ControlRequestBridgePresent, "goal141.control_request_bridge", diagnostics);
         Require(result.StateHashChainPresent, "goal141.state_hash_chain", diagnostics);
+        Require(result.RequestResponseCorrelationPassed,
+            "goal141.request_response_correlation",
+            diagnostics);
+        Require(result.SequentialCursorContinuityPassed,
+            "goal141.sequential_cursor_continuity",
+            diagnostics);
+        Require(result.StateHashContinuityPassed,
+            "goal141.state_hash_continuity",
+            diagnostics);
+        Require(result.CopySummaryStateUnchanged, "goal141.copy_summary_state_unchanged", diagnostics);
+        Require(result.LoadModelStateUnchanged, "goal141.load_model_state_unchanged", diagnostics);
+        Require(result.PlayAllExecutedRemainingCommands,
+            "goal141.play_all_executed_remaining_commands",
+            diagnostics);
+        Require(result.NoControlIntentMappedToUnrelatedGameplayCommand,
+            "goal141.no_unrelated_gameplay_command_mapping",
+            diagnostics);
+        Require(result.RoundtripSemanticCorrectnessPassed,
+            "goal141.roundtrip_semantic_correctness",
+            diagnostics);
         Require(result.RuntimeAuthority, "goal141.runtime_authority", diagnostics);
         Require(!result.ProjectionOnly, "goal141.projection_only", diagnostics);
         Require(!result.UnityGameplayTruth, "goal141.unity_gameplay_truth", diagnostics);
@@ -343,6 +585,27 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
         Require(smoke.Passed && smoke.Status == "GREEN", "goal141.unity_smoke_not_green", diagnostics);
         Require(smoke.UnityConsumesRoundtripResult, "goal141.unity_smoke_did_not_consume_result", diagnostics);
         Require(!smoke.UnityGameplayTruth, "goal141.unity_smoke_gameplay_truth", diagnostics);
+        Require(smoke.PresentationOnlyRequestCountPassed,
+            "goal141.unity_smoke_presentation_only_request_count",
+            diagnostics);
+        Require(smoke.PresentationOnlyRuntimeExecutionCountPassed,
+            "goal141.unity_smoke_presentation_only_runtime_execution_count",
+            diagnostics);
+        Require(smoke.RequestResponseCorrelationPassed,
+            "goal141.unity_smoke_request_response_correlation",
+            diagnostics);
+        Require(smoke.SequentialCursorContinuityPassed,
+            "goal141.unity_smoke_sequential_cursor_continuity",
+            diagnostics);
+        Require(smoke.CopySummaryStateUnchanged,
+            "goal141.unity_smoke_copy_summary_state_unchanged",
+            diagnostics);
+        Require(smoke.LoadModelStateUnchanged,
+            "goal141.unity_smoke_load_model_state_unchanged",
+            diagnostics);
+        Require(smoke.NoControlIntentMappedToUnrelatedGameplayCommand,
+            "goal141.unity_smoke_no_unrelated_gameplay_mapping",
+            diagnostics);
         foreach (var missing in result.MissingControlIntents)
         {
             diagnostics.Add("goal141.missing_control_intent:" + missing);
@@ -398,6 +661,26 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
         return files;
     }
 
+    private static SortedDictionary<string, string> BuildSemanticFilePayloads(
+        string relativeRoot,
+        RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessDashboard dashboard,
+        RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessRegressionProof regression,
+        string reportMarkdown)
+    {
+        var files = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            [RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessDashboardFileName] =
+                Serialize(dashboard),
+            [RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessRegressionProofFileName] =
+                Serialize(regression),
+            [RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessReportFileName] =
+                reportMarkdown
+        };
+        files[RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessFileIndexFileName] =
+            Serialize(BuildFileIndex(relativeRoot, files));
+        return files;
+    }
+
     private static RuntimeBackedPlayerCommandRoundtripFileIndex BuildFileIndex(
         string relativeRoot,
         IReadOnlyDictionary<string, string> pendingTextFiles)
@@ -436,11 +719,26 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             "- accepted: false",
             "- goal140Accepted: " + Bool(report.Goal140Accepted),
             "- candidateId: " + report.CandidateId,
+            "- totalControlRequestCount: " + report.TotalControlRequestCount,
             "- roundtripRequestCount: " + report.RoundtripRequestCount,
+            "- runtimeRoutedRequestCount: " + report.RuntimeRoutedRequestCount,
+            "- presentationOnlyRequestCount: " + report.PresentationOnlyRequestCount,
             "- runtimeExecutedRequestCount: " + report.RuntimeExecutedRequestCount,
+            "- presentationOnlyRuntimeExecutionCount: " + report.PresentationOnlyRuntimeExecutionCount,
+            "- runtimeMutatingPresentationRequestCount: " + report.RuntimeMutatingPresentationRequestCount,
+            "- responseCount: " + report.ResponseCount,
             "- roundtripSnapshotCount: " + report.RoundtripSnapshotCount,
             "- controlRequestBridgePresent: " + Bool(report.ControlRequestBridgePresent),
             "- stateHashChainPresent: " + Bool(report.StateHashChainPresent),
+            "- requestResponseCorrelationPassed: " + Bool(report.RequestResponseCorrelationPassed),
+            "- sequentialCursorContinuityPassed: " + Bool(report.SequentialCursorContinuityPassed),
+            "- stateHashContinuityPassed: " + Bool(report.StateHashContinuityPassed),
+            "- copySummaryStateUnchanged: " + Bool(report.CopySummaryStateUnchanged),
+            "- loadModelStateUnchanged: " + Bool(report.LoadModelStateUnchanged),
+            "- playAllExecutedRemainingCommands: " + Bool(report.PlayAllExecutedRemainingCommands),
+            "- noControlIntentMappedToUnrelatedGameplayCommand: "
+                + Bool(report.NoControlIntentMappedToUnrelatedGameplayCommand),
+            "- roundtripSemanticCorrectnessPassed: " + Bool(report.RoundtripSemanticCorrectnessPassed),
             "- runtimeAuthority: " + Bool(report.RuntimeAuthority),
             "- projectionOnly: " + Bool(report.ProjectionOnly),
             "- unityGameplayTruth: " + Bool(report.UnityGameplayTruth),
@@ -457,16 +755,81 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
         lines.AddRange(result.Responses.Select(response =>
             "- " + response.RequestIndex
             + " " + response.ControlIntent
-            + " -> " + response.RuntimeCommandCoverage
+            + " route=" + response.Route
+            + " operation=" + response.RequestedOperation
+            + " coverage=" + response.RuntimeCommandCoverage
             + "; status=" + response.Status
             + "; snapshotHash=" + response.Snapshot.StateHashAfter
-            + "; runtimeExecuted=" + Bool(response.RuntimeExecuted)));
+            + "; runtimeExecuted=" + Bool(response.RuntimeExecuted)
+            + "; executedCommandCount=" + response.ExecutedCommandCount
+            + "; producedSnapshotCount=" + response.ProducedSnapshotCount));
         lines.Add(string.Empty);
         lines.Add("## Diagnostics");
         lines.Add(string.Empty);
         lines.AddRange(dashboard.Diagnostics.Count == 0
             ? ["- none"]
             : dashboard.Diagnostics.Select(item => "- " + item));
+        return string.Join(Environment.NewLine, lines) + Environment.NewLine;
+    }
+
+    private static string RenderSemanticReport(
+        RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessDashboard dashboard,
+        RuntimeBackedPlayerCommandRoundtripSemanticCorrectnessRegressionProof regression)
+    {
+        var lines = new List<string>
+        {
+            "# Goal 141A Player Command Roundtrip Semantic Correctness Hotfix",
+            string.Empty,
+            "- status: " + dashboard.Status,
+            "- roundtripSemanticCorrectnessPassed: " + Bool(dashboard.RoundtripSemanticCorrectnessPassed),
+            "- totalControlRequestCount: " + dashboard.TotalControlRequestCount,
+            "- runtimeRoutedRequestCount: " + dashboard.RuntimeRoutedRequestCount,
+            "- presentationOnlyRequestCount: " + dashboard.PresentationOnlyRequestCount,
+            "- runtimeExecutedRequestCount: " + dashboard.RuntimeExecutedRequestCount,
+            "- presentationOnlyRuntimeExecutionCount: " + dashboard.PresentationOnlyRuntimeExecutionCount,
+            "- runtimeMutatingPresentationRequestCount: " + dashboard.RuntimeMutatingPresentationRequestCount,
+            "- responseCount: " + dashboard.ResponseCount,
+            "- requestResponseCorrelationPassed: " + Bool(dashboard.RequestResponseCorrelationPassed),
+            "- sequentialCursorContinuityPassed: " + Bool(dashboard.SequentialCursorContinuityPassed),
+            "- stateHashContinuityPassed: " + Bool(dashboard.StateHashContinuityPassed),
+            "- copySummaryStateUnchanged: " + Bool(dashboard.CopySummaryStateUnchanged),
+            "- loadModelStateUnchanged: " + Bool(dashboard.LoadModelStateUnchanged),
+            "- playAllExecutedRemainingCommands: " + Bool(dashboard.PlayAllExecutedRemainingCommands),
+            "- noControlIntentMappedToUnrelatedGameplayCommand: "
+                + Bool(dashboard.NoControlIntentMappedToUnrelatedGameplayCommand),
+            "- runtimeAuthority: " + Bool(dashboard.RuntimeAuthority),
+            "- projectionOnly: " + Bool(dashboard.ProjectionOnly),
+            "- unityGameplayTruth: " + Bool(dashboard.UnityGameplayTruth),
+            string.Empty,
+            "## Regression Proof",
+            string.Empty,
+            "- copyFrameSummaryNotMappedToBasicAttack: "
+                + Bool(regression.CopyFrameSummaryNotMappedToBasicAttack),
+            "- copyFrameSummaryRuntimeExecutedFalse: "
+                + Bool(regression.CopyFrameSummaryRuntimeExecutedFalse),
+            "- copyFrameSummaryStateHashUnchanged: "
+                + Bool(regression.CopyFrameSummaryStateHashUnchanged),
+            "- loadModelRuntimeExecutedFalse: " + Bool(regression.LoadModelRuntimeExecutedFalse),
+            "- loadModelCanonicalStepRuntimeExecutedFalse: "
+                + Bool(regression.LoadModelCanonicalStepRuntimeExecutedFalse),
+            "- runtimeExecutedNotSourcedFromAggregateLoopPassed: "
+                + Bool(regression.RuntimeExecutedNotSourcedFromAggregateLoopPassed),
+            "- requestsCreatedBeforeRuntimeExecution: "
+                + Bool(regression.RequestsCreatedBeforeRuntimeExecution),
+            "- noFixedControlToSnapshotIndexExecutionProof: "
+                + Bool(regression.NoFixedControlToSnapshotIndexExecutionProof),
+            "- runtimeExecutedRequiresExecutedCommandCount: "
+                + Bool(regression.RuntimeExecutedRequiresExecutedCommandCount),
+            "- requestResponseIdsMatch: " + Bool(regression.RequestResponseIdsMatch),
+            "- stateHashContinuityPassed: " + Bool(regression.StateHashContinuityPassed),
+            "- regressionProofPassed: " + Bool(regression.Passed),
+            string.Empty,
+            "## Diagnostics",
+            string.Empty
+        };
+        lines.AddRange(dashboard.Diagnostics.Concat(regression.Diagnostics).Any()
+            ? dashboard.Diagnostics.Concat(regression.Diagnostics).Select(item => "- " + item)
+            : ["- none"]);
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
     }
 
@@ -511,8 +874,21 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
             "acceptedByCodex=false",
             "goal140Accepted=" + Bool(report.Goal140Accepted),
             "candidateId=" + report.CandidateId,
+            "totalControlRequestCount=" + report.TotalControlRequestCount,
+            "runtimeRoutedRequestCount=" + report.RuntimeRoutedRequestCount,
+            "presentationOnlyRequestCount=" + report.PresentationOnlyRequestCount,
             "roundtripRequestCount=" + report.RoundtripRequestCount,
             "runtimeExecutedRequestCount=" + report.RuntimeExecutedRequestCount,
+            "presentationOnlyRuntimeExecutionCount=" + report.PresentationOnlyRuntimeExecutionCount,
+            "runtimeMutatingPresentationRequestCount=" + report.RuntimeMutatingPresentationRequestCount,
+            "requestResponseCorrelationPassed=" + Bool(report.RequestResponseCorrelationPassed),
+            "sequentialCursorContinuityPassed=" + Bool(report.SequentialCursorContinuityPassed),
+            "stateHashContinuityPassed=" + Bool(report.StateHashContinuityPassed),
+            "copySummaryStateUnchanged=" + Bool(report.CopySummaryStateUnchanged),
+            "loadModelStateUnchanged=" + Bool(report.LoadModelStateUnchanged),
+            "noControlIntentMappedToUnrelatedGameplayCommand="
+                + Bool(report.NoControlIntentMappedToUnrelatedGameplayCommand),
+            "roundtripSemanticCorrectnessPassed=" + Bool(report.RoundtripSemanticCorrectnessPassed),
             "roundtripSnapshotCount=" + report.RoundtripSnapshotCount,
             "controlRequestBridgePresent=" + Bool(report.ControlRequestBridgePresent),
             "stateHashChainPresent=" + Bool(report.StateHashChainPresent),
@@ -604,6 +980,12 @@ public sealed class RuntimeBackedPlayerCommandRoundtripArtifactService
                 StringComparison.Ordinal)
             || relative.StartsWith(
                 RuntimeBackedPlayerCommandRoundtripVocabulary.ExportPackageDirectory + "/",
+                StringComparison.Ordinal)
+            || relative.StartsWith(
+                RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessProceduralOutputDirectory + "/",
+                StringComparison.Ordinal)
+            || relative.StartsWith(
+                RuntimeBackedPlayerCommandRoundtripVocabulary.SemanticCorrectnessExportPackageDirectory + "/",
                 StringComparison.Ordinal)
             || relative == RuntimeBackedPlayerCommandRoundtripVocabulary.Goal140DocumentationPath
             || relative == RuntimeBackedPlayerCommandRoundtripVocabulary.DocumentationPath)

@@ -92,145 +92,138 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
             new UnifiedGameRuntimeService(new DefaultGameRuntime(), gameplay));
     }
 
-    public CanonicalRuntimePlayerCommandLoopResult Execute(
+    public CanonicalRuntimePlayerCommandLoopSession BeginSession(
         GamePackageDefinition package,
-        CanonicalRuntimePlayerCommandLoopRequest request)
-    {
-        var steps = BuildSteps();
-        var session = new UnifiedRuntimeSession();
-        var snapshots = new List<CanonicalRuntimePlayerCommandLoopSnapshot>();
-        var diagnostics = new List<string>();
-        var missingPrimitives = new List<string>();
-        var eventIndex = 0;
-        var stateHashBefore = "not_loaded";
-        var canonicalRuntimeStarted = false;
-        var runtimeExecutionSucceeded = true;
-
-        foreach (var step in steps)
+        CanonicalRuntimePlayerCommandLoopRequest request) =>
+        new()
         {
-            var events = new List<CanonicalRuntimePlayerCommandLoopRuntimeEvent>();
-            UnifiedRuntimeResult? result = null;
-            switch (step.StepId)
+            CandidateId = request.CandidateId,
+            PackagePath = request.PackagePath,
+            CurrentCommandIndex = 0,
+            CurrentStateHash = "not_loaded",
+            RuntimeStarted = false,
+            RuntimeExecutionSucceeded = true,
+            RuntimeSession = new UnifiedRuntimeSession(),
+            Steps = BuildSteps()
+        };
+
+    public CanonicalRuntimePlayerCommandLoopExecutionResult ExecuteRange(
+        GamePackageDefinition package,
+        CanonicalRuntimePlayerCommandLoopSession session,
+        CanonicalRuntimePlayerCommandLoopExecutionRequest request)
+    {
+        if (session.Steps.Count == 0)
+        {
+            session.Steps = BuildSteps();
+        }
+
+        var steps = session.Steps;
+        var cursorBefore = session.CurrentCommandIndex;
+        var stateHashBefore = session.CurrentStateHash;
+        var snapshots = new List<CanonicalRuntimePlayerCommandLoopSnapshot>();
+        var executedSteps = new List<CanonicalRuntimePlayerCommandLoopStep>();
+        var diagnostics = new List<string>();
+
+        if (request.RuntimeCommandStartIndex != session.CurrentCommandIndex)
+        {
+            diagnostics.Add(
+                "canonical.cursor_mismatch:"
+                + request.RuntimeCommandStartIndex
+                + "!="
+                + session.CurrentCommandIndex);
+            session.Diagnostics.AddRange(diagnostics);
+            return new CanonicalRuntimePlayerCommandLoopExecutionResult
             {
-                case "load_selected_package":
-                    events.Add(CommandLoopEvent(ref eventIndex, step, "package-loaded", package.Manifest.PackageId));
-                    break;
-                case "start_canonical_runtime":
-                    result = _runtime.Start(package);
-                    canonicalRuntimeStarted = result.Success;
-                    break;
-                case "move_to_sign":
-                    result = _runtime.ExecutePlayerCommand(
-                        package,
-                        session,
-                        PlayerCommand.Move(Direction2D.Right));
-                    break;
-                case "interact_with_sign":
-                    result = _runtime.ExecutePlayerCommand(package, session, PlayerCommand.Interact());
-                    break;
-                case "show_old_guard_dialogue":
-                    result = _runtime.ExecuteGameplayCommand(
-                        package,
-                        session,
-                        GameRuntimeCommand.OpenDialogue("dialogue/old_guard_intro"));
-                    break;
-                case "start_or_update_help_healer_quest":
-                    result = _runtime.ExecuteMany(
-                        package,
-                        session,
-                        [
-                            GameRuntimeCommand.StartQuest("quest/help_healer"),
-                            new GameRuntimeCommand { Type = GameRuntimeCommandType.RefreshQuestObjectives }
-                        ]);
-                    break;
-                case "show_inventory_state":
-                    result = _runtime.ExecuteGameplayCommand(
-                        package,
-                        session,
-                        new GameRuntimeCommand
-                        {
-                            Type = GameRuntimeCommandType.AddItem,
-                            Id = "item/apple",
-                            InventoryId = "inventory/player_start",
-                            Amount = 1
-                        });
-                    break;
-                case "craft_healing_potion":
-                    result = _runtime.ExecuteGameplayCommand(
-                        package,
-                        session,
-                        GameRuntimeCommand.CraftRecipe(
-                            "recipe/healing_potion",
-                            "inventory/player_start"));
-                    break;
-                case "harvest_apple_tree":
-                    result = _runtime.ExecuteGameplayCommand(
-                        package,
-                        session,
-                        GameRuntimeCommand.HarvestResourceNode(
-                            "node/apple_tree",
-                            "inventory/player_start",
-                            "item/woodcutting_axe",
-                            136));
-                    break;
-                case "execute_transaction":
-                    result = _runtime.ExecuteMany(
-                        package,
-                        session,
-                        [
-                            new GameRuntimeCommand
-                            {
-                                Type = GameRuntimeCommandType.ChangeResource,
-                                Id = "resource/gold",
-                                Amount = 25
-                            },
-                            GameRuntimeCommand.ExecuteTransaction(
-                                "transaction/buy_healing_potion",
-                                "inventory/player_start")
-                        ]);
-                    break;
-                case "start_encounter":
-                    result = _runtime.ExecuteGameplayCommand(
-                        package,
-                        session,
-                        GameRuntimeCommand.StartEncounter("encounter/goblin_duel", 136));
-                    break;
-                case "combat_round":
-                    result = _runtime.ExecuteGameplayCommand(
-                        package,
-                        session,
-                        GameRuntimeCommand.BasicAttack("player", "goblin"));
-                    break;
-                case "final_state":
-                    events.Add(CommandLoopEvent(ref eventIndex, step, "final-state", package.Manifest.PackageId));
-                    break;
-            }
+                RequestedOperation = request.RequestedOperation,
+                RuntimeCommandStartIndex = request.RuntimeCommandStartIndex,
+                RuntimeCommandEndIndex = request.RuntimeCommandEndIndex,
+                CursorBefore = cursorBefore,
+                CursorAfter = session.CurrentCommandIndex,
+                StateHashBefore = stateHashBefore,
+                StateHashAfter = session.CurrentStateHash,
+                Success = false,
+                Session = session,
+                Diagnostics = diagnostics
+            };
+        }
 
-            if (result is not null)
+        if (request.RuntimeCommandStartIndex < 0
+            || request.RuntimeCommandEndIndex >= steps.Count
+            || request.RuntimeCommandEndIndex < request.RuntimeCommandStartIndex)
+        {
+            diagnostics.Add("canonical.invalid_range:" + request.RuntimeCommandStartIndex + ".." + request.RuntimeCommandEndIndex);
+            session.Diagnostics.AddRange(diagnostics);
+            return new CanonicalRuntimePlayerCommandLoopExecutionResult
             {
-                session = result.Session;
-                events.AddRange(RuntimeEvents(ref eventIndex, step, result));
-                diagnostics.AddRange(result.Diagnostics.Select(diagnostic =>
-                    step.StepId + ":" + diagnostic.Code + ":" + diagnostic.Message));
-                if (!result.Success)
-                {
-                    runtimeExecutionSucceeded = false;
-                    missingPrimitives.Add(step.StepId + ":" + result.Message);
-                }
-            }
+                RequestedOperation = request.RequestedOperation,
+                RuntimeCommandStartIndex = request.RuntimeCommandStartIndex,
+                RuntimeCommandEndIndex = request.RuntimeCommandEndIndex,
+                CursorBefore = cursorBefore,
+                CursorAfter = session.CurrentCommandIndex,
+                StateHashBefore = stateHashBefore,
+                StateHashAfter = session.CurrentStateHash,
+                Success = false,
+                Session = session,
+                Diagnostics = diagnostics
+            };
+        }
 
-            var stateHashAfter = result is null && step.StepId == "load_selected_package"
-                ? HashText(package.Manifest.PackageId + "|" + package.Manifest.Title + "|" + request.CandidateId)
-                : HashSession(session);
-            var snapshot = BuildSnapshot(step, stateHashBefore, stateHashAfter, package, session, events);
-            snapshots.Add(snapshot);
-            stateHashBefore = stateHashAfter;
-
-            if (!runtimeExecutionSucceeded)
+        for (var index = request.RuntimeCommandStartIndex;
+             index <= request.RuntimeCommandEndIndex;
+             index++)
+        {
+            var step = steps[index];
+            var executed = ExecuteStep(package, session, step);
+            snapshots.Add(executed.Snapshot);
+            executedSteps.Add(step);
+            session.CurrentCommandIndex = index + 1;
+            diagnostics.AddRange(executed.Diagnostics);
+            if (!executed.Success)
             {
                 break;
             }
         }
+
+        var eventCount = snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).Count();
+        var executedCommandCount = executedSteps.Count(step => step.RuntimeExecuted);
+        return new CanonicalRuntimePlayerCommandLoopExecutionResult
+        {
+            RequestedOperation = request.RequestedOperation,
+            RuntimeCommandStartIndex = request.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = request.RuntimeCommandEndIndex,
+            CursorBefore = cursorBefore,
+            CursorAfter = session.CurrentCommandIndex,
+            RuntimeExecuted = executedCommandCount > 0 && session.RuntimeExecutionSucceeded,
+            RuntimeMutation = !string.Equals(stateHashBefore, session.CurrentStateHash, StringComparison.Ordinal),
+            ExecutedCommandCount = executedCommandCount,
+            ProducedSnapshotCount = snapshots.Count,
+            EventCount = eventCount,
+            StateHashBefore = stateHashBefore,
+            StateHashAfter = session.CurrentStateHash,
+            Success = session.RuntimeExecutionSucceeded && snapshots.Count == executedSteps.Count,
+            Session = session,
+            Steps = executedSteps,
+            Snapshots = snapshots,
+            Diagnostics = diagnostics
+        };
+    }
+
+    public CanonicalRuntimePlayerCommandLoopResult Execute(
+        GamePackageDefinition package,
+        CanonicalRuntimePlayerCommandLoopRequest request)
+    {
+        var session = BeginSession(package, request);
+        ExecuteRange(package, session, new CanonicalRuntimePlayerCommandLoopExecutionRequest
+        {
+            RequestedOperation = "full_player_command_loop",
+            RuntimeCommandStartIndex = 0,
+            RuntimeCommandEndIndex = session.Steps.Count - 1
+        });
+
+        var steps = session.Steps;
+        var snapshots = session.Snapshots;
+        var diagnostics = session.Diagnostics;
+        var missingPrimitives = session.MissingRuntimePrimitives;
 
         var presentCategories = snapshots
             .Select(snapshot => snapshot.Category)
@@ -255,7 +248,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                                             snapshot.StateHashBefore,
                                             StringComparison.Ordinal));
         var selectedCandidateExecutedByRuntime =
-            canonicalRuntimeStarted && runtimeEventCount > 0 && runtimeExecutionSucceeded;
+            session.RuntimeStarted && runtimeEventCount > 0 && session.RuntimeExecutionSucceeded;
         var passed = snapshots.Count == steps.Count
                      && snapshots.Count >= 10
                      && runtimeEventCount >= 10
@@ -296,6 +289,165 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
             StateHashChain = stateHashChain,
             Diagnostics = diagnostics
         };
+    }
+
+    private StepExecution ExecuteStep(
+        GamePackageDefinition package,
+        CanonicalRuntimePlayerCommandLoopSession session,
+        CanonicalRuntimePlayerCommandLoopStep step)
+    {
+        var events = new List<CanonicalRuntimePlayerCommandLoopRuntimeEvent>();
+        var diagnostics = new List<string>();
+        UnifiedRuntimeResult? result = null;
+        var eventIndex = session.EventIndex;
+        var stateHashBefore = session.CurrentStateHash;
+
+        switch (step.StepId)
+        {
+            case "load_selected_package":
+                events.Add(CommandLoopEvent(ref eventIndex, step, "package-loaded", package.Manifest.PackageId));
+                break;
+            case "start_canonical_runtime":
+                result = _runtime.Start(package);
+                session.RuntimeStarted = result.Success;
+                break;
+            case "move_to_sign":
+                result = _runtime.ExecutePlayerCommand(
+                    package,
+                    session.RuntimeSession,
+                    PlayerCommand.Move(Direction2D.Right));
+                break;
+            case "interact_with_sign":
+                result = _runtime.ExecutePlayerCommand(package, session.RuntimeSession, PlayerCommand.Interact());
+                break;
+            case "show_old_guard_dialogue":
+                result = _runtime.ExecuteGameplayCommand(
+                    package,
+                    session.RuntimeSession,
+                    GameRuntimeCommand.OpenDialogue("dialogue/old_guard_intro"));
+                break;
+            case "start_or_update_help_healer_quest":
+                result = _runtime.ExecuteMany(
+                    package,
+                    session.RuntimeSession,
+                    [
+                        GameRuntimeCommand.StartQuest("quest/help_healer"),
+                        new GameRuntimeCommand { Type = GameRuntimeCommandType.RefreshQuestObjectives }
+                    ]);
+                break;
+            case "show_inventory_state":
+                result = _runtime.ExecuteGameplayCommand(
+                    package,
+                    session.RuntimeSession,
+                    new GameRuntimeCommand
+                    {
+                        Type = GameRuntimeCommandType.AddItem,
+                        Id = "item/apple",
+                        InventoryId = "inventory/player_start",
+                        Amount = 1
+                    });
+                break;
+            case "craft_healing_potion":
+                result = _runtime.ExecuteGameplayCommand(
+                    package,
+                    session.RuntimeSession,
+                    GameRuntimeCommand.CraftRecipe(
+                        "recipe/healing_potion",
+                        "inventory/player_start"));
+                break;
+            case "harvest_apple_tree":
+                result = _runtime.ExecuteGameplayCommand(
+                    package,
+                    session.RuntimeSession,
+                    GameRuntimeCommand.HarvestResourceNode(
+                        "node/apple_tree",
+                        "inventory/player_start",
+                        "item/woodcutting_axe",
+                        136));
+                break;
+            case "execute_transaction":
+                result = _runtime.ExecuteMany(
+                    package,
+                    session.RuntimeSession,
+                    [
+                        new GameRuntimeCommand
+                        {
+                            Type = GameRuntimeCommandType.ChangeResource,
+                            Id = "resource/gold",
+                            Amount = 25
+                        },
+                        GameRuntimeCommand.ExecuteTransaction(
+                            "transaction/buy_healing_potion",
+                            "inventory/player_start")
+                    ]);
+                break;
+            case "start_encounter":
+                result = _runtime.ExecuteGameplayCommand(
+                    package,
+                    session.RuntimeSession,
+                    GameRuntimeCommand.StartEncounter("encounter/goblin_duel", 136));
+                break;
+            case "combat_round":
+                result = _runtime.ExecuteGameplayCommand(
+                    package,
+                    session.RuntimeSession,
+                    GameRuntimeCommand.BasicAttack("player", "goblin"));
+                break;
+            case "final_state":
+                events.Add(CommandLoopEvent(ref eventIndex, step, "final-state", package.Manifest.PackageId));
+                break;
+        }
+
+        if (result is not null)
+        {
+            session.RuntimeSession = result.Session;
+            events.AddRange(RuntimeEvents(ref eventIndex, step, result));
+            diagnostics.AddRange(result.Diagnostics.Select(diagnostic =>
+                step.StepId + ":" + diagnostic.Code + ":" + diagnostic.Message));
+            if (!result.Success)
+            {
+                session.RuntimeExecutionSucceeded = false;
+                session.MissingRuntimePrimitives.Add(step.StepId + ":" + result.Message);
+            }
+        }
+
+        var stateHashAfter = result is null && step.StepId == "load_selected_package"
+            ? HashText(package.Manifest.PackageId + "|" + package.Manifest.Title + "|" + session.CandidateId)
+            : HashSession(session.RuntimeSession);
+        var snapshot = BuildSnapshot(
+            step,
+            stateHashBefore,
+            stateHashAfter,
+            package,
+            session.RuntimeSession,
+            events);
+        session.EventIndex = eventIndex;
+        session.CurrentStateHash = stateHashAfter;
+        session.Snapshots.Add(snapshot);
+        session.StateHashChain.Add(snapshot.StateHashAfter);
+        session.Diagnostics.AddRange(diagnostics);
+
+        return new StepExecution(
+            snapshot,
+            session.RuntimeExecutionSucceeded,
+            diagnostics);
+    }
+
+    private sealed class StepExecution
+    {
+        public StepExecution(
+            CanonicalRuntimePlayerCommandLoopSnapshot snapshot,
+            bool success,
+            IReadOnlyList<string> diagnostics)
+        {
+            Snapshot = snapshot;
+            Success = success;
+            Diagnostics = diagnostics;
+        }
+
+        public CanonicalRuntimePlayerCommandLoopSnapshot Snapshot { get; }
+        public bool Success { get; }
+        public IReadOnlyList<string> Diagnostics { get; }
     }
 
     private static IReadOnlyList<CanonicalRuntimePlayerCommandLoopStep> BuildSteps() =>
