@@ -1,20 +1,75 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 142A WinForms operator self-lock and atomic regeneration hotfix
+Updated by: Goal 143 selected runtime variant end-to-end PlayerAdapter handoff
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 143 produced for review:
+
+```text
+selected_runtime_variant_end_to_end_playeradapter_handoff_verification required
+implementationStatus=GREEN
+accepted=false
+goal142Accepted=true
+goal141Accepted=false
+selectedRuntimeVariantPlayerAdapterHandoff=true
+selectedRuntimeVariantId=minimal-map-game-exploration-resource-focus
+selectedRuntimeVariantKind=exploration_resource_focus
+selectedRuntimeVariantScore=100
+selectedPackageSha256MatchesHandoff=true
+selectedFinalStateHashMatches=true
+frameCount=15
+requestCount=6
+snapshotCount=15
+runtimeRoutedRequestCount=4
+presentationOnlyRequestCount=2
+presentationOnlyRuntimeExecutionCount=0
+requestResponseCorrelationPassed=true
+sequentialCursorContinuityPassed=true
+stateHashContinuityPassed=true
+selectedVariantEffectVisible=true
+noBalancedBaselineFallback=true
+unityConsumesSelectedRuntimeVariantPlayerAdapter=true
+unitySmokePassed=true
+runtimeAuthority=true
+projectionOnly=false
+unityGameplayTruth=false
+manualUnityOptional=true
+```
+
+Goal143 records the repository owner's explicit Goal142 human acceptance, then
+consumes only the Goal142 selected handoff for
+`minimal-map-game-exploration-resource-focus`. It validates the selected
+package SHA-256, reruns the corrected Runtime request/response sequence and
+requires the final state hash to match Goal142. The resulting PlayerAdapter
+model contains 15 ordered Runtime snapshots across six requests; four requests
+route to Runtime and two presentation-only controls execute no Runtime work.
+
+The selected exploration/resource effect is visible in the final inventory
+summary and distinct final Runtime hash, rather than inferred from package hash
+alone. The read-only Unity consumer batchmode smoke is GREEN. The WinForms
+`Build Selected Variant PlayerAdapter` button invokes the in-process Application
+operator with transactional rollback and starts no compiler/test process.
+
+Evidence lives under
+`.llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/`,
+export metadata under
+`.llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/`,
+and the normal command is
+`.devflow\scripts\run-selected-runtime-variant-playeradapter-handoff.cmd`.
+Goal143 remains `accepted=false`; Goal141 also remains unaccepted.
 
 Goal 142A operator hotfix produced:
 
 ```text
 implementationStatus=GREEN
 accepted=false
-goal142Accepted=false
+goal142Accepted=true
 goal142OperatorSelfLockFixed=true
 goal142OperatorUsesInProcessService=true
 goal142OperatorTransactionalRegeneration=true
 goal142LastManualAttemptExitCode=1
-goal142ManualRetryRequired=true
+goal142ManualRetryRequired=false
 operatorStartsCompilerProcess=false
 operatorStartsDotnetTestProcess=false
 previousArtifactsPreservedOnFailure=true
@@ -28,16 +83,19 @@ successful GREEN result. The button no longer launches PowerShell, a compiler,
 or `dotnet test`. The external Goal142 automation script remains available and
 now snapshots/restores the canonical procedural/export roots when proof fails.
 
-The observed `exitCode=1` self-lock attempt is recorded as a failed operator
-attempt, not acceptance. Goal142 remains `accepted=false`; the repository owner
-must retry the one WinForms button before the Goal142 gate can be reviewed.
+The observed `exitCode=1` self-lock attempt remains recorded as a historical
+failed operator attempt. The corrected in-process retry later succeeded with
+exit code 0, and Goal143 records explicit human acceptance of Goal142.
 
 Goal 142 produced for review:
 
 ```text
-runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required
+runtime_significant_product_line_variant_matrix_and_selection_handoff_verification accepted
 implementationStatus=GREEN
-accepted=false
+accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+rawManualInputNotCommitted=true
 goal141Accepted=false
 manualUnityOptional=true
 projectionOnly=false
@@ -76,7 +134,8 @@ the normal command is
 and the short manual note is at
 `docs/manual-acceptance/runtime-significant-product-line-variant-matrix-and-selection-handoff.md`.
 
-Goal142 does not accept Goal141, mutate `samples/minimal-map-game/**`, write
+Goal142 is accepted by the explicit Goal143 human handoff. It does not accept
+Goal141, mutate `samples/minimal-map-game/**`, write
 `.llmgc/manual/**`, change public GamePackage schema, Generation,
 AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity
 scene/prefab/project-settings/packages/StreamingAssets or release packaging.

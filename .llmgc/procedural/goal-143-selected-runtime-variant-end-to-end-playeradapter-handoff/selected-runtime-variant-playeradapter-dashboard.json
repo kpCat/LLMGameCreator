@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "selected_runtime_variant_playeradapter_dashboard_v1",
+  "goalId": "goal_143_selected_runtime_variant_end_to_end_playeradapter_handoff",
+  "status": "GREEN",
+  "selectedCandidateId": "minimal-map-game-exploration-resource-focus",
+  "selectedVariantKind": "exploration_resource_focus",
+  "selectedScore": 100,
+  "packageHashMatch": true,
+  "finalStateHashMatch": true,
+  "frameCount": 15,
+  "selectedVariantEffectVisible": true,
+  "noBalancedBaselineFallback": true,
+  "unitySmokePassed": true,
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "normalCommand": ".devflow\\scripts\\run-selected-runtime-variant-playeradapter-handoff.cmd",
+  "handoffPath": ".llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-handoff.json",
+  "accepted": false
+}

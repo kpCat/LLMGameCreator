@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "unity_selected_runtime_variant_playeradapter_smoke_v1",
+  "goalId": "goal_143_selected_runtime_variant_end_to_end_playeradapter_handoff",
+  "status": "GREEN",
+  "unityAvailable": true,
+  "modelPathExists": true,
+  "framesPathExists": true,
+  "candidateIsGoal142Selection": true,
+  "selectedPackageSha256MatchesHandoff": true,
+  "selectedFinalStateHashMatches": true,
+  "frameCountPassed": true,
+  "selectedVariantEffectVisible": true,
+  "noBalancedBaselineFallback": true,
+  "runtimeAuthorityMarkersPresent": true,
+  "unityConsumesSelectedVariantPlayerAdapter": true,
+  "unityGameplayTruth": false,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "passed": true,
+  "unityExitCode": 0,
+  "modelPath": ".llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-model.json",
+  "framesPath": ".llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-frames.json",
+  "modelSha256": "fa0f3f0c55146c014cc08726a9389cc9eb960f61783f06bb4b29738b0a813f30",
+  "framesSha256": "8b1123612a6963187823c57a2afc1145b5ad15de91dc756a473406c482bffd60",
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/unity-selected-runtime-variant-playeradapter-smoke.log",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

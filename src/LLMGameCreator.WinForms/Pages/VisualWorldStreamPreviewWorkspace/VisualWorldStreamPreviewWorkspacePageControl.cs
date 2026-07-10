@@ -17,9 +17,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         VisualWorldStreamPreviewWorkspaceService service)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
-        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel(); ConfigureGoal138RuntimeBackedUnityPlayerLoopStepperPanel(); ConfigureGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsPanel(); ConfigureGoal140RuntimeBackedUnityPlayerLoopControlsUxPanel(); ConfigureGoal141RuntimeBackedPlayerCommandRoundtripPanel(); ConfigureGoal142ProductLineRuntimeVariantMatrixPanel();
+        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel(); ConfigureGoal138RuntimeBackedUnityPlayerLoopStepperPanel(); ConfigureGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsPanel(); ConfigureGoal140RuntimeBackedUnityPlayerLoopControlsUxPanel(); ConfigureGoal141RuntimeBackedPlayerCommandRoundtripPanel(); ConfigureGoal142ProductLineRuntimeVariantMatrixPanel(); ConfigureGoal143SelectedRuntimeVariantPlayerAdapterPanel();
         ConfigureControls();
-        WireEvents(); WireGoal132CandidatePipelineOperatorEvents(); WireGoal142ProductLineRuntimeVariantMatrixEvents();
+        WireEvents(); WireGoal132CandidatePipelineOperatorEvents(); WireGoal142ProductLineRuntimeVariantMatrixEvents(); WireGoal143SelectedRuntimeVariantPlayerAdapterEvents();
     }
 
     public string Id => "visual-world-stream-preview-workspace";
@@ -38,7 +38,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         _statusLabel.Text = BuildStatusText(result);
         BindGroups(result);
         BindProofs(result);
-        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result); BindGoal135PlayerLoop(result); BindGoal136PlayerCommandLoop(result); BindGoal137UnityPlayerLoopPlayback(result); BindGoal138RuntimeBackedUnityPlayerLoopStepper(result); BindGoal139RuntimeBackedUnityPlayerLoopInteractiveControls(result); BindGoal140RuntimeBackedUnityPlayerLoopControlsUx(result); BindGoal141RuntimeBackedPlayerCommandRoundtrip(result); BindGoal142ProductLineRuntimeVariantMatrix(result);
+        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result); BindGoal135PlayerLoop(result); BindGoal136PlayerCommandLoop(result); BindGoal137UnityPlayerLoopPlayback(result); BindGoal138RuntimeBackedUnityPlayerLoopStepper(result); BindGoal139RuntimeBackedUnityPlayerLoopInteractiveControls(result); BindGoal140RuntimeBackedUnityPlayerLoopControlsUx(result); BindGoal141RuntimeBackedPlayerCommandRoundtrip(result); BindGoal142ProductLineRuntimeVariantMatrix(result); BindGoal143SelectedRuntimeVariantPlayerAdapter();
     }
 
     private void ConfigureControls()

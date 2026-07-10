@@ -116,8 +116,9 @@ runtime_backed_unity_player_loop_stepper_hud_harness_verification accepted by ex
 runtime_backed_unity_player_loop_interactive_controls_harness_verification accepted by explicit Goal140 human handoff
 runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification accepted by explicit Goal141 human handoff
 runtime_backed_unity_player_command_roundtrip_bridge_verification required
-runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required
-goal_142a_winforms_operator_self_lock_and_atomic_regeneration_hotfix GREEN; Goal142 manual retry required
+runtime_significant_product_line_variant_matrix_and_selection_handoff_verification accepted by explicit Goal143 human handoff
+goal_142a_winforms_operator_self_lock_and_atomic_regeneration_hotfix GREEN; corrected retry succeeded
+selected_runtime_variant_end_to_end_playeradapter_handoff_verification required
 goal_132_winforms_candidate_pipeline_operator_panel required
 goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
 goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
@@ -2320,31 +2321,28 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-runtime_significant_product_line_variant_matrix_and_selection_handoff_verification
+selected_runtime_variant_end_to_end_playeradapter_handoff_verification
 ```
 
-Goal142 runtime-significant product-line variant matrix and selection handoff is
-produced for review with
-`runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required`,
-`accepted=false`, `goal141Accepted=false`, `manualUnityOptional=true`,
-`projectionOnly=false`, `runtimeAuthority=true`,
-`runtimeBackedPlayerCommandRoundtrip=true`,
-`templatePackagePath=samples/minimal-map-game/package.json`,
-`candidateCount=4`, `passedCandidateCount=4`, `failedCandidateCount=0`,
-`runtimeSignificantCandidateCount=4`, `distinctFinalStateHashCount=4`,
+Goal143 is produced for review with `implementationStatus=GREEN`,
+`accepted=false`, `goal142Accepted=true`, `goal141Accepted=false`,
 `selectedCandidateId=minimal-map-game-exploration-resource-focus`,
 `selectedVariantKind=exploration_resource_focus`, `selectedScore=100`,
-`sourceTemplateUnmodified=true`, `packageValidationPassed=true`,
-`runtimeRoundtripSemanticCorrectnessPassed=true`, `mutationAuditPassed=true` and
-`noMetadataOnlyVariantAccepted=true`.
+`selectedPackageSha256MatchesHandoff=true`,
+`selectedFinalStateHashMatches=true`, `frameCount=15`, `requestCount=6`,
+`snapshotCount=15`, `runtimeRoutedRequestCount=4`,
+`presentationOnlyRequestCount=2`,
+`presentationOnlyRuntimeExecutionCount=0`,
+`selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
+`unityConsumesSelectedRuntimeVariantPlayerAdapter=true`,
+`unitySmokePassed=true`, `runtimeAuthority=true`, `projectionOnly=false`,
+`unityGameplayTruth=false` and `manualUnityOptional=true`.
 
-Goal142A fixes the observed WinForms operator self-lock without accepting
-Goal142. `Run Runtime Variant Matrix` now uses transactional in-process
-generation, starts no compiler/test child process, and preserves the previous
-Goal142 procedural/export bytes on failure. The external automation script also
-snapshots/restores before cleanup. The observed manual attempt remains
-`exitCode=1`, `manualAttemptAccepted=false`; one corrected button retry is the
-next action before Goal142 review.
+Goal142 is accepted by the explicit human statement recorded in Goal143.
+Goal143 uses only that selection, validates the package hash, reruns corrected
+Runtime semantics, builds 15 ordered PlayerAdapter frames, exposes an in-process
+transactional WinForms operator and passes a real read-only Unity consumer
+batchmode smoke.
 
 The selected-candidate path now has the canonical runtime/player proof chain:
 
@@ -2352,9 +2350,8 @@ The selected-candidate path now has the canonical runtime/player proof chain:
 candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report -> Goal139 human acceptance -> controls UX polish -> bounded Unity editor noise classification
 ```
 
-Review Goal142 evidence before starting a new implementation slice. If accepted,
-the next bounded product step should continue on the explicitly runtime-backed
-product-line variant seam. Do not start sample mutation, `.llmgc/manual/**`,
+Review Goal143 evidence before starting a new implementation slice. Do not
+accept Goal143 automatically. Do not start sample mutation, `.llmgc/manual/**`,
 live geodata/provider, public schema changes, Lua, generator-library, final
 gameplay, final art, atlas, Unity scene/prefab/settings/packages,
 StreamingAssets or release packaging work from this handoff.
@@ -2362,5 +2359,5 @@ StreamingAssets or release packaging work from this handoff.
 Status:
 
 ```text
-runtime_significant_product_line_variant_matrix_and_selection_handoff_verification_required_accepted_false
+selected_runtime_variant_end_to_end_playeradapter_handoff_verification_required_accepted_false
 ```

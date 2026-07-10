@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "selected_runtime_variant_playeradapter_file_index_v1",
+  "goalId": "goal_143_selected_runtime_variant_end_to_end_playeradapter_handoff",
+  "rootPath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff",
+  "indexedFileCount": 10,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/goal142-human-acceptance-record.json",
+      "role": "goal142_human_acceptance",
+      "required": true,
+      "sha256": "edac513bb1dfc600c78e44ae089cdd3a8ef676f353ea3f529046d24737602858"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/one-click-selected-runtime-variant-playeradapter-report.json",
+      "role": "selected_variant_playeradapter_evidence",
+      "required": true,
+      "sha256": "876dfb779e0ad28b1164e4a8f8acfbdc44d1255e345bacbb7d5ba2d95ee468b2"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/one-click-selected-runtime-variant-playeradapter-report.md",
+      "role": "selected_variant_playeradapter_evidence",
+      "required": true,
+      "sha256": "53fd0990d57ab6eb7a196e870675cc3826109100903470ec18334d4b54b281d4"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-dashboard.json",
+      "role": "selected_variant_playeradapter_evidence",
+      "required": true,
+      "sha256": "bd71371b48b933965b17240c891be9493bc349ee2886b55ef2950fc3306a89ad"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-frames.json",
+      "role": "selected_variant_playeradapter_frames",
+      "required": true,
+      "sha256": "8b1123612a6963187823c57a2afc1145b5ad15de91dc756a473406c482bffd60"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-handoff.json",
+      "role": "selected_variant_playeradapter_handoff",
+      "required": true,
+      "sha256": "3210397967d144970f0d71b7fd8cf58daa2e0b4ad591a007f276caef26f9a5ce"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-model.json",
+      "role": "selected_variant_playeradapter_model",
+      "required": true,
+      "sha256": "fa0f3f0c55146c014cc08726a9389cc9eb960f61783f06bb4b29738b0a813f30"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-negative-proof.json",
+      "role": "selected_variant_playeradapter_evidence",
+      "required": true,
+      "sha256": "dc2fb1f680f5e2aff723386657a8c5992a19af669eff531d9f115359cb0c8531"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/selected-runtime-variant-playeradapter-result.json",
+      "role": "selected_variant_playeradapter_evidence",
+      "required": true,
+      "sha256": "d188ff9e0cc294af3447fe43c277e026bf1eea8000f6889f2d61bdc266edea0d"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/unity-selected-runtime-variant-playeradapter-smoke.json",
+      "role": "unity_playeradapter_consumer_smoke",
+      "required": true,
+      "sha256": "c573d784d8204edb991868e9d1e04afe4636eeac7365a64f824182c1d11ddfe1"
+    }
+  ]
+}

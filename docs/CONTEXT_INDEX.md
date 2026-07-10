@@ -73,7 +73,11 @@ model/script. Goal140 records Goal139 human acceptance, polishes the controls
 UX and adds a bounded Unity editor noise guard. Goal141 records Goal140 human
 acceptance, and Goal141A corrects its bridge so six Unity/PlayerAdapter control
 intents produce correlated responses with four Runtime-routed executions and
-two presentation-only controls. Future work should build on this canonical
+two presentation-only controls. Goal142 materializes four runtime-significant
+variants and selects `minimal-map-game-exploration-resource-focus`; Goal143
+records its human acceptance and carries only that selection through package
+integrity, deterministic Runtime rerun, ordered PlayerAdapter frames and a
+read-only Unity consumer smoke. Future work should build on this canonical
 Runtime/PlayerAdapter/Unity playback evidence instead of adding more
 projection-only wrappers.
 
@@ -282,8 +286,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/GOAL.md` | Goal 140 task: runtime-backed Unity player-loop controls UX polish and Unity editor noise guard over the Goal139 interactive controls model/result/script. Current gate=`runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification`, result is `GREEN`, accepted=true by Goal141 human handoff, acceptedGoal139=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-controls-ux-polish.cmd`, evidence under `.llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, export metadata under `.llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, frameCount=13, humanReadableFrameNumbering=true, stepOnceSemanticsClear=true, playAllToEndSemanticsClear=true, knownUnityEditorNoiseClassified=true, blockingUnityErrorCount=0, unclassifiedUnityErrorCount=0, unityControlsUxSmokePassed=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it records Goal139 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Runtime, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/GOAL.md` | Goal 141 task: runtime-backed Unity/player command roundtrip bridge over Goal140 controls UX artifacts. Current gate=`runtime_backed_unity_player_command_roundtrip_bridge_verification`, result is `GREEN`, accepted=false, goal140Accepted=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-player-command-roundtrip.cmd`, evidence under `.llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`, export metadata under `.llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`, roundtripRequestCount=6, runtimeRoutedRequestCount=4, presentationOnlyRequestCount=2, runtimeExecutedRequestCount=4, presentationOnlyRuntimeExecutionCount=0, roundtripSnapshotCount=15, requestResponseCorrelationPassed=true, sequentialCursorContinuityPassed=true, stateHashContinuityPassed=true, copySummaryStateUnchanged=true, loadModelStateUnchanged=true, noControlIntentMappedToUnrelatedGameplayCommand=true, roundtripSemanticCorrectnessPassed=true, controlRequestBridgePresent=true, stateHashChainPresent=true, runtimeAuthority=true, projectionOnly=false, unityConsumesRoundtripResult=true and unityGameplayTruth=false; it records Goal140 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/GOAL.md` | Goal 141A hotfix task: correct Goal141 request-level semantics so `load_model` and `copy_frame_summary` are presentation-only, `reset_first` starts the runtime session, `step_once` and `next_frame` advance the current runtime cursor, and `play_all_to_end` executes the remaining Runtime-owned commands. Current result is `GREEN`, roundtripSemanticCorrectnessPassed=true, totalControlRequestCount=6, runtimeRoutedRequestCount=4, presentationOnlyRequestCount=2, runtimeExecutedRequestCount=4, presentationOnlyRuntimeExecutionCount=0, requestResponseCorrelationPassed=true, sequentialCursorContinuityPassed=true, stateHashContinuityPassed=true, copySummaryStateUnchanged=true, loadModelStateUnchanged=true and noControlIntentMappedToUnrelatedGameplayCommand=true; it writes compact Goal141A evidence under `.llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/` and `.llmgc/exports/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/`. |
-| `docs/agent-tasks/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/GOAL.md` | Goal 142 task: runtime-significant product-line variant matrix and selection handoff over the read-only minimal-map sample package. Current gate=`runtime_significant_product_line_variant_matrix_and_selection_handoff_verification`, result is `GREEN`, accepted=false, goal141Accepted=false, normal command=`.devflow\scripts\run-product-line-runtime-variant-matrix.cmd`, evidence under `.llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, export metadata under `.llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, candidateCount=4, passedCandidateCount=4, runtimeSignificantCandidateCount=4, distinctFinalStateHashCount=4, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedScore=100, sourceTemplateUnmodified=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
-| `docs/agent-tasks/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/GOAL.md` | Goal 142A P1 hotfix: the Goal142 WinForms button now uses the in-process Application matrix service through a transactional operator runner, starts no compiler/test child process, disables the button while running and refreshes the workspace after success. Failed regeneration restores prior Goal142 procedural/export bytes; the external script also snapshots/restores canonical artifacts. The observed manual attempt remains exitCode=1 and not accepted; Goal142 remains accepted=false and requires one manual button retry. Evidence is under `.llmgc/procedural/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/` and `.llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/`. |
+| `docs/agent-tasks/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/GOAL.md` | Goal 142 task: runtime-significant product-line variant matrix and selection handoff over the read-only minimal-map sample package. Result is `GREEN`, accepted=true by explicit Goal143 human handoff, acceptedByCodex=false, goal141Accepted=false, normal command=`.devflow\scripts\run-product-line-runtime-variant-matrix.cmd`, evidence under `.llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, export metadata under `.llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, candidateCount=4, passedCandidateCount=4, runtimeSignificantCandidateCount=4, distinctFinalStateHashCount=4, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedScore=100, sourceTemplateUnmodified=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/GOAL.md` | Goal 142A P1 hotfix: the Goal142 WinForms button uses the in-process Application matrix service through a transactional operator runner, starts no compiler/test child process, disables the button while running and refreshes the workspace after success. Failed regeneration restores prior Goal142 procedural/export bytes; the corrected retry succeeded with exitCode=0 before Goal143 recorded human acceptance. Evidence is under `.llmgc/procedural/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/` and `.llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/`. |
+| `docs/agent-tasks/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/GOAL.md` | Goal 143 task: selected Goal142 runtime variant end-to-end PlayerAdapter handoff. Current gate=`selected_runtime_variant_end_to_end_playeradapter_handoff_verification`, result is `GREEN`, accepted=false, goal142Accepted=true, goal141Accepted=false, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedVariantKind=`exploration_resource_focus`, selectedScore=100, package/final Runtime hashes match, frameCount=15, requestCount=6, snapshotCount=15, selectedVariantEffectVisible=true, noBalancedBaselineFallback=true, Unity batchmode consumer smoke GREEN, runtimeAuthority=true, projectionOnly=false, unityGameplayTruth=false and manual Unity optional. Normal command=`.devflow\scripts\run-selected-runtime-variant-playeradapter-handoff.cmd`; evidence is under `.llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/` and `.llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/`. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -361,31 +366,27 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-runtime_significant_product_line_variant_matrix_and_selection_handoff_verification
+selected_runtime_variant_end_to_end_playeradapter_handoff_verification
 ```
 
-Goal142 runtime-significant product-line variant matrix and selection handoff is
-produced for review with
-`runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required`,
-`accepted=false`, `goal141Accepted=false`, `manualUnityOptional=true`,
-`projectionOnly=false`, `runtimeAuthority=true`,
-`runtimeBackedPlayerCommandRoundtrip=true`,
-`templatePackagePath=samples/minimal-map-game/package.json`,
-`candidateCount=4`, `passedCandidateCount=4`, `failedCandidateCount=0`,
-`runtimeSignificantCandidateCount=4`, `distinctFinalStateHashCount=4`,
+Goal143 is produced for review with `implementationStatus=GREEN`,
+`accepted=false`, `goal142Accepted=true`, `goal141Accepted=false`,
 `selectedCandidateId=minimal-map-game-exploration-resource-focus`,
 `selectedVariantKind=exploration_resource_focus`, `selectedScore=100`,
-`sourceTemplateUnmodified=true`, `packageValidationPassed=true`,
-`runtimeRoundtripSemanticCorrectnessPassed=true`, `mutationAuditPassed=true` and
-`noMetadataOnlyVariantAccepted=true`.
+`selectedPackageSha256MatchesHandoff=true`,
+`selectedFinalStateHashMatches=true`, `frameCount=15`, `requestCount=6`,
+`snapshotCount=15`, `runtimeRoutedRequestCount=4`,
+`presentationOnlyRequestCount=2`,
+`presentationOnlyRuntimeExecutionCount=0`,
+`selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
+`unitySmokePassed=true`, `runtimeAuthority=true`, `projectionOnly=false`,
+`unityGameplayTruth=false` and `manualUnityOptional=true`.
 
-Goal142A repairs the observed `exitCode=1` WinForms self-lock workflow. The
-button now calls the Application matrix service in-process, starts no compiler
-or test child process, disables itself while running, refreshes after success
-and rolls procedural/export artifacts back byte-for-byte if generation fails.
-The external script has the same snapshot/restore protection. The failed
-attempt is recorded but not accepted; Goal142 remains `accepted=false` and the
-next user action is one retry of `Run Runtime Variant Matrix`.
+Goal142 is accepted by the repository owner's exact Goal143 human handoff.
+Goal143 validates and reruns only the Goal142 selection, builds ordered
+request-correlated PlayerAdapter frames, exposes an in-process transactional
+WinForms action, and gives Unity a read-only PlayerAdapter consumer. Runtime
+remains gameplay truth.
 
 The Goal131 selected candidate now has
 package validation, canonical runtime transcript/state summary, save/load/replay
@@ -398,14 +399,10 @@ acceptance, controls UX polish evidence, bounded Unity editor noise
 classification, Goal140 human acceptance and a Runtime-owned command roundtrip
 request/result/snapshot bridge consumed by Unity/player.
 
-Goal132 WinForms candidate pipeline operator panel remains useful context: use
-`.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` and the Goal131
-selected candidate handoff as the source candidate input, but do not treat
-selected-candidate review as the immediate next goal unless it is tied to
-canonical runtime execution. Review Goal142 evidence before starting the next
-implementation slice; if accepted, the next product step should continue on the
-explicitly runtime-backed product-line variant seam instead of returning to
-projection-only verification.
+Review Goal143 evidence before starting the next implementation slice. Do not
+start sample mutation, `.llmgc/manual/**`, provider/network, public schema, Lua,
+generator-library, final art/gameplay, Unity scene/prefab/settings/packages/
+StreamingAssets or release packaging work from this handoff.
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
 `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop

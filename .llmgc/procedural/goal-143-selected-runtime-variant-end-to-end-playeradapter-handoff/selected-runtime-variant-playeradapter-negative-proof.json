@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "selected_runtime_variant_playeradapter_negative_proof_v1",
+  "goalId": "goal_143_selected_runtime_variant_end_to_end_playeradapter_handoff",
+  "noBalancedBaselineFallback": true,
+  "noGoal131SelectedCandidateFallback": true,
+  "noSampleTemplateFallback": true,
+  "selectedCandidateMatchesGoal142Handoff": true,
+  "selectedPackageHashMismatchRejected": true,
+  "selectedFinalStateHashMismatchRejected": true,
+  "presentationOnlyControlsStillDoNotExecuteRuntime": true,
+  "unityDoesNotExecuteGameplay": true,
+  "winFormsStartsNoCompilerOrTestProcess": true,
+  "previousArtifactsPreservedOnFailure": true,
+  "passed": true
+}

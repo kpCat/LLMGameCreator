@@ -1,10 +1,39 @@
 # Runtime-Significant Product-Line Variant Matrix And Selection Handoff
 
-Status: produced for review
-Gate: `runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required`
+Status: accepted by human Goal143 handoff
+Gate: `runtime_significant_product_line_variant_matrix_and_selection_handoff_verification accepted`
 Implementation status: GREEN
-Accepted: false
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
+Raw manual input not committed: true
+
+## Goal143 Human Acceptance Record
+
+```text
+Я принимаю Goal142 runtime_significant_product_line_variant_matrix_and_selection_handoff_verification GREEN. candidateCount=4, passedCandidateCount=4, runtimeSignificantCandidateCount=4, distinctFinalStateHashCount=4, selectedCandidate=minimal-map-game-exploration-resource-focus, selectedScore=100, sourceTemplateUnmodified=true, operatorUsesInProcessService=true, operatorExitCode=0, projectionOnly=false, runtimeAuthority=true.
+```
+
+```text
+accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+rawManualInputNotCommitted=true
+candidateCount=4
+passedCandidateCount=4
+runtimeSignificantCandidateCount=4
+distinctFinalStateHashCount=4
+selectedCandidate=minimal-map-game-exploration-resource-focus
+selectedScore=100
+sourceTemplateUnmodified=true
+operatorUsesInProcessService=true
+operatorExitCode=0
+projectionOnly=false
+runtimeAuthority=true
+```
+
+The bounded acceptance record is mirrored under the Goal143 procedural and
+export roots. No `.llmgc/manual/**` input is committed.
 
 ## Goal142A Manual Attempt Failure Record
 
@@ -22,9 +51,9 @@ goal142OperatorTransactionalRegeneration=true
 goal142ManualRetryRequired=true
 ```
 
-The observed run is recorded as an operator-workflow defect, not as Goal142
-acceptance. Goal142 remains `accepted=false`; the repository owner must retry
-the single `Run Runtime Variant Matrix` button after installing this hotfix.
+The observed run remains recorded as the historical operator-workflow defect.
+The corrected in-process retry later succeeded with exit code 0, and the
+repository owner accepted Goal142 through the explicit Goal143 handoff above.
 
 Goal142 builds a deterministic runtime-significant product-line variant matrix
 from the read-only template `samples/minimal-map-game/package.json`. It does
@@ -53,7 +82,7 @@ selectedCandidateId=minimal-map-game-exploration-resource-focus
 selectedVariantKind=exploration_resource_focus
 selectedScore=100
 sourceTemplateUnmodified=true
-accepted=false
+accepted=true
 ```
 
 The selected variant is runtime-significant because its structured resource and
