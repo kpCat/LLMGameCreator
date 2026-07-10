@@ -637,6 +637,21 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "runtimeAuthority")
                    && BoolValue(root, "projectionOnly") == false
                    && BoolValue(root, "unityGameplayTruth") == false;
+            var postGoal144State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal144Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "goal143Accepted")
+                   && BoolValue(root, "goal144Accepted") == false
+                   && BoolValue(root, "selectedRuntimeVariantInteractiveSession")
+                   && BoolValue(root, "checkpointReloadByReplayPassed")
+                   && BoolValue(root, "fullReplayEquivalent")
+                   && BoolValue(root, "finalStateHashMatchesGoal142")
+                   && BoolValue(root, "selectedVariantEffectVisible")
+                   && BoolValue(root, "noBalancedBaselineFallback")
+                   && BoolValue(root, "runtimeAuthority")
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "unityGameplayTruth") == false;
             return goal133AState
                    || postGoal134State
                    || postGoal135State
@@ -647,7 +662,8 @@ public sealed class ProductLineStrategyRebaselineService
                    || postGoal140State
                    || postGoal141State
                    || postGoal142State
-                   || postGoal143State;
+                   || postGoal143State
+                   || postGoal144State;
         }
         catch (JsonException)
         {
@@ -695,7 +711,12 @@ public sealed class ProductLineStrategyRebaselineService
         && Contains(markdown, "goal142Accepted=true")
         && Contains(markdown, "selectedRuntimeVariantPlayerAdapterHandoff=true")
         && Contains(markdown, "selectedPackageSha256MatchesHandoff=true")
-        && Contains(markdown, "selectedFinalStateHashMatches=true");
+        && Contains(markdown, "selectedFinalStateHashMatches=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal144Gate)
+        && Contains(markdown, "goal143Accepted=true")
+        && Contains(markdown, "selectedRuntimeVariantInteractiveSession=true")
+        && Contains(markdown, "checkpointReloadByReplayPassed=true")
+        && Contains(markdown, "fullReplayEquivalent=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -711,7 +732,8 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal140Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal141Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal142Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal143Gate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal143Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal144Gate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

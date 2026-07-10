@@ -78,6 +78,8 @@ Goal 142 note: the runtime-significant product-line variant matrix and selection
 
 Goal 143 note: the selected runtime variant end-to-end PlayerAdapter handoff produces `selected_runtime_variant_end_to_end_playeradapter_handoff_verification required`, `accepted=false`, goal142Accepted=true, goal141Accepted=false, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedVariantKind=`exploration_resource_focus`, selectedScore=100, selectedPackageSha256MatchesHandoff=true, selectedFinalStateHashMatches=true, frameCount=15, requestCount=6, snapshotCount=15, selectedVariantEffectVisible=true, noBalancedBaselineFallback=true, unityConsumesSelectedRuntimeVariantPlayerAdapter=true, unitySmokePassed=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false. This is a read-only player-adapter consumer gate, not final release or approval for sample/schema/provider/Lua/generator-library/final art/gameplay/Unity scene/prefab/settings/packages/StreamingAssets work.
 
+Goal 144 note: Goal143 is accepted by explicit human handoff with `acceptedByCodex=false`. The selected Goal142 package now runs as one persistent Runtime-owned interactive session with 14 data-driven action descriptors, individual correlated execution, invalid-action no-mutation, journal checkpoint reload and full replay to the accepted Goal142 final hash. WinForms is an in-process operator and Unity is read-only. Goal144 remains `accepted=false` and does not close `vertical_slice_final_verification` or authorize sample/schema/provider/Lua/generator-library/Unity gameplay-truth work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

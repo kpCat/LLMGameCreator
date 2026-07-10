@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "selected_runtime_variant_live_session_replay_result_v1",
+  "goalId": "goal_144_selected_runtime_variant_interactive_action_session_and_save_replay",
+  "replayKind": "full_final_journal",
+  "passed": true,
+  "packageHashValidated": true,
+  "candidateValidated": true,
+  "journalCorrelationPassed": true,
+  "stateHashContinuityPassed": true,
+  "expectedStateHashMatched": true,
+  "expectedStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+  "actualStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+  "replayedActionCount": 13,
+  "diagnostics": []
+}

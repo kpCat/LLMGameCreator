@@ -1,17 +1,19 @@
 # Goal 143 Selected Runtime Variant End-to-End PlayerAdapter Handoff
 
-Status: produced for review
-Gate: `selected_runtime_variant_end_to_end_playeradapter_handoff_verification required`
+Status: accepted by human handoff
+Gate: `selected_runtime_variant_end_to_end_playeradapter_handoff_verification accepted`
 Implementation status: GREEN
-Accepted: false
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
+Raw manual input committed: false
 Manual Unity optional: true
 
 ## Result
 
 ```text
 goal142Accepted=true
-goal143Accepted=false
+goal143Accepted=true
 selectedCandidateId=minimal-map-game-exploration-resource-focus
 selectedRecipeId=exploration_resource_focus
 selectedVariantKind=exploration_resource_focus
@@ -64,3 +66,13 @@ Goal143 does not authorize `.llmgc/manual/**`, sample mutation, public
 GamePackage schema changes, provider/LLM/RAG/media work, Lua/generator-library,
 Unity scene/prefab/StreamingAssets/project-settings/packages changes, final art,
 final gameplay or release packaging.
+
+## Human decision recorded by Goal144
+
+```text
+Я принимаю Goal143 selected_runtime_variant_end_to_end_playeradapter_handoff_verification GREEN. selectedCandidate=minimal-map-game-exploration-resource-focus, selectedVariant=exploration_resource_focus, selectedScore=100, packageHashMatch=true, finalStateHashMatch=true, requestCount=6, snapshotCount=15, frameCount=15, selectedVariantEffectVisible=true, noBalancedBaselineFallback=true, operatorUsesInProcessService=true, operatorStatus=GREEN, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.
+```
+
+The raw manual input is not stored under `.llmgc/manual/**`. This committed
+document records the bounded acceptance facts with `acceptedByHuman=true` and
+`acceptedByCodex=false`.

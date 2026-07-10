@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "unity_selected_runtime_variant_live_session_smoke_v1",
+  "goalId": "goal_144_selected_runtime_variant_interactive_action_session_and_save_replay",
+  "status": "GREEN",
+  "sessionArtifactsExist": true,
+  "selectedCandidateMatches": true,
+  "packageHashMatches": true,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "finalHashMatchesGoal142": true,
+  "selectedVariantEffectVisible": true,
+  "noFallback": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "passed": true,
+  "unityExitCode": 0,
+  "dashboardSha256": "a5d90e44da2d6acdd44a82882a6c92c3aae3123f841719b8070ec24b47ea5304",
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

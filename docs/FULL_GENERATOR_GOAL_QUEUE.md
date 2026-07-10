@@ -2321,28 +2321,27 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-selected_runtime_variant_end_to_end_playeradapter_handoff_verification
+selected_runtime_variant_interactive_action_session_and_save_replay_verification
 ```
 
-Goal143 is produced for review with `implementationStatus=GREEN`,
-`accepted=false`, `goal142Accepted=true`, `goal141Accepted=false`,
+Goal144 is produced for review with `implementationStatus=GREEN`,
+`accepted=false`, `goal143Accepted=true`, `goal141Accepted=false`,
 `selectedCandidateId=minimal-map-game-exploration-resource-focus`,
-`selectedVariantKind=exploration_resource_focus`, `selectedScore=100`,
-`selectedPackageSha256MatchesHandoff=true`,
-`selectedFinalStateHashMatches=true`, `frameCount=15`, `requestCount=6`,
-`snapshotCount=15`, `runtimeRoutedRequestCount=4`,
-`presentationOnlyRequestCount=2`,
-`presentationOnlyRuntimeExecutionCount=0`,
+`selectedVariantKind=exploration_resource_focus`, `actionDescriptorCount=14`,
+`runtimeRoutedActionDescriptorCount=11`,
+`presentationOnlyActionDescriptorCount=3`, `executedRuntimeActionCount=11`,
+`invalidActionStateUnchanged=true`, `checkpointReloadByReplayPassed=true`,
+`checkpointStateHashRestored=true`, `fullReplayEquivalent=true`,
+`finalStateHashMatchesGoal142=true`,
 `selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
-`unityConsumesSelectedRuntimeVariantPlayerAdapter=true`,
 `unitySmokePassed=true`, `runtimeAuthority=true`, `projectionOnly=false`,
 `unityGameplayTruth=false` and `manualUnityOptional=true`.
 
-Goal142 is accepted by the explicit human statement recorded in Goal143.
-Goal143 uses only that selection, validates the package hash, reruns corrected
-Runtime semantics, builds 15 ordered PlayerAdapter frames, exposes an in-process
-transactional WinForms operator and passes a real read-only Unity consumer
-batchmode smoke.
+Goal143 is accepted by the explicit human statement recorded in Goal144.
+Goal144 uses only the Goal142/143 selection, validates the package hash, derives
+14 actions from package/current state, executes one action at a time in Runtime,
+restores checkpoints through journal replay, exposes an in-process transactional
+WinForms operator and passes a read-only Unity live-session smoke.
 
 The selected-candidate path now has the canonical runtime/player proof chain:
 
@@ -2350,8 +2349,8 @@ The selected-candidate path now has the canonical runtime/player proof chain:
 candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report -> Goal139 human acceptance -> controls UX polish -> bounded Unity editor noise classification
 ```
 
-Review Goal143 evidence before starting a new implementation slice. Do not
-accept Goal143 automatically. Do not start sample mutation, `.llmgc/manual/**`,
+Review Goal144 evidence before starting a new implementation slice. Do not
+accept Goal144 automatically. Do not start sample mutation, `.llmgc/manual/**`,
 live geodata/provider, public schema changes, Lua, generator-library, final
 gameplay, final art, atlas, Unity scene/prefab/settings/packages,
 StreamingAssets or release packaging work from this handoff.
@@ -2359,5 +2358,5 @@ StreamingAssets or release packaging work from this handoff.
 Status:
 
 ```text
-selected_runtime_variant_end_to_end_playeradapter_handoff_verification_required_accepted_false
+selected_runtime_variant_interactive_action_session_and_save_replay_verification_required_accepted_false
 ```

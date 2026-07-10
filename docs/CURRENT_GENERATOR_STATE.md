@@ -1,35 +1,37 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 143 selected runtime variant end-to-end PlayerAdapter handoff
+Updated by: Goal 144 selected runtime variant interactive action session and save replay
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 143 produced for review:
+Goal 144 produced for review:
 
 ```text
-selected_runtime_variant_end_to_end_playeradapter_handoff_verification required
+selected_runtime_variant_interactive_action_session_and_save_replay_verification required
 implementationStatus=GREEN
 accepted=false
-goal142Accepted=true
+goal143Accepted=true
+goal144Accepted=false
 goal141Accepted=false
-selectedRuntimeVariantPlayerAdapterHandoff=true
+selectedRuntimeVariantInteractiveSession=true
 selectedRuntimeVariantId=minimal-map-game-exploration-resource-focus
 selectedRuntimeVariantKind=exploration_resource_focus
-selectedRuntimeVariantScore=100
-selectedPackageSha256MatchesHandoff=true
-selectedFinalStateHashMatches=true
-frameCount=15
-requestCount=6
-snapshotCount=15
-runtimeRoutedRequestCount=4
-presentationOnlyRequestCount=2
-presentationOnlyRuntimeExecutionCount=0
-requestResponseCorrelationPassed=true
-sequentialCursorContinuityPassed=true
+selectedVariantLiveSessionActionCount=14
+runtimeRoutedActionDescriptorCount=11
+presentationOnlyActionDescriptorCount=3
+executedRuntimeActionCount=11
+rejectedInvalidActionCount=1
+invalidActionStateUnchanged=true
+checkpointSavePassed=true
+checkpointReloadByReplayPassed=true
+checkpointStateHashRestored=true
+journalCorrelationPassed=true
 stateHashContinuityPassed=true
+fullReplayEquivalent=true
+finalStateHashMatchesGoal142=true
 selectedVariantEffectVisible=true
 noBalancedBaselineFallback=true
-unityConsumesSelectedRuntimeVariantPlayerAdapter=true
+noGoal131Fallback=true
 unitySmokePassed=true
 runtimeAuthority=true
 projectionOnly=false
@@ -37,27 +39,27 @@ unityGameplayTruth=false
 manualUnityOptional=true
 ```
 
-Goal143 records the repository owner's explicit Goal142 human acceptance, then
-consumes only the Goal142 selected handoff for
-`minimal-map-game-exploration-resource-focus`. It validates the selected
-package SHA-256, reruns the corrected Runtime request/response sequence and
-requires the final state hash to match Goal142. The resulting PlayerAdapter
-model contains 15 ordered Runtime snapshots across six requests; four requests
-route to Runtime and two presentation-only controls execute no Runtime work.
+Goal144 records the repository owner's exact Goal143 human acceptance, then
+starts one persistent Runtime-owned session over the selected Goal142 package.
+Its 14 package/state-derived descriptors execute one available action at a time;
+11 descriptors route to Runtime and three are presentation-only. Invalid or
+unavailable actions do not mutate state and do not advance the journal.
 
-The selected exploration/resource effect is visible in the final inventory
-summary and distinct final Runtime hash, rather than inferred from package hash
-alone. The read-only Unity consumer batchmode smoke is GREEN. The WinForms
-`Build Selected Variant PlayerAdapter` button invokes the in-process Application
-operator with transactional rollback and starts no compiler/test process.
+The checkpoint stores the correlated action journal plus expected hash, not an
+opaque Runtime object. Reload starts a fresh Runtime session, replays the journal
+and restores the checkpoint hash exactly. Full replay reaches the accepted
+Goal142 final hash and preserves the exploration/resource inventory effect.
+WinForms exposes individual actions plus the in-process acceptance drill, while
+Unity only reads the final session/checkpoint/replay artifacts.
 
 Evidence lives under
-`.llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/`,
+`.llmgc/procedural/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/`,
 export metadata under
-`.llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/`,
+`.llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/`,
 and the normal command is
-`.devflow\scripts\run-selected-runtime-variant-playeradapter-handoff.cmd`.
-Goal143 remains `accepted=false`; Goal141 also remains unaccepted.
+`.devflow\scripts\run-selected-runtime-variant-live-session.cmd`.
+Goal143 is accepted by explicit human handoff; Goal144 remains `accepted=false`;
+Goal141 also remains unaccepted.
 
 Goal 142A operator hotfix produced:
 

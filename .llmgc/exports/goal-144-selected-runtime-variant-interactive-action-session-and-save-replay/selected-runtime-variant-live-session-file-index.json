@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "selected_runtime_variant_live_session_file_index_v1",
+  "goalId": "goal_144_selected_runtime_variant_interactive_action_session_and_save_replay",
+  "fileCount": 12,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/goal143-human-acceptance-record.json",
+      "sha256": "ad0cd1d3abeed295627a084eb13efd8e0b9e8ca14e0992ef5ca2aa4c7d4344cc",
+      "byteCount": 804
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/one-click-selected-runtime-variant-live-session-report.json",
+      "sha256": "36f633c8d3a85df8b0c95f1826c0c1570cbdbefc04f67ebedc28364a41abe663",
+      "byteCount": 1506
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/one-click-selected-runtime-variant-live-session-report.md",
+      "sha256": "fe15926cd316846c1b880d3d70db4c9d8ad05c9b1656a9738f6bef0210b30ff9",
+      "byteCount": 429
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-action-catalog.json",
+      "sha256": "ba80cb0c1ed1a28f20b32e8874a596c77cd50da2a3491e88757102c508449105",
+      "byteCount": 6031
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-checkpoint-reload-result.json",
+      "sha256": "0743f3799cbc4f5cfe1e5e0a0d8a28358240ebcfd56e2f956c5ff98c60f86a65",
+      "byteCount": 642
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-checkpoint.json",
+      "sha256": "8d5bc707ed8680539e4565647a6a0dd068ce34ec58e54c561bdcd95f8fac839d",
+      "byteCount": 5482
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-dashboard.json",
+      "sha256": "36f633c8d3a85df8b0c95f1826c0c1570cbdbefc04f67ebedc28364a41abe663",
+      "byteCount": 1506
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-final-replay-result.json",
+      "sha256": "9caaf53b694b699fa3de93ac81e1dac32d859cf093a31b4f930bb11031fc7fd9",
+      "byteCount": 643
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-journal.json",
+      "sha256": "570bd1cf6fb8e9b2572f229571ab38bbfedcb09250b6836a09a5ef0a89e95668",
+      "byteCount": 7868
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-negative-proof.json",
+      "sha256": "1bd48783f0bbeb2826ab41ea3c1f88805b991405d4647821fe72040359066b0a",
+      "byteCount": 754
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/selected-runtime-variant-live-session-state.json",
+      "sha256": "9f400a73e56b91b28b2b57bd3b9a26ecaf892d8d400f6cfdd0a351c88c7efa8c",
+      "byteCount": 1133
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/unity-selected-runtime-variant-live-session-smoke.json",
+      "sha256": "877ba395af3738aede9207a67f06281f7eb682e58e95edf65a1d2860770f123f",
+      "byteCount": 768
+    }
+  ]
+}

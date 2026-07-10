@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "selected_runtime_variant_live_session_action_catalog_v1",
+  "goalId": "goal_144_selected_runtime_variant_interactive_action_session_and_save_replay",
+  "candidateId": "minimal-map-game-exploration-resource-focus",
+  "actionDescriptorCount": 14,
+  "runtimeRoutedActionDescriptorCount": 11,
+  "presentationOnlyActionDescriptorCount": 3,
+  "actions": [
+    {
+      "actionId": "start_runtime",
+      "category": "start_runtime",
+      "route": "runtime_session",
+      "commandKind": "Initialize",
+      "targetId": "map/village",
+      "prerequisites": [
+        "selected package hash validated"
+      ],
+      "mayMutateState": true,
+      "available": true,
+      "unavailableReason": "canonical action already completed"
+    },
+    {
+      "actionId": "move",
+      "category": "move",
+      "route": "runtime_session",
+      "commandKind": "Move",
+      "targetId": "entity/village/sign",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "interact",
+      "category": "interact",
+      "route": "runtime_session",
+      "commandKind": "Interact",
+      "targetId": "interaction/sign_inspect",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "open_dialogue",
+      "category": "open_dialogue",
+      "route": "runtime_session",
+      "commandKind": "OpenDialogue",
+      "targetId": "dialogue/old_guard_intro",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "start_or_update_quest",
+      "category": "start_or_update_quest",
+      "route": "runtime_session",
+      "commandKind": "StartQuest",
+      "targetId": "quest/help_healer",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "show_inventory",
+      "category": "show_inventory",
+      "route": "runtime_session",
+      "commandKind": "AddItem",
+      "targetId": "inventory/player_start",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "craft",
+      "category": "craft",
+      "route": "runtime_session",
+      "commandKind": "CraftRecipe",
+      "targetId": "recipe/healing_potion",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "harvest",
+      "category": "harvest",
+      "route": "runtime_session",
+      "commandKind": "HarvestResourceNode",
+      "targetId": "node/diesel_generator",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "transaction",
+      "category": "transaction",
+      "route": "runtime_session",
+      "commandKind": "ExecuteTransaction",
+      "targetId": "transaction/buy_healing_potion",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "begin_encounter",
+      "category": "begin_encounter",
+      "route": "runtime_session",
+      "commandKind": "StartEncounter",
+      "targetId": "encounter/goblin_duel",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "basic_attack",
+      "category": "basic_attack",
+      "route": "runtime_session",
+      "commandKind": "BasicAttack",
+      "targetId": "ability/basic_attack",
+      "prerequisites": [
+        "previous canonical action completed"
+      ],
+      "mayMutateState": true,
+      "available": false,
+      "unavailableReason": "previous canonical action required"
+    },
+    {
+      "actionId": "show_final_state",
+      "category": "show_final_state",
+      "route": "presentation_only",
+      "commandKind": "read_state_summary",
+      "targetId": "game/minimal-map-game",
+      "prerequisites": [
+        "runtime state exists"
+      ],
+      "mayMutateState": false,
+      "available": false,
+      "unavailableReason": "complete Runtime actions first"
+    },
+    {
+      "actionId": "inspect_inventory",
+      "category": "show_inventory",
+      "route": "presentation_only",
+      "commandKind": "read_state_summary",
+      "targetId": "inventory/player_start",
+      "prerequisites": [
+        "runtime state exists"
+      ],
+      "mayMutateState": false,
+      "available": false,
+      "unavailableReason": "runtime not started"
+    },
+    {
+      "actionId": "inspect_status",
+      "category": "show_status",
+      "route": "presentation_only",
+      "commandKind": "read_state_summary",
+      "targetId": "game/minimal-map-game",
+      "prerequisites": [
+        "runtime state exists"
+      ],
+      "mayMutateState": false,
+      "available": false,
+      "unavailableReason": "runtime not started"
+    }
+  ]
+}

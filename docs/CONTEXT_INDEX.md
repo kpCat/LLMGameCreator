@@ -75,11 +75,12 @@ acceptance, and Goal141A corrects its bridge so six Unity/PlayerAdapter control
 intents produce correlated responses with four Runtime-routed executions and
 two presentation-only controls. Goal142 materializes four runtime-significant
 variants and selects `minimal-map-game-exploration-resource-focus`; Goal143
-records its human acceptance and carries only that selection through package
-integrity, deterministic Runtime rerun, ordered PlayerAdapter frames and a
-read-only Unity consumer smoke. Future work should build on this canonical
-Runtime/PlayerAdapter/Unity playback evidence instead of adding more
-projection-only wrappers.
+carries only that selection through package integrity, deterministic Runtime
+rerun, ordered PlayerAdapter frames and a read-only Unity consumer smoke.
+Goal144 records Goal143 human acceptance and turns the selected handoff into a
+Runtime-owned interactive action session with journal checkpoint reload and
+full deterministic replay. Future work should build on this canonical
+Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 
 ## Full Generator Source-Of-Truth Docs
 
@@ -288,7 +289,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/GOAL.md` | Goal 141A hotfix task: correct Goal141 request-level semantics so `load_model` and `copy_frame_summary` are presentation-only, `reset_first` starts the runtime session, `step_once` and `next_frame` advance the current runtime cursor, and `play_all_to_end` executes the remaining Runtime-owned commands. Current result is `GREEN`, roundtripSemanticCorrectnessPassed=true, totalControlRequestCount=6, runtimeRoutedRequestCount=4, presentationOnlyRequestCount=2, runtimeExecutedRequestCount=4, presentationOnlyRuntimeExecutionCount=0, requestResponseCorrelationPassed=true, sequentialCursorContinuityPassed=true, stateHashContinuityPassed=true, copySummaryStateUnchanged=true, loadModelStateUnchanged=true and noControlIntentMappedToUnrelatedGameplayCommand=true; it writes compact Goal141A evidence under `.llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/` and `.llmgc/exports/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/`. |
 | `docs/agent-tasks/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/GOAL.md` | Goal 142 task: runtime-significant product-line variant matrix and selection handoff over the read-only minimal-map sample package. Result is `GREEN`, accepted=true by explicit Goal143 human handoff, acceptedByCodex=false, goal141Accepted=false, normal command=`.devflow\scripts\run-product-line-runtime-variant-matrix.cmd`, evidence under `.llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, export metadata under `.llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, candidateCount=4, passedCandidateCount=4, runtimeSignificantCandidateCount=4, distinctFinalStateHashCount=4, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedScore=100, sourceTemplateUnmodified=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/GOAL.md` | Goal 142A P1 hotfix: the Goal142 WinForms button uses the in-process Application matrix service through a transactional operator runner, starts no compiler/test child process, disables the button while running and refreshes the workspace after success. Failed regeneration restores prior Goal142 procedural/export bytes; the corrected retry succeeded with exitCode=0 before Goal143 recorded human acceptance. Evidence is under `.llmgc/procedural/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/` and `.llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/`. |
-| `docs/agent-tasks/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/GOAL.md` | Goal 143 task: selected Goal142 runtime variant end-to-end PlayerAdapter handoff. Current gate=`selected_runtime_variant_end_to_end_playeradapter_handoff_verification`, result is `GREEN`, accepted=false, goal142Accepted=true, goal141Accepted=false, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedVariantKind=`exploration_resource_focus`, selectedScore=100, package/final Runtime hashes match, frameCount=15, requestCount=6, snapshotCount=15, selectedVariantEffectVisible=true, noBalancedBaselineFallback=true, Unity batchmode consumer smoke GREEN, runtimeAuthority=true, projectionOnly=false, unityGameplayTruth=false and manual Unity optional. Normal command=`.devflow\scripts\run-selected-runtime-variant-playeradapter-handoff.cmd`; evidence is under `.llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/` and `.llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/`. |
+| `docs/agent-tasks/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/GOAL.md` | Goal 143 task: selected Goal142 runtime variant end-to-end PlayerAdapter handoff. Result is `GREEN`, accepted=true by explicit Goal144 human handoff, acceptedByCodex=false, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, package/final Runtime hashes match, frameCount=15 and Unity batchmode consumer smoke GREEN. |
+| `docs/agent-tasks/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/GOAL.md` | Goal 144 task: Runtime-owned selected-variant interactive action session and journal save/replay. Current gate=`selected_runtime_variant_interactive_action_session_and_save_replay_verification`, result is `GREEN`, accepted=false, goal143Accepted=true, actionDescriptorCount=14, executedRuntimeActionCount=11, invalid-action no-mutation, checkpoint reload-by-replay, full replay equivalence, Goal142 final hash match and read-only Unity smoke are GREEN. Normal command=`.devflow\scripts\run-selected-runtime-variant-live-session.cmd`; evidence is under the matching Goal144 procedural/export roots. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -366,27 +368,24 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-selected_runtime_variant_end_to_end_playeradapter_handoff_verification
+selected_runtime_variant_interactive_action_session_and_save_replay_verification
 ```
 
-Goal143 is produced for review with `implementationStatus=GREEN`,
-`accepted=false`, `goal142Accepted=true`, `goal141Accepted=false`,
+Goal144 is produced for review with `implementationStatus=GREEN`,
+`accepted=false`, `goal143Accepted=true`, `goal141Accepted=false`,
 `selectedCandidateId=minimal-map-game-exploration-resource-focus`,
-`selectedVariantKind=exploration_resource_focus`, `selectedScore=100`,
-`selectedPackageSha256MatchesHandoff=true`,
-`selectedFinalStateHashMatches=true`, `frameCount=15`, `requestCount=6`,
-`snapshotCount=15`, `runtimeRoutedRequestCount=4`,
-`presentationOnlyRequestCount=2`,
-`presentationOnlyRuntimeExecutionCount=0`,
+`selectedVariantKind=exploration_resource_focus`, `actionDescriptorCount=14`,
+`executedRuntimeActionCount=11`, `checkpointReloadByReplayPassed=true`,
+`fullReplayEquivalent=true`, `finalStateHashMatchesGoal142=true`,
 `selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
 `unitySmokePassed=true`, `runtimeAuthority=true`, `projectionOnly=false`,
 `unityGameplayTruth=false` and `manualUnityOptional=true`.
 
-Goal142 is accepted by the repository owner's exact Goal143 human handoff.
-Goal143 validates and reruns only the Goal142 selection, builds ordered
-request-correlated PlayerAdapter frames, exposes an in-process transactional
-WinForms action, and gives Unity a read-only PlayerAdapter consumer. Runtime
-remains gameplay truth.
+Goal143 is accepted by the repository owner's exact Goal144 human handoff.
+Goal144 validates only the Goal142/143 selected package, executes individual
+Runtime actions through one persistent session, restores journal checkpoints by
+replay, exposes an in-process transactional WinForms operator, and gives Unity
+a read-only live-session consumer. Runtime remains gameplay truth.
 
 The Goal131 selected candidate now has
 package validation, canonical runtime transcript/state summary, save/load/replay
