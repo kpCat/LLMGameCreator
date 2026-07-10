@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "product_line_runtime_variant_catalog_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "sourceTemplate": "samples/minimal-map-game/package.json",
+  "deterministic": true,
+  "runtimeSignificantVariants": true,
+  "variants": [
+    {
+      "recipeId": "balanced_baseline",
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "displayName": "Balanced Baseline",
+      "variantKind": "balanced_baseline",
+      "runtimeSignificant": true,
+      "mutationOperations": [],
+      "expectedRuntimeEffects": [
+        "baseline runtime comparison row exists",
+        "corrected Goal141A roundtrip passes over the baseline candidate"
+      ],
+      "selectionWeights": {
+        "packageValidation": 15,
+        "roundtripSemanticCorrectness": 20,
+        "requiredAnchorCoverage": 15,
+        "mutationAudit": 15,
+        "runtimeEffectObserved": 15,
+        "runtimeStateDistinctness": 10,
+        "noBlockingDiagnostics": 5,
+        "profileSpecificObjective": 5,
+        "tieBreakPriority": 0
+      },
+      "requiredAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    },
+    {
+      "recipeId": "alchemy_focus",
+      "candidateId": "minimal-map-game-alchemy-focus",
+      "displayName": "Alchemy Focus",
+      "variantKind": "alchemy_focus",
+      "runtimeSignificant": true,
+      "mutationOperations": [
+        {
+          "operationId": "alchemy.starting_red_herb_supply",
+          "targetKind": "inventory_stack_amount",
+          "targetId": "inventory/player_start|item/red_herb",
+          "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+          "expectedValue": "2",
+          "newValue": "4",
+          "runtimeDimension": "alchemy_inventory_resource"
+        },
+        {
+          "operationId": "alchemy.starting_water_supply",
+          "targetKind": "inventory_stack_amount",
+          "targetId": "inventory/player_start|item/water_flask",
+          "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "alchemy_inventory_resource"
+        },
+        {
+          "operationId": "alchemy.healing_potion_output_quantity",
+          "targetKind": "recipe_output_amount",
+          "targetId": "recipe/healing_potion|item/healing_potion",
+          "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "alchemy_recipe_output"
+        }
+      ],
+      "expectedRuntimeEffects": [
+        "final inventory summary differs from baseline",
+        "final runtime state hash differs from baseline",
+        "craft request still passes"
+      ],
+      "selectionWeights": {
+        "packageValidation": 15,
+        "roundtripSemanticCorrectness": 20,
+        "requiredAnchorCoverage": 15,
+        "mutationAudit": 15,
+        "runtimeEffectObserved": 15,
+        "runtimeStateDistinctness": 10,
+        "noBlockingDiagnostics": 5,
+        "profileSpecificObjective": 5,
+        "tieBreakPriority": 1
+      },
+      "requiredAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    },
+    {
+      "recipeId": "combat_focus",
+      "candidateId": "minimal-map-game-combat-focus",
+      "displayName": "Combat Focus",
+      "variantKind": "combat_focus",
+      "runtimeSignificant": true,
+      "mutationOperations": [
+        {
+          "operationId": "combat.goblin_health_pool",
+          "targetKind": "encounter_participant_resource_amount",
+          "targetId": "encounter/goblin_duel|goblin|resource/health",
+          "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+          "expectedValue": "12",
+          "newValue": "16",
+          "runtimeDimension": "combat_participant_resource"
+        },
+        {
+          "operationId": "combat.basic_attack_power",
+          "targetKind": "ability_power",
+          "targetId": "ability/basic_attack",
+          "jsonPath": "game.abilities[id=ability/basic_attack].power",
+          "expectedValue": "4",
+          "newValue": "6",
+          "runtimeDimension": "combat_ability_damage"
+        },
+        {
+          "operationId": "combat.basic_attack_damage_effect",
+          "targetKind": "ability_effect_arg_amount",
+          "targetId": "ability/basic_attack|damage_resource|resource/health",
+          "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+          "expectedValue": "4",
+          "newValue": "6",
+          "runtimeDimension": "combat_ability_damage"
+        }
+      ],
+      "expectedRuntimeEffects": [
+        "combat summary or post-combat participant resource state differs from baseline",
+        "final runtime state hash differs from baseline",
+        "combat request still passes"
+      ],
+      "selectionWeights": {
+        "packageValidation": 15,
+        "roundtripSemanticCorrectness": 20,
+        "requiredAnchorCoverage": 15,
+        "mutationAudit": 15,
+        "runtimeEffectObserved": 15,
+        "runtimeStateDistinctness": 10,
+        "noBlockingDiagnostics": 5,
+        "profileSpecificObjective": 5,
+        "tieBreakPriority": 2
+      },
+      "requiredAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    },
+    {
+      "recipeId": "exploration_resource_focus",
+      "candidateId": "minimal-map-game-exploration-resource-focus",
+      "displayName": "Exploration Resource Focus",
+      "variantKind": "exploration_resource_focus",
+      "runtimeSignificant": true,
+      "mutationOperations": [
+        {
+          "operationId": "exploration.apple_tree_loot_minimum",
+          "targetKind": "loot_entry_min_count",
+          "targetId": "loot/apple_tree|entry/apple",
+          "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+          "expectedValue": "1",
+          "newValue": "3",
+          "runtimeDimension": "harvest_loot_quantity"
+        },
+        {
+          "operationId": "exploration.apple_tree_loot_maximum",
+          "targetKind": "loot_entry_max_count",
+          "targetId": "loot/apple_tree|entry/apple",
+          "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+          "expectedValue": "2",
+          "newValue": "3",
+          "runtimeDimension": "harvest_loot_quantity"
+        },
+        {
+          "operationId": "exploration.apple_tree_log_yield",
+          "targetKind": "resource_node_production_amount",
+          "targetId": "node/apple_tree|item/log",
+          "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "harvest_resource_node_output"
+        },
+        {
+          "operationId": "exploration.transaction_potion_output",
+          "targetKind": "transaction_output_amount",
+          "targetId": "transaction/buy_healing_potion|item/healing_potion",
+          "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "transaction_output"
+        }
+      ],
+      "expectedRuntimeEffects": [
+        "harvest, transaction or inventory summary differs from baseline",
+        "final runtime state hash differs from baseline",
+        "harvest and transaction requests still pass"
+      ],
+      "selectionWeights": {
+        "packageValidation": 15,
+        "roundtripSemanticCorrectness": 20,
+        "requiredAnchorCoverage": 15,
+        "mutationAudit": 15,
+        "runtimeEffectObserved": 15,
+        "runtimeStateDistinctness": 10,
+        "noBlockingDiagnostics": 5,
+        "profileSpecificObjective": 5,
+        "tieBreakPriority": 3
+      },
+      "requiredAnchors": [
+        "map/village",
+        "entity/village/sign",
+        "interaction/sign_inspect",
+        "entity/village/old_guard",
+        "dialogue/old_guard_intro",
+        "quest/help_healer",
+        "inventory/player_start",
+        "recipe/healing_potion",
+        "node/apple_tree",
+        "transaction/buy_healing_potion",
+        "encounter/goblin_duel"
+      ]
+    }
+  ]
+}

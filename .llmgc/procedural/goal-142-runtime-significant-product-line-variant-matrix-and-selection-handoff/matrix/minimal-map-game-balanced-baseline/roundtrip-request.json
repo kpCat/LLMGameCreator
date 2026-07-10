@@ -1,0 +1,10 @@
+{
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+  "handoffPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/candidate-handoff.json",
+  "controlsUxModelPath": "goal142-runtime-variant-matrix/minimal-map-game-balanced-baseline/runtime-control-model.json",
+  "controlsUxResultPath": "goal142-runtime-variant-matrix/minimal-map-game-balanced-baseline/runtime-control-result.json",
+  "controlsUxScriptPath": ".devflow/scripts/run-product-line-runtime-variant-matrix.ps1",
+  "commandLoopSnapshotsPath": "goal142-runtime-variant-matrix/minimal-map-game-balanced-baseline/canonical-command-loop-snapshots.json",
+  "commandLoopResultPath": "goal142-runtime-variant-matrix/minimal-map-game-balanced-baseline/canonical-command-loop-result.json"
+}

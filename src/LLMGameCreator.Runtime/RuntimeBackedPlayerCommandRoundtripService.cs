@@ -619,16 +619,35 @@ public sealed class RuntimeBackedPlayerCommandRoundtripService :
                 .OrderBy(stack => stack.ItemId, StringComparer.Ordinal)
                 .Select(stack => stack.ItemId + ":" + Format(stack.Amount)))));
 
-    private static string CombatSummary(UnifiedRuntimeSession session) =>
-        session.GameplayState.ActiveEncounter == null
-            ? string.Empty
-            : session.GameplayState.ActiveEncounter.EncounterId
-              + ":round="
-              + session.GameplayState.ActiveEncounter.Round
-              + ":turn="
-              + session.GameplayState.ActiveEncounter.TurnIndex
-              + ":active="
-              + session.GameplayState.ActiveEncounter.Active;
+    private static string CombatSummary(UnifiedRuntimeSession session)
+    {
+        if (session.GameplayState.ActiveEncounter == null)
+        {
+            return string.Empty;
+        }
+
+        var encounter = session.GameplayState.ActiveEncounter;
+        var participantSummary = string.Join(",", encounter.Participants
+            .OrderBy(participant => participant.Id, StringComparer.Ordinal)
+            .Select(participant =>
+                participant.Id
+                + "[alive="
+                + participant.Alive
+                + ";"
+                + string.Join("|", participant.Resources
+                    .OrderBy(resource => resource.ResourceId, StringComparer.Ordinal)
+                    .Select(resource => resource.ResourceId + "=" + Format(resource.Amount)))
+                + "]"));
+        return encounter.EncounterId
+               + ":round="
+               + encounter.Round
+               + ":turn="
+               + encounter.TurnIndex
+               + ":active="
+               + encounter.Active
+               + ":participants="
+               + participantSummary;
+    }
 
     private static string Format(double value) =>
         value.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture);

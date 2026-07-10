@@ -9,65 +9,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.cs";
-        var pageGoal108RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal108.cs";
-        var pageGoal109RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal109.cs";
-        var pageGoal110RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal110.cs";
-        var pageGoal111RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal111.cs";
-        var pageGoal112RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal112.cs";
-        var pageGoal113RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal113.cs";
-        var pageGoal115RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal115.cs";
-        var pageGoal116RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal116.cs";
-        var pageGoal117RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal117.cs";
-        var pageGoal118RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal118.cs";
-        var pageGoal119RelativePath =
-            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
-            + "VisualWorldStreamPreviewWorkspacePageControl.Goal119.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
         var compositionRelativePath = "src/LLMGameCreator.WinForms/CompositionRoot.cs";
         var pageText = ReadOptionalText(projectRoot, pageRelativePath)
                        + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal108RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal109RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal110RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal111RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal112RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal113RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal115RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal116RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal117RelativePath)
-                       + "\n" + ReadOptionalText(projectRoot, pageGoal118RelativePath)
-                       + "\n" + ReadOptionalText(projectRoot, pageGoal119RelativePath)
-                       + "\n" + ReadGoal120Through141WinFormsPageText(projectRoot);
+                       + ReadGoal108Through142WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -643,6 +591,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(bindDisplaysGamePackageCandidateFactory, "goal130.winforms.gamepackage_candidate_factory_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysRuntimeBackedUnityPlayerLoopStepper, "goal138.winforms.runtime_backed_unity_player_loop_stepper_bind_missing", pageRelativePath, diagnostics); AddIfFalse(bindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls, "goal139.winforms.runtime_backed_unity_player_loop_interactive_controls_bind_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplaysRuntimeBackedUnityPlayerLoopControlsUx, "goal140.winforms.runtime_backed_unity_player_loop_controls_ux_bind_missing", pageRelativePath, diagnostics); AddIfFalse(bindDisplaysRuntimeBackedPlayerCommandRoundtrip, "goal141.winforms.runtime_backed_player_command_roundtrip_bind_missing", pageRelativePath, diagnostics);
+        var bindDisplaysProductLineRuntimeVariantMatrix =
+            ScanGoal142ProductLineRuntimeVariantMatrixBinding(pageText, pageRelativePath, diagnostics);
         return new VisualWorldPreviewWinFormsBindingInventory
         {
             Passed = diagnostics.Count == 0,
@@ -693,6 +643,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysCanonicalRuntimePlayerCommandLoop = bindDisplaysCanonicalRuntimePlayerCommandLoop,
             PageBindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback = bindDisplaysCanonicalRuntimeUnityPlayerLoopPlayback,
             PageBindDisplaysRuntimeBackedUnityPlayerLoopStepper = bindDisplaysRuntimeBackedUnityPlayerLoopStepper, PageBindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls = bindDisplaysRuntimeBackedUnityPlayerLoopInteractiveControls, PageBindDisplaysRuntimeBackedUnityPlayerLoopControlsUx = bindDisplaysRuntimeBackedUnityPlayerLoopControlsUx, PageBindDisplaysRuntimeBackedPlayerCommandRoundtrip = bindDisplaysRuntimeBackedPlayerCommandRoundtrip,
+            PageBindDisplaysProductLineRuntimeVariantMatrix = bindDisplaysProductLineRuntimeVariantMatrix,
             Diagnostics = diagnostics
         };
     }

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "selected_runtime_variant_handoff_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-exploration-resource-focus",
+  "recipeId": "exploration_resource_focus",
+  "variantKind": "exploration_resource_focus",
+  "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/package.json",
+  "packageSha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565",
+  "roundtripResultPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/roundtrip-result.json",
+  "runtimeOutcomeSummaryPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/runtime-outcome-summary.json",
+  "finalStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+  "score": 100,
+  "scoreBreakdown": [
+    {
+      "name": "packageValidation",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "candidate package exists, parses, validates, matches metadata, preserves anchors and stays under Goal142 root"
+    },
+    {
+      "name": "roundtripSemanticCorrectness",
+      "score": 20,
+      "maxScore": 20,
+      "passed": true,
+      "explanation": "corrected Goal141A request/response semantics pass over this candidate package"
+    },
+    {
+      "name": "requiredAnchorCoverage",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "canonical vertical-slice anchors remain present"
+    },
+    {
+      "name": "mutationAudit",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "all mutation targets had expected old values and verified new values"
+    },
+    {
+      "name": "runtimeEffectObserved",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "declared runtime effect is visible in runtime snapshots/state summaries"
+    },
+    {
+      "name": "runtimeStateDistinctness",
+      "score": 10,
+      "maxScore": 10,
+      "passed": true,
+      "explanation": "final runtime state hash differs from baseline"
+    },
+    {
+      "name": "noBlockingDiagnostics",
+      "score": 5,
+      "maxScore": 5,
+      "passed": true,
+      "explanation": "package validation emitted no blocking diagnostics"
+    },
+    {
+      "name": "profileSpecificObjective",
+      "score": 5,
+      "maxScore": 5,
+      "passed": true,
+      "explanation": "variant-specific craft, combat, harvest or transaction objective remained executable"
+    }
+  ],
+  "selectionReason": "Selected by deterministic order: score desc, tieBreakPriority desc, recipeId asc, candidateId asc. Source package: .llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package.json",
+  "runtimeSignificant": true,
+  "projectionOnly": false,
+  "runtimeAuthority": true,
+  "accepted": false
+}

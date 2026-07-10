@@ -17,9 +17,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         VisualWorldStreamPreviewWorkspaceService service)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
-        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel(); ConfigureGoal138RuntimeBackedUnityPlayerLoopStepperPanel(); ConfigureGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsPanel(); ConfigureGoal140RuntimeBackedUnityPlayerLoopControlsUxPanel(); ConfigureGoal141RuntimeBackedPlayerCommandRoundtripPanel();
+        InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel(); ConfigureGoal138RuntimeBackedUnityPlayerLoopStepperPanel(); ConfigureGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsPanel(); ConfigureGoal140RuntimeBackedUnityPlayerLoopControlsUxPanel(); ConfigureGoal141RuntimeBackedPlayerCommandRoundtripPanel(); ConfigureGoal142ProductLineRuntimeVariantMatrixPanel();
         ConfigureControls();
-        WireEvents(); WireGoal132CandidatePipelineOperatorEvents();
+        WireEvents(); WireGoal132CandidatePipelineOperatorEvents(); WireGoal142ProductLineRuntimeVariantMatrixEvents();
     }
 
     public string Id => "visual-world-stream-preview-workspace";
@@ -38,7 +38,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         _statusLabel.Text = BuildStatusText(result);
         BindGroups(result);
         BindProofs(result);
-        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result); BindGoal135PlayerLoop(result); BindGoal136PlayerCommandLoop(result); BindGoal137UnityPlayerLoopPlayback(result); BindGoal138RuntimeBackedUnityPlayerLoopStepper(result); BindGoal139RuntimeBackedUnityPlayerLoopInteractiveControls(result); BindGoal140RuntimeBackedUnityPlayerLoopControlsUx(result); BindGoal141RuntimeBackedPlayerCommandRoundtrip(result);
+        BindDiagnostics(result); BindGoal132CandidatePipelineOperator(result); BindGoal134CanonicalRuntime(result); BindGoal135PlayerLoop(result); BindGoal136PlayerCommandLoop(result); BindGoal137UnityPlayerLoopPlayback(result); BindGoal138RuntimeBackedUnityPlayerLoopStepper(result); BindGoal139RuntimeBackedUnityPlayerLoopInteractiveControls(result); BindGoal140RuntimeBackedUnityPlayerLoopControlsUx(result); BindGoal141RuntimeBackedPlayerCommandRoundtrip(result); BindGoal142ProductLineRuntimeVariantMatrix(result);
     }
 
     private void ConfigureControls()
@@ -383,7 +383,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageLoopDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageSystemsDiagnosticLines(result));
         lines.AddRange(BuildGenericGamePackageFullPlaythroughDiagnosticLines(result));
-        lines.AddRange(BuildUnityProjectionVerificationRunnerDiagnosticLines(result)); lines.AddRange(BuildParameterizedGamePackageRunnerDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateMatrixDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateFactoryDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateRecipePipelineDiagnosticLines(result)); lines.AddRange(BuildCandidatePipelineOperatorDiagnosticLines(result));
+        lines.AddRange(BuildUnityProjectionVerificationRunnerDiagnosticLines(result)); lines.AddRange(BuildParameterizedGamePackageRunnerDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateMatrixDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateFactoryDiagnosticLines(result)); lines.AddRange(BuildGamePackageCandidateRecipePipelineDiagnosticLines(result)); lines.AddRange(BuildCandidatePipelineOperatorDiagnosticLines(result)); lines.AddRange(BuildProductLineRuntimeVariantMatrixDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));

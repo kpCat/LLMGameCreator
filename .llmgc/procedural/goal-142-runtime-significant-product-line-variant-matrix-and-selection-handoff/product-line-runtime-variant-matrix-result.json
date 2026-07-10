@@ -1,0 +1,678 @@
+{
+  "schemaVersion": "product_line_runtime_variant_matrix_result_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "matrixStatus": "GREEN",
+  "candidateCount": 4,
+  "passedCandidateCount": 4,
+  "failedCandidateCount": 0,
+  "runtimeSignificantCandidateCount": 4,
+  "distinctFinalStateHashCount": 4,
+  "allPackageHashesDistinct": true,
+  "allMutationAuditsPassed": true,
+  "allRoundtripSemanticProofsPassed": true,
+  "sourceTemplateUnmodified": true,
+  "projectionOnly": false,
+  "runtimeAuthority": true,
+  "accepted": false,
+  "selectedCandidateId": "minimal-map-game-exploration-resource-focus",
+  "selectedVariantKind": "exploration_resource_focus",
+  "selectedScore": 100,
+  "normalCommand": ".devflow\\scripts\\run-product-line-runtime-variant-matrix.cmd",
+  "matrixResultPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-matrix-result.json",
+  "selectedHandoffPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/selected-runtime-variant-handoff.json",
+  "candidates": [
+    {
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "recipeId": "balanced_baseline",
+      "variantKind": "balanced_baseline",
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+      "packageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+      "mutationAudit": {
+        "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "recipeId": "balanced_baseline",
+        "variantKind": "balanced_baseline",
+        "runtimeSignificant": true,
+        "operationCount": 0,
+        "passed": true,
+        "operations": [],
+        "diagnostics": []
+      },
+      "packageValidation": {
+        "schemaVersion": "product_line_runtime_variant_package_validation_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "recipeId": "balanced_baseline",
+        "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+        "candidateFileExists": true,
+        "validJson": true,
+        "existingPackageValidatorPassed": true,
+        "handoffCandidateIdMatchesPackageMetadata": true,
+        "requiredAnchorsPresent": true,
+        "noBrokenRequiredReferences": true,
+        "sourceTemplateUnchanged": true,
+        "candidatePackageUnderGoal142Root": true,
+        "passed": true,
+        "missingAnchors": [],
+        "diagnostics": []
+      },
+      "runtimeOutcomeSummary": {
+        "schemaVersion": "product_line_runtime_variant_outcome_summary_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "recipeId": "balanced_baseline",
+        "variantKind": "balanced_baseline",
+        "finalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "finalInventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+        "finalCombatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "finalQuestSummary": "quest/help_healer:active:",
+        "baselineFinalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "runtimeEffectObserved": true,
+        "runtimeStateDistinctFromBaseline": false,
+        "craftRequestPassed": true,
+        "harvestRequestPassed": true,
+        "transactionRequestPassed": true,
+        "combatRequestPassed": true,
+        "roundtripSemanticProofPassed": true,
+        "observedRuntimeEffects": [
+          "baseline runtime comparison row captured"
+        ]
+      },
+      "candidateScore": {
+        "schemaVersion": "product_line_runtime_variant_candidate_score_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "recipeId": "balanced_baseline",
+        "variantKind": "balanced_baseline",
+        "score": 90,
+        "eligible": true,
+        "tieBreakPriority": 0,
+        "selectionTieBreakOrder": "score desc, tieBreakPriority desc, recipeId asc, candidateId asc",
+        "scoreBreakdown": [
+          {
+            "name": "packageValidation",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "candidate package exists, parses, validates, matches metadata, preserves anchors and stays under Goal142 root"
+          },
+          {
+            "name": "roundtripSemanticCorrectness",
+            "score": 20,
+            "maxScore": 20,
+            "passed": true,
+            "explanation": "corrected Goal141A request/response semantics pass over this candidate package"
+          },
+          {
+            "name": "requiredAnchorCoverage",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "canonical vertical-slice anchors remain present"
+          },
+          {
+            "name": "mutationAudit",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "baseline has no semantic mutations and serves only as comparison"
+          },
+          {
+            "name": "runtimeEffectObserved",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "declared runtime effect is visible in runtime snapshots/state summaries"
+          },
+          {
+            "name": "runtimeStateDistinctness",
+            "score": 0,
+            "maxScore": 10,
+            "passed": false,
+            "explanation": "final runtime state hash differs from baseline"
+          },
+          {
+            "name": "noBlockingDiagnostics",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "package validation emitted no blocking diagnostics"
+          },
+          {
+            "name": "profileSpecificObjective",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "variant-specific craft, combat, harvest or transaction objective remained executable"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "candidateId": "minimal-map-game-alchemy-focus",
+      "recipeId": "alchemy_focus",
+      "variantKind": "alchemy_focus",
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/package.json",
+      "packageSha256": "2a8ef8ef3425314359f63fe17aa90c3fdc37a2db3a1bc3a7028ede22f32c627c",
+      "mutationAudit": {
+        "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-alchemy-focus",
+        "recipeId": "alchemy_focus",
+        "variantKind": "alchemy_focus",
+        "runtimeSignificant": true,
+        "operationCount": 3,
+        "passed": true,
+        "operations": [
+          {
+            "operationId": "alchemy.starting_red_herb_supply",
+            "targetKind": "inventory_stack_amount",
+            "targetId": "inventory/player_start|item/red_herb",
+            "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+            "expectedValue": "2",
+            "actualOldValue": "2",
+            "newValue": "4",
+            "runtimeDimension": "alchemy_inventory_resource",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "alchemy.starting_water_supply",
+            "targetKind": "inventory_stack_amount",
+            "targetId": "inventory/player_start|item/water_flask",
+            "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+            "expectedValue": "1",
+            "actualOldValue": "1",
+            "newValue": "2",
+            "runtimeDimension": "alchemy_inventory_resource",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "alchemy.healing_potion_output_quantity",
+            "targetKind": "recipe_output_amount",
+            "targetId": "recipe/healing_potion|item/healing_potion",
+            "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+            "expectedValue": "1",
+            "actualOldValue": "1",
+            "newValue": "2",
+            "runtimeDimension": "alchemy_recipe_output",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          }
+        ],
+        "diagnostics": []
+      },
+      "packageValidation": {
+        "schemaVersion": "product_line_runtime_variant_package_validation_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-alchemy-focus",
+        "recipeId": "alchemy_focus",
+        "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/package.json",
+        "candidateFileExists": true,
+        "validJson": true,
+        "existingPackageValidatorPassed": true,
+        "handoffCandidateIdMatchesPackageMetadata": true,
+        "requiredAnchorsPresent": true,
+        "noBrokenRequiredReferences": true,
+        "sourceTemplateUnchanged": true,
+        "candidatePackageUnderGoal142Root": true,
+        "passed": true,
+        "missingAnchors": [],
+        "diagnostics": []
+      },
+      "runtimeOutcomeSummary": {
+        "schemaVersion": "product_line_runtime_variant_outcome_summary_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-alchemy-focus",
+        "recipeId": "alchemy_focus",
+        "variantKind": "alchemy_focus",
+        "finalStateHash": "652bdaaee90703ff36a361de7a5553d76403d549a8f9cdae63585d3fa2bacd72",
+        "finalInventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:4,item/log:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+        "finalCombatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "finalQuestSummary": "quest/help_healer:completed:",
+        "baselineFinalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "runtimeEffectObserved": true,
+        "runtimeStateDistinctFromBaseline": true,
+        "craftRequestPassed": true,
+        "harvestRequestPassed": true,
+        "transactionRequestPassed": true,
+        "combatRequestPassed": true,
+        "roundtripSemanticProofPassed": true,
+        "observedRuntimeEffects": [
+          "final inventory summary differs from baseline",
+          "final runtime state hash differs from baseline"
+        ]
+      },
+      "candidateScore": {
+        "schemaVersion": "product_line_runtime_variant_candidate_score_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-alchemy-focus",
+        "recipeId": "alchemy_focus",
+        "variantKind": "alchemy_focus",
+        "score": 100,
+        "eligible": true,
+        "tieBreakPriority": 1,
+        "selectionTieBreakOrder": "score desc, tieBreakPriority desc, recipeId asc, candidateId asc",
+        "scoreBreakdown": [
+          {
+            "name": "packageValidation",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "candidate package exists, parses, validates, matches metadata, preserves anchors and stays under Goal142 root"
+          },
+          {
+            "name": "roundtripSemanticCorrectness",
+            "score": 20,
+            "maxScore": 20,
+            "passed": true,
+            "explanation": "corrected Goal141A request/response semantics pass over this candidate package"
+          },
+          {
+            "name": "requiredAnchorCoverage",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "canonical vertical-slice anchors remain present"
+          },
+          {
+            "name": "mutationAudit",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "all mutation targets had expected old values and verified new values"
+          },
+          {
+            "name": "runtimeEffectObserved",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "declared runtime effect is visible in runtime snapshots/state summaries"
+          },
+          {
+            "name": "runtimeStateDistinctness",
+            "score": 10,
+            "maxScore": 10,
+            "passed": true,
+            "explanation": "final runtime state hash differs from baseline"
+          },
+          {
+            "name": "noBlockingDiagnostics",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "package validation emitted no blocking diagnostics"
+          },
+          {
+            "name": "profileSpecificObjective",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "variant-specific craft, combat, harvest or transaction objective remained executable"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "candidateId": "minimal-map-game-combat-focus",
+      "recipeId": "combat_focus",
+      "variantKind": "combat_focus",
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/package.json",
+      "packageSha256": "4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497",
+      "mutationAudit": {
+        "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-combat-focus",
+        "recipeId": "combat_focus",
+        "variantKind": "combat_focus",
+        "runtimeSignificant": true,
+        "operationCount": 3,
+        "passed": true,
+        "operations": [
+          {
+            "operationId": "combat.goblin_health_pool",
+            "targetKind": "encounter_participant_resource_amount",
+            "targetId": "encounter/goblin_duel|goblin|resource/health",
+            "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+            "expectedValue": "12",
+            "actualOldValue": "12",
+            "newValue": "16",
+            "runtimeDimension": "combat_participant_resource",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "combat.basic_attack_power",
+            "targetKind": "ability_power",
+            "targetId": "ability/basic_attack",
+            "jsonPath": "game.abilities[id=ability/basic_attack].power",
+            "expectedValue": "4",
+            "actualOldValue": "4",
+            "newValue": "6",
+            "runtimeDimension": "combat_ability_damage",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "combat.basic_attack_damage_effect",
+            "targetKind": "ability_effect_arg_amount",
+            "targetId": "ability/basic_attack|damage_resource|resource/health",
+            "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+            "expectedValue": "4",
+            "actualOldValue": "4",
+            "newValue": "6",
+            "runtimeDimension": "combat_ability_damage",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          }
+        ],
+        "diagnostics": []
+      },
+      "packageValidation": {
+        "schemaVersion": "product_line_runtime_variant_package_validation_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-combat-focus",
+        "recipeId": "combat_focus",
+        "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/package.json",
+        "candidateFileExists": true,
+        "validJson": true,
+        "existingPackageValidatorPassed": true,
+        "handoffCandidateIdMatchesPackageMetadata": true,
+        "requiredAnchorsPresent": true,
+        "noBrokenRequiredReferences": true,
+        "sourceTemplateUnchanged": true,
+        "candidatePackageUnderGoal142Root": true,
+        "passed": true,
+        "missingAnchors": [],
+        "diagnostics": []
+      },
+      "runtimeOutcomeSummary": {
+        "schemaVersion": "product_line_runtime_variant_outcome_summary_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-combat-focus",
+        "recipeId": "combat_focus",
+        "variantKind": "combat_focus",
+        "finalStateHash": "adf6785cf7f9984587c3ed007392d26dcd4fef1ca041053fdc1b7e613dcf2fc7",
+        "finalInventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+        "finalCombatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+        "finalQuestSummary": "quest/help_healer:active:",
+        "baselineFinalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "runtimeEffectObserved": true,
+        "runtimeStateDistinctFromBaseline": true,
+        "craftRequestPassed": true,
+        "harvestRequestPassed": true,
+        "transactionRequestPassed": true,
+        "combatRequestPassed": true,
+        "roundtripSemanticProofPassed": true,
+        "observedRuntimeEffects": [
+          "final combat summary differs from baseline",
+          "final runtime state hash differs from baseline"
+        ]
+      },
+      "candidateScore": {
+        "schemaVersion": "product_line_runtime_variant_candidate_score_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-combat-focus",
+        "recipeId": "combat_focus",
+        "variantKind": "combat_focus",
+        "score": 100,
+        "eligible": true,
+        "tieBreakPriority": 2,
+        "selectionTieBreakOrder": "score desc, tieBreakPriority desc, recipeId asc, candidateId asc",
+        "scoreBreakdown": [
+          {
+            "name": "packageValidation",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "candidate package exists, parses, validates, matches metadata, preserves anchors and stays under Goal142 root"
+          },
+          {
+            "name": "roundtripSemanticCorrectness",
+            "score": 20,
+            "maxScore": 20,
+            "passed": true,
+            "explanation": "corrected Goal141A request/response semantics pass over this candidate package"
+          },
+          {
+            "name": "requiredAnchorCoverage",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "canonical vertical-slice anchors remain present"
+          },
+          {
+            "name": "mutationAudit",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "all mutation targets had expected old values and verified new values"
+          },
+          {
+            "name": "runtimeEffectObserved",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "declared runtime effect is visible in runtime snapshots/state summaries"
+          },
+          {
+            "name": "runtimeStateDistinctness",
+            "score": 10,
+            "maxScore": 10,
+            "passed": true,
+            "explanation": "final runtime state hash differs from baseline"
+          },
+          {
+            "name": "noBlockingDiagnostics",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "package validation emitted no blocking diagnostics"
+          },
+          {
+            "name": "profileSpecificObjective",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "variant-specific craft, combat, harvest or transaction objective remained executable"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "candidateId": "minimal-map-game-exploration-resource-focus",
+      "recipeId": "exploration_resource_focus",
+      "variantKind": "exploration_resource_focus",
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package.json",
+      "packageSha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565",
+      "mutationAudit": {
+        "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-exploration-resource-focus",
+        "recipeId": "exploration_resource_focus",
+        "variantKind": "exploration_resource_focus",
+        "runtimeSignificant": true,
+        "operationCount": 4,
+        "passed": true,
+        "operations": [
+          {
+            "operationId": "exploration.apple_tree_loot_minimum",
+            "targetKind": "loot_entry_min_count",
+            "targetId": "loot/apple_tree|entry/apple",
+            "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+            "expectedValue": "1",
+            "actualOldValue": "1",
+            "newValue": "3",
+            "runtimeDimension": "harvest_loot_quantity",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "exploration.apple_tree_loot_maximum",
+            "targetKind": "loot_entry_max_count",
+            "targetId": "loot/apple_tree|entry/apple",
+            "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+            "expectedValue": "2",
+            "actualOldValue": "2",
+            "newValue": "3",
+            "runtimeDimension": "harvest_loot_quantity",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "exploration.apple_tree_log_yield",
+            "targetKind": "resource_node_production_amount",
+            "targetId": "node/apple_tree|item/log",
+            "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+            "expectedValue": "1",
+            "actualOldValue": "1",
+            "newValue": "2",
+            "runtimeDimension": "harvest_resource_node_output",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          },
+          {
+            "operationId": "exploration.transaction_potion_output",
+            "targetKind": "transaction_output_amount",
+            "targetId": "transaction/buy_healing_potion|item/healing_potion",
+            "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+            "expectedValue": "1",
+            "actualOldValue": "1",
+            "newValue": "2",
+            "runtimeDimension": "transaction_output",
+            "applied": true,
+            "passed": true,
+            "diagnostic": ""
+          }
+        ],
+        "diagnostics": []
+      },
+      "packageValidation": {
+        "schemaVersion": "product_line_runtime_variant_package_validation_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-exploration-resource-focus",
+        "recipeId": "exploration_resource_focus",
+        "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package.json",
+        "candidateFileExists": true,
+        "validJson": true,
+        "existingPackageValidatorPassed": true,
+        "handoffCandidateIdMatchesPackageMetadata": true,
+        "requiredAnchorsPresent": true,
+        "noBrokenRequiredReferences": true,
+        "sourceTemplateUnchanged": true,
+        "candidatePackageUnderGoal142Root": true,
+        "passed": true,
+        "missingAnchors": [],
+        "diagnostics": []
+      },
+      "runtimeOutcomeSummary": {
+        "schemaVersion": "product_line_runtime_variant_outcome_summary_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-exploration-resource-focus",
+        "recipeId": "exploration_resource_focus",
+        "variantKind": "exploration_resource_focus",
+        "finalStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+        "finalInventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
+        "finalCombatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "finalQuestSummary": "quest/help_healer:active:",
+        "baselineFinalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+        "runtimeEffectObserved": true,
+        "runtimeStateDistinctFromBaseline": true,
+        "craftRequestPassed": true,
+        "harvestRequestPassed": true,
+        "transactionRequestPassed": true,
+        "combatRequestPassed": true,
+        "roundtripSemanticProofPassed": true,
+        "observedRuntimeEffects": [
+          "final inventory summary differs from baseline",
+          "final runtime state hash differs from baseline"
+        ]
+      },
+      "candidateScore": {
+        "schemaVersion": "product_line_runtime_variant_candidate_score_v1",
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "candidateId": "minimal-map-game-exploration-resource-focus",
+        "recipeId": "exploration_resource_focus",
+        "variantKind": "exploration_resource_focus",
+        "score": 100,
+        "eligible": true,
+        "tieBreakPriority": 3,
+        "selectionTieBreakOrder": "score desc, tieBreakPriority desc, recipeId asc, candidateId asc",
+        "scoreBreakdown": [
+          {
+            "name": "packageValidation",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "candidate package exists, parses, validates, matches metadata, preserves anchors and stays under Goal142 root"
+          },
+          {
+            "name": "roundtripSemanticCorrectness",
+            "score": 20,
+            "maxScore": 20,
+            "passed": true,
+            "explanation": "corrected Goal141A request/response semantics pass over this candidate package"
+          },
+          {
+            "name": "requiredAnchorCoverage",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "canonical vertical-slice anchors remain present"
+          },
+          {
+            "name": "mutationAudit",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "all mutation targets had expected old values and verified new values"
+          },
+          {
+            "name": "runtimeEffectObserved",
+            "score": 15,
+            "maxScore": 15,
+            "passed": true,
+            "explanation": "declared runtime effect is visible in runtime snapshots/state summaries"
+          },
+          {
+            "name": "runtimeStateDistinctness",
+            "score": 10,
+            "maxScore": 10,
+            "passed": true,
+            "explanation": "final runtime state hash differs from baseline"
+          },
+          {
+            "name": "noBlockingDiagnostics",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "package validation emitted no blocking diagnostics"
+          },
+          {
+            "name": "profileSpecificObjective",
+            "score": 5,
+            "maxScore": 5,
+            "passed": true,
+            "explanation": "variant-specific craft, combat, harvest or transaction objective remained executable"
+          }
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "diagnostics": []
+}

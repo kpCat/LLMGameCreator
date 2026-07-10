@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-alchemy-focus",
+  "recipeId": "alchemy_focus",
+  "variantKind": "alchemy_focus",
+  "runtimeSignificant": true,
+  "operationCount": 3,
+  "passed": true,
+  "operations": [
+    {
+      "operationId": "alchemy.starting_red_herb_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/red_herb",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+      "expectedValue": "2",
+      "actualOldValue": "2",
+      "newValue": "4",
+      "runtimeDimension": "alchemy_inventory_resource",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "alchemy.starting_water_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/water_flask",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_inventory_resource",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "alchemy.healing_potion_output_quantity",
+      "targetKind": "recipe_output_amount",
+      "targetId": "recipe/healing_potion|item/healing_potion",
+      "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_recipe_output",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    }
+  ],
+  "diagnostics": []
+}

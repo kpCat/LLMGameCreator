@@ -1,0 +1,10 @@
+{
+  "candidateId": "minimal-map-game-alchemy-focus",
+  "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/package.json",
+  "handoffPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/candidate-handoff.json",
+  "controlsUxModelPath": "goal142-runtime-variant-matrix/minimal-map-game-alchemy-focus/runtime-control-model.json",
+  "controlsUxResultPath": "goal142-runtime-variant-matrix/minimal-map-game-alchemy-focus/runtime-control-result.json",
+  "controlsUxScriptPath": ".devflow/scripts/run-product-line-runtime-variant-matrix.ps1",
+  "commandLoopSnapshotsPath": "goal142-runtime-variant-matrix/minimal-map-game-alchemy-focus/canonical-command-loop-snapshots.json",
+  "commandLoopResultPath": "goal142-runtime-variant-matrix/minimal-map-game-alchemy-focus/canonical-command-loop-result.json"
+}

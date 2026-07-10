@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "product_line_runtime_variant_outcome_summary_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "recipeId": "balanced_baseline",
+  "variantKind": "balanced_baseline",
+  "finalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+  "finalInventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+  "finalCombatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+  "finalQuestSummary": "quest/help_healer:active:",
+  "baselineFinalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+  "runtimeEffectObserved": true,
+  "runtimeStateDistinctFromBaseline": false,
+  "craftRequestPassed": true,
+  "harvestRequestPassed": true,
+  "transactionRequestPassed": true,
+  "combatRequestPassed": true,
+  "roundtripSemanticProofPassed": true,
+  "observedRuntimeEffects": [
+    "baseline runtime comparison row captured"
+  ]
+}

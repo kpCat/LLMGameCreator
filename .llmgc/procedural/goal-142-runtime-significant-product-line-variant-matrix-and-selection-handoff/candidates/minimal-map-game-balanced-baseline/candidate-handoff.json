@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "product_line_runtime_variant_candidate_handoff_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "recipeId": "balanced_baseline",
+  "variantKind": "balanced_baseline",
+  "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+  "runtimeSignificant": true,
+  "projectionOnly": false,
+  "runtimeAuthority": true,
+  "accepted": false
+}

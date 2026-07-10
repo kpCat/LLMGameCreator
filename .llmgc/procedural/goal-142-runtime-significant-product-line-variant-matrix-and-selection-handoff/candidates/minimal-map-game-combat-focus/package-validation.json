@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "product_line_runtime_variant_package_validation_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-combat-focus",
+  "recipeId": "combat_focus",
+  "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/package.json",
+  "candidateFileExists": true,
+  "validJson": true,
+  "existingPackageValidatorPassed": true,
+  "handoffCandidateIdMatchesPackageMetadata": true,
+  "requiredAnchorsPresent": true,
+  "noBrokenRequiredReferences": true,
+  "sourceTemplateUnchanged": true,
+  "candidatePackageUnderGoal142Root": true,
+  "passed": true,
+  "missingAnchors": [],
+  "diagnostics": []
+}

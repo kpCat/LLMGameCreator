@@ -1,8 +1,57 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 141A player command roundtrip semantic correctness hotfix
+Updated by: Goal 142 runtime-significant product-line variant matrix and selection handoff
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 142 produced for review:
+
+```text
+runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required
+implementationStatus=GREEN
+accepted=false
+goal141Accepted=false
+manualUnityOptional=true
+projectionOnly=false
+runtimeAuthority=true
+runtimeBackedPlayerCommandRoundtrip=true
+templatePackagePath=samples/minimal-map-game/package.json
+candidateCount=4
+passedCandidateCount=4
+failedCandidateCount=0
+runtimeSignificantCandidateCount=4
+distinctFinalStateHashCount=4
+selectedCandidateId=minimal-map-game-exploration-resource-focus
+selectedVariantKind=exploration_resource_focus
+selectedScore=100
+sourceTemplateUnmodified=true
+packageValidationPassed=true
+runtimeRoundtripSemanticCorrectnessPassed=true
+mutationAuditPassed=true
+noMetadataOnlyVariantAccepted=true
+```
+
+Goal142 creates a deterministic product-line runtime variant matrix from the
+read-only sample package template. It materializes four bounded variants
+(`balanced_baseline`, `alchemy_focus`, `combat_focus` and
+`exploration_resource_focus`), validates each candidate package, runs each one
+through the Runtime-backed player command roundtrip, proves four distinct final
+runtime state hashes and selects `minimal-map-game-exploration-resource-focus`
+with score 100. The selection is runtime-significant, not metadata-only.
+
+Evidence lives under
+`.llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`,
+export metadata under
+`.llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`,
+the normal command is
+`.devflow\scripts\run-product-line-runtime-variant-matrix.cmd`,
+and the short manual note is at
+`docs/manual-acceptance/runtime-significant-product-line-variant-matrix-and-selection-handoff.md`.
+
+Goal142 does not accept Goal141, mutate `samples/minimal-map-game/**`, write
+`.llmgc/manual/**`, change public GamePackage schema, Generation,
+AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity
+scene/prefab/project-settings/packages/StreamingAssets or release packaging.
 
 Goal 141 produced for review:
 

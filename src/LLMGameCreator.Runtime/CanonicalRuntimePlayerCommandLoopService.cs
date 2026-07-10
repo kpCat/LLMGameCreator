@@ -526,15 +526,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 .Select(inventory => inventory.Id + "=" + string.Join(",", inventory.Stacks
                     .OrderBy(stack => stack.ItemId, StringComparer.Ordinal)
                     .Select(stack => stack.ItemId + ":" + Format(stack.Amount))))),
-            CombatSummary = state.ActiveEncounter == null
-                ? EventSummary(events, "EncounterStarted")
-                : state.ActiveEncounter.EncounterId
-                  + ":round="
-                  + state.ActiveEncounter.Round
-                  + ":turn="
-                  + state.ActiveEncounter.TurnIndex
-                  + ":active="
-                  + state.ActiveEncounter.Active,
+            CombatSummary = CombatSummary(state, events),
             DiagnosticSummary = events.Count == 0 ? "no events emitted" : "eventCount=" + events.Count,
             ProjectionOnly = false,
             UnityGameplayTruth = false,
@@ -599,6 +591,38 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
         IEnumerable<CanonicalRuntimePlayerCommandLoopRuntimeEvent> events,
         string eventType) =>
         events.FirstOrDefault(item => item.EventType == eventType)?.Message ?? string.Empty;
+
+    private static string CombatSummary(
+        GameRuntimeState state,
+        IEnumerable<CanonicalRuntimePlayerCommandLoopRuntimeEvent> events)
+    {
+        if (state.ActiveEncounter == null)
+        {
+            return EventSummary(events, "EncounterStarted");
+        }
+
+        var encounter = state.ActiveEncounter;
+        var participantSummary = string.Join(",", encounter.Participants
+            .OrderBy(participant => participant.Id, StringComparer.Ordinal)
+            .Select(participant =>
+                participant.Id
+                + "[alive="
+                + participant.Alive
+                + ";"
+                + string.Join("|", participant.Resources
+                    .OrderBy(resource => resource.ResourceId, StringComparer.Ordinal)
+                    .Select(resource => resource.ResourceId + "=" + Format(resource.Amount)))
+                + "]"));
+        return encounter.EncounterId
+               + ":round="
+               + encounter.Round
+               + ":turn="
+               + encounter.TurnIndex
+               + ":active="
+               + encounter.Active
+               + ":participants="
+               + participantSummary;
+    }
 
     private static string HashSession(UnifiedRuntimeSession session) =>
         HashText(JsonSerializer.Serialize(session, StableJsonOptions));

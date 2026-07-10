@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "product_line_runtime_variant_distinctness_proof_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateCount": 4,
+  "passedCandidateCount": 4,
+  "failedCandidateCount": 0,
+  "runtimeSignificantCandidateCount": 4,
+  "allPackageHashesDistinct": true,
+  "allMutationAuditsPassed": true,
+  "allRoundtripSemanticProofsPassed": true,
+  "baselineFinalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+  "alchemyFinalStateHash": "652bdaaee90703ff36a361de7a5553d76403d549a8f9cdae63585d3fa2bacd72",
+  "combatFinalStateHash": "adf6785cf7f9984587c3ed007392d26dcd4fef1ca041053fdc1b7e613dcf2fc7",
+  "explorationFinalStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+  "distinctFinalStateHashCount": 4,
+  "alchemyRuntimeEffectObserved": true,
+  "combatRuntimeEffectObserved": true,
+  "explorationRuntimeEffectObserved": true,
+  "noMetadataOnlyVariantAccepted": true,
+  "sourceTemplateUnmodified": true,
+  "passed": true
+}

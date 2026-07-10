@@ -23,6 +23,8 @@ public static class ProductLineStrategyRebaselineVocabulary
         "runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification";
     public const string Goal141Gate =
         "runtime_backed_unity_player_command_roundtrip_bridge_verification";
+    public const string Goal142Gate =
+        "runtime_significant_product_line_variant_matrix_and_selection_handoff_verification";
     public const string NextGoal =
         "goal_134_canonical_runtime_selected_candidate_playthrough_matrix";
     public const string PostGoal134NextGoal =

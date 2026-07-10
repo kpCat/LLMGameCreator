@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "product_line_runtime_variant_candidate_score_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "recipeId": "balanced_baseline",
+  "variantKind": "balanced_baseline",
+  "score": 90,
+  "eligible": true,
+  "tieBreakPriority": 0,
+  "selectionTieBreakOrder": "score desc, tieBreakPriority desc, recipeId asc, candidateId asc",
+  "scoreBreakdown": [
+    {
+      "name": "packageValidation",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "candidate package exists, parses, validates, matches metadata, preserves anchors and stays under Goal142 root"
+    },
+    {
+      "name": "roundtripSemanticCorrectness",
+      "score": 20,
+      "maxScore": 20,
+      "passed": true,
+      "explanation": "corrected Goal141A request/response semantics pass over this candidate package"
+    },
+    {
+      "name": "requiredAnchorCoverage",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "canonical vertical-slice anchors remain present"
+    },
+    {
+      "name": "mutationAudit",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "baseline has no semantic mutations and serves only as comparison"
+    },
+    {
+      "name": "runtimeEffectObserved",
+      "score": 15,
+      "maxScore": 15,
+      "passed": true,
+      "explanation": "declared runtime effect is visible in runtime snapshots/state summaries"
+    },
+    {
+      "name": "runtimeStateDistinctness",
+      "score": 0,
+      "maxScore": 10,
+      "passed": false,
+      "explanation": "final runtime state hash differs from baseline"
+    },
+    {
+      "name": "noBlockingDiagnostics",
+      "score": 5,
+      "maxScore": 5,
+      "passed": true,
+      "explanation": "package validation emitted no blocking diagnostics"
+    },
+    {
+      "name": "profileSpecificObjective",
+      "score": 5,
+      "maxScore": 5,
+      "passed": true,
+      "explanation": "variant-specific craft, combat, harvest or transaction objective remained executable"
+    }
+  ]
+}

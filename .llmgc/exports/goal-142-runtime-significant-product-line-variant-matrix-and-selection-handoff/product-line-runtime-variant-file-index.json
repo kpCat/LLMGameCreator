@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "product_line_runtime_variant_file_index_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "rootPath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff",
+  "indexedFileCount": 13,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/one-click-product-line-runtime-variant-matrix-report.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "5f86a5b641df076804693af9693186c17d388e25c9ae6f568107658f4063a8df"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/one-click-product-line-runtime-variant-matrix-report.md",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "23e6896f587d2214dcfad5da4d2027765419e9c77a69af4524e54a600e7f0ba2"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "1e4c3b1ad59743d3ee81a4a1b4f38be168efa837aa7786c330e33b3b82868e4b"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-distinctness-proof.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "54c99492f0620f63413c667c2f9929847aae36ea5f2ce446688f980cfbd8134c"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-matrix-dashboard.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "f13d30894721b541e9024858652656e0f6cb87fde75eac7d725fda41d11deab9"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-matrix-result.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "bb18be4d864b9ee8ec31b3cce4aeabca1bb5abcda50676ef33d643fd41f59cd4"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-mutation-summary.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "e9f810ac7190f94b0c821f3541f478d9a04181f26dbb695ba7f3f7b6ae815ad2"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-negative-proof.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "b3262f99c09dc6832348187c953cd7aa3caf6bdc538c70fdf08c4e92be978530"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-scoreboard.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "be6c9a79244b4d2ec082366c45ddabacc985a208774d430e66fa3b6baf4cae8e"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/package.json",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/runtime-outcome-summary.json",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "6f9f8c626ef4ad77b474a2f77b794e2afac27d7a740a8b949aad71ca6dec0af5"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/selected-runtime-variant-handoff.json",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "e8f573300de61b67d85180772cfc7458ff7969a709a5248996ea780c9fdc65fd"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/selection-rationale.md",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "338c25bb2a976a0a0aafb0bc9b8796dc10a7c9401b76992896905879b1c703e3"
+    }
+  ]
+}

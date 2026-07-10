@@ -282,6 +282,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/GOAL.md` | Goal 140 task: runtime-backed Unity player-loop controls UX polish and Unity editor noise guard over the Goal139 interactive controls model/result/script. Current gate=`runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification`, result is `GREEN`, accepted=true by Goal141 human handoff, acceptedGoal139=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-controls-ux-polish.cmd`, evidence under `.llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, export metadata under `.llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, frameCount=13, humanReadableFrameNumbering=true, stepOnceSemanticsClear=true, playAllToEndSemanticsClear=true, knownUnityEditorNoiseClassified=true, blockingUnityErrorCount=0, unclassifiedUnityErrorCount=0, unityControlsUxSmokePassed=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it records Goal139 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Runtime, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/GOAL.md` | Goal 141 task: runtime-backed Unity/player command roundtrip bridge over Goal140 controls UX artifacts. Current gate=`runtime_backed_unity_player_command_roundtrip_bridge_verification`, result is `GREEN`, accepted=false, goal140Accepted=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-player-command-roundtrip.cmd`, evidence under `.llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`, export metadata under `.llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`, roundtripRequestCount=6, runtimeRoutedRequestCount=4, presentationOnlyRequestCount=2, runtimeExecutedRequestCount=4, presentationOnlyRuntimeExecutionCount=0, roundtripSnapshotCount=15, requestResponseCorrelationPassed=true, sequentialCursorContinuityPassed=true, stateHashContinuityPassed=true, copySummaryStateUnchanged=true, loadModelStateUnchanged=true, noControlIntentMappedToUnrelatedGameplayCommand=true, roundtripSemanticCorrectnessPassed=true, controlRequestBridgePresent=true, stateHashChainPresent=true, runtimeAuthority=true, projectionOnly=false, unityConsumesRoundtripResult=true and unityGameplayTruth=false; it records Goal140 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/GOAL.md` | Goal 141A hotfix task: correct Goal141 request-level semantics so `load_model` and `copy_frame_summary` are presentation-only, `reset_first` starts the runtime session, `step_once` and `next_frame` advance the current runtime cursor, and `play_all_to_end` executes the remaining Runtime-owned commands. Current result is `GREEN`, roundtripSemanticCorrectnessPassed=true, totalControlRequestCount=6, runtimeRoutedRequestCount=4, presentationOnlyRequestCount=2, runtimeExecutedRequestCount=4, presentationOnlyRuntimeExecutionCount=0, requestResponseCorrelationPassed=true, sequentialCursorContinuityPassed=true, stateHashContinuityPassed=true, copySummaryStateUnchanged=true, loadModelStateUnchanged=true and noControlIntentMappedToUnrelatedGameplayCommand=true; it writes compact Goal141A evidence under `.llmgc/procedural/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/` and `.llmgc/exports/goal-141a-player-command-roundtrip-semantic-correctness-hotfix/`. |
+| `docs/agent-tasks/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/GOAL.md` | Goal 142 task: runtime-significant product-line variant matrix and selection handoff over the read-only minimal-map sample package. Current gate=`runtime_significant_product_line_variant_matrix_and_selection_handoff_verification`, result is `GREEN`, accepted=false, goal141Accepted=false, normal command=`.devflow\scripts\run-product-line-runtime-variant-matrix.cmd`, evidence under `.llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, export metadata under `.llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/`, candidateCount=4, passedCandidateCount=4, runtimeSignificantCandidateCount=4, distinctFinalStateHashCount=4, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, selectedScore=100, sourceTemplateUnmodified=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -359,26 +360,23 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-runtime_backed_unity_player_command_roundtrip_bridge_verification
+runtime_significant_product_line_variant_matrix_and_selection_handoff_verification
 ```
 
-Goal141 runtime-backed Unity player command roundtrip bridge is produced for
-review after the Goal141A semantic hotfix with
-`runtime_backed_unity_player_command_roundtrip_bridge_verification required`,
-`accepted=false`, `goal140Accepted=true`, `manualUnityOptional=true`,
+Goal142 runtime-significant product-line variant matrix and selection handoff is
+produced for review with
+`runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required`,
+`accepted=false`, `goal141Accepted=false`, `manualUnityOptional=true`,
 `projectionOnly=false`, `runtimeAuthority=true`,
 `runtimeBackedPlayerCommandRoundtrip=true`,
-`controlRequestBridgePresent=true`, `stateHashChainPresent=true`,
-`unityConsumesRoundtripResult=true`, `unityGameplayTruth=false`,
-`roundtripRequestCount=6`, `runtimeRoutedRequestCount=4`,
-`presentationOnlyRequestCount=2`, `runtimeExecutedRequestCount=4`,
-`presentationOnlyRuntimeExecutionCount=0`,
-`requestResponseCorrelationPassed=true`,
-`sequentialCursorContinuityPassed=true`,
-`stateHashContinuityPassed=true`, `copySummaryStateUnchanged=true`,
-`loadModelStateUnchanged=true`,
-`noControlIntentMappedToUnrelatedGameplayCommand=true`,
-`roundtripSemanticCorrectnessPassed=true` and `roundtripSnapshotCount=15`.
+`templatePackagePath=samples/minimal-map-game/package.json`,
+`candidateCount=4`, `passedCandidateCount=4`, `failedCandidateCount=0`,
+`runtimeSignificantCandidateCount=4`, `distinctFinalStateHashCount=4`,
+`selectedCandidateId=minimal-map-game-exploration-resource-focus`,
+`selectedVariantKind=exploration_resource_focus`, `selectedScore=100`,
+`sourceTemplateUnmodified=true`, `packageValidationPassed=true`,
+`runtimeRoundtripSemanticCorrectnessPassed=true`, `mutationAuditPassed=true` and
+`noMetadataOnlyVariantAccepted=true`.
 The Goal131 selected candidate now has
 package validation, canonical runtime transcript/state summary, save/load/replay
 proof, PlayerAdapter contract, 13-step player-loop plan, 13 Runtime-owned
@@ -394,9 +392,9 @@ Goal132 WinForms candidate pipeline operator panel remains useful context: use
 `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` and the Goal131
 selected candidate handoff as the source candidate input, but do not treat
 selected-candidate review as the immediate next goal unless it is tied to
-canonical runtime execution. Review Goal141 evidence before starting the next
+canonical runtime execution. Review Goal142 evidence before starting the next
 implementation slice; if accepted, the next product step should continue on the
-explicitly runtime-backed PlayerAdapter command seam instead of returning to
+explicitly runtime-backed product-line variant seam instead of returning to
 projection-only verification.
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:

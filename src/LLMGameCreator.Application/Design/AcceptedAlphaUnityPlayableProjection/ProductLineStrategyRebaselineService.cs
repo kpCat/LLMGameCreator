@@ -611,6 +611,17 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "controlRequestBridgePresent")
                    && BoolValue(root, "unityConsumesRoundtripResult")
                    && BoolValue(root, "unityGameplayTruth") == false;
+            var postGoal142State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal142Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "goal141Accepted") == false
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "runtimeAuthority")
+                   && BoolValue(root, "runtimeSignificantProductLineVariantMatrix")
+                   && BoolValue(root, "runtimeBackedPlayerCommandRoundtrip")
+                   && BoolValue(root, "sourceTemplateUnmodified")
+                   && BoolValue(root, "unityGameplayTruth") == false;
             return goal133AState
                    || postGoal134State
                    || postGoal135State
@@ -619,7 +630,8 @@ public sealed class ProductLineStrategyRebaselineService
                    || postGoal138State
                    || postGoal139State
                    || postGoal140State
-                   || postGoal141State;
+                   || postGoal141State
+                   || postGoal142State;
         }
         catch (JsonException)
         {
@@ -658,7 +670,11 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal141Gate)
         && Contains(markdown, "goal140Accepted=true")
         && Contains(markdown, "goal141Accepted=false")
-        && Contains(markdown, "runtimeBackedPlayerCommandRoundtrip=true");
+        && Contains(markdown, "runtimeBackedPlayerCommandRoundtrip=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal142Gate)
+        && Contains(markdown, "goal141Accepted=false")
+        && Contains(markdown, "runtimeBackedPlayerCommandRoundtrip=true")
+        && Contains(markdown, "sourceTemplateUnmodified=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -672,7 +688,8 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal138Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal139Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal140Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal141Gate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal141Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal142Gate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

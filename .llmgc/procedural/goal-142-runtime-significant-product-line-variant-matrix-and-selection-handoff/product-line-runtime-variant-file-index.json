@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "product_line_runtime_variant_file_index_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "rootPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff",
+  "indexedFileCount": 49,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/candidate-handoff.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "29edd384c19db35b4b6d72cec25583ca1b212c24665cbc5858dfe47f14f39933"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/mutation-audit.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "e8df4d9ef06ab70f0d6fd34493ccd7d14a073195b2208a548dc5d47c9b2f8832"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/package-validation.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "7f98d8fe5c24ab67b2d480faaafcc423cf7ff9c7b66e7255d2987f90031be603"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/package.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "2a8ef8ef3425314359f63fe17aa90c3fdc37a2db3a1bc3a7028ede22f32c627c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/candidate-handoff.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "c3fe4f8a83e63a70a902cc1059e66e3e4460557591b419b0ef7cacc20b84d075"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/mutation-audit.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "95713a0ec16098cf48f52adf83364d5991ca0c807e9c95ece149083f321d908f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package-validation.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "4e4eec388dd8722818938705fdd25a1b50b8f6e0ce89afb5498558bde3a24745"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/candidate-handoff.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "656fe7a33b387e4c398bd0ef09acdec1357a240019020283977ba14c3990e457"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/mutation-audit.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "4e4f13ffee4cb205636e7359924d9be0c886e2d8237603ea789588455ab5411b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/package-validation.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "f2629040a24aba579a4e9b4310736b8f79042422d8fcb1231f8ea3260b73bb49"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/package.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/candidate-handoff.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "0e56c1aebe39dacea1901e5f620509e15668c463b37cd9cec2490771ba6c42ae"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/mutation-audit.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "3f99552f69efbfb410dee00f710fdd32fc17c45a7681c7936f641f793858519d"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package-validation.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "bf7be298b53131d50b9889e27649e6cc45457d4ad177c746bd0bdcbbb8827062"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package.json",
+      "role": "candidate_package_materialization",
+      "required": true,
+      "sha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-alchemy-focus/candidate-score.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "7d121ccf9b530a0a24bb6ae77b3a6d5e568c4d94d7ea909f449ff6a1bedde0d1"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-alchemy-focus/roundtrip-request.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "f424599630a3476e953646e4fbffe170e0707a3ecf308946c28c6478a98b566a"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-alchemy-focus/roundtrip-result.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "000b54967b141e1a1d10adb06b0c1ce4a7544c62afc90933b2df462b85c51ed1"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-alchemy-focus/roundtrip-snapshots.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "4d836537bac1e3ca9ca3b5b0b62a32c998e53d6568650c99ec83cfb5229bf72d"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-alchemy-focus/runtime-outcome-summary.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "21d68ffac6b468d6ee57c183d039c09ca89b3101e902322bfb08f954b5bf63b4"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-balanced-baseline/candidate-score.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "2f67b60a96342cc02959f594e269f3537f9af63777864e240f22bff7924402e7"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-balanced-baseline/roundtrip-request.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "42867e58684c4ee0869c7364b63037e3e0ebe1e5a422ade7a7050ff5b288ba4f"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-balanced-baseline/roundtrip-result.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "d0c60be35f3628ba2fd281497831367a9302375a6e83582d657b12964f2e5fd9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-balanced-baseline/roundtrip-snapshots.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "b522009a07524a8d6c4cf871daf18972845e78b92c2c90a85cdc6ac390c14674"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-balanced-baseline/runtime-outcome-summary.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "d1fa9e75f6eb6fc2296eebbf2dc53e553f23259dbfdafea994f33bc029e218b4"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-combat-focus/candidate-score.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "4333ff9857d6336df7fe0f323f48b61888631cb9e630d36e8b2b602a02a262d6"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-combat-focus/roundtrip-request.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "3727777aa5310db372d6b29d0a18d1fd0a82139189360439430d620db830afac"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-combat-focus/roundtrip-result.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "d3e143e17ab3ff1a2ef2d0b6fa77a74a63d32a4bd51b8fea2aeab81051f12cba"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-combat-focus/roundtrip-snapshots.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "6ca8c205d28d6d5bccf70b2a51d2793d5f2cda504749e7a54ede605ca4a94fbb"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-combat-focus/runtime-outcome-summary.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "93a2ac594c00c3314a7985d65bee9b21f06ec87dc910a95301f4eda7add36579"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/candidate-score.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "91623752b3f550f379791496e6e8415fe3a594c0fb1ad66ea3cb641755708162"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/roundtrip-request.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "f3e905dcdc93ddfa4e8b14f74e9f0596a967b700d80073ab2bd66cfc8619975c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/roundtrip-result.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "b23c4a4534f5c813182fe180da5e81d6ad359171e4004599620849060ff4c693"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/roundtrip-snapshots.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "28edfcc41e3e77cacaa6a9e943c9cac69b85f72f4e827a7429a8639c96c6228b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/matrix/minimal-map-game-exploration-resource-focus/runtime-outcome-summary.json",
+      "role": "candidate_runtime_matrix",
+      "required": true,
+      "sha256": "6f9f8c626ef4ad77b474a2f77b794e2afac27d7a740a8b949aad71ca6dec0af5"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/one-click-product-line-runtime-variant-matrix-report.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "5f86a5b641df076804693af9693186c17d388e25c9ae6f568107658f4063a8df"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/one-click-product-line-runtime-variant-matrix-report.md",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "23e6896f587d2214dcfad5da4d2027765419e9c77a69af4524e54a600e7f0ba2"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "1e4c3b1ad59743d3ee81a4a1b4f38be168efa837aa7786c330e33b3b82868e4b"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-distinctness-proof.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "54c99492f0620f63413c667c2f9929847aae36ea5f2ce446688f980cfbd8134c"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-matrix-dashboard.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "f13d30894721b541e9024858652656e0f6cb87fde75eac7d725fda41d11deab9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-matrix-result.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "bb18be4d864b9ee8ec31b3cce4aeabca1bb5abcda50676ef33d643fd41f59cd4"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-mutation-summary.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "e9f810ac7190f94b0c821f3541f478d9a04181f26dbb695ba7f3f7b6ae815ad2"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-negative-proof.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "b3262f99c09dc6832348187c953cd7aa3caf6bdc538c70fdf08c4e92be978530"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-scoreboard.json",
+      "role": "aggregate_matrix_evidence",
+      "required": true,
+      "sha256": "be6c9a79244b4d2ec082366c45ddabacc985a208774d430e66fa3b6baf4cae8e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/package.json",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/runtime-outcome-summary.json",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "6f9f8c626ef4ad77b474a2f77b794e2afac27d7a740a8b949aad71ca6dec0af5"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/selected-runtime-variant-handoff.json",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "e8f573300de61b67d85180772cfc7458ff7969a709a5248996ea780c9fdc65fd"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/selection-rationale.md",
+      "role": "selected_runtime_variant_handoff",
+      "required": true,
+      "sha256": "338c25bb2a976a0a0aafb0bc9b8796dc10a7c9401b76992896905879b1c703e3"
+    }
+  ]
+}

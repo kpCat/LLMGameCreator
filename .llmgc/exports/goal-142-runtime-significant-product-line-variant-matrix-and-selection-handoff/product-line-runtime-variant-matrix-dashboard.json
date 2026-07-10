@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "product_line_runtime_variant_matrix_dashboard_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "matrixStatus": "GREEN",
+  "candidateCount": 4,
+  "passedCandidateCount": 4,
+  "failedCandidateCount": 0,
+  "runtimeSignificantCandidateCount": 4,
+  "distinctFinalStateHashCount": 4,
+  "selectedCandidateId": "minimal-map-game-exploration-resource-focus",
+  "selectedVariantKind": "exploration_resource_focus",
+  "selectedScore": 100,
+  "sourceTemplateUnmodified": true,
+  "normalCommand": ".devflow\\scripts\\run-product-line-runtime-variant-matrix.cmd",
+  "matrixResultPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-matrix-result.json",
+  "selectedHandoffPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/selected-runtime-variant/selected-runtime-variant-handoff.json",
+  "accepted": false
+}
