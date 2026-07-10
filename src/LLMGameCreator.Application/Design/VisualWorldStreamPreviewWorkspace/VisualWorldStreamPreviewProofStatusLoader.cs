@@ -147,6 +147,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal138RuntimeBackedUnityPlayerLoopStepperProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal140RuntimeBackedUnityPlayerLoopControlsUxProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal141RuntimeBackedPlayerCommandRoundtripProofStatus(projectRoot, proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         proofs = NormalizeHistoricalGoal107Goal108SourceHealthProofs(projectRoot, proofs, proofDiagnostics).ToList();

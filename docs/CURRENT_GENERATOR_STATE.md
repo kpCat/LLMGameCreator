@@ -1,48 +1,70 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 140 runtime-backed Unity player-loop controls UX polish and noise guard
+Updated by: Goal 141 runtime-backed Unity player command roundtrip bridge
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 140 produced for review:
+Goal 141 produced for review:
 
 ```text
-runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification required
+runtime_backed_unity_player_command_roundtrip_bridge_verification required
 implementationStatus=GREEN
 accepted=false
-goal139Accepted=true
-goal140Accepted=false
-acceptedGoal139=true
+goal140Accepted=true
+goal141Accepted=false
+acceptedGoal140=true
 manualUnityOptional=true
 projectionOnly=false
 runtimeAuthority=true
-runtimeBackedUnityControlsUxPolish=true
+runtimeBackedPlayerCommandRoundtrip=true
+controlRequestBridgePresent=true
+stateHashChainPresent=true
+unityConsumesRoundtripResult=true
+unityGameplayTruth=false
+roundtripRequestCount=6
+runtimeExecutedRequestCount=6
+roundtripSnapshotCount=6
+noUnclassifiedErrorDiagnostics=true
+```
+
+Goal141 records the repository owner's human acceptance of Goal140, then maps
+Unity/PlayerAdapter control intents into Runtime-owned command requests for the
+Goal131 selected candidate `minimal-map-game-balanced-baseline`. It executes
+6 request/response pairs through Runtime, writes updated runtime snapshots and a
+state hash chain, verifies Unity/player batchmode consumption of the roundtrip
+result, and keeps gameplay truth in Runtime artifacts.
+
+Evidence lives under
+`.llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`,
+export metadata under
+`.llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`,
+and the short manual note at
+`docs/manual-acceptance/runtime-backed-unity-player-command-roundtrip-bridge.md`.
+
+Goal 140 is now recorded as accepted by human handoff:
+
+```text
+goal140Accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+selectedCandidate=minimal-map-game-balanced-baseline
+frames=13
 humanReadableFrameNumbering=true
 stepOnceSemanticsClear=true
 playAllToEndSemanticsClear=true
+copyFrameSummaryStatusPresent=true
 knownUnityEditorNoiseClassified=true
 blockingUnityErrorCount=0
-unclassifiedUnityErrorCount=0
-unityControlsUxSmokePassed=true
+projectionOnly=false
+runtimeAuthority=true
 unityGameplayTruth=false
-frameCount=13
-requiredControlsPresent=true
+rawManualInputNotCommitted=true
 ```
 
-Goal140 records the repository owner's human acceptance of Goal139, then
-consumes the Goal139 runtime-backed interactive controls model/result/script for
-the Goal131 selected candidate `minimal-map-game-balanced-baseline`. It writes
-a deterministic 13-frame controls UX model, script and result, verifies
-Unity/player batchmode consumption of those UX controls, keeps gameplay truth in
-Runtime artifacts and classifies the known Unity BuildProfileContext editor
-noise without ignoring unpaired `NullReferenceException` diagnostics.
-
-Evidence lives under
-`.llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`,
-export metadata under
-`.llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`,
-and the short manual note at
-`docs/manual-acceptance/runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard.md`.
+Goal140 recorded Goal139 human acceptance, consumed the Goal139 runtime-backed
+interactive controls artifacts, wrote a 13-frame controls UX model/script/result,
+ran Unity/player controls UX smoke, classified known Unity BuildProfileContext
+editor noise and kept gameplay truth in Runtime.
 
 Goal 139 is now recorded as accepted by human handoff:
 
@@ -189,10 +211,11 @@ player command loop; Goal137 turns those Runtime-owned snapshots into a
 Unity/player playback harness; Goal138 adds a runtime-backed stepper/HUD harness
 over that playback; Goal139 adds interactive controls over the runtime-backed
 stepper model/script; Goal140 polishes the controls UX, records Goal139 human
-acceptance and adds a bounded Unity editor noise guard without mutating the
-sample package, public GamePackage schema, provider/media/LLM/Lua/
-generator-library code or Unity scenes/prefabs/ProjectSettings/Packages/
-StreamingAssets.
+acceptance and adds a bounded Unity editor noise guard; Goal141 records Goal140
+human acceptance and bridges Unity/PlayerAdapter control intent to Runtime-owned
+command request/response snapshots without mutating the sample package, public
+GamePackage schema, provider/media/LLM/Lua/generator-library code or Unity
+scenes/prefabs/ProjectSettings/Packages/StreamingAssets.
 
 Goal 119 produced for review:
 

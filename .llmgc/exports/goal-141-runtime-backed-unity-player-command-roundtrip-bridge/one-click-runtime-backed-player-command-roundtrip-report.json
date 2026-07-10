@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_141_runtime_backed_unity_player_command_roundtrip_bridge",
+  "status": "GREEN",
+  "accepted": false,
+  "goal140Accepted": true,
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "roundtripRequestCount": 6,
+  "runtimeExecutedRequestCount": 6,
+  "roundtripSnapshotCount": 6,
+  "controlRequestBridgePresent": true,
+  "stateHashChainPresent": true,
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "unityConsumesRoundtripResult": true,
+  "unitySmokePassed": true,
+  "manualUnityOptional": true,
+  "normalCommand": ".devflow\\scripts\\run-runtime-backed-player-command-roundtrip.cmd",
+  "reportPath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/one-click-runtime-backed-player-command-roundtrip-report.md"
+}

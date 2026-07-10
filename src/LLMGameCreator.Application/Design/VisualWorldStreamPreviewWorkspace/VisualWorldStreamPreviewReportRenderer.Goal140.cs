@@ -64,6 +64,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
     {
         AddGoal140ReportLines(lines, report);
         AddGoal140QualityLines(lines, qualityGate);
-        return string.Join(Environment.NewLine, lines) + Environment.NewLine;
+        return RenderWithGoal141Lines(lines, report, qualityGate);
     }
 }

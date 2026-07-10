@@ -1,0 +1,63 @@
+{
+  "goalId": "goal_141_runtime_backed_unity_player_command_roundtrip_bridge",
+  "rootPath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge",
+  "indexedFileCount": 11,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/goal140-human-acceptance-record.json",
+      "role": "goal141_goal140_human_acceptance_record",
+      "sha256": "517ff2cc5e18540795f5fff3b76367ba79cbd4beb6532c3dcf0f529762ffeeab"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/one-click-runtime-backed-player-command-roundtrip-report.json",
+      "role": "goal141_one_click_runtime_backed_player_command_roundtrip_report",
+      "sha256": "a999bbe39063c0906ebab64bbd453758c6a1e3c096b000962e784409d7286a90"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/one-click-runtime-backed-player-command-roundtrip-report.md",
+      "role": "goal141_one_click_runtime_backed_player_command_roundtrip_report",
+      "sha256": "de2af104ca5251f06a163166da1635a8268fe48a67ef6bcac7dc8061ad425a46"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-dashboard.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_dashboard",
+      "sha256": "2a062e3ac6e30cf6cea34adb615de9be4d6c15011bb08664d6fb8945f35d7463"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-model.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_model",
+      "sha256": "b4baabb2fa831cb1376655ac21df99e9461a62aa8b812516337a34b5b7499f44"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-negative-proof.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_negative_proof",
+      "sha256": "079301fab75d5d160613ec442b58953b64635cc5204a3806885c5a3e4d7e2b5a"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-request.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_request",
+      "sha256": "9d60d1c39841c2bc45288e98e3e32ff20859cb847f104ab625763f25b5f38b60"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-result.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_result",
+      "sha256": "c678b0c668c6b5657df34d2d950016f6cf425737f00f22f76211651d88f0ab25"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-session.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_session",
+      "sha256": "9df5a55b18026071c153a144037a3e441b704f381e8a3404fad854cea3ca0c99"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-snapshots.json",
+      "role": "goal141_runtime_backed_player_command_roundtrip_snapshots",
+      "sha256": "75de9f597c16a53234192a458cb1d2586f1004599fad66059db8ed1c4a51fc51"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/unity-player-command-roundtrip-smoke.json",
+      "role": "goal141_unity_player_command_roundtrip_smoke",
+      "sha256": "58ed9a344005683198749de1009c6f2b4e8c02df7c18add9770110c13b7fa4fa"
+    }
+  ]
+}

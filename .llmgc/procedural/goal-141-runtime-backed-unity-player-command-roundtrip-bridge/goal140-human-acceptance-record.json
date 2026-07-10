@@ -1,0 +1,18 @@
+{
+  "goalId": "goal_140_runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard",
+  "accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "rawManualInputNotCommitted": true,
+  "selectedCandidate": "minimal-map-game-balanced-baseline",
+  "frames": 13,
+  "humanReadableFrameNumbering": true,
+  "stepOnceSemanticsClear": true,
+  "playAllToEndSemanticsClear": true,
+  "copyFrameSummaryStatusPresent": true,
+  "knownUnityEditorNoiseClassified": true,
+  "blockingUnityErrorCount": 0,
+  "projectionOnly": false,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false
+}

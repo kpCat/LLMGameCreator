@@ -1,0 +1,16 @@
+{
+  "goalId": "goal_141_runtime_backed_unity_player_command_roundtrip_bridge",
+  "manualInputRejected": true,
+  "rawManualInputNotCommitted": true,
+  "outputRootUnderGoal141": true,
+  "samplePackageReadOnly": true,
+  "gamePackageSchemaUnchanged": true,
+  "generatorLibraryProviderLuaUnchanged": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsUnchanged": true,
+  "runtimeOwnsRoundtripExecution": true,
+  "unityConsumesResultOnly": true,
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "passed": true
+}

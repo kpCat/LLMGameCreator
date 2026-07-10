@@ -28,6 +28,19 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         + Environment.NewLine
         + ReadGoal140WinFormsPageText(projectRoot);
 
+    private static string ReadGoal141WinFormsPageText(string projectRoot)
+    {
+        const string pageGoal141RelativePath =
+            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
+            + "VisualWorldStreamPreviewWorkspacePageControl.Goal141.cs";
+        return ReadOptionalText(projectRoot, pageGoal141RelativePath);
+    }
+
+    private static string ReadGoal120Through141WinFormsPageText(string projectRoot) =>
+        ReadGoal120Through140WinFormsPageText(projectRoot)
+        + Environment.NewLine
+        + ReadGoal141WinFormsPageText(projectRoot);
+
     private static bool PageBindsGoal139RuntimeBackedUnityPlayerLoopInteractiveControls(
         string pageText) =>
         pageText.Contains("Goal139 Controls", StringComparison.Ordinal)
@@ -93,4 +106,55 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             diagnostics);
         return binds;
     }
+
+    private static bool PageBindsGoal141RuntimeBackedPlayerCommandRoundtrip(
+        string pageText) =>
+        pageText.Contains("Goal141 Command Roundtrip", StringComparison.Ordinal)
+        && pageText.Contains("BindGoal141RuntimeBackedPlayerCommandRoundtrip", StringComparison.Ordinal)
+        && pageText.Contains("goal140Accepted", StringComparison.Ordinal)
+        && pageText.Contains("candidateId", StringComparison.Ordinal)
+        && pageText.Contains("roundtripRequestCount", StringComparison.Ordinal)
+        && pageText.Contains("runtimeExecutedRequestCount", StringComparison.Ordinal)
+        && pageText.Contains("roundtripSnapshotCount", StringComparison.Ordinal)
+        && pageText.Contains("controlRequestBridgePresent", StringComparison.Ordinal)
+        && pageText.Contains("stateHashChainPresent", StringComparison.Ordinal)
+        && pageText.Contains("runtimeAuthority", StringComparison.Ordinal)
+        && pageText.Contains("projectionOnly", StringComparison.Ordinal)
+        && pageText.Contains("unityGameplayTruth", StringComparison.Ordinal)
+        && pageText.Contains("unityConsumesRoundtripResult", StringComparison.Ordinal)
+        && pageText.Contains("normalCommand", StringComparison.Ordinal)
+        && pageText.Contains("reportPath", StringComparison.Ordinal)
+        && pageText.Contains("manualUnityOptional", StringComparison.Ordinal)
+        && pageText.Contains("accepted", StringComparison.Ordinal);
+
+    private static bool ScanGoal141RuntimeBackedPlayerCommandRoundtripBinding(
+        string pageText,
+        string pageRelativePath,
+        List<VisualWorldPreviewDiagnostic> diagnostics)
+    {
+        var binds = PageBindsGoal141RuntimeBackedPlayerCommandRoundtrip(pageText);
+        AddIfFalse(
+            binds,
+            "goal141.winforms.runtime_backed_player_command_roundtrip_bind_missing",
+            pageRelativePath,
+            diagnostics);
+        return binds;
+    }
+
+    private static (
+        bool Stepper,
+        bool InteractiveControls,
+        bool ControlsUx,
+        bool CommandRoundtrip) ScanGoal138Through141RuntimeBackedBindings(
+            string pageText,
+            string pageRelativePath,
+            List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        (
+            ScanGoal138RuntimeBackedUnityPlayerLoopStepperBinding(pageText, pageRelativePath, diagnostics),
+            ScanGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsBinding(
+                pageText,
+                pageRelativePath,
+                diagnostics),
+            ScanGoal140RuntimeBackedUnityPlayerLoopControlsUxBinding(pageText, pageRelativePath, diagnostics),
+            ScanGoal141RuntimeBackedPlayerCommandRoundtripBinding(pageText, pageRelativePath, diagnostics));
 }

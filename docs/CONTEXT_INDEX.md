@@ -70,7 +70,9 @@ Unity/player playback frames and a playback smoke without making Unity gameplay
 truth. Goal138 adds the accepted runtime-backed stepper/HUD model over that
 playback. Goal139 adds runtime-backed interactive controls over the Goal138
 model/script. Goal140 records Goal139 human acceptance, polishes the controls
-UX and adds a bounded Unity editor noise guard. Future work should build on this canonical
+UX and adds a bounded Unity editor noise guard. Goal141 records Goal140 human
+acceptance and bridges Unity/PlayerAdapter control intents to Runtime-owned
+command request/response snapshots. Future work should build on this canonical
 Runtime/PlayerAdapter/Unity playback evidence instead of adding more
 projection-only wrappers.
 
@@ -276,7 +278,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-137-canonical-runtime-unity-player-loop-playback-harness/GOAL.md` | Goal 137 task: canonical Runtime Unity/player loop playback harness over Goal136 snapshots. Current gate=`canonical_runtime_unity_player_loop_playback_harness_verification`, result is `GREEN`, accepted=true by human handoff, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-canonical-runtime-unity-player-loop-playback.cmd`, evidence under `.llmgc/procedural/goal-137-canonical-runtime-unity-player-loop-playback-harness/`, export metadata under `.llmgc/exports/goal-137-canonical-runtime-unity-player-loop-playback-harness/`, playbackFrameCount=13, required frame categories, Unity/player playback smoke, runtimeSnapshotSource=true, unityConsumesRuntimeSnapshots=true, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/GOAL.md` | Goal 138 task: runtime-backed Unity player-loop stepper/HUD harness over Goal137 playback frames and Goal136 Runtime snapshots. Result is `GREEN`, accepted=true by human handoff, acceptedGoal137=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-stepper.cmd`, evidence under `.llmgc/procedural/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`, export metadata under `.llmgc/exports/goal-138-runtime-backed-unity-player-loop-stepper-hud-harness/`, frameCount=13, required frame categories, runtimeAuthority=true, stepperWindowPresent=true, stepperBatchSmokePassed=true, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/agent-tasks/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/GOAL.md` | Goal 139 task: runtime-backed Unity player-loop interactive controls over the Goal138 stepper model/result. Current gate=`runtime_backed_unity_player_loop_interactive_controls_harness_verification`, result is `GREEN`, accepted=false, acceptedGoal138=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-interactive-controls.cmd`, evidence under `.llmgc/procedural/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/`, export metadata under `.llmgc/exports/goal-139-runtime-backed-unity-player-loop-interactive-controls-harness/`, frameCount=13, required controls present, controlScriptPassed=true, interactiveControlsWindowPresent=true, unityInteractiveControlsSmokePassed=true, runtimeAuthority=true, projectionOnly=false, unityGameplayTruth=false and manual Unity inspection remains optional; it records Goal138 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Runtime, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
-| `docs/agent-tasks/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/GOAL.md` | Goal 140 task: runtime-backed Unity player-loop controls UX polish and Unity editor noise guard over the Goal139 interactive controls model/result/script. Current gate=`runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification`, result is `GREEN`, accepted=false, acceptedGoal139=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-controls-ux-polish.cmd`, evidence under `.llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, export metadata under `.llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, frameCount=13, humanReadableFrameNumbering=true, stepOnceSemanticsClear=true, playAllToEndSemanticsClear=true, knownUnityEditorNoiseClassified=true, blockingUnityErrorCount=0, unclassifiedUnityErrorCount=0, unityControlsUxSmokePassed=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it records Goal139 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Runtime, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/GOAL.md` | Goal 140 task: runtime-backed Unity player-loop controls UX polish and Unity editor noise guard over the Goal139 interactive controls model/result/script. Current gate=`runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification`, result is `GREEN`, accepted=true by Goal141 human handoff, acceptedGoal139=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-unity-player-loop-controls-ux-polish.cmd`, evidence under `.llmgc/procedural/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, export metadata under `.llmgc/exports/goal-140-runtime-backed-unity-player-loop-controls-ux-polish-and-noise-guard/`, frameCount=13, humanReadableFrameNumbering=true, stepOnceSemanticsClear=true, playAllToEndSemanticsClear=true, knownUnityEditorNoiseClassified=true, blockingUnityErrorCount=0, unclassifiedUnityErrorCount=0, unityControlsUxSmokePassed=true, runtimeAuthority=true, projectionOnly=false and unityGameplayTruth=false; it records Goal139 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Runtime, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/GOAL.md` | Goal 141 task: runtime-backed Unity/player command roundtrip bridge over Goal140 controls UX artifacts. Current gate=`runtime_backed_unity_player_command_roundtrip_bridge_verification`, result is `GREEN`, accepted=false, goal140Accepted=true, selectedCandidateId=`minimal-map-game-balanced-baseline`, normal command=`.devflow\scripts\run-runtime-backed-player-command-roundtrip.cmd`, evidence under `.llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`, export metadata under `.llmgc/exports/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/`, roundtripRequestCount=6, runtimeExecutedRequestCount=6, roundtripSnapshotCount=6, controlRequestBridgePresent=true, stateHashChainPresent=true, runtimeAuthority=true, projectionOnly=false, unityConsumesRoundtripResult=true and unityGameplayTruth=false; it records Goal140 human acceptance and starts no sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets or release packaging work. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -357,34 +360,34 @@ Recommended next work:
 runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification
 ```
 
-Goal140 runtime-backed Unity player-loop controls UX polish and noise guard is produced for
+Goal141 runtime-backed Unity player command roundtrip bridge is produced for
 review with
-`runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification required`,
-`accepted=false`, `acceptedGoal139=true`, `manualUnityOptional=true`,
+`runtime_backed_unity_player_command_roundtrip_bridge_verification required`,
+`accepted=false`, `goal140Accepted=true`, `manualUnityOptional=true`,
 `projectionOnly=false`, `runtimeAuthority=true`,
-`runtimeBackedUnityControlsUxPolish=true`,
-`humanReadableFrameNumbering=true`, `stepOnceSemanticsClear=true`,
-`playAllToEndSemanticsClear=true`, `knownUnityEditorNoiseClassified=true`,
-`blockingUnityErrorCount=0`, `unclassifiedUnityErrorCount=0`,
-`unityControlsUxSmokePassed=true`, `unityGameplayTruth=false`,
-`frameCount=13` and `requiredControlsPresent=true`. The Goal131 selected candidate now has
+`runtimeBackedPlayerCommandRoundtrip=true`,
+`controlRequestBridgePresent=true`, `stateHashChainPresent=true`,
+`unityConsumesRoundtripResult=true`, `unityGameplayTruth=false`,
+`roundtripRequestCount=6`, `runtimeExecutedRequestCount=6` and
+`roundtripSnapshotCount=6`. The Goal131 selected candidate now has
 package validation, canonical runtime transcript/state summary, save/load/replay
 proof, PlayerAdapter contract, 13-step player-loop plan, 13 Runtime-owned
 player commands, one snapshot per command, 13 Unity/player playback frames,
 Goal137 human acceptance, a runtime-backed stepper/HUD model, Unity stepper smoke
 and Goal138 human acceptance, plus a runtime-backed interactive controls model,
 script, session, Unity controls smoke and one-click report, Goal139 human
-acceptance, controls UX polish evidence and bounded Unity editor noise
-classification.
+acceptance, controls UX polish evidence, bounded Unity editor noise
+classification, Goal140 human acceptance and a Runtime-owned command roundtrip
+request/result/snapshot bridge consumed by Unity/player.
 
 Goal132 WinForms candidate pipeline operator panel remains useful context: use
 `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` and the Goal131
 selected candidate handoff as the source candidate input, but do not treat
 selected-candidate review as the immediate next goal unless it is tied to
-canonical runtime execution. Review Goal140 evidence before starting the next
-implementation slice; if accepted, the next product step should be a manual
-review/acceptance checkpoint or another explicitly runtime-backed player-loop
-step instead of returning to projection-only verification.
+canonical runtime execution. Review Goal141 evidence before starting the next
+implementation slice; if accepted, the next product step should continue on the
+explicitly runtime-backed PlayerAdapter command seam instead of returning to
+projection-only verification.
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
 `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop
@@ -1007,6 +1010,7 @@ Allowed next sequence:
 87. Use Goal123 as the generic GamePackage projection adapter pass: run `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, click `Run Generic Package Projection Verification`, inspect the read-only minimal-map package projection, use `.devflow\scripts\clean-unity-editor-noise.cmd` after Unity checks, and keep sample mutation, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/settings/packages/StreamingAssets/release-packaging work behind separate explicit tasks.
 88. Use Goal124 as the generic GamePackage quest/dialogue/interaction loop pass: run `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, click `Run Generic Package Gameplay Loop Verification`, inspect the read-only sign inspect, old guard dialogue, help healer objective, inventory/resource summaries and event log, use `.devflow\scripts\clean-unity-editor-noise.cmd` after Unity checks, and keep sample mutation, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/settings/packages/StreamingAssets/release-packaging work behind separate explicit tasks.
 89. Review Goal132 as the WinForms Candidate Pipeline Operator panel: use `.devflow\scripts\run-gamepackage-candidate-recipe-pipeline.cmd` as the normal command, inspect selected candidate/count/matrix/result/output-tail proof in the workspace, and keep sample mutation, `.llmgc/manual/**`, Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/settings/packages/StreamingAssets/release-packaging work behind separate explicit tasks.
+90. Review Goal141 as the runtime-backed Unity/player command roundtrip bridge: use `.devflow\scripts\run-runtime-backed-player-command-roundtrip.cmd` as the normal command, inspect request/result/snapshot/model/report proof in the workspace, and keep sample mutation, `.llmgc/manual/**`, public GamePackage schema, Generation, AssetPipeline, Scripting/Lua, provider/media/LLM/RAG, generator-library, Unity scene/prefab/project-settings/packages/StreamingAssets and release-packaging work behind separate explicit tasks.
 
 Kill criterion:
 

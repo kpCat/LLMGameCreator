@@ -1,0 +1,29 @@
+{
+  "goalId": "goal_141_runtime_backed_unity_player_command_roundtrip_bridge",
+  "unityAvailable": true,
+  "modelPathExists": true,
+  "roundtripRequestCountPassed": true,
+  "runtimeSnapshotResponsePresent": true,
+  "runtimeAuthorityMarkersPresent": true,
+  "unityConsumesRoundtripResult": true,
+  "unityGameplayTruth": false,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "passed": true,
+  "unityPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
+  "unityLogPath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/unity-player-command-roundtrip-smoke.log",
+  "modelPath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-model.json",
+  "resultPath": ".llmgc/procedural/goal-141-runtime-backed-unity-player-command-roundtrip-bridge/runtime-backed-player-command-roundtrip-result.json",
+  "status": "GREEN",
+  "diagnostics": [
+    "unityExitCode=0",
+    "passMarkerPresent=True",
+    "failMarkerPresent=False",
+    "modelPathExists=True",
+    "roundtripRequestCountPassed=True",
+    "runtimeSnapshotResponsePresent=True",
+    "runtimeAuthorityMarkersPresent=True",
+    "unityConsumesRoundtripResult=True",
+    "unityGameplayTruth=False"
+  ]
+}
