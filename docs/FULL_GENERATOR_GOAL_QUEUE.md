@@ -117,6 +117,7 @@ runtime_backed_unity_player_loop_interactive_controls_harness_verification accep
 runtime_backed_unity_player_loop_controls_ux_polish_and_noise_guard_verification accepted by explicit Goal141 human handoff
 runtime_backed_unity_player_command_roundtrip_bridge_verification required
 runtime_significant_product_line_variant_matrix_and_selection_handoff_verification required
+goal_142a_winforms_operator_self_lock_and_atomic_regeneration_hotfix GREEN; Goal142 manual retry required
 goal_132_winforms_candidate_pipeline_operator_panel required
 goal_131_gamepackage_candidate_recipe_catalog_scoring_and_promotion required
 goal_130_gamepackage_candidate_factory_and_matrix_pipeline required
@@ -2336,6 +2337,14 @@ produced for review with
 `sourceTemplateUnmodified=true`, `packageValidationPassed=true`,
 `runtimeRoundtripSemanticCorrectnessPassed=true`, `mutationAuditPassed=true` and
 `noMetadataOnlyVariantAccepted=true`.
+
+Goal142A fixes the observed WinForms operator self-lock without accepting
+Goal142. `Run Runtime Variant Matrix` now uses transactional in-process
+generation, starts no compiler/test child process, and preserves the previous
+Goal142 procedural/export bytes on failure. The external automation script also
+snapshots/restores before cleanup. The observed manual attempt remains
+`exitCode=1`, `manualAttemptAccepted=false`; one corrected button retry is the
+next action before Goal142 review.
 
 The selected-candidate path now has the canonical runtime/player proof chain:
 

@@ -1,8 +1,36 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 142 runtime-significant product-line variant matrix and selection handoff
+Updated by: Goal 142A WinForms operator self-lock and atomic regeneration hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 142A operator hotfix produced:
+
+```text
+implementationStatus=GREEN
+accepted=false
+goal142Accepted=false
+goal142OperatorSelfLockFixed=true
+goal142OperatorUsesInProcessService=true
+goal142OperatorTransactionalRegeneration=true
+goal142LastManualAttemptExitCode=1
+goal142ManualRetryRequired=true
+operatorStartsCompilerProcess=false
+operatorStartsDotnetTestProcess=false
+previousArtifactsPreservedOnFailure=true
+successfulRunRegeneratesGoal142Artifacts=true
+```
+
+The `Run Runtime Variant Matrix` WinForms button now calls the Application-level
+`ProductLineRuntimeVariantMatrixOperatorRunner`, which transactionally invokes
+the existing in-process matrix service and refreshes the workspace after a
+successful GREEN result. The button no longer launches PowerShell, a compiler,
+or `dotnet test`. The external Goal142 automation script remains available and
+now snapshots/restores the canonical procedural/export roots when proof fails.
+
+The observed `exitCode=1` self-lock attempt is recorded as a failed operator
+attempt, not acceptance. Goal142 remains `accepted=false`; the repository owner
+must retry the one WinForms button before the Goal142 gate can be reviewed.
 
 Goal 142 produced for review:
 

@@ -9,7 +9,8 @@ using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.Application.Design.ProductLineRuntimeVariantMatrix;
 
-public sealed class ProductLineRuntimeVariantMatrixService
+public sealed class ProductLineRuntimeVariantMatrixService :
+    IProductLineRuntimeVariantMatrixWriter
 {
     private static readonly UTF8Encoding Utf8WithoutBom = new(false);
     private static readonly JsonSerializerOptions JsonOptions = new()

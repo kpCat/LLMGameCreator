@@ -99,6 +99,42 @@ function Resolve-Goal142OutputPath {
     return $full
 }
 
+function Copy-Goal142Directory {
+    param(
+        [Parameter(Mandatory=$true)][string]$Source,
+        [Parameter(Mandatory=$true)][string]$Destination
+    )
+
+    if (-not (Test-Path -LiteralPath $Source -PathType Container)) {
+        return
+    }
+
+    $parent = Split-Path -Parent $Destination
+    New-Item -ItemType Directory -Path $parent -Force | Out-Null
+    Copy-Item -LiteralPath $Source -Destination $Destination -Recurse -Force
+}
+
+function Remove-Goal142Directory {
+    param([Parameter(Mandatory=$true)][string]$Path)
+
+    if (Test-Path -LiteralPath $Path -PathType Container) {
+        Remove-Item -LiteralPath $Path -Recurse -Force
+    }
+}
+
+function Restore-Goal142Directory {
+    param(
+        [Parameter(Mandatory=$true)][string]$Destination,
+        [Parameter(Mandatory=$true)][string]$Backup,
+        [Parameter(Mandatory=$true)][bool]$PreviouslyExisted
+    )
+
+    Remove-Goal142Directory -Path $Destination
+    if ($PreviouslyExisted) {
+        Copy-Goal142Directory -Source $Backup -Destination $Destination
+    }
+}
+
 $ResolvedTemplatePackagePath = Resolve-Goal142InputPath -Path $TemplatePackagePath -Name "TemplatePackagePath"
 $ResolvedVariantCatalogPath = Resolve-Goal142OutputPath -Path $VariantCatalogPath -Name "VariantCatalogPath"
 $ResolvedOutputRoot = Resolve-Goal142OutputPath -Path $OutputRoot -Name "OutputRoot"
@@ -115,20 +151,30 @@ if ($DryRun) {
     return
 }
 
-if ($ApplyCleanup) {
-    if (Test-Path -LiteralPath $ResolvedOutputRoot -PathType Container) {
-        Remove-Item -LiteralPath $ResolvedOutputRoot -Recurse -Force
-    }
-
-    if (Test-Path -LiteralPath $ResolvedExportRoot -PathType Container) {
-        Remove-Item -LiteralPath $ResolvedExportRoot -Recurse -Force
-    }
+$templateHashBefore = (Get-FileHash -Algorithm SHA256 -LiteralPath $ResolvedTemplatePackagePath).Hash.ToLowerInvariant()
+$backupRoot = [System.IO.Path]::GetFullPath((Join-Path ([System.IO.Path]::GetTempPath()) ("LLMGameCreator/goal142-script-" + [Guid]::NewGuid().ToString("N"))))
+if (Test-Goal142PathUnderRoot -RootPath $RepoRoot -CandidatePath $backupRoot) {
+    throw "Goal142 transaction backup must stay outside the repository: $backupRoot"
 }
 
-$templateHashBefore = (Get-FileHash -Algorithm SHA256 -LiteralPath $ResolvedTemplatePackagePath).Hash.ToLowerInvariant()
+$proceduralBackup = Join-Path $backupRoot "procedural"
+$exportBackup = Join-Path $backupRoot "export"
+$proceduralExisted = Test-Path -LiteralPath $ResolvedOutputRoot -PathType Container
+$exportExisted = Test-Path -LiteralPath $ResolvedExportRoot -PathType Container
+$locationPushed = $false
 
-Push-Location $RepoRoot
+New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
+Copy-Goal142Directory -Source $ResolvedOutputRoot -Destination $proceduralBackup
+Copy-Goal142Directory -Source $ResolvedExportRoot -Destination $exportBackup
+
 try {
+    if ($ApplyCleanup) {
+        Remove-Goal142Directory -Path $ResolvedOutputRoot
+        Remove-Goal142Directory -Path $ResolvedExportRoot
+    }
+
+    Push-Location $RepoRoot
+    $locationPushed = $true
     $env:LLMGC_GOAL142_TEMPLATE_PACKAGE_PATH = ConvertTo-Goal142RelativePath -Path $ResolvedTemplatePackagePath
     $env:LLMGC_GOAL142_VARIANT_CATALOG_PATH = ConvertTo-Goal142RelativePath -Path $ResolvedVariantCatalogPath
     $env:LLMGC_GOAL142_OUTPUT_ROOT = ConvertTo-Goal142RelativePath -Path $ResolvedOutputRoot
@@ -137,27 +183,35 @@ try {
     if ($LASTEXITCODE -ne 0) {
         throw "Goal142 runtime-significant variant matrix proof test failed with exit code $LASTEXITCODE."
     }
+
+    $templateHashAfter = (Get-FileHash -Algorithm SHA256 -LiteralPath $ResolvedTemplatePackagePath).Hash.ToLowerInvariant()
+    if ($templateHashBefore -ne $templateHashAfter) {
+        throw "Goal142 source template hash changed: $templateHashBefore != $templateHashAfter"
+    }
+
+    $dashboardPath = Join-Path $ResolvedOutputRoot "product-line-runtime-variant-matrix-dashboard.json"
+    if (-not (Test-Path -LiteralPath $dashboardPath -PathType Leaf)) {
+        throw "Goal142 dashboard was not written: $dashboardPath"
+    }
+
+    $dashboard = Get-Content -LiteralPath $dashboardPath -Raw | ConvertFrom-Json
+    if ($dashboard.matrixStatus -ne "GREEN") {
+        throw "Goal142 matrix status is not GREEN: $($dashboard.matrixStatus)"
+    }
+}
+catch {
+    Restore-Goal142Directory -Destination $ResolvedOutputRoot -Backup $proceduralBackup -PreviouslyExisted $proceduralExisted
+    Restore-Goal142Directory -Destination $ResolvedExportRoot -Backup $exportBackup -PreviouslyExisted $exportExisted
+    throw
 }
 finally {
     Remove-Item Env:\LLMGC_GOAL142_TEMPLATE_PACKAGE_PATH -ErrorAction SilentlyContinue
     Remove-Item Env:\LLMGC_GOAL142_VARIANT_CATALOG_PATH -ErrorAction SilentlyContinue
     Remove-Item Env:\LLMGC_GOAL142_OUTPUT_ROOT -ErrorAction SilentlyContinue
-    Pop-Location
-}
-
-$templateHashAfter = (Get-FileHash -Algorithm SHA256 -LiteralPath $ResolvedTemplatePackagePath).Hash.ToLowerInvariant()
-if ($templateHashBefore -ne $templateHashAfter) {
-    throw "Goal142 source template hash changed: $templateHashBefore != $templateHashAfter"
-}
-
-$dashboardPath = Join-Path $ResolvedOutputRoot "product-line-runtime-variant-matrix-dashboard.json"
-if (-not (Test-Path -LiteralPath $dashboardPath -PathType Leaf)) {
-    throw "Goal142 dashboard was not written: $dashboardPath"
-}
-
-$dashboard = Get-Content -LiteralPath $dashboardPath -Raw | ConvertFrom-Json
-if ($dashboard.matrixStatus -ne "GREEN") {
-    throw "Goal142 matrix status is not GREEN: $($dashboard.matrixStatus)"
+    if ($locationPushed) {
+        Pop-Location
+    }
+    Remove-Goal142Directory -Path $backupRoot
 }
 
 Write-Host "GOAL142_PRODUCT_LINE_RUNTIME_VARIANT_MATRIX_GREEN"

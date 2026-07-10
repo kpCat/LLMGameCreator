@@ -9,6 +9,30 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceGoal142Tests
 {
     [Fact]
+    public void Goal142ButtonUsesInProcessOperatorWithoutCompilerOrTestChildProcess()
+    {
+        var source = File.ReadAllText(Path.Combine(
+            ProjectRoot(),
+            "src",
+            "LLMGameCreator.WinForms",
+            "Pages",
+            "VisualWorldStreamPreviewWorkspace",
+            "VisualWorldStreamPreviewWorkspacePageControl.Goal142.cs"));
+
+        Assert.Contains("ProductLineRuntimeVariantMatrixOperatorRunner", source, StringComparison.Ordinal);
+        Assert.Contains("ProductLineRuntimeVariantMatrixService", source, StringComparison.Ordinal);
+        Assert.Contains("Task.Run(() => _goal142OperatorRunner.RunAsync(root))", source, StringComparison.Ordinal);
+        Assert.Contains("Goal142SetRunning(true)", source, StringComparison.Ordinal);
+        Assert.Contains("RefreshWorkspace()", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("ProcessStartInfo", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("new Process", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("powershell", source, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("run-product-line-runtime-variant-matrix.ps1", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("dotnet test", source, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("dotnet build", source, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public async Task WorkspaceDisplaysGoal142RuntimeVariantMatrixSurface()
     {
         var root = ProjectRoot();

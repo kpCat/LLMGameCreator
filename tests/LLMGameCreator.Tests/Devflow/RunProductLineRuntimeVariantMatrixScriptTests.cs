@@ -29,6 +29,19 @@ public sealed class RunProductLineRuntimeVariantMatrixScriptTests
         Assert.Contains("must stay under the Goal142 output root", script, StringComparison.Ordinal);
         Assert.Contains("ProductLineRuntimeVariantMatrixScriptProof", script, StringComparison.Ordinal);
         Assert.Contains("Get-FileHash -Algorithm SHA256", script, StringComparison.Ordinal);
+        Assert.Contains("goal142-script-", script, StringComparison.Ordinal);
+        Assert.Contains("transaction backup must stay outside the repository", script, StringComparison.Ordinal);
+        Assert.Contains("Copy-Goal142Directory -Source $ResolvedOutputRoot", script, StringComparison.Ordinal);
+        Assert.Contains("Copy-Goal142Directory -Source $ResolvedExportRoot", script, StringComparison.Ordinal);
+        Assert.Contains("Restore-Goal142Directory -Destination $ResolvedOutputRoot", script, StringComparison.Ordinal);
+        Assert.Contains("Restore-Goal142Directory -Destination $ResolvedExportRoot", script, StringComparison.Ordinal);
+        Assert.Contains("catch {", script, StringComparison.Ordinal);
+        Assert.True(
+            script.IndexOf("Copy-Goal142Directory -Source $ResolvedOutputRoot", StringComparison.Ordinal)
+            < script.IndexOf("Remove-Goal142Directory -Path $ResolvedOutputRoot", StringComparison.Ordinal));
+        Assert.True(
+            script.IndexOf("Copy-Goal142Directory -Source $ResolvedExportRoot", StringComparison.Ordinal)
+            < script.IndexOf("Remove-Goal142Directory -Path $ResolvedExportRoot", StringComparison.Ordinal));
         Assert.Contains("GOAL142_PRODUCT_LINE_RUNTIME_VARIANT_MATRIX_GREEN", script, StringComparison.Ordinal);
         Assert.Contains("minimal-map-game-balanced-baseline", script, StringComparison.Ordinal);
         Assert.Contains("minimal-map-game-alchemy-focus", script, StringComparison.Ordinal);

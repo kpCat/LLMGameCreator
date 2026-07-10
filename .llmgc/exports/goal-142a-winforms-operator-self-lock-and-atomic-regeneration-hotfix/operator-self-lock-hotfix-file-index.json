@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "operator_self_lock_hotfix_file_index_v1",
+  "goalId": "goal_142a_winforms_operator_self_lock_and_atomic_regeneration_hotfix",
+  "status": "GREEN",
+  "rootPath": ".llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix",
+  "indexedFileCount": 3,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/operator-self-lock-hotfix-dashboard.json",
+      "role": "hotfix_dashboard",
+      "required": true,
+      "sha256": "38d4e466a5ce1a3e07c08497ee9d35671be63076d9bd16e44f207ff7dddaca98"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/operator-self-lock-hotfix-regression-proof.json",
+      "role": "rollback_and_source_regression_proof",
+      "required": true,
+      "sha256": "7afee6c725ac565855e0e3200cb1e0038b9d3ebb9f646ef8f2adbfd0beb09bae"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/operator-self-lock-hotfix-report.md",
+      "role": "human_readable_hotfix_report",
+      "required": true,
+      "sha256": "a86bae1cec26215369d6a1f3fcbac5a753c3cf535486c691e026ba987d0b4599"
+    }
+  ],
+  "goal142Accepted": false,
+  "accepted": false
+}

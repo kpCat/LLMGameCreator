@@ -6,6 +6,26 @@ Implementation status: GREEN
 Accepted: false
 Accepted by Codex: false
 
+## Goal142A Manual Attempt Failure Record
+
+```text
+manualAttemptObserved=true
+manualAttemptAccepted=false
+manualAttemptExitCode=1
+failureClass=winforms_self_lock_build_copy
+lockedByRunningWinForms=true
+lockedByVisualStudio=true
+artifactsMayHaveBeenRemovedBeforeFailure=true
+goal142OperatorSelfLockFixed=true
+goal142OperatorUsesInProcessService=true
+goal142OperatorTransactionalRegeneration=true
+goal142ManualRetryRequired=true
+```
+
+The observed run is recorded as an operator-workflow defect, not as Goal142
+acceptance. Goal142 remains `accepted=false`; the repository owner must retry
+the single `Run Runtime Variant Matrix` button after installing this hotfix.
+
 Goal142 builds a deterministic runtime-significant product-line variant matrix
 from the read-only template `samples/minimal-map-game/package.json`. It does
 not accept Goal141 and does not mutate the source template.

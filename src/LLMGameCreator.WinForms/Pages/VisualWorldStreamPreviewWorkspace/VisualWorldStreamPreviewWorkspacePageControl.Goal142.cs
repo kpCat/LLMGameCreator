@@ -1,12 +1,15 @@
-using System.Diagnostics;
-using System.Text;
 using LLMGameCreator.Application.Design.AcceptedAlphaUnityPlayableProjection;
+using LLMGameCreator.Application.Design.ProductLineRuntimeVariantMatrix;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
+using LLMGameCreator.Runtime;
 
 namespace LLMGameCreator.WinForms.Pages;
 
 public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
 {
+    private readonly ProductLineRuntimeVariantMatrixOperatorRunner _goal142OperatorRunner =
+        new(new ProductLineRuntimeVariantMatrixService(
+            RuntimeBackedPlayerCommandRoundtripService.CreateDefault()));
     private TabPage? _goal142RuntimeVariantMatrixTabPage;
     private TextBox? _goal142RuntimeVariantMatrixStatusTextBox;
     private TextBox? _goal142RuntimeVariantMatrixCommandTextBox;
@@ -125,82 +128,48 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         }
 
         Goal142SetRunning(true);
-        var output = new StringBuilder();
-        var error = new StringBuilder();
         var exitCode = -1;
         try
         {
-            Goal142SetStatus("running command=" + ProductLineRuntimeVariantMatrixVocabulary.NormalCommand);
-            using var process = new Process
-            {
-                StartInfo = CreateGoal142RuntimeVariantMatrixProcessStartInfo(root),
-                EnableRaisingEvents = true
-            };
-            process.OutputDataReceived += (_, args) =>
-            {
-                if (args.Data is not null)
-                {
-                    lock (output)
-                    {
-                        output.AppendLine(args.Data);
-                    }
-                }
-            };
-            process.ErrorDataReceived += (_, args) =>
-            {
-                if (args.Data is not null)
-                {
-                    lock (error)
-                    {
-                        error.AppendLine(args.Data);
-                    }
-                }
-            };
-
-            process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
-            await process.WaitForExitAsync();
-            exitCode = process.ExitCode;
-            Goal142SetOutputTail(output.ToString(), error.ToString());
+            Goal142SetStatus("running inProcess=true");
+            var result = await Task.Run(() => _goal142OperatorRunner.RunAsync(root));
+            exitCode = string.Equals(
+                result.Dashboard.MatrixStatus,
+                "GREEN",
+                StringComparison.Ordinal)
+                ? 0
+                : 1;
+            Goal142SetOutputTail(
+                string.Join(Environment.NewLine,
+                [
+                    "operatorUsesInProcessService=true",
+                    "operatorStartsCompilerProcess=false",
+                    "operatorStartsDotnetTestProcess=false",
+                    "matrixStatus=" + result.Dashboard.MatrixStatus,
+                    "candidateCount=" + result.Dashboard.CandidateCount,
+                    "passedCandidateCount=" + result.Dashboard.PassedCandidateCount,
+                    "distinctFinalStateHashCount=" + result.Dashboard.DistinctFinalStateHashCount,
+                    "selectedCandidateId=" + result.Dashboard.SelectedCandidateId,
+                    "sourceTemplateUnmodified="
+                        + result.Dashboard.SourceTemplateUnmodified.ToString().ToLowerInvariant(),
+                    "accepted=" + result.Dashboard.Accepted.ToString().ToLowerInvariant()
+                ]),
+                string.Empty);
             RefreshWorkspace();
             Goal142SetStatus("completed exitCode=" + exitCode);
         }
-        catch (Exception ex) when (ex is IOException
-            or UnauthorizedAccessException
-            or InvalidOperationException)
+        catch (Exception ex)
         {
-            Goal142SetOutputTail(output.ToString(), error + Environment.NewLine + ex.Message);
-            RefreshWorkspace();
+            exitCode = 1;
+            Goal142SetOutputTail(
+                "operatorUsesInProcessService=true",
+                Goal142RuntimeVariantMatrixOutputTail(ex.Message));
             Goal142SetStatus("failed exitCode=" + exitCode + "; " + ex.Message);
         }
         finally
         {
             Goal142SetRunning(false);
         }
-    }
-
-    private static ProcessStartInfo CreateGoal142RuntimeVariantMatrixProcessStartInfo(string root)
-    {
-        var script = Path.Combine(
-            root,
-            ProductLineRuntimeVariantMatrixVocabulary.ScriptPath
-                .Replace('/', Path.DirectorySeparatorChar));
-        var startInfo = new ProcessStartInfo("powershell")
-        {
-            WorkingDirectory = root,
-            UseShellExecute = false,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            CreateNoWindow = true
-        };
-        startInfo.ArgumentList.Add("-NoProfile");
-        startInfo.ArgumentList.Add("-ExecutionPolicy");
-        startInfo.ArgumentList.Add("Bypass");
-        startInfo.ArgumentList.Add("-File");
-        startInfo.ArgumentList.Add(script);
-        startInfo.ArgumentList.Add("-ApplyCleanup");
-        return startInfo;
     }
 
     private void Goal142SetRunning(bool running)
