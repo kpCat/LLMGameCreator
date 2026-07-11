@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "product_line_interactive_session_selection_handoff_v1",
+  "selectionId": "goal145-active-runtime-session-selection",
+  "selectionMode": "human_operator",
+  "selectedCandidateId": "minimal-map-game-exploration-resource-focus",
+  "selectedRecipeId": "exploration_resource_focus",
+  "selectedVariantKind": "exploration_resource_focus",
+  "selectedScore": 100,
+  "selectedPackagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package.json",
+  "selectedPackageSha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565",
+  "selectedFinalStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+  "selectedCheckpointHash": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+  "selectedComparisonToBaseline": {
+    "candidateId": "minimal-map-game-exploration-resource-focus",
+    "focusKind": "exploration_resource_focus",
+    "comparedDimension": "inventory",
+    "baselineValue": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+    "candidateValue": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
+    "focusEffectObserved": true
+  },
+  "availableCandidateIds": [
+    "minimal-map-game-alchemy-focus",
+    "minimal-map-game-balanced-baseline",
+    "minimal-map-game-combat-focus",
+    "minimal-map-game-exploration-resource-focus"
+  ],
+  "candidateMatrixResultPath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-matrix-result.json",
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "accepted": false
+}

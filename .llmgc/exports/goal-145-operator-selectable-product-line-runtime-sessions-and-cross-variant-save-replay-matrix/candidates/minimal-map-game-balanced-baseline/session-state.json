@@ -1,0 +1,13 @@
+{
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "sessionId": "goal145-minimal-map-game-balanced-baseline-session",
+  "packageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+  "currentActionIndex": 13,
+  "runtimeCommandExecutionCount": 11,
+  "presentationOnlyActionCount": 2,
+  "finalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+  "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+  "questSummary": "quest/help_healer:active:",
+  "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+  "completed": true
+}

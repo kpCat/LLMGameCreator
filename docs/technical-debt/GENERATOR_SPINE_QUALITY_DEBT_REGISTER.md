@@ -66,9 +66,11 @@ Goal 142 note: the runtime-significant product-line variant matrix and selection
 
 Goal 143 note: the selected runtime variant is carried through package/hash integrity validation, corrected Runtime rerun, ordered PlayerAdapter frames, in-process transactional WinForms operator and read-only Unity batchmode consumption. Goal144 records explicit human acceptance with acceptedByCodex=false.
 
-Goal 144 note: the selected variant now has one bounded Runtime-owned interactive session with individual actions and journal-based checkpoint/full replay. Remaining debt is Goal144 human review, Goal141 review, deeper hands-on playable quality, final release quality, public schema decisions, provider/legal, Lua/generator-library, final renderer/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+Goal 144 note: the selected variant now has one bounded Runtime-owned interactive session with individual actions and journal-based checkpoint/full replay. Goal144 is accepted by the later explicit Goal145 human handoff. Remaining debt is Goal141 review, deeper hands-on playable quality, final release quality, public schema decisions, provider/legal, Lua/generator-library, final renderer/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
-Goal 144A note: the advertised-action/executed-target mismatch and mutable checkpoint replay-count evidence are repaired with exact canonical binding, negative tamper proof and frozen 8/13 replay counts. Remaining debt still includes Goal144 manual WinForms review and explicit human acceptance; the hotfix does not advance that gate.
+Goal 144A note: the advertised-action/executed-target mismatch and mutable checkpoint replay-count evidence are repaired with exact canonical binding, negative tamper proof and frozen 8/13 replay counts. Goal144 is accepted by the later explicit Goal145 human handoff; the hotfix itself did not advance that gate.
+
+Goal 145 note: Goal144 manual review is accepted. The exploration-only active workflow debt is removed by artifact-driven discovery, one shared Runtime session/replay kernel for all four Goal142 candidates, fresh semantic focus comparisons and operator-selectable in-process sessions. Remaining debt includes Goal145 human review, Goal141 review, deeper hands-on playable quality, final release quality, public schema decisions, provider/legal, Lua/generator-library, final renderer/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|

@@ -2321,38 +2321,30 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-selected_runtime_variant_interactive_action_session_and_save_replay_verification
+operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification
 ```
 
-Goal144 is produced for review with `implementationStatus=GREEN`,
-`accepted=false`, `goal143Accepted=true`, `goal141Accepted=false`,
-`selectedCandidateId=minimal-map-game-exploration-resource-focus`,
-`selectedVariantKind=exploration_resource_focus`, `actionDescriptorCount=14`,
-`runtimeRoutedActionDescriptorCount=11`,
-`presentationOnlyActionDescriptorCount=3`, `executedRuntimeActionCount=11`,
-`invalidActionStateUnchanged=true`, `checkpointReloadByReplayPassed=true`,
-`actionDescriptorExecutionBindingPassed=true`,
-`allRuntimeActionTargetsMatchExecutedSteps=true`,
-`allRuntimeActionCommandKindsMatchExecutedSteps=true`,
-`harvestActionTargetId=node/apple_tree`, `basicAttackActionTargetId=goblin`,
-`checkpointReplayedActionCount=8`, `finalReplayActionCount=13`,
-`replayEvidenceFrozenBeforeContinuation=true`,
-`checkpointStateHashRestored=true`, `fullReplayEquivalent=true`,
-`finalStateHashMatchesGoal142=true`,
-`selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
-`unitySmokePassed=true`, `runtimeAuthority=true`, `projectionOnly=false`,
-`unityGameplayTruth=false` and `manualUnityOptional=true`.
+Goal145 is produced for review with `implementationStatus=GREEN`,
+`accepted=false`, `goal144Accepted=true`, `candidateCount=4`,
+`passedCandidateCount=4`, `failedCandidateCount=0`,
+`runtimeEvaluatedCandidateCount=4`, `runtimeMutatedCandidateCount=3`,
+`controlCandidateCount=1`, `distinctFinalStateHashCount=4`,
+`allCandidateCheckpointReloadsPassed=true`,
+`allCandidateFullReplaysEquivalent=true`,
+`allCandidateActionBindingsPassed=true`, `allFocusEffectsObserved=true`,
+`operatorSelectableCandidateCount=4`,
+`activeSelectedCandidateId=minimal-map-game-exploration-resource-focus`,
+`crossCandidateCheckpointRejected=true`, `unitySmokePassed=true`,
+`runtimeAuthority=true`, `projectionOnly=false`, `unityGameplayTruth=false` and
+`manualUnityOptional=true`.
 
-Goal143 is accepted by the explicit human statement recorded in Goal144.
-Goal144A corrects the Goal144 descriptor/execution correlation and immutable
-replay evidence without accepting Goal144: descriptor ranges now drive Runtime
-execution, harvest advertises/executes `node/apple_tree`, basic attack
-advertises/executes `goblin`, checkpoint replay remains 8 after continuation,
-and the final replay remains 13 with the accepted Goal142 final hash.
-Goal144 uses only the Goal142/143 selection, validates the package hash, derives
-14 actions from package/current state, executes one action at a time in Runtime,
-restores checkpoints through journal replay, exposes an in-process transactional
-WinForms operator and passes a read-only Unity live-session smoke.
+Goal144 is accepted by the explicit human statement recorded in Goal145.
+Goal145 discovers and validates all Goal142 candidates, executes one shared
+Runtime session kernel over every candidate, freezes each 8-action checkpoint
+replay before continuing to the 13-action final journal, and proves four fresh
+distinct hashes plus alchemy, combat and exploration/resource semantic effects.
+The operator can select any passing candidate in WinForms; Unity remains a
+read-only matrix consumer.
 
 The selected-candidate path now has the canonical runtime/player proof chain:
 
@@ -2360,8 +2352,8 @@ The selected-candidate path now has the canonical runtime/player proof chain:
 candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report -> Goal139 human acceptance -> controls UX polish -> bounded Unity editor noise classification
 ```
 
-Review Goal144 evidence before starting a new implementation slice. Do not
-accept Goal144 automatically. Do not start sample mutation, `.llmgc/manual/**`,
+Review Goal145 evidence before starting a new implementation slice. Do not
+accept Goal145 automatically. Do not start sample mutation, `.llmgc/manual/**`,
 live geodata/provider, public schema changes, Lua, generator-library, final
 gameplay, final art, atlas, Unity scene/prefab/settings/packages,
 StreamingAssets or release packaging work from this handoff.
@@ -2369,5 +2361,5 @@ StreamingAssets or release packaging work from this handoff.
 Status:
 
 ```text
-selected_runtime_variant_interactive_action_session_and_save_replay_verification_required_accepted_false
+operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification_required_accepted_false
 ```

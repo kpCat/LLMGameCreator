@@ -1,0 +1,8 @@
+{
+  "candidateId": "minimal-map-game-balanced-baseline",
+  "focusKind": "balanced_baseline",
+  "comparedDimension": "control",
+  "baselineValue": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+  "candidateValue": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+  "focusEffectObserved": true
+}

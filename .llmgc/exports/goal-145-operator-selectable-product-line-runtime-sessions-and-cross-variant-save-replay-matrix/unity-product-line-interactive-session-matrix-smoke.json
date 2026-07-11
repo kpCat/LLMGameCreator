@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "unity_product_line_interactive_session_matrix_smoke_v1",
+  "status": "GREEN",
+  "candidateCount": 4,
+  "passedCandidateCount": 4,
+  "distinctFinalStateHashCount": 4,
+  "selectedCandidateExists": true,
+  "selectedCandidatePackageHashMatches": true,
+  "allCandidateCheckpointReloadsPassed": true,
+  "allCandidateFullReplaysEquivalent": true,
+  "allCandidateActionBindingsPassed": true,
+  "allFocusEffectsObserved": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "passed": true,
+  "unityExitCode": 0,
+  "diagnostics": [
+    "unityExitCode=0"
+  ]
+}

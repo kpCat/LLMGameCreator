@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "product_line_interactive_session_file_index_v1",
+  "goalId": "goal_145_operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix",
+  "fileCount": 38,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/action-catalog.json",
+      "sha256": "be8dd334ef5f734ee2b5d48aeac060a7771df08ca9a1ee242e429423cbb660f0",
+      "byteCount": 9268
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/checkpoint-replay-result.json",
+      "sha256": "ef9cde83e942b397e1ce438b5bb3020695d70854b2f5ed02d518cbf74361b458",
+      "byteCount": 470
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/checkpoint.json",
+      "sha256": "8ca130c4e0eba547c1305d8a30551a9495947ee39d8f2a7ee77af34d72cc82ca",
+      "byteCount": 8118
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/final-replay-result.json",
+      "sha256": "71f50dba227b14e110faa39e5f7bce14d79bd7a896d9003fb4ed944cde979bd6",
+      "byteCount": 472
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/focus-effect-proof.json",
+      "sha256": "724da9b286862546b63b4bf4144969346c51b9055a40ee63389899f23ee6e86f",
+      "byteCount": 566
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/journal.json",
+      "sha256": "d77f4b0cb44e17eb6bb2a9bd360a39a12f6d63e59a7be4583c46e731e1c4e2fb",
+      "byteCount": 11891
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-alchemy-focus/session-state.json",
+      "sha256": "75d6df4e53ab9c03cdffd17bc62403172b6d107a179a842a17dac67d4786de31",
+      "byteCount": 881
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/action-catalog.json",
+      "sha256": "05ba6acd8c74700cf513d8bb531dca3365275f78b411ea38c87f4866247e471f",
+      "byteCount": 9272
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/checkpoint-replay-result.json",
+      "sha256": "5c907358c60397bcbabf99dca3fcf0d6d297cf310e002e36ddd83430cf45e5e0",
+      "byteCount": 470
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/checkpoint.json",
+      "sha256": "fc03d5fbd9ad3bd4bec378cd3e89b3e2aa7e36ada161ac605b0b8b0bb1699e5a",
+      "byteCount": 8159
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/final-replay-result.json",
+      "sha256": "61ce9ae456ac04cd8f6f766ef688892c14963a2ae1bb41b8cb281950b403547c",
+      "byteCount": 472
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/focus-effect-proof.json",
+      "sha256": "198ca6b6af65ed426b51190cdaaed46e904e509e124ff79d28e5b94977d41223",
+      "byteCount": 341
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/journal.json",
+      "sha256": "02f3e1189be50e80759650cf7e8eabbe06788531101a25f187f777a32f74cc65",
+      "byteCount": 11998
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-balanced-baseline/session-state.json",
+      "sha256": "d4afbb1fa2ebf94d03e41b483e1aa31156e2343729fb57df2011ca099dc8b494",
+      "byteCount": 851
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/action-catalog.json",
+      "sha256": "d8c3729b92494f9ab5bb3acd21f6a87dfd2a26d99437402694f94f1e52c43f5e",
+      "byteCount": 9267
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/checkpoint-replay-result.json",
+      "sha256": "5c907358c60397bcbabf99dca3fcf0d6d297cf310e002e36ddd83430cf45e5e0",
+      "byteCount": 470
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/checkpoint.json",
+      "sha256": "b7bdcf09ad12a51c51342c0dd02db04f3a52fb15c91f04d370a854ab63b2d6df",
+      "byteCount": 8059
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/final-replay-result.json",
+      "sha256": "faa8666c0ad42c706758b5d193b8571dbea0857003bb7b2ab551d485b9fde19c",
+      "byteCount": 472
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/focus-effect-proof.json",
+      "sha256": "26359c3a19576263418f2d10a04cd483e16e3aede8c57809cb0063ce0cdb2e2a",
+      "byteCount": 515
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/journal.json",
+      "sha256": "89798eb3346104e1ea87f4a4f09756c6be70c2bb250b1b7b1e3e7b976333202a",
+      "byteCount": 11863
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-combat-focus/session-state.json",
+      "sha256": "1eae50be97b708021ec29c9d164bf80626d92e7cb0bdd2e753dc4cc174003ecb",
+      "byteCount": 842
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/action-catalog.json",
+      "sha256": "92d9d2c11f869d29380f09f9d84f61634b86e51c02adda5951fb496037b0cb41",
+      "byteCount": 9281
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/checkpoint-replay-result.json",
+      "sha256": "5c907358c60397bcbabf99dca3fcf0d6d297cf310e002e36ddd83430cf45e5e0",
+      "byteCount": 470
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/checkpoint.json",
+      "sha256": "5d12bc7e8f95be1d522681cdc5b96ca1d84db6b40ddacf6907343737af5ea8c7",
+      "byteCount": 8339
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/final-replay-result.json",
+      "sha256": "22b0218fc67e916bc0fa0925a275feca152da40154b3b922cbf97d3fa734dc86",
+      "byteCount": 472
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/focus-effect-proof.json",
+      "sha256": "16a1d2a4e4dee07e2e4f6f5b52981f7e6e1530c0c59b8e18a42d981dc95bd7fd",
+      "byteCount": 557
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/journal.json",
+      "sha256": "01c70422376db8fbc0a63fa5740e0e677bd9391dacb18d831ef5ce19c1ad87f0",
+      "byteCount": 12241
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/candidates/minimal-map-game-exploration-resource-focus/session-state.json",
+      "sha256": "12c1335a7c80b1cf386b2267fcf5279d81723bb8e6e093323b631dcfcec0e9e1",
+      "byteCount": 869
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/goal144-human-acceptance-record.json",
+      "sha256": "e60438c449428799674fbd50d02848148e3cf86de9b04ea6b03d96aa05d5af35",
+      "byteCount": 1057
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/one-click-product-line-interactive-session-report.json",
+      "sha256": "8c4b2f5dcb15072c8291e61b77b793d36a955f02ebde7abd5c52bb65f92f2681",
+      "byteCount": 19267
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/one-click-product-line-interactive-session-report.md",
+      "sha256": "59e645361be139c0e1c618c9e63e02ba468c4bfd6b9a3c1b4ebd8224dacc1423",
+      "byteCount": 2097
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-candidate-catalog.json",
+      "sha256": "5421025604735271e150355d74701fe08c218d3cfb5c37884c0506922cc390e4",
+      "byteCount": 2712
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-comparison.json",
+      "sha256": "b90c9d0a53aa49b1b3576192ab325ba49f0fd573835c536b4298296c82cf16f1",
+      "byteCount": 2411
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-dashboard.json",
+      "sha256": "0ad226663ab2842b9911bb8087aa301207b177e6025886553a60b26e4f88b696",
+      "byteCount": 1344
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-matrix-result.json",
+      "sha256": "e0a1348b599e07a30bed8be659602d7c30925448451e5523d97c13754d3a4145",
+      "byteCount": 7367
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-negative-proof.json",
+      "sha256": "44fb9e4913919e47162fc53320184f9bc45ea5a258ce9b2d923b4c3f36ccda99",
+      "byteCount": 873
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/product-line-interactive-session-selection-handoff.json",
+      "sha256": "ede3f5b8aed859654bdd6d87d63ee5f89b1c7abd3c64b7aca3abf5cb3784ada7",
+      "byteCount": 1998
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/unity-product-line-interactive-session-matrix-smoke.json",
+      "sha256": "e4f18562d690af010190f16b9ac7cf23bc6c4535b9a884c68749f61beb3e6c3f",
+      "byteCount": 667
+    }
+  ]
+}

@@ -1,17 +1,27 @@
 # Goal 144 Selected Runtime Variant Interactive Action Session and Save Replay
 
-Status: produced for review
-Gate: `selected_runtime_variant_interactive_action_session_and_save_replay_verification required`
+Status: accepted
+Gate: `selected_runtime_variant_interactive_action_session_and_save_replay_verification passed`
 Implementation status: GREEN
-Accepted: false
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
+Raw manual input committed: false
 Manual Unity optional: true
+
+## Human acceptance
+
+```text
+Я принимаю Goal144 selected_runtime_variant_interactive_action_session_and_save_replay_verification GREEN. selectedCandidate=minimal-map-game-exploration-resource-focus, actionDescriptorCount=14, runtimeRoutedActionDescriptorCount=11, presentationOnlyActionDescriptorCount=3, executedRuntimeActionCount=11, actionDescriptorExecutionBindingPassed=true, harvestTarget=node/apple_tree, basicAttackTarget=goblin, invalidActionStateUnchanged=true, checkpointReloadByReplayPassed=true, checkpointReplayedActionCount=8, finalReplayActionCount=13, replayEvidenceFrozenBeforeContinuation=true, fullReplayEquivalent=true, finalStateHashMatchesGoal142=true, operatorStatus=GREEN, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.
+```
 
 ## Result
 
 ```text
 goal143Accepted=true
-goal144Accepted=false
+goal144Accepted=true
+goal144AcceptedByHuman=true
+goal144AcceptedByCodex=false
 goal144ActionExecutionBindingCorrected=true
 actionDescriptorExecutionBindingPassed=true
 allRuntimeActionTargetsMatchExecutedSteps=true
@@ -49,9 +59,9 @@ expected hash. Reload starts a fresh Runtime session and replays the journal; no
 opaque Runtime object is used as the persisted checkpoint authority.
 
 Goal144A corrected the descriptor/execution binding and replay evidence before
-manual review. The action selector now shows action id, target id, canonical
-step and route. This document remains `Accepted: false`; no human acceptance is
-fabricated by the hotfix.
+manual review. The action selector shows action id, target id, canonical step
+and route. Goal144 is accepted by the exact human statement above; Codex did not
+accept it and raw manual input is not tracked under `.llmgc/manual/**`.
 
 Normal command:
 `.devflow\scripts\run-selected-runtime-variant-live-session.cmd`

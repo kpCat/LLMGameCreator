@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "product_line_interactive_session_candidate_catalog_v1",
+  "goalId": "goal_145_operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix",
+  "candidateCount": 4,
+  "defaultSelectedCandidateId": "minimal-map-game-exploration-resource-focus",
+  "candidates": [
+    {
+      "candidateId": "minimal-map-game-alchemy-focus",
+      "recipeId": "alchemy_focus",
+      "variantKind": "alchemy_focus",
+      "score": 100,
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-alchemy-focus/package.json",
+      "packageSha256": "2a8ef8ef3425314359f63fe17aa90c3fdc37a2db3a1bc3a7028ede22f32c627c",
+      "runtimeEvaluated": true,
+      "runtimeMutated": true,
+      "controlCandidate": false,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "candidateId": "minimal-map-game-balanced-baseline",
+      "recipeId": "balanced_baseline",
+      "variantKind": "balanced_baseline",
+      "score": 90,
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+      "packageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+      "runtimeEvaluated": true,
+      "runtimeMutated": false,
+      "controlCandidate": true,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "candidateId": "minimal-map-game-combat-focus",
+      "recipeId": "combat_focus",
+      "variantKind": "combat_focus",
+      "score": 100,
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-combat-focus/package.json",
+      "packageSha256": "4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497",
+      "runtimeEvaluated": true,
+      "runtimeMutated": true,
+      "controlCandidate": false,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "candidateId": "minimal-map-game-exploration-resource-focus",
+      "recipeId": "exploration_resource_focus",
+      "variantKind": "exploration_resource_focus",
+      "score": 100,
+      "packagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-exploration-resource-focus/package.json",
+      "packageSha256": "27b426b087eb6dfd4567facbf76b1463a7ab1a46ff0e834ba849c95aa1858565",
+      "runtimeEvaluated": true,
+      "runtimeMutated": true,
+      "controlCandidate": false,
+      "passed": true,
+      "diagnostics": []
+    }
+  ]
+}

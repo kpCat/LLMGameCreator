@@ -1,0 +1,13 @@
+{
+  "candidateId": "minimal-map-game-alchemy-focus",
+  "sessionId": "goal145-minimal-map-game-alchemy-focus-session",
+  "packageSha256": "2a8ef8ef3425314359f63fe17aa90c3fdc37a2db3a1bc3a7028ede22f32c627c",
+  "currentActionIndex": 13,
+  "runtimeCommandExecutionCount": 11,
+  "presentationOnlyActionCount": 2,
+  "finalStateHash": "652bdaaee90703ff36a361de7a5553d76403d549a8f9cdae63585d3fa2bacd72",
+  "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:4,item/log:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+  "questSummary": "quest/help_healer:completed:",
+  "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+  "completed": true
+}

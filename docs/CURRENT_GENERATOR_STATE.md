@@ -1,50 +1,40 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 144A live session action target binding and replay evidence hotfix
+Updated by: Goal 145 operator-selectable product-line Runtime sessions and cross-variant save/replay matrix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 144 produced for review:
+Goal 145 produced for review:
 
 ```text
-selected_runtime_variant_interactive_action_session_and_save_replay_verification required
+operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification required
 implementationStatus=GREEN
 accepted=false
-goal143Accepted=true
-goal144Accepted=false
-goal144ActionExecutionBindingCorrected=true
-actionDescriptorExecutionBindingPassed=true
-allRuntimeActionTargetsMatchExecutedSteps=true
-allRuntimeActionCommandKindsMatchExecutedSteps=true
-harvestActionTargetId=node/apple_tree
-harvestExecutedTargetId=node/apple_tree
-basicAttackActionTargetId=goblin
-basicAttackExecutedTargetId=goblin
-noFirstResourceNodeFallback=true
-noIndependentCanonicalRangeLookup=true
-checkpointReplayedActionCount=8
-finalReplayActionCount=13
-replayEvidenceFrozenBeforeContinuation=true
+acceptedByHuman=false
+acceptedByCodex=false
+goal144Accepted=true
+goal144AcceptedByHuman=true
+goal144AcceptedByCodex=false
+productLineInteractiveSessionMatrix=true
+candidateCount=4
+passedCandidateCount=4
+failedCandidateCount=0
+runtimeEvaluatedCandidateCount=4
+runtimeMutatedCandidateCount=3
+controlCandidateCount=1
+distinctFinalStateHashCount=4
+allCandidatePackageHashesDistinct=true
+allCandidateCheckpointReloadsPassed=true
+allCandidateFullReplaysEquivalent=true
+allCandidateActionBindingsPassed=true
+sameRuntimeServiceUsedForAllCandidates=true
+sameCanonicalActionPlanUsedForAllCandidates=true
+allFocusEffectsObserved=true
+operatorSelectableCandidateCount=4
+activeSelectedCandidateId=minimal-map-game-exploration-resource-focus
+crossCandidateCheckpointRejected=true
+noHardcodedExplorationOnlyPath=true
 goal141Accepted=false
-selectedRuntimeVariantInteractiveSession=true
-selectedRuntimeVariantId=minimal-map-game-exploration-resource-focus
-selectedRuntimeVariantKind=exploration_resource_focus
-selectedVariantLiveSessionActionCount=14
-runtimeRoutedActionDescriptorCount=11
-presentationOnlyActionDescriptorCount=3
-executedRuntimeActionCount=11
-rejectedInvalidActionCount=1
-invalidActionStateUnchanged=true
-checkpointSavePassed=true
-checkpointReloadByReplayPassed=true
-checkpointStateHashRestored=true
-journalCorrelationPassed=true
-stateHashContinuityPassed=true
-fullReplayEquivalent=true
-finalStateHashMatchesGoal142=true
-selectedVariantEffectVisible=true
-noBalancedBaselineFallback=true
-noGoal131Fallback=true
 unitySmokePassed=true
 runtimeAuthority=true
 projectionOnly=false
@@ -52,42 +42,34 @@ unityGameplayTruth=false
 manualUnityOptional=true
 ```
 
-Goal144A corrects the Goal144 execution/evidence seam without accepting Goal144.
-Every Runtime-routed descriptor now names the exact canonical step, range,
-command kind and target that executes. Harvest advertises and executes
-`node/apple_tree`; basic attack advertises and executes `goblin`. Descriptor,
-response and journal bindings are replay-validated, including negative target,
-step, range and journal-tamper proofs.
+Goal145 discovers all four candidates from the Goal142 catalog/matrix/scoreboard,
+validates their metadata, package paths and SHA-256 values, and executes every
+candidate through the same Goal144 Runtime session service and canonical action
+plan. Every fresh session rejects an invalid action without mutation, saves an
+8-action checkpoint after craft, freezes checkpoint replay evidence, continues
+to a 13-action final journal and full-replays to the same final hash.
 
-Checkpoint evidence is frozen when reload completes: the checkpoint replay
-summary remains 8 even after its returned session continues to 13 actions.
-The checkpoint hash remains
-`cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6` and
-the final hash remains
-`d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54`.
-Goal144A evidence lives under the matching procedural/export hotfix roots.
+Fresh final hashes are distinct for all four candidates. Compared with the
+balanced control, alchemy finishes with healing-potion quantity 4 instead of 3,
+combat leaves goblin health 10 instead of 8, and exploration/resource finishes
+with apple/log/potion quantities 4/2/4 instead of 3/1/3. These are semantic
+Runtime state differences, not copied Goal142 outcome claims.
 
-Goal144 records the repository owner's exact Goal143 human acceptance, then
-starts one persistent Runtime-owned session over the selected Goal142 package.
-Its 14 package/state-derived descriptors execute one available action at a time;
-11 descriptors route to Runtime and three are presentation-only. Invalid or
-unavailable actions do not mutate state and do not advance the journal.
-
-The checkpoint stores the correlated action journal plus expected hash, not an
-opaque Runtime object. Reload starts a fresh Runtime session, replays the journal
-and restores the checkpoint hash exactly. Full replay reaches the accepted
-Goal142 final hash and preserves the exploration/resource inventory effect.
-WinForms exposes individual actions plus the in-process acceptance drill, while
-Unity only reads the final session/checkpoint/replay artifacts.
+The default selection is resolved from the accepted Goal142 handoff and remains
+`minimal-map-game-exploration-resource-focus`; `-SelectedCandidateId` supports
+any passing row, including the verified combat override. Changing selection
+resets the in-memory session/checkpoint, and cross-candidate checkpoint replay is
+rejected. WinForms uses in-process Application services; Unity reads Goal145
+artifacts only and remains non-authoritative.
 
 Evidence lives under
-`.llmgc/procedural/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/`,
+`.llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/`,
 export metadata under
-`.llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/`,
+`.llmgc/exports/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/`,
 and the normal command is
-`.devflow\scripts\run-selected-runtime-variant-live-session.cmd`.
-Goal143 is accepted by explicit human handoff; Goal144 remains `accepted=false`;
-Goal141 also remains unaccepted.
+`.devflow\scripts\run-product-line-interactive-session-matrix.cmd`.
+Goal144 is accepted by the exact human statement recorded in the Goal145
+acceptance record. Goal145 remains `accepted=false`; Goal141 remains unaccepted.
 
 Goal 142A operator hotfix produced:
 

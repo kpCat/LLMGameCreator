@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "product_line_interactive_session_negative_proof_v1",
+  "unknownCandidateRejected": true,
+  "failedCandidateSelectionRejected": true,
+  "candidatePackageHashMismatchRejected": true,
+  "candidateMetadataMismatchRejected": true,
+  "candidatePathEscapeRejected": true,
+  "duplicateCandidateIdRejected": true,
+  "duplicatePackagePathRejected": true,
+  "crossCandidateCheckpointRejected": true,
+  "baselineFallbackRejected": true,
+  "goal131FallbackRejected": true,
+  "sampleTemplateFallbackRejected": true,
+  "hardcodedExplorationOnlySelectionRejected": true,
+  "precomputedGoal142OutcomeCannotCountAsGoal145Execution": true,
+  "candidateSpecificRuntimeImplementationAbsent": true,
+  "unityDoesNotExecuteGameplay": true,
+  "winFormsStartsNoCompilerOrTestProcess": true,
+  "previousArtifactsPreservedOnFailure": true,
+  "passed": true
+}

@@ -1,0 +1,13 @@
+{
+  "candidateId": "minimal-map-game-combat-focus",
+  "sessionId": "goal145-minimal-map-game-combat-focus-session",
+  "packageSha256": "4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497",
+  "currentActionIndex": 13,
+  "runtimeCommandExecutionCount": 11,
+  "presentationOnlyActionCount": 2,
+  "finalStateHash": "adf6785cf7f9984587c3ed007392d26dcd4fef1ca041053fdc1b7e613dcf2fc7",
+  "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+  "questSummary": "quest/help_healer:active:",
+  "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+  "completed": true
+}

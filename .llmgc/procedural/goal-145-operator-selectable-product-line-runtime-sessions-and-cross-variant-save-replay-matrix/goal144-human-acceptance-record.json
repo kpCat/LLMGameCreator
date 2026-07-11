@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "goal144_human_acceptance_record_v1",
+  "goalId": "goal_144_selected_runtime_variant_interactive_action_session_and_save_replay",
+  "accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "rawManualInputNotCommitted": true,
+  "decision": "Я принимаю Goal144 selected_runtime_variant_interactive_action_session_and_save_replay_verification GREEN. selectedCandidate=minimal-map-game-exploration-resource-focus, actionDescriptorCount=14, runtimeRoutedActionDescriptorCount=11, presentationOnlyActionDescriptorCount=3, executedRuntimeActionCount=11, actionDescriptorExecutionBindingPassed=true, harvestTarget=node/apple_tree, basicAttackTarget=goblin, invalidActionStateUnchanged=true, checkpointReloadByReplayPassed=true, checkpointReplayedActionCount=8, finalReplayActionCount=13, replayEvidenceFrozenBeforeContinuation=true, fullReplayEquivalent=true, finalStateHashMatchesGoal142=true, operatorStatus=GREEN, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false."
+}

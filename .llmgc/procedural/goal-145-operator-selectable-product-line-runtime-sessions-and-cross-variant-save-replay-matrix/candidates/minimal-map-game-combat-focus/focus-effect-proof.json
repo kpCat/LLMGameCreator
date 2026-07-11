@@ -1,0 +1,8 @@
+{
+  "candidateId": "minimal-map-game-combat-focus",
+  "focusKind": "combat_focus",
+  "comparedDimension": "combat",
+  "baselineValue": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+  "candidateValue": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+  "focusEffectObserved": true
+}

@@ -1,0 +1,8 @@
+{
+  "candidateId": "minimal-map-game-exploration-resource-focus",
+  "focusKind": "exploration_resource_focus",
+  "comparedDimension": "inventory",
+  "baselineValue": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
+  "candidateValue": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
+  "focusEffectObserved": true
+}
