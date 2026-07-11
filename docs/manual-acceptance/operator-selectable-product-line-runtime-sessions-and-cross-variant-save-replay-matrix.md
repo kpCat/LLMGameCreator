@@ -1,12 +1,19 @@
 # Goal 145 Operator-Selectable Product-Line Runtime Sessions and Cross-Variant Save/Replay Matrix
 
-Status: produced for review
-Gate: `operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification required`
+Status: accepted by human handoff
+Gate: `operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification accepted`
 Implementation status: GREEN
-Accepted: false
-Accepted by human: false
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
+Raw manual input committed: false
 Manual Unity optional: true
+
+## Human decision
+
+```text
+Я принимаю Goal145 operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification GREEN. candidateCount=4, passedCandidateCount=4, distinctFinalStateHashCount=4, defaultSelection=minimal-map-game-exploration-resource-focus, combatSelectionStable=true, combatPackageSha256=4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497, programmaticBindInvokesSelectionCount=0, programmaticRestoreInvokesSelectionCount=0, operatorCommitInvokesSelectionCount=1, maximumSelectionCallbackDepth=1, allCandidateCheckpointReloadsPassed=true, allCandidateFullReplaysEquivalent=true, allCandidateActionBindingsPassed=true, allFocusEffectsObserved=true, operatorStatus=GREEN, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.
+```
 
 ## Result
 
@@ -36,7 +43,10 @@ runtimeAuthority=true
 projectionOnly=false
 unityGameplayTruth=false
 unitySmokePassed=true
-goal145Accepted=false
+goal145Accepted=true
+goal145AcceptedByHuman=true
+goal145AcceptedByCodex=false
+rawManualInputNotCommitted=true
 ```
 
 Fresh semantic comparisons against the balanced Runtime control:
@@ -69,5 +79,5 @@ The WinForms candidate combo now handles only real operator commits through
 operator commit is applied exactly once with maximum callback depth 1, remains
 selected through session/action/checkpoint/replay/matrix refreshes and starts
 the combat package SHA. Candidate changes reset prior session, checkpoint, last
-action and last replay state. Goal145 remains `accepted=false`; retry the
-corrected WinForms operator workflow before human review.
+action and last replay state. The repository owner accepted Goal145 through the
+exact decision above; `acceptedByCodex=false` remains preserved.

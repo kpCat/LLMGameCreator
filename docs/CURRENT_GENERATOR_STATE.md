@@ -1,15 +1,72 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 145A WinForms candidate selector reentrancy and selection stability hotfix
+Updated by: Goal 146 FeatureModule composition workbench and novel GamePackage Runtime qualification matrix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 145 is accepted by the repository owner's exact human handoff:
+
+```text
+accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+rawManualInputNotCommitted=true
+candidateCount=4
+passedCandidateCount=4
+distinctFinalStateHashCount=4
+allCandidateCheckpointReloadsPassed=true
+allCandidateFullReplaysEquivalent=true
+allCandidateActionBindingsPassed=true
+allFocusEffectsObserved=true
+```
+
+Goal 146 FeatureModule composition matrix is GREEN:
+
+```text
+featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification required
+implementationStatus=GREEN
+accepted=false
+acceptedByHuman=false
+acceptedByCodex=false
+manualReviewDeferred=true
+goal145Accepted=true
+featureModuleComposition=true
+requiredCoreModuleCount=10
+optionalProfileModuleCount=3
+compositionCount=8
+passedCompositionCount=8
+multiModuleCompositionCount=4
+distinctComposedPackageHashCount=8
+distinctComposedFinalStateHashCount=8
+allCompositionCheckpointReloadsPassed=true
+allCompositionFullReplaysEquivalent=true
+allCompositionActionBindingsPassed=true
+allCompositionOrderIndependenceProofsPassed=true
+selectedCompositionId=minimal-map-game-composed-alchemy-combat-exploration
+selectedCompositionModuleCount=3
+selectedCompositionCombinedEffectCount=3
+runtimeAuthority=true
+projectionOnly=false
+unityGameplayTruth=false
+nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
+```
+
+Goal146 composes all eight combinations of the three Goal142-derived optional
+profile modules over the immutable balanced base. Every new package validates,
+uses the existing structured mutation engine, passes the shared Runtime
+qualifier with an 8-action checkpoint and 13-action full replay, and is stable
+under module input reordering. The selected all-three package shows potion/apple/log
+quantities 5/4/2, goblin health 10 after the same attack, retained red-herb/water
+quantities 2/1 and completed quest state. WinForms uses in-process services;
+Unity reads Goal146 artifacts only. Goal146 remains `accepted=false` and
+`manualReviewDeferred=true`; no immediate human gate follows this goal.
 
 Goal 145A selector hotfix is GREEN:
 
 ```text
 implementationStatus=GREEN
 accepted=false
-goal145Accepted=false
+goal145Accepted=true
 goal145CandidateSelectorReentrancyFixed=true
 goal145ProgrammaticBindingSelectionCount=0
 goal145OperatorCommitSelectionCount=1
@@ -21,7 +78,7 @@ goal145CandidateChangeResetsCheckpoint=true
 goal145CombatSessionUsesCombatPackage=true
 goal145MatrixStillGreen=true
 goal145UnitySmokeStillGreen=true
-nextProductGoal=retry_goal_145_winforms_operator_then_review
+nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
 ```
 
 The Goal145 candidate combo now uses `SelectionChangeCommitted` for operator
@@ -31,16 +88,17 @@ commit is applied exactly once with maximum callback depth 1, remains selected
 through session/action/checkpoint/replay and matrix refreshes, and starts the
 combat package SHA `4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497`.
 Changing candidate still clears the prior session, checkpoint, last action and
-last replay. Goal145 remains produced for review and is not accepted here.
+last replay. Goal145 is now accepted by the exact human decision recorded for Goal146.
 
-Goal 145 produced for review:
+Goal 145 accepted by human handoff:
 
 ```text
-operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification required
+operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification accepted
 implementationStatus=GREEN
-accepted=false
-acceptedByHuman=false
+accepted=true
+acceptedByHuman=true
 acceptedByCodex=false
+rawManualInputNotCommitted=true
 goal144Accepted=true
 goal144AcceptedByHuman=true
 goal144AcceptedByCodex=false
@@ -98,7 +156,8 @@ export metadata under
 and the normal command is
 `.devflow\scripts\run-product-line-interactive-session-matrix.cmd`.
 Goal144 is accepted by the exact human statement recorded in the Goal145
-acceptance record. Goal145 remains `accepted=false`; Goal141 remains unaccepted.
+acceptance record. Goal145 is accepted by the later exact Goal146 human handoff
+with `acceptedByCodex=false`; Goal141 remains unaccepted.
 
 Goal 142A operator hotfix produced:
 

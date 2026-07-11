@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "featuremodule_composition_plan_v1",
+  "compositionId": "minimal-map-game-composed-exploration",
+  "baseCandidateId": "minimal-map-game-balanced-baseline",
+  "basePackagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+  "basePackageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+  "requiredModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "selectedOptionalModuleIds": [
+    "feature.profile.exploration_resource_focus"
+  ],
+  "orderedModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.profile.exploration_resource_focus",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "orderedMutationOperations": [
+    {
+      "operationId": "exploration.apple_tree_loot_maximum",
+      "targetKind": "loot_entry_max_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+      "expectedValue": "2",
+      "newValue": "3",
+      "runtimeDimension": "harvest_loot_quantity"
+    },
+    {
+      "operationId": "exploration.apple_tree_loot_minimum",
+      "targetKind": "loot_entry_min_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+      "expectedValue": "1",
+      "newValue": "3",
+      "runtimeDimension": "harvest_loot_quantity"
+    },
+    {
+      "operationId": "exploration.apple_tree_log_yield",
+      "targetKind": "resource_node_production_amount",
+      "targetId": "node/apple_tree|item/log",
+      "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "harvest_resource_node_output"
+    },
+    {
+      "operationId": "exploration.transaction_potion_output",
+      "targetKind": "transaction_output_amount",
+      "targetId": "transaction/buy_healing_potion|item/healing_potion",
+      "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "transaction_output"
+    }
+  ],
+  "deduplicatedOperationCount": 0,
+  "conflictCount": 0,
+  "dependencyValidationPassed": true,
+  "orderIndependencePassed": true,
+  "sourceTemplateUnmodified": true,
+  "validation": {
+    "allModuleIdsExist": true,
+    "requiredModulesSelected": true,
+    "dependenciesSatisfied": true,
+    "conflictsAbsent": true,
+    "moduleIdsUnique": true,
+    "operationIdsUnique": true,
+    "mutationTargetsUniqueOrIdentical": true,
+    "parameterOverridesSupported": true,
+    "passed": true,
+    "diagnostics": []
+  }
+}

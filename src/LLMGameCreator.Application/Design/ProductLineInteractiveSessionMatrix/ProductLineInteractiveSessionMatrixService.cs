@@ -1,4 +1,5 @@
 using System.Text.Json;
+using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Runtime.Abstractions;
 using RuntimeSession = LLMGameCreator.Runtime.Abstractions.SelectedRuntimeVariantInteractiveSession;
 
@@ -14,14 +15,8 @@ public interface IProductLineInteractiveSessionMatrixWriter
 
 public sealed class ProductLineInteractiveSessionMatrixService : IProductLineInteractiveSessionMatrixWriter
 {
-    private static readonly string[] ActionPlan =
-    [
-        "start_runtime", "move", "interact", "inspect_inventory", "open_dialogue",
-        "start_or_update_quest", "show_inventory", "craft", "harvest", "transaction",
-        "begin_encounter", "basic_attack", "show_final_state"
-    ];
-
     private readonly ISelectedRuntimeVariantInteractiveSessionService _runtime;
+    private readonly ProductLineRuntimeQualifier _qualifier;
     private readonly Goal142CandidateDiscovery _discovery;
     private readonly ProductLineInteractiveSessionMatrixArtifactService _artifactService;
 
@@ -31,6 +26,7 @@ public sealed class ProductLineInteractiveSessionMatrixService : IProductLineInt
         ProductLineInteractiveSessionMatrixArtifactService? artifactService = null)
     {
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
+        _qualifier = new ProductLineRuntimeQualifier(_runtime);
         _discovery = discovery ?? new Goal142CandidateDiscovery();
         _artifactService = artifactService ?? new ProductLineInteractiveSessionMatrixArtifactService();
     }
@@ -176,85 +172,27 @@ public sealed class ProductLineInteractiveSessionMatrixService : IProductLineInt
 
     private CandidateDrill RunCandidate(Goal142DiscoveredCandidate source)
     {
-        var start = new SelectedRuntimeVariantInteractiveSessionStartRequest
+        var qualification = _qualifier.Qualify(source.Package, new ProductLineRuntimeQualificationRequest
         {
             SessionId = "goal145-" + source.Candidate.CandidateId + "-session",
             CandidateId = source.Candidate.CandidateId,
             VariantKind = source.Candidate.VariantKind,
             PackagePath = source.Candidate.PackagePath,
-            PackageSha256 = source.Candidate.PackageSha256
-        };
-        var session = _runtime.StartSession(source.Package, start);
-        var catalog = session.AvailableActions.Select(CloneDescriptor).ToList();
-        var invalid = _runtime.ExecuteAction(source.Package, session, new()
-        {
-            ActionRequestId = start.SessionId + "-invalid",
-            SessionId = session.SessionId,
-            ActionIndex = session.CurrentActionIndex,
-            ActionId = "invalid-action-not-in-candidate"
+            PackageSha256 = source.Candidate.PackageSha256,
+            CheckpointId = "goal145-" + source.Candidate.CandidateId + "-checkpoint-after-craft",
+            FinalCheckpointId = "goal145-" + source.Candidate.CandidateId + "-final-journal"
         });
-        var invalidUnchanged = invalid.Status == "REJECTED"
-                               && invalid.StateHashBefore == invalid.StateHashAfter
-                               && session.ActionJournal.Count == 0
-                               && session.CurrentActionIndex == 0;
-
-        foreach (var action in ActionPlan.Take(8)) Execute(source, session, action);
-        var checkpoint = _runtime.SaveCheckpoint(
-            session,
-            "goal145-" + source.Candidate.CandidateId + "-checkpoint-after-craft",
-            "2026-07-11T00:00:00Z");
-        Execute(source, session, "harvest");
-        Execute(source, session, "transaction");
-        var checkpointReplay = _runtime.ReloadCheckpoint(source.Package, start, checkpoint);
-        var checkpointSummary = Freeze("checkpoint_reload", checkpointReplay);
-        if (!checkpointReplay.Passed)
-        {
-            throw new InvalidOperationException("Goal145 checkpoint replay failed: " + source.Candidate.CandidateId);
-        }
-
-        session = checkpointReplay.Session;
-        foreach (var action in ActionPlan.Skip(8)) Execute(source, session, action);
-        var finalCheckpoint = _runtime.SaveCheckpoint(
-            session,
-            "goal145-" + source.Candidate.CandidateId + "-final-journal",
-            "2026-07-11T00:00:00Z");
-        var finalReplay = _runtime.ReloadCheckpoint(source.Package, start, finalCheckpoint);
-        var finalSummary = Freeze("full_final_journal", finalReplay);
-        var bindingPassed = session.ActionJournal.Where(entry => entry.RuntimeExecuted).All(entry =>
-            entry.ExecutionBindingValidated
-            && entry.TargetId == entry.ExecutionTargetId
-            && !string.IsNullOrWhiteSpace(entry.CanonicalStepId)
-            && entry.CanonicalStepIndex >= 0
-            && entry.RuntimeCommandStartIndex >= 0
-            && entry.RuntimeCommandEndIndex >= entry.RuntimeCommandStartIndex);
         return new CandidateDrill(
             source,
-            start,
-            session,
-            catalog,
-            checkpoint,
-            checkpointSummary,
-            finalSummary,
-            invalidUnchanged,
-            bindingPassed,
-            string.Join("|", catalog.Select(action =>
-                action.ActionId + ":" + action.CanonicalStepId + ":" + action.RuntimeCommandStartIndex + "-" + action.RuntimeCommandEndIndex)));
-    }
-
-    private void Execute(Goal142DiscoveredCandidate source, RuntimeSession session, string actionId)
-    {
-        var result = _runtime.ExecuteAction(source.Package, session, new()
-        {
-            ActionRequestId = session.SessionId + "-action-" + session.CurrentActionIndex.ToString("000"),
-            SessionId = session.SessionId,
-            ActionIndex = session.CurrentActionIndex,
-            ActionId = actionId
-        });
-        if (result.Status != "EXECUTED" || !result.CorrelationPassed)
-        {
-            throw new InvalidOperationException(
-                "Goal145 action failed: " + source.Candidate.CandidateId + ":" + actionId + ":" + string.Join(";", result.Diagnostics));
-        }
+            qualification.StartRequest,
+            qualification.Session,
+            qualification.ActionCatalog,
+            qualification.Checkpoint,
+            ReplaySummary(qualification.CheckpointReplay),
+            ReplaySummary(qualification.FinalReplay),
+            qualification.InvalidActionStateUnchanged,
+            qualification.ActionDescriptorExecutionBindingPassed,
+            qualification.CanonicalActionPlanSignature);
     }
 
     private bool ProveCrossCandidateCheckpointRejected(IReadOnlyList<CandidateDrill> drills)
@@ -482,6 +420,22 @@ public sealed class ProductLineInteractiveSessionMatrixService : IProductLineInt
         SelectedRuntimeVariantInteractiveReplayResult replay) => new()
     {
         ReplayKind = kind,
+        Passed = replay.Passed,
+        PackageHashValidated = replay.PackageHashValidated,
+        CandidateValidated = replay.CandidateValidated,
+        JournalCorrelationPassed = replay.JournalCorrelationPassed,
+        StateHashContinuityPassed = replay.StateHashContinuityPassed,
+        ExpectedStateHashMatched = replay.ExpectedStateHashMatched,
+        ExpectedStateHash = replay.ExpectedStateHash,
+        ActualStateHash = replay.ActualStateHash,
+        ReplayedActionCount = replay.ReplayedActionCount,
+        Diagnostics = replay.Diagnostics.ToList()
+    };
+
+    private static ProductLineInteractiveSessionReplaySummary ReplaySummary(
+        ProductLineRuntimeQualificationReplayEvidence replay) => new()
+    {
+        ReplayKind = replay.ReplayKind,
         Passed = replay.Passed,
         PackageHashValidated = replay.PackageHashValidated,
         CandidateValidated = replay.CandidateValidated,

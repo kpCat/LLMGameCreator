@@ -17,11 +17,12 @@ public sealed class ProductLineRuntimeVariantMaterializer
 
     public ProductLineRuntimeVariantMaterializationResult Materialize(
         string templateJson,
-        ProductLineRuntimeVariantRecipe recipe)
+        ProductLineRuntimeVariantRecipe recipe,
+        ProductLineRuntimeVariantMetadataContext? metadataContext = null)
     {
         var root = JsonNode.Parse(templateJson)?.AsObject()
                    ?? throw new InvalidOperationException("Template package JSON root must be an object.");
-        ApplyCandidateMetadata(root, recipe);
+        ApplyCandidateMetadata(root, recipe, metadataContext);
 
         var entries = new List<ProductLineRuntimeVariantMutationAuditEntry>();
         var diagnostics = new List<string>();
@@ -52,14 +53,32 @@ public sealed class ProductLineRuntimeVariantMaterializer
             audit);
     }
 
-    private static void ApplyCandidateMetadata(JsonObject root, ProductLineRuntimeVariantRecipe recipe)
+    private static void ApplyCandidateMetadata(
+        JsonObject root,
+        ProductLineRuntimeVariantRecipe recipe,
+        ProductLineRuntimeVariantMetadataContext? context)
     {
         var manifest = Object(root, "manifest");
-        manifest["version"] = "0.1.142-" + recipe.RecipeId.Replace('_', '-');
-        manifest["description"] = recipe.DisplayName + " Goal142 runtime-significant variant.";
-
         var generated = Object(root, "generatedContent");
         var profile = Object(generated, "profile");
+        if (context is not null)
+        {
+            manifest["version"] = context.VersionSuffix;
+            manifest["description"] = context.ManifestDescription;
+            profile["title"] = context.ProfileTitle;
+            profile["description"] = context.ProfileDescription;
+            profile["genre"] = context.Genre;
+            profile["tone"] = context.Tone;
+            profile["presentationMode"] = context.PresentationMode;
+            profile["worldTopology"] = context.WorldTopology;
+            profile["actorModel"] = context.ActorModel;
+            profile["combatModel"] = context.CombatModel;
+            profile["sourceContextJson"] = context.SourceContext;
+            return;
+        }
+
+        manifest["version"] = "0.1.142-" + recipe.RecipeId.Replace('_', '-');
+        manifest["description"] = recipe.DisplayName + " Goal142 runtime-significant variant.";
         profile["title"] = recipe.DisplayName;
         profile["description"] = "Goal142 product-line runtime variant candidate.";
         profile["genre"] = "runtime-variant";

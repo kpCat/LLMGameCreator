@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "goal145_human_acceptance_record_v1",
+  "goalId": "goal_145_operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix",
+  "accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "rawManualInputNotCommitted": true,
+  "decision": "Я принимаю Goal145 operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification GREEN. candidateCount=4, passedCandidateCount=4, distinctFinalStateHashCount=4, defaultSelection=minimal-map-game-exploration-resource-focus, combatSelectionStable=true, combatPackageSha256=4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497, programmaticBindInvokesSelectionCount=0, programmaticRestoreInvokesSelectionCount=0, operatorCommitInvokesSelectionCount=1, maximumSelectionCallbackDepth=1, allCandidateCheckpointReloadsPassed=true, allCandidateFullReplaysEquivalent=true, allCandidateActionBindingsPassed=true, allFocusEffectsObserved=true, operatorStatus=GREEN, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false."
+}

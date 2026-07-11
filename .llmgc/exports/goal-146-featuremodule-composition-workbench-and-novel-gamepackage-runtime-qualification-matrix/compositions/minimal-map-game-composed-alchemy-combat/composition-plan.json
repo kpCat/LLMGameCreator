@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "featuremodule_composition_plan_v1",
+  "compositionId": "minimal-map-game-composed-alchemy-combat",
+  "baseCandidateId": "minimal-map-game-balanced-baseline",
+  "basePackagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+  "basePackageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+  "requiredModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "selectedOptionalModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus"
+  ],
+  "orderedModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "orderedMutationOperations": [
+    {
+      "operationId": "combat.basic_attack_damage_effect",
+      "targetKind": "ability_effect_arg_amount",
+      "targetId": "ability/basic_attack|damage_resource|resource/health",
+      "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+      "expectedValue": "4",
+      "newValue": "6",
+      "runtimeDimension": "combat_ability_damage"
+    },
+    {
+      "operationId": "combat.basic_attack_power",
+      "targetKind": "ability_power",
+      "targetId": "ability/basic_attack",
+      "jsonPath": "game.abilities[id=ability/basic_attack].power",
+      "expectedValue": "4",
+      "newValue": "6",
+      "runtimeDimension": "combat_ability_damage"
+    },
+    {
+      "operationId": "combat.goblin_health_pool",
+      "targetKind": "encounter_participant_resource_amount",
+      "targetId": "encounter/goblin_duel|goblin|resource/health",
+      "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+      "expectedValue": "12",
+      "newValue": "16",
+      "runtimeDimension": "combat_participant_resource"
+    },
+    {
+      "operationId": "alchemy.starting_red_herb_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/red_herb",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+      "expectedValue": "2",
+      "newValue": "4",
+      "runtimeDimension": "alchemy_inventory_resource"
+    },
+    {
+      "operationId": "alchemy.starting_water_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/water_flask",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_inventory_resource"
+    },
+    {
+      "operationId": "alchemy.healing_potion_output_quantity",
+      "targetKind": "recipe_output_amount",
+      "targetId": "recipe/healing_potion|item/healing_potion",
+      "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_recipe_output"
+    }
+  ],
+  "deduplicatedOperationCount": 0,
+  "conflictCount": 0,
+  "dependencyValidationPassed": true,
+  "orderIndependencePassed": true,
+  "sourceTemplateUnmodified": true,
+  "validation": {
+    "allModuleIdsExist": true,
+    "requiredModulesSelected": true,
+    "dependenciesSatisfied": true,
+    "conflictsAbsent": true,
+    "moduleIdsUnique": true,
+    "operationIdsUnique": true,
+    "mutationTargetsUniqueOrIdentical": true,
+    "parameterOverridesSupported": true,
+    "passed": true,
+    "diagnostics": []
+  }
+}

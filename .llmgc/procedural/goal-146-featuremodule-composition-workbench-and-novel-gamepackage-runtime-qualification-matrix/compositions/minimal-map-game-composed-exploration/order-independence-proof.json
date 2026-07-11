@@ -1,0 +1,13 @@
+{
+  "compositionId": "minimal-map-game-composed-exploration",
+  "forwardModuleIds": [
+    "feature.profile.exploration_resource_focus"
+  ],
+  "reverseModuleIds": [
+    "feature.profile.exploration_resource_focus"
+  ],
+  "forwardPackageSha256": "5a59c2b552ea56f53a660550c8de2f55cf105c0914b2a2296f8ad507f9e34aa7",
+  "reversePackageSha256": "5a59c2b552ea56f53a660550c8de2f55cf105c0914b2a2296f8ad507f9e34aa7",
+  "packageBytesIdentical": true,
+  "passed": true
+}

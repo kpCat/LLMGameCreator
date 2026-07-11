@@ -1,0 +1,59 @@
+{
+  "selectionId": "goal146-human-operator-feature-modules",
+  "selectionMode": "human_operator_feature_modules",
+  "compositionId": "minimal-map-game-composed-alchemy-combat-exploration",
+  "displayName": "Alchemy + Combat + Exploration Resource FeatureModule Composition",
+  "baseCandidateId": "minimal-map-game-balanced-baseline",
+  "requiredModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "selectedOptionalModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus"
+  ],
+  "orderedModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "packagePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/package.json",
+  "packageSha256": "9a83d47e8e2ae541e7789b804c32f489acb8e7525c0a9dc32a7cc8be8822d65a",
+  "packageDistinctFromGoal142Candidates": true,
+  "runtimeQualificationResultPath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/final-replay-result.json",
+  "checkpointHash": "0336f91c07f656aefb9edbe03310b23d0fc7a4ea49665993e5f3a190a715b2d8",
+  "finalStateHash": "d5ad29ee7c350918681c2859b80f5d2944834a6414918a16d8b4e1c0746753b9",
+  "semanticEffects": [
+    "alchemy effect observed",
+    "combat effect observed",
+    "exploration/resource effect observed"
+  ],
+  "availableOptionalModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus"
+  ],
+  "runtimeAuthority": true,
+  "projectionOnly": false,
+  "unityGameplayTruth": false,
+  "accepted": false
+}

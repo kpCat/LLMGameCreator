@@ -1,0 +1,1059 @@
+{
+  "manifest": {
+    "packageId": "game/minimal-map-game",
+    "title": "Minimal Map Game",
+    "version": "0.1.146-alchemy-combat-exploration",
+    "formatVersion": "0.1",
+    "startMapId": "map/village",
+    "description": "Alchemy + Combat + Exploration Resource FeatureModule Composition Goal146 FeatureModule composition."
+  },
+  "game": {
+    "tilePrototypes": [
+      {
+        "id": "tile/grass",
+        "name": "Трава",
+        "walkable": true,
+        "movementCost": 1.0,
+        "assetId": "asset/tile/grass"
+      },
+      {
+        "id": "tile/wall",
+        "name": "Стена",
+        "walkable": false,
+        "movementCost": 999.0,
+        "assetId": "asset/tile/wall"
+      },
+      {
+        "id": "tile/road",
+        "name": "Дорога",
+        "walkable": true,
+        "movementCost": 0.8,
+        "assetId": "asset/tile/road"
+      }
+    ],
+    "entityPrototypes": [
+      {
+        "id": "prototype/npc/old_guard",
+        "name": "Старый стражник",
+        "assetId": "asset/npc/old_guard/spritesheet",
+        "components": [
+          {
+            "type": "interactable",
+            "args": {
+              "dialogueId": "dialogue/old_guard_intro"
+            }
+          },
+          {
+            "type": "collidable",
+            "args": {
+              "blocksMovement": "true"
+            }
+          }
+        ]
+      },
+      {
+        "id": "prototype/object/sign",
+        "name": "Указатель",
+        "assetId": "asset/object/sign",
+        "components": [
+          {
+            "type": "interactable",
+            "args": {
+              "text": "На табличке написано: северная дорога закрыта.",
+              "interactionId": "interaction/sign_inspect"
+            }
+          }
+        ]
+      }
+    ],
+    "maps": [
+      {
+        "id": "map/village",
+        "name": "Деревня",
+        "width": 12,
+        "height": 8,
+        "defaultTileId": "tile/grass",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [
+          {
+            "x": 0,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 7,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 8,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 9,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 10,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 11,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 6,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "tileId": "tile/road"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "tileId": "tile/road"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "tileId": "tile/road"
+          }
+        ],
+        "entities": [
+          {
+            "id": "entity/village/old_guard",
+            "prototypeId": "prototype/npc/old_guard",
+            "position": {
+              "x": 4,
+              "y": 1
+            },
+            "components": []
+          },
+          {
+            "id": "entity/village/sign",
+            "prototypeId": "prototype/object/sign",
+            "position": {
+              "x": 2,
+              "y": 2
+            },
+            "components": []
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "item/red_herb",
+        "name": "Red Herb",
+        "description": "A simple alchemy herb.",
+        "kind": "material",
+        "rarity": "common",
+        "maxStack": 20,
+        "tags": [
+          "herb",
+          "alchemy"
+        ]
+      },
+      {
+        "id": "item/water_flask",
+        "name": "Water Flask",
+        "description": "Clean water in a small flask.",
+        "kind": "material",
+        "maxStack": 10
+      },
+      {
+        "id": "item/healing_potion",
+        "name": "Healing Potion",
+        "description": "A small restorative potion.",
+        "kind": "consumable",
+        "rarity": "common",
+        "maxStack": 5,
+        "value": 25,
+        "useEffects": [
+          {
+            "type": "add_status",
+            "args": {
+              "id": "status/healed",
+              "amount": "3"
+            }
+          },
+          {
+            "type": "log",
+            "args": {
+              "id": "log/healing_potion_used",
+              "message": "Healing potion used."
+            }
+          }
+        ]
+      },
+      {
+        "id": "item/fuel_can",
+        "name": "Fuel Can",
+        "description": "Fuel for base machinery.",
+        "kind": "fuel",
+        "maxStack": 4,
+        "fuelType": "diesel"
+      },
+      {
+        "id": "item/rusty_knife",
+        "name": "Rusty Knife",
+        "description": "A worn utility blade.",
+        "kind": "weapon",
+        "maxStack": 1,
+        "tags": [
+          "weapon"
+        ],
+        "metadata": {
+          "equip_slot": "slot/weapon"
+        }
+      },
+      {
+        "id": "item/woodcutting_axe",
+        "name": "Woodcutting Axe",
+        "description": "A simple axe for gathering wood.",
+        "kind": "tool",
+        "maxStack": 1,
+        "maxDurability": 10,
+        "tags": [
+          "tool",
+          "axe"
+        ],
+        "metadata": {
+          "equip_slot": "slot/tool",
+          "break_on_zero": "true"
+        }
+      },
+      {
+        "id": "item/apple",
+        "name": "Apple",
+        "description": "A small foraged apple.",
+        "kind": "consumable",
+        "maxStack": 10,
+        "tags": [
+          "food"
+        ]
+      },
+      {
+        "id": "item/log",
+        "name": "Log",
+        "description": "Freshly cut wood.",
+        "kind": "material",
+        "maxStack": 20,
+        "tags": [
+          "wood"
+        ]
+      },
+      {
+        "id": "item/ore",
+        "name": "Ore",
+        "description": "A small chunk of raw ore.",
+        "kind": "material",
+        "maxStack": 20,
+        "tags": [
+          "ore"
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "id": "resource/health",
+        "name": "Health",
+        "kind": "health",
+        "defaultValue": 30,
+        "minValue": 0,
+        "maxValue": 30,
+        "tags": [
+          "health"
+        ]
+      },
+      {
+        "id": "resource/stamina",
+        "name": "Stamina",
+        "kind": "combat",
+        "defaultValue": 10,
+        "minValue": 0,
+        "maxValue": 10
+      },
+      {
+        "id": "resource/gold",
+        "name": "Gold",
+        "kind": "currency",
+        "minValue": 0
+      },
+      {
+        "id": "resource/mana",
+        "name": "Mana",
+        "kind": "magic",
+        "defaultValue": 10,
+        "minValue": 0,
+        "maxValue": 100,
+        "regenPerTick": 1
+      },
+      {
+        "id": "resource/electricity",
+        "name": "Electricity",
+        "kind": "network_resource",
+        "minValue": 0
+      }
+    ],
+    "statuses": [
+      {
+        "id": "status/healed",
+        "name": "Healed",
+        "description": "Temporary sample healing status.",
+        "kind": "buff"
+      },
+      {
+        "id": "status/poisoned",
+        "name": "Poisoned",
+        "description": "A sample combat status.",
+        "kind": "debuff"
+      }
+    ],
+    "recipes": [
+      {
+        "id": "recipe/healing_potion",
+        "name": "Healing Potion",
+        "category": "alchemy",
+        "inputs": [
+          {
+            "kind": "item",
+            "id": "item/red_herb",
+            "amount": 2
+          },
+          {
+            "kind": "item",
+            "id": "item/water_flask",
+            "amount": 1
+          }
+        ],
+        "costs": [
+          {
+            "kind": "resource",
+            "id": "resource/mana",
+            "amount": 5
+          }
+        ],
+        "outputs": [
+          {
+            "kind": "item",
+            "id": "item/healing_potion",
+            "amount": 2
+          }
+        ],
+        "duration": 3,
+        "successChance": 1,
+        "tags": [
+          "alchemy",
+          "potion"
+        ]
+      }
+    ],
+    "lootTables": [
+      {
+        "id": "loot/goblin_common",
+        "name": "Goblin Common Loot",
+        "kind": "common",
+        "entries": [
+          {
+            "id": "entry/gold",
+            "weight": 10,
+            "output": {
+              "kind": "resource",
+              "id": "resource/gold",
+              "amount": 3
+            }
+          },
+          {
+            "id": "entry/healing_potion",
+            "weight": 1,
+            "output": {
+              "kind": "item",
+              "id": "item/healing_potion",
+              "amount": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "loot/apple_tree",
+        "name": "Apple Tree Forage",
+        "kind": "harvest",
+        "entries": [
+          {
+            "id": "entry/apple",
+            "weight": 1,
+            "minCount": 3,
+            "maxCount": 3,
+            "output": {
+              "kind": "item",
+              "id": "item/apple",
+              "amount": 1
+            }
+          }
+        ]
+      }
+    ],
+    "transactions": [
+      {
+        "id": "transaction/buy_healing_potion",
+        "name": "Buy Healing Potion",
+        "kind": "shop",
+        "costs": [
+          {
+            "kind": "resource",
+            "id": "resource/gold",
+            "amount": 25
+          }
+        ],
+        "outputs": [
+          {
+            "kind": "item",
+            "id": "item/healing_potion",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "resourceNetworks": [
+      {
+        "id": "network/base_power",
+        "name": "Base Power Grid",
+        "resourceId": "resource/electricity",
+        "kind": "electricity"
+      }
+    ],
+    "resourceNodes": [
+      {
+        "id": "node/diesel_generator",
+        "name": "Diesel Generator",
+        "kind": "producer",
+        "networkId": "network/base_power",
+        "production": [
+          {
+            "kind": "resource",
+            "id": "resource/electricity",
+            "amount": 20
+          }
+        ],
+        "conversionInputs": [
+          {
+            "kind": "item",
+            "id": "item/fuel_can",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "node/apple_tree",
+        "name": "Apple Tree",
+        "kind": "harvester",
+        "production": [
+          {
+            "kind": "item",
+            "id": "item/log",
+            "amount": 2
+          }
+        ],
+        "metadata": {
+          "required_tool_tag": "axe",
+          "durability_cost": "1",
+          "harvest_loot_table_id": "loot/apple_tree"
+        }
+      }
+    ],
+    "inventories": [
+      {
+        "id": "inventory/player_start",
+        "ownerKind": "player",
+        "slots": 16,
+        "stacks": [
+          {
+            "itemId": "item/red_herb",
+            "amount": 4
+          },
+          {
+            "itemId": "item/water_flask",
+            "amount": 2
+          },
+          {
+            "itemId": "item/healing_potion",
+            "amount": 1
+          },
+          {
+            "itemId": "item/fuel_can",
+            "amount": 1
+          },
+          {
+            "itemId": "item/woodcutting_axe",
+            "amount": 1,
+            "durability": 10
+          }
+        ]
+      },
+      {
+        "id": "inventory/chest_start",
+        "ownerKind": "container",
+        "ownerId": "entity/chest/start",
+        "slots": 8,
+        "stacks": [
+          {
+            "itemId": "item/rusty_knife",
+            "amount": 1
+          },
+          {
+            "itemId": "item/apple",
+            "amount": 2
+          }
+        ],
+        "tags": [
+          "container"
+        ]
+      }
+    ],
+    "equipmentSlots": [
+      {
+        "id": "slot/tool",
+        "name": "Tool",
+        "allowedTags": [
+          "tool"
+        ],
+        "allowedKinds": [
+          "tool"
+        ]
+      },
+      {
+        "id": "slot/weapon",
+        "name": "Weapon",
+        "allowedTags": [
+          "weapon"
+        ],
+        "allowedKinds": [
+          "weapon"
+        ]
+      }
+    ],
+    "abilities": [
+      {
+        "id": "ability/basic_attack",
+        "name": "Basic Attack",
+        "kind": "attack",
+        "power": 6,
+        "resourceId": "resource/health",
+        "tags": [
+          "basic_attack",
+          "combat"
+        ],
+        "effects": [
+          {
+            "type": "damage_resource",
+            "args": {
+              "id": "resource/health",
+              "amount": "6"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ability/heal_minor",
+        "name": "Minor Heal",
+        "kind": "heal",
+        "costs": [
+          {
+            "kind": "resource",
+            "id": "resource/stamina",
+            "amount": 2
+          }
+        ],
+        "effects": [
+          {
+            "type": "heal_resource",
+            "args": {
+              "id": "resource/health",
+              "amount": "5",
+              "scope": "source"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ability/goblin_slash",
+        "name": "Goblin Slash",
+        "kind": "attack",
+        "power": 3,
+        "resourceId": "resource/health",
+        "tags": [
+          "combat"
+        ],
+        "effects": [
+          {
+            "type": "damage_resource",
+            "args": {
+              "id": "resource/health",
+              "amount": "3"
+            }
+          }
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "id": "stat/strength",
+        "name": "Strength",
+        "kind": "attribute",
+        "defaultValue": 5,
+        "minValue": 0,
+        "maxValue": 20
+      }
+    ],
+    "progressions": [
+      {
+        "id": "progression/character_level",
+        "name": "Character Level",
+        "kind": "xp_level",
+        "stages": [
+          {
+            "id": "level/1",
+            "name": "Level 1",
+            "requiredAmount": 0
+          },
+          {
+            "id": "level/2",
+            "name": "Level 2",
+            "requiredAmount": 10
+          }
+        ]
+      }
+    ],
+    "encounters": [
+      {
+        "id": "encounter/goblin_duel",
+        "name": "Goblin Duel",
+        "kind": "combat",
+        "participants": [
+          {
+            "id": "player",
+            "name": "Player",
+            "kind": "player",
+            "team": "player",
+            "stats": [
+              {
+                "kind": "stat",
+                "id": "stat/strength",
+                "amount": 5
+              }
+            ],
+            "resources": [
+              {
+                "kind": "resource",
+                "id": "resource/health",
+                "amount": 30
+              },
+              {
+                "kind": "resource",
+                "id": "resource/stamina",
+                "amount": 10
+              }
+            ],
+            "abilities": [
+              "ability/basic_attack",
+              "ability/heal_minor"
+            ],
+            "inventoryId": "inventory/player_start"
+          },
+          {
+            "id": "goblin",
+            "name": "Goblin",
+            "kind": "enemy",
+            "team": "enemy",
+            "resources": [
+              {
+                "kind": "resource",
+                "id": "resource/health",
+                "amount": 16
+              }
+            ],
+            "abilities": [
+              "ability/goblin_slash"
+            ]
+          }
+        ],
+        "rewards": [
+          {
+            "kind": "resource",
+            "id": "resource/gold",
+            "amount": 5
+          },
+          {
+            "kind": "progression",
+            "id": "progression/character_level",
+            "amount": 10
+          }
+        ],
+        "lootTableId": "loot/goblin_common",
+        "defaultSeed": 19,
+        "metadata": {
+          "default_attack_ability_id": "ability/basic_attack"
+        }
+      }
+    ],
+    "quests": [
+      {
+        "id": "quest/help_healer",
+        "title": "Help the Healer",
+        "description": "Gather three red herbs and report back.",
+        "kind": "side_quest",
+        "objectives": [
+          {
+            "id": "objective/collect_red_herbs",
+            "kind": "has_item",
+            "targetId": "item/red_herb",
+            "requiredAmount": 3
+          }
+        ],
+        "rewards": [
+          {
+            "kind": "resource",
+            "id": "resource/gold",
+            "amount": 10
+          },
+          {
+            "kind": "reputation",
+            "id": "faction/village",
+            "amount": 5
+          }
+        ],
+        "tags": [
+          "sample",
+          "narrative"
+        ]
+      }
+    ],
+    "dialogues": [
+      {
+        "id": "dialogue/old_guard_intro",
+        "title": "Старый стражник",
+        "startNodeId": "start",
+        "backgroundAssetId": "asset/background/village_gate",
+        "nodes": [
+          {
+            "id": "start",
+            "speakerId": "npc/old_guard",
+            "expression": "neutral",
+            "text": "Дальше дороги нет. Пока нет.",
+            "choices": []
+          }
+        ]
+      },
+      {
+        "id": "dialogue/healer",
+        "title": "Village Healer",
+        "startNodeId": "start",
+        "nodes": [
+          {
+            "id": "start",
+            "speakerId": "npc/healer",
+            "text": "Can you bring me three red herbs?",
+            "choices": [
+              {
+                "id": "accept",
+                "text": "I will help.",
+                "startQuestId": "quest/help_healer",
+                "targetNodeId": "accepted"
+              },
+              {
+                "id": "leave",
+                "text": "Not now.",
+                "closeDialogue": true
+              }
+            ]
+          },
+          {
+            "id": "accepted",
+            "speakerId": "npc/healer",
+            "text": "Thank you. Come back when you have them.",
+            "choices": [
+              {
+                "id": "close",
+                "text": "Goodbye.",
+                "closeDialogue": true
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "sample",
+          "narrative"
+        ]
+      }
+    ],
+    "factions": [
+      {
+        "id": "faction/village",
+        "name": "Village",
+        "description": "The local settlement.",
+        "kind": "settlement",
+        "defaultReputation": 0,
+        "minReputation": -100,
+        "maxReputation": 100
+      }
+    ],
+    "formulas": [],
+    "interactions": [
+      {
+        "id": "interaction/sign_inspect",
+        "kind": "inspect",
+        "effects": [
+          {
+            "type": "set_flag",
+            "args": {
+              "id": "flag/sign_inspected",
+              "value": "true"
+            }
+          },
+          {
+            "type": "log",
+            "args": {
+              "id": "log/sign_inspected",
+              "message": "The sign was inspected through InteractionDefinition v1."
+            }
+          }
+        ]
+      },
+      {
+        "id": "interaction/open_start_chest",
+        "kind": "open_container",
+        "metadata": {
+          "container_id": "inventory/chest_start"
+        }
+      },
+      {
+        "id": "interaction/harvest_apple_tree",
+        "kind": "harvest_resource",
+        "metadata": {
+          "resource_node_id": "node/apple_tree",
+          "tool_item_id": "item/woodcutting_axe"
+        }
+      },
+      {
+        "id": "interaction/talk_healer",
+        "kind": "talk",
+        "metadata": {
+          "dialogue_id": "dialogue/healer"
+        }
+      }
+    ]
+  },
+  "assetCatalog": {
+    "contracts": [
+      {
+        "id": "contract/tileset/topdown_32",
+        "assetType": "tileset",
+        "tileWidth": 32,
+        "tileHeight": 32
+      },
+      {
+        "id": "contract/spritesheet/4dir_4frames",
+        "assetType": "character_spritesheet",
+        "frameWidth": 32,
+        "frameHeight": 48,
+        "framesPerDirection": 4,
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      {
+        "id": "contract/portrait_set/basic",
+        "assetType": "portrait_expression_set",
+        "requiredVariants": [
+          "neutral"
+        ],
+        "optionalVariants": [
+          "smile",
+          "angry",
+          "wounded",
+          "dead"
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "id": "asset/tile/grass",
+        "type": "tile",
+        "role": "map",
+        "path": "assets/tiles/grass.png",
+        "contractId": "contract/tileset/topdown_32",
+        "linkedEntityIds": [],
+        "variants": {}
+      },
+      {
+        "id": "asset/tile/wall",
+        "type": "tile",
+        "role": "map",
+        "path": "assets/tiles/wall.png",
+        "contractId": "contract/tileset/topdown_32",
+        "linkedEntityIds": [],
+        "variants": {}
+      },
+      {
+        "id": "asset/tile/road",
+        "type": "tile",
+        "role": "map",
+        "path": "assets/tiles/road.png",
+        "contractId": "contract/tileset/topdown_32",
+        "linkedEntityIds": [],
+        "variants": {}
+      },
+      {
+        "id": "asset/npc/old_guard/spritesheet",
+        "type": "character_spritesheet",
+        "role": "map_entity",
+        "path": "assets/characters/old_guard.png",
+        "contractId": "contract/spritesheet/4dir_4frames",
+        "linkedEntityIds": [
+          "prototype/npc/old_guard"
+        ],
+        "variants": {}
+      },
+      {
+        "id": "asset/npc/old_guard/portrait_set",
+        "type": "portrait_expression_set",
+        "role": "dialogue",
+        "contractId": "contract/portrait_set/basic",
+        "linkedEntityIds": [
+          "npc/old_guard"
+        ],
+        "variants": {
+          "neutral": {
+            "path": "assets/portraits/old_guard/neutral.png",
+            "expression": "neutral"
+          }
+        }
+      },
+      {
+        "id": "asset/object/sign",
+        "type": "scene_image",
+        "role": "map_entity",
+        "linkedEntityIds": [
+          "prototype/object/sign"
+        ],
+        "variants": {}
+      }
+    ],
+    "generationRequests": []
+  },
+  "scriptCatalog": {
+    "scripts": [
+      {
+        "id": "script/generator/basic_village",
+        "kind": "Generator",
+        "path": "scripts/generators/basic_village.lua",
+        "entryPoints": [
+          "generate_chunk"
+        ],
+        "capabilities": [
+          "noise",
+          "random",
+          "return_chunk_draft"
+        ],
+        "usedBy": [
+          "map/village"
+        ]
+      }
+    ],
+    "generators": [
+      {
+        "id": "generator/chunk/basic_village",
+        "kind": "chunk",
+        "scriptId": "script/generator/basic_village",
+        "entryPoint": "generate_chunk"
+      }
+    ]
+  },
+  "generatedContent": {
+    "profile": {
+      "title": "Alchemy + Combat + Exploration Resource FeatureModule Composition",
+      "description": "Goal146 deterministic FeatureModule composition over the immutable Goal142 balanced base.",
+      "genre": "featuremodule-composition",
+      "tone": "alchemy-combat-exploration",
+      "presentationMode": "canonical-runtime",
+      "worldTopology": "minimal-map-vertical-slice",
+      "actorModel": "package-runtime",
+      "combatModel": "turn-based-encounter",
+      "sourceContextJson": "{\r\n  \"goalId\": \"goal_146_featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix\",\r\n  \"compositionId\": \"minimal-map-game-composed-alchemy-combat-exploration\",\r\n  \"baseCandidateId\": \"minimal-map-game-balanced-baseline\",\r\n  \"requiredModuleIds\": [\r\n    \"feature.combat.turn_based_encounter\",\r\n    \"feature.crafting.recipes\",\r\n    \"feature.dialogue.basic\",\r\n    \"feature.economy.transaction\",\r\n    \"feature.interaction.basic\",\r\n    \"feature.inventory.basic\",\r\n    \"feature.player_adapter.runtime_summary\",\r\n    \"feature.quest.objective_chain\",\r\n    \"feature.resources.harvest\",\r\n    \"feature.world.grid_navigation\"\r\n  ],\r\n  \"selectedOptionalModuleIds\": [\r\n    \"feature.profile.alchemy_focus\",\r\n    \"feature.profile.combat_focus\",\r\n    \"feature.profile.exploration_resource_focus\"\r\n  ],\r\n  \"orderedModuleIds\": [\r\n    \"feature.combat.turn_based_encounter\",\r\n    \"feature.crafting.recipes\",\r\n    \"feature.dialogue.basic\",\r\n    \"feature.economy.transaction\",\r\n    \"feature.interaction.basic\",\r\n    \"feature.inventory.basic\",\r\n    \"feature.player_adapter.runtime_summary\",\r\n    \"feature.profile.alchemy_focus\",\r\n    \"feature.profile.combat_focus\",\r\n    \"feature.profile.exploration_resource_focus\",\r\n    \"feature.quest.objective_chain\",\r\n    \"feature.resources.harvest\",\r\n    \"feature.world.grid_navigation\"\r\n  ],\r\n  \"operationIds\": [\r\n    \"combat.basic_attack_damage_effect\",\r\n    \"combat.basic_attack_power\",\r\n    \"combat.goblin_health_pool\",\r\n    \"alchemy.starting_red_herb_supply\",\r\n    \"alchemy.starting_water_supply\",\r\n    \"exploration.apple_tree_loot_maximum\",\r\n    \"exploration.apple_tree_loot_minimum\",\r\n    \"alchemy.healing_potion_output_quantity\",\r\n    \"exploration.apple_tree_log_yield\",\r\n    \"exploration.transaction_potion_output\"\r\n  ]\r\n}"
+    }
+  }
+}

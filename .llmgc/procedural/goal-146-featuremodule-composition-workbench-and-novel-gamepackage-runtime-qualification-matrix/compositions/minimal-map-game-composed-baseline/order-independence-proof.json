@@ -1,0 +1,9 @@
+{
+  "compositionId": "minimal-map-game-composed-baseline",
+  "forwardModuleIds": [],
+  "reverseModuleIds": [],
+  "forwardPackageSha256": "5170d610379d818b2ff55535e1fac0e5ee98f26d8e039e9bc1054bfdea87fa49",
+  "reversePackageSha256": "5170d610379d818b2ff55535e1fac0e5ee98f26d8e039e9bc1054bfdea87fa49",
+  "packageBytesIdentical": true,
+  "passed": true
+}

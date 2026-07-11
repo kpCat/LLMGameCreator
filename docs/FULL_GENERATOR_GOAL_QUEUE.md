@@ -2321,19 +2321,26 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-retry_goal_145_winforms_operator_then_review
+goal_147_featuremodule_authoring_parameters_and_composition_persistence
 ```
 
-Goal145A is GREEN and keeps Goal145 `accepted=false`. The WinForms candidate
-combo now uses `SelectionChangeCommitted` with guarded programmatic binding:
-bind/restore callback counts are 0/0, one real combat commit is applied once,
-maximum callback depth is 1, and combat selection survives session, action,
-checkpoint, replay and all-candidate matrix refreshes. Candidate changes still
-reset session/checkpoint/action/replay state. The Goal145 4/4 Runtime matrix and
-Unity smoke remain GREEN. Retry the corrected operator workflow before review.
+Goal145 is accepted by the repository owner's exact human handoff after the
+Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,
+four distinct final hashes, stable combat selection, 8-action checkpoint reloads,
+13-action full replays, exact action binding and read-only Unity smoke.
 
-Goal145 is produced for review with `implementationStatus=GREEN`,
-`accepted=false`, `goal144Accepted=true`, `candidateCount=4`,
+Goal146 is GREEN. It composes every combination of the three Goal142-derived
+optional profile modules over the immutable balanced base, materializes eight
+novel GamePackages with the existing structured mutation engine, and qualifies
+8/8 through one shared Runtime session/replay seam. Package hashes and final
+state hashes are 8/8 distinct; all order-independence, checkpoint, replay,
+binding, WinForms and Unity gates pass. Goal146 remains `accepted=false`; manual
+review is deferred until related authoring or persistence work can be bundled.
+
+Goal145 is accepted by the repository owner's exact Goal146 human handoff with
+`implementationStatus=GREEN`, `accepted=true`, `acceptedByHuman=true`,
+`acceptedByCodex=false`, `rawManualInputNotCommitted=true`,
+`goal144Accepted=true`, `candidateCount=4`,
 `passedCandidateCount=4`, `failedCandidateCount=0`,
 `runtimeEvaluatedCandidateCount=4`, `runtimeMutatedCandidateCount=3`,
 `controlCandidateCount=1`, `distinctFinalStateHashCount=4`,
@@ -2360,14 +2367,13 @@ The selected-candidate path now has the canonical runtime/player proof chain:
 candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report -> Goal139 human acceptance -> controls UX polish -> bounded Unity editor noise classification
 ```
 
-Review Goal145 evidence before starting a new implementation slice. Do not
-accept Goal145 automatically. Do not start sample mutation, `.llmgc/manual/**`,
-live geodata/provider, public schema changes, Lua, generator-library, final
-gameplay, final art, atlas, Unity scene/prefab/settings/packages,
-StreamingAssets or release packaging work from this handoff.
+Do not start Goal147 without a separate task. Do not start sample mutation,
+`.llmgc/manual/**`, live geodata/provider, public schema changes, Lua,
+generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/
+packages/StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification_required_accepted_false
+featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification_required_accepted_false_manual_review_deferred_true
 ```

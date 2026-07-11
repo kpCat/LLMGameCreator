@@ -49,6 +49,40 @@ public sealed class ProductLineRuntimeVariantMaterializerTests
                 .Amount);
     }
 
+    [Fact]
+    public void Default_metadata_remains_byte_identical_and_goal146_context_is_truthful()
+    {
+        var root = ProjectRoot();
+        var template = File.ReadAllText(Path.Combine(root, "samples", "minimal-map-game", "package.json"));
+        var recipe = ProductLineRuntimeVariantCatalog.CreateDefault().Variants
+            .Single(item => item.RecipeId == "balanced_baseline");
+        var materializer = new ProductLineRuntimeVariantMaterializer();
+
+        var defaultResult = materializer.Materialize(template, recipe);
+        var expected = File.ReadAllText(Path.Combine(root, ".llmgc", "procedural",
+            "goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff", "candidates",
+            recipe.CandidateId, "package.json"));
+        Assert.Equal(expected, defaultResult.PackageJson);
+
+        var goal146 = materializer.Materialize(template, recipe, new()
+        {
+            GoalId = "goal_146",
+            VersionSuffix = "0.1.146-test",
+            ManifestDescription = "Goal146 composition.",
+            ProfileTitle = "Goal146 Test",
+            ProfileDescription = "FeatureModule composition.",
+            Genre = "featuremodule-composition",
+            Tone = "test",
+            PresentationMode = "canonical-runtime",
+            WorldTopology = "minimal-map-vertical-slice",
+            ActorModel = "package-runtime",
+            CombatModel = "turn-based-encounter",
+            SourceContext = "{\"goalId\":\"goal_146\"}"
+        });
+        Assert.DoesNotContain("Goal142 runtime-significant variant", goal146.PackageJson, StringComparison.Ordinal);
+        Assert.Contains("Goal146 composition", goal146.PackageJson, StringComparison.Ordinal);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

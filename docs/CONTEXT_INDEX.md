@@ -298,8 +298,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/GOAL.md` | Goal 143 task: selected Goal142 runtime variant end-to-end PlayerAdapter handoff. Result is `GREEN`, accepted=true by explicit Goal144 human handoff, acceptedByCodex=false, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, package/final Runtime hashes match, frameCount=15 and Unity batchmode consumer smoke GREEN. |
 | `docs/agent-tasks/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/GOAL.md` | Goal 144 task: Runtime-owned selected-variant interactive action session and journal save/replay. Result is `GREEN`, accepted=true by explicit Goal145 human handoff, acceptedByCodex=false, actionDescriptorCount=14, executedRuntimeActionCount=11, checkpoint/full replay and read-only Unity smoke GREEN. |
 | `docs/agent-tasks/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/GOAL.md` | Goal 144A P1 hotfix: descriptor, response and journal bind to the exact canonical step/range/command/target; harvest uses `node/apple_tree`, basic attack uses `goblin`, checkpoint replay evidence is frozen at 8 actions and final replay reports 13. Runtime remains authority and Unity remains read-only. |
-| `docs/agent-tasks/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/GOAL.md` | Goal 145 task: four discovered Goal142 candidates execute the same Runtime session kernel with exact action binding, checkpoint/full replay, fresh semantic focus comparisons, operator-selectable in-process WinForms sessions and a read-only Unity matrix. Result is `GREEN`, accepted=false, candidateCount=4, passedCandidateCount=4 and distinctFinalStateHashCount=4. |
-| `docs/agent-tasks/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/GOAL.md` | Goal 145A hotfix: the candidate combo uses `SelectionChangeCommitted` plus a bounded programmatic binding guard, so bind/restore invokes selection logic 0 times, one operator combat commit invokes it once with maximum depth 1, combat survives session/action/checkpoint/replay/matrix refreshes, and candidate changes clear prior live state. Goal145 remains accepted=false; its 4/4 Runtime matrix and Unity smoke remain GREEN. |
+| `docs/agent-tasks/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/GOAL.md` | Goal 145 task: four discovered Goal142 candidates execute the same Runtime session kernel with exact action binding, checkpoint/full replay, fresh semantic focus comparisons, operator-selectable in-process WinForms sessions and a read-only Unity matrix. Result is `GREEN`, accepted=true by exact Goal146 human handoff, acceptedByCodex=false, candidateCount=4, passedCandidateCount=4 and distinctFinalStateHashCount=4. |
+| `docs/agent-tasks/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/GOAL.md` | Goal 145A hotfix: the candidate combo uses `SelectionChangeCommitted` plus a bounded programmatic binding guard, so bind/restore invokes selection logic 0 times, one operator combat commit invokes it once with maximum depth 1, combat survives session/action/checkpoint/replay/matrix refreshes, and candidate changes clear prior live state. Its 4/4 Runtime matrix and Unity smoke remain GREEN; Goal145 is accepted by the later Goal146 human handoff. |
+| `docs/agent-tasks/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/GOAL.md` | Goal 146 task: records Goal145 human acceptance, composes eight novel GamePackages from required and optional FeatureModules with deterministic mutation planning, qualifies each through the shared Runtime session/replay seam, adds an in-process WinForms module composer and a read-only Unity matrix consumer. Goal146 remains accepted=false with manual review deferred. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -377,22 +378,23 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-retry_goal_145_winforms_operator_then_review
+goal_147_featuremodule_authoring_parameters_and_composition_persistence
 ```
 
-Goal145A fixes the WinForms candidate-selector reentrancy and selection-stability
-defect without changing Runtime, matrix semantics, candidate packages or Unity.
-Programmatic candidate `DataSource` binding and `SelectedValue` restoration call
-selection logic zero times; a real operator commit calls it exactly once with
-maximum callback depth 1. The default exploration selection remains stable,
-combat remains selected through dependent refreshes, and changing candidate
-still resets session/checkpoint/action/replay state. Goal145 remains
-`accepted=false`; its gate remains
-`operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification`.
-Retry its corrected WinForms workflow before review.
+Goal146 is GREEN with 10 locked core modules, three Goal142-derived optional
+profile modules and all eight module combinations materialized as novel
+GamePackages. All 8/8 validate and pass the shared Runtime qualifier with
+distinct package/final hashes, 8-action checkpoint reload, 13-action full replay,
+exact action binding and order-independent package bytes. The selected all-three
+composition shows all three fresh semantic dimensions. WinForms uses in-process
+services and Unity is read-only. Goal146 remains `accepted=false` with
+`manualReviewDeferred=true` at
+`featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification required`;
+a future review should be bundled with related authoring or persistence work.
 
-Goal145 is produced for review with `implementationStatus=GREEN`,
-`accepted=false`, `goal144Accepted=true`, `candidateCount=4`,
+Goal145 is accepted by the repository owner's exact Goal146 human handoff with
+`accepted=true`, `acceptedByHuman=true`, `acceptedByCodex=false`,
+`rawManualInputNotCommitted=true`, `goal144Accepted=true`, `candidateCount=4`,
 `passedCandidateCount=4`, `runtimeEvaluatedCandidateCount=4`,
 `runtimeMutatedCandidateCount=3`, `controlCandidateCount=1`,
 `distinctFinalStateHashCount=4`, `allCandidateCheckpointReloadsPassed=true`,
@@ -422,11 +424,10 @@ acceptance, controls UX polish evidence, bounded Unity editor noise
 classification, Goal140 human acceptance and a Runtime-owned command roundtrip
 request/result/snapshot bridge consumed by Unity/player.
 
-Retry the corrected Goal145 WinForms operator workflow and then review Goal145
-before starting the next implementation slice. Do not
-start sample mutation, `.llmgc/manual/**`, provider/network, public schema, Lua,
-generator-library, final art/gameplay, Unity scene/prefab/settings/packages/
-StreamingAssets or release packaging work from this handoff.
+Do not start Goal147 without a separate task. Keep sample mutation,
+`.llmgc/manual/**`, provider/network, public schema, Lua, generator-library,
+final art/gameplay, Unity scene/prefab/settings/packages/StreamingAssets and
+release packaging out of scope from this handoff.
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
 `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop

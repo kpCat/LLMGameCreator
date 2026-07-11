@@ -1,0 +1,15 @@
+{
+  "compositionId": "minimal-map-game-composed-combat-exploration",
+  "forwardModuleIds": [
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus"
+  ],
+  "reverseModuleIds": [
+    "feature.profile.exploration_resource_focus",
+    "feature.profile.combat_focus"
+  ],
+  "forwardPackageSha256": "655e47603a203b49d1e4318a514f9c1bb0714be5a490a7fb2a5cab62dff0037c",
+  "reversePackageSha256": "655e47603a203b49d1e4318a514f9c1bb0714be5a490a7fb2a5cab62dff0037c",
+  "packageBytesIdentical": true,
+  "passed": true
+}

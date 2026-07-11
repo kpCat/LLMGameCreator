@@ -95,6 +95,22 @@ public sealed record ProductLineRuntimeVariantRecipe
         ProductLineRuntimeVariantMatrixVocabulary.RequiredAnchors;
 }
 
+public sealed record ProductLineRuntimeVariantMetadataContext
+{
+    public string GoalId { get; init; } = string.Empty;
+    public string VersionSuffix { get; init; } = string.Empty;
+    public string ManifestDescription { get; init; } = string.Empty;
+    public string ProfileTitle { get; init; } = string.Empty;
+    public string ProfileDescription { get; init; } = string.Empty;
+    public string Genre { get; init; } = string.Empty;
+    public string Tone { get; init; } = string.Empty;
+    public string PresentationMode { get; init; } = string.Empty;
+    public string WorldTopology { get; init; } = string.Empty;
+    public string ActorModel { get; init; } = string.Empty;
+    public string CombatModel { get; init; } = string.Empty;
+    public string SourceContext { get; init; } = string.Empty;
+}
+
 public sealed record ProductLineRuntimeVariantSelectionWeights
 {
     public int PackageValidation { get; init; } = 15;

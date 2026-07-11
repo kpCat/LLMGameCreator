@@ -1,0 +1,23 @@
+{
+  "unknownModuleRejected": true,
+  "requiredModuleDeselectionRejected": true,
+  "missingDependencyRejected": true,
+  "declaredConflictRejected": true,
+  "duplicateModuleRejected": true,
+  "conflictingMutationTargetRejected": true,
+  "mismatchedExpectedOldValueRejected": true,
+  "unsupportedParameterOverrideRejected": true,
+  "basePackageHashMismatchRejected": true,
+  "compositionPathEscapeRejected": true,
+  "moduleOrderChangesPackageBytes": false,
+  "goal142PackageCopyCannotCountAsComposition": true,
+  "singleGoal142CandidateAliasCannotCountAsNovelComposition": true,
+  "goal131ProjectionRecipeCannotBecomeSourceOfTruth": true,
+  "precomputedGoal145OutcomeCannotCountAsGoal146Execution": true,
+  "candidateSpecificRuntimeImplementationAbsent": true,
+  "duplicateRuntimeActionPlanAbsent": true,
+  "unityDoesNotMaterializeOrExecuteGameplay": true,
+  "winFormsStartsNoCompilerOrTestProcess": true,
+  "previousArtifactsPreservedOnFailure": true,
+  "passed": true
+}

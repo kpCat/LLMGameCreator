@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-composed-exploration",
+  "recipeId": "composition_exploration",
+  "variantKind": "feature.profile.exploration_resource_focus",
+  "runtimeSignificant": true,
+  "operationCount": 4,
+  "passed": true,
+  "operations": [
+    {
+      "operationId": "exploration.apple_tree_loot_maximum",
+      "targetKind": "loot_entry_max_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+      "expectedValue": "2",
+      "actualOldValue": "2",
+      "newValue": "3",
+      "runtimeDimension": "harvest_loot_quantity",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "exploration.apple_tree_loot_minimum",
+      "targetKind": "loot_entry_min_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "3",
+      "runtimeDimension": "harvest_loot_quantity",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "exploration.apple_tree_log_yield",
+      "targetKind": "resource_node_production_amount",
+      "targetId": "node/apple_tree|item/log",
+      "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "harvest_resource_node_output",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "exploration.transaction_potion_output",
+      "targetKind": "transaction_output_amount",
+      "targetId": "transaction/buy_healing_potion|item/healing_potion",
+      "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "transaction_output",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    }
+  ],
+  "diagnostics": []
+}

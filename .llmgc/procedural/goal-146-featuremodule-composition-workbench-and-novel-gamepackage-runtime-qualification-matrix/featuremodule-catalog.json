@@ -1,0 +1,830 @@
+{
+  "schemaVersion": "featuremodule_catalog_v1",
+  "goalId": "goal_146_featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix",
+  "immutableBaseCandidateId": "minimal-map-game-balanced-baseline",
+  "requiredCoreModuleCount": 10,
+  "optionalProfileModuleCount": 3,
+  "modules": [
+    {
+      "moduleId": "feature.combat.turn_based_encounter",
+      "title": "Turn-Based Encounter",
+      "category": "combat",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.interaction.basic",
+        "feature.inventory.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.encounters",
+        "game.abilities"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.use_ability"
+      ],
+      "requiredValidationRules": [
+        "encounter_ability_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "encounter_resource_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "combat_summary"
+      ],
+      "generatorInputs": [
+        "feature.combat.turn_based_encounter"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.crafting.recipes",
+      "title": "Recipe Crafting",
+      "category": "crafting",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.inventory.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.recipes"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.craft_recipe"
+      ],
+      "requiredValidationRules": [
+        "recipe_item_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "inventory_stack_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "craft_actions"
+      ],
+      "generatorInputs": [
+        "feature.crafting.recipes"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.dialogue.basic",
+      "title": "Basic Dialogue",
+      "category": "dialogue",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.interaction.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.dialogues"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.open_dialogue"
+      ],
+      "requiredValidationRules": [
+        "dialogue_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "dialogue_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "dialogue_summary"
+      ],
+      "generatorInputs": [
+        "feature.dialogue.basic"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.economy.transaction",
+      "title": "Transactions",
+      "category": "economy",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.inventory.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.transactions"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.execute_transaction"
+      ],
+      "requiredValidationRules": [
+        "transaction_item_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "inventory_stack_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "transaction_actions"
+      ],
+      "generatorInputs": [
+        "feature.economy.transaction"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.interaction.basic",
+      "title": "Basic Interaction",
+      "category": "interaction",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.world.grid_navigation"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.interactions"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.interact"
+      ],
+      "requiredValidationRules": [
+        "interaction_targets"
+      ],
+      "requiredSaveLoadPolicy": [
+        "interaction_event_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "interaction_actions"
+      ],
+      "generatorInputs": [
+        "feature.interaction.basic"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.inventory.basic",
+      "title": "Basic Inventory",
+      "category": "inventory",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.inventories",
+        "game.items"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.add_item"
+      ],
+      "requiredValidationRules": [
+        "inventory_item_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "inventory_stack_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "inventory_summary"
+      ],
+      "generatorInputs": [
+        "feature.inventory.basic"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.player_adapter.runtime_summary",
+      "title": "Runtime Summary Player Adapter",
+      "category": "player_adapter",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.world.grid_navigation"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "generatedContent.profile"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.show_final_state"
+      ],
+      "requiredValidationRules": [
+        "runtime_summary_contract"
+      ],
+      "requiredSaveLoadPolicy": [
+        "runtime_state_hash"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "runtime_summary"
+      ],
+      "generatorInputs": [
+        "feature.player_adapter.runtime_summary"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Alchemy Focus",
+      "category": "profile",
+      "moduleKind": "goal142_runtime_profile",
+      "required": false,
+      "selectable": true,
+      "dependencies": [
+        "feature.crafting.recipes",
+        "feature.inventory.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "generatedContent.profile"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.qualification.canonical_action_plan"
+      ],
+      "requiredValidationRules": [
+        "structured_mutation_expected_old_value",
+        "package_cross_reference_validation"
+      ],
+      "requiredSaveLoadPolicy": [
+        "journal_checkpoint_reload",
+        "full_replay_equivalence"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "runtime_summary",
+        "semantic_effect_summary"
+      ],
+      "generatorInputs": [
+        "feature.profile.alchemy_focus"
+      ],
+      "authoringControls": [
+        "checked_optional_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-alchemy-focus"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 imports fixed Goal142 numeric mutations; parameter authoring is deferred."
+      ],
+      "futureExpansionNotes": [
+        "Goal147 may add bounded authoring parameters and persistence."
+      ],
+      "mutationOperations": [
+        {
+          "operationId": "alchemy.healing_potion_output_quantity",
+          "targetKind": "recipe_output_amount",
+          "targetId": "recipe/healing_potion|item/healing_potion",
+          "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "alchemy_recipe_output"
+        },
+        {
+          "operationId": "alchemy.starting_red_herb_supply",
+          "targetKind": "inventory_stack_amount",
+          "targetId": "inventory/player_start|item/red_herb",
+          "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+          "expectedValue": "2",
+          "newValue": "4",
+          "runtimeDimension": "alchemy_inventory_resource"
+        },
+        {
+          "operationId": "alchemy.starting_water_supply",
+          "targetKind": "inventory_stack_amount",
+          "targetId": "inventory/player_start|item/water_flask",
+          "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "alchemy_inventory_resource"
+        }
+      ],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+        "recipeId": "alchemy_focus",
+        "variantKind": "alchemy_focus",
+        "candidateId": "minimal-map-game-alchemy-focus",
+        "operationIds": [
+          "alchemy.healing_potion_output_quantity",
+          "alchemy.starting_red_herb_supply",
+          "alchemy.starting_water_supply"
+        ]
+      }
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "title": "Combat Focus",
+      "category": "profile",
+      "moduleKind": "goal142_runtime_profile",
+      "required": false,
+      "selectable": true,
+      "dependencies": [
+        "feature.combat.turn_based_encounter"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "generatedContent.profile"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.qualification.canonical_action_plan"
+      ],
+      "requiredValidationRules": [
+        "structured_mutation_expected_old_value",
+        "package_cross_reference_validation"
+      ],
+      "requiredSaveLoadPolicy": [
+        "journal_checkpoint_reload",
+        "full_replay_equivalence"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "runtime_summary",
+        "semantic_effect_summary"
+      ],
+      "generatorInputs": [
+        "feature.profile.combat_focus"
+      ],
+      "authoringControls": [
+        "checked_optional_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-combat-focus"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 imports fixed Goal142 numeric mutations; parameter authoring is deferred."
+      ],
+      "futureExpansionNotes": [
+        "Goal147 may add bounded authoring parameters and persistence."
+      ],
+      "mutationOperations": [
+        {
+          "operationId": "combat.basic_attack_damage_effect",
+          "targetKind": "ability_effect_arg_amount",
+          "targetId": "ability/basic_attack|damage_resource|resource/health",
+          "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+          "expectedValue": "4",
+          "newValue": "6",
+          "runtimeDimension": "combat_ability_damage"
+        },
+        {
+          "operationId": "combat.basic_attack_power",
+          "targetKind": "ability_power",
+          "targetId": "ability/basic_attack",
+          "jsonPath": "game.abilities[id=ability/basic_attack].power",
+          "expectedValue": "4",
+          "newValue": "6",
+          "runtimeDimension": "combat_ability_damage"
+        },
+        {
+          "operationId": "combat.goblin_health_pool",
+          "targetKind": "encounter_participant_resource_amount",
+          "targetId": "encounter/goblin_duel|goblin|resource/health",
+          "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+          "expectedValue": "12",
+          "newValue": "16",
+          "runtimeDimension": "combat_participant_resource"
+        }
+      ],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+        "recipeId": "combat_focus",
+        "variantKind": "combat_focus",
+        "candidateId": "minimal-map-game-combat-focus",
+        "operationIds": [
+          "combat.basic_attack_damage_effect",
+          "combat.basic_attack_power",
+          "combat.goblin_health_pool"
+        ]
+      }
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Exploration Resource Focus",
+      "category": "profile",
+      "moduleKind": "goal142_runtime_profile",
+      "required": false,
+      "selectable": true,
+      "dependencies": [
+        "feature.resources.harvest",
+        "feature.economy.transaction"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "generatedContent.profile"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.qualification.canonical_action_plan"
+      ],
+      "requiredValidationRules": [
+        "structured_mutation_expected_old_value",
+        "package_cross_reference_validation"
+      ],
+      "requiredSaveLoadPolicy": [
+        "journal_checkpoint_reload",
+        "full_replay_equivalence"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "runtime_summary",
+        "semantic_effect_summary"
+      ],
+      "generatorInputs": [
+        "feature.profile.exploration_resource_focus"
+      ],
+      "authoringControls": [
+        "checked_optional_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-exploration-resource-focus"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 imports fixed Goal142 numeric mutations; parameter authoring is deferred."
+      ],
+      "futureExpansionNotes": [
+        "Goal147 may add bounded authoring parameters and persistence."
+      ],
+      "mutationOperations": [
+        {
+          "operationId": "exploration.apple_tree_log_yield",
+          "targetKind": "resource_node_production_amount",
+          "targetId": "node/apple_tree|item/log",
+          "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "harvest_resource_node_output"
+        },
+        {
+          "operationId": "exploration.apple_tree_loot_maximum",
+          "targetKind": "loot_entry_max_count",
+          "targetId": "loot/apple_tree|entry/apple",
+          "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+          "expectedValue": "2",
+          "newValue": "3",
+          "runtimeDimension": "harvest_loot_quantity"
+        },
+        {
+          "operationId": "exploration.apple_tree_loot_minimum",
+          "targetKind": "loot_entry_min_count",
+          "targetId": "loot/apple_tree|entry/apple",
+          "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+          "expectedValue": "1",
+          "newValue": "3",
+          "runtimeDimension": "harvest_loot_quantity"
+        },
+        {
+          "operationId": "exploration.transaction_potion_output",
+          "targetKind": "transaction_output_amount",
+          "targetId": "transaction/buy_healing_potion|item/healing_potion",
+          "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+          "expectedValue": "1",
+          "newValue": "2",
+          "runtimeDimension": "transaction_output"
+        }
+      ],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+        "recipeId": "exploration_resource_focus",
+        "variantKind": "exploration_resource_focus",
+        "candidateId": "minimal-map-game-exploration-resource-focus",
+        "operationIds": [
+          "exploration.apple_tree_log_yield",
+          "exploration.apple_tree_loot_maximum",
+          "exploration.apple_tree_loot_minimum",
+          "exploration.transaction_potion_output"
+        ]
+      }
+    },
+    {
+      "moduleId": "feature.quest.objective_chain",
+      "title": "Quest Objective Chain",
+      "category": "quest",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.dialogue.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.quests"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.advance_objective"
+      ],
+      "requiredValidationRules": [
+        "quest_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "quest_progress_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "quest_summary"
+      ],
+      "generatorInputs": [
+        "feature.quest.objective_chain"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.resources.harvest",
+      "title": "Resource Harvest",
+      "category": "resources",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [
+        "feature.world.grid_navigation",
+        "feature.inventory.basic"
+      ],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.resourceNodes",
+        "game.lootTables"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.harvest"
+      ],
+      "requiredValidationRules": [
+        "resource_loot_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "resource_node_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "harvest_actions"
+      ],
+      "generatorInputs": [
+        "feature.resources.harvest"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    },
+    {
+      "moduleId": "feature.world.grid_navigation",
+      "title": "Grid Navigation",
+      "category": "world",
+      "moduleKind": "required_core",
+      "required": true,
+      "selectable": false,
+      "dependencies": [],
+      "conflicts": [],
+      "requiredSchemaSections": [
+        "game.maps",
+        "game.tilePrototypes"
+      ],
+      "requiredRuntimePrimitives": [
+        "runtime.command.move"
+      ],
+      "requiredValidationRules": [
+        "map_references"
+      ],
+      "requiredSaveLoadPolicy": [
+        "map_position_state"
+      ],
+      "requiredPlayerAdapterSurface": [
+        "map_summary"
+      ],
+      "generatorInputs": [
+        "feature.world.grid_navigation"
+      ],
+      "authoringControls": [
+        "locked_core_module"
+      ],
+      "goldenPackages": [
+        "minimal-map-game-balanced-baseline"
+      ],
+      "smokePlaythroughs": [
+        "goal145_canonical_13_action_plan"
+      ],
+      "knownLimitations": [
+        "Goal146 composes the proven minimal-map vertical slice only."
+      ],
+      "futureExpansionNotes": [
+        "Additional module families attach through the same application-layer contract."
+      ],
+      "mutationOperations": [],
+      "sourceLineage": {
+        "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+        "catalogPath": "",
+        "recipeId": "",
+        "variantKind": "",
+        "candidateId": "minimal-map-game-balanced-baseline",
+        "operationIds": []
+      }
+    }
+  ]
+}

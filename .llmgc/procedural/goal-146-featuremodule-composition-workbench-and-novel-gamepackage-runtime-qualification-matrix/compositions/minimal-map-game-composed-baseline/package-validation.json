@@ -1,0 +1,11 @@
+{
+  "candidateFileExists": true,
+  "validJson": true,
+  "existingPackageValidatorPassed": true,
+  "requiredAnchorsPresent": true,
+  "compositionMetadataMatches": true,
+  "packageUnderGoal146Root": true,
+  "sourceTemplateUnmodified": true,
+  "passed": true,
+  "diagnostics": []
+}

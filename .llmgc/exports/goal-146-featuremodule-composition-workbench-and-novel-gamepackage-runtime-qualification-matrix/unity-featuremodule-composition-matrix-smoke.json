@@ -1,0 +1,22 @@
+{
+  "status": "GREEN",
+  "compositionCount": 8,
+  "passedCompositionCount": 8,
+  "distinctPackageSha256Count": 8,
+  "distinctFinalStateHashCount": 8,
+  "multiModuleCompositionCount": 4,
+  "selectedCompositionExists": true,
+  "selectedCompositionModuleCount": 3,
+  "selectedPackageDistinctFromGoal142Candidates": true,
+  "selectedCombinedEffectCount": 3,
+  "allOrderIndependenceProofsPassed": true,
+  "allCheckpointReloadsPassed": true,
+  "allFullReplaysEquivalent": true,
+  "allActionBindingsPassed": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "unityExitCode": 0,
+  "passed": true
+}

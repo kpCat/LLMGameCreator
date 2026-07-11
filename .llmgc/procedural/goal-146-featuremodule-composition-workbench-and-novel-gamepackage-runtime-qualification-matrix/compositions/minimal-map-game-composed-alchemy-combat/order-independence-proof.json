@@ -1,0 +1,15 @@
+{
+  "compositionId": "minimal-map-game-composed-alchemy-combat",
+  "forwardModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus"
+  ],
+  "reverseModuleIds": [
+    "feature.profile.combat_focus",
+    "feature.profile.alchemy_focus"
+  ],
+  "forwardPackageSha256": "ba18c0aa4e792c4ab05784ea6f9a5235cffe76ab19852f2d077d5a3080110142",
+  "reversePackageSha256": "ba18c0aa4e792c4ab05784ea6f9a5235cffe76ab19852f2d077d5a3080110142",
+  "packageBytesIdentical": true,
+  "passed": true
+}

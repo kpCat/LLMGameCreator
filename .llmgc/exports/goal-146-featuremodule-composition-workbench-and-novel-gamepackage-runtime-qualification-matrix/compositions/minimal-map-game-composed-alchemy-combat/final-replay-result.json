@@ -1,0 +1,13 @@
+{
+  "replayKind": "full_final_journal",
+  "passed": true,
+  "packageHashValidated": true,
+  "candidateValidated": true,
+  "journalCorrelationPassed": true,
+  "stateHashContinuityPassed": true,
+  "expectedStateHashMatched": true,
+  "expectedStateHash": "8f5fb25e2f2063aafc4702b71d193b35502931dd4975732610480c7bbee4a112",
+  "actualStateHash": "8f5fb25e2f2063aafc4702b71d193b35502931dd4975732610480c7bbee4a112",
+  "replayedActionCount": 13,
+  "diagnostics": []
+}

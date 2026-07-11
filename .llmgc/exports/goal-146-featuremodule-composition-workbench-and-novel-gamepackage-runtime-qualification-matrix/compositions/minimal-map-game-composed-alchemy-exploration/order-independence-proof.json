@@ -1,0 +1,15 @@
+{
+  "compositionId": "minimal-map-game-composed-alchemy-exploration",
+  "forwardModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.exploration_resource_focus"
+  ],
+  "reverseModuleIds": [
+    "feature.profile.exploration_resource_focus",
+    "feature.profile.alchemy_focus"
+  ],
+  "forwardPackageSha256": "dfc3b0c2e48f2e3425156257d84f454cc3e69ccf0fb9f103cb3da24f69301a36",
+  "reversePackageSha256": "dfc3b0c2e48f2e3425156257d84f454cc3e69ccf0fb9f103cb3da24f69301a36",
+  "packageBytesIdentical": true,
+  "passed": true
+}

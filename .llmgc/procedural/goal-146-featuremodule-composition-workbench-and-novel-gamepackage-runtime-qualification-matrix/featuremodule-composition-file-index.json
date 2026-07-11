@@ -1,0 +1,548 @@
+{
+  "schemaVersion": "featuremodule_composition_file_index_v1",
+  "goalId": "goal_146_featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix",
+  "rootPath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix",
+  "indexedFileCount": 108,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/checkpoint-replay-result.json",
+      "sha256": "856fe62287f249b182801bd7b414c33d2f5384f51072bbb3b2ec9b5394bc425d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/checkpoint.json",
+      "sha256": "ac273bcaee3e3d6684ece2ada55b88d09349c35e80caa12804cc2279a2764563",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/composition-plan.json",
+      "sha256": "6826166296bcd7d139f589a84f5d1d494ff7443097a58a4a5c9af9b72e34c249",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/final-replay-result.json",
+      "sha256": "9601e09ab350549d64d78ea40e3d8c7393da7daa5776d87e354db75c1f2b4450",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/journal.json",
+      "sha256": "22dcc5d0b8b42a6902b2e0b181ccc382277109995ddb5dc59fa09f81f372e05f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/mutation-audit.json",
+      "sha256": "5cb3d58416bb6f6a27622f4370215128ce05fda493f4b88ef914db3cdfb15783",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/order-independence-proof.json",
+      "sha256": "90012a6bf9625a2f8e011584224cb6f8335e7fe2dac9f0cde0f73ce13ed3483b",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/package.json",
+      "sha256": "9a83d47e8e2ae541e7789b804c32f489acb8e7525c0a9dc32a7cc8be8822d65a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/semantic-effect-proof.json",
+      "sha256": "c2723ba69d411147fe22619a2a7c04a47322fd0da3b0186507e30a045ecbec2b",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat-exploration/session-state.json",
+      "sha256": "3cd6ab2cc0f703f5dad830d3337e45b3ad5ded6701594f2c732b97a84254411f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/checkpoint-replay-result.json",
+      "sha256": "856fe62287f249b182801bd7b414c33d2f5384f51072bbb3b2ec9b5394bc425d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/checkpoint.json",
+      "sha256": "c5090b914f062b02eadf7c589d469186de203a70727afdd4cb01f71e79ae2ba1",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/composition-plan.json",
+      "sha256": "9d8520f5fa706446e939e1924c7d0d23348ff88892643c19d347122dedfe74a7",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/final-replay-result.json",
+      "sha256": "132d643dc88f0a0c36396bb2c8e019636820133495cb5a18339ed04263445698",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/journal.json",
+      "sha256": "edb671377ddb84b7943f7ab32f2b75dbe20344756b5a51b02eb64aca3d47045b",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/mutation-audit.json",
+      "sha256": "4da921bea1fac28a95e0bcac24d01b63159d4e56168cf3b302d0870851392d28",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/order-independence-proof.json",
+      "sha256": "c13bf38f0292e9af3818c72a5a32013064cbbf4f07a7311157ab7dccb9e8c0c5",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/package.json",
+      "sha256": "ba18c0aa4e792c4ab05784ea6f9a5235cffe76ab19852f2d077d5a3080110142",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/semantic-effect-proof.json",
+      "sha256": "8e0475f00c9c54e6e67c177f99bb62bc8bd0e0e2f64694004ad58b88fa6f2f56",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-combat/session-state.json",
+      "sha256": "4f08b9ee1cfa94e89bc8da350ef5308fd59f23c08aa14a7ad738a16042c3d68f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/checkpoint-replay-result.json",
+      "sha256": "856fe62287f249b182801bd7b414c33d2f5384f51072bbb3b2ec9b5394bc425d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/checkpoint.json",
+      "sha256": "5604d188fb0f21135cdbbf330647a682102a0b5e892f7df557aca3fad32aa3fa",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/composition-plan.json",
+      "sha256": "b23ff3a65a23693a87be8765101f886ec955d63153cb62b3cca073ea75323930",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/final-replay-result.json",
+      "sha256": "54f283c91d7b0edf0a8b66b0a80b9c3d968940d6b8584c098b21faeb3f036e25",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/journal.json",
+      "sha256": "c5c4790dfb1bad03f7c005643114222391e14d07c571abe7fd30dfc3f747dc46",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/mutation-audit.json",
+      "sha256": "12dddb1c0deddcb309d8271e3d94944254c46f6fee19dfa96837ccb47dc37e33",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/order-independence-proof.json",
+      "sha256": "7304d0c0573d194c4e6ff6451eb148bd0c7501d8461bd53cd3875aadcb104c7f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/package.json",
+      "sha256": "dfc3b0c2e48f2e3425156257d84f454cc3e69ccf0fb9f103cb3da24f69301a36",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/semantic-effect-proof.json",
+      "sha256": "3f668d72cd11708ba7eb6d92bf285415cfa36f34ed6ba025b6d2243f14f12002",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy-exploration/session-state.json",
+      "sha256": "73b97b4eb8d7eaa7c34faca407edcc2e2227c56c9cfc587139b6c5f9ca9010ea",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/checkpoint-replay-result.json",
+      "sha256": "856fe62287f249b182801bd7b414c33d2f5384f51072bbb3b2ec9b5394bc425d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/checkpoint.json",
+      "sha256": "1b94c7197136396d0810f5dc085ce381c3a5d921e74a8acad79d90bdb7a24342",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/composition-plan.json",
+      "sha256": "6d13d478276da6705761cc2fba7dbcdd924e0f76be11e07dc14b361224399821",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/final-replay-result.json",
+      "sha256": "a55f026ba34fc4ef79c579929a31505c3c6ba13673f7f56fff83fcdcb6bdb28d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/journal.json",
+      "sha256": "d9f26f4b99a4ea1e2938172f6e62462fbc315d4a52e7a059551e605d1f23d1be",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/mutation-audit.json",
+      "sha256": "9a46c5958e4f3d2f293b05afa20aab8f078495ef9f975ee3fbb208c7dde6d864",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/order-independence-proof.json",
+      "sha256": "9c1dc5627ec1b08dfbf03805a34b6102f005b44bdd96e21f5b3f7a288c2afceb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/package.json",
+      "sha256": "faa35f6b608042b8a8a9b52ca0bd282af4504dfb53d8775b7e261a26402082f6",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/semantic-effect-proof.json",
+      "sha256": "8674837e929df4769333a0fbf1243cd5e5be8a83f86fc29e49ba108ce6fbc81f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-alchemy/session-state.json",
+      "sha256": "cb73299e6d75587f78f6b9d20c029eec83e7f9ccf998b357e6f132bc4a35c490",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/checkpoint-replay-result.json",
+      "sha256": "21c0d0bb30942bb326bdf8978d8ed5e9838634795ef2865cf8061b4b15162076",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/checkpoint.json",
+      "sha256": "fa6b381b5b9e1c706320de07730fef5420719a150c84c6d283024c8f0578e072",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/composition-plan.json",
+      "sha256": "529dccce0d48b9170b341970ce1072f547029cb838e240460c3abb467e96c781",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/final-replay-result.json",
+      "sha256": "18e6d757026c5e6f307939adc05a5e368b914faa88c6dc2e577f1d44e1faf95d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/journal.json",
+      "sha256": "ffc17a44e730d257631641b504bdce9524413b9064aa79d4880ac4fd48c89e3a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/mutation-audit.json",
+      "sha256": "7d9aa67b0e99fc6696f54a5038841887fcdcfca1573fb9edd1f79090f193168a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/order-independence-proof.json",
+      "sha256": "a626012d005a2fd62752ba9904c7a1fa91b0d5472c3fc3ff894c581064734f95",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/package.json",
+      "sha256": "5170d610379d818b2ff55535e1fac0e5ee98f26d8e039e9bc1054bfdea87fa49",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/semantic-effect-proof.json",
+      "sha256": "07629b14b15ba5c505f50302d0ee16022ec6cb092f5a7db7c7f700e540d7519d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-baseline/session-state.json",
+      "sha256": "349ac58163806c12b2dda857e56ff8bea2f30a37ba97449b0deab43e028c6765",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/checkpoint-replay-result.json",
+      "sha256": "21c0d0bb30942bb326bdf8978d8ed5e9838634795ef2865cf8061b4b15162076",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/checkpoint.json",
+      "sha256": "01fe92db410fa4319d9756dd16b558dda73d46ed729388bc299a6f5933b8ad3c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/composition-plan.json",
+      "sha256": "ea0e4331a6a2b847b8a327d41c81a5972eecebd4802042a4502956818ebe4184",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/final-replay-result.json",
+      "sha256": "7fd6f863914783d942732954cf2194b675d77ec79db2bcaf4d1d77835e33e34c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/journal.json",
+      "sha256": "ededcb8af9505e6cda7234cbd8935bf535b9b7b4ebd13b9c1a2227be109ca9cc",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/mutation-audit.json",
+      "sha256": "bc22f454428d4251ba4266f49d8cffa07cd160e51475a88bf512d1c1e0490621",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/order-independence-proof.json",
+      "sha256": "8f86ab9d0544e690472cd3aa615420978fb558b9645a533169d45217524a04b5",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/package.json",
+      "sha256": "655e47603a203b49d1e4318a514f9c1bb0714be5a490a7fb2a5cab62dff0037c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/semantic-effect-proof.json",
+      "sha256": "f52aedad881f3d0813410a930d9f48ee99665922e9450d42e2dc4e7c69cf8a26",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat-exploration/session-state.json",
+      "sha256": "3ffa1e55bbd51738c718384a59928c04d701194ee904c559288b7e4d412b527f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/checkpoint-replay-result.json",
+      "sha256": "21c0d0bb30942bb326bdf8978d8ed5e9838634795ef2865cf8061b4b15162076",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/checkpoint.json",
+      "sha256": "ce5cc78864323f40f0647db54d70f99244f5a72d6b322a1318bf288330e88da8",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/composition-plan.json",
+      "sha256": "052be8ef16e595dafed3a0624ceedf3ed538f25ae7a395a719e0996bff42ec88",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/final-replay-result.json",
+      "sha256": "9f7d8339d36a45a728b9ed2a9e3cd1294b9d72989ddd50cd962ff310d7eb7488",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/journal.json",
+      "sha256": "7ba9656398c005b9bc482e3cf1ee130994f2677ad2b3ecf3cf63965886d109d7",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/mutation-audit.json",
+      "sha256": "337f593ed671c88b84d0e6b63aa27c92881d33057d789fdc2742e93fc7a4de4a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/order-independence-proof.json",
+      "sha256": "e468585acc487220c16fede6cd4d66125c48ee4244b593de0603ff4f352f5252",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/package.json",
+      "sha256": "e156f9f356013dc5f1c515a6ce5f1b1610e2656604e71e793835a10076f9364d",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/semantic-effect-proof.json",
+      "sha256": "db082aa803eafd935768cbb4cf9aa59bb4699489ea03e2687d8052b358e5d2e1",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-combat/session-state.json",
+      "sha256": "3a85eb347020222f8b9e0d057090fbb8aa2570f7b3d36720259068bba2c2d1e4",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/action-catalog.json",
+      "sha256": "ca02a8a4cb1150ca7002fb453f56f8c81fe34536f4c1da11a616886ad0d0c8bb",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/checkpoint-replay-result.json",
+      "sha256": "21c0d0bb30942bb326bdf8978d8ed5e9838634795ef2865cf8061b4b15162076",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/checkpoint.json",
+      "sha256": "05445a0db3980394e6739263f0298fe1b533161c0914cb1a77d7820858cccef3",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/composition-plan.json",
+      "sha256": "a1fa353073e28986a3482fdbad44faa612b0536c5149a82706bd4be1b490223f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/final-replay-result.json",
+      "sha256": "7755d05590d57aee56d76026ccc9d0253c27f5e1114bacca2354a18b0134678f",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/journal.json",
+      "sha256": "8898b905442bb5d99a75fff7c9378943b76c3a53d1fa833febba8c5a54d0cb1e",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/mutation-audit.json",
+      "sha256": "17117f470b22a61c371566a52306b07bcdf63a2247275a5c49443c2a25ed7eae",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/order-independence-proof.json",
+      "sha256": "c93099ab15b420ee16d9a3034222b0b2cc5e85d7e3b6899e52c654f1cb8305a8",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/package-validation.json",
+      "sha256": "11b0683cfe445a5b4fb01d852899c53140f37562c7411c2e90ed03e5f9b68f80",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/package.json",
+      "sha256": "5a59c2b552ea56f53a660550c8de2f55cf105c0914b2a2296f8ad507f9e34aa7",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/semantic-effect-proof.json",
+      "sha256": "9c9589dc613be31faa54f8215ff637e259eea7535769c97b560cb3692a94c118",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/compositions/minimal-map-game-composed-exploration/session-state.json",
+      "sha256": "2dc575a00344baba1ab149592903d027bb9afca8c85422d0fb24283961d61f63",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-catalog.json",
+      "sha256": "9e268ded85451485e9e4c2c104b67b23e8823efece64324a9adb54affba135c6",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-comparison.json",
+      "sha256": "3451d9b82e6b5c7225411b7abe255c7e3875740a48dd2b4c1673bbbb7024274e",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-dashboard.json",
+      "sha256": "52556a69e682903c493203100da9cdfe91a262e96c6846d4d296cf5a82fb9c97",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-matrix-result.json",
+      "sha256": "6c41869132f161011a5f2f345849a8557c204ca0f0011c1dfce167b48739b3e2",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-negative-proof.json",
+      "sha256": "fe60109673c7472d0d7959fdebc467d8f2d5472ac57ae623852228806e02f864",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-plan.json",
+      "sha256": "6826166296bcd7d139f589a84f5d1d494ff7443097a58a4a5c9af9b72e34c249",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-request.json",
+      "sha256": "98759133223be5eb5eb58a05298a2210a5c51a81162f52e409a84875cf269fb0",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/featuremodule-composition-selection-handoff.json",
+      "sha256": "c0fc81de4b091cd4f99a1079f099dc0f41a14e3f00b4f9aebc092566b6a39356",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/goal145-human-acceptance-record.json",
+      "sha256": "861a917c7cc8b475ef5bcceea14644824ea058b52774bc6ef132830fb6cc6df5",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/one-click-featuremodule-composition-report.json",
+      "sha256": "eab9730d13db89d9de7ad6205c75c1f8dd517cf162cd1fa1d3dd23cd2aad6c43",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/one-click-featuremodule-composition-report.md",
+      "sha256": "0ab03054c6a38e783d43b7cb7b40b841b1439c0202d4c6f8cf53133fa873b128",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/unity-featuremodule-composition-matrix-smoke.json",
+      "sha256": "682b80b5da64006a9a8db9bea1ccec565343baf7bac1b057c1f3285e37efef5a",
+      "required": true
+    }
+  ]
+}

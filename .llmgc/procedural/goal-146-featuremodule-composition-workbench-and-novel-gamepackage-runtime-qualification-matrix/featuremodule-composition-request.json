@@ -1,0 +1,12 @@
+{
+  "compositionId": "minimal-map-game-composed-alchemy-combat-exploration",
+  "displayName": "Alchemy + Combat + Exploration Resource FeatureModule Composition",
+  "baseCandidateId": "minimal-map-game-balanced-baseline",
+  "selectedModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus"
+  ],
+  "parameterOverrides": {},
+  "selectionMode": "human_operator"
+}

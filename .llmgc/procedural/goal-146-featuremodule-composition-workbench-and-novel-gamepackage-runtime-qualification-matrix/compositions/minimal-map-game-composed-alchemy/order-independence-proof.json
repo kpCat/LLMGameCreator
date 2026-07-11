@@ -1,0 +1,13 @@
+{
+  "compositionId": "minimal-map-game-composed-alchemy",
+  "forwardModuleIds": [
+    "feature.profile.alchemy_focus"
+  ],
+  "reverseModuleIds": [
+    "feature.profile.alchemy_focus"
+  ],
+  "forwardPackageSha256": "faa35f6b608042b8a8a9b52ca0bd282af4504dfb53d8775b7e261a26402082f6",
+  "reversePackageSha256": "faa35f6b608042b8a8a9b52ca0bd282af4504dfb53d8775b7e261a26402082f6",
+  "packageBytesIdentical": true,
+  "passed": true
+}

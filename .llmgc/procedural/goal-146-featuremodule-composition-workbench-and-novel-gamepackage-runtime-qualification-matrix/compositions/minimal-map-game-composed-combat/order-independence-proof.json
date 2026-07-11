@@ -1,0 +1,13 @@
+{
+  "compositionId": "minimal-map-game-composed-combat",
+  "forwardModuleIds": [
+    "feature.profile.combat_focus"
+  ],
+  "reverseModuleIds": [
+    "feature.profile.combat_focus"
+  ],
+  "forwardPackageSha256": "e156f9f356013dc5f1c515a6ce5f1b1610e2656604e71e793835a10076f9364d",
+  "reversePackageSha256": "e156f9f356013dc5f1c515a6ce5f1b1610e2656604e71e793835a10076f9364d",
+  "packageBytesIdentical": true,
+  "passed": true
+}

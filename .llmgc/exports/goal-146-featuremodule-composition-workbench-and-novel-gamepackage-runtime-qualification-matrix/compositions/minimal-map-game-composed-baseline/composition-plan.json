@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "featuremodule_composition_plan_v1",
+  "compositionId": "minimal-map-game-composed-baseline",
+  "baseCandidateId": "minimal-map-game-balanced-baseline",
+  "basePackagePath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/candidates/minimal-map-game-balanced-baseline/package.json",
+  "basePackageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+  "requiredModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "selectedOptionalModuleIds": [],
+  "orderedModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "orderedMutationOperations": [],
+  "deduplicatedOperationCount": 0,
+  "conflictCount": 0,
+  "dependencyValidationPassed": true,
+  "orderIndependencePassed": true,
+  "sourceTemplateUnmodified": true,
+  "validation": {
+    "allModuleIdsExist": true,
+    "requiredModulesSelected": true,
+    "dependenciesSatisfied": true,
+    "conflictsAbsent": true,
+    "moduleIdsUnique": true,
+    "operationIdsUnique": true,
+    "mutationTargetsUniqueOrIdentical": true,
+    "parameterOverridesSupported": true,
+    "passed": true,
+    "diagnostics": []
+  }
+}

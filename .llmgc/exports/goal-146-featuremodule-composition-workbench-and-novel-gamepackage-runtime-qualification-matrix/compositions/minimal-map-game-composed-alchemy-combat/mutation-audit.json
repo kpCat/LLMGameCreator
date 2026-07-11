@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-composed-alchemy-combat",
+  "recipeId": "composition_alchemy_combat",
+  "variantKind": "feature.profile.alchemy_focus+feature.profile.combat_focus",
+  "runtimeSignificant": true,
+  "operationCount": 6,
+  "passed": true,
+  "operations": [
+    {
+      "operationId": "combat.basic_attack_damage_effect",
+      "targetKind": "ability_effect_arg_amount",
+      "targetId": "ability/basic_attack|damage_resource|resource/health",
+      "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+      "expectedValue": "4",
+      "actualOldValue": "4",
+      "newValue": "6",
+      "runtimeDimension": "combat_ability_damage",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "combat.basic_attack_power",
+      "targetKind": "ability_power",
+      "targetId": "ability/basic_attack",
+      "jsonPath": "game.abilities[id=ability/basic_attack].power",
+      "expectedValue": "4",
+      "actualOldValue": "4",
+      "newValue": "6",
+      "runtimeDimension": "combat_ability_damage",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "combat.goblin_health_pool",
+      "targetKind": "encounter_participant_resource_amount",
+      "targetId": "encounter/goblin_duel|goblin|resource/health",
+      "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+      "expectedValue": "12",
+      "actualOldValue": "12",
+      "newValue": "16",
+      "runtimeDimension": "combat_participant_resource",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "alchemy.starting_red_herb_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/red_herb",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+      "expectedValue": "2",
+      "actualOldValue": "2",
+      "newValue": "4",
+      "runtimeDimension": "alchemy_inventory_resource",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "alchemy.starting_water_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/water_flask",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_inventory_resource",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    },
+    {
+      "operationId": "alchemy.healing_potion_output_quantity",
+      "targetKind": "recipe_output_amount",
+      "targetId": "recipe/healing_potion|item/healing_potion",
+      "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "actualOldValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_recipe_output",
+      "applied": true,
+      "passed": true,
+      "diagnostic": ""
+    }
+  ],
+  "diagnostics": []
+}

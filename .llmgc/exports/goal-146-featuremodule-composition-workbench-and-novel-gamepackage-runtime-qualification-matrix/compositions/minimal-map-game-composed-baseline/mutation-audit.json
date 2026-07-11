@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "product_line_runtime_variant_mutation_audit_v1",
+  "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+  "candidateId": "minimal-map-game-composed-baseline",
+  "recipeId": "composition_baseline",
+  "variantKind": "baseline_composition",
+  "runtimeSignificant": true,
+  "operationCount": 0,
+  "passed": true,
+  "operations": [],
+  "diagnostics": []
+}

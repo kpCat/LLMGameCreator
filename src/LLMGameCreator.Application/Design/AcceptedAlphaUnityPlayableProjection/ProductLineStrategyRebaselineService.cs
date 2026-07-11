@@ -679,6 +679,25 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "runtimeAuthority")
                    && BoolValue(root, "projectionOnly") == false
                    && BoolValue(root, "unityGameplayTruth") == false;
+            var postGoal146State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal146Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "goal145Accepted")
+                   && BoolValue(root, "goal145AcceptedByHuman")
+                   && BoolValue(root, "goal145AcceptedByCodex") == false
+                   && BoolValue(root, "featureModuleComposition")
+                   && IntValue(root, "requiredCoreModuleCount") >= 10
+                   && IntValue(root, "optionalProfileModuleCount") == 3
+                   && IntValue(root, "compositionCount") == 8
+                   && IntValue(root, "passedCompositionCount") == 8
+                   && BoolValue(root, "allCompositionCheckpointReloadsPassed")
+                   && BoolValue(root, "allCompositionFullReplaysEquivalent")
+                   && BoolValue(root, "allCompositionActionBindingsPassed")
+                   && BoolValue(root, "allCompositionOrderIndependenceProofsPassed")
+                   && BoolValue(root, "runtimeAuthority")
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "unityGameplayTruth") == false;
             return goal133AState
                    || postGoal134State
                    || postGoal135State
@@ -691,7 +710,8 @@ public sealed class ProductLineStrategyRebaselineService
                    || postGoal142State
                    || postGoal143State
                    || postGoal144State
-                   || postGoal145State;
+                   || postGoal145State
+                   || postGoal146State;
         }
         catch (JsonException)
         {
@@ -757,7 +777,16 @@ public sealed class ProductLineStrategyRebaselineService
         && Contains(markdown, "allCandidateCheckpointReloadsPassed=true")
         && Contains(markdown, "allCandidateFullReplaysEquivalent=true")
         && Contains(markdown, "allCandidateActionBindingsPassed=true")
-        && Contains(markdown, "allFocusEffectsObserved=true");
+        && Contains(markdown, "allFocusEffectsObserved=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal146Gate)
+        && Contains(markdown, "goal145Accepted=true")
+        && Contains(markdown, "featureModuleComposition=true")
+        && Contains(markdown, "compositionCount=8")
+        && Contains(markdown, "passedCompositionCount=8")
+        && Contains(markdown, "allCompositionCheckpointReloadsPassed=true")
+        && Contains(markdown, "allCompositionFullReplaysEquivalent=true")
+        && Contains(markdown, "allCompositionActionBindingsPassed=true")
+        && Contains(markdown, "allCompositionOrderIndependenceProofsPassed=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -775,7 +804,8 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal142Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal143Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal144Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal145Gate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal145Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146Gate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);
