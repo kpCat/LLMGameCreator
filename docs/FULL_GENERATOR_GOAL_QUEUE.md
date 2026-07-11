@@ -2321,7 +2321,7 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-goal_147_featuremodule_authoring_parameters_and_composition_persistence
+review_goals_146_147_featuremodule_composer_authoring_workflow
 ```
 
 Goal145 is accepted by the repository owner's exact human handoff after the
@@ -2347,8 +2347,20 @@ contracts and coverage planning. The current three-module catalog remains an
 fourth module materializes and qualifies through the shared Runtime seam while
 bounded coverage emits 13 rows; a deterministic twelve-module catalog emits 21
 rows under `maxTotalRows=24` rather than enumerating 4096. Goal146 remains
-`accepted=false` and `manualReviewDeferred=true`; the next product goal remains
-`goal_147_featuremodule_authoring_parameters_and_composition_persistence`.
+`accepted=false` and `manualReviewDeferred=true`.
+
+Goal147 is GREEN at
+`persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required`.
+The repository-local catalog is the FeatureModule source of truth for 10 locked
+core modules, 3 optional modules and 8 typed parameters. Saved compositions use
+canonical atomic persistence and detect stale/missing module fingerprints.
+Incremental certification reuses all unchanged results and invalidates only a
+changed module; 100 modules yield 100 certification entries and 9 interaction
+rows under the 24-row cap without powerset enumeration. Default values preserve
+all eight Goal146 package/final hashes, and a custom all-three composition
+passes the shared Runtime/checkpoint/replay/action-binding seam. Goals 146 and
+147 remain `accepted=false`; the current next work is their bundled manual
+composer/authoring workflow review.
 
 Goal145 is accepted by the repository owner's exact Goal146 human handoff with
 `implementationStatus=GREEN`, `accepted=true`, `acceptedByHuman=true`,

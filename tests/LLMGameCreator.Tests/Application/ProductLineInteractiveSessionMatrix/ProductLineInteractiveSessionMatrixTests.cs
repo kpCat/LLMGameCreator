@@ -5,6 +5,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.ProductLineInteractiveSessionMatrix;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class ProductLineInteractiveSessionMatrixTests
 {
     [Fact]

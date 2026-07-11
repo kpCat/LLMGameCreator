@@ -63,6 +63,7 @@ Normal command:
 Evidence:
 `.llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/`
 
-No immediate human gate is required. Bundle a later review after Goal146 plus
-at least one related authoring or persistence goal unless a real P0/P1 defect
-appears.
+Goal147 is now GREEN, so the deferred Goal146 review is ready to be performed
+together with the Goal147 authoring/persistence workflow. Goal146 remains
+`accepted=false`; use the Goal147 manual-acceptance checklist and do not infer
+acceptance from automated evidence.

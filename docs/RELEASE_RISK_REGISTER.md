@@ -86,6 +86,8 @@ Goal 145A review note: the selector reentrancy/selection-drift risk is fixed wit
 
 Goal 146 review note: Goal145 is accepted by human handoff. Goal146 closes the immediate hardcoded-prebuilt-candidate composition risk for the proven vertical slice: eight FeatureModule combinations create novel packages and pass one shared Runtime/save/replay qualifier with distinct semantic outcomes. Remaining P0/P1 risks still include hands-on playable quality, clean-machine release proof, public-schema decisions, providers/licensing, Lua/generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release packaging. Goal146 manual review is deferred for bundling with related authoring or persistence work.
 
+Goal 147 review note: the immediate in-memory/hardcoded authoring risk is bounded by a file-based fingerprinted module registry, eight generic typed parameters, atomic saved-composition persistence with stale/missing-module diagnostics, and independently cached per-module certification. A 100-module catalog avoids powerset certification and keeps interaction coverage at 9 rows under the 24-row cap. Default Goal146 hashes remain stable and a custom all-three composition passes the shared Runtime seam. Goals 146 and 147 remain unaccepted until their combined WinForms authoring and saved-composition evidence workflow is reviewed; all broader release, provider, schema, Lua, art and Unity gameplay-truth risks remain open.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

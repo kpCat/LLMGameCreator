@@ -65,6 +65,9 @@ nunit-*.xml
 
 .devflow/runs/
 
+# Local FeatureModule authoring documents and certification cache
+.llmgc/workspace/
+
 # Generated Unity and LLMGameCreator build artifacts
 .llmgc/procedural/**/build/
 .llmgc/procedural/**/logs/

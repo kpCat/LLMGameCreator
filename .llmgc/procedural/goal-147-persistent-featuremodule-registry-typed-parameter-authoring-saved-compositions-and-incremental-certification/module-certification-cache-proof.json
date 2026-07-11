@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "module_certification_cache_proof_v1",
+  "firstExecutedCount": 3,
+  "unchangedReusedCount": 3,
+  "corruptCacheRejected": true,
+  "corruptCacheRegeneratedCount": 1,
+  "changedModuleExecutedCount": 1,
+  "changedModuleReusedCount": 2,
+  "changedModuleSelectiveInvalidationPassed": true,
+  "runtimeContractVersionInvalidatesCache": true,
+  "passed": true
+}

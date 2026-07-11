@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "featuremodule_parameter_schema_v1",
+  "supportedValueTypes": [
+    "integer",
+    "number",
+    "boolean",
+    "enum"
+  ],
+  "supportedControls": [
+    "numeric_up_down",
+    "check_box",
+    "combo_box"
+  ],
+  "parameterDefinitionCount": 8,
+  "parameters": [
+    {
+      "parameterId": "healingPotionOutput",
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Healing potion output",
+      "description": "Healing potions produced by the recipe.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 1,
+      "maximum": 10,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "alchemy.healing_potion_output_quantity",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "alchemy.healing_potion_output"
+        }
+      ],
+      "validationRules": [
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.alchemy_focus"
+      ],
+      "atomicGroupId": "alchemy.healing_potion_output"
+    },
+    {
+      "parameterId": "startingRedHerbQuantity",
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Starting red herb quantity",
+      "description": "Red herbs in the starting player inventory.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 4,
+      "minimum": 2,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "alchemy.starting_red_herb_supply",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "alchemy.starting_red_herb"
+        }
+      ],
+      "validationRules": [
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.alchemy_focus"
+      ],
+      "atomicGroupId": "alchemy.starting_red_herb"
+    },
+    {
+      "parameterId": "startingWaterFlaskQuantity",
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Starting water flask quantity",
+      "description": "Water flasks in the starting player inventory.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 1,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "alchemy.starting_water_supply",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "alchemy.starting_water"
+        }
+      ],
+      "validationRules": [
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.alchemy_focus"
+      ],
+      "atomicGroupId": "alchemy.starting_water"
+    },
+    {
+      "parameterId": "basicAttackDamage",
+      "moduleId": "feature.profile.combat_focus",
+      "title": "Basic attack damage",
+      "description": "Damage and power for the basic attack; both targets update atomically.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 6,
+      "minimum": 1,
+      "maximum": 30,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "damage",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "combat.basic_attack_damage_effect",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "combat.basic_attack_damage"
+        },
+        {
+          "operationId": "combat.basic_attack_power",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "combat.basic_attack_damage"
+        }
+      ],
+      "validationRules": [
+        "atomic_group_complete",
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.combat_focus"
+      ],
+      "atomicGroupId": "combat.basic_attack_damage"
+    },
+    {
+      "parameterId": "goblinStartingHealth",
+      "moduleId": "feature.profile.combat_focus",
+      "title": "Goblin starting health",
+      "description": "Starting health for the goblin encounter participant.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 16,
+      "minimum": 8,
+      "maximum": 100,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "health",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "combat.goblin_health_pool",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "combat.goblin_health"
+        }
+      ],
+      "validationRules": [
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.combat_focus"
+      ],
+      "atomicGroupId": "combat.goblin_health"
+    },
+    {
+      "parameterId": "appleYield",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Apple yield",
+      "description": "Deterministic minimum and maximum apple loot count.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 3,
+      "minimum": 1,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "exploration.apple_tree_loot_maximum",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "exploration.apple_yield"
+        },
+        {
+          "operationId": "exploration.apple_tree_loot_minimum",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "exploration.apple_yield"
+        }
+      ],
+      "validationRules": [
+        "atomic_group_complete",
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.exploration_resource_focus"
+      ],
+      "atomicGroupId": "exploration.apple_yield"
+    },
+    {
+      "parameterId": "logYield",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Log yield",
+      "description": "Logs produced by the apple tree resource node.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 0,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "exploration.apple_tree_log_yield",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "exploration.log_yield"
+        }
+      ],
+      "validationRules": [
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.exploration_resource_focus"
+      ],
+      "atomicGroupId": "exploration.log_yield"
+    },
+    {
+      "parameterId": "transactionPotionOutput",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Transaction potion output",
+      "description": "Healing potions produced by the purchase transaction.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 1,
+      "maximum": 10,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "exploration.transaction_potion_output",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "exploration.transaction_output"
+        }
+      ],
+      "validationRules": [
+        "integer_range",
+        "step"
+      ],
+      "runtimeEffectIds": [
+        "runtime_effect.exploration_resource_focus"
+      ],
+      "atomicGroupId": "exploration.transaction_output"
+    }
+  ]
+}

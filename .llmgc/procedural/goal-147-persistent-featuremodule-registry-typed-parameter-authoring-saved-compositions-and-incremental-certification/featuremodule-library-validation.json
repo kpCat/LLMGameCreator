@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "featuremodule_library_validation_v1",
+  "passed": true,
+  "manifestValidated": true,
+  "countsMatch": true,
+  "moduleIdsUnique": true,
+  "fileReferencesUnique": true,
+  "pathsConfined": true,
+  "dependenciesAndConflictsValidated": true,
+  "operationEffectParameterReferencesValidated": true,
+  "diagnostics": []
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "moduleId": "feature.profile.alchemy_focus",
+    "parameterId": "healingPotionOutput",
+    "valueType": "integer",
+    "value": 3,
+    "usedDefault": false,
+    "boundOperationIds": [
+      "alchemy.healing_potion_output_quantity"
+    ],
+    "atomicGroupId": "alchemy.healing_potion_output"
+  },
+  {
+    "moduleId": "feature.profile.alchemy_focus",
+    "parameterId": "startingRedHerbQuantity",
+    "valueType": "integer",
+    "value": 4,
+    "usedDefault": true,
+    "boundOperationIds": [
+      "alchemy.starting_red_herb_supply"
+    ],
+    "atomicGroupId": "alchemy.starting_red_herb"
+  },
+  {
+    "moduleId": "feature.profile.alchemy_focus",
+    "parameterId": "startingWaterFlaskQuantity",
+    "valueType": "integer",
+    "value": 2,
+    "usedDefault": true,
+    "boundOperationIds": [
+      "alchemy.starting_water_supply"
+    ],
+    "atomicGroupId": "alchemy.starting_water"
+  },
+  {
+    "moduleId": "feature.profile.combat_focus",
+    "parameterId": "basicAttackDamage",
+    "valueType": "integer",
+    "value": 5,
+    "usedDefault": false,
+    "boundOperationIds": [
+      "combat.basic_attack_damage_effect",
+      "combat.basic_attack_power"
+    ],
+    "atomicGroupId": "combat.basic_attack_damage"
+  },
+  {
+    "moduleId": "feature.profile.combat_focus",
+    "parameterId": "goblinStartingHealth",
+    "valueType": "integer",
+    "value": 18,
+    "usedDefault": false,
+    "boundOperationIds": [
+      "combat.goblin_health_pool"
+    ],
+    "atomicGroupId": "combat.goblin_health"
+  },
+  {
+    "moduleId": "feature.profile.exploration_resource_focus",
+    "parameterId": "appleYield",
+    "valueType": "integer",
+    "value": 4,
+    "usedDefault": false,
+    "boundOperationIds": [
+      "exploration.apple_tree_loot_maximum",
+      "exploration.apple_tree_loot_minimum"
+    ],
+    "atomicGroupId": "exploration.apple_yield"
+  },
+  {
+    "moduleId": "feature.profile.exploration_resource_focus",
+    "parameterId": "logYield",
+    "valueType": "integer",
+    "value": 3,
+    "usedDefault": false,
+    "boundOperationIds": [
+      "exploration.apple_tree_log_yield"
+    ],
+    "atomicGroupId": "exploration.log_yield"
+  },
+  {
+    "moduleId": "feature.profile.exploration_resource_focus",
+    "parameterId": "transactionPotionOutput",
+    "valueType": "integer",
+    "value": 3,
+    "usedDefault": false,
+    "boundOperationIds": [
+      "exploration.transaction_potion_output"
+    ],
+    "atomicGroupId": "exploration.transaction_output"
+  }
+]

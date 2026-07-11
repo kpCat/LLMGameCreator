@@ -35,6 +35,10 @@ public static class ProductLineStrategyRebaselineVocabulary
         "featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification";
     public const string Goal146AGate =
         "generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification";
+    public const string Goal147Gate =
+        "persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required";
+    public const string PostGoal147NextGoal =
+        "review_goals_146_147_featuremodule_composer_authoring_workflow";
     public const string NextGoal =
         "goal_134_canonical_runtime_selected_candidate_playthrough_matrix";
     public const string PostGoal134NextGoal =

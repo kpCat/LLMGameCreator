@@ -23,6 +23,13 @@ public sealed record FeatureModuleCompositionCoverageSpec
     public IReadOnlyList<string> CoverageReasons { get; init; } = [];
 }
 
+public sealed record FeatureModuleCompositionRejectedCoverageSpec
+{
+    public string CompositionId { get; init; } = string.Empty;
+    public IReadOnlyList<string> ModuleIds { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
 public sealed record FeatureModuleCompositionCoveragePlan
 {
     public string SchemaVersion { get; init; } = "featuremodule_composition_coverage_plan_v1";
@@ -40,4 +47,5 @@ public sealed record FeatureModuleCompositionCoveragePlan
     public bool Bounded { get; init; }
     public FeatureModuleCompositionCoveragePolicy Policy { get; init; } = new();
     public IReadOnlyList<FeatureModuleCompositionCoverageSpec> CompositionSpecs { get; init; } = [];
+    public IReadOnlyList<FeatureModuleCompositionRejectedCoverageSpec> RejectedCompositions { get; init; } = [];
 }

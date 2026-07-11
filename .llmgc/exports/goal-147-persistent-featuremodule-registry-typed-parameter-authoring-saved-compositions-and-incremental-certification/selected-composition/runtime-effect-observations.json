@@ -1,0 +1,50 @@
+{
+  "effectObservationCount": 3,
+  "passedEffectObservationCount": 3,
+  "selectedModuleCount": 3,
+  "satisfiedSelectedModuleCount": 3,
+  "observations": [
+    {
+      "effectId": "runtime_effect.alchemy_focus",
+      "moduleId": "feature.profile.alchemy_focus",
+      "metricKind": "inventory_item_quantity",
+      "targetId": "inventory/player_start",
+      "resourceOrItemId": "item/red_herb",
+      "comparisonKind": "greater_than_baseline",
+      "expectedValue": "4",
+      "baselineValue": "0",
+      "actualValue": "2",
+      "runtimeDimension": "alchemy_inventory_resource",
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "effectId": "runtime_effect.combat_focus",
+      "moduleId": "feature.profile.combat_focus",
+      "metricKind": "combat_resource_amount",
+      "targetId": "goblin",
+      "resourceOrItemId": "resource/health",
+      "comparisonKind": "changed_from_baseline",
+      "expectedValue": "16",
+      "baselineValue": "8",
+      "actualValue": "13",
+      "runtimeDimension": "combat_participant_resource",
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "effectId": "runtime_effect.exploration_resource_focus",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "metricKind": "inventory_item_quantity",
+      "targetId": "inventory/player_start",
+      "resourceOrItemId": "item/apple",
+      "comparisonKind": "greater_than_baseline",
+      "expectedValue": "3",
+      "baselineValue": "3",
+      "actualValue": "5",
+      "runtimeDimension": "harvest_loot_quantity",
+      "passed": true,
+      "diagnostics": []
+    }
+  ]
+}

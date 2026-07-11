@@ -302,6 +302,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/GOAL.md` | Goal 145A hotfix: the candidate combo uses `SelectionChangeCommitted` plus a bounded programmatic binding guard, so bind/restore invokes selection logic 0 times, one operator combat commit invokes it once with maximum depth 1, combat survives session/action/checkpoint/replay/matrix refreshes, and candidate changes clear prior live state. Its 4/4 Runtime matrix and Unity smoke remain GREEN; Goal145 is accepted by the later Goal146 human handoff. |
 | `docs/agent-tasks/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/GOAL.md` | Goal 146 task: records Goal145 human acceptance, composes eight novel GamePackages from required and optional FeatureModules with deterministic mutation planning, qualifies each through the shared Runtime session/replay seam, adds an in-process WinForms module composer and a read-only Unity matrix consumer. Goal146 remains accepted=false with manual review deferred. |
 | `docs/agent-tasks/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/GOAL.md` | Goal 146A hotfix: removes the fixed eight-row table and optional-module indexing, derives active modules and labels from the catalog, adds generic runtime-effect contracts, exhaustive three-module coverage and bounded deterministic 4/12-module coverage. The synthetic fourth module materializes and passes the shared Runtime qualifier without a Composer branch; all current Goal146 package/final hashes remain unchanged. |
+| `docs/agent-tasks/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/GOAL.md` | Goal 147 task: repository-local file catalog with 10 locked core and 3 optional FeatureModules, 8 typed parameters, atomic saved-composition persistence, fingerprinted incremental per-module certification, 100-module certification scalability with 9 bounded interaction rows, custom Runtime qualification, in-process WinForms authoring and read-only Unity evidence. Result is `GREEN`; Goals 146 and 147 remain accepted=false pending bundled review. |
+| `docs/manual-acceptance/persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification.md` | Goal 147 bundled manual review checklist for the Goal146 composer plus Goal147 typed authoring, persistence, certification and saved-composition evidence workflow. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -379,7 +381,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-goal_147_featuremodule_authoring_parameters_and_composition_persistence
+review_goals_146_147_featuremodule_composer_authoring_workflow
 ```
 
 Goal146A is GREEN at
@@ -392,8 +394,19 @@ all eight Goal146 package/final hashes. A synthetic fourth module uses
 Runtime qualifier/checkpoint/full-replay/action-binding path without a Composer
 branch. A deterministic twelve-module catalog produces 21 rows under the
 24-row policy limit instead of enumerating 4096. Goal146 remains
-`accepted=false` with `manualReviewDeferred=true`; Goal147 remains the next
-separate task.
+`accepted=false` with `manualReviewDeferred=true`.
+
+Goal147 is GREEN at
+`persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required`.
+The file-based catalog is authoritative, typed parameters bind generically,
+saved compositions round-trip atomically with staleness diagnostics, and
+fingerprinted per-module certification reuses unchanged results. The current
+three optional modules are certified independently from interaction coverage;
+a 100-module catalog produces 100 certification entries and only 9 interaction
+rows under the 24-row cap without powerset enumeration. Defaults preserve all
+eight Goal146 hashes, while a custom all-three composition passes the same
+Runtime/checkpoint/replay/action-binding qualifier. Goals 146 and 147 remain
+`accepted=false`; their combined workflow is the current manual review.
 
 Goal146 is GREEN with 10 locked core modules, three Goal142-derived optional
 profile modules and all eight module combinations materialized as novel

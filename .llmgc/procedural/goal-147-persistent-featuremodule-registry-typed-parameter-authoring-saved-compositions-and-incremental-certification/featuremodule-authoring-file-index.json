@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "featuremodule_authoring_file_index_v1",
+  "goalId": "goal_147_persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification",
+  "rootPath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification",
+  "indexedFileCount": 29,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/bounded-interaction-coverage-proof.json",
+      "sha256": "3b5abf70f8a59d4d92ac0bed0b0d7a3664e8f42e916273bef852a4594375712c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/featuremodule-authoring-dashboard.json",
+      "sha256": "76855eec94fa2dfc711a1ed69b32ceaee44d2d08fd3a16252ab130a75f7ef47e",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/featuremodule-authoring-negative-proof.json",
+      "sha256": "2ff836ee39f19e56e6a54b60f029024f710d50b699fe11ad8f2b2aae07557c35",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/featuremodule-default-hash-compatibility-proof.json",
+      "sha256": "8ea51dfb476bdfe93c48dd9ef6589394ec803d6cded9744f677deda1cb920efa",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/featuremodule-library-index.json",
+      "sha256": "a61589422ec3c881e2a91e74b9309f445e26083f568671d90a44b883b53765af",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/featuremodule-library-validation.json",
+      "sha256": "d38c253ed0443d40b685db42122fd11df6948d71dd14641bbbd4ced0101112d1",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/featuremodule-parameter-schema.json",
+      "sha256": "12edf08fd4b3eebf928a23694d685434d5f0b0546f695f6ed1a163d60c7c40c7",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/hundred-module-scalability-proof.json",
+      "sha256": "7a2ff974211a394206a6c21bf1854f3f74e4cb52217a09456ee1cd9716f76267",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/module-certification-cache-proof.json",
+      "sha256": "7bd16d45d72bc8357836f8016139aa9958209780ce710dc921c37de14e5e3198",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/module-certification-ledger.json",
+      "sha256": "58f9d5402079cde31db54ee09958ac48727b30b5cff34473db9c6469c5887efe",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/multi-effect-module-proof.json",
+      "sha256": "b4ea6ea3c2cb5c7f7ec23679e7b6fae9171335a52b291573ee21d58fd92e0c63",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/one-click-featuremodule-authoring-report.json",
+      "sha256": "3f16633e81e9798337ca5a478e69cbae4114e4e642c0a4de792efcd6ff6acbe3",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/one-click-featuremodule-authoring-report.md",
+      "sha256": "fbcc285572ac43f2c773d724cd02d4e9605d715f3629596d9f76c4f1dbfe2f12",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/parameterized-composition-materialization-proof.json",
+      "sha256": "8c14e59febefe8650bcaa68d3af5953984ff9e87d5110b5535abb30adcc86230",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/saved-composition-roundtrip-proof.json",
+      "sha256": "97cfde932bdd5a7079ed05dc162c485174b9efa93ead85d4fc50b4a96db2e0e5",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/action-catalog.json",
+      "sha256": "9ae78bca1176ee2e25c5b1ac2b65502bfad3517f0fe146aa6d1a3e40a93b6d7c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/checkpoint-replay-result.json",
+      "sha256": "f780b872bc63b018e932071ced279b8a2c15d51c60ac07fe88ee1649a42e05c1",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/checkpoint.json",
+      "sha256": "bdc13c236a819eb424220537b306b5bef61d23eeeeb44637eabb530374b01100",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/composition.json",
+      "sha256": "9d93b124a636c06cb478c0bcb0a045b91ab033e74977c489798a03a1b304b50a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/effective-mutation-plan.json",
+      "sha256": "fc6a669ddd1f62229aad556342ce7dc0d3b0e039229393791d69ef2ef658236b",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/effective-parameter-values.json",
+      "sha256": "d4398227745541c5ad5bc93dbe0f5c490629da7505bdbfe511697861e2552355",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/final-replay-result.json",
+      "sha256": "3dbf9e4499c10ce59f02f514c5813760f1c41bddc885ea3df23b54a725d17615",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/journal.json",
+      "sha256": "e25ef087100ea886122817b6714dc727672b5f25fd58ef5fec86e9d292dce2e4",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/package-validation.json",
+      "sha256": "27d9bb38b153904cc3cc7ef3e1ad2c59abcfd328c5a1412bec3a3ab6a248029c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/package.json",
+      "sha256": "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/parameter-audit.json",
+      "sha256": "0d9a72963af9c2bac63f05a892d14935b473234e80a151fb6a012dd3a7b8b6ce",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/runtime-effect-observations.json",
+      "sha256": "d529b467d7df4c1f6851a08fe8fae09c7eb6c6b77df0cf36eaf3598243ef4aab",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/selected-composition/session-state.json",
+      "sha256": "4b968293361f2c1245fed9cd6067b0fe38c6a9398127f68d9c07ba0ee4ce10be",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/unity-saved-featuremodule-composition-smoke.json",
+      "sha256": "7eb74bb470f4da4ee5f88e71babed570645201de3f71e971a049c410262eb1f2",
+      "required": true
+    }
+  ]
+}

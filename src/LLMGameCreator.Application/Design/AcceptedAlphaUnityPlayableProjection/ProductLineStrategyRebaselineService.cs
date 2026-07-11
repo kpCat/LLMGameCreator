@@ -719,6 +719,31 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "runtimeAuthority")
                    && BoolValue(root, "projectionOnly") == false
                    && BoolValue(root, "unityGameplayTruth") == false;
+            var postGoal147State =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal147Gate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "goal146Accepted") == false
+                   && BoolValue(root, "goal146ManualReviewDeferred")
+                   && BoolValue(root, "goal147Accepted") == false
+                   && BoolValue(root, "persistentFeatureModuleLibrary")
+                   && BoolValue(root, "moduleLibrarySourceOfTruth")
+                   && BoolValue(root, "typedFeatureModuleParameters")
+                   && BoolValue(root, "savedFeatureModuleCompositions")
+                   && BoolValue(root, "incrementalFeatureModuleCertification")
+                   && BoolValue(root, "interactionCoverageDecoupledFromModuleCertification")
+                   && BoolValue(root, "hundredModuleCatalogAccepted")
+                   && IntValue(root, "hundredModuleInteractionRowCount") <= 24
+                   && BoolValue(root, "hundredModulePowersetEnumerated") == false
+                   && BoolValue(root, "allCurrentOptionalModulesCertified")
+                   && BoolValue(root, "defaultParameterGoal146HashesPreserved")
+                   && BoolValue(root, "customParameterizedCompositionQualified")
+                   && BoolValue(root, "featureModuleWorkspaceIgnored")
+                   && StringValue(root, "nextProductGoal")
+                   == ProductLineStrategyRebaselineVocabulary.PostGoal147NextGoal
+                   && BoolValue(root, "runtimeAuthority")
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "unityGameplayTruth") == false;
             return goal133AState
                    || postGoal134State
                    || postGoal135State
@@ -733,7 +758,8 @@ public sealed class ProductLineStrategyRebaselineService
                    || postGoal144State
                    || postGoal145State
                    || postGoal146State
-                   || postGoal146AState;
+                   || postGoal146AState
+                   || postGoal147State;
         }
         catch (JsonException)
         {
@@ -815,7 +841,18 @@ public sealed class ProductLineStrategyRebaselineService
         && Contains(markdown, "goal146SyntheticFourthModulePassed=true")
         && Contains(markdown, "goal146LargeCatalogCoverageBounded=true")
         && Contains(markdown, "goal146CurrentPackageHashesPreserved=true")
-        && Contains(markdown, "goal146CurrentFinalHashesPreserved=true");
+        && Contains(markdown, "goal146CurrentFinalHashesPreserved=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal147Gate)
+        && Contains(markdown, "goal146Accepted=false")
+        && Contains(markdown, "goal147Accepted=false")
+        && Contains(markdown, "persistentFeatureModuleLibrary=true")
+        && Contains(markdown, "moduleLibrarySourceOfTruth=true")
+        && Contains(markdown, "typedFeatureModuleParameters=true")
+        && Contains(markdown, "savedFeatureModuleCompositions=true")
+        && Contains(markdown, "incrementalFeatureModuleCertification=true")
+        && Contains(markdown, "hundredModuleCatalogAccepted=true")
+        && Contains(markdown, "customParameterizedCompositionQualified=true")
+        && Contains(markdown, ProductLineStrategyRebaselineVocabulary.PostGoal147NextGoal);
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -835,7 +872,9 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal144Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal145Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146AGate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146AGate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal147Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.PostGoal147NextGoal);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

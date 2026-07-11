@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "featuremodule_library_index_v1",
+  "catalogId": "llmgc.feature-modules",
+  "catalogVersion": "1.0.0",
+  "catalogFingerprint": "077cf069224b455930669a8b7ac5ef888d67827c55bb17bb16e3e4269277d369",
+  "requiredCoreModuleCount": 10,
+  "optionalModuleCount": 3,
+  "parameterDefinitionCount": 8,
+  "modules": [
+    {
+      "moduleId": "feature.combat.turn_based_encounter",
+      "relativePath": "core/combat-turn-based-encounter.featuremodule.json",
+      "moduleFingerprint": "b2d154a98d615662779cb0965353078d387880b1433a6c6a55ebbade5ca5d29c",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.crafting.recipes",
+      "relativePath": "core/crafting-recipes.featuremodule.json",
+      "moduleFingerprint": "bd8cc04ff8e7048a63f0cbf5bc911b26f2096c5f9b8f3c05e685146d07e665c4",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.dialogue.basic",
+      "relativePath": "core/dialogue-basic.featuremodule.json",
+      "moduleFingerprint": "22967d037d3605c2771901341b826e468931a3777e0ce876ec2356dfc62618c5",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.economy.transaction",
+      "relativePath": "core/economy-transaction.featuremodule.json",
+      "moduleFingerprint": "5a700883df531e7076b5b0337c85ef3ffc9747429bf7a0b3d6e295df38cc3fd0",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.interaction.basic",
+      "relativePath": "core/interaction-basic.featuremodule.json",
+      "moduleFingerprint": "6a76d3787d61cc40e1e5170c385c7bd3cd3741f830892136b90c103a7a425f91",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.inventory.basic",
+      "relativePath": "core/inventory-basic.featuremodule.json",
+      "moduleFingerprint": "36167cd7670d3c35dc391857a4c3bda9c0b9df370051192a44424f6cf4b44dd2",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.player_adapter.runtime_summary",
+      "relativePath": "core/player-adapter-runtime-summary.featuremodule.json",
+      "moduleFingerprint": "668ebb9051919a7fb67016d6af6a0c457087faae2ef706fbaca218076c7b96da",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "relativePath": "optional/alchemy-focus.featuremodule.json",
+      "moduleFingerprint": "12381958c7ad42193f689d30e0367d103262273b46f634f7980dc356224e694f",
+      "required": false,
+      "selectable": true,
+      "parameterDefinitionCount": 3
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "relativePath": "optional/combat-focus.featuremodule.json",
+      "moduleFingerprint": "e18c273e690598be9e2b6a9c75e74ed30065627e94381f43e9ca581343438124",
+      "required": false,
+      "selectable": true,
+      "parameterDefinitionCount": 2
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "relativePath": "optional/exploration-resource-focus.featuremodule.json",
+      "moduleFingerprint": "d94a235f60c6c914354212b35b74d5b2295eea26c787b7f8d45eabb9401b895e",
+      "required": false,
+      "selectable": true,
+      "parameterDefinitionCount": 3
+    },
+    {
+      "moduleId": "feature.quest.objective_chain",
+      "relativePath": "core/quest-objective-chain.featuremodule.json",
+      "moduleFingerprint": "08dda916bb4e1a7ceb38d2832c51bccdcf0aa686f115592622a3ded1744116ae",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.resources.harvest",
+      "relativePath": "core/resources-harvest.featuremodule.json",
+      "moduleFingerprint": "044fe321700733f0ad56d7291bd87e29c655dff9ab6fbfd54e5136accbe4edf9",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    },
+    {
+      "moduleId": "feature.world.grid_navigation",
+      "relativePath": "core/world-grid-navigation.featuremodule.json",
+      "moduleFingerprint": "708aca52a3508afdeb8cd3a2b9af55cd121fbff51168e7897213f5972d3558f1",
+      "required": true,
+      "selectable": false,
+      "parameterDefinitionCount": 0
+    }
+  ]
+}

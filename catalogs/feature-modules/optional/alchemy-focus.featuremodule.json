@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "featuremodule_definition_v1",
+  "moduleId": "feature.profile.alchemy_focus",
+  "title": "Alchemy Focus",
+  "category": "profile",
+  "moduleKind": "goal142_runtime_profile",
+  "required": false,
+  "selectable": true,
+  "moduleVersion": "1.0.0",
+  "dependencies": ["feature.crafting.recipes", "feature.inventory.basic"],
+  "conflicts": [],
+  "requiredSchemaSections": ["generatedContent.profile"],
+  "requiredRuntimePrimitives": ["runtime.qualification.canonical_action_plan"],
+  "requiredValidationRules": ["structured_mutation_expected_old_value", "package_cross_reference_validation"],
+  "requiredSaveLoadPolicy": ["journal_checkpoint_reload", "full_replay_equivalence"],
+  "requiredPlayerAdapterSurface": ["runtime_summary", "semantic_effect_summary"],
+  "generatorInputs": ["feature.profile.alchemy_focus"],
+  "authoringControls": ["checked_optional_module", "typed_parameter_editor"],
+  "goldenPackages": ["minimal-map-game-alchemy-focus"],
+  "smokePlaythroughs": ["goal145_canonical_13_action_plan"],
+  "knownLimitations": ["Parameters are bounded to the proven minimal-map vertical slice."],
+  "futureExpansionNotes": ["Additional alchemy parameters may bind declaratively without Composer branches."],
+  "mutationOperations": [
+    {
+      "operationId": "alchemy.healing_potion_output_quantity",
+      "targetKind": "recipe_output_amount",
+      "targetId": "recipe/healing_potion|item/healing_potion",
+      "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_recipe_output"
+    },
+    {
+      "operationId": "alchemy.starting_red_herb_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/red_herb",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+      "expectedValue": "2",
+      "newValue": "4",
+      "runtimeDimension": "alchemy_inventory_resource"
+    },
+    {
+      "operationId": "alchemy.starting_water_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/water_flask",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_inventory_resource"
+    }
+  ],
+  "runtimeEffectContracts": [
+    {
+      "effectId": "runtime_effect.alchemy_focus",
+      "moduleId": "feature.profile.alchemy_focus",
+      "metricKind": "inventory_item_quantity",
+      "targetId": "inventory/player_start",
+      "resourceOrItemId": "item/red_herb",
+      "comparisonKind": "greater_than_baseline",
+      "expectedValue": "4",
+      "sourceOperationIds": ["alchemy.starting_red_herb_supply"],
+      "runtimeDimension": "alchemy_inventory_resource"
+    }
+  ],
+  "parameterDefinitions": [
+    {
+      "parameterId": "healingPotionOutput",
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Healing potion output",
+      "description": "Healing potions produced by the recipe.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 1,
+      "maximum": 10,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [{ "operationId": "alchemy.healing_potion_output_quantity", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "alchemy.healing_potion_output" }],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": ["runtime_effect.alchemy_focus"],
+      "atomicGroupId": "alchemy.healing_potion_output"
+    },
+    {
+      "parameterId": "startingRedHerbQuantity",
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Starting red herb quantity",
+      "description": "Red herbs in the starting player inventory.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 4,
+      "minimum": 2,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [{ "operationId": "alchemy.starting_red_herb_supply", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "alchemy.starting_red_herb" }],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": ["runtime_effect.alchemy_focus"],
+      "atomicGroupId": "alchemy.starting_red_herb"
+    },
+    {
+      "parameterId": "startingWaterFlaskQuantity",
+      "moduleId": "feature.profile.alchemy_focus",
+      "title": "Starting water flask quantity",
+      "description": "Water flasks in the starting player inventory.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 1,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [{ "operationId": "alchemy.starting_water_supply", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "alchemy.starting_water" }],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": ["runtime_effect.alchemy_focus"],
+      "atomicGroupId": "alchemy.starting_water"
+    }
+  ],
+  "sourceLineage": {
+    "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+    "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+    "recipeId": "alchemy_focus",
+    "variantKind": "alchemy_focus",
+    "candidateId": "minimal-map-game-alchemy-focus",
+    "operationIds": ["alchemy.healing_potion_output_quantity", "alchemy.starting_red_herb_supply", "alchemy.starting_water_supply"]
+  }
+}

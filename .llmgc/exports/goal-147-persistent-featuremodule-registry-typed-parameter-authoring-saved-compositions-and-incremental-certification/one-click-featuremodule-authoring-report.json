@@ -1,0 +1,511 @@
+{
+  "schemaVersion": "one_click_featuremodule_authoring_report_v1",
+  "goalId": "goal_147_persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification",
+  "dashboard": {
+    "status": "GREEN",
+    "persistentFeatureModuleLibrary": true,
+    "moduleLibraryFileBased": true,
+    "moduleLibrarySourceOfTruth": true,
+    "publicGamePackageSchemaChanged": false,
+    "requiredCoreModuleCount": 10,
+    "optionalModuleCount": 3,
+    "moduleFingerprintingPassed": true,
+    "catalogFingerprintingPassed": true,
+    "addingModuleFileRequiresNoComposerCodeChange": true,
+    "typedParameterAuthoring": true,
+    "parameterDefinitionCount": 8,
+    "genericParameterBinding": true,
+    "atomicParameterGroupsPassed": true,
+    "defaultParametersPreserveGoal146Hashes": true,
+    "savedCompositionPersistence": true,
+    "savedCompositionRoundtripPassed": true,
+    "savedCompositionAtomicWritePassed": true,
+    "savedCompositionStalenessDetectionPassed": true,
+    "incrementalModuleCertification": true,
+    "allOptionalModulesCertified": true,
+    "unchangedCertificationCacheReusePassed": true,
+    "changedModuleSelectiveInvalidationPassed": true,
+    "interactionCoverageIndependentFromSingletonCertification": true,
+    "hundredModuleCatalogAccepted": true,
+    "hundredModuleInteractionRowCount": 9,
+    "hundredModulePowersetEnumerated": false,
+    "selectedCompositionAlwaysIncluded": true,
+    "smallCatalogCompatibleExhaustiveCoveragePassed": true,
+    "smallCatalogInvalidCombinationsClassified": true,
+    "multiEffectModuleAccountingPassed": true,
+    "customParameterizedCompositionPassed": true,
+    "customPackageDistinctFromDefault": true,
+    "customRuntimeQualificationPassed": true,
+    "operatorUsesInProcessService": true,
+    "unitySmokePassed": true,
+    "goal146Accepted": false,
+    "goal147Accepted": false,
+    "runtimeAuthority": true,
+    "projectionOnly": false,
+    "unityGameplayTruth": false,
+    "accepted": false
+  },
+  "index": {
+    "schemaVersion": "featuremodule_library_index_v1",
+    "catalogId": "llmgc.feature-modules",
+    "catalogVersion": "1.0.0",
+    "catalogFingerprint": "077cf069224b455930669a8b7ac5ef888d67827c55bb17bb16e3e4269277d369",
+    "requiredCoreModuleCount": 10,
+    "optionalModuleCount": 3,
+    "parameterDefinitionCount": 8,
+    "modules": [
+      {
+        "moduleId": "feature.combat.turn_based_encounter",
+        "relativePath": "core/combat-turn-based-encounter.featuremodule.json",
+        "moduleFingerprint": "b2d154a98d615662779cb0965353078d387880b1433a6c6a55ebbade5ca5d29c",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.crafting.recipes",
+        "relativePath": "core/crafting-recipes.featuremodule.json",
+        "moduleFingerprint": "bd8cc04ff8e7048a63f0cbf5bc911b26f2096c5f9b8f3c05e685146d07e665c4",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.dialogue.basic",
+        "relativePath": "core/dialogue-basic.featuremodule.json",
+        "moduleFingerprint": "22967d037d3605c2771901341b826e468931a3777e0ce876ec2356dfc62618c5",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.economy.transaction",
+        "relativePath": "core/economy-transaction.featuremodule.json",
+        "moduleFingerprint": "5a700883df531e7076b5b0337c85ef3ffc9747429bf7a0b3d6e295df38cc3fd0",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.interaction.basic",
+        "relativePath": "core/interaction-basic.featuremodule.json",
+        "moduleFingerprint": "6a76d3787d61cc40e1e5170c385c7bd3cd3741f830892136b90c103a7a425f91",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.inventory.basic",
+        "relativePath": "core/inventory-basic.featuremodule.json",
+        "moduleFingerprint": "36167cd7670d3c35dc391857a4c3bda9c0b9df370051192a44424f6cf4b44dd2",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.player_adapter.runtime_summary",
+        "relativePath": "core/player-adapter-runtime-summary.featuremodule.json",
+        "moduleFingerprint": "668ebb9051919a7fb67016d6af6a0c457087faae2ef706fbaca218076c7b96da",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.profile.alchemy_focus",
+        "relativePath": "optional/alchemy-focus.featuremodule.json",
+        "moduleFingerprint": "12381958c7ad42193f689d30e0367d103262273b46f634f7980dc356224e694f",
+        "required": false,
+        "selectable": true,
+        "parameterDefinitionCount": 3
+      },
+      {
+        "moduleId": "feature.profile.combat_focus",
+        "relativePath": "optional/combat-focus.featuremodule.json",
+        "moduleFingerprint": "e18c273e690598be9e2b6a9c75e74ed30065627e94381f43e9ca581343438124",
+        "required": false,
+        "selectable": true,
+        "parameterDefinitionCount": 2
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "relativePath": "optional/exploration-resource-focus.featuremodule.json",
+        "moduleFingerprint": "d94a235f60c6c914354212b35b74d5b2295eea26c787b7f8d45eabb9401b895e",
+        "required": false,
+        "selectable": true,
+        "parameterDefinitionCount": 3
+      },
+      {
+        "moduleId": "feature.quest.objective_chain",
+        "relativePath": "core/quest-objective-chain.featuremodule.json",
+        "moduleFingerprint": "08dda916bb4e1a7ceb38d2832c51bccdcf0aa686f115592622a3ded1744116ae",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.resources.harvest",
+        "relativePath": "core/resources-harvest.featuremodule.json",
+        "moduleFingerprint": "044fe321700733f0ad56d7291bd87e29c655dff9ab6fbfd54e5136accbe4edf9",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      },
+      {
+        "moduleId": "feature.world.grid_navigation",
+        "relativePath": "core/world-grid-navigation.featuremodule.json",
+        "moduleFingerprint": "708aca52a3508afdeb8cd3a2b9af55cd121fbff51168e7897213f5972d3558f1",
+        "required": true,
+        "selectable": false,
+        "parameterDefinitionCount": 0
+      }
+    ]
+  },
+  "selectedComposition": {
+    "schemaVersion": "featuremodule_composition_document_v1",
+    "compositionId": "goal147-custom-alchemy-combat-exploration",
+    "displayName": "Goal147 Custom Alchemy + Combat + Exploration",
+    "description": "Saved all-three composition with typed non-default parameters.",
+    "baseCandidateId": "minimal-map-game-balanced-baseline",
+    "selectedModuleIds": [
+      "feature.profile.alchemy_focus",
+      "feature.profile.combat_focus",
+      "feature.profile.exploration_resource_focus"
+    ],
+    "parameterValues": [
+      {
+        "moduleId": "feature.profile.alchemy_focus",
+        "parameterId": "healingPotionOutput",
+        "value": 3
+      },
+      {
+        "moduleId": "feature.profile.combat_focus",
+        "parameterId": "basicAttackDamage",
+        "value": 5
+      },
+      {
+        "moduleId": "feature.profile.combat_focus",
+        "parameterId": "goblinStartingHealth",
+        "value": 18
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "parameterId": "appleYield",
+        "value": 4
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "parameterId": "logYield",
+        "value": 3
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "parameterId": "transactionPotionOutput",
+        "value": 3
+      }
+    ],
+    "catalogFingerprint": "077cf069224b455930669a8b7ac5ef888d67827c55bb17bb16e3e4269277d369",
+    "moduleFingerprints": {
+      "feature.profile.alchemy_focus": "12381958c7ad42193f689d30e0367d103262273b46f634f7980dc356224e694f",
+      "feature.profile.combat_focus": "e18c273e690598be9e2b6a9c75e74ed30065627e94381f43e9ca581343438124",
+      "feature.profile.exploration_resource_focus": "d94a235f60c6c914354212b35b74d5b2295eea26c787b7f8d45eabb9401b895e"
+    },
+    "createdAtUtc": "2026-07-11T00:00:00+00:00",
+    "updatedAtUtc": "2026-07-11T00:00:00+00:00",
+    "lastMaterializedPackageSha256": "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+    "lastQualifiedFinalStateHash": "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e",
+    "lastQualificationStatus": "GREEN",
+    "revision": 2
+  },
+  "parameterizedCompositionMaterializationProof": {
+    "schemaVersion": "parameterized_composition_materialization_proof_v1",
+    "compositionId": "goal147-custom-alchemy-combat-exploration",
+    "parameterValues": [
+      {
+        "moduleId": "feature.profile.alchemy_focus",
+        "parameterId": "healingPotionOutput",
+        "valueType": "integer",
+        "value": 3,
+        "usedDefault": false,
+        "boundOperationIds": [
+          "alchemy.healing_potion_output_quantity"
+        ],
+        "atomicGroupId": "alchemy.healing_potion_output"
+      },
+      {
+        "moduleId": "feature.profile.alchemy_focus",
+        "parameterId": "startingRedHerbQuantity",
+        "valueType": "integer",
+        "value": 4,
+        "usedDefault": true,
+        "boundOperationIds": [
+          "alchemy.starting_red_herb_supply"
+        ],
+        "atomicGroupId": "alchemy.starting_red_herb"
+      },
+      {
+        "moduleId": "feature.profile.alchemy_focus",
+        "parameterId": "startingWaterFlaskQuantity",
+        "valueType": "integer",
+        "value": 2,
+        "usedDefault": true,
+        "boundOperationIds": [
+          "alchemy.starting_water_supply"
+        ],
+        "atomicGroupId": "alchemy.starting_water"
+      },
+      {
+        "moduleId": "feature.profile.combat_focus",
+        "parameterId": "basicAttackDamage",
+        "valueType": "integer",
+        "value": 5,
+        "usedDefault": false,
+        "boundOperationIds": [
+          "combat.basic_attack_damage_effect",
+          "combat.basic_attack_power"
+        ],
+        "atomicGroupId": "combat.basic_attack_damage"
+      },
+      {
+        "moduleId": "feature.profile.combat_focus",
+        "parameterId": "goblinStartingHealth",
+        "valueType": "integer",
+        "value": 18,
+        "usedDefault": false,
+        "boundOperationIds": [
+          "combat.goblin_health_pool"
+        ],
+        "atomicGroupId": "combat.goblin_health"
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "parameterId": "appleYield",
+        "valueType": "integer",
+        "value": 4,
+        "usedDefault": false,
+        "boundOperationIds": [
+          "exploration.apple_tree_loot_maximum",
+          "exploration.apple_tree_loot_minimum"
+        ],
+        "atomicGroupId": "exploration.apple_yield"
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "parameterId": "logYield",
+        "valueType": "integer",
+        "value": 3,
+        "usedDefault": false,
+        "boundOperationIds": [
+          "exploration.apple_tree_log_yield"
+        ],
+        "atomicGroupId": "exploration.log_yield"
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "parameterId": "transactionPotionOutput",
+        "valueType": "integer",
+        "value": 3,
+        "usedDefault": false,
+        "boundOperationIds": [
+          "exploration.transaction_potion_output"
+        ],
+        "atomicGroupId": "exploration.transaction_output"
+      }
+    ],
+    "packageSha256": "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+    "finalStateHash": "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e",
+    "packageDistinctFromDefault": true,
+    "repeatedPackageHashMatches": true,
+    "repeatedFinalHashMatches": true,
+    "effectObservationCount": 3,
+    "satisfiedSelectedModuleCount": 3,
+    "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:5,item/fuel_can:1,item/healing_potion:7,item/log:3,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+    "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=13],player[alive=True;resource/health=30|resource/stamina=10]",
+    "questSummary": "quest/help_healer:completed:",
+    "checkpointReloadPassed": true,
+    "fullReplayEquivalent": true,
+    "actionBindingPassed": true,
+    "passed": true
+  },
+  "certificationLedger": {
+    "schemaVersion": "featuremodule_certification_ledger_v1",
+    "status": "GREEN",
+    "plannedModuleCount": 3,
+    "certifiedModuleCount": 3,
+    "executedCount": 0,
+    "reusedCount": 3,
+    "invalidatedCount": 0,
+    "corruptCacheRejected": false,
+    "cacheIsOptimizationOnly": true,
+    "entries": [
+      {
+        "moduleId": "feature.profile.alchemy_focus",
+        "moduleFingerprint": "12381958c7ad42193f689d30e0367d103262273b46f634f7980dc356224e694f",
+        "dependencyFingerprint": "430bfaac1825197bc0a42a434d1ae673f93f453c5a1453c38f9b6170eec63263",
+        "basePackageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+        "runtimeQualifierContractVersion": "product_line_runtime_qualifier_v1",
+        "actionPlanSignature": "start_runtime|move|interact|inspect_inventory|open_dialogue|start_or_update_quest|show_inventory|craft|harvest|transaction|begin_encounter|basic_attack|show_final_state",
+        "parameterDefaultsFingerprint": "c3fc60f8cd7bc38502c4fe6fd847e56c2d98ab68f2cef12a785d11a9b65de374",
+        "status": "GREEN",
+        "structuralValidationPassed": true,
+        "defaultParameterValidationPassed": true,
+        "materializationPassed": true,
+        "packageValidationPassed": true,
+        "runtimeQualificationPassed": true,
+        "runtimeEffectsPassed": true,
+        "checkpointReloadPassed": true,
+        "fullReplayEquivalent": true,
+        "actionBindingPassed": true,
+        "certifiedAtUtc": "2026-07-11T00:00:00+00:00",
+        "diagnostics": []
+      },
+      {
+        "moduleId": "feature.profile.combat_focus",
+        "moduleFingerprint": "e18c273e690598be9e2b6a9c75e74ed30065627e94381f43e9ca581343438124",
+        "dependencyFingerprint": "70581715aa6f85287497ab87f7931db7eb7c3f311089cea3051fa610c3633db6",
+        "basePackageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+        "runtimeQualifierContractVersion": "product_line_runtime_qualifier_v1",
+        "actionPlanSignature": "start_runtime|move|interact|inspect_inventory|open_dialogue|start_or_update_quest|show_inventory|craft|harvest|transaction|begin_encounter|basic_attack|show_final_state",
+        "parameterDefaultsFingerprint": "409aaa51d372de2e43335bece849186709832d950dd2ed00490360754232ec0e",
+        "status": "GREEN",
+        "structuralValidationPassed": true,
+        "defaultParameterValidationPassed": true,
+        "materializationPassed": true,
+        "packageValidationPassed": true,
+        "runtimeQualificationPassed": true,
+        "runtimeEffectsPassed": true,
+        "checkpointReloadPassed": true,
+        "fullReplayEquivalent": true,
+        "actionBindingPassed": true,
+        "certifiedAtUtc": "2026-07-11T00:00:00+00:00",
+        "diagnostics": []
+      },
+      {
+        "moduleId": "feature.profile.exploration_resource_focus",
+        "moduleFingerprint": "d94a235f60c6c914354212b35b74d5b2295eea26c787b7f8d45eabb9401b895e",
+        "dependencyFingerprint": "6162f8cbd0579ab4efc210cf02359a6d1278b6853707bf0d89bf68eea9ba98bc",
+        "basePackageSha256": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+        "runtimeQualifierContractVersion": "product_line_runtime_qualifier_v1",
+        "actionPlanSignature": "start_runtime|move|interact|inspect_inventory|open_dialogue|start_or_update_quest|show_inventory|craft|harvest|transaction|begin_encounter|basic_attack|show_final_state",
+        "parameterDefaultsFingerprint": "ec78f29e16030d1f5b0420ae0661be7204e407ab802a6a460283332834efea63",
+        "status": "GREEN",
+        "structuralValidationPassed": true,
+        "defaultParameterValidationPassed": true,
+        "materializationPassed": true,
+        "packageValidationPassed": true,
+        "runtimeQualificationPassed": true,
+        "runtimeEffectsPassed": true,
+        "checkpointReloadPassed": true,
+        "fullReplayEquivalent": true,
+        "actionBindingPassed": true,
+        "certifiedAtUtc": "2026-07-11T00:00:00+00:00",
+        "diagnostics": []
+      }
+    ]
+  },
+  "hundredModuleScalabilityProof": {
+    "schemaVersion": "hundred_module_scalability_proof_v1",
+    "optionalModuleCount": 100,
+    "certificationPlanCount": 100,
+    "interactionRowCount": 9,
+    "maxTotalRows": 24,
+    "selectedCompositionIncluded": true,
+    "baselineIncluded": true,
+    "fullPowersetEnumerated": false,
+    "theoreticalPowersetSize": "2^100",
+    "passed": true
+  },
+  "multiEffectModuleProof": {
+    "schemaVersion": "multi_effect_module_proof_v1",
+    "effectObservationCount": 2,
+    "passedEffectObservationCount": 2,
+    "selectedModuleCount": 1,
+    "satisfiedSelectedModuleCount": 1,
+    "observations": [
+      {
+        "effectId": "effect.red_herb",
+        "moduleId": "feature.synthetic.multi_effect",
+        "metricKind": "inventory_item_quantity",
+        "targetId": "inventory/player_start",
+        "resourceOrItemId": "item/red_herb",
+        "comparisonKind": "greater_than_baseline",
+        "expectedValue": "",
+        "baselineValue": "0",
+        "actualValue": "2",
+        "runtimeDimension": "",
+        "passed": true,
+        "diagnostics": []
+      },
+      {
+        "effectId": "effect.water",
+        "moduleId": "feature.synthetic.multi_effect",
+        "metricKind": "inventory_item_quantity",
+        "targetId": "inventory/player_start",
+        "resourceOrItemId": "item/water_flask",
+        "comparisonKind": "greater_than_baseline",
+        "expectedValue": "",
+        "baselineValue": "0",
+        "actualValue": "1",
+        "runtimeDimension": "",
+        "passed": true,
+        "diagnostics": []
+      }
+    ],
+    "passed": true
+  },
+  "negativeProof": {
+    "atomicGroupPartialApplyRejected": true,
+    "catalogAboveTwentyModulesDoesNotThrow": true,
+    "compositionIdSpecificRuntimeBranchAbsent": true,
+    "compositionWorkspacePathEscapeRejected": true,
+    "conflictReferenceMismatchRejected": true,
+    "conflictingParameterBindingRejected": true,
+    "corruptCertificationCacheRejected": true,
+    "corruptCompositionRejected": true,
+    "duplicateModuleFileRejected": true,
+    "duplicateModuleIdRejected": true,
+    "duplicateParameterRejected": true,
+    "effectOperationReferenceMismatchRejected": true,
+    "fullPowersetAboveSmallLimitAbsent": true,
+    "incompatibleSmallCatalogCombinationNotExecuted": true,
+    "invalidCompositionIdRejected": true,
+    "invalidEnumRejected": true,
+    "malformedModuleJsonRejected": true,
+    "missingSelectedModuleNoFallback": true,
+    "moduleFilePathEscapeRejected": true,
+    "moduleIdSpecificParameterBranchAbsent": true,
+    "moduleLibraryPathEscapeRejected": true,
+    "multiEffectCountNotComparedToModuleCount": true,
+    "operationReferenceMismatchRejected": true,
+    "parameterRangeViolationRejected": true,
+    "parameterStepViolationRejected": true,
+    "previousArtifactsPreservedOnFailure": true,
+    "runtimeContractVersionInvalidatesCache": true,
+    "saveAsDuplicateRejected": true,
+    "staleCompositionDetected": true,
+    "unityDoesNotAuthorMaterializeOrExecute": true,
+    "unknownDependencyRejected": true,
+    "unknownParameterRejected": true,
+    "unselectedModuleParameterRejected": true,
+    "unsupportedModuleSchemaRejected": true,
+    "winFormsStartsNoCompilerOrTestProcess": true,
+    "wrongParameterTypeRejected": true
+  },
+  "unitySmoke": {
+    "status": "GREEN",
+    "savedCompositionLoaded": true,
+    "catalogFingerprintMatches": true,
+    "selectedModuleFingerprintsMatch": true,
+    "parameterValuesLoaded": true,
+    "packageShaMatches": true,
+    "runtimeQualificationPassed": true,
+    "checkpointReloadPassed": true,
+    "fullReplayEquivalent": true,
+    "actionBindingPassed": true,
+    "runtimeAuthority": true,
+    "unityGameplayTruth": false,
+    "passMarkerPresent": true,
+    "failMarkerPresent": false,
+    "unityExitCode": 0,
+    "passed": true
+  }
+}

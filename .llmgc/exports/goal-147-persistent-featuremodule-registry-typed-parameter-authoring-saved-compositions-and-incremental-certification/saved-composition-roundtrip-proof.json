@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "saved_composition_roundtrip_proof_v1",
+  "createNewPassed": true,
+  "savePassed": true,
+  "loadPassed": true,
+  "listPassed": true,
+  "clonePassed": true,
+  "deletePassed": true,
+  "saveAsDuplicateRejected": true,
+  "deterministicCanonicalSerialization": true,
+  "atomicWritePassed": true,
+  "stalenessDetectionPassed": true,
+  "revisionAfterQualification": 2,
+  "passed": true
+}

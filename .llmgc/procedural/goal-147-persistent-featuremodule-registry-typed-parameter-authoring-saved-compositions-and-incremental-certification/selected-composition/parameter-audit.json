@@ -1,0 +1,198 @@
+{
+  "passed": true,
+  "effectiveMutationOperations": [
+    {
+      "operationId": "combat.basic_attack_damage_effect",
+      "targetKind": "ability_effect_arg_amount",
+      "targetId": "ability/basic_attack|damage_resource|resource/health",
+      "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+      "expectedValue": "4",
+      "newValue": "5",
+      "runtimeDimension": "combat_ability_damage"
+    },
+    {
+      "operationId": "combat.basic_attack_power",
+      "targetKind": "ability_power",
+      "targetId": "ability/basic_attack",
+      "jsonPath": "game.abilities[id=ability/basic_attack].power",
+      "expectedValue": "4",
+      "newValue": "5",
+      "runtimeDimension": "combat_ability_damage"
+    },
+    {
+      "operationId": "combat.goblin_health_pool",
+      "targetKind": "encounter_participant_resource_amount",
+      "targetId": "encounter/goblin_duel|goblin|resource/health",
+      "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+      "expectedValue": "12",
+      "newValue": "18",
+      "runtimeDimension": "combat_participant_resource"
+    },
+    {
+      "operationId": "alchemy.starting_red_herb_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/red_herb",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/red_herb].amount",
+      "expectedValue": "2",
+      "newValue": "4",
+      "runtimeDimension": "alchemy_inventory_resource"
+    },
+    {
+      "operationId": "alchemy.starting_water_supply",
+      "targetKind": "inventory_stack_amount",
+      "targetId": "inventory/player_start|item/water_flask",
+      "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "alchemy_inventory_resource"
+    },
+    {
+      "operationId": "exploration.apple_tree_loot_maximum",
+      "targetKind": "loot_entry_max_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+      "expectedValue": "2",
+      "newValue": "4",
+      "runtimeDimension": "harvest_loot_quantity"
+    },
+    {
+      "operationId": "exploration.apple_tree_loot_minimum",
+      "targetKind": "loot_entry_min_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+      "expectedValue": "1",
+      "newValue": "4",
+      "runtimeDimension": "harvest_loot_quantity"
+    },
+    {
+      "operationId": "alchemy.healing_potion_output_quantity",
+      "targetKind": "recipe_output_amount",
+      "targetId": "recipe/healing_potion|item/healing_potion",
+      "jsonPath": "game.recipes[id=recipe/healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "newValue": "3",
+      "runtimeDimension": "alchemy_recipe_output"
+    },
+    {
+      "operationId": "exploration.apple_tree_log_yield",
+      "targetKind": "resource_node_production_amount",
+      "targetId": "node/apple_tree|item/log",
+      "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+      "expectedValue": "1",
+      "newValue": "3",
+      "runtimeDimension": "harvest_resource_node_output"
+    },
+    {
+      "operationId": "exploration.transaction_potion_output",
+      "targetKind": "transaction_output_amount",
+      "targetId": "transaction/buy_healing_potion|item/healing_potion",
+      "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "newValue": "3",
+      "runtimeDimension": "transaction_output"
+    }
+  ],
+  "effectiveParameterValues": [
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "healingPotionOutput",
+      "valueType": "integer",
+      "value": 3,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "alchemy.healing_potion_output_quantity"
+      ],
+      "atomicGroupId": "alchemy.healing_potion_output"
+    },
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "startingRedHerbQuantity",
+      "valueType": "integer",
+      "value": 4,
+      "usedDefault": true,
+      "boundOperationIds": [
+        "alchemy.starting_red_herb_supply"
+      ],
+      "atomicGroupId": "alchemy.starting_red_herb"
+    },
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "startingWaterFlaskQuantity",
+      "valueType": "integer",
+      "value": 2,
+      "usedDefault": true,
+      "boundOperationIds": [
+        "alchemy.starting_water_supply"
+      ],
+      "atomicGroupId": "alchemy.starting_water"
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "parameterId": "basicAttackDamage",
+      "valueType": "integer",
+      "value": 5,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "combat.basic_attack_damage_effect",
+        "combat.basic_attack_power"
+      ],
+      "atomicGroupId": "combat.basic_attack_damage"
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "parameterId": "goblinStartingHealth",
+      "valueType": "integer",
+      "value": 18,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "combat.goblin_health_pool"
+      ],
+      "atomicGroupId": "combat.goblin_health"
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "appleYield",
+      "valueType": "integer",
+      "value": 4,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "exploration.apple_tree_loot_maximum",
+        "exploration.apple_tree_loot_minimum"
+      ],
+      "atomicGroupId": "exploration.apple_yield"
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "logYield",
+      "valueType": "integer",
+      "value": 3,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "exploration.apple_tree_log_yield"
+      ],
+      "atomicGroupId": "exploration.log_yield"
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "transactionPotionOutput",
+      "valueType": "integer",
+      "value": 3,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "exploration.transaction_potion_output"
+      ],
+      "atomicGroupId": "exploration.transaction_output"
+    }
+  ],
+  "appliedAtomicGroupIds": [
+    "alchemy.healing_potion_output",
+    "alchemy.starting_red_herb",
+    "alchemy.starting_water",
+    "combat.basic_attack_damage",
+    "combat.goblin_health",
+    "exploration.apple_yield",
+    "exploration.log_yield",
+    "exploration.transaction_output"
+  ],
+  "diagnostics": []
+}

@@ -88,6 +88,8 @@ Goal 145A note: the WinForms selector lifecycle uses `SelectionChangeCommitted` 
 
 Goal 146 note: Goal145 is accepted by exact human handoff with `acceptedByCodex=false`. Ten locked core FeatureModules and three Goal142-derived optional profile modules produce eight novel GamePackages; all 8/8 pass package validation, structured mutation audit, deterministic order-independence, shared Runtime qualification, 8-action checkpoint reload, 13-action full replay, exact action binding and read-only Unity smoke. Goal146 remains `accepted=false` with `manualReviewDeferred=true`; it does not close `vertical_slice_final_verification` or authorize public schema, provider, Lua, generator-library or Unity gameplay-truth work.
 
+Goal 147 note: a repository-local fingerprinted FeatureModule catalog, generic typed parameters, atomic saved compositions and incremental singleton certification extend the Goal146 composer without changing public GamePackage schema or Runtime authority. All current optional modules certify; a 100-module catalog has 100 certification entries but only 9 bounded interaction rows under a 24-row cap. Defaults preserve all Goal146 hashes and one custom all-three composition passes the same Runtime/checkpoint/replay/action-binding seam. Goals 146 and 147 remain `accepted=false` pending bundled manual review; this does not close `vertical_slice_final_verification` or authorize provider, Lua, generator-library or Unity gameplay-truth work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

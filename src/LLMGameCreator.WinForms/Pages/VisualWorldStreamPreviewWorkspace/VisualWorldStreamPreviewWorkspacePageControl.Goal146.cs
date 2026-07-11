@@ -27,6 +27,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
     private void ConfigureGoal146ModuleComposerPanel()
     {
         _goal146Tab = new TabPage { Name = "_goal146Tab", Text = "Goal146 Module Composer" };
+        var innerTabs = new TabControl { Dock = DockStyle.Fill };
+        var composerTab = new TabPage { Text = "Composition Matrix" };
         var layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 6, Padding = new Padding(8) };
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45));
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55));
@@ -76,7 +78,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         layout.SetColumnSpan(buttons, 2);
         layout.Controls.Add(_goal146Results, 0, 5);
         layout.SetColumnSpan(_goal146Results, 2);
-        _goal146Tab.Controls.Add(layout);
+        composerTab.Controls.Add(layout);
+        innerTabs.TabPages.Add(composerTab);
+        ConfigureGoal147AuthoringSurface(innerTabs);
+        _goal146Tab.Controls.Add(innerTabs);
         _detailTabs.TabPages.Add(_goal146Tab);
     }
 
@@ -102,6 +107,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         _goal146Buttons[5].Click += async (_, _) => await Goal146RunSelectedAsync();
         if (_goal146OptionalModules is not null)
             _goal146OptionalModules.SelectedIndexChanged += (_, _) => BindGoal146SelectedModuleDetails();
+        WireGoal147AuthoringEvents();
     }
 
     private async Task Goal146RunSelectedAsync()

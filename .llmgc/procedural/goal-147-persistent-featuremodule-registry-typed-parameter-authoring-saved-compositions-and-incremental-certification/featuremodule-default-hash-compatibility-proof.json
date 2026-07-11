@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "featuremodule_default_hash_compatibility_proof_v1",
+  "seededLibraryCurrentEightPackageHashesPreserved": true,
+  "seededLibraryCurrentEightFinalHashesPreserved": true,
+  "compositionCount": 8,
+  "selectedPackageSha256": "9a83d47e8e2ae541e7789b804c32f489acb8e7525c0a9dc32a7cc8be8822d65a",
+  "selectedFinalStateHash": "d5ad29ee7c350918681c2859b80f5d2944834a6414918a16d8b4e1c0746753b9",
+  "rows": [
+    {
+      "compositionId": "minimal-map-game-composed-baseline",
+      "packageSha256": "5170d610379d818b2ff55535e1fac0e5ee98f26d8e039e9bc1054bfdea87fa49",
+      "finalStateHash": "29c99098d25aa934b72a06063d82b5bf44b6454cb7195a178ef959a6224b95c2",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-alchemy",
+      "packageSha256": "faa35f6b608042b8a8a9b52ca0bd282af4504dfb53d8775b7e261a26402082f6",
+      "finalStateHash": "652bdaaee90703ff36a361de7a5553d76403d549a8f9cdae63585d3fa2bacd72",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-combat",
+      "packageSha256": "e156f9f356013dc5f1c515a6ce5f1b1610e2656604e71e793835a10076f9364d",
+      "finalStateHash": "adf6785cf7f9984587c3ed007392d26dcd4fef1ca041053fdc1b7e613dcf2fc7",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-alchemy-combat",
+      "packageSha256": "ba18c0aa4e792c4ab05784ea6f9a5235cffe76ab19852f2d077d5a3080110142",
+      "finalStateHash": "8f5fb25e2f2063aafc4702b71d193b35502931dd4975732610480c7bbee4a112",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-exploration",
+      "packageSha256": "5a59c2b552ea56f53a660550c8de2f55cf105c0914b2a2296f8ad507f9e34aa7",
+      "finalStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-alchemy-exploration",
+      "packageSha256": "dfc3b0c2e48f2e3425156257d84f454cc3e69ccf0fb9f103cb3da24f69301a36",
+      "finalStateHash": "2661c01856324dedf7a8f0652672fa18f79ce1d65f513a1a0bc4658c833dbab3",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-combat-exploration",
+      "packageSha256": "655e47603a203b49d1e4318a514f9c1bb0714be5a490a7fb2a5cab62dff0037c",
+      "finalStateHash": "b9326775d8925dc2857327e2611a9b7df3f7c922eb78ea2052656a4f6c6e257c",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    },
+    {
+      "compositionId": "minimal-map-game-composed-alchemy-combat-exploration",
+      "packageSha256": "9a83d47e8e2ae541e7789b804c32f489acb8e7525c0a9dc32a7cc8be8822d65a",
+      "finalStateHash": "d5ad29ee7c350918681c2859b80f5d2944834a6414918a16d8b4e1c0746753b9",
+      "packageHashPreserved": true,
+      "finalHashPreserved": true
+    }
+  ]
+}

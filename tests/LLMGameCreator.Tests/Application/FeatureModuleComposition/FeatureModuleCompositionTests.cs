@@ -134,10 +134,12 @@ public sealed class FeatureModuleCompositionTests
         Assert.True(first.GeneratedCompositionCount <= policy.MaxTotalRows);
         Assert.True(first.GeneratedCompositionCount < 4096 / 10);
         Assert.Equal(JsonSerializer.Serialize(first, options), JsonSerializer.Serialize(second, options));
-        Assert.Throws<InvalidOperationException>(() => planner.Plan(
+        var constrained = planner.Plan(
             twelveCatalog,
             twelveSelected,
-            policy with { MaxTotalRows = 10 }));
+            policy with { MaxTotalRows = 10 });
+        Assert.True(constrained.GeneratedCompositionCount <= 10);
+        Assert.True(constrained.SelectedCompositionIncluded);
     }
 
     [Fact]

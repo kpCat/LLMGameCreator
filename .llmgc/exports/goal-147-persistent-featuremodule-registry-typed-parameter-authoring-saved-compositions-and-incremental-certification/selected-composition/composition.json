@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "featuremodule_composition_document_v1",
+  "compositionId": "goal147-custom-alchemy-combat-exploration",
+  "displayName": "Goal147 Custom Alchemy + Combat + Exploration",
+  "description": "Saved all-three composition with typed non-default parameters.",
+  "baseCandidateId": "minimal-map-game-balanced-baseline",
+  "selectedModuleIds": [
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus"
+  ],
+  "parameterValues": [
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "healingPotionOutput",
+      "value": 3
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "parameterId": "basicAttackDamage",
+      "value": 5
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "parameterId": "goblinStartingHealth",
+      "value": 18
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "appleYield",
+      "value": 4
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "logYield",
+      "value": 3
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "transactionPotionOutput",
+      "value": 3
+    }
+  ],
+  "catalogFingerprint": "077cf069224b455930669a8b7ac5ef888d67827c55bb17bb16e3e4269277d369",
+  "moduleFingerprints": {
+    "feature.profile.alchemy_focus": "12381958c7ad42193f689d30e0367d103262273b46f634f7980dc356224e694f",
+    "feature.profile.combat_focus": "e18c273e690598be9e2b6a9c75e74ed30065627e94381f43e9ca581343438124",
+    "feature.profile.exploration_resource_focus": "d94a235f60c6c914354212b35b74d5b2295eea26c787b7f8d45eabb9401b895e"
+  },
+  "createdAtUtc": "2026-07-11T00:00:00+00:00",
+  "updatedAtUtc": "2026-07-11T00:00:00+00:00",
+  "lastMaterializedPackageSha256": "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+  "lastQualifiedFinalStateHash": "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e",
+  "lastQualificationStatus": "GREEN",
+  "revision": 2
+}

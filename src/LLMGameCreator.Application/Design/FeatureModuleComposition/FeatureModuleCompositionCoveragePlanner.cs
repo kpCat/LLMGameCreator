@@ -94,12 +94,27 @@ public sealed class FeatureModuleCompositionCoveragePlanner
         if (count > policy.MaxTotalRows)
             throw new InvalidOperationException("FeatureModule exhaustive coverage exceeds maxTotalRows.");
         var specs = new List<FeatureModuleCompositionCoverageSpec>(count);
+        var rejected = new List<FeatureModuleCompositionRejectedCoverageSpec>();
+        var required = catalog.Modules.Where(module => module.Required).Select(module => module.ModuleId).ToList();
         for (var mask = 0; mask < count; mask++)
         {
             var modules = new List<string>();
             for (var index = 0; index < optionalIds.Count; index++)
                 if ((mask & (1 << index)) != 0) modules.Add(optionalIds[index]);
-            specs.Add(Spec(catalog, modules, ["exhaustive_powerset"]));
+            var validation = _validator.Validate(catalog, required.Concat(modules).ToList());
+            if (validation.Passed)
+            {
+                specs.Add(Spec(catalog, modules, ["exhaustive_powerset"]));
+            }
+            else
+            {
+                rejected.Add(new FeatureModuleCompositionRejectedCoverageSpec
+                {
+                    CompositionId = FeatureModuleCompositionIdentity.CompositionId(catalog, modules),
+                    ModuleIds = modules,
+                    Diagnostics = validation.Diagnostics
+                });
+            }
         }
 
         return BuildPlan(
@@ -110,7 +125,7 @@ public sealed class FeatureModuleCompositionCoveragePlanner
             specs,
             policy,
             fullPowersetEnumerated: true,
-            bounded: false);
+            bounded: false) with { RejectedCompositions = rejected };
     }
 
     private FeatureModuleCompositionCoveragePlan Bounded(
@@ -126,14 +141,6 @@ public sealed class FeatureModuleCompositionCoveragePlanner
         Add(catalog, specs, byKey, selected, "operator_selected", policy.MaxTotalRows);
         var all = optional.Select(module => module.ModuleId).ToList();
         if (IsCompatible(catalog, all)) Add(catalog, specs, byKey, all, "all_enabled", policy.MaxTotalRows);
-        var compatibleSingletons = optional.Where(module => IsCompatible(catalog, [module.ModuleId])).ToList();
-        foreach (var module in compatibleSingletons)
-            Add(catalog, specs, byKey, [module.ModuleId], "singleton", policy.MaxTotalRows);
-
-        if (specs.Count(spec => spec.CoverageReasons.Contains("singleton", StringComparer.Ordinal))
-            != compatibleSingletons.Count)
-            throw new InvalidOperationException("FeatureModule singleton certification exceeds maxTotalRows.");
-
         var pairRows = 0;
         foreach (var pair in CompatiblePairs(catalog, optional))
         {

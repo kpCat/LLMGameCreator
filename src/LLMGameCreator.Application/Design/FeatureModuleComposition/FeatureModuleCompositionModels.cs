@@ -30,12 +30,14 @@ public sealed record FeatureModuleSourceLineage
 
 public sealed record FeatureModuleDefinition
 {
+    public string SchemaVersion { get; init; } = "featuremodule_definition_v1";
     public string ModuleId { get; init; } = string.Empty;
     public string Title { get; init; } = string.Empty;
     public string Category { get; init; } = string.Empty;
     public string ModuleKind { get; init; } = string.Empty;
     public bool Required { get; init; }
     public bool Selectable { get; init; }
+    public string ModuleVersion { get; init; } = "1.0.0";
     public IReadOnlyList<string> Dependencies { get; init; } = [];
     public IReadOnlyList<string> Conflicts { get; init; } = [];
     public IReadOnlyList<string> RequiredSchemaSections { get; init; } = [];
@@ -51,6 +53,7 @@ public sealed record FeatureModuleDefinition
     public IReadOnlyList<string> FutureExpansionNotes { get; init; } = [];
     public IReadOnlyList<ProductLineRuntimeVariantMutationOperation> MutationOperations { get; init; } = [];
     public IReadOnlyList<FeatureModuleRuntimeEffectContract> RuntimeEffectContracts { get; init; } = [];
+    public IReadOnlyList<FeatureModuleParameterDefinition> ParameterDefinitions { get; init; } = [];
     public FeatureModuleSourceLineage SourceLineage { get; init; } = new();
 }
 
@@ -147,6 +150,10 @@ public sealed record FeatureModuleSemanticEffectProof
     public bool CombatEffectObserved { get; init; }
     public bool ExplorationResourceEffectObserved { get; init; }
     public int CombinedEffectCount { get; init; }
+    public int EffectObservationCount { get; init; }
+    public int PassedEffectObservationCount { get; init; }
+    public int SelectedModuleCount { get; init; }
+    public int SatisfiedSelectedModuleCount { get; init; }
     public int HealingPotionQuantity { get; init; }
     public int AppleQuantity { get; init; }
     public int LogQuantity { get; init; }

@@ -609,6 +609,13 @@ public sealed class FeatureModuleCompositionService
             CombatEffectObserved = combat,
             ExplorationResourceEffectObserved = exploration,
             CombinedEffectCount = observations.Count(observation => observation.Passed),
+            EffectObservationCount = observations.Count,
+            PassedEffectObservationCount = observations.Count(observation => observation.Passed),
+            SelectedModuleCount = selected.Count,
+            SatisfiedSelectedModuleCount = selected.Count(module =>
+                module.RuntimeEffectContracts.Count > 0
+                && observations.Where(observation => observation.ModuleId == module.ModuleId)
+                    .All(observation => observation.Passed)),
             HealingPotionQuantity = potion,
             AppleQuantity = apple,
             LogQuantity = log,

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "multi_effect_module_proof_v1",
+  "effectObservationCount": 2,
+  "passedEffectObservationCount": 2,
+  "selectedModuleCount": 1,
+  "satisfiedSelectedModuleCount": 1,
+  "observations": [
+    {
+      "effectId": "effect.red_herb",
+      "moduleId": "feature.synthetic.multi_effect",
+      "metricKind": "inventory_item_quantity",
+      "targetId": "inventory/player_start",
+      "resourceOrItemId": "item/red_herb",
+      "comparisonKind": "greater_than_baseline",
+      "expectedValue": "",
+      "baselineValue": "0",
+      "actualValue": "2",
+      "runtimeDimension": "",
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "effectId": "effect.water",
+      "moduleId": "feature.synthetic.multi_effect",
+      "metricKind": "inventory_item_quantity",
+      "targetId": "inventory/player_start",
+      "resourceOrItemId": "item/water_flask",
+      "comparisonKind": "greater_than_baseline",
+      "expectedValue": "",
+      "baselineValue": "0",
+      "actualValue": "1",
+      "runtimeDimension": "",
+      "passed": true,
+      "diagnostics": []
+    }
+  ],
+  "passed": true
+}

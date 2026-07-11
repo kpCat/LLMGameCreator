@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "featuremodule_library_manifest_v1",
+  "catalogId": "llmgc.feature-modules",
+  "catalogVersion": "1.0.0",
+  "requiredCoreModuleCount": 10,
+  "optionalModuleCount": 3,
+  "moduleFileCount": 13,
+  "moduleFiles": [
+    "core/combat-turn-based-encounter.featuremodule.json",
+    "core/crafting-recipes.featuremodule.json",
+    "core/dialogue-basic.featuremodule.json",
+    "core/economy-transaction.featuremodule.json",
+    "core/interaction-basic.featuremodule.json",
+    "core/inventory-basic.featuremodule.json",
+    "core/player-adapter-runtime-summary.featuremodule.json",
+    "core/quest-objective-chain.featuremodule.json",
+    "core/resources-harvest.featuremodule.json",
+    "core/world-grid-navigation.featuremodule.json",
+    "optional/alchemy-focus.featuremodule.json",
+    "optional/combat-focus.featuremodule.json",
+    "optional/exploration-resource-focus.featuremodule.json"
+  ]
+}

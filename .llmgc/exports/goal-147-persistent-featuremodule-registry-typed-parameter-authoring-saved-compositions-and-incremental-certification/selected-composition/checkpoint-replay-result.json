@@ -1,0 +1,13 @@
+{
+  "replayKind": "checkpoint_reload",
+  "passed": true,
+  "packageHashValidated": true,
+  "candidateValidated": true,
+  "journalCorrelationPassed": true,
+  "stateHashContinuityPassed": true,
+  "expectedStateHashMatched": true,
+  "expectedStateHash": "2f63631b91a67c08bf2cb4c0ac7a6bc4a08edaf9d975b133c448aca570a76de0",
+  "actualStateHash": "2f63631b91a67c08bf2cb4c0ac7a6bc4a08edaf9d975b133c448aca570a76de0",
+  "replayedActionCount": 8,
+  "diagnostics": []
+}

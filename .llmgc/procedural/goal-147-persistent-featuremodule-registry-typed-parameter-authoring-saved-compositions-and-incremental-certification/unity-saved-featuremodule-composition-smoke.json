@@ -1,0 +1,18 @@
+{
+  "status": "GREEN",
+  "savedCompositionLoaded": true,
+  "catalogFingerprintMatches": true,
+  "selectedModuleFingerprintsMatch": true,
+  "parameterValuesLoaded": true,
+  "packageShaMatches": true,
+  "runtimeQualificationPassed": true,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "actionBindingPassed": true,
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "passMarkerPresent": true,
+  "failMarkerPresent": false,
+  "unityExitCode": 0,
+  "passed": true
+}

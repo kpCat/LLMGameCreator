@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "featuremodule_definition_v1",
+  "moduleId": "feature.profile.exploration_resource_focus",
+  "title": "Exploration Resource Focus",
+  "category": "profile",
+  "moduleKind": "goal142_runtime_profile",
+  "required": false,
+  "selectable": true,
+  "moduleVersion": "1.0.0",
+  "dependencies": ["feature.economy.transaction", "feature.inventory.basic", "feature.resources.harvest"],
+  "conflicts": [],
+  "requiredSchemaSections": ["generatedContent.profile"],
+  "requiredRuntimePrimitives": ["runtime.qualification.canonical_action_plan"],
+  "requiredValidationRules": ["structured_mutation_expected_old_value", "package_cross_reference_validation"],
+  "requiredSaveLoadPolicy": ["journal_checkpoint_reload", "full_replay_equivalence"],
+  "requiredPlayerAdapterSurface": ["runtime_summary", "semantic_effect_summary"],
+  "generatorInputs": ["feature.profile.exploration_resource_focus"],
+  "authoringControls": ["checked_optional_module", "typed_parameter_editor"],
+  "goldenPackages": ["minimal-map-game-exploration-resource-focus"],
+  "smokePlaythroughs": ["goal145_canonical_13_action_plan"],
+  "knownLimitations": ["Parameters are bounded to the proven minimal-map vertical slice."],
+  "futureExpansionNotes": ["Additional resource parameters may bind declaratively without Composer branches."],
+  "mutationOperations": [
+    {
+      "operationId": "exploration.apple_tree_log_yield",
+      "targetKind": "resource_node_production_amount",
+      "targetId": "node/apple_tree|item/log",
+      "jsonPath": "game.resourceNodes[id=node/apple_tree].production[id=item/log].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "harvest_resource_node_output"
+    },
+    {
+      "operationId": "exploration.apple_tree_loot_maximum",
+      "targetKind": "loot_entry_max_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].maxCount",
+      "expectedValue": "2",
+      "newValue": "3",
+      "runtimeDimension": "harvest_loot_quantity"
+    },
+    {
+      "operationId": "exploration.apple_tree_loot_minimum",
+      "targetKind": "loot_entry_min_count",
+      "targetId": "loot/apple_tree|entry/apple",
+      "jsonPath": "game.lootTables[id=loot/apple_tree].entries[id=entry/apple].minCount",
+      "expectedValue": "1",
+      "newValue": "3",
+      "runtimeDimension": "harvest_loot_quantity"
+    },
+    {
+      "operationId": "exploration.transaction_potion_output",
+      "targetKind": "transaction_output_amount",
+      "targetId": "transaction/buy_healing_potion|item/healing_potion",
+      "jsonPath": "game.transactions[id=transaction/buy_healing_potion].outputs[id=item/healing_potion].amount",
+      "expectedValue": "1",
+      "newValue": "2",
+      "runtimeDimension": "transaction_output"
+    }
+  ],
+  "runtimeEffectContracts": [
+    {
+      "effectId": "runtime_effect.exploration_resource_focus",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "metricKind": "inventory_item_quantity",
+      "targetId": "inventory/player_start",
+      "resourceOrItemId": "item/apple",
+      "comparisonKind": "greater_than_baseline",
+      "expectedValue": "3",
+      "sourceOperationIds": ["exploration.apple_tree_loot_minimum"],
+      "runtimeDimension": "harvest_loot_quantity"
+    }
+  ],
+  "parameterDefinitions": [
+    {
+      "parameterId": "appleYield",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Apple yield",
+      "description": "Deterministic minimum and maximum apple loot count.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 3,
+      "minimum": 1,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        { "operationId": "exploration.apple_tree_loot_maximum", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "exploration.apple_yield" },
+        { "operationId": "exploration.apple_tree_loot_minimum", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "exploration.apple_yield" }
+      ],
+      "validationRules": ["integer_range", "step", "atomic_group_complete"],
+      "runtimeEffectIds": ["runtime_effect.exploration_resource_focus"],
+      "atomicGroupId": "exploration.apple_yield"
+    },
+    {
+      "parameterId": "logYield",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Log yield",
+      "description": "Logs produced by the apple tree resource node.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 0,
+      "maximum": 20,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [{ "operationId": "exploration.apple_tree_log_yield", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "exploration.log_yield" }],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": ["runtime_effect.exploration_resource_focus"],
+      "atomicGroupId": "exploration.log_yield"
+    },
+    {
+      "parameterId": "transactionPotionOutput",
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "title": "Transaction potion output",
+      "description": "Healing potions produced by the purchase transaction.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 1,
+      "maximum": 10,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "items",
+      "authoringControl": "numeric_up_down",
+      "bindings": [{ "operationId": "exploration.transaction_potion_output", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "exploration.transaction_output" }],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": ["runtime_effect.exploration_resource_focus"],
+      "atomicGroupId": "exploration.transaction_output"
+    }
+  ],
+  "sourceLineage": {
+    "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+    "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+    "recipeId": "exploration_resource_focus",
+    "variantKind": "exploration_resource_focus",
+    "candidateId": "minimal-map-game-exploration-resource-focus",
+    "operationIds": ["exploration.apple_tree_log_yield", "exploration.apple_tree_loot_maximum", "exploration.apple_tree_loot_minimum", "exploration.transaction_potion_output"]
+  }
+}

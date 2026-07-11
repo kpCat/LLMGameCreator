@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "parameterized_composition_materialization_proof_v1",
+  "compositionId": "goal147-custom-alchemy-combat-exploration",
+  "parameterValues": [
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "healingPotionOutput",
+      "valueType": "integer",
+      "value": 3,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "alchemy.healing_potion_output_quantity"
+      ],
+      "atomicGroupId": "alchemy.healing_potion_output"
+    },
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "startingRedHerbQuantity",
+      "valueType": "integer",
+      "value": 4,
+      "usedDefault": true,
+      "boundOperationIds": [
+        "alchemy.starting_red_herb_supply"
+      ],
+      "atomicGroupId": "alchemy.starting_red_herb"
+    },
+    {
+      "moduleId": "feature.profile.alchemy_focus",
+      "parameterId": "startingWaterFlaskQuantity",
+      "valueType": "integer",
+      "value": 2,
+      "usedDefault": true,
+      "boundOperationIds": [
+        "alchemy.starting_water_supply"
+      ],
+      "atomicGroupId": "alchemy.starting_water"
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "parameterId": "basicAttackDamage",
+      "valueType": "integer",
+      "value": 5,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "combat.basic_attack_damage_effect",
+        "combat.basic_attack_power"
+      ],
+      "atomicGroupId": "combat.basic_attack_damage"
+    },
+    {
+      "moduleId": "feature.profile.combat_focus",
+      "parameterId": "goblinStartingHealth",
+      "valueType": "integer",
+      "value": 18,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "combat.goblin_health_pool"
+      ],
+      "atomicGroupId": "combat.goblin_health"
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "appleYield",
+      "valueType": "integer",
+      "value": 4,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "exploration.apple_tree_loot_maximum",
+        "exploration.apple_tree_loot_minimum"
+      ],
+      "atomicGroupId": "exploration.apple_yield"
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "logYield",
+      "valueType": "integer",
+      "value": 3,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "exploration.apple_tree_log_yield"
+      ],
+      "atomicGroupId": "exploration.log_yield"
+    },
+    {
+      "moduleId": "feature.profile.exploration_resource_focus",
+      "parameterId": "transactionPotionOutput",
+      "valueType": "integer",
+      "value": 3,
+      "usedDefault": false,
+      "boundOperationIds": [
+        "exploration.transaction_potion_output"
+      ],
+      "atomicGroupId": "exploration.transaction_output"
+    }
+  ],
+  "packageSha256": "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+  "finalStateHash": "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e",
+  "packageDistinctFromDefault": true,
+  "repeatedPackageHashMatches": true,
+  "repeatedFinalHashMatches": true,
+  "effectObservationCount": 3,
+  "satisfiedSelectedModuleCount": 3,
+  "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:5,item/fuel_can:1,item/healing_potion:7,item/log:3,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
+  "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=13],player[alive=True;resource/health=30|resource/stamina=10]",
+  "questSummary": "quest/help_healer:completed:",
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "actionBindingPassed": true,
+  "passed": true
+}

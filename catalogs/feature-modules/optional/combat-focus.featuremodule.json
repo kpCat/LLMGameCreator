@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "featuremodule_definition_v1",
+  "moduleId": "feature.profile.combat_focus",
+  "title": "Combat Focus",
+  "category": "profile",
+  "moduleKind": "goal142_runtime_profile",
+  "required": false,
+  "selectable": true,
+  "moduleVersion": "1.0.0",
+  "dependencies": ["feature.combat.turn_based_encounter"],
+  "conflicts": [],
+  "requiredSchemaSections": ["generatedContent.profile"],
+  "requiredRuntimePrimitives": ["runtime.qualification.canonical_action_plan"],
+  "requiredValidationRules": ["structured_mutation_expected_old_value", "package_cross_reference_validation"],
+  "requiredSaveLoadPolicy": ["journal_checkpoint_reload", "full_replay_equivalence"],
+  "requiredPlayerAdapterSurface": ["runtime_summary", "semantic_effect_summary"],
+  "generatorInputs": ["feature.profile.combat_focus"],
+  "authoringControls": ["checked_optional_module", "typed_parameter_editor"],
+  "goldenPackages": ["minimal-map-game-combat-focus"],
+  "smokePlaythroughs": ["goal145_canonical_13_action_plan"],
+  "knownLimitations": ["Parameters are bounded to the proven minimal-map vertical slice."],
+  "futureExpansionNotes": ["Additional combat parameters may bind declaratively without Composer branches."],
+  "mutationOperations": [
+    {
+      "operationId": "combat.basic_attack_damage_effect",
+      "targetKind": "ability_effect_arg_amount",
+      "targetId": "ability/basic_attack|damage_resource|resource/health",
+      "jsonPath": "game.abilities[id=ability/basic_attack].effects[type=damage_resource,args.id=resource/health].args.amount",
+      "expectedValue": "4",
+      "newValue": "6",
+      "runtimeDimension": "combat_ability_damage"
+    },
+    {
+      "operationId": "combat.basic_attack_power",
+      "targetKind": "ability_power",
+      "targetId": "ability/basic_attack",
+      "jsonPath": "game.abilities[id=ability/basic_attack].power",
+      "expectedValue": "4",
+      "newValue": "6",
+      "runtimeDimension": "combat_ability_damage"
+    },
+    {
+      "operationId": "combat.goblin_health_pool",
+      "targetKind": "encounter_participant_resource_amount",
+      "targetId": "encounter/goblin_duel|goblin|resource/health",
+      "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goblin].resources[id=resource/health].amount",
+      "expectedValue": "12",
+      "newValue": "16",
+      "runtimeDimension": "combat_participant_resource"
+    }
+  ],
+  "runtimeEffectContracts": [
+    {
+      "effectId": "runtime_effect.combat_focus",
+      "moduleId": "feature.profile.combat_focus",
+      "metricKind": "combat_resource_amount",
+      "targetId": "goblin",
+      "resourceOrItemId": "resource/health",
+      "comparisonKind": "changed_from_baseline",
+      "expectedValue": "16",
+      "sourceOperationIds": ["combat.goblin_health_pool"],
+      "runtimeDimension": "combat_participant_resource"
+    }
+  ],
+  "parameterDefinitions": [
+    {
+      "parameterId": "goblinStartingHealth",
+      "moduleId": "feature.profile.combat_focus",
+      "title": "Goblin starting health",
+      "description": "Starting health for the goblin encounter participant.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 16,
+      "minimum": 8,
+      "maximum": 100,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "health",
+      "authoringControl": "numeric_up_down",
+      "bindings": [{ "operationId": "combat.goblin_health_pool", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "combat.goblin_health" }],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": ["runtime_effect.combat_focus"],
+      "atomicGroupId": "combat.goblin_health"
+    },
+    {
+      "parameterId": "basicAttackDamage",
+      "moduleId": "feature.profile.combat_focus",
+      "title": "Basic attack damage",
+      "description": "Damage and power for the basic attack; both targets update atomically.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 6,
+      "minimum": 1,
+      "maximum": 30,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "damage",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        { "operationId": "combat.basic_attack_damage_effect", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "combat.basic_attack_damage" },
+        { "operationId": "combat.basic_attack_power", "operationField": "newValue", "transformKind": "identity", "atomicGroupId": "combat.basic_attack_damage" }
+      ],
+      "validationRules": ["integer_range", "step", "atomic_group_complete"],
+      "runtimeEffectIds": ["runtime_effect.combat_focus"],
+      "atomicGroupId": "combat.basic_attack_damage"
+    }
+  ],
+  "sourceLineage": {
+    "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
+    "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
+    "recipeId": "combat_focus",
+    "variantKind": "combat_focus",
+    "candidateId": "minimal-map-game-combat-focus",
+    "operationIds": ["combat.basic_attack_damage_effect", "combat.basic_attack_power", "combat.goblin_health_pool"]
+  }
+}

@@ -1,8 +1,56 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 146A generic FeatureModule composer scalability and catalog-driven coverage hotfix
+Updated by: Goal 147 persistent FeatureModule registry, typed parameter authoring, saved compositions and incremental certification
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 147 FeatureModule authoring and persistence is GREEN:
+
+```text
+persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required
+implementationStatus=GREEN
+goal146Accepted=false
+goal146ManualReviewDeferred=true
+goal147Accepted=false
+persistentFeatureModuleLibrary=true
+moduleLibrarySourceOfTruth=true
+requiredCoreModuleCount=10
+optionalModuleCount=3
+typedFeatureModuleParameters=true
+parameterDefinitionCount=8
+savedFeatureModuleCompositions=true
+incrementalFeatureModuleCertification=true
+allCurrentOptionalModulesCertified=true
+interactionCoverageDecoupledFromModuleCertification=true
+hundredModuleCatalogAccepted=true
+hundredModuleInteractionRowCount=9
+hundredModuleInteractionMaxRows=24
+hundredModulePowersetEnumerated=false
+defaultParameterGoal146HashesPreserved=true
+customParameterizedCompositionQualified=true
+customPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991
+customFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e
+featureModuleWorkspaceIgnored=true
+runtimeAuthority=true
+projectionOnly=false
+unityGameplayTruth=false
+nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+```
+
+The repository-local file catalog is now the FeatureModule source of truth.
+Ten locked core modules, three optional modules, eight typed parameters and
+stable module/catalog fingerprints drive generic authoring without public
+GamePackage schema changes. Saved compositions support create, save, load,
+list, clone, delete and save-as through atomic canonical persistence, including
+staleness and missing-module detection. Per-module certification caches reuse
+all three unchanged results and selectively re-execute only the changed module.
+The independent 100-module certification plan has 100 entries while interaction
+coverage stays at 9 rows under the 24-row cap and never enumerates `2^100`.
+Defaults preserve all eight Goal146 package/final hashes; a custom all-three
+composition qualifies through the same Runtime/checkpoint/replay/action-binding
+seam. WinForms remains an in-process Application adapter and Unity is a
+read-only evidence consumer. Goals 146 and 147 both remain `accepted=false` and
+are now ready for the required bundled manual review.
 
 Goal 145 is accepted by the repository owner's exact human handoff:
 
@@ -48,7 +96,7 @@ selectedCompositionCombinedEffectCount=3
 runtimeAuthority=true
 projectionOnly=false
 unityGameplayTruth=false
-nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
+nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
 ```
 
 Goal 146A generic Composer scalability hotfix is GREEN:
@@ -73,7 +121,7 @@ goal146LargeCatalogGeneratedCompositionCount=21
 goal146LargeCatalogMaxTotalRows=24
 goal146CurrentPackageHashesPreserved=true
 goal146CurrentFinalHashesPreserved=true
-nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
+nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
 ```
 
 The active optional module set now comes from the catalog. Three optional
@@ -114,7 +162,7 @@ goal145CandidateChangeResetsCheckpoint=true
 goal145CombatSessionUsesCombatPackage=true
 goal145MatrixStillGreen=true
 goal145UnitySmokeStillGreen=true
-nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
+nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
 ```
 
 The Goal145 candidate combo now uses `SelectionChangeCommitted` for operator
