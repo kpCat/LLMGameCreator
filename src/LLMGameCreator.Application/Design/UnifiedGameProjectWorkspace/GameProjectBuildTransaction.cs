@@ -35,10 +35,14 @@ public sealed class GameProjectBuildTransaction
 {
     private readonly string _packagePath;
     private readonly string _authoringPath;
+    private readonly string _identityPath;
+    private readonly string _legacyAuthoringPath;
     private readonly ICurrentGamePackageService _currentPackageService;
     private readonly IGameProjectPackageActivationStore _activationStore;
     private readonly byte[]? _packageBytes;
     private readonly byte[]? _authoringBytes;
+    private readonly byte[]? _identityBytes;
+    private readonly byte[]? _legacyAuthoringBytes;
     private readonly GamePackageDefinition? _currentPackage;
     private readonly List<SupportFileSnapshot> _supportFileSnapshots = [];
     private readonly HashSet<string> _copiedSupportFileTargets = new(GameProjectSupportFileMaterializer.PathComparer);
@@ -47,15 +51,21 @@ public sealed class GameProjectBuildTransaction
     public GameProjectBuildTransaction(
         string projectFolder,
         string authoringPath,
+        string identityPath,
+        string legacyAuthoringPath,
         ICurrentGamePackageService currentPackageService,
         IGameProjectPackageActivationStore activationStore)
     {
         _packagePath = GameProjectFeatureModuleAuthoringService.ConfinedPath(projectFolder, "package.json");
         _authoringPath = Path.GetFullPath(authoringPath);
+        _identityPath = Path.GetFullPath(identityPath);
+        _legacyAuthoringPath = Path.GetFullPath(legacyAuthoringPath);
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _activationStore = activationStore ?? throw new ArgumentNullException(nameof(activationStore));
         _packageBytes = File.Exists(_packagePath) ? File.ReadAllBytes(_packagePath) : null;
         _authoringBytes = File.Exists(_authoringPath) ? File.ReadAllBytes(_authoringPath) : null;
+        _identityBytes = File.Exists(_identityPath) ? File.ReadAllBytes(_identityPath) : null;
+        _legacyAuthoringBytes = File.Exists(_legacyAuthoringPath) ? File.ReadAllBytes(_legacyAuthoringPath) : null;
         _currentPackage = currentPackageService.CurrentPackage;
     }
 
@@ -139,6 +149,8 @@ public sealed class GameProjectBuildTransaction
         }
         RestoreFile(_packagePath, _packageBytes);
         RestoreFile(_authoringPath, _authoringBytes);
+        RestoreFile(_identityPath, _identityBytes);
+        RestoreFile(_legacyAuthoringPath, _legacyAuthoringBytes);
         if (_currentPackage is not null) _currentPackageService.ReplaceCurrent(_currentPackage);
         return true;
     }

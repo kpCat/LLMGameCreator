@@ -1,0 +1,14 @@
+{
+    "schemaVersion":  "goal148_manual_project_identity_failure_record_v1",
+    "status":  "RECORDED",
+    "projectFolder":  "goal148-manual",
+    "originalTitle":  "Проверка конструктора",
+    "overwrittenTitle":  "Minimal Map Game",
+    "failureClass":  "project_identity_overwritten_by_template_manifest",
+    "manualBuildExecutionPassed":  true,
+    "manualCrossThreadFailureResolved":  true,
+    "goal148Accepted":  false,
+    "manualRetryRequired":  true,
+    "rawScreenshotsNotCommitted":  true,
+    "passed":  true
+}

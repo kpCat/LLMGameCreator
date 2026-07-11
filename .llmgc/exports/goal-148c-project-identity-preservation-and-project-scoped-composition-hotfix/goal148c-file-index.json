@@ -1,0 +1,78 @@
+{
+    "schemaVersion":  "goal148c_file_index_v1",
+    "fileCount":  14,
+    "files":  [
+                  {
+                      "relativePath":  "goal148-manual-project-identity-failure-record.json",
+                      "sha256":  "f2b8a4b31a0ba7282d99e850f081f575029f4d22afde0eee110fcb9b497748cb",
+                      "byteCount":  560
+                  },
+                  {
+                      "relativePath":  "project-identity-capture-proof.json",
+                      "sha256":  "7a21c90ce8d57edf15f31cd3a8294b6aabf6a1131643192fa0438c6df91c52ec",
+                      "byteCount":  397
+                  },
+                  {
+                      "relativePath":  "legacy-authoring-migration-proof.json",
+                      "sha256":  "d4ee988ec13b299a835526ba5009f262bf395b64b52620c55516805c60e62f80",
+                      "byteCount":  599
+                  },
+                  {
+                      "relativePath":  "project-scoped-composition-identity-proof.json",
+                      "sha256":  "5274c839c9a9e1692ba438d57ca0400a972e922956f2ab559e815aa0e0cefadf",
+                      "byteCount":  429
+                  },
+                  {
+                      "relativePath":  "manual-values-project-build-proof.json",
+                      "sha256":  "8b9d991d0d5f6d02c572b24074c80e672e59821c984cb2d3fca1f427784e60b8",
+                      "byteCount":  743
+                  },
+                  {
+                      "relativePath":  "historical-control-values-proof.json",
+                      "sha256":  "b458978dc8a3be694c10ac5f25c145f309b758a61831167bc9c9559ae4b98930",
+                      "byteCount":  340
+                  },
+                  {
+                      "relativePath":  "two-project-identity-isolation-proof.json",
+                      "sha256":  "f6df08a420ad83b78239a57b56974ddd50e2b2f24fdcefe8a217e2fbe37a9f76",
+                      "byteCount":  362
+                  },
+                  {
+                      "relativePath":  "identity-repeat-build-proof.json",
+                      "sha256":  "58c7f54294cb1412f7d7227809a54f91d867e51b130a14fbbd44306f9c7b6f6a",
+                      "byteCount":  331
+                  },
+                  {
+                      "relativePath":  "identity-rollback-proof.json",
+                      "sha256":  "be54ff8d71a73bc6c875e4cad3aa42aac04a4f303a7cf4b90cb9e7bf38d53fae",
+                      "byteCount":  438
+                  },
+                  {
+                      "relativePath":  "mainform-project-title-consistency-proof.json",
+                      "sha256":  "3a2c5cc58a9cff9e2009276ceae858aa0d11a49ba5b32c53ee8d1fb254c12926",
+                      "byteCount":  1061
+                  },
+                  {
+                      "relativePath":  "goal148c-regression-compatibility-proof.json",
+                      "sha256":  "302ed4914793bce1b95121d67e2474e4eec8ce3e4967d4dc8e1ea0f63526e662",
+                      "byteCount":  471
+                  },
+                  {
+                      "relativePath":  "goal148c-negative-proof.json",
+                      "sha256":  "2cc106e253ef6f42c29117dcc402535fd113e4f677a6dcf4222d1713a3e16d8f",
+                      "byteCount":  708
+                  },
+                  {
+                      "relativePath":  "goal148c-dashboard.json",
+                      "sha256":  "d7112250a62aff029022048b12ff1a465f145bcdd3ed57224bd7491d69dedfc7",
+                      "byteCount":  1168
+                  },
+                  {
+                      "relativePath":  "goal148c-report.md",
+                      "sha256":  "c44db97f3c2f5b04938dfbbf441145131b357f6a2593810b4fd7151a9b109e71",
+                      "byteCount":  996
+                  }
+              ],
+    "sha256Included":  true,
+    "passed":  true
+}

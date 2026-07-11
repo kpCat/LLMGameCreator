@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "project_scoped_composition_identity_proof_v1",
+  "status": "GREEN",
+  "packageId": "game/goal148-manual",
+  "compositionId": "project-game-goal148-manual-b64404fafc75",
+  "filename": "project-game-goal148-manual-b64404fafc75.featurecomposition.json",
+  "validatorAccepted": true,
+  "deterministic": true,
+  "fixedGoal147CompositionIdAbsent": true,
+  "titleIndependent": true,
+  "passed": true
+}

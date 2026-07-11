@@ -437,15 +437,28 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         var lines = new List<string>
         {
             "projectFolder=" + snapshot.ProjectFolder,
+            "Project package ID: " + snapshot.ProjectPackageId,
+            "Project title: " + snapshot.ProjectTitle,
+            "Project version: " + snapshot.ProjectVersion,
+            "Project format version: " + snapshot.ProjectFormatVersion,
+            "Project-scoped composition ID: " + snapshot.ProjectScopedCompositionId,
+            "Composition package SHA-256: " + snapshot.CompositionPackageSha256,
+            "Activated project package SHA-256: " + snapshot.ActivatedProjectPackageSha256,
+            "Final Runtime state hash: " + snapshot.FinalStateHash,
+            "Identity source/recovery status: " + snapshot.IdentitySource,
             "authoringRevision=" + snapshot.Revision,
             "catalogFingerprint=" + snapshot.CatalogFingerprint,
-            "packageSha256=" + snapshot.PackageSha256,
-            "finalStateHash=" + snapshot.FinalStateHash,
             "certificationExecuted=" + snapshot.LastCertificationExecutedCount,
             "certificationReused=" + snapshot.LastCertificationReusedCount,
             string.Empty,
-            "Модули:"
+            "Identity recovery diagnostics:"
         };
+        lines.AddRange(snapshot.IdentityRecoveryDiagnostics);
+        lines.AddRange(new[]
+        {
+            string.Empty,
+            "Модули:"
+        });
         lines.AddRange(snapshot.Mechanics.Select(item => item.ModuleId + " | selected=" + item.Selected.ToString().ToLowerInvariant()));
         _technicalDetailsTextBox.Text = string.Join(Environment.NewLine, lines);
     }

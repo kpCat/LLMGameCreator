@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "legacy_authoring_migration_proof_v1",
+  "status": "GREEN",
+  "legacyDocumentPreserved": true,
+  "projectScopedDocumentCreated": true,
+  "projectScopedCompositionId": "project-game-goal148-manual-b64404fafc75",
+  "selectedModulesPreserved": true,
+  "allParameterValuesPreserved": true,
+  "logYield": 4,
+  "previousCompositionPackageSha256": "e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221",
+  "previousFinalStateHash": "95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8",
+  "staleSuccessfulHashesCleared": true,
+  "passed": true
+}

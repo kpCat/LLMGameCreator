@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "identity_repeat_build_proof_v1",
+  "status": "GREEN",
+  "sameCompositionPackageSha256": true,
+  "sameActivatedProjectPackageSha256": true,
+  "sameFinalStateHash": true,
+  "sameProjectIdentitySidecarBytes": true,
+  "sameProjectScopedCompositionId": true,
+  "supportReused": true,
+  "passed": true
+}

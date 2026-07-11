@@ -42,3 +42,26 @@ rawScreenshotNotCommitted=true
 
 The screenshot and raw manual files remain outside the repository. Retry the
 same checklist after the Goal148B automated hotfix evidence is GREEN.
+
+## Recorded manual identity-preservation failure
+
+The human repeated the real workflow after Goal148B in project
+`goal148-manual`. The build and canonical Runtime checks completed without the
+cross-thread error, with six configured parameters, one prepared support file,
+composition package SHA
+`e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221`
+and final Runtime state hash
+`95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`.
+The activated package nevertheless replaced the user's title
+`Проверка конструктора` with template title `Minimal Map Game`. Goal148C records
+and repairs this identity-preservation failure; Goal148 remains unaccepted and
+requires another human retry.
+
+```text
+goal148Accepted=false
+manualRetryRequired=true
+manualBuildExecutionPassed=true
+manualCrossThreadFailureResolved=true
+manualFailureClass=project_identity_overwritten_by_template_manifest
+rawScreenshotsNotCommitted=true
+```

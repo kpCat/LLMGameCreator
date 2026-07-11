@@ -24,8 +24,13 @@ public sealed record FeatureModuleCompositionDocument
     public DateTimeOffset CreatedAtUtc { get; init; }
     public DateTimeOffset UpdatedAtUtc { get; init; }
     public string LastMaterializedPackageSha256 { get; init; } = string.Empty;
+    public string LastCompositionPackageSha256 { get; init; } = string.Empty;
+    public string LastActivatedProjectPackageSha256 { get; init; } = string.Empty;
     public string LastQualifiedFinalStateHash { get; init; } = string.Empty;
     public string LastQualificationStatus { get; init; } = "NOT_RUN";
+    public string PreviousMaterializedPackageSha256 { get; init; } = string.Empty;
+    public string PreviousQualifiedFinalStateHash { get; init; } = string.Empty;
+    public string PreviousQualificationStatus { get; init; } = string.Empty;
     public int Revision { get; init; }
 }
 

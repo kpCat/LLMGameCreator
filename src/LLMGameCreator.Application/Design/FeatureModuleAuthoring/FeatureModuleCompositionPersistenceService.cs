@@ -125,6 +125,8 @@ public sealed class FeatureModuleCompositionPersistenceService
             UpdatedAtUtc = now,
             Revision = 0,
             LastMaterializedPackageSha256 = string.Empty,
+            LastCompositionPackageSha256 = string.Empty,
+            LastActivatedProjectPackageSha256 = string.Empty,
             LastQualifiedFinalStateHash = string.Empty,
             LastQualificationStatus = "NOT_RUN"
         }, library);

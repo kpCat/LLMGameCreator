@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "project_identity_capture_proof_v1",
+  "status": "GREEN",
+  "identityPath": ".llmgc/project-identity.json",
+  "packageId": "game/goal148-manual",
+  "title": "Проверка конструктора",
+  "version": "0.1.0",
+  "formatVersion": "0.1",
+  "source": "recovered_after_template_overwrite",
+  "packageJsonByteIdenticalAfterOpen": true,
+  "passed": true
+}

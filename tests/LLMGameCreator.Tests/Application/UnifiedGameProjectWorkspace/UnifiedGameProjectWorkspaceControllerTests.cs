@@ -44,7 +44,12 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
 
         var initial = context.Controller.OpenProject(context.ProjectFolder);
 
-        Assert.True(File.Exists(Path.Combine(context.ProjectFolder, ".llmgc", "authoring", "goal147-custom-alchemy-combat-exploration.featurecomposition.json")));
+        Assert.True(File.Exists(Path.Combine(
+            context.ProjectFolder,
+            ".llmgc",
+            "authoring",
+            initial.ProjectScopedCompositionId + ".featurecomposition.json")));
+        Assert.DoesNotContain("goal147", initial.ProjectScopedCompositionId, StringComparison.OrdinalIgnoreCase);
         Assert.Equal(packageBefore, await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json")));
         Assert.Equal(10, initial.Mechanics.Count(item => item.Required));
         Assert.Equal(3, initial.Mechanics.Count(item => !item.Required));
@@ -92,7 +97,10 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         var result = context.Controller.BuildAndQualify();
 
         Assert.True(result.Passed, string.Join(Environment.NewLine, result.Diagnostics));
-        Assert.Equal("2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991", result.PackageSha256);
+        Assert.Equal("2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991", result.CompositionPackageSha256);
+        Assert.False(string.IsNullOrWhiteSpace(result.ActivatedProjectPackageSha256));
+        Assert.Equal(result.ActivatedProjectPackageSha256, result.PackageSha256);
+        Assert.NotEqual(result.CompositionPackageSha256, result.ActivatedProjectPackageSha256);
         Assert.Equal("80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e", result.FinalStateHash);
         Assert.True(result.CheckpointReloadPassed);
         Assert.True(result.FullReplayEquivalent);
@@ -113,10 +121,14 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         Assert.Equal(HashFile(supportSourcePath), HashFile(supportTargetPath));
         Assert.NotNull(context.Current.CurrentPackage);
         var reloaded = await context.Repository.LoadAsync(context.ProjectFolder, CancellationToken.None);
+        Assert.Equal("game/workspace-game", reloaded.Manifest.PackageId);
+        Assert.Equal("Рабочая игра", reloaded.Manifest.Title);
+        Assert.Equal("0.1.0", reloaded.Manifest.Version);
         Assert.Equal(reloaded.Manifest.PackageId, context.Current.CurrentPackage!.Manifest.PackageId);
         var snapshot = context.Controller.Snapshot();
         Assert.Equal("Готово", snapshot.PackageStatus);
-        Assert.Equal(result.PackageSha256, snapshot.PackageSha256);
+        Assert.Equal(result.ActivatedProjectPackageSha256, snapshot.PackageSha256);
+        Assert.Equal(result.CompositionPackageSha256, snapshot.CompositionPackageSha256);
         Assert.Equal(result.FinalStateHash, snapshot.FinalStateHash);
         Assert.False(Directory.EnumerateDirectories(Path.Combine(context.ProjectFolder, ".llmgc", "build-staging")).Any());
         WriteProof("project-build-activation-proof.json", new
@@ -124,6 +136,8 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
             schemaVersion = "project_build_activation_proof_v1",
             status = "GREEN",
             packageSha256 = result.PackageSha256,
+            compositionPackageSha256 = result.CompositionPackageSha256,
+            activatedProjectPackageSha256 = result.ActivatedProjectPackageSha256,
             finalStateHash = result.FinalStateHash,
             result.CheckpointReloadPassed,
             result.FullReplayEquivalent,
@@ -200,6 +214,7 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         Assert.True(repeat.ReusedSupportFileCount >= 1);
         Assert.Equal(supportBytes, await File.ReadAllBytesAsync(supportPath));
         Assert.Equal(first.PackageSha256, repeat.PackageSha256);
+        Assert.Equal(first.CompositionPackageSha256, repeat.CompositionPackageSha256);
         Assert.Equal(first.FinalStateHash, repeat.FinalStateHash);
         WriteProof("support-file-repeat-build-proof.json", new
         {

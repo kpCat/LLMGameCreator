@@ -1,0 +1,14 @@
+{
+    "schemaVersion":  "goal148c_regression_compatibility_proof_v1",
+    "status":  "GREEN",
+    "goal148BRegressionGreen":  true,
+    "goal148ARegressionGreen":  true,
+    "unsafeCurrentChangedSubscriberCount":  0,
+    "normalWorkspaceGoalNumberControlCount":  0,
+    "legacyDiagnosticsHiddenByDefault":  true,
+    "goal146Accepted":  true,
+    "goal147Accepted":  true,
+    "goal148Accepted":  false,
+    "goal141Accepted":  false,
+    "passed":  true
+}

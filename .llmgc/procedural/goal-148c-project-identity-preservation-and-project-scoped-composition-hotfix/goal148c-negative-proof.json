@@ -1,0 +1,18 @@
+{
+    "schemaVersion":  "goal148c_negative_proof_v1",
+    "status":  "GREEN",
+    "openDoesNotReplacePackageJson":  true,
+    "ambiguousRecoveryRejected":  true,
+    "invalidSidecarRejected":  true,
+    "fixedGoal147WorkspaceIdentityAbsent":  true,
+    "titleChangeDoesNotChangeCompositionId":  true,
+    "identityOverlayDoesNotChangeFinalState":  true,
+    "activatedPackageHashNotCompositionHash":  true,
+    "failedBuildRestoresIdentityAndAuthoring":  true,
+    "mainFormSameFolderTitleCacheAbsent":  true,
+    "historicalArtifactsRewritten":  false,
+    "publicGamePackageSchemaChanged":  false,
+    "runtimeChanged":  false,
+    "goalNumberControlAdded":  false,
+    "passed":  true
+}

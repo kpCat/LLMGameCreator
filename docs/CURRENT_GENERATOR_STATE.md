@@ -1,8 +1,47 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 148B current-package UI-thread dispatch and real workspace build retry hotfix
+Updated by: Goal 148C project identity preservation and project-scoped composition hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 148C project identity preservation and project-scoped composition hotfix is GREEN:
+
+```text
+implementationStatus=GREEN
+goal148Accepted=false
+goal148ManualRetryRequired=true
+manualBuildExecutionPassed=true
+manualCrossThreadFailureResolved=true
+manualFailureClass=project_identity_overwritten_by_template_manifest
+goal148ProjectIdentityPreserved=true
+goal148ProjectScopedCompositionId=true
+goal148HonestHashSemantics=true
+goal148ManualProjectMigrationReady=true
+manualProjectTitle=Проверка конструктора
+manualProjectPackageId=game/goal148-manual
+manualProjectVersion=0.1.0
+manualValuesCompositionPackageSha256=e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221
+manualValuesFinalStateHash=95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8
+historicalControlCompositionPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991
+historicalControlFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e
+accepted=false
+nextProductGoal=retry_goal_148_unified_game_project_workspace_manual_verification
+```
+
+The post-Goal148B manual build completed without the cross-thread failure but
+activated the immutable composition template identity and renamed the project
+from `Проверка конструктора` to `Minimal Map Game`. The editor now captures or
+recovers the five project identity fields in atomic
+`.llmgc/project-identity.json`, migrates the legacy fixed authoring file to a
+deterministic package-ID-scoped composition file without losing selections or
+parameter values, overlays identity before staged validation/activation, and
+requalifies the identity-overlaid package through the existing canonical
+Runtime seam. Composition package SHA, activated project package SHA and final
+Runtime state hash are reported separately. Two project identities preserve the
+same mechanics/final hashes and produce distinct activated package hashes;
+repeat build and full identity/authoring/support rollback are GREEN. MainForm
+now refreshes same-folder title on every marshalled `CurrentChanged`. Goal148
+and Goal141 remain `accepted=false`; Goal149 must not start.
 
 Goal 148B current-package UI-thread dispatch and real workspace build retry hotfix is GREEN:
 

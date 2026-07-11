@@ -9,8 +9,6 @@ public sealed partial class MainForm : Form
     private readonly IEditorPageRegistry? _pageRegistry;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly ILogger? _logger;
-    private string? _displayedProjectFolder;
-    private string? _displayedProjectTitle;
 
     public MainForm()
     {
@@ -88,21 +86,10 @@ public sealed partial class MainForm : Form
         var package = _currentGamePackageService.CurrentPackage;
         if (package == null)
         {
-            _displayedProjectFolder = null;
-            _displayedProjectTitle = null;
             _statusLabel.Text = "Проект игры не открыт";
             return;
         }
 
-        var currentFolder = _currentGamePackageService.CurrentFolder;
-        if (string.IsNullOrWhiteSpace(currentFolder)
-            || !string.Equals(currentFolder, _displayedProjectFolder, StringComparison.OrdinalIgnoreCase)
-            || string.IsNullOrWhiteSpace(_displayedProjectTitle))
-        {
-            _displayedProjectFolder = currentFolder;
-            _displayedProjectTitle = package.Manifest.Title;
-        }
-
-        _statusLabel.Text = $"Открыт проект: {_displayedProjectTitle}";
+        _statusLabel.Text = $"Открыт проект: {package.Manifest.Title}";
     }
 }

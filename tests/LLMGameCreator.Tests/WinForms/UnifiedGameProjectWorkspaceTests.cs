@@ -55,7 +55,12 @@ public sealed class UnifiedGameProjectWorkspaceTests
             InvokeVoid(page, "ShowWorkspace");
             page.CreateControl();
             Assert.Single(projectList.Items.Cast<ListViewItem>());
-            Assert.True(File.Exists(Path.Combine(summary.FolderPath, ".llmgc", "authoring", "goal147-custom-alchemy-combat-exploration.featurecomposition.json")));
+            Assert.True(File.Exists(Path.Combine(
+                summary.FolderPath,
+                ".llmgc",
+                "authoring",
+                snapshot.ProjectScopedCompositionId + ".featurecomposition.json")));
+            Assert.DoesNotContain("goal147", snapshot.ProjectScopedCompositionId, StringComparison.OrdinalIgnoreCase);
             var workspaceTabs = Field<TabControl>(page, "_workspaceTabs");
             Assert.Equal("Обзор", workspaceTabs.SelectedTab?.Text);
             Assert.NotEqual("Технические детали", workspaceTabs.SelectedTab?.Text);

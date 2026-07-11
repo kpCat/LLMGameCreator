@@ -2349,6 +2349,18 @@ retry preserves the expected package/final hashes. Goal148 remains
 `accepted=false`, `manualRetryRequired=true`, and the next work is
 `retry_goal_148_unified_game_project_workspace_manual_verification`.
 
+Goal148C is GREEN. The successful post-Goal148B manual build exposed a second
+P1 defect: template manifest identity replaced the user's title, package ID and
+version. Project identity is now captured or generically recovered in an atomic
+sidecar, legacy fixed authoring is migrated without value loss to a deterministic
+project-scoped composition file, and identity is overlaid before transactional
+activation. Composition package SHA, activated project package SHA and final
+Runtime state hash have separate semantics. The manual values preserve
+composition SHA `e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221`
+and final hash `95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`;
+historical control hashes remain unchanged. Goal148 remains `accepted=false`
+and the next work is its manual retry, not Goal149.
+
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,
 four distinct final hashes, stable combat selection, 8-action checkpoint reloads,

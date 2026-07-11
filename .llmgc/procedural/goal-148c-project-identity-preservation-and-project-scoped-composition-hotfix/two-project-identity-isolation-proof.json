@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "two_project_identity_isolation_proof_v1",
+  "status": "GREEN",
+  "sameCompositionPackageSha256": true,
+  "sameFinalStateHash": true,
+  "differentActivatedProjectPackageSha256": true,
+  "differentProjectScopedCompositionId": true,
+  "firstPackageId": "game/first-game",
+  "secondPackageId": "game/second-game",
+  "passed": true
+}

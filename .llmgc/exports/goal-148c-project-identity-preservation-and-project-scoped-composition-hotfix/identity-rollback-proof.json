@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "identity_rollback_proof_v1",
+  "status": "GREEN",
+  "failureInjectedAfterOverlayAndSupportActivation": true,
+  "packageJsonByteIdentical": true,
+  "currentPackageUnchanged": true,
+  "projectIdentitySidecarByteIdentical": true,
+  "projectScopedAuthoringByteIdentical": true,
+  "legacyAuthoringByteIdentical": true,
+  "newSupportFileRemoved": true,
+  "userEditsRetainedInMemory": true,
+  "passed": true
+}

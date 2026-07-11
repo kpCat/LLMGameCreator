@@ -5,6 +5,7 @@ using System.Text.Json;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleCertification;
+using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Runtime.Abstractions;
@@ -28,6 +29,7 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly IGameProjectPackageActivationStore _activationStore;
     private readonly IGameProjectSupportFileSource _supportFileSource;
     private readonly GameProjectSupportFileMaterializer _supportFileMaterializer = new();
+    private readonly GameProjectPackageIdentityOverlayService _identityOverlay = new();
     private int _buildRunning;
 
     public GameProjectBuildAndQualificationService(
@@ -61,15 +63,33 @@ public sealed class GameProjectBuildAndQualificationService
         string? stagingRoot = null;
         GameProjectBuildTransaction? transaction = null;
         FeatureModuleCompositionDocument? savedDocument = null;
+        FeatureModuleCompositionDocument? preBuildDocument = null;
+        var preBuildDirty = false;
         GameProjectSupportFilePlan? supportFilePlan = null;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
+            var preBuildState = authoring.State;
+            preBuildDocument = preBuildState.Document;
+            preBuildDirty = preBuildState.Dirty;
+            transaction = new GameProjectBuildTransaction(
+                preBuildState.ProjectFolder,
+                authoring.DocumentPath,
+                authoring.IdentityPath,
+                authoring.LegacyDocumentPath,
+                _currentPackageService,
+                _activationStore);
             savedDocument = authoring.Save();
             var state = authoring.State;
             var validation = new FeatureModuleCompositionDocumentValidator().Validate(savedDocument, state.Library);
             if (!validation.Passed)
-                return Failure("Исправьте настройки механик перед сборкой.", validation.Diagnostics);
+                return RollbackFailure(
+                    authoring,
+                    preBuildDocument,
+                    preBuildDirty,
+                    transaction,
+                    "Исправьте настройки механик перед сборкой.",
+                    validation.Diagnostics);
 
             stagingRoot = GameProjectFeatureModuleAuthoringService.ConfinedPath(
                 state.ProjectFolder,
@@ -77,12 +97,6 @@ public sealed class GameProjectBuildAndQualificationService
             var materializationRoot = Path.Combine(stagingRoot, "materialized");
             var certificationExecutionRoot = Path.Combine(stagingRoot, "certification");
             Directory.CreateDirectory(stagingRoot);
-
-            transaction = new GameProjectBuildTransaction(
-                state.ProjectFolder,
-                authoring.DocumentPath,
-                _currentPackageService,
-                _activationStore);
 
             var certification = new FeatureModuleCertificationService(
                 _runtime,
@@ -97,21 +111,30 @@ public sealed class GameProjectBuildAndQualificationService
             if (ledger.Status != "GREEN")
                 return RollbackFailure(
                     authoring,
-                    savedDocument,
+                    preBuildDocument,
+                    preBuildDirty,
                     transaction,
                     "Не удалось подтвердить совместимость выбранных механик.",
                     ledger.Entries.SelectMany(entry => entry.Diagnostics).ToList());
 
             var materializer = new FeatureModuleParameterizedCompositionService(_runtime);
+            // Keep the generic mechanics package byte-compatible with the accepted Goal146/147
+            // composition. The project-scoped identity remains the persisted authoring identity
+            // and filename; project manifest identity is applied only in the overlay below.
+            var materializationDocument = savedDocument with
+            {
+                CompositionId = UnifiedGameProjectWorkspaceVocabulary.LegacyCompositionId
+            };
             var materialized = materializer.MaterializeAndQualify(
                 _repositoryRoot,
                 state.Library,
-                savedDocument,
+                materializationDocument,
                 materializationRoot);
             if (!materialized.Passed)
                 return RollbackFailure(
                     authoring,
-                    savedDocument,
+                    preBuildDocument,
+                    preBuildDirty,
                     transaction,
                     "Игра не прошла проверку Runtime.",
                     materialized.Qualification.Result.Diagnostics);
@@ -119,7 +142,7 @@ public sealed class GameProjectBuildAndQualificationService
             var qualifiedPackagePath = Path.Combine(
                 materializationRoot,
                 "compositions",
-                savedDocument.CompositionId,
+                materializationDocument.CompositionId,
                 "package.json");
             if (!File.Exists(qualifiedPackagePath))
                 throw new FileNotFoundException("Qualified package was not materialized.", qualifiedPackagePath);
@@ -127,8 +150,29 @@ public sealed class GameProjectBuildAndQualificationService
             if (!string.Equals(qualifiedHash, materialized.PackageSha256, StringComparison.Ordinal))
                 throw new InvalidOperationException("Qualified package hash mismatch rejected.");
 
-            var qualifiedPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(qualifiedPackagePath)!, cancellationToken)
+            var activatedPackagePath = Path.Combine(stagingRoot, "identity-overlaid", "package.json");
+            var overlay = _identityOverlay.Overlay(qualifiedPackagePath, activatedPackagePath, state.Identity);
+            if (!string.Equals(overlay.CompositionPackageSha256, materialized.PackageSha256, StringComparison.Ordinal))
+                throw new InvalidOperationException("Composition package hash changed during identity overlay.");
+
+            var qualifiedPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(activatedPackagePath)!, cancellationToken)
                 .GetAwaiter().GetResult();
+            var compositionPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(qualifiedPackagePath)!, cancellationToken)
+                .GetAwaiter().GetResult();
+            AssertIdentity(qualifiedPackage, state.Identity);
+            var projectQualification = QualifyIdentityOverlaidPackage(
+                qualifiedPackage,
+                compositionPackage,
+                materializationDocument,
+                activatedPackagePath,
+                overlay.ActivatedProjectPackageSha256);
+            if (!string.Equals(projectQualification.Session.CurrentStateHash, materialized.FinalStateHash, StringComparison.Ordinal))
+                throw new InvalidOperationException("Project identity overlay changed canonical Runtime final-state semantics.");
+            if (!projectQualification.CheckpointReplay.Passed
+                || !projectQualification.FinalReplay.Passed
+                || !projectQualification.ActionDescriptorExecutionBindingPassed)
+                throw new InvalidOperationException("Identity-overlaid project package failed canonical Runtime qualification.");
+
             supportFilePlan = _supportFileMaterializer.CreatePlan(
                 qualifiedPackage,
                 state.ProjectFolder,
@@ -136,14 +180,15 @@ public sealed class GameProjectBuildAndQualificationService
             if (!supportFilePlan.IsValid)
                 return RollbackFailure(
                     authoring,
-                    savedDocument,
+                    preBuildDocument,
+                    preBuildDirty,
                     transaction,
                     "Не удалось подготовить файлы проекта.",
                     supportFilePlan.Diagnostics,
                     supportFilePlan);
 
             var validationProjectRoot = _supportFileMaterializer.StageValidationProject(
-                qualifiedPackagePath,
+                activatedPackagePath,
                 supportFilePlan,
                 Path.Combine(stagingRoot, "validation-project"));
             var stagedPackage = _packageRepository.LoadAsync(validationProjectRoot, cancellationToken)
@@ -152,21 +197,23 @@ public sealed class GameProjectBuildAndQualificationService
             if (!stagedValidation.IsValid)
                 return RollbackFailure(
                     authoring,
-                    savedDocument,
+                    preBuildDocument,
+                    preBuildDirty,
                     transaction,
                     "Собранный пакет содержит ошибки.",
                     stagedValidation.Issues.Select(issue => issue.ToString()).ToList(),
                     supportFilePlan);
 
             var supportActivation = transaction.ActivateSupportFiles(supportFilePlan, cancellationToken);
-            transaction.ActivatePackageAsync(qualifiedPackagePath, cancellationToken)
+            transaction.ActivatePackageAsync(activatedPackagePath, cancellationToken)
                 .GetAwaiter().GetResult();
 
             var realProjectValidation = _packageValidator.Validate(qualifiedPackage, state.ProjectFolder);
             if (!realProjectValidation.IsValid)
                 return RollbackFailure(
                     authoring,
-                    savedDocument,
+                    preBuildDocument,
+                    preBuildDirty,
                     transaction,
                     "Собранный пакет содержит ошибки после активации.",
                     realProjectValidation.Issues.Select(issue => issue.ToString()).ToList(),
@@ -174,11 +221,21 @@ public sealed class GameProjectBuildAndQualificationService
 
             transaction.ReplaceCurrentPackage(qualifiedPackage);
 
-            authoring.ApplyQualifiedDocument(materialized.QualifiedDocument);
+            authoring.ApplyQualifiedDocument(savedDocument with
+            {
+                LastMaterializedPackageSha256 = overlay.CompositionPackageSha256,
+                LastCompositionPackageSha256 = overlay.CompositionPackageSha256,
+                LastActivatedProjectPackageSha256 = overlay.ActivatedProjectPackageSha256,
+                LastQualifiedFinalStateHash = projectQualification.Session.CurrentStateHash,
+                LastQualificationStatus = "GREEN"
+            });
             var qualifiedDocument = authoring.Save();
             var historyPath = WriteHistory(
                 state.ProjectFolder,
                 materialized,
+                overlay.CompositionPackageSha256,
+                overlay.ActivatedProjectPackageSha256,
+                projectQualification.Session.CurrentStateHash,
                 qualifiedDocument.ParameterValues.Count,
                 ledger);
             transaction.Commit();
@@ -197,11 +254,14 @@ public sealed class GameProjectBuildAndQualificationService
                     "Пакет проекта обновлён"),
                 SelectedMechanicCount = state.Library.Manifest.RequiredCoreModuleCount + savedDocument.SelectedModuleIds.Count,
                 ConfiguredParameterCount = qualifiedDocument.ParameterValues.Count,
-                PackageSha256 = materialized.PackageSha256,
-                FinalStateHash = materialized.FinalStateHash,
-                CheckpointReloadPassed = materialized.CheckpointReloadPassed,
-                FullReplayEquivalent = materialized.FullReplayEquivalent,
-                ActionBindingPassed = materialized.ActionBindingPassed,
+                PackageSha256 = overlay.ActivatedProjectPackageSha256,
+                CompositionPackageSha256 = overlay.CompositionPackageSha256,
+                ActivatedProjectPackageSha256 = overlay.ActivatedProjectPackageSha256,
+                FinalStateHash = projectQualification.Session.CurrentStateHash,
+                CheckpointReloadPassed = projectQualification.CheckpointReplay.Passed,
+                FullReplayEquivalent = projectQualification.FinalReplay.Passed
+                                       && projectQualification.FinalReplay.ActualStateHash == projectQualification.Session.CurrentStateHash,
+                ActionBindingPassed = projectQualification.ActionDescriptorExecutionBindingPassed,
                 PackageActivated = true,
                 PackageActivationTransactional = true,
                 CertificationExecutedCount = ledger.ExecutedCount,
@@ -223,7 +283,7 @@ public sealed class GameProjectBuildAndQualificationService
             or OperationCanceledException)
         {
             var rollback = transaction?.Rollback() ?? false;
-            if (savedDocument is not null) authoring.RestoreInMemoryDocument(savedDocument, dirty: false);
+            if (preBuildDocument is not null) authoring.RestoreInMemoryDocument(preBuildDocument, preBuildDirty);
             return Failure(
                 "Сборка не завершена. Текущий пакет не изменён.",
                 [exception.Message],
@@ -240,14 +300,15 @@ public sealed class GameProjectBuildAndQualificationService
 
     private GameProjectBuildResult RollbackFailure(
         GameProjectFeatureModuleAuthoringService authoring,
-        FeatureModuleCompositionDocument savedDocument,
+        FeatureModuleCompositionDocument preBuildDocument,
+        bool preBuildDirty,
         GameProjectBuildTransaction transaction,
         string summary,
         IReadOnlyList<string> diagnostics,
         GameProjectSupportFilePlan? supportFilePlan = null)
     {
         var rolledBack = transaction.Rollback();
-        authoring.RestoreInMemoryDocument(savedDocument, dirty: false);
+        authoring.RestoreInMemoryDocument(preBuildDocument, preBuildDirty);
         return Failure(summary + " Текущий пакет не изменён.", diagnostics, rolledBack, supportFilePlan);
     }
 
@@ -269,6 +330,9 @@ public sealed class GameProjectBuildAndQualificationService
     private static string WriteHistory(
         string projectFolder,
         FeatureModuleParameterizedCompositionResult result,
+        string compositionPackageSha256,
+        string activatedProjectPackageSha256,
+        string finalStateHash,
         int configuredParameterCount,
         FeatureModuleCertificationLedger ledger)
     {
@@ -282,8 +346,10 @@ public sealed class GameProjectBuildAndQualificationService
         {
             CompletedAtUtc = DateTimeOffset.UtcNow,
             Status = "GREEN",
-            PackageSha256 = result.PackageSha256,
-            FinalStateHash = result.FinalStateHash,
+            PackageSha256 = activatedProjectPackageSha256,
+            CompositionPackageSha256 = compositionPackageSha256,
+            ActivatedProjectPackageSha256 = activatedProjectPackageSha256,
+            FinalStateHash = finalStateHash,
             SelectedMechanicCount = result.SelectedModuleCount,
             ConfiguredParameterCount = configuredParameterCount,
             CertificationExecutedCount = ledger.ExecutedCount,
@@ -300,6 +366,43 @@ public sealed class GameProjectBuildAndQualificationService
     {
         using var stream = File.OpenRead(path);
         return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+    }
+
+    private ProductLineRuntimeQualificationResult QualifyIdentityOverlaidPackage(
+        LLMGameCreator.GamePackage.GamePackageDefinition package,
+        LLMGameCreator.GamePackage.GamePackageDefinition compositionPackage,
+        FeatureModuleCompositionDocument document,
+        string packagePath,
+        string packageSha256)
+    {
+        var selected = document.SelectedModuleIds.OrderBy(id => id, StringComparer.Ordinal).ToList();
+        var qualifier = new ProductLineRuntimeQualifier(
+            new GameProjectIdentityRuntimeQualificationAdapter(_runtime, compositionPackage.Manifest));
+        return qualifier.Qualify(package, new ProductLineRuntimeQualificationRequest
+        {
+            SessionId = "project-" + document.CompositionId + "-session",
+            CandidateId = document.CompositionId,
+            VariantKind = selected.Count == 0 ? "baseline_composition" : string.Join("+", selected),
+            PackagePath = packagePath,
+            PackageSha256 = packageSha256,
+            CheckpointId = "project-" + document.CompositionId + "-checkpoint-after-craft",
+            FinalCheckpointId = "project-" + document.CompositionId + "-final-journal"
+        });
+    }
+
+    private static void AssertIdentity(
+        LLMGameCreator.GamePackage.GamePackageDefinition package,
+        GameProjectIdentityDocument identity)
+    {
+        var manifest = package.Manifest;
+        if (!string.Equals(manifest.PackageId, identity.PackageId, StringComparison.Ordinal)
+            || !string.Equals(manifest.Title, identity.Title, StringComparison.Ordinal)
+            || !string.Equals(manifest.Version, identity.Version, StringComparison.Ordinal)
+            || !string.Equals(manifest.FormatVersion, identity.FormatVersion, StringComparison.Ordinal)
+            || !string.Equals(manifest.Description ?? string.Empty, identity.Description, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException("Activated package manifest does not preserve project identity.");
+        }
     }
 
     private static GameProjectBuildResult Failure(

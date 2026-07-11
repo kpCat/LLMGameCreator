@@ -1,6 +1,7 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
+using LLMGameCreator.GamePackage;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 
@@ -8,20 +9,28 @@ public sealed class GameProjectFeatureModuleAuthoringService
 {
     private readonly string _repositoryRoot;
     private readonly FeatureModuleLibraryLoader _libraryLoader;
+    private readonly GameProjectIdentityStore _identityStore;
+    private readonly GameProjectCompositionIdentityService _compositionIdentity;
     private FeatureModuleCompositionPersistenceService? _persistence;
     private FeatureModuleLibrarySnapshot? _library;
     private FeatureModuleCompositionDocument? _document;
     private string? _projectFolder;
+    private string? _compositionId;
+    private GameProjectIdentityDocument? _identity;
     private bool _dirty;
     private int _dirtyTransitionCount;
 
     public GameProjectFeatureModuleAuthoringService(
         string repositoryRoot,
-        FeatureModuleLibraryLoader? libraryLoader = null)
+        FeatureModuleLibraryLoader? libraryLoader = null,
+        GameProjectIdentityStore? identityStore = null,
+        GameProjectCompositionIdentityService? compositionIdentity = null)
     {
         if (string.IsNullOrWhiteSpace(repositoryRoot)) throw new ArgumentException("repository root is required", nameof(repositoryRoot));
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _libraryLoader = libraryLoader ?? new FeatureModuleLibraryLoader();
+        _identityStore = identityStore ?? new GameProjectIdentityStore();
+        _compositionIdentity = compositionIdentity ?? new GameProjectCompositionIdentityService();
     }
 
     public GameProjectAuthoringState State => new()
@@ -29,6 +38,7 @@ public sealed class GameProjectFeatureModuleAuthoringService
         ProjectFolder = RequireProjectFolder(),
         Library = RequireLibrary(),
         Document = RequireDocument(),
+        Identity = RequireIdentity(),
         Dirty = _dirty,
         DirtyTransitionCount = _dirtyTransitionCount
     };
@@ -36,24 +46,54 @@ public sealed class GameProjectFeatureModuleAuthoringService
     public string AuthoringRoot => ConfinedPath(RequireProjectFolder(), UnifiedGameProjectWorkspaceVocabulary.AuthoringRelativeRoot);
     public string DocumentPath => ConfinedPath(
         AuthoringRoot,
-        UnifiedGameProjectWorkspaceVocabulary.CompositionId + FeatureModuleCompositionDocumentVocabulary.FileExtension);
+        RequireCompositionId() + FeatureModuleCompositionDocumentVocabulary.FileExtension);
+    public string LegacyDocumentPath => ConfinedPath(
+        AuthoringRoot,
+        UnifiedGameProjectWorkspaceVocabulary.LegacyCompositionId + FeatureModuleCompositionDocumentVocabulary.FileExtension);
+    public string IdentityPath => _identityStore.PathFor(RequireProjectFolder());
 
-    public GameProjectAuthoringState OpenProject(string projectFolder, string projectTitle)
+    public GameProjectAuthoringState OpenProject(string projectFolder, GamePackageDefinition currentPackage)
     {
+        ArgumentNullException.ThrowIfNull(currentPackage);
         var fullProjectFolder = RequireProject(projectFolder);
         _projectFolder = fullProjectFolder;
         _library = _libraryLoader.Load(Path.Combine(_repositoryRoot,
             FeatureModuleLibraryVocabulary.DefaultRelativeRoot.Replace('/', Path.DirectorySeparatorChar)));
         _persistence = new FeatureModuleCompositionPersistenceService(AuthoringRoot);
+        FeatureModuleCompositionDocument? legacyDocument = null;
+        if (File.Exists(LegacyDocumentPath))
+        {
+            legacyDocument = _persistence.Load(UnifiedGameProjectWorkspaceVocabulary.LegacyCompositionId, _library);
+        }
+
+        _identity = _identityStore.LoadOrCapture(fullProjectFolder, currentPackage, legacyDocument);
+        _compositionId = _compositionIdentity.Create(_identity.PackageId);
         if (File.Exists(DocumentPath))
         {
-            _document = _persistence.Load(UnifiedGameProjectWorkspaceVocabulary.CompositionId, _library);
+            _document = _persistence.Load(_compositionId, _library);
+        }
+        else if (legacyDocument is not null)
+        {
+            _document = _persistence.Save(legacyDocument with
+            {
+                CompositionId = _compositionId,
+                DisplayName = _identity.Title,
+                Revision = 0,
+                PreviousMaterializedPackageSha256 = legacyDocument.LastMaterializedPackageSha256,
+                PreviousQualifiedFinalStateHash = legacyDocument.LastQualifiedFinalStateHash,
+                PreviousQualificationStatus = legacyDocument.LastQualificationStatus,
+                LastMaterializedPackageSha256 = string.Empty,
+                LastCompositionPackageSha256 = string.Empty,
+                LastActivatedProjectPackageSha256 = string.Empty,
+                LastQualifiedFinalStateHash = string.Empty,
+                LastQualificationStatus = "NOT_RUN"
+            }, _library);
         }
         else
         {
             _document = _persistence.CreateNew(
-                UnifiedGameProjectWorkspaceVocabulary.CompositionId,
-                string.IsNullOrWhiteSpace(projectTitle) ? "Моя игра" : projectTitle,
+                _compositionId,
+                _identity.Title,
                 "Настройки механик открытого игрового проекта.",
                 _library);
             _document = _persistence.Save(_document, _library);
@@ -158,6 +198,12 @@ public sealed class GameProjectFeatureModuleAuthoringService
         ?? throw new InvalidOperationException("Open a game project first.");
 
     private FeatureModuleCompositionDocument RequireDocument() => _document
+        ?? throw new InvalidOperationException("Open a game project first.");
+
+    private GameProjectIdentityDocument RequireIdentity() => _identity
+        ?? throw new InvalidOperationException("Open a game project first.");
+
+    private string RequireCompositionId() => _compositionId
         ?? throw new InvalidOperationException("Open a game project first.");
 
     private FeatureModuleCompositionPersistenceService RequirePersistence() => _persistence

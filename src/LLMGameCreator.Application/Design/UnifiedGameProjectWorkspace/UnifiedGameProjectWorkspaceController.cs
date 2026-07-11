@@ -55,7 +55,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         if (!string.Equals(Path.GetFullPath(currentFolder), requested, comparison))
             throw new InvalidOperationException("Workspace project must match the currently opened package folder.");
 
-        _authoring.OpenProject(requested, currentPackage.Manifest.Title);
+        _authoring.OpenProject(requested, currentPackage);
         HasOpenProject = true;
         _lastBuild = null;
         return Snapshot();
@@ -100,10 +100,20 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             };
         }).ToList();
         var lastGreen = state.Document.LastQualificationStatus == "GREEN";
+        var activatedPackageSha = string.IsNullOrWhiteSpace(state.Document.LastActivatedProjectPackageSha256)
+            ? state.Document.LastMaterializedPackageSha256
+            : state.Document.LastActivatedProjectPackageSha256;
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
-            ProjectTitle = _currentPackageService.CurrentPackage?.Manifest.Title ?? state.Document.DisplayName,
+            ProjectTitle = state.Identity.Title,
+            ProjectPackageId = state.Identity.PackageId,
+            ProjectVersion = state.Identity.Version,
+            ProjectFormatVersion = state.Identity.FormatVersion,
+            ProjectDescription = state.Identity.Description,
+            ProjectScopedCompositionId = state.Document.CompositionId,
+            IdentitySource = state.Identity.Source,
+            IdentityRecoveryDiagnostics = state.Identity.RecoveryDiagnostics,
             PackageStatus = _presenter.PackageStatus(state.Document.LastQualificationStatus, state.Dirty),
             AuthoringStatus = _presenter.AuthoringStatus(state.Dirty, validation.Passed, missingDependencies),
             SelectedMechanicCount = mechanics.Count(item => item.Selected),
@@ -115,7 +125,11 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             Mechanics = mechanics,
             Parameters = parameters,
             Diagnostics = validation.Diagnostics.Concat(parameterValidation.Diagnostics).Distinct(StringComparer.Ordinal).ToList(),
-            PackageSha256 = state.Document.LastMaterializedPackageSha256,
+            PackageSha256 = activatedPackageSha,
+            CompositionPackageSha256 = string.IsNullOrWhiteSpace(state.Document.LastCompositionPackageSha256)
+                ? state.Document.LastMaterializedPackageSha256
+                : state.Document.LastCompositionPackageSha256,
+            ActivatedProjectPackageSha256 = activatedPackageSha,
             FinalStateHash = state.Document.LastQualifiedFinalStateHash,
             LastCertificationExecutedCount = _lastBuild?.CertificationExecutedCount ?? 0,
             LastCertificationReusedCount = _lastBuild?.CertificationReusedCount ?? 0

@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Composition;
+using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
+using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Settings;
@@ -26,7 +28,7 @@ namespace LLMGameCreator.Tests.WinForms;
 
 public sealed class CurrentGamePackageUiThreadDispatchTests
 {
-    private const string ExpectedPackageSha256 = "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991";
+    private const string ExpectedCompositionPackageSha256 = "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991";
     private const string ExpectedFinalStateHash = "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e";
 
     [Fact]
@@ -389,7 +391,9 @@ public sealed class CurrentGamePackageUiThreadDispatchTests
                         Assert.True(result.Passed, string.Join(Environment.NewLine, result.Diagnostics));
                         Assert.Null(threadException);
                         Assert.NotEqual(uiThreadId, currentChangedThreadId);
-                        Assert.Equal(ExpectedPackageSha256, result.PackageSha256);
+                        Assert.Equal(ExpectedCompositionPackageSha256, result.CompositionPackageSha256);
+                        Assert.False(string.IsNullOrWhiteSpace(result.ActivatedProjectPackageSha256));
+                        Assert.NotEqual(result.CompositionPackageSha256, result.ActivatedProjectPackageSha256);
                         Assert.Equal(ExpectedFinalStateHash, result.FinalStateHash);
                         Assert.True(result.SupportFilesPrepared);
                         Assert.True(result.StagedProjectValidationPassed);
@@ -461,6 +465,104 @@ public sealed class CurrentGamePackageUiThreadDispatchTests
             File.WriteAllText(Path.Combine(Path.GetTempPath(), "goal148b-current-package-test-progress.txt"), progress);
             throw new TimeoutException($"{exception.Message} Progress: {progress}", exception);
         }
+    }
+
+    [Fact]
+    public void Goal148C_migrated_manual_values_build_under_MainForm_preserves_all_visible_and_activated_identity()
+    {
+        using var temp = new TempDirectory();
+        var root = FindRepositoryRoot();
+        var projectFolder = CreateAffectedManualProject(root, temp.Path);
+        var repository = new JsonGamePackageRepository();
+        var validator = new GamePackageValidator();
+        var projectService = new GameProjectService(repository, validator, new NewGamePackageFactory());
+        var current = new CurrentGamePackageService(repository);
+        var controller = CreateController(root, current);
+
+        RunSta(() =>
+        {
+            using var page = new ProjectsPageControl(
+                current,
+                new MemorySettingsRepository(temp.Path),
+                projectService,
+                validator,
+                controller);
+            var projectsEntry = new DeferredEditorPage(page);
+            using var form = new MainForm(new EditorPageRegistry([projectsEntry]), current, NullLoggerFactory.Instance);
+            Exception? scenarioException = null;
+            form.Shown += async (_, _) =>
+            {
+                var currentChangedThreadId = 0;
+                Exception? threadException = null;
+                ThreadExceptionEventHandler threadExceptionHandler = (_, args) => threadException = args.Exception;
+                System.Windows.Forms.Application.ThreadException += threadExceptionHandler;
+                try
+                {
+                    var uiThreadId = Environment.CurrentManagedThreadId;
+                    await InvokeTaskWithoutPump(page, "LoadProjectFolderAsync", projectFolder).ConfigureAwait(true);
+                    current.CurrentChanged += (_, _) => currentChangedThreadId = Environment.CurrentManagedThreadId;
+                    var buildTask = InvokeTaskWithoutPump(page, "BuildAndQualifyAsync");
+                    var uiPumpResponsive = false;
+                    page.BeginInvoke(() => uiPumpResponsive = true);
+                    await buildTask.ConfigureAwait(true);
+
+                    var result = controller.LastBuild ?? throw new InvalidOperationException("Build result was not recorded.");
+                    var activated = await repository.LoadAsync(projectFolder, CancellationToken.None).ConfigureAwait(true);
+                    var status = Field<ToolStripStatusLabel>(form, "_statusLabel");
+                    var workspaceTitle = Field<Label>(page, "_workspaceTitleLabel");
+                    var overviewTitle = Field<Label>(page, "_overviewProjectLabel");
+                    Assert.True(result.Passed, string.Join(Environment.NewLine, result.Diagnostics));
+                    Assert.Equal("e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221", result.CompositionPackageSha256);
+                    Assert.Equal("95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8", result.FinalStateHash);
+                    Assert.NotEqual(result.CompositionPackageSha256, result.ActivatedProjectPackageSha256);
+                    Assert.Equal("game/goal148-manual", activated.Manifest.PackageId);
+                    Assert.Equal("Проверка конструктора", activated.Manifest.Title);
+                    Assert.Equal("0.1.0", activated.Manifest.Version);
+                    Assert.Equal("Проверка конструктора", workspaceTitle.Text);
+                    Assert.Equal("Проект: Проверка конструктора", overviewTitle.Text);
+                    Assert.Equal("Открыт проект: Проверка конструктора", status.Text);
+                    Assert.DoesNotContain("Minimal Map Game", string.Join("\n", workspaceTitle.Text, overviewTitle.Text, status.Text), StringComparison.Ordinal);
+                    Assert.NotEqual(uiThreadId, currentChangedThreadId);
+                    Assert.Null(threadException);
+                    Assert.True(uiPumpResponsive);
+
+                    WriteProof("mainform-project-title-consistency-proof.json", new
+                    {
+                        schemaVersion = "mainform_project_title_consistency_proof_v1",
+                        status = "GREEN",
+                        realProjectsPageControl = true,
+                        realMainForm = true,
+                        realUnifiedGameProjectWorkspaceController = true,
+                        currentChangedRaisedFromWorker = currentChangedThreadId != uiThreadId,
+                        crossThreadExceptionAbsent = threadException is null,
+                        workspaceTitle = workspaceTitle.Text,
+                        overviewTitle = overviewTitle.Text,
+                        mainFormStatus = status.Text,
+                        activatedPackageId = activated.Manifest.PackageId,
+                        activatedPackageTitle = activated.Manifest.Title,
+                        activatedPackageVersion = activated.Manifest.Version,
+                        compositionPackageSha256 = result.CompositionPackageSha256,
+                        activatedProjectPackageSha256 = result.ActivatedProjectPackageSha256,
+                        finalStateHash = result.FinalStateHash,
+                        supportFilePrepared = result.SupportFilesPrepared,
+                        uiPumpResponsive,
+                        passed = true
+                    });
+                }
+                catch (Exception exception)
+                {
+                    scenarioException = exception;
+                }
+                finally
+                {
+                    System.Windows.Forms.Application.ThreadException -= threadExceptionHandler;
+                    form.Close();
+                }
+            };
+
+            System.Windows.Forms.Application.Run(form);
+            if (scenarioException is not null) ExceptionDispatchInfo.Capture(scenarioException).Throw();
+        }, TimeSpan.FromMinutes(4));
     }
 
     private static SubscriberInventoryEntry Inventory(
@@ -648,14 +750,61 @@ public sealed class CurrentGamePackageUiThreadDispatchTests
         return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
     }
 
+    private static string CreateAffectedManualProject(string repositoryRoot, string gamesRoot)
+    {
+        var projectFolder = Path.Combine(gamesRoot, "goal148-manual");
+        Directory.CreateDirectory(projectFolder);
+        Directory.CreateDirectory(Path.Combine(projectFolder, "assets"));
+        Directory.CreateDirectory(Path.Combine(projectFolder, "scripts"));
+        Directory.CreateDirectory(Path.Combine(projectFolder, "saves"));
+        File.Copy(
+            Path.Combine(repositoryRoot, ".llmgc", "procedural",
+                "goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix",
+                "compositions", "minimal-map-game-composed-alchemy-combat-exploration", "package.json"),
+            Path.Combine(projectFolder, "package.json"));
+        var library = new FeatureModuleLibraryLoader().Load(Path.Combine(repositoryRoot, "catalogs", "feature-modules"));
+        var persistence = new FeatureModuleCompositionPersistenceService(Path.Combine(projectFolder, ".llmgc", "authoring"));
+        var legacy = persistence.CreateNew(
+            UnifiedGameProjectWorkspaceVocabulary.LegacyCompositionId,
+            "Проверка конструктора",
+            "Настройки механик открытого игрового проекта.",
+            library) with
+        {
+            ParameterValues =
+            [
+                Parameter("feature.profile.alchemy_focus", "healingPotionOutput", 3),
+                Parameter("feature.profile.combat_focus", "basicAttackDamage", 5),
+                Parameter("feature.profile.combat_focus", "goblinStartingHealth", 18),
+                Parameter("feature.profile.exploration_resource_focus", "appleYield", 4),
+                Parameter("feature.profile.exploration_resource_focus", "logYield", 4),
+                Parameter("feature.profile.exploration_resource_focus", "transactionPotionOutput", 3)
+            ],
+            LastMaterializedPackageSha256 = "e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221",
+            LastQualifiedFinalStateHash = "95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8",
+            LastQualificationStatus = "GREEN"
+        };
+        persistence.Save(legacy, library);
+        return projectFolder;
+    }
+
+    private static FeatureModuleParameterValue Parameter(string moduleId, string parameterId, int value) => new()
+    {
+        ModuleId = moduleId,
+        ParameterId = parameterId,
+        Value = JsonSerializer.SerializeToElement(value)
+    };
+
     private static void WriteProof(string fileName, object value)
     {
-        if (!string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL148B_RUN"), "true", StringComparison.OrdinalIgnoreCase))
+        var goal148C = string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL148C_RUN"), "true", StringComparison.OrdinalIgnoreCase);
+        var goal148B = string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL148B_RUN"), "true", StringComparison.OrdinalIgnoreCase);
+        if (!goal148B && !goal148C)
         {
             return;
         }
-        var root = Environment.GetEnvironmentVariable("LLMGC_GOAL148B_OUTPUT_ROOT")
-                   ?? throw new InvalidOperationException("LLMGC_GOAL148B_OUTPUT_ROOT is required.");
+        var variable = goal148C ? "LLMGC_GOAL148C_OUTPUT_ROOT" : "LLMGC_GOAL148B_OUTPUT_ROOT";
+        var root = Environment.GetEnvironmentVariable(variable)
+                   ?? throw new InvalidOperationException(variable + " is required.");
         Directory.CreateDirectory(root);
         File.WriteAllText(Path.Combine(root, fileName), JsonSerializer.Serialize(value, new JsonSerializerOptions
         {

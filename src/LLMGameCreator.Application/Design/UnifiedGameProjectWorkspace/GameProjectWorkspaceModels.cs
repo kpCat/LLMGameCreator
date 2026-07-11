@@ -5,7 +5,7 @@ namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 
 public static class UnifiedGameProjectWorkspaceVocabulary
 {
-    public const string CompositionId = "goal147-custom-alchemy-combat-exploration";
+    public const string LegacyCompositionId = "goal147-custom-alchemy-combat-exploration";
     public const string AuthoringRelativeRoot = ".llmgc/authoring";
     public const string CertificationCacheRelativeRoot = ".llmgc/certification-cache";
     public const string BuildStagingRelativeRoot = ".llmgc/build-staging";
@@ -46,6 +46,13 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
 {
     public string ProjectFolder { get; init; } = string.Empty;
     public string ProjectTitle { get; init; } = string.Empty;
+    public string ProjectPackageId { get; init; } = string.Empty;
+    public string ProjectVersion { get; init; } = string.Empty;
+    public string ProjectFormatVersion { get; init; } = string.Empty;
+    public string ProjectDescription { get; init; } = string.Empty;
+    public string ProjectScopedCompositionId { get; init; } = string.Empty;
+    public string IdentitySource { get; init; } = string.Empty;
+    public IReadOnlyList<string> IdentityRecoveryDiagnostics { get; init; } = [];
     public string PackageStatus { get; init; } = "Проверка ещё не запускалась";
     public string AuthoringStatus { get; init; } = "Готово";
     public int SelectedMechanicCount { get; init; }
@@ -58,6 +65,8 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public IReadOnlyList<GameProjectParameterPresentation> Parameters { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
     public string PackageSha256 { get; init; } = string.Empty;
+    public string CompositionPackageSha256 { get; init; } = string.Empty;
+    public string ActivatedProjectPackageSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public int LastCertificationExecutedCount { get; init; }
     public int LastCertificationReusedCount { get; init; }
@@ -72,6 +81,8 @@ public sealed record GameProjectBuildResult
     public int SelectedMechanicCount { get; init; }
     public int ConfiguredParameterCount { get; init; }
     public string PackageSha256 { get; init; } = string.Empty;
+    public string CompositionPackageSha256 { get; init; } = string.Empty;
+    public string ActivatedProjectPackageSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public bool CheckpointReloadPassed { get; init; }
     public bool FullReplayEquivalent { get; init; }
@@ -93,10 +104,12 @@ public sealed record GameProjectBuildResult
 
 public sealed record GameProjectBuildHistoryEntry
 {
-    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v1";
+    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v2";
     public DateTimeOffset CompletedAtUtc { get; init; }
     public string Status { get; init; } = string.Empty;
     public string PackageSha256 { get; init; } = string.Empty;
+    public string CompositionPackageSha256 { get; init; } = string.Empty;
+    public string ActivatedProjectPackageSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public int SelectedMechanicCount { get; init; }
     public int ConfiguredParameterCount { get; init; }
@@ -112,6 +125,7 @@ public sealed record GameProjectAuthoringState
     public string ProjectFolder { get; init; } = string.Empty;
     public FeatureModuleLibrarySnapshot Library { get; init; } = new();
     public FeatureModuleCompositionDocument Document { get; init; } = new();
+    public GameProjectIdentityDocument Identity { get; init; } = new();
     public bool Dirty { get; init; }
     public int DirtyTransitionCount { get; init; }
 }
