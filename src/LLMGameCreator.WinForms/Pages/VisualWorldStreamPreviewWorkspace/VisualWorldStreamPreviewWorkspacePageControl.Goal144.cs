@@ -78,7 +78,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         });
         _goal144Buttons[1].Click += async (_, _) => await Goal144RunAsync(() =>
         {
-            var action = _goal144Actions?.SelectedItem as string
+            var action = _goal144Actions?.SelectedValue as string
                          ?? throw new InvalidOperationException("Select an available action.");
             var result = _goal144Controller.ExecuteSelected(action);
             return result.Status + " " + result.ActionId;
@@ -130,9 +130,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
             "quest=" + session.LatestQuestSummary,
             "combat=" + session.LatestCombatSummary
         ]);
+        _goal144Actions.DisplayMember = "Value";
+        _goal144Actions.ValueMember = "Key";
         _goal144Actions.DataSource = session.AvailableActions
             .Where(action => action.Available)
-            .Select(action => action.ActionId)
+            .Select(action => new KeyValuePair<string, string>(
+                action.ActionId,
+                action.ActionId
+                + " | target=" + action.TargetId
+                + " | step=" + (string.IsNullOrWhiteSpace(action.CanonicalStepId)
+                    ? "presentation_only"
+                    : action.CanonicalStepId)
+                + " | route=" + action.Route))
             .ToList();
     }
 

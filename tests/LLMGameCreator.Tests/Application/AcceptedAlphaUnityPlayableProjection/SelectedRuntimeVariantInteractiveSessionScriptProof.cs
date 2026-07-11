@@ -40,13 +40,27 @@ public sealed class SelectedRuntimeVariantInteractiveSessionScriptProof
         Assert.True(dashboard.FullReplayEquivalent);
         Assert.True(dashboard.FinalStateHashMatchesGoal142);
         Assert.True(dashboard.SelectedVariantEffectVisible);
+        Assert.True(dashboard.ActionDescriptorExecutionBindingPassed);
+        Assert.True(dashboard.AllRuntimeActionTargetsMatchExecutedSteps);
+        Assert.True(dashboard.AllRuntimeActionCommandKindsMatchExecutedSteps);
+        Assert.Equal("node/apple_tree", dashboard.HarvestActionTargetId);
+        Assert.Equal("node/apple_tree", dashboard.HarvestExecutedTargetId);
+        Assert.Equal("goblin", dashboard.BasicAttackActionTargetId);
+        Assert.Equal("goblin", dashboard.BasicAttackExecutedTargetId);
+        Assert.Equal(8, dashboard.CheckpointReplayedActionCount);
+        Assert.Equal(13, dashboard.FinalReplayActionCount);
+        Assert.True(dashboard.ReplayEvidenceFrozenBeforeContinuation);
+        Assert.False(dashboard.Goal144Accepted);
         Assert.True(write.Artifacts.NegativeProof.Passed);
+        Assert.True(write.Artifacts.ActionExecutionBindingProof.Passed);
+        Assert.True(write.Artifacts.ReplayEvidenceFreezeProof.Passed);
         Assert.DoesNotContain(write.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
         if (Environment.GetEnvironmentVariable("LLMGC_GOAL144_REQUIRE_UNITY_SMOKE") == "true")
         {
             Assert.Equal("GREEN", dashboard.Status);
             Assert.True(write.Artifacts.UnitySmoke.Passed);
+            Assert.Equal("GREEN", write.Artifacts.HotfixDashboard.Status);
         }
     }
 

@@ -324,14 +324,14 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 result = _runtime.ExecuteGameplayCommand(
                     package,
                     session.RuntimeSession,
-                    GameRuntimeCommand.OpenDialogue("dialogue/old_guard_intro"));
+                    GameRuntimeCommand.OpenDialogue(step.TargetId));
                 break;
             case "start_or_update_help_healer_quest":
                 result = _runtime.ExecuteMany(
                     package,
                     session.RuntimeSession,
                     [
-                        GameRuntimeCommand.StartQuest("quest/help_healer"),
+                        GameRuntimeCommand.StartQuest(step.TargetId),
                         new GameRuntimeCommand { Type = GameRuntimeCommandType.RefreshQuestObjectives }
                     ]);
                 break;
@@ -352,7 +352,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                     package,
                     session.RuntimeSession,
                     GameRuntimeCommand.CraftRecipe(
-                        "recipe/healing_potion",
+                        step.TargetId,
                         "inventory/player_start"));
                 break;
             case "harvest_apple_tree":
@@ -360,7 +360,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                     package,
                     session.RuntimeSession,
                     GameRuntimeCommand.HarvestResourceNode(
-                        "node/apple_tree",
+                        step.TargetId,
                         "inventory/player_start",
                         "item/woodcutting_axe",
                         136));
@@ -377,7 +377,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                             Amount = 25
                         },
                         GameRuntimeCommand.ExecuteTransaction(
-                            "transaction/buy_healing_potion",
+                            step.TargetId,
                             "inventory/player_start")
                     ]);
                 break;
@@ -385,13 +385,13 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 result = _runtime.ExecuteGameplayCommand(
                     package,
                     session.RuntimeSession,
-                    GameRuntimeCommand.StartEncounter("encounter/goblin_duel", 136));
+                    GameRuntimeCommand.StartEncounter(step.TargetId, 136));
                 break;
             case "combat_round":
                 result = _runtime.ExecuteGameplayCommand(
                     package,
                     session.RuntimeSession,
-                    GameRuntimeCommand.BasicAttack("player", "goblin"));
+                    GameRuntimeCommand.BasicAttack("player", step.TargetId));
                 break;
             case "final_state":
                 events.Add(CommandLoopEvent(ref eventIndex, step, "final-state", package.Manifest.PackageId));

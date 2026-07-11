@@ -27,6 +27,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceGoal144Tests
         Assert.Contains("Replay Verify", source, StringComparison.Ordinal);
         Assert.Contains("Run Selected Variant Session Drill", source, StringComparison.Ordinal);
         Assert.Contains("SelectedRuntimeVariantInteractiveSessionOperatorRunner", source, StringComparison.Ordinal);
+        Assert.Contains("target=", source, StringComparison.Ordinal);
+        Assert.Contains("CanonicalStepId", source, StringComparison.Ordinal);
+        Assert.Contains("route=", source, StringComparison.Ordinal);
         Assert.DoesNotContain("ProcessStartInfo", source, StringComparison.Ordinal);
         Assert.DoesNotContain("dotnet test", source, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("powershell", source, StringComparison.OrdinalIgnoreCase);

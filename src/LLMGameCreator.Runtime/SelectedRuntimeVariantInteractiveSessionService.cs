@@ -90,15 +90,23 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         var diagnostics = new List<string>();
         if (descriptor.Route == RuntimeRoute)
         {
-            var range = CanonicalRange(descriptor.ActionId);
+            if (!ValidateExecutionBinding(package, session, descriptor))
+            {
+                return Rejected(
+                    request,
+                    before,
+                    "goal144.action_execution_binding_rejected",
+                    descriptor);
+            }
+
             var execution = _commandLoop.ExecuteRange(
                 package,
                 session.CanonicalSession,
                 new CanonicalRuntimePlayerCommandLoopExecutionRequest
                 {
                     RequestedOperation = descriptor.ActionId,
-                    RuntimeCommandStartIndex = range.Start,
-                    RuntimeCommandEndIndex = range.End
+                    RuntimeCommandStartIndex = descriptor.RuntimeCommandStartIndex,
+                    RuntimeCommandEndIndex = descriptor.RuntimeCommandEndIndex
                 });
             diagnostics.AddRange(execution.Diagnostics);
             if (!execution.Success)
@@ -114,6 +122,22 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             runtimeExecuted = execution.RuntimeExecuted;
             runtimeMutation = execution.RuntimeMutation;
             eventCount = execution.EventCount;
+            var primaryStep = execution.Steps.SingleOrDefault(step =>
+                step.Index == descriptor.CanonicalStepIndex);
+            var executionBindingValidated = primaryStep is not null
+                                            && primaryStep.StepId == descriptor.CanonicalStepId
+                                            && primaryStep.RuntimeCommandKind == descriptor.CommandKind
+                                            && primaryStep.TargetId == descriptor.TargetId
+                                            && execution.RuntimeCommandStartIndex ==
+                                            descriptor.RuntimeCommandStartIndex
+                                            && execution.RuntimeCommandEndIndex ==
+                                            descriptor.RuntimeCommandEndIndex;
+            if (!executionBindingValidated)
+            {
+                throw new InvalidOperationException(
+                    "Goal144 canonical execution result violated its validated action binding.");
+            }
+
             session.RuntimeCommandExecutionCount += execution.ExecutedCommandCount;
             session.RuntimeStarted = session.CanonicalSession.RuntimeStarted;
             if (execution.Snapshots.Count > 0)
@@ -141,7 +165,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ActionId = descriptor.ActionId,
             Category = descriptor.Category,
             Route = descriptor.Route,
+            CommandKind = descriptor.CommandKind,
             TargetId = descriptor.TargetId,
+            CanonicalStepId = descriptor.CanonicalStepId,
+            CanonicalStepIndex = descriptor.CanonicalStepIndex,
+            RuntimeCommandStartIndex = descriptor.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = descriptor.RuntimeCommandEndIndex,
+            ExecutionTargetId = descriptor.ExecutionTargetId,
+            ExecutionBindingValidated = descriptor.ExecutionBindingValidated,
             StateHashBefore = before,
             StateHashAfter = session.CurrentStateHash,
             RuntimeExecuted = runtimeExecuted,
@@ -233,7 +264,15 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                            && replay.Status == "EXECUTED"
                            && replay.Category == entry.Category
                            && replay.Route == entry.Route
-                           && replay.TargetId == entry.TargetId;
+                           && replay.CommandKind == entry.CommandKind
+                           && replay.TargetId == entry.TargetId
+                           && replay.CanonicalStepId == entry.CanonicalStepId
+                           && replay.CanonicalStepIndex == entry.CanonicalStepIndex
+                           && replay.RuntimeCommandStartIndex == entry.RuntimeCommandStartIndex
+                           && replay.RuntimeCommandEndIndex == entry.RuntimeCommandEndIndex
+                           && replay.ExecutionTargetId == entry.ExecutionTargetId
+                           && replay.ExecutionBindingValidated
+                           && entry.ExecutionBindingValidated;
             continuity &= replay.StateHashBefore == entry.StateHashBefore
                           && replay.StateHashAfter == entry.StateHashAfter;
             if (!correlation || !continuity)
@@ -263,6 +302,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ExpectedStateHashMatched = expectedHashMatched,
             ExpectedStateHash = checkpoint.ExpectedStateHash,
             ActualStateHash = fresh.CurrentStateHash,
+            ReplayedActionCount = fresh.ActionJournal.Count,
             Session = fresh,
             Diagnostics = diagnostics
         };
@@ -278,6 +318,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             PackageHashValidated = packageHashValid,
             CandidateValidated = candidateValid,
             ExpectedStateHash = checkpoint.ExpectedStateHash,
+            ReplayedActionCount = 0,
             Diagnostics = diagnostics
         };
 
@@ -302,7 +343,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ActionId = request.ActionId,
             Category = descriptor?.Category ?? string.Empty,
             Route = descriptor?.Route ?? string.Empty,
+            CommandKind = descriptor?.CommandKind ?? string.Empty,
             TargetId = descriptor?.TargetId ?? string.Empty,
+            CanonicalStepId = descriptor?.CanonicalStepId ?? string.Empty,
+            CanonicalStepIndex = descriptor?.CanonicalStepIndex ?? -1,
+            RuntimeCommandStartIndex = descriptor?.RuntimeCommandStartIndex ?? -1,
+            RuntimeCommandEndIndex = descriptor?.RuntimeCommandEndIndex ?? -1,
+            ExecutionTargetId = descriptor?.ExecutionTargetId ?? string.Empty,
+            ExecutionBindingValidated = false,
             StateHashBefore = stateHash,
             StateHashAfter = stateHash,
             CorrelationPassed = request.SessionId.Length > 0,
@@ -326,39 +374,23 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         GamePackageDefinition package,
         SelectedRuntimeVariantInteractiveSession session)
     {
-        var game = package.Game;
-        var sign = game.Maps.SelectMany(map => map.Entities)
-            .FirstOrDefault(entity => entity.Id.Contains("sign", StringComparison.Ordinal))?.Id
-            ?? string.Empty;
-        var interaction = game.Interactions.FirstOrDefault()?.Id ?? string.Empty;
-        var dialogue = game.Dialogues.FirstOrDefault()?.Id ?? string.Empty;
-        var quest = game.Quests.FirstOrDefault()?.Id ?? string.Empty;
-        var inventory = game.Inventories.FirstOrDefault(item => item.OwnerKind == "player")?.Id
-                        ?? game.Inventories.FirstOrDefault()?.Id
-                        ?? string.Empty;
-        var recipe = game.Recipes.FirstOrDefault()?.Id ?? string.Empty;
-        var node = game.ResourceNodes.FirstOrDefault()?.Id ?? string.Empty;
-        var transaction = game.Transactions.FirstOrDefault()?.Id ?? string.Empty;
-        var encounter = game.Encounters.FirstOrDefault()?.Id ?? string.Empty;
-        var attack = game.Abilities.FirstOrDefault(item =>
-            item.Id.Contains("basic_attack", StringComparison.Ordinal))?.Id ?? string.Empty;
         var cursor = session.CanonicalSession.CurrentCommandIndex;
         var actions = new List<SelectedRuntimeVariantActionDescriptor>
         {
-            Runtime("start_runtime", "start_runtime", "Initialize", package.Manifest.StartMapId, cursor, 0),
-            Runtime("move", "move", "Move", sign, cursor, 2),
-            Runtime("interact", "interact", "Interact", interaction, cursor, 3),
-            Runtime("open_dialogue", "open_dialogue", "OpenDialogue", dialogue, cursor, 4),
-            Runtime("start_or_update_quest", "start_or_update_quest", "StartQuest", quest, cursor, 5),
-            Runtime("show_inventory", "show_inventory", "AddItem", inventory, cursor, 6),
-            Runtime("craft", "craft", "CraftRecipe", recipe, cursor, 7),
-            Runtime("harvest", "harvest", "HarvestResourceNode", node, cursor, 8),
-            Runtime("transaction", "transaction", "ExecuteTransaction", transaction, cursor, 9),
-            Runtime("begin_encounter", "begin_encounter", "StartEncounter", encounter, cursor, 10),
-            Runtime("basic_attack", "basic_attack", "BasicAttack", attack, cursor, 11),
+            Runtime(package, session, "start_runtime", "start_runtime", "start_canonical_runtime", 0, 1),
+            Runtime(package, session, "move", "move", "move_to_sign", 2, 2),
+            Runtime(package, session, "interact", "interact", "interact_with_sign", 3, 3),
+            Runtime(package, session, "open_dialogue", "open_dialogue", "show_old_guard_dialogue", 4, 4),
+            Runtime(package, session, "start_or_update_quest", "start_or_update_quest", "start_or_update_help_healer_quest", 5, 5),
+            Runtime(package, session, "show_inventory", "show_inventory", "show_inventory_state", 6, 6),
+            Runtime(package, session, "craft", "craft", "craft_healing_potion", 7, 7),
+            Runtime(package, session, "harvest", "harvest", "harvest_apple_tree", 8, 8),
+            Runtime(package, session, "transaction", "transaction", "execute_transaction", 9, 9),
+            Runtime(package, session, "begin_encounter", "begin_encounter", "start_encounter", 10, 10),
+            Runtime(package, session, "basic_attack", "basic_attack", "combat_round", 11, 11),
             Presentation("show_final_state", "show_final_state", package.Manifest.PackageId, cursor == 12,
                 cursor < 12 ? "complete Runtime actions first" : cursor > 12 ? "session already completed" : string.Empty),
-            Presentation("inspect_inventory", "show_inventory", inventory, session.RuntimeStarted && !session.Completed,
+            Presentation("inspect_inventory", "show_inventory", "inventory/player_start", session.RuntimeStarted && !session.Completed,
                 session.RuntimeStarted ? "session completed" : "runtime not started"),
             Presentation("inspect_status", "show_status", package.Manifest.PackageId, session.RuntimeStarted,
                 session.RuntimeStarted ? string.Empty : "runtime not started")
@@ -367,30 +399,50 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
     }
 
     private static SelectedRuntimeVariantActionDescriptor Runtime(
+        GamePackageDefinition package,
+        SelectedRuntimeVariantInteractiveSession session,
         string actionId,
         string category,
-        string commandKind,
-        string targetId,
-        int cursor,
-        int expectedCursor)
+        string primaryStepId,
+        int runtimeCommandStartIndex,
+        int runtimeCommandEndIndex)
     {
-        var targetExists = !string.IsNullOrWhiteSpace(targetId);
-        var available = targetExists && cursor == expectedCursor;
+        var steps = session.CanonicalSession.Steps;
+        var primaryStep = steps.SingleOrDefault(step => step.StepId == primaryStepId);
+        var rangeValid = primaryStep is not null
+                         && runtimeCommandStartIndex >= 0
+                         && runtimeCommandEndIndex < steps.Count
+                         && runtimeCommandEndIndex >= runtimeCommandStartIndex
+                         && primaryStep.Index >= runtimeCommandStartIndex
+                         && primaryStep.Index <= runtimeCommandEndIndex;
+        var targetsExist = rangeValid
+                           && steps.Skip(runtimeCommandStartIndex)
+                               .Take(runtimeCommandEndIndex - runtimeCommandStartIndex + 1)
+                               .All(step => TargetExists(package, step));
+        var bindingValidated = rangeValid && targetsExist;
+        var available = bindingValidated
+                        && session.CanonicalSession.CurrentCommandIndex == runtimeCommandStartIndex;
         return new SelectedRuntimeVariantActionDescriptor
         {
             ActionId = actionId,
             Category = category,
             Route = RuntimeRoute,
-            CommandKind = commandKind,
-            TargetId = targetId,
-            Prerequisites = expectedCursor == 0
+            CommandKind = primaryStep?.RuntimeCommandKind ?? string.Empty,
+            TargetId = primaryStep?.TargetId ?? string.Empty,
+            CanonicalStepId = primaryStep?.StepId ?? primaryStepId,
+            CanonicalStepIndex = primaryStep?.Index ?? -1,
+            RuntimeCommandStartIndex = runtimeCommandStartIndex,
+            RuntimeCommandEndIndex = runtimeCommandEndIndex,
+            ExecutionTargetId = primaryStep?.TargetId ?? string.Empty,
+            ExecutionBindingValidated = bindingValidated,
+            Prerequisites = runtimeCommandStartIndex == 0
                 ? new List<string> { "selected package hash validated" }
                 : new List<string> { "previous canonical action completed" },
             MayMutateState = true,
             Available = available,
-            UnavailableReason = !targetExists
-                ? "target is absent from selected package"
-                : cursor < expectedCursor
+            UnavailableReason = !bindingValidated
+                ? "canonical execution binding or target is invalid"
+                : session.CanonicalSession.CurrentCommandIndex < runtimeCommandStartIndex
                     ? "previous canonical action required"
                     : "canonical action already completed"
         };
@@ -409,26 +461,64 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             Route = PresentationRoute,
             CommandKind = "read_state_summary",
             TargetId = targetId,
+            ExecutionTargetId = targetId,
+            ExecutionBindingValidated = true,
             Prerequisites = new List<string> { "runtime state exists" },
             MayMutateState = false,
             Available = available,
             UnavailableReason = available ? string.Empty : unavailableReason
         };
 
-    private static (int Start, int End) CanonicalRange(string actionId) => actionId switch
+    private static bool ValidateExecutionBinding(
+        GamePackageDefinition package,
+        SelectedRuntimeVariantInteractiveSession session,
+        SelectedRuntimeVariantActionDescriptor descriptor)
     {
-        "start_runtime" => (0, 1),
-        "move" => (2, 2),
-        "interact" => (3, 3),
-        "open_dialogue" => (4, 4),
-        "start_or_update_quest" => (5, 5),
-        "show_inventory" => (6, 6),
-        "craft" => (7, 7),
-        "harvest" => (8, 8),
-        "transaction" => (9, 9),
-        "begin_encounter" => (10, 10),
-        "basic_attack" => (11, 11),
-        _ => throw new InvalidOperationException("Unknown Goal144 Runtime action: " + actionId)
+        var steps = session.CanonicalSession.Steps;
+        if (!descriptor.ExecutionBindingValidated
+            || descriptor.RuntimeCommandStartIndex < 0
+            || descriptor.RuntimeCommandEndIndex >= steps.Count
+            || descriptor.RuntimeCommandEndIndex < descriptor.RuntimeCommandStartIndex
+            || descriptor.RuntimeCommandStartIndex != session.CanonicalSession.CurrentCommandIndex)
+        {
+            return false;
+        }
+
+        var primaryStep = steps.SingleOrDefault(step =>
+            step.Index == descriptor.CanonicalStepIndex);
+        return primaryStep is not null
+               && primaryStep.StepId == descriptor.CanonicalStepId
+               && primaryStep.RuntimeCommandKind == descriptor.CommandKind
+               && primaryStep.TargetId == descriptor.TargetId
+               && descriptor.ExecutionTargetId == primaryStep.TargetId
+               && primaryStep.Index >= descriptor.RuntimeCommandStartIndex
+               && primaryStep.Index <= descriptor.RuntimeCommandEndIndex
+               && steps.Skip(descriptor.RuntimeCommandStartIndex)
+                   .Take(descriptor.RuntimeCommandEndIndex - descriptor.RuntimeCommandStartIndex + 1)
+                   .All(step => TargetExists(package, step));
+    }
+
+    private static bool TargetExists(
+        GamePackageDefinition package,
+        CanonicalRuntimePlayerCommandLoopStep step) => step.StepId switch
+    {
+        "load_selected_package" => package.Manifest.PackageId == step.TargetId,
+        "start_canonical_runtime" => package.Manifest.StartMapId == step.TargetId
+                                     && package.Game.Maps.Any(map => map.Id == step.TargetId),
+        "move_to_sign" => package.Game.Maps.SelectMany(map => map.Entities)
+            .Any(entity => entity.Id == step.TargetId),
+        "interact_with_sign" => package.Game.Interactions.Any(item => item.Id == step.TargetId),
+        "show_old_guard_dialogue" => package.Game.Dialogues.Any(item => item.Id == step.TargetId),
+        "start_or_update_help_healer_quest" => package.Game.Quests.Any(item => item.Id == step.TargetId),
+        "show_inventory_state" => package.Game.Inventories.Any(item => item.Id == step.TargetId),
+        "craft_healing_potion" => package.Game.Recipes.Any(item => item.Id == step.TargetId),
+        "harvest_apple_tree" => package.Game.ResourceNodes.Any(item => item.Id == step.TargetId),
+        "execute_transaction" => package.Game.Transactions.Any(item => item.Id == step.TargetId),
+        "start_encounter" => package.Game.Encounters.Any(item => item.Id == step.TargetId),
+        "combat_round" => package.Game.Encounters.SelectMany(item => item.Participants)
+            .Any(item => item.Id == step.TargetId),
+        "final_state" => package.Manifest.PackageId == step.TargetId,
+        _ => false
     };
 
     private static void UpdateSummaries(SelectedRuntimeVariantInteractiveSession session)
@@ -450,7 +540,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ActionId = result.ActionId,
             Category = result.Category,
             Route = result.Route,
+            CommandKind = result.CommandKind,
             TargetId = result.TargetId,
+            CanonicalStepId = result.CanonicalStepId,
+            CanonicalStepIndex = result.CanonicalStepIndex,
+            RuntimeCommandStartIndex = result.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = result.RuntimeCommandEndIndex,
+            ExecutionTargetId = result.ExecutionTargetId,
+            ExecutionBindingValidated = result.ExecutionBindingValidated,
             StateHashBefore = result.StateHashBefore,
             StateHashAfter = result.StateHashAfter,
             RuntimeExecuted = result.RuntimeExecuted,
@@ -468,7 +565,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ActionId = entry.ActionId,
             Category = entry.Category,
             Route = entry.Route,
+            CommandKind = entry.CommandKind,
             TargetId = entry.TargetId,
+            CanonicalStepId = entry.CanonicalStepId,
+            CanonicalStepIndex = entry.CanonicalStepIndex,
+            RuntimeCommandStartIndex = entry.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = entry.RuntimeCommandEndIndex,
+            ExecutionTargetId = entry.ExecutionTargetId,
+            ExecutionBindingValidated = entry.ExecutionBindingValidated,
             StateHashBefore = entry.StateHashBefore,
             StateHashAfter = entry.StateHashAfter,
             RuntimeExecuted = entry.RuntimeExecuted,

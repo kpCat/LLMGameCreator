@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "goal144a_file_index_v1",
+  "goalId": "goal_144a_live_session_action_target_binding_and_replay_evidence_hotfix",
+  "fileCount": 4,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/action-execution-binding-proof.json",
+      "sha256": "3b4e9e23868a1210df28c9f3e096d220206471a12296d2d2e3c75bde27a89118",
+      "byteCount": 834
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/goal144a-correctness-dashboard.json",
+      "sha256": "34c2ecb1262e42ff8e8046cd61cc05243fadefec464abf9ca5ff4d0cd608774e",
+      "byteCount": 980
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/goal144a-correctness-report.md",
+      "sha256": "794bafee2bcf3ac0279c90fa890c93ba3484add19632590f98775a9bd97489f6",
+      "byteCount": 670
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/replay-evidence-freeze-proof.json",
+      "sha256": "e6782eec390a9303acba72d20183a00a353abaa47b773fbcde4ee6277f33a267",
+      "byteCount": 803
+    }
+  ]
+}

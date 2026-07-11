@@ -68,6 +68,8 @@ Goal 143 note: the selected runtime variant is carried through package/hash inte
 
 Goal 144 note: the selected variant now has one bounded Runtime-owned interactive session with individual actions and journal-based checkpoint/full replay. Remaining debt is Goal144 human review, Goal141 review, deeper hands-on playable quality, final release quality, public schema decisions, provider/legal, Lua/generator-library, final renderer/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 144A note: the advertised-action/executed-target mismatch and mutable checkpoint replay-count evidence are repaired with exact canonical binding, negative tamper proof and frozen 8/13 replay counts. Remaining debt still includes Goal144 manual WinForms review and explicit human acceptance; the hotfix does not advance that gate.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

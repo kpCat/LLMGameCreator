@@ -63,6 +63,48 @@ public sealed class SelectedRuntimeVariantInteractiveSessionArtifactService
             written.Add(Relative(repositoryRoot, indexPath));
         }
 
+        var hotfixRoots = new[]
+        {
+            Resolve(repositoryRoot,
+                SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixProceduralOutputDirectory),
+            Resolve(repositoryRoot,
+                SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixExportPackageDirectory)
+        };
+        foreach (var root in hotfixRoots)
+        {
+            Directory.CreateDirectory(root);
+            var files = BuildHotfixFiles(artifacts);
+            foreach (var item in files)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                var path = Path.Combine(root, item.Key);
+                await WriteAtomicAsync(path, item.Value, cancellationToken).ConfigureAwait(false);
+                written.Add(Relative(repositoryRoot, path));
+            }
+
+            var index = new
+            {
+                schemaVersion = "goal144a_file_index_v1",
+                goalId = SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixGoalId,
+                fileCount = files.Count,
+                files = files.Keys.OrderBy(name => name, StringComparer.Ordinal).Select(name =>
+                {
+                    var path = Path.Combine(root, name);
+                    return new
+                    {
+                        relativePath = Relative(repositoryRoot, path),
+                        sha256 = HashFile(path),
+                        byteCount = new FileInfo(path).Length
+                    };
+                }).ToList()
+            };
+            var indexPath = Path.Combine(
+                root,
+                SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixFileIndexFileName);
+            await WriteAtomicAsync(indexPath, Serialize(index), cancellationToken).ConfigureAwait(false);
+            written.Add(Relative(repositoryRoot, indexPath));
+        }
+
         return written;
     }
 
@@ -94,7 +136,13 @@ public sealed class SelectedRuntimeVariantInteractiveSessionArtifactService
             "- selectedVariantKind: `" + artifacts.Dashboard.SelectedVariantKind + "`",
             "- actionDescriptorCount: " + artifacts.Dashboard.ActionDescriptorCount,
             "- executedRuntimeActionCount: " + artifacts.Dashboard.ExecutedRuntimeActionCount,
+            "- actionDescriptorExecutionBindingPassed: " + artifacts.Dashboard.ActionDescriptorExecutionBindingPassed.ToString().ToLowerInvariant(),
+            "- harvestTarget: `" + artifacts.Dashboard.HarvestActionTargetId + "`",
+            "- basicAttackTarget: `" + artifacts.Dashboard.BasicAttackActionTargetId + "`",
             "- checkpointReloadByReplayPassed: " + artifacts.Dashboard.CheckpointReloadByReplayPassed.ToString().ToLowerInvariant(),
+            "- checkpointReplayedActionCount: " + artifacts.Dashboard.CheckpointReplayedActionCount,
+            "- finalReplayActionCount: " + artifacts.Dashboard.FinalReplayActionCount,
+            "- replayEvidenceFrozenBeforeContinuation: " + artifacts.Dashboard.ReplayEvidenceFrozenBeforeContinuation.ToString().ToLowerInvariant(),
             "- fullReplayEquivalent: " + artifacts.Dashboard.FullReplayEquivalent.ToString().ToLowerInvariant(),
             "- finalStateHashMatchesGoal142: " + artifacts.Dashboard.FinalStateHashMatchesGoal142.ToString().ToLowerInvariant(),
             "- runtimeAuthority: true",
@@ -116,6 +164,45 @@ public sealed class SelectedRuntimeVariantInteractiveSessionArtifactService
             [SelectedRuntimeVariantInteractiveSessionVocabulary.UnitySmokeFileName] = Serialize(artifacts.UnitySmoke),
             [SelectedRuntimeVariantInteractiveSessionVocabulary.ReportJsonFileName] = Serialize(artifacts.Dashboard),
             [SelectedRuntimeVariantInteractiveSessionVocabulary.ReportMarkdownFileName] = reportMarkdown
+        };
+    }
+
+    private static Dictionary<string, string> BuildHotfixFiles(
+        SelectedRuntimeVariantLiveSessionArtifactSet artifacts)
+    {
+        var dashboard = artifacts.HotfixDashboard;
+        var report = string.Join("\n",
+        [
+            "# Goal 144A Live Session Action Binding and Replay Evidence Hotfix",
+            string.Empty,
+            "- status: " + dashboard.Status,
+            "- actionDescriptorExecutionBindingPassed: " + dashboard.ActionDescriptorExecutionBindingPassed.ToString().ToLowerInvariant(),
+            "- allRuntimeActionTargetsMatchExecutedSteps: " + dashboard.AllRuntimeActionTargetsMatchExecutedSteps.ToString().ToLowerInvariant(),
+            "- allRuntimeActionCommandKindsMatchExecutedSteps: " + dashboard.AllRuntimeActionCommandKindsMatchExecutedSteps.ToString().ToLowerInvariant(),
+            "- harvestActionTargetId: `" + dashboard.HarvestActionTargetId + "`",
+            "- harvestExecutedTargetId: `" + dashboard.HarvestExecutedTargetId + "`",
+            "- basicAttackActionTargetId: `" + dashboard.BasicAttackActionTargetId + "`",
+            "- basicAttackExecutedTargetId: `" + dashboard.BasicAttackExecutedTargetId + "`",
+            "- checkpointReplayedActionCount: " + dashboard.CheckpointReplayedActionCount,
+            "- finalReplayActionCount: " + dashboard.FinalReplayActionCount,
+            "- replayEvidenceFrozenBeforeContinuation: " + dashboard.ReplayEvidenceFrozenBeforeContinuation.ToString().ToLowerInvariant(),
+            "- finalStateHashMatchesGoal142: " + dashboard.FinalStateHashMatchesGoal142.ToString().ToLowerInvariant(),
+            "- runtimeAuthority: true",
+            "- projectionOnly: false",
+            "- unityGameplayTruth: false",
+            "- goal144Accepted: false",
+            "- accepted: false",
+            string.Empty
+        ]);
+        return new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            [SelectedRuntimeVariantInteractiveSessionVocabulary.ActionExecutionBindingProofFileName] =
+                Serialize(artifacts.ActionExecutionBindingProof),
+            [SelectedRuntimeVariantInteractiveSessionVocabulary.ReplayEvidenceFreezeProofFileName] =
+                Serialize(artifacts.ReplayEvidenceFreezeProof),
+            [SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixDashboardFileName] =
+                Serialize(artifacts.HotfixDashboard),
+            [SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixReportFileName] = report
         };
     }
 

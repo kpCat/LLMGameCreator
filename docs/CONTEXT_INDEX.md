@@ -79,7 +79,10 @@ carries only that selection through package integrity, deterministic Runtime
 rerun, ordered PlayerAdapter frames and a read-only Unity consumer smoke.
 Goal144 records Goal143 human acceptance and turns the selected handoff into a
 Runtime-owned interactive action session with journal checkpoint reload and
-full deterministic replay. Future work should build on this canonical
+full deterministic replay. Goal144A binds every advertised Runtime action to
+the exact executed canonical step/target and freezes checkpoint replay evidence
+at 8 actions before the returned session continues to the 13-action final state.
+Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 
 ## Full Generator Source-Of-Truth Docs
@@ -291,6 +294,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/GOAL.md` | Goal 142A P1 hotfix: the Goal142 WinForms button uses the in-process Application matrix service through a transactional operator runner, starts no compiler/test child process, disables the button while running and refreshes the workspace after success. Failed regeneration restores prior Goal142 procedural/export bytes; the corrected retry succeeded with exitCode=0 before Goal143 recorded human acceptance. Evidence is under `.llmgc/procedural/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/` and `.llmgc/exports/goal-142a-winforms-operator-self-lock-and-atomic-regeneration-hotfix/`. |
 | `docs/agent-tasks/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/GOAL.md` | Goal 143 task: selected Goal142 runtime variant end-to-end PlayerAdapter handoff. Result is `GREEN`, accepted=true by explicit Goal144 human handoff, acceptedByCodex=false, selectedCandidateId=`minimal-map-game-exploration-resource-focus`, package/final Runtime hashes match, frameCount=15 and Unity batchmode consumer smoke GREEN. |
 | `docs/agent-tasks/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/GOAL.md` | Goal 144 task: Runtime-owned selected-variant interactive action session and journal save/replay. Current gate=`selected_runtime_variant_interactive_action_session_and_save_replay_verification`, result is `GREEN`, accepted=false, goal143Accepted=true, actionDescriptorCount=14, executedRuntimeActionCount=11, invalid-action no-mutation, checkpoint reload-by-replay, full replay equivalence, Goal142 final hash match and read-only Unity smoke are GREEN. Normal command=`.devflow\scripts\run-selected-runtime-variant-live-session.cmd`; evidence is under the matching Goal144 procedural/export roots. |
+| `docs/agent-tasks/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/GOAL.md` | Goal 144A P1 hotfix: descriptor, response and journal now bind to the exact canonical step/range/command/target; harvest uses `node/apple_tree`, basic attack uses `goblin`, checkpoint replay evidence is frozen at 8 actions and final replay reports 13. Result is `GREEN`, Goal144 remains `accepted=false`, Runtime remains authority and Unity remains a read-only consumer. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -376,6 +380,10 @@ Goal144 is produced for review with `implementationStatus=GREEN`,
 `selectedCandidateId=minimal-map-game-exploration-resource-focus`,
 `selectedVariantKind=exploration_resource_focus`, `actionDescriptorCount=14`,
 `executedRuntimeActionCount=11`, `checkpointReloadByReplayPassed=true`,
+`actionDescriptorExecutionBindingPassed=true`,
+`harvestActionTargetId=node/apple_tree`, `basicAttackActionTargetId=goblin`,
+`checkpointReplayedActionCount=8`, `finalReplayActionCount=13`,
+`replayEvidenceFrozenBeforeContinuation=true`,
 `fullReplayEquivalent=true`, `finalStateHashMatchesGoal142=true`,
 `selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
 `unitySmokePassed=true`, `runtimeAuthority=true`, `projectionOnly=false`,

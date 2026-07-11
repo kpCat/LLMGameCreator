@@ -11,6 +11,9 @@ public sealed class RunSelectedRuntimeVariantLiveSessionScriptTests
             ".devflow/scripts/run-selected-runtime-variant-live-session.ps1"));
         foreach (var marker in new[] { "SelectedHandoffPath", "SelectedPackagePath", "SelectedOutcomePath", "Goal143HandoffPath", "OutputRoot", "UnityPath", "DryRun", "ApplyCleanup", ".llmgc/manual/", "Restore-Goal144Directory", "RunBatchmodeSelectedRuntimeVariantLiveSessionSmoke" })
             Assert.Contains(marker, source, StringComparison.Ordinal);
+        Assert.Contains("actionDescriptorExecutionBindingPassed", source, StringComparison.Ordinal);
+        Assert.Contains("checkpointReplayedActionCount=8", source, StringComparison.Ordinal);
+        Assert.Contains("finalReplayActionCount=13", source, StringComparison.Ordinal);
     }
 
     private static string ProjectRoot()

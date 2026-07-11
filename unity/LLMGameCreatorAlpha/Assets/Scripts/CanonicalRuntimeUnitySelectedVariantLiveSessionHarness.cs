@@ -46,6 +46,12 @@ namespace LLMGameCreatorAlpha
                              && diagnostics.Contains("finalHashMatchesGoal142=True")
                              && diagnostics.Contains("selectedVariantEffectVisible=True")
                              && diagnostics.Contains("noFallback=True")
+                             && diagnostics.Contains("actionDescriptorExecutionBindingPassed=True")
+                             && diagnostics.Contains("harvestTargetMatches=True")
+                             && diagnostics.Contains("basicAttackTargetMatches=True")
+                             && diagnostics.Contains("checkpointReplayedActionCount=8")
+                             && diagnostics.Contains("finalReplayActionCount=13")
+                             && diagnostics.Contains("replayEvidenceFrozenBeforeContinuation=True")
                              && diagnostics.Contains("runtimeAuthority=True")
                              && diagnostics.Contains("unityGameplayTruth=False");
 #if UNITY_EDITOR
@@ -71,16 +77,19 @@ namespace LLMGameCreatorAlpha
         public static string Validate(string root)
         {
             var dashboardPath = Path.Combine(root, "selected-runtime-variant-live-session-dashboard.json");
+            var catalogPath = Path.Combine(root, "selected-runtime-variant-live-session-action-catalog.json");
             var statePath = Path.Combine(root, "selected-runtime-variant-live-session-state.json");
             var journalPath = Path.Combine(root, "selected-runtime-variant-live-session-journal.json");
             var checkpointPath = Path.Combine(root, "selected-runtime-variant-live-session-checkpoint.json");
             var reloadPath = Path.Combine(root, "selected-runtime-variant-live-session-checkpoint-reload-result.json");
             var replayPath = Path.Combine(root, "selected-runtime-variant-live-session-final-replay-result.json");
-            var paths = new[] { dashboardPath, statePath, journalPath, checkpointPath, reloadPath, replayPath };
+            var paths = new[] { dashboardPath, catalogPath, statePath, journalPath, checkpointPath, reloadPath, replayPath };
             var exist = Array.TrueForAll(paths, File.Exists);
             if (!exist) return "sessionArtifactsExist=False";
             var dashboard = File.ReadAllText(dashboardPath);
+            var catalog = File.ReadAllText(catalogPath);
             var state = File.ReadAllText(statePath);
+            var journal = File.ReadAllText(journalPath);
             var reload = File.ReadAllText(reloadPath);
             var replay = File.ReadAllText(replayPath);
             var selected = Pair(dashboard, "selectedCandidateId", Candidate);
@@ -96,6 +105,18 @@ namespace LLMGameCreatorAlpha
                              && !dashboard.Contains("minimal-map-game-balanced-baseline", StringComparison.Ordinal);
             var authority = Bool(dashboard, "runtimeAuthority", true);
             var unityTruth = Bool(dashboard, "unityGameplayTruth", true);
+            var binding = Bool(dashboard, "actionDescriptorExecutionBindingPassed", true)
+                          && Bool(dashboard, "allRuntimeActionTargetsMatchExecutedSteps", true)
+                          && Bool(dashboard, "allRuntimeActionCommandKindsMatchExecutedSteps", true);
+            var harvest = ActionTarget(catalog, "harvest", "node/apple_tree")
+                          && ActionTarget(journal, "harvest", "node/apple_tree");
+            var basicAttack = ActionTarget(catalog, "basic_attack", "goblin")
+                              && ActionTarget(journal, "basic_attack", "goblin");
+            var checkpointCount = ExtractInt(reload, "replayedActionCount");
+            var finalCount = ExtractInt(replay, "replayedActionCount");
+            var frozen = Bool(dashboard, "replayEvidenceFrozenBeforeContinuation", true)
+                         && checkpointCount == 8
+                         && finalCount == 13;
             return "sessionArtifactsExist=" + exist
                    + "; selectedCandidateMatches=" + selected
                    + "; packageHashMatches=" + package
@@ -104,6 +125,12 @@ namespace LLMGameCreatorAlpha
                    + "; finalHashMatchesGoal142=" + finalHash
                    + "; selectedVariantEffectVisible=" + effect
                    + "; noFallback=" + noFallback
+                   + "; actionDescriptorExecutionBindingPassed=" + binding
+                   + "; harvestTargetMatches=" + harvest
+                   + "; basicAttackTargetMatches=" + basicAttack
+                   + "; checkpointReplayedActionCount=" + checkpointCount
+                   + "; finalReplayActionCount=" + finalCount
+                   + "; replayEvidenceFrozenBeforeContinuation=" + frozen
                    + "; runtimeAuthority=" + authority
                    + "; unityGameplayTruth=" + unityTruth
                    + "; statePresent=" + (state.Length > 0);
@@ -145,6 +172,18 @@ namespace LLMGameCreatorAlpha
             text.Contains("\"" + property + "\": \"" + value + "\"", StringComparison.Ordinal);
         private static bool Bool(string text, string property, bool value) =>
             text.Contains("\"" + property + "\": " + value.ToString().ToLowerInvariant(), StringComparison.Ordinal);
+
+        private static bool ActionTarget(string text, string actionId, string targetId)
+        {
+            var actionMarker = "\"actionId\": \"" + actionId + "\"";
+            var actionStart = text.IndexOf(actionMarker, StringComparison.Ordinal);
+            if (actionStart < 0) return false;
+            var nextAction = text.IndexOf("\"actionId\":", actionStart + actionMarker.Length,
+                StringComparison.Ordinal);
+            var targetMarker = "\"targetId\": \"" + targetId + "\"";
+            var targetStart = text.IndexOf(targetMarker, actionStart, StringComparison.Ordinal);
+            return targetStart >= 0 && (nextAction < 0 || targetStart < nextAction);
+        }
 
         private static string ExtractString(string text, string property)
         {

@@ -9,6 +9,12 @@ public sealed class SelectedRuntimeVariantActionDescriptor
     public string Route { get; set; } = string.Empty;
     public string CommandKind { get; set; } = string.Empty;
     public string TargetId { get; set; } = string.Empty;
+    public string CanonicalStepId { get; set; } = string.Empty;
+    public int CanonicalStepIndex { get; set; } = -1;
+    public int RuntimeCommandStartIndex { get; set; } = -1;
+    public int RuntimeCommandEndIndex { get; set; } = -1;
+    public string ExecutionTargetId { get; set; } = string.Empty;
+    public bool ExecutionBindingValidated { get; set; }
     public IReadOnlyList<string> Prerequisites { get; set; } = new List<string>();
     public bool MayMutateState { get; set; }
     public bool Available { get; set; }
@@ -40,7 +46,14 @@ public sealed class SelectedRuntimeVariantInteractiveActionResult
     public string ActionId { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
     public string Route { get; set; } = string.Empty;
+    public string CommandKind { get; set; } = string.Empty;
     public string TargetId { get; set; } = string.Empty;
+    public string CanonicalStepId { get; set; } = string.Empty;
+    public int CanonicalStepIndex { get; set; } = -1;
+    public int RuntimeCommandStartIndex { get; set; } = -1;
+    public int RuntimeCommandEndIndex { get; set; } = -1;
+    public string ExecutionTargetId { get; set; } = string.Empty;
+    public bool ExecutionBindingValidated { get; set; }
     public string StateHashBefore { get; set; } = string.Empty;
     public string StateHashAfter { get; set; } = string.Empty;
     public bool RuntimeExecuted { get; set; }
@@ -59,7 +72,14 @@ public sealed class SelectedRuntimeVariantInteractiveJournalEntry
     public string ActionId { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
     public string Route { get; set; } = string.Empty;
+    public string CommandKind { get; set; } = string.Empty;
     public string TargetId { get; set; } = string.Empty;
+    public string CanonicalStepId { get; set; } = string.Empty;
+    public int CanonicalStepIndex { get; set; } = -1;
+    public int RuntimeCommandStartIndex { get; set; } = -1;
+    public int RuntimeCommandEndIndex { get; set; } = -1;
+    public string ExecutionTargetId { get; set; } = string.Empty;
+    public bool ExecutionBindingValidated { get; set; }
     public string StateHashBefore { get; set; } = string.Empty;
     public string StateHashAfter { get; set; } = string.Empty;
     public bool RuntimeExecuted { get; set; }
@@ -120,6 +140,7 @@ public sealed class SelectedRuntimeVariantInteractiveReplayResult
     public bool ExpectedStateHashMatched { get; set; }
     public string ExpectedStateHash { get; set; } = string.Empty;
     public string ActualStateHash { get; set; } = string.Empty;
+    public int ReplayedActionCount { get; set; }
     public SelectedRuntimeVariantInteractiveSession Session { get; set; } = new();
     public IReadOnlyList<string> Diagnostics { get; set; } = new List<string>();
 }

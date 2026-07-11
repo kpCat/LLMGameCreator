@@ -645,6 +645,15 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "goal144Accepted") == false
                    && BoolValue(root, "selectedRuntimeVariantInteractiveSession")
                    && BoolValue(root, "checkpointReloadByReplayPassed")
+                   && BoolValue(root, "goal144ActionExecutionBindingCorrected")
+                   && BoolValue(root, "actionDescriptorExecutionBindingPassed")
+                   && BoolValue(root, "allRuntimeActionTargetsMatchExecutedSteps")
+                   && BoolValue(root, "allRuntimeActionCommandKindsMatchExecutedSteps")
+                   && StringValue(root, "harvestActionTargetId") == "node/apple_tree"
+                   && StringValue(root, "basicAttackActionTargetId") == "goblin"
+                   && IntValue(root, "checkpointReplayedActionCount") == 8
+                   && IntValue(root, "finalReplayActionCount") == 13
+                   && BoolValue(root, "replayEvidenceFrozenBeforeContinuation")
                    && BoolValue(root, "fullReplayEquivalent")
                    && BoolValue(root, "finalStateHashMatchesGoal142")
                    && BoolValue(root, "selectedVariantEffectVisible")
@@ -715,6 +724,12 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal144Gate)
         && Contains(markdown, "goal143Accepted=true")
         && Contains(markdown, "selectedRuntimeVariantInteractiveSession=true")
+        && Contains(markdown, "actionDescriptorExecutionBindingPassed=true")
+        && Contains(markdown, "harvestActionTargetId=node/apple_tree")
+        && Contains(markdown, "basicAttackActionTargetId=goblin")
+        && Contains(markdown, "checkpointReplayedActionCount=8")
+        && Contains(markdown, "finalReplayActionCount=13")
+        && Contains(markdown, "replayEvidenceFrozenBeforeContinuation=true")
         && Contains(markdown, "checkpointReloadByReplayPassed=true")
         && Contains(markdown, "fullReplayEquivalent=true");
 
@@ -810,6 +825,13 @@ public sealed class ProductLineStrategyRebaselineService
         && property.ValueKind == JsonValueKind.String
             ? property.GetString() ?? string.Empty
             : string.Empty;
+
+    private static int IntValue(JsonElement element, string propertyName) =>
+        element.TryGetProperty(propertyName, out var property)
+        && property.ValueKind == JsonValueKind.Number
+        && property.TryGetInt32(out var value)
+            ? value
+            : 0;
 
     private static bool BoolValue(JsonElement element, string propertyName) =>
         element.TryGetProperty(propertyName, out var property)

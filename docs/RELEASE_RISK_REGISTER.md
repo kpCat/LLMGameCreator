@@ -78,6 +78,8 @@ Goal 143 review note: the selected runtime variant end-to-end PlayerAdapter hand
 
 Goal 144 review note: the selected variant now has a persistent Runtime-owned action session, 14 package/state-derived descriptors, correlated individual actions, invalid-action no-mutation, journal checkpoint reload and full deterministic replay to the accepted Goal142 hash. Unity remains read-only and WinForms remains an Application adapter. Goal144 remains `accepted=false`; hands-on playable quality, final release, public schema, providers, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release packaging remain open.
 
+Goal 144A review note: descriptor targets are no longer decorative. Harvest binds to and executes `node/apple_tree`, basic attack binds to and executes `goblin`, descriptor ranges drive Runtime execution, and checkpoint/final replay evidence reports immutable counts 8/13. The hotfix does not claim Goal144 human acceptance or reduce the remaining release/manual-review risks.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

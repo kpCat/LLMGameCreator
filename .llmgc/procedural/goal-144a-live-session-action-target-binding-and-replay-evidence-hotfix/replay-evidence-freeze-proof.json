@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "goal144a_replay_evidence_freeze_proof_v1",
+  "goalId": "goal_144a_live_session_action_target_binding_and_replay_evidence_hotfix",
+  "passed": true,
+  "checkpointJournalActionCount": 8,
+  "checkpointReplayedActionCount": 8,
+  "finalReplayActionCount": 13,
+  "replayEvidenceFrozenBeforeContinuation": true,
+  "checkpointStateHashRestored": true,
+  "fullReplayEquivalent": true,
+  "checkpointExpectedStateHash": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+  "checkpointActualStateHash": "cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6",
+  "finalExpectedStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54",
+  "finalActualStateHash": "d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54"
+}

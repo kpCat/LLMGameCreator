@@ -26,6 +26,12 @@ public static class SelectedRuntimeVariantInteractiveSessionVocabulary
         ".llmgc/procedural/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay";
     public const string ExportPackageDirectory =
         ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay";
+    public const string HotfixGoalId =
+        "goal_144a_live_session_action_target_binding_and_replay_evidence_hotfix";
+    public const string HotfixProceduralOutputDirectory =
+        ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix";
+    public const string HotfixExportPackageDirectory =
+        ".llmgc/exports/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix";
     public const string NormalCommand =
         ".devflow\\scripts\\run-selected-runtime-variant-live-session.cmd";
     public const string AcceptanceFileName = "goal143-human-acceptance-record.json";
@@ -41,6 +47,11 @@ public static class SelectedRuntimeVariantInteractiveSessionVocabulary
     public const string UnitySmokeFileName = "unity-selected-runtime-variant-live-session-smoke.json";
     public const string ReportJsonFileName = "one-click-selected-runtime-variant-live-session-report.json";
     public const string ReportMarkdownFileName = "one-click-selected-runtime-variant-live-session-report.md";
+    public const string ActionExecutionBindingProofFileName = "action-execution-binding-proof.json";
+    public const string ReplayEvidenceFreezeProofFileName = "replay-evidence-freeze-proof.json";
+    public const string HotfixDashboardFileName = "goal144a-correctness-dashboard.json";
+    public const string HotfixReportFileName = "goal144a-correctness-report.md";
+    public const string HotfixFileIndexFileName = "goal144a-file-index.json";
     public const string UnitySmokeRelativePath = ProceduralOutputDirectory + "/" + UnitySmokeFileName;
 }
 
@@ -155,6 +166,11 @@ public sealed record SelectedRuntimeVariantLiveSessionNegativeProof
     public bool CheckpointPackageHashMismatchRejected { get; init; }
     public bool CheckpointCandidateMismatchRejected { get; init; }
     public bool CheckpointJournalTamperRejected { get; init; }
+    public bool HarvestDescriptorTargetTamperRejected { get; init; }
+    public bool BasicAttackDescriptorTargetTamperRejected { get; init; }
+    public bool CanonicalStepIdTamperRejected { get; init; }
+    public bool RuntimeRangeTamperRejected { get; init; }
+    public bool JournalTargetTamperRejected { get; init; }
     public bool CheckpointExpectedHashMismatchRejected { get; init; }
     public bool BalancedBaselineFallbackRejected { get; init; }
     public bool Goal131FallbackRejected { get; init; }
@@ -180,6 +196,12 @@ public sealed record SelectedRuntimeVariantLiveSessionUnitySmoke
     public bool NoFallback { get; init; }
     public bool RuntimeAuthority { get; init; }
     public bool UnityGameplayTruth { get; init; }
+    public bool ActionDescriptorExecutionBindingPassed { get; init; }
+    public bool HarvestTargetMatches { get; init; }
+    public bool BasicAttackTargetMatches { get; init; }
+    public int CheckpointReplayedActionCount { get; init; }
+    public int FinalReplayActionCount { get; init; }
+    public bool ReplayEvidenceFrozenBeforeContinuation { get; init; }
     public bool PassMarkerPresent { get; init; }
     public bool FailMarkerPresent { get; init; }
     public bool Passed { get; init; }
@@ -220,6 +242,20 @@ public sealed record SelectedRuntimeVariantLiveSessionDashboard
     public bool ProjectionOnly { get; init; }
     public bool UnityGameplayTruth { get; init; }
     public bool UnitySmokePassed { get; init; }
+    public bool Goal144ActionExecutionBindingCorrected { get; init; }
+    public bool ActionDescriptorExecutionBindingPassed { get; init; }
+    public bool AllRuntimeActionTargetsMatchExecutedSteps { get; init; }
+    public bool AllRuntimeActionCommandKindsMatchExecutedSteps { get; init; }
+    public string HarvestActionTargetId { get; init; } = string.Empty;
+    public string HarvestExecutedTargetId { get; init; } = string.Empty;
+    public string BasicAttackActionTargetId { get; init; } = string.Empty;
+    public string BasicAttackExecutedTargetId { get; init; } = string.Empty;
+    public bool NoFirstResourceNodeFallback { get; init; }
+    public bool NoIndependentCanonicalRangeLookup { get; init; }
+    public int CheckpointReplayedActionCount { get; init; }
+    public int FinalReplayActionCount { get; init; }
+    public bool ReplayEvidenceFrozenBeforeContinuation { get; init; }
+    public bool Goal144Accepted { get; init; }
     public bool Accepted { get; init; }
     public string NormalCommand { get; init; } = SelectedRuntimeVariantInteractiveSessionVocabulary.NormalCommand;
 }
@@ -236,6 +272,74 @@ public sealed record SelectedRuntimeVariantLiveSessionArtifactSet
     public SelectedRuntimeVariantLiveSessionDashboard Dashboard { get; init; } = new();
     public SelectedRuntimeVariantLiveSessionNegativeProof NegativeProof { get; init; } = new();
     public SelectedRuntimeVariantLiveSessionUnitySmoke UnitySmoke { get; init; } = new();
+    public Goal144AActionExecutionBindingProof ActionExecutionBindingProof { get; init; } = new();
+    public Goal144AReplayEvidenceFreezeProof ReplayEvidenceFreezeProof { get; init; } = new();
+    public Goal144ACorrectnessDashboard HotfixDashboard { get; init; } = new();
+}
+
+public sealed record Goal144AActionExecutionBindingProof
+{
+    public string SchemaVersion { get; init; } = "goal144a_action_execution_binding_proof_v1";
+    public string GoalId { get; init; } = SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixGoalId;
+    public bool Passed { get; init; }
+    public bool ActionDescriptorExecutionBindingPassed { get; init; }
+    public bool AllRuntimeActionTargetsMatchExecutedSteps { get; init; }
+    public bool AllRuntimeActionCommandKindsMatchExecutedSteps { get; init; }
+    public string HarvestActionTargetId { get; init; } = string.Empty;
+    public string HarvestExecutedTargetId { get; init; } = string.Empty;
+    public string BasicAttackActionTargetId { get; init; } = string.Empty;
+    public string BasicAttackExecutedTargetId { get; init; } = string.Empty;
+    public bool NoFirstResourceNodeFallback { get; init; }
+    public bool NoIndependentCanonicalRangeLookup { get; init; }
+    public bool HarvestDescriptorTargetTamperRejected { get; init; }
+    public bool BasicAttackDescriptorTargetTamperRejected { get; init; }
+    public bool CanonicalStepIdTamperRejected { get; init; }
+    public bool RuntimeRangeTamperRejected { get; init; }
+    public bool JournalTargetTamperRejected { get; init; }
+}
+
+public sealed record Goal144AReplayEvidenceFreezeProof
+{
+    public string SchemaVersion { get; init; } = "goal144a_replay_evidence_freeze_proof_v1";
+    public string GoalId { get; init; } = SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixGoalId;
+    public bool Passed { get; init; }
+    public int CheckpointJournalActionCount { get; init; }
+    public int CheckpointReplayedActionCount { get; init; }
+    public int FinalReplayActionCount { get; init; }
+    public bool ReplayEvidenceFrozenBeforeContinuation { get; init; }
+    public bool CheckpointStateHashRestored { get; init; }
+    public bool FullReplayEquivalent { get; init; }
+    public string CheckpointExpectedStateHash { get; init; } = string.Empty;
+    public string CheckpointActualStateHash { get; init; } = string.Empty;
+    public string FinalExpectedStateHash { get; init; } = string.Empty;
+    public string FinalActualStateHash { get; init; } = string.Empty;
+}
+
+public sealed record Goal144ACorrectnessDashboard
+{
+    public string SchemaVersion { get; init; } = "goal144a_correctness_dashboard_v1";
+    public string GoalId { get; init; } = SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixGoalId;
+    public string Status { get; init; } = "BLOCKED";
+    public bool ActionDescriptorExecutionBindingPassed { get; init; }
+    public bool AllRuntimeActionTargetsMatchExecutedSteps { get; init; }
+    public bool AllRuntimeActionCommandKindsMatchExecutedSteps { get; init; }
+    public string HarvestActionTargetId { get; init; } = string.Empty;
+    public string HarvestExecutedTargetId { get; init; } = string.Empty;
+    public string BasicAttackActionTargetId { get; init; } = string.Empty;
+    public string BasicAttackExecutedTargetId { get; init; } = string.Empty;
+    public bool NoFirstResourceNodeFallback { get; init; }
+    public bool NoIndependentCanonicalRangeLookup { get; init; }
+    public int CheckpointReplayedActionCount { get; init; }
+    public int FinalReplayActionCount { get; init; }
+    public bool ReplayEvidenceFrozenBeforeContinuation { get; init; }
+    public bool CheckpointStateHashRestored { get; init; }
+    public bool FullReplayEquivalent { get; init; }
+    public bool FinalStateHashMatchesGoal142 { get; init; }
+    public bool RuntimeAuthority { get; init; } = true;
+    public bool ProjectionOnly { get; init; }
+    public bool UnityGameplayTruth { get; init; }
+    public bool Goal144Accepted { get; init; }
+    public bool Accepted { get; init; }
 }
 
 public sealed record SelectedRuntimeVariantLiveSessionWriteResult

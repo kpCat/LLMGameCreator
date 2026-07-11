@@ -36,19 +36,31 @@ public sealed class SelectedRuntimeVariantInteractiveSessionOperatorRunner
             var export = ArtifactRoot(
                 root,
                 SelectedRuntimeVariantInteractiveSessionVocabulary.ExportPackageDirectory);
+            var hotfixProcedural = ArtifactRoot(
+                root,
+                SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixProceduralOutputDirectory);
+            var hotfixExport = ArtifactRoot(
+                root,
+                SelectedRuntimeVariantInteractiveSessionVocabulary.HotfixExportPackageDirectory);
             var backup = Path.Combine(
                 Path.GetTempPath(),
                 "LLMGameCreator",
                 "goal144-operator-" + Guid.NewGuid().ToString("N"));
             var proceduralBackup = Path.Combine(backup, "procedural");
             var exportBackup = Path.Combine(backup, "export");
+            var hotfixProceduralBackup = Path.Combine(backup, "hotfix-procedural");
+            var hotfixExportBackup = Path.Combine(backup, "hotfix-export");
             var proceduralExisted = Directory.Exists(procedural);
             var exportExisted = Directory.Exists(export);
+            var hotfixProceduralExisted = Directory.Exists(hotfixProcedural);
+            var hotfixExportExisted = Directory.Exists(hotfixExport);
             Directory.CreateDirectory(backup);
             try
             {
                 SnapshotDirectory(procedural, proceduralBackup);
                 SnapshotDirectory(export, exportBackup);
+                SnapshotDirectory(hotfixProcedural, hotfixProceduralBackup);
+                SnapshotDirectory(hotfixExport, hotfixExportBackup);
                 try
                 {
                     return await _writer.RunDrillAndWriteAsync(root, request, cancellationToken)
@@ -58,6 +70,11 @@ public sealed class SelectedRuntimeVariantInteractiveSessionOperatorRunner
                 {
                     RestoreDirectory(procedural, proceduralBackup, proceduralExisted);
                     RestoreDirectory(export, exportBackup, exportExisted);
+                    RestoreDirectory(
+                        hotfixProcedural,
+                        hotfixProceduralBackup,
+                        hotfixProceduralExisted);
+                    RestoreDirectory(hotfixExport, hotfixExportBackup, hotfixExportExisted);
                     throw;
                 }
             }

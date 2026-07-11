@@ -12,11 +12,17 @@
   "noFallback": true,
   "runtimeAuthority": true,
   "unityGameplayTruth": false,
+  "actionDescriptorExecutionBindingPassed": true,
+  "harvestTargetMatches": true,
+  "basicAttackTargetMatches": true,
+  "checkpointReplayedActionCount": 8,
+  "finalReplayActionCount": 13,
+  "replayEvidenceFrozenBeforeContinuation": true,
   "passMarkerPresent": true,
   "failMarkerPresent": false,
   "passed": true,
   "unityExitCode": 0,
-  "dashboardSha256": "a5d90e44da2d6acdd44a82882a6c92c3aae3123f841719b8070ec24b47ea5304",
+  "dashboardSha256": "cb32f0cf9b1e88aa9334cd3968185f6d635df148ba15c59845887d535714c870",
   "diagnostics": [
     "unityExitCode=0"
   ]

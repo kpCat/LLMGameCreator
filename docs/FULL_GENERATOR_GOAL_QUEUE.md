@@ -2331,6 +2331,12 @@ Goal144 is produced for review with `implementationStatus=GREEN`,
 `runtimeRoutedActionDescriptorCount=11`,
 `presentationOnlyActionDescriptorCount=3`, `executedRuntimeActionCount=11`,
 `invalidActionStateUnchanged=true`, `checkpointReloadByReplayPassed=true`,
+`actionDescriptorExecutionBindingPassed=true`,
+`allRuntimeActionTargetsMatchExecutedSteps=true`,
+`allRuntimeActionCommandKindsMatchExecutedSteps=true`,
+`harvestActionTargetId=node/apple_tree`, `basicAttackActionTargetId=goblin`,
+`checkpointReplayedActionCount=8`, `finalReplayActionCount=13`,
+`replayEvidenceFrozenBeforeContinuation=true`,
 `checkpointStateHashRestored=true`, `fullReplayEquivalent=true`,
 `finalStateHashMatchesGoal142=true`,
 `selectedVariantEffectVisible=true`, `noBalancedBaselineFallback=true`,
@@ -2338,6 +2344,11 @@ Goal144 is produced for review with `implementationStatus=GREEN`,
 `unityGameplayTruth=false` and `manualUnityOptional=true`.
 
 Goal143 is accepted by the explicit human statement recorded in Goal144.
+Goal144A corrects the Goal144 descriptor/execution correlation and immutable
+replay evidence without accepting Goal144: descriptor ranges now drive Runtime
+execution, harvest advertises/executes `node/apple_tree`, basic attack
+advertises/executes `goblin`, checkpoint replay remains 8 after continuation,
+and the final replay remains 13 with the accepted Goal142 final hash.
 Goal144 uses only the Goal142/143 selection, validates the package hash, derives
 14 actions from package/current state, executes one action at a time in Runtime,
 restores checkpoints through journal replay, exposes an in-process transactional

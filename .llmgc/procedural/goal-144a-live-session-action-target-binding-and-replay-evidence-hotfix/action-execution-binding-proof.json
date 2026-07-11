@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "goal144a_action_execution_binding_proof_v1",
+  "goalId": "goal_144a_live_session_action_target_binding_and_replay_evidence_hotfix",
+  "passed": true,
+  "actionDescriptorExecutionBindingPassed": true,
+  "allRuntimeActionTargetsMatchExecutedSteps": true,
+  "allRuntimeActionCommandKindsMatchExecutedSteps": true,
+  "harvestActionTargetId": "node/apple_tree",
+  "harvestExecutedTargetId": "node/apple_tree",
+  "basicAttackActionTargetId": "goblin",
+  "basicAttackExecutedTargetId": "goblin",
+  "noFirstResourceNodeFallback": true,
+  "noIndependentCanonicalRangeLookup": true,
+  "harvestDescriptorTargetTamperRejected": true,
+  "basicAttackDescriptorTargetTamperRejected": true,
+  "canonicalStepIdTamperRejected": true,
+  "runtimeRangeTamperRejected": true,
+  "journalTargetTamperRejected": true
+}

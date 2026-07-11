@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 144 selected runtime variant interactive action session and save replay
+Updated by: Goal 144A live session action target binding and replay evidence hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 144 produced for review:
@@ -12,6 +12,19 @@ implementationStatus=GREEN
 accepted=false
 goal143Accepted=true
 goal144Accepted=false
+goal144ActionExecutionBindingCorrected=true
+actionDescriptorExecutionBindingPassed=true
+allRuntimeActionTargetsMatchExecutedSteps=true
+allRuntimeActionCommandKindsMatchExecutedSteps=true
+harvestActionTargetId=node/apple_tree
+harvestExecutedTargetId=node/apple_tree
+basicAttackActionTargetId=goblin
+basicAttackExecutedTargetId=goblin
+noFirstResourceNodeFallback=true
+noIndependentCanonicalRangeLookup=true
+checkpointReplayedActionCount=8
+finalReplayActionCount=13
+replayEvidenceFrozenBeforeContinuation=true
 goal141Accepted=false
 selectedRuntimeVariantInteractiveSession=true
 selectedRuntimeVariantId=minimal-map-game-exploration-resource-focus
@@ -38,6 +51,21 @@ projectionOnly=false
 unityGameplayTruth=false
 manualUnityOptional=true
 ```
+
+Goal144A corrects the Goal144 execution/evidence seam without accepting Goal144.
+Every Runtime-routed descriptor now names the exact canonical step, range,
+command kind and target that executes. Harvest advertises and executes
+`node/apple_tree`; basic attack advertises and executes `goblin`. Descriptor,
+response and journal bindings are replay-validated, including negative target,
+step, range and journal-tamper proofs.
+
+Checkpoint evidence is frozen when reload completes: the checkpoint replay
+summary remains 8 even after its returned session continues to 13 actions.
+The checkpoint hash remains
+`cb819cb474f7019646de72de59a85cbe1fd0909a476e218b389864fb92fb53c6` and
+the final hash remains
+`d7c04179cb76ca48ba9694905e491bead014c0f56f446f66331becd5e3211e54`.
+Goal144A evidence lives under the matching procedural/export hotfix roots.
 
 Goal144 records the repository owner's exact Goal143 human acceptance, then
 starts one persistent Runtime-owned session over the selected Goal142 package.

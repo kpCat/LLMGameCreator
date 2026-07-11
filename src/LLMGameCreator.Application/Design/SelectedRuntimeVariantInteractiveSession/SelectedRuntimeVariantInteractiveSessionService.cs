@@ -75,6 +75,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 "Goal144 checkpoint reload failed: " + string.Join("; ", reload.Diagnostics));
         }
 
+        var checkpointReloadSummary = ToReplay("checkpoint_reload", reload);
         session = reload.Session;
         Execute(input, session, results, "harvest");
         Execute(input, session, results, "transaction");
@@ -86,6 +87,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             "goal144-final-journal",
             "2026-07-11T00:00:00Z");
         var finalReplay = _runtime.ReloadCheckpoint(input.Package, start, finalCheckpoint);
+        var finalReplaySummary = ToReplay("full_final_journal", finalReplay);
         var finalHashMatches = session.CurrentStateHash == input.ExpectedFinalStateHash
                                && finalReplay.ActualStateHash == input.ExpectedFinalStateHash;
         var selectedEffectVisible = session.LatestInventorySummary.Contains(
@@ -105,6 +107,17 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 action.Route == "presentation_only"),
             Actions = initialCatalog
         };
+        var actionBindingProof = BuildActionExecutionBindingProof(
+            input.RepositoryRoot,
+            catalog,
+            session.ActionJournal,
+            negative);
+        var replayFreezeProof = BuildReplayEvidenceFreezeProof(
+            checkpoint,
+            checkpointReloadSummary,
+            reload,
+            finalReplaySummary,
+            finalReplay);
         var unitySmoke = LoadUnitySmoke(input.UnitySmokePath);
         var runtimeExecutedCount = session.ActionJournal.Count(entry => entry.RuntimeExecuted);
         var dashboard = new SelectedRuntimeVariantLiveSessionDashboard
@@ -138,8 +151,31 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             SelectedVariantEffectVisible = selectedEffectVisible,
             NoBalancedBaselineFallback = true,
             NoGoal131Fallback = true,
-            UnitySmokePassed = unitySmoke.Passed
+            UnitySmokePassed = unitySmoke.Passed,
+            Goal144ActionExecutionBindingCorrected = actionBindingProof.Passed,
+            ActionDescriptorExecutionBindingPassed =
+                actionBindingProof.ActionDescriptorExecutionBindingPassed,
+            AllRuntimeActionTargetsMatchExecutedSteps =
+                actionBindingProof.AllRuntimeActionTargetsMatchExecutedSteps,
+            AllRuntimeActionCommandKindsMatchExecutedSteps =
+                actionBindingProof.AllRuntimeActionCommandKindsMatchExecutedSteps,
+            HarvestActionTargetId = actionBindingProof.HarvestActionTargetId,
+            HarvestExecutedTargetId = actionBindingProof.HarvestExecutedTargetId,
+            BasicAttackActionTargetId = actionBindingProof.BasicAttackActionTargetId,
+            BasicAttackExecutedTargetId = actionBindingProof.BasicAttackExecutedTargetId,
+            NoFirstResourceNodeFallback = actionBindingProof.NoFirstResourceNodeFallback,
+            NoIndependentCanonicalRangeLookup = actionBindingProof.NoIndependentCanonicalRangeLookup,
+            CheckpointReplayedActionCount = replayFreezeProof.CheckpointReplayedActionCount,
+            FinalReplayActionCount = replayFreezeProof.FinalReplayActionCount,
+            ReplayEvidenceFrozenBeforeContinuation =
+                replayFreezeProof.ReplayEvidenceFrozenBeforeContinuation,
+            Goal144Accepted = false
         };
+        var hotfixDashboard = BuildHotfixDashboard(
+            actionBindingProof,
+            replayFreezeProof,
+            finalHashMatches,
+            unitySmoke.Passed);
         var corePassed = catalog.ActionDescriptorCount >= 10
                          && catalog.RuntimeRoutedActionDescriptorCount >= 8
                          && catalog.PresentationOnlyActionDescriptorCount >= 2
@@ -153,7 +189,9 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                          && dashboard.FullReplayEquivalent
                          && finalHashMatches
                          && selectedEffectVisible
-                         && negative.Passed;
+                         && negative.Passed
+                         && actionBindingProof.Passed
+                         && replayFreezeProof.Passed;
         if (!corePassed)
         {
             throw new InvalidOperationException("Goal144 deterministic interactive-session drill failed.");
@@ -170,11 +208,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 ActionJournal = session.ActionJournal.Select(CloneEntry).ToList()
             },
             Checkpoint = checkpoint,
-            CheckpointReload = ToReplay("checkpoint_reload", reload),
-            FinalReplay = ToReplay("full_final_journal", finalReplay),
+            CheckpointReload = checkpointReloadSummary,
+            FinalReplay = finalReplaySummary,
             Dashboard = dashboard,
             NegativeProof = negative,
-            UnitySmoke = unitySmoke
+            UnitySmoke = unitySmoke,
+            ActionExecutionBindingProof = actionBindingProof,
+            ReplayEvidenceFreezeProof = replayFreezeProof,
+            HotfixDashboard = hotfixDashboard
         };
         var written = await _artifacts.WriteAsync(
                 input.RepositoryRoot,
@@ -234,6 +275,12 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             input.Package,
             start,
             tamperedJournal).Passed;
+        var tamperedJournalTarget = CloneCheckpoint(checkpoint);
+        tamperedJournalTarget.ActionJournal[0].TargetId = "map/not-village";
+        var journalTargetRejected = !_runtime.ReloadCheckpoint(
+            input.Package,
+            start,
+            tamperedJournalTarget).Passed;
         var tamperedHash = CloneCheckpoint(checkpoint);
         tamperedHash.ExpectedStateHash = new string('f', 64);
         var expectedHashRejected = !_runtime.ReloadCheckpoint(
@@ -268,6 +315,31 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             CheckpointPackageHashMismatchRejected = hashRejected,
             CheckpointCandidateMismatchRejected = candidateRejected,
             CheckpointJournalTamperRejected = journalRejected,
+            HarvestDescriptorTargetTamperRejected = DescriptorTamperRejected(
+                input,
+                start,
+                "harvest",
+                descriptor => descriptor.TargetId = "node/diesel_generator"),
+            BasicAttackDescriptorTargetTamperRejected = DescriptorTamperRejected(
+                input,
+                start,
+                "basic_attack",
+                descriptor => descriptor.TargetId = "ability/basic_attack"),
+            CanonicalStepIdTamperRejected = DescriptorTamperRejected(
+                input,
+                start,
+                "harvest",
+                descriptor => descriptor.CanonicalStepId = "execute_transaction"),
+            RuntimeRangeTamperRejected = DescriptorTamperRejected(
+                input,
+                start,
+                "harvest",
+                descriptor =>
+                {
+                    descriptor.RuntimeCommandStartIndex = 9;
+                    descriptor.RuntimeCommandEndIndex = 9;
+                }),
+            JournalTargetTamperRejected = journalTargetRejected,
             CheckpointExpectedHashMismatchRejected = expectedHashRejected,
             BalancedBaselineFallbackRejected = candidateRejected,
             Goal131FallbackRejected = true,
@@ -285,6 +357,11 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                      && proof.CheckpointPackageHashMismatchRejected
                      && proof.CheckpointCandidateMismatchRejected
                      && proof.CheckpointJournalTamperRejected
+                     && proof.HarvestDescriptorTargetTamperRejected
+                     && proof.BasicAttackDescriptorTargetTamperRejected
+                     && proof.CanonicalStepIdTamperRejected
+                     && proof.RuntimeRangeTamperRejected
+                     && proof.JournalTargetTamperRejected
                      && proof.CheckpointExpectedHashMismatchRejected
                      && proof.BalancedBaselineFallbackRejected
                      && proof.Goal131FallbackRejected
@@ -294,6 +371,185 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                      && proof.PreviousArtifactsPreservedOnFailure
         };
     }
+
+    private bool DescriptorTamperRejected(
+        SelectedRuntimeVariantInteractiveSessionValidatedInput input,
+        SelectedRuntimeVariantInteractiveSessionStartRequest start,
+        string actionId,
+        Action<SelectedRuntimeVariantActionDescriptor> tamper)
+    {
+        var sequence = new[]
+        {
+            "start_runtime", "move", "interact", "inspect_inventory", "open_dialogue",
+            "start_or_update_quest", "show_inventory", "craft", "harvest", "transaction",
+            "begin_encounter", "basic_attack"
+        };
+        var targetIndex = Array.IndexOf(sequence, actionId);
+        if (targetIndex < 0) return false;
+        var session = _runtime.StartSession(input.Package, CloneStart(start));
+        for (var index = 0; index < targetIndex; index++)
+        {
+            var result = _runtime.ExecuteAction(input.Package, session, new()
+            {
+                ActionRequestId = "goal144a-negative-" + session.CurrentActionIndex.ToString("000"),
+                SessionId = session.SessionId,
+                ActionIndex = session.CurrentActionIndex,
+                ActionId = sequence[index]
+            });
+            if (result.Status != "EXECUTED") return false;
+        }
+
+        var descriptor = session.AvailableActions.Single(item => item.ActionId == actionId);
+        if (!descriptor.Available) return false;
+        var stateHashBefore = session.CurrentStateHash;
+        var journalCountBefore = session.ActionJournal.Count;
+        var actionIndexBefore = session.CurrentActionIndex;
+        tamper(descriptor);
+        var rejected = _runtime.ExecuteAction(input.Package, session, new()
+        {
+            ActionRequestId = "goal144a-negative-tampered-" + actionId,
+            SessionId = session.SessionId,
+            ActionIndex = session.CurrentActionIndex,
+            ActionId = actionId
+        });
+        return rejected.Status == "REJECTED"
+               && rejected.StateHashBefore == rejected.StateHashAfter
+               && session.CurrentStateHash == stateHashBefore
+               && session.ActionJournal.Count == journalCountBefore
+               && session.CurrentActionIndex == actionIndexBefore;
+    }
+
+    private static Goal144AActionExecutionBindingProof BuildActionExecutionBindingProof(
+        string repositoryRoot,
+        SelectedRuntimeVariantLiveSessionCatalog catalog,
+        IReadOnlyList<SelectedRuntimeVariantInteractiveJournalEntry> journal,
+        SelectedRuntimeVariantLiveSessionNegativeProof negative)
+    {
+        var descriptors = catalog.Actions
+            .Where(item => item.Route == "runtime_session")
+            .ToDictionary(item => item.ActionId, StringComparer.Ordinal);
+        var entries = journal.Where(item => item.Route == "runtime_session").ToList();
+        var allTargetsMatch = entries.Count == descriptors.Count
+                              && entries.All(entry => descriptors.TryGetValue(entry.ActionId, out var descriptor)
+                                  && descriptor.TargetId == entry.TargetId
+                                  && descriptor.TargetId == entry.ExecutionTargetId
+                                  && descriptor.CanonicalStepId == entry.CanonicalStepId
+                                  && descriptor.CanonicalStepIndex == entry.CanonicalStepIndex
+                                  && descriptor.RuntimeCommandStartIndex == entry.RuntimeCommandStartIndex
+                                  && descriptor.RuntimeCommandEndIndex == entry.RuntimeCommandEndIndex
+                                  && descriptor.ExecutionBindingValidated
+                                  && entry.ExecutionBindingValidated);
+        var allCommandKindsMatch = entries.Count == descriptors.Count
+                                   && entries.All(entry => descriptors.TryGetValue(entry.ActionId, out var descriptor)
+                                       && descriptor.CommandKind == entry.CommandKind);
+        descriptors.TryGetValue("harvest", out var harvestDescriptor);
+        descriptors.TryGetValue("basic_attack", out var attackDescriptor);
+        var harvestEntry = entries.SingleOrDefault(item => item.ActionId == "harvest");
+        var attackEntry = entries.SingleOrDefault(item => item.ActionId == "basic_attack");
+        var runtimeSource = Read(repositoryRoot,
+            "src/LLMGameCreator.Runtime/SelectedRuntimeVariantInteractiveSessionService.cs");
+        var noFirstResourceNodeFallback = harvestDescriptor?.TargetId == "node/apple_tree"
+                                          && harvestEntry?.ExecutionTargetId == "node/apple_tree"
+                                          && !runtimeSource.Contains("ResourceNodes.FirstOrDefault", StringComparison.Ordinal);
+        var noIndependentRangeLookup = !runtimeSource.Contains("CanonicalRange(", StringComparison.Ordinal);
+        var bindingPassed = allTargetsMatch
+                            && allCommandKindsMatch
+                            && descriptors.Values.All(item => item.ExecutionBindingValidated);
+        var passed = bindingPassed
+                     && harvestDescriptor?.TargetId == "node/apple_tree"
+                     && harvestEntry?.ExecutionTargetId == "node/apple_tree"
+                     && attackDescriptor?.TargetId == "goblin"
+                     && attackEntry?.ExecutionTargetId == "goblin"
+                     && noFirstResourceNodeFallback
+                     && noIndependentRangeLookup
+                     && negative.HarvestDescriptorTargetTamperRejected
+                     && negative.BasicAttackDescriptorTargetTamperRejected
+                     && negative.CanonicalStepIdTamperRejected
+                     && negative.RuntimeRangeTamperRejected
+                     && negative.JournalTargetTamperRejected;
+        return new Goal144AActionExecutionBindingProof
+        {
+            Passed = passed,
+            ActionDescriptorExecutionBindingPassed = bindingPassed,
+            AllRuntimeActionTargetsMatchExecutedSteps = allTargetsMatch,
+            AllRuntimeActionCommandKindsMatchExecutedSteps = allCommandKindsMatch,
+            HarvestActionTargetId = harvestDescriptor?.TargetId ?? string.Empty,
+            HarvestExecutedTargetId = harvestEntry?.ExecutionTargetId ?? string.Empty,
+            BasicAttackActionTargetId = attackDescriptor?.TargetId ?? string.Empty,
+            BasicAttackExecutedTargetId = attackEntry?.ExecutionTargetId ?? string.Empty,
+            NoFirstResourceNodeFallback = noFirstResourceNodeFallback,
+            NoIndependentCanonicalRangeLookup = noIndependentRangeLookup,
+            HarvestDescriptorTargetTamperRejected = negative.HarvestDescriptorTargetTamperRejected,
+            BasicAttackDescriptorTargetTamperRejected = negative.BasicAttackDescriptorTargetTamperRejected,
+            CanonicalStepIdTamperRejected = negative.CanonicalStepIdTamperRejected,
+            RuntimeRangeTamperRejected = negative.RuntimeRangeTamperRejected,
+            JournalTargetTamperRejected = negative.JournalTargetTamperRejected
+        };
+    }
+
+    private static Goal144AReplayEvidenceFreezeProof BuildReplayEvidenceFreezeProof(
+        SelectedRuntimeVariantInteractiveCheckpoint checkpoint,
+        SelectedRuntimeVariantLiveSessionReplaySummary checkpointSummary,
+        SelectedRuntimeVariantInteractiveReplayResult checkpointReplay,
+        SelectedRuntimeVariantLiveSessionReplaySummary finalSummary,
+        SelectedRuntimeVariantInteractiveReplayResult finalReplay)
+    {
+        var frozen = checkpoint.ActionJournal.Count == 8
+                     && checkpointReplay.ReplayedActionCount == 8
+                     && checkpointSummary.ReplayedActionCount == 8
+                     && checkpointReplay.Session.ActionJournal.Count == 13;
+        var checkpointRestored = checkpointReplay.Passed
+                                 && checkpointSummary.ExpectedStateHash == checkpointSummary.ActualStateHash;
+        var fullReplayEquivalent = finalReplay.Passed
+                                   && finalSummary.ExpectedStateHash == finalSummary.ActualStateHash
+                                   && finalSummary.ReplayedActionCount == 13;
+        return new Goal144AReplayEvidenceFreezeProof
+        {
+            Passed = frozen && checkpointRestored && fullReplayEquivalent,
+            CheckpointJournalActionCount = checkpoint.ActionJournal.Count,
+            CheckpointReplayedActionCount = checkpointSummary.ReplayedActionCount,
+            FinalReplayActionCount = finalSummary.ReplayedActionCount,
+            ReplayEvidenceFrozenBeforeContinuation = frozen,
+            CheckpointStateHashRestored = checkpointRestored,
+            FullReplayEquivalent = fullReplayEquivalent,
+            CheckpointExpectedStateHash = checkpointSummary.ExpectedStateHash,
+            CheckpointActualStateHash = checkpointSummary.ActualStateHash,
+            FinalExpectedStateHash = finalSummary.ExpectedStateHash,
+            FinalActualStateHash = finalSummary.ActualStateHash
+        };
+    }
+
+    private static Goal144ACorrectnessDashboard BuildHotfixDashboard(
+        Goal144AActionExecutionBindingProof binding,
+        Goal144AReplayEvidenceFreezeProof replay,
+        bool finalHashMatches,
+        bool unitySmokePassed) =>
+        new()
+        {
+            Status = binding.Passed && replay.Passed && finalHashMatches && unitySmokePassed
+                ? "GREEN"
+                : "READY_FOR_UNITY_SMOKE",
+            ActionDescriptorExecutionBindingPassed = binding.ActionDescriptorExecutionBindingPassed,
+            AllRuntimeActionTargetsMatchExecutedSteps = binding.AllRuntimeActionTargetsMatchExecutedSteps,
+            AllRuntimeActionCommandKindsMatchExecutedSteps = binding.AllRuntimeActionCommandKindsMatchExecutedSteps,
+            HarvestActionTargetId = binding.HarvestActionTargetId,
+            HarvestExecutedTargetId = binding.HarvestExecutedTargetId,
+            BasicAttackActionTargetId = binding.BasicAttackActionTargetId,
+            BasicAttackExecutedTargetId = binding.BasicAttackExecutedTargetId,
+            NoFirstResourceNodeFallback = binding.NoFirstResourceNodeFallback,
+            NoIndependentCanonicalRangeLookup = binding.NoIndependentCanonicalRangeLookup,
+            CheckpointReplayedActionCount = replay.CheckpointReplayedActionCount,
+            FinalReplayActionCount = replay.FinalReplayActionCount,
+            ReplayEvidenceFrozenBeforeContinuation = replay.ReplayEvidenceFrozenBeforeContinuation,
+            CheckpointStateHashRestored = replay.CheckpointStateHashRestored,
+            FullReplayEquivalent = replay.FullReplayEquivalent,
+            FinalStateHashMatchesGoal142 = finalHashMatches,
+            RuntimeAuthority = true,
+            ProjectionOnly = false,
+            UnityGameplayTruth = false,
+            Goal144Accepted = false,
+            Accepted = false
+        };
 
     private SelectedRuntimeVariantLiveSessionUnitySmoke LoadUnitySmoke(string path)
     {
@@ -312,6 +568,12 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                    && smoke.NoFallback
                    && smoke.RuntimeAuthority
                    && !smoke.UnityGameplayTruth
+                   && smoke.ActionDescriptorExecutionBindingPassed
+                   && smoke.HarvestTargetMatches
+                   && smoke.BasicAttackTargetMatches
+                   && smoke.CheckpointReplayedActionCount == 8
+                   && smoke.FinalReplayActionCount == 13
+                   && smoke.ReplayEvidenceFrozenBeforeContinuation
                    && smoke.PassMarkerPresent
                    && !smoke.FailMarkerPresent
                 ? smoke
@@ -360,7 +622,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ExpectedStateHashMatched = replay.ExpectedStateHashMatched,
             ExpectedStateHash = replay.ExpectedStateHash,
             ActualStateHash = replay.ActualStateHash,
-            ReplayedActionCount = replay.Session.ActionJournal.Count,
+            ReplayedActionCount = replay.ReplayedActionCount,
             Diagnostics = replay.Diagnostics
         };
 
@@ -379,6 +641,12 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             Route = source.Route,
             CommandKind = source.CommandKind,
             TargetId = source.TargetId,
+            CanonicalStepId = source.CanonicalStepId,
+            CanonicalStepIndex = source.CanonicalStepIndex,
+            RuntimeCommandStartIndex = source.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = source.RuntimeCommandEndIndex,
+            ExecutionTargetId = source.ExecutionTargetId,
+            ExecutionBindingValidated = source.ExecutionBindingValidated,
             Prerequisites = source.Prerequisites.ToList(),
             MayMutateState = source.MayMutateState,
             Available = source.Available,
@@ -395,7 +663,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             ActionId = source.ActionId,
             Category = source.Category,
             Route = source.Route,
+            CommandKind = source.CommandKind,
             TargetId = source.TargetId,
+            CanonicalStepId = source.CanonicalStepId,
+            CanonicalStepIndex = source.CanonicalStepIndex,
+            RuntimeCommandStartIndex = source.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = source.RuntimeCommandEndIndex,
+            ExecutionTargetId = source.ExecutionTargetId,
+            ExecutionBindingValidated = source.ExecutionBindingValidated,
             StateHashBefore = source.StateHashBefore,
             StateHashAfter = source.StateHashAfter,
             RuntimeExecuted = source.RuntimeExecuted,

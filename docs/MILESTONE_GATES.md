@@ -80,6 +80,8 @@ Goal 143 note: the selected runtime variant end-to-end PlayerAdapter handoff pro
 
 Goal 144 note: Goal143 is accepted by explicit human handoff with `acceptedByCodex=false`. The selected Goal142 package now runs as one persistent Runtime-owned interactive session with 14 data-driven action descriptors, individual correlated execution, invalid-action no-mutation, journal checkpoint reload and full replay to the accepted Goal142 final hash. WinForms is an in-process operator and Unity is read-only. Goal144 remains `accepted=false` and does not close `vertical_slice_final_verification` or authorize sample/schema/provider/Lua/generator-library/Unity gameplay-truth work.
 
+Goal 144A note: the hotfix binds every Runtime-routed descriptor to its exact canonical step/range/command/target, rejects tampered target/step/range/journal bindings, reports harvest target `node/apple_tree` and basic-attack target `goblin`, and freezes checkpoint replay evidence at 8 actions before final continuation to 13. The accepted Goal142 final hash is unchanged. Goal144 remains `accepted=false` pending audit and manual WinForms review.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

@@ -17,6 +17,8 @@ Initialize-DevflowScriptEnvironment
 $RepoRoot = Resolve-DevflowRepoRoot -ScriptPath $ScriptPath
 $GoalRootRelative = ".llmgc/procedural/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay"
 $ExportRootRelative = ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay"
+$HotfixGoalRootRelative = ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix"
+$HotfixExportRootRelative = ".llmgc/exports/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix"
 $PassMarker = "GOAL144_SELECTED_RUNTIME_VARIANT_LIVE_SESSION_PASS"
 $FailMarker = "GOAL144_SELECTED_RUNTIME_VARIANT_LIVE_SESSION_FAIL"
 
@@ -120,11 +122,14 @@ function Invoke-Goal144UnitySmoke {
     $text = if (Test-Path $log) { Get-Content $log -Raw -Encoding UTF8 } else { "" }
     $pass = $process.ExitCode -eq 0 -and $text.Contains($PassMarker) -and -not $text.Contains($FailMarker)
     $checks = [ordered]@{}
-    foreach ($name in @("sessionArtifactsExist","selectedCandidateMatches","packageHashMatches","checkpointReloadPassed","fullReplayEquivalent","finalHashMatchesGoal142","selectedVariantEffectVisible","noFallback","runtimeAuthority")) {
+    foreach ($name in @("sessionArtifactsExist","selectedCandidateMatches","packageHashMatches","checkpointReloadPassed","fullReplayEquivalent","finalHashMatchesGoal142","selectedVariantEffectVisible","noFallback","actionDescriptorExecutionBindingPassed","harvestTargetMatches","basicAttackTargetMatches","replayEvidenceFrozenBeforeContinuation","runtimeAuthority")) {
         $checks[$name] = $text.Contains("$name=True")
     }
+    $checkpointReplayCount = if ($text.Contains("checkpointReplayedActionCount=8")) { 8 } else { -1 }
+    $finalReplayCount = if ($text.Contains("finalReplayActionCount=13")) { 13 } else { -1 }
     $unityTruth = $text.Contains("unityGameplayTruth=True")
-    $passed = $pass -and -not $unityTruth -and -not ($checks.Values -contains $false)
+    $passed = $pass -and -not $unityTruth -and -not ($checks.Values -contains $false) `
+        -and $checkpointReplayCount -eq 8 -and $finalReplayCount -eq 13
     $smoke = [ordered]@{
         schemaVersion="unity_selected_runtime_variant_live_session_smoke_v1"; goalId="goal_144_selected_runtime_variant_interactive_action_session_and_save_replay"
         status=if($passed){"GREEN"}else{"FAILED_UNITY_SMOKE"}; sessionArtifactsExist=$checks.sessionArtifactsExist
@@ -132,6 +137,10 @@ function Invoke-Goal144UnitySmoke {
         checkpointReloadPassed=$checks.checkpointReloadPassed; fullReplayEquivalent=$checks.fullReplayEquivalent
         finalHashMatchesGoal142=$checks.finalHashMatchesGoal142; selectedVariantEffectVisible=$checks.selectedVariantEffectVisible
         noFallback=$checks.noFallback; runtimeAuthority=$checks.runtimeAuthority; unityGameplayTruth=$unityTruth
+        actionDescriptorExecutionBindingPassed=$checks.actionDescriptorExecutionBindingPassed
+        harvestTargetMatches=$checks.harvestTargetMatches; basicAttackTargetMatches=$checks.basicAttackTargetMatches
+        checkpointReplayedActionCount=$checkpointReplayCount; finalReplayActionCount=$finalReplayCount
+        replayEvidenceFrozenBeforeContinuation=$checks.replayEvidenceFrozenBeforeContinuation
         passMarkerPresent=$text.Contains($PassMarker); failMarkerPresent=$text.Contains($FailMarker); passed=$passed
         unityExitCode=$process.ExitCode; dashboardSha256=((Get-FileHash (Join-Path $ResolvedOutput "selected-runtime-variant-live-session-dashboard.json") -Algorithm SHA256).Hash).ToLowerInvariant()
         diagnostics=@("unityExitCode=$($process.ExitCode)")
@@ -147,6 +156,8 @@ $ResolvedOutcome = Resolve-Goal144RepoPath $SelectedOutcomePath "SelectedOutcome
 $ResolvedGoal143 = Resolve-Goal144RepoPath $Goal143HandoffPath "Goal143HandoffPath" $true
 $ResolvedOutput = Resolve-Goal144RepoPath $OutputRoot "OutputRoot" $false
 $ResolvedExport = Resolve-Goal144RepoPath $ExportRootRelative "ExportRoot" $false
+$ResolvedHotfixOutput = Resolve-Goal144RepoPath $HotfixGoalRootRelative "HotfixOutputRoot" $false
+$ResolvedHotfixExport = Resolve-Goal144RepoPath $HotfixExportRootRelative "HotfixExportRoot" $false
 if (-not (ConvertTo-Goal144RelativePath $ResolvedOutput).StartsWith($GoalRootRelative, [StringComparison]::OrdinalIgnoreCase)) { throw "OutputRoot must stay under Goal144 root." }
 $ResolvedUnity = Resolve-Goal144Unity $UnityPath
 $SmokePath = Join-Path $ResolvedOutput "unity-selected-runtime-variant-live-session-smoke.json"
@@ -163,13 +174,24 @@ if ($DryRun) {
 $backup = Join-Path ([IO.Path]::GetTempPath()) ("LLMGameCreator/goal144-script-" + [Guid]::NewGuid().ToString("N"))
 $proceduralBackup = Join-Path $backup "procedural"
 $exportBackup = Join-Path $backup "export"
+$hotfixProceduralBackup = Join-Path $backup "hotfix-procedural"
+$hotfixExportBackup = Join-Path $backup "hotfix-export"
 $proceduralExisted = Test-Path $ResolvedOutput -PathType Container
 $exportExisted = Test-Path $ResolvedExport -PathType Container
+$hotfixProceduralExisted = Test-Path $ResolvedHotfixOutput -PathType Container
+$hotfixExportExisted = Test-Path $ResolvedHotfixExport -PathType Container
 [IO.Directory]::CreateDirectory($backup) | Out-Null
 Copy-Goal144Directory $ResolvedOutput $proceduralBackup
 Copy-Goal144Directory $ResolvedExport $exportBackup
+Copy-Goal144Directory $ResolvedHotfixOutput $hotfixProceduralBackup
+Copy-Goal144Directory $ResolvedHotfixExport $hotfixExportBackup
 try {
-    if ($ApplyCleanup) { Remove-Goal144Directory $ResolvedOutput; Remove-Goal144Directory $ResolvedExport }
+    if ($ApplyCleanup) {
+        Remove-Goal144Directory $ResolvedOutput
+        Remove-Goal144Directory $ResolvedExport
+        Remove-Goal144Directory $ResolvedHotfixOutput
+        Remove-Goal144Directory $ResolvedHotfixExport
+    }
     Invoke-Goal144Core $false
     Invoke-Goal144UnitySmoke
     Invoke-Goal144Core $true
@@ -178,6 +200,8 @@ try {
 catch {
     Restore-Goal144Directory $ResolvedOutput $proceduralBackup $proceduralExisted
     Restore-Goal144Directory $ResolvedExport $exportBackup $exportExisted
+    Restore-Goal144Directory $ResolvedHotfixOutput $hotfixProceduralBackup $hotfixProceduralExisted
+    Restore-Goal144Directory $ResolvedHotfixExport $hotfixExportBackup $hotfixExportExisted
     throw
 }
 finally { Remove-Goal144Directory $backup }
