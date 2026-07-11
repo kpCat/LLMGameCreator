@@ -2354,13 +2354,23 @@ Goal147 is GREEN at
 The repository-local catalog is the FeatureModule source of truth for 10 locked
 core modules, 3 optional modules and 8 typed parameters. Saved compositions use
 canonical atomic persistence and detect stale/missing module fingerprints.
-Incremental certification reuses all unchanged results and invalidates only a
-changed module; 100 modules yield 100 certification entries and 9 interaction
+Incremental certification reuses all unchanged results and invalidates a
+changed module plus declared transitive dependents; 100 modules yield 100 certification entries and 9 interaction
 rows under the 24-row cap without powerset enumeration. Default values preserve
 all eight Goal146 package/final hashes, and a custom all-three composition
 passes the shared Runtime/checkpoint/replay/action-binding seam. Goals 146 and
 147 remain `accepted=false`; the current next work is their bundled manual
 composer/authoring workflow review.
+
+Goal147A is GREEN. The real Goal147 WinForms checked-list lifecycle is now
+programmatically silent (0 applies), one operator ItemCheck applies once using
+post-event state, Refresh/Delete rebinds are safe without a document, and heavy
+materialize/qualify bodies run off the UI thread with responsive message pumping
+and control restoration. Certification composes each target with its sorted
+transitive optional dependency closure. A synthetic three-module catalog proves
+3 initial executions, 3 cache reuses, selective base-change invalidation at
+2 executed / 1 reused, corrupt-dependent regeneration and deterministic cycle
+rejection before Runtime execution. Goal146 and Goal147 remain `accepted=false`.
 
 Goal145 is accepted by the repository owner's exact Goal146 human handoff with
 `implementationStatus=GREEN`, `accepted=true`, `acceptedByHuman=true`,
@@ -2392,7 +2402,7 @@ The selected-candidate path now has the canonical runtime/player proof chain:
 candidate package -> package validation -> canonical runtime playthrough -> save/load/replay proof -> player adapter contract -> player-loop readiness plan -> Runtime-owned player command loop -> Unity/player playback frames -> Goal137 human acceptance -> runtime-backed stepper/HUD model -> Unity/player stepper smoke -> Goal138 human acceptance -> runtime-backed interactive controls model/script/session -> Unity/player controls smoke -> one-click report -> Goal139 human acceptance -> controls UX polish -> bounded Unity editor noise classification
 ```
 
-Do not start Goal147 without a separate task. Do not start sample mutation,
+Do not start Goal148 without a separate task. Do not start sample mutation,
 `.llmgc/manual/**`, live geodata/provider, public schema changes, Lua,
 generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/
 packages/StreamingAssets or release packaging work from this handoff.

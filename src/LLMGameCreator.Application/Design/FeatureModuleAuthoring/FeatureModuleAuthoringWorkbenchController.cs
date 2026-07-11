@@ -44,6 +44,7 @@ public sealed class FeatureModuleAuthoringWorkbenchController
     public FeatureModuleCertificationLedger? LastCertificationLedger { get; private set; }
     public bool Dirty { get; private set; }
     public int DirtyTransitionCount { get; private set; }
+    public int SelectedModuleApplyCount { get; private set; }
     public int MaterializationInvocationCount { get; private set; }
 
     public FeatureModuleLibrarySnapshot RefreshLibrary()
@@ -94,6 +95,7 @@ public sealed class FeatureModuleAuthoringWorkbenchController
         EnsureLibrary();
         var selected = moduleIds.OrderBy(id => id, StringComparer.Ordinal).ToList();
         if (Document!.SelectedModuleIds.SequenceEqual(selected, StringComparer.Ordinal)) return;
+        SelectedModuleApplyCount++;
         Document = Document with
         {
             SelectedModuleIds = selected,

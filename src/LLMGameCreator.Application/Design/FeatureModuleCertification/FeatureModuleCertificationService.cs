@@ -51,26 +51,38 @@ public sealed class FeatureModuleCertificationService
             if (state == FeatureModuleCertificationCacheReadState.Corrupt) corrupt = true;
             var output = Path.Combine(Path.GetFullPath(executionRoot), FeatureModuleLibraryFingerprintService.Hash(item.ModuleId));
             var qualification = _compositionService.ComposeAndQualify(
-                repositoryRoot, library.Catalog, [item.ModuleId], output,
-                FeatureModuleCompositionIdentity.CompositionId(library.Catalog, [item.ModuleId]));
-            var parameterValidation = _parameters.Validate(library.Catalog, [item.ModuleId], []);
+                repositoryRoot, library.Catalog, item.CertificationSelectedModuleIds, output,
+                FeatureModuleCompositionIdentity.CompositionId(library.Catalog, item.CertificationSelectedModuleIds));
+            var parameterValidation = _parameters.Validate(library.Catalog, item.CertificationSelectedModuleIds, []);
             var result = qualification.Result;
+            var target = library.Catalog.Modules.Single(module => module.ModuleId == item.ModuleId);
+            var targetObservations = result.SemanticEffects.Observations
+                .Where(observation => observation.ModuleId == item.ModuleId)
+                .ToList();
+            var targetRuntimeEffectsPassed = target.RuntimeEffectContracts.Count > 0
+                                             && targetObservations.Count == target.RuntimeEffectContracts.Count
+                                             && targetObservations.All(observation => observation.Passed);
             var entry = new FeatureModuleCertificationEntry
             {
                 ModuleId = item.ModuleId,
+                CertificationSelectedModuleIds = item.CertificationSelectedModuleIds,
+                OptionalDependencyClosureIds = item.OptionalDependencyClosureIds,
+                DependencyClosureFingerprint = item.DependencyClosureFingerprint,
                 ModuleFingerprint = item.ModuleFingerprint,
                 DependencyFingerprint = item.DependencyFingerprint,
                 BasePackageSha256 = item.BasePackageSha256,
                 RuntimeQualifierContractVersion = item.RuntimeQualifierContractVersion,
                 ActionPlanSignature = item.ActionPlanSignature,
                 ParameterDefaultsFingerprint = item.ParameterDefaultsFingerprint,
-                Status = result.Passed && parameterValidation.Passed ? "GREEN" : "FAILED",
+                Status = result.Passed && parameterValidation.Passed && targetRuntimeEffectsPassed ? "GREEN" : "FAILED",
                 StructuralValidationPassed = library.Validation.Passed,
                 DefaultParameterValidationPassed = parameterValidation.Passed,
                 MaterializationPassed = result.MutationAuditPassed,
                 PackageValidationPassed = result.PackageValidationPassed,
                 RuntimeQualificationPassed = result.Passed,
-                RuntimeEffectsPassed = result.SemanticEffects.Passed,
+                RuntimeEffectsPassed = targetRuntimeEffectsPassed,
+                ClosureRuntimeEffectsPassed = result.SemanticEffects.Passed,
+                TargetRuntimeEffectsPassed = targetRuntimeEffectsPassed,
                 CheckpointReloadPassed = result.CheckpointReloadPassed,
                 FullReplayEquivalent = result.FullReplayEquivalent,
                 ActionBindingPassed = result.ActionBindingsPassed,

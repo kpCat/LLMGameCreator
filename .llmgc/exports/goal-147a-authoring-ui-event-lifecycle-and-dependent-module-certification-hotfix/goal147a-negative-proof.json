@@ -1,0 +1,18 @@
+{
+    "schemaVersion":  "goal147a_negative_proof_v1",
+    "status":  "GREEN",
+    "delayedItemCheckCallbackAbsent":  true,
+    "refreshWithoutDocumentDoesNotThrow":  true,
+    "deleteRebindWithoutDocumentDoesNotThrow":  true,
+    "concurrentHeavyOperationRejected":  true,
+    "heavyFailureRestoresControls":  true,
+    "unknownDependencyRejected":  true,
+    "dependencyCycleRejectedBeforeRuntime":  true,
+    "corruptDependentCacheRejected":  true,
+    "noModuleIdSpecificUiBranch":  true,
+    "noModuleIdSpecificCertificationBranch":  true,
+    "noCompilerTestOrPowerShellChildProcess":  true,
+    "historicalArtifactsRewritten":  false,
+    "accepted":  false,
+    "passed":  true
+}

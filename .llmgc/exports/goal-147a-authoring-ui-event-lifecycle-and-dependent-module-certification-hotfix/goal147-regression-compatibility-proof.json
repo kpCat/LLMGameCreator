@@ -1,0 +1,15 @@
+{
+    "schemaVersion":  "goal147_regression_compatibility_proof_v1",
+    "status":  "GREEN",
+    "goal147RegressionGreen":  true,
+    "goal146RegressionGreen":  true,
+    "unitySmokeStillGreen":  true,
+    "customPackageSha256":  "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+    "customFinalStateHash":  "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e",
+    "checkpointReloadPassed":  true,
+    "fullReplayEquivalent":  true,
+    "actionBindingPassed":  true,
+    "goal146Accepted":  false,
+    "goal147Accepted":  false,
+    "passed":  true
+}

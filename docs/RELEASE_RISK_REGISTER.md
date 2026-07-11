@@ -88,6 +88,8 @@ Goal 146 review note: Goal145 is accepted by human handoff. Goal146 closes the i
 
 Goal 147 review note: the immediate in-memory/hardcoded authoring risk is bounded by a file-based fingerprinted module registry, eight generic typed parameters, atomic saved-composition persistence with stale/missing-module diagnostics, and independently cached per-module certification. A 100-module catalog avoids powerset certification and keeps interaction coverage at 9 rows under the 24-row cap. Default Goal146 hashes remain stable and a custom all-three composition passes the shared Runtime seam. Goals 146 and 147 remain unaccepted until their combined WinForms authoring and saved-composition evidence workflow is reviewed; all broader release, provider, schema, Lua, art and Unity gameplay-truth risks remain open.
 
+Goal 147A review note: the delayed ItemCheck callback/stale-document risk and UI-thread heavy-action freeze risk are repaired with real STA lifecycle coverage and off-thread in-process execution. The flat certification dependency fingerprint is replaced by deterministic transitive closure, with selective dependent invalidation and pre-Runtime cycle rejection. This does not accept Goals 146/147 or reduce broader release, schema, provider, Lua, art or Unity gameplay-truth risks.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

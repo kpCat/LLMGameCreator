@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "dependent_module_certification_proof_v1",
+  "status": "GREEN",
+  "ledgerEntryCount": 3,
+  "initialExecutedCount": 3,
+  "initialGreen": true,
+  "secondRunReusedCount": 3,
+  "dependentCertificationSelectedModuleIds": [
+    "feature.synthetic.base_optional",
+    "feature.synthetic.dependent_optional"
+  ],
+  "dependentOptionalDependencyClosureIds": [
+    "feature.synthetic.base_optional"
+  ],
+  "dependencyClosureFingerprint": "5b572b92db9d974704c283754f34815d61e11e3772aab17c6f3f80b2ff9684c5",
+  "dependencyChangeExecutedCount": 2,
+  "dependencyChangeReusedCount": 1,
+  "unrelatedEntryReusedAfterDependencyChange": true,
+  "corruptDependentCacheExecutedCount": 1,
+  "corruptDependentCacheRegenerated": true,
+  "dependencyCycleRejected": true,
+  "unknownDependencyRejected": true,
+  "runtimeInvocationsBeforeCycleRejection": 0,
+  "transitiveDependencyClosurePassed": true,
+  "composeAndQualifyReceivesDependencyClosure": true,
+  "targetRequiredEffectContractsPassed": true,
+  "noModuleIdSpecificCertificationBranch": true,
+  "passed": true
+}

@@ -1,0 +1,38 @@
+{
+    "schemaVersion":  "goal147a_file_index_v1",
+    "fileCount":  6,
+    "files":  [
+                  {
+                      "relativePath":  "goal147a-hotfix-dashboard.json",
+                      "sha256":  "e93021bac42e8a9ffcfb35228ea3d1aa250d888617a8151a22b7747ad6648fdb",
+                      "byteCount":  984
+                  },
+                  {
+                      "relativePath":  "goal147-authoring-ui-event-lifecycle-proof.json",
+                      "sha256":  "1097f6dc2bf147ad11d4243161db4a29d5957d3096ef5ec4d22310742f793395",
+                      "byteCount":  951
+                  },
+                  {
+                      "relativePath":  "dependent-module-certification-proof.json",
+                      "sha256":  "9e2dd5cb6211875dff7fa5c156b704d1a530ff4ea0d94a9ba43a27873422715e",
+                      "byteCount":  1092
+                  },
+                  {
+                      "relativePath":  "goal147-regression-compatibility-proof.json",
+                      "sha256":  "e04d4266c993f994c23c9ecd7710a9a2bdba5ee03bb2fd8f5dd682f414cba5a9",
+                      "byteCount":  600
+                  },
+                  {
+                      "relativePath":  "goal147a-negative-proof.json",
+                      "sha256":  "c30affa43e91cf6a9fccb98b16a766b9a51dced0ad4d1575784d7e442a70cedf",
+                      "byteCount":  705
+                  },
+                  {
+                      "relativePath":  "goal147a-report.md",
+                      "sha256":  "5b587cbcaab57903ebd9dd57acf8ab5caf75fbf7df123979e9b7666f3f1b18be",
+                      "byteCount":  646
+                  }
+              ],
+    "sha256Included":  true,
+    "passed":  true
+}

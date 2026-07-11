@@ -303,6 +303,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/GOAL.md` | Goal 146 task: records Goal145 human acceptance, composes eight novel GamePackages from required and optional FeatureModules with deterministic mutation planning, qualifies each through the shared Runtime session/replay seam, adds an in-process WinForms module composer and a read-only Unity matrix consumer. Goal146 remains accepted=false with manual review deferred. |
 | `docs/agent-tasks/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/GOAL.md` | Goal 146A hotfix: removes the fixed eight-row table and optional-module indexing, derives active modules and labels from the catalog, adds generic runtime-effect contracts, exhaustive three-module coverage and bounded deterministic 4/12-module coverage. The synthetic fourth module materializes and passes the shared Runtime qualifier without a Composer branch; all current Goal146 package/final hashes remain unchanged. |
 | `docs/agent-tasks/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/GOAL.md` | Goal 147 task: repository-local file catalog with 10 locked core and 3 optional FeatureModules, 8 typed parameters, atomic saved-composition persistence, fingerprinted incremental per-module certification, 100-module certification scalability with 9 bounded interaction rows, custom Runtime qualification, in-process WinForms authoring and read-only Unity evidence. Result is `GREEN`; Goals 146 and 147 remain accepted=false pending bundled review. |
+| `docs/agent-tasks/goal-147a-authoring-ui-event-lifecycle-and-dependent-module-certification-hotfix/GOAL.md` | Goal 147A P1 hotfix: real STA WinForms lifecycle uses synchronous post-event ItemCheck state with 0 programmatic and 1 operator apply, heavy materialize/qualify actions run off the UI thread, and certification uses deterministic transitive optional dependency closure with selective 2 executed / 1 reused invalidation and pre-Runtime cycle rejection. Goals 146/147 remain accepted=false. |
 | `docs/manual-acceptance/persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification.md` | Goal 147 bundled manual review checklist for the Goal146 composer plus Goal147 typed authoring, persistence, certification and saved-composition evidence workflow. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
@@ -408,6 +409,15 @@ eight Goal146 hashes, while a custom all-three composition passes the same
 Runtime/checkpoint/replay/action-binding qualifier. Goals 146 and 147 remain
 `accepted=false`; their combined workflow is the current manual review.
 
+Goal147A is GREEN. Programmatic Goal147 checked-list binding applies zero
+selection callbacks, one operator check change applies once from post-event UI
+state, Refresh/Delete rebinds are safe with no document, and heavy primary
+actions run off the UI thread while the UI message pump remains responsive.
+Dependent-module certification now includes sorted transitive optional closure;
+changing the synthetic base executes base plus dependent while reusing the
+unrelated entry (2/1), and cycles are rejected before Runtime execution. The
+recommended next work remains the bundled Goals 146/147 review.
+
 Goal146 is GREEN with 10 locked core modules, three Goal142-derived optional
 profile modules and all eight module combinations materialized as novel
 GamePackages. All 8/8 validate and pass the shared Runtime qualifier with
@@ -451,7 +461,7 @@ acceptance, controls UX polish evidence, bounded Unity editor noise
 classification, Goal140 human acceptance and a Runtime-owned command roundtrip
 request/result/snapshot bridge consumed by Unity/player.
 
-Do not start Goal147 without a separate task. Keep sample mutation,
+Do not start Goal148 without a separate task. Keep sample mutation,
 `.llmgc/manual/**`, provider/network, public schema, Lua, generator-library,
 final art/gameplay, Unity scene/prefab/settings/packages/StreamingAssets and
 release packaging out of scope from this handoff.

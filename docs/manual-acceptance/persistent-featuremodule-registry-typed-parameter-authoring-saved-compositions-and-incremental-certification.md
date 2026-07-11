@@ -39,6 +39,24 @@ Normal command:
 Evidence:
 `.llmgc/procedural/goal-147-persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification/`
 
+Goal147A hotfix evidence is also GREEN:
+
+```text
+programmaticItemCheckAppliedCount=0
+operatorItemCheckAppliedCount=1
+refreshWithoutDocumentPassed=true
+deleteRebindWithoutDocumentPassed=true
+heavyWorkRunsOffUiThread=true
+dependencyChangeExecutedCount=2
+dependencyChangeReusedCount=1
+dependencyCycleRejected=true
+goal146Accepted=false
+goal147Accepted=false
+```
+
+Hotfix evidence:
+`.llmgc/procedural/goal-147a-authoring-ui-event-lifecycle-and-dependent-module-certification-hotfix/`
+
 ## Bundled manual checklist
 
 1. Open the existing Goal146 FeatureModule composer and confirm the Goal147

@@ -76,6 +76,8 @@ Goal 145A note: the candidate-selector reentrant bind and selection-drift debt i
 
 Goal 146 note: Goal145 is accepted and the prebuilt-candidate-only composition debt is reduced by an application-layer FeatureModule contract, deterministic planner, reuse of the Goal142 structured mutation engine and one shared Goal145/Goal146 Runtime qualifier. Remaining debt includes bounded parameter authoring/persistence, future module families, Goal141 review, hands-on playable quality and release-grade provider/schema/art/Unity packaging decisions. Goal146 remains unaccepted with manual review deferred.
 
+Goal 147A note: Goal147's delayed CheckedListBox callback, UI-thread heavy-action execution and flat certification dependency fingerprint debts are repaired. Programmatic applies are 0, operator apply is 1 from post-event state, heavy work is off the UI thread, dependency invalidation is 2 executed / 1 unrelated reused and cycles are rejected before Runtime execution. Goals 146/147 remain unaccepted pending bundled review.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

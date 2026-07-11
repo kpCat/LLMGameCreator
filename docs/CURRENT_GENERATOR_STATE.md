@@ -1,8 +1,49 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 147 persistent FeatureModule registry, typed parameter authoring, saved compositions and incremental certification
+Updated by: Goal 147A authoring UI event lifecycle and dependent-module certification hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 147A authoring UI and dependent-module certification hotfix is GREEN:
+
+```text
+implementationStatus=GREEN
+goal146Accepted=false
+goal147Accepted=false
+programmaticItemCheckAppliedCount=0
+refreshWithoutDocumentPassed=true
+deleteRebindWithoutDocumentPassed=true
+operatorItemCheckAppliedCount=1
+operatorItemCheckUsesPostEventState=true
+programmaticRebindDirtyTransitionCount=0
+programmaticRebindMaterializationCount=0
+heavyWorkRunsOffUiThread=true
+uiRemainsPumpResponsiveDuringHeavyWork=true
+controlsDisabledWhileHeavyWorkRuns=true
+dependentModuleCertificationPassed=true
+transitiveDependencyClosurePassed=true
+dependencyChangeExecutedCount=2
+dependencyChangeReusedCount=1
+dependencyCycleRejected=true
+goal147RegressionGreen=true
+goal146RegressionGreen=true
+unitySmokeStillGreen=true
+accepted=false
+nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+```
+
+The production `CheckedListBox.ItemCheck` path is synchronous and derives the
+post-event checked IDs from `ItemCheckEventArgs.NewValue`; programmatic add,
+clear and rebind operations apply zero selection callbacks. Refresh and delete
+rebinds remain safe with no document. Materialization and qualification capture
+UI values first, run the heavy in-process Application work off the UI thread and
+restore disabled controls after success or failure. Certification now composes
+each target with its sorted transitive optional dependency closure and keys the
+cache by the complete dependency closure. A synthetic base/dependent/unrelated
+catalog proves 3 initial executions, 3 reuses, then 2 executions and 1 unrelated
+reuse after the base changes; corrupt dependent cache regenerates and cycles are
+rejected before Runtime execution. Goal146/147 hashes and Unity smoke remain
+GREEN, while both goals remain `accepted=false` for the bundled manual review.
 
 Goal 147 FeatureModule authoring and persistence is GREEN:
 

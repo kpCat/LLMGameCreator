@@ -39,6 +39,9 @@ public sealed class FeatureModuleCertificationCache
                 || !string.Equals(envelope.Entry.ModuleId, plan.ModuleId, StringComparison.Ordinal))
                 return FeatureModuleCertificationCacheReadState.Corrupt;
             if (!string.Equals(envelope.CacheKey, plan.CacheKey, StringComparison.Ordinal)
+                || !envelope.Entry.CertificationSelectedModuleIds.SequenceEqual(plan.CertificationSelectedModuleIds, StringComparer.Ordinal)
+                || !envelope.Entry.OptionalDependencyClosureIds.SequenceEqual(plan.OptionalDependencyClosureIds, StringComparer.Ordinal)
+                || !string.Equals(envelope.Entry.DependencyClosureFingerprint, plan.DependencyClosureFingerprint, StringComparison.Ordinal)
                 || !string.Equals(envelope.Entry.ModuleFingerprint, plan.ModuleFingerprint, StringComparison.Ordinal)
                 || !string.Equals(envelope.Entry.DependencyFingerprint, plan.DependencyFingerprint, StringComparison.Ordinal)
                 || !string.Equals(envelope.Entry.BasePackageSha256, plan.BasePackageSha256, StringComparison.Ordinal)

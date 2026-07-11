@@ -9,6 +9,9 @@ public static class FeatureModuleCertificationVocabulary
 public sealed record FeatureModuleCertificationPlanItem
 {
     public string ModuleId { get; init; } = string.Empty;
+    public IReadOnlyList<string> CertificationSelectedModuleIds { get; init; } = [];
+    public IReadOnlyList<string> OptionalDependencyClosureIds { get; init; } = [];
+    public string DependencyClosureFingerprint { get; init; } = string.Empty;
     public string ModuleFingerprint { get; init; } = string.Empty;
     public string DependencyFingerprint { get; init; } = string.Empty;
     public string BasePackageSha256 { get; init; } = string.Empty;
@@ -28,6 +31,9 @@ public sealed record FeatureModuleCertificationPlan
 public sealed record FeatureModuleCertificationEntry
 {
     public string ModuleId { get; init; } = string.Empty;
+    public IReadOnlyList<string> CertificationSelectedModuleIds { get; init; } = [];
+    public IReadOnlyList<string> OptionalDependencyClosureIds { get; init; } = [];
+    public string DependencyClosureFingerprint { get; init; } = string.Empty;
     public string ModuleFingerprint { get; init; } = string.Empty;
     public string DependencyFingerprint { get; init; } = string.Empty;
     public string BasePackageSha256 { get; init; } = string.Empty;
@@ -41,6 +47,8 @@ public sealed record FeatureModuleCertificationEntry
     public bool PackageValidationPassed { get; init; }
     public bool RuntimeQualificationPassed { get; init; }
     public bool RuntimeEffectsPassed { get; init; }
+    public bool ClosureRuntimeEffectsPassed { get; init; }
+    public bool TargetRuntimeEffectsPassed { get; init; }
     public bool CheckpointReloadPassed { get; init; }
     public bool FullReplayEquivalent { get; init; }
     public bool ActionBindingPassed { get; init; }

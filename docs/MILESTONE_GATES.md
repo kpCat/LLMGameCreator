@@ -90,6 +90,8 @@ Goal 146 note: Goal145 is accepted by exact human handoff with `acceptedByCodex=
 
 Goal 147 note: a repository-local fingerprinted FeatureModule catalog, generic typed parameters, atomic saved compositions and incremental singleton certification extend the Goal146 composer without changing public GamePackage schema or Runtime authority. All current optional modules certify; a 100-module catalog has 100 certification entries but only 9 bounded interaction rows under a 24-row cap. Defaults preserve all Goal146 hashes and one custom all-three composition passes the same Runtime/checkpoint/replay/action-binding seam. Goals 146 and 147 remain `accepted=false` pending bundled manual review; this does not close `vertical_slice_final_verification` or authorize provider, Lua, generator-library or Unity gameplay-truth work.
 
+Goal 147A note: the Goal147 authoring checked-list lifecycle is programmatically silent, uses synchronous post-event state for one operator apply, keeps Refresh/Delete safe without a document and runs heavy materialize/qualify bodies off the UI thread. Certification now includes deterministic transitive optional dependencies; changing a base invalidates base plus dependent while reusing unrelated cache (2/1), and cycles are rejected before Runtime execution. Goals 146/147 remain `accepted=false` pending the same bundled review.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

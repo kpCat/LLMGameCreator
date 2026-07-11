@@ -21,6 +21,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
     private TextBox? _goal147Results;
     private readonly List<Button> _goal147Buttons = [];
     private bool _goal147Binding;
+    private bool _goal147OperationRunning;
+    private Func<Func<string>, Task<string>> _goal147HeavyExecutor = operation => Task.Run(operation);
+    private Func<FeatureModuleAuthoringWorkbenchController, string> _goal147MaterializeAndQualifyOperation = controller =>
+    {
+        var result = controller.MaterializeAndQualify();
+        return "materialized=" + result.PackageSha256 + "; final=" + result.FinalStateHash;
+    };
+    private Func<FeatureModuleAuthoringWorkbenchController, string> _goal147SaveMaterializeAndQualifyOperation = controller =>
+    {
+        var result = controller.SaveMaterializeAndQualify();
+        return "GREEN package=" + result.PackageSha256 + "; final=" + result.FinalStateHash;
+    };
 
     private void ConfigureGoal147AuthoringSurface(TabControl innerTabs)
     {
@@ -129,34 +141,51 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
             BindGoal147Status();
             return "validationPassed=" + validation.Passed + Environment.NewLine + string.Join(Environment.NewLine, validation.Diagnostics);
         });
-        _goal147Buttons[6].Click += async (_, _) => await Goal147RunAsync(() =>
+        _goal147Buttons[6].Click += async (_, _) =>
         {
-            Goal147CaptureDocument();
-            var result = Goal147Controller().MaterializeAndQualify();
-            BindGoal147All();
-            return "materialized=" + result.PackageSha256 + "; final=" + result.FinalStateHash;
-        });
+            await Goal147RunHeavyAsync(
+                () =>
+                {
+                    Goal147CaptureDocument();
+                    var controller = Goal147Controller();
+                    return () => _goal147MaterializeAndQualifyOperation(controller);
+                },
+                BindGoal147All);
+        };
         _goal147Buttons[7].Click += async (_, _) => await Goal147RunAsync(() =>
         {
             Goal147Controller().RefreshLibrary();
             BindGoal147All();
             return "library refreshed";
         });
-        _goal147Buttons[8].Click += async (_, _) => await Goal147RunAsync(() =>
+        _goal147Buttons[8].Click += async (_, _) =>
         {
-            Goal147CaptureDocument();
-            var result = Goal147Controller().SaveMaterializeAndQualify();
-            BindGoal147All();
-            return "GREEN package=" + result.PackageSha256 + "; final=" + result.FinalStateHash;
-        });
+            await Goal147RunHeavyAsync(
+                () =>
+                {
+                    Goal147CaptureDocument();
+                    var controller = Goal147Controller();
+                    return () => _goal147SaveMaterializeAndQualifyOperation(controller);
+                },
+                BindGoal147All);
+        };
         if (_goal147OptionalModules is not null)
-            _goal147OptionalModules.ItemCheck += (_, _) => BeginInvoke(new Action(() =>
-            {
-                if (_goal147Binding || _goal147OptionalModules is null) return;
-                Goal147Controller().SetSelectedModules(_goal147OptionalModules.CheckedItems.Cast<string>().ToList());
-                BuildGoal147ParameterEditors();
-                BindGoal147Status();
-            }));
+            _goal147OptionalModules.ItemCheck += Goal147OptionalModuleItemCheck;
+    }
+
+    private void Goal147OptionalModuleItemCheck(object? sender, ItemCheckEventArgs args)
+    {
+        var modules = _goal147OptionalModules;
+        var controller = _goal147Controller;
+        if (_goal147Binding || modules is null || controller?.Document is null) return;
+        if (args.Index < 0 || args.Index >= modules.Items.Count || modules.Items[args.Index] is not string changedId) return;
+
+        var postEventIds = modules.CheckedItems.Cast<string>().ToHashSet(StringComparer.Ordinal);
+        if (args.NewValue == CheckState.Checked) postEventIds.Add(changedId);
+        else postEventIds.Remove(changedId);
+        controller.SetSelectedModules(postEventIds.OrderBy(id => id, StringComparer.Ordinal).ToList());
+        BuildGoal147ParameterEditors();
+        BindGoal147Status();
     }
 
     private FeatureModuleAuthoringWorkbenchController Goal147Controller()
@@ -316,12 +345,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         ]);
     }
 
-    private async Task Goal147RunAsync(Func<string> operation)
+    private Task Goal147RunAsync(Func<string> operation)
     {
+        if (_goal147OperationRunning) return Task.CompletedTask;
+        _goal147OperationRunning = true;
         Goal147SetRunning(true);
         try
         {
-            await Task.Yield();
             var message = operation();
             if (_goal147Diagnostics is not null) _goal147Diagnostics.Text = Goal144Tail(message);
         }
@@ -329,7 +359,41 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         {
             if (_goal147Diagnostics is not null) _goal147Diagnostics.Text = Goal144Tail("failed: " + exception.Message);
         }
-        finally { Goal147SetRunning(false); }
+        finally
+        {
+            _goal147OperationRunning = false;
+            Goal147SetRunning(false);
+        }
+        return Task.CompletedTask;
+    }
+
+    private async Task Goal147RunHeavyAsync(Func<Func<string>> captureOperation, Action onCompleted)
+    {
+        if (_goal147OperationRunning)
+        {
+            if (_goal147Diagnostics is not null) _goal147Diagnostics.Text = "An authoring operation is already running.";
+            return;
+        }
+
+        _goal147OperationRunning = true;
+        Goal147SetRunning(true);
+        if (_goal147Diagnostics is not null) _goal147Diagnostics.Text = "Running in-process materialization and Runtime qualification...";
+        try
+        {
+            var operation = captureOperation();
+            var message = await _goal147HeavyExecutor(operation);
+            onCompleted();
+            if (_goal147Diagnostics is not null) _goal147Diagnostics.Text = Goal144Tail(message);
+        }
+        catch (Exception exception)
+        {
+            if (_goal147Diagnostics is not null) _goal147Diagnostics.Text = Goal144Tail("failed: " + exception.Message);
+        }
+        finally
+        {
+            _goal147OperationRunning = false;
+            Goal147SetRunning(false);
+        }
     }
 
     private void Goal147SetRunning(bool running)
@@ -338,5 +402,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         if (_goal147OptionalModules is not null) _goal147OptionalModules.Enabled = !running;
         if (_goal147SavedCompositions is not null) _goal147SavedCompositions.Enabled = !running;
         if (_goal147Parameters is not null) _goal147Parameters.Enabled = !running;
+        if (_goal147CompositionId is not null) _goal147CompositionId.Enabled = !running;
+        if (_goal147DisplayName is not null) _goal147DisplayName.Enabled = !running;
+        if (_goal147Description is not null) _goal147Description.Enabled = !running;
     }
 }
