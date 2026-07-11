@@ -33,6 +33,8 @@ public static class ProductLineStrategyRebaselineVocabulary
         "operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification";
     public const string Goal146Gate =
         "featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification";
+    public const string Goal146AGate =
+        "generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification";
     public const string NextGoal =
         "goal_134_canonical_runtime_selected_candidate_playthrough_matrix";
     public const string PostGoal134NextGoal =

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 146 FeatureModule composition workbench and novel GamePackage Runtime qualification matrix
+Updated by: Goal 146A generic FeatureModule composer scalability and catalog-driven coverage hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 145 is accepted by the repository owner's exact human handoff:
@@ -50,6 +50,42 @@ projectionOnly=false
 unityGameplayTruth=false
 nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
 ```
+
+Goal 146A generic Composer scalability hotfix is GREEN:
+
+```text
+generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification GREEN
+goal146Accepted=false
+goal146ManualReviewDeferred=true
+goal146GenericCatalogDrivenComposer=true
+goal146HardcodedCombinationTableAbsent=true
+goal146ActiveOptionalSetDerivedFromCatalog=true
+goal146GenericCompositionIdGenerator=true
+goal146GenericRuntimeEffectContracts=true
+goal146CurrentCoverageMode=exhaustive_small_catalog
+goal146CurrentGeneratedCompositionCount=8
+goal146SyntheticFourthModulePassed=true
+goal146SyntheticFourthCoverageMode=bounded_interaction_coverage
+goal146SyntheticFourthGeneratedCompositionCount=13
+goal146LargeCatalogCoverageBounded=true
+goal146LargeCatalogCoverageDeterministic=true
+goal146LargeCatalogGeneratedCompositionCount=21
+goal146LargeCatalogMaxTotalRows=24
+goal146CurrentPackageHashesPreserved=true
+goal146CurrentFinalHashesPreserved=true
+nextProductGoal=goal_147_featuremodule_authoring_parameters_and_composition_persistence
+```
+
+The active optional module set now comes from the catalog. Three optional
+modules use algorithmic `exhaustive_small_catalog` coverage with the same eight
+Goal146 package and final-state hashes. Four optional modules switch to
+`bounded_interaction_coverage` with 13 rows rather than the 16-row powerset;
+the deterministic twelve-module proof produces 21 rows under `maxTotalRows=24`
+instead of enumerating 4096. A synthetic fuel-reserve module is appended at
+runtime, materializes without a Composer branch, passes the shared Runtime
+qualifier, checkpoint reload, full replay and action binding, and observes its
+declared generic inventory effect. Goal146 remains `accepted=false` with
+`manualReviewDeferred=true`.
 
 Goal146 composes all eight combinations of the three Goal142-derived optional
 profile modules over the immutable balanced base. Every new package validates,

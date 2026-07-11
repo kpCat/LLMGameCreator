@@ -43,9 +43,9 @@
   "checkpointHash": "0336f91c07f656aefb9edbe03310b23d0fc7a4ea49665993e5f3a190a715b2d8",
   "finalStateHash": "d5ad29ee7c350918681c2859b80f5d2944834a6414918a16d8b4e1c0746753b9",
   "semanticEffects": [
-    "alchemy effect observed",
-    "combat effect observed",
-    "exploration/resource effect observed"
+    "runtime_effect.alchemy_focus observed",
+    "runtime_effect.combat_focus observed",
+    "runtime_effect.exploration_resource_focus observed"
   ],
   "availableOptionalModuleIds": [
     "feature.profile.alchemy_focus",

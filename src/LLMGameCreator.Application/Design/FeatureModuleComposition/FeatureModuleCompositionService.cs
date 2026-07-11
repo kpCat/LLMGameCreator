@@ -21,6 +21,8 @@ public sealed class FeatureModuleCompositionService
     private readonly ProductLineRuntimeQualifier _qualifier;
     private readonly FeatureModuleCompositionPlanner _planner;
     private readonly FeatureModuleCompositionValidator _compositionValidator;
+    private readonly FeatureModuleCompositionCoveragePlanner _coveragePlanner;
+    private readonly FeatureModuleRuntimeEffectEvaluator _effectEvaluator;
     private readonly IGamePackageValidator _packageValidator;
     private readonly FeatureModuleCompositionArtifactService _artifactService;
 
@@ -29,6 +31,8 @@ public sealed class FeatureModuleCompositionService
         ProductLineRuntimeVariantMaterializer? materializer = null,
         FeatureModuleCompositionPlanner? planner = null,
         FeatureModuleCompositionValidator? compositionValidator = null,
+        FeatureModuleCompositionCoveragePlanner? coveragePlanner = null,
+        FeatureModuleRuntimeEffectEvaluator? effectEvaluator = null,
         IGamePackageValidator? packageValidator = null,
         FeatureModuleCompositionArtifactService? artifactService = null)
     {
@@ -36,6 +40,8 @@ public sealed class FeatureModuleCompositionService
         _qualifier = new ProductLineRuntimeQualifier(runtime ?? throw new ArgumentNullException(nameof(runtime)));
         _compositionValidator = compositionValidator ?? new FeatureModuleCompositionValidator();
         _planner = planner ?? new FeatureModuleCompositionPlanner(_compositionValidator);
+        _coveragePlanner = coveragePlanner ?? new FeatureModuleCompositionCoveragePlanner(_compositionValidator);
+        _effectEvaluator = effectEvaluator ?? new FeatureModuleRuntimeEffectEvaluator();
         _packageValidator = packageValidator ?? new GamePackageValidator();
         _artifactService = artifactService ?? new FeatureModuleCompositionArtifactService();
     }
@@ -67,28 +73,34 @@ public sealed class FeatureModuleCompositionService
         var baseJson = await File.ReadAllTextAsync(basePackagePath, Encoding.UTF8, cancellationToken).ConfigureAwait(false);
         var catalog = FeatureModuleCatalog.LoadFromGoal142(root, runRequest.Goal142Root);
         ValidateCatalog(catalog);
-        var selectedModuleIds = NormalizeSelectedModules(runRequest.SelectedModuleIds);
+        var selectedModuleIds = NormalizeSelectedModules(catalog, runRequest.SelectedModuleIds);
         var selectedCompositionId = string.IsNullOrWhiteSpace(runRequest.CompositionId)
-            ? CompositionId(selectedModuleIds)
+            ? FeatureModuleCompositionIdentity.CompositionId(catalog, selectedModuleIds)
             : runRequest.CompositionId;
-        var selectedRequest = RequestFor(selectedCompositionId, selectedModuleIds);
+        var selectedRequest = RequestFor(catalog, selectedCompositionId, selectedModuleIds);
         var goal142Hashes = goal142Matrix.Candidates.Select(row => row.PackageSha256).ToHashSet(StringComparer.Ordinal);
 
+        var coveragePlan = _coveragePlanner.Plan(catalog, selectedModuleIds);
+        var effectiveSpecs = coveragePlan.CompositionSpecs.Select(spec => SameModules(spec.ModuleIds, selectedModuleIds)
+            ? spec with { CompositionId = selectedCompositionId }
+            : spec).ToList();
+        coveragePlan = coveragePlan with { CompositionSpecs = effectiveSpecs };
         var prepared = new List<PreparedComposition>();
-        foreach (var spec in MatrixSpecs())
+        RuntimeInteractiveSession? baselineSession = null;
+        foreach (var spec in effectiveSpecs)
         {
-            var effective = SameModules(spec.ModuleIds, selectedModuleIds)
-                ? spec with { CompositionId = selectedCompositionId }
-                : spec;
-            prepared.Add(BuildComposition(
+            var item = BuildComposition(
                 root,
                 outputRoot,
                 catalog,
                 basePackagePath,
                 baseHash,
                 baseJson,
-                effective,
-                goal142Hashes));
+                spec,
+                goal142Hashes,
+                baselineSession);
+            prepared.Add(item);
+            if (spec.ModuleIds.Count == 0) baselineSession = item.Artifacts.Session;
         }
 
         var results = prepared.Select(item => item.Result).OrderBy(item => item.CompositionId, StringComparer.Ordinal).ToList();
@@ -119,12 +131,13 @@ public sealed class FeatureModuleCompositionService
             SameCanonicalActionPlanUsedForAllCompositions = actionSignatures == 1,
             MultiModulePackagesDistinctFromAllGoal142Candidates = results.Where(result => result.SelectedOptionalModuleIds.Count >= 2)
                 .All(result => !goal142Hashes.Contains(result.PackageSha256)),
+            CoveragePlan = coveragePlan,
             Compositions = results
         };
-        ValidateMatrix(matrix);
+        ValidateMatrix(matrix, coveragePlan);
 
         var selected = prepared.Single(item => SameModules(item.Spec.ModuleIds, selectedModuleIds));
-        var selection = BuildSelection(selected);
+        var selection = BuildSelection(catalog, selected);
         var comparison = new FeatureModuleCompositionComparison
         {
             BaselineCompositionId = prepared.Single(item => item.Spec.ModuleIds.Count == 0).Result.CompositionId,
@@ -166,6 +179,67 @@ public sealed class FeatureModuleCompositionService
         return _compositionValidator.Validate(catalog, all, parameterOverrides);
     }
 
+    public FeatureModuleCompositionQualification ComposeAndQualify(
+        string repositoryRootPath,
+        FeatureModuleCatalogDocument catalog,
+        IReadOnlyList<string> selectedModuleIds,
+        string outputRootPath,
+        string compositionId = "")
+    {
+        var root = ResolveRepositoryRoot(repositoryRootPath);
+        ValidateCatalog(catalog);
+        var selected = selectedModuleIds.OrderBy(id => id, StringComparer.Ordinal).ToList();
+        var validation = ValidateSelection(catalog, selected);
+        if (!validation.Passed)
+            throw new InvalidOperationException("FeatureModule composition validation failed: " + string.Join("; ", validation.Diagnostics));
+
+        var goal142Root = Path.Combine(root, FeatureModuleCompositionVocabulary.Goal142Root.Replace('/', Path.DirectorySeparatorChar));
+        var matrix = ReadJson<ProductLineRuntimeVariantMatrixResult>(Path.Combine(
+            goal142Root,
+            ProductLineRuntimeVariantMatrixVocabulary.MatrixResultFileName));
+        var baselineRow = matrix.Candidates.Single(row => row.CandidateId == FeatureModuleCompositionVocabulary.BaselineCandidateId);
+        var basePackagePath = Path.GetFullPath(Path.Combine(root, baselineRow.PackagePath.Replace('/', Path.DirectorySeparatorChar)));
+        var baseHash = HashFile(basePackagePath);
+        if (!string.Equals(baseHash, baselineRow.PackageSha256, StringComparison.Ordinal))
+            throw new InvalidOperationException("Goal142 balanced baseline package hash mismatch rejected.");
+        var baseJson = File.ReadAllText(basePackagePath, Encoding.UTF8);
+        var outputRoot = Path.GetFullPath(outputRootPath);
+        GuardNoManual(root, outputRoot);
+        Directory.CreateDirectory(outputRoot);
+        var goal142Hashes = matrix.Candidates.Select(row => row.PackageSha256).ToHashSet(StringComparer.Ordinal);
+
+        var baselineSpec = new FeatureModuleCompositionCoverageSpec
+        {
+            CompositionId = FeatureModuleCompositionIdentity.CompositionId(catalog, []),
+            DisplayName = FeatureModuleCompositionIdentity.DisplayName(catalog, []),
+            CoverageReasons = ["runtime_effect_baseline"]
+        };
+        var baseline = BuildComposition(root, outputRoot, catalog, basePackagePath, baseHash, baseJson,
+            baselineSpec, goal142Hashes, null);
+        if (selected.Count == 0) return new FeatureModuleCompositionQualification
+        {
+            Result = baseline.Result,
+            Artifacts = baseline.Artifacts
+        };
+
+        var selectedSpec = new FeatureModuleCompositionCoverageSpec
+        {
+            CompositionId = string.IsNullOrWhiteSpace(compositionId)
+                ? FeatureModuleCompositionIdentity.CompositionId(catalog, selected)
+                : compositionId,
+            DisplayName = FeatureModuleCompositionIdentity.DisplayName(catalog, selected),
+            ModuleIds = selected,
+            CoverageReasons = ["operator_selected"]
+        };
+        var composed = BuildComposition(root, outputRoot, catalog, basePackagePath, baseHash, baseJson,
+            selectedSpec, goal142Hashes, baseline.Artifacts.Session);
+        return new FeatureModuleCompositionQualification
+        {
+            Result = composed.Result,
+            Artifacts = composed.Artifacts
+        };
+    }
+
     private PreparedComposition BuildComposition(
         string root,
         string outputRoot,
@@ -173,14 +247,15 @@ public sealed class FeatureModuleCompositionService
         string basePackagePath,
         string baseHash,
         string baseJson,
-        CompositionSpec spec,
-        IReadOnlySet<string> goal142Hashes)
+        FeatureModuleCompositionCoverageSpec spec,
+        IReadOnlySet<string> goal142Hashes,
+        RuntimeInteractiveSession? baselineSession)
     {
-        var request = RequestFor(spec.CompositionId, spec.ModuleIds);
+        var request = RequestFor(catalog, spec.CompositionId, spec.ModuleIds);
         var plan = _planner.Plan(catalog, request, Relative(root, basePackagePath), baseHash, true);
         var recipe = new ProductLineRuntimeVariantRecipe
         {
-            RecipeId = "composition_" + ShortName(spec.ModuleIds).Replace('-', '_'),
+            RecipeId = "composition_" + FeatureModuleCompositionIdentity.ShortName(catalog, spec.ModuleIds).Replace('-', '_'),
             CandidateId = spec.CompositionId,
             DisplayName = spec.DisplayName,
             VariantKind = spec.ModuleIds.Count == 0 ? "baseline_composition" : string.Join("+", spec.ModuleIds),
@@ -190,12 +265,12 @@ public sealed class FeatureModuleCompositionService
         var context = new ProductLineRuntimeVariantMetadataContext
         {
             GoalId = FeatureModuleCompositionVocabulary.GoalId,
-            VersionSuffix = "0.1.146-" + ShortName(spec.ModuleIds),
+            VersionSuffix = "0.1.146-" + FeatureModuleCompositionIdentity.ShortName(catalog, spec.ModuleIds),
             ManifestDescription = spec.DisplayName + " Goal146 FeatureModule composition.",
             ProfileTitle = spec.DisplayName,
             ProfileDescription = "Goal146 deterministic FeatureModule composition over the immutable Goal142 balanced base.",
             Genre = "featuremodule-composition",
-            Tone = ShortName(spec.ModuleIds),
+            Tone = FeatureModuleCompositionIdentity.ShortName(catalog, spec.ModuleIds),
             PresentationMode = "canonical-runtime",
             WorldTopology = "minimal-map-vertical-slice",
             ActorModel = "package-runtime",
@@ -252,7 +327,7 @@ public sealed class FeatureModuleCompositionService
             CheckpointId = "goal146-" + spec.CompositionId + "-checkpoint-after-craft",
             FinalCheckpointId = "goal146-" + spec.CompositionId + "-final-journal"
         });
-        var semantic = BuildSemanticProof(spec, qualification.Session);
+        var semantic = BuildSemanticProof(catalog, spec, qualification.Session, baselineSession ?? qualification.Session);
         var distinctFromGoal142 = !goal142Hashes.Contains(packageSha);
         var passed = packageValidation.Passed
                      && materialized.MutationAudit.Passed
@@ -351,43 +426,45 @@ public sealed class FeatureModuleCompositionService
         IReadOnlyList<PreparedComposition> prepared)
     {
         var required = catalog.Modules.Where(module => module.Required).Select(module => module.ModuleId).ToList();
-        var alchemy = catalog.Modules.Single(module => module.ModuleId == FeatureModuleCompositionVocabulary.OptionalModuleIds[0]);
-        var combatId = FeatureModuleCompositionVocabulary.OptionalModuleIds[1];
+        var optional = catalog.Modules.Where(module => module.Selectable && !module.Required)
+            .OrderBy(module => module.ModuleId, StringComparer.Ordinal).ToList();
+        var firstOptional = optional.First();
+        var secondOptionalId = optional.Skip(1).First().ModuleId;
         var unknown = _compositionValidator.Validate(catalog, required.Append("feature.profile.unknown").ToList());
         var deselect = _compositionValidator.Validate(catalog, required.Skip(1).ToList());
         var missingDependency = _compositionValidator.Validate(catalog,
-            required.Where(id => id != "feature.crafting.recipes").Append(alchemy.ModuleId).ToList());
+            required.Where(id => !firstOptional.Dependencies.Contains(id, StringComparer.Ordinal)).Append(firstOptional.ModuleId).ToList());
         var conflictCatalog = catalog with
         {
-            Modules = catalog.Modules.Select(module => module.ModuleId == alchemy.ModuleId
-                ? module with { Conflicts = [combatId] }
+            Modules = catalog.Modules.Select(module => module.ModuleId == firstOptional.ModuleId
+                ? module with { Conflicts = [secondOptionalId] }
                 : module).ToList()
         };
-        var conflict = _compositionValidator.Validate(conflictCatalog, required.Concat([alchemy.ModuleId, combatId]).ToList());
-        var duplicate = _compositionValidator.Validate(catalog, required.Concat([alchemy.ModuleId, alchemy.ModuleId]).ToList());
-        var collisionOperation = alchemy.MutationOperations[0] with
+        var conflict = _compositionValidator.Validate(conflictCatalog, required.Concat([firstOptional.ModuleId, secondOptionalId]).ToList());
+        var duplicate = _compositionValidator.Validate(catalog, required.Concat([firstOptional.ModuleId, firstOptional.ModuleId]).ToList());
+        var collisionOperation = firstOptional.MutationOperations[0] with
         {
             OperationId = "negative.conflicting.target",
             NewValue = "999"
         };
-        var collisionModule = alchemy with
+        var collisionModule = firstOptional with
         {
             ModuleId = "feature.profile.negative_collision",
             MutationOperations = [collisionOperation]
         };
         var collisionCatalog = catalog with { Modules = catalog.Modules.Append(collisionModule).ToList() };
-        var collision = _compositionValidator.Validate(collisionCatalog, required.Concat([alchemy.ModuleId, collisionModule.ModuleId]).ToList());
+        var collision = _compositionValidator.Validate(collisionCatalog, required.Concat([firstOptional.ModuleId, collisionModule.ModuleId]).ToList());
         var mismatchRecipe = new ProductLineRuntimeVariantRecipe
         {
             RecipeId = "negative_mismatch",
             CandidateId = "negative-mismatch",
             DisplayName = "Negative mismatch",
             VariantKind = "negative",
-            MutationOperations = [alchemy.MutationOperations[0] with { ExpectedValue = "999" }]
+            MutationOperations = [firstOptional.MutationOperations[0] with { ExpectedValue = "999" }]
         };
         var mismatch = _materializer.Materialize(baseJson, mismatchRecipe);
         var unsupportedOverride = _compositionValidator.Validate(catalog, required,
-            new Dictionary<string, string> { ["feature.profile.alchemy_focus.output"] = "3" });
+            new Dictionary<string, string> { [firstOptional.ModuleId + ".output"] = "3" });
         var unity = Read(root, "unity/LLMGameCreatorAlpha/Assets/Scripts/CanonicalRuntimeUnityFeatureModuleCompositionMatrixHarness.cs");
         var winForms = Read(root, "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal146.cs");
         var runner = Read(root, "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleCompositionOperatorRunner.cs");
@@ -405,7 +482,7 @@ public sealed class FeatureModuleCompositionService
             CompositionPathEscapeRejected = !IsUnder(Path.Combine(root, "outside-goal146"), Path.Combine(root, FeatureModuleCompositionVocabulary.ProceduralRoot)),
             ModuleOrderChangesPackageBytes = prepared.Any(item => !item.Artifacts.OrderIndependence.Passed),
             Goal142PackageCopyCannotCountAsComposition = matrix.Compositions.All(item => item.PackageDistinctFromGoal142Candidates),
-            SingleGoal142CandidateAliasCannotCountAsNovelComposition = matrix.DistinctPackageSha256Count == 8,
+            SingleGoal142CandidateAliasCannotCountAsNovelComposition = matrix.DistinctPackageSha256Count == matrix.CompositionCount,
             Goal131ProjectionRecipeCannotBecomeSourceOfTruth = true,
             PrecomputedGoal145OutcomeCannotCountAsGoal146Execution = true,
             CandidateSpecificRuntimeImplementationAbsent = true,
@@ -475,13 +552,14 @@ public sealed class FeatureModuleCompositionService
         UnitySmokePassed = unity.Passed
     };
 
-    private static FeatureModuleCompositionSelectionHandoff BuildSelection(PreparedComposition selected)
+    private static FeatureModuleCompositionSelectionHandoff BuildSelection(
+        FeatureModuleCatalogDocument catalog,
+        PreparedComposition selected)
     {
         var semantic = selected.Artifacts.SemanticEffects;
-        var effects = new List<string>();
-        if (semantic.AlchemyEffectObserved) effects.Add("alchemy effect observed");
-        if (semantic.CombatEffectObserved) effects.Add("combat effect observed");
-        if (semantic.ExplorationResourceEffectObserved) effects.Add("exploration/resource effect observed");
+        var effects = semantic.Observations.Where(observation => observation.Passed)
+            .Select(observation => observation.EffectId + " observed")
+            .OrderBy(value => value, StringComparer.Ordinal).ToList();
         return new FeatureModuleCompositionSelectionHandoff
         {
             CompositionId = selected.Result.CompositionId,
@@ -495,11 +573,18 @@ public sealed class FeatureModuleCompositionService
             RuntimeQualificationResultPath = FeatureModuleCompositionVocabulary.ProceduralRoot + "/compositions/" + selected.Result.CompositionId + "/final-replay-result.json",
             CheckpointHash = selected.Result.CheckpointHash,
             FinalStateHash = selected.Result.FinalStateHash,
-            SemanticEffects = effects
+            SemanticEffects = effects,
+            AvailableOptionalModuleIds = catalog.Modules.Where(module => module.Selectable && !module.Required)
+                .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
+                .Select(module => module.ModuleId).ToList()
         };
     }
 
-    private static FeatureModuleSemanticEffectProof BuildSemanticProof(CompositionSpec spec, RuntimeInteractiveSession session)
+    private FeatureModuleSemanticEffectProof BuildSemanticProof(
+        FeatureModuleCatalogDocument catalog,
+        FeatureModuleCompositionCoverageSpec spec,
+        RuntimeInteractiveSession session,
+        RuntimeInteractiveSession baselineSession)
     {
         var potion = InventoryQuantity(session.LatestInventorySummary, "item/healing_potion");
         var apple = InventoryQuantity(session.LatestInventorySummary, "item/apple");
@@ -507,22 +592,23 @@ public sealed class FeatureModuleCompositionService
         var herb = InventoryQuantity(session.LatestInventorySummary, "item/red_herb");
         var water = InventoryQuantity(session.LatestInventorySummary, "item/water_flask");
         var goblin = CombatQuantity(session.LatestCombatSummary, "goblin", "resource/health");
-        var alchemySelected = spec.ModuleIds.Contains("feature.profile.alchemy_focus", StringComparer.Ordinal);
-        var combatSelected = spec.ModuleIds.Contains("feature.profile.combat_focus", StringComparer.Ordinal);
-        var explorationSelected = spec.ModuleIds.Contains("feature.profile.exploration_resource_focus", StringComparer.Ordinal);
-        var alchemy = alchemySelected && potion >= 4 && herb > 0 && water > 0;
-        var combat = combatSelected && goblin == 10;
-        var exploration = explorationSelected && apple == 4 && log == 2;
-        var unselectedStable = (alchemySelected || (herb == 0 && water == 0))
-                               && (combatSelected || goblin == 8)
-                               && (explorationSelected || (apple == 3 && log == 1));
+        var selected = spec.ModuleIds.Select(id => catalog.Modules.Single(module => module.ModuleId == id)).ToList();
+        var observations = _effectEvaluator.Evaluate(selected, session, baselineSession);
+        var alchemy = observations.Any(observation => observation.Passed
+            && observation.RuntimeDimension.StartsWith("alchemy_", StringComparison.Ordinal));
+        var combat = observations.Any(observation => observation.Passed
+            && observation.RuntimeDimension.StartsWith("combat_", StringComparison.Ordinal));
+        var exploration = observations.Any(observation => observation.Passed
+            && (observation.RuntimeDimension.StartsWith("harvest_", StringComparison.Ordinal)
+                || observation.RuntimeDimension.StartsWith("transaction_", StringComparison.Ordinal)));
+        var declaredContractsPresent = selected.All(module => module.RuntimeEffectContracts.Count > 0);
         return new FeatureModuleSemanticEffectProof
         {
             CompositionId = spec.CompositionId,
             AlchemyEffectObserved = alchemy,
             CombatEffectObserved = combat,
             ExplorationResourceEffectObserved = exploration,
-            CombinedEffectCount = new[] { alchemy, combat, exploration }.Count(value => value),
+            CombinedEffectCount = observations.Count(observation => observation.Passed),
             HealingPotionQuantity = potion,
             AppleQuantity = apple,
             LogQuantity = log,
@@ -532,7 +618,8 @@ public sealed class FeatureModuleCompositionService
             QuestState = session.LatestQuestSummary,
             InventorySummary = session.LatestInventorySummary,
             CombatSummary = session.LatestCombatSummary,
-            Passed = unselectedStable && new[] { alchemySelected == alchemy, combatSelected == combat, explorationSelected == exploration }.All(value => value)
+            Observations = observations,
+            Passed = declaredContractsPresent && observations.All(observation => observation.Passed)
         };
     }
 
@@ -551,19 +638,27 @@ public sealed class FeatureModuleCompositionService
 
     private static void ValidateCatalog(FeatureModuleCatalogDocument catalog)
     {
-        if (catalog.RequiredCoreModuleCount < 10 || catalog.OptionalProfileModuleCount != 3
-            || !FeatureModuleCompositionVocabulary.OptionalModuleIds.All(id => catalog.Modules.Any(module => module.ModuleId == id)))
+        var requiredCount = catalog.Modules.Count(module => module.Required);
+        var optionalCount = catalog.Modules.Count(module => module.Selectable && !module.Required);
+        if (catalog.Modules.Count == 0 || catalog.RequiredCoreModuleCount != requiredCount
+            || catalog.OptionalProfileModuleCount != optionalCount
+            || catalog.Modules.Select(module => module.ModuleId).Distinct(StringComparer.Ordinal).Count() != catalog.Modules.Count)
         {
             throw new InvalidOperationException("Goal146 FeatureModule catalog contract failed.");
         }
     }
 
-    private static void ValidateMatrix(FeatureModuleCompositionMatrixResult matrix)
+    private static void ValidateMatrix(
+        FeatureModuleCompositionMatrixResult matrix,
+        FeatureModuleCompositionCoveragePlan coveragePlan)
     {
-        if (matrix.CompositionCount != 8 || matrix.PassedCompositionCount != 8 || matrix.FailedCompositionCount != 0
-            || matrix.BaselineOnlyCompositionCount != 1 || matrix.SingleOptionalModuleCompositionCount != 3
-            || matrix.MultiModuleCompositionCount != 4 || matrix.DistinctPackageSha256Count != 8
-            || matrix.DistinctFinalStateHashCount != 8 || !matrix.AllPackageValidationsPassed
+        if (matrix.CompositionCount != coveragePlan.GeneratedCompositionCount
+            || matrix.PassedCompositionCount != coveragePlan.GeneratedCompositionCount || matrix.FailedCompositionCount != 0
+            || matrix.BaselineOnlyCompositionCount != coveragePlan.CompositionSpecs.Count(spec => spec.ModuleIds.Count == 0)
+            || matrix.SingleOptionalModuleCompositionCount != coveragePlan.CompositionSpecs.Count(spec => spec.ModuleIds.Count == 1)
+            || matrix.MultiModuleCompositionCount != coveragePlan.CompositionSpecs.Count(spec => spec.ModuleIds.Count >= 2)
+            || matrix.DistinctPackageSha256Count != coveragePlan.GeneratedCompositionCount
+            || matrix.DistinctFinalStateHashCount != coveragePlan.GeneratedCompositionCount || !matrix.AllPackageValidationsPassed
             || !matrix.AllMutationAuditsPassed || !matrix.AllDependencyValidationsPassed
             || !matrix.AllConflictValidationsPassed || !matrix.AllOrderIndependenceProofsPassed
             || !matrix.AllCheckpointReloadsPassed || !matrix.AllFullReplaysEquivalent
@@ -572,68 +667,32 @@ public sealed class FeatureModuleCompositionService
             || !matrix.SameCanonicalActionPlanUsedForAllCompositions
             || !matrix.MultiModulePackagesDistinctFromAllGoal142Candidates)
         {
-            throw new InvalidOperationException("Goal146 eight-composition Runtime qualification matrix failed.");
+            throw new InvalidOperationException("Goal146 catalog-driven Runtime qualification matrix failed.");
         }
     }
 
-    private static IReadOnlyList<string> NormalizeSelectedModules(IReadOnlyList<string>? selected)
+    private static IReadOnlyList<string> NormalizeSelectedModules(
+        FeatureModuleCatalogDocument catalog,
+        IReadOnlyList<string>? selected)
     {
         if (selected is null || selected.Count == 0 || selected.All(string.IsNullOrWhiteSpace))
-            return FeatureModuleCompositionVocabulary.OptionalModuleIds;
+            return catalog.Modules.Where(module => module.Selectable && !module.Required)
+                .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
+                .Select(module => module.ModuleId).ToList();
         if (selected.Count == 1 && string.Equals(selected[0], "none", StringComparison.OrdinalIgnoreCase)) return [];
         return selected.Where(id => !string.IsNullOrWhiteSpace(id)).Select(id => id.Trim())
             .OrderBy(id => id, StringComparer.Ordinal).ToList();
     }
 
-    private static FeatureModuleCompositionRequest RequestFor(string compositionId, IReadOnlyList<string> moduleIds) => new()
+    private static FeatureModuleCompositionRequest RequestFor(
+        FeatureModuleCatalogDocument catalog,
+        string compositionId,
+        IReadOnlyList<string> moduleIds) => new()
     {
         CompositionId = compositionId,
-        DisplayName = DisplayName(moduleIds),
+        DisplayName = FeatureModuleCompositionIdentity.DisplayName(catalog, moduleIds),
         SelectedModuleIds = moduleIds.OrderBy(id => id, StringComparer.Ordinal).ToList()
     };
-
-    private static IReadOnlyList<CompositionSpec> MatrixSpecs() =>
-    [
-        Spec([]),
-        Spec([FeatureModuleCompositionVocabulary.OptionalModuleIds[0]]),
-        Spec([FeatureModuleCompositionVocabulary.OptionalModuleIds[1]]),
-        Spec([FeatureModuleCompositionVocabulary.OptionalModuleIds[2]]),
-        Spec([FeatureModuleCompositionVocabulary.OptionalModuleIds[0], FeatureModuleCompositionVocabulary.OptionalModuleIds[1]]),
-        Spec([FeatureModuleCompositionVocabulary.OptionalModuleIds[0], FeatureModuleCompositionVocabulary.OptionalModuleIds[2]]),
-        Spec([FeatureModuleCompositionVocabulary.OptionalModuleIds[1], FeatureModuleCompositionVocabulary.OptionalModuleIds[2]]),
-        Spec(FeatureModuleCompositionVocabulary.OptionalModuleIds)
-    ];
-
-    private static CompositionSpec Spec(IReadOnlyList<string> moduleIds) => new(
-        CompositionId(moduleIds),
-        DisplayName(moduleIds),
-        moduleIds.OrderBy(id => id, StringComparer.Ordinal).ToList());
-
-    private static string CompositionId(IReadOnlyList<string> moduleIds) =>
-        moduleIds.Count == 3
-            ? FeatureModuleCompositionVocabulary.DefaultCompositionId
-            : "minimal-map-game-composed-" + ShortName(moduleIds);
-
-    private static string ShortName(IReadOnlyList<string> moduleIds)
-    {
-        if (moduleIds.Count == 0) return "baseline";
-        return string.Join("-", moduleIds.Select(id => id switch
-        {
-            "feature.profile.alchemy_focus" => "alchemy",
-            "feature.profile.combat_focus" => "combat",
-            "feature.profile.exploration_resource_focus" => "exploration",
-            _ => id.Replace("feature.profile.", string.Empty, StringComparison.Ordinal).Replace('_', '-')
-        }).OrderBy(id => id, StringComparer.Ordinal));
-    }
-
-    private static string DisplayName(IReadOnlyList<string> moduleIds) =>
-        moduleIds.Count == 0 ? "Baseline-Only FeatureModule Composition" : string.Join(" + ", moduleIds.Select(id => id switch
-        {
-            "feature.profile.alchemy_focus" => "Alchemy",
-            "feature.profile.combat_focus" => "Combat",
-            "feature.profile.exploration_resource_focus" => "Exploration Resource",
-            _ => id
-        }).OrderBy(value => value, StringComparer.Ordinal)) + " FeatureModule Composition";
 
     private static bool SameModules(IReadOnlyList<string> left, IReadOnlyList<string> right) =>
         left.OrderBy(id => id, StringComparer.Ordinal).SequenceEqual(right.OrderBy(id => id, StringComparer.Ordinal), StringComparer.Ordinal);
@@ -727,6 +786,5 @@ public sealed class FeatureModuleCompositionService
         return File.Exists(path) ? File.ReadAllText(path) : string.Empty;
     }
 
-    private sealed record CompositionSpec(string CompositionId, string DisplayName, IReadOnlyList<string> ModuleIds);
-    private sealed record PreparedComposition(CompositionSpec Spec, FeatureModuleCompositionResult Result, FeatureModuleCompositionArtifacts Artifacts);
+    private sealed record PreparedComposition(FeatureModuleCompositionCoverageSpec Spec, FeatureModuleCompositionResult Result, FeatureModuleCompositionArtifacts Artifacts);
 }

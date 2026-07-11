@@ -1,0 +1,17 @@
+{
+  "manualMatrixSpecsTableAbsent": true,
+  "fixedOptionalModuleIndexingAbsentFromComposer": true,
+  "fixedThreeModuleCountSpecialCaseAbsentFromComposer": true,
+  "unknownFutureModuleDoesNotRequireComposerChange": true,
+  "moduleIdSpecificRuntimeBranchAbsent": true,
+  "compositionIdSpecificRuntimeBranchAbsent": true,
+  "largeCatalogPowersetEnumerationRejectedOrAvoided": true,
+  "coveragePlanMaxRowsEnforced": true,
+  "selectedCompositionNeverDropped": true,
+  "moduleOrderStillByteIndependent": true,
+  "conflictingTargetStillRejected": true,
+  "missingDependencyStillRejected": true,
+  "candidateSpecificRuntimeImplementationAbsent": true,
+  "winFormsSyntheticModuleRequiresNoBranch": true,
+  "passed": true
+}

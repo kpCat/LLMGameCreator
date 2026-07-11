@@ -698,6 +698,27 @@ public sealed class ProductLineStrategyRebaselineService
                    && BoolValue(root, "runtimeAuthority")
                    && BoolValue(root, "projectionOnly") == false
                    && BoolValue(root, "unityGameplayTruth") == false;
+            var postGoal146AState =
+                StringValue(root, "gate_status")
+                   == ProductLineStrategyRebaselineVocabulary.Goal146AGate
+                   && BoolValue(root, "accepted") == false
+                   && BoolValue(root, "goal145Accepted")
+                   && BoolValue(root, "goal146Accepted") == false
+                   && BoolValue(root, "goal146ManualReviewDeferred")
+                   && BoolValue(root, "goal146GenericCatalogDrivenComposer")
+                   && BoolValue(root, "goal146HardcodedCombinationTableAbsent")
+                   && BoolValue(root, "goal146ActiveOptionalSetDerivedFromCatalog")
+                   && BoolValue(root, "goal146GenericCompositionIdGenerator")
+                   && BoolValue(root, "goal146GenericRuntimeEffectContracts")
+                   && IntValue(root, "goal146CurrentGeneratedCompositionCount") == 8
+                   && BoolValue(root, "goal146SyntheticFourthModulePassed")
+                   && BoolValue(root, "goal146LargeCatalogCoverageBounded")
+                   && BoolValue(root, "goal146LargeCatalogCoverageDeterministic")
+                   && BoolValue(root, "goal146CurrentPackageHashesPreserved")
+                   && BoolValue(root, "goal146CurrentFinalHashesPreserved")
+                   && BoolValue(root, "runtimeAuthority")
+                   && BoolValue(root, "projectionOnly") == false
+                   && BoolValue(root, "unityGameplayTruth") == false;
             return goal133AState
                    || postGoal134State
                    || postGoal135State
@@ -711,7 +732,8 @@ public sealed class ProductLineStrategyRebaselineService
                    || postGoal143State
                    || postGoal144State
                    || postGoal145State
-                   || postGoal146State;
+                   || postGoal146State
+                   || postGoal146AState;
         }
         catch (JsonException)
         {
@@ -786,7 +808,14 @@ public sealed class ProductLineStrategyRebaselineService
         && Contains(markdown, "allCompositionCheckpointReloadsPassed=true")
         && Contains(markdown, "allCompositionFullReplaysEquivalent=true")
         && Contains(markdown, "allCompositionActionBindingsPassed=true")
-        && Contains(markdown, "allCompositionOrderIndependenceProofsPassed=true");
+        && Contains(markdown, "allCompositionOrderIndependenceProofsPassed=true")
+        || Contains(markdown, ProductLineStrategyRebaselineVocabulary.Goal146AGate)
+        && Contains(markdown, "goal146GenericCatalogDrivenComposer=true")
+        && Contains(markdown, "goal146HardcodedCombinationTableAbsent=true")
+        && Contains(markdown, "goal146SyntheticFourthModulePassed=true")
+        && Contains(markdown, "goal146LargeCatalogCoverageBounded=true")
+        && Contains(markdown, "goal146CurrentPackageHashesPreserved=true")
+        && Contains(markdown, "goal146CurrentFinalHashesPreserved=true");
 
     private static bool ContainsAnyGoal134State(string text) =>
         Contains(text, ProductLineStrategyRebaselineVocabulary.NextGoal)
@@ -805,7 +834,8 @@ public sealed class ProductLineStrategyRebaselineService
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal143Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal144Gate)
         || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal145Gate)
-        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146Gate);
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146Gate)
+        || Contains(text, ProductLineStrategyRebaselineVocabulary.Goal146AGate);
 
     private static bool Contains(string text, string value) =>
         text.Contains(value, StringComparison.Ordinal);

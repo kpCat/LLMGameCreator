@@ -52,6 +52,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -106,6 +107,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -160,6 +162,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -214,6 +217,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -268,6 +272,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -321,6 +326,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -375,6 +381,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -458,6 +465,21 @@
           "jsonPath": "game.inventories[id=inventory/player_start].stacks[itemId=item/water_flask].amount",
           "expectedValue": "1",
           "newValue": "2",
+          "runtimeDimension": "alchemy_inventory_resource"
+        }
+      ],
+      "runtimeEffectContracts": [
+        {
+          "effectId": "runtime_effect.alchemy_focus",
+          "moduleId": "feature.profile.alchemy_focus",
+          "metricKind": "inventory_item_quantity",
+          "targetId": "inventory/player_start",
+          "resourceOrItemId": "item/red_herb",
+          "comparisonKind": "greater_than_baseline",
+          "expectedValue": "4",
+          "sourceOperationIds": [
+            "alchemy.starting_red_herb_supply"
+          ],
           "runtimeDimension": "alchemy_inventory_resource"
         }
       ],
@@ -550,6 +572,21 @@
           "runtimeDimension": "combat_participant_resource"
         }
       ],
+      "runtimeEffectContracts": [
+        {
+          "effectId": "runtime_effect.combat_focus",
+          "moduleId": "feature.profile.combat_focus",
+          "metricKind": "combat_resource_amount",
+          "targetId": "goblin",
+          "resourceOrItemId": "resource/health",
+          "comparisonKind": "changed_from_baseline",
+          "expectedValue": "16",
+          "sourceOperationIds": [
+            "combat.goblin_health_pool"
+          ],
+          "runtimeDimension": "combat_participant_resource"
+        }
+      ],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
@@ -571,8 +608,9 @@
       "required": false,
       "selectable": true,
       "dependencies": [
-        "feature.resources.harvest",
-        "feature.economy.transaction"
+        "feature.economy.transaction",
+        "feature.inventory.basic",
+        "feature.resources.harvest"
       ],
       "conflicts": [],
       "requiredSchemaSections": [
@@ -649,6 +687,21 @@
           "runtimeDimension": "transaction_output"
         }
       ],
+      "runtimeEffectContracts": [
+        {
+          "effectId": "runtime_effect.exploration_resource_focus",
+          "moduleId": "feature.profile.exploration_resource_focus",
+          "metricKind": "inventory_item_quantity",
+          "targetId": "inventory/player_start",
+          "resourceOrItemId": "item/apple",
+          "comparisonKind": "greater_than_baseline",
+          "expectedValue": "3",
+          "sourceOperationIds": [
+            "exploration.apple_tree_loot_minimum"
+          ],
+          "runtimeDimension": "harvest_loot_quantity"
+        }
+      ],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/product-line-runtime-variant-catalog.json",
@@ -708,6 +761,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -764,6 +818,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",
@@ -817,6 +872,7 @@
         "Additional module families attach through the same application-layer contract."
       ],
       "mutationOperations": [],
+      "runtimeEffectContracts": [],
       "sourceLineage": {
         "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff",
         "catalogPath": "",

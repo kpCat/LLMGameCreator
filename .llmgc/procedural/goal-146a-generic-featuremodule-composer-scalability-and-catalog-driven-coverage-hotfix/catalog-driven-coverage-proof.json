@@ -1,0 +1,537 @@
+{
+  "schemaVersion": "catalog_driven_coverage_proof_v1",
+  "currentCatalog": {
+    "schemaVersion": "featuremodule_composition_coverage_plan_v1",
+    "coverageMode": "exhaustive_small_catalog",
+    "optionalModuleCount": 3,
+    "theoreticalPowersetSize": "8",
+    "generatedCompositionCount": 8,
+    "fullPowersetEnumerated": true,
+    "baselineIncluded": true,
+    "selectedCompositionIncluded": true,
+    "allEnabledIncluded": true,
+    "singletonCoverageCount": 3,
+    "pairwiseCoverageCount": 0,
+    "sampledCoverageCount": 0,
+    "bounded": false,
+    "policy": {
+      "exhaustiveOptionalModuleLimit": 3,
+      "maxPairwiseRows": 4,
+      "maxSampledRows": 2,
+      "maxTotalRows": 24,
+      "deterministicSeed": 146
+    },
+    "compositionSpecs": [
+      {
+        "compositionId": "minimal-map-game-composed-baseline",
+        "displayName": "Baseline-Only FeatureModule Composition",
+        "moduleIds": [],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy",
+        "displayName": "Alchemy FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-combat",
+        "displayName": "Combat FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.combat_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-combat",
+        "displayName": "Alchemy + Combat FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.combat_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-exploration",
+        "displayName": "Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-exploration",
+        "displayName": "Alchemy + Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-combat-exploration",
+        "displayName": "Combat + Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.combat_focus",
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-combat-exploration",
+        "displayName": "Alchemy + Combat + Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.combat_focus",
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "exhaustive_powerset"
+        ]
+      }
+    ]
+  },
+  "syntheticFourModuleCatalog": {
+    "schemaVersion": "featuremodule_composition_coverage_plan_v1",
+    "coverageMode": "bounded_interaction_coverage",
+    "optionalModuleCount": 4,
+    "theoreticalPowersetSize": "16",
+    "generatedCompositionCount": 13,
+    "fullPowersetEnumerated": false,
+    "baselineIncluded": true,
+    "selectedCompositionIncluded": true,
+    "allEnabledIncluded": true,
+    "singletonCoverageCount": 4,
+    "pairwiseCoverageCount": 5,
+    "sampledCoverageCount": 4,
+    "bounded": true,
+    "policy": {
+      "exhaustiveOptionalModuleLimit": 3,
+      "maxPairwiseRows": 4,
+      "maxSampledRows": 2,
+      "maxTotalRows": 24,
+      "deterministicSeed": 146
+    },
+    "compositionSpecs": [
+      {
+        "compositionId": "minimal-map-game-composed-baseline",
+        "displayName": "Baseline-Only FeatureModule Composition",
+        "moduleIds": [],
+        "coverageReasons": [
+          "baseline"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-synthetic-fuel-reserve",
+        "displayName": "Alchemy + Synthetic Fuel Reserve FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.synthetic_fuel_reserve"
+        ],
+        "coverageReasons": [
+          "operator_selected",
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-combat-exploration-synthetic-fuel-reserve",
+        "displayName": "Alchemy + Combat + Exploration Resource + Synthetic Fuel Reserve FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.combat_focus",
+          "feature.profile.exploration_resource_focus",
+          "feature.profile.synthetic_fuel_reserve"
+        ],
+        "coverageReasons": [
+          "all_enabled"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy",
+        "displayName": "Alchemy FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-combat",
+        "displayName": "Combat FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.combat_focus"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-exploration",
+        "displayName": "Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-synthetic-fuel-reserve",
+        "displayName": "Synthetic Fuel Reserve FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.synthetic_fuel_reserve"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-combat",
+        "displayName": "Alchemy + Combat FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.combat_focus"
+        ],
+        "coverageReasons": [
+          "deterministic_sample",
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-exploration",
+        "displayName": "Alchemy + Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-combat-exploration",
+        "displayName": "Combat + Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.combat_focus",
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "deterministic_sample",
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-combat-synthetic-fuel-reserve",
+        "displayName": "Combat + Synthetic Fuel Reserve FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.combat_focus",
+          "feature.profile.synthetic_fuel_reserve"
+        ],
+        "coverageReasons": [
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-combat-exploration",
+        "displayName": "Alchemy + Combat + Exploration Resource FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.combat_focus",
+          "feature.profile.exploration_resource_focus"
+        ],
+        "coverageReasons": [
+          "deterministic_sample"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-alchemy-combat-synthetic-fuel-reserve",
+        "displayName": "Alchemy + Combat + Synthetic Fuel Reserve FeatureModule Composition",
+        "moduleIds": [
+          "feature.profile.alchemy_focus",
+          "feature.profile.combat_focus",
+          "feature.profile.synthetic_fuel_reserve"
+        ],
+        "coverageReasons": [
+          "deterministic_sample"
+        ]
+      }
+    ]
+  },
+  "syntheticTwelveModuleCatalog": {
+    "schemaVersion": "featuremodule_composition_coverage_plan_v1",
+    "coverageMode": "bounded_interaction_coverage",
+    "optionalModuleCount": 12,
+    "theoreticalPowersetSize": "4096",
+    "generatedCompositionCount": 21,
+    "fullPowersetEnumerated": false,
+    "baselineIncluded": true,
+    "selectedCompositionIncluded": true,
+    "allEnabledIncluded": true,
+    "singletonCoverageCount": 12,
+    "pairwiseCoverageCount": 4,
+    "sampledCoverageCount": 2,
+    "bounded": true,
+    "policy": {
+      "exhaustiveOptionalModuleLimit": 3,
+      "maxPairwiseRows": 4,
+      "maxSampledRows": 2,
+      "maxTotalRows": 24,
+      "deterministicSeed": 146
+    },
+    "compositionSpecs": [
+      {
+        "compositionId": "minimal-map-game-composed-baseline",
+        "displayName": "Baseline-Only FeatureModule Composition",
+        "moduleIds": [],
+        "coverageReasons": [
+          "baseline"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-11",
+        "displayName": "Synthetic Module 00 + Synthetic Module 11 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_11"
+        ],
+        "coverageReasons": [
+          "operator_selected"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-01-module-02-module-03-module-04-module-05-module-06-module-07-module-08-module-09-module-10-module-11",
+        "displayName": "Synthetic Module 00 + Synthetic Module 01 + Synthetic Module 02 + Synthetic Module 03 + Synthetic Module 04 + Synthetic Module 05 + Synthetic Module 06 + Synthetic Module 07 + Synthetic Module 08 + Synthetic Module 09 + Synthetic Module 10 + Synthetic Module 11 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_01",
+          "feature.synthetic.module_02",
+          "feature.synthetic.module_03",
+          "feature.synthetic.module_04",
+          "feature.synthetic.module_05",
+          "feature.synthetic.module_06",
+          "feature.synthetic.module_07",
+          "feature.synthetic.module_08",
+          "feature.synthetic.module_09",
+          "feature.synthetic.module_10",
+          "feature.synthetic.module_11"
+        ],
+        "coverageReasons": [
+          "all_enabled"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00",
+        "displayName": "Synthetic Module 00 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-01",
+        "displayName": "Synthetic Module 01 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_01"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-02",
+        "displayName": "Synthetic Module 02 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_02"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-03",
+        "displayName": "Synthetic Module 03 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_03"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-04",
+        "displayName": "Synthetic Module 04 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_04"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-05",
+        "displayName": "Synthetic Module 05 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_05"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-06",
+        "displayName": "Synthetic Module 06 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_06"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-07",
+        "displayName": "Synthetic Module 07 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_07"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-08",
+        "displayName": "Synthetic Module 08 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_08"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-09",
+        "displayName": "Synthetic Module 09 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_09"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-10",
+        "displayName": "Synthetic Module 10 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_10"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-11",
+        "displayName": "Synthetic Module 11 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_11"
+        ],
+        "coverageReasons": [
+          "singleton"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-01",
+        "displayName": "Synthetic Module 00 + Synthetic Module 01 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_01"
+        ],
+        "coverageReasons": [
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-02",
+        "displayName": "Synthetic Module 00 + Synthetic Module 02 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_02"
+        ],
+        "coverageReasons": [
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-03",
+        "displayName": "Synthetic Module 00 + Synthetic Module 03 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_03"
+        ],
+        "coverageReasons": [
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-04",
+        "displayName": "Synthetic Module 00 + Synthetic Module 04 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_04"
+        ],
+        "coverageReasons": [
+          "pairwise"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-01-module-04-module-07-module-10",
+        "displayName": "Synthetic Module 01 + Synthetic Module 04 + Synthetic Module 07 + Synthetic Module 10 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_01",
+          "feature.synthetic.module_04",
+          "feature.synthetic.module_07",
+          "feature.synthetic.module_10"
+        ],
+        "coverageReasons": [
+          "deterministic_sample"
+        ]
+      },
+      {
+        "compositionId": "minimal-map-game-composed-module-00-module-02-module-03-module-06-module-09",
+        "displayName": "Synthetic Module 00 + Synthetic Module 02 + Synthetic Module 03 + Synthetic Module 06 + Synthetic Module 09 FeatureModule Composition",
+        "moduleIds": [
+          "feature.synthetic.module_00",
+          "feature.synthetic.module_02",
+          "feature.synthetic.module_03",
+          "feature.synthetic.module_06",
+          "feature.synthetic.module_09"
+        ],
+        "coverageReasons": [
+          "deterministic_sample"
+        ]
+      }
+    ]
+  },
+  "largeCatalogCoverageDeterministic": true,
+  "coveragePlanMaxRowsEnforced": true,
+  "selectedCompositionNeverDropped": true,
+  "largeCatalogPowersetEnumerationAvoided": true,
+  "passed": true
+}

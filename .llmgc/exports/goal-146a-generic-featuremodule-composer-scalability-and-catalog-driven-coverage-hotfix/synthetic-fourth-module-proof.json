@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "synthetic_fourth_module_proof_v1",
+  "syntheticFourthModuleRegistered": true,
+  "composerSourceUnchangedForSyntheticModule": true,
+  "syntheticCompositionMaterialized": true,
+  "syntheticCompositionRuntimeQualified": true,
+  "syntheticEffectObserved": true,
+  "syntheticCheckpointReloadPassed": true,
+  "syntheticFullReplayEquivalent": true,
+  "syntheticActionBindingPassed": true,
+  "compositionId": "minimal-map-game-composed-alchemy-synthetic-fuel-reserve",
+  "packageSha256": "eb804e0d9a2fee8ebaecdd80a674ad292b3d82c703015167c5f31d22b0cb8f6a",
+  "finalStateHash": "5bfd6ab87478b3da178550ca859bed6dad7a42c12628628ea43f3fca0dc72720",
+  "syntheticActualValue": "2",
+  "passed": true
+}

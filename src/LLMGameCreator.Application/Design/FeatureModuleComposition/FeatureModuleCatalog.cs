@@ -57,13 +57,7 @@ public static class FeatureModuleCatalog
         foreach (var recipe in source.Variants.Where(recipe => recipe.RecipeId != "balanced_baseline"))
         {
             var moduleId = "feature.profile." + recipe.RecipeId;
-            var dependencies = recipe.RecipeId switch
-            {
-                "alchemy_focus" => new[] { "feature.crafting.recipes", "feature.inventory.basic" },
-                "combat_focus" => new[] { "feature.combat.turn_based_encounter" },
-                "exploration_resource_focus" => new[] { "feature.resources.harvest", "feature.economy.transaction" },
-                _ => throw new InvalidOperationException("Unsupported Goal142 optional profile recipe: " + recipe.RecipeId)
-            };
+            var dependencies = DependenciesFromOperations(recipe.MutationOperations);
             yield return new FeatureModuleDefinition
             {
                 ModuleId = moduleId,
@@ -86,6 +80,7 @@ public static class FeatureModuleCatalog
                 MutationOperations = recipe.MutationOperations
                     .OrderBy(operation => operation.OperationId, StringComparer.Ordinal)
                     .ToList(),
+                RuntimeEffectContracts = RuntimeEffectContractsFromOperations(moduleId, recipe.MutationOperations),
                 SourceLineage = new FeatureModuleSourceLineage
                 {
                     GoalId = ProductLineRuntimeVariantMatrixVocabulary.GoalId,
@@ -99,6 +94,84 @@ public static class FeatureModuleCatalog
                 }
             };
         }
+    }
+
+    private static IReadOnlyList<string> DependenciesFromOperations(
+        IReadOnlyList<ProductLineRuntimeVariantMutationOperation> operations) =>
+        operations.SelectMany(operation => operation.TargetKind switch
+            {
+                "inventory_stack_amount" => new[] { "feature.inventory.basic" },
+                "recipe_output_amount" => new[] { "feature.crafting.recipes", "feature.inventory.basic" },
+                "encounter_participant_resource_amount" or "ability_power" or "ability_effect_arg_amount" =>
+                    new[] { "feature.combat.turn_based_encounter" },
+                "loot_entry_min_count" or "loot_entry_max_count" or "resource_node_production_amount" =>
+                    new[] { "feature.resources.harvest", "feature.inventory.basic" },
+                "transaction_output_amount" => new[] { "feature.economy.transaction", "feature.inventory.basic" },
+                _ => Array.Empty<string>()
+            })
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(id => id, StringComparer.Ordinal)
+            .ToList();
+
+    private static IReadOnlyList<FeatureModuleRuntimeEffectContract> RuntimeEffectContractsFromOperations(
+        string moduleId,
+        IReadOnlyList<ProductLineRuntimeVariantMutationOperation> operations)
+    {
+        foreach (var operation in operations)
+        {
+            var contract = RuntimeEffectContract(moduleId, operation);
+            if (contract is not null) return [contract];
+        }
+        return [];
+    }
+
+    private static FeatureModuleRuntimeEffectContract? RuntimeEffectContract(
+        string moduleId,
+        ProductLineRuntimeVariantMutationOperation operation)
+    {
+        var parts = operation.TargetId.Split('|');
+        var metricKind = string.Empty;
+        var targetId = string.Empty;
+        var resourceOrItemId = string.Empty;
+        switch (operation.TargetKind)
+        {
+            case "inventory_stack_amount" when parts.Length == 2:
+                metricKind = FeatureModuleRuntimeEffectMetricKinds.InventoryItemQuantity;
+                targetId = parts[0];
+                resourceOrItemId = parts[1];
+                break;
+            case "recipe_output_amount" or "transaction_output_amount" or "resource_node_production_amount" when parts.Length == 2:
+                metricKind = FeatureModuleRuntimeEffectMetricKinds.InventoryItemQuantity;
+                targetId = "inventory/player_start";
+                resourceOrItemId = parts[1];
+                break;
+            case "loot_entry_min_count" or "loot_entry_max_count" when parts.Length == 2:
+                metricKind = FeatureModuleRuntimeEffectMetricKinds.InventoryItemQuantity;
+                targetId = "inventory/player_start";
+                resourceOrItemId = "item/" + parts[1].Split('/')[^1];
+                break;
+            case "encounter_participant_resource_amount" when parts.Length == 3:
+                metricKind = FeatureModuleRuntimeEffectMetricKinds.CombatResourceAmount;
+                targetId = parts[1];
+                resourceOrItemId = parts[2];
+                break;
+            default:
+                return null;
+        }
+        return new FeatureModuleRuntimeEffectContract
+        {
+            EffectId = "runtime_effect." + moduleId[(moduleId.LastIndexOf('.') + 1)..],
+            ModuleId = moduleId,
+            MetricKind = metricKind,
+            TargetId = targetId,
+            ResourceOrItemId = resourceOrItemId,
+            ComparisonKind = operation.TargetKind == "encounter_participant_resource_amount"
+                ? FeatureModuleRuntimeEffectComparisonKinds.ChangedFromBaseline
+                : FeatureModuleRuntimeEffectComparisonKinds.GreaterThanBaseline,
+            ExpectedValue = operation.NewValue,
+            SourceOperationIds = [operation.OperationId],
+            RuntimeDimension = operation.RuntimeDimension
+        };
     }
 
     private static FeatureModuleDefinition Core(

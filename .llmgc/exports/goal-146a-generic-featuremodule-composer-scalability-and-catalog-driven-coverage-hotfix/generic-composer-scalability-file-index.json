@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "generic_composer_scalability_file_index_v1",
+  "scenarioId": "goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix",
+  "indexedFileCount": 6,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/catalog-driven-coverage-proof.json",
+      "sha256": "5dc015d79e3e145dddb914e28890fbdb2c6df8fff246308b89ae8ad01600dbc2",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/current-goal146-compatibility-proof.json",
+      "sha256": "d35abbd661d3b6e33792ad73151526e0309d95e4104ab67b5c1a1b9f73292b8a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/generic-composer-scalability-dashboard.json",
+      "sha256": "bab9f40e1cc2009f2c5915ed6a3b632d1eadac191de4966a16ded040fc19f90c",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/generic-composer-scalability-negative-proof.json",
+      "sha256": "fe7851e5f6c245675d245c8df9d99b7524ae40de25b1f8e74d0fae43c6c0f91a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/generic-composer-scalability-report.md",
+      "sha256": "06fe7579c0b044e51596c26b102db392a1c00d0b44b2d942126c6361ebb6321a",
+      "required": true
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/synthetic-fourth-module-proof.json",
+      "sha256": "25592f2246b8676285a9a3c0aada801bd6beca531029bb851c24dd747c4a0468",
+      "required": true
+    }
+  ]
+}

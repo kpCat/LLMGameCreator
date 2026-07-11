@@ -1,5 +1,6 @@
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Runtime;
+using LLMGameCreator.Tests.Application.FeatureModuleComposition;
 using Xunit;
 
 namespace LLMGameCreator.Tests.WinForms;
@@ -12,11 +13,35 @@ public sealed class Goal146FeatureModuleComposerBindingTests
         var root = FindRoot();
         var service = new FeatureModuleCompositionService(SelectedRuntimeVariantInteractiveSessionService.CreateDefault());
         var controller = new FeatureModuleCompositionWorkbenchController(service, new FeatureModuleCompositionOperatorRunner(service));
-        controller.LoadCatalog(root);
-        controller.SetSelectedOptionalModules(FeatureModuleCompositionVocabulary.OptionalModuleIds);
+        var catalog = controller.LoadCatalog(root);
+        controller.SetSelectedOptionalModules(catalog.Modules.Where(module => module.Selectable && !module.Required)
+            .Select(module => module.ModuleId).ToList());
 
         Assert.Equal(0, controller.MaterializationInvocationCount);
         Assert.True(controller.ValidateSelection().Passed);
+    }
+
+    [Fact]
+    public void Synthetic_fourth_optional_module_is_dynamic_and_button_collection_requires_no_branch()
+    {
+        var root = FindRoot();
+        var service = new FeatureModuleCompositionService(SelectedRuntimeVariantInteractiveSessionService.CreateDefault());
+        var controller = new FeatureModuleCompositionWorkbenchController(service, new FeatureModuleCompositionOperatorRunner(service));
+        var catalog = FeatureModuleCatalog.LoadFromGoal142(root, FeatureModuleCompositionVocabulary.Goal142Root);
+        var synthetic = FeatureModuleCompositionTests.SyntheticFuelModule();
+        catalog = FeatureModuleCompositionTests.AppendOptional(catalog, synthetic);
+        var selected = FeatureModuleCompositionTests.Optional(catalog).Select(module => module.ModuleId).ToList();
+
+        controller.BindCatalog(catalog);
+        controller.SetSelectedOptionalModules(selected);
+
+        Assert.Contains(synthetic, catalog.Modules);
+        Assert.Contains(synthetic.ModuleId, controller.SelectedOptionalModuleIds);
+        Assert.Equal(0, controller.MaterializationInvocationCount);
+        Assert.True(controller.ValidateSelection().Passed);
+        var source = File.ReadAllText(Path.Combine(root, "src", "LLMGameCreator.WinForms", "Pages",
+            "VisualWorldStreamPreviewWorkspace", "VisualWorldStreamPreviewWorkspacePageControl.Goal146.cs"));
+        Assert.DoesNotContain(synthetic.ModuleId, source, StringComparison.Ordinal);
     }
 
     [Fact]

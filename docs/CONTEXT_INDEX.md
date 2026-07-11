@@ -301,6 +301,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/GOAL.md` | Goal 145 task: four discovered Goal142 candidates execute the same Runtime session kernel with exact action binding, checkpoint/full replay, fresh semantic focus comparisons, operator-selectable in-process WinForms sessions and a read-only Unity matrix. Result is `GREEN`, accepted=true by exact Goal146 human handoff, acceptedByCodex=false, candidateCount=4, passedCandidateCount=4 and distinctFinalStateHashCount=4. |
 | `docs/agent-tasks/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/GOAL.md` | Goal 145A hotfix: the candidate combo uses `SelectionChangeCommitted` plus a bounded programmatic binding guard, so bind/restore invokes selection logic 0 times, one operator combat commit invokes it once with maximum depth 1, combat survives session/action/checkpoint/replay/matrix refreshes, and candidate changes clear prior live state. Its 4/4 Runtime matrix and Unity smoke remain GREEN; Goal145 is accepted by the later Goal146 human handoff. |
 | `docs/agent-tasks/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/GOAL.md` | Goal 146 task: records Goal145 human acceptance, composes eight novel GamePackages from required and optional FeatureModules with deterministic mutation planning, qualifies each through the shared Runtime session/replay seam, adds an in-process WinForms module composer and a read-only Unity matrix consumer. Goal146 remains accepted=false with manual review deferred. |
+| `docs/agent-tasks/goal-146a-generic-featuremodule-composer-scalability-and-catalog-driven-coverage-hotfix/GOAL.md` | Goal 146A hotfix: removes the fixed eight-row table and optional-module indexing, derives active modules and labels from the catalog, adds generic runtime-effect contracts, exhaustive three-module coverage and bounded deterministic 4/12-module coverage. The synthetic fourth module materializes and passes the shared Runtime qualifier without a Composer branch; all current Goal146 package/final hashes remain unchanged. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -380,6 +381,19 @@ Recommended next work:
 ```text
 goal_147_featuremodule_authoring_parameters_and_composition_persistence
 ```
+
+Goal146A is GREEN at
+`generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification`.
+The active optional set, composition IDs, display names,
+coverage rows and Runtime effect observations are catalog-driven. The current
+three-module fixture uses `exhaustive_small_catalog` with 8 rows and preserves
+all eight Goal146 package/final hashes. A synthetic fourth module uses
+`bounded_interaction_coverage` with 13 rows, materializes and passes the shared
+Runtime qualifier/checkpoint/full-replay/action-binding path without a Composer
+branch. A deterministic twelve-module catalog produces 21 rows under the
+24-row policy limit instead of enumerating 4096. Goal146 remains
+`accepted=false` with `manualReviewDeferred=true`; Goal147 remains the next
+separate task.
 
 Goal146 is GREEN with 10 locked core modules, three Goal142-derived optional
 profile modules and all eight module combinations materialized as novel

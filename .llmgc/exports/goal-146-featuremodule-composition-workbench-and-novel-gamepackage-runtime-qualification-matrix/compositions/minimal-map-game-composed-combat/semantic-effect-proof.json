@@ -13,5 +13,21 @@
   "questState": "quest/help_healer:active:",
   "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
   "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+  "observations": [
+    {
+      "effectId": "runtime_effect.combat_focus",
+      "moduleId": "feature.profile.combat_focus",
+      "metricKind": "combat_resource_amount",
+      "targetId": "goblin",
+      "resourceOrItemId": "resource/health",
+      "comparisonKind": "changed_from_baseline",
+      "expectedValue": "16",
+      "baselineValue": "8",
+      "actualValue": "10",
+      "runtimeDimension": "combat_participant_resource",
+      "passed": true,
+      "diagnostics": []
+    }
+  ],
   "passed": true
 }

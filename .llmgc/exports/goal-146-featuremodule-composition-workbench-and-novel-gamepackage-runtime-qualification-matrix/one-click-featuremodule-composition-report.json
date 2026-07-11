@@ -87,9 +87,9 @@
     "checkpointHash": "0336f91c07f656aefb9edbe03310b23d0fc7a4ea49665993e5f3a190a715b2d8",
     "finalStateHash": "d5ad29ee7c350918681c2859b80f5d2944834a6414918a16d8b4e1c0746753b9",
     "semanticEffects": [
-      "alchemy effect observed",
-      "combat effect observed",
-      "exploration/resource effect observed"
+      "runtime_effect.alchemy_focus observed",
+      "runtime_effect.combat_focus observed",
+      "runtime_effect.exploration_resource_focus observed"
     ],
     "availableOptionalModuleIds": [
       "feature.profile.alchemy_focus",
@@ -124,6 +124,113 @@
     "sameRuntimeQualifierUsedForGoal145AndGoal146": true,
     "sameCanonicalActionPlanUsedForAllCompositions": true,
     "multiModulePackagesDistinctFromAllGoal142Candidates": true,
+    "coveragePlan": {
+      "schemaVersion": "featuremodule_composition_coverage_plan_v1",
+      "coverageMode": "exhaustive_small_catalog",
+      "optionalModuleCount": 3,
+      "theoreticalPowersetSize": "8",
+      "generatedCompositionCount": 8,
+      "fullPowersetEnumerated": true,
+      "baselineIncluded": true,
+      "selectedCompositionIncluded": true,
+      "allEnabledIncluded": true,
+      "singletonCoverageCount": 3,
+      "pairwiseCoverageCount": 0,
+      "sampledCoverageCount": 0,
+      "bounded": false,
+      "policy": {
+        "exhaustiveOptionalModuleLimit": 3,
+        "maxPairwiseRows": 4,
+        "maxSampledRows": 2,
+        "maxTotalRows": 24,
+        "deterministicSeed": 146
+      },
+      "compositionSpecs": [
+        {
+          "compositionId": "minimal-map-game-composed-baseline",
+          "displayName": "Baseline-Only FeatureModule Composition",
+          "moduleIds": [],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-alchemy",
+          "displayName": "Alchemy FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.alchemy_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-combat",
+          "displayName": "Combat FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.combat_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-alchemy-combat",
+          "displayName": "Alchemy + Combat FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.alchemy_focus",
+            "feature.profile.combat_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-exploration",
+          "displayName": "Exploration Resource FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.exploration_resource_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-alchemy-exploration",
+          "displayName": "Alchemy + Exploration Resource FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.alchemy_focus",
+            "feature.profile.exploration_resource_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-combat-exploration",
+          "displayName": "Combat + Exploration Resource FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.combat_focus",
+            "feature.profile.exploration_resource_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        },
+        {
+          "compositionId": "minimal-map-game-composed-alchemy-combat-exploration",
+          "displayName": "Alchemy + Combat + Exploration Resource FeatureModule Composition",
+          "moduleIds": [
+            "feature.profile.alchemy_focus",
+            "feature.profile.combat_focus",
+            "feature.profile.exploration_resource_focus"
+          ],
+          "coverageReasons": [
+            "exhaustive_powerset"
+          ]
+        }
+      ]
+    },
     "compositions": [
       {
         "compositionId": "minimal-map-game-composed-alchemy",
@@ -162,6 +269,22 @@
           "questState": "quest/help_healer:completed:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:4,item/log:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.alchemy_focus",
+              "moduleId": "feature.profile.alchemy_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/red_herb",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "4",
+              "baselineValue": "0",
+              "actualValue": "2",
+              "runtimeDimension": "alchemy_inventory_resource",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -205,6 +328,36 @@
           "questState": "quest/help_healer:completed:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:4,item/log:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.alchemy_focus",
+              "moduleId": "feature.profile.alchemy_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/red_herb",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "4",
+              "baselineValue": "0",
+              "actualValue": "2",
+              "runtimeDimension": "alchemy_inventory_resource",
+              "passed": true,
+              "diagnostics": []
+            },
+            {
+              "effectId": "runtime_effect.combat_focus",
+              "moduleId": "feature.profile.combat_focus",
+              "metricKind": "combat_resource_amount",
+              "targetId": "goblin",
+              "resourceOrItemId": "resource/health",
+              "comparisonKind": "changed_from_baseline",
+              "expectedValue": "16",
+              "baselineValue": "8",
+              "actualValue": "10",
+              "runtimeDimension": "combat_participant_resource",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -249,6 +402,50 @@
           "questState": "quest/help_healer:completed:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:5,item/log:2,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.alchemy_focus",
+              "moduleId": "feature.profile.alchemy_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/red_herb",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "4",
+              "baselineValue": "0",
+              "actualValue": "2",
+              "runtimeDimension": "alchemy_inventory_resource",
+              "passed": true,
+              "diagnostics": []
+            },
+            {
+              "effectId": "runtime_effect.combat_focus",
+              "moduleId": "feature.profile.combat_focus",
+              "metricKind": "combat_resource_amount",
+              "targetId": "goblin",
+              "resourceOrItemId": "resource/health",
+              "comparisonKind": "changed_from_baseline",
+              "expectedValue": "16",
+              "baselineValue": "8",
+              "actualValue": "10",
+              "runtimeDimension": "combat_participant_resource",
+              "passed": true,
+              "diagnostics": []
+            },
+            {
+              "effectId": "runtime_effect.exploration_resource_focus",
+              "moduleId": "feature.profile.exploration_resource_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/apple",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "3",
+              "baselineValue": "3",
+              "actualValue": "4",
+              "runtimeDimension": "harvest_loot_quantity",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -292,6 +489,36 @@
           "questState": "quest/help_healer:completed:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:5,item/log:2,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.alchemy_focus",
+              "moduleId": "feature.profile.alchemy_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/red_herb",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "4",
+              "baselineValue": "0",
+              "actualValue": "2",
+              "runtimeDimension": "alchemy_inventory_resource",
+              "passed": true,
+              "diagnostics": []
+            },
+            {
+              "effectId": "runtime_effect.exploration_resource_focus",
+              "moduleId": "feature.profile.exploration_resource_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/apple",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "3",
+              "baselineValue": "3",
+              "actualValue": "4",
+              "runtimeDimension": "harvest_loot_quantity",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -332,6 +559,7 @@
           "questState": "quest/help_healer:active:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [],
           "passed": true
         },
         "passed": true,
@@ -374,6 +602,22 @@
           "questState": "quest/help_healer:active:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.combat_focus",
+              "moduleId": "feature.profile.combat_focus",
+              "metricKind": "combat_resource_amount",
+              "targetId": "goblin",
+              "resourceOrItemId": "resource/health",
+              "comparisonKind": "changed_from_baseline",
+              "expectedValue": "16",
+              "baselineValue": "8",
+              "actualValue": "10",
+              "runtimeDimension": "combat_participant_resource",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -417,6 +661,36 @@
           "questState": "quest/help_healer:active:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.combat_focus",
+              "moduleId": "feature.profile.combat_focus",
+              "metricKind": "combat_resource_amount",
+              "targetId": "goblin",
+              "resourceOrItemId": "resource/health",
+              "comparisonKind": "changed_from_baseline",
+              "expectedValue": "16",
+              "baselineValue": "8",
+              "actualValue": "10",
+              "runtimeDimension": "combat_participant_resource",
+              "passed": true,
+              "diagnostics": []
+            },
+            {
+              "effectId": "runtime_effect.exploration_resource_focus",
+              "moduleId": "feature.profile.exploration_resource_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/apple",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "3",
+              "baselineValue": "3",
+              "actualValue": "4",
+              "runtimeDimension": "harvest_loot_quantity",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -459,6 +733,22 @@
           "questState": "quest/help_healer:active:",
           "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
           "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+          "observations": [
+            {
+              "effectId": "runtime_effect.exploration_resource_focus",
+              "moduleId": "feature.profile.exploration_resource_focus",
+              "metricKind": "inventory_item_quantity",
+              "targetId": "inventory/player_start",
+              "resourceOrItemId": "item/apple",
+              "comparisonKind": "greater_than_baseline",
+              "expectedValue": "3",
+              "baselineValue": "3",
+              "actualValue": "4",
+              "runtimeDimension": "harvest_loot_quantity",
+              "passed": true,
+              "diagnostics": []
+            }
+          ],
           "passed": true
         },
         "passed": true,
@@ -486,6 +776,22 @@
         "questState": "quest/help_healer:completed:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:4,item/log:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.alchemy_focus",
+            "moduleId": "feature.profile.alchemy_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/red_herb",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "4",
+            "baselineValue": "0",
+            "actualValue": "2",
+            "runtimeDimension": "alchemy_inventory_resource",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       },
       {
@@ -503,6 +809,36 @@
         "questState": "quest/help_healer:completed:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:4,item/log:1,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.alchemy_focus",
+            "moduleId": "feature.profile.alchemy_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/red_herb",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "4",
+            "baselineValue": "0",
+            "actualValue": "2",
+            "runtimeDimension": "alchemy_inventory_resource",
+            "passed": true,
+            "diagnostics": []
+          },
+          {
+            "effectId": "runtime_effect.combat_focus",
+            "moduleId": "feature.profile.combat_focus",
+            "metricKind": "combat_resource_amount",
+            "targetId": "goblin",
+            "resourceOrItemId": "resource/health",
+            "comparisonKind": "changed_from_baseline",
+            "expectedValue": "16",
+            "baselineValue": "8",
+            "actualValue": "10",
+            "runtimeDimension": "combat_participant_resource",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       },
       {
@@ -520,6 +856,50 @@
         "questState": "quest/help_healer:completed:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:5,item/log:2,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.alchemy_focus",
+            "moduleId": "feature.profile.alchemy_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/red_herb",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "4",
+            "baselineValue": "0",
+            "actualValue": "2",
+            "runtimeDimension": "alchemy_inventory_resource",
+            "passed": true,
+            "diagnostics": []
+          },
+          {
+            "effectId": "runtime_effect.combat_focus",
+            "moduleId": "feature.profile.combat_focus",
+            "metricKind": "combat_resource_amount",
+            "targetId": "goblin",
+            "resourceOrItemId": "resource/health",
+            "comparisonKind": "changed_from_baseline",
+            "expectedValue": "16",
+            "baselineValue": "8",
+            "actualValue": "10",
+            "runtimeDimension": "combat_participant_resource",
+            "passed": true,
+            "diagnostics": []
+          },
+          {
+            "effectId": "runtime_effect.exploration_resource_focus",
+            "moduleId": "feature.profile.exploration_resource_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/apple",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "3",
+            "baselineValue": "3",
+            "actualValue": "4",
+            "runtimeDimension": "harvest_loot_quantity",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       },
       {
@@ -537,6 +917,36 @@
         "questState": "quest/help_healer:completed:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:5,item/log:2,item/red_herb:2,item/water_flask:1,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.alchemy_focus",
+            "moduleId": "feature.profile.alchemy_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/red_herb",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "4",
+            "baselineValue": "0",
+            "actualValue": "2",
+            "runtimeDimension": "alchemy_inventory_resource",
+            "passed": true,
+            "diagnostics": []
+          },
+          {
+            "effectId": "runtime_effect.exploration_resource_focus",
+            "moduleId": "feature.profile.exploration_resource_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/apple",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "3",
+            "baselineValue": "3",
+            "actualValue": "4",
+            "runtimeDimension": "harvest_loot_quantity",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       },
       {
@@ -554,6 +964,7 @@
         "questState": "quest/help_healer:active:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [],
         "passed": true
       },
       {
@@ -571,6 +982,22 @@
         "questState": "quest/help_healer:active:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:3,item/fuel_can:1,item/healing_potion:3,item/log:1,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.combat_focus",
+            "moduleId": "feature.profile.combat_focus",
+            "metricKind": "combat_resource_amount",
+            "targetId": "goblin",
+            "resourceOrItemId": "resource/health",
+            "comparisonKind": "changed_from_baseline",
+            "expectedValue": "16",
+            "baselineValue": "8",
+            "actualValue": "10",
+            "runtimeDimension": "combat_participant_resource",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       },
       {
@@ -588,6 +1015,36 @@
         "questState": "quest/help_healer:active:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=10],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.combat_focus",
+            "moduleId": "feature.profile.combat_focus",
+            "metricKind": "combat_resource_amount",
+            "targetId": "goblin",
+            "resourceOrItemId": "resource/health",
+            "comparisonKind": "changed_from_baseline",
+            "expectedValue": "16",
+            "baselineValue": "8",
+            "actualValue": "10",
+            "runtimeDimension": "combat_participant_resource",
+            "passed": true,
+            "diagnostics": []
+          },
+          {
+            "effectId": "runtime_effect.exploration_resource_focus",
+            "moduleId": "feature.profile.exploration_resource_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/apple",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "3",
+            "baselineValue": "3",
+            "actualValue": "4",
+            "runtimeDimension": "harvest_loot_quantity",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       },
       {
@@ -605,6 +1062,22 @@
         "questState": "quest/help_healer:active:",
         "inventorySummary": "inventory/chest_start=item/apple:2,item/rusty_knife:1; inventory/player_start=item/apple:4,item/fuel_can:1,item/healing_potion:4,item/log:2,item/woodcutting_axe:1",
         "combatSummary": "encounter/goblin_duel:round=1:turn=1:active=True:participants=goblin[alive=True;resource/health=8],player[alive=True;resource/health=30|resource/stamina=10]",
+        "observations": [
+          {
+            "effectId": "runtime_effect.exploration_resource_focus",
+            "moduleId": "feature.profile.exploration_resource_focus",
+            "metricKind": "inventory_item_quantity",
+            "targetId": "inventory/player_start",
+            "resourceOrItemId": "item/apple",
+            "comparisonKind": "greater_than_baseline",
+            "expectedValue": "3",
+            "baselineValue": "3",
+            "actualValue": "4",
+            "runtimeDimension": "harvest_loot_quantity",
+            "passed": true,
+            "diagnostics": []
+          }
+        ],
         "passed": true
       }
     ]

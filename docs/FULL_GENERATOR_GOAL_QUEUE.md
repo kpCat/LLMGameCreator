@@ -2337,6 +2337,19 @@ state hashes are 8/8 distinct; all order-independence, checkpoint, replay,
 binding, WinForms and Unity gates pass. Goal146 remains `accepted=false`; manual
 review is deferred until related authoring or persistence work can be bundled.
 
+Goal146A is GREEN at
+`generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification`.
+The Composer no longer owns a fixed eight-row table, fixed
+optional-module indices or module-ID-specific Runtime effect branches. The
+catalog drives optional selection, deterministic IDs/titles, generic effect
+contracts and coverage planning. The current three-module catalog remains an
+8-row exhaustive fixture with all package/final hashes preserved. A synthetic
+fourth module materializes and qualifies through the shared Runtime seam while
+bounded coverage emits 13 rows; a deterministic twelve-module catalog emits 21
+rows under `maxTotalRows=24` rather than enumerating 4096. Goal146 remains
+`accepted=false` and `manualReviewDeferred=true`; the next product goal remains
+`goal_147_featuremodule_authoring_parameters_and_composition_persistence`.
+
 Goal145 is accepted by the repository owner's exact Goal146 human handoff with
 `implementationStatus=GREEN`, `accepted=true`, `acceptedByHuman=true`,
 `acceptedByCodex=false`, `rawManualInputNotCommitted=true`,

@@ -14,12 +14,22 @@ public sealed class FeatureModuleCompositionWorkbenchController
     }
 
     public FeatureModuleCatalogDocument? Catalog { get; private set; }
-    public IReadOnlyList<string> SelectedOptionalModuleIds { get; private set; } = FeatureModuleCompositionVocabulary.OptionalModuleIds;
+    public IReadOnlyList<string> SelectedOptionalModuleIds { get; private set; } = [];
     public int MaterializationInvocationCount { get; private set; }
 
     public FeatureModuleCatalogDocument LoadCatalog(string repositoryRoot)
     {
-        Catalog = _service.LoadCatalog(repositoryRoot);
+        return BindCatalog(_service.LoadCatalog(repositoryRoot));
+    }
+
+    public FeatureModuleCatalogDocument BindCatalog(FeatureModuleCatalogDocument catalog)
+    {
+        Catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
+        SelectedOptionalModuleIds = Catalog.Modules
+            .Where(module => module.Selectable && !module.Required)
+            .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
+            .Select(module => module.ModuleId)
+            .ToList();
         return Catalog;
     }
 

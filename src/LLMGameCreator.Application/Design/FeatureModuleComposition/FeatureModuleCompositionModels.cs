@@ -16,12 +16,6 @@ public static class FeatureModuleCompositionVocabulary
     public const string DefaultCompositionId = "minimal-map-game-composed-alchemy-combat-exploration";
     public const string NormalCommand = ".devflow\\scripts\\run-featuremodule-composition-runtime-matrix.cmd";
 
-    public static IReadOnlyList<string> OptionalModuleIds =>
-    [
-        "feature.profile.alchemy_focus",
-        "feature.profile.combat_focus",
-        "feature.profile.exploration_resource_focus"
-    ];
 }
 
 public sealed record FeatureModuleSourceLineage
@@ -56,6 +50,7 @@ public sealed record FeatureModuleDefinition
     public IReadOnlyList<string> KnownLimitations { get; init; } = [];
     public IReadOnlyList<string> FutureExpansionNotes { get; init; } = [];
     public IReadOnlyList<ProductLineRuntimeVariantMutationOperation> MutationOperations { get; init; } = [];
+    public IReadOnlyList<FeatureModuleRuntimeEffectContract> RuntimeEffectContracts { get; init; } = [];
     public FeatureModuleSourceLineage SourceLineage { get; init; } = new();
 }
 
@@ -74,7 +69,7 @@ public sealed record FeatureModuleCompositionRequest
     public string CompositionId { get; init; } = FeatureModuleCompositionVocabulary.DefaultCompositionId;
     public string DisplayName { get; init; } = "Alchemy + Combat + Exploration Composition";
     public string BaseCandidateId { get; init; } = FeatureModuleCompositionVocabulary.BaselineCandidateId;
-    public IReadOnlyList<string> SelectedModuleIds { get; init; } = FeatureModuleCompositionVocabulary.OptionalModuleIds;
+    public IReadOnlyList<string> SelectedModuleIds { get; init; } = [];
     public IReadOnlyDictionary<string, string> ParameterOverrides { get; init; } = new Dictionary<string, string>();
     public string SelectionMode { get; init; } = "human_operator";
 }
@@ -161,6 +156,7 @@ public sealed record FeatureModuleSemanticEffectProof
     public string QuestState { get; init; } = string.Empty;
     public string InventorySummary { get; init; } = string.Empty;
     public string CombatSummary { get; init; } = string.Empty;
+    public IReadOnlyList<FeatureModuleRuntimeEffectObservation> Observations { get; init; } = [];
     public bool Passed { get; init; }
 }
 
@@ -214,6 +210,7 @@ public sealed record FeatureModuleCompositionMatrixResult
     public bool SameRuntimeQualifierUsedForGoal145AndGoal146 { get; init; }
     public bool SameCanonicalActionPlanUsedForAllCompositions { get; init; }
     public bool MultiModulePackagesDistinctFromAllGoal142Candidates { get; init; }
+    public FeatureModuleCompositionCoveragePlan CoveragePlan { get; init; } = new();
     public IReadOnlyList<FeatureModuleCompositionResult> Compositions { get; init; } = [];
 }
 
@@ -242,7 +239,7 @@ public sealed record FeatureModuleCompositionSelectionHandoff
     public string CheckpointHash { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public IReadOnlyList<string> SemanticEffects { get; init; } = [];
-    public IReadOnlyList<string> AvailableOptionalModuleIds { get; init; } = FeatureModuleCompositionVocabulary.OptionalModuleIds;
+    public IReadOnlyList<string> AvailableOptionalModuleIds { get; init; } = [];
     public bool RuntimeAuthority { get; init; } = true;
     public bool ProjectionOnly { get; init; }
     public bool UnityGameplayTruth { get; init; }
@@ -366,6 +363,12 @@ public sealed record FeatureModuleCompositionArtifacts
     public ProductLineRuntimeQualificationReplayEvidence FinalReplay { get; init; } = new();
     public FeatureModuleSemanticEffectProof SemanticEffects { get; init; } = new();
     public FeatureModuleOrderIndependenceProof OrderIndependence { get; init; } = new();
+}
+
+public sealed record FeatureModuleCompositionQualification
+{
+    public FeatureModuleCompositionResult Result { get; init; } = new();
+    public FeatureModuleCompositionArtifacts Artifacts { get; init; } = new();
 }
 
 public sealed record FeatureModuleCompositionWriteResult

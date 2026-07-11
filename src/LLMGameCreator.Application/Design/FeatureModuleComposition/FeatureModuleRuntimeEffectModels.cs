@@ -1,0 +1,44 @@
+namespace LLMGameCreator.Application.Design.FeatureModuleComposition;
+
+public static class FeatureModuleRuntimeEffectMetricKinds
+{
+    public const string InventoryItemQuantity = "inventory_item_quantity";
+    public const string CombatResourceAmount = "combat_resource_amount";
+}
+
+public static class FeatureModuleRuntimeEffectComparisonKinds
+{
+    public const string GreaterThanBaseline = "greater_than_baseline";
+    public const string ChangedFromBaseline = "changed_from_baseline";
+    public const string Equal = "equal";
+    public const string AtLeast = "at_least";
+}
+
+public sealed record FeatureModuleRuntimeEffectContract
+{
+    public string EffectId { get; init; } = string.Empty;
+    public string ModuleId { get; init; } = string.Empty;
+    public string MetricKind { get; init; } = string.Empty;
+    public string TargetId { get; init; } = string.Empty;
+    public string ResourceOrItemId { get; init; } = string.Empty;
+    public string ComparisonKind { get; init; } = FeatureModuleRuntimeEffectComparisonKinds.ChangedFromBaseline;
+    public string ExpectedValue { get; init; } = string.Empty;
+    public IReadOnlyList<string> SourceOperationIds { get; init; } = [];
+    public string RuntimeDimension { get; init; } = string.Empty;
+}
+
+public sealed record FeatureModuleRuntimeEffectObservation
+{
+    public string EffectId { get; init; } = string.Empty;
+    public string ModuleId { get; init; } = string.Empty;
+    public string MetricKind { get; init; } = string.Empty;
+    public string TargetId { get; init; } = string.Empty;
+    public string ResourceOrItemId { get; init; } = string.Empty;
+    public string ComparisonKind { get; init; } = string.Empty;
+    public string ExpectedValue { get; init; } = string.Empty;
+    public string BaselineValue { get; init; } = string.Empty;
+    public string ActualValue { get; init; } = string.Empty;
+    public string RuntimeDimension { get; init; } = string.Empty;
+    public bool Passed { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
