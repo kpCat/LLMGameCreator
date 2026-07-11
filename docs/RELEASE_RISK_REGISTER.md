@@ -92,6 +92,8 @@ Goal 147A review note: the delayed ItemCheck callback/stale-document risk and UI
 
 Goal 148 review note: the user-facing fragmentation risk is reduced by consolidating project creation/open/save, mechanics, typed parameters and Runtime-qualified build activation on `Игры`. Transactional rollback protects package bytes/current state/last hashes, and legacy numbered panels are hidden by default behind an explicit diagnostics toggle. Goal148A closes the immediate first-build failure for production-created projects by planning, staging, validating and transactionally activating package-required scripts without overwriting differing user files. Remaining risks include replacing the read-only sample-backed narrow-alpha support source with release-owned templates, broader clean-machine content provisioning, release packaging and playable quality. Goal148 remains unaccepted pending review.
 
+Goal 148B review note: the real Goal148 manual build exposed a synchronous worker-thread `CurrentChanged` delivery into WinForms and `_navigation`. Named disposal-safe dispatch now covers every subscriber, async page refresh failures are observed, and a real MainForm + Projects automated build retry is GREEN. The implementation risk is closed, but the Goal148 human workflow retry remains required and Goal148 remains unaccepted.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

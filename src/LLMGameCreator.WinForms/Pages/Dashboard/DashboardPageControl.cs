@@ -2,6 +2,7 @@ using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Domain.Validation;
+using LLMGameCreator.WinForms;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -59,18 +60,7 @@ public sealed partial class DashboardPageControl : UserControl, IEditorPage
 
     private void CurrentGamePackageService_CurrentChanged(object? sender, EventArgs e)
     {
-        if (IsDisposed)
-        {
-            return;
-        }
-
-        if (InvokeRequired)
-        {
-            BeginInvoke(new Action(RefreshSnapshot));
-            return;
-        }
-
-        RefreshSnapshot();
+        WinFormsUiThreadDispatcher.Post(this, RefreshSnapshot);
     }
 
     private void DisposeRuntime()

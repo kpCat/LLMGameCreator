@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "mainform_disposal_race_proof_v1",
+  "status": "GREEN",
+  "workerReplaceCompleted": true,
+  "noUnhandledInvalidOperationException": true,
+  "noObjectDisposedException": true,
+  "queuedUiOperationAfterDisposalCount": 0,
+  "disposedControlDoesNotReceiveQueuedCallback": true,
+  "passed": true
+}

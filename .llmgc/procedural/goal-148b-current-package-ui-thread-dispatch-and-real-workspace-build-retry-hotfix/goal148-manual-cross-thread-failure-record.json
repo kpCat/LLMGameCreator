@@ -1,0 +1,12 @@
+{
+    "schemaVersion":  "goal148_manual_cross_thread_failure_record_v1",
+    "status":  "RECORDED",
+    "failureClass":  "current_package_changed_cross_thread_ui_dispatch",
+    "projectTitle":  "Проверка конструктора",
+    "action":  "Собрать и проверить игру",
+    "ownerControl":  "_navigation",
+    "goal148Accepted":  false,
+    "manualRetryRequired":  true,
+    "rawScreenshotNotCommitted":  true,
+    "passed":  true
+}

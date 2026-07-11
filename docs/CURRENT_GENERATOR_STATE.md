@@ -1,8 +1,40 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 148A new-project required support files and transactional activation hotfix
+Updated by: Goal 148B current-package UI-thread dispatch and real workspace build retry hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 148B current-package UI-thread dispatch and real workspace build retry hotfix is GREEN:
+
+```text
+implementationStatus=GREEN
+goal148Accepted=false
+goal148ManualRetryRequired=true
+goal148CrossThreadFailureRecorded=true
+goal148CurrentChangedUiDispatchFixed=true
+goal148UnsafeCurrentChangedSubscriberCount=0
+anonymousCurrentChangedUiHandlerCount=0
+goal148RealWorkspaceBuildRetryAutomatedPassed=true
+crossThreadExceptionAbsent=true
+packageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991
+finalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e
+supportFilesPrepared=true
+heavyWorkRunsOffUiThread=true
+uiPumpResponsive=true
+accepted=false
+nextProductGoal=retry_goal_148_unified_game_project_workspace_manual_verification
+```
+
+The real Goal148 manual attempt failed because the off-thread project build
+activated the current package and synchronously raised `CurrentChanged` on its
+worker. `MainForm`, `CompositionWorkbenchPageControl` and
+`UnityArchiveReviewPageControl` could then touch WinForms controls without an
+owning-thread dispatch. All five WinForms subscribers now use named handlers,
+the bounded dispatcher drops callbacks after disposal/handle destruction, and
+async page errors are observed on their status surfaces. A real production New
+Game + Projects + MainForm build retry is GREEN with the preserved package/final
+hashes and support file. Goal148 remains `accepted=false` and requires the human
+retry; Goal141 remains `accepted=false`; Goal149 must not start.
 
 Goal 148A new-project required support files and transactional activation hotfix is GREEN:
 

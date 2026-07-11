@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "current_package_subscriber_inventory_v1",
+  "status": "GREEN",
+  "subscribers": [
+    {
+      "subscriber": "MainForm",
+      "ownerControl": "MainForm",
+      "handlerName": "CurrentGamePackageService_CurrentChanged",
+      "marshalsToUiThread": true,
+      "asyncHandler": false,
+      "asyncExceptionsObserved": true,
+      "unsubscribesOnDispose": true
+    },
+    {
+      "subscriber": "DashboardPageControl",
+      "ownerControl": "DashboardPageControl",
+      "handlerName": "CurrentGamePackageService_CurrentChanged",
+      "marshalsToUiThread": true,
+      "asyncHandler": false,
+      "asyncExceptionsObserved": true,
+      "unsubscribesOnDispose": true
+    },
+    {
+      "subscriber": "GenerationPageControl",
+      "ownerControl": "GenerationPageControl",
+      "handlerName": "CurrentGamePackageService_CurrentChanged",
+      "marshalsToUiThread": true,
+      "asyncHandler": false,
+      "asyncExceptionsObserved": true,
+      "unsubscribesOnDispose": true
+    },
+    {
+      "subscriber": "CompositionWorkbenchPageControl",
+      "ownerControl": "CompositionWorkbenchPageControl",
+      "handlerName": "CurrentGamePackageService_CurrentChanged",
+      "marshalsToUiThread": true,
+      "asyncHandler": true,
+      "asyncExceptionsObserved": true,
+      "unsubscribesOnDispose": true
+    },
+    {
+      "subscriber": "UnityArchiveReviewPageControl",
+      "ownerControl": "UnityArchiveReviewPageControl",
+      "handlerName": "CurrentGamePackageService_CurrentChanged",
+      "marshalsToUiThread": true,
+      "asyncHandler": true,
+      "asyncExceptionsObserved": true,
+      "unsubscribesOnDispose": true
+    }
+  ],
+  "unsafeSubscriberCount": 0,
+  "anonymousCurrentChangedUiHandlerCount": 0,
+  "passed": true
+}

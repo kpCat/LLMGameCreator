@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mainform_worker_currentchanged_proof_v1",
+  "status": "GREEN",
+  "workerCallCompletedWithoutException": true,
+  "uiThreadId": 26,
+  "workerThreadId": 18,
+  "callbackThreadId": 26,
+  "statusText": "Открыт проект: Проверка конструктора",
+  "mainFormStatusUpdatedOnUiThread": true,
+  "mainFormNavigationUntouchedFromWorker": true,
+  "selectedPageUnchanged": true,
+  "repeatedEventsPassed": true,
+  "passed": true
+}

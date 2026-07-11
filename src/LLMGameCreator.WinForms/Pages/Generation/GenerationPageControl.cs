@@ -3,6 +3,7 @@ using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Domain.Validation;
+using LLMGameCreator.WinForms;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -19,6 +20,7 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
 
     public GenerationPageControl()
     {
+        components = new System.ComponentModel.Container();
         InitializeComponent();
         SetNoRuntimeState("Design-time preview. Runtime services are not available in Visual Studio Designer.");
     }
@@ -33,6 +35,7 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
         _generator = generator;
         _validator = validator;
         _settingsRepository = settingsRepository;
+        components = new System.ComponentModel.Container();
         InitializeComponent();
         WireEvents();
         _currentGamePackageService.CurrentChanged += CurrentGamePackageService_CurrentChanged;
@@ -62,18 +65,7 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
 
     private void CurrentGamePackageService_CurrentChanged(object? sender, EventArgs e)
     {
-        if (IsDisposed)
-        {
-            return;
-        }
-
-        if (InvokeRequired)
-        {
-            BeginInvoke(new Action(RefreshCurrentPackageState));
-            return;
-        }
-
-        RefreshCurrentPackageState();
+        WinFormsUiThreadDispatcher.Post(this, RefreshCurrentPackageState);
     }
 
     private async Task RefreshProfileAsync()

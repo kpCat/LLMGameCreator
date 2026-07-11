@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "goal148b_negative_proof_v1",
+  "status": "GREEN",
+  "crossThreadChecksNotDisabled": true,
+  "genericInvalidOperationNotSwallowed": true,
+  "currentPackageServiceHasNoWinFormsDependency": true,
+  "workerThreadDoesNotCallUpdateStatusDirectly": true,
+  "workerThreadDoesNotCallApplyViewStateDirectly": true,
+  "disposedControlDoesNotReceiveQueuedCallback": true,
+  "asyncEventExceptionObserved": true,
+  "duplicateBuildStillRejected": true,
+  "failedBuildRollbackStillPassed": true,
+  "noChildToolProcessStarted": true,
+  "historicalArtifactsRewritten": false,
+  "passed": true
+}

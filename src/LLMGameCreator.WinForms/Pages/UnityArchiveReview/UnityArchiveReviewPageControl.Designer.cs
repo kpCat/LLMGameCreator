@@ -70,9 +70,10 @@ namespace LLMGameCreator.WinForms.Pages
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                DisposeRuntime();
+                components?.Dispose();
             }
 
             base.Dispose(disposing);

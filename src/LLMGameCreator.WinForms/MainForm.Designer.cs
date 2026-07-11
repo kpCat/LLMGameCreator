@@ -18,6 +18,7 @@ namespace LLMGameCreator.WinForms
         {
             if (disposing)
             {
+                DisposeRuntime();
                 components?.Dispose();
             }
 

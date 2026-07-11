@@ -9,6 +9,8 @@ public sealed partial class MainForm : Form
     private readonly IEditorPageRegistry? _pageRegistry;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly ILogger? _logger;
+    private string? _displayedProjectFolder;
+    private string? _displayedProjectTitle;
 
     public MainForm()
     {
@@ -25,8 +27,21 @@ public sealed partial class MainForm : Form
         InitializeComponent();
         BindPages();
 
-        _currentGamePackageService.CurrentChanged += (_, _) => UpdateStatus();
+        _currentGamePackageService.CurrentChanged += CurrentGamePackageService_CurrentChanged;
         UpdateStatus();
+    }
+
+    private void CurrentGamePackageService_CurrentChanged(object? sender, EventArgs e)
+    {
+        WinFormsUiThreadDispatcher.Post(this, UpdateStatus);
+    }
+
+    private void DisposeRuntime()
+    {
+        if (_currentGamePackageService != null)
+        {
+            _currentGamePackageService.CurrentChanged -= CurrentGamePackageService_CurrentChanged;
+        }
     }
 
     private void BindPages()
@@ -70,8 +85,24 @@ public sealed partial class MainForm : Form
             return;
         }
 
-        _statusLabel.Text = _currentGamePackageService.CurrentPackage == null
-            ? "Проект игры не открыт"
-            : $"Открыт проект: {_currentGamePackageService.CurrentPackage.Manifest.Title}";
+        var package = _currentGamePackageService.CurrentPackage;
+        if (package == null)
+        {
+            _displayedProjectFolder = null;
+            _displayedProjectTitle = null;
+            _statusLabel.Text = "Проект игры не открыт";
+            return;
+        }
+
+        var currentFolder = _currentGamePackageService.CurrentFolder;
+        if (string.IsNullOrWhiteSpace(currentFolder)
+            || !string.Equals(currentFolder, _displayedProjectFolder, StringComparison.OrdinalIgnoreCase)
+            || string.IsNullOrWhiteSpace(_displayedProjectTitle))
+        {
+            _displayedProjectFolder = currentFolder;
+            _displayedProjectTitle = package.Manifest.Title;
+        }
+
+        _statusLabel.Text = $"Открыт проект: {_displayedProjectTitle}";
     }
 }

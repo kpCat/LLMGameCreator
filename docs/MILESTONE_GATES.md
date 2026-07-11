@@ -96,6 +96,8 @@ Goal 148 note: the existing `Игры` page is the primary five-section project 
 
 Goal 148A note: the production New Game path now materializes every package-declared relative script through a confined deterministic support-file plan, staged package validation and the existing activation transaction. First-build copy, repeat reuse, differing-user-file preservation, missing-source rejection and post-copy rollback cleanup are GREEN. The read-only minimal-map sample is a temporary narrow-alpha source behind an injectable abstraction; Goal148 and Goal141 remain unaccepted.
 
+Goal 148B note: the real Goal148 manual `_navigation` cross-thread failure is recorded. All five WinForms current-package subscribers now use named, disposal-safe owning-thread dispatch; the two async pages coalesce refreshes and observe exceptions. The production New Game + Projects + MainForm automated retry is GREEN with unchanged package/final hashes and support preparation. Goal148 remains unaccepted and requires the human retry; Goal141 remains unaccepted.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

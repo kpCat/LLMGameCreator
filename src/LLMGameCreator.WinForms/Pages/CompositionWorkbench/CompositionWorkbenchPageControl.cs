@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Projects;
+using LLMGameCreator.WinForms;
 using LLMGameCreator.WinForms.Pages.CompositionWorkbench;
 
 namespace LLMGameCreator.WinForms.Pages;
@@ -13,6 +14,8 @@ public sealed partial class CompositionWorkbenchPageControl : UserControl, IEdit
     private bool _loaded;
     private bool _applyingState;
     private bool _splitterInitialized;
+    private bool _currentProjectRefreshRunning;
+    private bool _currentProjectRefreshPending;
 
     public CompositionWorkbenchPageControl()
     {
@@ -84,7 +87,7 @@ public sealed partial class CompositionWorkbenchPageControl : UserControl, IEdit
         _refreshReportsButton.Click += async (_, _) => await RefreshReportsAsync();
         _exportReportButton.Click += async (_, _) => await ExportReportAsync();
         _savedReportsList.SelectedIndexChanged += async (_, _) => await LoadSelectedSavedReportAsync();
-        _currentGamePackageService!.CurrentChanged += async (_, _) => await CurrentProjectChangedAsync();
+        _currentGamePackageService!.CurrentChanged += CurrentGamePackageService_CurrentChanged;
     }
 
     private async Task EnsureLoadedAsync()
@@ -151,16 +154,73 @@ public sealed partial class CompositionWorkbenchPageControl : UserControl, IEdit
         });
     }
 
-    private async Task CurrentProjectChangedAsync()
+    private void CurrentGamePackageService_CurrentChanged(object? sender, EventArgs e)
+    {
+        WinFormsUiThreadDispatcher.PostAsync(
+            this,
+            RefreshCurrentProjectOnUiThreadAsync,
+            ShowCurrentProjectRefreshError);
+    }
+
+    private async Task RefreshCurrentProjectOnUiThreadAsync()
     {
         if (_presenter is null || _currentGamePackageService is null)
         {
             return;
         }
 
-        ApplyViewState(_presenter.Initialize(_currentGamePackageService.CurrentFolder));
-        BuildPreview();
-        await RefreshReportsAsync();
+        if (_currentProjectRefreshRunning)
+        {
+            _currentProjectRefreshPending = true;
+            return;
+        }
+
+        _currentProjectRefreshRunning = true;
+        try
+        {
+            do
+            {
+                _currentProjectRefreshPending = false;
+                ApplyViewState(_presenter.Initialize(_currentGamePackageService.CurrentFolder));
+                BuildPreview();
+                SetBusy(true);
+                try
+                {
+                    var refreshed = await _presenter.RefreshSavedReportsAsync(_state).ConfigureAwait(true);
+                    if (IsDisposed || Disposing)
+                    {
+                        return;
+                    }
+
+                    ApplyViewState(refreshed);
+                }
+                finally
+                {
+                    if (!IsDisposed && !Disposing)
+                    {
+                        SetBusy(false);
+                    }
+                }
+            }
+            while (_currentProjectRefreshPending && !IsDisposed && !Disposing);
+        }
+        finally
+        {
+            _currentProjectRefreshRunning = false;
+        }
+    }
+
+    private void ShowCurrentProjectRefreshError(Exception exception)
+    {
+        _statusLabel.Text = exception.Message;
+    }
+
+    private void DisposeRuntime()
+    {
+        if (_currentGamePackageService != null)
+        {
+            _currentGamePackageService.CurrentChanged -= CurrentGamePackageService_CurrentChanged;
+        }
     }
 
     private async Task RunBusyAsync(Func<Task> operation)

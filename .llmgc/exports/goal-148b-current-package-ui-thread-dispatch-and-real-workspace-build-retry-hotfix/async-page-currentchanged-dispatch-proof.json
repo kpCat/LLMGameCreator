@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "async_page_currentchanged_dispatch_proof_v1",
+  "status": "GREEN",
+  "uiThreadId": 27,
+  "compositionWorkerThreadId": 10,
+  "unityWorkerThreadId": 18,
+  "compositionCallbackThreadIds": [
+    27
+  ],
+  "unityArchiveReviewCallbackThreadIds": [
+    27
+  ],
+  "compositionWorkbenchDispatchPassed": true,
+  "unityArchiveReviewDispatchPassed": true,
+  "repeatedEventsCoalesced": true,
+  "concurrentDestructiveRefreshes": 0,
+  "asyncExceptionsObserved": true,
+  "exceptionCallbackThreadId": 27,
+  "noChildToolProcessStarted": true,
+  "passed": true
+}

@@ -2321,7 +2321,7 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-review_goal_148_unified_game_project_workspace
+retry_goal_148_unified_game_project_workspace_manual_verification
 ```
 
 Goal148 is GREEN at
@@ -2342,8 +2342,12 @@ build copies it and the repeat build reuses it. Differing user files and missing
 sources are rejected before package activation, and an injected failure after
 copy removes the new file and restores package/current/authoring state. The
 current narrow-alpha source remains the read-only minimal-map sample behind an
-injectable source abstraction; Goal148 remains `accepted=false` and the next
-work remains `review_goal_148_unified_game_project_workspace`.
+injectable source abstraction. Goal148B records the real manual `_navigation`
+cross-thread failure and repairs all five WinForms `CurrentChanged` subscribers
+with named disposal-safe UI dispatch; the real MainForm + Projects automated
+retry preserves the expected package/final hashes. Goal148 remains
+`accepted=false`, `manualRetryRequired=true`, and the next work is
+`retry_goal_148_unified_game_project_workspace_manual_verification`.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,

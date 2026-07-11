@@ -23,3 +23,22 @@ copies the package-required relative script from the confined read-only
 narrow-alpha source, repeat build reuses it, conflicts and missing sources are
 rejected, and rollback removes a newly copied file. This does not accept
 Goal148; the checklist above remains the active human gate.
+
+## Recorded manual failure and retry
+
+The real Goal148 manual attempt used project title `Проверка конструктора` and
+failed after `Собрать и проверить игру`. Package activation raised
+`CurrentChanged` from the build worker, and an unsafe WinForms subscriber reached
+`_navigation` from that worker thread. Goal148B records and repairs this exact
+failure class; it does not accept Goal148 and does not replace the required human
+retry.
+
+```text
+goal148Accepted=false
+manualRetryRequired=true
+manualFailureClass=current_package_changed_cross_thread_ui_dispatch
+rawScreenshotNotCommitted=true
+```
+
+The screenshot and raw manual files remain outside the repository. Retry the
+same checklist after the Goal148B automated hotfix evidence is GREEN.

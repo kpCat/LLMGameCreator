@@ -1,0 +1,58 @@
+{
+    "schemaVersion":  "goal148b_file_index_v1",
+    "fileCount":  10,
+    "files":  [
+                  {
+                      "relativePath":  "goal148-manual-cross-thread-failure-record.json",
+                      "sha256":  "385b19d77d8e3b09082e4c9408154be82704328d91a14162a3b49f0cceeea272",
+                      "byteCount":  478
+                  },
+                  {
+                      "relativePath":  "current-package-subscriber-inventory.json",
+                      "sha256":  "7fe53823918c1fc1abfdf9547faa4e1279a767f3206c59cf911696393b537893",
+                      "byteCount":  1803
+                  },
+                  {
+                      "relativePath":  "mainform-worker-currentchanged-proof.json",
+                      "sha256":  "e6409f933136caefaad262fb9f74bc410c4822234f1904f875a90b4e8684cdf7",
+                      "byteCount":  480
+                  },
+                  {
+                      "relativePath":  "mainform-disposal-race-proof.json",
+                      "sha256":  "5f786459287d429de829775ab83811775f2cab9d3b87e52bd673caea2a3f1dff",
+                      "byteCount":  324
+                  },
+                  {
+                      "relativePath":  "async-page-currentchanged-dispatch-proof.json",
+                      "sha256":  "944bff7ad201fe123541d1bc5e52b00b6ac67b06c5ee0e20ec5ab7256d9a757f",
+                      "byteCount":  587
+                  },
+                  {
+                      "relativePath":  "real-workspace-build-retry-proof.json",
+                      "sha256":  "b4c67969e5bdfd22bb7e84fb78a90a026e878350e0fa98f9e33397d44b93cb03",
+                      "byteCount":  1200
+                  },
+                  {
+                      "relativePath":  "goal148b-regression-compatibility-proof.json",
+                      "sha256":  "23e6b412e5584ce05fb4ee377dcd2efc7f275177956070768446c472a7dce88e",
+                      "byteCount":  640
+                  },
+                  {
+                      "relativePath":  "goal148b-negative-proof.json",
+                      "sha256":  "256b24d15abacc3f3a597b5c42481702127c6088382c01d80a845b4731e0fad4",
+                      "byteCount":  615
+                  },
+                  {
+                      "relativePath":  "goal148b-dashboard.json",
+                      "sha256":  "4ab7067212abd21ada2ea796dca6d38cabd48cb21212a1a5c482e87d8b1bea7b",
+                      "byteCount":  1158
+                  },
+                  {
+                      "relativePath":  "goal148b-report.md",
+                      "sha256":  "2bad1e9b102e2be3e6d262bec2b24857a63ac8bf833f2ecb34323b2bdfc13385",
+                      "byteCount":  904
+                  }
+              ],
+    "sha256Included":  true,
+    "passed":  true
+}
