@@ -1,15 +1,70 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 147A authoring UI event lifecycle and dependent-module certification hotfix
+Updated by: Goal 148 unified game project workspace and legacy diagnostics isolation
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 148 unified game project workspace and legacy diagnostics isolation is GREEN:
+
+```text
+unified_game_project_workspace_and_legacy_goal_diagnostics_isolation_verification required
+implementationStatus=GREEN
+goal146Accepted=true
+goal146AcceptedByHuman=true
+goal146AcceptedByCodex=false
+goal147Accepted=true
+goal147AcceptedByHuman=true
+goal147AcceptedByCodex=false
+goal148Accepted=false
+unifiedGameProjectWorkspace=true
+projectsPageIsPrimaryWorkflow=true
+newTopLevelPageAdded=false
+normalWorkspaceGoalNumberControlCount=0
+legacyGoalDiagnosticsHiddenByDefault=true
+legacyGoalDiagnosticsAvailableByExplicitToggle=true
+projectLocalAuthoringPersistence=true
+projectAuthoringRoundtripPassed=true
+friendlyMechanicPresentation=true
+dynamicParameterEditor=true
+primaryActionText=Собрать и проверить игру
+heavyWorkRunsOffUiThread=true
+uiPumpResponsive=true
+packageActivationPassed=true
+packageActivationTransactional=true
+failureRollbackPassed=true
+currentPackageMatchesSavedPackage=true
+customPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991
+customFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e
+runtimeAuthority=true
+unityGameplayTruth=false
+accepted=false
+nextProductGoal=review_goal_148_unified_game_project_workspace
+```
+
+The existing `Игры` page is now the primary project workflow. It retains game
+root/list/create/open/save behavior and adds `Обзор`, `Механики`, `Настройки`,
+`Сборка и проверка` and collapsed-by-default `Технические детали` sections for
+the opened project. Friendly mechanic metadata drives ten locked core rows,
+three optional rows and eight typed parameter controls. Project-local authoring
+uses the existing `FeatureModuleCompositionDocument` format under
+`.llmgc/authoring`; certification cache, staging and history remain confined to
+the opened game project. The primary action runs in-process off the UI thread,
+qualifies the accepted custom composition, atomically activates exact package
+SHA `2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991`
+and rolls package bytes, current package and last-successful metadata back on
+injected save failure while retaining user edits. The former Visual World
+Stream Preview page is titled `Диагностика генератора`, placed near the end of
+navigation and hides legacy numbered tabs until `Показать внутренние проверки`
+is explicitly selected. Goals146/147 are accepted by the exact human decision
+recorded in their manual-acceptance documents; Goal141 and Goal148 remain
+`accepted=false`.
 
 Goal 147A authoring UI and dependent-module certification hotfix is GREEN:
 
 ```text
 implementationStatus=GREEN
-goal146Accepted=false
-goal147Accepted=false
+goal146Accepted=true
+goal147Accepted=true
 programmaticItemCheckAppliedCount=0
 refreshWithoutDocumentPassed=true
 deleteRebindWithoutDocumentPassed=true
@@ -29,7 +84,7 @@ goal147RegressionGreen=true
 goal146RegressionGreen=true
 unitySmokeStillGreen=true
 accepted=false
-nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+nextProductGoal=review_goal_148_unified_game_project_workspace
 ```
 
 The production `CheckedListBox.ItemCheck` path is synchronous and derives the
@@ -43,16 +98,16 @@ cache by the complete dependency closure. A synthetic base/dependent/unrelated
 catalog proves 3 initial executions, 3 reuses, then 2 executions and 1 unrelated
 reuse after the base changes; corrupt dependent cache regenerates and cycles are
 rejected before Runtime execution. Goal146/147 hashes and Unity smoke remain
-GREEN, while both goals remain `accepted=false` for the bundled manual review.
+GREEN; Goals146/147 are now accepted by explicit human decision.
 
 Goal 147 FeatureModule authoring and persistence is GREEN:
 
 ```text
-persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required
+persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification GREEN
 implementationStatus=GREEN
-goal146Accepted=false
-goal146ManualReviewDeferred=true
-goal147Accepted=false
+goal146Accepted=true
+goal146ManualReviewDeferred=false
+goal147Accepted=true
 persistentFeatureModuleLibrary=true
 moduleLibrarySourceOfTruth=true
 requiredCoreModuleCount=10
@@ -75,7 +130,7 @@ featureModuleWorkspaceIgnored=true
 runtimeAuthority=true
 projectionOnly=false
 unityGameplayTruth=false
-nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+nextProductGoal=review_goal_148_unified_game_project_workspace
 ```
 
 The repository-local file catalog is now the FeatureModule source of truth.
@@ -90,8 +145,8 @@ coverage stays at 9 rows under the 24-row cap and never enumerates `2^100`.
 Defaults preserve all eight Goal146 package/final hashes; a custom all-three
 composition qualifies through the same Runtime/checkpoint/replay/action-binding
 seam. WinForms remains an in-process Application adapter and Unity is a
-read-only evidence consumer. Goals 146 and 147 both remain `accepted=false` and
-are now ready for the required bundled manual review.
+read-only evidence consumer. Goals 146 and 147 are accepted by the explicit
+human decision recorded with Goal148.
 
 Goal 145 is accepted by the repository owner's exact human handoff:
 
@@ -112,12 +167,12 @@ allFocusEffectsObserved=true
 Goal 146 FeatureModule composition matrix is GREEN:
 
 ```text
-featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification required
+featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification GREEN
 implementationStatus=GREEN
-accepted=false
-acceptedByHuman=false
+accepted=true
+acceptedByHuman=true
 acceptedByCodex=false
-manualReviewDeferred=true
+manualReviewDeferred=false
 goal145Accepted=true
 featureModuleComposition=true
 requiredCoreModuleCount=10
@@ -137,15 +192,15 @@ selectedCompositionCombinedEffectCount=3
 runtimeAuthority=true
 projectionOnly=false
 unityGameplayTruth=false
-nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+nextProductGoal=review_goal_148_unified_game_project_workspace
 ```
 
 Goal 146A generic Composer scalability hotfix is GREEN:
 
 ```text
 generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification GREEN
-goal146Accepted=false
-goal146ManualReviewDeferred=true
+goal146Accepted=true
+goal146ManualReviewDeferred=false
 goal146GenericCatalogDrivenComposer=true
 goal146HardcodedCombinationTableAbsent=true
 goal146ActiveOptionalSetDerivedFromCatalog=true
@@ -162,7 +217,7 @@ goal146LargeCatalogGeneratedCompositionCount=21
 goal146LargeCatalogMaxTotalRows=24
 goal146CurrentPackageHashesPreserved=true
 goal146CurrentFinalHashesPreserved=true
-nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+nextProductGoal=review_goal_148_unified_game_project_workspace
 ```
 
 The active optional module set now comes from the catalog. Three optional
@@ -173,8 +228,8 @@ the deterministic twelve-module proof produces 21 rows under `maxTotalRows=24`
 instead of enumerating 4096. A synthetic fuel-reserve module is appended at
 runtime, materializes without a Composer branch, passes the shared Runtime
 qualifier, checkpoint reload, full replay and action binding, and observes its
-declared generic inventory effect. Goal146 remains `accepted=false` with
-`manualReviewDeferred=true`.
+declared generic inventory effect. Goal146 is accepted by explicit human
+decision and manual review is no longer deferred.
 
 Goal146 composes all eight combinations of the three Goal142-derived optional
 profile modules over the immutable balanced base. Every new package validates,
@@ -183,8 +238,8 @@ qualifier with an 8-action checkpoint and 13-action full replay, and is stable
 under module input reordering. The selected all-three package shows potion/apple/log
 quantities 5/4/2, goblin health 10 after the same attack, retained red-herb/water
 quantities 2/1 and completed quest state. WinForms uses in-process services;
-Unity reads Goal146 artifacts only. Goal146 remains `accepted=false` and
-`manualReviewDeferred=true`; no immediate human gate follows this goal.
+Unity reads Goal146 artifacts only. Goal146 is now accepted by the explicit
+Goals146/147 human decision recorded with Goal148.
 
 Goal 145A selector hotfix is GREEN:
 
@@ -203,7 +258,7 @@ goal145CandidateChangeResetsCheckpoint=true
 goal145CombatSessionUsesCombatPackage=true
 goal145MatrixStillGreen=true
 goal145UnitySmokeStillGreen=true
-nextProductGoal=review_goals_146_147_featuremodule_composer_authoring_workflow
+nextProductGoal=review_goal_148_unified_game_project_workspace
 ```
 
 The Goal145 candidate combo now uses `SelectionChangeCommitted` for operator

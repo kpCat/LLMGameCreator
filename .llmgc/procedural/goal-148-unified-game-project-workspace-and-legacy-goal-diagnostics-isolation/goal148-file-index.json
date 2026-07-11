@@ -1,0 +1,63 @@
+{
+    "schemaVersion":  "goal148_file_index_v1",
+    "fileCount":  11,
+    "files":  [
+                  {
+                      "relativePath":  "goals146-147-human-acceptance-record.json",
+                      "sha256":  "9e5341c8d1aa895d57c6ed49821a429f52120a0bb98b1594dda87ffdbde428ce",
+                      "byteCount":  1415
+                  },
+                  {
+                      "relativePath":  "unified-game-project-workspace-dashboard.json",
+                      "sha256":  "9ed063523926a35bdcdec5dc8fd37768ed2172cf978618832b7c1b99c55908d4",
+                      "byteCount":  1260
+                  },
+                  {
+                      "relativePath":  "project-local-authoring-roundtrip-proof.json",
+                      "sha256":  "00f3e52e4400b5bc4baded60cc9be117a05a199e7bdad4f21861b9a506f0a830",
+                      "byteCount":  434
+                  },
+                  {
+                      "relativePath":  "project-build-activation-proof.json",
+                      "sha256":  "a8f88c875f93b4041e9dd27aee4a2a2119ca0e4d05e3d91e3878f469f92670bb",
+                      "byteCount":  582
+                  },
+                  {
+                      "relativePath":  "project-build-rollback-proof.json",
+                      "sha256":  "2521ff6453d998cf047af899f169095785c54f3674dcd681e744f15bc531e878",
+                      "byteCount":  374
+                  },
+                  {
+                      "relativePath":  "user-facing-control-inventory.json",
+                      "sha256":  "9ee452b20ea38242ebad031ebb4a53cf1714aa9102d6c038a9091dd84840c26b",
+                      "byteCount":  617
+                  },
+                  {
+                      "relativePath":  "legacy-diagnostics-isolation-proof.json",
+                      "sha256":  "b2170408301d829f457e9a09ee80b8b50e9a4c9dd85ebb8e386230b50791ff30",
+                      "byteCount":  385
+                  },
+                  {
+                      "relativePath":  "goal148-regression-compatibility-proof.json",
+                      "sha256":  "5b7095c105ec4d467391b063ca426bae2c9875c220d801c00053dc4d28bd72cb",
+                      "byteCount":  529
+                  },
+                  {
+                      "relativePath":  "goal148-negative-proof.json",
+                      "sha256":  "76c0b497be94bb72dcc048b10b8aaf3636707e9b6c24c913120ba14ccd2f26b3",
+                      "byteCount":  878
+                  },
+                  {
+                      "relativePath":  "project-ui-responsiveness-proof.json",
+                      "sha256":  "7fc4c9a098e362cd4bdf62109679e606a43facb06e381e36553892d700fb7c72",
+                      "byteCount":  323
+                  },
+                  {
+                      "relativePath":  "goal148-report.md",
+                      "sha256":  "bbc656b35d3ee21a77b0cb177fd3f0be7d6e3f19450c857197054ebba3372c83",
+                      "byteCount":  638
+                  }
+              ],
+    "sha256Included":  true,
+    "passed":  true
+}

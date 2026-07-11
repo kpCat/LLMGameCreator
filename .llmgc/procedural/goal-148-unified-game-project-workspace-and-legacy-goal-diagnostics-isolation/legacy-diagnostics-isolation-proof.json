@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "legacy_diagnostics_isolation_proof_v1",
+  "status": "GREEN",
+  "title": "Диагностика генератора",
+  "pageNearEndOfNavigation": true,
+  "legacyDiagnosticsHiddenByDefault": true,
+  "visibleGoalNumberTextBeforeToggle": 0,
+  "legacyDiagnosticsAvailableByExplicitToggle": true,
+  "legacyDiagnosticsNotDeleted": true,
+  "passed": true
+}

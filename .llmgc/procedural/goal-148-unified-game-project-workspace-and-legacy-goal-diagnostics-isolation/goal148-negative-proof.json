@@ -1,0 +1,21 @@
+{
+    "schemaVersion":  "goal148_negative_proof_v1",
+    "status":  "GREEN",
+    "buildWithoutOpenProjectRejected":  true,
+    "unknownModuleRejected":  true,
+    "invalidParameterRejectedBeforePackageActivation":  true,
+    "staleCompositionRejectedOrExplained":  true,
+    "concurrentBuildRejected":  true,
+    "packageSaveFailureRollsBack":  true,
+    "failedBuildDoesNotReplaceCurrentPackage":  true,
+    "failedBuildDoesNotOverwriteLastSuccessfulHashes":  true,
+    "projectPathEscapeRejected":  true,
+    "projectAuthoringPathConfined":  true,
+    "normalWorkspaceDoesNotReadProofArtifactGroups":  true,
+    "normalWorkspaceContainsNoGoalNumberLabels":  true,
+    "legacyDiagnosticsNotDefaultVisible":  true,
+    "legacyDiagnosticsNotDeleted":  true,
+    "noChildToolProcessStarted":  true,
+    "noUnityExecutionStarted":  true,
+    "passed":  true
+}

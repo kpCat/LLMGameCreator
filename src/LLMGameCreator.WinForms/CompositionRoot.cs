@@ -13,6 +13,7 @@ using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
+using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
@@ -203,6 +204,22 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IRuntimeSnapshotStore, RuntimeSnapshotStore>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
+        _container.RegisterDelegate<ISelectedRuntimeVariantInteractiveSessionService>(
+            _ => SelectedRuntimeVariantInteractiveSessionService.CreateDefault(), Reuse.Singleton);
+        var repositoryRoot = ResolveRepositoryRoot();
+        _container.RegisterDelegate<GameProjectFeatureModuleAuthoringService>(
+            _ => new GameProjectFeatureModuleAuthoringService(repositoryRoot), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectBuildAndQualificationService>(resolver =>
+            new GameProjectBuildAndQualificationService(
+                repositoryRoot,
+                resolver.Resolve<ISelectedRuntimeVariantInteractiveSessionService>(),
+                resolver.Resolve<IGamePackageRepository>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+        _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
+        _container.Register<UnifiedGameProjectWorkspaceController>(Reuse.Singleton);
+        _container.RegisterDelegate<IUnifiedGameProjectWorkspaceController>(
+            resolver => resolver.Resolve<UnifiedGameProjectWorkspaceController>(), Reuse.Singleton);
 
         _container.RegisterDelegate<DashboardPageControl>(resolver => new DashboardPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
@@ -212,7 +229,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<IAppSettingsRepository>(),
             resolver.Resolve<IGameProjectService>(),
-            resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
+            resolver.Resolve<IGamePackageValidator>(),
+            resolver.Resolve<IUnifiedGameProjectWorkspaceController>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GenerationPageControl>(resolver => new GenerationPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
@@ -361,6 +379,20 @@ public sealed class CompositionRoot : IDisposable
     public MainForm ResolveMainForm() => _container.Resolve<MainForm>();
 
     public IEditorPageRegistry ResolveEditorPageRegistry() => _container.Resolve<IEditorPageRegistry>();
+
+    private static string ResolveRepositoryRoot()
+    {
+        foreach (var start in new[] { Directory.GetCurrentDirectory(), AppContext.BaseDirectory })
+        {
+            var directory = new DirectoryInfo(Path.GetFullPath(start));
+            while (directory is not null)
+            {
+                if (File.Exists(Path.Combine(directory.FullName, "LLMGameCreator.sln"))) return directory.FullName;
+                directory = directory.Parent;
+            }
+        }
+        throw new DirectoryNotFoundException("LLMGameCreator repository root was not found.");
+    }
 
     public void Dispose()
     {

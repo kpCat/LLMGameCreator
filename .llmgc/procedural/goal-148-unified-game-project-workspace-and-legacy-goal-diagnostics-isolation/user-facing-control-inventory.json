@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "user_facing_control_inventory_v1",
+  "status": "GREEN",
+  "topLevelPageTitle": "Игры",
+  "sections": [
+    "Обзор",
+    "Механики",
+    "Настройки",
+    "Сборка и проверка",
+    "Технические детали"
+  ],
+  "requiredMechanicCount": 10,
+  "optionalMechanicCount": 3,
+  "parameterEditorCount": 8,
+  "normalWorkspaceGoalNumberControlCount": 0,
+  "technicalDetailsSelectedByDefault": false,
+  "primaryActionText": "Собрать и проверить игру",
+  "friendlyMechanicPresentation": true,
+  "passed": true
+}

@@ -1,11 +1,18 @@
 # Goals 146/147 FeatureModule Composer and Authoring Review
 
-Status: GREEN, manual review required
-Gate: `persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required`
-Goal146 accepted: false
-Goal147 accepted: false
-Accepted by human: false
+Status: GREEN, accepted by human
+Gate: `persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification GREEN`
+Goal146 accepted: true
+Goal147 accepted: true
+Accepted by human: true
 Accepted by Codex: false
+Raw manual input committed: false
+
+Human decision recorded by Goal148:
+
+```text
+Я принимаю Goals146/147 featuremodule_composer_and_authoring_workflow_verification GREEN. goal146Accepted=true, goal147Accepted=true, persistentFeatureModuleLibrary=true, moduleLibrarySourceOfTruth=true, requiredCoreModuleCount=10, optionalModuleCount=3, parameterDefinitionCount=8, catalogDrivenComposer=true, hardcodedCombinationTableAbsent=true, typedParameterAuthoring=true, savedCompositionPersistence=true, savedCompositionRoundtripPassed=true, incrementalModuleCertification=true, dependentModuleCertificationPassed=true, transitiveDependencyInvalidationPassed=true, hundredModuleCatalogAccepted=true, hundredModuleInteractionRowCount=9, programmaticItemCheckAppliedCount=0, operatorItemCheckAppliedCount=1, heavyWorkRunsOffUiThread=true, customPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991, customFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e, checkpointReloadPassed=true, fullReplayEquivalent=true, actionBindingPassed=true, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.
+```
 
 ## Automated result
 
@@ -30,7 +37,7 @@ featureModuleWorkspaceIgnored=true
 runtimeAuthority=true
 projectionOnly=false
 unityGameplayTruth=false
-accepted=false
+accepted=true
 ```
 
 Normal command:
@@ -77,6 +84,5 @@ Hotfix evidence:
 8. Review the Goal147 dashboard, default-hash compatibility proof,
    certification cache proof, 100-module scalability proof and Unity smoke.
 
-Do not mark either Goal146 or Goal147 accepted automatically. Record an explicit
-human decision after the bundled review. Runtime remains gameplay authority;
-Unity remains a read-only evidence consumer for this goal.
+The bundled review is accepted by the explicit human decision above. Runtime
+remains gameplay authority; Unity remains a read-only evidence consumer.

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "project_build_rollback_proof_v1",
+  "status": "GREEN",
+  "packageJsonByteIdentical": true,
+  "currentPackageUnchanged": true,
+  "lastSuccessfulHashesUnchanged": true,
+  "userEditsRetained": true,
+  "temporaryStagingRemoved": true,
+  "packageSaveFailureRollsBack": true,
+  "failedBuildDoesNotReplaceCurrentPackage": true,
+  "passed": true
+}

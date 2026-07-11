@@ -2321,8 +2321,19 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-review_goals_146_147_featuremodule_composer_authoring_workflow
+review_goal_148_unified_game_project_workspace
 ```
+
+Goal148 is GREEN at
+`unified_game_project_workspace_and_legacy_goal_diagnostics_isolation_verification required`.
+Goals146/147 are accepted by the exact human decision recorded in their manual
+acceptance documents. The existing `Игры` page is now the primary workflow with
+`Обзор`, `Механики`, `Настройки`, `Сборка и проверка` and `Технические детали`;
+normalWorkspaceGoalNumberControlCount=0. Project-local authoring roundtrip,
+exact custom package/final hashes, off-thread UI execution, transactional
+activation and package-save rollback are GREEN. Legacy numbered panels are
+preserved on `Диагностика генератора` but hidden until the explicit toggle.
+Goal148 remains `accepted=false`; the current next work is its manual review.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,
@@ -2334,8 +2345,8 @@ optional profile modules over the immutable balanced base, materializes eight
 novel GamePackages with the existing structured mutation engine, and qualifies
 8/8 through one shared Runtime session/replay seam. Package hashes and final
 state hashes are 8/8 distinct; all order-independence, checkpoint, replay,
-binding, WinForms and Unity gates pass. Goal146 remains `accepted=false`; manual
-review is deferred until related authoring or persistence work can be bundled.
+binding, WinForms and Unity gates pass. Goal146 is accepted by the exact bundled
+Goals146/147 human decision recorded with Goal148.
 
 Goal146A is GREEN at
 `generic_featuremodule_composer_scalability_and_catalog_driven_coverage_hotfix_verification`.
@@ -2346,8 +2357,8 @@ contracts and coverage planning. The current three-module catalog remains an
 8-row exhaustive fixture with all package/final hashes preserved. A synthetic
 fourth module materializes and qualifies through the shared Runtime seam while
 bounded coverage emits 13 rows; a deterministic twelve-module catalog emits 21
-rows under `maxTotalRows=24` rather than enumerating 4096. Goal146 remains
-`accepted=false` and `manualReviewDeferred=true`.
+rows under `maxTotalRows=24` rather than enumerating 4096. Goal146 is accepted
+and manual review is no longer deferred.
 
 Goal147 is GREEN at
 `persistent_featuremodule_registry_typed_parameter_authoring_saved_compositions_and_incremental_certification_verification required`.
@@ -2359,8 +2370,7 @@ changed module plus declared transitive dependents; 100 modules yield 100 certif
 rows under the 24-row cap without powerset enumeration. Default values preserve
 all eight Goal146 package/final hashes, and a custom all-three composition
 passes the shared Runtime/checkpoint/replay/action-binding seam. Goals 146 and
-147 remain `accepted=false`; the current next work is their bundled manual
-composer/authoring workflow review.
+147 are accepted by the explicit human decision recorded with Goal148.
 
 Goal147A is GREEN. The real Goal147 WinForms checked-list lifecycle is now
 programmatically silent (0 applies), one operator ItemCheck applies once using
@@ -2370,7 +2380,8 @@ and control restoration. Certification composes each target with its sorted
 transitive optional dependency closure. A synthetic three-module catalog proves
 3 initial executions, 3 cache reuses, selective base-change invalidation at
 2 executed / 1 reused, corrupt-dependent regeneration and deterministic cycle
-rejection before Runtime execution. Goal146 and Goal147 remain `accepted=false`.
+rejection before Runtime execution. Goals146/147 are accepted by the explicit
+human decision recorded with Goal148.
 
 Goal145 is accepted by the repository owner's exact Goal146 human handoff with
 `implementationStatus=GREEN`, `accepted=true`, `acceptedByHuman=true`,

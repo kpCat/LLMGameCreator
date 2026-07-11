@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "project_local_authoring_roundtrip_proof_v1",
+  "status": "GREEN",
+  "projectLocalAuthoringPersistence": true,
+  "authoringDocumentCreatedWithoutReplacingPackage": true,
+  "requiredMechanicCount": 10,
+  "optionalMechanicCount": 3,
+  "parameterDefinitionCount": 8,
+  "savedModuleSelectionRestored": true,
+  "savedParameterValueRestored": true,
+  "manualJsonEditingRequired": false,
+  "passed": true
+}

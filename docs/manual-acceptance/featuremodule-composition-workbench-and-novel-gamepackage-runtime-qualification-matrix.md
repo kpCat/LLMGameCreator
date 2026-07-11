@@ -1,11 +1,17 @@
 # Goal 146 FeatureModule Composition Workbench and Novel GamePackage Runtime Qualification Matrix
 
-Status: GREEN, manual review deferred
-Gate: `featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification required`
-Accepted: false
-Accepted by human: false
+Status: GREEN, accepted by human
+Gate: `featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification GREEN`
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
-Manual review deferred: true
+Raw manual input committed: false
+
+Human decision recorded by Goal148:
+
+```text
+Я принимаю Goals146/147 featuremodule_composer_and_authoring_workflow_verification GREEN. goal146Accepted=true, goal147Accepted=true, persistentFeatureModuleLibrary=true, moduleLibrarySourceOfTruth=true, requiredCoreModuleCount=10, optionalModuleCount=3, parameterDefinitionCount=8, catalogDrivenComposer=true, hardcodedCombinationTableAbsent=true, typedParameterAuthoring=true, savedCompositionPersistence=true, savedCompositionRoundtripPassed=true, incrementalModuleCertification=true, dependentModuleCertificationPassed=true, transitiveDependencyInvalidationPassed=true, hundredModuleCatalogAccepted=true, hundredModuleInteractionRowCount=9, programmaticItemCheckAppliedCount=0, operatorItemCheckAppliedCount=1, heavyWorkRunsOffUiThread=true, customPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991, customFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e, checkpointReloadPassed=true, fullReplayEquivalent=true, actionBindingPassed=true, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.
+```
 
 ## Automated result
 
@@ -42,8 +48,8 @@ unitySmokePassed=true
 runtimeAuthority=true
 projectionOnly=false
 unityGameplayTruth=false
-accepted=false
-manualReviewDeferred=true
+accepted=true
+manualReviewDeferred=false
 ```
 
 The selected all-three composition finishes with healing-potion/apple/log
@@ -63,7 +69,5 @@ Normal command:
 Evidence:
 `.llmgc/procedural/goal-146-featuremodule-composition-workbench-and-novel-gamepackage-runtime-qualification-matrix/`
 
-Goal147 is now GREEN, so the deferred Goal146 review is ready to be performed
-together with the Goal147 authoring/persistence workflow. Goal146 remains
-`accepted=false`; use the Goal147 manual-acceptance checklist and do not infer
-acceptance from automated evidence.
+Goal146 and Goal147 were accepted together by the explicit human decision above.
+Goal148 remains `accepted=false` and requires its own review.

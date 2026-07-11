@@ -9,12 +9,17 @@ namespace LLMGameCreator.WinForms.Pages
     partial class ProjectsPageControl
     {
         private IContainer components;
-        private TableLayoutPanel _layoutPanel;
+        private TableLayoutPanel _rootLayout;
+        private Label _pageTitleLabel;
+        private TableLayoutPanel _gamesRootPanel;
         private Label _gamesRootLabel;
         private TextBox _gamesRootTextBox;
         private Button _browseGamesRootButton;
         private Button _saveGamesRootButton;
         private Button _refreshButton;
+        private Panel _contentPanel;
+        private TableLayoutPanel _projectStartPanel;
+        private Label _myGamesLabel;
         private ListView _projectsListView;
         private ColumnHeader _gameNameColumnHeader;
         private ColumnHeader _packageIdColumnHeader;
@@ -25,14 +30,40 @@ namespace LLMGameCreator.WinForms.Pages
         private Button _newGameButton;
         private Button _openSelectedButton;
         private Button _openFolderButton;
-        private Button _saveCurrentButton;
         private TextBox _infoTextBox;
+        private TableLayoutPanel _workspacePanel;
+        private FlowLayoutPanel _workspaceToolbar;
+        private Button _backToGamesButton;
+        private Button _saveCurrentButton;
+        private Label _workspaceTitleLabel;
+        private TabControl _workspaceTabs;
+        private TabPage _overviewTab;
+        private TabPage _mechanicsTab;
+        private TabPage _settingsTab;
+        private TabPage _buildTab;
+        private TabPage _technicalTab;
+        private TableLayoutPanel _overviewLayout;
+        private Label _overviewProjectLabel;
+        private Label _overviewFolderLabel;
+        private Label _overviewPackageStatusLabel;
+        private Label _overviewAuthoringStatusLabel;
+        private Label _overviewMechanicsCountLabel;
+        private Label _overviewLastBuildLabel;
+        private Label _overviewRuntimeLabel;
+        private FlowLayoutPanel _mechanicsFlow;
+        private FlowLayoutPanel _settingsFlow;
+        private TableLayoutPanel _buildLayout;
+        private Button _buildAndQualifyButton;
+        private Label _buildStatusLabel;
+        private TextBox _buildResultTextBox;
+        private TextBox _technicalDetailsTextBox;
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                components?.Dispose();
+                this._workspaceToolTip.Dispose();
+                this.components?.Dispose();
             }
 
             base.Dispose(disposing);
@@ -40,215 +71,339 @@ namespace LLMGameCreator.WinForms.Pages
 
         private void InitializeComponent()
         {
-            _layoutPanel = new TableLayoutPanel();
-            _gamesRootLabel = new Label();
-            _gamesRootTextBox = new TextBox();
-            _browseGamesRootButton = new Button();
-            _saveGamesRootButton = new Button();
-            _refreshButton = new Button();
-            _projectsListView = new ListView();
-            _gameNameColumnHeader = new ColumnHeader();
-            _packageIdColumnHeader = new ColumnHeader();
-            _versionColumnHeader = new ColumnHeader();
-            _statusColumnHeader = new ColumnHeader();
-            _gameFolderColumnHeader = new ColumnHeader();
-            _actionsPanel = new FlowLayoutPanel();
-            _newGameButton = new Button();
-            _openSelectedButton = new Button();
-            _openFolderButton = new Button();
-            _saveCurrentButton = new Button();
-            _infoTextBox = new TextBox();
-            _layoutPanel.SuspendLayout();
-            _actionsPanel.SuspendLayout();
-            SuspendLayout();
-            // 
-            // _layoutPanel
-            // 
-            _layoutPanel.ColumnCount = 4;
-            _layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 140F));
-            _layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            _layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130F));
-            _layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130F));
-            _layoutPanel.Controls.Add(_gamesRootLabel, 0, 0);
-            _layoutPanel.Controls.Add(_gamesRootTextBox, 1, 0);
-            _layoutPanel.Controls.Add(_browseGamesRootButton, 2, 0);
-            _layoutPanel.Controls.Add(_saveGamesRootButton, 3, 0);
-            _layoutPanel.Controls.Add(_refreshButton, 3, 1);
-            _layoutPanel.Controls.Add(_projectsListView, 0, 2);
-            _layoutPanel.Controls.Add(_actionsPanel, 0, 3);
-            _layoutPanel.Controls.Add(_infoTextBox, 0, 4);
-            _layoutPanel.Dock = DockStyle.Fill;
-            _layoutPanel.Location = new Point(0, 0);
-            _layoutPanel.Name = "_layoutPanel";
-            _layoutPanel.Padding = new Padding(12);
-            _layoutPanel.RowCount = 5;
-            _layoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
-            _layoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
-            _layoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
-            _layoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            _layoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
-            _layoutPanel.Size = new Size(900, 560);
-            _layoutPanel.TabIndex = 0;
-            // 
-            // _gamesRootLabel
-            // 
-            _gamesRootLabel.Dock = DockStyle.Fill;
-            _gamesRootLabel.Location = new Point(15, 12);
-            _gamesRootLabel.Name = "_gamesRootLabel";
-            _gamesRootLabel.Size = new Size(134, 34);
-            _gamesRootLabel.TabIndex = 0;
-            _gamesRootLabel.Text = "Папка с играми:";
-            _gamesRootLabel.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // _gamesRootTextBox
-            // 
-            _gamesRootTextBox.Dock = DockStyle.Fill;
-            _gamesRootTextBox.Location = new Point(155, 15);
-            _gamesRootTextBox.Name = "_gamesRootTextBox";
-            _gamesRootTextBox.Size = new Size(470, 23);
-            _gamesRootTextBox.TabIndex = 1;
-            // 
-            // _browseGamesRootButton
-            // 
-            _browseGamesRootButton.Dock = DockStyle.Fill;
-            _browseGamesRootButton.Location = new Point(631, 15);
-            _browseGamesRootButton.Name = "_browseGamesRootButton";
-            _browseGamesRootButton.Size = new Size(124, 28);
-            _browseGamesRootButton.TabIndex = 2;
-            _browseGamesRootButton.Text = "Выбрать...";
-            _browseGamesRootButton.UseVisualStyleBackColor = true;
-            // 
-            // _saveGamesRootButton
-            // 
-            _saveGamesRootButton.Dock = DockStyle.Fill;
-            _saveGamesRootButton.Location = new Point(761, 15);
-            _saveGamesRootButton.Name = "_saveGamesRootButton";
-            _saveGamesRootButton.Size = new Size(124, 28);
-            _saveGamesRootButton.TabIndex = 3;
-            _saveGamesRootButton.Text = "Сохранить";
-            _saveGamesRootButton.UseVisualStyleBackColor = true;
-            // 
-            // _refreshButton
-            // 
-            _refreshButton.Dock = DockStyle.Fill;
-            _refreshButton.Location = new Point(761, 49);
-            _refreshButton.Name = "_refreshButton";
-            _refreshButton.Size = new Size(124, 28);
-            _refreshButton.TabIndex = 4;
-            _refreshButton.Text = "Обновить";
-            _refreshButton.UseVisualStyleBackColor = true;
-            // 
+            this.components = new Container();
+            this._rootLayout = new TableLayoutPanel();
+            this._pageTitleLabel = new Label();
+            this._gamesRootPanel = new TableLayoutPanel();
+            this._gamesRootLabel = new Label();
+            this._gamesRootTextBox = new TextBox();
+            this._browseGamesRootButton = new Button();
+            this._saveGamesRootButton = new Button();
+            this._refreshButton = new Button();
+            this._contentPanel = new Panel();
+            this._projectStartPanel = new TableLayoutPanel();
+            this._myGamesLabel = new Label();
+            this._projectsListView = new ListView();
+            this._gameNameColumnHeader = new ColumnHeader();
+            this._packageIdColumnHeader = new ColumnHeader();
+            this._versionColumnHeader = new ColumnHeader();
+            this._statusColumnHeader = new ColumnHeader();
+            this._gameFolderColumnHeader = new ColumnHeader();
+            this._actionsPanel = new FlowLayoutPanel();
+            this._newGameButton = new Button();
+            this._openSelectedButton = new Button();
+            this._openFolderButton = new Button();
+            this._infoTextBox = new TextBox();
+            this._workspacePanel = new TableLayoutPanel();
+            this._workspaceToolbar = new FlowLayoutPanel();
+            this._backToGamesButton = new Button();
+            this._saveCurrentButton = new Button();
+            this._workspaceTitleLabel = new Label();
+            this._workspaceTabs = new TabControl();
+            this._overviewTab = new TabPage();
+            this._mechanicsTab = new TabPage();
+            this._settingsTab = new TabPage();
+            this._buildTab = new TabPage();
+            this._technicalTab = new TabPage();
+            this._overviewLayout = new TableLayoutPanel();
+            this._overviewProjectLabel = new Label();
+            this._overviewFolderLabel = new Label();
+            this._overviewPackageStatusLabel = new Label();
+            this._overviewAuthoringStatusLabel = new Label();
+            this._overviewMechanicsCountLabel = new Label();
+            this._overviewLastBuildLabel = new Label();
+            this._overviewRuntimeLabel = new Label();
+            this._mechanicsFlow = new FlowLayoutPanel();
+            this._settingsFlow = new FlowLayoutPanel();
+            this._buildLayout = new TableLayoutPanel();
+            this._buildAndQualifyButton = new Button();
+            this._buildStatusLabel = new Label();
+            this._buildResultTextBox = new TextBox();
+            this._technicalDetailsTextBox = new TextBox();
+            this._rootLayout.SuspendLayout();
+            this._gamesRootPanel.SuspendLayout();
+            this._contentPanel.SuspendLayout();
+            this._projectStartPanel.SuspendLayout();
+            this._actionsPanel.SuspendLayout();
+            this._workspacePanel.SuspendLayout();
+            this._workspaceToolbar.SuspendLayout();
+            this._workspaceTabs.SuspendLayout();
+            this._overviewTab.SuspendLayout();
+            this._mechanicsTab.SuspendLayout();
+            this._settingsTab.SuspendLayout();
+            this._buildTab.SuspendLayout();
+            this._technicalTab.SuspendLayout();
+            this._overviewLayout.SuspendLayout();
+            this._buildLayout.SuspendLayout();
+            this.SuspendLayout();
+            //
+            // _rootLayout
+            //
+            this._rootLayout.ColumnCount = 1;
+            this._rootLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._rootLayout.Controls.Add(this._pageTitleLabel, 0, 0);
+            this._rootLayout.Controls.Add(this._gamesRootPanel, 0, 1);
+            this._rootLayout.Controls.Add(this._contentPanel, 0, 2);
+            this._rootLayout.Dock = DockStyle.Fill;
+            this._rootLayout.Padding = new Padding(12);
+            this._rootLayout.RowCount = 3;
+            this._rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            this._rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            this._rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            //
+            // _pageTitleLabel
+            //
+            this._pageTitleLabel.Dock = DockStyle.Fill;
+            this._pageTitleLabel.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            this._pageTitleLabel.Text = "Мои игры";
+            this._pageTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+            //
+            // _gamesRootPanel
+            //
+            this._gamesRootPanel.ColumnCount = 5;
+            this._gamesRootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130F));
+            this._gamesRootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._gamesRootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105F));
+            this._gamesRootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105F));
+            this._gamesRootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105F));
+            this._gamesRootPanel.Controls.Add(this._gamesRootLabel, 0, 0);
+            this._gamesRootPanel.Controls.Add(this._gamesRootTextBox, 1, 0);
+            this._gamesRootPanel.Controls.Add(this._browseGamesRootButton, 2, 0);
+            this._gamesRootPanel.Controls.Add(this._saveGamesRootButton, 3, 0);
+            this._gamesRootPanel.Controls.Add(this._refreshButton, 4, 0);
+            this._gamesRootPanel.Dock = DockStyle.Fill;
+            this._gamesRootLabel.Dock = DockStyle.Fill;
+            this._gamesRootLabel.Text = "Папка с играми:";
+            this._gamesRootLabel.TextAlign = ContentAlignment.MiddleLeft;
+            this._gamesRootTextBox.Dock = DockStyle.Fill;
+            this._browseGamesRootButton.Dock = DockStyle.Fill;
+            this._browseGamesRootButton.Text = "Выбрать...";
+            this._browseGamesRootButton.UseVisualStyleBackColor = true;
+            this._saveGamesRootButton.Dock = DockStyle.Fill;
+            this._saveGamesRootButton.Text = "Сохранить";
+            this._saveGamesRootButton.UseVisualStyleBackColor = true;
+            this._refreshButton.Dock = DockStyle.Fill;
+            this._refreshButton.Text = "Обновить";
+            this._refreshButton.UseVisualStyleBackColor = true;
+            //
+            // _contentPanel
+            //
+            this._contentPanel.Controls.Add(this._workspacePanel);
+            this._contentPanel.Controls.Add(this._projectStartPanel);
+            this._contentPanel.Dock = DockStyle.Fill;
+            //
+            // _projectStartPanel
+            //
+            this._projectStartPanel.ColumnCount = 1;
+            this._projectStartPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._projectStartPanel.Controls.Add(this._myGamesLabel, 0, 0);
+            this._projectStartPanel.Controls.Add(this._projectsListView, 0, 1);
+            this._projectStartPanel.Controls.Add(this._actionsPanel, 0, 2);
+            this._projectStartPanel.Controls.Add(this._infoTextBox, 0, 3);
+            this._projectStartPanel.Dock = DockStyle.Fill;
+            this._projectStartPanel.RowCount = 4;
+            this._projectStartPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
+            this._projectStartPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
+            this._projectStartPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+            this._projectStartPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            this._myGamesLabel.Dock = DockStyle.Fill;
+            this._myGamesLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            this._myGamesLabel.Text = "Мои игры";
+            this._myGamesLabel.TextAlign = ContentAlignment.MiddleLeft;
+            //
             // _projectsListView
-            // 
-            _projectsListView.Columns.AddRange(new ColumnHeader[] { _gameNameColumnHeader, _packageIdColumnHeader, _versionColumnHeader, _statusColumnHeader, _gameFolderColumnHeader });
-            _layoutPanel.SetColumnSpan(_projectsListView, 4);
-            _projectsListView.Dock = DockStyle.Fill;
-            _projectsListView.FullRowSelect = true;
-            _projectsListView.Location = new Point(15, 83);
-            _projectsListView.MultiSelect = false;
-            _projectsListView.Name = "_projectsListView";
-            _projectsListView.Size = new Size(870, 249);
-            _projectsListView.TabIndex = 5;
-            _projectsListView.UseCompatibleStateImageBehavior = false;
-            _projectsListView.View = View.Details;
-            // 
-            // _gameNameColumnHeader
-            // 
-            _gameNameColumnHeader.Text = "Игра";
-            _gameNameColumnHeader.Width = 180;
-            // 
-            // _packageIdColumnHeader
-            // 
-            _packageIdColumnHeader.Text = "PackageId";
-            _packageIdColumnHeader.Width = 160;
-            // 
-            // _versionColumnHeader
-            // 
-            _versionColumnHeader.Text = "Version";
-            _versionColumnHeader.Width = 80;
-            // 
-            // _statusColumnHeader
-            // 
-            _statusColumnHeader.Text = "Status";
-            _statusColumnHeader.Width = 180;
-            // 
-            // _gameFolderColumnHeader
-            // 
-            _gameFolderColumnHeader.Text = "Папка";
-            _gameFolderColumnHeader.Width = 300;
-            // 
+            //
+            this._projectsListView.Columns.AddRange(new ColumnHeader[] { this._gameNameColumnHeader, this._packageIdColumnHeader, this._versionColumnHeader, this._statusColumnHeader, this._gameFolderColumnHeader });
+            this._projectsListView.Dock = DockStyle.Fill;
+            this._projectsListView.FullRowSelect = true;
+            this._projectsListView.MultiSelect = false;
+            this._projectsListView.UseCompatibleStateImageBehavior = false;
+            this._projectsListView.View = View.Details;
+            this._gameNameColumnHeader.Text = "Игра";
+            this._gameNameColumnHeader.Width = 190;
+            this._packageIdColumnHeader.Text = "Идентификатор";
+            this._packageIdColumnHeader.Width = 160;
+            this._versionColumnHeader.Text = "Версия";
+            this._versionColumnHeader.Width = 80;
+            this._statusColumnHeader.Text = "Состояние";
+            this._statusColumnHeader.Width = 190;
+            this._gameFolderColumnHeader.Text = "Папка";
+            this._gameFolderColumnHeader.Width = 320;
+            //
             // _actionsPanel
-            // 
-            _layoutPanel.SetColumnSpan(_actionsPanel, 4);
-            _actionsPanel.Controls.Add(_newGameButton);
-            _actionsPanel.Controls.Add(_openSelectedButton);
-            _actionsPanel.Controls.Add(_openFolderButton);
-            _actionsPanel.Controls.Add(_saveCurrentButton);
-            _actionsPanel.Dock = DockStyle.Fill;
-            _actionsPanel.Location = new Point(15, 338);
-            _actionsPanel.Name = "_actionsPanel";
-            _actionsPanel.Size = new Size(870, 36);
-            _actionsPanel.TabIndex = 6;
-            // 
-            // _newGameButton
-            // 
-            _newGameButton.Location = new Point(3, 3);
-            _newGameButton.Name = "_newGameButton";
-            _newGameButton.Size = new Size(110, 30);
-            _newGameButton.TabIndex = 0;
-            _newGameButton.Text = "Новая игра";
-            _newGameButton.UseVisualStyleBackColor = true;
-            // 
-            // _openSelectedButton
-            // 
-            _openSelectedButton.Location = new Point(119, 3);
-            _openSelectedButton.Name = "_openSelectedButton";
-            _openSelectedButton.Size = new Size(170, 30);
-            _openSelectedButton.TabIndex = 1;
-            _openSelectedButton.Text = "Открыть выбранную";
-            _openSelectedButton.UseVisualStyleBackColor = true;
-            // 
-            // _openFolderButton
-            // 
-            _openFolderButton.Location = new Point(295, 3);
-            _openFolderButton.Name = "_openFolderButton";
-            _openFolderButton.Size = new Size(190, 30);
-            _openFolderButton.TabIndex = 2;
-            _openFolderButton.Text = "Открыть папку вручную";
-            _openFolderButton.UseVisualStyleBackColor = true;
-            // 
-            // _saveCurrentButton
-            // 
-            _saveCurrentButton.Location = new Point(491, 3);
-            _saveCurrentButton.Name = "_saveCurrentButton";
-            _saveCurrentButton.Size = new Size(170, 30);
-            _saveCurrentButton.TabIndex = 3;
-            _saveCurrentButton.Text = "Сохранить текущую";
-            _saveCurrentButton.UseVisualStyleBackColor = true;
-            // 
-            // _infoTextBox
-            // 
-            _layoutPanel.SetColumnSpan(_infoTextBox, 4);
-            _infoTextBox.Dock = DockStyle.Fill;
-            _infoTextBox.Location = new Point(15, 380);
-            _infoTextBox.Multiline = true;
-            _infoTextBox.Name = "_infoTextBox";
-            _infoTextBox.ReadOnly = true;
-            _infoTextBox.ScrollBars = ScrollBars.Vertical;
-            _infoTextBox.Size = new Size(870, 165);
-            _infoTextBox.TabIndex = 7;
-            // 
+            //
+            this._actionsPanel.Controls.Add(this._newGameButton);
+            this._actionsPanel.Controls.Add(this._openSelectedButton);
+            this._actionsPanel.Controls.Add(this._openFolderButton);
+            this._actionsPanel.Dock = DockStyle.Fill;
+            this._newGameButton.AutoSize = true;
+            this._newGameButton.Text = "Новая игра";
+            this._newGameButton.UseVisualStyleBackColor = true;
+            this._openSelectedButton.AutoSize = true;
+            this._openSelectedButton.Text = "Открыть выбранную";
+            this._openSelectedButton.UseVisualStyleBackColor = true;
+            this._openFolderButton.AutoSize = true;
+            this._openFolderButton.Text = "Открыть папку";
+            this._openFolderButton.UseVisualStyleBackColor = true;
+            this._infoTextBox.Dock = DockStyle.Fill;
+            this._infoTextBox.Multiline = true;
+            this._infoTextBox.ReadOnly = true;
+            this._infoTextBox.ScrollBars = ScrollBars.Vertical;
+            //
+            // _workspacePanel
+            //
+            this._workspacePanel.ColumnCount = 1;
+            this._workspacePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._workspacePanel.Controls.Add(this._workspaceToolbar, 0, 0);
+            this._workspacePanel.Controls.Add(this._workspaceTabs, 0, 1);
+            this._workspacePanel.Dock = DockStyle.Fill;
+            this._workspacePanel.RowCount = 2;
+            this._workspacePanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._workspacePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._workspacePanel.Visible = false;
+            //
+            // _workspaceToolbar
+            //
+            this._workspaceToolbar.Controls.Add(this._backToGamesButton);
+            this._workspaceToolbar.Controls.Add(this._saveCurrentButton);
+            this._workspaceToolbar.Controls.Add(this._workspaceTitleLabel);
+            this._workspaceToolbar.Dock = DockStyle.Fill;
+            this._backToGamesButton.AutoSize = true;
+            this._backToGamesButton.Text = "К списку игр";
+            this._backToGamesButton.UseVisualStyleBackColor = true;
+            this._saveCurrentButton.AutoSize = true;
+            this._saveCurrentButton.Text = "Сохранить проект";
+            this._saveCurrentButton.UseVisualStyleBackColor = true;
+            this._workspaceTitleLabel.AutoSize = true;
+            this._workspaceTitleLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            this._workspaceTitleLabel.Margin = new Padding(18, 7, 3, 3);
+            //
+            // _workspaceTabs
+            //
+            this._workspaceTabs.Controls.Add(this._overviewTab);
+            this._workspaceTabs.Controls.Add(this._mechanicsTab);
+            this._workspaceTabs.Controls.Add(this._settingsTab);
+            this._workspaceTabs.Controls.Add(this._buildTab);
+            this._workspaceTabs.Controls.Add(this._technicalTab);
+            this._workspaceTabs.Dock = DockStyle.Fill;
+            this._overviewTab.Text = "Обзор";
+            this._mechanicsTab.Text = "Механики";
+            this._settingsTab.Text = "Настройки";
+            this._buildTab.Text = "Сборка и проверка";
+            this._technicalTab.Text = "Технические детали";
+            //
+            // _overviewTab
+            //
+            this._overviewTab.Controls.Add(this._overviewLayout);
+            this._overviewLayout.ColumnCount = 1;
+            this._overviewLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._overviewLayout.Controls.Add(this._overviewProjectLabel, 0, 0);
+            this._overviewLayout.Controls.Add(this._overviewFolderLabel, 0, 1);
+            this._overviewLayout.Controls.Add(this._overviewPackageStatusLabel, 0, 2);
+            this._overviewLayout.Controls.Add(this._overviewAuthoringStatusLabel, 0, 3);
+            this._overviewLayout.Controls.Add(this._overviewMechanicsCountLabel, 0, 4);
+            this._overviewLayout.Controls.Add(this._overviewLastBuildLabel, 0, 5);
+            this._overviewLayout.Controls.Add(this._overviewRuntimeLabel, 0, 6);
+            this._overviewLayout.Dock = DockStyle.Fill;
+            this._overviewLayout.Padding = new Padding(18);
+            this._overviewLayout.RowCount = 8;
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._overviewProjectLabel.Dock = DockStyle.Fill;
+            this._overviewProjectLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            this._overviewFolderLabel.Dock = DockStyle.Fill;
+            this._overviewPackageStatusLabel.Dock = DockStyle.Fill;
+            this._overviewAuthoringStatusLabel.Dock = DockStyle.Fill;
+            this._overviewMechanicsCountLabel.Dock = DockStyle.Fill;
+            this._overviewLastBuildLabel.Dock = DockStyle.Fill;
+            this._overviewRuntimeLabel.Dock = DockStyle.Fill;
+            //
+            // dynamic sections
+            //
+            this._mechanicsTab.Controls.Add(this._mechanicsFlow);
+            this._mechanicsFlow.AutoScroll = true;
+            this._mechanicsFlow.Dock = DockStyle.Fill;
+            this._mechanicsFlow.FlowDirection = FlowDirection.TopDown;
+            this._mechanicsFlow.Padding = new Padding(12);
+            this._mechanicsFlow.WrapContents = false;
+            this._settingsTab.Controls.Add(this._settingsFlow);
+            this._settingsFlow.AutoScroll = true;
+            this._settingsFlow.Dock = DockStyle.Fill;
+            this._settingsFlow.FlowDirection = FlowDirection.TopDown;
+            this._settingsFlow.Padding = new Padding(12);
+            this._settingsFlow.WrapContents = false;
+            //
+            // _buildTab
+            //
+            this._buildTab.Controls.Add(this._buildLayout);
+            this._buildLayout.ColumnCount = 1;
+            this._buildLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._buildLayout.Controls.Add(this._buildAndQualifyButton, 0, 0);
+            this._buildLayout.Controls.Add(this._buildStatusLabel, 0, 1);
+            this._buildLayout.Controls.Add(this._buildResultTextBox, 0, 2);
+            this._buildLayout.Dock = DockStyle.Fill;
+            this._buildLayout.Padding = new Padding(18);
+            this._buildLayout.RowCount = 3;
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 54F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._buildAndQualifyButton.Dock = DockStyle.Left;
+            this._buildAndQualifyButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            this._buildAndQualifyButton.Size = new Size(270, 42);
+            this._buildAndQualifyButton.Text = "Собрать и проверить игру";
+            this._buildAndQualifyButton.UseVisualStyleBackColor = true;
+            this._buildStatusLabel.Dock = DockStyle.Fill;
+            this._buildStatusLabel.Text = "Проверка ещё не запускалась";
+            this._buildStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
+            this._buildResultTextBox.Dock = DockStyle.Fill;
+            this._buildResultTextBox.Multiline = true;
+            this._buildResultTextBox.ReadOnly = true;
+            this._buildResultTextBox.ScrollBars = ScrollBars.Vertical;
+            //
+            // _technicalTab
+            //
+            this._technicalTab.Controls.Add(this._technicalDetailsTextBox);
+            this._technicalDetailsTextBox.Dock = DockStyle.Fill;
+            this._technicalDetailsTextBox.Font = new Font("Consolas", 9F);
+            this._technicalDetailsTextBox.Multiline = true;
+            this._technicalDetailsTextBox.ReadOnly = true;
+            this._technicalDetailsTextBox.ScrollBars = ScrollBars.Both;
+            this._technicalDetailsTextBox.WordWrap = false;
+            //
             // ProjectsPageControl
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(_layoutPanel);
-            Name = "ProjectsPageControl";
-            Size = new Size(900, 560);
-            _layoutPanel.ResumeLayout(false);
-            _layoutPanel.PerformLayout();
-            _actionsPanel.ResumeLayout(false);
-            ResumeLayout(false);
+            //
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.Controls.Add(this._rootLayout);
+            this.Name = "ProjectsPageControl";
+            this.Size = new Size(1100, 720);
+            this._rootLayout.ResumeLayout(false);
+            this._gamesRootPanel.ResumeLayout(false);
+            this._gamesRootPanel.PerformLayout();
+            this._contentPanel.ResumeLayout(false);
+            this._projectStartPanel.ResumeLayout(false);
+            this._projectStartPanel.PerformLayout();
+            this._actionsPanel.ResumeLayout(false);
+            this._actionsPanel.PerformLayout();
+            this._workspacePanel.ResumeLayout(false);
+            this._workspaceToolbar.ResumeLayout(false);
+            this._workspaceToolbar.PerformLayout();
+            this._workspaceTabs.ResumeLayout(false);
+            this._overviewTab.ResumeLayout(false);
+            this._mechanicsTab.ResumeLayout(false);
+            this._settingsTab.ResumeLayout(false);
+            this._buildTab.ResumeLayout(false);
+            this._technicalTab.ResumeLayout(false);
+            this._overviewLayout.ResumeLayout(false);
+            this._buildLayout.ResumeLayout(false);
+            this._buildLayout.PerformLayout();
+            this.ResumeLayout(false);
         }
     }
 }

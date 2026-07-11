@@ -12,6 +12,8 @@ namespace LLMGameCreator.WinForms.Pages
         private TableLayoutPanel _rootLayout;
         private FlowLayoutPanel _toolbarPanel;
         private Button _refreshButton;
+        private CheckBox _showInternalChecksCheckBox;
+        private Label _advancedPageLabel;
         private Label _statusLabel;
         private SplitContainer _splitContainer;
         private TableLayoutPanel _leftLayout;
@@ -53,6 +55,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._rootLayout = new TableLayoutPanel();
             this._toolbarPanel = new FlowLayoutPanel();
             this._refreshButton = new Button();
+            this._showInternalChecksCheckBox = new CheckBox();
+            this._advancedPageLabel = new Label();
             this._statusLabel = new Label();
             this._splitContainer = new SplitContainer();
             this._leftLayout = new TableLayoutPanel();
@@ -107,6 +111,8 @@ namespace LLMGameCreator.WinForms.Pages
             // _toolbarPanel
             //
             this._toolbarPanel.Controls.Add(this._refreshButton);
+            this._toolbarPanel.Controls.Add(this._showInternalChecksCheckBox);
+            this._toolbarPanel.Controls.Add(this._advancedPageLabel);
             this._toolbarPanel.Dock = DockStyle.Fill;
             this._toolbarPanel.Padding = new Padding(8, 7, 8, 4);
             this._toolbarPanel.Name = "_toolbarPanel";
@@ -117,6 +123,21 @@ namespace LLMGameCreator.WinForms.Pages
             this._refreshButton.Name = "_refreshButton";
             this._refreshButton.Text = "Refresh";
             this._refreshButton.UseVisualStyleBackColor = true;
+            //
+            // _showInternalChecksCheckBox
+            //
+            this._showInternalChecksCheckBox.AutoSize = true;
+            this._showInternalChecksCheckBox.Margin = new Padding(12, 6, 3, 3);
+            this._showInternalChecksCheckBox.Name = "_showInternalChecksCheckBox";
+            this._showInternalChecksCheckBox.Text = "Показать внутренние проверки";
+            this._showInternalChecksCheckBox.UseVisualStyleBackColor = true;
+            //
+            // _advancedPageLabel
+            //
+            this._advancedPageLabel.AutoSize = true;
+            this._advancedPageLabel.Margin = new Padding(18, 7, 3, 3);
+            this._advancedPageLabel.Name = "_advancedPageLabel";
+            this._advancedPageLabel.Text = "Расширенная страница для разработчиков";
             //
             // _statusLabel
             //

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "project_ui_responsiveness_proof_v1",
+  "status": "GREEN",
+  "heavyWorkRunsOffUiThread": true,
+  "uiPumpResponsive": true,
+  "controlsDisabledDuringBuild": true,
+  "controlsRestoredAfterBuild": true,
+  "concurrentBuildRejected": true,
+  "noChildToolProcessStarted": true,
+  "passed": true
+}

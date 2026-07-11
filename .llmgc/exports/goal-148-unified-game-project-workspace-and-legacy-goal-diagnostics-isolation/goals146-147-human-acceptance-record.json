@@ -1,0 +1,11 @@
+{
+    "schemaVersion":  "goals146_147_human_acceptance_record_v1",
+    "goal146Accepted":  true,
+    "goal147Accepted":  true,
+    "acceptedByHuman":  true,
+    "acceptedByCodex":  false,
+    "rawManualInputNotCommitted":  true,
+    "decision":  "Я принимаю Goals146/147 featuremodule_composer_and_authoring_workflow_verification GREEN. goal146Accepted=true, goal147Accepted=true, persistentFeatureModuleLibrary=true, moduleLibrarySourceOfTruth=true, requiredCoreModuleCount=10, optionalModuleCount=3, parameterDefinitionCount=8, catalogDrivenComposer=true, hardcodedCombinationTableAbsent=true, typedParameterAuthoring=true, savedCompositionPersistence=true, savedCompositionRoundtripPassed=true, incrementalModuleCertification=true, dependentModuleCertificationPassed=true, transitiveDependencyInvalidationPassed=true, hundredModuleCatalogAccepted=true, hundredModuleInteractionRowCount=9, programmaticItemCheckAppliedCount=0, operatorItemCheckAppliedCount=1, heavyWorkRunsOffUiThread=true, customPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991, customFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e, checkpointReloadPassed=true, fullReplayEquivalent=true, actionBindingPassed=true, unitySmoke=GREEN, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.",
+    "goal148Accepted":  false,
+    "accepted":  false
+}

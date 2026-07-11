@@ -7,6 +7,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
 {
     private readonly VisualWorldStreamPreviewWorkspaceService _service;
     private VisualWorldStreamPreviewWorkspaceResult? _result;
+    private readonly List<(TabPage Page, int Index)> _legacyDiagnosticTabs = [];
+    private bool _internalChecksVisible;
 
     public VisualWorldStreamPreviewWorkspacePageControl()
         : this(new VisualWorldStreamPreviewWorkspaceService())
@@ -18,18 +20,19 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
         InitializeComponent(); ConfigureGoal132CandidatePipelineOperatorPanel(); ConfigureGoal134CanonicalRuntimePanel(); ConfigureGoal135PlayerLoopPanel(); ConfigureGoal136PlayerCommandLoopPanel(); ConfigureGoal137UnityPlayerLoopPlaybackPanel(); ConfigureGoal138RuntimeBackedUnityPlayerLoopStepperPanel(); ConfigureGoal139RuntimeBackedUnityPlayerLoopInteractiveControlsPanel(); ConfigureGoal140RuntimeBackedUnityPlayerLoopControlsUxPanel(); ConfigureGoal141RuntimeBackedPlayerCommandRoundtripPanel(); ConfigureGoal142ProductLineRuntimeVariantMatrixPanel(); ConfigureGoal143SelectedRuntimeVariantPlayerAdapterPanel(); ConfigureGoal144LiveSessionPanel(); ConfigureGoal145VariantSessionsPanel(); ConfigureGoal146ModuleComposerPanel();
+        ConfigureLegacyDiagnosticsIsolation();
         ConfigureControls();
         WireEvents(); WireGoal132CandidatePipelineOperatorEvents(); WireGoal142ProductLineRuntimeVariantMatrixEvents(); WireGoal143SelectedRuntimeVariantPlayerAdapterEvents(); WireGoal144LiveSessionEvents(); WireGoal145VariantSessionsEvents(); WireGoal146ModuleComposerEvents();
     }
 
     public string Id => "visual-world-stream-preview-workspace";
-    public string Title => "Visual World Stream Preview";
-    public int SortOrder => 38;
+    public string Title => "Диагностика генератора";
+    public int SortOrder => 90;
     Control IEditorPage.View => this;
 
     public void OnActivated()
     {
-        RefreshWorkspace();
+        if (_internalChecksVisible) RefreshWorkspace();
     }
 
     public void Bind(VisualWorldStreamPreviewWorkspaceResult result)
@@ -49,6 +52,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
     private void WireEvents()
     {
         _refreshButton.Click += (_, _) => RefreshWorkspace();
+        _showInternalChecksCheckBox.CheckedChanged += (_, _) => SetInternalChecksVisible(_showInternalChecksCheckBox.Checked);
         _groupsListBox.SelectedIndexChanged += (_, _) => SelectedGroupChanged();
         _entriesListView.SelectedIndexChanged += (_, _) => SelectedEntryChanged();
     }
@@ -670,6 +674,46 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildGenericGamePackageFullPlaythroughEntryLines(entry));
         lines.AddRange(BuildUnityProjectionVerificationRunnerEntryLines(entry)); lines.AddRange(BuildParameterizedGamePackageRunnerEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateMatrixEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateFactoryEntryLines(entry)); lines.AddRange(BuildGamePackageCandidateRecipePipelineEntryLines(entry)); lines.AddRange(BuildCandidatePipelineOperatorEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
+    }
+
+    private void ConfigureLegacyDiagnosticsIsolation()
+    {
+        for (var index = _detailTabs.TabPages.Count - 1; index >= 0; index--)
+        {
+            var page = _detailTabs.TabPages[index];
+            if (!System.Text.RegularExpressions.Regex.IsMatch(page.Text, @"\bGoal\d+\b",
+                    System.Text.RegularExpressions.RegexOptions.CultureInvariant)) continue;
+            _legacyDiagnosticTabs.Add((page, index));
+            _detailTabs.TabPages.Remove(page);
+        }
+        _legacyDiagnosticTabs.Sort((left, right) => left.Index.CompareTo(right.Index));
+        _splitContainer.Visible = false;
+        _refreshButton.Enabled = false;
+        _statusLabel.Text = "Расширенная страница для разработчиков. Внутренние проверки скрыты.";
+    }
+
+    private void SetInternalChecksVisible(bool visible)
+    {
+        _internalChecksVisible = visible;
+        if (visible)
+        {
+            foreach (var item in _legacyDiagnosticTabs)
+            {
+                if (_detailTabs.TabPages.Contains(item.Page)) continue;
+                var index = Math.Min(item.Index, _detailTabs.TabPages.Count);
+                _detailTabs.TabPages.Insert(index, item.Page);
+            }
+            _splitContainer.Visible = true;
+            _refreshButton.Enabled = true;
+            RefreshWorkspace();
+            return;
+        }
+
+        foreach (var item in _legacyDiagnosticTabs)
+            if (_detailTabs.TabPages.Contains(item.Page)) _detailTabs.TabPages.Remove(item.Page);
+        _splitContainer.Visible = false;
+        _refreshButton.Enabled = false;
+        _statusLabel.Text = "Расширенная страница для разработчиков. Внутренние проверки скрыты.";
     }
 
     private static string? FindProjectRoot()
