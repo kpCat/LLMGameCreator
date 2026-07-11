@@ -94,6 +94,8 @@ Goal 147A note: the Goal147 authoring checked-list lifecycle is programmatically
 
 Goal 148 note: the existing `Игры` page is the primary five-section project workflow with friendly catalog-driven mechanics, project-local authoring, off-thread in-process build/qualification and transactional activation/rollback. The accepted custom package SHA and final hash are preserved, the normal workspace exposes zero Goal-number controls, and legacy panels are preserved behind an explicit toggle on `Диагностика генератора`. Goal148 remains `accepted=false` pending manual review; Goal141 remains unaccepted.
 
+Goal 148A note: the production New Game path now materializes every package-declared relative script through a confined deterministic support-file plan, staged package validation and the existing activation transaction. First-build copy, repeat reuse, differing-user-file preservation, missing-source rejection and post-copy rollback cleanup are GREEN. The read-only minimal-map sample is a temporary narrow-alpha source behind an injectable abstraction; Goal148 and Goal141 remain unaccepted.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

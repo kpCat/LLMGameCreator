@@ -1,8 +1,43 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 148 unified game project workspace and legacy diagnostics isolation
+Updated by: Goal 148A new-project required support files and transactional activation hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 148A new-project required support files and transactional activation hotfix is GREEN:
+
+```text
+implementationStatus=GREEN
+goal148Accepted=false
+goal148NewProjectBuildPassed=true
+goal148RequiredSupportFilesMaterialized=true
+goal148SupportFileConflictProtection=true
+goal148SupportFileRollbackPassed=true
+requiredSupportFileCount=1
+copiedSupportFileCount=1
+repeatBuildCopiedSupportFileCount=0
+repeatBuildReusedSupportFileCount=1
+supportFileRelativePath=scripts/generators/basic_village.lua
+supportFileSha256=90910bcf76a51f9e37621d852149e85d9c70c97c1a97ad49c7a8ccbe71f7913a
+stagedProjectValidationPassed=true
+realProjectValidationPassed=true
+customPackageSha256=2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991
+customFinalStateHash=80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e
+accepted=false
+nextProductGoal=review_goal_148_unified_game_project_workspace
+```
+
+The real production `GameProjectService.CreateAsync` path now starts with an
+empty scripts directory and succeeds on its first primary build without test or
+user copying. The qualified package drives a generic required-support-file
+plan, the current narrow-alpha sample source is confined and read-only, and a
+project-local staged copy passes package validation before activation. Missing
+files are copied atomically, matching files are reused, differing user files
+are rejected without overwrite, missing source files fail before activation,
+and post-copy package activation failure removes the new file while restoring
+package bytes, current package and successful authoring hashes. Goal148 remains
+`accepted=false`; Goal141 remains `accepted=false`; the next action is still the
+Goal148 human review.
 
 Goal 148 unified game project workspace and legacy diagnostics isolation is GREEN:
 

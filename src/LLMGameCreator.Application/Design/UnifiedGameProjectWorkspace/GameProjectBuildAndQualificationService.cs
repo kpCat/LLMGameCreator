@@ -26,6 +26,8 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly IGamePackageValidator _packageValidator;
     private readonly ICurrentGamePackageService _currentPackageService;
     private readonly IGameProjectPackageActivationStore _activationStore;
+    private readonly IGameProjectSupportFileSource _supportFileSource;
+    private readonly GameProjectSupportFileMaterializer _supportFileMaterializer = new();
     private int _buildRunning;
 
     public GameProjectBuildAndQualificationService(
@@ -34,7 +36,8 @@ public sealed class GameProjectBuildAndQualificationService
         IGamePackageRepository packageRepository,
         IGamePackageValidator packageValidator,
         ICurrentGamePackageService currentPackageService,
-        IGameProjectPackageActivationStore? activationStore = null)
+        IGameProjectPackageActivationStore? activationStore = null,
+        IGameProjectSupportFileSource? supportFileSource = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -42,6 +45,8 @@ public sealed class GameProjectBuildAndQualificationService
         _packageValidator = packageValidator ?? throw new ArgumentNullException(nameof(packageValidator));
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _activationStore = activationStore ?? new AtomicGameProjectPackageActivationStore();
+        _supportFileSource = supportFileSource ?? new NarrowAlphaTemplateSupportFileSource(
+            Path.Combine(_repositoryRoot, "samples", "minimal-map-game"));
     }
 
     public bool BuildRunning => Volatile.Read(ref _buildRunning) != 0;
@@ -56,6 +61,7 @@ public sealed class GameProjectBuildAndQualificationService
         string? stagingRoot = null;
         GameProjectBuildTransaction? transaction = null;
         FeatureModuleCompositionDocument? savedDocument = null;
+        GameProjectSupportFilePlan? supportFilePlan = null;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -123,17 +129,50 @@ public sealed class GameProjectBuildAndQualificationService
 
             var qualifiedPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(qualifiedPackagePath)!, cancellationToken)
                 .GetAwaiter().GetResult();
-            var packageValidation = _packageValidator.Validate(qualifiedPackage, state.ProjectFolder);
-            if (!packageValidation.IsValid)
+            supportFilePlan = _supportFileMaterializer.CreatePlan(
+                qualifiedPackage,
+                state.ProjectFolder,
+                _supportFileSource);
+            if (!supportFilePlan.IsValid)
+                return RollbackFailure(
+                    authoring,
+                    savedDocument,
+                    transaction,
+                    "Не удалось подготовить файлы проекта.",
+                    supportFilePlan.Diagnostics,
+                    supportFilePlan);
+
+            var validationProjectRoot = _supportFileMaterializer.StageValidationProject(
+                qualifiedPackagePath,
+                supportFilePlan,
+                Path.Combine(stagingRoot, "validation-project"));
+            var stagedPackage = _packageRepository.LoadAsync(validationProjectRoot, cancellationToken)
+                .GetAwaiter().GetResult();
+            var stagedValidation = _packageValidator.Validate(stagedPackage, validationProjectRoot);
+            if (!stagedValidation.IsValid)
                 return RollbackFailure(
                     authoring,
                     savedDocument,
                     transaction,
                     "Собранный пакет содержит ошибки.",
-                    packageValidation.Issues.Select(issue => issue.ToString()).ToList());
+                    stagedValidation.Issues.Select(issue => issue.ToString()).ToList(),
+                    supportFilePlan);
 
-            transaction.ActivateAsync(qualifiedPackagePath, qualifiedPackage, cancellationToken)
+            var supportActivation = transaction.ActivateSupportFiles(supportFilePlan, cancellationToken);
+            transaction.ActivatePackageAsync(qualifiedPackagePath, cancellationToken)
                 .GetAwaiter().GetResult();
+
+            var realProjectValidation = _packageValidator.Validate(qualifiedPackage, state.ProjectFolder);
+            if (!realProjectValidation.IsValid)
+                return RollbackFailure(
+                    authoring,
+                    savedDocument,
+                    transaction,
+                    "Собранный пакет содержит ошибки после активации.",
+                    realProjectValidation.Issues.Select(issue => issue.ToString()).ToList(),
+                    supportFilePlan);
+
+            transaction.ReplaceCurrentPackage(qualifiedPackage);
 
             authoring.ApplyQualifiedDocument(materialized.QualifiedDocument);
             var qualifiedDocument = authoring.Save();
@@ -154,6 +193,7 @@ public sealed class GameProjectBuildAndQualificationService
                     "Параметров настроено: " + qualifiedDocument.ParameterValues.Count,
                     "Сохранение/загрузка: пройдено",
                     "Повтор действий: пройден",
+                    "Файлы проекта подготовлены: " + supportFilePlan.RequiredFileCount,
                     "Пакет проекта обновлён"),
                 SelectedMechanicCount = state.Library.Manifest.RequiredCoreModuleCount + savedDocument.SelectedModuleIds.Count,
                 ConfiguredParameterCount = qualifiedDocument.ParameterValues.Count,
@@ -166,7 +206,14 @@ public sealed class GameProjectBuildAndQualificationService
                 PackageActivationTransactional = true,
                 CertificationExecutedCount = ledger.ExecutedCount,
                 CertificationReusedCount = ledger.ReusedCount,
-                BuildHistoryPath = historyPath
+                BuildHistoryPath = historyPath,
+                RequiredSupportFileCount = supportFilePlan.RequiredFileCount,
+                CopiedSupportFileCount = supportActivation.CopiedFileCount,
+                ReusedSupportFileCount = supportActivation.ReusedFileCount,
+                SupportFilesPrepared = true,
+                SupportFileDiagnostics = supportFilePlan.Diagnostics,
+                StagedProjectValidationPassed = true,
+                RealProjectValidationPassed = true
             };
         }
         catch (Exception exception) when (exception is IOException
@@ -180,7 +227,8 @@ public sealed class GameProjectBuildAndQualificationService
             return Failure(
                 "Сборка не завершена. Текущий пакет не изменён.",
                 [exception.Message],
-                rollback);
+                rollback,
+                supportFilePlan);
         }
         finally
         {
@@ -195,11 +243,12 @@ public sealed class GameProjectBuildAndQualificationService
         FeatureModuleCompositionDocument savedDocument,
         GameProjectBuildTransaction transaction,
         string summary,
-        IReadOnlyList<string> diagnostics)
+        IReadOnlyList<string> diagnostics,
+        GameProjectSupportFilePlan? supportFilePlan = null)
     {
         var rolledBack = transaction.Rollback();
         authoring.RestoreInMemoryDocument(savedDocument, dirty: false);
-        return Failure(summary + " Текущий пакет не изменён.", diagnostics, rolledBack);
+        return Failure(summary + " Текущий пакет не изменён.", diagnostics, rolledBack, supportFilePlan);
     }
 
     private string ResolveBaselineSha256()
@@ -256,12 +305,15 @@ public sealed class GameProjectBuildAndQualificationService
     private static GameProjectBuildResult Failure(
         string summary,
         IReadOnlyList<string> diagnostics,
-        bool rollback = false) => new()
+        bool rollback = false,
+        GameProjectSupportFilePlan? supportFilePlan = null) => new()
         {
             Status = "FAILED",
             HumanSummary = summary,
             Diagnostics = diagnostics,
             RollbackApplied = rollback,
-            PackageActivationTransactional = true
+            PackageActivationTransactional = true,
+            RequiredSupportFileCount = supportFilePlan?.RequiredFileCount ?? 0,
+            SupportFileDiagnostics = supportFilePlan?.Diagnostics ?? []
         };
 }

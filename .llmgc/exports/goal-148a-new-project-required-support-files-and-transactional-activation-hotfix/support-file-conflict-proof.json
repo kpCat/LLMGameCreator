@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "support_file_conflict_proof_v1",
+  "status": "GREEN",
+  "relativePath": "scripts/generators/basic_village.lua",
+  "conflictingExistingFileRejected": true,
+  "conflictingExistingFilePreserved": true,
+  "packageJsonByteIdentical": true,
+  "currentPackageUnchanged": true,
+  "lastSuccessfulHashesUnchanged": true,
+  "passed": true
+}

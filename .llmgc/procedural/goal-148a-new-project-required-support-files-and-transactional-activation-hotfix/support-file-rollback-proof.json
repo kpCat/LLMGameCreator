@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "support_file_rollback_proof_v1",
+  "status": "GREEN",
+  "failureInjectedAfterSupportCopy": true,
+  "newSupportFileRemovedOnRollback": true,
+  "packageRollbackPassed": true,
+  "currentPackageRollbackPassed": true,
+  "lastSuccessfulHashesUnchanged": true,
+  "passed": true
+}

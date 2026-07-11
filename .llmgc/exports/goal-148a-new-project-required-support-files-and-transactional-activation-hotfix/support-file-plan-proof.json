@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "game_project_support_file_plan_proof_v1",
+  "status": "GREEN",
+  "entries": [
+    {
+      "scriptId": "script/generator/basic_village",
+      "relativePath": "scripts/generators/basic_village.lua",
+      "sourcePath": "samples/minimal-map-game/scripts/generators/basic_village.lua",
+      "sourceSha256": "90910bcf76a51f9e37621d852149e85d9c70c97c1a97ad49c7a8ccbe71f7913a",
+      "targetPath": "scripts/generators/basic_village.lua",
+      "targetState": "missing",
+      "activationAction": "copy"
+    }
+  ],
+  "relativePathsOnlyCopied": true,
+  "sourcePathConfined": true,
+  "targetPathConfined": true,
+  "passed": true
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "goal148a_negative_proof_v1",
+  "status": "GREEN",
+  "rootedSupportPathRejected": true,
+  "pathTraversalRejected": true,
+  "sourceEscapeRejected": true,
+  "targetEscapeRejected": true,
+  "duplicateTargetConflictRejected": true,
+  "differingUserFilesNeverOverwritten": true,
+  "invalidPlanDoesNotMutateProject": true,
+  "normalOverviewShowsNoAbsoluteSourcePaths": true,
+  "passed": true
+}

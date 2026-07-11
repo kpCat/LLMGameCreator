@@ -82,6 +82,13 @@ public sealed record GameProjectBuildResult
     public int CertificationExecutedCount { get; init; }
     public int CertificationReusedCount { get; init; }
     public string BuildHistoryPath { get; init; } = string.Empty;
+    public int RequiredSupportFileCount { get; init; }
+    public int CopiedSupportFileCount { get; init; }
+    public int ReusedSupportFileCount { get; init; }
+    public bool SupportFilesPrepared { get; init; }
+    public IReadOnlyList<string> SupportFileDiagnostics { get; init; } = [];
+    public bool StagedProjectValidationPassed { get; init; }
+    public bool RealProjectValidationPassed { get; init; }
 }
 
 public sealed record GameProjectBuildHistoryEntry

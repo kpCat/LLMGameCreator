@@ -2335,6 +2335,16 @@ activation and package-save rollback are GREEN. Legacy numbered panels are
 preserved on `Диагностика генератора` but hidden until the explicit toggle.
 Goal148 remains `accepted=false`; the current next work is its manual review.
 
+Goal148A is GREEN. A project created through the production New Game service now
+builds with an initially empty scripts directory: the qualified package derives
+one required relative script, staged and real-project validation pass, the first
+build copies it and the repeat build reuses it. Differing user files and missing
+sources are rejected before package activation, and an injected failure after
+copy removes the new file and restores package/current/authoring state. The
+current narrow-alpha source remains the read-only minimal-map sample behind an
+injectable source abstraction; Goal148 remains `accepted=false` and the next
+work remains `review_goal_148_unified_game_project_workspace`.
+
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,
 four distinct final hashes, stable combat selection, 8-action checkpoint reloads,

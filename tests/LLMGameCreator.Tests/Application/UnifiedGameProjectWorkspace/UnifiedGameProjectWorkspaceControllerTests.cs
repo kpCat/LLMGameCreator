@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Projects;
@@ -83,6 +84,8 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
     {
         using var temp = new TempDirectory();
         var context = await CreateContextAsync(temp.Path);
+        var scriptsRoot = Path.Combine(context.ProjectFolder, "scripts");
+        Assert.Empty(Directory.EnumerateFiles(scriptsRoot, "*", SearchOption.AllDirectories));
         context.Controller.OpenProject(context.ProjectFolder);
         ApplyAcceptedCustomValues(context.Controller);
 
@@ -95,7 +98,19 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         Assert.True(result.FullReplayEquivalent);
         Assert.True(result.ActionBindingPassed);
         Assert.True(result.PackageActivated);
+        Assert.True(result.SupportFilesPrepared);
+        Assert.True(result.StagedProjectValidationPassed);
+        Assert.True(result.RealProjectValidationPassed);
+        Assert.Equal(1, result.RequiredSupportFileCount);
+        Assert.Equal(1, result.CopiedSupportFileCount);
+        Assert.Equal(0, result.ReusedSupportFileCount);
+        Assert.Contains("Файлы проекта подготовлены: 1", result.HumanSummary, StringComparison.Ordinal);
         Assert.Equal(result.PackageSha256, HashFile(Path.Combine(context.ProjectFolder, "package.json")));
+        var supportRelativePath = "scripts/generators/basic_village.lua";
+        var supportTargetPath = Path.Combine(context.ProjectFolder, supportRelativePath.Replace('/', Path.DirectorySeparatorChar));
+        var supportSourcePath = Path.Combine(context.RepositoryRoot, "samples", "minimal-map-game", supportRelativePath.Replace('/', Path.DirectorySeparatorChar));
+        Assert.True(File.Exists(supportTargetPath));
+        Assert.Equal(HashFile(supportSourcePath), HashFile(supportTargetPath));
         Assert.NotNull(context.Current.CurrentPackage);
         var reloaded = await context.Repository.LoadAsync(context.ProjectFolder, CancellationToken.None);
         Assert.Equal(reloaded.Manifest.PackageId, context.Current.CurrentPackage!.Manifest.PackageId);
@@ -118,6 +133,198 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
             authoringDocumentStoresSuccessfulHashes = true,
             packageActivationTransactional = true,
             stagingRemoved = true,
+            passed = true
+        });
+        WriteProof("new-project-production-build-proof.json", new
+        {
+            schemaVersion = "new_project_production_build_proof_v1",
+            status = "GREEN",
+            realGameProjectServiceCreateAsync = true,
+            manualTestScriptCopyUsed = false,
+            scriptsDirectoryInitiallyEmpty = true,
+            packageSha256 = result.PackageSha256,
+            finalStateHash = result.FinalStateHash,
+            requiredSupportFileCount = result.RequiredSupportFileCount,
+            copiedSupportFileCount = result.CopiedSupportFileCount,
+            reusedSupportFileCount = result.ReusedSupportFileCount,
+            supportRelativePath,
+            supportSourceSha256 = HashFile(supportSourcePath),
+            supportTargetSha256 = HashFile(supportTargetPath),
+            supportFileSourceHashMatched = true,
+            stagedProjectValidationPassed = result.StagedProjectValidationPassed,
+            realProjectValidationPassed = result.RealProjectValidationPassed,
+            currentPackageMatchesSavedPackage = true,
+            stagingRemoved = true,
+            passed = true
+        });
+        WriteProof("support-file-plan-proof.json", new
+        {
+            schemaVersion = "game_project_support_file_plan_proof_v1",
+            status = "GREEN",
+            entries = new[]
+            {
+                new
+                {
+                    scriptId = "script/generator/basic_village",
+                    relativePath = supportRelativePath,
+                    sourcePath = "samples/minimal-map-game/" + supportRelativePath,
+                    sourceSha256 = HashFile(supportSourcePath),
+                    targetPath = supportRelativePath,
+                    targetState = "missing",
+                    activationAction = "copy"
+                }
+            },
+            relativePathsOnlyCopied = true,
+            sourcePathConfined = true,
+            targetPathConfined = true,
+            passed = true
+        });
+    }
+
+    [Fact]
+    public async Task Goal148A_repeat_build_reuses_matching_support_file_and_preserves_hashes()
+    {
+        using var temp = new TempDirectory();
+        var context = await CreateContextAsync(temp.Path);
+        context.Controller.OpenProject(context.ProjectFolder);
+        ApplyAcceptedCustomValues(context.Controller);
+        var first = context.Controller.BuildAndQualify();
+        Assert.True(first.Passed, string.Join(Environment.NewLine, first.Diagnostics));
+        var supportPath = Path.Combine(context.ProjectFolder, "scripts", "generators", "basic_village.lua");
+        var supportBytes = await File.ReadAllBytesAsync(supportPath);
+
+        var repeat = context.Controller.BuildAndQualify();
+
+        Assert.True(repeat.Passed, string.Join(Environment.NewLine, repeat.Diagnostics));
+        Assert.Equal(0, repeat.CopiedSupportFileCount);
+        Assert.True(repeat.ReusedSupportFileCount >= 1);
+        Assert.Equal(supportBytes, await File.ReadAllBytesAsync(supportPath));
+        Assert.Equal(first.PackageSha256, repeat.PackageSha256);
+        Assert.Equal(first.FinalStateHash, repeat.FinalStateHash);
+        WriteProof("support-file-repeat-build-proof.json", new
+        {
+            schemaVersion = "support_file_repeat_build_proof_v1",
+            status = "GREEN",
+            copiedSupportFileCount = repeat.CopiedSupportFileCount,
+            reusedSupportFileCount = repeat.ReusedSupportFileCount,
+            supportBytesUnchanged = true,
+            packageSha256 = repeat.PackageSha256,
+            finalStateHash = repeat.FinalStateHash,
+            deterministicHashesPreserved = true,
+            passed = true
+        });
+    }
+
+    [Fact]
+    public async Task Goal148A_conflicting_user_support_file_is_rejected_and_preserved_without_activation()
+    {
+        using var temp = new TempDirectory();
+        var context = await CreateContextAsync(temp.Path);
+        context.Controller.OpenProject(context.ProjectFolder);
+        ApplyAcceptedCustomValues(context.Controller);
+        var targetPath = Path.Combine(context.ProjectFolder, "scripts", "generators", "basic_village.lua");
+        Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
+        var userBytes = Encoding.UTF8.GetBytes("-- user-owned conflicting script\n");
+        await File.WriteAllBytesAsync(targetPath, userBytes);
+        var packageBytes = await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json"));
+        var currentPackage = context.Current.CurrentPackage;
+        var hashesBefore = (context.Controller.Snapshot().PackageSha256, context.Controller.Snapshot().FinalStateHash);
+
+        var failed = context.Controller.BuildAndQualify();
+
+        Assert.False(failed.Passed);
+        Assert.Contains(failed.Diagnostics, value => value.Contains("scripts/generators/basic_village.lua", StringComparison.Ordinal));
+        Assert.Equal(userBytes, await File.ReadAllBytesAsync(targetPath));
+        Assert.Equal(packageBytes, await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json")));
+        Assert.Same(currentPackage, context.Current.CurrentPackage);
+        var after = context.Controller.Snapshot();
+        Assert.Equal(hashesBefore.PackageSha256, after.PackageSha256);
+        Assert.Equal(hashesBefore.FinalStateHash, after.FinalStateHash);
+        WriteProof("support-file-conflict-proof.json", new
+        {
+            schemaVersion = "support_file_conflict_proof_v1",
+            status = "GREEN",
+            relativePath = "scripts/generators/basic_village.lua",
+            conflictingExistingFileRejected = true,
+            conflictingExistingFilePreserved = true,
+            packageJsonByteIdentical = true,
+            currentPackageUnchanged = true,
+            lastSuccessfulHashesUnchanged = true,
+            passed = true
+        });
+    }
+
+    [Fact]
+    public async Task Goal148A_missing_injected_source_is_rejected_before_activation_and_staging_is_removed()
+    {
+        using var temp = new TempDirectory();
+        var context = await CreateContextAsync(temp.Path);
+        var missingSourceRoot = Path.Combine(temp.Path, "missing-source");
+        Directory.CreateDirectory(missingSourceRoot);
+        var controller = CreateController(
+            context.RepositoryRoot,
+            context.Current,
+            new NarrowAlphaTemplateSupportFileSource(missingSourceRoot));
+        controller.OpenProject(context.ProjectFolder);
+        ApplyAcceptedCustomValues(controller);
+        var packageBytes = await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json"));
+        var targetPath = Path.Combine(context.ProjectFolder, "scripts", "generators", "basic_village.lua");
+
+        var failed = controller.BuildAndQualify();
+
+        Assert.False(failed.Passed);
+        Assert.Contains(failed.Diagnostics, value => value.Contains("support.source.missing", StringComparison.Ordinal));
+        Assert.Equal(packageBytes, await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json")));
+        Assert.False(File.Exists(targetPath));
+        Assert.False(Directory.EnumerateDirectories(Path.Combine(context.ProjectFolder, ".llmgc", "build-staging")).Any());
+        WriteProof("support-file-missing-source-proof.json", new
+        {
+            schemaVersion = "support_file_missing_source_proof_v1",
+            status = "GREEN",
+            missingSourceRejectedBeforeActivation = true,
+            packageJsonByteIdentical = true,
+            supportTargetAbsent = true,
+            stagingRemoved = true,
+            passed = true
+        });
+    }
+
+    [Fact]
+    public async Task Goal148A_failure_after_support_copy_removes_new_file_and_restores_package_current_and_hashes()
+    {
+        using var temp = new TempDirectory();
+        var context = await CreateContextAsync(temp.Path);
+        var controller = CreateController(
+            context.RepositoryRoot,
+            context.Current,
+            supportFileSource: null,
+            activationStore: new FailingActivationStore());
+        controller.OpenProject(context.ProjectFolder);
+        ApplyAcceptedCustomValues(controller);
+        var packageBytes = await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json"));
+        var currentPackage = context.Current.CurrentPackage;
+        var hashesBefore = (controller.Snapshot().PackageSha256, controller.Snapshot().FinalStateHash);
+        var targetPath = Path.Combine(context.ProjectFolder, "scripts", "generators", "basic_village.lua");
+
+        var failed = controller.BuildAndQualify();
+
+        Assert.False(failed.Passed);
+        Assert.True(failed.RollbackApplied);
+        Assert.False(File.Exists(targetPath));
+        Assert.Equal(packageBytes, await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json")));
+        Assert.Same(currentPackage, context.Current.CurrentPackage);
+        var after = controller.Snapshot();
+        Assert.Equal(hashesBefore.PackageSha256, after.PackageSha256);
+        Assert.Equal(hashesBefore.FinalStateHash, after.FinalStateHash);
+        WriteProof("support-file-rollback-proof.json", new
+        {
+            schemaVersion = "support_file_rollback_proof_v1",
+            status = "GREEN",
+            failureInjectedAfterSupportCopy = true,
+            newSupportFileRemovedOnRollback = true,
+            packageRollbackPassed = true,
+            currentPackageRollbackPassed = true,
+            lastSuccessfulHashesUnchanged = true,
             passed = true
         });
     }
@@ -184,7 +391,11 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         controller.SetParameterValue("feature.profile.exploration_resource_focus", "transactionPotionOutput", JsonSerializer.SerializeToElement(3));
     }
 
-    private static UnifiedGameProjectWorkspaceController CreateController(string repositoryRoot, CurrentGamePackageService current)
+    private static UnifiedGameProjectWorkspaceController CreateController(
+        string repositoryRoot,
+        CurrentGamePackageService current,
+        IGameProjectSupportFileSource? supportFileSource = null,
+        IGameProjectPackageActivationStore? activationStore = null)
     {
         var repository = new JsonGamePackageRepository();
         return new UnifiedGameProjectWorkspaceController(
@@ -195,7 +406,9 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
                 SelectedRuntimeVariantInteractiveSessionService.CreateDefault(),
                 repository,
                 new GamePackageValidator(),
-                current));
+                current,
+                activationStore,
+                supportFileSource));
     }
 
     private static async Task<TestContext> CreateContextAsync(string gamesRoot)
@@ -211,9 +424,6 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
             PackageId = "game/workspace-game",
             Version = "0.1.0"
         }, CancellationToken.None);
-        CopyDirectory(
-            Path.Combine(repositoryRoot, "samples", "minimal-map-game", "scripts"),
-            Path.Combine(summary.FolderPath, "scripts"));
         var current = new CurrentGamePackageService(repository);
         await current.LoadAsync(summary.FolderPath, CancellationToken.None);
         return new TestContext(
@@ -230,17 +440,6 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
     }
 
-    private static void CopyDirectory(string source, string destination)
-    {
-        Directory.CreateDirectory(destination);
-        foreach (var file in Directory.EnumerateFiles(source, "*", SearchOption.AllDirectories))
-        {
-            var target = Path.Combine(destination, Path.GetRelativePath(source, file));
-            Directory.CreateDirectory(Path.GetDirectoryName(target)!);
-            File.Copy(file, target, overwrite: true);
-        }
-    }
-
     private static string FindRepositoryRoot()
     {
         var directory = new DirectoryInfo(AppContext.BaseDirectory);
@@ -254,16 +453,22 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
 
     private static void WriteProof(string fileName, object value)
     {
-        if (!string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL148_RUN"), "true", StringComparison.OrdinalIgnoreCase)) return;
-        var root = Environment.GetEnvironmentVariable("LLMGC_GOAL148_OUTPUT_ROOT")
-                   ?? throw new InvalidOperationException("LLMGC_GOAL148_OUTPUT_ROOT is required.");
+        var goal148A = string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL148A_RUN"), "true", StringComparison.OrdinalIgnoreCase);
+        var goal148 = string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL148_RUN"), "true", StringComparison.OrdinalIgnoreCase);
+        if (!goal148A && !goal148) return;
+        if (goal148A && fileName is "project-local-authoring-roundtrip-proof.json"
+            or "project-build-activation-proof.json"
+            or "project-build-rollback-proof.json") return;
+        var rootVariable = goal148A ? "LLMGC_GOAL148A_OUTPUT_ROOT" : "LLMGC_GOAL148_OUTPUT_ROOT";
+        var root = Environment.GetEnvironmentVariable(rootVariable)
+                   ?? throw new InvalidOperationException(rootVariable + " is required.");
         Directory.CreateDirectory(root);
         File.WriteAllText(Path.Combine(root, fileName), JsonSerializer.Serialize(value, new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             WriteIndented = true,
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        }) + Environment.NewLine);
+        }) + Environment.NewLine, new UTF8Encoding(false));
     }
 
     private sealed record TestContext(

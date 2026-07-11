@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "support_file_missing_source_proof_v1",
+  "status": "GREEN",
+  "missingSourceRejectedBeforeActivation": true,
+  "packageJsonByteIdentical": true,
+  "supportTargetAbsent": true,
+  "stagingRemoved": true,
+  "passed": true
+}

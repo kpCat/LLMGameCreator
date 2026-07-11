@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "new_project_production_build_proof_v1",
+  "status": "GREEN",
+  "realGameProjectServiceCreateAsync": true,
+  "manualTestScriptCopyUsed": false,
+  "scriptsDirectoryInitiallyEmpty": true,
+  "packageSha256": "2274c4e30928c10a07c17c01b4a54ea9dc605c4fb32f30f05a321a8dc30ce991",
+  "finalStateHash": "80d013801882b974a7448c24682f59068dccbb4473dc93f42ae8110ce626746e",
+  "requiredSupportFileCount": 1,
+  "copiedSupportFileCount": 1,
+  "reusedSupportFileCount": 0,
+  "supportRelativePath": "scripts/generators/basic_village.lua",
+  "supportSourceSha256": "90910bcf76a51f9e37621d852149e85d9c70c97c1a97ad49c7a8ccbe71f7913a",
+  "supportTargetSha256": "90910bcf76a51f9e37621d852149e85d9c70c97c1a97ad49c7a8ccbe71f7913a",
+  "supportFileSourceHashMatched": true,
+  "stagedProjectValidationPassed": true,
+  "realProjectValidationPassed": true,
+  "currentPackageMatchesSavedPackage": true,
+  "stagingRemoved": true,
+  "passed": true
+}
