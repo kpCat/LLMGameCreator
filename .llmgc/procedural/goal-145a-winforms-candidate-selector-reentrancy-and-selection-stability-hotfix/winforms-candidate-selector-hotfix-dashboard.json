@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "goal145a_winforms_candidate_selector_hotfix_dashboard_v1",
+  "goalId": "goal_145a_winforms_candidate_selector_reentrancy_and_selection_stability_hotfix",
+  "status": "GREEN",
+  "programmaticBindInvokesSelectionCount": 0,
+  "programmaticRestoreInvokesSelectionCount": 0,
+  "operatorCommitInvokesSelectionCount": 1,
+  "maximumSelectionCallbackDepth": 1,
+  "defaultSelectionPreserved": true,
+  "combatSelectionPreserved": true,
+  "candidateChangeResetsSession": true,
+  "candidateChangeResetsCheckpoint": true,
+  "combatSessionUsesCombatPackage": true,
+  "goal145MatrixStillGreen": true,
+  "candidateCount": 4,
+  "passedCandidateCount": 4,
+  "distinctFinalStateHashCount": 4,
+  "unitySmokeStillGreen": true,
+  "goal145Accepted": false,
+  "accepted": false
+}

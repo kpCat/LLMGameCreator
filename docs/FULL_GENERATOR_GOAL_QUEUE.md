@@ -2321,8 +2321,16 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-operator_selectable_product_line_runtime_sessions_and_cross_variant_save_replay_matrix_verification
+retry_goal_145_winforms_operator_then_review
 ```
+
+Goal145A is GREEN and keeps Goal145 `accepted=false`. The WinForms candidate
+combo now uses `SelectionChangeCommitted` with guarded programmatic binding:
+bind/restore callback counts are 0/0, one real combat commit is applied once,
+maximum callback depth is 1, and combat selection survives session, action,
+checkpoint, replay and all-candidate matrix refreshes. Candidate changes still
+reset session/checkpoint/action/replay state. The Goal145 4/4 Runtime matrix and
+Unity smoke remain GREEN. Retry the corrected operator workflow before review.
 
 Goal145 is produced for review with `implementationStatus=GREEN`,
 `accepted=false`, `goal144Accepted=true`, `candidateCount=4`,

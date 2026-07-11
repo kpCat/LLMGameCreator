@@ -82,6 +82,8 @@ Goal 144A review note: descriptor targets are no longer decorative. Harvest bind
 
 Goal 145 review note: Goal144 is accepted by explicit human handoff. Goal145 discovers four Goal142 candidates, validates package metadata/path/SHA, executes the same Runtime session/replay kernel for each, proves four distinct final hashes and semantic alchemy/combat/exploration effects, and exposes operator selection in WinForms plus a read-only Unity matrix. Goal145 remains `accepted=false`; hands-on playable quality, final release, public schema, providers, Lua, generator-library, final art/atlas, sample promotion and Unity scene/prefab/project-settings/StreamingAssets/release packaging remain open.
 
+Goal 145A review note: the selector reentrancy/selection-drift risk is fixed with operator-only `SelectionChangeCommitted`, guarded programmatic binding and behavioral STA coverage. Callback counts are 0/0/1 with maximum depth 1; combat selection and package identity persist through refreshes, while a real candidate change resets prior session/checkpoint/action/replay state. Goal145 still requires operator retry and human review.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

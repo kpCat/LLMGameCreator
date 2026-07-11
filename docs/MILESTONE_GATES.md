@@ -84,6 +84,8 @@ Goal 144A note: the hotfix binds every Runtime-routed descriptor to its exact ca
 
 Goal 145 note: Goal144 is accepted by explicit human handoff with `acceptedByCodex=false`. Four candidates are discovered from Goal142 artifacts and run through one shared Runtime interactive-session kernel with exact action binding, 8-action checkpoint reload and 13-action full replay. All four pass with distinct final hashes and fresh alchemy/combat/exploration semantic effects; WinForms permits in-process selection and Unity remains read-only. Goal145 remains `accepted=false` and does not close `vertical_slice_final_verification` or authorize sample/schema/provider/Lua/generator-library/Unity gameplay-truth work.
 
+Goal 145A note: the WinForms selector lifecycle uses `SelectionChangeCommitted` and a bounded programmatic binding guard. Programmatic bind/restore callbacks are 0/0, one operator commit is applied once with maximum callback depth 1, combat selection is stable through dependent refreshes, and candidate changes reset prior live state. Goal145 remains `accepted=false`; retry its corrected operator workflow before review.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

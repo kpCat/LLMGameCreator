@@ -1,8 +1,37 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 145 operator-selectable product-line Runtime sessions and cross-variant save/replay matrix
+Updated by: Goal 145A WinForms candidate selector reentrancy and selection stability hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 145A selector hotfix is GREEN:
+
+```text
+implementationStatus=GREEN
+accepted=false
+goal145Accepted=false
+goal145CandidateSelectorReentrancyFixed=true
+goal145ProgrammaticBindingSelectionCount=0
+goal145OperatorCommitSelectionCount=1
+goal145MaximumSelectionCallbackDepth=1
+goal145DefaultSelectionPreserved=true
+goal145CombatSelectionPreserved=true
+goal145CandidateChangeResetsSession=true
+goal145CandidateChangeResetsCheckpoint=true
+goal145CombatSessionUsesCombatPackage=true
+goal145MatrixStillGreen=true
+goal145UnitySmokeStillGreen=true
+nextProductGoal=retry_goal_145_winforms_operator_then_review
+```
+
+The Goal145 candidate combo now uses `SelectionChangeCommitted` for operator
+commits. Programmatic `DataSource` and `SelectedValue` restoration run under a
+bounded binding guard and invoke selection logic zero times. A real combat
+commit is applied exactly once with maximum callback depth 1, remains selected
+through session/action/checkpoint/replay and matrix refreshes, and starts the
+combat package SHA `4528af180259dd0d3dd11c97de4048ed4ee43ea2c77209cf5b311061ea702497`.
+Changing candidate still clears the prior session, checkpoint, last action and
+last replay. Goal145 remains produced for review and is not accepted here.
 
 Goal 145 produced for review:
 

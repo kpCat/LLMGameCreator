@@ -44,6 +44,66 @@ public sealed class ProductLineInteractiveSessionMatrixTests
     }
 
     [Fact]
+    public void Selection_controller_preserves_candidate_and_uses_selected_package_after_matrix_refresh()
+    {
+        var root = TestRepositoryRoot.Find();
+        var controller = new ProductLineInteractiveSessionSelectionController(
+            SelectedRuntimeVariantInteractiveSessionService.CreateDefault());
+
+        controller.LoadCandidateMatrix(root);
+        Assert.Equal("minimal-map-game-exploration-resource-focus", controller.SelectedCandidateId);
+
+        const string combatId = "minimal-map-game-combat-focus";
+        var combat = controller.Candidates.Single(candidate => candidate.CandidateId == combatId);
+        controller.SelectCandidate(combatId);
+        var session = controller.StartSelected();
+
+        Assert.Equal(combatId, controller.SelectedCandidateId);
+        Assert.Equal(combatId, session.CandidateId);
+        Assert.Equal(combat.PackageSha256, session.PackageSha256);
+        Assert.DoesNotContain("exploration", session.CandidateId, StringComparison.Ordinal);
+        Assert.DoesNotContain("balanced-baseline", session.CandidateId, StringComparison.Ordinal);
+
+        _ = controller.Candidates.ToList();
+        controller.LoadCandidateMatrix(root);
+
+        Assert.Equal(combatId, controller.SelectedCandidateId);
+        Assert.Same(session, controller.Session);
+        Assert.Equal(combat.PackageSha256, controller.Session!.PackageSha256);
+    }
+
+    [Fact]
+    public void Candidate_change_clears_previous_session_checkpoint_action_and_replay_state()
+    {
+        var controller = new ProductLineInteractiveSessionSelectionController(
+            SelectedRuntimeVariantInteractiveSessionService.CreateDefault());
+        controller.LoadCandidateMatrix(TestRepositoryRoot.Find());
+        var explorationSession = controller.StartSelected();
+        controller.ExecuteSelectedAction("start_runtime");
+        controller.SaveCheckpoint();
+        controller.ReloadCheckpoint();
+
+        Assert.NotNull(explorationSession);
+        Assert.NotNull(controller.Session);
+        Assert.NotNull(controller.Checkpoint);
+        Assert.NotNull(controller.LastActionResult);
+        Assert.NotNull(controller.LastReplayResult);
+
+        const string combatId = "minimal-map-game-combat-focus";
+        var combat = controller.Candidates.Single(candidate => candidate.CandidateId == combatId);
+        controller.SelectCandidate(combatId);
+
+        Assert.Null(controller.Session);
+        Assert.Null(controller.Checkpoint);
+        Assert.Null(controller.LastActionResult);
+        Assert.Null(controller.LastReplayResult);
+
+        var combatSession = controller.StartSelected();
+        Assert.Equal(combatId, combatSession.CandidateId);
+        Assert.Equal(combat.PackageSha256, combatSession.PackageSha256);
+    }
+
+    [Fact]
     public void Discovery_rejects_hash_metadata_and_path_tampering()
     {
         using var repository = TamperRepository.Create(TestRepositoryRoot.Find());

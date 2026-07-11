@@ -60,3 +60,14 @@ Evidence:
 Goal145 does not authorize `.llmgc/manual/**`, sample or public GamePackage
 schema mutation, provider/LLM/RAG/media, Lua/generator-library, or Unity gameplay
 truth, scenes, prefabs, StreamingAssets, ProjectSettings or Packages changes.
+
+## Goal 145A selector lifecycle hotfix
+
+The WinForms candidate combo now handles only real operator commits through
+`SelectionChangeCommitted`; guarded programmatic `DataSource` binding and
+`SelectedValue` restoration invoke selection logic zero times. One combat
+operator commit is applied exactly once with maximum callback depth 1, remains
+selected through session/action/checkpoint/replay/matrix refreshes and starts
+the combat package SHA. Candidate changes reset prior session, checkpoint, last
+action and last replay state. Goal145 remains `accepted=false`; retry the
+corrected WinForms operator workflow before human review.

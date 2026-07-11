@@ -30,8 +30,11 @@ public sealed class ProductLineInteractiveSessionSelectionController
 
     public IReadOnlyList<ProductLineInteractiveSessionCandidate> LoadCandidateMatrix(string repositoryRootPath)
     {
+        var previousSelectedCandidateId = SelectedCandidateId;
         _matrix = _discovery.Discover(repositoryRootPath, ProductLineInteractiveSessionMatrixVocabulary.Goal142Root);
-        SelectCandidate(_matrix.DefaultSelectedCandidateId);
+        SelectCandidate(string.IsNullOrWhiteSpace(previousSelectedCandidateId)
+            ? _matrix.DefaultSelectedCandidateId
+            : previousSelectedCandidateId);
         return Candidates;
     }
 
@@ -39,7 +42,12 @@ public sealed class ProductLineInteractiveSessionSelectionController
     {
         if (_matrix is null) throw new InvalidOperationException("Load the Goal145 candidate matrix first.");
         var next = ProductLineInteractiveSessionMatrixService.ResolveSelectable(_matrix.Candidates, candidateId);
-        if (_selected?.Candidate.CandidateId == next.Candidate.CandidateId) return;
+        if (_selected?.Candidate.CandidateId == next.Candidate.CandidateId)
+        {
+            _selected = next;
+            return;
+        }
+
         _selected = next;
         Session = null;
         Checkpoint = null;

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "goal145a_winforms_candidate_selector_hotfix_file_index_v1",
+  "goalId": "goal_145a_winforms_candidate_selector_reentrancy_and_selection_stability_hotfix",
+  "fileCount": 3,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/winforms-candidate-selector-hotfix-dashboard.json",
+      "sha256": "af69846e337bad5bb37719d3354668aaec0c466cacddf8dd05877fd99413d429",
+      "byteCount": 777
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/winforms-candidate-selector-regression-proof.json",
+      "sha256": "a760bfe47f322b87bd5b0427965b72b7f564e67b7f6e0085118fc66e92af75e3",
+      "byteCount": 1677
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/winforms-candidate-selector-hotfix-report.md",
+      "sha256": "a6d3a2af28b758302362fea950149425da299c9a342378a6eff0323ec6bf8ae5",
+      "byteCount": 815
+    }
+  ]
+}

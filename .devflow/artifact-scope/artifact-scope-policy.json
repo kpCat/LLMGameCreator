@@ -161,7 +161,9 @@
     ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/",
     ".llmgc/exports/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/",
     ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/",
-    ".llmgc/exports/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/"
+    ".llmgc/exports/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/",
+    ".llmgc/procedural/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/",
+    ".llmgc/exports/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -3613,6 +3615,56 @@
         "provider/",
         "LLM/",
         "RAG/"
+      ]
+    },
+    {
+      "scenario": "goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix.md",
+        "src/LLMGameCreator.Application/Design/ProductLineInteractiveSessionMatrix/ProductLineInteractiveSessionSelectionController.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal145.cs",
+        "tests/LLMGameCreator.Tests/Application/ProductLineInteractiveSessionMatrix/ProductLineInteractiveSessionMatrixTests.cs",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspaceGoal145Tests.cs",
+        "tests/LLMGameCreator.Tests/WinForms/Goal145CandidateSelectorBindingTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        "docs/agent-tasks/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/",
+        ".llmgc/procedural/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/",
+        ".llmgc/exports/goal-145a-winforms-candidate-selector-reentrancy-and-selection-stability-hotfix/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/minimal-map-game/",
+        ".llmgc/procedural/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/",
+        ".llmgc/exports/goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff/",
+        ".llmgc/procedural/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/",
+        ".llmgc/exports/goal-143-selected-runtime-variant-end-to-end-playeradapter-handoff/",
+        ".llmgc/procedural/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/",
+        ".llmgc/exports/goal-144-selected-runtime-variant-interactive-action-session-and-save-replay/",
+        ".llmgc/procedural/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/",
+        ".llmgc/exports/goal-144a-live-session-action-target-binding-and-replay-evidence-hotfix/",
+        ".llmgc/procedural/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/",
+        ".llmgc/exports/goal-145-operator-selectable-product-line-runtime-sessions-and-cross-variant-save-replay-matrix/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Generation/",
+        "src/LLMGameCreator.AssetPipeline/",
+        "src/LLMGameCreator.Scripting/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/",
+        "unity/",
+        "Directory.Build."
       ]
     },
     {

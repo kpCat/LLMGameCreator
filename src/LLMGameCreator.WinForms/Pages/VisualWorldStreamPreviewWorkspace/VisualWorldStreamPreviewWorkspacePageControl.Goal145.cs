@@ -16,6 +16,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
     private TextBox? _goal145Comparison;
     private TextBox? _goal145LastResult;
     private readonly List<Button> _goal145Buttons = [];
+    private bool _goal145BindingCandidateList;
+    private int _goal145SelectionCallbackDepth;
+    private int _goal145MaximumSelectionCallbackDepth;
+    private int _goal145OperatorCommitSelectionCount;
 
     private void ConfigureGoal145VariantSessionsPanel()
     {
@@ -78,14 +82,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         });
         if (_goal145Candidates is not null)
         {
-            _goal145Candidates.SelectedValueChanged += (_, _) =>
-            {
-                if (_goal145Candidates.SelectedValue is string id && !string.IsNullOrWhiteSpace(id))
-                {
-                    _goal145Controller.SelectCandidate(id);
-                    BindGoal145VariantSessions();
-                }
-            };
+            _goal145Candidates.SelectionChangeCommitted += (_, _) => Goal145CandidateSelectionCommitted();
         }
 
         _goal145Buttons[1].Click += async (_, _) => await Goal145RunAsync(() =>
@@ -119,10 +116,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
             candidate.CandidateId,
             candidate.CandidateId + " | variant=" + candidate.VariantKind + " | score=" + candidate.Score
             + " | sha=" + candidate.PackageSha256 + " | pass=" + candidate.Passed.ToString().ToLowerInvariant())).ToList();
-        _goal145Candidates.DisplayMember = "Value";
-        _goal145Candidates.ValueMember = "Key";
-        _goal145Candidates.DataSource = candidateRows;
-        if (!string.IsNullOrWhiteSpace(selectedId)) _goal145Candidates.SelectedValue = selectedId;
+        _goal145BindingCandidateList = true;
+        try
+        {
+            _goal145Candidates.DisplayMember = "Value";
+            _goal145Candidates.ValueMember = "Key";
+            _goal145Candidates.DataSource = candidateRows;
+            if (!string.IsNullOrWhiteSpace(selectedId)) _goal145Candidates.SelectedValue = selectedId;
+        }
+        finally
+        {
+            _goal145BindingCandidateList = false;
+        }
 
         var session = _goal145Controller.Session;
         _goal145Status.Text = session is null
@@ -149,6 +154,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
                 + (string.IsNullOrWhiteSpace(action.CanonicalStepId) ? "presentation_only" : action.CanonicalStepId)
                 + " | route=" + action.Route)).ToList() ?? [];
         BindGoal145Comparison();
+    }
+
+    private void Goal145CandidateSelectionCommitted()
+    {
+        if (_goal145BindingCandidateList || _goal145Candidates?.SelectedValue is not string id
+            || string.IsNullOrWhiteSpace(id) || id == _goal145Controller.SelectedCandidateId)
+        {
+            return;
+        }
+
+        _goal145SelectionCallbackDepth++;
+        _goal145MaximumSelectionCallbackDepth = Math.Max(
+            _goal145MaximumSelectionCallbackDepth,
+            _goal145SelectionCallbackDepth);
+        try
+        {
+            _goal145OperatorCommitSelectionCount++;
+            _goal145Controller.SelectCandidate(id);
+            BindGoal145VariantSessions();
+        }
+        finally
+        {
+            _goal145SelectionCallbackDepth--;
+        }
     }
 
     private void BindGoal145Comparison()

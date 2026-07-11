@@ -16,6 +16,8 @@ public sealed class VisualWorldStreamPreviewWorkspaceGoal145Tests
         Assert.Contains("Execute Selected Action", source, StringComparison.Ordinal);
         Assert.Contains("Run All Variant Sessions", source, StringComparison.Ordinal);
         Assert.Contains("ProductLineInteractiveSessionMatrixOperatorRunner", source, StringComparison.Ordinal);
+        Assert.Contains("SelectionChangeCommitted", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("SelectedValueChanged", source, StringComparison.Ordinal);
         Assert.DoesNotContain("ProcessStartInfo", source, StringComparison.Ordinal);
         Assert.DoesNotContain("dotnet test", source, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("powershell", source, StringComparison.OrdinalIgnoreCase);
