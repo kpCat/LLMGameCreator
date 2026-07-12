@@ -289,22 +289,30 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _launchWindowsStandaloneButton.Enabled = result is { Status: "GREEN" } && File.Exists(result.ExecutablePath);
         _openWindowsStandaloneFolderButton.Enabled = result is { Status: "GREEN" } && Directory.Exists(result.OutputFolder);
         if (result is null) return;
+        if (result.Status == "GREEN")
+        {
+            _standaloneStatusTextBox.Text = string.Join(Environment.NewLine, new[]
+            {
+                "Автоматическая проверка: ПРОЙДЕНА",
+                "Payload integrity: GREEN",
+                "Runtime authority: GREEN",
+                "Navigation self-check: GREEN",
+                "Frames: " + result.FrameCount,
+                "Host cache: " + (result.HostRebuilt ? "rebuilt" : "reused"),
+                "",
+                "Для ручной проверки:",
+                "1. Запустите игру.",
+                "2. Нажмите Далее, Назад, В конец и Сбросить.",
+                "3. Убедитесь, что текст обновляется без наложения."
+            });
+            return;
+        }
         _standaloneStatusTextBox.Text = string.Join(Environment.NewLine, new[]
         {
             "Текущий этап: " + result.Stage,
             "Общий статус: " + result.Status,
-            "Последняя успешная standalone-сборка: " + (result.Status == "GREEN" ? "Готово" : "Нет"),
-            "Путь к exe: " + result.ExecutablePath,
-            "Путь к папке: " + result.OutputFolder,
-            "Unity version: " + result.UnityVersion,
-            "Host cache: " + (result.HostRebuilt ? "rebuilt" : result.HostReused ? "reused" : "не использован"),
-            "Package SHA-256: " + result.PackageSha256,
-            "Final Runtime state hash: " + result.FinalStateHash,
-            "Selected mechanics count: " + result.SelectedModuleCount,
-            "Configured parameters count: " + result.ConfiguredParameterCount,
-            "PlayerAdapter frame count: " + result.FrameCount,
-            "Launch smoke status: " + (result.LaunchSmokePassed ? "GREEN" : "не пройден"),
-            "First causal diagnostic: " + (result.Diagnostics.FirstOrDefault() ?? string.Empty)
+            "First causal diagnostic: " + (result.Diagnostics.FirstOrDefault() ?? string.Empty),
+            "Технические пути и хэши доступны на вкладке «Технические сведения»."
         });
     }
 

@@ -79,10 +79,10 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
             var cacheRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ProjectStandaloneBuildVocabulary.HostCacheRootName, cacheKey);
             var hostRoot = Path.Combine(cacheRoot, "host");
             var rebuilt = false;
-            if (!HostIsComplete(hostRoot))
+            if (!HostIsComplete(hostRoot, cacheKey))
             {
                 rebuilt = true;
-                BuildHost(unity, hostRoot, token);
+                BuildHost(unity, hostRoot, cacheKey, token);
             }
 
             token.ThrowIfCancellationRequested();
@@ -109,6 +109,8 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
                 RuntimePlanId = request.RuntimePlanId,
                 CapabilityCount = request.CapabilityCount,
                 FrameCount = payload.Frames.Count,
+                SelfCheckPassedCount = StandaloneSelfCheck.RequiredMarkers.Length,
+                SelfCheckTotalCount = StandaloneSelfCheck.RequiredMarkers.Length,
                 UnityEditorPath = unity,
                 UnityVersion = unityVersion,
                 HostCacheKey = cacheKey,
@@ -165,7 +167,7 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
         Process.Start(new ProcessStartInfo(result.OutputFolder) { UseShellExecute = true });
     }
 
-    private void BuildHost(string unityPath, string hostRoot, CancellationToken token)
+    private void BuildHost(string unityPath, string hostRoot, string cacheKey, CancellationToken token)
     {
         var unityProject = Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha");
         var entrypoint = Path.Combine(unityProject, "Assets", "Editor", "ProjectStandaloneBuildEntrypoint.cs");
@@ -184,7 +186,7 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
         lock (_gate) _ownedUnityProcess = process;
         while (!process.WaitForExit(250)) token.ThrowIfCancellationRequested();
         lock (_gate) _ownedUnityProcess = null;
-        if (process.ExitCode != 0 || !HostIsComplete(Path.Combine(temporary, "host")))
+        if (process.ExitCode != 0 || !HostFilesPresent(Path.Combine(temporary, "host")))
         {
             var detail = File.Exists(log) ? File.ReadLines(log).TakeLast(20).Aggregate(new StringBuilder(), (builder, line) => builder.AppendLine(line)).ToString() : string.Empty;
             Directory.Delete(temporary, true);
@@ -192,6 +194,7 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
         }
         if (Directory.Exists(hostRoot)) Directory.Delete(hostRoot, true);
         Directory.Move(Path.Combine(temporary, "host"), hostRoot);
+        File.WriteAllText(Path.Combine(hostRoot, "host-cache-manifest.json"), JsonSerializer.Serialize(new { schemaVersion = "llmgc_standalone_host_cache_v1", cacheKey }, JsonOptions), new UTF8Encoding(false));
         Directory.Delete(temporary, true);
     }
 
@@ -210,9 +213,17 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
         return HashText(string.Join("\n", inputs))[..32];
     }
 
-    private static bool HostIsComplete(string root) => File.Exists(Path.Combine(root, ProjectStandaloneBuildVocabulary.HostExecutableName))
+    private static bool HostFilesPresent(string root) => File.Exists(Path.Combine(root, ProjectStandaloneBuildVocabulary.HostExecutableName))
         && Directory.Exists(Path.Combine(root, ProjectStandaloneBuildVocabulary.HostDataDirectoryName))
-        && File.Exists(Path.Combine(root, "UnityPlayer.dll"));
+        && File.Exists(Path.Combine(root, "UnityPlayer.dll"))
+        && Directory.Exists(Path.Combine(root, "MonoBleedingEdge"));
+
+    private static bool HostIsComplete(string root, string cacheKey)
+    {
+        if (!HostFilesPresent(root)) return false;
+        var manifest = Path.Combine(root, "host-cache-manifest.json");
+        return File.Exists(manifest) && File.ReadAllText(manifest).Contains("\"cacheKey\": \"" + cacheKey + "\"", StringComparison.Ordinal);
+    }
 
     private static string UnityProjectVersionIdentity(string projectVersionPath)
     {
@@ -243,11 +254,11 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
             }).ToList();
         return new StandalonePayload
         {
-            ProjectManifest = new { schemaVersion = "llmgc_project_standalone_v1", request.ProjectPackageId, request.ProjectTitle, request.ProjectVersion, request.CompositionId, request.PackageSha256, request.CompositionPackageSha256, request.FinalStateHash, selectedModuleIds = request.SelectedModuleIds, effectiveParameters = request.Parameters, request.RuntimePlanId, request.CapabilityCount, runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false, sourceCommit = Environment.GetEnvironmentVariable("GIT_COMMIT") ?? string.Empty, unityVersion, cacheKey, attemptId },
+            ProjectManifest = new { schemaVersion = "llmgc_project_standalone_v2", request.ProjectPackageId, request.ProjectTitle, request.ProjectVersion, request.CompositionId, request.PackageSha256, request.CompositionPackageSha256, request.FinalStateHash, selectedModuleIds = request.SelectedModuleIds, effectiveParameters = request.Parameters, request.RequiredMechanicCount, request.SelectedOptionalMechanicCount, request.ActiveMechanicCount, request.ConfiguredParameterCount, request.PlannedActionCount, request.CheckpointActionCount, request.FinalReplayActionCount, request.RuntimePlanId, request.CapabilityCount, runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false, sourceCommit = Environment.GetEnvironmentVariable("GIT_COMMIT") ?? string.Empty, unityVersion, cacheKey, attemptId },
             PackageJson = packageJson,
             Frames = frames,
-            Model = new { schemaVersion = "llmgc_player_adapter_model_v1", request.EquipmentSummary, request.AttributesSummary, request.ProgressionSummary, request.FinalStateHash, mapSummary = "Runtime-derived project package", inventorySummary = "Runtime-derived player state", questSummary = "Runtime-derived player state", combatSummary = "Runtime-derived player state", runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false },
-            Launch = new { schemaVersion = "llmgc_standalone_launch_v1", smokeArguments = new[] { "-llmgcStandaloneSmokeExit", "-llmgcStandaloneSmokeLogPath" }, runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false }
+            Model = new { schemaVersion = "llmgc_player_adapter_model_v2", request.EquipmentSummary, request.AttributesSummary, request.ProgressionSummary, request.EquipmentDamageBonus, request.StatDamageBonus, request.TotalAdditionalDamage, humanReviewFacts = request.HumanReviewFacts, request.FinalStateHash, mapSummary = "Runtime-derived project package", inventorySummary = "Runtime-derived player state", questSummary = "Runtime-derived player state", combatSummary = "Runtime-derived player state", runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false },
+            Launch = new { schemaVersion = "llmgc_standalone_launch_v2", smokeArguments = new[] { "-batchmode", "-nographics", "-llmgcStandaloneSmokeExit", "-llmgcStandaloneSmokeLogPath" }, runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false }
         };
     }
 
@@ -296,16 +307,21 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
     private static void ValidateOutput(OutputAssembly output, StandalonePayload payload)
     {
         if (!File.Exists(output.ExecutablePath) || !File.Exists(output.ManifestPath)) throw new InvalidOperationException("Standalone output manifest or executable is missing.");
+        var root = Path.GetDirectoryName(output.ExecutablePath)!;
+        var data = Path.Combine(root, Path.GetFileNameWithoutExtension(output.ExecutablePath) + "_Data");
+        if (!Directory.Exists(data) || !File.Exists(Path.Combine(root, "UnityPlayer.dll")) || !Directory.Exists(Path.Combine(root, "MonoBleedingEdge"))) throw new InvalidOperationException("Standalone output is not a complete Unity player set.");
         if (payload.Frames.Count == 0) throw new InvalidOperationException("PlayerAdapter payload has no frames.");
     }
 
     private static SmokeResult RunSmoke(string executable, CancellationToken token)
     {
-        var log = Path.Combine(Path.GetDirectoryName(executable)!, ".standalone-smoke-" + Guid.NewGuid().ToString("N") + ".log");
-        using var process = Process.Start(new ProcessStartInfo(executable, "-llmgcStandaloneSmokeExit -llmgcStandaloneSmokeLogPath \"" + log + "\"") { UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = Path.GetDirectoryName(executable)! }) ?? throw new InvalidOperationException("Standalone executable could not be started.");
+        var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LLMGameCreator", "S");
+        Directory.CreateDirectory(root);
+        var log = Path.Combine(root, "standalone-smoke-" + Guid.NewGuid().ToString("N") + ".log");
+        using var process = Process.Start(new ProcessStartInfo(executable, "-batchmode -nographics -llmgcStandaloneSmokeExit -llmgcStandaloneSmokeLogPath \"" + log + "\"") { UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = Path.GetDirectoryName(executable)! }) ?? throw new InvalidOperationException("Standalone executable could not be started.");
         while (!process.WaitForExit(250)) token.ThrowIfCancellationRequested();
         var contents = File.Exists(log) ? File.ReadAllText(log) : string.Empty;
-        var passed = process.ExitCode == 0 && contents.Contains("LLMGC_PROJECT_STANDALONE_SMOKE_PASS", StringComparison.Ordinal);
+        var passed = process.ExitCode == 0 && StandaloneSelfCheck.RequiredMarkers.All(marker => contents.Contains(marker, StringComparison.Ordinal));
         return new SmokeResult(passed, passed ? string.Empty : "Standalone smoke failed with exit code " + process.ExitCode + ".");
     }
 
@@ -340,4 +356,15 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
     private sealed record StandalonePayload { public object ProjectManifest { get; init; } = new(); public string PackageJson { get; init; } = string.Empty; public object Model { get; init; } = new(); public List<StandaloneFrame> Frames { get; init; } = []; public object Launch { get; init; } = new(); }
     private sealed record OutputAssembly(string OutputFolder, string ExecutablePath, string ManifestPath);
     private sealed record SmokeResult(bool Passed, string Diagnostic);
+}
+
+internal static class StandaloneSelfCheck
+{
+    public static readonly string[] RequiredMarkers = [
+        "LLMGC_PROJECT_STANDALONE_LOAD_PASS",
+        "LLMGC_PROJECT_STANDALONE_INTEGRITY_PASS",
+        "LLMGC_PROJECT_STANDALONE_NAVIGATION_PASS",
+        "LLMGC_PROJECT_STANDALONE_RUNTIME_AUTHORITY_PASS",
+        "LLMGC_PROJECT_STANDALONE_SMOKE_PASS"
+    ];
 }

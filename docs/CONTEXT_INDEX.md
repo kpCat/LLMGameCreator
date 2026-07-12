@@ -18,6 +18,8 @@ For any generator/Codex task:
 8. `docs/ROADMAP_TO_FULL_GENERATOR.md`
 9. only then task-specific docs
 
+For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` before any Unity invocation.
+
 For Goal 029 specifically, read:
 
 1. `AGENTS.md`

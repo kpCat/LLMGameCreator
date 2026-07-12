@@ -149,3 +149,7 @@ Runtime/Player исполняет GamePackage без LLM.
 ## Git
 
 Не выполнять git-команды без прямого запроса пользователя.
+
+## Unity execution
+
+Before Unity-host work, read and follow [docs/UNITY_EXECUTION_POLICY.md](docs/UNITY_EXECUTION_POLICY.md). It governs Unity invocation budgets, standalone host-cache reuse, atomic player files and hidden automated smoke.

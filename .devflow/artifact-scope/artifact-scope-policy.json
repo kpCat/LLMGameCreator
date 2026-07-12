@@ -4808,6 +4808,58 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-152a-standalone-playeradapter-ux-framebuffer-refresh-and-unity-execution-policy-hotfix",
+      "allowedPaths": [
+        "AGENTS.md",
+        "docs/UNITY_EXECUTION_POLICY.md",
+        "docs/CONTEXT_INDEX.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal152a-standalone-playeradapter-ux-hotfix.ps1",
+        ".devflow/scripts/run-goal152a-standalone-playeradapter-ux-hotfix.cmd",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/ProjectStandalonePlayerAdapterBootstrap.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/ProjectStandaloneBuildEntrypoint.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildModels.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.Designer.cs",
+        "tests/LLMGameCreator.Tests/Application/ProjectStandaloneBuild/Goal152AStandaloneUxAndSelfCheckTests.cs",
+        "tests/LLMGameCreator.Tests/Application/ProjectStandaloneBuild/Goal152ProjectStandaloneBuildTests.cs",
+        "tests/LLMGameCreator.Tests/WinForms/Goal152AProjectsPageReviewSurfaceTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunGoal152AStandaloneUxScriptTests.cs",
+        "docs/manual-acceptance/project-scoped-windows-standalone-build-launch.md",
+        "docs/manual-acceptance/standalone-playeradapter-ux-framebuffer-refresh-hotfix.md",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md"
+      ],
+      "allowedPathPrefixes": [
+        "docs/agent-tasks/goal-152a-standalone-playeradapter-ux-framebuffer-refresh-and-unity-execution-policy-hotfix/",
+        ".llmgc/procedural/goal-152a-standalone-playeradapter-ux-framebuffer-refresh-and-unity-execution-policy-hotfix/",
+        ".llmgc/exports/goal-152a-standalone-playeradapter-ux-framebuffer-refresh-and-unity-execution-policy-hotfix/"
+      ],
+      "excludedPathPrefixes": [
+        ".llmgc/manual/",
+        "samples/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "unity/LLMGameCreatorAlpha/Assets/Scenes/",
+        "unity/LLMGameCreatorAlpha/Assets/Prefabs/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/",
+        "unity/LLMGameCreatorAlpha/ProjectSettings/",
+        "unity/LLMGameCreatorAlpha/Packages/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

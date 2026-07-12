@@ -33,13 +33,27 @@ public sealed record ProjectStandaloneBuildRequest
     public string FinalStateHash { get; init; } = string.Empty;
     public string RuntimePlanId { get; init; } = string.Empty;
     public int CapabilityCount { get; init; }
+    public int RequiredMechanicCount { get; init; }
+    public int SelectedOptionalMechanicCount { get; init; }
+    public int ActiveMechanicCount { get; init; }
+    public int ConfiguredParameterCount { get; init; }
     public int PlannedActionCount { get; init; }
     public int CheckpointActionCount { get; init; }
     public int FinalReplayActionCount { get; init; }
     public string EquipmentSummary { get; init; } = string.Empty;
     public string AttributesSummary { get; init; } = string.Empty;
     public string ProgressionSummary { get; init; } = string.Empty;
+    public int EquipmentDamageBonus { get; init; }
+    public decimal StatDamageBonus { get; init; }
+    public decimal TotalAdditionalDamage { get; init; }
+    public IReadOnlyList<StandaloneHumanReviewFact> HumanReviewFacts { get; init; } = [];
     public IReadOnlyList<StandaloneRuntimeFrame> RuntimeFrames { get; init; } = [];
+}
+
+public sealed record StandaloneHumanReviewFact
+{
+    public string Label { get; init; } = string.Empty;
+    public string Value { get; init; } = string.Empty;
 }
 
 public sealed record StandaloneRuntimeFrame
@@ -74,6 +88,8 @@ public sealed record ProjectStandaloneBuildResult
     public string RuntimePlanId { get; init; } = string.Empty;
     public int CapabilityCount { get; init; }
     public int FrameCount { get; init; }
+    public int SelfCheckPassedCount { get; init; }
+    public int SelfCheckTotalCount { get; init; }
     public string UnityEditorPath { get; init; } = string.Empty;
     public string UnityVersion { get; init; } = string.Empty;
     public string HostCacheKey { get; init; } = string.Empty;

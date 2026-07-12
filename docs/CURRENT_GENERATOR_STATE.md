@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 152 accepted mechanics milestone and project-scoped Windows standalone build launch
+Updated by: Goal 152A standalone PlayerAdapter UX framebuffer refresh and Unity execution policy hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goals149/150/150A/150B/151 are accepted by human. Goal152 is GREEN and ready for manual review:
+Goals149/150/150A/150B/151 are accepted by human. Goal152 remains unaccepted after human feedback; Goal152A is BLOCKED from publication because Unity generated out-of-scope worktree churn that may not be restored without explicit authorization:
 
 ```text
 implementationStatus=GREEN
@@ -49,8 +49,12 @@ interfaceAndDiagnosticsAccepted=true
 goal152Accepted=false
 goal152AcceptedByHuman=false
 goal152AcceptedByCodex=false
-goal152ManualReviewPerformed=false
-goal152ManualGateReady=true
+goal152ManualReviewPerformed=true
+goal152ManualGateReady=false
+goal152aAccepted=false
+goal152aAcceptedByHuman=false
+goal152aManualGateReady=false
+gateStatus=goal152a_standalone_playeradapter_ux_framebuffer_refresh required
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -64,12 +68,7 @@ diagnostics and compact history, and Technical Details separates last success, c
 attempt and current saved configuration. The unrelated 64 historical snapshot failures
 remain open validation debt and are not part of the Goal151 acceptance gate.
 
-Goal152 standalone launch status is GREEN: short disposable copies of `goal148-manual` passed the
-normal controller path at `3/8/2/12`, produced the required slugged executable/Data output, and
-emitted all stable smoke markers. A one-parameter second copy changed the payload hash while
-reusing the generic host cache. The source project remained byte-identical and no Goal142/Goal143/
-sample fallback was used. Goal152 remains `accepted=false`, `manualReviewPerformed=false`,
-`manualGateReady=true` pending its own human review.
+Goal152A implementation and the one authorized real host build were GREEN: one opaque clearing camera, opaque full-frame repaint, responsive reference canvas, hidden smoke and second-payload cache reuse all passed. Publication is BLOCKED because Unity generated unallowed `.meta`/ProjectSettings files and historical Goal149/150 artifact churn. Local policy forbids deleting or restoring those paths without explicit exact-path authorization. Goal152 remains `accepted=false`, `manualReviewPerformed=true`, `manualGateReady=false`; Goal152A remains `accepted=false`, `acceptedByHuman=false`, `manualGateReady=false`.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

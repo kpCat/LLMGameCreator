@@ -1,5 +1,7 @@
 # Full Generator Goal Queue
 
+- Goal 152A standalone PlayerAdapter UX framebuffer refresh and Unity execution policy hotfix: add a clearing camera and opaque repaint contract, responsive Russian standalone shell, generic payload self-check, hidden smoke/cache reuse proof and a five-step human gate; Goal152 and Goal152A remain `accepted=false`.
+
 Status: planning control document
 
 Purpose: keep LLMGameCreator moving toward the full generator without re-planning from scratch after every Codex run.

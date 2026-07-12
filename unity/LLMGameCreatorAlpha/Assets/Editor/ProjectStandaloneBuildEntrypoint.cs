@@ -18,6 +18,12 @@ namespace LLMGameCreator
             try
             {
                 var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+                var camera = new GameObject("ProjectStandaloneBackgroundCamera").AddComponent<Camera>();
+                camera.enabled = true;
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = new Color(0.045f, 0.06f, 0.08f, 1f);
+                camera.cullingMask = 0;
+                camera.depth = -100f;
                 new GameObject("ProjectStandalonePlayerAdapterBootstrap").AddComponent<ProjectStandalonePlayerAdapterBootstrap>();
                 EditorSceneManager.SaveScene(scene, scenePath);
                 var options = new BuildPlayerOptions { scenes = new[] { scenePath }, locationPathName = output, target = BuildTarget.StandaloneWindows64, options = BuildOptions.None };

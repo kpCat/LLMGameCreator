@@ -237,12 +237,20 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             FinalStateHash = _lastBuild.FinalStateHash,
             RuntimePlanId = _lastBuild.RuntimePlaythroughPlanId,
             CapabilityCount = _lastBuild.CapabilityCount,
+            RequiredMechanicCount = snapshot.Mechanics.Count(item => item.Required),
+            SelectedOptionalMechanicCount = snapshot.Mechanics.Count(item => !item.Required && item.Selected),
+            ActiveMechanicCount = snapshot.Mechanics.Count(item => item.Selected),
+            ConfiguredParameterCount = state.Document.ParameterValues.Count,
             PlannedActionCount = _lastBuild.PlannedActionCount,
             CheckpointActionCount = _lastBuild.CheckpointActionCount,
             FinalReplayActionCount = _lastBuild.FinalReplayActionCount,
             EquipmentSummary = _lastBuild.EquipmentSlotSummary,
             AttributesSummary = _lastBuild.AttributesSummary,
             ProgressionSummary = _lastBuild.ProgressionSummary,
+            EquipmentDamageBonus = _lastBuild.WeaponDamageBonus,
+            StatDamageBonus = _lastBuild.StatDamageBonus,
+            TotalAdditionalDamage = _lastBuild.TotalAdditionalDamage,
+            HumanReviewFacts = BuildHumanReviewFacts(_lastBuild),
             RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame
             {
                 Index = frame.Index,
@@ -253,6 +261,33 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             }).ToList()
         };
         return _standaloneBuild.Build(request, cancellationToken);
+    }
+
+    private static IReadOnlyList<StandaloneHumanReviewFact> BuildHumanReviewFacts(GameProjectBuildResult build)
+    {
+        var facts = new List<StandaloneHumanReviewFact>
+        {
+            new() { Label = "Бонус оружия", Value = build.WeaponDamageBonus.ToString() },
+            new() { Label = "Бонус от характеристик", Value = build.StatDamageBonus.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) },
+            new() { Label = "Общий дополнительный урон", Value = build.TotalAdditionalDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) }
+        };
+        AddSummaryFact(build.AttributesSummary, "stat/strength=", "Сила", facts);
+        var progression = System.Text.RegularExpressions.Regex.Match(build.ProgressionSummary ?? string.Empty, @"=(\d+):[^/]+/(\d+)");
+        if (progression.Success)
+        {
+            facts.Add(new StandaloneHumanReviewFact { Label = "Уровень", Value = progression.Groups[2].Value });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Опыт", Value = progression.Groups[1].Value });
+        }
+        return facts;
+    }
+
+    private static void AddSummaryFact(string summary, string marker, string label, ICollection<StandaloneHumanReviewFact> facts)
+    {
+        summary ??= string.Empty;
+        var index = summary.IndexOf(marker, StringComparison.Ordinal);
+        if (index < 0) return;
+        var value = summary[(index + marker.Length)..].TakeWhile(char.IsDigit).ToArray();
+        if (value.Length > 0) facts.Add(new StandaloneHumanReviewFact { Label = label, Value = new string(value) });
     }
 
     public void CancelWindowsStandaloneBuild() => _standaloneBuild.Cancel();

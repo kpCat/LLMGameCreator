@@ -1,11 +1,11 @@
 # Project-Scoped Windows Standalone Build & Launch
 
-Status: GREEN, manual review pending
+Status: superseded by Goal152A UX hotfix; Goal152 remains unaccepted
 Gate: `goal152_project_scoped_windows_standalone_build_launch required`
 Accepted: false
 Accepted by human: false
 Accepted by Codex: false
-Manual review performed: false
+Manual review performed: true (feedback captured); acceptance remains false
 
 Goal152 adds the normal `Игры → Сборка и проверка` route for a **Windows standalone Alpha**.
 The host is generic and only presents Runtime-backed PlayerAdapter payload. Gameplay truth remains Runtime.

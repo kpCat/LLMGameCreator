@@ -205,6 +205,8 @@ closure is BLOCKED with 21 passed and 64 terminal failures. Goals149/150/150A/15
 150E/150F remain `accepted=false`; no manual gate is ready until the failures are
 repaired and a later bounded closure plus independent audit are GREEN.
 
+Goal152A repairs PlayerAdapter framebuffer/UX feedback without accepting Goal152. Its five-step manual gate is ready after GREEN hidden smoke and host-cache reuse; `goal152Accepted=false` and `goal152aAccepted=false` remain explicit until human review.
+
 Goals149/150/150A/150B/151 are accepted by human through the exact Goal152 acceptance
 record at commit `2516931f9c8242bbd59fe5cf73f9e66b405ef16c`, with `3/8/2/12`, `3/6/9`
 and `2/12` confirmed. Goal152 is the active project-scoped Windows standalone build/launch

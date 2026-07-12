@@ -1,0 +1,34 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-152a-standalone-playeradapter-ux-framebuffer-refresh-and-unity-execution-policy-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: a2da741befd028e48046bbdd401361db0015a74f
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен. Требование AGENTS.md о плане выполнено этим GOAL; не спрашивай подтверждение.
+
+Критически важно:
+- Goal152 НЕ принят человеком;
+- исправь отсутствие clearing Camera и налипание OnGUI;
+- сделай standalone крупным, адаптивным и понятным, а не debug-screen;
+- добавь явную зелёную автопроверку и сократи ручной gate до пяти простых действий;
+- добавь постоянную Unity execution policy в AGENTS.md и docs;
+- smoke должен запускаться скрыто с -batchmode -nographics;
+- не экспериментируй напрямую с Unity.exe;
+- после всех prechecks разрешена одна плановая host build через ProjectStandaloneBuildService;
+- допустима максимум одна исправленная повторная попытка;
+- второй payload обязан переиспользовать host без Unity build;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи root cause/fix, self-check, Unity invocation count, cache keys/reuse,
+focused tests, final SHA, push, HEAD == origin/main, clean worktree и короткий manual gate.
