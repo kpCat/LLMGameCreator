@@ -2417,9 +2417,11 @@ expression overflow is rejected as a deterministic failed binding. A bounded
 15-minute monolithic diagnostic and exact discovery/class-shard runner replace the
 previous unbounded full-suite wait. Goal150C supersedes that mutable runner with
 an exact-HEAD disposable-worktree runner, fresh ProductSmoke roots and adaptive
-terminal accounting. Goals149/150/150A/150B remain `accepted=false`; next is
-`complete_goal150c_hermetic_validation_then_independent_audit`. No human gate is
-ready until the hermetic result is GREEN.
+terminal accounting. Goal150E reconciled all 85 historical identities before its
+one candidate commit, but closure is BLOCKED by a `run-complete-test-suite.ps1`
+parser error. Goals149/150/150A/150B/150E remain `accepted=false`; next is
+`resolve_exact_goal150e_remaining_identity_or_test_blockers`. No human gate is
+ready until a later bounded closure is GREEN.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,

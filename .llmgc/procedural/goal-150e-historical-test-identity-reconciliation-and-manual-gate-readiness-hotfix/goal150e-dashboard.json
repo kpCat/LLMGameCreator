@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "goal150e_dashboard_v1",
+  "status": "BLOCKED",
+  "candidateCommit": "aa46ed88018dcabb09d1998f7d9f0f16114c988c",
+  "historicalIdentityCount": 85,
+  "resolvedHistoricalIdentityCount": 85,
+  "exactCount": 85,
+  "canonicalMethodCount": 0,
+  "explicitRenameCount": 0,
+  "retiredWithCoverageCount": 0,
+  "unresolvedCount": 0,
+  "ambiguousCount": 0,
+  "closureStarted": false,
+  "closureBlocker": "run-complete-test-suite.ps1 parser error at line 194",
+  "manualGateReady": false,
+  "goal149Accepted": false,
+  "goal150Accepted": false,
+  "goal150aAccepted": false,
+  "goal150bAccepted": false,
+  "goal150eAccepted": false,
+  "humanAcceptanceClaimed": false
+}

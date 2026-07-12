@@ -1,22 +1,30 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 150C hermetic adaptive validation and acceptance readiness hotfix
+Updated by: Goal 150E historical test identity reconciliation and bundled manual gate readiness hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 150C hermetic adaptive validation and acceptance readiness hotfix is BLOCKED:
+Goal 150E historical test identity reconciliation and bundled manual gate readiness hotfix is BLOCKED:
 
 ```text
 implementationStatus=BLOCKED
-gateStatus=complete_goal150c_hermetic_validation_then_independent_audit required
+gateStatus=resolve_exact_goal150e_remaining_identity_or_test_blockers required
 goal149Accepted=false
 goal150Accepted=false
 goal150aAccepted=false
 goal150bAccepted=false
 goal150cAccepted=false
+goal150eAccepted=false
 acceptedByCodex=false
 manualReviewRequired=false
 manualGateReady=false
+historicalIdentityCount=85
+resolvedHistoricalIdentityCount=85
+unresolvedHistoricalIdentityCount=0
+ambiguousHistoricalIdentityCount=0
+candidateCommit=aa46ed88018dcabb09d1998f7d9f0f16114c988c
+closureStarted=false
+closureBlocker=run-complete-test-suite.ps1 parser error at line 194
 hermeticSnapshot=true
 mainWorktreeUnchangedByValidation=true
 completeSuiteDiscovered=1734
@@ -61,16 +69,14 @@ completeSuiteDuplicate=0
 completeSuiteAborted=4
 githubActionsCheckPresent=false
 accepted=false
-nextProductGoal=complete_goal150c_hermetic_validation_then_independent_audit
+nextProductGoal=resolve_exact_goal150e_remaining_identity_or_test_blockers
 ```
 
-Goal150C replaces the Goal150B mutable class-shard runner with an exact-HEAD
-disposable-worktree runner. It separates non-ProductSmoke and ProductSmoke lanes,
-creates unique ProductSmoke project/package roots for every shard, restores the
-throwaway worktree before each shard, and recursively splits only non-terminal
-groups after a fresh retry. The one 35-minute hermetic pass accounted for all
-1734 discovered tests but ended BLOCKED at 97 passed, 18 failed and 1619 aborted;
-no bundled human gate is ready and all acceptance flags remain false.
+Goal150E preflight reconciled all 85 historical Goal150B identities to exact current
+test identities (`R1=85`, `R2/R3/R4=0`, unresolved/ambiguous `0`). The one allowed
+candidate commit was created, but its bounded closure did not start: the disposable
+runner has a PowerShell parser error at line 194. This final BLOCKED status defers
+the code repair to a new task; no human acceptance is claimed.
 
 Goal150B fixes the independently audited P1 gap where valid equipped
 `combat_damage_bonus=0` was indistinguishable from absent metadata in

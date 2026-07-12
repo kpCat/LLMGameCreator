@@ -106,12 +106,14 @@ default hashes remain exact. Goal150B fixes generic equipment-only zero evidence
 and hardens decimal-expression overflow into a deterministic failed binding.
 Goal150C replaces the non-hermetic Goal150B shard route with exact-HEAD
 disposable-worktree validation, unique ProductSmoke roots, adaptive retry/splitting
-and terminal-result accounting. Goals149/150/150A/150B remain `accepted=false`;
-until this run is GREEN the next step is
-`complete_goal150c_hermetic_validation_then_independent_audit`, not a human gate;
+and terminal-result accounting. Goal150E reconciled 85 historical identities to 85
+exact current identities before its single candidate commit, but that candidate’s
+closure did not start because `run-complete-test-suite.ps1` has a parser error.
+Goals149/150/150A/150B/150E remain `accepted=false`; the next step is
+`resolve_exact_goal150e_remaining_identity_or_test_blockers`, not a human gate;
 Goal141 remains `accepted=false`.
 
-Current gate token: `complete_goal150c_hermetic_validation_then_independent_audit required`.
+Current gate token: `resolve_exact_goal150e_remaining_identity_or_test_blockers required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 

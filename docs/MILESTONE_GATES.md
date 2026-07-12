@@ -197,8 +197,9 @@ dream_full_final_verification required
 - Release risk register was reviewed and updated.
 - The next goal is not started until this gate is accepted.
 
-Goal 150C gate note: equipment-only zero Runtime evidence, equipment-only positive
+Goal 150E gate note: equipment-only zero Runtime evidence, equipment-only positive
 totals, the Goal150A custom `3/8/2/12` regression and expression-overflow rejection
-remain automated. The required complete suite must first be GREEN from the
-exact-HEAD hermetic runner. Goals149/150/150A/150B remain `accepted=false`; no
-manual gate is ready until independent Goal150C audit follows that result.
+remain automated. Historical identity preflight is GREEN (`85/85` exact), but the
+single Goal150E candidate cannot start its bounded closure because the exact-HEAD
+runner has a parser error. Goals149/150/150A/150B/150E remain `accepted=false`; no
+manual gate is ready until a later bounded closure and independent audit are GREEN.
