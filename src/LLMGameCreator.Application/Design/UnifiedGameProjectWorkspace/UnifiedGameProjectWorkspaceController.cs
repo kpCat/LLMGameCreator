@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
+using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 using LLMGameCreator.Application.Projects;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
@@ -19,6 +20,15 @@ public interface IUnifiedGameProjectWorkspaceController
     UnifiedGameProjectWorkspaceSnapshot SetParameterValue(string moduleId, string parameterId, JsonElement value);
     UnifiedGameProjectWorkspaceSnapshot SaveAuthoring();
     GameProjectBuildResult BuildAndQualify(CancellationToken cancellationToken = default);
+    ProjectStandaloneBuildResult BuildWindowsStandalone(CancellationToken cancellationToken = default) => new()
+    {
+        Status = "FAILED", Stage = "standalone_not_supported", Diagnostics = ["Standalone build is not available for this controller."]
+    };
+    void CancelWindowsStandaloneBuild() { }
+    void LaunchWindowsStandalone() => throw new InvalidOperationException("Standalone build is not available for this controller.");
+    void OpenWindowsStandaloneFolder() => throw new InvalidOperationException("Standalone build is not available for this controller.");
+    ProjectStandaloneBuildSettings GetStandaloneBuildSettings() => new();
+    ProjectStandaloneBuildSettings SaveStandaloneBuildSettings(ProjectStandaloneBuildSettings settings) => settings;
 }
 
 public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectWorkspaceController
@@ -27,18 +37,21 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private readonly GameProjectFeatureModuleAuthoringService _authoring;
     private readonly GameProjectBuildAndQualificationService _builder;
     private readonly GameProjectWorkspaceStatusPresenter _presenter;
+    private readonly IProjectStandaloneBuildService _standaloneBuild;
     private GameProjectBuildResult? _lastBuild;
 
     public UnifiedGameProjectWorkspaceController(
         ICurrentGamePackageService currentPackageService,
         GameProjectFeatureModuleAuthoringService authoring,
         GameProjectBuildAndQualificationService builder,
-        GameProjectWorkspaceStatusPresenter? presenter = null)
+        GameProjectWorkspaceStatusPresenter? presenter = null,
+        IProjectStandaloneBuildService? standaloneBuild = null)
     {
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _authoring = authoring ?? throw new ArgumentNullException(nameof(authoring));
         _builder = builder ?? throw new ArgumentNullException(nameof(builder));
         _presenter = presenter ?? new GameProjectWorkspaceStatusPresenter();
+        _standaloneBuild = standaloneBuild ?? new ProjectStandaloneBuildService(Directory.GetCurrentDirectory());
     }
 
     public bool HasOpenProject { get; private set; }
@@ -164,6 +177,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ExecutableSha256 = executable.Sha256,
             ExecutableFileVersion = executable.FileVersion,
             ExecutableInformationalVersion = executable.InformationalVersion
+            ,LastStandaloneBuild = _standaloneBuild.LastResult
+            ,StandaloneUnityEditorPath = _standaloneBuild.LoadSettings(state.ProjectFolder).UnityEditorPath
         };
     }
 
@@ -194,6 +209,49 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _lastBuild = _builder.Build(_authoring, cancellationToken);
         return _lastBuild;
     }
+
+    public ProjectStandaloneBuildResult BuildWindowsStandalone(CancellationToken cancellationToken = default)
+    {
+        EnsureOpen();
+        _lastBuild = _builder.Build(_authoring, cancellationToken);
+        var snapshot = Snapshot();
+        if (!_lastBuild.Passed)
+            return new ProjectStandaloneBuildResult { Status = "FAILED", Stage = "qualify_current_project", Diagnostics = _lastBuild.Diagnostics, ProjectFolder = snapshot.ProjectFolder };
+        var state = _authoring.State;
+        var request = new ProjectStandaloneBuildRequest
+        {
+            ProjectFolder = snapshot.ProjectFolder,
+            ProjectTitle = snapshot.ProjectTitle,
+            ProjectPackageId = snapshot.ProjectPackageId,
+            ProjectVersion = snapshot.ProjectVersion,
+            CompositionId = snapshot.ProjectScopedCompositionId,
+            SelectedModuleIds = state.Document.SelectedModuleIds.OrderBy(id => id, StringComparer.Ordinal).ToList(),
+            Parameters = state.Document.ParameterValues.OrderBy(value => value.ModuleId, StringComparer.Ordinal).ThenBy(value => value.ParameterId, StringComparer.Ordinal).Select(value => new StandaloneParameterValue
+            {
+                ModuleId = value.ModuleId,
+                ParameterId = value.ParameterId,
+                Value = value.Value.Clone()
+            }).ToList(),
+            PackageSha256 = _lastBuild.ActivatedProjectPackageSha256,
+            CompositionPackageSha256 = _lastBuild.CompositionPackageSha256,
+            FinalStateHash = _lastBuild.FinalStateHash,
+            RuntimePlanId = _lastBuild.RuntimePlaythroughPlanId,
+            CapabilityCount = _lastBuild.CapabilityCount,
+            PlannedActionCount = _lastBuild.PlannedActionCount,
+            CheckpointActionCount = _lastBuild.CheckpointActionCount,
+            FinalReplayActionCount = _lastBuild.FinalReplayActionCount,
+            EquipmentSummary = _lastBuild.EquipmentSlotSummary,
+            AttributesSummary = _lastBuild.AttributesSummary,
+            ProgressionSummary = _lastBuild.ProgressionSummary
+        };
+        return _standaloneBuild.Build(request, cancellationToken);
+    }
+
+    public void CancelWindowsStandaloneBuild() => _standaloneBuild.Cancel();
+    public void LaunchWindowsStandalone() => _standaloneBuild.LaunchLastBuild();
+    public void OpenWindowsStandaloneFolder() => _standaloneBuild.OpenLastBuildFolder();
+    public ProjectStandaloneBuildSettings GetStandaloneBuildSettings() { EnsureOpen(); return _standaloneBuild.LoadSettings(_authoring.State.ProjectFolder); }
+    public ProjectStandaloneBuildSettings SaveStandaloneBuildSettings(ProjectStandaloneBuildSettings settings) { EnsureOpen(); return _standaloneBuild.SaveSettings(_authoring.State.ProjectFolder, settings); }
 
     private void EnsureOpen()
     {

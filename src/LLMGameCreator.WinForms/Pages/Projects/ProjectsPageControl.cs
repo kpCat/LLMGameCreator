@@ -3,6 +3,7 @@ using System.Text.Json;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
+using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Settings;
 using LLMGameCreator.Application.Validation;
@@ -73,6 +74,12 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _saveCurrentButton.Click += async (_, _) => await SaveCurrentGameAsync();
         _backToGamesButton.Click += (_, _) => ShowProjectStart();
         _buildAndQualifyButton.Click += async (_, _) => await BuildAndQualifyAsync();
+        _buildWindowsStandaloneButton.Click += async (_, _) => await BuildWindowsStandaloneAsync();
+        _cancelWindowsStandaloneButton.Click += (_, _) => _workspaceController?.CancelWindowsStandaloneBuild();
+        _launchWindowsStandaloneButton.Click += (_, _) => LaunchWindowsStandalone();
+        _openWindowsStandaloneFolderButton.Click += (_, _) => OpenWindowsStandaloneFolder();
+        _findUnityEditorButton.Click += (_, _) => FindUnityEditor();
+        _chooseUnityEditorButton.Click += (_, _) => ChooseUnityEditor();
         _projectsListView.DoubleClick += async (_, _) => await OpenSelectedProjectAsync();
     }
 
@@ -261,6 +268,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             BindMechanics(snapshot);
             BindParameters(snapshot);
             BindTechnicalDetails(snapshot);
+            BindStandalone(snapshot);
             if (snapshot.Diagnostics.Count > 0 && !_buildUiRunning)
                 _buildResultTextBox.Text = string.Join(Environment.NewLine, snapshot.Diagnostics);
         }
@@ -268,6 +276,88 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         {
             _workspaceBinding = false;
         }
+    }
+
+    private void BindStandalone(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        _unityEditorPathTextBox.Text = string.IsNullOrWhiteSpace(snapshot.StandaloneUnityEditorPath)
+            ? "Не выбран — будет найден через UNITY_EDITOR_PATH или Unity Hub"
+            : snapshot.StandaloneUnityEditorPath;
+        var result = snapshot.LastStandaloneBuild;
+        _buildWindowsStandaloneButton.Enabled = !_buildUiRunning && !snapshot.Dirty;
+        _cancelWindowsStandaloneButton.Enabled = _buildUiRunning;
+        _launchWindowsStandaloneButton.Enabled = result is { Status: "GREEN" } && File.Exists(result.ExecutablePath);
+        _openWindowsStandaloneFolderButton.Enabled = result is { Status: "GREEN" } && Directory.Exists(result.OutputFolder);
+        if (result is null) return;
+        _standaloneStatusTextBox.Text = string.Join(Environment.NewLine, new[]
+        {
+            "Текущий этап: " + result.Stage,
+            "Общий статус: " + result.Status,
+            "Последняя успешная standalone-сборка: " + (result.Status == "GREEN" ? "Готово" : "Нет"),
+            "Путь к exe: " + result.ExecutablePath,
+            "Путь к папке: " + result.OutputFolder,
+            "Unity version: " + result.UnityVersion,
+            "Host cache: " + (result.HostRebuilt ? "rebuilt" : result.HostReused ? "reused" : "не использован"),
+            "Package SHA-256: " + result.PackageSha256,
+            "Final Runtime state hash: " + result.FinalStateHash,
+            "Selected mechanics count: " + result.SelectedModuleCount,
+            "Configured parameters count: " + result.ConfiguredParameterCount,
+            "PlayerAdapter frame count: " + result.FrameCount,
+            "Launch smoke status: " + (result.LaunchSmokePassed ? "GREEN" : "не пройден"),
+            "First causal diagnostic: " + (result.Diagnostics.FirstOrDefault() ?? string.Empty)
+        });
+    }
+
+    private void FindUnityEditor()
+    {
+        if (_workspaceController?.HasOpenProject != true) return;
+        _workspaceController.SaveStandaloneBuildSettings(new ProjectStandaloneBuildSettings());
+        BindWorkspace(_workspaceController.Snapshot());
+    }
+
+    private void ChooseUnityEditor()
+    {
+        if (_workspaceController?.HasOpenProject != true) return;
+        using var dialog = new OpenFileDialog { Filter = "Unity Editor (Unity.exe)|Unity.exe|Executable (*.exe)|*.exe", Title = "Выберите Unity Editor" };
+        if (dialog.ShowDialog(this) != DialogResult.OK) return;
+        _workspaceController.SaveStandaloneBuildSettings(new ProjectStandaloneBuildSettings { UnityEditorPath = dialog.FileName });
+        BindWorkspace(_workspaceController.Snapshot());
+    }
+
+    private async Task BuildWindowsStandaloneAsync()
+    {
+        if (_workspaceController?.HasOpenProject != true || _buildUiRunning) return;
+        _buildUiRunning = true;
+        SetWorkspaceBusy(true);
+        _standaloneStatusTextBox.Text = "Текущий этап: validate_current_project" + Environment.NewLine + "Общий статус: RUNNING";
+        try
+        {
+            var result = await Task.Run(() => _workspaceController.BuildWindowsStandalone()).ConfigureAwait(true);
+            BindWorkspace(_workspaceController.Snapshot());
+            if (result.Status != "GREEN") _buildStatusLabel.Text = "Standalone: есть ошибки";
+        }
+        catch (Exception exception)
+        {
+            _standaloneStatusTextBox.Text = "Текущий этап: unexpected" + Environment.NewLine + "First causal diagnostic: " + exception.Message;
+        }
+        finally
+        {
+            _buildUiRunning = false;
+            SetWorkspaceBusy(false);
+            if (_workspaceController.HasOpenProject) BindWorkspace(_workspaceController.Snapshot());
+        }
+    }
+
+    private void LaunchWindowsStandalone()
+    {
+        try { _workspaceController?.LaunchWindowsStandalone(); }
+        catch (Exception exception) { _standaloneStatusTextBox.Text = "First causal diagnostic: " + exception.Message; }
+    }
+
+    private void OpenWindowsStandaloneFolder()
+    {
+        try { _workspaceController?.OpenWindowsStandaloneFolder(); }
+        catch (Exception exception) { _standaloneStatusTextBox.Text = "First causal diagnostic: " + exception.Message; }
     }
 
     private void BindMechanics(UnifiedGameProjectWorkspaceSnapshot snapshot)
@@ -549,6 +639,10 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _saveCurrentButton.Enabled = !busy;
         _workspaceTabs.Enabled = !busy;
         _buildAndQualifyButton.Enabled = !busy;
+        _buildWindowsStandaloneButton.Enabled = !busy;
+        _cancelWindowsStandaloneButton.Enabled = busy;
+        _launchWindowsStandaloneButton.Enabled = !busy && _workspaceController?.Snapshot().LastStandaloneBuild is { Status: "GREEN" } result && File.Exists(result.ExecutablePath);
+        _openWindowsStandaloneFolderButton.Enabled = !busy && _workspaceController?.Snapshot().LastStandaloneBuild is { Status: "GREEN" } folderResult && Directory.Exists(folderResult.OutputFolder);
     }
 
     private void RefreshInfo()

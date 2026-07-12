@@ -1,18 +1,18 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 151 real saved project build recovery and diagnostic truth hotfix
+Updated by: Goal 152 accepted mechanics milestone and project-scoped Windows standalone build launch
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 151 real saved project build recovery and diagnostic truth hotfix is GREEN and ready for manual review:
+Goals149/150/150A/150B/151 are accepted by human. Goal152 is in progress:
 
 ```text
-implementationStatus=GREEN
-gateStatus=goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required
+implementationStatus=BLOCKED
+gateStatus=goal152_project_scoped_windows_standalone_build_launch required
 accepted=false
 acceptedByCodex=false
 manualReviewPerformed=false
-manualGateReady=true
+manualGateReady=false
 sourceProjectPresent=true
 originalProjectMutationCount=0
 originalTrackedStateByteIdentical=true
@@ -34,6 +34,23 @@ failureDiagnosticsStageAware=true
 uiSeparatesLastSuccessCurrentAttemptCurrentConfiguration=true
 failedAttemptHistoryPersisted=true
 historicalSnapshotFailureCountMovedToDebt=64
+goal149Accepted=true
+goal149AcceptedByHuman=true
+goal150Accepted=true
+goal150AcceptedByHuman=true
+goal150aAccepted=true
+goal150aAcceptedByHuman=true
+goal150bAccepted=true
+goal150bAcceptedByHuman=true
+goal151Accepted=true
+goal151AcceptedByHuman=true
+acceptedCommit=2516931f9c8242bbd59fe5cf73f9e66b405ef16c
+interfaceAndDiagnosticsAccepted=true
+goal152Accepted=false
+goal152AcceptedByHuman=false
+goal152AcceptedByCodex=false
+goal152ManualReviewPerformed=false
+goal152ManualGateReady=false
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -46,6 +63,13 @@ The UI now exposes executable path/hash/version, failed builds keep stage-aware 
 diagnostics and compact history, and Technical Details separates last success, current
 attempt and current saved configuration. The unrelated 64 historical snapshot failures
 remain open validation debt and are not part of the Goal151 acceptance gate.
+
+Goal152 standalone launch status is BLOCKED: Unity `6000.1.10f1` built the generic cached host,
+but the required project-scoped renamed executable exits before the bootstrap because Unity cannot
+load its byte-identical adjacent MonoBleedingEdge runtime. The source `goal148-manual` project
+remained byte-identical, no Goal142/Goal143/sample fallback was used, and Goal152 remains
+`accepted=false`, `manualReviewPerformed=false`, `manualGateReady=false`. The next bounded repair
+must preserve the generic host cache and resolve the slugged executable/runtime packaging contract.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

@@ -56,6 +56,17 @@ namespace LLMGameCreator.WinForms.Pages
         private Button _buildAndQualifyButton;
         private Label _buildStatusLabel;
         private TextBox _buildResultTextBox;
+        private TableLayoutPanel _standaloneLayout;
+        private Label _unityEditorLabel;
+        private TextBox _unityEditorPathTextBox;
+        private Button _findUnityEditorButton;
+        private Button _chooseUnityEditorButton;
+        private FlowLayoutPanel _standaloneActionsPanel;
+        private Button _buildWindowsStandaloneButton;
+        private Button _cancelWindowsStandaloneButton;
+        private Button _launchWindowsStandaloneButton;
+        private Button _openWindowsStandaloneFolderButton;
+        private TextBox _standaloneStatusTextBox;
         private TextBox _technicalDetailsTextBox;
 
         protected override void Dispose(bool disposing)
@@ -119,6 +130,17 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildAndQualifyButton = new Button();
             this._buildStatusLabel = new Label();
             this._buildResultTextBox = new TextBox();
+            this._standaloneLayout = new TableLayoutPanel();
+            this._unityEditorLabel = new Label();
+            this._unityEditorPathTextBox = new TextBox();
+            this._findUnityEditorButton = new Button();
+            this._chooseUnityEditorButton = new Button();
+            this._standaloneActionsPanel = new FlowLayoutPanel();
+            this._buildWindowsStandaloneButton = new Button();
+            this._cancelWindowsStandaloneButton = new Button();
+            this._launchWindowsStandaloneButton = new Button();
+            this._openWindowsStandaloneFolderButton = new Button();
+            this._standaloneStatusTextBox = new TextBox();
             this._technicalDetailsTextBox = new TextBox();
             this._rootLayout.SuspendLayout();
             this._gamesRootPanel.SuspendLayout();
@@ -135,6 +157,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._technicalTab.SuspendLayout();
             this._overviewLayout.SuspendLayout();
             this._buildLayout.SuspendLayout();
+            this._standaloneLayout.SuspendLayout();
+            this._standaloneActionsPanel.SuspendLayout();
             this.SuspendLayout();
             //
             // _rootLayout
@@ -347,12 +371,14 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildLayout.Controls.Add(this._buildAndQualifyButton, 0, 0);
             this._buildLayout.Controls.Add(this._buildStatusLabel, 0, 1);
             this._buildLayout.Controls.Add(this._buildResultTextBox, 0, 2);
+            this._buildLayout.Controls.Add(this._standaloneLayout, 0, 3);
             this._buildLayout.Dock = DockStyle.Fill;
             this._buildLayout.Padding = new Padding(18);
-            this._buildLayout.RowCount = 3;
+            this._buildLayout.RowCount = 4;
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 54F));
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));
             this._buildAndQualifyButton.Dock = DockStyle.Left;
             this._buildAndQualifyButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             this._buildAndQualifyButton.Size = new Size(270, 42);
@@ -365,6 +391,61 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildResultTextBox.Multiline = true;
             this._buildResultTextBox.ReadOnly = true;
             this._buildResultTextBox.ScrollBars = ScrollBars.Vertical;
+            //
+            // _standaloneLayout
+            //
+            this._standaloneLayout.ColumnCount = 4;
+            this._standaloneLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            this._standaloneLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._standaloneLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 145F));
+            this._standaloneLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            this._standaloneLayout.Controls.Add(this._unityEditorLabel, 0, 0);
+            this._standaloneLayout.Controls.Add(this._unityEditorPathTextBox, 1, 0);
+            this._standaloneLayout.Controls.Add(this._findUnityEditorButton, 2, 0);
+            this._standaloneLayout.Controls.Add(this._chooseUnityEditorButton, 3, 0);
+            this._standaloneLayout.Controls.Add(this._standaloneActionsPanel, 0, 1);
+            this._standaloneLayout.Controls.Add(this._standaloneStatusTextBox, 0, 2);
+            this._standaloneLayout.SetColumnSpan(this._standaloneActionsPanel, 4);
+            this._standaloneLayout.SetColumnSpan(this._standaloneStatusTextBox, 4);
+            this._standaloneLayout.Dock = DockStyle.Fill;
+            this._standaloneLayout.Margin = new Padding(0, 8, 0, 0);
+            this._standaloneLayout.RowCount = 3;
+            this._standaloneLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
+            this._standaloneLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+            this._standaloneLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._unityEditorLabel.Dock = DockStyle.Fill;
+            this._unityEditorLabel.Text = "Unity Editor:";
+            this._unityEditorLabel.TextAlign = ContentAlignment.MiddleLeft;
+            this._unityEditorPathTextBox.Dock = DockStyle.Fill;
+            this._unityEditorPathTextBox.ReadOnly = true;
+            this._findUnityEditorButton.Dock = DockStyle.Fill;
+            this._findUnityEditorButton.Text = "Найти автоматически";
+            this._findUnityEditorButton.UseVisualStyleBackColor = true;
+            this._chooseUnityEditorButton.Dock = DockStyle.Fill;
+            this._chooseUnityEditorButton.Text = "Выбрать...";
+            this._chooseUnityEditorButton.UseVisualStyleBackColor = true;
+            this._standaloneActionsPanel.Controls.Add(this._buildWindowsStandaloneButton);
+            this._standaloneActionsPanel.Controls.Add(this._cancelWindowsStandaloneButton);
+            this._standaloneActionsPanel.Controls.Add(this._launchWindowsStandaloneButton);
+            this._standaloneActionsPanel.Controls.Add(this._openWindowsStandaloneFolderButton);
+            this._standaloneActionsPanel.Dock = DockStyle.Fill;
+            this._buildWindowsStandaloneButton.AutoSize = true;
+            this._buildWindowsStandaloneButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this._buildWindowsStandaloneButton.Text = "Собрать Windows-игру (Alpha)";
+            this._buildWindowsStandaloneButton.UseVisualStyleBackColor = true;
+            this._cancelWindowsStandaloneButton.AutoSize = true;
+            this._cancelWindowsStandaloneButton.Text = "Отменить";
+            this._cancelWindowsStandaloneButton.UseVisualStyleBackColor = true;
+            this._launchWindowsStandaloneButton.AutoSize = true;
+            this._launchWindowsStandaloneButton.Text = "Запустить игру";
+            this._launchWindowsStandaloneButton.UseVisualStyleBackColor = true;
+            this._openWindowsStandaloneFolderButton.AutoSize = true;
+            this._openWindowsStandaloneFolderButton.Text = "Открыть папку сборки";
+            this._openWindowsStandaloneFolderButton.UseVisualStyleBackColor = true;
+            this._standaloneStatusTextBox.Dock = DockStyle.Fill;
+            this._standaloneStatusTextBox.Multiline = true;
+            this._standaloneStatusTextBox.ReadOnly = true;
+            this._standaloneStatusTextBox.ScrollBars = ScrollBars.Vertical;
             //
             // _technicalTab
             //
@@ -403,6 +484,10 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewLayout.ResumeLayout(false);
             this._buildLayout.ResumeLayout(false);
             this._buildLayout.PerformLayout();
+            this._standaloneLayout.ResumeLayout(false);
+            this._standaloneLayout.PerformLayout();
+            this._standaloneActionsPanel.ResumeLayout(false);
+            this._standaloneActionsPanel.PerformLayout();
             this.ResumeLayout(false);
         }
     }

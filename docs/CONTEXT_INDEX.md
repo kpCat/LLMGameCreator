@@ -117,9 +117,14 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required`.
+Current gate token: `goal152_project_scoped_windows_standalone_build_launch required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
+
+Goal152 records the human acceptance of Goals149/150/150A/150B/151 and makes the next
+normal `Игры` workflow a project-scoped Windows standalone Alpha build using Runtime-backed
+PlayerAdapter payload with a cached generic Unity host. Goal152 remains `accepted=false`
+until its own final human review; Goal150F's 64 historical failures remain debt, not the active gate.
 
 ## Full Generator Source-Of-Truth Docs
 

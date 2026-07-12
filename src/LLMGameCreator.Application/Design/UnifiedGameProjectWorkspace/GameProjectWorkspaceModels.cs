@@ -1,5 +1,6 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
+using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 
@@ -98,6 +99,8 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public string ExecutableSha256 { get; init; } = string.Empty;
     public string ExecutableFileVersion { get; init; } = string.Empty;
     public string ExecutableInformationalVersion { get; init; } = string.Empty;
+    public ProjectStandaloneBuildResult? LastStandaloneBuild { get; init; }
+    public string StandaloneUnityEditorPath { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectBuildResult

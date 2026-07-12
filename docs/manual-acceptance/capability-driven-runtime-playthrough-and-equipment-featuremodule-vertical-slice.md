@@ -1,10 +1,18 @@
 # Capability-Driven Runtime Playthrough and Equipment FeatureModule Vertical Slice
 
-Status: GREEN, bundled manual review deferred until Goal150C hermetic validation and independent audit
-Gate: `capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required`
-Accepted: false
-Accepted by human: false
+Status: ACCEPTED by human
+Gate: historical accepted mechanics milestone
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
+
+## Human acceptance record
+
+Я принимаю Goal151 и объединённую ручную проверку Goals149/150/150A/150B: свежий бинарник commit 2516931f успешно собрал и проверил проект goal148-manual с параметрами 3/8/2/12; equipment/stat/total=3/6/9, level/XP=2/12, интерфейс и диагностика корректны.
+
+- Accepted commit: `2516931f9c8242bbd59fe5cf73f9e66b405ef16c`
+- Custom values: `3/8/2/12`; equipment/stat/total: `3/6/9`; level/XP: `2/12`.
+- This acceptance is human-only; `acceptedByCodex=false`.
 
 ## Automated evidence
 
@@ -27,12 +35,8 @@ Accepted by Codex: false
 6. In technical details, confirm stat/equipment/total damage `6/3/9`, progression `12:level/2`, and 20/16/20 planned/checkpoint/final actions.
 7. Save, close and reopen the project; confirm selections and all four custom values persist, then rebuild and compare hashes/replay markers.
 
-Goal149 remains accepted=false. Its deferred review is now routed into the
-bundled Goals149/150/150A mechanics review; do not mark any goal accepted until
-Goal150C is GREEN, independently audited and an explicit human decision is recorded. The equipment-only zero case remains automated and adds no user clicks.
+Goal149 is accepted by human as part of the bundled mechanics review. Goal150C through
+Goal150F remain historical validation-infrastructure/debt records and are not the active product gate.
 
-Goal151 update: the automated disposable-copy `3/8/2/12` lifecycle is GREEN and the
-original saved project is byte-identical. During review, Technical Details must show
-separate `Последняя успешная сборка`, `Последняя попытка сборки` and
-`Текущая сохранённая конфигурация` sections plus executable provenance. Goal151 remains
-`accepted=false` until an explicit human decision.
+Goal151 is accepted by human through the same exact decision. The original saved project
+remained byte-identical; diagnostic truth and executable provenance were accepted.

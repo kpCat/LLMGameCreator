@@ -14,6 +14,7 @@ using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorks
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
+using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
@@ -217,6 +218,7 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<IGamePackageValidator>(),
                 resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
+        _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
         _container.Register<UnifiedGameProjectWorkspaceController>(Reuse.Singleton);
         _container.RegisterDelegate<IUnifiedGameProjectWorkspaceController>(
             resolver => resolver.Resolve<UnifiedGameProjectWorkspaceController>(), Reuse.Singleton);

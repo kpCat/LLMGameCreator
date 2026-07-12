@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "goal152_negative_proof_v1",
+  "status": "BLOCKED",
+  "case": "project_scoped_slugged_executable_launch_smoke",
+  "hostCache": "generic host starts successfully before payload validation",
+  "projectScopedOutput": "renamed slug executable exits 1 before bootstrap and reports MonoBleedingEdge load failure",
+  "physicalMonoRuntimeHashMatchedHost": true,
+  "sourceProjectManifestByteIdentical": true,
+  "noFallbackSourceUsed": true,
+  "requiredOutcome": "not met"
+}

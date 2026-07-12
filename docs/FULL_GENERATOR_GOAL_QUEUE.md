@@ -2528,4 +2528,4 @@ stage-aware diagnostics, failed-attempt history, executable provenance and separ
 last-success/current-attempt/current-configuration UI evidence are now present. The 64
 Goal150F historical snapshot failures remain validation debt and are not this gate.
 
-Gate: `goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required`.
+Gate: `goal152_project_scoped_windows_standalone_build_launch required`.

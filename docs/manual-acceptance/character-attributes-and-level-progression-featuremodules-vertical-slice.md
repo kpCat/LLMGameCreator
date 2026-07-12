@@ -1,10 +1,18 @@
 # Character Attributes and Level Progression FeatureModules Vertical Slice
 
-Status: GREEN, bundled manual review deferred until Goal150C hermetic validation and independent audit
-Gate: `character_attributes_and_level_progression_featuremodules_vertical_slice_verification required`
-Accepted: false
-Accepted by human: false
+Status: ACCEPTED by human
+Gate: historical accepted mechanics milestone
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
+
+## Human acceptance record
+
+Я принимаю Goal151 и объединённую ручную проверку Goals149/150/150A/150B: свежий бинарник commit 2516931f успешно собрал и проверил проект goal148-manual с параметрами 3/8/2/12; equipment/stat/total=3/6/9, level/XP=2/12, интерфейс и диагностика корректны.
+
+- Accepted commit: `2516931f9c8242bbd59fe5cf73f9e66b405ef16c`
+- Custom values: `3/8/2/12`; equipment/stat/total: `3/6/9`; level/XP: `2/12`.
+- This acceptance is human-only; `acceptedByCodex=false`.
 
 ## Automated evidence
 
@@ -28,10 +36,8 @@ Accepted by Codex: false
 6. Confirm technical details show stat bonus `6`, equipment bonus `3`, total additional damage `9`, progression `12:level/2`, and a capability plan with 20/16/20 planned/checkpoint/final actions.
 7. Save, close and reopen; confirm selections and values persist, then rebuild and compare hashes/replay markers.
 
-Goals149, 150, 150A and 150B remain accepted=false until Goal150C is independently
-audited and the owner records an explicit bundled human acceptance decision.
+Goals149, 150, 150A and 150B are accepted by human through the bundled mechanics decision.
+Goals150C through 150F remain historical validation-infrastructure/debt records and are not the active product gate.
 
-Goal151 update: fresh required HEAD passes the real saved-project copy with `3/8/2/12`,
-damage `6/3/9`, progression `2/12` and capability/action/checkpoint/replay
-`14/20/16/20`. Failed attempts must retain a visible stage and causal diagnostic while
-the last-success hashes remain in their own section. No Goal151 acceptance is claimed.
+Goal151 is accepted by human through the same exact decision: the fresh saved-project copy
+passed `3/8/2/12`, damage `6/3/9`, progression `2/12` and `14/20/16/20` proof.
