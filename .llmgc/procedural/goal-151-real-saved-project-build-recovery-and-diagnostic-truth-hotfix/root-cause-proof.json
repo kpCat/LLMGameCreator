@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "goal151_root_cause_proof_v1",
+  "rootCause": "stale_executable_or_launch_target",
+  "currentHeadCompositionDefectProven": false,
+  "freshHeadRealCopyPassed": true,
+  "freshHeadCustomStatePassed": true,
+  "oldRunningBinaryAvailableForHash": false,
+  "limitation": "No running LLMGameCreator process remained available for direct old-binary hashing.",
+  "genericFixScope": [
+    "stage-aware non-empty diagnostics",
+    "failed-attempt history",
+    "last-success/current-attempt/current-configuration separation",
+    "executable provenance"
+  ]
+}

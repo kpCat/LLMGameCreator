@@ -1,0 +1,33 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-151-real-saved-project-build-recovery-and-diagnostic-truth-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: a6c6892c636a4eadbf858978aec608a713f152da
+
+Реальный affected project используется только как read-only источник:
+C:\Users\endim\AppData\Local\LLMGameCreator\Games\goal148-manual
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен. Не спрашивай подтверждение и не проси пользователя вручную воспроизводить ошибку.
+
+Обязательно:
+- не запускай build/activation прямо в оригинальной папке;
+- сначала создай byte-identical disposable copy и manifest оригинала;
+- воспроизведи ошибку текущим HEAD через реальные Application services;
+- установи точный failing stage/effect;
+- исправь generic-причину и отсутствие диагностики;
+- отдели в UI последнюю успешную сборку от текущей неудачной попытки;
+- после фикса докажи GREEN на копии реального проекта с 3/8/2/12;
+- не запускай 85-case closure, full suite или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи root cause, original-project immutability, real-copy result, focused tests, final SHA, push, HEAD == origin/main, clean worktree и manualGateReady.

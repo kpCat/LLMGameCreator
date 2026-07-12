@@ -59,8 +59,14 @@ public sealed class GameProjectBuildAndQualificationService
         GameProjectFeatureModuleAuthoringService authoring,
         CancellationToken cancellationToken = default)
     {
+        var attempt = new GameProjectBuildResult
+        {
+            AttemptId = Guid.NewGuid().ToString("N"),
+            AttemptStatus = "RUNNING"
+        };
         if (Interlocked.CompareExchange(ref _buildRunning, 1, 0) != 0)
-            return Failure("Сборка уже выполняется. Дождитесь её завершения.", ["concurrent build rejected"]);
+            return Failure("Сборка уже выполняется. Дождитесь её завершения.",
+                ["build.concurrent_rejected"], "build.concurrent", attempt);
 
         string? stagingRoot = null;
         GameProjectBuildTransaction? transaction = null;
@@ -68,10 +74,12 @@ public sealed class GameProjectBuildAndQualificationService
         FeatureModuleCompositionDocument? preBuildDocument = null;
         var preBuildDirty = false;
         GameProjectSupportFilePlan? supportFilePlan = null;
+        string? projectFolder = null;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
             var preBuildState = authoring.State;
+            projectFolder = preBuildState.ProjectFolder;
             preBuildDocument = preBuildState.Document;
             preBuildDirty = preBuildState.Dirty;
             transaction = new GameProjectBuildTransaction(
@@ -83,6 +91,11 @@ public sealed class GameProjectBuildAndQualificationService
                 _activationStore);
             savedDocument = authoring.Save();
             var state = authoring.State;
+            attempt = attempt with
+            {
+                AttemptedSelectedModuleIds = savedDocument.SelectedModuleIds,
+                AttemptedConfiguredParameterCount = savedDocument.ParameterValues.Count
+            };
             var validation = new FeatureModuleCompositionDocumentValidator().Validate(savedDocument, state.Library);
             if (!validation.Passed)
                 return RollbackFailure(
@@ -91,7 +104,9 @@ public sealed class GameProjectBuildAndQualificationService
                     preBuildDirty,
                     transaction,
                     "Исправьте настройки механик перед сборкой.",
-                    validation.Diagnostics);
+                    validation.Diagnostics,
+                    "authoring.validation",
+                    attempt);
 
             stagingRoot = GameProjectFeatureModuleAuthoringService.ConfinedPath(
                 state.ProjectFolder,
@@ -117,7 +132,9 @@ public sealed class GameProjectBuildAndQualificationService
                     preBuildDirty,
                     transaction,
                     "Не удалось подтвердить совместимость выбранных механик.",
-                    ledger.Entries.SelectMany(entry => entry.Diagnostics).ToList());
+                    ledger.Entries.SelectMany(entry => entry.Diagnostics).ToList(),
+                    "composition.certification",
+                    attempt);
 
             var materializer = new FeatureModuleParameterizedCompositionService(_runtime);
             // Keep the generic mechanics package byte-compatible with the accepted Goal146/147
@@ -133,6 +150,16 @@ public sealed class GameProjectBuildAndQualificationService
                 materializationDocument,
                 materializationRoot,
                 useCapabilityDrivenRuntimePlaythrough: true);
+            var attemptedPlan = materialized.Qualification.Artifacts.Session.CapabilityPlan;
+            attempt = attempt with
+            {
+                AttemptedCapabilityCount = attemptedPlan?.CapabilityIds.Count ?? 0,
+                AttemptedPlannedActionCount = attemptedPlan?.OrderedActions.Count ?? 0,
+                AttemptedCheckpointActionCount = materialized.Qualification.Artifacts.CheckpointReplay.ReplayedActionCount,
+                AttemptedFinalReplayActionCount = materialized.Qualification.Artifacts.FinalReplay.ReplayedActionCount,
+                AttemptedCompositionPackageSha256 = materialized.PackageSha256,
+                AttemptedFinalStateHash = materialized.FinalStateHash
+            };
             if (!materialized.Passed)
                 return RollbackFailure(
                     authoring,
@@ -140,7 +167,9 @@ public sealed class GameProjectBuildAndQualificationService
                     preBuildDirty,
                     transaction,
                     "Игра не прошла проверку Runtime.",
-                    materialized.Qualification.Result.Diagnostics);
+                    materialized.Diagnostics,
+                    materialized.FailureStage,
+                    attempt);
 
             var qualifiedPackagePath = Path.Combine(
                 materializationRoot,
@@ -189,6 +218,8 @@ public sealed class GameProjectBuildAndQualificationService
                     transaction,
                     "Не удалось подготовить файлы проекта.",
                     supportFilePlan.Diagnostics,
+                    "project.support_files",
+                    attempt,
                     supportFilePlan);
 
             var validationProjectRoot = _supportFileMaterializer.StageValidationProject(
@@ -206,6 +237,8 @@ public sealed class GameProjectBuildAndQualificationService
                     transaction,
                     "Собранный пакет содержит ошибки.",
                     stagedValidation.Issues.Select(issue => issue.ToString()).ToList(),
+                    "project.staged_validation",
+                    attempt,
                     supportFilePlan);
 
             var supportActivation = transaction.ActivateSupportFiles(supportFilePlan, cancellationToken);
@@ -221,6 +254,8 @@ public sealed class GameProjectBuildAndQualificationService
                     transaction,
                     "Собранный пакет содержит ошибки после активации.",
                     realProjectValidation.Issues.Select(issue => issue.ToString()).ToList(),
+                    "project.activated_validation",
+                    attempt,
                     supportFilePlan);
 
             transaction.ReplaceCurrentPackage(qualifiedPackage);
@@ -241,7 +276,8 @@ public sealed class GameProjectBuildAndQualificationService
                 overlay.ActivatedProjectPackageSha256,
                 projectQualification.Session.CurrentStateHash,
                 qualifiedDocument.ParameterValues.Count,
-                ledger);
+                ledger,
+                attempt.AttemptId);
             transaction.Commit();
 
             var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
@@ -360,7 +396,17 @@ public sealed class GameProjectBuildAndQualificationService
                 AttributesSummary = attributesSummary,
                 ProgressionSummary = progressionSummary,
                 StatDamageBonus = statDamageBonus,
-                TotalAdditionalDamage = totalAdditionalDamage
+                TotalAdditionalDamage = totalAdditionalDamage,
+                AttemptId = attempt.AttemptId,
+                AttemptStatus = "GREEN",
+                AttemptedSelectedModuleIds = attempt.AttemptedSelectedModuleIds,
+                AttemptedConfiguredParameterCount = attempt.AttemptedConfiguredParameterCount,
+                AttemptedCapabilityCount = capabilityPlan.CapabilityIds.Count,
+                AttemptedPlannedActionCount = capabilityPlan.OrderedActions.Count,
+                AttemptedCheckpointActionCount = projectQualification.CheckpointActionCount,
+                AttemptedFinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount,
+                AttemptedCompositionPackageSha256 = overlay.CompositionPackageSha256,
+                AttemptedFinalStateHash = projectQualification.Session.CurrentStateHash
             };
         }
         catch (Exception exception) when (exception is IOException
@@ -371,11 +417,14 @@ public sealed class GameProjectBuildAndQualificationService
         {
             var rollback = transaction?.Rollback() ?? false;
             if (preBuildDocument is not null) authoring.RestoreInMemoryDocument(preBuildDocument, preBuildDirty);
-            return Failure(
+            var failed = Failure(
                 "Сборка не завершена. Текущий пакет не изменён.",
                 [exception.Message],
+                "build.exception",
+                attempt,
                 rollback,
                 supportFilePlan);
+            return projectFolder is null ? failed : RecordFailure(projectFolder, failed);
         }
         finally
         {
@@ -392,11 +441,15 @@ public sealed class GameProjectBuildAndQualificationService
         GameProjectBuildTransaction transaction,
         string summary,
         IReadOnlyList<string> diagnostics,
+        string failureStage,
+        GameProjectBuildResult attempt,
         GameProjectSupportFilePlan? supportFilePlan = null)
     {
         var rolledBack = transaction.Rollback();
         authoring.RestoreInMemoryDocument(preBuildDocument, preBuildDirty);
-        return Failure(summary + " Текущий пакет не изменён.", diagnostics, rolledBack, supportFilePlan);
+        var failed = Failure(summary + " Текущий пакет не изменён.", diagnostics,
+            failureStage, attempt, rolledBack, supportFilePlan);
+        return RecordFailure(authoring.State.ProjectFolder, failed);
     }
 
     private string ResolveBaselineSha256()
@@ -421,7 +474,8 @@ public sealed class GameProjectBuildAndQualificationService
         string activatedProjectPackageSha256,
         string finalStateHash,
         int configuredParameterCount,
-        FeatureModuleCertificationLedger ledger)
+        FeatureModuleCertificationLedger ledger,
+        string attemptId)
     {
         var root = GameProjectFeatureModuleAuthoringService.ConfinedPath(
             projectFolder,
@@ -443,7 +497,14 @@ public sealed class GameProjectBuildAndQualificationService
             CertificationReusedCount = ledger.ReusedCount,
             CheckpointReloadPassed = result.CheckpointReloadPassed,
             FullReplayEquivalent = result.FullReplayEquivalent,
-            ActionBindingPassed = result.ActionBindingPassed
+            ActionBindingPassed = result.ActionBindingPassed,
+            AttemptId = attemptId,
+            AttemptStatus = "GREEN",
+            AttemptedSelectedModuleIds = result.SourceDocument.SelectedModuleIds,
+            AttemptedCapabilityCount = result.Qualification.Artifacts.Session.CapabilityPlan?.CapabilityIds.Count ?? 0,
+            AttemptedPlannedActionCount = result.Qualification.Artifacts.Session.CapabilityPlan?.OrderedActions.Count ?? 0,
+            AttemptedCheckpointActionCount = result.Qualification.Artifacts.CheckpointReplay.ReplayedActionCount,
+            AttemptedFinalReplayActionCount = result.Qualification.Artifacts.FinalReplay.ReplayedActionCount
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
         return path;
@@ -501,15 +562,47 @@ public sealed class GameProjectBuildAndQualificationService
         }
     }
 
+    private static GameProjectBuildResult RecordFailure(string projectFolder, GameProjectBuildResult result)
+    {
+        var root = GameProjectFeatureModuleAuthoringService.ConfinedPath(
+            projectFolder,
+            UnifiedGameProjectWorkspaceVocabulary.BuildHistoryRelativeRoot);
+        Directory.CreateDirectory(root);
+        var path = Path.Combine(root, DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffffffZ") + ".json");
+        var entry = new GameProjectBuildHistoryEntry
+        {
+            CompletedAtUtc = DateTimeOffset.UtcNow,
+            Status = "FAILED",
+            AttemptId = result.AttemptId,
+            AttemptStatus = result.AttemptStatus,
+            FailureStage = result.FailureStage,
+            AttemptedSelectedModuleIds = result.AttemptedSelectedModuleIds,
+            ConfiguredParameterCount = result.AttemptedConfiguredParameterCount,
+            AttemptedCapabilityCount = result.AttemptedCapabilityCount,
+            AttemptedPlannedActionCount = result.AttemptedPlannedActionCount,
+            AttemptedCheckpointActionCount = result.AttemptedCheckpointActionCount,
+            AttemptedFinalReplayActionCount = result.AttemptedFinalReplayActionCount,
+            CompositionPackageSha256 = result.AttemptedCompositionPackageSha256,
+            FinalStateHash = result.AttemptedFinalStateHash,
+            Diagnostics = result.Diagnostics.Take(50).ToList()
+        };
+        File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
+        return result with { BuildHistoryPath = path };
+    }
+
     private static GameProjectBuildResult Failure(
         string summary,
         IReadOnlyList<string> diagnostics,
+        string failureStage,
+        GameProjectBuildResult attempt,
         bool rollback = false,
-        GameProjectSupportFilePlan? supportFilePlan = null) => new()
+        GameProjectSupportFilePlan? supportFilePlan = null) => attempt with
         {
             Status = "FAILED",
+            AttemptStatus = "FAILED",
+            FailureStage = failureStage,
             HumanSummary = summary,
-            Diagnostics = diagnostics,
+            Diagnostics = diagnostics.Count == 0 ? [failureStage + ".failed"] : diagnostics,
             RollbackApplied = rollback,
             PackageActivationTransactional = true,
             RequiredSupportFileCount = supportFilePlan?.RequiredFileCount ?? 0,

@@ -28,6 +28,8 @@ public sealed record FeatureModuleParameterizedCompositionResult
     public bool ActionBindingPassed { get; init; }
     public bool RuntimeEffectsPassed { get; init; }
     public bool Passed { get; init; }
+    public string FailureStage { get; init; } = string.Empty;
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
 public sealed class FeatureModuleParameterizedCompositionService
@@ -72,17 +74,45 @@ public sealed class FeatureModuleParameterizedCompositionService
             Relative(root, basePath),
             baseSha);
         var effectiveCatalog = plan.ParameterBinding.EffectiveCatalog;
-        var qualification = _compositionService.ComposeAndQualify(
-            root,
-            effectiveCatalog,
-            document.SelectedModuleIds,
-            Path.GetFullPath(outputRoot),
-            document.CompositionId,
-            useCapabilityDrivenRuntimePlaythrough);
+        FeatureModuleCompositionQualification qualification;
+        try
+        {
+            qualification = _compositionService.ComposeAndQualify(
+                root,
+                effectiveCatalog,
+                document.SelectedModuleIds,
+                Path.GetFullPath(outputRoot),
+                document.CompositionId,
+                useCapabilityDrivenRuntimePlaythrough);
+        }
+        catch (InvalidOperationException exception) when (IsQualificationFailure(exception.Message))
+        {
+            var (stage, code) = ClassifyQualificationFailure(exception.Message);
+            return new FeatureModuleParameterizedCompositionResult
+            {
+                Status = "FAILED",
+                SourceDocument = document,
+                QualifiedDocument = document with { LastQualificationStatus = "FAILED" },
+                Staleness = stale,
+                Plan = plan,
+                SelectedModuleCount = document.SelectedModuleIds.Count,
+                AtomicParameterGroupsPassed = plan.ParameterBinding.Passed,
+                FailureStage = stage,
+                Diagnostics = [code, code + ": " + exception.Message],
+                Passed = false
+            };
+        }
         var semantic = qualification.Artifacts.SemanticEffects;
         var passed = qualification.Result.Passed
                      && semantic.SatisfiedSelectedModuleCount == document.SelectedModuleIds.Count
                      && plan.ParameterBinding.Passed;
+        var failure = BuildFailureDiagnostics(plan, qualification, document.SelectedModuleIds.Count);
+        if (!passed && failure.Diagnostics.Count == 0)
+            failure = ("composition.qualification", ["composition.qualification.failed"]);
+        qualification = qualification with
+        {
+            Result = qualification.Result with { Diagnostics = failure.Diagnostics }
+        };
         var qualifiedDocument = document with
         {
             LastMaterializedPackageSha256 = qualification.Result.PackageSha256,
@@ -109,8 +139,82 @@ public sealed class FeatureModuleParameterizedCompositionService
             FullReplayEquivalent = qualification.Result.FullReplayEquivalent,
             ActionBindingPassed = qualification.Result.ActionBindingsPassed,
             RuntimeEffectsPassed = semantic.Passed,
-            Passed = passed
+            Passed = passed,
+            FailureStage = passed ? string.Empty : failure.Stage,
+            Diagnostics = passed ? [] : failure.Diagnostics
         };
+    }
+
+    private static (string Stage, IReadOnlyList<string> Diagnostics) BuildFailureDiagnostics(
+        FeatureModuleParameterizedCompositionPlan plan,
+        FeatureModuleCompositionQualification qualification,
+        int selectedModuleCount)
+    {
+        var result = qualification.Result;
+        var artifacts = qualification.Artifacts;
+        var diagnostics = new List<string>();
+        string stage = string.Empty;
+        void Failed(string failedStage, string code, IEnumerable<string>? details = null)
+        {
+            if (string.IsNullOrEmpty(stage)) stage = failedStage;
+            diagnostics.Add(code);
+            if (details is not null)
+                diagnostics.AddRange(details.Where(value => !string.IsNullOrWhiteSpace(value))
+                    .Select(value => code + ": " + value));
+        }
+
+        if (!plan.ParameterBinding.Passed)
+            Failed("composition.parameter_binding", "composition.parameter_binding.failed", plan.ParameterBinding.Diagnostics);
+        if (!result.PackageValidationPassed)
+            Failed("composition.package_validation", "composition.package_validation.failed", artifacts.PackageValidation.Diagnostics);
+        if (!result.MutationAuditPassed)
+            Failed("composition.mutation_audit", "composition.mutation_audit.failed", artifacts.MutationAudit.Diagnostics);
+        if (!artifacts.Plan.Validation.Passed)
+            Failed("composition.validation", "composition.validation.failed", artifacts.Plan.Validation.Diagnostics);
+        if (!result.OrderIndependencePassed)
+            Failed("composition.order_independence", "composition.order_independence.failed");
+        if (!result.InvalidActionStateUnchanged)
+            Failed("runtime.invalid_action", "runtime.invalid_action_state_changed");
+        if (!result.CheckpointReloadPassed)
+            Failed("runtime.checkpoint_replay", "runtime.checkpoint_replay.failed", artifacts.CheckpointReplay.Diagnostics);
+        if (!result.FullReplayEquivalent)
+            Failed("runtime.full_replay", "runtime.full_replay.failed", artifacts.FinalReplay.Diagnostics);
+        if (!result.ActionBindingsPassed)
+            Failed("runtime.action_binding", "runtime.action_binding.failed");
+        foreach (var observation in artifacts.SemanticEffects.Observations.Where(item => !item.Passed))
+        {
+            var detail = "moduleId=" + observation.ModuleId
+                         + "; effectId=" + observation.EffectId
+                         + "; metricKind=" + observation.MetricKind
+                         + "; targetId=" + observation.TargetId
+                         + "; expectedValue=" + observation.ExpectedValue
+                         + "; actualValue=" + observation.ActualValue;
+            Failed("runtime.semantic_effect", "runtime.semantic_effect.failed", new[] { detail }
+                .Concat(observation.Diagnostics));
+        }
+        if (artifacts.SemanticEffects.SatisfiedSelectedModuleCount != selectedModuleCount)
+            Failed("runtime.selected_module", "runtime.selected_module_unsatisfied",
+            ["satisfied=" + artifacts.SemanticEffects.SatisfiedSelectedModuleCount + "; selected=" + selectedModuleCount]);
+        if (!result.PackageDistinctFromGoal142Candidates)
+            Failed("composition.distinctness", "composition.package_distinctness.failed");
+        return (stage, diagnostics.Distinct(StringComparer.Ordinal).ToList());
+    }
+
+    private static bool IsQualificationFailure(string message) =>
+        message.Contains("qualification", StringComparison.OrdinalIgnoreCase)
+        || message.Contains("checkpoint replay", StringComparison.OrdinalIgnoreCase)
+        || message.Contains("full replay", StringComparison.OrdinalIgnoreCase)
+        || message.Contains("action binding", StringComparison.OrdinalIgnoreCase);
+
+    private static (string Stage, string Code) ClassifyQualificationFailure(string message)
+    {
+        if (message.Contains("checkpoint replay", StringComparison.OrdinalIgnoreCase))
+            return ("runtime.checkpoint_replay", "runtime.checkpoint_replay.failed");
+        if (message.Contains("full replay", StringComparison.OrdinalIgnoreCase))
+            return ("runtime.full_replay", "runtime.full_replay.failed");
+        if (message.Contains("action binding", StringComparison.OrdinalIgnoreCase))
+            return ("runtime.action_binding", "runtime.action_binding.failed");
+        return ("composition.qualification", "composition.qualification.failed");
     }
 
     public static string HashText(string value) =>

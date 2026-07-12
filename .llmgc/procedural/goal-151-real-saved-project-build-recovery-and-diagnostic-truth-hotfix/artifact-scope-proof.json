@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal151_artifact_scope_proof_v1",
+  "scenario": "goal-151-real-saved-project-build-recovery-and-diagnostic-truth-hotfix",
+  "status": "GREEN",
+  "baselineRef": "a6c6892c636a4eadbf858978aec608a713f152da",
+  "changedPathCount": 24,
+  "allowedCount": 24,
+  "warningCount": 0,
+  "violationCount": 0
+}

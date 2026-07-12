@@ -82,6 +82,22 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public decimal StatDamageBonus { get; init; }
     public decimal EquipmentDamageBonus { get; init; }
     public decimal TotalAdditionalDamage { get; init; }
+    public string LastBuildAttemptId { get; init; } = string.Empty;
+    public string LastBuildAttemptStatus { get; init; } = "NOT_RUN";
+    public string LastBuildFailureStage { get; init; } = string.Empty;
+    public IReadOnlyList<string> LastBuildAttemptedSelectedModuleIds { get; init; } = [];
+    public int LastBuildAttemptedConfiguredParameterCount { get; init; }
+    public int LastBuildAttemptedCapabilityCount { get; init; }
+    public int LastBuildAttemptedPlannedActionCount { get; init; }
+    public int LastBuildAttemptedCheckpointActionCount { get; init; }
+    public int LastBuildAttemptedFinalReplayActionCount { get; init; }
+    public string LastBuildAttemptedCompositionPackageSha256 { get; init; } = string.Empty;
+    public string LastBuildAttemptedFinalStateHash { get; init; } = string.Empty;
+    public IReadOnlyList<string> LastBuildAttemptDiagnostics { get; init; } = [];
+    public string ExecutablePath { get; init; } = string.Empty;
+    public string ExecutableSha256 { get; init; } = string.Empty;
+    public string ExecutableFileVersion { get; init; } = string.Empty;
+    public string ExecutableInformationalVersion { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectBuildResult
@@ -125,6 +141,17 @@ public sealed record GameProjectBuildResult
     public string ProgressionSummary { get; init; } = string.Empty;
     public decimal StatDamageBonus { get; init; }
     public decimal TotalAdditionalDamage { get; init; }
+    public string AttemptId { get; init; } = string.Empty;
+    public string AttemptStatus { get; init; } = "NOT_RUN";
+    public string FailureStage { get; init; } = string.Empty;
+    public IReadOnlyList<string> AttemptedSelectedModuleIds { get; init; } = [];
+    public int AttemptedConfiguredParameterCount { get; init; }
+    public int AttemptedCapabilityCount { get; init; }
+    public int AttemptedPlannedActionCount { get; init; }
+    public int AttemptedCheckpointActionCount { get; init; }
+    public int AttemptedFinalReplayActionCount { get; init; }
+    public string AttemptedCompositionPackageSha256 { get; init; } = string.Empty;
+    public string AttemptedFinalStateHash { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectBuildHistoryEntry
@@ -143,6 +170,15 @@ public sealed record GameProjectBuildHistoryEntry
     public bool CheckpointReloadPassed { get; init; }
     public bool FullReplayEquivalent { get; init; }
     public bool ActionBindingPassed { get; init; }
+    public string AttemptId { get; init; } = string.Empty;
+    public string AttemptStatus { get; init; } = string.Empty;
+    public string FailureStage { get; init; } = string.Empty;
+    public IReadOnlyList<string> AttemptedSelectedModuleIds { get; init; } = [];
+    public int AttemptedCapabilityCount { get; init; }
+    public int AttemptedPlannedActionCount { get; init; }
+    public int AttemptedCheckpointActionCount { get; init; }
+    public int AttemptedFinalReplayActionCount { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
 public sealed record GameProjectAuthoringState

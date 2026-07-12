@@ -30,3 +30,9 @@ Accepted by Codex: false
 Goal149 remains accepted=false. Its deferred review is now routed into the
 bundled Goals149/150/150A mechanics review; do not mark any goal accepted until
 Goal150C is GREEN, independently audited and an explicit human decision is recorded. The equipment-only zero case remains automated and adds no user clicks.
+
+Goal151 update: the automated disposable-copy `3/8/2/12` lifecycle is GREEN and the
+original saved project is byte-identical. During review, Technical Details must show
+separate `Последняя успешная сборка`, `Последняя попытка сборки` and
+`Текущая сохранённая конфигурация` sections plus executable provenance. Goal151 remains
+`accepted=false` until an explicit human decision.

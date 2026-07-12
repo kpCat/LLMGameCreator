@@ -66,7 +66,27 @@ public sealed class ProductLineRuntimeQualifier
         var checkpointEvidence = Freeze("checkpoint_reload", checkpointReplay);
         if (!checkpointReplay.Passed)
         {
-            throw new InvalidOperationException("Runtime qualification checkpoint replay failed: " + request.CandidateId);
+            return new ProductLineRuntimeQualificationResult
+            {
+                StartRequest = start,
+                Session = checkpointReplay.Session,
+                ActionCatalog = catalog,
+                Checkpoint = checkpoint,
+                CheckpointReplay = checkpointEvidence,
+                FinalReplay = new ProductLineRuntimeQualificationReplayEvidence
+                {
+                    ReplayKind = "full_final_journal",
+                    Diagnostics = ["full replay was not run after checkpoint replay failure"]
+                },
+                InvalidActionStateUnchanged = invalidUnchanged,
+                ActionDescriptorExecutionBindingPassed = false,
+                CanonicalActionPlanSignature = request.CapabilityPlan?.ActionPlanSignature ?? string.Empty,
+                RuntimePlaythroughPlanId = request.CapabilityPlan?.PlanId ?? string.Empty,
+                CapabilityCount = request.CapabilityPlan?.CapabilityIds.Count ?? 0,
+                PlannedActionCount = actionPlan.Count,
+                CheckpointActionCount = checkpointCount,
+                CapabilityDriven = request.CapabilityPlan is not null
+            };
         }
 
         session = checkpointReplay.Session;

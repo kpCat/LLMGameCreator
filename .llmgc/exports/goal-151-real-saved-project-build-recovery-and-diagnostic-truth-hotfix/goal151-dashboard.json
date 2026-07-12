@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "goal151_export_dashboard_v1",
+  "status": "GREEN",
+  "manualGateReady": true,
+  "accepted": false,
+  "sourceEvidenceRoot": ".llmgc/procedural/goal-151-real-saved-project-build-recovery-and-diagnostic-truth-hotfix"
+}

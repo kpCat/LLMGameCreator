@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
@@ -103,6 +105,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var activatedPackageSha = string.IsNullOrWhiteSpace(state.Document.LastActivatedProjectPackageSha256)
             ? state.Document.LastMaterializedPackageSha256
             : state.Document.LastActivatedProjectPackageSha256;
+        var executable = ExecutableProvenance();
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -144,7 +147,23 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ProgressionSummary = _lastBuild?.ProgressionSummary ?? string.Empty,
             StatDamageBonus = _lastBuild?.StatDamageBonus ?? 0,
             EquipmentDamageBonus = _lastBuild?.WeaponDamageBonus ?? 0,
-            TotalAdditionalDamage = _lastBuild?.TotalAdditionalDamage ?? 0
+            TotalAdditionalDamage = _lastBuild?.TotalAdditionalDamage ?? 0,
+            LastBuildAttemptId = _lastBuild?.AttemptId ?? string.Empty,
+            LastBuildAttemptStatus = _lastBuild?.AttemptStatus ?? "NOT_RUN",
+            LastBuildFailureStage = _lastBuild?.FailureStage ?? string.Empty,
+            LastBuildAttemptedSelectedModuleIds = _lastBuild?.AttemptedSelectedModuleIds ?? [],
+            LastBuildAttemptedConfiguredParameterCount = _lastBuild?.AttemptedConfiguredParameterCount ?? 0,
+            LastBuildAttemptedCapabilityCount = _lastBuild?.AttemptedCapabilityCount ?? 0,
+            LastBuildAttemptedPlannedActionCount = _lastBuild?.AttemptedPlannedActionCount ?? 0,
+            LastBuildAttemptedCheckpointActionCount = _lastBuild?.AttemptedCheckpointActionCount ?? 0,
+            LastBuildAttemptedFinalReplayActionCount = _lastBuild?.AttemptedFinalReplayActionCount ?? 0,
+            LastBuildAttemptedCompositionPackageSha256 = _lastBuild?.AttemptedCompositionPackageSha256 ?? string.Empty,
+            LastBuildAttemptedFinalStateHash = _lastBuild?.AttemptedFinalStateHash ?? string.Empty,
+            LastBuildAttemptDiagnostics = _lastBuild?.Diagnostics ?? [],
+            ExecutablePath = executable.Path,
+            ExecutableSha256 = executable.Sha256,
+            ExecutableFileVersion = executable.FileVersion,
+            ExecutableInformationalVersion = executable.InformationalVersion
         };
     }
 
@@ -179,5 +198,15 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private void EnsureOpen()
     {
         if (!HasOpenProject) throw new InvalidOperationException("Open a game project first.");
+    }
+
+    private static (string Path, string Sha256, string FileVersion, string InformationalVersion) ExecutableProvenance()
+    {
+        var path = Environment.ProcessPath ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path)) return (path, string.Empty, string.Empty, string.Empty);
+        using var stream = File.OpenRead(path);
+        var sha = Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+        var version = FileVersionInfo.GetVersionInfo(path);
+        return (path, sha, version.FileVersion ?? string.Empty, version.ProductVersion ?? string.Empty);
     }
 }

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "goal151_dashboard_v1",
+  "status": "GREEN",
+  "accepted": false,
+  "acceptedByCodex": false,
+  "manualReviewPerformed": false,
+  "manualGateReady": true,
+  "rootCause": "stale_executable_or_launch_target",
+  "originalProjectMutationCount": 0,
+  "realCopyCustomBuildPassed": true,
+  "diagnosticTruthPassed": true,
+  "uiTruthPassed": true,
+  "historicalSnapshotFailuresExcludedFromGate": 64
+}

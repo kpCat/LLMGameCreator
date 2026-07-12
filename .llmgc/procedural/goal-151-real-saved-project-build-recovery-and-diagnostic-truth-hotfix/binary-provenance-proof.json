@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal151_binary_provenance_proof_v1",
+  "repositoryBaseCommit": "a6c6892c636a4eadbf858978aec608a713f152da",
+  "builtExecutableSha256": "94a362cb6c8a7ebea78700580c40d1cec1053d03071bbb0450f1a137592d2fdd",
+  "builtExecutableFileVersion": "1.0.0.0",
+  "builtExecutableInformationalVersion": "1.0.0+a6c6892c636a4eadbf858978aec608a713f152da",
+  "runningExecutableObserved": false,
+  "runningProcessTerminated": false,
+  "uiExecutableProvenanceAdded": true
+}

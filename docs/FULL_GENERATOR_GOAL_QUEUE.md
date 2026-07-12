@@ -2513,3 +2513,19 @@ Status:
 ```text
 featuremodule_composition_workbench_and_novel_gamepackage_runtime_qualification_matrix_verification_required_accepted_false_manual_review_deferred_true
 ```
+
+## Goal 151 — Real Saved Project Build Recovery and Diagnostic Truth Hotfix
+
+Produced for review with `implementationStatus=GREEN`, `accepted=false`,
+`acceptedByCodex=false`, `manualReviewPerformed=false` and `manualGateReady=true`.
+The original saved project remained byte-identical. Fresh required HEAD passed the
+persisted baseline and the normal-controller six-module `3/8/2/12` save/reopen/build/
+repeat lifecycle on disposable copies with damage `6/3/9`, progression `2/12`,
+capability/action/checkpoint/replay `14/20/16/20`, identity preservation and
+transactional activation. The earlier failure is classified as
+`stale_executable_or_launch_target`; no running old process remained to hash. Generic
+stage-aware diagnostics, failed-attempt history, executable provenance and separated
+last-success/current-attempt/current-configuration UI evidence are now present. The 64
+Goal150F historical snapshot failures remain validation debt and are not this gate.
+
+Gate: `goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required`.

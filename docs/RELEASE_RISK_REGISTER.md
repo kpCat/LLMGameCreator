@@ -160,3 +160,8 @@ clean-machine, provider, art and packaging risks remain open.
 2. Strong Alpha: prove repeatable multi-family generation, Unity/player path, save/load deltas and rating-safe export behavior.
 3. v1 Full Final: prove clean-machine install/export/player launch, docs, samples, diagnostics, dependency/license audit and release validation.
 4. Dream Full Final: only after v1, select specific dream tracks and require research/legal gates before implementation.
+
+Goal151 adds an explicit stale executable/launch-target risk: Technical Details now
+shows executable path, SHA-256 and file/informational version, and saved-project
+diagnosis must use a fresh-build disposable-copy proof before attributing a defect to
+current composition code.

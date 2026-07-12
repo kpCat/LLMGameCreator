@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal151_original_project_immutability_proof_v1",
+  "sourceProjectPresent": true,
+  "originalBeforeManifestSha256": "ec1d598891e88296a9102fe6618811bae3af39e618f3105466e1c95eda4d7963",
+  "originalAfterManifestSha256": "ec1d598891e88296a9102fe6618811bae3af39e618f3105466e1c95eda4d7963",
+  "originalProjectMutationCount": 0,
+  "originalTrackedStateByteIdentical": true,
+  "regularFileCount": 13,
+  "transientBuildStagingExcluded": true
+}

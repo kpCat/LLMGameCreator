@@ -442,9 +442,26 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             "Project version: " + snapshot.ProjectVersion,
             "Project format version: " + snapshot.ProjectFormatVersion,
             "Project-scoped composition ID: " + snapshot.ProjectScopedCompositionId,
+            "Identity source/recovery status: " + snapshot.IdentitySource,
+            "authoringRevision=" + snapshot.Revision,
+            "catalogFingerprint=" + snapshot.CatalogFingerprint,
+            string.Empty,
+            "Последняя успешная сборка",
             "Composition package SHA-256: " + snapshot.CompositionPackageSha256,
             "Activated project package SHA-256: " + snapshot.ActivatedProjectPackageSha256,
             "Final Runtime state hash: " + snapshot.FinalStateHash,
+            string.Empty,
+            "Последняя попытка сборки",
+            "Attempt ID: " + snapshot.LastBuildAttemptId,
+            "Attempt status: " + snapshot.LastBuildAttemptStatus,
+            "Этап сбоя: " + snapshot.LastBuildFailureStage,
+            "Attempted composition package SHA-256: " + snapshot.LastBuildAttemptedCompositionPackageSha256,
+            "Attempted final Runtime state hash: " + snapshot.LastBuildAttemptedFinalStateHash,
+            "Attempted configured parameter count: " + snapshot.LastBuildAttemptedConfiguredParameterCount,
+            "Attempted capability count: " + snapshot.LastBuildAttemptedCapabilityCount,
+            "Attempted planned action count: " + snapshot.LastBuildAttemptedPlannedActionCount,
+            "Attempted checkpoint action count: " + snapshot.LastBuildAttemptedCheckpointActionCount,
+            "Attempted final replay action count: " + snapshot.LastBuildAttemptedFinalReplayActionCount,
             "Runtime playthrough plan ID: " + snapshot.RuntimePlaythroughPlanId,
             "Capability count: " + snapshot.CapabilityCount,
             "Planned action count: " + snapshot.PlannedActionCount,
@@ -457,11 +474,17 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             "Stat damage bonus: " + snapshot.StatDamageBonus.ToString(CultureInfo.InvariantCulture),
             "Equipment damage bonus: " + snapshot.EquipmentDamageBonus.ToString(CultureInfo.InvariantCulture),
             "Total additional damage: " + snapshot.TotalAdditionalDamage.ToString(CultureInfo.InvariantCulture),
-            "Identity source/recovery status: " + snapshot.IdentitySource,
-            "authoringRevision=" + snapshot.Revision,
-            "catalogFingerprint=" + snapshot.CatalogFingerprint,
             "certificationExecuted=" + snapshot.LastCertificationExecutedCount,
             "certificationReused=" + snapshot.LastCertificationReusedCount,
+            string.Empty,
+            "Текущая сохранённая конфигурация",
+            "Selected module count: " + snapshot.SelectedMechanicCount,
+            string.Empty,
+            "Executable provenance",
+            "Executable path: " + snapshot.ExecutablePath,
+            "Executable SHA-256: " + snapshot.ExecutableSha256,
+            "File version: " + snapshot.ExecutableFileVersion,
+            "Informational version: " + snapshot.ExecutableInformationalVersion,
             string.Empty,
             "Identity recovery diagnostics:"
         };
@@ -491,10 +514,21 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         {
             var result = await Task.Run(() => _workspaceController.BuildAndQualify()).ConfigureAwait(true);
             _buildStatusLabel.Text = result.Passed ? "Готово" : "Есть ошибки";
-            _buildResultTextBox.Text = result.HumanSummary
-                                       + (result.Diagnostics.Count == 0
-                                           ? string.Empty
-                                           : Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, result.Diagnostics));
+            if (result.Passed)
+            {
+                _buildResultTextBox.Text = result.HumanSummary;
+            }
+            else
+            {
+                var firstDiagnostic = result.Diagnostics.FirstOrDefault() ?? "build.unknown_failure";
+                _buildResultTextBox.Text = result.HumanSummary
+                                           + Environment.NewLine + Environment.NewLine
+                                           + "Этап сбоя: " + result.FailureStage
+                                           + Environment.NewLine + "Причина: " + firstDiagnostic
+                                           + Environment.NewLine + Environment.NewLine
+                                           + "Диагностика:" + Environment.NewLine
+                                           + string.Join(Environment.NewLine, result.Diagnostics);
+            }
             BindWorkspace(_workspaceController.Snapshot());
         }
         catch (Exception exception)

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "goal151_diagnostic_truth_proof_v1",
+  "semanticMismatchInjected": true,
+  "semanticFailureStage": "runtime.semantic_effect",
+  "semanticDiagnosticIncludesModuleEffectMetricTargetExpectedActual": true,
+  "checkpointFailureInjected": true,
+  "checkpointFailureStage": "runtime.checkpoint_replay",
+  "checkpointCausalDiagnosticPreserved": true,
+  "emptyFailureDiagnosticListPossible": false,
+  "failedAttemptHistoryPersisted": true,
+  "lastSuccessfulEvidencePreserved": true,
+  "currentAttemptEvidenceSeparated": true,
+  "currentSavedConfigurationSeparated": true,
+  "projectsPageBindingPassed": true
+}

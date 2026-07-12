@@ -30,3 +30,8 @@ Accepted by Codex: false
 
 Goals149, 150, 150A and 150B remain accepted=false until Goal150C is independently
 audited and the owner records an explicit bundled human acceptance decision.
+
+Goal151 update: fresh required HEAD passes the real saved-project copy with `3/8/2/12`,
+damage `6/3/9`, progression `2/12` and capability/action/checkpoint/replay
+`14/20/16/20`. Failed attempts must retain a visible stage and causal diagnostic while
+the last-success hashes remain in their own section. No Goal151 acceptance is claimed.

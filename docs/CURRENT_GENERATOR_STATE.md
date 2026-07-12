@@ -1,10 +1,53 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 150F PowerShell parser gate and acceptance closure execution hotfix
+Updated by: Goal 151 real saved project build recovery and diagnostic truth hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 150F PowerShell parser gate and acceptance closure execution hotfix is BLOCKED:
+Goal 151 real saved project build recovery and diagnostic truth hotfix is GREEN and ready for manual review:
+
+```text
+implementationStatus=GREEN
+gateStatus=goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required
+accepted=false
+acceptedByCodex=false
+manualReviewPerformed=false
+manualGateReady=true
+sourceProjectPresent=true
+originalProjectMutationCount=0
+originalTrackedStateByteIdentical=true
+freshHeadBaselineBuildPassed=true
+freshHeadCustomBuildPassed=true
+rootCause=stale_executable_or_launch_target
+runningExecutableObserved=false
+customValues=3/8/2/12
+customDamage=6/3/9
+customProgression=2/12
+capability/action/checkpoint/replay=14/20/16/20
+checkpointReloadPassed=true
+fullReplayEquivalent=true
+actionBindingPassed=true
+identityPreserved=true
+transactionalActivationPassed=true
+failureDiagnosticsNonEmpty=true
+failureDiagnosticsStageAware=true
+uiSeparatesLastSuccessCurrentAttemptCurrentConfiguration=true
+failedAttemptHistoryPersisted=true
+historicalSnapshotFailureCountMovedToDebt=64
+```
+
+The read-only real source project was inventoried and copied before any Application
+service opened it. Fresh required HEAD passed both its persisted three-profile state
+and the normal-controller six-module `3/8/2/12` save/reopen/build/repeat lifecycle on
+disposable copies. No running application process remained available for direct old
+binary hashing, so the observed earlier Runtime failure is classified honestly as a
+stale executable or launch target rather than an invented current composition defect.
+The UI now exposes executable path/hash/version, failed builds keep stage-aware causal
+diagnostics and compact history, and Technical Details separates last success, current
+attempt and current saved configuration. The unrelated 64 historical snapshot failures
+remain open validation debt and are not part of the Goal151 acceptance gate.
+
+Goal 150F historical closure status remains recorded as validation debt:
 
 ```text
 implementationStatus=BLOCKED

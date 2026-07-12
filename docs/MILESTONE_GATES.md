@@ -204,3 +204,13 @@ parser/one-test closure/artifact-scope pre-gates are GREEN; the one real 85-case
 closure is BLOCKED with 21 passed and 64 terminal failures. Goals149/150/150A/150B/
 150E/150F remain `accepted=false`; no manual gate is ready until the failures are
 repaired and a later bounded closure plus independent audit are GREEN.
+
+Goal 151 gate note: the read-only real saved project is byte-identical before/after,
+fresh required HEAD passes a disposable-copy `3/8/2/12` save/reopen/build/repeat with
+damage `6/3/9`, progression `2/12`, checkpoint/replay/action binding and transactional
+identity-preserving activation. The earlier failure is classified as
+`stale_executable_or_launch_target`; stage-aware diagnostics, failed-attempt history,
+executable provenance and truthful UI separation are implemented. Goal151 remains
+`accepted=false`, `manualReviewPerformed=false`, `manualGateReady=true` at
+`goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required`.
+The unrelated 64 historical failures remain validation debt.

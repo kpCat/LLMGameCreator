@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "goal151_pre_fix_real_copy_reproduction_v1",
+  "freshHeadFailureReproduced": false,
+  "persistedSourceOptionalModuleCount": 3,
+  "persistedSourceExplicitParameterCount": 6,
+  "freshHeadPersistedStateBuildPassed": true,
+  "freshHeadCustomSixModuleBuildPassed": true,
+  "customValues": "3/8/2/12",
+  "parameterBindingPassed": true,
+  "packageValidationPassed": true,
+  "mutationAuditPassed": true,
+  "compositionValidationPassed": true,
+  "orderIndependencePassed": true,
+  "checkpointPassed": true,
+  "fullReplayPassed": true,
+  "actionBindingPassed": true,
+  "semanticObservationCount": 10,
+  "failedSemanticObservationCount": 0,
+  "satisfiedSelectedModuleCount": 6,
+  "selectedModuleCount": 6
+}

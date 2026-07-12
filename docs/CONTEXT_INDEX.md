@@ -110,11 +110,14 @@ and terminal-result accounting. Goal150E reconciled 85 historical identities to 
 exact current identities before its single candidate commit, but that candidate’s
 closure proceeded after Goal150F parser repair and has 85 terminal cases: 21 passed
 and 64 failed, with zero skipped/not-run/timed-out/missing/duplicate. Goals149/150/
-150A/150B/150E/150F remain `accepted=false`; the next step is
-`repair_64_historical_closure_failures_before_rerun`, not a human gate; Goal141
-remains `accepted=false`.
+150A/150B/150E/150F remain `accepted=false`. Goal151 proves the read-only real
+saved project succeeds from fresh required HEAD on a disposable copy, adds
+stage-aware non-empty failure diagnostics, failed-attempt history, executable
+provenance and truthful last-success/current-attempt/current-config UI sections.
+The 64 historical closure failures are explicit validation debt, not the Goal151
+gate; Goal141 remains `accepted=false`.
 
-Current gate token: `repair_64_historical_closure_failures_before_rerun required`.
+Current gate token: `goal151_real_saved_project_build_recovery_and_diagnostic_truth_verification required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 
