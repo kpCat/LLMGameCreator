@@ -7,7 +7,8 @@ param(
     [switch]$PlanOnly,
     [ValidateSet('FullSuite', 'Goal150AcceptanceClosure')]
     [string]$Mode = 'FullSuite',
-    [string]$ManifestPath = ''
+    [string]$ManifestPath = '',
+    [string]$ReconciliationManifestPath = ''
 )
 
 Set-StrictMode -Version 2.0
@@ -161,6 +162,11 @@ $terminal = @{}
 $attempts = [System.Collections.Generic.List[object]]::new()
 $groups = @()
 $manifestMissingCount = 0
+$reconciliationSummary = $null
+$attemptedExecutionIds = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+$timedOutExecutionIds = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+$missingResultExecutionIds = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+$duplicateResultCount = 0
 try {
     $snapshot = New-DisposableWorktree
     $baselineHead = $snapshot.head
@@ -179,14 +185,25 @@ try {
     $tests = $discoveredTests
     $manifestEntries = @()
     if ($Mode -eq 'Goal150AcceptanceClosure') {
-        if ([string]::IsNullOrWhiteSpace($ManifestPath) -or -not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) { throw 'Goal150AcceptanceClosure requires a JSON ManifestPath.' }
-        $manifestEntries = @(Get-Content -LiteralPath $ManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json)
+        $closureManifestPath = if (-not [string]::IsNullOrWhiteSpace($ReconciliationManifestPath)) { $ReconciliationManifestPath } else { $ManifestPath }
+        if ([string]::IsNullOrWhiteSpace($closureManifestPath) -or -not (Test-Path -LiteralPath $closureManifestPath -PathType Leaf)) { throw 'Goal150AcceptanceClosure requires a JSON manifest path.' }
+        $manifestDocument = Get-Content -LiteralPath $closureManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $manifestEntries = if ($manifestDocument.PSObject.Properties.Name -contains 'entries') { @($manifestDocument.entries) } else { @($manifestDocument) }
         if ($manifestEntries.Count -eq 0) { throw 'Goal150AcceptanceClosure manifest is empty.' }
-        $duplicates = @($manifestEntries | Group-Object testName | Where-Object Count -gt 1)
-        if ($duplicates.Count -gt 0) { throw 'Goal150AcceptanceClosure manifest contains duplicate test identities.' }
-        $missingManifest = @($manifestEntries | Where-Object { $discoveredTests -notcontains $_.testName })
+        if ($manifestDocument.PSObject.Properties.Name -contains 'historicalIdentityCount') { $reconciliationSummary = $manifestDocument }
+        $executionEntries = @($manifestEntries | ForEach-Object {
+            if ($_.PSObject.Properties.Name -contains 'currentExecutionIdentities') {
+                $_.currentExecutionIdentities | ForEach-Object { [pscustomobject]@{ testName = [string]$_; lane = if ([string]$_ -like '*ProductSmoke*') { 'P' } else { 'N' } }
+            }
+            else { [pscustomobject]@{ testName = [string]$_.testName; lane = [string]$_.lane } }
+        })
+        $duplicates = @($executionEntries | Group-Object testName | Where-Object Count -gt 1)
+        $executionEntries = @($executionEntries | Group-Object testName | ForEach-Object { $_.Group[0] })
+        $missingManifest = @($executionEntries | Where-Object { $discoveredTests -notcontains $_.testName })
         $manifestMissingCount = $missingManifest.Count
-        $tests = @($manifestEntries | Select-Object -ExpandProperty testName)
+        if ($manifestMissingCount -ne 0) { throw "Goal150AcceptanceClosure manifest contains $manifestMissingCount current execution identities absent from discovery." }
+        $tests = @($executionEntries | Select-Object -ExpandProperty testName)
+        $manifestEntries = $executionEntries
     }
     if ($tests.Count -eq 0) { throw 'Complete-suite discovery returned zero tests.' }
     $inventory = @($tests | ForEach-Object { $entry = @($manifestEntries | Where-Object testName -eq $_ | Select-Object -First 1); [pscustomobject]@{ name = $_; className = Get-ClassName $_; lane = if ($entry.Count -gt 0) { $entry[0].lane } else { Get-Lane (Get-ClassName $_) } } })
@@ -197,7 +214,10 @@ try {
 
     $lanePlan = @()
     if ($Mode -eq 'Goal150AcceptanceClosure') {
-        foreach ($test in $inventory) { $lanePlan += [pscustomobject]@{ id = "closure-{0:D3}" -f ($lanePlan.Count + 1); lane = $test.lane; classes = @($test.className); tests = @($test.name); exactTests = @($test.name); initial = $true } }
+        foreach ($methodGroup in @($inventory | Group-Object { "$($_.className).$(Get-MethodName $_.name)" } | Sort-Object Name)) {
+            $members = @($methodGroup.Group)
+            $lanePlan += [pscustomobject]@{ id = "closure-{0:D3}" -f ($lanePlan.Count + 1); lane = $members[0].lane; classes = @($members[0].className); tests = @($members | Select-Object -ExpandProperty name); exactTests = @($members | Select-Object -ExpandProperty name); initial = $true }
+        }
     }
     else { foreach ($lane in @('N', 'P')) {
         $classes = @($inventory | Where-Object lane -eq $lane | Select-Object -ExpandProperty className -Unique | Sort-Object)
@@ -222,13 +242,25 @@ try {
         $filter = Get-Filter @($Group.classes) $groupExactTests
         $run = Invoke-Dotnet $attemptId @('test', $ProjectRelativePath, '-c', 'Debug', '--no-build', '--filter', $filter, '--results-directory', $environment.shardTestResultsRoot, '--logger', "trx;LogFileName=$trx", '--logger', 'console;verbosity=minimal') ($(if ($groupExactTests.Count -eq 1) { $HeavyTestTimeoutSeconds } else { $ShardTimeoutSeconds })) $snapshot.path $environment
         $results = @(Read-Trx $trx)
-        $byName = @{}; foreach ($row in $results) { if (-not $byName.ContainsKey($row.name)) { $byName[$row.name] = $row } }
+        $byName = @{}; foreach ($row in $results) { if (-not $byName.ContainsKey($row.name)) { $byName[$row.name] = @() }; $byName[$row.name] += $row }
         $expected = @($Group.tests | Where-Object { -not $terminal.ContainsKey($_) })
-        $passedNow = @($expected | Where-Object { $byName.ContainsKey($_) -and $byName[$_].outcome -eq 'Passed' })
-        foreach ($name in $passedNow) { $row=$byName[$name]; $terminal[$name] = [pscustomobject]@{ name=$name; outcome='Passed'; durationSeconds=$row.durationSeconds; lane=$Group.lane; groupId=$Group.id; reason='terminal_pass' } }
+        foreach ($name in $expected) { [void]$attemptedExecutionIds.Add($name) }
+        $passedNow = @($expected | Where-Object { $byName.ContainsKey($_) -and $byName[$_][0].outcome -eq 'Passed' })
+        foreach ($name in $passedNow) { $row=$byName[$name][0]; $terminal[$name] = [pscustomobject]@{ name=$name; outcome='Passed'; durationSeconds=$row.durationSeconds; lane=$Group.lane; groupId=$Group.id; reason='terminal_pass' } }
+        if ($Mode -eq 'Goal150AcceptanceClosure') {
+            foreach ($name in $expected) {
+                if ($byName.ContainsKey($name)) {
+                    if ($byName[$name].Count -gt 1) { $script:duplicateResultCount += ($byName[$name].Count - 1) }
+                    $row = $byName[$name][0]
+                    $terminal[$name] = [pscustomobject]@{ name=$name; outcome=$row.outcome; durationSeconds=$row.durationSeconds; lane=$Group.lane; groupId=$Group.id; reason='closure_terminal_result' }
+                }
+                elseif ($run.timedOut -and $expected.Count -eq 1) { [void]$timedOutExecutionIds.Add($name) }
+                elseif (-not $run.timedOut) { [void]$missingResultExecutionIds.Add($name) }
+            }
+        }
         $pending = @($expected | Where-Object { -not $terminal.ContainsKey($_) })
         [void]$script:attempts.Add([pscustomobject]@{ id=$attemptId; lane=$Group.lane; groupId=$Group.id; depth=$Depth; retry=$Retry; classes=$Group.classes; expectedCount=$expected.Count; passedTerminalCount=$passedNow.Count; pendingCount=$pending.Count; run=$run; productSmokeProjectRoot=(Get-RelativeOutputPath $environment.shardProjectRoot); productSmokePackageRoot=(Get-RelativeOutputPath $environment.shardPackageRoot); trxPath=(Get-RelativeOutputPath $trx) })
-        if ($pending.Count -eq 0) { return }
+        if ($pending.Count -eq 0 -or $Mode -eq 'Goal150AcceptanceClosure') { return }
         if (-not $Retry -and $groupExactTests.Count -ne 1) { Invoke-Group $Group $Depth $true; return }
         if ($groupExactTests.Count -eq 1) {
             $name = $groupExactTests[0]
@@ -255,13 +287,15 @@ try {
     foreach ($group in $lanePlan) { Invoke-Group $group 0 $false }
     $mainHeadAfter = (& git -C $RepoRoot rev-parse HEAD).Trim()
     $mainStatusAfter = (& git -C $RepoRoot status --porcelain=v1) -join "`n"
-    $timedOut = @($attempts | Where-Object { $_.run.timedOut } | ForEach-Object { $_.classes } | ForEach-Object { $_ } | Select-Object -Unique).Count
-    $notRun = @($tests | Where-Object { -not $terminal.ContainsKey($_) }).Count - $timedOut
-    $counts = [ordered]@{ discovered=$tests.Count; assigned=$inventory.Count; attempted=$attempts.Count; executed=$terminal.Count; passed=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failed=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skipped=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; notRun=[Math]::Max(0,$notRun); timedOut=$timedOut; missing=$manifestMissingCount; duplicate=0 }
-    $passed = $counts.discovered -eq $counts.executed -and $counts.executed -eq ($counts.passed + $counts.failed + $counts.skipped) -and $counts.discovered -eq ($counts.executed + $counts.notRun + $counts.timedOut) -and $counts.failed -eq 0 -and $counts.notRun -eq 0 -and $counts.timedOut -eq 0 -and $counts.missing -eq 0 -and $counts.duplicate -eq 0
+    $timedOut = if ($Mode -eq 'Goal150AcceptanceClosure') { $timedOutExecutionIds.Count } else { @($attempts | Where-Object { $_.run.timedOut } | ForEach-Object { $_.classes } | ForEach-Object { $_ } | Select-Object -Unique).Count }
+    $notRun = if ($Mode -eq 'Goal150AcceptanceClosure') { @($tests | Where-Object { -not $attemptedExecutionIds.Contains($_) }).Count } else { @($tests | Where-Object { -not $terminal.ContainsKey($_) }).Count - $timedOut }
+    $missingResult = if ($Mode -eq 'Goal150AcceptanceClosure') { $missingResultExecutionIds.Count + $manifestMissingCount } else { $manifestMissingCount }
+    $duplicate = if ($Mode -eq 'Goal150AcceptanceClosure') { $duplicateResultCount } else { 0 }
+    $counts = [ordered]@{ discovered=$tests.Count; assigned=$inventory.Count; attempted=$attempts.Count; executed=$terminal.Count; passed=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failed=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skipped=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; notRun=[Math]::Max(0,$notRun); timedOut=$timedOut; missing=$missingResult; duplicate=$duplicate; historicalIdentityCount=if($null -ne $reconciliationSummary){[int]$reconciliationSummary.historicalIdentityCount}else{$null}; resolvedHistoricalIdentityCount=if($null -ne $reconciliationSummary){[int]$reconciliationSummary.resolvedHistoricalIdentityCount}else{$null}; currentExecutionCaseCount=$tests.Count; attemptedExecutionCaseCount=$attemptedExecutionIds.Count; executedCaseCount=$terminal.Count; passedCaseCount=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failedCaseCount=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skippedCaseCount=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; notRunCaseCount=[Math]::Max(0,$notRun); timedOutCaseCount=$timedOut; missingResultCount=$missingResult; duplicateResultCount=$duplicate }
+    $passed = $counts.currentExecutionCaseCount -eq $counts.executedCaseCount -and $counts.executedCaseCount -eq ($counts.passedCaseCount + $counts.failedCaseCount + $counts.skippedCaseCount) -and $counts.currentExecutionCaseCount -eq ($counts.executedCaseCount + $counts.notRunCaseCount + $counts.timedOutCaseCount + $counts.missingResultCount) -and $counts.failedCaseCount -eq 0 -and $counts.notRunCaseCount -eq 0 -and $counts.timedOutCaseCount -eq 0 -and $counts.missingResultCount -eq 0 -and $counts.duplicateResultCount -eq 0
     Write-Json 'terminal-results.json' @($terminal.Values | Sort-Object name)
     Write-Json 'validation-slowest-summary.json' ([ordered]@{ schemaVersion='goal150c_slowest_v1'; slowestTerminalTests=@($terminal.Values | Sort-Object durationSeconds -Descending | Select-Object -First 20); slowestAttempts=@($attempts | Sort-Object { $_.run.durationSeconds } -Descending | Select-Object -First 20) })
-    Write-Json 'validation-result.json' ([ordered]@{ schemaVersion='goal150d_validation_accounting_v1'; mode=$Mode; status=if($passed){'GREEN'}else{'BLOCKED'}; passed=$passed; validatedCommit=$baselineHead; validationSnapshotMatchesFinalSources=($baselineHead -eq $mainHeadAfter); hermeticSnapshot=$true; mainWorktreeUnchangedByValidation=($mainHeadBefore -eq $mainHeadAfter -and $mainStatusBefore -eq $mainStatusAfter); maximumSimultaneousTesthostProcesses=1; counts=$counts; lanes=@{ nonProductLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'N' -and $_.outcome -ne 'Passed' }).Count -eq 0); productSmokeLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'P' -and $_.outcome -ne 'Passed' }).Count -eq 0) }; attempts=$attempts.Count; rawOutputRoot=$ResolvedOutput })
+    Write-Json 'validation-result.json' ([ordered]@{ schemaVersion='goal150e_validation_accounting_v1'; mode=$Mode; status=if($passed){'GREEN'}else{'BLOCKED'}; passed=$passed; validatedCommit=$baselineHead; validationSnapshotMatchesFinalSources=($baselineHead -eq $mainHeadAfter); hermeticSnapshot=$true; mainWorktreeUnchangedByValidation=($mainHeadBefore -eq $mainHeadAfter -and $mainStatusBefore -eq $mainStatusAfter); maximumSimultaneousTesthostProcesses=1; counts=$counts; lanes=@{ nonProductLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'N' -and $_.outcome -ne 'Passed' }).Count -eq 0); productSmokeLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'P' -and $_.outcome -ne 'Passed' }).Count -eq 0) }; attempts=$attempts.Count; rawOutputRoot=$ResolvedOutput })
     if (-not $passed) { exit 2 }
     Write-Host 'COMPLETE_TEST_SUITE_GREEN'
 }

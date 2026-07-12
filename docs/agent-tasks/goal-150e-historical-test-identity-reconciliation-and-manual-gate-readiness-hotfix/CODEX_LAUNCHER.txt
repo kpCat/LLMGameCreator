@@ -1,0 +1,30 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: cd5a2aa910790755cd0e0470fabdf3b85d61f201
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md; не рассчитывай на память из других диалогов.
+
+План уже одобрен запуском задачи. Не спрашивай подтверждение; после проверки базы сразу выполняй.
+
+Соблюдай command budget:
+- сначала uncommitted identity-reconciliation preflight;
+- не создавай candidate, пока unresolved=0 и ambiguous=0;
+- создай ровно один validation-candidate commit;
+- не запускай all-ProductSmoke;
+- выполни один mapped closure pass;
+- check-all запускай один раз только после GREEN closure;
+- не повторяй успешные тесты.
+
+Codex обязан сам запушить candidate и финальный GREEN/BLOCKED/FAILED commit. Пользователь не должен пушить вручную.
+
+В финале сообщи reconciliation counts, candidate SHA, final SHA, push result, ancestry, HEAD == origin/main, clean worktree, closure accounting и manualGateReady.

@@ -4548,6 +4548,36 @@
       "excludedPathPrefixes": ["src/LLMGameCreator.Runtime/", "src/LLMGameCreator.WinForms/", "unity/", "provider/", "LLM/", "RAG/"]
     },
     {
+      "scenario": "goal-150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-complete-test-suite.ps1",
+        ".devflow/scripts/run-complete-test-suite.cmd",
+        ".devflow/scripts/run-goal150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix.ps1",
+        ".devflow/scripts/run-goal150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix.cmd",
+        "tests/LLMGameCreator.Tests/Devflow/RunCompleteTestSuiteScriptTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunGoal150DValidationAccountingTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunGoal150EHistoricalIdentityReconciliationTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice.md",
+        "docs/manual-acceptance/character-attributes-and-level-progression-featuremodules-vertical-slice.md"
+      ],
+      "allowedPathPrefixes": [
+        "docs/agent-tasks/goal-150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix/",
+        ".llmgc/procedural/goal-150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix/",
+        ".llmgc/exports/goal-150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix/"
+      ],
+      "allowedDeletionPathPrefixes": [],
+      "allowedDeletedPaths": [],
+      "excludedPathPrefixes": ["src/LLMGameCreator.Runtime/", "src/LLMGameCreator.WinForms/", "unity/", "provider/", "LLM/", "RAG/"]
+    },
+    {
       "scenario": "goal-150b-zero-value-runtime-evidence-and-complete-suite-closure-hotfix",
       "allowedPaths": [
         ".devflow/artifact-scope/artifact-scope-policy.json",

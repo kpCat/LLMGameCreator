@@ -19,6 +19,10 @@ public sealed class RunCompleteTestSuiteScriptTests
         Assert.Contains("MaximumWallClockMinutes", script, StringComparison.Ordinal);
         Assert.Contains("taskkill /PID", script, StringComparison.Ordinal);
         Assert.Contains("HeavyTestTimeoutSeconds", script, StringComparison.Ordinal);
+        Assert.Contains("ReconciliationManifestPath", script, StringComparison.Ordinal);
+        Assert.Contains("attemptedExecutionCaseCount", script, StringComparison.Ordinal);
+        Assert.Contains("timedOutCaseCount", script, StringComparison.Ordinal);
+        Assert.Contains("missingResultCount", script, StringComparison.Ordinal);
         Assert.DoesNotContain("--filter Category", script, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("MonolithicTimeoutSeconds", script, StringComparison.Ordinal);
 
