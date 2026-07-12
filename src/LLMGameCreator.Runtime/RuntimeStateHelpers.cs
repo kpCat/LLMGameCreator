@@ -495,6 +495,11 @@ internal static class RuntimeStateHelpers
                 Scope = resource.Scope,
                 OwnerId = resource.OwnerId
             }).ToList(),
+            Stats = state.Stats.Select(stat => new StatValueState
+            {
+                StatId = stat.StatId,
+                Value = stat.Value
+            }).ToList(),
             Progressions = state.Progressions.Select(progression => new ProgressionState
             {
                 ProgressionId = progression.ProgressionId,
@@ -528,6 +533,7 @@ internal static class RuntimeStateHelpers
         target.Inventories = source.Inventories;
         target.Equipment = source.Equipment;
         target.Resources = source.Resources;
+        target.Stats = source.Stats;
         target.Progressions = source.Progressions;
         target.Flags = source.Flags;
         target.Statuses = source.Statuses;

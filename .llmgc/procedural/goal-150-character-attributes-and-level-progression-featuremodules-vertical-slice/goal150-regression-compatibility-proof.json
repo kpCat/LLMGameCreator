@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "goal150_regression_compatibility_proof_v1",
+  "status": "GREEN",
+  "goal148Accepted": true,
+  "goal149Accepted": false,
+  "goal141Accepted": false,
+  "goal149DisabledHashesPreserved": true,
+  "goal149EquipmentHashesPreserved": true,
+  "projectIdentityPreserved": true,
+  "normalWorkspaceGoalNumberControlCount": 0,
+  "newTopLevelPageAdded": false,
+  "publicGamePackageSchemaChanged": false,
+  "unityChanged": false,
+  "historicalArtifactsRewritten": false,
+  "passed": true
+}

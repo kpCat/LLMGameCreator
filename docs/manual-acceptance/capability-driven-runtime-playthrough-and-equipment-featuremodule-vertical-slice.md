@@ -1,6 +1,6 @@
 # Capability-Driven Runtime Playthrough and Equipment FeatureModule Vertical Slice
 
-Status: GREEN, manual review deferred
+Status: GREEN, bundled manual review pending with Goal150
 Gate: `capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required`
 Accepted: false
 Accepted by human: false
@@ -26,6 +26,6 @@ Accepted by Codex: false
 5. In technical details, confirm the plan has 17/13/17 actions, equipment is `slot/weapon:item/rusty_knife`, and the combat delta is `2`.
 6. Save, close and reopen the project; confirm the equipment selection, parameter value, equipped-item proof and deterministic replay remain stable.
 
-Manual review is optional for this delivery and has been deferred. Do not mark
-Goal149 accepted until an explicit human decision is recorded. Do not start
-Goal150 from this document alone.
+Goal149 remains accepted=false. Its deferred review is now routed into the
+bundled Goals149/150 mechanics review; do not mark either goal accepted until an
+explicit human decision is recorded.

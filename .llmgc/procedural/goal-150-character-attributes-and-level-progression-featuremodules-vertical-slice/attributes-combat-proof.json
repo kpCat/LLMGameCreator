@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "goal150_attributes_combat_proof_v1",
+  "status": "GREEN",
+  "damageEvent": {
+    "eventIndex": 41,
+    "stepIndex": 11,
+    "stepId": "capability.basic_attack",
+    "source": "gameplay-runtime",
+    "eventType": "DamageApplied",
+    "targetId": "goblin",
+    "message": "Damage applied: resource/health -6",
+    "args": {
+      "damage": "6",
+      "equipmentDamageBonus": "0",
+      "source": "player",
+      "statDamageBonus": "2",
+      "statId": "stat/strength",
+      "statValue": "7",
+      "totalAdditionalDamage": "2"
+    }
+  },
+  "statDamageBonus": 2,
+  "equipmentDamageBonus": 0,
+  "totalAdditionalDamage": 2,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "passed": true
+}

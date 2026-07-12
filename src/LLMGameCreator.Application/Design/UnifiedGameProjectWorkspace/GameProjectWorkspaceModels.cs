@@ -77,6 +77,11 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public int FinalReplayActionCount { get; init; }
     public string PlaythroughSignature { get; init; } = string.Empty;
     public string EquipmentSlotSummary { get; init; } = string.Empty;
+    public string AttributesSummary { get; init; } = string.Empty;
+    public string ProgressionSummary { get; init; } = string.Empty;
+    public decimal StatDamageBonus { get; init; }
+    public decimal EquipmentDamageBonus { get; init; }
+    public decimal TotalAdditionalDamage { get; init; }
 }
 
 public sealed record GameProjectBuildResult
@@ -116,6 +121,10 @@ public sealed record GameProjectBuildResult
     public string EquipmentSlotSummary { get; init; } = string.Empty;
     public int WeaponDamageBonus { get; init; }
     public int CombatDamageDelta { get; init; }
+    public string AttributesSummary { get; init; } = string.Empty;
+    public string ProgressionSummary { get; init; } = string.Empty;
+    public decimal StatDamageBonus { get; init; }
+    public decimal TotalAdditionalDamage { get; init; }
 }
 
 public sealed record GameProjectBuildHistoryEntry

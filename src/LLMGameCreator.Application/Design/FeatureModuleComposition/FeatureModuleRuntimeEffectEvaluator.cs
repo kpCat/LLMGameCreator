@@ -27,7 +27,8 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         RuntimeInteractiveSession baselineSession)
     {
         var diagnostics = new List<string>();
-        if (contract.MetricKind == FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta
+        if (contract.MetricKind is FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta
+                or FeatureModuleRuntimeEffectMetricKinds.CombatStatDamageDelta
             && session.CapabilityPlan?.OrderedActions.All(action => action.ActionId != "basic_attack") == true)
         {
             return new FeatureModuleRuntimeEffectObservation
@@ -43,7 +44,7 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
                 ActualValue = "not_applicable",
                 RuntimeDimension = contract.RuntimeDimension,
                 Passed = true,
-                Diagnostics = ["combat capability absent; equipment combat delta is not applicable"]
+                Diagnostics = ["combat capability absent; combat delta is not applicable"]
             };
         }
         var actual = ReadMetric(contract, session, diagnostics);
@@ -51,6 +52,10 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         {
             FeatureModuleRuntimeEffectMetricKinds.EquipmentSlotItemEquals => string.Empty,
             FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta => "0",
+            FeatureModuleRuntimeEffectMetricKinds.CombatStatDamageDelta => "0",
+            FeatureModuleRuntimeEffectMetricKinds.PlayerStatEquals => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.ProgressionAmountEquals => "0",
+            FeatureModuleRuntimeEffectMetricKinds.ProgressionStageEquals => string.Empty,
             _ => ReadMetric(contract, baselineSession, diagnostics)
         };
         var passed = diagnostics.Count == 0 && Compare(contract, actual, baseline);
@@ -90,6 +95,14 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
                 InventoryQuantity(session.LatestInventorySummary, contract.TargetId, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta =>
                 EquipmentDamageDelta(session)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.PlayerStatEquals =>
+                PlayerStat(session, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.CombatStatDamageDelta =>
+                CombatDamageEventValue(session, "statDamageBonus")?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.ProgressionAmountEquals =>
+                Progression(session, contract.TargetId)?.Amount.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.ProgressionStageEquals =>
+                Progression(session, contract.TargetId)?.StageId,
             _ => null
         };
         if (value is null)
@@ -102,18 +115,20 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
 
     private static bool Compare(FeatureModuleRuntimeEffectContract contract, string actualText, string baselineText)
     {
-        if (contract.ComparisonKind == FeatureModuleRuntimeEffectComparisonKinds.Equal
-            && !int.TryParse(contract.ExpectedValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out _))
-            return string.Equals(actualText, contract.ExpectedValue, StringComparison.Ordinal);
+        if (contract.ComparisonKind == FeatureModuleRuntimeEffectComparisonKinds.Equal)
+        {
+            return decimal.TryParse(contract.ExpectedValue, NumberStyles.Number, CultureInfo.InvariantCulture,
+                out var expected)
+                ? decimal.TryParse(actualText, NumberStyles.Number, CultureInfo.InvariantCulture, out var actualEqual)
+                  && actualEqual == expected
+                : string.Equals(actualText, contract.ExpectedValue, StringComparison.Ordinal);
+        }
         if (!decimal.TryParse(actualText, NumberStyles.Number, CultureInfo.InvariantCulture, out var actual)
             || !decimal.TryParse(baselineText, NumberStyles.Number, CultureInfo.InvariantCulture, out var baseline)) return false;
         return contract.ComparisonKind switch
         {
             FeatureModuleRuntimeEffectComparisonKinds.GreaterThanBaseline => actual > baseline,
             FeatureModuleRuntimeEffectComparisonKinds.ChangedFromBaseline => actual != baseline,
-            FeatureModuleRuntimeEffectComparisonKinds.Equal =>
-                decimal.TryParse(contract.ExpectedValue, NumberStyles.Number, CultureInfo.InvariantCulture, out var expected)
-                && actual == expected,
             FeatureModuleRuntimeEffectComparisonKinds.AtLeast =>
                 decimal.TryParse(contract.ExpectedValue, NumberStyles.Number, CultureInfo.InvariantCulture, out var minimum)
                 && actual >= minimum,
@@ -172,6 +187,24 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             .Where(item => item.EventType == "DamageApplied")
             .Select(item => item.Args.TryGetValue("equipmentDamageBonus", out var raw) ? raw : null)
             .LastOrDefault(raw => raw is not null);
+        return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed)
+            ? parsed : null;
+    }
+
+    private static double? PlayerStat(RuntimeInteractiveSession session, string statId) =>
+        session.CanonicalSession.RuntimeSession.GameplayState.Stats
+            .SingleOrDefault(stat => stat.StatId == statId)?.Value;
+
+    private static ProgressionState? Progression(RuntimeInteractiveSession session, string progressionId) =>
+        session.CanonicalSession.RuntimeSession.GameplayState.Progressions
+            .SingleOrDefault(progression => progression.ProgressionId == progressionId);
+
+    private static decimal? CombatDamageEventValue(RuntimeInteractiveSession session, string key)
+    {
+        var value = session.LatestSnapshot.RuntimeEvents
+            .Where(item => item.EventType == "DamageApplied")
+            .Select(item => item.Args.GetValueOrDefault(key))
+            .LastOrDefault(raw => !string.IsNullOrWhiteSpace(raw));
         return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed)
             ? parsed : null;
     }

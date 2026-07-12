@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "goal150_file_index_v1",
+  "fileCount": 20,
+  "files": [
+    {
+      "relativePath": "additive-catalog-compatibility-proof.json",
+      "sha256": "4e342014f625edbd8fe414942ac1deed95b5fa3bd7e6feb43995a0eb0a2f6075",
+      "byteCount": 600
+    },
+    {
+      "relativePath": "attributes-combat-proof.json",
+      "sha256": "b0a89c9f2e67667060fab6b4013d6202ae8c9ce8112379edd2efa47c86d03f66",
+      "byteCount": 755
+    },
+    {
+      "relativePath": "attributes-progression-composition-proof.json",
+      "sha256": "3f11bd6d46c7b57f5613a2aed58b839141fca2a9f520e4381d83105280b035d0",
+      "byteCount": 366
+    },
+    {
+      "relativePath": "attributes-runtime-state-proof.json",
+      "sha256": "ff60c2e78cd9b49a8c4c3cc013e6954b65f3d9b1488efe78b0ed9a7082b09a45",
+      "byteCount": 431
+    },
+    {
+      "relativePath": "attributes-without-combat-proof.json",
+      "sha256": "11f5df78d9b200b9703de4e73d1ac58c778c84316e4afb3ef4fe7f20421cb1a3",
+      "byteCount": 536
+    },
+    {
+      "relativePath": "character-attributes-module-proof.json",
+      "sha256": "6042707b596f46817c8403c67157b657804e4a2eb143ff1f6fd580750d635f1a",
+      "byteCount": 9244
+    },
+    {
+      "relativePath": "equipment-attributes-additivity-proof.json",
+      "sha256": "26059cc6730a1823682ce051c98c6d1001b22ebf77e27804a4879f0c38ffc7fa",
+      "byteCount": 1619
+    },
+    {
+      "relativePath": "extended-mutation-engine-proof.json",
+      "sha256": "8240d17e24f8e7751a86caaade8165413d1e604570c1c35a8d04e6a077c3ffb1",
+      "byteCount": 781
+    },
+    {
+      "relativePath": "full-current-optional-set-proof.json",
+      "sha256": "452c9a15f79047763edba448905a5909e45771adcb15b9e5f61aabe5a5ac3599",
+      "byteCount": 958
+    },
+    {
+      "relativePath": "goal149-disabled-hash-regression-proof.json",
+      "sha256": "e8bacca1102f041a61ff892ce7559cf7c76e07d43561f3a2bce5863e956b4698",
+      "byteCount": 607
+    },
+    {
+      "relativePath": "goal149-equipment-hash-regression-proof.json",
+      "sha256": "7bb7b8a69900200cb9860028c97b18b6770bb6c0fd0d5f4868c4efe99903b09d",
+      "byteCount": 609
+    },
+    {
+      "relativePath": "goal150-certification-proof.json",
+      "sha256": "bd3fcdc48e98867c50bab96ee73cb7263ee87a67d8803403c1513d4a46ddc03a",
+      "byteCount": 554
+    },
+    {
+      "relativePath": "goal150-dashboard.json",
+      "sha256": "b50951111c3339604728d0093a8a1143573b9f0810a85383766bdc7bcd3f8f83",
+      "byteCount": 1186
+    },
+    {
+      "relativePath": "goal150-negative-proof.json",
+      "sha256": "b71fe98d6f66a814048d84c3eaa22cb2d8e83f64e0badec1bf69697ec1285097",
+      "byteCount": 1148
+    },
+    {
+      "relativePath": "goal150-regression-compatibility-proof.json",
+      "sha256": "0e17d057cf07b8d7fecc7f0f4db51afcc263a437da3c36fe84733ea044c40234",
+      "byteCount": 514
+    },
+    {
+      "relativePath": "goal150-report.md",
+      "sha256": "3c51a7e0428e72628ce7d3db00f9a1c6695b7108fd7f9dc237298424a1c915d5",
+      "byteCount": 1279
+    },
+    {
+      "relativePath": "goal150-save-replay-proof.json",
+      "sha256": "48c3e8547685ca857fc3a0013ad7b5cb31640d5ca877addcbc64ac109da444dd",
+      "byteCount": 1922
+    },
+    {
+      "relativePath": "level-progression-module-proof.json",
+      "sha256": "019912d1656334f63757939a33f1e2610f62b10804db0aadb790811931bc8be7",
+      "byteCount": 7099
+    },
+    {
+      "relativePath": "progression-runtime-state-proof.json",
+      "sha256": "084d390eae280ced2688078107b52ec9882d9b322ba2725f8907348066f25832",
+      "byteCount": 289
+    },
+    {
+      "relativePath": "progression-without-combat-proof.json",
+      "sha256": "e61764335d77052c6e00df1b701048e124cb47243b98a53a1dc5500f2b8ee127",
+      "byteCount": 523
+    }
+  ],
+  "sha256Included": true,
+  "passed": true
+}

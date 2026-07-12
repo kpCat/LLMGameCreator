@@ -1,10 +1,10 @@
 {
   "schemaVersion": "featuremodule_library_manifest_v1",
   "catalogId": "llmgc.feature-modules",
-  "catalogVersion": "1.1.0",
+  "catalogVersion": "1.2.0",
   "requiredCoreModuleCount": 10,
-  "optionalModuleCount": 4,
-  "moduleFileCount": 14,
+  "optionalModuleCount": 6,
+  "moduleFileCount": 16,
   "moduleFiles": [
     "core/combat-turn-based-encounter.featuremodule.json",
     "core/crafting-recipes.featuremodule.json",
@@ -17,6 +17,8 @@
     "core/resources-harvest.featuremodule.json",
     "core/world-grid-navigation.featuremodule.json",
     "optional/alchemy-focus.featuremodule.json",
+    "optional/character-attributes.featuremodule.json",
+    "optional/character-level-progression.featuremodule.json",
     "optional/combat-focus.featuremodule.json",
     "optional/equipment-weapon-loadout.featuremodule.json",
     "optional/exploration-resource-focus.featuremodule.json"

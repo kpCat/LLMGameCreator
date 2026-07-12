@@ -2377,11 +2377,21 @@ and final hash
 `95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`.
 Disabled planned/checkpoint/final counts are 13/8/13; enabled counts are
 17/13/17. A new unselected optional module is additive-compatible with existing
-projects, while selected/required drift remains stale. Goal149 manual review is
-deferred and `accepted=false`; Goal141 remains unaccepted. Goal150 is the
-recommended next product goal only after explicit Goal149 acceptance. No public
+projects, while selected/required drift remains stale. Goal149 remains
+`accepted=false`; its deferred review is bundled with Goal150. No public
 GamePackage schema, sample, Unity, provider, Lua, generator-library or
 dependency change is authorized by this slice.
+
+Goal150 adds two more default-off catalog mechanics: `Характеристики персонажа`
+and `Уровни и опыт`. A single deterministic extended mutation registry now
+handles item metadata, stat defaults, participant stats, ability metadata and
+progression stages. Runtime-owned player stats feed generic ability metadata;
+strength `7` adds `2` damage and combines with equipment `2` into total `4`.
+The generic progression command delegates to `OutputApplier` and reaches amount
+`10`, stage `level/2`. Attributes/progression qualify independently without
+combat, all six optional modules certify, the full workspace is 20/16/20, and
+Goal149 hashes stay exact. Goals149/150 remain `accepted=false`; the next action
+is `review_goals_149_150_equipment_attributes_progression_workflow`.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,

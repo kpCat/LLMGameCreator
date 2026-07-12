@@ -249,6 +249,8 @@ public sealed class GameProjectBuildAndQualificationService
             var equipmentAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
                 action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.EquipItem);
             var equipmentSummary = projectQualification.Session.LatestEquipmentSummary;
+            var attributesSummary = projectQualification.Session.LatestAttributesSummary;
+            var progressionSummary = projectQualification.Session.LatestProgressionSummary;
             var weaponDamageBonus = 0;
             var combatDamageDelta = 0;
             if (equipmentAction is not null)
@@ -264,6 +266,29 @@ public sealed class GameProjectBuildAndQualificationService
                 if (!string.IsNullOrWhiteSpace(rawDelta))
                     combatDamageDelta = (int)decimal.Parse(rawDelta, NumberStyles.Number, CultureInfo.InvariantCulture);
             }
+            var runtimeState = projectQualification.Session.CanonicalSession.RuntimeSession.GameplayState;
+            var attributesAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
+                action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.InspectAttributes);
+            var statDamageBonus = 0m;
+            StatValueState? inspectedStat = null;
+            if (attributesAction is not null)
+            {
+                inspectedStat = runtimeState.Stats.Single(stat => stat.StatId == attributesAction.ResolvedTargetId);
+                var scalingAbility = qualifiedPackage.Game.Abilities.Single(ability =>
+                    ability.Metadata.GetValueOrDefault("source_stat_damage_stat_id") == inspectedStat.StatId);
+                var baseline = decimal.Parse(scalingAbility.Metadata["source_stat_damage_baseline"],
+                    NumberStyles.Number, CultureInfo.InvariantCulture);
+                var perPoint = decimal.Parse(scalingAbility.Metadata["source_stat_damage_per_point"],
+                    NumberStyles.Number, CultureInfo.InvariantCulture);
+                statDamageBonus = ((decimal)inspectedStat.Value - baseline) * perPoint;
+            }
+            var progressionAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
+                action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.InspectProgression);
+            ProgressionState? inspectedProgression = null;
+            if (progressionAction is not null)
+                inspectedProgression = runtimeState.Progressions.Single(progression =>
+                    progression.ProgressionId == progressionAction.ResolvedTargetId);
+            var totalAdditionalDamage = statDamageBonus + weaponDamageBonus;
             var summaryLines = new List<string>
             {
                 "Игра успешно собрана и проверена.",
@@ -279,6 +304,22 @@ public sealed class GameProjectBuildAndQualificationService
                 summaryLines.Add("Экипировано: " + equipmentAction.Args.GetValueOrDefault("itemTitle", equipmentAction.Args.GetValueOrDefault("itemId", string.Empty)));
                 summaryLines.Add("Слот: " + equipmentAction.Args.GetValueOrDefault("slotTitle", equipmentAction.Args.GetValueOrDefault("slotId", string.Empty)));
                 summaryLines.Add("Бонус урона: +" + weaponDamageBonus.ToString(CultureInfo.InvariantCulture));
+            }
+            if (attributesAction is not null && inspectedStat is not null)
+            {
+                summaryLines.Add(attributesAction.Args.GetValueOrDefault("title", inspectedStat.StatId)
+                                 + ": " + FormatNumber(inspectedStat.Value));
+                summaryLines.Add(attributesAction.Args.GetValueOrDefault("damageBonusTitle", "Бонус урона")
+                                 + ": +" + statDamageBonus.ToString(CultureInfo.InvariantCulture));
+            }
+            if (progressionAction is not null && inspectedProgression is not null)
+            {
+                var stage = inspectedProgression.StageId ?? string.Empty;
+                var stageValue = stage.Contains('/')
+                    ? stage[(stage.LastIndexOf('/') + 1)..] : stage;
+                summaryLines.Add(progressionAction.Args.GetValueOrDefault("stageTitle", "Уровень") + ": " + stageValue);
+                summaryLines.Add(progressionAction.Args.GetValueOrDefault("amountTitle", "Опыт")
+                                 + ": " + FormatNumber(inspectedProgression.Amount));
             }
 
             return new GameProjectBuildResult
@@ -316,7 +357,11 @@ public sealed class GameProjectBuildAndQualificationService
                 PlaythroughSignature = capabilityPlan.ActionPlanSignature,
                 EquipmentSlotSummary = equipmentSummary,
                 WeaponDamageBonus = weaponDamageBonus,
-                CombatDamageDelta = combatDamageDelta
+                CombatDamageDelta = combatDamageDelta,
+                AttributesSummary = attributesSummary,
+                ProgressionSummary = progressionSummary,
+                StatDamageBonus = statDamageBonus,
+                TotalAdditionalDamage = totalAdditionalDamage
             };
         }
         catch (Exception exception) when (exception is IOException
@@ -410,6 +455,9 @@ public sealed class GameProjectBuildAndQualificationService
         using var stream = File.OpenRead(path);
         return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
     }
+
+    private static string FormatNumber(double value) =>
+        value.ToString("0.####", CultureInfo.InvariantCulture);
 
     private ProductLineRuntimeQualificationResult QualifyIdentityOverlaidPackage(
         LLMGameCreator.GamePackage.GamePackageDefinition package,

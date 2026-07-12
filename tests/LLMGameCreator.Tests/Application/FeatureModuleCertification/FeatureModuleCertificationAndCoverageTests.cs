@@ -82,21 +82,21 @@ public sealed class FeatureModuleCertificationAndCoverageTests
             var first = service.Certify(root, library, baseSha, executionRoot);
             var second = service.Certify(root, library, baseSha, executionRoot);
             Assert.Equal("GREEN", first.Status);
-            Assert.Equal(4, first.ExecutedCount);
+            Assert.Equal(6, first.ExecutedCount);
             Assert.Equal(0, first.ReusedCount);
             Assert.Equal(0, second.ExecutedCount);
-            Assert.Equal(4, second.ReusedCount);
+            Assert.Equal(6, second.ReusedCount);
 
             File.WriteAllText(cache.PathForModule(first.Entries[0].ModuleId), "{corrupt");
             var afterCorruption = service.Certify(root, library, baseSha, executionRoot);
             Assert.Equal(1, afterCorruption.ExecutedCount);
-            Assert.Equal(3, afterCorruption.ReusedCount);
+            Assert.Equal(5, afterCorruption.ReusedCount);
             Assert.Equal(1, afterCorruption.InvalidatedCount);
             Assert.True(afterCorruption.CorruptCacheRejected);
 
             var changedContract = service.Certify(root, library, baseSha, executionRoot, "product_line_runtime_qualifier_v2");
-            Assert.Equal(4, changedContract.ExecutedCount);
-            Assert.Equal(4, changedContract.InvalidatedCount);
+            Assert.Equal(6, changedContract.ExecutedCount);
+            Assert.Equal(6, changedContract.InvalidatedCount);
             Assert.All(changedContract.Entries, entry => Assert.Equal("GREEN", entry.Status));
         }
         finally { Delete(cacheRoot); Delete(executionRoot); }

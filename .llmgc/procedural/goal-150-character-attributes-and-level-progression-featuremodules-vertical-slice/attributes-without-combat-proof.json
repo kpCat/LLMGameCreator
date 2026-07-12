@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "goal150_without_combat_qualification_proof_v1",
+  "status": "GREEN",
+  "candidateId": "goal150-artifact-attributes-no-combat",
+  "attributesSummary": "stat/strength=7",
+  "progressionSummary": "progression/character_level=0:level/1",
+  "inspectAttributesActionPresent": true,
+  "progressionActionsPresent": false,
+  "combatActionsPresent": false,
+  "combatAssertionRequired": false,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "actionBindingPassed": true,
+  "passed": true
+}

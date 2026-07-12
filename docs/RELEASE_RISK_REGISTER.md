@@ -103,6 +103,15 @@ longer makes unrelated projects stale. Goal149 still requires human review;
 hands-on playable quality, clean-machine release, public-schema, provider, Lua,
 art and Unity packaging risks remain open.
 
+Goal 150 review note: attributes and level progression now attach through
+default-off FeatureModules, a target-kind mutation registry, canonical
+Runtime-owned state and capability-driven presentation. Stat/equipment damage
+combines independently and progression stage resolution reuses `OutputApplier`.
+The legacy Goal149 hash paths remain exact and catalog-only additions remain
+additive-compatible. This reduces mechanic-expansion and save/replay risk, but
+the bundled Goals149/150 hands-on review plus broader playable-quality,
+clean-machine, provider, art and packaging risks remain open.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

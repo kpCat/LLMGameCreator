@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "goal150_character_attributes_module_proof_v1",
+  "status": "GREEN",
+  "module": {
+    "schemaVersion": "featuremodule_definition_v1",
+    "moduleId": "feature.character.attributes",
+    "title": "Характеристики персонажа",
+    "description": "Добавляет сохраняемые характеристики персонажа и их декларативное влияние на урон.",
+    "category": "Персонаж",
+    "moduleKind": "optional_feature",
+    "required": false,
+    "selectable": true,
+    "defaultSelected": false,
+    "moduleVersion": "1.0.0",
+    "dependencies": [
+      "feature.player_adapter.runtime_summary"
+    ],
+    "conflicts": [],
+    "requiredSchemaSections": [
+      "game.abilities",
+      "game.encounters",
+      "game.stats"
+    ],
+    "requiredRuntimePrimitives": [
+      "runtime.presentation.inspect_attributes"
+    ],
+    "requiredValidationRules": [
+      "ability_stat_damage_metadata",
+      "stat_references"
+    ],
+    "requiredSaveLoadPolicy": [
+      "full_replay_equivalence",
+      "journal_checkpoint_reload",
+      "player_stat_state"
+    ],
+    "requiredPlayerAdapterSurface": [
+      "attributes_summary",
+      "combat_stat_damage_summary"
+    ],
+    "generatorInputs": [
+      "feature.character.attributes"
+    ],
+    "authoringControls": [
+      "checked_optional_module",
+      "typed_parameter_editor"
+    ],
+    "goldenPackages": [
+      "minimal-map-game-character-attributes"
+    ],
+    "smokePlaythroughs": [
+      "goal150_character_attributes_slice"
+    ],
+    "knownLimitations": [
+      "Первая вертикаль настраивает силу и базовую атаку."
+    ],
+    "futureExpansionNotes": [
+      "Другие характеристики подключаются через те же stat ID и ability metadata contracts."
+    ],
+    "mutationOperations": [
+      {
+        "operationId": "attributes.basic_attack_source_stat_baseline",
+        "targetKind": "ability_metadata_numeric",
+        "targetId": "ability/basic_attack|source_stat_damage_baseline",
+        "jsonPath": "game.abilities[id=ability/basic_attack].metadata.source_stat_damage_baseline",
+        "expectedValue": "__MISSING__",
+        "newValue": "5",
+        "runtimeDimension": "combat_stat_damage"
+      },
+      {
+        "operationId": "attributes.basic_attack_source_stat_id",
+        "targetKind": "ability_metadata_string",
+        "targetId": "ability/basic_attack|source_stat_damage_stat_id",
+        "jsonPath": "game.abilities[id=ability/basic_attack].metadata.source_stat_damage_stat_id",
+        "expectedValue": "__MISSING__",
+        "newValue": "stat/strength",
+        "runtimeDimension": "combat_stat_damage"
+      },
+      {
+        "operationId": "attributes.basic_attack_source_stat_per_point",
+        "targetKind": "ability_metadata_numeric",
+        "targetId": "ability/basic_attack|source_stat_damage_per_point",
+        "jsonPath": "game.abilities[id=ability/basic_attack].metadata.source_stat_damage_per_point",
+        "expectedValue": "__MISSING__",
+        "newValue": "1",
+        "runtimeDimension": "combat_stat_damage"
+      },
+      {
+        "operationId": "attributes.player_strength_amount",
+        "targetKind": "encounter_participant_stat_amount",
+        "targetId": "encounter/goblin_duel|player|stat/strength",
+        "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=player].stats[id=stat/strength].amount",
+        "expectedValue": "5",
+        "newValue": "7",
+        "runtimeDimension": "character_strength"
+      },
+      {
+        "operationId": "attributes.strength_default_value",
+        "targetKind": "stat_default_value",
+        "targetId": "stat/strength",
+        "jsonPath": "game.stats[id=stat/strength].defaultValue",
+        "expectedValue": "5",
+        "newValue": "7",
+        "runtimeDimension": "character_strength"
+      }
+    ],
+    "runtimeEffectContracts": [
+      {
+        "effectId": "runtime_effect.combat_stat_damage_delta",
+        "moduleId": "feature.character.attributes",
+        "metricKind": "combat_stat_damage_delta",
+        "targetId": "player",
+        "resourceOrItemId": "stat/strength",
+        "comparisonKind": "equal",
+        "expectedValue": "2",
+        "sourceOperationIds": [
+          "attributes.basic_attack_source_stat_per_point"
+        ],
+        "runtimeDimension": "combat_stat_damage"
+      },
+      {
+        "effectId": "runtime_effect.player_strength_equals",
+        "moduleId": "feature.character.attributes",
+        "metricKind": "player_stat_equals",
+        "targetId": "player",
+        "resourceOrItemId": "stat/strength",
+        "comparisonKind": "equal",
+        "expectedValue": "7",
+        "sourceOperationIds": [
+          "attributes.player_strength_amount",
+          "attributes.strength_default_value"
+        ],
+        "runtimeDimension": "character_strength"
+      }
+    ],
+    "parameterDefinitions": [
+      {
+        "parameterId": "damagePerStrengthPoint",
+        "moduleId": "feature.character.attributes",
+        "title": "Урон за очко силы",
+        "description": "Изменение урона базовой атаки за очко силы относительно базового значения.",
+        "valueType": "number",
+        "required": true,
+        "defaultValue": 1,
+        "minimum": 0,
+        "maximum": 5,
+        "step": 0.1,
+        "allowedValues": [],
+        "unit": "damage",
+        "authoringControl": "numeric_up_down",
+        "bindings": [
+          {
+            "operationId": "attributes.basic_attack_source_stat_per_point",
+            "operationField": "newValue",
+            "transformKind": "identity",
+            "atomicGroupId": "attributes.stat_damage_scaling"
+          }
+        ],
+        "validationRules": [
+          "number_range",
+          "step"
+        ],
+        "runtimeEffectIds": [
+          "runtime_effect.combat_stat_damage_delta"
+        ],
+        "atomicGroupId": "attributes.stat_damage_scaling"
+      },
+      {
+        "parameterId": "startingStrength",
+        "moduleId": "feature.character.attributes",
+        "title": "Начальная сила",
+        "description": "Значение силы персонажа при создании Runtime-состояния.",
+        "valueType": "integer",
+        "required": true,
+        "defaultValue": 7,
+        "minimum": 0,
+        "maximum": 20,
+        "step": 1,
+        "allowedValues": [],
+        "unit": "",
+        "authoringControl": "numeric_up_down",
+        "bindings": [
+          {
+            "operationId": "attributes.player_strength_amount",
+            "operationField": "newValue",
+            "transformKind": "identity",
+            "atomicGroupId": "attributes.starting_strength"
+          },
+          {
+            "operationId": "attributes.strength_default_value",
+            "operationField": "newValue",
+            "transformKind": "identity",
+            "atomicGroupId": "attributes.starting_strength"
+          }
+        ],
+        "validationRules": [
+          "integer_range",
+          "step"
+        ],
+        "runtimeEffectIds": [
+          "runtime_effect.player_strength_equals"
+        ],
+        "atomicGroupId": "attributes.starting_strength"
+      }
+    ],
+    "runtimePlaythroughContracts": [
+      {
+        "contractId": "playthrough.attributes.inspect",
+        "capabilityId": "capability.character.attributes",
+        "actionId": "inspect_character_attributes",
+        "category": "attributes",
+        "phase": "inventory",
+        "order": 90,
+        "runtimePrimitiveId": "runtime.presentation.inspect_attributes",
+        "targetSelector": "stat_id",
+        "args": {
+          "damageBonusTitle": "Бонус урона от силы",
+          "id": "stat/strength",
+          "title": "Сила"
+        },
+        "dependsOnActionIds": [
+          "start_runtime"
+        ],
+        "checkpointBoundaryAfter": true,
+        "presentationOnly": true,
+        "required": true,
+        "expectedRuntimeEffects": [
+          "player_stat_equals"
+        ]
+      }
+    ],
+    "sourceLineage": {
+      "goalId": "goal_150_character_attributes_and_level_progression_featuremodules_vertical_slice",
+      "catalogPath": "catalogs/feature-modules/optional/character-attributes.featuremodule.json",
+      "recipeId": "character_attributes",
+      "variantKind": "character_attributes",
+      "candidateId": "minimal-map-game-character-attributes",
+      "operationIds": [
+        "attributes.basic_attack_source_stat_baseline",
+        "attributes.basic_attack_source_stat_id",
+        "attributes.basic_attack_source_stat_per_point",
+        "attributes.player_strength_amount",
+        "attributes.strength_default_value"
+      ]
+    }
+  },
+  "defaultStrength": 7,
+  "baseline": 5,
+  "damagePerPoint": 1,
+  "defaultStatDamageBonus": 2,
+  "defaultSelected": false,
+  "passed": true
+}

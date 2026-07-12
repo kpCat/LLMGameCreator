@@ -111,6 +111,8 @@ public sealed class SelectedRuntimeVariantInteractiveSession
     public string LatestQuestSummary { get; set; } = string.Empty;
     public string LatestCombatSummary { get; set; } = string.Empty;
     public string LatestEquipmentSummary { get; set; } = string.Empty;
+    public string LatestAttributesSummary { get; set; } = string.Empty;
+    public string LatestProgressionSummary { get; set; } = string.Empty;
     public CanonicalRuntimePlayerCommandLoopSession CanonicalSession { get; set; } = new();
 }
 
@@ -133,6 +135,8 @@ public sealed class SelectedRuntimeVariantInteractiveCheckpoint
     public string QuestSummary { get; set; } = string.Empty;
     public string CombatSummary { get; set; } = string.Empty;
     public string EquipmentSummary { get; set; } = string.Empty;
+    public string AttributesSummary { get; set; } = string.Empty;
+    public string ProgressionSummary { get; set; } = string.Empty;
     public string CreatedAtUtc { get; set; } = string.Empty;
 }
 

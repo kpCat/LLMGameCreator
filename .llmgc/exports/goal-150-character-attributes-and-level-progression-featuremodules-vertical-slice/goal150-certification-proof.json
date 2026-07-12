@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "goal150_certification_proof_v1",
+  "status": "GREEN",
+  "firstExecutedCount": 6,
+  "firstReusedCount": 0,
+  "secondExecutedCount": 0,
+  "secondReusedCount": 6,
+  "attributesFirstExecuted": true,
+  "progressionFirstExecuted": true,
+  "attributesChangeExecutedCount": 1,
+  "attributesChangeReusedCount": 5,
+  "progressionChangeExecutedCount": 1,
+  "progressionChangeReusedCount": 5,
+  "equipmentReusableWhenUnrelated": true,
+  "dependencyClosurePreserved": true,
+  "cycleBehaviorPreserved": true,
+  "passed": true
+}

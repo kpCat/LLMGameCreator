@@ -51,6 +51,17 @@ public sealed class GameRuntimeStateFactory : IGameRuntimeStateFactory
             RuntimeStateHelpers.EnsureResource(state, resource);
         }
 
+        var runtimeStatIds = package.Game.Abilities
+            .Select(ability => ability.Metadata.GetValueOrDefault("source_stat_damage_stat_id"))
+            .Where(id => !string.IsNullOrWhiteSpace(id))
+            .Distinct(StringComparer.Ordinal)
+            .ToHashSet(StringComparer.Ordinal);
+        foreach (var stat in package.Game.Stats.Where(stat => runtimeStatIds.Contains(stat.Id)
+                                                              && stat.DefaultValue.HasValue))
+        {
+            state.Stats.Add(new StatValueState { StatId = stat.Id, Value = stat.DefaultValue!.Value });
+        }
+
         foreach (var progression in package.Game.Progressions)
         {
             RuntimeStateHelpers.EnsureProgression(state, progression);

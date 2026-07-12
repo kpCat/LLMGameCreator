@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "goal150_level_progression_module_proof_v1",
+  "status": "GREEN",
+  "module": {
+    "schemaVersion": "featuremodule_definition_v1",
+    "moduleId": "feature.character.level_progression",
+    "title": "Уровни и опыт",
+    "description": "Добавляет накопление опыта и детерминированный переход между уровнями.",
+    "category": "Персонаж",
+    "moduleKind": "optional_feature",
+    "required": false,
+    "selectable": true,
+    "defaultSelected": false,
+    "moduleVersion": "1.0.0",
+    "dependencies": [
+      "feature.player_adapter.runtime_summary"
+    ],
+    "conflicts": [],
+    "requiredSchemaSections": [
+      "game.progressions"
+    ],
+    "requiredRuntimePrimitives": [
+      "runtime.command.change_progression",
+      "runtime.presentation.inspect_progression"
+    ],
+    "requiredValidationRules": [
+      "progression_stage_references"
+    ],
+    "requiredSaveLoadPolicy": [
+      "full_replay_equivalence",
+      "journal_checkpoint_reload",
+      "progression_state"
+    ],
+    "requiredPlayerAdapterSurface": [
+      "progression_summary"
+    ],
+    "generatorInputs": [
+      "feature.character.level_progression"
+    ],
+    "authoringControls": [
+      "checked_optional_module",
+      "typed_parameter_editor"
+    ],
+    "goldenPackages": [
+      "minimal-map-game-character-level-progression"
+    ],
+    "smokePlaythroughs": [
+      "goal150_character_level_progression_slice"
+    ],
+    "knownLimitations": [
+      "Первая вертикаль подтверждает переход со стартового уровня на второй."
+    ],
+    "futureExpansionNotes": [
+      "Дополнительные уровни используют тот же progression ID и OutputApplier stage resolution."
+    ],
+    "mutationOperations": [
+      {
+        "operationId": "progression.character_level_level2_required_amount",
+        "targetKind": "progression_stage_required_amount",
+        "targetId": "progression/character_level|level/2",
+        "jsonPath": "game.progressions[id=progression/character_level].stages[id=level/2].requiredAmount",
+        "expectedValue": "10",
+        "newValue": "10",
+        "runtimeDimension": "character_level_threshold"
+      }
+    ],
+    "runtimeEffectContracts": [
+      {
+        "effectId": "runtime_effect.character_progression_amount",
+        "moduleId": "feature.character.level_progression",
+        "metricKind": "progression_amount_equals",
+        "targetId": "progression/character_level",
+        "resourceOrItemId": "",
+        "comparisonKind": "equal",
+        "expectedValue": "10",
+        "sourceOperationIds": [
+          "progression.character_level_level2_required_amount"
+        ],
+        "runtimeDimension": "character_experience"
+      },
+      {
+        "effectId": "runtime_effect.character_progression_stage",
+        "moduleId": "feature.character.level_progression",
+        "metricKind": "progression_stage_equals",
+        "targetId": "progression/character_level",
+        "resourceOrItemId": "",
+        "comparisonKind": "equal",
+        "expectedValue": "level/2",
+        "sourceOperationIds": [
+          "progression.character_level_level2_required_amount"
+        ],
+        "runtimeDimension": "character_level"
+      }
+    ],
+    "parameterDefinitions": [
+      {
+        "parameterId": "level2RequiredExperience",
+        "moduleId": "feature.character.level_progression",
+        "title": "Опыт для второго уровня",
+        "description": "Количество опыта, необходимое для перехода на второй уровень.",
+        "valueType": "integer",
+        "required": true,
+        "defaultValue": 10,
+        "minimum": 1,
+        "maximum": 1000,
+        "step": 1,
+        "allowedValues": [],
+        "unit": "experience",
+        "authoringControl": "numeric_up_down",
+        "bindings": [
+          {
+            "operationId": "progression.character_level_level2_required_amount",
+            "operationField": "newValue",
+            "transformKind": "identity",
+            "atomicGroupId": "progression.level2_threshold"
+          }
+        ],
+        "validationRules": [
+          "integer_range",
+          "step"
+        ],
+        "runtimeEffectIds": [
+          "runtime_effect.character_progression_amount",
+          "runtime_effect.character_progression_stage"
+        ],
+        "atomicGroupId": "progression.level2_threshold"
+      }
+    ],
+    "runtimePlaythroughContracts": [
+      {
+        "contractId": "playthrough.progression.gain_experience",
+        "capabilityId": "capability.character.level_progression",
+        "actionId": "gain_character_experience",
+        "category": "progression",
+        "phase": "inventory",
+        "order": 100,
+        "runtimePrimitiveId": "runtime.command.change_progression",
+        "targetSelector": "progression_id",
+        "args": {
+          "amount": "10",
+          "id": "progression/character_level"
+        },
+        "dependsOnActionIds": [
+          "start_runtime"
+        ],
+        "checkpointBoundaryAfter": false,
+        "presentationOnly": false,
+        "required": true,
+        "expectedRuntimeEffects": [
+          "progression_amount_equals",
+          "progression_stage_equals"
+        ]
+      },
+      {
+        "contractId": "playthrough.progression.inspect",
+        "capabilityId": "capability.character.level_progression",
+        "actionId": "inspect_character_progression",
+        "category": "progression",
+        "phase": "inventory",
+        "order": 102,
+        "runtimePrimitiveId": "runtime.presentation.inspect_progression",
+        "targetSelector": "progression_id",
+        "args": {
+          "amountTitle": "Опыт",
+          "id": "progression/character_level",
+          "stageTitle": "Уровень"
+        },
+        "dependsOnActionIds": [
+          "gain_character_experience"
+        ],
+        "checkpointBoundaryAfter": true,
+        "presentationOnly": true,
+        "required": true,
+        "expectedRuntimeEffects": [
+          "progression_amount_equals",
+          "progression_stage_equals"
+        ]
+      }
+    ],
+    "sourceLineage": {
+      "goalId": "goal_150_character_attributes_and_level_progression_featuremodules_vertical_slice",
+      "catalogPath": "catalogs/feature-modules/optional/character-level-progression.featuremodule.json",
+      "recipeId": "character_level_progression",
+      "variantKind": "character_level_progression",
+      "candidateId": "minimal-map-game-character-level-progression",
+      "operationIds": [
+        "progression.character_level_level2_required_amount"
+      ]
+    }
+  },
+  "defaultProgressionAmount": 10,
+  "defaultProgressionStage": "level/2",
+  "defaultSelected": false,
+  "outputApplierStageResolution": true,
+  "passed": true
+}

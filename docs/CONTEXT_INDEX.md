@@ -94,10 +94,16 @@ project's fixed 13-action assumption with structured module playthrough
 contracts and a deterministic capability plan, then proves the first optional
 equipment vertical slice. Equipment is the fourth optional module and is
 disabled by default; unrelated saved projects remain additive-compatible when
-it appears in the catalog. Goal149 is GREEN with manual review deferred and
-`accepted=false` at
-`capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required`;
-Goal150 must not start before an explicit human decision.
+it appears in the catalog. Goal150 adds default-off character attributes and
+level progression modules through the same capability plan, extended mutation
+registry and canonical Runtime/save/replay path. Strength `7` contributes `+2`
+generic stat damage, combines with equipment `+2` into `4`, and progression
+amount `10` resolves to `level/2`. All six optional modules certify; Goal149
+disabled/equipment hashes remain exact and unselected additions remain
+additive-compatible. Goals149/150 are GREEN and `accepted=false` at the bundled
+manual review gate
+`character_attributes_and_level_progression_featuremodules_vertical_slice_verification required`;
+Goal141 remains `accepted=false`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 
@@ -321,8 +327,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-148a-new-project-required-support-files-and-transactional-activation-hotfix/GOAL.md` | Goal 148A P1 hotfix: production-created projects derive package-required relative script files through a generic confined plan, validate a project-local staged package, copy or reuse files transactionally, reject differing user files and missing sources, and remove new files on rollback. Result is `GREEN`; Goal148 remains accepted=false and nextProductGoal remains its human review. |
 | `docs/agent-tasks/goal-148b-current-package-ui-thread-dispatch-and-real-workspace-build-retry-hotfix/GOAL.md` | Goal 148B P1 hotfix: records the real `_navigation` cross-thread manual failure, dispatches all five WinForms `CurrentChanged` subscribers through named disposal-safe UI handlers, observes/coalesces async page refreshes and proves the production New Game + Projects + MainForm build retry with preserved hashes. Result is `GREEN`; Goal148 remains accepted=false, manualRetryRequired=true and nextProductGoal is the Goal148 manual retry. |
 | `docs/agent-tasks/goal-148c-project-identity-preservation-and-project-scoped-composition-hotfix/GOAL.md` | Goal 148C P1 hotfix: records the real template-identity overwrite, adds atomic project identity capture/recovery, migrates the fixed Goal147 authoring file to a deterministic project-scoped composition document, overlays identity before activation, separates composition/activated/final hashes and refreshes MainForm title on every marshalled current-package event. Result is `GREEN`; manual values preserve composition SHA `e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221` and final hash `95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`; Goal148 remains accepted=false and requires a manual retry. |
+| `docs/agent-tasks/goal-149-capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice/GOAL.md` | Goal 149 replaces the normal fixed action list with structured FeatureModule playthrough contracts and adds the default-off equipment vertical slice. Result is `GREEN`, Goal148 is accepted, Goal149 remains accepted=false, disabled/equipment hashes are preserved, and review is bundled with Goal150. |
+| `docs/agent-tasks/goal-150-character-attributes-and-level-progression-featuremodules-vertical-slice/GOAL.md` | Goal 150 adds default-off `Характеристики персонажа` and `Уровни и опыт`, a six-kind extended mutation registry, Runtime-owned player stats, generic stat/equipment damage additivity, `ChangeProgression` through `OutputApplier`, capability-driven inspect actions, 20/16/20 full optional replay and additive compatibility. Result is `GREEN`, Goals149/150 remain accepted=false, and the next action is their bundled human review. |
 | `docs/manual-acceptance/persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification.md` | Exact Goals146/147 human acceptance record plus the completed bundled authoring review evidence. |
 | `docs/manual-acceptance/unified-game-project-workspace-and-legacy-goal-diagnostics-isolation.md` | Goal148 manual checklist for the normal `Игры` workflow, project-local roundtrip, transactional build and explicit diagnostics toggle. |
+| `docs/manual-acceptance/capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice.md` | Goal149 checklist, now routed into the bundled Goals149/150 equipment, attributes and progression review. |
+| `docs/manual-acceptance/character-attributes-and-level-progression-featuremodules-vertical-slice.md` | Goal150 checklist for the bundled Goals149/150 mechanics review; both goals remain accepted=false. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |

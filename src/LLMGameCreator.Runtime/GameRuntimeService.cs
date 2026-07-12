@@ -22,6 +22,7 @@ public sealed class GameRuntimeService : IGameRuntimeService
     private readonly IDialogueRuntimeService _dialogueRuntimeService;
     private readonly IFactionRuntimeService _factionRuntimeService;
     private readonly IQuestObjectiveTracker _questObjectiveTracker;
+    private readonly IOutputApplier _outputApplier;
 
     public GameRuntimeService(
         IGameRuntimeStateFactory stateFactory,
@@ -39,7 +40,8 @@ public sealed class GameRuntimeService : IGameRuntimeService
         IQuestRuntimeService? questRuntimeService = null,
         IDialogueRuntimeService? dialogueRuntimeService = null,
         IFactionRuntimeService? factionRuntimeService = null,
-        IQuestObjectiveTracker? questObjectiveTracker = null)
+        IQuestObjectiveTracker? questObjectiveTracker = null,
+        IOutputApplier? outputApplier = null)
     {
         _stateFactory = stateFactory;
         _recipeRuntimeService = recipeRuntimeService;
@@ -57,6 +59,7 @@ public sealed class GameRuntimeService : IGameRuntimeService
         _questRuntimeService = questRuntimeService ?? new QuestRuntimeService(new RequirementEvaluator(), new OutputApplier());
         _dialogueRuntimeService = dialogueRuntimeService ?? new DialogueRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier(), _questRuntimeService, _transactionRuntimeService, _encounterRuntimeService);
         _questObjectiveTracker = questObjectiveTracker ?? new QuestObjectiveTracker(_questRuntimeService);
+        _outputApplier = outputApplier ?? new OutputApplier();
     }
 
     public GameRuntimeResult CreateInitialState(GamePackageDefinition package)
@@ -185,6 +188,8 @@ public sealed class GameRuntimeService : IGameRuntimeService
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "SetReputation requires faction id.", null)
                     : _factionRuntimeService.SetReputation(package, state, command.Id.Trim(), command.Amount);
+            case GameRuntimeCommandType.ChangeProgression:
+                return Track(package, state, ChangeProgression(package, state, command));
             default:
                 return Fail(state, "runtime.command.unknown", $"Unknown runtime command: {command.Type}", command.Type.ToString());
         }
@@ -271,6 +276,36 @@ public sealed class GameRuntimeService : IGameRuntimeService
         var value = command.Value ?? "true";
         RuntimeStateHelpers.SetFlag(state, flagId, value);
         return Success(state, $"Set flag {flagId} = {value}", GameRuntimeEventType.OutputApplied, flagId);
+    }
+
+    private GameRuntimeResult ChangeProgression(
+        GamePackageDefinition package,
+        GameRuntimeState state,
+        GameRuntimeCommand command)
+    {
+        if (string.IsNullOrWhiteSpace(command.Id))
+            return Fail(state, "runtime.command.id_missing", "ChangeProgression requires progression id.", null);
+        if (!double.IsFinite(command.Amount) || command.Amount == 0)
+            return Fail(state, "runtime.command.amount_invalid", "ChangeProgression amount must be finite and non-zero.", command.Id);
+        var application = _outputApplier.Apply(package, state,
+        [
+            new OutputDefinition
+            {
+                Kind = "change_progression",
+                Id = command.Id.Trim(),
+                Amount = command.Amount
+            }
+        ]);
+        return new GameRuntimeResult
+        {
+            Success = application.Success,
+            State = state,
+            Message = application.Success
+                ? "Changed progression " + command.Id + " by " + Format(command.Amount)
+                : "ChangeProgression failed: " + command.Id,
+            Events = application.Events,
+            Diagnostics = application.Diagnostics
+        };
     }
 
     private static GameRuntimeResult Success(GameRuntimeState state, string message, GameRuntimeEventType eventType, string? targetId)

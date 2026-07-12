@@ -7,6 +7,10 @@ public static class FeatureModuleRuntimeEffectMetricKinds
     public const string EquipmentSlotItemEquals = "equipment_slot_item_equals";
     public const string InventoryItemAbsentOrDecreased = "inventory_item_absent_or_decreased";
     public const string CombatDamageDelta = "combat_damage_delta";
+    public const string PlayerStatEquals = "player_stat_equals";
+    public const string CombatStatDamageDelta = "combat_stat_damage_delta";
+    public const string ProgressionAmountEquals = "progression_amount_equals";
+    public const string ProgressionStageEquals = "progression_stage_equals";
 }
 
 public static class FeatureModuleRuntimeEffectComparisonKinds

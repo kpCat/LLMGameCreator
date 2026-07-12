@@ -104,8 +104,16 @@ dependency-aware Runtime playthrough plan on the normal Игры path; the legac
 no-plan qualifier remains compatible. Equipment is optional/default-off and
 adds chest, transfer, equip, presentation, save/replay and player-only weapon
 bonus proof when enabled. Unselected catalog growth is additive-compatible.
-Goal149 is GREEN with manual review deferred and `accepted=false`; Goal141 stays
-unaccepted, and Goal150 requires a later explicit Goal149 acceptance.
+Goal149 is GREEN and `accepted=false`; its review is bundled with Goal150.
+
+Goal 150 note: two default-off character mechanics extend the same normal
+`Игры` workflow without a new page or public schema. Generic stat metadata,
+Runtime-owned player stats and `ChangeProgression` produce strength `7`, stat
+bonus `2`, equipment/stat total `4`, progression amount `10` and stage
+`level/2`. Attributes/progression pass without combat, all six optional modules
+certify, and the full optional plan passes 20/16/20 checkpoint/replay/binding.
+Goals149/150 remain `accepted=false` pending their bundled human review;
+Goal141 remains unaccepted.
 
 Acceptance gate:
 

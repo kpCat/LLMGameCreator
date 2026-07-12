@@ -52,9 +52,11 @@ public sealed class UnifiedGameProjectWorkspaceControllerTests
         Assert.DoesNotContain("goal147", initial.ProjectScopedCompositionId, StringComparison.OrdinalIgnoreCase);
         Assert.Equal(packageBefore, await File.ReadAllBytesAsync(Path.Combine(context.ProjectFolder, "package.json")));
         Assert.Equal(10, initial.Mechanics.Count(item => item.Required));
-        Assert.Equal(4, initial.Mechanics.Count(item => !item.Required));
+        Assert.Equal(6, initial.Mechanics.Count(item => !item.Required));
         Assert.All(initial.Mechanics.Where(item => item.Required), item => Assert.True(item.Selected));
         Assert.Contains(initial.Mechanics, item => item.Title == "Углублённая алхимия");
+        Assert.Contains(initial.Mechanics, item => item.Title == "Характеристики персонажа" && !item.Selected);
+        Assert.Contains(initial.Mechanics, item => item.Title == "Уровни и опыт" && !item.Selected);
         Assert.Equal(8, initial.Parameters.Count);
 
         context.Controller.SetModuleSelected("feature.profile.combat_focus", false);

@@ -45,7 +45,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         foreach (var participant in encounter.Participants)
         {
-            runtime.Participants.Add(BuildParticipantState(package, participant));
+            runtime.Participants.Add(BuildParticipantState(package, working, participant));
         }
 
         if (runtime.Participants.Count == 0)
@@ -209,6 +209,10 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         var outputs = BuildAbilityOutputs(ability, isBasicAttack).ToList();
         var equipmentBonus = 0d;
+        var statBonus = 0d;
+        var statId = string.Empty;
+        var statValue = 0d;
+        var statMetadataPresent = false;
         if (isBasicAttack && RuntimeStateHelpers.IdEquals(source.Id, "player"))
         {
             if (!TryResolveEquipmentDamageBonus(package, working, out equipmentBonus, out var bonusDiagnostic))
@@ -218,19 +222,40 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
                 result.Message = $"Ability failed: {ability.Id}";
                 return result;
             }
+            if (!TryResolveStatDamageBonus(package, ability, source, out statBonus, out statId,
+                    out statValue, out statMetadataPresent, out var statDiagnostic))
+            {
+                result.Diagnostics.Add(statDiagnostic!);
+                result.Success = false;
+                result.Message = $"Ability failed: {ability.Id}";
+                return result;
+            }
+            var totalBonus = equipmentBonus + statBonus;
+            if (totalBonus != 0)
+            {
+                foreach (var output in outputs.Where(IsDamageOutput)) output.Amount += totalBonus;
+            }
             if (equipmentBonus > 0)
             {
-                foreach (var output in outputs.Where(IsDamageOutput)) output.Amount += equipmentBonus;
                 result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic(
                     "combat.equipment_damage_bonus.applied",
                     "Equipped weapon damage bonus applied: +" + Format(equipmentBonus),
                     source.Id,
                     "info"));
             }
+            if (statMetadataPresent)
+            {
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic(
+                    "combat.stat_damage_bonus.applied",
+                    "Source stat damage bonus applied: " + Format(statBonus),
+                    statId,
+                    "info"));
+            }
         }
         foreach (var output in outputs)
         {
-            ApplyEncounterOutput(package, encounter, source, target, output, result.Events, result.Diagnostics, equipmentBonus);
+            ApplyEncounterOutput(package, encounter, source, target, output, result.Events, result.Diagnostics,
+                equipmentBonus, statBonus, statId, statValue, statMetadataPresent);
         }
 
         encounter.ActionHistory.Add($"{source.Id}:{ability.Id}:{target.Id}");
@@ -261,7 +286,10 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         return result;
     }
 
-    private static EncounterParticipantState BuildParticipantState(GamePackageDefinition package, EncounterParticipantDefinition definition)
+    private static EncounterParticipantState BuildParticipantState(
+        GamePackageDefinition package,
+        GameRuntimeState runtimeState,
+        EncounterParticipantDefinition definition)
     {
         var state = new EncounterParticipantState
         {
@@ -283,6 +311,21 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
             if (!state.Stats.Any(s => RuntimeStateHelpers.IdEquals(s.StatId, statDefinition.Id)) && statDefinition.DefaultValue.HasValue)
             {
                 state.Stats.Add(new StatValueState { StatId = statDefinition.Id, Value = statDefinition.DefaultValue.Value });
+            }
+        }
+
+        // Current player-owned Runtime stats are authoritative at encounter start.
+        // Explicit participant values remain authoritative for non-player participants and
+        // are the player fallback when no current Runtime value exists.
+        if (RuntimeStateHelpers.KindEquals(state.Team, "player"))
+        {
+            foreach (var current in runtimeState.Stats)
+            {
+                var existing = state.Stats.FirstOrDefault(stat => RuntimeStateHelpers.IdEquals(stat.StatId, current.StatId));
+                if (existing is null)
+                    state.Stats.Add(new StatValueState { StatId = current.StatId, Value = current.Value });
+                else
+                    existing.Value = current.Value;
             }
         }
 
@@ -351,7 +394,19 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         return result;
     }
 
-    private static void ApplyEncounterOutput(GamePackageDefinition package, EncounterRuntimeState encounter, EncounterParticipantState source, EncounterParticipantState target, OutputDefinition output, List<GameRuntimeEvent> events, List<RuntimeDiagnostic> diagnostics, double equipmentBonus)
+    private static void ApplyEncounterOutput(
+        GamePackageDefinition package,
+        EncounterRuntimeState encounter,
+        EncounterParticipantState source,
+        EncounterParticipantState target,
+        OutputDefinition output,
+        List<GameRuntimeEvent> events,
+        List<RuntimeDiagnostic> diagnostics,
+        double equipmentBonus,
+        double statBonus,
+        string statId,
+        double statValue,
+        bool statMetadataPresent)
     {
         var outputTarget = ResolveOutputTarget(encounter, source, target, output);
         if (IsDamageOutput(output))
@@ -365,7 +420,18 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
             resource.Amount = Math.Max(0, resource.Amount - Math.Abs(output.Amount));
             Dictionary<string, string>? args = null;
-            if (equipmentBonus > 0)
+            if (statMetadataPresent)
+                args = new Dictionary<string, string>
+                {
+                    ["source"] = source.Id,
+                    ["damage"] = Format(Math.Abs(output.Amount)),
+                    ["equipmentDamageBonus"] = Format(equipmentBonus),
+                    ["statId"] = statId,
+                    ["statValue"] = Format(statValue),
+                    ["statDamageBonus"] = Format(statBonus),
+                    ["totalAdditionalDamage"] = Format(equipmentBonus + statBonus)
+                };
+            else if (equipmentBonus > 0)
                 args = new Dictionary<string, string>
                 {
                     ["source"] = source.Id,
@@ -715,6 +781,66 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
             }
             bonus += value;
         }
+        return true;
+    }
+
+    private static bool TryResolveStatDamageBonus(
+        GamePackageDefinition package,
+        AbilityDefinition ability,
+        EncounterParticipantState source,
+        out double bonus,
+        out string statId,
+        out double statValue,
+        out bool metadataPresent,
+        out RuntimeDiagnostic? diagnostic)
+    {
+        const string statIdKey = "source_stat_damage_stat_id";
+        const string baselineKey = "source_stat_damage_baseline";
+        const string perPointKey = "source_stat_damage_per_point";
+        bonus = 0;
+        statId = string.Empty;
+        statValue = 0;
+        diagnostic = null;
+        metadataPresent = ability.Metadata.ContainsKey(statIdKey)
+                          || ability.Metadata.ContainsKey(baselineKey)
+                          || ability.Metadata.ContainsKey(perPointKey);
+        if (!metadataPresent) return true;
+        if (!ability.Metadata.TryGetValue(statIdKey, out statId)
+            || string.IsNullOrWhiteSpace(statId)
+            || !ability.Metadata.TryGetValue(baselineKey, out var rawBaseline)
+            || !ability.Metadata.TryGetValue(perPointKey, out var rawPerPoint))
+        {
+            diagnostic = RuntimeStateHelpers.Diagnostic("combat.stat_damage_metadata.invalid",
+                "Source stat damage metadata is incomplete: " + ability.Id, ability.Id);
+            return false;
+        }
+        var resolvedStatId = statId;
+        if (!double.TryParse(rawBaseline, System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture, out var baseline)
+            || !double.IsFinite(baseline)
+            || !double.TryParse(rawPerPoint, System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture, out var perPoint)
+            || !double.IsFinite(perPoint) || perPoint < 0)
+        {
+            diagnostic = RuntimeStateHelpers.Diagnostic("combat.stat_damage_metadata.invalid",
+                "Source stat damage baseline or multiplier is invalid: " + ability.Id, ability.Id);
+            return false;
+        }
+        if (package.Game.Stats.Count(stat => RuntimeStateHelpers.IdEquals(stat.Id, resolvedStatId)) != 1)
+        {
+            diagnostic = RuntimeStateHelpers.Diagnostic("combat.stat_definition.missing",
+                "Source stat definition is missing or ambiguous: " + statId, statId);
+            return false;
+        }
+        var statState = source.Stats.SingleOrDefault(stat => RuntimeStateHelpers.IdEquals(stat.StatId, resolvedStatId));
+        if (statState is null)
+        {
+            diagnostic = RuntimeStateHelpers.Diagnostic("combat.source_stat.missing",
+                "Source participant stat is missing: " + statId, statId);
+            return false;
+        }
+        statValue = statState.Value;
+        bonus = (statValue - baseline) * perPoint;
         return true;
     }
 

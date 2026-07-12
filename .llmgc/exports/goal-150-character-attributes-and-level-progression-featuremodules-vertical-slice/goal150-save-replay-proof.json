@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "goal150_save_replay_proof_v1",
+  "status": "GREEN",
+  "scenarios": [
+    {
+      "candidateId": "goal150-artifact-attributes-no-combat",
+      "checkpointReloadPassed": true,
+      "checkpointActionCount": 9,
+      "fullReplayEquivalent": true,
+      "finalReplayActionCount": 12,
+      "actionBindingPassed": true
+    },
+    {
+      "candidateId": "goal150-artifact-progression-no-combat",
+      "checkpointReloadPassed": true,
+      "checkpointActionCount": 11,
+      "fullReplayEquivalent": true,
+      "finalReplayActionCount": 13,
+      "actionBindingPassed": true
+    },
+    {
+      "candidateId": "goal150-artifact-attributes-combat",
+      "checkpointReloadPassed": true,
+      "checkpointActionCount": 9,
+      "fullReplayEquivalent": true,
+      "finalReplayActionCount": 14,
+      "actionBindingPassed": true
+    },
+    {
+      "candidateId": "goal150-artifact-equipment-combat",
+      "checkpointReloadPassed": true,
+      "checkpointActionCount": 13,
+      "fullReplayEquivalent": true,
+      "finalReplayActionCount": 17,
+      "actionBindingPassed": true
+    },
+    {
+      "candidateId": "goal150-artifact-combined",
+      "checkpointReloadPassed": true,
+      "checkpointActionCount": 14,
+      "fullReplayEquivalent": true,
+      "finalReplayActionCount": 18,
+      "actionBindingPassed": true
+    },
+    {
+      "candidateId": "goal150-artifact-attributes-progression",
+      "checkpointReloadPassed": true,
+      "checkpointActionCount": 12,
+      "fullReplayEquivalent": true,
+      "finalReplayActionCount": 14,
+      "actionBindingPassed": true
+    }
+  ],
+  "fullWorkspaceCheckpointReloadPassed": true,
+  "fullWorkspaceReplayEquivalent": true,
+  "fullWorkspaceActionBindingPassed": true,
+  "allCheckpointReloadsPassed": true,
+  "allFullReplaysEquivalent": true,
+  "allActionBindingsPassed": true,
+  "passed": true
+}

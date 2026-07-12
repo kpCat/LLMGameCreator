@@ -61,7 +61,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughGoal149Tests
             ApplyAcceptedValues(controller);
 
             var disabled = controller.BuildAndQualify();
-            Assert.True(disabled.Passed, string.Join(Environment.NewLine, disabled.Diagnostics));
+            Assert.True(disabled.Passed, disabled.HumanSummary + Environment.NewLine
+                                         + string.Join(Environment.NewLine, disabled.Diagnostics));
             Assert.Equal("e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221", disabled.CompositionPackageSha256);
             Assert.Equal("c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb", disabled.ActivatedProjectPackageSha256);
             Assert.Equal("95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8", disabled.FinalStateHash);

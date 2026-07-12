@@ -35,6 +35,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                     System.Globalization.CultureInfo.InvariantCulture, out var bonus) || bonus < 0)
                 diagnostics.Add("invalid weapon damage bonus rejected: " + item.Id + ":" + raw);
         }
+        ValidateStatDamageMetadata(package, diagnostics);
         foreach (var item in contracts)
         {
             var contract = item.Contract;
@@ -153,6 +154,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                 .Select(item => item.Id), explicitId),
             "item_id" => Matches(package.Game.Items.Select(item => item.Id), explicitId),
             "equipment_slot_id" => Matches(package.Game.EquipmentSlots.Select(item => item.Id), explicitId),
+            "stat_id" => Matches(package.Game.Stats.Select(item => item.Id), explicitId),
+            "progression_id" => Matches(package.Game.Progressions.Select(item => item.Id), explicitId),
             _ => []
         };
         if (matches.Count == 0)
@@ -176,7 +179,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             ("targetInventoryId", "inventory_id"), ("recipeId", "recipe_id"),
             ("resourceNodeId", "resource_node_id"), ("transactionId", "transaction_id"),
             ("encounterId", "encounter_id"), ("participantId", "encounter_participant_id"),
-            ("itemId", "item_id"), ("slotId", "equipment_slot_id")
+            ("itemId", "item_id"), ("slotId", "equipment_slot_id"),
+            ("statId", "stat_id"), ("progressionId", "progression_id")
         };
         foreach (var reference in references)
         {
@@ -196,5 +200,38 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
     private static bool KnownSelector(string selector) => selector is "manifest_package" or "start_map"
         or "entity_id" or "interaction_id" or "dialogue_id" or "quest_id" or "inventory_id"
         or "container_inventory_id" or "recipe_id" or "resource_node_id" or "transaction_id"
-        or "encounter_id" or "encounter_participant_id" or "item_id" or "equipment_slot_id";
+        or "encounter_id" or "encounter_participant_id" or "item_id" or "equipment_slot_id"
+        or "stat_id" or "progression_id";
+
+    private static void ValidateStatDamageMetadata(
+        GamePackageDefinition package,
+        List<string> diagnostics)
+    {
+        const string statIdKey = "source_stat_damage_stat_id";
+        const string baselineKey = "source_stat_damage_baseline";
+        const string perPointKey = "source_stat_damage_per_point";
+        foreach (var ability in package.Game.Abilities.Where(ability =>
+                     ability.Metadata.ContainsKey(statIdKey)
+                     || ability.Metadata.ContainsKey(baselineKey)
+                     || ability.Metadata.ContainsKey(perPointKey)))
+        {
+            if (!ability.Metadata.TryGetValue(statIdKey, out var statId)
+                || !ability.Metadata.TryGetValue(baselineKey, out var baseline)
+                || !ability.Metadata.TryGetValue(perPointKey, out var perPoint)
+                || string.IsNullOrWhiteSpace(statId))
+            {
+                diagnostics.Add("invalid stat damage metadata rejected: " + ability.Id);
+                continue;
+            }
+
+            if (package.Game.Stats.Count(stat => stat.Id == statId) != 1)
+                diagnostics.Add("missing or ambiguous source stat rejected: " + ability.Id + ":" + statId);
+            if (!decimal.TryParse(baseline, System.Globalization.NumberStyles.Number,
+                    System.Globalization.CultureInfo.InvariantCulture, out _))
+                diagnostics.Add("invalid stat baseline rejected: " + ability.Id + ":" + baseline);
+            if (!decimal.TryParse(perPoint, System.Globalization.NumberStyles.Number,
+                    System.Globalization.CultureInfo.InvariantCulture, out var multiplier) || multiplier < 0)
+                diagnostics.Add("invalid stat multiplier rejected: " + ability.Id + ":" + perPoint);
+        }
+    }
 }

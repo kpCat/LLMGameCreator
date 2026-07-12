@@ -1,54 +1,76 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 149 capability-driven Runtime playthrough and equipment FeatureModule vertical slice
+Updated by: Goal 150 character attributes and level progression FeatureModules vertical slice
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 149 capability-driven Runtime playthrough and equipment FeatureModule vertical slice is GREEN:
+Goal 150 character attributes and level progression FeatureModules vertical slice is GREEN:
 
 ```text
 implementationStatus=GREEN
-gateStatus=capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required
+gateStatus=character_attributes_and_level_progression_featuremodules_vertical_slice_verification required
 goal148Accepted=true
-goal148AcceptedByHuman=true
-goal148AcceptedByCodex=false
 goal149Accepted=false
-goal149ManualReviewDeferred=true
+goal149ManualReviewDeferred=false
+goal150Accepted=false
+goal150ManualReviewRequired=true
 capabilityDrivenRuntimePlaythrough=true
-fixedNormalActionPlanAbsent=true
 requiredCoreModuleCount=10
-optionalFeatureModuleCount=4
+optionalFeatureModuleCount=6
+characterAttributesFeatureModule=true
+levelProgressionFeatureModule=true
+bothDefaultSelected=false
+defaultStrength=7
+defaultStatDamageBonus=2
+defaultProgressionAmount=10
+defaultProgressionStage=level/2
+equipmentAttributesAdditive=true
+additiveCatalogCompatibility=true
+goal149HashesPreserved=true
+goal149DisabledHashes=e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221/c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb/95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8
+goal149EquipmentHashes=94a47ab896b425a76c2e523acef3ab87d538bb8f0c754b2402b0127e5ad82bf5/147f88ac026f006ab5fbe93dc6c7cb039e85189fcb3421a71a1fd99284d3a5c1/51bba1ffada4ce9ffccfa9132e7e7c007afcbcec8632d7de13d26ce961b3ea0d
+fullOptionalCompositionPackageSha256=ba9dbf32c8e79d4e2bf37116dd611cc7eccd7bee73f880aefeb041cce4b2ee40
+fullOptionalActivatedPackageSha256=19e837b8d4925b0b567c52adfb93905bc44ac6e9a13d3008726ff1be89ea49cf
+fullOptionalFinalStateHash=ebb05a61036ddfde40b605267685ba8ab90baa01ed3b5efbb815615ae26eca5c
+fullOptionalActionCounts=20/16/20
+runtimeAuthority=true
+projectionOnly=false
+unityGameplayTruth=false
+accepted=false
+nextProductGoal=review_goals_149_150_equipment_attributes_progression_workflow
+```
+
+The normal `Игры` workspace now exposes default-off `Характеристики персонажа`
+and `Уровни и опыт` mechanics through catalog metadata. Runtime-owned player
+stats initialize from package defaults when referenced by generic ability
+metadata; current player state takes precedence over an explicit player
+participant value at encounter start, while explicit values remain the
+non-player/fallback authority. Strength `7` against baseline `5` at multiplier
+`1` contributes `+2`; equipment contributes an independent `+2`, producing
+total additional damage `4`. The generic `ChangeProgression` command delegates
+to `OutputApplier` and reaches amount `10`, stage `level/2`. Attributes and
+progression each qualify without combat or each other. All six optional modules
+pass deterministic package materialization, checkpoint reload, full replay,
+action binding and incremental certification. Goal149 hashes remain exact and
+new unselected modules remain additive-compatible. Goals149/150 and Goal141
+remain `accepted=false`; the next action is the bundled Goals149/150 human
+review.
+
+Goal 149 capability-driven Runtime playthrough and equipment FeatureModule vertical slice remains GREEN:
+
+```text
+goal149Accepted=false
+goal149ManualReviewDeferred=false
 equipmentFeatureModule=true
 equipmentDefaultSelected=false
-additiveCatalogCompatibility=true
-legacyGoal148HashesPreserved=true
-disabledCompositionPackageSha256=e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221
-disabledActivatedPackageSha256=c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb
-disabledFinalStateHash=95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8
 disabledActionCounts=13/8/13
-enabledCompositionPackageSha256=94a47ab896b425a76c2e523acef3ab87d538bb8f0c754b2402b0127e5ad82bf5
-enabledActivatedPackageSha256=147f88ac026f006ab5fbe93dc6c7cb039e85189fcb3421a71a1fd99284d3a5c1
-enabledFinalStateHash=51bba1ffada4ce9ffccfa9132e7e7c007afcbcec8632d7de13d26ce961b3ea0d
 enabledActionCounts=17/13/17
 equipmentSlot=slot/weapon
 equipmentItem=item/rusty_knife
 weaponDamageBonus=2
 combatDamageDelta=2
-accepted=false
-nextProductGoal=goal_150_character_stats_and_progression_featuremodule_vertical_slice
+nextAction=bundled_goals_149_150_manual_review
 ```
-
-The normal Игры workspace now derives its Runtime playthrough from structured
-FeatureModule contracts and a deterministic dependency-aware plan. The new
-optional equipment module is catalog-visible but disabled by default; when
-selected it opens the starting chest, transfers and equips `item/rusty_knife`,
-surfaces `Экипировано: Ржавый нож`, and adds the configured `+2` only to the
-player's equipped-weapon attack. Save/replay preserves the equipment summary,
-plan identity and dynamic checkpoint/final counts. A newly discovered optional
-module is additive-compatible with unrelated saved projects; selected or
-required module drift remains stale/unresolved. The accepted Goal148 package
-and final hashes remain unchanged when equipment is disabled. Goal149 manual
-review is deferred, so Goal149 and Goal141 remain `accepted=false`.
 
 Goal 148C project identity preservation and project-scoped composition hotfix is GREEN:
 

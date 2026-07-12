@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "goal150_equipment_attributes_additivity_proof_v1",
+  "status": "GREEN",
+  "attributesOnly": {
+    "eventIndex": 41,
+    "stepIndex": 11,
+    "stepId": "capability.basic_attack",
+    "source": "gameplay-runtime",
+    "eventType": "DamageApplied",
+    "targetId": "goblin",
+    "message": "Damage applied: resource/health -6",
+    "args": {
+      "damage": "6",
+      "equipmentDamageBonus": "0",
+      "source": "player",
+      "statDamageBonus": "2",
+      "statId": "stat/strength",
+      "statValue": "7",
+      "totalAdditionalDamage": "2"
+    }
+  },
+  "equipmentOnly": {
+    "eventIndex": 47,
+    "stepIndex": 14,
+    "stepId": "capability.basic_attack",
+    "source": "gameplay-runtime",
+    "eventType": "DamageApplied",
+    "targetId": "goblin",
+    "message": "Damage applied: resource/health -6",
+    "args": {
+      "damage": "6",
+      "equipmentDamageBonus": "2",
+      "source": "player"
+    }
+  },
+  "combined": {
+    "eventIndex": 47,
+    "stepIndex": 14,
+    "stepId": "capability.basic_attack",
+    "source": "gameplay-runtime",
+    "eventType": "DamageApplied",
+    "targetId": "goblin",
+    "message": "Damage applied: resource/health -8",
+    "args": {
+      "damage": "8",
+      "equipmentDamageBonus": "2",
+      "source": "player",
+      "statDamageBonus": "2",
+      "statId": "stat/strength",
+      "statValue": "7",
+      "totalAdditionalDamage": "4"
+    }
+  },
+  "statDamageBonus": 2,
+  "equipmentDamageBonus": 2,
+  "totalAdditionalDamage": 4,
+  "forwardReverseModuleOrderIndependent": true,
+  "passed": true
+}

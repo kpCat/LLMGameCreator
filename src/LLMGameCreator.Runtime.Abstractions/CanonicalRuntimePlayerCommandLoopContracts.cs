@@ -108,6 +108,8 @@ public sealed class CanonicalRuntimePlayerCommandLoopSnapshot
     public string InventorySummary { get; set; } = string.Empty;
     public string CombatSummary { get; set; } = string.Empty;
     public string EquipmentSummary { get; set; } = string.Empty;
+    public string AttributesSummary { get; set; } = string.Empty;
+    public string ProgressionSummary { get; set; } = string.Empty;
     public string DiagnosticSummary { get; set; } = string.Empty;
     public bool ProjectionOnly { get; set; }
     public bool UnityGameplayTruth { get; set; }

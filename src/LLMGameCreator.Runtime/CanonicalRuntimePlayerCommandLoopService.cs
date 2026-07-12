@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
@@ -63,7 +64,9 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 GameRuntimeCommand.TakeFromContainer(Arg(step, "sourceInventoryId"), Arg(step, "itemId"),
                     ParseDouble(Arg(step, "amount", "1")), Arg(step, "targetInventoryId"))),
             ["runtime.command.equip_item"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
-                GameRuntimeCommand.EquipItem(Arg(step, "itemId"), Arg(step, "slotId"), Arg(step, "inventoryId")))
+                GameRuntimeCommand.EquipItem(Arg(step, "itemId"), Arg(step, "slotId"), Arg(step, "inventoryId"))),
+            ["runtime.command.change_progression"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.ChangeProgression(step.TargetId, ParseDouble(Arg(step, "amount"))))
         };
     }
 
@@ -542,6 +545,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
         "runtime.command.open_container" => nameof(GameRuntimeCommandType.OpenContainer),
         "runtime.command.take_from_container" => nameof(GameRuntimeCommandType.TakeFromContainer),
         "runtime.command.equip_item" => nameof(GameRuntimeCommandType.EquipItem),
+        "runtime.command.change_progression" => nameof(GameRuntimeCommandType.ChangeProgression),
         _ => string.Empty
     };
 
@@ -643,6 +647,13 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 .OrderBy(equipment => equipment.OwnerId, StringComparer.Ordinal)
                 .SelectMany(equipment => equipment.Slots.OrderBy(slot => slot.SlotId, StringComparer.Ordinal)
                     .Select(slot => slot.SlotId + ":" + (slot.ItemId ?? string.Empty)))),
+            AttributesSummary = string.Join("; ", state.Stats
+                .OrderBy(stat => stat.StatId, StringComparer.Ordinal)
+                .Select(stat => stat.StatId + "=" + Format(stat.Value))),
+            ProgressionSummary = string.Join("; ", state.Progressions
+                .OrderBy(progression => progression.ProgressionId, StringComparer.Ordinal)
+                .Select(progression => progression.ProgressionId + "=" + Format(progression.Amount)
+                                       + ":" + (progression.StageId ?? string.Empty))),
             CombatSummary = CombatSummary(state, events),
             DiagnosticSummary = events.Count == 0 ? "no events emitted" : "eventCount=" + events.Count,
             ProjectionOnly = false,
@@ -743,8 +754,16 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                + participantSummary;
     }
 
-    private static string HashSession(UnifiedRuntimeSession session) =>
-        HashText(JsonSerializer.Serialize(session, StableJsonOptions));
+    private static string HashSession(UnifiedRuntimeSession session)
+    {
+        var node = JsonSerializer.SerializeToNode(session, StableJsonOptions)?.AsObject()
+                   ?? throw new InvalidOperationException("Runtime session hash payload could not be created.");
+        if (node["gameplayState"] is JsonObject gameplay
+            && gameplay["stats"] is JsonArray stats
+            && stats.Count == 0)
+            gameplay.Remove("stats");
+        return HashText(node.ToJsonString(StableJsonOptions));
+    }
 
     private static string HashText(string text)
     {

@@ -219,6 +219,8 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             QuestSummary = session.LatestQuestSummary,
             CombatSummary = session.LatestCombatSummary,
             EquipmentSummary = session.LatestEquipmentSummary,
+            AttributesSummary = session.LatestAttributesSummary,
+            ProgressionSummary = session.LatestProgressionSummary,
             CreatedAtUtc = createdAtUtc
         };
     }
@@ -593,6 +595,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 "runtime.command.open_container" => package.Game.Inventories.Any(item => item.Id == step.TargetId),
                 "runtime.command.take_from_container" => package.Game.Items.Any(item => item.Id == step.TargetId),
                 "runtime.command.equip_item" => package.Game.EquipmentSlots.Any(item => item.Id == step.TargetId),
+                "runtime.command.change_progression" => package.Game.Progressions.Any(item => item.Id == step.TargetId),
                 _ => false
             };
         }
@@ -626,6 +629,8 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         session.LatestQuestSummary = snapshot.QuestSummary;
         session.LatestCombatSummary = snapshot.CombatSummary;
         session.LatestEquipmentSummary = snapshot.EquipmentSummary;
+        session.LatestAttributesSummary = snapshot.AttributesSummary;
+        session.LatestProgressionSummary = snapshot.ProgressionSummary;
     }
 
     private static SelectedRuntimeVariantInteractiveJournalEntry ToJournal(

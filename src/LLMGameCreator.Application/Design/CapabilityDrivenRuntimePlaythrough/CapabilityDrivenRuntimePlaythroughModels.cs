@@ -55,16 +55,19 @@ public static class CapabilityRuntimePrimitiveIds
     public const string OpenContainer = "runtime.command.open_container";
     public const string TakeFromContainer = "runtime.command.take_from_container";
     public const string EquipItem = "runtime.command.equip_item";
+    public const string ChangeProgression = "runtime.command.change_progression";
     public const string InspectInventory = "runtime.presentation.inspect_inventory";
     public const string InspectStatus = "runtime.presentation.inspect_status";
     public const string InspectEquipment = "runtime.presentation.inspect_equipment";
+    public const string InspectAttributes = "runtime.presentation.inspect_attributes";
+    public const string InspectProgression = "runtime.presentation.inspect_progression";
     public const string FinalState = "runtime.presentation.final_state";
 
     public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
     {
         Start, Move, Interact, OpenDialogue, StartOrUpdateQuest, ShowInventory,
         CraftRecipe, HarvestResource, ExecuteTransaction, StartEncounter, BasicAttack,
-        OpenContainer, TakeFromContainer, EquipItem,
-        InspectInventory, InspectStatus, InspectEquipment, FinalState
+        OpenContainer, TakeFromContainer, EquipItem, ChangeProgression,
+        InspectInventory, InspectStatus, InspectEquipment, InspectAttributes, InspectProgression, FinalState
     };
 }

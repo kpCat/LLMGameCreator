@@ -139,7 +139,12 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             CheckpointActionCount = _lastBuild?.CheckpointActionCount ?? 0,
             FinalReplayActionCount = _lastBuild?.FinalReplayActionCount ?? 0,
             PlaythroughSignature = _lastBuild?.PlaythroughSignature ?? string.Empty,
-            EquipmentSlotSummary = _lastBuild?.EquipmentSlotSummary ?? string.Empty
+            EquipmentSlotSummary = _lastBuild?.EquipmentSlotSummary ?? string.Empty,
+            AttributesSummary = _lastBuild?.AttributesSummary ?? string.Empty,
+            ProgressionSummary = _lastBuild?.ProgressionSummary ?? string.Empty,
+            StatDamageBonus = _lastBuild?.StatDamageBonus ?? 0,
+            EquipmentDamageBonus = _lastBuild?.WeaponDamageBonus ?? 0,
+            TotalAdditionalDamage = _lastBuild?.TotalAdditionalDamage ?? 0
         };
     }
 

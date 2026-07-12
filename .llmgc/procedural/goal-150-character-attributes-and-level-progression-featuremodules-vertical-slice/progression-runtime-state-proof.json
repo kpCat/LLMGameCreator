@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal150_progression_runtime_state_proof_v1",
+  "status": "GREEN",
+  "progressionSummary": "progression/character_level=10:level/2",
+  "amount": 10,
+  "stageId": "level/2",
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "passed": true
+}

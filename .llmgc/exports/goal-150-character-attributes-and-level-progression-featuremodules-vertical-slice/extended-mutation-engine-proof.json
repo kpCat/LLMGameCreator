@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "goal150_extended_mutation_engine_proof_v1",
+  "status": "GREEN",
+  "supportedTargetKinds": [
+    "ability_metadata_numeric",
+    "ability_metadata_string",
+    "encounter_participant_stat_amount",
+    "item_metadata_numeric",
+    "progression_stage_required_amount",
+    "stat_default_value"
+  ],
+  "operationCount": 7,
+  "exactTargetCardinality": true,
+  "expectedOldValueChecks": true,
+  "explicitExpectedMissing": true,
+  "stableOperationOrdering": true,
+  "forwardPackageSha256": "2bdef71b4568af04ca4162c8c2ef5b2d51867aed88ab70a344f543c2af1c5724",
+  "reversePackageSha256": "2bdef71b4568af04ca4162c8c2ef5b2d51867aed88ab70a344f543c2af1c5724",
+  "packageBytesIdentical": true,
+  "atomicFailurePreservesInput": true,
+  "passed": true
+}

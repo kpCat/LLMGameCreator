@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "goal150_attributes_runtime_state_proof_v1",
+  "status": "GREEN",
+  "attributesSummary": "stat/strength=7",
+  "playerStatPrecedence": "current player Runtime stat overrides explicit player participant value; explicit values remain non-player and fallback authority",
+  "statId": "stat/strength",
+  "statValue": 7,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "passed": true
+}

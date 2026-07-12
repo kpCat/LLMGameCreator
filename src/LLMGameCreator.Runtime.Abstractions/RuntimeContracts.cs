@@ -88,6 +88,7 @@ public sealed class GameRuntimeState
     public List<InventoryState> Inventories { get; set; } = new List<InventoryState>();
     public List<EquipmentState> Equipment { get; set; } = new List<EquipmentState>();
     public List<ResourceState> Resources { get; set; } = new List<ResourceState>();
+    public List<StatValueState> Stats { get; set; } = new List<StatValueState>();
     public List<ProgressionState> Progressions { get; set; } = new List<ProgressionState>();
     public List<RuntimeFlagState> Flags { get; set; } = new List<RuntimeFlagState>();
     public List<StatusState> Statuses { get; set; } = new List<StatusState>();
@@ -279,7 +280,8 @@ public enum GameRuntimeCommandType
     ChooseDialogueOption = 32,
     CloseDialogue = 33,
     ChangeReputation = 34,
-    SetReputation = 35
+    SetReputation = 35,
+    ChangeProgression = 36
 }
 
 public sealed class GameRuntimeCommand
@@ -353,6 +355,9 @@ public sealed class GameRuntimeCommand
 
     public static GameRuntimeCommand ChangeReputation(string factionId, double amount)
         => new GameRuntimeCommand { Type = GameRuntimeCommandType.ChangeReputation, Id = factionId, Amount = amount };
+
+    public static GameRuntimeCommand ChangeProgression(string progressionId, double amount)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.ChangeProgression, Id = progressionId, Amount = amount };
 }
 
 public enum GameRuntimeEventType

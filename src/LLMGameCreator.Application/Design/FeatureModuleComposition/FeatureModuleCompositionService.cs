@@ -257,10 +257,10 @@ public sealed class FeatureModuleCompositionService
         var request = RequestFor(catalog, spec.CompositionId, spec.ModuleIds);
         var plan = _planner.Plan(catalog, request, Relative(root, basePackagePath), baseHash, true);
         var metadataOperations = plan.OrderedMutationOperations
-            .Where(operation => operation.TargetKind == FeatureModuleItemMetadataMutationService.TargetKind).ToList();
+            .Where(operation => FeatureModulePackageMutationTargetKinds.Supported.Contains(operation.TargetKind)).ToList();
         var standardOperations = plan.OrderedMutationOperations
-            .Where(operation => operation.TargetKind != FeatureModuleItemMetadataMutationService.TargetKind).ToList();
-        var metadataMutation = new FeatureModuleItemMetadataMutationService().Apply(baseJson, metadataOperations);
+            .Where(operation => !FeatureModulePackageMutationTargetKinds.Supported.Contains(operation.TargetKind)).ToList();
+        var metadataMutation = new FeatureModulePackageMutationService().Apply(baseJson, metadataOperations);
         var recipe = new ProductLineRuntimeVariantRecipe
         {
             RecipeId = "composition_" + FeatureModuleCompositionIdentity.ShortName(catalog, spec.ModuleIds).Replace('-', '_'),
@@ -304,10 +304,10 @@ public sealed class FeatureModuleCompositionService
         var reverseRequest = request with { SelectedModuleIds = request.SelectedModuleIds.Reverse().ToList() };
         var reversePlan = _planner.Plan(catalog, reverseRequest, Relative(root, basePackagePath), baseHash, true);
         var reverseMetadataOperations = reversePlan.OrderedMutationOperations
-            .Where(operation => operation.TargetKind == FeatureModuleItemMetadataMutationService.TargetKind).ToList();
+            .Where(operation => FeatureModulePackageMutationTargetKinds.Supported.Contains(operation.TargetKind)).ToList();
         var reverseStandardOperations = reversePlan.OrderedMutationOperations
-            .Where(operation => operation.TargetKind != FeatureModuleItemMetadataMutationService.TargetKind).ToList();
-        var reverseMetadata = new FeatureModuleItemMetadataMutationService().Apply(baseJson, reverseMetadataOperations);
+            .Where(operation => !FeatureModulePackageMutationTargetKinds.Supported.Contains(operation.TargetKind)).ToList();
+        var reverseMetadata = new FeatureModulePackageMutationService().Apply(baseJson, reverseMetadataOperations);
         var reverseRecipe = recipe with { MutationOperations = reverseStandardOperations };
         var reverseJson = _materializer.Materialize(reverseMetadata.PackageJson, reverseRecipe, context).PackageJson;
         var packageSha = HashText(materialized.PackageJson);

@@ -88,8 +88,16 @@ dependency-aware planner. Generic item-metadata mutation supports the first
 default-off equipment module without module/composition-ID branches, and
 catalog-only optional additions are additive-compatible with unrelated saved
 projects. Legacy no-plan qualification remains for historical consumers.
-Remaining debt includes broader primitive/module families, Goal141/Goal149
-manual review, release-owned templates, hands-on quality and packaging.
+Remaining debt includes broader primitive/module families, Goal141 and bundled
+Goals149/150 manual review, release-owned templates, hands-on quality and packaging.
+
+Goal 150 note: the bespoke item-metadata mutation seam is generalized into one
+six-kind target registry; player attributes, generic stat damage and level
+progression now have canonical Runtime/checkpoint/replay coverage. Incremental
+certification reuses five unrelated modules when either new module changes, and
+equipment remains reusable. Remaining debt includes further mechanic families,
+the bundled Goals149/150 and Goal141 reviews, release-owned templates,
+hands-on quality and packaging.
 
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "goal150_attributes_progression_composition_proof_v1",
+  "status": "GREEN",
+  "attributesSummary": "stat/strength=7",
+  "progressionSummary": "progression/character_level=10:level/2",
+  "combatActionsAbsent": true,
+  "equipmentActionsAbsent": true,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "passed": true
+}
