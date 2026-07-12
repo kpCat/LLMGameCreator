@@ -1,0 +1,32 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-152b-unity-worktree-churn-cleanup-and-external-build-workspace-hardening/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: Medium
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 832d9de32d07a37c121fc6e4719ea8d82ec55316
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя чистить worktree вручную.
+
+Критически важно:
+- сначала зафиксируй точный initial dirty inventory;
+- безопасно восстанови/удали только точные Unity/test-generated churn paths из этого inventory;
+- не используй broad git reset или broad git clean;
+- неизвестные пути не трогай;
+- Unity Editor invocation budget = 0;
+- измени ProjectStandaloneBuildService так, чтобы будущий Unity -projectPath всегда был во внешнем
+  коротком LocalAppData workspace, а не в репозитории;
+- используй существующий host cache и один hidden standalone smoke;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи cleanup counts, unknown paths, external workspace contract, Unity process count,
+cache reuse, hidden smoke, final SHA, push, HEAD == origin/main, clean worktree и короткий manual gate.
