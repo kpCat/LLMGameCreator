@@ -197,9 +197,10 @@ dream_full_final_verification required
 - Release risk register was reviewed and updated.
 - The next goal is not started until this gate is accepted.
 
-Goal 150E gate note: equipment-only zero Runtime evidence, equipment-only positive
+Goal 150F gate note: equipment-only zero Runtime evidence, equipment-only positive
 totals, the Goal150A custom `3/8/2/12` regression and expression-overflow rejection
-remain automated. Historical identity preflight is GREEN (`85/85` exact), but the
-single Goal150E candidate cannot start its bounded closure because the exact-HEAD
-runner has a parser error. Goals149/150/150A/150B/150E remain `accepted=false`; no
-manual gate is ready until a later bounded closure and independent audit are GREEN.
+remain automated. Historical identity preflight is GREEN (`85/85` exact); PowerShell
+parser/one-test closure/artifact-scope pre-gates are GREEN; the one real 85-case
+closure is BLOCKED with 21 passed and 64 terminal failures. Goals149/150/150A/150B/
+150E/150F remain `accepted=false`; no manual gate is ready until the failures are
+repaired and a later bounded closure plus independent audit are GREEN.

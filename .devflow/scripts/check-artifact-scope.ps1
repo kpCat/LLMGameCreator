@@ -261,8 +261,8 @@ function Classify-ChangedPath {
         [Parameter(Mandatory=$true)]$Policy,
         [Parameter(Mandatory=$true)][string[]]$ExactAllowed,
         [Parameter(Mandatory=$true)][string[]]$PrefixAllowed,
-        [Parameter(Mandatory=$true)][string[]]$DeletedExactAllowed,
-        [Parameter(Mandatory=$true)][string[]]$DeletedPrefixAllowed
+        [Parameter(Mandatory=$true)][AllowEmptyCollection()][string[]]$DeletedExactAllowed,
+        [Parameter(Mandatory=$true)][AllowEmptyCollection()][string[]]$DeletedPrefixAllowed
     )
 
     $path = $Change.path

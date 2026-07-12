@@ -1,0 +1,31 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-150f-powershell-parser-gate-and-acceptance-closure-execution-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: Medium
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: a952e2918601804c47eafaf7a53f880f9aadac49
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен запуском задачи. Не спрашивай подтверждение; после проверки базы сразу выполняй.
+
+ВАЖНО:
+- не создавай validation-candidate commit;
+- до реального closure обязательно выполни PowerShell AST parse всех изменённых PS1;
+- затем PlanOnly, реальный one-test closure smoke и artifact-scope baseline smoke;
+- исправляй pre-publication parser/smoke дефекты внутри этой задачи;
+- после успешных pre-gates заморозь runner и выполни один 85-case closure;
+- check-all запускай один раз только после GREEN closure;
+- не запускай all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+Пользователь не должен пушить вручную.
+
+В финале сообщи parser results, closure smoke, real closure counts, check-all, final SHA, push result, HEAD == origin/main, clean worktree и manualGateReady.

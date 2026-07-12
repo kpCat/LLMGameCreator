@@ -108,12 +108,13 @@ Goal150C replaces the non-hermetic Goal150B shard route with exact-HEAD
 disposable-worktree validation, unique ProductSmoke roots, adaptive retry/splitting
 and terminal-result accounting. Goal150E reconciled 85 historical identities to 85
 exact current identities before its single candidate commit, but that candidate’s
-closure did not start because `run-complete-test-suite.ps1` has a parser error.
-Goals149/150/150A/150B/150E remain `accepted=false`; the next step is
-`resolve_exact_goal150e_remaining_identity_or_test_blockers`, not a human gate;
-Goal141 remains `accepted=false`.
+closure proceeded after Goal150F parser repair and has 85 terminal cases: 21 passed
+and 64 failed, with zero skipped/not-run/timed-out/missing/duplicate. Goals149/150/
+150A/150B/150E/150F remain `accepted=false`; the next step is
+`repair_64_historical_closure_failures_before_rerun`, not a human gate; Goal141
+remains `accepted=false`.
 
-Current gate token: `resolve_exact_goal150e_remaining_identity_or_test_blockers required`.
+Current gate token: `repair_64_historical_closure_failures_before_rerun required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 

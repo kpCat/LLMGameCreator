@@ -1,0 +1,97 @@
+{
+    "schemaVersion":  "artifact_scope_report_v1",
+    "scenario":  "goal-150f-powershell-parser-gate-and-acceptance-closure-execution-hotfix",
+    "accepted":  true,
+    "policyPath":  ".devflow/artifact-scope/artifact-scope-policy.json",
+    "baselineRef":  "a952e2918601804c47eafaf7a53f880f9aadac49",
+    "failOnTrackedIgnored":  false,
+    "changedPathCount":  8,
+    "allowedCount":  8,
+    "warningCount":  0,
+    "violationCount":  0,
+    "diagnostics":  [
+
+                    ],
+    "changedPaths":  [
+                         {
+                             "path":  ".devflow/artifact-scope/artifact-scope-policy.json",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".devflow/scripts/check-artifact-scope.ps1",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".devflow/scripts/run-complete-test-suite.ps1",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".devflow/scripts/run-goal150f-powershell-parser-gate-and-acceptance-closure-execution-hotfix.cmd",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".devflow/scripts/run-goal150f-powershell-parser-gate-and-acceptance-closure-execution-hotfix.ps1",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/goal-150f-powershell-parser-gate-and-acceptance-closure-execution-hotfix/",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Devflow/ArtifactScopeDeletionAllowlistTests.cs",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Devflow/RunGoal150FPowerShellParserGateTests.cs",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         }
+                     ]
+}

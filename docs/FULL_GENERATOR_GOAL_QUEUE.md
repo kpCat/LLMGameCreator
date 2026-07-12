@@ -2418,10 +2418,12 @@ expression overflow is rejected as a deterministic failed binding. A bounded
 previous unbounded full-suite wait. Goal150C supersedes that mutable runner with
 an exact-HEAD disposable-worktree runner, fresh ProductSmoke roots and adaptive
 terminal accounting. Goal150E reconciled all 85 historical identities before its
-one candidate commit, but closure is BLOCKED by a `run-complete-test-suite.ps1`
-parser error. Goals149/150/150A/150B/150E remain `accepted=false`; next is
-`resolve_exact_goal150e_remaining_identity_or_test_blockers`. No human gate is
-ready until a later bounded closure is GREEN.
+one candidate commit. Goal150F repaired the PowerShell parser and empty deletion-list
+binding gates, then completed the single real 85-case closure with 85 terminal
+results: 21 passed and 64 failed, with zero skipped/not-run/timed-out/missing/
+duplicate cases. Goals149/150/150A/150B/150E/150F remain `accepted=false`; next
+is `repair_64_historical_closure_failures_before_rerun`. No human gate is ready
+until a later bounded closure is GREEN.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,

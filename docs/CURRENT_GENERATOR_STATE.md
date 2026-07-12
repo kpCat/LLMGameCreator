@@ -1,20 +1,21 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 150E historical test identity reconciliation and bundled manual gate readiness hotfix
+Updated by: Goal 150F PowerShell parser gate and acceptance closure execution hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 150E historical test identity reconciliation and bundled manual gate readiness hotfix is BLOCKED:
+Goal 150F PowerShell parser gate and acceptance closure execution hotfix is BLOCKED:
 
 ```text
 implementationStatus=BLOCKED
-gateStatus=resolve_exact_goal150e_remaining_identity_or_test_blockers required
+gateStatus=repair_64_historical_closure_failures_before_rerun required
 goal149Accepted=false
 goal150Accepted=false
 goal150aAccepted=false
 goal150bAccepted=false
 goal150cAccepted=false
 goal150eAccepted=false
+goal150fAccepted=false
 acceptedByCodex=false
 manualReviewRequired=false
 manualGateReady=false
@@ -22,20 +23,22 @@ historicalIdentityCount=85
 resolvedHistoricalIdentityCount=85
 unresolvedHistoricalIdentityCount=0
 ambiguousHistoricalIdentityCount=0
-candidateCommit=aa46ed88018dcabb09d1998f7d9f0f16114c988c
-closureStarted=false
-closureBlocker=run-complete-test-suite.ps1 parser error at line 194
+candidateCommit=none
+closureStarted=true
+closureBlocker=64 mapped historical cases have terminal Failed outcomes in the disposable snapshot
 hermeticSnapshot=true
 mainWorktreeUnchangedByValidation=true
-completeSuiteDiscovered=1734
-completeSuiteAssigned=1734
-completeSuiteExecuted=1734
-completeSuitePassed=97
-completeSuiteFailed=18
+completeSuiteDiscovered=85
+completeSuiteAssigned=85
+completeSuiteAttempted=85
+completeSuiteExecuted=85
+completeSuitePassed=21
+completeSuiteFailed=64
 completeSuiteSkipped=0
+completeSuiteNotRun=0
+completeSuiteTimedOut=0
 completeSuiteMissing=0
 completeSuiteDuplicate=0
-completeSuiteAborted=1619
 equipmentOnlyZeroRuntimeEvidence=true
 equipmentOnlyPositiveTotal=3/0/3
 zeroMetadataDistinctFromAbsent=true
@@ -69,14 +72,20 @@ completeSuiteDuplicate=0
 completeSuiteAborted=4
 githubActionsCheckPresent=false
 accepted=false
-nextProductGoal=resolve_exact_goal150e_remaining_identity_or_test_blockers
+nextProductGoal=repair_64_historical_closure_failures_before_rerun
 ```
 
-Goal150E preflight reconciled all 85 historical Goal150B identities to exact current
-test identities (`R1=85`, `R2/R3/R4=0`, unresolved/ambiguous `0`). The one allowed
-candidate commit was created, but its bounded closure did not start: the disposable
-runner has a PowerShell parser error at line 194. This final BLOCKED status defers
-the code repair to a new task; no human acceptance is claimed.
+Goal150F repaired the malformed compact PowerShell closure projection/plan blocks,
+added AST parser regression coverage and made empty deletion allowlists bindable.
+All changed scripts passed the PowerShell AST parser; reconciliation PlanOnly was
+85/85; the real one-test disposable closure smoke was 1/1; and the artifact-scope
+baseline passed with empty deletion allowlists. The one real 85-case closure then
+completed with terminal accounting: 85 attempted/executed, 21 passed, 64 failed,
+0 skipped/not-run/timed-out/missing/duplicate. The failures are real historical
+test failures in the disposable snapshot (including stale expected GREEN state and
+missing historical build/log evidence), not parser or result-accounting failures.
+No human acceptance is claimed; all acceptance flags remain false and
+`manualGateReady=false`.
 
 Goal150B fixes the independently audited P1 gap where valid equipped
 `combat_damage_bonus=0` was indistinguishable from absent metadata in

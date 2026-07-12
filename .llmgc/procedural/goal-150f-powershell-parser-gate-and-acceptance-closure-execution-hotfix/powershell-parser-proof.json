@@ -1,0 +1,33 @@
+{
+    "status":  "GREEN",
+    "scripts":  [
+                    {
+                        "path":  ".devflow/scripts/run-complete-test-suite.ps1",
+                        "passed":  true,
+                        "errors":  [
+
+                                   ]
+                    },
+                    {
+                        "path":  ".devflow/scripts/check-artifact-scope.ps1",
+                        "passed":  true,
+                        "errors":  [
+
+                                   ]
+                    },
+                    {
+                        "path":  ".devflow/scripts/run-goal150e-historical-test-identity-reconciliation-and-manual-gate-readiness-hotfix.ps1",
+                        "passed":  true,
+                        "errors":  [
+
+                                   ]
+                    },
+                    {
+                        "path":  ".devflow/scripts/run-goal150f-powershell-parser-gate-and-acceptance-closure-execution-hotfix.ps1",
+                        "passed":  true,
+                        "errors":  [
+
+                                   ]
+                    }
+                ]
+}

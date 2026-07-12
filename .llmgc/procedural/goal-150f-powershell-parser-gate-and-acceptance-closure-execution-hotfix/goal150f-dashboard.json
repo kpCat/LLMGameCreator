@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal150f_dashboard_v1",
+  "status": "BLOCKED",
+  "parserGatePassed": true,
+  "artifactScopeEmptyDeletionListsPassed": true,
+  "closureSmoke": { "attempted": 1, "executed": 1, "passed": 1, "failed": 0, "notRun": 0, "timedOut": 0, "missing": 0, "duplicate": 0 },
+  "closure": { "historicalIdentityCount": 85, "resolvedHistoricalIdentityCount": 85, "currentExecutionCaseCount": 85, "attempted": 85, "executed": 85, "passed": 21, "failed": 64, "skipped": 0, "notRun": 0, "timedOut": 0, "missing": 0, "duplicate": 0 },
+  "manualGateReady": false,
+  "goal149Accepted": false,
+  "goal150Accepted": false,
+  "goal150aAccepted": false,
+  "goal150bAccepted": false,
+  "acceptedByCodex": false,
+  "manualReviewPerformed": false,
+  "humanAcceptanceClaimed": false,
+  "blocker": "64 mapped historical cases have terminal Failed outcomes in the disposable snapshot"
+}

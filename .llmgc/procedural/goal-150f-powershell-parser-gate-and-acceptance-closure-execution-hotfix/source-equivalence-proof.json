@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "goal150f_source_equivalence_v1",
+  "validatedSourceManifestSha256": "976378ef2fcec9752ff1140611422f63ed49ffe0977087318e9b37330d8b30e7",
+  "finalSourceManifestSha256": "976378ef2fcec9752ff1140611422f63ed49ffe0977087318e9b37330d8b30e7",
+  "sourceEquivalent": true,
+  "note": "Final post-commit recomputation is required before publication."
+}

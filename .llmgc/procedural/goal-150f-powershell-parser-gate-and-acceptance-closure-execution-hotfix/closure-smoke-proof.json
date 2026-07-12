@@ -1,0 +1,42 @@
+{
+    "schemaVersion":  "goal150e_validation_accounting_v1",
+    "mode":  "Goal150AcceptanceClosure",
+    "status":  "GREEN",
+    "passed":  true,
+    "validatedCommit":  "a952e2918601804c47eafaf7a53f880f9aadac49",
+    "validationSnapshotMatchesFinalSources":  true,
+    "hermeticSnapshot":  true,
+    "mainWorktreeUnchangedByValidation":  true,
+    "maximumSimultaneousTesthostProcesses":  1,
+    "counts":  {
+                   "discovered":  1,
+                   "assigned":  1,
+                   "attempted":  1,
+                   "executed":  1,
+                   "passed":  1,
+                   "failed":  0,
+                   "skipped":  0,
+                   "notRun":  0,
+                   "timedOut":  0,
+                   "missing":  0,
+                   "duplicate":  0,
+                   "historicalIdentityCount":  1,
+                   "resolvedHistoricalIdentityCount":  1,
+                   "currentExecutionCaseCount":  1,
+                   "attemptedExecutionCaseCount":  1,
+                   "executedCaseCount":  1,
+                   "passedCaseCount":  1,
+                   "failedCaseCount":  0,
+                   "skippedCaseCount":  0,
+                   "notRunCaseCount":  0,
+                   "timedOutCaseCount":  0,
+                   "missingResultCount":  0,
+                   "duplicateResultCount":  0
+               },
+    "lanes":  {
+                  "productSmokeLanePassed":  true,
+                  "nonProductLanePassed":  true
+              },
+    "attempts":  1,
+    "rawOutputRoot":  "C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150f-20260712-175616\\one-test-closure-smoke"
+}

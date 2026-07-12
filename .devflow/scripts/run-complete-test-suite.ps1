@@ -188,15 +188,35 @@ try {
         $closureManifestPath = if (-not [string]::IsNullOrWhiteSpace($ReconciliationManifestPath)) { $ReconciliationManifestPath } else { $ManifestPath }
         if ([string]::IsNullOrWhiteSpace($closureManifestPath) -or -not (Test-Path -LiteralPath $closureManifestPath -PathType Leaf)) { throw 'Goal150AcceptanceClosure requires a JSON manifest path.' }
         $manifestDocument = Get-Content -LiteralPath $closureManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-        $manifestEntries = if ($manifestDocument.PSObject.Properties.Name -contains 'entries') { @($manifestDocument.entries) } else { @($manifestDocument) }
+        $manifestEntries = @(
+            if ($manifestDocument.PSObject.Properties.Name -contains 'entries') {
+                $manifestDocument.entries
+            }
+            else {
+                $manifestDocument
+            }
+        )
         if ($manifestEntries.Count -eq 0) { throw 'Goal150AcceptanceClosure manifest is empty.' }
         if ($manifestDocument.PSObject.Properties.Name -contains 'historicalIdentityCount') { $reconciliationSummary = $manifestDocument }
-        $executionEntries = @($manifestEntries | ForEach-Object {
-            if ($_.PSObject.Properties.Name -contains 'currentExecutionIdentities') {
-                $_.currentExecutionIdentities | ForEach-Object { [pscustomobject]@{ testName = [string]$_; lane = if ([string]$_ -like '*ProductSmoke*') { 'P' } else { 'N' } }
+        $executionEntries = @(
+            foreach ($manifestEntry in $manifestEntries) {
+                if ($manifestEntry.PSObject.Properties.Name -contains 'currentExecutionIdentities') {
+                    foreach ($currentIdentity in @($manifestEntry.currentExecutionIdentities)) {
+                        $lane = if ([string]$currentIdentity -like '*ProductSmoke*') { 'P' } else { 'N' }
+                        [pscustomobject]@{
+                            testName = [string]$currentIdentity
+                            lane = $lane
+                        }
+                    }
+                }
+                else {
+                    [pscustomobject]@{
+                        testName = [string]$manifestEntry.testName
+                        lane = [string]$manifestEntry.lane
+                    }
+                }
             }
-            else { [pscustomobject]@{ testName = [string]$_.testName; lane = [string]$_.lane } }
-        })
+        )
         $duplicates = @($executionEntries | Group-Object testName | Where-Object Count -gt 1)
         $executionEntries = @($executionEntries | Group-Object testName | ForEach-Object { $_.Group[0] })
         $missingManifest = @($executionEntries | Where-Object { $discoveredTests -notcontains $_.testName })
@@ -214,19 +234,44 @@ try {
 
     $lanePlan = @()
     if ($Mode -eq 'Goal150AcceptanceClosure') {
-        foreach ($methodGroup in @($inventory | Group-Object { "$($_.className).$(Get-MethodName $_.name)" } | Sort-Object Name)) {
+        $methodGroups = @(
+            $inventory |
+                Group-Object -Property {
+                    $className = $_.className
+                    $methodName = Get-MethodName -TestName $_.name
+                    "$className.$methodName"
+                } |
+                Sort-Object -Property Name
+        )
+
+        foreach ($methodGroup in $methodGroups) {
             $members = @($methodGroup.Group)
-            $lanePlan += [pscustomobject]@{ id = "closure-{0:D3}" -f ($lanePlan.Count + 1); lane = $members[0].lane; classes = @($members[0].className); tests = @($members | Select-Object -ExpandProperty name); exactTests = @($members | Select-Object -ExpandProperty name); initial = $true }
+            $lanePlan += [pscustomobject]@{
+                id = "closure-{0:D3}" -f ($lanePlan.Count + 1)
+                lane = $members[0].lane
+                classes = @($members[0].className)
+                tests = @($members | Select-Object -ExpandProperty name)
+                exactTests = @($members | Select-Object -ExpandProperty name)
+                initial = $true
+            }
         }
     }
-    else { foreach ($lane in @('N', 'P')) {
-        $classes = @($inventory | Where-Object lane -eq $lane | Select-Object -ExpandProperty className -Unique | Sort-Object)
-        for ($offset = 0; $offset -lt $classes.Count; $offset += $ClassesPerShard) {
-            $last = [Math]::Min($classes.Count - 1, $offset + $ClassesPerShard - 1)
-            $members = @($classes[$offset..$last])
-            $lanePlan += [pscustomobject]@{ id = "$lane-{0:D3}" -f ($lanePlan.Count + 1); lane = $lane; classes = $members; tests = @($inventory | Where-Object { $members -contains $_.className } | Select-Object -ExpandProperty name); initial = $true }
+    else {
+        foreach ($lane in @('N', 'P')) {
+            $classes = @($inventory | Where-Object lane -eq $lane | Select-Object -ExpandProperty className -Unique | Sort-Object)
+            for ($offset = 0; $offset -lt $classes.Count; $offset += $ClassesPerShard) {
+                $last = [Math]::Min($classes.Count - 1, $offset + $ClassesPerShard - 1)
+                $members = @($classes[$offset..$last])
+                $lanePlan += [pscustomobject]@{
+                    id = "$lane-{0:D3}" -f ($lanePlan.Count + 1)
+                    lane = $lane
+                    classes = $members
+                    tests = @($inventory | Where-Object { $members -contains $_.className } | Select-Object -ExpandProperty name)
+                    initial = $true
+                }
+            }
         }
-    } }
+    }
     Write-Json 'validation-lane-plan.json' ([ordered]@{ schemaVersion = 'goal150c_lane_plan_v1'; partitionKind = 'deterministic_namespace_class_groups'; initialClassesPerShard = $ClassesPerShard; maximumSimultaneousTesthostProcesses = 1; lanes = @([ordered]@{ id='N'; filter='FullyQualifiedName!~ProductSmoke' }, [ordered]@{ id='P'; filter='FullyQualifiedName~ProductSmoke'; environment='unique project/package roots per shard' }); groups = $lanePlan })
     if ($PlanOnly) { Write-Host 'COMPLETE_TEST_SUITE_PLAN_READY'; return }
 

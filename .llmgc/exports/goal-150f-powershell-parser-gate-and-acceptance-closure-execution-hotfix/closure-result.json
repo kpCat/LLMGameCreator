@@ -1,0 +1,42 @@
+{
+    "schemaVersion":  "goal150e_validation_accounting_v1",
+    "mode":  "Goal150AcceptanceClosure",
+    "status":  "BLOCKED",
+    "passed":  false,
+    "validatedCommit":  "a952e2918601804c47eafaf7a53f880f9aadac49",
+    "validationSnapshotMatchesFinalSources":  true,
+    "hermeticSnapshot":  true,
+    "mainWorktreeUnchangedByValidation":  true,
+    "maximumSimultaneousTesthostProcesses":  1,
+    "counts":  {
+                   "discovered":  85,
+                   "assigned":  85,
+                   "attempted":  85,
+                   "executed":  85,
+                   "passed":  21,
+                   "failed":  64,
+                   "skipped":  0,
+                   "notRun":  0,
+                   "timedOut":  0,
+                   "missing":  0,
+                   "duplicate":  0,
+                   "historicalIdentityCount":  85,
+                   "resolvedHistoricalIdentityCount":  85,
+                   "currentExecutionCaseCount":  85,
+                   "attemptedExecutionCaseCount":  85,
+                   "executedCaseCount":  85,
+                   "passedCaseCount":  21,
+                   "failedCaseCount":  64,
+                   "skippedCaseCount":  0,
+                   "notRunCaseCount":  0,
+                   "timedOutCaseCount":  0,
+                   "missingResultCount":  0,
+                   "duplicateResultCount":  0
+               },
+    "lanes":  {
+                  "productSmokeLanePassed":  false,
+                  "nonProductLanePassed":  false
+              },
+    "attempts":  85,
+    "rawOutputRoot":  "C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150f-20260712-175616\\closure"
+}
