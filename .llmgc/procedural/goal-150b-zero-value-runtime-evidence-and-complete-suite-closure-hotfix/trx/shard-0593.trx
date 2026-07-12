@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fe852de8-9101-4461-8c8a-db39c7782ba9" name="endim@DESKTOP-SM838SH 2026-07-12 13:57:47" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:57:47.5765040+03:00" queuing="2026-07-12T13:57:47.5765042+03:00" start="2026-07-12T13:57:46.5054611+03:00" finish="2026-07-12T13:57:47.5853367+03:00" />
+  <TestSettings name="default" id="9dd20bdf-c732-40e2-b087-edb194a90362">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_57_47" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="401f35a1-2854-463a-b314-4d0da435c8cf" testId="c75c2b06-fe90-2894-d3e7-2f385b89815b" testName="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterMapsLatestSelection" computerName="DESKTOP-SM838SH" duration="00:00:00.0030060" startTime="2026-07-12T13:57:47.3761172+03:00" endTime="2026-07-12T13:57:47.3761174+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="401f35a1-2854-463a-b314-4d0da435c8cf" />
+    <UnitTestResult executionId="8e713f19-6d5a-4693-a261-620ae6c07540" testId="9812fd24-d299-46de-dd06-4bd9ad6d52fc" testName="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PageControlCanBeConstructedBeforeLayout" computerName="DESKTOP-SM838SH" duration="00:00:00.1313371" startTime="2026-07-12T13:57:47.3730542+03:00" endTime="2026-07-12T13:57:47.3730545+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8e713f19-6d5a-4693-a261-620ae6c07540" />
+    <UnitTestResult executionId="da9b88cf-9ded-4eb7-afde-df909432019c" testId="ae364aaa-4441-5058-dd07-f612c8e1b6ea" testName="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterBuildsRequestFromSelections" computerName="DESKTOP-SM838SH" duration="00:00:00.0070935" startTime="2026-07-12T13:57:47.3832738+03:00" endTime="2026-07-12T13:57:47.3832740+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da9b88cf-9ded-4eb7-afde-df909432019c" />
+    <UnitTestResult executionId="60ce0e6c-54ce-4577-a79e-a1322662e3d8" testId="8b8a51db-bd86-ba0e-c143-1709500a0718" testName="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterBuildsVariantOptions" computerName="DESKTOP-SM838SH" duration="00:00:00.0272904" startTime="2026-07-12T13:57:47.2420723+03:00" endTime="2026-07-12T13:57:47.2420886+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="60ce0e6c-54ce-4577-a79e-a1322662e3d8" />
+    <UnitTestResult executionId="1ec6053a-c8ff-4fd7-b8e5-a2b5efa004cd" testId="7a803330-98da-b221-617f-fec74614b41d" testName="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterMapsDiagnostics" computerName="DESKTOP-SM838SH" duration="00:00:00.0260466" startTime="2026-07-12T13:57:47.4101117+03:00" endTime="2026-07-12T13:57:47.4101120+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1ec6053a-c8ff-4fd7-b8e5-a2b5efa004cd" />
+    <UnitTestResult executionId="3f4cb5f3-a1a5-469f-b3dc-f3f7aecd26ad" testId="f270595c-4f8f-aa13-97cf-112f2f021322" testName="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterBuildsUsefulAtlasFallbackHelpForUnknownVisibleOption" computerName="DESKTOP-SM838SH" duration="00:00:00.0006879" startTime="2026-07-12T13:57:47.3840029+03:00" endTime="2026-07-12T13:57:47.3840029+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3f4cb5f3-a1a5-469f-b3dc-f3f7aecd26ad" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterMapsDiagnostics" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="7a803330-98da-b221-617f-fec74614b41d">
+      <Execution id="1ec6053a-c8ff-4fd7-b8e5-a2b5efa004cd" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests" name="PresenterMapsDiagnostics" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterMapsLatestSelection" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c75c2b06-fe90-2894-d3e7-2f385b89815b">
+      <Execution id="401f35a1-2854-463a-b314-4d0da435c8cf" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests" name="PresenterMapsLatestSelection" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PageControlCanBeConstructedBeforeLayout" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="9812fd24-d299-46de-dd06-4bd9ad6d52fc">
+      <Execution id="8e713f19-6d5a-4693-a261-620ae6c07540" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests" name="PageControlCanBeConstructedBeforeLayout" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterBuildsUsefulAtlasFallbackHelpForUnknownVisibleOption" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f270595c-4f8f-aa13-97cf-112f2f021322">
+      <Execution id="3f4cb5f3-a1a5-469f-b3dc-f3f7aecd26ad" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests" name="PresenterBuildsUsefulAtlasFallbackHelpForUnknownVisibleOption" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterBuildsVariantOptions" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="8b8a51db-bd86-ba0e-c143-1709500a0718">
+      <Execution id="60ce0e6c-54ce-4577-a79e-a1322662e3d8" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests" name="PresenterBuildsVariantOptions" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests.PresenterBuildsRequestFromSelections" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="ae364aaa-4441-5058-dd07-f612c8e1b6ea">
+      <Execution id="da9b88cf-9ded-4eb7-afde-df909432019c" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.WinForms.CapabilityPickerPresenterTests" name="PresenterBuildsRequestFromSelections" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="c75c2b06-fe90-2894-d3e7-2f385b89815b" executionId="401f35a1-2854-463a-b314-4d0da435c8cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9812fd24-d299-46de-dd06-4bd9ad6d52fc" executionId="8e713f19-6d5a-4693-a261-620ae6c07540" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae364aaa-4441-5058-dd07-f612c8e1b6ea" executionId="da9b88cf-9ded-4eb7-afde-df909432019c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b8a51db-bd86-ba0e-c143-1709500a0718" executionId="60ce0e6c-54ce-4577-a79e-a1322662e3d8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a803330-98da-b221-617f-fec74614b41d" executionId="1ec6053a-c8ff-4fd7-b8e5-a2b5efa004cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f270595c-4f8f-aa13-97cf-112f2f021322" executionId="3f4cb5f3-a1a5-469f-b3dc-f3f7aecd26ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.57]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a3f35316-f165-4dd1-89a9-46e54779c7af" name="endim@DESKTOP-SM838SH 2026-07-12 13:04:13" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:04:13.3838787+03:00" queuing="2026-07-12T13:04:13.3838790+03:00" start="2026-07-12T13:04:12.5365696+03:00" finish="2026-07-12T13:04:13.3918485+03:00" />
+  <TestSettings name="default" id="50cb7a8f-3ed4-4ecd-99ca-589cf46d46e0">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_04_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="731bc4a4-c960-477e-b703-b83fe988fe7b" testId="e6f007f9-7fa6-1746-f26c-2fde14e8f21b" testName="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.ScannerIdentifiesDeliberatelyMinifiedFileFixture" computerName="DESKTOP-SM838SH" duration="00:00:00.0001588" startTime="2026-07-12T13:04:13.2990155+03:00" endTime="2026-07-12T13:04:13.2990156+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="731bc4a4-c960-477e-b703-b83fe988fe7b" />
+    <UnitTestResult executionId="f2be6ce0-1f98-4844-8de5-3517b1801733" testId="aaf62fce-97bb-69d5-08ae-aae095f31955" testName="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.ProofQualityHeuristicCatchesReportOnlyShallowSmokeFixture" computerName="DESKTOP-SM838SH" duration="00:00:00.0007858" startTime="2026-07-12T13:04:13.2969377+03:00" endTime="2026-07-12T13:04:13.2969378+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f2be6ce0-1f98-4844-8de5-3517b1801733" />
+    <UnitTestResult executionId="2836a07f-a054-4284-af20-95568ba32e24" testId="5892e9a6-b41c-eba8-feec-7b0decf1a3cc" testName="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.ScannerDoesNotFlagNormalFilesAsMinified" computerName="DESKTOP-SM838SH" duration="00:00:00.0077880" startTime="2026-07-12T13:04:13.2946945+03:00" endTime="2026-07-12T13:04:13.2947109+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2836a07f-a054-4284-af20-95568ba32e24" />
+    <UnitTestResult executionId="ef8d6bd3-c05a-4f98-bf39-9bc6c4a5ba11" testId="55bf3f82-dced-278e-6f57-06bc87c63bc0" testName="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.AbsolutePathDetectionCatchesWindowsAndUnixStylePaths" computerName="DESKTOP-SM838SH" duration="00:00:00.0034616" startTime="2026-07-12T13:04:13.2988026+03:00" endTime="2026-07-12T13:04:13.2988027+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef8d6bd3-c05a-4f98-bf39-9bc6c4a5ba11" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.AbsolutePathDetectionCatchesWindowsAndUnixStylePaths" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="55bf3f82-dced-278e-6f57-06bc87c63bc0">
+      <Execution id="ef8d6bd3-c05a-4f98-bf39-9bc6c4a5ba11" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests" name="AbsolutePathDetectionCatchesWindowsAndUnixStylePaths" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.ScannerDoesNotFlagNormalFilesAsMinified" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="5892e9a6-b41c-eba8-feec-7b0decf1a3cc">
+      <Execution id="2836a07f-a054-4284-af20-95568ba32e24" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests" name="ScannerDoesNotFlagNormalFilesAsMinified" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.ProofQualityHeuristicCatchesReportOnlyShallowSmokeFixture" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="aaf62fce-97bb-69d5-08ae-aae095f31955">
+      <Execution id="f2be6ce0-1f98-4844-8de5-3517b1801733" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests" name="ProofQualityHeuristicCatchesReportOnlyShallowSmokeFixture" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests.ScannerIdentifiesDeliberatelyMinifiedFileFixture" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="e6f007f9-7fa6-1746-f26c-2fde14e8f21b">
+      <Execution id="731bc4a4-c960-477e-b703-b83fe988fe7b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.GeneratorSpineQualityConsolidation.GeneratorSpineQualityScannerTests" name="ScannerIdentifiesDeliberatelyMinifiedFileFixture" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="e6f007f9-7fa6-1746-f26c-2fde14e8f21b" executionId="731bc4a4-c960-477e-b703-b83fe988fe7b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aaf62fce-97bb-69d5-08ae-aae095f31955" executionId="f2be6ce0-1f98-4844-8de5-3517b1801733" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5892e9a6-b41c-eba8-feec-7b0decf1a3cc" executionId="2836a07f-a054-4284-af20-95568ba32e24" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="55bf3f82-dced-278e-6f57-06bc87c63bc0" executionId="ef8d6bd3-c05a-4f98-bf39-9bc6c4a5ba11" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.36]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.37]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.42]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

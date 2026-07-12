@@ -1,0 +1,5 @@
+[xUnit.net 00:00:01.27]     LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.CreatesReviewPackageWithRequiredFiles [FAIL]
+[xUnit.net 00:00:03.67]     LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ValidGeneratedReviewPackageHasNoTopLevelErrorDiagnostics [FAIL]
+[xUnit.net 00:00:04.46]     LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ReviewPackageManifestHashesMatchPhysicalFiles [FAIL]
+[xUnit.net 00:00:04.83]     LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.AutomatedSmokeProofVerifiesLaunchAndQuestCompletion [FAIL]
+Test Run Failed.

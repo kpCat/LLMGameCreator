@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="605041cf-0cad-4e0d-88b0-a65427b5cd35" name="endim@DESKTOP-SM838SH 2026-07-12 13:10:04" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:10:04.1462504+03:00" queuing="2026-07-12T13:10:04.1462506+03:00" start="2026-07-12T13:10:03.1277584+03:00" finish="2026-07-12T13:10:04.1519879+03:00" />
+  <TestSettings name="default" id="4e1e82fb-a4e8-4b66-9758-d3cb006aa7bc">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_10_04" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="27df716e-99fb-44a9-a80a-a6d1f170e45b" testId="f738fd98-8e79-3426-1d3f-611e087c2dc6" testName="LLMGameCreator.Tests.Application.OfflineGeoworldWorldSourceGraph.OfflineGeoworldWorldSourceGraphTests.NegativeProofRejectsForbiddenGeoworldBoundaryScenarios" computerName="DESKTOP-SM838SH" duration="00:00:00.1121717" startTime="2026-07-12T13:10:04.0535606+03:00" endTime="2026-07-12T13:10:04.0535770+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27df716e-99fb-44a9-a80a-a6d1f170e45b" />
+    <UnitTestResult executionId="9a20a637-f64a-4315-845e-08f3c807f81e" testId="4a3cc91e-0733-d3c7-a377-0ef488b20576" testName="LLMGameCreator.Tests.Application.OfflineGeoworldWorldSourceGraph.OfflineGeoworldWorldSourceGraphTests.SyntheticBundleNormalizesIntoGameplaySafeTaxonomyAndGraph" computerName="DESKTOP-SM838SH" duration="00:00:00.0013117" startTime="2026-07-12T13:10:04.0561205+03:00" endTime="2026-07-12T13:10:04.0561206+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a20a637-f64a-4315-845e-08f3c807f81e" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldWorldSourceGraph.OfflineGeoworldWorldSourceGraphTests.SyntheticBundleNormalizesIntoGameplaySafeTaxonomyAndGraph" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="4a3cc91e-0733-d3c7-a377-0ef488b20576">
+      <Execution id="9a20a637-f64a-4315-845e-08f3c807f81e" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldWorldSourceGraph.OfflineGeoworldWorldSourceGraphTests" name="SyntheticBundleNormalizesIntoGameplaySafeTaxonomyAndGraph" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldWorldSourceGraph.OfflineGeoworldWorldSourceGraphTests.NegativeProofRejectsForbiddenGeoworldBoundaryScenarios" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f738fd98-8e79-3426-1d3f-611e087c2dc6">
+      <Execution id="27df716e-99fb-44a9-a80a-a6d1f170e45b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldWorldSourceGraph.OfflineGeoworldWorldSourceGraphTests" name="NegativeProofRejectsForbiddenGeoworldBoundaryScenarios" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="f738fd98-8e79-3426-1d3f-611e087c2dc6" executionId="27df716e-99fb-44a9-a80a-a6d1f170e45b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a3cc91e-0733-d3c7-a377-0ef488b20576" executionId="9a20a637-f64a-4315-845e-08f3c807f81e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.36]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.51]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f56dd35f-6e33-4b0c-ac10-2c7a082f404e" name="endim@DESKTOP-SM838SH 2026-07-12 13:10:16" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:10:16.8863545+03:00" queuing="2026-07-12T13:10:16.8863546+03:00" start="2026-07-12T13:10:16.0402636+03:00" finish="2026-07-12T13:10:16.8943706+03:00" />
+  <TestSettings name="default" id="c5c2820d-1ab2-4e97-b246-7e686c0a5763">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_10_16" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ee30944e-ff16-4c56-b399-06f9add15f58" testId="9b58beaf-4b40-f426-d26a-a8f981f561d8" testName="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.LayerSetsAreDataDrivenAndNegativeMatrixRejectsExpectedCases" computerName="DESKTOP-SM838SH" duration="00:00:00.0095829" startTime="2026-07-12T13:10:16.7820858+03:00" endTime="2026-07-12T13:10:16.7820860+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee30944e-ff16-4c56-b399-06f9add15f58" />
+    <UnitTestResult executionId="5e9d713b-e11f-4983-9389-28fe26ed8e9d" testId="339dabf6-9e41-f214-00e1-f2f691a65520" testName="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.ArbitraryFiniteSizeMatrixValidatesThroughGenericProfilePath" computerName="DESKTOP-SM838SH" duration="00:00:00.0347351" startTime="2026-07-12T13:10:16.7728463+03:00" endTime="2026-07-12T13:10:16.7728633+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5e9d713b-e11f-4983-9389-28fe26ed8e9d" />
+    <UnitTestResult executionId="9242ecdb-45b3-4cad-9933-a842e633c372" testId="d8aad101-3bb0-53b6-fd03-d4116e2f852f" testName="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.DeterministicChunkKeysAreStableAndVariantSensitive" computerName="DESKTOP-SM838SH" duration="00:00:00.0062757" startTime="2026-07-12T13:10:16.7883838+03:00" endTime="2026-07-12T13:10:16.7883839+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9242ecdb-45b3-4cad-9933-a842e633c372" />
+    <UnitTestResult executionId="7e1c3e5a-05fc-495a-aa99-8563ac63bafb" testId="b1ee1906-db27-0035-9fb6-ade56ffaf5a7" testName="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.BenchmarkHeroesSizeIsFixtureMetadataAndNotArchitectureLimit" computerName="DESKTOP-SM838SH" duration="00:00:00.0122098" startTime="2026-07-12T13:10:16.8006681+03:00" endTime="2026-07-12T13:10:16.8006682+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e1c3e5a-05fc-495a-aa99-8563ac63bafb" />
+    <UnitTestResult executionId="58b1f728-0885-4ab2-9880-1721fdaf16c9" testId="c835f38b-3556-f558-9d66-39c163c1656c" testName="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.HugeSparseAndInfiniteProfilesValidateWithoutRawCellDumps" computerName="DESKTOP-SM838SH" duration="00:00:00.0038218" startTime="2026-07-12T13:10:16.8045517+03:00" endTime="2026-07-12T13:10:16.8045519+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="58b1f728-0885-4ab2-9880-1721fdaf16c9" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.LayerSetsAreDataDrivenAndNegativeMatrixRejectsExpectedCases" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="9b58beaf-4b40-f426-d26a-a8f981f561d8">
+      <Execution id="ee30944e-ff16-4c56-b399-06f9add15f58" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests" name="LayerSetsAreDataDrivenAndNegativeMatrixRejectsExpectedCases" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.ArbitraryFiniteSizeMatrixValidatesThroughGenericProfilePath" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="339dabf6-9e41-f214-00e1-f2f691a65520">
+      <Execution id="5e9d713b-e11f-4983-9389-28fe26ed8e9d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests" name="ArbitraryFiniteSizeMatrixValidatesThroughGenericProfilePath" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.DeterministicChunkKeysAreStableAndVariantSensitive" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="d8aad101-3bb0-53b6-fd03-d4116e2f852f">
+      <Execution id="9242ecdb-45b3-4cad-9933-a842e633c372" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests" name="DeterministicChunkKeysAreStableAndVariantSensitive" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.BenchmarkHeroesSizeIsFixtureMetadataAndNotArchitectureLimit" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b1ee1906-db27-0035-9fb6-ade56ffaf5a7">
+      <Execution id="7e1c3e5a-05fc-495a-aa99-8563ac63bafb" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests" name="BenchmarkHeroesSizeIsFixtureMetadataAndNotArchitectureLimit" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests.HugeSparseAndInfiniteProfilesValidateWithoutRawCellDumps" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c835f38b-3556-f558-9d66-39c163c1656c">
+      <Execution id="58b1f728-0885-4ab2-9880-1721fdaf16c9" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ParameterizedVisualWorldProfiles.ParameterizedVisualWorldProfilesValidatorTests" name="HugeSparseAndInfiniteProfilesValidateWithoutRawCellDumps" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9b58beaf-4b40-f426-d26a-a8f981f561d8" executionId="ee30944e-ff16-4c56-b399-06f9add15f58" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="339dabf6-9e41-f214-00e1-f2f691a65520" executionId="5e9d713b-e11f-4983-9389-28fe26ed8e9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d8aad101-3bb0-53b6-fd03-d4116e2f852f" executionId="9242ecdb-45b3-4cad-9933-a842e633c372" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b1ee1906-db27-0035-9fb6-ade56ffaf5a7" executionId="7e1c3e5a-05fc-495a-aa99-8563ac63bafb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c835f38b-3556-f558-9d66-39c163c1656c" executionId="58b1f728-0885-4ab2-9880-1721fdaf16c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.43]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

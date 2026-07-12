@@ -1,0 +1,22 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.52]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorReportsMissingModulePath [48 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorPassesCurrentGeneratorLibrary [31 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorIgnoresSchemaExampleManifest [3 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorReportsAliasFields [10 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorReportsRootLeakage [9 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorReportsMissingManifestFileEntry [11 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorReportsRootLevelTestsLuaLeakage [10 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorLibraryIntegrityValidatorTests.IntegrityValidatorReportsDuplicateModuleIds [11 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0361.trx
+
+Test Run Successful.
+Total tests: 8
+     Passed: 8
+ Total time: 0,9277 Seconds

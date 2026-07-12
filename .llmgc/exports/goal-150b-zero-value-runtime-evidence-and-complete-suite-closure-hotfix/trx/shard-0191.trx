@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="62b43cdd-ed9d-4b9e-8583-a4bf46d4b28b" name="endim@DESKTOP-SM838SH 2026-07-12 13:10:18" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:10:18.7036971+03:00" queuing="2026-07-12T13:10:18.7036973+03:00" start="2026-07-12T13:10:17.7855736+03:00" finish="2026-07-12T13:10:18.7107545+03:00" />
+  <TestSettings name="default" id="035291dd-a147-4dc5-a890-33026242d1bf">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_10_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="222d9606-ae3f-4e99-9b2c-90400cea3c68" testId="d9aa01d3-37f6-6ce8-58b3-927dd73ba66d" testName="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.SameGeneratedPlanProducesByteIdenticalRulePackAndValidationReport" computerName="DESKTOP-SM838SH" duration="00:00:00.0051398" startTime="2026-07-12T13:10:18.6231639+03:00" endTime="2026-07-12T13:10:18.6231640+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="222d9606-ae3f-4e99-9b2c-90400cea3c68" />
+    <UnitTestResult executionId="6d4d91aa-c846-4f33-907d-560b4cecc304" testId="20f712a4-dbc2-23e5-6b9f-5437da8ff140" testName="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.GeneratedRuleReferencesPointToKnownRulesAndSourcePlanIds" computerName="DESKTOP-SM838SH" duration="00:00:00.0925388" startTime="2026-07-12T13:10:18.6128675+03:00" endTime="2026-07-12T13:10:18.6128842+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d4d91aa-c846-4f33-907d-560b4cecc304" />
+    <UnitTestResult executionId="261e12b6-d143-4470-9828-4dd5cf5f244b" testId="0c7ee5e4-2fe2-6bad-92b4-e10ecf3512e3" testName="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.ValidatorRejectsDuplicateUnsafeIdsInvalidFormulaAndMissingRefs" computerName="DESKTOP-SM838SH" duration="00:00:00.0040360" startTime="2026-07-12T13:10:18.6163013+03:00" endTime="2026-07-12T13:10:18.6163014+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="261e12b6-d143-4470-9828-4dd5cf5f244b" />
+    <UnitTestResult executionId="34904c32-c0ab-41df-91df-d48e67258044" testId="da665960-2b25-82a3-386d-72f2fb745ff9" testName="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.MissingSourcePlanRefsProduceDiagnosticsInsteadOfThrowing" computerName="DESKTOP-SM838SH" duration="00:00:00.0016423" startTime="2026-07-12T13:10:18.6179574+03:00" endTime="2026-07-12T13:10:18.6179576+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34904c32-c0ab-41df-91df-d48e67258044" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.GeneratedRuleReferencesPointToKnownRulesAndSourcePlanIds" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="20f712a4-dbc2-23e5-6b9f-5437da8ff140">
+      <Execution id="6d4d91aa-c846-4f33-907d-560b4cecc304" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests" name="GeneratedRuleReferencesPointToKnownRulesAndSourcePlanIds" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.ValidatorRejectsDuplicateUnsafeIdsInvalidFormulaAndMissingRefs" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="0c7ee5e4-2fe2-6bad-92b4-e10ecf3512e3">
+      <Execution id="261e12b6-d143-4470-9828-4dd5cf5f244b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests" name="ValidatorRejectsDuplicateUnsafeIdsInvalidFormulaAndMissingRefs" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.SameGeneratedPlanProducesByteIdenticalRulePackAndValidationReport" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="d9aa01d3-37f6-6ce8-58b3-927dd73ba66d">
+      <Execution id="222d9606-ae3f-4e99-9b2c-90400cea3c68" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests" name="SameGeneratedPlanProducesByteIdenticalRulePackAndValidationReport" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests.MissingSourcePlanRefsProduceDiagnosticsInsteadOfThrowing" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="da665960-2b25-82a3-386d-72f2fb745ff9">
+      <Execution id="34904c32-c0ab-41df-91df-d48e67258044" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.FormulaEffectActionRegistryServiceTests" name="MissingSourcePlanRefsProduceDiagnosticsInsteadOfThrowing" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d9aa01d3-37f6-6ce8-58b3-927dd73ba66d" executionId="222d9606-ae3f-4e99-9b2c-90400cea3c68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="20f712a4-dbc2-23e5-6b9f-5437da8ff140" executionId="6d4d91aa-c846-4f33-907d-560b4cecc304" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c7ee5e4-2fe2-6bad-92b4-e10ecf3512e3" executionId="261e12b6-d143-4470-9828-4dd5cf5f244b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da665960-2b25-82a3-386d-72f2fb745ff9" executionId="34904c32-c0ab-41df-91df-d48e67258044" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.49]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

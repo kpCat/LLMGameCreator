@@ -1,0 +1,8 @@
+{
+    "schemaVersion":  "goal150b_no_equipment_metadata_baseline_proof_v1",
+    "status":  "GREEN",
+    "falseEquipmentEvidence":  false,
+    "disabledSummaryLinesAdded":  false,
+    "disabledHashesPreserved":  true,
+    "passed":  true
+}

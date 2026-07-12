@@ -1,0 +1,10 @@
+{
+    "schemaVersion":  "goal150b_historical_artifact_integrity_proof_v1",
+    "status":  "GREEN",
+    "requiredBase":  "90f278b1f3a70fdb5011e555491fb83860d00509",
+    "goal149Changed":  false,
+    "goal150Changed":  false,
+    "goal150aChanged":  false,
+    "verification":  "Exact git diff against required base is empty for historical Goal149/150/150A artifact roots.",
+    "passed":  true
+}

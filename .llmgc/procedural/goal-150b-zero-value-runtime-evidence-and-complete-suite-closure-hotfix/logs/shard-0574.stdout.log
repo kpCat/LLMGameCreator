@@ -1,0 +1,16 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.36]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.37]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.62]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Runtime.CharacterAttributesProgressionRuntimeTests.CharacterAttributes_current_player_stat_overrides_explicit_participant_value_at_encounter_start [213 ms]
+  Passed LLMGameCreator.Tests.Runtime.CharacterAttributesProgressionRuntimeTests.LevelProgression_command_delegates_to_output_stage_resolution_and_rejects_invalid_input [4 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0574.trx
+
+Test Run Successful.
+Total tests: 2
+     Passed: 2
+ Total time: 1,0528 Seconds

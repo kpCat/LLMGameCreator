@@ -1,0 +1,22 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.Goal148A_missing_injected_source_is_rejected_before_activation_and_staging_is_removed [807 ms]
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.Goal148A_conflicting_user_support_file_is_rejected_and_preserved_without_activation [301 ms]
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.Goal148A_failure_after_support_copy_removes_new_file_and_restores_package_current_and_hashes [349 ms]
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.UnifiedGameProjectWorkspace_creates_project_local_document_and_roundtrips_edits_without_replacing_package [33 ms]
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.UnifiedGameProjectWorkspace_rejects_no_project_unknown_module_invalid_parameter_and_path_escape [23 ms]
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.UnifiedGameProjectWorkspace_build_activates_accepted_custom_package_and_updates_current_package [347 ms]
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.UnifiedGameProjectWorkspace_package_save_failure_rolls_back_bytes_current_and_last_successful_hashes [413 ms]
+[xUnit.net 00:00:03.04]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnifiedGameProjectWorkspace.UnifiedGameProjectWorkspaceControllerTests.Goal148A_repeat_build_reuses_matching_support_file_and_preserves_hashes [383 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0266.trx
+
+Test Run Successful.
+Total tests: 8
+     Passed: 8
+ Total time: 3,4028 Seconds

@@ -1,0 +1,7 @@
+[xUnit.net 00:00:02.06]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts [FAIL]
+[xUnit.net 00:00:04.61]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult [FAIL]
+[xUnit.net 00:00:04.64]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts [FAIL]
+[xUnit.net 00:00:08.09]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness [FAIL]
+[xUnit.net 00:00:08.73]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs [FAIL]
+[xUnit.net 00:00:10.03]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs [FAIL]
+Test Run Failed.

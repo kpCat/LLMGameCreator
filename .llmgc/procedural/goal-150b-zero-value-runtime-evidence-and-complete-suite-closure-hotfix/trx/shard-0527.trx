@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="007df25d-4b91-47b7-bd09-0380059d007e" name="endim@DESKTOP-SM838SH 2026-07-12 13:43:56" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:43:56.3527925+03:00" queuing="2026-07-12T13:43:56.3527927+03:00" start="2026-07-12T13:43:55.1662859+03:00" finish="2026-07-12T13:43:56.3590722+03:00" />
+  <TestSettings name="default" id="28610714-522d-4fa8-b70e-7033f7f43304">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_43_56" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="53ce97fb-9b07-46dc-9a59-4c5335369a88" testId="66989d3e-b0d6-a0ad-95a2-4b366ddb3de4" testName="LLMGameCreator.Tests.ProductSmoke.SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests.Goal074SchemaDrivenCampaignAuthoringReviewWorkspaceEvidenceIsProducedForReview" computerName="DESKTOP-SM838SH" duration="00:00:00.3037887" startTime="2026-07-12T13:43:56.1837676+03:00" endTime="2026-07-12T13:43:56.1837839+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53ce97fb-9b07-46dc-9a59-4c5335369a88" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests.Goal074SchemaDrivenCampaignAuthoringReviewWorkspaceEvidenceIsProducedForReview" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="66989d3e-b0d6-a0ad-95a2-4b366ddb3de4">
+      <Execution id="53ce97fb-9b07-46dc-9a59-4c5335369a88" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests" name="Goal074SchemaDrivenCampaignAuthoringReviewWorkspaceEvidenceIsProducedForReview" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="66989d3e-b0d6-a0ad-95a2-4b366ddb3de4" executionId="53ce97fb-9b07-46dc-9a59-4c5335369a88" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.68]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

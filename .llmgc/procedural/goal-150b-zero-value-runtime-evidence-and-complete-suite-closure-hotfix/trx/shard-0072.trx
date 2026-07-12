@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="63bc2fc7-2c53-481c-9d68-7e8c7ad1ec75" name="endim@DESKTOP-SM838SH 2026-07-12 13:02:53" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:02:53.1642995+03:00" queuing="2026-07-12T13:02:53.1642997+03:00" start="2026-07-12T13:02:50.5880066+03:00" finish="2026-07-12T13:02:53.1728349+03:00" />
+  <TestSettings name="default" id="4ec969bb-5c01-432a-a291-caa22ae06979">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_02_53" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="7d4f11a4-9a15-4977-8c87-99bef94bbe68" testId="c1933899-a264-2984-74bf-dad59f789169" testName="LLMGameCreator.Tests.Application.EditDrivenReviewPackagePlayableSession.EditDrivenReviewPackagePlayableSessionWinFormsBindingTests.WorkspaceActivationBindsGoal078PlaySessionControl" computerName="DESKTOP-SM838SH" duration="00:00:01.6110674" startTime="2026-07-12T13:02:52.9874009+03:00" endTime="2026-07-12T13:02:52.9874180+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7d4f11a4-9a15-4977-8c87-99bef94bbe68" />
+    <UnitTestResult executionId="7908a619-6625-442b-a525-c85d637258e2" testId="39a269d2-86f7-4218-157c-cbdd66949d28" testName="LLMGameCreator.Tests.Application.EditDrivenReviewPackagePlayableSession.EditDrivenReviewPackagePlayableSessionWinFormsBindingTests.WinFormsBindingInventoryFindsGoal078ControlAndParentActivation" computerName="DESKTOP-SM838SH" duration="00:00:00.0271962" startTime="2026-07-12T13:02:53.0144978+03:00" endTime="2026-07-12T13:02:53.0144981+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7908a619-6625-442b-a525-c85d637258e2" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.EditDrivenReviewPackagePlayableSession.EditDrivenReviewPackagePlayableSessionWinFormsBindingTests.WorkspaceActivationBindsGoal078PlaySessionControl" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c1933899-a264-2984-74bf-dad59f789169">
+      <Execution id="7d4f11a4-9a15-4977-8c87-99bef94bbe68" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.EditDrivenReviewPackagePlayableSession.EditDrivenReviewPackagePlayableSessionWinFormsBindingTests" name="WorkspaceActivationBindsGoal078PlaySessionControl" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.EditDrivenReviewPackagePlayableSession.EditDrivenReviewPackagePlayableSessionWinFormsBindingTests.WinFormsBindingInventoryFindsGoal078ControlAndParentActivation" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="39a269d2-86f7-4218-157c-cbdd66949d28">
+      <Execution id="7908a619-6625-442b-a525-c85d637258e2" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.EditDrivenReviewPackagePlayableSession.EditDrivenReviewPackagePlayableSessionWinFormsBindingTests" name="WinFormsBindingInventoryFindsGoal078ControlAndParentActivation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="c1933899-a264-2984-74bf-dad59f789169" executionId="7d4f11a4-9a15-4977-8c87-99bef94bbe68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="39a269d2-86f7-4218-157c-cbdd66949d28" executionId="7908a619-6625-442b-a525-c85d637258e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.18]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.39]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.40]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:02.07]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

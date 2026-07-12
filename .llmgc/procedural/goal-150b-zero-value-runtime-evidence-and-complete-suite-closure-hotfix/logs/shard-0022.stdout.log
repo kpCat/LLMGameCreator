@@ -1,0 +1,24 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripUnknownTranslatedIdIsErrorByDefault [21 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripProtectedColumnChangeProducesErrorByDefault [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripEmptyTranslatedTextProducesMissingTranslationWarning [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripMissingExpectedIdWarnsByDefaultAndErrorsWhenConfigured [1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripValidTranslatedCsvPassesWithoutPublicSchemaChanges [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripLockMismatchWarnsByDefaultAndErrorsWhenConfigured [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripMalformedCsvAndHeaderMismatchReturnDiagnostics [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripCsvParserHandlesCommaQuoteAndNewlineInTranslatedText [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripDuplicateTranslatedIdProducesError [1 ms]
+[xUnit.net 00:00:00.42]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.CandidateModules.DialogueNarrativeTooling.DialogueNarrativeLocalizationRoundTripReviewerTests.LocalizationRoundTripReviewOrderingIsDeterministicAcrossEquivalentInputs [8 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0022.trx
+
+Test Run Successful.
+Total tests: 10
+     Passed: 10
+ Total time: 0,8020 Seconds

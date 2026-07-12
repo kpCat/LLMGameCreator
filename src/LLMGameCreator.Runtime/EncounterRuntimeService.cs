@@ -209,13 +209,15 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         var outputs = BuildAbilityOutputs(ability, isBasicAttack).ToList();
         var equipmentBonus = 0d;
+        var equipmentMetadataPresent = false;
         var statBonus = 0d;
         var statId = string.Empty;
         var statValue = 0d;
         var statMetadataPresent = false;
         if (isBasicAttack && RuntimeStateHelpers.IdEquals(source.Id, "player"))
         {
-            if (!TryResolveEquipmentDamageBonus(package, working, out equipmentBonus, out var bonusDiagnostic))
+            if (!TryResolveEquipmentDamageBonus(package, working, out equipmentBonus,
+                    out equipmentMetadataPresent, out var bonusDiagnostic))
             {
                 result.Diagnostics.Add(bonusDiagnostic!);
                 result.Success = false;
@@ -255,7 +257,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         foreach (var output in outputs)
         {
             ApplyEncounterOutput(package, encounter, source, target, output, result.Events, result.Diagnostics,
-                equipmentBonus, statBonus, statId, statValue, statMetadataPresent);
+                equipmentBonus, equipmentMetadataPresent, statBonus, statId, statValue, statMetadataPresent);
         }
 
         encounter.ActionHistory.Add($"{source.Id}:{ability.Id}:{target.Id}");
@@ -403,6 +405,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         List<GameRuntimeEvent> events,
         List<RuntimeDiagnostic> diagnostics,
         double equipmentBonus,
+        bool equipmentMetadataPresent,
         double statBonus,
         string statId,
         double statValue,
@@ -431,7 +434,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
                     ["statDamageBonus"] = Format(statBonus),
                     ["totalAdditionalDamage"] = Format(equipmentBonus + statBonus)
                 };
-            else if (equipmentBonus > 0)
+            else if (equipmentMetadataPresent)
                 args = new Dictionary<string, string>
                 {
                     ["source"] = source.Id,
@@ -752,9 +755,11 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         GamePackageDefinition package,
         GameRuntimeState state,
         out double bonus,
+        out bool metadataPresent,
         out RuntimeDiagnostic? diagnostic)
     {
         bonus = 0;
+        metadataPresent = false;
         diagnostic = null;
         var equipment = state.Equipment.FirstOrDefault(item =>
             RuntimeStateHelpers.KindEquals(item.OwnerKind, "player")
@@ -772,6 +777,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
                 return false;
             }
             if (!item.Metadata.TryGetValue("combat_damage_bonus", out var raw)) continue;
+            metadataPresent = true;
             if (!double.TryParse(raw, System.Globalization.NumberStyles.Float,
                     System.Globalization.CultureInfo.InvariantCulture, out var value) || value < 0)
             {

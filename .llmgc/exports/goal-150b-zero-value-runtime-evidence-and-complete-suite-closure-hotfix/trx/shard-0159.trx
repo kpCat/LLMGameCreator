@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f43b91b0-6ec5-465e-a3cf-dfd80b648f95" name="endim@DESKTOP-SM838SH 2026-07-12 13:05:55" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:05:55.8908216+03:00" queuing="2026-07-12T13:05:55.8908218+03:00" start="2026-07-12T13:05:54.8878692+03:00" finish="2026-07-12T13:05:55.9011850+03:00" />
+  <TestSettings name="default" id="defca754-e3d4-4819-a8ef-441d7a44dfbb">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_05_55" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f35d2c3e-d3a1-40cb-b811-c34861b9317a" testId="db0a26ac-3855-f5d0-874f-33fb38d11c4c" testName="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.WrittenReportRoundTripsManualGate" computerName="DESKTOP-SM838SH" duration="00:00:00.0218925" startTime="2026-07-12T13:05:55.7665116+03:00" endTime="2026-07-12T13:05:55.7665119+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f35d2c3e-d3a1-40cb-b811-c34861b9317a" />
+    <UnitTestResult executionId="e23ec2fe-52a5-4d35-9c95-f9b87fd7e99c" testId="3a8170f9-3778-b6ea-a277-9a76a2ffa575" testName="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CompatibilityMatrixAndAbsenceBehaviorAreDeterministic" computerName="DESKTOP-SM838SH" duration="00:00:00.0647430" startTime="2026-07-12T13:05:55.7170485+03:00" endTime="2026-07-12T13:05:55.7170488+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e23ec2fe-52a5-4d35-9c95-f9b87fd7e99c" />
+    <UnitTestResult executionId="028924c1-856e-4010-944c-bc8615d13c5e" testId="02d1bd63-aec9-4d7c-e734-b8b79c9f96de" testName="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.ModuleManifestParserValidatorRejectsMalformedDuplicateAndUnknownContracts" computerName="DESKTOP-SM838SH" duration="00:00:00.0289718" startTime="2026-07-12T13:05:55.6504331+03:00" endTime="2026-07-12T13:05:55.6504493+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="028924c1-856e-4010-944c-bc8615d13c5e" />
+    <UnitTestResult executionId="1c6f320f-8861-4430-8672-72c344c2827a" testId="8813702c-4092-08c8-c679-36cafe1f6185" testName="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.BuildsDeterministicReadinessArtifacts" computerName="DESKTOP-SM838SH" duration="00:00:00.0260554" startTime="2026-07-12T13:05:55.7442828+03:00" endTime="2026-07-12T13:05:55.7442831+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c6f320f-8861-4430-8672-72c344c2827a" />
+    <UnitTestResult executionId="9a3990f4-b41e-47b3-a489-fc7d73d09608" testId="7305a9f4-b493-7efc-4602-0f587fc2f83e" testName="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CurrentStateRecordsGoal028AcceptedBeforeGoal029" computerName="DESKTOP-SM838SH" duration="00:00:00.0224033" startTime="2026-07-12T13:05:55.7982544+03:00" endTime="2026-07-12T13:05:55.7982546+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a3990f4-b41e-47b3-a489-fc7d73d09608">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Contains() Failure: Sub-string not found&#xD;
+String:    "# CONTEXT_INDEX.md\r\n\r\nPurpose: reduce rep"···&#xD;
+Not found: "goal150b_independent_audit_then_bundled_h"···</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CurrentStateRecordsGoal028AcceptedBeforeGoal029() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\ModularGeneratorKernel\ModularGeneratorKernelReadinessTests.cs:line 134&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="00610183-2736-442a-86ff-ec0902594342" testId="2dd2d842-d1af-ebcf-2971-f69b6cc6e5f0" testName="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.InvalidMatrixCoversRequiredScenariosAndFinalReportHasNoTopLevelErrors" computerName="DESKTOP-SM838SH" duration="00:00:00.0070180" startTime="2026-07-12T13:05:55.8017417+03:00" endTime="2026-07-12T13:05:55.8017421+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00610183-2736-442a-86ff-ec0902594342" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.InvalidMatrixCoversRequiredScenariosAndFinalReportHasNoTopLevelErrors" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="2dd2d842-d1af-ebcf-2971-f69b6cc6e5f0">
+      <Execution id="00610183-2736-442a-86ff-ec0902594342" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests" name="InvalidMatrixCoversRequiredScenariosAndFinalReportHasNoTopLevelErrors" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.WrittenReportRoundTripsManualGate" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="db0a26ac-3855-f5d0-874f-33fb38d11c4c">
+      <Execution id="f35d2c3e-d3a1-40cb-b811-c34861b9317a" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests" name="WrittenReportRoundTripsManualGate" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.BuildsDeterministicReadinessArtifacts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="8813702c-4092-08c8-c679-36cafe1f6185">
+      <Execution id="1c6f320f-8861-4430-8672-72c344c2827a" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests" name="BuildsDeterministicReadinessArtifacts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CompatibilityMatrixAndAbsenceBehaviorAreDeterministic" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="3a8170f9-3778-b6ea-a277-9a76a2ffa575">
+      <Execution id="e23ec2fe-52a5-4d35-9c95-f9b87fd7e99c" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests" name="CompatibilityMatrixAndAbsenceBehaviorAreDeterministic" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.ModuleManifestParserValidatorRejectsMalformedDuplicateAndUnknownContracts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="02d1bd63-aec9-4d7c-e734-b8b79c9f96de">
+      <Execution id="028924c1-856e-4010-944c-bc8615d13c5e" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests" name="ModuleManifestParserValidatorRejectsMalformedDuplicateAndUnknownContracts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CurrentStateRecordsGoal028AcceptedBeforeGoal029" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="7305a9f4-b493-7efc-4602-0f587fc2f83e">
+      <Execution id="9a3990f4-b41e-47b3-a489-fc7d73d09608" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests" name="CurrentStateRecordsGoal028AcceptedBeforeGoal029" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="db0a26ac-3855-f5d0-874f-33fb38d11c4c" executionId="f35d2c3e-d3a1-40cb-b811-c34861b9317a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3a8170f9-3778-b6ea-a277-9a76a2ffa575" executionId="e23ec2fe-52a5-4d35-9c95-f9b87fd7e99c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="02d1bd63-aec9-4d7c-e734-b8b79c9f96de" executionId="028924c1-856e-4010-944c-bc8615d13c5e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8813702c-4092-08c8-c679-36cafe1f6185" executionId="1c6f320f-8861-4430-8672-72c344c2827a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7305a9f4-b493-7efc-4602-0f587fc2f83e" executionId="9a3990f4-b41e-47b3-a489-fc7d73d09608" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2dd2d842-d1af-ebcf-2971-f69b6cc6e5f0" executionId="00610183-2736-442a-86ff-ec0902594342" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="5" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.36]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.56]       Assert.Contains() Failure: Sub-string not found&#xD;
+[xUnit.net 00:00:00.56]       String:    "# CONTEXT_INDEX.md\r\n\r\nPurpose: reduce rep"···&#xD;
+[xUnit.net 00:00:00.56]       Not found: "goal150b_independent_audit_then_bundled_h"···&#xD;
+[xUnit.net 00:00:00.56]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.57]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\ModularGeneratorKernel\ModularGeneratorKernelReadinessTests.cs(134,0): at LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CurrentStateRecordsGoal028AcceptedBeforeGoal029()&#xD;
+[xUnit.net 00:00:00.57]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:00.57]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:00.57]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:05:55.7970155+03:00">
+        <Text>[xUnit.net 00:00:00.56]     LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CurrentStateRecordsGoal028AcceptedBeforeGoal029 [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,22 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.40]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.DirectConflictProducesError [15 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.FutureImportedMapBlueprintsReportPlannedAndMissingCapabilitiesWithoutThrowing [11 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.UnknownCapabilityProducesErrorDiagnostic [2 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.BaselineGeneratedRpgBlueprintValidatesCompatible [2 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.BuiltInCapabilityIdsAreUniqueAndResolvable [2 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.DuplicateRegistryCapabilityProducesDeterministicError [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.MissingRequiredCapabilityProducesError [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.GameBlueprintCapabilityTests.OptionalMissingCapabilityProducesWarning [< 1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0093.trx
+
+Test Run Successful.
+Total tests: 8
+     Passed: 8
+ Total time: 0,8065 Seconds

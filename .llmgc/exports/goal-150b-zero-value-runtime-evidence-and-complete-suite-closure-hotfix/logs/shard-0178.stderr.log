@@ -1,0 +1,3 @@
+[xUnit.net 00:00:00.66]     LLMGameCreator.Tests.Application.OfflineGeoworldObjectiveAcceptanceRun.OfflineGeoworldObjectiveAcceptanceRunTests.ServiceBuildsObjectivePayloadAndEvidence [FAIL]
+[xUnit.net 00:00:02.12]     LLMGameCreator.Tests.Application.OfflineGeoworldObjectiveAcceptanceRun.OfflineGeoworldObjectiveAcceptanceRunTests.WorkspaceGroupSurfacesObjectiveAcceptanceReadiness [FAIL]
+Test Run Failed.

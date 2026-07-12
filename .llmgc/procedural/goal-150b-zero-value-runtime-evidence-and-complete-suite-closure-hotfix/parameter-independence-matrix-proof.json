@@ -1,0 +1,27 @@
+{
+    "schemaVersion":  "goal150b_parameter_independence_matrix_proof_v1",
+    "status":  "GREEN",
+    "equipmentOnly":  [
+                          0,
+                          3,
+                          10
+                      ],
+    "startingStrengthOnly":  [
+                                 0,
+                                 8,
+                                 20
+                             ],
+    "damagePerStrengthPointOnly":  [
+                                       0,
+                                       0.5,
+                                       2,
+                                       5
+                                   ],
+    "progressionOnly":  [
+                            1,
+                            12,
+                            1000
+                        ],
+    "unrelatedModulesAddedForEvidence":  false,
+    "passed":  true
+}

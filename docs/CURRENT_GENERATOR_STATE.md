@@ -1,19 +1,24 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 150A parameterized Runtime contract synchronization hotfix
+Updated by: Goal 150B zero-value Runtime evidence and complete-suite closure hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 150A parameterized Runtime contract synchronization hotfix is BLOCKED:
+Goal 150B zero-value Runtime evidence and complete-suite closure hotfix is BLOCKED:
 
 ```text
 implementationStatus=BLOCKED
-gateStatus=goal150a_full_test_suite_completion required
+gateStatus=goal150b_independent_audit_then_bundled_human_gate required
 goal149Accepted=false
 goal150Accepted=false
 goal150aAccepted=false
+goal150bAccepted=false
 acceptedByCodex=false
 manualReviewRequired=true
+equipmentOnlyZeroRuntimeEvidence=true
+equipmentOnlyPositiveTotal=3/0/3
+zeroMetadataDistinctFromAbsent=true
+expressionOverflowRejected=true
 effectiveValueBindingContract=true
 immutableEffectiveCatalogSnapshot=true
 customValues=3/8/2/12
@@ -29,11 +34,44 @@ fullReplayEquivalent=true
 actionBindingPassed=true
 incrementalCertificationPassed=true
 historicalArtifactsPreserved=true
-fullSuitePassed=false
+monolithicSuiteStatus=TIMEOUT
+exhaustiveShardedSuiteStatus=BLOCKED
+fullDiscoveredTestSetCovered=false
+completeSuiteDiscovered=1736
+completeSuiteAssigned=1736
+completeSuiteExecuted=1715
+completeSuitePassed=1651
+completeSuiteFailed=64
+completeSuiteSkipped=0
+completeSuiteMissing=21
+completeSuiteDuplicate=0
+completeSuiteAborted=4
 githubActionsCheckPresent=false
 accepted=false
-nextProductGoal=complete_goal_150a_full_suite_then_independent_audit
+nextProductGoal=independent_goal150b_audit_then_one_bundled_human_gate
 ```
+
+Goal150B fixes the independently audited P1 gap where valid equipped
+`combat_damage_bonus=0` was indistinguishable from absent metadata in
+`DamageApplied.Args`. Generic Runtime resolution now preserves metadata
+presence independently from its numeric value, so equipment-only zero emits
+`equipmentDamageBonus=0` without inventing stat evidence; absent metadata still
+emits no equipment evidence, and the historical positive equipment event shape
+and hashes remain unchanged. Project build totals now fall back to the observed
+equipment plus stat event values when `totalAdditionalDamage` is absent.
+Decimal expression overflow becomes a deterministic failed binding diagnostic.
+
+Goal150B also replaces the unbounded complete-suite command with deterministic
+discovery and isolated class shards. The single bounded monolithic attempt timed
+out after 15 minutes while making progress through long ProductSmoke routes.
+The exhaustive shard run records exact discovered/assigned/executed/pass/fail/
+skip/missing/duplicate/aborted counts, commands, TRX files, process metrics and
+slowest tests/classes. Collection parallelism was already disabled at assembly
+level, so it was not the contention cause. The coherent Goal150B implementation
+is published as BLOCKED under the status-aware publication policy; GitHub Actions
+remain absent. No manual review or acceptance is claimed. The next action is an
+independent audit followed by the one bundled Goals149/150/150A/150B human gate,
+not another proof-only Goal.
 
 Goal150 existed as a GREEN commit but was blocked from acceptance because
 non-default parameters changed package mutations without changing exact Runtime

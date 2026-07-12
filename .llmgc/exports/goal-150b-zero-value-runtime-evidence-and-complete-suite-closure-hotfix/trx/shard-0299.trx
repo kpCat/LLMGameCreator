@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b98209dc-6b19-44d9-af3e-add11fa2c76d" name="endim@DESKTOP-SM838SH 2026-07-12 13:24:28" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:24:28.8503281+03:00" queuing="2026-07-12T13:24:28.8503284+03:00" start="2026-07-12T13:24:28.0319281+03:00" finish="2026-07-12T13:24:28.8600017+03:00" />
+  <TestSettings name="default" id="ab2f6afb-38c9-4273-9d5b-d9a9e4caece4">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_24_28" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="186051d0-2df6-45b8-9d81-fb9d986777ed" testId="0cf2b423-6a33-a174-15d6-5a3ae8cef542" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.BuiltInUnityRuntimeModuleIdsAreUnique" computerName="DESKTOP-SM838SH" duration="00:00:00.0002848" startTime="2026-07-12T13:24:28.7585304+03:00" endTime="2026-07-12T13:24:28.7585304+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="186051d0-2df6-45b8-9d81-fb9d986777ed" />
+    <UnitTestResult executionId="3d316538-f0a5-4c05-8687-b65f8747ea8b" testId="15453df4-801e-9b67-10ca-6acc57916907" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.BuiltInUnityTargetProfileIdsAreUnique" computerName="DESKTOP-SM838SH" duration="00:00:00.0086726" startTime="2026-07-12T13:24:28.7438980+03:00" endTime="2026-07-12T13:24:28.7439148+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d316538-f0a5-4c05-8687-b65f8747ea8b" />
+    <UnitTestResult executionId="640c99c0-9400-453a-a205-d2a8ed76ba65" testId="49fa115f-5fa3-a394-d623-5344a96227f9" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.FutureMixedViewTargetReportsWarningsWithoutThrowing" computerName="DESKTOP-SM838SH" duration="00:00:00.0063893" startTime="2026-07-12T13:24:28.7499467+03:00" endTime="2026-07-12T13:24:28.7499468+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="640c99c0-9400-453a-a205-d2a8ed76ba65" />
+    <UnitTestResult executionId="c113bc8f-b2f9-4c1a-b823-03ff5d03ab5b" testId="ee984bb2-d75c-fa44-9b34-2e19a95c605d" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.UiLayoutContractSupportsPanelsWidgetsAndBindings" computerName="DESKTOP-SM838SH" duration="00:00:00.0015370" startTime="2026-07-12T13:24:28.7582122+03:00" endTime="2026-07-12T13:24:28.7582123+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c113bc8f-b2f9-4c1a-b823-03ff5d03ab5b" />
+    <UnitTestResult executionId="84fc0640-f21e-47ca-8632-ff76ef347732" testId="2a39bd87-f624-37d1-5232-e548bbff448a" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.CurrentGenericUnityTargetAndTopDownArchiveValidate" computerName="DESKTOP-SM838SH" duration="00:00:00.0026373" startTime="2026-07-12T13:24:28.7618413+03:00" endTime="2026-07-12T13:24:28.7618414+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="84fc0640-f21e-47ca-8632-ff76ef347732" />
+    <UnitTestResult executionId="e43f9079-e598-49c0-af71-5e8f28f4cfec" testId="2616c168-786c-cc39-83f1-9e0f061105d1" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.ValidatorReportsMalformedArchiveAndCatalogDiagnostics" computerName="DESKTOP-SM838SH" duration="00:00:00.0018734" startTime="2026-07-12T13:24:28.7637478+03:00" endTime="2026-07-12T13:24:28.7637479+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e43f9079-e598-49c0-af71-5e8f28f4cfec" />
+    <UnitTestResult executionId="9badd879-d47b-49b1-a8f0-19819e686ea1" testId="db13b116-d73b-8a64-2789-f208eda57304" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.AssetAndAudioRequestsKeepFutureProviderKindsAsMetadataOnly" computerName="DESKTOP-SM838SH" duration="00:00:00.0006266" startTime="2026-07-12T13:24:28.7591886+03:00" endTime="2026-07-12T13:24:28.7591887+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9badd879-d47b-49b1-a8f0-19819e686ea1" />
+    <UnitTestResult executionId="451f27b8-c6b9-4407-adc1-f33b2579b5da" testId="c9fa5dbb-c99b-7822-f803-6d2462026c17" testName="LLMGameCreator.Tests.Application.UnityTargetContractTests.LargeWorldPolicySupportsLazyGenerationAndDirtyDeltaPersistence" computerName="DESKTOP-SM838SH" duration="00:00:00.0066304" startTime="2026-07-12T13:24:28.7565996+03:00" endTime="2026-07-12T13:24:28.7565999+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="451f27b8-c6b9-4407-adc1-f33b2579b5da" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.ValidatorReportsMalformedArchiveAndCatalogDiagnostics" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="2616c168-786c-cc39-83f1-9e0f061105d1">
+      <Execution id="e43f9079-e598-49c0-af71-5e8f28f4cfec" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="ValidatorReportsMalformedArchiveAndCatalogDiagnostics" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.CurrentGenericUnityTargetAndTopDownArchiveValidate" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="2a39bd87-f624-37d1-5232-e548bbff448a">
+      <Execution id="84fc0640-f21e-47ca-8632-ff76ef347732" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="CurrentGenericUnityTargetAndTopDownArchiveValidate" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.FutureMixedViewTargetReportsWarningsWithoutThrowing" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="49fa115f-5fa3-a394-d623-5344a96227f9">
+      <Execution id="640c99c0-9400-453a-a205-d2a8ed76ba65" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="FutureMixedViewTargetReportsWarningsWithoutThrowing" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.AssetAndAudioRequestsKeepFutureProviderKindsAsMetadataOnly" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="db13b116-d73b-8a64-2789-f208eda57304">
+      <Execution id="9badd879-d47b-49b1-a8f0-19819e686ea1" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="AssetAndAudioRequestsKeepFutureProviderKindsAsMetadataOnly" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.UiLayoutContractSupportsPanelsWidgetsAndBindings" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="ee984bb2-d75c-fa44-9b34-2e19a95c605d">
+      <Execution id="c113bc8f-b2f9-4c1a-b823-03ff5d03ab5b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="UiLayoutContractSupportsPanelsWidgetsAndBindings" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.BuiltInUnityTargetProfileIdsAreUnique" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="15453df4-801e-9b67-10ca-6acc57916907">
+      <Execution id="3d316538-f0a5-4c05-8687-b65f8747ea8b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="BuiltInUnityTargetProfileIdsAreUnique" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.LargeWorldPolicySupportsLazyGenerationAndDirtyDeltaPersistence" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c9fa5dbb-c99b-7822-f803-6d2462026c17">
+      <Execution id="451f27b8-c6b9-4407-adc1-f33b2579b5da" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="LargeWorldPolicySupportsLazyGenerationAndDirtyDeltaPersistence" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityTargetContractTests.BuiltInUnityRuntimeModuleIdsAreUnique" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="0cf2b423-6a33-a174-15d6-5a3ae8cef542">
+      <Execution id="186051d0-2df6-45b8-9d81-fb9d986777ed" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityTargetContractTests" name="BuiltInUnityRuntimeModuleIdsAreUnique" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="0cf2b423-6a33-a174-15d6-5a3ae8cef542" executionId="186051d0-2df6-45b8-9d81-fb9d986777ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15453df4-801e-9b67-10ca-6acc57916907" executionId="3d316538-f0a5-4c05-8687-b65f8747ea8b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49fa115f-5fa3-a394-d623-5344a96227f9" executionId="640c99c0-9400-453a-a205-d2a8ed76ba65" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ee984bb2-d75c-fa44-9b34-2e19a95c605d" executionId="c113bc8f-b2f9-4c1a-b823-03ff5d03ab5b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2a39bd87-f624-37d1-5232-e548bbff448a" executionId="84fc0640-f21e-47ca-8632-ff76ef347732" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2616c168-786c-cc39-83f1-9e0f061105d1" executionId="e43f9079-e598-49c0-af71-5e8f28f4cfec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db13b116-d73b-8a64-2789-f208eda57304" executionId="9badd879-d47b-49b1-a8f0-19819e686ea1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c9fa5dbb-c99b-7822-f803-6d2462026c17" executionId="451f27b8-c6b9-4407-adc1-f33b2579b5da" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.40]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,16 @@
+{
+    "schemaVersion":  "goal150b_goal150a_custom_regression_proof_v1",
+    "status":  "GREEN",
+    "weapon":  3,
+    "strength":  8,
+    "damagePerStrengthPoint":  2,
+    "level2Experience":  12,
+    "equipmentDamageBonus":  3,
+    "statDamageBonus":  6,
+    "totalAdditionalDamage":  9,
+    "level":  2,
+    "experience":  12,
+    "checkpointPassed":  true,
+    "replayPassed":  true,
+    "passed":  true
+}

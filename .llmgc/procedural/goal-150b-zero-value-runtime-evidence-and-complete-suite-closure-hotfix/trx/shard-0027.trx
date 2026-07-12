@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="bb8408a5-d70a-41eb-8926-a6bfd3e1f35f" name="endim@DESKTOP-SM838SH 2026-07-12 13:01:15" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:01:15.9931643+03:00" queuing="2026-07-12T13:01:15.9931646+03:00" start="2026-07-12T13:01:14.1653426+03:00" finish="2026-07-12T13:01:16.0479511+03:00" />
+  <TestSettings name="default" id="4270c0ae-3217-466a-b4f6-a8737f055d5e">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_01_15" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="04e00a33-5c5e-470d-9599-b7a6241cc6d0" testId="2bb8eeb9-2758-2444-9533-d149b6830028" testName="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_planner_preserves_disabled_order_and_adds_equipment_without_combination_branches" computerName="DESKTOP-SM838SH" duration="00:00:00.2556201" startTime="2026-07-12T13:01:15.1186483+03:00" endTime="2026-07-12T13:01:15.1186647+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="04e00a33-5c5e-470d-9599-b7a6241cc6d0" />
+    <UnitTestResult executionId="2fed192f-ba77-42a9-82ed-489e2f0f321b" testId="9e795e25-25f1-bc36-15d4-9b98005c1f58" testName="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.CapabilityDrivenRuntimePlaythrough_equipment_without_combat_and_combat_without_equipment_are_independent" computerName="DESKTOP-SM838SH" duration="00:00:00.0069557" startTime="2026-07-12T13:01:15.9926361+03:00" endTime="2026-07-12T13:01:15.9926365+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2fed192f-ba77-42a9-82ed-489e2f0f321b" />
+    <UnitTestResult executionId="4c3f7297-7414-43b2-995d-1ae2b35137c2" testId="68aa4f0f-42b1-e761-3edd-561148473925" testName="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.CapabilityDrivenRuntimePlaythrough_rejects_duplicate_cycle_unknown_targets_and_equipment_tamper" computerName="DESKTOP-SM838SH" duration="00:00:00.0212579" startTime="2026-07-12T13:01:15.9856328+03:00" endTime="2026-07-12T13:01:15.9856334+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4c3f7297-7414-43b2-995d-1ae2b35137c2" />
+    <UnitTestResult executionId="377473da-32b0-45b7-a453-ca8de9128e14" testId="1e96ab82-f1d9-14d8-2f58-5301b1337e45" testName="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_accepted_workspace_preserves_disabled_hashes_and_builds_enabled_equipment_slice" computerName="DESKTOP-SM838SH" duration="00:00:00.7685407" startTime="2026-07-12T13:01:15.8887240+03:00" endTime="2026-07-12T13:01:15.8887243+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="377473da-32b0-45b7-a453-ca8de9128e14" />
+    <UnitTestResult executionId="bdee2f05-d863-49ff-b534-d2ff43393122" testId="03deb78b-69c1-efa2-a04d-45d816845fe2" testName="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_additive_catalog_drift_keeps_legacy_selection_current_and_refreshes_on_save" computerName="DESKTOP-SM838SH" duration="00:00:00.0161971" startTime="2026-07-12T13:01:15.9700069+03:00" endTime="2026-07-12T13:01:15.9700071+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bdee2f05-d863-49ff-b534-d2ff43393122" />
+    <UnitTestResult executionId="e1e5f3f0-11ae-448c-9580-ec5fe721e29a" testId="dfe7663e-cf65-c940-33c8-972b8c577d7b" testName="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_equipment_materialization_qualifies_checkpoint_replay_and_combat_bonus" computerName="DESKTOP-SM838SH" duration="00:00:00.0583158" startTime="2026-07-12T13:01:15.9480516+03:00" endTime="2026-07-12T13:01:15.9480518+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e1e5f3f0-11ae-448c-9580-ec5fe721e29a" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_planner_preserves_disabled_order_and_adds_equipment_without_combination_branches" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="2bb8eeb9-2758-2444-9533-d149b6830028">
+      <Execution id="04e00a33-5c5e-470d-9599-b7a6241cc6d0" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests" name="Goal149_planner_preserves_disabled_order_and_adds_equipment_without_combination_branches" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_equipment_materialization_qualifies_checkpoint_replay_and_combat_bonus" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="dfe7663e-cf65-c940-33c8-972b8c577d7b">
+      <Execution id="e1e5f3f0-11ae-448c-9580-ec5fe721e29a" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests" name="Goal149_equipment_materialization_qualifies_checkpoint_replay_and_combat_bonus" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_accepted_workspace_preserves_disabled_hashes_and_builds_enabled_equipment_slice" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="1e96ab82-f1d9-14d8-2f58-5301b1337e45">
+      <Execution id="377473da-32b0-45b7-a453-ca8de9128e14" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests" name="Goal149_accepted_workspace_preserves_disabled_hashes_and_builds_enabled_equipment_slice" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.CapabilityDrivenRuntimePlaythrough_rejects_duplicate_cycle_unknown_targets_and_equipment_tamper" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="68aa4f0f-42b1-e761-3edd-561148473925">
+      <Execution id="4c3f7297-7414-43b2-995d-1ae2b35137c2" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests" name="CapabilityDrivenRuntimePlaythrough_rejects_duplicate_cycle_unknown_targets_and_equipment_tamper" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.Goal149_additive_catalog_drift_keeps_legacy_selection_current_and_refreshes_on_save" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="03deb78b-69c1-efa2-a04d-45d816845fe2">
+      <Execution id="bdee2f05-d863-49ff-b534-d2ff43393122" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests" name="Goal149_additive_catalog_drift_keeps_legacy_selection_current_and_refreshes_on_save" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests.CapabilityDrivenRuntimePlaythrough_equipment_without_combat_and_combat_without_equipment_are_independent" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="9e795e25-25f1-bc36-15d4-9b98005c1f58">
+      <Execution id="2fed192f-ba77-42a9-82ed-489e2f0f321b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CapabilityDrivenRuntimePlaythrough.CapabilityDrivenRuntimePlaythroughGoal149Tests" name="CapabilityDrivenRuntimePlaythrough_equipment_without_combat_and_combat_without_equipment_are_independent" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="2bb8eeb9-2758-2444-9533-d149b6830028" executionId="04e00a33-5c5e-470d-9599-b7a6241cc6d0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9e795e25-25f1-bc36-15d4-9b98005c1f58" executionId="2fed192f-ba77-42a9-82ed-489e2f0f321b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="68aa4f0f-42b1-e761-3edd-561148473925" executionId="4c3f7297-7414-43b2-995d-1ae2b35137c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e96ab82-f1d9-14d8-2f58-5301b1337e45" executionId="377473da-32b0-45b7-a453-ca8de9128e14" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="03deb78b-69c1-efa2-a04d-45d816845fe2" executionId="bdee2f05-d863-49ff-b534-d2ff43393122" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dfe7663e-cf65-c940-33c8-972b8c577d7b" executionId="e1e5f3f0-11ae-448c-9580-ec5fe721e29a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:01.50]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,8 @@
+{
+    "schemaVersion":  "goal150b_root_cause_v1",
+    "status":  "GREEN",
+    "zeroValueCause":  "Runtime collapsed present numeric zero metadata into the same event-evidence branch as absent metadata.",
+    "zeroValueRepair":  "Generic equipment resolution now reports metadata presence independently from numeric value.",
+    "completeSuiteDiagnosis":  "The final inventory contains 1736 tests after runtime-expanded theory rows and supplemental final-source contracts; heavy recursive ProductSmoke routes remain, while collection parallelism was already disabled.",
+    "passed":  true
+}

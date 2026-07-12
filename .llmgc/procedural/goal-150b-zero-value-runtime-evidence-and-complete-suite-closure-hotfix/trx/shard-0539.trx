@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8ec2493c-d469-4712-ad8b-90e1b384a3e2" name="endim@DESKTOP-SM838SH 2026-07-12 13:45:57" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:45:57.6688006+03:00" queuing="2026-07-12T13:45:57.6688008+03:00" start="2026-07-12T13:45:23.9723175+03:00" finish="2026-07-12T13:45:57.6757540+03:00" />
+  <TestSettings name="default" id="24b10f1b-75ad-474b-85dc-b26b7df86138">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_45_57" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="9aa7e49a-bb92-4583-8a1e-8d85b120231b" testId="4f9f888d-70a2-a9f6-1c87-e4c7990de273" testName="LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke" computerName="DESKTOP-SM838SH" duration="00:00:32.8852147" startTime="2026-07-12T13:45:57.6043342+03:00" endTime="2026-07-12T13:45:57.6043516+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9aa7e49a-bb92-4583-8a1e-8d85b120231b">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Contains() Failure: Item not found in collection&#xD;
+Collection: ["GREEN", "BLOCKED"]&#xD;
+Not found:  "FAILED"</Message>
+          <StackTrace>   at LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\ProductSmoke\UnityAlphaMediaBoundPlayablePackageProductSmokeTests.cs:line 60&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="4f9f888d-70a2-a9f6-1c87-e4c7990de273">
+      <Execution id="9aa7e49a-bb92-4583-8a1e-8d85b120231b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests" name="UnityAlphaMediaBoundPlayablePackageProductSmoke" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="4f9f888d-70a2-a9f6-1c87-e4c7990de273" executionId="9aa7e49a-bb92-4583-8a1e-8d85b120231b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.36]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:33.29]       Assert.Contains() Failure: Item not found in collection&#xD;
+[xUnit.net 00:00:33.29]       Collection: ["GREEN", "BLOCKED"]&#xD;
+[xUnit.net 00:00:33.29]       Not found:  "FAILED"&#xD;
+[xUnit.net 00:00:33.29]       Stack Trace:&#xD;
+[xUnit.net 00:00:33.29]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\ProductSmoke\UnityAlphaMediaBoundPlayablePackageProductSmokeTests.cs(60,0): at LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke()&#xD;
+[xUnit.net 00:00:33.29]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:33.30]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:45:57.6025850+03:00">
+        <Text>[xUnit.net 00:00:33.29]     LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

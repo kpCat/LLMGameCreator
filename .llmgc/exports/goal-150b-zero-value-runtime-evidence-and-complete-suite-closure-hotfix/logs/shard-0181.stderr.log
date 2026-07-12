@@ -1,0 +1,4 @@
+[xUnit.net 00:00:02.05]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityPlayModeTravelPreview.OfflineGeoworldUnityPlayModeTravelPreviewTests.WorkspaceGroupSurfacesPlayModeTravelReadiness [FAIL]
+[xUnit.net 00:00:02.27]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityPlayModeTravelPreview.OfflineGeoworldUnityPlayModeTravelPreviewTests.EvidenceIsDeterministicAndSourceHealthClean [FAIL]
+[xUnit.net 00:00:02.45]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityPlayModeTravelPreview.OfflineGeoworldUnityPlayModeTravelPreviewTests.ServiceBuildsPlayModeTravelPayloadAndEvidence [FAIL]
+Test Run Failed.

@@ -1,0 +1,20 @@
+{
+    "schemaVersion":  "goal150b_equipment_only_zero_runtime_proof_v1",
+    "status":  "GREEN",
+    "selectedOptionalModules":  [
+                                    "feature.equipment.weapon_loadout"
+                                ],
+    "attributesEnabled":  false,
+    "progressionEnabled":  false,
+    "packageMetadata":  "0",
+    "weaponEquipped":  true,
+    "equipmentDamageBonusEventArg":  "0",
+    "expected":  "0",
+    "actual":  "0",
+    "statEvidenceInvented":  false,
+    "validationPassed":  true,
+    "checkpointPassed":  true,
+    "replayPassed":  true,
+    "bindingPassed":  true,
+    "passed":  true
+}

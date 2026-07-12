@@ -1,0 +1,23 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.42]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceAllowsApprovalWhenValidationHasNoErrors [24 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceRevalidatesSavedValidPlan [4 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceRejectActionSetsRejectedWithoutLlm [1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceRejectsApprovalWhenPackageOperationsAreInvalid [4 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceArchiveActionSetsArchivedWithoutLlm [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceRejectsApprovalWhenDependencyOrderIsInvalid [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceRejectsApprovalWhenRequiredDependencyIsMissing [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.ReviewServiceRejectsApprovalWhenRegistryModuleIsMissing [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanReviewServiceTests.RevalidationDoesNotExecuteLuaOrTouchPackageFiles [12 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0376.trx
+
+Test Run Successful.
+Total tests: 9
+     Passed: 9
+ Total time: 0,8147 Seconds

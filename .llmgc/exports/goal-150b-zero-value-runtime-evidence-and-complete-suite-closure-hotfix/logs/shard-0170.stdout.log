@@ -1,0 +1,23 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.39]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.40]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.64]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.MultipleDifferingResultFilesAreInvalidNotRandomWinner [85 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.MissingRequiredStepBlocksIncompleteResult [23 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.MalformedJsonIsFailedInvalidResult [13 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.DuplicateRequiredStepIsFailedInvalidResult [16 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.MissingActualResultIsBlockedPendingManualResult [12 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.AllStepsPassedWithAcceptedFalseBlocksAcceptedFalse [12 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.WrongChecklistHashIsFailedInvalidResult [16 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.FailedRequiredStepBlocksIncompleteResult [16 ms]
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualResultIntake.OfflineGeoworldAlphaManualResultIntakeTests.AllStepsPassedWithAcceptedTrueIsGreenCandidateButNotAcceptedByCodex [12 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0170.trx
+
+Test Run Successful.
+Total tests: 9
+     Passed: 9
+ Total time: 1,0536 Seconds

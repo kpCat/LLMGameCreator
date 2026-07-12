@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="84b9a7d9-2354-454d-b789-ae8601c46163" name="endim@DESKTOP-SM838SH 2026-07-12 13:25:01" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:25:01.0320299+03:00" queuing="2026-07-12T13:25:01.0320302+03:00" start="2026-07-12T13:24:58.9452963+03:00" finish="2026-07-12T13:25:01.0396342+03:00" />
+  <TestSettings name="default" id="aea4725b-fc2d-4509-851c-5acb7514c6ec">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_25_01" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="eee94a62-1fb5-49f6-968d-08b1d0c161ec" testId="284c6d9c-df16-0d3d-be34-6b14b0d47dbe" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests.Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding" computerName="DESKTOP-SM838SH" duration="00:00:01.2802151" startTime="2026-07-12T13:25:00.9435662+03:00" endTime="2026-07-12T13:25:00.9435831+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eee94a62-1fb5-49f6-968d-08b1d0c161ec">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests.Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceGoal118Tests.cs:line 29&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests.Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="284c6d9c-df16-0d3d-be34-6b14b0d47dbe">
+      <Execution id="eee94a62-1fb5-49f6-968d-08b1d0c161ec" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests" name="Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="284c6d9c-df16-0d3d-be34-6b14b0d47dbe" executionId="eee94a62-1fb5-49f6-968d-08b1d0c161ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:01.66]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:01.66]       Expected: True&#xD;
+[xUnit.net 00:00:01.66]       Actual:   False&#xD;
+[xUnit.net 00:00:01.66]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.66]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceGoal118Tests.cs(29,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests.Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding()&#xD;
+[xUnit.net 00:00:01.66]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:01.66]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:01.67]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:25:00.9416735+03:00">
+        <Text>[xUnit.net 00:00:01.66]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests.Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

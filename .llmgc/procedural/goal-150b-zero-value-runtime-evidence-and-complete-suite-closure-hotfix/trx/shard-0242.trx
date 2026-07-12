@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="83b6027d-cdb6-4c66-82d8-a0918f90a6db" name="endim@DESKTOP-SM838SH 2026-07-12 13:11:59" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:11:59.4944461+03:00" queuing="2026-07-12T13:11:59.4944463+03:00" start="2026-07-12T13:11:58.6273995+03:00" finish="2026-07-12T13:11:59.5016762+03:00" />
+  <TestSettings name="default" id="0598fe9c-97dc-4557-82ae-db3f062e56de">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_11_59" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="796f33ea-0fcd-48e9-ad0d-1237eb46d559" testId="d1d96791-317b-ab49-dc18-d7cfd136ce36" testName="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests.SameInputProducesStructurallyEquivalentBlueprint" computerName="DESKTOP-SM838SH" duration="00:00:00.0076768" startTime="2026-07-12T13:11:59.4040953+03:00" endTime="2026-07-12T13:11:59.4040956+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="796f33ea-0fcd-48e9-ad0d-1237eb46d559" />
+    <UnitTestResult executionId="fccb09fa-e6c5-4cd9-a3aa-437dec7b33ca" testId="f3ea064b-641a-ffdf-4abf-ec26a5b84973" testName="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests.ThreeScenarioBlueprintsAreDifferentButUseSameComposerAndGoal030PlannerPath" computerName="DESKTOP-SM838SH" duration="00:00:00.0580931" startTime="2026-07-12T13:11:59.3921091+03:00" endTime="2026-07-12T13:11:59.3921256+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fccb09fa-e6c5-4cd9-a3aa-437dec7b33ca" />
+    <UnitTestResult executionId="a8d09364-27c6-4c19-a05d-f1eac962bd88" testId="e7486540-4cc0-0b9f-b63d-38159bc8b080" testName="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests.BlueprintContainsRequiredSectionsAndCrossArtifactLinks" computerName="DESKTOP-SM838SH" duration="00:00:00.0045665" startTime="2026-07-12T13:11:59.3963558+03:00" endTime="2026-07-12T13:11:59.3963561+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8d09364-27c6-4c19-a05d-f1eac962bd88" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests.ThreeScenarioBlueprintsAreDifferentButUseSameComposerAndGoal030PlannerPath" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f3ea064b-641a-ffdf-4abf-ec26a5b84973">
+      <Execution id="fccb09fa-e6c5-4cd9-a3aa-437dec7b33ca" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests" name="ThreeScenarioBlueprintsAreDifferentButUseSameComposerAndGoal030PlannerPath" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests.SameInputProducesStructurallyEquivalentBlueprint" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="d1d96791-317b-ab49-dc18-d7cfd136ce36">
+      <Execution id="796f33ea-0fcd-48e9-ad0d-1237eb46d559" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests" name="SameInputProducesStructurallyEquivalentBlueprint" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests.BlueprintContainsRequiredSectionsAndCrossArtifactLinks" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="e7486540-4cc0-0b9f-b63d-38159bc8b080">
+      <Execution id="a8d09364-27c6-4c19-a05d-f1eac962bd88" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SemanticPackComposition.SemanticPackCompositionPlannerTests" name="BlueprintContainsRequiredSectionsAndCrossArtifactLinks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d1d96791-317b-ab49-dc18-d7cfd136ce36" executionId="796f33ea-0fcd-48e9-ad0d-1237eb46d559" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f3ea064b-641a-ffdf-4abf-ec26a5b84973" executionId="fccb09fa-e6c5-4cd9-a3aa-437dec7b33ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e7486540-4cc0-0b9f-b63d-38159bc8b080" executionId="a8d09364-27c6-4c19-a05d-f1eac962bd88" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.44]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

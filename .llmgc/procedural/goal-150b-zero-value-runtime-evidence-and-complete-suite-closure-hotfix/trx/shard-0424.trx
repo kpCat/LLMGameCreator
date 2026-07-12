@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="bf1d8eaf-5324-4e58-97a9-b1afb394fe68" name="endim@DESKTOP-SM838SH 2026-07-12 13:29:18" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:29:18.8726591+03:00" queuing="2026-07-12T13:29:18.8726593+03:00" start="2026-07-12T13:29:17.9874126+03:00" finish="2026-07-12T13:29:18.8787283+03:00" />
+  <TestSettings name="default" id="47788555-0b94-44bc-a4ae-841a2c0c0b69">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_29_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ec76d2e5-1c2a-40d4-958c-a8574454918e" testId="940fa65a-a8b7-ba16-f536-6ceb762d685e" testName="LLMGameCreator.Tests.JsonStorageEncodingTests.JsonAppSettingsRepository_SavesReadableCyrillic" computerName="DESKTOP-SM838SH" duration="00:00:00.0532553" startTime="2026-07-12T13:29:18.7273318+03:00" endTime="2026-07-12T13:29:18.7273481+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec76d2e5-1c2a-40d4-958c-a8574454918e" />
+    <UnitTestResult executionId="95581ad6-2a7e-4b99-adf1-f71ff0b25fc5" testId="208c569c-b432-141f-dc23-6a703bb221ba" testName="LLMGameCreator.Tests.JsonStorageEncodingTests.JsonGamePackageRepository_SavesReadableCyrillic" computerName="DESKTOP-SM838SH" duration="00:00:00.0591355" startTime="2026-07-12T13:29:18.7875005+03:00" endTime="2026-07-12T13:29:18.7875008+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95581ad6-2a7e-4b99-adf1-f71ff0b25fc5" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.JsonStorageEncodingTests.JsonAppSettingsRepository_SavesReadableCyrillic" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="940fa65a-a8b7-ba16-f536-6ceb762d685e">
+      <Execution id="ec76d2e5-1c2a-40d4-958c-a8574454918e" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.JsonStorageEncodingTests" name="JsonAppSettingsRepository_SavesReadableCyrillic" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.JsonStorageEncodingTests.JsonGamePackageRepository_SavesReadableCyrillic" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="208c569c-b432-141f-dc23-6a703bb221ba">
+      <Execution id="95581ad6-2a7e-4b99-adf1-f71ff0b25fc5" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.JsonStorageEncodingTests" name="JsonGamePackageRepository_SavesReadableCyrillic" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="940fa65a-a8b7-ba16-f536-6ceb762d685e" executionId="ec76d2e5-1c2a-40d4-958c-a8574454918e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="208c569c-b432-141f-dc23-6a703bb221ba" executionId="95581ad6-2a7e-4b99-adf1-f71ff0b25fc5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.48]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

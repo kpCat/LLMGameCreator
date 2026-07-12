@@ -1,0 +1,19 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.16]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.36]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.38]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.FeatureModuleCertification.FeatureModuleCertificationAndCoverageTests.Exhaustive_small_catalog_classifies_incompatible_rows_without_execution [106 ms]
+  Passed LLMGameCreator.Tests.Application.FeatureModuleCertification.FeatureModuleCertificationAndCoverageTests.Certification_executes_then_reuses_rejects_corruption_and_invalidates_contract_version [849 ms]
+  Passed LLMGameCreator.Tests.Application.FeatureModuleCertification.FeatureModuleCertificationAndCoverageTests.Hundred_module_certification_plan_is_linear_and_interaction_rows_remain_bounded [22 ms]
+[xUnit.net 00:00:01.65]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.FeatureModuleCertification.FeatureModuleCertificationAndCoverageTests.Goal147A_dependency_closure_certification_is_transitive_incremental_and_cycle_safe [261 ms]
+  Passed LLMGameCreator.Tests.Application.FeatureModuleCertification.FeatureModuleCertificationAndCoverageTests.Goal147A_script_writes_executable_dependent_module_certification_proof [< 1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0079.trx
+
+Test Run Successful.
+Total tests: 5
+     Passed: 5
+ Total time: 2,0601 Seconds

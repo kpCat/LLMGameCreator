@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d91defa0-d81e-4e20-927d-8c3e0d233353" name="endim@DESKTOP-SM838SH 2026-07-12 13:04:58" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:04:58.7864733+03:00" queuing="2026-07-12T13:04:58.7864735+03:00" start="2026-07-12T13:04:57.8082139+03:00" finish="2026-07-12T13:04:58.7916420+03:00" />
+  <TestSettings name="default" id="4b08555e-694a-4b1d-bf36-760052dbf1c1">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_04_58" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="06d29d22-3f2d-4aad-8112-8de96f62ecbc" testId="181c9d26-19c4-2574-0f27-04dba68fade7" testName="LLMGameCreator.Tests.Application.LivingWorldNpcFactionSimulationMatrix.LivingWorldNpcFactionUnityPlanTests.UnityCommandPlanRequiresLivingWorldMarkersForAllRowsAndTicks" computerName="DESKTOP-SM838SH" duration="00:00:00.1662075" startTime="2026-07-12T13:04:58.6960691+03:00" endTime="2026-07-12T13:04:58.6960854+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06d29d22-3f2d-4aad-8112-8de96f62ecbc" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.LivingWorldNpcFactionSimulationMatrix.LivingWorldNpcFactionUnityPlanTests.UnityCommandPlanRequiresLivingWorldMarkersForAllRowsAndTicks" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="181c9d26-19c4-2574-0f27-04dba68fade7">
+      <Execution id="06d29d22-3f2d-4aad-8112-8de96f62ecbc" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.LivingWorldNpcFactionSimulationMatrix.LivingWorldNpcFactionUnityPlanTests" name="UnityCommandPlanRequiresLivingWorldMarkersForAllRowsAndTicks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="181c9d26-19c4-2574-0f27-04dba68fade7" executionId="06d29d22-3f2d-4aad-8112-8de96f62ecbc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.54]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

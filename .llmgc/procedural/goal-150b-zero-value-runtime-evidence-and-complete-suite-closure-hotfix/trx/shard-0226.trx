@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e311923a-f760-44a5-89f5-8e62becc1ae3" name="endim@DESKTOP-SM838SH 2026-07-12 13:11:29" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:11:29.8756106+03:00" queuing="2026-07-12T13:11:29.8756108+03:00" start="2026-07-12T13:11:28.4810677+03:00" finish="2026-07-12T13:11:29.8825359+03:00" />
+  <TestSettings name="default" id="df6ee3e1-df9c-4c09-8394-0a1bb738b7d3">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_11_29" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4ea1e29d-c75b-44ab-a182-c601392ceff2" testId="4ce597f4-596b-da2d-7413-c418c96dfe0a" testName="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.ManualAndAutoCandidatesCoverEveryFamilyAndEditDomain" computerName="DESKTOP-SM838SH" duration="00:00:00.2616952" startTime="2026-07-12T13:11:29.4761219+03:00" endTime="2026-07-12T13:11:29.4761434+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ea1e29d-c75b-44ab-a182-c601392ceff2" />
+    <UnitTestResult executionId="9b33aff7-8458-411f-81d2-3e0d12245069" testId="60afe35b-af1e-fd7a-d13a-a328ddfb74d9" testName="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.PreviewExportRefreshPayloadReferencesChangedRows" computerName="DESKTOP-SM838SH" duration="00:00:00.1163629" startTime="2026-07-12T13:11:29.5920580+03:00" endTime="2026-07-12T13:11:29.5920585+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b33aff7-8458-411f-81d2-3e0d12245069" />
+    <UnitTestResult executionId="0874f6a1-97b9-46af-8502-9c03eaae5e23" testId="158cddaa-96fa-3795-4c6e-34b7b57d982c" testName="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.SourceManifestAndCatalogLoadGoal074Rows" computerName="DESKTOP-SM838SH" duration="00:00:00.1016957" startTime="2026-07-12T13:11:29.6937954+03:00" endTime="2026-07-12T13:11:29.6937956+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0874f6a1-97b9-46af-8502-9c03eaae5e23" />
+    <UnitTestResult executionId="9769c458-a943-491d-a1e7-ed4e3c9fc231" testId="6b99612a-f197-47b6-3c4f-23277b945ef1" testName="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.ApplyAndRollbackChangeHashesForEveryRow" computerName="DESKTOP-SM838SH" duration="00:00:00.0993248" startTime="2026-07-12T13:11:29.7932171+03:00" endTime="2026-07-12T13:11:29.7932174+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9769c458-a943-491d-a1e7-ed4e3c9fc231" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.ApplyAndRollbackChangeHashesForEveryRow" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="6b99612a-f197-47b6-3c4f-23277b945ef1">
+      <Execution id="9769c458-a943-491d-a1e7-ed4e3c9fc231" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests" name="ApplyAndRollbackChangeHashesForEveryRow" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.ManualAndAutoCandidatesCoverEveryFamilyAndEditDomain" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="4ce597f4-596b-da2d-7413-c418c96dfe0a">
+      <Execution id="4ea1e29d-c75b-44ab-a182-c601392ceff2" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests" name="ManualAndAutoCandidatesCoverEveryFamilyAndEditDomain" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.PreviewExportRefreshPayloadReferencesChangedRows" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="60afe35b-af1e-fd7a-d13a-a328ddfb74d9">
+      <Execution id="9b33aff7-8458-411f-81d2-3e0d12245069" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests" name="PreviewExportRefreshPayloadReferencesChangedRows" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests.SourceManifestAndCatalogLoadGoal074Rows" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="158cddaa-96fa-3795-4c6e-34b7b57d982c">
+      <Execution id="0874f6a1-97b9-46af-8502-9c03eaae5e23" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.SchemaDrivenCampaignEditValidateApplyLoop.SchemaDrivenCampaignEditValidateApplyLoopTests" name="SourceManifestAndCatalogLoadGoal074Rows" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="4ce597f4-596b-da2d-7413-c418c96dfe0a" executionId="4ea1e29d-c75b-44ab-a182-c601392ceff2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="60afe35b-af1e-fd7a-d13a-a328ddfb74d9" executionId="9b33aff7-8458-411f-81d2-3e0d12245069" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="158cddaa-96fa-3795-4c6e-34b7b57d982c" executionId="0874f6a1-97b9-46af-8502-9c03eaae5e23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b99612a-f197-47b6-3c4f-23277b945ef1" executionId="9769c458-a943-491d-a1e7-ed4e3c9fc231" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.97]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

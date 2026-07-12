@@ -1,0 +1,24 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ConflictOnlyRunDoesNotStoreNewHistorySnapshot [229 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportRejectsUnknownUnsafeAndExtensionMismatchEntries [26 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportRefreshesFulfillmentReviewHistoryAndComparison [77 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportIsIdempotentForSameBytesAndConflictsForDifferentBytes [35 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportCopiesAssetAudioAndLuaToExpectedSlots [31 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.IdempotentAlreadyImportedDoesNotStoreNewHistorySnapshot [51 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportMissingManifestReturnsReportWithoutThrowing [6 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportInvalidManifestReturnsInvalidManifestWithoutThrowing [17 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.ManualProviderImportReportsAreDeterministicTimestampFreeAndArchiveRelative [26 ms]
+[xUnit.net 00:00:00.92]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnityArchiveManualProviderImportTests.OverwriteChangedBytesStoresNewHistorySnapshot [40 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0285.trx
+
+Test Run Successful.
+Total tests: 10
+     Passed: 10
+ Total time: 1,2871 Seconds

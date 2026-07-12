@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="9f22e46f-197b-4281-9475-c62fddba8267" name="endim@DESKTOP-SM838SH 2026-07-12 13:26:22" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:26:22.7398216+03:00" queuing="2026-07-12T13:26:22.7398219+03:00" start="2026-07-12T13:26:19.3972651+03:00" finish="2026-07-12T13:26:30.5377931+03:00" />
+  <TestSettings name="default" id="407a4f55-c87b-494b-919b-475c7430850a">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_26_22" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1d68f403-8a9b-4256-bea6-64a5073c36a3" testId="a62b45c4-e2d9-6c5d-8329-8d54f901f711" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.SourceHealthScannerRejectsSyntheticOver1000LineSource" computerName="DESKTOP-SM838SH" duration="00:00:00.0018799" startTime="2026-07-12T13:26:26.3296608+03:00" endTime="2026-07-12T13:26:26.3296610+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d68f403-8a9b-4256-bea6-64a5073c36a3" />
+    <UnitTestResult executionId="aa939a42-4bba-417b-9553-22c12e637d89" testId="c49eb3b5-8a6c-a50e-449d-098d1e39d55a" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityEditorPreviewGroupSurfacesGoal102EditorToolReadiness" computerName="DESKTOP-SM838SH" duration="00:00:00.6082210" startTime="2026-07-12T13:26:29.1042458+03:00" endTime="2026-07-12T13:26:29.1042460+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa939a42-4bba-417b-9553-22c12e637d89" />
+    <UnitTestResult executionId="38fd3d6b-1c43-4a22-9c15-2ef29fbd93a1" testId="c74ef216-9256-0dc0-45de-daa1f5ac0061" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts" computerName="DESKTOP-SM838SH" duration="00:00:00.0307495" startTime="2026-07-12T13:26:24.3993921+03:00" endTime="2026-07-12T13:26:24.3993923+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="38fd3d6b-1c43-4a22-9c15-2ef29fbd93a1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.NotNull() Failure: Value is null</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.RequiredPrivateField[T](Object owner, String fieldName) in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 760&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c.&lt;WorkspaceActivationLoadsAndBindsRealArtifacts&gt;b__17_0() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 708&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c__DisplayClass19_0.&lt;RunSta&gt;b__0() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 737&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.RunSta(Action action) in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 749&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 702&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f8fdf8a4-cd3a-4df0-93a0-9f60f2f2112d" testId="ed8a662b-7780-ef87-ce25-b0d0e8b6eb72" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.UnityHandoffGroupSurfacesGoal095PayloadProbeAndReadinessProof" computerName="DESKTOP-SM838SH" duration="00:00:00.6221706" startTime="2026-07-12T13:26:26.3277245+03:00" endTime="2026-07-12T13:26:26.3277247+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f8fdf8a4-cd3a-4df0-93a0-9f60f2f2112d" />
+    <UnitTestResult executionId="7019f062-5df6-4d08-b3ce-bc45e496dfab" testId="f7dc84f2-bc52-9632-981d-472d338165fd" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness" computerName="DESKTOP-SM838SH" duration="00:00:00.6219988" startTime="2026-07-12T13:26:27.8508461+03:00" endTime="2026-07-12T13:26:27.8508462+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7019f062-5df6-4d08-b3ce-bc45e496dfab">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceGoal103Tests.cs:line 30&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="62452389-dc66-4ee1-9395-cfba0cecdefc" testId="172a9957-0602-acad-bbcc-a0d86267ab92" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts" computerName="DESKTOP-SM838SH" duration="00:00:01.6687388" startTime="2026-07-12T13:26:21.8376587+03:00" endTime="2026-07-12T13:26:21.8376785+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62452389-dc66-4ee1-9395-cfba0cecdefc">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.DoesNotContain() Failure: Filter matched in collection&#xD;
+             ↓ (pos 0)&#xD;
+Collection: [VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal101.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal101.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal103.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal103.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal104.quality_gate, Message = Required visual preview proof is missing or did not pass. }, ···]</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 48&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d62f41f6-e7a0-4fbe-a956-c71e0e8df1ce" testId="23c16ab7-16b2-0d37-c255-1fffa8cdc09e" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.CurrentGoal092NamespaceHasNoFilesOver1000LogicalLines" computerName="DESKTOP-SM838SH" duration="00:00:00.0616097" startTime="2026-07-12T13:26:21.8872046+03:00" endTime="2026-07-12T13:26:21.8872047+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d62f41f6-e7a0-4fbe-a956-c71e0e8df1ce" />
+    <UnitTestResult executionId="49a3ed2f-a2e1-40d2-9aa3-a03611979e1a" testId="dce9ce28-c2d1-2bde-af79-65d43b5d6779" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.MissingArtifactScenarioProducesDiagnosticsNotFakeGreen" computerName="DESKTOP-SM838SH" duration="00:00:00.2898784" startTime="2026-07-12T13:26:26.6196509+03:00" endTime="2026-07-12T13:26:26.6196511+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49a3ed2f-a2e1-40d2-9aa3-a03611979e1a" />
+    <UnitTestResult executionId="d9f74bb6-a3e9-4b02-b18f-ebdcaee4a309" testId="5a330b19-215d-f8cb-5138-22c195be6ed1" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs" computerName="DESKTOP-SM838SH" duration="00:00:00.6455121" startTime="2026-07-12T13:26:28.4963762+03:00" endTime="2026-07-12T13:26:28.4963763+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9f74bb6-a3e9-4b02-b18f-ebdcaee4a309">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 390&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f364ed53-39cb-4cc7-9ec8-f6c59c0ec502" testId="31bbe929-1ba5-4deb-a687-e97df48c546b" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.GeoworldGroupSurfacesGoal099OfflineBundleGraphAndPrefetch" computerName="DESKTOP-SM838SH" duration="00:00:00.8002158" startTime="2026-07-12T13:26:23.4753330+03:00" endTime="2026-07-12T13:26:23.4753336+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f364ed53-39cb-4cc7-9ec8-f6c59c0ec502" />
+    <UnitTestResult executionId="a10b7c12-9cd1-4117-bee6-3910d5b6011c" testId="4951f551-25cd-1531-1582-64e16ddd42c2" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.SourceHealthScannerRejectsZeroLfCrOnlyAndMinifiedSamples" computerName="DESKTOP-SM838SH" duration="00:00:00.0003114" startTime="2026-07-12T13:26:29.7889299+03:00" endTime="2026-07-12T13:26:29.7889302+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a10b7c12-9cd1-4117-bee6-3910d5b6011c" />
+    <UnitTestResult executionId="a5f7995b-8a94-40a4-a348-68d31d8ce3ca" testId="204a7adb-10ee-0fe8-ef05-8ce8fd19b36b" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs" computerName="DESKTOP-SM838SH" duration="00:00:00.6839029" startTime="2026-07-12T13:26:29.7888630+03:00" endTime="2026-07-12T13:26:29.7888632+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5f7995b-8a94-40a4-a348-68d31d8ce3ca">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 249&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b96c6037-4e66-4b96-9101-a431b7a6bde5" testId="a00e9a4e-8556-100e-3063-3b234c48396d" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091StreamWindowSvgEntriesAreVisibleInCatalog" computerName="DESKTOP-SM838SH" duration="00:00:00.6080714" startTime="2026-07-12T13:26:27.2278671+03:00" endTime="2026-07-12T13:26:27.2278674+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b96c6037-4e66-4b96-9101-a431b7a6bde5" />
+    <UnitTestResult executionId="6022e4ec-70ed-4179-8132-9a09bf32bb22" testId="9fcee318-850d-f35b-41ed-ae29c0952260" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.SvgEntriesAreRelativeTextSafePreviewPaths" computerName="DESKTOP-SM838SH" duration="00:00:00.6270059" startTime="2026-07-12T13:26:25.7054873+03:00" endTime="2026-07-12T13:26:25.7054876+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6022e4ec-70ed-4179-8132-9a09bf32bb22" />
+    <UnitTestResult executionId="6e774db1-d217-4a6f-bc49-9ff0ed991ebf" testId="b585475b-310a-80dc-94fa-4f101af71900" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult" computerName="DESKTOP-SM838SH" duration="00:00:00.8921140" startTime="2026-07-12T13:26:24.3686571+03:00" endTime="2026-07-12T13:26:24.3686574+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e774db1-d217-4a6f-bc49-9ff0ed991ebf">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Contains() Failure: Sub-string not found&#xD;
+String:    "id: goal_101_offline_geoworld_unity_previ"···&#xD;
+Not found: "offlineGeoworldUnityPreviewQualityGatePas"···</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c__DisplayClass16_0.&lt;WinFormsWorkspaceCanBindApplicationResult&gt;b__0() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 609&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c__DisplayClass19_0.&lt;RunSta&gt;b__0() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 737&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.RunSta(Action action) in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 749&#xD;
+   at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs:line 505&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="aa939654-4079-4293-94bc-eb35c7bc8b0c" testId="df5c71b0-ce98-4531-fbce-a86dc004a064" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldHandoffGroupSurfacesGoal100PackagesPayloadAndProofs" computerName="DESKTOP-SM838SH" duration="00:00:00.7880528" startTime="2026-07-12T13:26:22.6750714+03:00" endTime="2026-07-12T13:26:22.6750717+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa939654-4079-4293-94bc-eb35c7bc8b0c" />
+    <UnitTestResult executionId="33fee036-e09e-4b10-8e4a-ea08dd212513" testId="cb2fe065-089a-88cf-5f2f-e24387ea42fa" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceQualityGateRecordsSourceHealthBackstop" computerName="DESKTOP-SM838SH" duration="00:00:00.6793813" startTime="2026-07-12T13:26:25.0783743+03:00" endTime="2026-07-12T13:26:25.0783745+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33fee036-e09e-4b10-8e4a-ea08dd212513" />
+    <UnitTestResult executionId="e275195f-fb8f-43db-8f26-ad4f0188c34c" testId="43eebe22-e722-24d0-676f-56b0a1c60af5" testName="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.CacheExportGroupSurfacesGoal093PackagesAndRuntimeHandoffSidecar" computerName="DESKTOP-SM838SH" duration="00:00:00.6065369" startTime="2026-07-12T13:26:30.3954481+03:00" endTime="2026-07-12T13:26:30.3954483+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e275195f-fb8f-43db-8f26-ad4f0188c34c" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="204a7adb-10ee-0fe8-ef05-8ce8fd19b36b">
+      <Execution id="a5f7995b-8a94-40a4-a348-68d31d8ce3ca" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceQualityGateRecordsSourceHealthBackstop" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="cb2fe065-089a-88cf-5f2f-e24387ea42fa">
+      <Execution id="33fee036-e09e-4b10-8e4a-ea08dd212513" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="WorkspaceQualityGateRecordsSourceHealthBackstop" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c74ef216-9256-0dc0-45de-daa1f5ac0061">
+      <Execution id="38fd3d6b-1c43-4a22-9c15-2ef29fbd93a1" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="WorkspaceActivationLoadsAndBindsRealArtifacts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f7dc84f2-bc52-9632-981d-472d338165fd">
+      <Execution id="7019f062-5df6-4d08-b3ce-bc45e496dfab" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.SourceHealthScannerRejectsSyntheticOver1000LineSource" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="a62b45c4-e2d9-6c5d-8329-8d54f901f711">
+      <Execution id="1d68f403-8a9b-4256-bea6-64a5073c36a3" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="SourceHealthScannerRejectsSyntheticOver1000LineSource" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="172a9957-0602-acad-bbcc-a0d86267ab92">
+      <Execution id="62452389-dc66-4ee1-9395-cfba0cecdefc" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="ServiceLoadsRealGoal086Through108Artifacts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.CacheExportGroupSurfacesGoal093PackagesAndRuntimeHandoffSidecar" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="43eebe22-e722-24d0-676f-56b0a1c60af5">
+      <Execution id="e275195f-fb8f-43db-8f26-ad4f0188c34c" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="CacheExportGroupSurfacesGoal093PackagesAndRuntimeHandoffSidecar" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.CurrentGoal092NamespaceHasNoFilesOver1000LogicalLines" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="23c16ab7-16b2-0d37-c255-1fffa8cdc09e">
+      <Execution id="d62f41f6-e7a0-4fbe-a956-c71e0e8df1ce" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="CurrentGoal092NamespaceHasNoFilesOver1000LogicalLines" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b585475b-310a-80dc-94fa-4f101af71900">
+      <Execution id="6e774db1-d217-4a6f-bc49-9ff0ed991ebf" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="WinFormsWorkspaceCanBindApplicationResult" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.MissingArtifactScenarioProducesDiagnosticsNotFakeGreen" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="dce9ce28-c2d1-2bde-af79-65d43b5d6779">
+      <Execution id="49a3ed2f-a2e1-40d2-9aa3-a03611979e1a" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="MissingArtifactScenarioProducesDiagnosticsNotFakeGreen" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityEditorPreviewGroupSurfacesGoal102EditorToolReadiness" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c49eb3b5-8a6c-a50e-449d-098d1e39d55a">
+      <Execution id="aa939a42-4bba-417b-9553-22c12e637d89" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="OfflineGeoworldUnityEditorPreviewGroupSurfacesGoal102EditorToolReadiness" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.SvgEntriesAreRelativeTextSafePreviewPaths" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="9fcee318-850d-f35b-41ed-ae29c0952260">
+      <Execution id="6022e4ec-70ed-4179-8132-9a09bf32bb22" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="SvgEntriesAreRelativeTextSafePreviewPaths" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.UnityHandoffGroupSurfacesGoal095PayloadProbeAndReadinessProof" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="ed8a662b-7780-ef87-ce25-b0d0e8b6eb72">
+      <Execution id="f8fdf8a4-cd3a-4df0-93a0-9f60f2f2112d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="UnityHandoffGroupSurfacesGoal095PayloadProbeAndReadinessProof" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldHandoffGroupSurfacesGoal100PackagesPayloadAndProofs" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="df5c71b0-ce98-4531-fbce-a86dc004a064">
+      <Execution id="aa939654-4079-4293-94bc-eb35c7bc8b0c" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="OfflineGeoworldHandoffGroupSurfacesGoal100PackagesPayloadAndProofs" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.GeoworldGroupSurfacesGoal099OfflineBundleGraphAndPrefetch" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="31bbe929-1ba5-4deb-a687-e97df48c546b">
+      <Execution id="f364ed53-39cb-4cc7-9ec8-f6c59c0ec502" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="GeoworldGroupSurfacesGoal099OfflineBundleGraphAndPrefetch" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.SourceHealthScannerRejectsZeroLfCrOnlyAndMinifiedSamples" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="4951f551-25cd-1531-1582-64e16ddd42c2">
+      <Execution id="a10b7c12-9cd1-4117-bee6-3910d5b6011c" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="SourceHealthScannerRejectsZeroLfCrOnlyAndMinifiedSamples" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091StreamWindowSvgEntriesAreVisibleInCatalog" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="a00e9a4e-8556-100e-3063-3b234c48396d">
+      <Execution id="b96c6037-4e66-4b96-9101-a431b7a6bde5" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="Goal091StreamWindowSvgEntriesAreVisibleInCatalog" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="5a330b19-215d-f8cb-5138-22c195be6ed1">
+      <Execution id="d9f74bb6-a3e9-4b02-b18f-ebdcaee4a309" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests" name="Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="a62b45c4-e2d9-6c5d-8329-8d54f901f711" executionId="1d68f403-8a9b-4256-bea6-64a5073c36a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c49eb3b5-8a6c-a50e-449d-098d1e39d55a" executionId="aa939a42-4bba-417b-9553-22c12e637d89" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c74ef216-9256-0dc0-45de-daa1f5ac0061" executionId="38fd3d6b-1c43-4a22-9c15-2ef29fbd93a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed8a662b-7780-ef87-ce25-b0d0e8b6eb72" executionId="f8fdf8a4-cd3a-4df0-93a0-9f60f2f2112d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7dc84f2-bc52-9632-981d-472d338165fd" executionId="7019f062-5df6-4d08-b3ce-bc45e496dfab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="172a9957-0602-acad-bbcc-a0d86267ab92" executionId="62452389-dc66-4ee1-9395-cfba0cecdefc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="23c16ab7-16b2-0d37-c255-1fffa8cdc09e" executionId="d62f41f6-e7a0-4fbe-a956-c71e0e8df1ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dce9ce28-c2d1-2bde-af79-65d43b5d6779" executionId="49a3ed2f-a2e1-40d2-9aa3-a03611979e1a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5a330b19-215d-f8cb-5138-22c195be6ed1" executionId="d9f74bb6-a3e9-4b02-b18f-ebdcaee4a309" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="31bbe929-1ba5-4deb-a687-e97df48c546b" executionId="f364ed53-39cb-4cc7-9ec8-f6c59c0ec502" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4951f551-25cd-1531-1582-64e16ddd42c2" executionId="a10b7c12-9cd1-4117-bee6-3910d5b6011c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="204a7adb-10ee-0fe8-ef05-8ce8fd19b36b" executionId="a5f7995b-8a94-40a4-a348-68d31d8ce3ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a00e9a4e-8556-100e-3063-3b234c48396d" executionId="b96c6037-4e66-4b96-9101-a431b7a6bde5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9fcee318-850d-f35b-41ed-ae29c0952260" executionId="6022e4ec-70ed-4179-8132-9a09bf32bb22" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b585475b-310a-80dc-94fa-4f101af71900" executionId="6e774db1-d217-4a6f-bc49-9ff0ed991ebf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="df5c71b0-ce98-4531-fbce-a86dc004a064" executionId="aa939654-4079-4293-94bc-eb35c7bc8b0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb2fe065-089a-88cf-5f2f-e24387ea42fa" executionId="33fee036-e09e-4b10-8e4a-ea08dd212513" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43eebe22-e722-24d0-676f-56b0a1c60af5" executionId="e275195f-fb8f-43db-8f26-ad4f0188c34c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="18" executed="18" passed="12" failed="6" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.36]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:02.07]       Assert.DoesNotContain() Failure: Filter matched in collection&#xD;
+[xUnit.net 00:00:02.07]                    ↓ (pos 0)&#xD;
+[xUnit.net 00:00:02.07]       Collection: [VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal101.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal101.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal103.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal103.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal104.quality_gate, Message = Required visual preview proof is missing or did not pass. }, ···]&#xD;
+[xUnit.net 00:00:02.07]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.07]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(48,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts()&#xD;
+[xUnit.net 00:00:02.07]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:02.07]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:04.61]       Assert.Contains() Failure: Sub-string not found&#xD;
+[xUnit.net 00:00:04.61]       String:    "id: goal_101_offline_geoworld_unity_previ"···&#xD;
+[xUnit.net 00:00:04.61]       Not found: "offlineGeoworldUnityPreviewQualityGatePas"···&#xD;
+[xUnit.net 00:00:04.61]       Stack Trace:&#xD;
+[xUnit.net 00:00:04.61]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(609,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c__DisplayClass16_0.&lt;WinFormsWorkspaceCanBindApplicationResult&gt;b__0()&#xD;
+[xUnit.net 00:00:04.61]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(737,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c__DisplayClass19_0.&lt;RunSta&gt;b__0()&#xD;
+[xUnit.net 00:00:04.61]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:04.61]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(749,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.RunSta(Action action)&#xD;
+[xUnit.net 00:00:04.61]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(505,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult()&#xD;
+[xUnit.net 00:00:04.61]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:04.61]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:04.64]       Assert.NotNull() Failure: Value is null&#xD;
+[xUnit.net 00:00:04.64]       Stack Trace:&#xD;
+[xUnit.net 00:00:04.64]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(760,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.RequiredPrivateField[T](Object owner, String fieldName)&#xD;
+[xUnit.net 00:00:04.64]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(708,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c.&lt;WorkspaceActivationLoadsAndBindsRealArtifacts&gt;b__17_0()&#xD;
+[xUnit.net 00:00:04.64]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(737,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.&lt;&gt;c__DisplayClass19_0.&lt;RunSta&gt;b__0()&#xD;
+[xUnit.net 00:00:04.64]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:04.64]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(749,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.RunSta(Action action)&#xD;
+[xUnit.net 00:00:04.64]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(702,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts()&#xD;
+[xUnit.net 00:00:04.64]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:04.64]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:08.09]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:08.09]       Expected: True&#xD;
+[xUnit.net 00:00:08.09]       Actual:   False&#xD;
+[xUnit.net 00:00:08.09]       Stack Trace:&#xD;
+[xUnit.net 00:00:08.09]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceGoal103Tests.cs(30,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness()&#xD;
+[xUnit.net 00:00:08.09]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:08.09]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:08.73]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:08.73]       Expected: True&#xD;
+[xUnit.net 00:00:08.73]       Actual:   False&#xD;
+[xUnit.net 00:00:08.73]       Stack Trace:&#xD;
+[xUnit.net 00:00:08.73]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(390,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs()&#xD;
+[xUnit.net 00:00:08.73]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:08.73]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:10.03]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:10.03]       Expected: True&#xD;
+[xUnit.net 00:00:10.03]       Actual:   False&#xD;
+[xUnit.net 00:00:10.03]       Stack Trace:&#xD;
+[xUnit.net 00:00:10.03]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\VisualWorldStreamPreviewWorkspace\VisualWorldStreamPreviewWorkspaceServiceTests.cs(249,0): at LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs()&#xD;
+[xUnit.net 00:00:10.03]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:10.03]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:10.64]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:26:21.8267238+03:00">
+        <Text>[xUnit.net 00:00:02.06]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:26:24.3681118+03:00">
+        <Text>[xUnit.net 00:00:04.61]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:26:24.3991042+03:00">
+        <Text>[xUnit.net 00:00:04.64]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:26:27.8504813+03:00">
+        <Text>[xUnit.net 00:00:08.09]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:26:28.4961355+03:00">
+        <Text>[xUnit.net 00:00:08.73]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:26:29.7886380+03:00">
+        <Text>[xUnit.net 00:00:10.03]     LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

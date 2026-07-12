@@ -1,0 +1,31 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.RejectsQuestWithoutStepsOrObjectives [19 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.RejectsWrongArtifactKind [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ExpandedStrictContractRejectsWrongArtifactKind(contractId: "encounter_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ExpandedStrictContractRejectsWrongArtifactKind(contractId: "region_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ExpandedStrictContractRejectsWrongArtifactKind(contractId: "npc_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ExpandedStrictContractRejectsWrongArtifactKind(contractId: "item_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ExpandedStrictContractRejectsWrongArtifactKind(contractId: "dialogue_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ExpandedStrictContractRejectsDuplicateIdsAndNonStringReferences [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ValidExpandedStrictContractPasses(contractId: "npc_pack_v1") [< 1 ms]
+[xUnit.net 00:00:00.40]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ValidExpandedStrictContractPasses(contractId: "dialogue_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ValidExpandedStrictContractPasses(contractId: "encounter_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ValidExpandedStrictContractPasses(contractId: "region_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ValidExpandedStrictContractPasses(contractId: "item_pack_v1") [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.CatalogExposesExpandedContractsAndBatchPresets [9 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.RejectsForbiddenCodeFields [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.RejectsMechanicWithoutTitleOrName [< 1 ms]
+  Passed LLMGameCreator.Tests.Design.GeneratorPlanStrictLlmArtifactValidatorTests.ValidGameProfilePasses [< 1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0380.trx
+
+Test Run Successful.
+Total tests: 17
+     Passed: 17
+ Total time: 0,7810 Seconds

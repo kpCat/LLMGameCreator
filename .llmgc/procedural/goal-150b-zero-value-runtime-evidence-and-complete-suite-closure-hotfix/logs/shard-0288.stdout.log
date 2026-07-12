@@ -1,0 +1,24 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsWithSamplePackageCreatesExpectedAssetRequests [34 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsWithEmptyPackageReturnsEmptyRequestsAndReady [1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsWithFutureMixedViewModulesProducesLuaWarningsNotErrors [2 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsAggregatesFutureProviderWarningsByProviderKind [10 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsWithSamplePackageCreatesExpectedAudioRequests [1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsNormalizesBlankIdsToUnknownAndReportsDuplicates [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsReportsDuplicateAssetRequestIdsAndBlocksByErrors [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsRefactorPreservesDeterministicRequestIdsAndDiagnostics [1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsWithTopDownModulesCreatesLuaModuleRequests [2 ms]
+[xUnit.net 00:00:00.47]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnityArchiveRequestPipelineTests.BuildRequestsProducesDeterministicOutputAcrossRuns [45 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0288.trx
+
+Test Run Successful.
+Total tests: 10
+     Passed: 10
+ Total time: 0,8350 Seconds

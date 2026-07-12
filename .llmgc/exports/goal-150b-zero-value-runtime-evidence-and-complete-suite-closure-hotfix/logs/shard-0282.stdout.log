@@ -1,0 +1,25 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateMissingExpectedOutputsMarkedMissing [19 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateUnsafePathIsDiagnosticError(unsafePath: "assets\\escaped.png") [47 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateUnsafePathIsDiagnosticError(unsafePath: "C:/escaped.png") [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateUnsafePathIsDiagnosticError(unsafePath: "../../escaped.png") [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateUnsafePathIsDiagnosticError(unsafePath: "assets/generated/icon:escaped.png") [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateDirectoryAtExpectedPathMarkedInvalid [1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateWrongExtensionMarkedInvalid [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateManuallyCreatedFilesMarkedAvailable [11 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateEmptyFileMarkedInvalid [1 ms]
+[xUnit.net 00:00:00.49]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateCreatesEmptyValidManifests [1 ms]
+  Passed LLMGameCreator.Tests.Application.UnityArchiveFulfillmentStateTests.UnityArchiveFulfillmentStateDuplicateExpectedOutputPathIsDiagnosticError [1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0282.trx
+
+Test Run Successful.
+Total tests: 11
+     Passed: 11
+ Total time: 0,8609 Seconds

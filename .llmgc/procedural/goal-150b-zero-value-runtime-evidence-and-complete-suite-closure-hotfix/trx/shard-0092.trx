@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="71dc7d2a-2cf2-4268-aec9-968c5f85c4db" name="endim@DESKTOP-SM838SH 2026-07-12 13:03:37" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:03:37.3631288+03:00" queuing="2026-07-12T13:03:37.3631290+03:00" start="2026-07-12T13:03:36.4536770+03:00" finish="2026-07-12T13:03:37.3683090+03:00" />
+  <TestSettings name="default" id="463f3cc5-bf3b-43e9-878e-254f3bb5ff62">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_03_37" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2ef7d5fe-f71e-4cbf-b4b7-df01da51ef90" testId="f8da8090-4854-f8e7-5dc7-2d45285c89ac" testName="LLMGameCreator.Tests.Application.FullMediaBoundGeneratorCampaign.FullMediaBoundGeneratorCampaignSourceLoadingTests.Goal058ConsumesGoal057HandoffAndRequiredSourceChain" computerName="DESKTOP-SM838SH" duration="00:00:00.1064720" startTime="2026-07-12T13:03:37.2795850+03:00" endTime="2026-07-12T13:03:37.2796098+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ef7d5fe-f71e-4cbf-b4b7-df01da51ef90" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.FullMediaBoundGeneratorCampaign.FullMediaBoundGeneratorCampaignSourceLoadingTests.Goal058ConsumesGoal057HandoffAndRequiredSourceChain" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f8da8090-4854-f8e7-5dc7-2d45285c89ac">
+      <Execution id="2ef7d5fe-f71e-4cbf-b4b7-df01da51ef90" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.FullMediaBoundGeneratorCampaign.FullMediaBoundGeneratorCampaignSourceLoadingTests" name="Goal058ConsumesGoal057HandoffAndRequiredSourceChain" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="f8da8090-4854-f8e7-5dc7-2d45285c89ac" executionId="2ef7d5fe-f71e-4cbf-b4b7-df01da51ef90" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.49]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

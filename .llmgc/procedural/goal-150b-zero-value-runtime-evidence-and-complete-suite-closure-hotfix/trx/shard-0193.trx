@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b0df4e73-cd8b-4f00-9295-36cd88b1be52" name="endim@DESKTOP-SM838SH 2026-07-12 13:10:22" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:10:22.3797814+03:00" queuing="2026-07-12T13:10:22.3797816+03:00" start="2026-07-12T13:10:21.5249522+03:00" finish="2026-07-12T13:10:22.3871279+03:00" />
+  <TestSettings name="default" id="01257c38-4c1b-4067-9296-8b1ee613b652">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_10_22" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="13b4efe8-7999-4911-9c40-575bb9526d1b" testId="b1ff65e8-d790-e401-16e1-698e285b44f2" testName="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.InvalidSeedModeAndUnsafeIdsReturnDiagnosticsInsteadOfThrowing" computerName="DESKTOP-SM838SH" duration="00:00:00.0024657" startTime="2026-07-12T13:10:22.3000943+03:00" endTime="2026-07-12T13:10:22.3000944+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13b4efe8-7999-4911-9c40-575bb9526d1b" />
+    <UnitTestResult executionId="46bcaf79-e654-4083-a366-e6d8176e5870" testId="581312ef-0518-4670-0720-49a44cde3eb8" testName="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.SameSeedAndProfileProduceByteIdenticalJsonAndMarkdown" computerName="DESKTOP-SM838SH" duration="00:00:00.0022395" startTime="2026-07-12T13:10:22.2949218+03:00" endTime="2026-07-12T13:10:22.2949219+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46bcaf79-e654-4083-a366-e6d8176e5870" />
+    <UnitTestResult executionId="095dbeb6-76e6-4231-9591-1a31f42c60e0" testId="ad3dd5ea-e0a3-d1a9-6367-25fdcfcdc0e3" testName="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.GeneratedReferencesAndMarkdownSummaryAreDeterministicAndRuntimeFacing" computerName="DESKTOP-SM838SH" duration="00:00:00.0028646" startTime="2026-07-12T13:10:22.2975754+03:00" endTime="2026-07-12T13:10:22.2975755+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="095dbeb6-76e6-4231-9591-1a31f42c60e0" />
+    <UnitTestResult executionId="1647c56a-b260-4a56-97b8-03da6427821d" testId="f8ce5b0b-e852-ebf0-59e2-042ae1c3c434" testName="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.DifferentSeedChangesGeneratedValuesButPreservesStructure" computerName="DESKTOP-SM838SH" duration="00:00:00.0532489" startTime="2026-07-12T13:10:22.2927999+03:00" endTime="2026-07-12T13:10:22.2928207+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1647c56a-b260-4a56-97b8-03da6427821d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.GeneratedReferencesAndMarkdownSummaryAreDeterministicAndRuntimeFacing" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="ad3dd5ea-e0a3-d1a9-6367-25fdcfcdc0e3">
+      <Execution id="095dbeb6-76e6-4231-9591-1a31f42c60e0" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests" name="GeneratedReferencesAndMarkdownSummaryAreDeterministicAndRuntimeFacing" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.DifferentSeedChangesGeneratedValuesButPreservesStructure" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f8ce5b0b-e852-ebf0-59e2-042ae1c3c434">
+      <Execution id="1647c56a-b260-4a56-97b8-03da6427821d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests" name="DifferentSeedChangesGeneratedValuesButPreservesStructure" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.SameSeedAndProfileProduceByteIdenticalJsonAndMarkdown" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="581312ef-0518-4670-0720-49a44cde3eb8">
+      <Execution id="46bcaf79-e654-4083-a366-e6d8176e5870" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests" name="SameSeedAndProfileProduceByteIdenticalJsonAndMarkdown" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests.InvalidSeedModeAndUnsafeIdsReturnDiagnosticsInsteadOfThrowing" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b1ff65e8-d790-e401-16e1-698e285b44f2">
+      <Execution id="13b4efe8-7999-4911-9c40-575bb9526d1b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.Procedural.ProceduralGameKernelServiceTests" name="InvalidSeedModeAndUnsafeIdsReturnDiagnosticsInsteadOfThrowing" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b1ff65e8-d790-e401-16e1-698e285b44f2" executionId="13b4efe8-7999-4911-9c40-575bb9526d1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="581312ef-0518-4670-0720-49a44cde3eb8" executionId="46bcaf79-e654-4083-a366-e6d8176e5870" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ad3dd5ea-e0a3-d1a9-6367-25fdcfcdc0e3" executionId="095dbeb6-76e6-4231-9591-1a31f42c60e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f8ce5b0b-e852-ebf0-59e2-042ae1c3c434" executionId="1647c56a-b260-4a56-97b8-03da6427821d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.45]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="4682886f-4151-4236-98b2-08d288aef06e" name="endim@DESKTOP-SM838SH 2026-07-12 13:28:33" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:28:33.0186171+03:00" queuing="2026-07-12T13:28:33.0186174+03:00" start="2026-07-12T13:28:32.2047718+03:00" finish="2026-07-12T13:28:33.0241313+03:00" />
+  <TestSettings name="default" id="ac86ebeb-490a-48d8-a3f9-49e06e69649a">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_28_33" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="02ba2630-d37c-4673-9563-2d48e6e56cad" testId="b0ee7e7b-9931-55a3-30b7-01b661ffe5a6" testName="LLMGameCreator.Tests.Devflow.RunFeatureModuleCompositionRuntimeMatrixScriptTests.Script_has_bounded_paths_default_none_semantics_unity_smoke_and_transactional_rollback" computerName="DESKTOP-SM838SH" duration="00:00:00.0031396" startTime="2026-07-12T13:28:32.9367377+03:00" endTime="2026-07-12T13:28:32.9367538+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="02ba2630-d37c-4673-9563-2d48e6e56cad" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Devflow.RunFeatureModuleCompositionRuntimeMatrixScriptTests.Script_has_bounded_paths_default_none_semantics_unity_smoke_and_transactional_rollback" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b0ee7e7b-9931-55a3-30b7-01b661ffe5a6">
+      <Execution id="02ba2630-d37c-4673-9563-2d48e6e56cad" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Devflow.RunFeatureModuleCompositionRuntimeMatrixScriptTests" name="Script_has_bounded_paths_default_none_semantics_unity_smoke_and_transactional_rollback" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b0ee7e7b-9931-55a3-30b7-01b661ffe5a6" executionId="02ba2630-d37c-4673-9563-2d48e6e56cad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.36]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.40]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

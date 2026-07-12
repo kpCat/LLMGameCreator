@@ -1,0 +1,17 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:01.05]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.EditDrivenPlayablePreviewRefresh.EditDrivenPlayablePreviewRefreshServiceTests.ServiceConsumesGoal075EvidenceAndRows [441 ms]
+  Passed LLMGameCreator.Tests.Application.EditDrivenPlayablePreviewRefresh.EditDrivenPlayablePreviewRefreshServiceTests.RefreshPlanTargetsAreDerivedFromChangedRows [107 ms]
+  Passed LLMGameCreator.Tests.Application.EditDrivenPlayablePreviewRefresh.EditDrivenPlayablePreviewRefreshServiceTests.StateTransitionHashesProveBeforeAfterRollbackAndReplay [108 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0065.trx
+
+Test Run Successful.
+Total tests: 3
+     Passed: 3
+ Total time: 1,4695 Seconds

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f63d5a18-8337-4316-a44a-efe5319b911c" name="endim@DESKTOP-SM838SH 2026-07-12 13:06:19" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:06:19.3042901+03:00" queuing="2026-07-12T13:06:19.3042903+03:00" start="2026-07-12T13:06:18.3874001+03:00" finish="2026-07-12T13:06:19.3132888+03:00" />
+  <TestSettings name="default" id="e5fd81ab-953d-4cbc-901f-310a79cac87f">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_06_19" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4cfb630a-fd70-4886-83e8-6569c50f0119" testId="8d6b458d-269c-0b5e-20bf-95a7394b8ec5" testName="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.NegativeProofRejectsManualInputAndForbiddenPathSamples" computerName="DESKTOP-SM838SH" duration="00:00:00.0023162" startTime="2026-07-12T13:06:19.2221527+03:00" endTime="2026-07-12T13:06:19.2221530+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4cfb630a-fd70-4886-83e8-6569c50f0119" />
+    <UnitTestResult executionId="350c5cf1-9897-470b-bd22-dd9383cf6ab5" testId="d1e278eb-7674-56c2-b65c-3365983ee4ac" testName="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.NonGreenGoal115SnapshotBlocksAcceptance" computerName="DESKTOP-SM838SH" duration="00:00:00.0187362" startTime="2026-07-12T13:06:19.2153671+03:00" endTime="2026-07-12T13:06:19.2153672+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="350c5cf1-9897-470b-bd22-dd9383cf6ab5" />
+    <UnitTestResult executionId="77a99b19-302e-4d0c-9fb2-35062a6d996f" testId="6f437a1e-067f-fe57-8559-51fa552f32b4" testName="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.MissingGoal115SnapshotBlocksAcceptance" computerName="DESKTOP-SM838SH" duration="00:00:00.0644814" startTime="2026-07-12T13:06:19.1837902+03:00" endTime="2026-07-12T13:06:19.1838066+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="77a99b19-302e-4d0c-9fb2-35062a6d996f" />
+    <UnitTestResult executionId="c52ff6d3-10fb-44fe-8f5c-f67607773f7d" testId="a1dfad13-1340-18d8-61d3-fd7fe1bda873" testName="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput" computerName="DESKTOP-SM838SH" duration="00:00:00.0081150" startTime="2026-07-12T13:06:19.1995509+03:00" endTime="2026-07-12T13:06:19.1995510+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c52ff6d3-10fb-44fe-8f5c-f67607773f7d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ&#xD;
+           ↓ (pos 0)&#xD;
+Expected: "GREEN"&#xD;
+Actual:   "BLOCKED"&#xD;
+           ↑ (pos 0)</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldAlphaManualGateAcceptanceRecord\OfflineGeoworldAlphaManualGateAcceptanceRecordTests.cs:line 15&#xD;
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="279dfbbf-17ee-462e-93c5-09e21f497e87" testId="faebc8a6-f30f-9232-4bfb-8f7a223179c9" testName="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.ManualHashMismatchBlocksAcceptance" computerName="DESKTOP-SM838SH" duration="00:00:00.0043377" startTime="2026-07-12T13:06:19.2197466+03:00" endTime="2026-07-12T13:06:19.2197469+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="279dfbbf-17ee-462e-93c5-09e21f497e87" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.NonGreenGoal115SnapshotBlocksAcceptance" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="d1e278eb-7674-56c2-b65c-3365983ee4ac">
+      <Execution id="350c5cf1-9897-470b-bd22-dd9383cf6ab5" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests" name="NonGreenGoal115SnapshotBlocksAcceptance" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.MissingGoal115SnapshotBlocksAcceptance" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="6f437a1e-067f-fe57-8559-51fa552f32b4">
+      <Execution id="77a99b19-302e-4d0c-9fb2-35062a6d996f" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests" name="MissingGoal115SnapshotBlocksAcceptance" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.ManualHashMismatchBlocksAcceptance" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="faebc8a6-f30f-9232-4bfb-8f7a223179c9">
+      <Execution id="279dfbbf-17ee-462e-93c5-09e21f497e87" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests" name="ManualHashMismatchBlocksAcceptance" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="a1dfad13-1340-18d8-61d3-fd7fe1bda873">
+      <Execution id="c52ff6d3-10fb-44fe-8f5c-f67607773f7d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests" name="RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.NegativeProofRejectsManualInputAndForbiddenPathSamples" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="8d6b458d-269c-0b5e-20bf-95a7394b8ec5">
+      <Execution id="4cfb630a-fd70-4886-83e8-6569c50f0119" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests" name="NegativeProofRejectsManualInputAndForbiddenPathSamples" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="8d6b458d-269c-0b5e-20bf-95a7394b8ec5" executionId="4cfb630a-fd70-4886-83e8-6569c50f0119" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d1e278eb-7674-56c2-b65c-3365983ee4ac" executionId="350c5cf1-9897-470b-bd22-dd9383cf6ab5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f437a1e-067f-fe57-8559-51fa552f32b4" executionId="77a99b19-302e-4d0c-9fb2-35062a6d996f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a1dfad13-1340-18d8-61d3-fd7fe1bda873" executionId="c52ff6d3-10fb-44fe-8f5c-f67607773f7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="faebc8a6-f30f-9232-4bfb-8f7a223179c9" executionId="279dfbbf-17ee-462e-93c5-09e21f497e87" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="5" executed="5" passed="4" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.46]       Assert.Equal() Failure: Strings differ&#xD;
+[xUnit.net 00:00:00.46]                  ↓ (pos 0)&#xD;
+[xUnit.net 00:00:00.46]       Expected: "GREEN"&#xD;
+[xUnit.net 00:00:00.46]       Actual:   "BLOCKED"&#xD;
+[xUnit.net 00:00:00.46]                  ↑ (pos 0)&#xD;
+[xUnit.net 00:00:00.46]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.46]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldAlphaManualGateAcceptanceRecord\OfflineGeoworldAlphaManualGateAcceptanceRecordTests.cs(15,0): at LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput()&#xD;
+[xUnit.net 00:00:00.46]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)&#xD;
+[xUnit.net 00:00:00.46]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:00.48]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:06:19.1985323+03:00">
+        <Text>[xUnit.net 00:00:00.46]     LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

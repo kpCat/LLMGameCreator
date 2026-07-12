@@ -218,6 +218,14 @@ public sealed class FeatureModuleParameterBindingService
                 Diagnostics = [exception.Message]
             };
         }
+        catch (OverflowException)
+        {
+            return new FeatureModuleParameterBindingResult
+            {
+                EffectiveParameterValues = validation.EffectiveValues,
+                Diagnostics = ["numeric expression overflow rejected"]
+            };
+        }
     }
 
     private static string TargetKey(FeatureModuleEffectiveValueBinding binding) =>

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="aef8e51b-0fde-4c90-a27f-352f9f60068a" name="endim@DESKTOP-SM838SH 2026-07-12 13:09:48" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:09:48.9093930+03:00" queuing="2026-07-12T13:09:48.9093933+03:00" start="2026-07-12T13:09:47.0518470+03:00" finish="2026-07-12T13:09:51.0131663+03:00" />
+  <TestSettings name="default" id="024d0506-9563-412e-98cb-6db8a5239191">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_09_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="82b7983d-0cd3-4a03-9a14-b189a899c820" testId="2a1c51ce-8398-1eb3-7a61-337623c16cd4" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardAcceptsRepairedEditorWindow" computerName="DESKTOP-SM838SH" duration="00:00:00.0008079" startTime="2026-07-12T13:09:50.9258315+03:00" endTime="2026-07-12T13:09:50.9258316+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="82b7983d-0cd3-4a03-9a14-b189a899c820" />
+    <UnitTestResult executionId="4522c1a7-3a49-44a1-8634-40ba7a741de4" testId="11db4f5a-5bd1-7ee7-fe97-5f9d955f7990" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardRejectsZeroLfCrOnlyAndExtremeLine" computerName="DESKTOP-SM838SH" duration="00:00:00.0082553" startTime="2026-07-12T13:09:47.8460840+03:00" endTime="2026-07-12T13:09:47.8461025+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4522c1a7-3a49-44a1-8634-40ba7a741de4" />
+    <UnitTestResult executionId="6f4a77ed-6b33-4373-a4cf-4cfad66e63a2" testId="26b878df-f154-3fc6-5819-ce703101f4ba" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardRejectsSyntheticOneLineCSharp" computerName="DESKTOP-SM838SH" duration="00:00:00.0001223" startTime="2026-07-12T13:09:50.7688099+03:00" endTime="2026-07-12T13:09:50.7688100+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f4a77ed-6b33-4373-a4cf-4cfad66e63a2" />
+    <UnitTestResult executionId="dd0ac0f5-2b64-420a-af9c-fa64f5a39d56" testId="4a610e45-9b49-fd04-e8e6-ccc4866f29c8" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SimulatedActionProofAndNegativeProofCoverRequiredRisks" computerName="DESKTOP-SM838SH" duration="00:00:00.0529024" startTime="2026-07-12T13:09:50.7686389+03:00" endTime="2026-07-12T13:09:50.7686391+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd0ac0f5-2b64-420a-af9c-fa64f5a39d56" />
+    <UnitTestResult executionId="00f63545-6030-4027-afc4-e9b668c7a643" testId="30469b15-d0d1-d8cc-651a-9f1c198054f3" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload" computerName="DESKTOP-SM838SH" duration="00:00:00.0503405" startTime="2026-07-12T13:09:50.9254857+03:00" endTime="2026-07-12T13:09:50.9254858+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00f63545-6030-4027-afc4-e9b668c7a643">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldUnityEditorPreviewTool\OfflineGeoworldUnityEditorPreviewToolTests.cs:line 20&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="74361372-6921-4fe1-806f-43e7447d72a9" testId="8dae925a-8d78-0470-7f0f-7acf23bc597d" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardRejectsActualEditorWindowOneLineSample" computerName="DESKTOP-SM838SH" duration="00:00:00.0001415" startTime="2026-07-12T13:09:48.4701934+03:00" endTime="2026-07-12T13:09:48.4701935+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="74361372-6921-4fe1-806f-43e7447d72a9" />
+    <UnitTestResult executionId="a52b64ae-05a9-4259-8ab4-9b1bf7041dbd" testId="f0359b25-1c8c-75ec-6d6f-bce55610e259" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness" computerName="DESKTOP-SM838SH" duration="00:00:01.4833137" startTime="2026-07-12T13:09:49.9638166+03:00" endTime="2026-07-12T13:09:49.9638167+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a52b64ae-05a9-4259-8ab4-9b1bf7041dbd">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldUnityEditorPreviewTool\OfflineGeoworldUnityEditorPreviewToolTests.cs:line 107&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="652dd6da-e9e3-42ea-9d9d-c8b103f4e8c9" testId="e0cefde1-e998-c0e3-5203-496865f11712" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardEvidenceIsDeterministicAndKeepsAlphaRuntimeBootstrapUnchanged" computerName="DESKTOP-SM838SH" duration="00:00:00.7527509" startTime="2026-07-12T13:09:50.7147092+03:00" endTime="2026-07-12T13:09:50.7147094+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="652dd6da-e9e3-42ea-9d9d-c8b103f4e8c9" />
+    <UnitTestResult executionId="04780ef6-138c-40fe-9dfa-8a3c32ba36d0" testId="bcd196e0-2fff-f8f8-5057-a86563880c65" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ActualUnityEditorSourceReformatEvidenceBlocksWhenActualHeadBlobIsAlreadyReadable" computerName="DESKTOP-SM838SH" duration="00:00:00.6241769" startTime="2026-07-12T13:09:48.4699089+03:00" endTime="2026-07-12T13:09:48.4699091+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="04780ef6-138c-40fe-9dfa-8a3c32ba36d0" />
+    <UnitTestResult executionId="321ddd38-8503-4e25-ba52-03d0669ef04f" testId="3c489f27-a823-187e-d0e2-d3da001dd494" testName="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean" computerName="DESKTOP-SM838SH" duration="00:00:00.1049773" startTime="2026-07-12T13:09:50.8748897+03:00" endTime="2026-07-12T13:09:50.8748899+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="321ddd38-8503-4e25-ba52-03d0669ef04f">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldUnityEditorPreviewTool\OfflineGeoworldUnityEditorPreviewToolTests.cs:line 146&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardRejectsZeroLfCrOnlyAndExtremeLine" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="11db4f5a-5bd1-7ee7-fe97-5f9d955f7990">
+      <Execution id="4522c1a7-3a49-44a1-8634-40ba7a741de4" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="SourceFormatGuardRejectsZeroLfCrOnlyAndExtremeLine" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SimulatedActionProofAndNegativeProofCoverRequiredRisks" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="4a610e45-9b49-fd04-e8e6-ccc4866f29c8">
+      <Execution id="dd0ac0f5-2b64-420a-af9c-fa64f5a39d56" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="SimulatedActionProofAndNegativeProofCoverRequiredRisks" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardAcceptsRepairedEditorWindow" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="2a1c51ce-8398-1eb3-7a61-337623c16cd4">
+      <Execution id="82b7983d-0cd3-4a03-9a14-b189a899c820" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="SourceFormatGuardAcceptsRepairedEditorWindow" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="3c489f27-a823-187e-d0e2-d3da001dd494">
+      <Execution id="321ddd38-8503-4e25-ba52-03d0669ef04f" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="EvidenceIsDeterministicAndSourceHealthClean" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f0359b25-1c8c-75ec-6d6f-bce55610e259">
+      <Execution id="a52b64ae-05a9-4259-8ab4-9b1bf7041dbd" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="WorkspaceGroupSurfacesEditorToolReadiness" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ActualUnityEditorSourceReformatEvidenceBlocksWhenActualHeadBlobIsAlreadyReadable" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="bcd196e0-2fff-f8f8-5057-a86563880c65">
+      <Execution id="04780ef6-138c-40fe-9dfa-8a3c32ba36d0" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="ActualUnityEditorSourceReformatEvidenceBlocksWhenActualHeadBlobIsAlreadyReadable" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="30469b15-d0d1-d8cc-651a-9f1c198054f3">
+      <Execution id="00f63545-6030-4027-afc4-e9b668c7a643" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardEvidenceIsDeterministicAndKeepsAlphaRuntimeBootstrapUnchanged" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="e0cefde1-e998-c0e3-5203-496865f11712">
+      <Execution id="652dd6da-e9e3-42ea-9d9d-c8b103f4e8c9" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="SourceFormatGuardEvidenceIsDeterministicAndKeepsAlphaRuntimeBootstrapUnchanged" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardRejectsSyntheticOneLineCSharp" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="26b878df-f154-3fc6-5819-ce703101f4ba">
+      <Execution id="6f4a77ed-6b33-4373-a4cf-4cfad66e63a2" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="SourceFormatGuardRejectsSyntheticOneLineCSharp" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.SourceFormatGuardRejectsActualEditorWindowOneLineSample" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="8dae925a-8d78-0470-7f0f-7acf23bc597d">
+      <Execution id="74361372-6921-4fe1-806f-43e7447d72a9" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests" name="SourceFormatGuardRejectsActualEditorWindowOneLineSample" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="2a1c51ce-8398-1eb3-7a61-337623c16cd4" executionId="82b7983d-0cd3-4a03-9a14-b189a899c820" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11db4f5a-5bd1-7ee7-fe97-5f9d955f7990" executionId="4522c1a7-3a49-44a1-8634-40ba7a741de4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="26b878df-f154-3fc6-5819-ce703101f4ba" executionId="6f4a77ed-6b33-4373-a4cf-4cfad66e63a2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a610e45-9b49-fd04-e8e6-ccc4866f29c8" executionId="dd0ac0f5-2b64-420a-af9c-fa64f5a39d56" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="30469b15-d0d1-d8cc-651a-9f1c198054f3" executionId="00f63545-6030-4027-afc4-e9b668c7a643" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8dae925a-8d78-0470-7f0f-7acf23bc597d" executionId="74361372-6921-4fe1-806f-43e7447d72a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f0359b25-1c8c-75ec-6d6f-bce55610e259" executionId="a52b64ae-05a9-4259-8ab4-9b1bf7041dbd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e0cefde1-e998-c0e3-5203-496865f11712" executionId="652dd6da-e9e3-42ea-9d9d-c8b103f4e8c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bcd196e0-2fff-f8f8-5057-a86563880c65" executionId="04780ef6-138c-40fe-9dfa-8a3c32ba36d0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c489f27-a823-187e-d0e2-d3da001dd494" executionId="321ddd38-8503-4e25-ba52-03d0669ef04f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="10" executed="10" passed="7" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.17]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.38]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.39]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:02.55]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:02.55]       Expected: True&#xD;
+[xUnit.net 00:00:02.55]       Actual:   False&#xD;
+[xUnit.net 00:00:02.55]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.55]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldUnityEditorPreviewTool\OfflineGeoworldUnityEditorPreviewToolTests.cs(107,0): at LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness()&#xD;
+[xUnit.net 00:00:02.55]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:03.46]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:03.46]       Expected: True&#xD;
+[xUnit.net 00:00:03.46]       Actual:   False&#xD;
+[xUnit.net 00:00:03.46]       Stack Trace:&#xD;
+[xUnit.net 00:00:03.46]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldUnityEditorPreviewTool\OfflineGeoworldUnityEditorPreviewToolTests.cs(146,0): at LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean()&#xD;
+[xUnit.net 00:00:03.46]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:03.51]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:03.51]       Expected: True&#xD;
+[xUnit.net 00:00:03.51]       Actual:   False&#xD;
+[xUnit.net 00:00:03.51]       Stack Trace:&#xD;
+[xUnit.net 00:00:03.51]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldUnityEditorPreviewTool\OfflineGeoworldUnityEditorPreviewToolTests.cs(20,0): at LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload()&#xD;
+[xUnit.net 00:00:03.51]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:03.52]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:09:49.9623893+03:00">
+        <Text>[xUnit.net 00:00:02.55]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:09:50.8745683+03:00">
+        <Text>[xUnit.net 00:00:03.46]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:09:50.9252258+03:00">
+        <Text>[xUnit.net 00:00:03.51]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

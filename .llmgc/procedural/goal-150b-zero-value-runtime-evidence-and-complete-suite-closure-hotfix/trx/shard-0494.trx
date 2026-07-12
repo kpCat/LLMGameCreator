@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="977eb02f-02b2-46af-bc55-65d5114cedb8" name="endim@DESKTOP-SM838SH 2026-07-12 13:39:12" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:39:12.7368847+03:00" queuing="2026-07-12T13:39:12.7368850+03:00" start="2026-07-12T13:39:11.8529258+03:00" finish="2026-07-12T13:39:12.7445705+03:00" />
+  <TestSettings name="default" id="4dd611cd-24dd-4bdc-8868-8e2b29399768">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_39_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1b324473-ce2f-4b13-867b-82758b775a45" testId="196df67b-d14e-8580-22d0-ed499bc2a842" testName="LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface" computerName="DESKTOP-SM838SH" duration="00:00:00.0732989" startTime="2026-07-12T13:39:12.6525851+03:00" endTime="2026-07-12T13:39:12.6526024+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1b324473-ce2f-4b13-867b-82758b775a45">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ&#xD;
+           ↓ (pos 0)&#xD;
+Expected: "GREEN"&#xD;
+Actual:   "BLOCKED"&#xD;
+           ↑ (pos 0)</Message>
+          <StackTrace>   at LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\ProductSmoke\OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.cs:line 16&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="196df67b-d14e-8580-22d0-ed499bc2a842">
+      <Execution id="1b324473-ce2f-4b13-867b-82758b775a45" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests" name="ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="196df67b-d14e-8580-22d0-ed499bc2a842" executionId="1b324473-ce2f-4b13-867b-82758b775a45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.45]       Assert.Equal() Failure: Strings differ&#xD;
+[xUnit.net 00:00:00.45]                  ↓ (pos 0)&#xD;
+[xUnit.net 00:00:00.45]       Expected: "GREEN"&#xD;
+[xUnit.net 00:00:00.45]       Actual:   "BLOCKED"&#xD;
+[xUnit.net 00:00:00.45]                  ↑ (pos 0)&#xD;
+[xUnit.net 00:00:00.45]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.45]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\ProductSmoke\OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.cs(16,0): at LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface()&#xD;
+[xUnit.net 00:00:00.45]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:00.46]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:39:12.6503527+03:00">
+        <Text>[xUnit.net 00:00:00.45]     LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

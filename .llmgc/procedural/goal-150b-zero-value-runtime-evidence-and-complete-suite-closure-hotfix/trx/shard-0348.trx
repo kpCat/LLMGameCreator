@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="ace6a152-4f5b-46bd-b970-4bcf1bf99f38" name="endim@DESKTOP-SM838SH 2026-07-12 13:26:46" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:26:46.6574430+03:00" queuing="2026-07-12T13:26:46.6574434+03:00" start="2026-07-12T13:26:45.7963078+03:00" finish="2026-07-12T13:26:46.6629909+03:00" />
+  <TestSettings name="default" id="7373170e-dcb9-4b76-a9fb-ae94a1b5e690">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_26_46" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="7e6c2f29-31c8-45a5-a6d9-6dc89344d21d" testId="1c656ecb-2b9e-1d5c-ffe8-4438fa902479" testName="LLMGameCreator.Tests.Application.WorldScaleRegionMapFoundation.WorldScaleReachabilityPlannerTests.RequiredTargetsAreReachableWithStableCosts" computerName="DESKTOP-SM838SH" duration="00:00:00.0344591" startTime="2026-07-12T13:26:46.5572279+03:00" endTime="2026-07-12T13:26:46.5572496+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e6c2f29-31c8-45a5-a6d9-6dc89344d21d" />
+    <UnitTestResult executionId="911fe740-3e88-43c6-b6bc-0ec94a03cbab" testId="1d669050-5eb5-f93b-eb20-a049566b3e3b" testName="LLMGameCreator.Tests.Application.WorldScaleRegionMapFoundation.WorldScaleReachabilityPlannerTests.PlannerReportsUnreachableRequiredTargetsAndBlockedCriticalEdges" computerName="DESKTOP-SM838SH" duration="00:00:00.0059596" startTime="2026-07-12T13:26:46.5627885+03:00" endTime="2026-07-12T13:26:46.5627888+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="911fe740-3e88-43c6-b6bc-0ec94a03cbab" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.WorldScaleRegionMapFoundation.WorldScaleReachabilityPlannerTests.RequiredTargetsAreReachableWithStableCosts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="1c656ecb-2b9e-1d5c-ffe8-4438fa902479">
+      <Execution id="7e6c2f29-31c8-45a5-a6d9-6dc89344d21d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.WorldScaleRegionMapFoundation.WorldScaleReachabilityPlannerTests" name="RequiredTargetsAreReachableWithStableCosts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.WorldScaleRegionMapFoundation.WorldScaleReachabilityPlannerTests.PlannerReportsUnreachableRequiredTargetsAndBlockedCriticalEdges" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="1d669050-5eb5-f93b-eb20-a049566b3e3b">
+      <Execution id="911fe740-3e88-43c6-b6bc-0ec94a03cbab" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.WorldScaleRegionMapFoundation.WorldScaleReachabilityPlannerTests" name="PlannerReportsUnreachableRequiredTargetsAndBlockedCriticalEdges" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1c656ecb-2b9e-1d5c-ffe8-4438fa902479" executionId="7e6c2f29-31c8-45a5-a6d9-6dc89344d21d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d669050-5eb5-f93b-eb20-a049566b3e3b" executionId="911fe740-3e88-43c6-b6bc-0ec94a03cbab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.42]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

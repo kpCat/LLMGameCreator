@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="9728ff78-ab82-4eb6-a94e-cee3eea525da" name="endim@DESKTOP-SM838SH 2026-07-12 13:10:02" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:10:02.2072922+03:00" queuing="2026-07-12T13:10:02.2072925+03:00" start="2026-07-12T13:09:59.6723389+03:00" finish="2026-07-12T13:10:02.2163329+03:00" />
+  <TestSettings name="default" id="4d89998c-6922-481b-bc3e-665822ce27a7">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_10_02" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a33cf59d-0e14-4656-badf-8599a3ae3533" testId="b7e9964d-ba92-99df-22a0-8832b685aac3" testName="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.ServiceBuildsVisualCachePackagesAndUnityPayloadFromGoal099Artifacts" computerName="DESKTOP-SM838SH" duration="00:00:00.0769394" startTime="2026-07-12T13:10:02.1154055+03:00" endTime="2026-07-12T13:10:02.1154061+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a33cf59d-0e14-4656-badf-8599a3ae3533" />
+    <UnitTestResult executionId="631f67b8-4c97-4b76-a748-a169e145e7c8" testId="8aad6f88-5a1c-771e-67b8-42138224f058" testName="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.SimulatedReadProofAndNegativeProofCoverRequiredUnityHandoffRisks" computerName="DESKTOP-SM838SH" duration="00:00:00.1048972" startTime="2026-07-12T13:10:02.0380043+03:00" endTime="2026-07-12T13:10:02.0380047+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="631f67b8-4c97-4b76-a748-a169e145e7c8" />
+    <UnitTestResult executionId="78a4b68b-7309-4c7f-b01a-6b4b8602fae1" testId="4049f540-8a08-1541-c277-0bba96b8f005" testName="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs" computerName="DESKTOP-SM838SH" duration="00:00:01.4936681" startTime="2026-07-12T13:10:01.9347766+03:00" endTime="2026-07-12T13:10:01.9347926+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78a4b68b-7309-4c7f-b01a-6b4b8602fae1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldVisualCacheUnityHandoff\OfflineGeoworldVisualCacheUnityHandoffTests.cs:line 117&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.ServiceBuildsVisualCachePackagesAndUnityPayloadFromGoal099Artifacts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b7e9964d-ba92-99df-22a0-8832b685aac3">
+      <Execution id="a33cf59d-0e14-4656-badf-8599a3ae3533" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests" name="ServiceBuildsVisualCachePackagesAndUnityPayloadFromGoal099Artifacts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.SimulatedReadProofAndNegativeProofCoverRequiredUnityHandoffRisks" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="8aad6f88-5a1c-771e-67b8-42138224f058">
+      <Execution id="631f67b8-4c97-4b76-a748-a169e145e7c8" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests" name="SimulatedReadProofAndNegativeProofCoverRequiredUnityHandoffRisks" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="4049f540-8a08-1541-c277-0bba96b8f005">
+      <Execution id="78a4b68b-7309-4c7f-b01a-6b4b8602fae1" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests" name="WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b7e9964d-ba92-99df-22a0-8832b685aac3" executionId="a33cf59d-0e14-4656-badf-8599a3ae3533" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8aad6f88-5a1c-771e-67b8-42138224f058" executionId="631f67b8-4c97-4b76-a748-a169e145e7c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4049f540-8a08-1541-c277-0bba96b8f005" executionId="78a4b68b-7309-4c7f-b01a-6b4b8602fae1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="2" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:01.89]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:01.89]       Expected: True&#xD;
+[xUnit.net 00:00:01.89]       Actual:   False&#xD;
+[xUnit.net 00:00:01.89]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.89]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldVisualCacheUnityHandoff\OfflineGeoworldVisualCacheUnityHandoffTests.cs(117,0): at LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs()&#xD;
+[xUnit.net 00:00:01.89]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:02.07]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:10:01.9327261+03:00">
+        <Text>[xUnit.net 00:00:01.89]     LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

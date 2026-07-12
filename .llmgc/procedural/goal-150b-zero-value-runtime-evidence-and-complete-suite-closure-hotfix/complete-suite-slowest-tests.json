@@ -1,0 +1,809 @@
+{
+    "schemaVersion":  "complete_test_suite_slowest_tests_v1",
+    "slowestTests":  [
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityReadablePresentationSmokeTests.UnityReadablePresentationProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  165.528974
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityMultiVariantPlayableScenarioSmokeTests.UnityMultiVariantPlayableScenarioProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  162.766856
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.MinimumPlayableGeneratedGameSmokeTests.MinimumPlayableGeneratedGameProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  61.840055
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.AlphaRunnableBuildSmokeTests.AlphaRunnableBuildProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  53.443154
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityRuntimeStateLoopSmokeTests.UnityRuntimeStateLoopProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  52.572349
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityQuestCompletionLoopSmokeTests.UnityQuestCompletionLoopProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  52.392498
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityPlayableAlphaSmokeTests.UnityPlayableAlphaProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  52.159232
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityGeneratedSceneProjectionSmokeTests.UnityGeneratedSceneProjectionProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  51.668843
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.Application.UnityRuntimeState.UnityRuntimeStateLoopAcceptanceTests.BuildsDeterministicRuntimeStateLoopArtifacts",
+                             "outcome":  "Passed",
+                             "durationSeconds":  37.742205
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.Application.UnityGeneratedScene.UnityGeneratedSceneProjectionAcceptanceTests.BuildsDeterministicProjectionArtifactsFromAcceptedAlphaEvidence",
+                             "outcome":  "Passed",
+                             "durationSeconds":  36.435843
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.Application.UnityQuestLoop.UnityQuestCompletionLoopAcceptanceTests.BuildsDeterministicPlanStateAndReportArtifacts",
+                             "outcome":  "Passed",
+                             "durationSeconds":  35.926488
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.FullCampaignPlayableReviewPackageRcProductSmokeTests.Goal061FullCampaignPlayableReviewPackageRcEvidenceIsProducedForReview",
+                             "outcome":  "Passed",
+                             "durationSeconds":  34.51715
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.FullCampaignGamePackageMaterializationProductSmokeTests.Goal060FullCampaignGamePackageMaterializationEvidenceIsProducedForReview",
+                             "outcome":  "Passed",
+                             "durationSeconds":  34.180748
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.FullGeneratorVariabilityRegressionMatrixProductSmokeTests.FullGeneratorVariabilityRegressionMatrixProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  33.674834
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.IntegratedCampaignTimelineSimulationMatrixProductSmokeTests.Goal070IntegratedCampaignTimelineSimulationMatrixEvidenceIsProducedForReview",
+                             "outcome":  "Passed",
+                             "durationSeconds":  33.263268
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMultiFamilyPlayableLoopProductSmokeTests.UnityAlphaMultiFamilyPlayableLoopProductSmoke",
+                             "outcome":  "Failed",
+                             "durationSeconds":  33.178024
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.ConstrainedSpatialDetailGenerationProductSmokeTests.Goal062ConstrainedSpatialDetailGenerationEvidenceIsProducedForReview",
+                             "outcome":  "Passed",
+                             "durationSeconds":  33.129907
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.InterlockedGameplaySystemsDepthMatrixProductSmokeTests.Goal065InterlockedGameplaySystemsDepthMatrixEvidenceIsProducedForReview",
+                             "outcome":  "Passed",
+                             "durationSeconds":  33.047933
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.FullMediaBoundGeneratorCampaignProductSmokeTests.FullMediaBoundGeneratorCampaignProductSmoke",
+                             "outcome":  "Passed",
+                             "durationSeconds":  32.995414
+                         },
+                         {
+                             "name":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke",
+                             "outcome":  "Failed",
+                             "durationSeconds":  32.885215
+                         }
+                     ],
+    "slowestClasses":  [
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityReadablePresentationSmokeTests",
+                               "durationSeconds":  165.528974,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityMultiVariantPlayableScenarioSmokeTests",
+                               "durationSeconds":  162.766856,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.Application.UnityQuestLoop.UnityQuestCompletionLoopAcceptanceTests",
+                               "durationSeconds":  127.743869,
+                               "executedCount":  6
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.Application.UnityGeneratedScene.UnityGeneratedSceneProjectionAcceptanceTests",
+                               "durationSeconds":  73.835067,
+                               "executedCount":  3
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.MinimumPlayableGeneratedGameSmokeTests",
+                               "durationSeconds":  61.840055,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.Application.UnityRuntimeState.UnityRuntimeStateLoopAcceptanceTests",
+                               "durationSeconds":  56.614397,
+                               "executedCount":  2
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.AlphaRunnableBuildSmokeTests",
+                               "durationSeconds":  53.443154,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityRuntimeStateLoopSmokeTests",
+                               "durationSeconds":  52.572349,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityQuestCompletionLoopSmokeTests",
+                               "durationSeconds":  52.392498,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityPlayableAlphaSmokeTests",
+                               "durationSeconds":  52.159232,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityGeneratedSceneProjectionSmokeTests",
+                               "durationSeconds":  51.668843,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.FullCampaignPlayableReviewPackageRcProductSmokeTests",
+                               "durationSeconds":  34.51715,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.FullCampaignGamePackageMaterializationProductSmokeTests",
+                               "durationSeconds":  34.180748,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.FullGeneratorVariabilityRegressionMatrixProductSmokeTests",
+                               "durationSeconds":  33.674834,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.IntegratedCampaignTimelineSimulationMatrixProductSmokeTests",
+                               "durationSeconds":  33.263268,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMultiFamilyPlayableLoopProductSmokeTests",
+                               "durationSeconds":  33.178024,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.ConstrainedSpatialDetailGenerationProductSmokeTests",
+                               "durationSeconds":  33.129907,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.InterlockedGameplaySystemsDepthMatrixProductSmokeTests",
+                               "durationSeconds":  33.047933,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.FullMediaBoundGeneratorCampaignProductSmokeTests",
+                               "durationSeconds":  32.995414,
+                               "executedCount":  1
+                           },
+                           {
+                               "className":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests",
+                               "durationSeconds":  32.885215,
+                               "executedCount":  1
+                           }
+                       ],
+    "slowestShards":  [
+                          {
+                              "shardId":  "shard-0175",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceOrchestrator.OfflineGeoworldAlphaSliceOrchestratorTests"
+                                          ],
+                              "discoveredCount":  5,
+                              "executedCount":  0,
+                              "passedCount":  0,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  5,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  null,
+                              "run":  {
+                                          "name":  "shard-0175",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceOrchestrator.OfflineGeoworldAlphaSliceOrchestratorTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0175.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:06:31.0107439Z",
+                                          "endedAtUtc":  "2026-07-12T10:09:31.3891528Z",
+                                          "durationSeconds":  180.378,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  true,
+                                          "exitCode":  -1,
+                                          "peakWorkingSetBytes":  529711104,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  4.219,
+                                          "stdoutPath":  "logs/shard-0175.stdout.log",
+                                          "stderrPath":  "logs/shard-0175.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0500",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests"
+                                          ],
+                              "discoveredCount":  2,
+                              "executedCount":  0,
+                              "passedCount":  0,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  2,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  null,
+                              "run":  {
+                                          "name":  "shard-0500",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0500.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:39:25.8741673Z",
+                                          "endedAtUtc":  "2026-07-12T10:42:26.1417061Z",
+                                          "durationSeconds":  180.268,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  true,
+                                          "exitCode":  -1,
+                                          "peakWorkingSetBytes":  237543424,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  2.156,
+                                          "stdoutPath":  "logs/shard-0500.stdout.log",
+                                          "stderrPath":  "logs/shard-0500.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0296",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.Application.UnityReadablePresentation.UnityAlphaReadablePresentationAcceptanceTests"
+                                          ],
+                              "discoveredCount":  7,
+                              "executedCount":  0,
+                              "passedCount":  0,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  7,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  null,
+                              "run":  {
+                                          "name":  "shard-0296",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.Application.UnityReadablePresentation.UnityAlphaReadablePresentationAcceptanceTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0296.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:20:23.9763459Z",
+                                          "endedAtUtc":  "2026-07-12T10:23:24.2253134Z",
+                                          "durationSeconds":  180.249,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  true,
+                                          "exitCode":  -1,
+                                          "peakWorkingSetBytes":  307220480,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  174.984,
+                                          "stdoutPath":  "logs/shard-0296.stdout.log",
+                                          "stderrPath":  "logs/shard-0296.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0293",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.Application.UnityMultiVariant.UnityMultiVariantPlayableScenarioAcceptanceTests"
+                                          ],
+                              "discoveredCount":  7,
+                              "executedCount":  0,
+                              "passedCount":  0,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  7,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  null,
+                              "run":  {
+                                          "name":  "shard-0293",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.Application.UnityMultiVariant.UnityMultiVariantPlayableScenarioAcceptanceTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0293.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:14:53.5963795Z",
+                                          "endedAtUtc":  "2026-07-12T10:17:53.7456401Z",
+                                          "durationSeconds":  180.149,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  true,
+                                          "exitCode":  -1,
+                                          "peakWorkingSetBytes":  308715520,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  173.25,
+                                          "stdoutPath":  "logs/shard-0293.stdout.log",
+                                          "stderrPath":  "logs/shard-0293.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0556",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityReadablePresentationSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityReadablePresentationSmokeTests.UnityReadablePresentationProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0556",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityReadablePresentationSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0556.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:52:21.4337191Z",
+                                          "endedAtUtc":  "2026-07-12T10:55:08.5836478Z",
+                                          "durationSeconds":  167.15,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  628633600,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  58.828,
+                                          "stdoutPath":  "logs/shard-0556.stdout.log",
+                                          "stderrPath":  "logs/shard-0556.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0553",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityMultiVariantPlayableScenarioSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityMultiVariantPlayableScenarioSmokeTests.UnityMultiVariantPlayableScenarioProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0553",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityMultiVariantPlayableScenarioSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0553.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:47:49.1226518Z",
+                                          "endedAtUtc":  "2026-07-12T10:50:33.4846689Z",
+                                          "durationSeconds":  164.362,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  624156672,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  58.609,
+                                          "stdoutPath":  "logs/shard-0553.stdout.log",
+                                          "stderrPath":  "logs/shard-0553.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0295",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.Application.UnityQuestLoop.UnityQuestCompletionLoopAcceptanceTests"
+                                          ],
+                              "discoveredCount":  6,
+                              "executedCount":  6,
+                              "passedCount":  6,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.Application.UnityQuestLoop.UnityQuestCompletionLoopAcceptanceTests.BuildsDeterministicPlanStateAndReportArtifacts",
+                              "run":  {
+                                          "name":  "shard-0295",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.Application.UnityQuestLoop.UnityQuestCompletionLoopAcceptanceTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0295.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:18:14.5813763Z",
+                                          "endedAtUtc":  "2026-07-12T10:20:23.9624075Z",
+                                          "durationSeconds":  129.381,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  308707328,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  125.281,
+                                          "stdoutPath":  "logs/shard-0295.stdout.log",
+                                          "stderrPath":  "logs/shard-0295.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0292",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.Application.UnityGeneratedScene.UnityGeneratedSceneProjectionAcceptanceTests"
+                                          ],
+                              "discoveredCount":  3,
+                              "executedCount":  3,
+                              "passedCount":  3,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.Application.UnityGeneratedScene.UnityGeneratedSceneProjectionAcceptanceTests.ProjectionCarriesSelectedIdsAndAvoidsGoal014FixedMarkerPositions",
+                              "run":  {
+                                          "name":  "shard-0292",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.Application.UnityGeneratedScene.UnityGeneratedSceneProjectionAcceptanceTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0292.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:13:38.1590656Z",
+                                          "endedAtUtc":  "2026-07-12T10:14:53.5824174Z",
+                                          "durationSeconds":  75.423,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  307548160,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  73.734,
+                                          "stdoutPath":  "logs/shard-0292.stdout.log",
+                                          "stderrPath":  "logs/shard-0292.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0488",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.MinimumPlayableGeneratedGameSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.MinimumPlayableGeneratedGameSmokeTests.MinimumPlayableGeneratedGameProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0488",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.MinimumPlayableGeneratedGameSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0488.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:37:55.2780541Z",
+                                          "endedAtUtc":  "2026-07-12T10:38:58.8116083Z",
+                                          "durationSeconds":  63.534,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  574672896,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  22.953,
+                                          "stdoutPath":  "logs/shard-0488.stdout.log",
+                                          "stderrPath":  "logs/shard-0488.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0298",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.Application.UnityRuntimeState.UnityRuntimeStateLoopAcceptanceTests"
+                                          ],
+                              "discoveredCount":  2,
+                              "executedCount":  2,
+                              "passedCount":  2,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.Application.UnityRuntimeState.UnityRuntimeStateLoopAcceptanceTests.BuildsDeterministicRuntimeStateLoopArtifacts",
+                              "run":  {
+                                          "name":  "shard-0298",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.Application.UnityRuntimeState.UnityRuntimeStateLoopAcceptanceTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0298.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:23:29.0386176Z",
+                                          "endedAtUtc":  "2026-07-12T10:24:27.2317701Z",
+                                          "durationSeconds":  58.193,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  298274816,
+                                          "observedDotnetAndTesthostProcessCount":  3,
+                                          "observedAggregateCpuSeconds":  56.734,
+                                          "stdoutPath":  "logs/shard-0298.stdout.log",
+                                          "stderrPath":  "logs/shard-0298.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0429",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.AlphaRunnableBuildSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.AlphaRunnableBuildSmokeTests.AlphaRunnableBuildProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0429",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.AlphaRunnableBuildSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0429.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:29:27.2821709Z",
+                                          "endedAtUtc":  "2026-07-12T10:30:22.4032616Z",
+                                          "durationSeconds":  55.121,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  567570432,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  22.234,
+                                          "stdoutPath":  "logs/shard-0429.stdout.log",
+                                          "stderrPath":  "logs/shard-0429.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0558",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityRuntimeStateLoopSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityRuntimeStateLoopSmokeTests.UnityRuntimeStateLoopProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0558",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityRuntimeStateLoopSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0558.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:55:11.5593732Z",
+                                          "endedAtUtc":  "2026-07-12T10:56:05.8404934Z",
+                                          "durationSeconds":  54.281,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  571867136,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  21.438,
+                                          "stdoutPath":  "logs/shard-0558.stdout.log",
+                                          "stderrPath":  "logs/shard-0558.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0555",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityQuestCompletionLoopSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityQuestCompletionLoopSmokeTests.UnityQuestCompletionLoopProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0555",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityQuestCompletionLoopSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0555.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:51:27.4020426Z",
+                                          "endedAtUtc":  "2026-07-12T10:52:21.4207539Z",
+                                          "durationSeconds":  54.019,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  575201280,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  21.438,
+                                          "stdoutPath":  "logs/shard-0555.stdout.log",
+                                          "stderrPath":  "logs/shard-0555.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0554",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityPlayableAlphaSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityPlayableAlphaSmokeTests.UnityPlayableAlphaProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0554",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityPlayableAlphaSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0554.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:50:33.4976339Z",
+                                          "endedAtUtc":  "2026-07-12T10:51:27.3886224Z",
+                                          "durationSeconds":  53.891,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  581820416,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  21.531,
+                                          "stdoutPath":  "logs/shard-0554.stdout.log",
+                                          "stderrPath":  "logs/shard-0554.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0552",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityGeneratedSceneProjectionSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityGeneratedSceneProjectionSmokeTests.UnityGeneratedSceneProjectionProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0552",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityGeneratedSceneProjectionSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0552.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:46:55.8124662Z",
+                                          "endedAtUtc":  "2026-07-12T10:47:49.1097218Z",
+                                          "durationSeconds":  53.297,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  575250432,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  21.094,
+                                          "stdoutPath":  "logs/shard-0552.stdout.log",
+                                          "stderrPath":  "logs/shard-0552.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0459",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.FullCampaignPlayableReviewPackageRcProductSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.FullCampaignPlayableReviewPackageRcProductSmokeTests.Goal061FullCampaignPlayableReviewPackageRcEvidenceIsProducedForReview",
+                              "run":  {
+                                          "name":  "shard-0459",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.FullCampaignPlayableReviewPackageRcProductSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0459.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:33:03.2645828Z",
+                                          "endedAtUtc":  "2026-07-12T10:33:39.4686645Z",
+                                          "durationSeconds":  36.204,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  526753792,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  2.297,
+                                          "stdoutPath":  "logs/shard-0459.stdout.log",
+                                          "stderrPath":  "logs/shard-0459.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0458",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.FullCampaignGamePackageMaterializationProductSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.FullCampaignGamePackageMaterializationProductSmokeTests.Goal060FullCampaignGamePackageMaterializationEvidenceIsProducedForReview",
+                              "run":  {
+                                          "name":  "shard-0458",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.FullCampaignGamePackageMaterializationProductSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0458.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:32:27.4729671Z",
+                                          "endedAtUtc":  "2026-07-12T10:33:03.2506219Z",
+                                          "durationSeconds":  35.778,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  538222592,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  2.688,
+                                          "stdoutPath":  "logs/shard-0458.stdout.log",
+                                          "stderrPath":  "logs/shard-0458.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0460",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.FullGeneratorVariabilityRegressionMatrixProductSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.FullGeneratorVariabilityRegressionMatrixProductSmokeTests.FullGeneratorVariabilityRegressionMatrixProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0460",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.FullGeneratorVariabilityRegressionMatrixProductSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0460.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:33:39.4821425Z",
+                                          "endedAtUtc":  "2026-07-12T10:34:14.8942377Z",
+                                          "durationSeconds":  35.412,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  530771968,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  2.453,
+                                          "stdoutPath":  "logs/shard-0460.stdout.log",
+                                          "stderrPath":  "logs/shard-0460.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0540",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMultiFamilyPlayableLoopProductSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  0,
+                              "failedCount":  1,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  false,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMultiFamilyPlayableLoopProductSmokeTests.UnityAlphaMultiFamilyPlayableLoopProductSmoke",
+                              "run":  {
+                                          "name":  "shard-0540",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.UnityAlphaMultiFamilyPlayableLoopProductSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0540.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:45:57.7355605Z",
+                                          "endedAtUtc":  "2026-07-12T10:46:32.9255519Z",
+                                          "durationSeconds":  35.19,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  529620992,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  2.359,
+                                          "stdoutPath":  "logs/shard-0540.stdout.log",
+                                          "stderrPath":  "logs/shard-0540.stderr.log"
+                                      }
+                          },
+                          {
+                              "shardId":  "shard-0479",
+                              "classes":  [
+                                              "LLMGameCreator.Tests.ProductSmoke.IntegratedCampaignTimelineSimulationMatrixProductSmokeTests"
+                                          ],
+                              "discoveredCount":  1,
+                              "executedCount":  1,
+                              "passedCount":  1,
+                              "failedCount":  0,
+                              "skippedCount":  0,
+                              "missingCount":  0,
+                              "duplicateCount":  0,
+                              "aborted":  true,
+                              "lastCompletedTest":  "LLMGameCreator.Tests.ProductSmoke.IntegratedCampaignTimelineSimulationMatrixProductSmokeTests.Goal070IntegratedCampaignTimelineSimulationMatrixEvidenceIsProducedForReview",
+                              "run":  {
+                                          "name":  "shard-0479",
+                                          "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --filter FullyQualifiedName~LLMGameCreator.Tests.ProductSmoke.IntegratedCampaignTimelineSimulationMatrixProductSmokeTests. --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite-refined\\trx\\shard-0479.trx --logger console;verbosity=detailed",
+                                          "startedAtUtc":  "2026-07-12T10:35:58.1658553Z",
+                                          "endedAtUtc":  "2026-07-12T10:36:33.1284627Z",
+                                          "durationSeconds":  34.963,
+                                          "timeoutSeconds":  180,
+                                          "timedOut":  false,
+                                          "exitCode":  null,
+                                          "peakWorkingSetBytes":  548810752,
+                                          "observedDotnetAndTesthostProcessCount":  5,
+                                          "observedAggregateCpuSeconds":  2.484,
+                                          "stdoutPath":  "logs/shard-0479.stdout.log",
+                                          "stderrPath":  "logs/shard-0479.stderr.log"
+                                      }
+                          }
+                      ]
+}

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="300318bf-dd1c-406b-80a4-16df060f1671" name="endim@DESKTOP-SM838SH 2026-07-12 13:28:46" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:28:46.0308646+03:00" queuing="2026-07-12T13:28:46.0308648+03:00" start="2026-07-12T13:28:45.2468935+03:00" finish="2026-07-12T13:28:46.0355212+03:00" />
+  <TestSettings name="default" id="341df7f6-bf61-4f74-89a4-498d35211a81">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_28_46" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2d25d972-b88b-4fb1-9fa3-fd7dc014a94f" testId="a07d5b53-cde6-38b2-d5c3-2bc76a231289" testName="LLMGameCreator.Tests.Devflow.RunGoal150AParameterizedRuntimeContractSynchronizationHotfixScriptTests.Goal150A_runner_is_bounded_transactional_and_requires_green_unaccepted_artifacts" computerName="DESKTOP-SM838SH" duration="00:00:00.0031769" startTime="2026-07-12T13:28:45.9495284+03:00" endTime="2026-07-12T13:28:45.9495452+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d25d972-b88b-4fb1-9fa3-fd7dc014a94f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Devflow.RunGoal150AParameterizedRuntimeContractSynchronizationHotfixScriptTests.Goal150A_runner_is_bounded_transactional_and_requires_green_unaccepted_artifacts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="a07d5b53-cde6-38b2-d5c3-2bc76a231289">
+      <Execution id="2d25d972-b88b-4fb1-9fa3-fd7dc014a94f" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Devflow.RunGoal150AParameterizedRuntimeContractSynchronizationHotfixScriptTests" name="Goal150A_runner_is_bounded_transactional_and_requires_green_unaccepted_artifacts" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="a07d5b53-cde6-38b2-d5c3-2bc76a231289" executionId="2d25d972-b88b-4fb1-9fa3-fd7dc014a94f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.37]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

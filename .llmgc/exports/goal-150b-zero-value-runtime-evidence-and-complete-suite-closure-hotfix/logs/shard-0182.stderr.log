@@ -1,0 +1,4 @@
+[xUnit.net 00:00:00.61]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityPreviewRunner.OfflineGeoworldUnityPreviewRunnerTests.ServiceBuildsPreviewCommandsPayloadAndEvidenceFromGoal100Artifacts [FAIL]
+[xUnit.net 00:00:02.03]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityPreviewRunner.OfflineGeoworldUnityPreviewRunnerTests.UnityScriptInventoryAndWorkspaceGroupAreReal [FAIL]
+[xUnit.net 00:00:02.27]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityPreviewRunner.OfflineGeoworldUnityPreviewRunnerTests.EvidenceIsDeterministicAndSourceHealthClean [FAIL]
+Test Run Failed.

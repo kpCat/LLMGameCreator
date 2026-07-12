@@ -1,0 +1,10 @@
+{
+    "schemaVersion":  "goal150b_equipment_only_positive_runtime_proof_v1",
+    "status":  "GREEN",
+    "configured":  3,
+    "equipmentDamageBonus":  3,
+    "statDamageBonus":  0,
+    "totalAdditionalDamage":  3,
+    "positiveEventShapePreserved":  true,
+    "passed":  true
+}

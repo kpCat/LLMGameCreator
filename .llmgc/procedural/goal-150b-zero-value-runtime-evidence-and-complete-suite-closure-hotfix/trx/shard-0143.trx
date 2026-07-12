@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="95758f39-7320-4ed7-9f11-6d65b299b808" name="endim@DESKTOP-SM838SH 2026-07-12 13:05:21" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:05:21.2570953+03:00" queuing="2026-07-12T13:05:21.2570956+03:00" start="2026-07-12T13:05:20.2252834+03:00" finish="2026-07-12T13:05:21.2626351+03:00" />
+  <TestSettings name="default" id="1151d496-1d0e-4b79-abb8-03a60fe18641">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_05_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="015f128e-d883-4b36-825e-c7ef57da4941" testId="b4385ce2-0610-df1d-3efa-32762aa8977f" testName="LLMGameCreator.Tests.Application.MediaAssetCampaignOrchestration.MediaAssetCampaignInvalidMatrixTests.InvalidFakeLeakMatrixCoversRequiredRisks" computerName="DESKTOP-SM838SH" duration="00:00:00.1861366" startTime="2026-07-12T13:05:21.1632712+03:00" endTime="2026-07-12T13:05:21.1632876+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="015f128e-d883-4b36-825e-c7ef57da4941" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.MediaAssetCampaignOrchestration.MediaAssetCampaignInvalidMatrixTests.InvalidFakeLeakMatrixCoversRequiredRisks" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b4385ce2-0610-df1d-3efa-32762aa8977f">
+      <Execution id="015f128e-d883-4b36-825e-c7ef57da4941" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.MediaAssetCampaignOrchestration.MediaAssetCampaignInvalidMatrixTests" name="InvalidFakeLeakMatrixCoversRequiredRisks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b4385ce2-0610-df1d-3efa-32762aa8977f" executionId="015f128e-d883-4b36-825e-c7ef57da4941" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.58]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

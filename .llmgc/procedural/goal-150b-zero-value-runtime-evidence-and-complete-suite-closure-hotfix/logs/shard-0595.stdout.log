@@ -1,0 +1,20 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.WinForms.CurrentGamePackageUiThreadDispatchTests.Goal148B_async_pages_dispatch_worker_events_and_observe_async_errors_on_UI_thread [552 ms]
+  Passed LLMGameCreator.Tests.WinForms.CurrentGamePackageUiThreadDispatchTests.Goal148B_CurrentChanged_subscriber_inventory_has_only_named_dispatched_disposable_handlers [211 ms]
+[xUnit.net 00:00:02.67]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.WinForms.CurrentGamePackageUiThreadDispatchTests.Goal148B_real_New_Game_workspace_build_under_MainForm_is_GREEN_and_keeps_Games_selected [981 ms]
+  Passed LLMGameCreator.Tests.WinForms.CurrentGamePackageUiThreadDispatchTests.Goal148B_MainForm_worker_CurrentChanged_updates_status_on_STA_without_navigation_change [32 ms]
+  Passed LLMGameCreator.Tests.WinForms.CurrentGamePackageUiThreadDispatchTests.Goal148C_migrated_manual_values_build_under_MainForm_preserves_all_visible_and_activated_identity [490 ms]
+  Passed LLMGameCreator.Tests.WinForms.CurrentGamePackageUiThreadDispatchTests.Goal148B_MainForm_disposal_race_drops_queued_CurrentChanged_callback [20 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0595.trx
+
+Test Run Successful.
+Total tests: 6
+     Passed: 6
+ Total time: 3,1408 Seconds

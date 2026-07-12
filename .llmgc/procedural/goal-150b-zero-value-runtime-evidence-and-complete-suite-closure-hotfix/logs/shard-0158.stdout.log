@@ -1,0 +1,186 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:01.27]       minimum_playable_game.build.source_executable_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.build.source_play_loop_log_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_package.data_folder_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_package.executable_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.launch_log_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.launch_not_verified
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.play_loop_log_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.validation.asset_manifest_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.validation.config_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.validation.data_folder_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.validation.executable_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.validation.package_missing
+[xUnit.net 00:00:01.27]       minimum_playable_game.goal019_gate_recorded
+[xUnit.net 00:00:01.27]       minimum_playable_game.invalid_matrix_rejected
+[xUnit.net 00:00:01.27]       minimum_playable_game.no_external_providers
+[xUnit.net 00:00:01.27]       minimum_playable_game.previous.goal019_evidence_present
+[xUnit.net 00:00:01.27]       Stack Trace:
+[xUnit.net 00:00:01.27]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs(50,0): at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.CreatesReviewPackageWithRequiredFiles()
+[xUnit.net 00:00:01.27]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:01.27]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.CreatesReviewPackageWithRequiredFiles [895 ms]
+  Error Message:
+   minimum_playable_game.build.source_executable_missing
+minimum_playable_game.build.source_play_loop_log_missing
+minimum_playable_game.review_package.data_folder_missing
+minimum_playable_game.review_package.executable_missing
+minimum_playable_game.review_smoke.launch_log_missing
+minimum_playable_game.review_smoke.launch_not_verified
+minimum_playable_game.review_smoke.play_loop_log_missing
+minimum_playable_game.review_smoke.quest_completion_missing
+minimum_playable_game.review_smoke.quest_completion_missing
+minimum_playable_game.review_smoke.quest_completion_missing
+minimum_playable_game.review_smoke.quest_completion_missing
+minimum_playable_game.validation.asset_manifest_missing
+minimum_playable_game.validation.config_missing
+minimum_playable_game.validation.data_folder_missing
+minimum_playable_game.validation.executable_missing
+minimum_playable_game.validation.package_missing
+minimum_playable_game.goal019_gate_recorded
+minimum_playable_game.invalid_matrix_rejected
+minimum_playable_game.no_external_providers
+minimum_playable_game.previous.goal019_evidence_present
+  Stack Trace:
+     at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.CreatesReviewPackageWithRequiredFiles() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs:line 50
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.MissingGoal019EvidenceRejects [416 ms]
+  Passed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.AutomatedSmokeScriptUsesStartProcessExitCodeAndLogMarkerChecks [379 ms]
+  Passed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.BuildsDeterministicManifestReportAndChecklistArtifacts [407 ms]
+  Passed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ManualChecklistIsNotPreMarkedPassed [397 ms]
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.build.source_executable_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.build.source_play_loop_log_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_package.data_folder_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_package.executable_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.launch_log_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.launch_not_verified
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.play_loop_log_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.review_smoke.quest_completion_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.validation.asset_manifest_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.validation.config_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.validation.data_folder_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.validation.executable_missing
+[xUnit.net 00:00:03.67]       error:minimum_playable_game.validation.package_missing
+[xUnit.net 00:00:03.67]       info:minimum_playable_game.goal019_gate_recorded
+[xUnit.net 00:00:03.67]       info:minimum_playable_game.invalid_matrix_rejected
+[xUnit.net 00:00:03.67]       info:minimum_playable_game.no_external_providers
+[xUnit.net 00:00:03.67]       info:minimum_playable_game.previous.goal019_evidence_present
+[xUnit.net 00:00:03.67]       Stack Trace:
+[xUnit.net 00:00:03.67]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs(149,0): at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ValidGeneratedReviewPackageHasNoTopLevelErrorDiagnostics()
+[xUnit.net 00:00:03.67]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:03.67]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:04.46]       Assert.False() Failure
+[xUnit.net 00:00:04.46]       Expected: False
+[xUnit.net 00:00:04.46]       Actual:   True
+[xUnit.net 00:00:04.46]       Stack Trace:
+[xUnit.net 00:00:04.46]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs(74,0): at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ReviewPackageManifestHashesMatchPhysicalFiles()
+[xUnit.net 00:00:04.46]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:04.46]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ScriptsArePackageRelativeAndDoNotContainAbsolutePaths [379 ms]
+  Failed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ValidGeneratedReviewPackageHasNoTopLevelErrorDiagnostics [413 ms]
+  Error Message:
+   error:minimum_playable_game.build.source_executable_missing
+error:minimum_playable_game.build.source_play_loop_log_missing
+error:minimum_playable_game.review_package.data_folder_missing
+error:minimum_playable_game.review_package.executable_missing
+error:minimum_playable_game.review_smoke.launch_log_missing
+error:minimum_playable_game.review_smoke.launch_not_verified
+error:minimum_playable_game.review_smoke.play_loop_log_missing
+error:minimum_playable_game.review_smoke.quest_completion_missing
+error:minimum_playable_game.review_smoke.quest_completion_missing
+error:minimum_playable_game.review_smoke.quest_completion_missing
+error:minimum_playable_game.review_smoke.quest_completion_missing
+error:minimum_playable_game.validation.asset_manifest_missing
+error:minimum_playable_game.validation.config_missing
+error:minimum_playable_game.validation.data_folder_missing
+error:minimum_playable_game.validation.executable_missing
+error:minimum_playable_game.validation.package_missing
+info:minimum_playable_game.goal019_gate_recorded
+info:minimum_playable_game.invalid_matrix_rejected
+info:minimum_playable_game.no_external_providers
+info:minimum_playable_game.previous.goal019_evidence_present
+  Stack Trace:
+     at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ValidGeneratedReviewPackageHasNoTopLevelErrorDiagnostics() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs:line 149
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.InvalidMatrixScenariosAreCausalAndRejected [399 ms]
+  Failed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ReviewPackageManifestHashesMatchPhysicalFiles [392 ms]
+  Error Message:
+   Assert.False() Failure
+Expected: False
+Actual:   True
+  Stack Trace:
+     at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ReviewPackageManifestHashesMatchPhysicalFiles() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs:line 74
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:04.83]       minimum_playable_game.build.source_executable_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/build/windows
+[xUnit.net 00:00:04.83]       minimum_playable_game.build.source_play_loop_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_package.data_folder_missing:LLMGameCreatorAlpha_Data
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_package.executable_missing:LLMGameCreatorAlpha.exe
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.launch_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-launch.log
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.launch_not_verified:alpha_runtime.launch_completed
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.play_loop_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.play_loop_completed=true
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.quest_completed.after=true
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.quest_loop_completed=true
+[xUnit.net 00:00:04.83]       minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.reward_granted.after=true
+[xUnit.net 00:00:04.83]       minimum_playable_game.validation.asset_manifest_missing:assets/asset-manifest.json
+[xUnit.net 00:00:04.83]       minimum_playable_game.validation.config_missing:runtime/unity-runtime-config.json
+[xUnit.net 00:00:04.83]       minimum_playable_game.validation.data_folder_missing:LLMGameCreatorAlpha_Data
+[xUnit.net 00:00:04.83]       minimum_playable_game.validation.executable_missing:LLMGameCreatorAlpha.exe
+[xUnit.net 00:00:04.83]       minimum_playable_game.validation.package_missing:game-data/game-package.json
+[xUnit.net 00:00:04.83]       minimum_playable_game.goal019_gate_recorded:unity_alpha_readable_presentation_verification
+[xUnit.net 00:00:04.83]       minimum_playable_game.invalid_matrix_rejected:invalid_matrix
+[xUnit.net 00:00:04.83]       minimum_playable_game.no_external_providers:execution_boundary
+[xUnit.net 00:00:04.83]       minimum_playable_game.previous.goal019_evidence_present:unity-alpha-readable-presentation-report.json
+[xUnit.net 00:00:04.83]       Stack Trace:
+[xUnit.net 00:00:04.83]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs(134,0): at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.AutomatedSmokeProofVerifiesLaunchAndQuestCompletion()
+[xUnit.net 00:00:04.83]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:04.83]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:04.83]   Finished:    LLMGameCreator.Tests
+  Failed LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.AutomatedSmokeProofVerifiesLaunchAndQuestCompletion [362 ms]
+  Error Message:
+   minimum_playable_game.build.source_executable_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/build/windows
+minimum_playable_game.build.source_play_loop_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log
+minimum_playable_game.review_package.data_folder_missing:LLMGameCreatorAlpha_Data
+minimum_playable_game.review_package.executable_missing:LLMGameCreatorAlpha.exe
+minimum_playable_game.review_smoke.launch_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-launch.log
+minimum_playable_game.review_smoke.launch_not_verified:alpha_runtime.launch_completed
+minimum_playable_game.review_smoke.play_loop_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log
+minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.play_loop_completed=true
+minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.quest_completed.after=true
+minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.quest_loop_completed=true
+minimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.reward_granted.after=true
+minimum_playable_game.validation.asset_manifest_missing:assets/asset-manifest.json
+minimum_playable_game.validation.config_missing:runtime/unity-runtime-config.json
+minimum_playable_game.validation.data_folder_missing:LLMGameCreatorAlpha_Data
+minimum_playable_game.validation.executable_missing:LLMGameCreatorAlpha.exe
+minimum_playable_game.validation.package_missing:game-data/game-package.json
+minimum_playable_game.goal019_gate_recorded:unity_alpha_readable_presentation_verification
+minimum_playable_game.invalid_matrix_rejected:invalid_matrix
+minimum_playable_game.no_external_providers:execution_boundary
+minimum_playable_game.previous.goal019_evidence_present:unity-alpha-readable-presentation-report.json
+  Stack Trace:
+     at LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.AutomatedSmokeProofVerifiesLaunchAndQuestCompletion() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\MinimumPlayableGame\MinimumPlayableGeneratedGameAcceptanceTests.cs:line 134
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0158.trx
+
+Total tests: 10
+     Passed: 6
+     Failed: 4
+ Total time: 5,2118 Seconds

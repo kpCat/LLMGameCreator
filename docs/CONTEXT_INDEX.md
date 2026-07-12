@@ -102,11 +102,16 @@ progression action amount static. One declarative effective-value binding layer
 now drives mutation fields, exact Runtime-effect expected values and numeric
 playthrough args from an immutable effective catalog. The custom `3/8/2/12`
 workspace build is focused GREEN with stat/equipment/total `6/3/9` and level/XP `2/12`;
-default hashes remain exact. Goal150A is BLOCKED because the exact full suite did
-not complete within the 60-minute execution limit; Goals149/150/150A remain
-`accepted=false`. The next step is `goal150a_full_test_suite_completion required`,
-then an independent Goal150A audit and their single bundled human gate;
+default hashes remain exact. Goal150B fixes generic equipment-only zero evidence,
+hardens decimal-expression overflow into a deterministic failed binding, and adds
+bounded discovery plus isolated complete-suite shards. The monolithic suite timed
+out after 15 minutes and exhaustive shards remain honestly BLOCKED with exact
+counts/logs; Goals149/150/150A/150B remain `accepted=false`. The next step is an
+independent Goal150B audit and their single bundled human gate, not another
+proof-only Goal;
 Goal141 remains `accepted=false`.
+
+Current gate token: `goal150b_independent_audit_then_bundled_human_gate required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 

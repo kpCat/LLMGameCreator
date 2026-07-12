@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="35a16021-0b9c-40ca-88d4-7e484d64b695" name="endim@DESKTOP-SM838SH 2026-07-12 13:00:26" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:00:26.2478701+03:00" queuing="2026-07-12T13:00:26.2478703+03:00" start="2026-07-12T13:00:25.3198996+03:00" finish="2026-07-12T13:00:26.2557752+03:00" />
+  <TestSettings name="default" id="08281c77-f71c-4306-abc0-b2748fbf58bc">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_00_26" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="68afed3b-6300-4221-8ad8-03b1561cd389" testId="50e17b2c-c131-5a4f-a604-1fc666dacd5f" testName="LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests.Goal133AProductLineStrategyRebaselineWritesGreenEvidence" computerName="DESKTOP-SM838SH" duration="00:00:00.0725867" startTime="2026-07-12T13:00:26.1621201+03:00" endTime="2026-07-12T13:00:26.1621399+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68afed3b-6300-4221-8ad8-03b1561cd389">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Strings differ&#xD;
+           ↓ (pos 0)&#xD;
+Expected: "GREEN"&#xD;
+Actual:   "BLOCKED"&#xD;
+           ↑ (pos 0)</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests.Goal133AProductLineStrategyRebaselineWritesGreenEvidence() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\AcceptedAlphaUnityPlayableProjection\ProductLineStrategyRebaselineServiceTests.cs:line 16&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests.Goal133AProductLineStrategyRebaselineWritesGreenEvidence" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="50e17b2c-c131-5a4f-a604-1fc666dacd5f">
+      <Execution id="68afed3b-6300-4221-8ad8-03b1561cd389" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests" name="Goal133AProductLineStrategyRebaselineWritesGreenEvidence" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="50e17b2c-c131-5a4f-a604-1fc666dacd5f" executionId="68afed3b-6300-4221-8ad8-03b1561cd389" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.46]       Assert.Equal() Failure: Strings differ&#xD;
+[xUnit.net 00:00:00.46]                  ↓ (pos 0)&#xD;
+[xUnit.net 00:00:00.46]       Expected: "GREEN"&#xD;
+[xUnit.net 00:00:00.46]       Actual:   "BLOCKED"&#xD;
+[xUnit.net 00:00:00.46]                  ↑ (pos 0)&#xD;
+[xUnit.net 00:00:00.46]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.46]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\AcceptedAlphaUnityPlayableProjection\ProductLineStrategyRebaselineServiceTests.cs(16,0): at LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests.Goal133AProductLineStrategyRebaselineWritesGreenEvidence()&#xD;
+[xUnit.net 00:00:00.46]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:00.47]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:00:26.1604027+03:00">
+        <Text>[xUnit.net 00:00:00.46]     LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests.Goal133AProductLineStrategyRebaselineWritesGreenEvidence [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

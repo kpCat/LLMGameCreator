@@ -1,0 +1,97 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.17]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.37]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.38]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal101.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal103.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal104.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal105.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal107.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal108.alpha_slice.full_slice_simulated_proof] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal108.alpha_slice.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal109.alpha_export.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal116.manual_gate.human_accepted] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal116.manual_gate.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal117.continuation.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal118.baseline.quality_gate] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.proof.failed [goal118.baseline.ready] Required visual preview proof is missing or did not pass.
+[xUnit.net 00:00:02.35]       goal092.quality.proofs_failed [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal101.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal101.workspace.summary_failed [offline_geoworld_unity_preview] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal103.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal103.workspace.summary_failed [offline_geoworld_playmode_travel] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal104.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal104.workspace.summary_failed [offline_geoworld_interactive_travel] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal105.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal105.workspace.summary_failed [offline_geoworld_interactions] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal107.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal107.workspace.summary_failed [offline_geoworld_objective_acceptance] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal108.quality.full_slice_proof [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal108.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal108.quality.ready_component_count [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal108.workspace.summary_failed [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal109.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal109.workspace.summary_failed [offline_geoworld_alpha_export_package] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal116.quality.human_accepted [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal116.quality.manual_gate_status [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal116.quality.manual_result_sha [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal116.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal116.workspace.summary_failed [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal118.quality.baseline_ready [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.35]       goal118.quality.manual_gate_status [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.
+[xUnit.net 00:00:02.36]       Stack Trace:
+[xUnit.net 00:00:02.36]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldAlphaSliceManualAcceptanceGate\OfflineGeoworldAlphaSliceManualAcceptanceGateTests.cs(59,0): at LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceManualAcceptanceGate.OfflineGeoworldAlphaSliceManualAcceptanceGateTests.BuildAndWriteCreatesManualAcceptancePayloadEvidenceAndWorkspaceGroup()
+[xUnit.net 00:00:02.36]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.40]   Finished:    LLMGameCreator.Tests
+  Failed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceManualAcceptanceGate.OfflineGeoworldAlphaSliceManualAcceptanceGateTests.BuildAndWriteCreatesManualAcceptancePayloadEvidenceAndWorkspaceGroup [1 s]
+  Error Message:
+   goal092.proof.failed [goal101.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal103.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal104.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal105.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal107.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal108.alpha_slice.full_slice_simulated_proof] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal108.alpha_slice.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal109.alpha_export.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal116.manual_gate.human_accepted] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal116.manual_gate.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal117.continuation.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal118.baseline.quality_gate] Required visual preview proof is missing or did not pass.
+goal092.proof.failed [goal118.baseline.ready] Required visual preview proof is missing or did not pass.
+goal092.quality.proofs_failed [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal101.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal101.workspace.summary_failed [offline_geoworld_unity_preview] Visual world stream preview workspace quality gate did not pass.
+goal103.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal103.workspace.summary_failed [offline_geoworld_playmode_travel] Visual world stream preview workspace quality gate did not pass.
+goal104.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal104.workspace.summary_failed [offline_geoworld_interactive_travel] Visual world stream preview workspace quality gate did not pass.
+goal105.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal105.workspace.summary_failed [offline_geoworld_interactions] Visual world stream preview workspace quality gate did not pass.
+goal107.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal107.workspace.summary_failed [offline_geoworld_objective_acceptance] Visual world stream preview workspace quality gate did not pass.
+goal108.quality.full_slice_proof [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal108.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal108.quality.ready_component_count [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.
+goal108.workspace.summary_failed [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.
+goal109.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal109.workspace.summary_failed [offline_geoworld_alpha_export_package] Visual world stream preview workspace quality gate did not pass.
+goal116.quality.human_accepted [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+goal116.quality.manual_gate_status [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+goal116.quality.manual_result_sha [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+goal116.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.
+goal116.workspace.summary_failed [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.
+goal118.quality.baseline_ready [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.
+goal118.quality.manual_gate_status [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.
+  Stack Trace:
+     at LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceManualAcceptanceGate.OfflineGeoworldAlphaSliceManualAcceptanceGateTests.BuildAndWriteCreatesManualAcceptancePayloadEvidenceAndWorkspaceGroup() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldAlphaSliceManualAcceptanceGate\OfflineGeoworldAlphaSliceManualAcceptanceGateTests.cs:line 59
+--- End of stack trace from previous location ---
+  Passed LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceManualAcceptanceGate.OfflineGeoworldAlphaSliceManualAcceptanceGateTests.NegativeProofCoversRequiredManualAcceptanceFailureClasses [45 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0174.trx
+
+Total tests: 2
+     Passed: 1
+     Failed: 1
+ Total time: 2,8537 Seconds

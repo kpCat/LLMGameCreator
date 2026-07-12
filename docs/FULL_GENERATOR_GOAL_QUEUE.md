@@ -2409,6 +2409,18 @@ Goal150A status is BLOCKED. Goals149/150/150A remain `accepted=false`; next is
 full-suite completion, then an independent audit and one bundled custom human gate.
 No GitHub Actions workflow exists in the working tree.
 
+Goal150B repairs the generic equipment-only zero evidence gap without module-ID
+dispatch: present numeric zero now emits `equipmentDamageBonus=0`, while absent
+metadata emits no equipment evidence and positive/default hashes remain exact.
+Project totals fall back to observed equipment plus stat event values, and decimal
+expression overflow is rejected as a deterministic failed binding. A bounded
+15-minute monolithic diagnostic and exact discovery/class-shard runner replace the
+previous unbounded full-suite wait. Monolithic and exhaustive shard statuses are
+recorded separately; the current exhaustive result remains BLOCKED and is published
+under the mandatory status-aware policy. Goals149/150/150A/150B remain
+`accepted=false`. Next is an independent Goal150B audit and the one bundled custom
+human gate, not another proof-only Goal.
+
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,
 four distinct final hashes, stable combat selection, 8-action checkpoint reloads,

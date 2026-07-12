@@ -1,0 +1,27 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.RelatedVsTransitiveHierarchyConflictProducesDiagnostic [17 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.DiagnosticsAndMetricsOrderingIsStable [7 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.LookupSmokeExpectationFailureProducesErrorAndAcceptedFalse [4 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.LookupSmokeExpectationPassesUsingSemanticCatalogLookupIndex [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.RelatedVsDirectBroaderConflictProducesDiagnostic [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.OrphanConceptProducesDiagnostic [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.AsymmetricRelatedIdsProducesDiagnostic [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.MissingDescriptionAlternateLabelsTagsAndFacetsProduceWarnings [1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.MinimumConceptCountByKindProducesErrorAndAcceptedFalse [2 ms]
+[xUnit.net 00:00:00.42]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.RequiredKindMissingProducesErrorAndAcceptedFalse [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.InvalidFacetSyntaxProducesDiagnostic [< 1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.AnalyzerHandlesMoreThanOneHundredGeneratedConcepts [1 ms]
+  Passed LLMGameCreator.Tests.Application.CandidateSemanticCatalog.SemanticCatalogQualityAnalyzerTests.ValidCompactCatalogProducesDeterministicMetricsAndAcceptedReport [< 1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0025.trx
+
+Test Run Successful.
+Total tests: 13
+     Passed: 13
+ Total time: 0,7917 Seconds

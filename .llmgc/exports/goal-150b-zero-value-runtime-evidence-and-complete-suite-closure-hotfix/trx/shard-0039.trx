@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d1685ef0-d59a-45b7-b758-1546d2eb3952" name="endim@DESKTOP-SM838SH 2026-07-12 13:01:40" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:01:40.6383895+03:00" queuing="2026-07-12T13:01:40.6383900+03:00" start="2026-07-12T13:01:39.6222364+03:00" finish="2026-07-12T13:01:40.6445937+03:00" />
+  <TestSettings name="default" id="8b863e4e-2399-41b8-a5e2-8fbe143e5af8">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_01_40" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="463fe1dc-47cb-4f34-9754-174a7ba23e2c" testId="73a740f7-9354-50b2-2a83-df3caec2006b" testName="LLMGameCreator.Tests.Application.CombatMagicAbilityBossEncounterMatrix.CombatMagicMatrixTests.BuildCreatesNineStateChangingCombatMagicRowsWithoutFinalProse" computerName="DESKTOP-SM838SH" duration="00:00:00.2163924" startTime="2026-07-12T13:01:40.5509748+03:00" endTime="2026-07-12T13:01:40.5509918+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="463fe1dc-47cb-4f34-9754-174a7ba23e2c" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.CombatMagicAbilityBossEncounterMatrix.CombatMagicMatrixTests.BuildCreatesNineStateChangingCombatMagicRowsWithoutFinalProse" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="73a740f7-9354-50b2-2a83-df3caec2006b">
+      <Execution id="463fe1dc-47cb-4f34-9754-174a7ba23e2c" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.CombatMagicAbilityBossEncounterMatrix.CombatMagicMatrixTests" name="BuildCreatesNineStateChangingCombatMagicRowsWithoutFinalProse" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="73a740f7-9354-50b2-2a83-df3caec2006b" executionId="463fe1dc-47cb-4f34-9754-174a7ba23e2c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.60]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

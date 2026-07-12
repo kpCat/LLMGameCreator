@@ -1,0 +1,25 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.SmokeTests.AssetCatalog_BrokenFallbackContractAndPath_ProducesValidationIssues [24 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.MinimalGame_FirstMove_Changes_Position [109 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.ScriptCatalog_MissingPathOrEntryPoint_ProducesValidationErrors [1 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.MinimalGame_Loads_Validates_And_Starts_Runtime [20 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.AssetCatalog_MissingPhysicalAssetFile_RemainsWarning [2 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.ScriptCatalog_GeneratorMissingOrNonGeneratorScript_ProducesValidationErrors [1 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.ScriptCatalog_PathTraversal_ProducesValidationError [< 1 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.GameDefinitions_MissingTileAndEntityAssetReferences_ProduceValidationErrors [< 1 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.GamePackageValidator_ModularValidators_PreserveManifestGameAndScriptIssues [< 1 ms]
+[xUnit.net 00:00:00.56]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.SmokeTests.ValidationReportFormatter_GroupsBySeverityThenCategoryDeterministically [3 ms]
+  Passed LLMGameCreator.Tests.SmokeTests.ValidationIssue_ToString_KeepsLegacyShapeAndAddsOptionalPath [< 1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0591.trx
+
+Test Run Successful.
+Total tests: 11
+     Passed: 11
+ Total time: 0,9342 Seconds

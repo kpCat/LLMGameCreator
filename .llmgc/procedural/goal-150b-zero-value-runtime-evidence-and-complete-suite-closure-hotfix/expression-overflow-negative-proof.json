@@ -1,0 +1,10 @@
+{
+    "schemaVersion":  "goal150b_expression_overflow_negative_proof_v1",
+    "status":  "GREEN",
+    "unhandledExceptionReachedActivation":  false,
+    "diagnostic":  "numeric expression overflow rejected",
+    "divisionByZeroStillRejected":  true,
+    "cycleStillRejected":  true,
+    "languageExpanded":  false,
+    "passed":  true
+}

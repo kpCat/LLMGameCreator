@@ -1,0 +1,23 @@
+{
+    "status":  "TIMEOUT",
+    "run":  {
+                "name":  "monolithic",
+                "command":  "dotnet test C:\\Users\\endim\\LLMGameCreator\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj -c Debug --no-build --logger trx;LogFileName=C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150b-complete-suite\\trx\\monolithic.trx --logger console;verbosity=detailed",
+                "startedAtUtc":  "2026-07-12T09:15:03.2964915Z",
+                "endedAtUtc":  "2026-07-12T09:30:03.5108513Z",
+                "durationSeconds":  900.214,
+                "timeoutSeconds":  900,
+                "timedOut":  true,
+                "exitCode":  -1,
+                "peakWorkingSetBytes":  3033796608,
+                "observedDotnetAndTesthostProcessCount":  15,
+                "observedAggregateCpuSeconds":  176.359,
+                "stdoutPath":  "logs/monolithic.stdout.log",
+                "stderrPath":  "logs/monolithic.stderr.log"
+            },
+    "executedCount":  0,
+    "passedCount":  0,
+    "failedCount":  0,
+    "skippedCount":  0,
+    "lastCompletedTest":  null
+}

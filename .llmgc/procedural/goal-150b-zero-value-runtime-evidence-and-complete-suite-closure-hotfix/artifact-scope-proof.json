@@ -1,0 +1,12 @@
+{
+    "schemaVersion":  "goal150b_artifact_scope_proof_v1",
+    "status":  "GREEN",
+    "scenario":  "goal-150b-zero-value-runtime-evidence-and-complete-suite-closure-hotfix",
+    "accepted":  true,
+    "violationCount":  0,
+    "changedPathCount":  24,
+    "diagnostics":  [
+
+                    ],
+    "passed":  true
+}

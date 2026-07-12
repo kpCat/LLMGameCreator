@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="46e9319d-bef8-4273-b80f-1058f7ce73ad" name="endim@DESKTOP-SM838SH 2026-07-12 13:30:26" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:30:26.2216790+03:00" queuing="2026-07-12T13:30:26.2216793+03:00" start="2026-07-12T13:30:25.1322536+03:00" finish="2026-07-12T13:30:26.2287945+03:00" />
+  <TestSettings name="default" id="fc93189b-37aa-4f50-b74e-6c3e1d3e1722">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_30_26" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2cd0ec1d-e1ce-4d3b-b148-105cea5319db" testId="0df06b32-aa6d-4fd0-3a2b-8edd009899ff" testName="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateRegionSettlementRoadSeedsProductSmoke" computerName="DESKTOP-SM838SH" duration="00:00:00.0190947" startTime="2026-07-12T13:30:26.0937404+03:00" endTime="2026-07-12T13:30:26.0937407+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2cd0ec1d-e1ce-4d3b-b148-105cea5319db" />
+    <UnitTestResult executionId="ef56ebdd-0a03-4a36-8bb4-ffbc17321d78" testId="1df34d85-66d5-c318-32c8-a5a0acd07647" testName="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateRegionHydrologyWaterwayHintsProductSmoke" computerName="DESKTOP-SM838SH" duration="00:00:00.1405766" startTime="2026-07-12T13:30:26.0467609+03:00" endTime="2026-07-12T13:30:26.0467612+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef56ebdd-0a03-4a36-8bb4-ffbc17321d78" />
+    <UnitTestResult executionId="025cf9fb-9a4c-40e4-b1b1-667b3602b1f6" testId="f3ccf1fe-2b8b-6e51-64a6-f36a88f15d0e" testName="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateWorldBiomeNoiseProductSmoke" computerName="DESKTOP-SM838SH" duration="00:00:00.0659033" startTime="2026-07-12T13:30:25.9052288+03:00" endTime="2026-07-12T13:30:25.9052451+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="025cf9fb-9a4c-40e4-b1b1-667b3602b1f6" />
+    <UnitTestResult executionId="5aad6bd6-73fd-43c6-8c0f-6fae2ffc8540" testId="b21eaec8-4911-a050-9a52-f2b3fa4bc0d7" testName="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateRegionGatewayConnectivityHintsProductSmoke" computerName="DESKTOP-SM838SH" duration="00:00:00.0272740" startTime="2026-07-12T13:30:26.0743152+03:00" endTime="2026-07-12T13:30:26.0743155+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5aad6bd6-73fd-43c6-8c0f-6fae2ffc8540" />
+    <UnitTestResult executionId="ad9d3cac-8dd4-4a99-a20c-bb233daa5b35" testId="15a9d245-b5f9-33c4-f4c6-ed17f1aae59b" testName="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateWorldRegionClimateProductSmoke" computerName="DESKTOP-SM838SH" duration="00:00:00.0321512" startTime="2026-07-12T13:30:26.1262632+03:00" endTime="2026-07-12T13:30:26.1262634+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad9d3cac-8dd4-4a99-a20c-bb233daa5b35" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateWorldBiomeNoiseProductSmoke" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="f3ccf1fe-2b8b-6e51-64a6-f36a88f15d0e">
+      <Execution id="025cf9fb-9a4c-40e4-b1b1-667b3602b1f6" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests" name="CandidateWorldBiomeNoiseProductSmoke" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateRegionGatewayConnectivityHintsProductSmoke" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b21eaec8-4911-a050-9a52-f2b3fa4bc0d7">
+      <Execution id="5aad6bd6-73fd-43c6-8c0f-6fae2ffc8540" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests" name="CandidateRegionGatewayConnectivityHintsProductSmoke" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateRegionHydrologyWaterwayHintsProductSmoke" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="1df34d85-66d5-c318-32c8-a5a0acd07647">
+      <Execution id="ef56ebdd-0a03-4a36-8bb4-ffbc17321d78" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests" name="CandidateRegionHydrologyWaterwayHintsProductSmoke" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateWorldRegionClimateProductSmoke" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="15a9d245-b5f9-33c4-f4c6-ed17f1aae59b">
+      <Execution id="ad9d3cac-8dd4-4a99-a20c-bb233daa5b35" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests" name="CandidateWorldRegionClimateProductSmoke" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests.CandidateRegionSettlementRoadSeedsProductSmoke" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="0df06b32-aa6d-4fd0-3a2b-8edd009899ff">
+      <Execution id="2cd0ec1d-e1ce-4d3b-b148-105cea5319db" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.ProductSmoke.CandidateWorldBiomeNoiseSmokeTests" name="CandidateRegionSettlementRoadSeedsProductSmoke" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="0df06b32-aa6d-4fd0-3a2b-8edd009899ff" executionId="2cd0ec1d-e1ce-4d3b-b148-105cea5319db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1df34d85-66d5-c318-32c8-a5a0acd07647" executionId="ef56ebdd-0a03-4a36-8bb4-ffbc17321d78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f3ccf1fe-2b8b-6e51-64a6-f36a88f15d0e" executionId="025cf9fb-9a4c-40e4-b1b1-667b3602b1f6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b21eaec8-4911-a050-9a52-f2b3fa4bc0d7" executionId="5aad6bd6-73fd-43c6-8c0f-6fae2ffc8540" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15a9d245-b5f9-33c4-f4c6-ed17f1aae59b" executionId="ad9d3cac-8dd4-4a99-a20c-bb233daa5b35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.67]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

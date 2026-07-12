@@ -1,0 +1,19 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.16]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.37]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.38]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:01.10]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.FullCampaignGamePackageMaterialization.FullCampaignGamePackageMaterializationTests.InvalidMatrixCoversRequiredFakeLeakCasesWithStableDiagnostics [436 ms]
+  Passed LLMGameCreator.Tests.Application.FullCampaignGamePackageMaterialization.FullCampaignGamePackageMaterializationTests.SourceLoaderConsumesAcceptedGoal059MatrixInDeterministicFamilySeedOrder [15 ms]
+  Passed LLMGameCreator.Tests.Application.FullCampaignGamePackageMaterialization.FullCampaignGamePackageMaterializationTests.BuildMaterializesNineValidatorCleanPackagesAndRuntimeConsumptionRows [55 ms]
+  Passed LLMGameCreator.Tests.Application.FullCampaignGamePackageMaterialization.FullCampaignGamePackageMaterializationTests.UnityCommandPlanRequiresPackageConsumptionMarkersForEveryMaterializedRow [39 ms]
+  Passed LLMGameCreator.Tests.Application.FullCampaignGamePackageMaterialization.FullCampaignGamePackageMaterializationTests.WriteAsyncEmitsRequiredEvidenceAndPhysicalPackageFiles [134 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0082.trx
+
+Test Run Successful.
+Total tests: 5
+     Passed: 5
+ Total time: 1,5439 Seconds

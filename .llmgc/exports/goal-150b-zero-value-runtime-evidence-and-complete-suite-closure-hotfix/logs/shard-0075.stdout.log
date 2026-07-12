@@ -1,0 +1,18 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.34]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.35]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.78]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.Application.EditDrivenUnityAlphaStreamingAssetsHandoff.EditDrivenUnityAlphaStreamingAssetsHandoffServiceTests.MirroredStreamingAssetsPayloadCanBeReadAndValidated [206 ms]
+  Passed LLMGameCreator.Tests.Application.EditDrivenUnityAlphaStreamingAssetsHandoff.EditDrivenUnityAlphaStreamingAssetsHandoffServiceTests.UnityProbeSourceReferencesStreamingAssetsRootOnly [58 ms]
+  Passed LLMGameCreator.Tests.Application.EditDrivenUnityAlphaStreamingAssetsHandoff.EditDrivenUnityAlphaStreamingAssetsHandoffServiceTests.ServiceBuildsDeterministicHandoffArtifactsFromGoal080AndGoal081Inputs [87 ms]
+  Passed LLMGameCreator.Tests.Application.EditDrivenUnityAlphaStreamingAssetsHandoff.EditDrivenUnityAlphaStreamingAssetsHandoffServiceTests.NegativeProofRejectsMissingTamperedAndFakeReadScenarios [33 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0075.trx
+
+Test Run Successful.
+Total tests: 4
+     Passed: 4
+ Total time: 1,2139 Seconds

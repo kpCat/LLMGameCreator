@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="58647ebf-9cda-4d04-95f8-112a7157d326" name="endim@DESKTOP-SM838SH 2026-07-12 13:11:10" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:11:10.5586216+03:00" queuing="2026-07-12T13:11:10.5586219+03:00" start="2026-07-12T13:11:09.2748713+03:00" finish="2026-07-12T13:11:10.5653867+03:00" />
+  <TestSettings name="default" id="37513f8a-1940-4672-9990-3edebb487ca7">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_11_10" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3aaa9e89-74a4-4388-a82f-4c95e70ad568" testId="9f2acd90-4276-72e8-e0fd-7bcb7bc25e5b" testName="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests.OneClickGeneratedPreviewWorkflowCanDeferCurrentPackageReplacementToCaller" computerName="DESKTOP-SM838SH" duration="00:00:00.0223491" startTime="2026-07-12T13:11:10.4506449+03:00" endTime="2026-07-12T13:11:10.4506452+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3aaa9e89-74a4-4388-a82f-4c95e70ad568" />
+    <UnitTestResult executionId="31fa045c-484c-425e-93e9-2bdd201753eb" testId="5a5b34c3-86fd-fe47-c0ae-edaddfe89608" testName="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests.OneClickGeneratedPreviewWorkflowRejectsConcurrentRun" computerName="DESKTOP-SM838SH" duration="00:00:00.0221709" startTime="2026-07-12T13:11:10.4732187+03:00" endTime="2026-07-12T13:11:10.4732190+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31fa045c-484c-425e-93e9-2bdd201753eb" />
+    <UnitTestResult executionId="f2440eb6-9387-4ba3-b4fb-30315d2a34eb" testId="acfda378-aa68-f10a-898c-78a5be16258e" testName="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests.OneClickGeneratedPreviewWorkflowProducesArtifactsAndLoadsCurrentPackage" computerName="DESKTOP-SM838SH" duration="00:00:00.4436312" startTime="2026-07-12T13:11:10.4273648+03:00" endTime="2026-07-12T13:11:10.4273818+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f2440eb6-9387-4ba3-b4fb-30315d2a34eb" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests.OneClickGeneratedPreviewWorkflowCanDeferCurrentPackageReplacementToCaller" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="9f2acd90-4276-72e8-e0fd-7bcb7bc25e5b">
+      <Execution id="3aaa9e89-74a4-4388-a82f-4c95e70ad568" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests" name="OneClickGeneratedPreviewWorkflowCanDeferCurrentPackageReplacementToCaller" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests.OneClickGeneratedPreviewWorkflowProducesArtifactsAndLoadsCurrentPackage" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="acfda378-aa68-f10a-898c-78a5be16258e">
+      <Execution id="f2440eb6-9387-4ba3-b4fb-30315d2a34eb" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests" name="OneClickGeneratedPreviewWorkflowProducesArtifactsAndLoadsCurrentPackage" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests.OneClickGeneratedPreviewWorkflowRejectsConcurrentRun" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="5a5b34c3-86fd-fe47-c0ae-edaddfe89608">
+      <Execution id="31fa045c-484c-425e-93e9-2bdd201753eb" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.RuntimePreview.OneClickGeneratedPreviewWorkflowServiceTests" name="OneClickGeneratedPreviewWorkflowRejectsConcurrentRun" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9f2acd90-4276-72e8-e0fd-7bcb7bc25e5b" executionId="3aaa9e89-74a4-4388-a82f-4c95e70ad568" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5a5b34c3-86fd-fe47-c0ae-edaddfe89608" executionId="31fa045c-484c-425e-93e9-2bdd201753eb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="acfda378-aa68-f10a-898c-78a5be16258e" executionId="f2440eb6-9387-4ba3-b4fb-30315d2a34eb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.86]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

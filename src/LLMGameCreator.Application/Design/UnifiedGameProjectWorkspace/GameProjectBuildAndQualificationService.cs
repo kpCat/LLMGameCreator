@@ -284,7 +284,7 @@ public sealed class GameProjectBuildAndQualificationService
                     progression.ProgressionId == progressionAction.ResolvedTargetId);
             var rawTotalAdditionalDamage = damageEvent?.Args.GetValueOrDefault("totalAdditionalDamage");
             var totalAdditionalDamage = string.IsNullOrWhiteSpace(rawTotalAdditionalDamage)
-                ? 0m
+                ? damageEvent is null ? 0m : weaponDamageBonus + statDamageBonus
                 : decimal.Parse(rawTotalAdditionalDamage, NumberStyles.Number, CultureInfo.InvariantCulture);
             var summaryLines = new List<string>
             {

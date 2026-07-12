@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="15fd18af-fcd8-4bc5-8516-509a20c29104" name="endim@DESKTOP-SM838SH 2026-07-12 13:10:13" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:10:13.2080390+03:00" queuing="2026-07-12T13:10:13.2080393+03:00" start="2026-07-12T13:10:11.9697167+03:00" finish="2026-07-12T13:10:13.2162267+03:00" />
+  <TestSettings name="default" id="a94ea4d5-b6a5-4903-a269-847307b5b9b0">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_10_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="892f084d-4c6d-4d01-a642-1853e4f60221" testId="3f027cac-c55b-6126-5015-81dfc4cd13fe" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.CurrentStateKeepsGoal025RecordAfterLaterGoalHandoff" computerName="DESKTOP-SM838SH" duration="00:00:00.0074299" startTime="2026-07-12T13:10:13.0100475+03:00" endTime="2026-07-12T13:10:13.0100476+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="892f084d-4c6d-4d01-a642-1853e4f60221" />
+    <UnitTestResult executionId="566c2889-c055-40b9-8785-8b0f2071c278" testId="54f0637f-6584-b51b-94e2-cb0f5ccfe0d1" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.RealAndSyntheticConsumersProduceMapsPrototypesAndPlacements" computerName="DESKTOP-SM838SH" duration="00:00:00.0203812" startTime="2026-07-12T13:10:13.0021896+03:00" endTime="2026-07-12T13:10:13.0021901+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="566c2889-c055-40b9-8785-8b0f2071c278" />
+    <UnitTestResult executionId="71b7cefe-ace6-4dc0-91ab-acf2e18fe83d" testId="b5477f17-78dd-d48b-809a-87b931c16c62" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.WrittenReportRoundTripsManualGateAndHasNoTopLevelErrors" computerName="DESKTOP-SM838SH" duration="00:00:00.2667005" startTime="2026-07-12T13:10:12.9804423+03:00" endTime="2026-07-12T13:10:12.9804574+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71b7cefe-ace6-4dc0-91ab-acf2e18fe83d" />
+    <UnitTestResult executionId="33e8077e-c9aa-4e21-ab9d-307744d4fd8b" testId="056ed130-3901-4595-f2d9-6fec70b64b5f" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.InvalidMatrixRejectsRequiredScenarios" computerName="DESKTOP-SM838SH" duration="00:00:00.0114273" startTime="2026-07-12T13:10:13.0218267+03:00" endTime="2026-07-12T13:10:13.0218271+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33e8077e-c9aa-4e21-ab9d-307744d4fd8b" />
+    <UnitTestResult executionId="4cd1de91-07bd-47f2-9f5c-56712e76ddc8" testId="1028472d-ad9f-b502-2b27-6fd9fb3ac48e" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.RejectsMissingEvidenceAndAntiOverfitFailure" computerName="DESKTOP-SM838SH" duration="00:00:00.0271616" startTime="2026-07-12T13:10:13.1075686+03:00" endTime="2026-07-12T13:10:13.1075688+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4cd1de91-07bd-47f2-9f5c-56712e76ddc8" />
+    <UnitTestResult executionId="97a655ae-f225-4e01-816c-ef834eb278db" testId="c6301fee-cd96-c2b1-d99e-b2807ebddd01" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.AssemblerMapsExplicitEntityAndNpcPlacementsWithoutSchemaChanges" computerName="DESKTOP-SM838SH" duration="00:00:00.0018347" startTime="2026-07-12T13:10:13.1094570+03:00" endTime="2026-07-12T13:10:13.1094572+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="97a655ae-f225-4e01-816c-ef834eb278db" />
+    <UnitTestResult executionId="96cc0105-72ae-4a62-af2b-050b992b0f4f" testId="034be2da-f064-a16f-c217-aef61d3b814a" testName="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.BuildsDeterministicWorldEntityArtifacts" computerName="DESKTOP-SM838SH" duration="00:00:00.0580298" startTime="2026-07-12T13:10:13.0800999+03:00" endTime="2026-07-12T13:10:13.0801002+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="96cc0105-72ae-4a62-af2b-050b992b0f4f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.AssemblerMapsExplicitEntityAndNpcPlacementsWithoutSchemaChanges" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="c6301fee-cd96-c2b1-d99e-b2807ebddd01">
+      <Execution id="97a655ae-f225-4e01-816c-ef834eb278db" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="AssemblerMapsExplicitEntityAndNpcPlacementsWithoutSchemaChanges" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.BuildsDeterministicWorldEntityArtifacts" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="034be2da-f064-a16f-c217-aef61d3b814a">
+      <Execution id="96cc0105-72ae-4a62-af2b-050b992b0f4f" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="BuildsDeterministicWorldEntityArtifacts" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.RejectsMissingEvidenceAndAntiOverfitFailure" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="1028472d-ad9f-b502-2b27-6fd9fb3ac48e">
+      <Execution id="4cd1de91-07bd-47f2-9f5c-56712e76ddc8" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="RejectsMissingEvidenceAndAntiOverfitFailure" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.CurrentStateKeepsGoal025RecordAfterLaterGoalHandoff" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="3f027cac-c55b-6126-5015-81dfc4cd13fe">
+      <Execution id="892f084d-4c6d-4d01-a642-1853e4f60221" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="CurrentStateKeepsGoal025RecordAfterLaterGoalHandoff" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.RealAndSyntheticConsumersProduceMapsPrototypesAndPlacements" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="54f0637f-6584-b51b-94e2-cb0f5ccfe0d1">
+      <Execution id="566c2889-c055-40b9-8785-8b0f2071c278" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="RealAndSyntheticConsumersProduceMapsPrototypesAndPlacements" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.WrittenReportRoundTripsManualGateAndHasNoTopLevelErrors" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="b5477f17-78dd-d48b-809a-87b931c16c62">
+      <Execution id="71b7cefe-ace6-4dc0-91ab-acf2e18fe83d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="WrittenReportRoundTripsManualGateAndHasNoTopLevelErrors" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests.InvalidMatrixRejectsRequiredScenarios" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="056ed130-3901-4595-f2d9-6fec70b64b5f">
+      <Execution id="33e8077e-c9aa-4e21-ab9d-307744d4fd8b" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.PackageAssemblyWorldEntities.PackageAssemblyWorldEntitiesAcceptanceTests" name="InvalidMatrixRejectsRequiredScenarios" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="3f027cac-c55b-6126-5015-81dfc4cd13fe" executionId="892f084d-4c6d-4d01-a642-1853e4f60221" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="54f0637f-6584-b51b-94e2-cb0f5ccfe0d1" executionId="566c2889-c055-40b9-8785-8b0f2071c278" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5477f17-78dd-d48b-809a-87b931c16c62" executionId="71b7cefe-ace6-4dc0-91ab-acf2e18fe83d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="056ed130-3901-4595-f2d9-6fec70b64b5f" executionId="33e8077e-c9aa-4e21-ab9d-307744d4fd8b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1028472d-ad9f-b502-2b27-6fd9fb3ac48e" executionId="4cd1de91-07bd-47f2-9f5c-56712e76ddc8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c6301fee-cd96-c2b1-d99e-b2807ebddd01" executionId="97a655ae-f225-4e01-816c-ef834eb278db" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="034be2da-f064-a16f-c217-aef61d3b814a" executionId="96cc0105-72ae-4a62-af2b-050b992b0f4f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.15]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.77]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

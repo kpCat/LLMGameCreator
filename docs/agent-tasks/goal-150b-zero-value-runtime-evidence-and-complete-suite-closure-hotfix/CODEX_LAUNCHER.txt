@@ -1,0 +1,17 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-150b-zero-value-runtime-evidence-and-complete-suite-closure-hotfix/GOAL.md
+
+Codex reasoning: very high
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 90f278b1f3a70fdb5011e555491fb83860d00509
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md; не рассчитывай на память из других диалогов.
+
+ВАЖНО: Codex обязан сам выполнить commit и push в origin/main не только при GREEN, но и при BLOCKED/FAILED по status-aware publication policy из GOAL.md. Пользователь не должен пушить изменения вручную.
+
+После выполнения сообщи GREEN/BLOCKED/FAILED, commit SHA, push result, HEAD == origin/main и clean worktree.

@@ -1,0 +1,3 @@
+[xUnit.net 00:00:00.78]     LLMGameCreator.Tests.Application.OfflineGeoworldSessionPersistenceReplay.OfflineGeoworldSessionPersistenceReplayTests.ServiceBuildsSessionPayloadAndEvidence [FAIL]
+[xUnit.net 00:00:02.17]     LLMGameCreator.Tests.Application.OfflineGeoworldSessionPersistenceReplay.OfflineGeoworldSessionPersistenceReplayTests.WorkspaceGroupSurfacesSessionReplayReadiness [FAIL]
+Test Run Failed.

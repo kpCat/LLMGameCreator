@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="46711165-5658-4d00-89cc-4514457c9660" name="endim@DESKTOP-SM838SH 2026-07-12 13:13:23" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:13:23.5430439+03:00" queuing="2026-07-12T13:13:23.5430442+03:00" start="2026-07-12T13:13:22.5770415+03:00" finish="2026-07-12T13:13:23.5513888+03:00" />
+  <TestSettings name="default" id="9f26fa0c-cb44-43be-9147-17b0955bce4b">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_13_23" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d909238a-3fde-41d3-8669-c9d97d17cc32" testId="61d0fb86-8209-ab26-335a-e40434deeefe" testName="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.EnsureManualImportDirectoryRejectsTraversal" computerName="DESKTOP-SM838SH" duration="00:00:00.0057163" startTime="2026-07-12T13:13:23.3708017+03:00" endTime="2026-07-12T13:13:23.3708020+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d909238a-3fde-41d3-8669-c9d97d17cc32" />
+    <UnitTestResult executionId="c38a5595-36b6-48df-b553-0514dde29e78" testId="6f65fa09-89c9-4b8e-9703-66bbbf46dcf9" testName="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.EnsureManualImportDirectoryAcceptsManualImport" computerName="DESKTOP-SM838SH" duration="00:00:00.0791429" startTime="2026-07-12T13:13:23.3654129+03:00" endTime="2026-07-12T13:13:23.3654297+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c38a5595-36b6-48df-b553-0514dde29e78" />
+    <UnitTestResult executionId="ab8d82e9-4d26-44ca-b7e2-f788b92ed8e8" testId="2c036c1c-b8f3-8bad-8a36-f09d8b4653c9" testName="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.CreateManualImportTemplateWritesMissingSlotsOnly" computerName="DESKTOP-SM838SH" duration="00:00:00.0152475" startTime="2026-07-12T13:13:23.4568043+03:00" endTime="2026-07-12T13:13:23.4568046+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ab8d82e9-4d26-44ca-b7e2-f788b92ed8e8" />
+    <UnitTestResult executionId="1afe8bd3-c462-4d6c-82af-0d3b8a5d29a8" testId="916201ff-d80c-aa23-4b6c-535e4f049a1f" testName="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.WorkspaceLoadsPlanWhenTypedIndexesAreMissing" computerName="DESKTOP-SM838SH" duration="00:00:00.0172629" startTime="2026-07-12T13:13:23.4411781+03:00" endTime="2026-07-12T13:13:23.4411784+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1afe8bd3-c462-4d6c-82af-0d3b8a5d29a8" />
+    <UnitTestResult executionId="2a65051f-5a4c-4e0f-9edc-71ad85e5adad" testId="bf308c76-bf80-7e97-6112-6a846e9a73f6" testName="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.CreateManualImportTemplateDoesNotOverwriteImportManifest" computerName="DESKTOP-SM838SH" duration="00:00:00.0496884" startTime="2026-07-12T13:13:23.4226366+03:00" endTime="2026-07-12T13:13:23.4226368+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a65051f-5a4c-4e0f-9edc-71ad85e5adad" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.CreateManualImportTemplateDoesNotOverwriteImportManifest" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="bf308c76-bf80-7e97-6112-6a846e9a73f6">
+      <Execution id="2a65051f-5a4c-4e0f-9edc-71ad85e5adad" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests" name="CreateManualImportTemplateDoesNotOverwriteImportManifest" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.EnsureManualImportDirectoryAcceptsManualImport" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="6f65fa09-89c9-4b8e-9703-66bbbf46dcf9">
+      <Execution id="c38a5595-36b6-48df-b553-0514dde29e78" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests" name="EnsureManualImportDirectoryAcceptsManualImport" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.WorkspaceLoadsPlanWhenTypedIndexesAreMissing" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="916201ff-d80c-aa23-4b6c-535e4f049a1f">
+      <Execution id="1afe8bd3-c462-4d6c-82af-0d3b8a5d29a8" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests" name="WorkspaceLoadsPlanWhenTypedIndexesAreMissing" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.EnsureManualImportDirectoryRejectsTraversal" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="61d0fb86-8209-ab26-335a-e40434deeefe">
+      <Execution id="d909238a-3fde-41d3-8669-c9d97d17cc32" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests" name="EnsureManualImportDirectoryRejectsTraversal" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests.CreateManualImportTemplateWritesMissingSlotsOnly" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="2c036c1c-b8f3-8bad-8a36-f09d8b4653c9">
+      <Execution id="ab8d82e9-4d26-44ca-b7e2-f788b92ed8e8" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.UnityArchiveManualImportTemplateTests" name="CreateManualImportTemplateWritesMissingSlotsOnly" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="61d0fb86-8209-ab26-335a-e40434deeefe" executionId="d909238a-3fde-41d3-8669-c9d97d17cc32" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f65fa09-89c9-4b8e-9703-66bbbf46dcf9" executionId="c38a5595-36b6-48df-b553-0514dde29e78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2c036c1c-b8f3-8bad-8a36-f09d8b4653c9" executionId="ab8d82e9-4d26-44ca-b7e2-f788b92ed8e8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="916201ff-d80c-aa23-4b6c-535e4f049a1f" executionId="1afe8bd3-c462-4d6c-82af-0d3b8a5d29a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bf308c76-bf80-7e97-6112-6a846e9a73f6" executionId="2a65051f-5a4c-4e0f-9edc-71ad85e5adad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.33]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.34]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.55]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

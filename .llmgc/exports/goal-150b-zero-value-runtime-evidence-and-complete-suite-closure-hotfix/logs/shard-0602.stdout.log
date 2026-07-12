@@ -1,0 +1,21 @@
+Test run for C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)
+[xUnit.net 00:00:00.14]   Discovering: LLMGameCreator.Tests
+[xUnit.net 00:00:00.32]   Discovered:  LLMGameCreator.Tests
+[xUnit.net 00:00:00.33]   Starting:    LLMGameCreator.Tests
+[xUnit.net 00:00:00.44]   Finished:    LLMGameCreator.Tests
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.PresenterAppliesBaselineAndFullBatchPresetsInContractListOrder [20 ms]
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.PresenterShowsMissingSelectionMessage [10 ms]
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.PresenterBuildsProfileAndContractOptions [1 ms]
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.PresenterMapsGenerationResult [40 ms]
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.PresenterBuildsRequest [1 ms]
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.UnknownBatchPresetPreservesCurrentContractSelection [< 1 ms]
+  Passed LLMGameCreator.Tests.WinForms.StrictLlmArtifactsPresenterTests.PreviewPromptShownWithoutGenerationResult [< 1 ms]
+Results File: C:\Users\endim\LLMGameCreator\.devflow\runs\goal150b-complete-suite-refined\trx\shard-0602.trx
+
+Test Run Successful.
+Total tests: 7
+     Passed: 7
+ Total time: 0,8436 Seconds

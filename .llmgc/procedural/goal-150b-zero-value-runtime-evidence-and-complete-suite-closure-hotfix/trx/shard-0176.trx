@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d6e4bae7-0c90-426a-a114-c6f6a42ce160" name="endim@DESKTOP-SM838SH 2026-07-12 13:09:34" runUser="DESKTOP-SM838SH\endim" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-12T13:09:34.0596235+03:00" queuing="2026-07-12T13:09:34.0596238+03:00" start="2026-07-12T13:09:32.2135673+03:00" finish="2026-07-12T13:09:34.8950973+03:00" />
+  <TestSettings name="default" id="4b3d43ed-3557-41a9-8368-487263a25b66">
+    <Deployment runDeploymentRoot="endim_DESKTOP-SM838SH_2026-07-12_13_09_34" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="80b6e11d-6b8f-443c-8c94-2a97f84d7705" testId="29dd377f-0913-c99b-d960-e740255aef5c" testName="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence" computerName="DESKTOP-SM838SH" duration="00:00:00.2756785" startTime="2026-07-12T13:09:33.2790730+03:00" endTime="2026-07-12T13:09:33.2790893+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="80b6e11d-6b8f-443c-8c94-2a97f84d7705">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldInteractionPlayableProbe\OfflineGeoworldInteractionPlayableProbeTests.cs:line 19&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4a8675bb-7f37-4c05-9ce9-856f4522fd8a" testId="76f3052d-de0c-4408-37a4-15cfc0d80d75" testName="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.NegativeProofCoversRequiredInteractionRisks" computerName="DESKTOP-SM838SH" duration="00:00:00.0570008" startTime="2026-07-12T13:09:33.3343849+03:00" endTime="2026-07-12T13:09:33.3343851+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a8675bb-7f37-4c05-9ce9-856f4522fd8a" />
+    <UnitTestResult executionId="ff19cc3f-169c-433e-bb27-49ccefb8f92d" testId="d2a7dca6-6b5b-d949-850a-cf259b33685c" testName="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.SimulatedSessionProofCoversBindingAvailabilityAndStateHashChain" computerName="DESKTOP-SM838SH" duration="00:00:00.0595083" startTime="2026-07-12T13:09:33.3939788+03:00" endTime="2026-07-12T13:09:33.3939792+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff19cc3f-169c-433e-bb27-49ccefb8f92d" />
+    <UnitTestResult executionId="9939a84d-284c-41e9-8b80-c3700930ebc7" testId="5dddcadd-90ca-fd3d-278e-fa5efca7ba1a" testName="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness" computerName="DESKTOP-SM838SH" duration="00:00:01.4210337" startTime="2026-07-12T13:09:34.8166791+03:00" endTime="2026-07-12T13:09:34.8166797+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9939a84d-284c-41e9-8b80-c3700930ebc7">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure&#xD;
+Expected: True&#xD;
+Actual:   False</Message>
+          <StackTrace>   at LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness() in C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldInteractionPlayableProbe\OfflineGeoworldInteractionPlayableProbeTests.cs:line 122&#xD;
+--- End of stack trace from previous location ---</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.SimulatedSessionProofCoversBindingAvailabilityAndStateHashChain" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="d2a7dca6-6b5b-d949-850a-cf259b33685c">
+      <Execution id="ff19cc3f-169c-433e-bb27-49ccefb8f92d" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests" name="SimulatedSessionProofCoversBindingAvailabilityAndStateHashChain" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.NegativeProofCoversRequiredInteractionRisks" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="76f3052d-de0c-4408-37a4-15cfc0d80d75">
+      <Execution id="4a8675bb-7f37-4c05-9ce9-856f4522fd8a" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests" name="NegativeProofCoversRequiredInteractionRisks" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="29dd377f-0913-c99b-d960-e740255aef5c">
+      <Execution id="80b6e11d-6b8f-443c-8c94-2a97f84d7705" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests" name="ServiceBuildsInteractionPayloadAndEvidence" />
+    </UnitTest>
+    <UnitTest name="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness" storage="c:\users\endim\llmgamecreator\tests\llmgamecreator.tests\bin\debug\net8.0-windows\llmgamecreator.tests.dll" id="5dddcadd-90ca-fd3d-278e-fa5efca7ba1a">
+      <Execution id="9939a84d-284c-41e9-8b80-c3700930ebc7" />
+      <TestMethod codeBase="C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\bin\Debug\net8.0-windows\LLMGameCreator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests" name="WorkspaceGroupSurfacesInteractionReadiness" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="29dd377f-0913-c99b-d960-e740255aef5c" executionId="80b6e11d-6b8f-443c-8c94-2a97f84d7705" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="76f3052d-de0c-4408-37a4-15cfc0d80d75" executionId="4a8675bb-7f37-4c05-9ce9-856f4522fd8a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d2a7dca6-6b5b-d949-850a-cf259b33685c" executionId="ff19cc3f-169c-433e-bb27-49ccefb8f92d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5dddcadd-90ca-fd3d-278e-fa5efca7ba1a" executionId="9939a84d-284c-41e9-8b80-c3700930ebc7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="4" executed="4" passed="2" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.26)&#xD;
+[xUnit.net 00:00:00.18]   Discovering: LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.38]   Discovered:  LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.39]   Starting:    LLMGameCreator.Tests&#xD;
+[xUnit.net 00:00:00.71]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:00.71]       Expected: True&#xD;
+[xUnit.net 00:00:00.71]       Actual:   False&#xD;
+[xUnit.net 00:00:00.71]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.71]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldInteractionPlayableProbe\OfflineGeoworldInteractionPlayableProbeTests.cs(19,0): at LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence()&#xD;
+[xUnit.net 00:00:00.71]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:02.25]       Assert.True() Failure&#xD;
+[xUnit.net 00:00:02.25]       Expected: True&#xD;
+[xUnit.net 00:00:02.25]       Actual:   False&#xD;
+[xUnit.net 00:00:02.25]       Stack Trace:&#xD;
+[xUnit.net 00:00:02.25]         C:\Users\endim\LLMGameCreator\tests\LLMGameCreator.Tests\Application\OfflineGeoworldInteractionPlayableProbe\OfflineGeoworldInteractionPlayableProbeTests.cs(122,0): at LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness()&#xD;
+[xUnit.net 00:00:02.25]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:02.25]   Finished:    LLMGameCreator.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:09:33.2771060+03:00">
+        <Text>[xUnit.net 00:00:00.71]     LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SM838SH" outcome="Error" timestamp="2026-07-12T13:09:34.8164816+03:00">
+        <Text>[xUnit.net 00:00:02.25]     LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>
