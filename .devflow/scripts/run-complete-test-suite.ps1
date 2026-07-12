@@ -232,6 +232,8 @@ try {
         if ($groupExactTests.Count -eq 1) {
             $name = $groupExactTests[0]
             $row = if ($byName.ContainsKey($name)) { $byName[$name] } else { $null }
+            # A single_test_timeout is never fabricated as a terminal result;
+            # it remains in the launched-attempt record and contributes to timedOut.
             if ($null -ne $row -and -not $run.timedOut) { $terminal[$name] = [pscustomobject]@{ name=$name; outcome=$row.outcome; durationSeconds=$row.durationSeconds; lane=$Group.lane; groupId=$Group.id; reason='single_test_terminal' } }
             return
         }
