@@ -160,6 +160,7 @@ $runStarted = [DateTime]::UtcNow
 $terminal = @{}
 $attempts = [System.Collections.Generic.List[object]]::new()
 $groups = @()
+$manifestMissingCount = 0
 try {
     $snapshot = New-DisposableWorktree
     $baselineHead = $snapshot.head
@@ -184,7 +185,7 @@ try {
         $duplicates = @($manifestEntries | Group-Object testName | Where-Object Count -gt 1)
         if ($duplicates.Count -gt 0) { throw 'Goal150AcceptanceClosure manifest contains duplicate test identities.' }
         $missingManifest = @($manifestEntries | Where-Object { $discoveredTests -notcontains $_.testName })
-        if ($missingManifest.Count -gt 0) { throw "Goal150AcceptanceClosure manifest contains tests missing from candidate discovery: $($missingManifest.testName -join ', ')" }
+        $manifestMissingCount = $missingManifest.Count
         $tests = @($manifestEntries | Select-Object -ExpandProperty testName)
     }
     if ($tests.Count -eq 0) { throw 'Complete-suite discovery returned zero tests.' }
@@ -256,7 +257,7 @@ try {
     $mainStatusAfter = (& git -C $RepoRoot status --porcelain=v1) -join "`n"
     $timedOut = @($attempts | Where-Object { $_.run.timedOut } | ForEach-Object { $_.classes } | ForEach-Object { $_ } | Select-Object -Unique).Count
     $notRun = @($tests | Where-Object { -not $terminal.ContainsKey($_) }).Count - $timedOut
-    $counts = [ordered]@{ discovered=$tests.Count; assigned=$inventory.Count; attempted=$attempts.Count; executed=$terminal.Count; passed=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failed=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skipped=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; notRun=[Math]::Max(0,$notRun); timedOut=$timedOut; missing=0; duplicate=0 }
+    $counts = [ordered]@{ discovered=$tests.Count; assigned=$inventory.Count; attempted=$attempts.Count; executed=$terminal.Count; passed=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failed=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skipped=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; notRun=[Math]::Max(0,$notRun); timedOut=$timedOut; missing=$manifestMissingCount; duplicate=0 }
     $passed = $counts.discovered -eq $counts.executed -and $counts.executed -eq ($counts.passed + $counts.failed + $counts.skipped) -and $counts.discovered -eq ($counts.executed + $counts.notRun + $counts.timedOut) -and $counts.failed -eq 0 -and $counts.notRun -eq 0 -and $counts.timedOut -eq 0 -and $counts.missing -eq 0 -and $counts.duplicate -eq 0
     Write-Json 'terminal-results.json' @($terminal.Values | Sort-Object name)
     Write-Json 'validation-slowest-summary.json' ([ordered]@{ schemaVersion='goal150c_slowest_v1'; slowestTerminalTests=@($terminal.Values | Sort-Object durationSeconds -Descending | Select-Object -First 20); slowestAttempts=@($attempts | Sort-Object { $_.run.durationSeconds } -Descending | Select-Object -First 20) })
