@@ -57,6 +57,7 @@ public sealed record FeatureModuleDefinition
     public IReadOnlyList<ProductLineRuntimeVariantMutationOperation> MutationOperations { get; init; } = [];
     public IReadOnlyList<FeatureModuleRuntimeEffectContract> RuntimeEffectContracts { get; init; } = [];
     public IReadOnlyList<FeatureModuleParameterDefinition> ParameterDefinitions { get; init; } = [];
+    public IReadOnlyList<FeatureModuleEffectiveValueBinding> EffectiveValueBindings { get; init; } = [];
     public IReadOnlyList<FeatureModuleRuntimePlaythroughContract> RuntimePlaythroughContracts { get; init; } = [];
     public FeatureModuleSourceLineage SourceLineage { get; init; } = new();
 }

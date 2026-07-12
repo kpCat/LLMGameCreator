@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal150a_negative_binding_proof_v1",
+  "status": "GREEN",
+  "unknownParameterReferenceRejected": true,
+  "unknownMutationTargetRejected": true,
+  "unknownEffectTargetRejected": true,
+  "unknownActionTargetRejected": true,
+  "duplicateTargetRejected": true,
+  "incompatibleTargetFieldRejected": true,
+  "nonnumericExpressionRejected": true,
+  "divisionByZeroRejected": true,
+  "expressionCycleRejected": true,
+  "unselectedModuleReferenceRejected": true,
+  "outsideAllowlistTargetKindRejected": true,
+  "failedBuildRollbackPreserved": true,
+  "passed": true
+}

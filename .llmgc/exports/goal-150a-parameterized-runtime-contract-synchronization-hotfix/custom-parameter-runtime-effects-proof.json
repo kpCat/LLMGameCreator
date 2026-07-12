@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "goal150a_custom_parameter_runtime_effects_proof_v1",
+  "status": "GREEN",
+  "equipmentDamageBonus": 3,
+  "statValue": 8,
+  "statDamageBonus": 6,
+  "totalAdditionalDamage": 9,
+  "progressionAmount": 12,
+  "progressionStage": "level/2",
+  "actionAmount": "12",
+  "attributesSummary": "stat/strength=8",
+  "progressionSummary": "progression/character_level=12:level/2",
+  "humanSummary": "Игра успешно собрана и проверена.\r\nМеханик включено: 16\r\nПараметров настроено: 10\r\nСохранение/загрузка: пройдено\r\nПовтор действий: пройден\r\nФайлы проекта подготовлены: 1\r\nПакет проекта обновлён\r\nЭкипировано: Ржавый нож\r\nСлот: Оружие\r\nБонус урона: +3\r\nСила: 8\r\nБонус урона от силы: +6\r\nУровень: 2\r\nОпыт: 12",
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "actionBindingPassed": true,
+  "plannedActionCount": 20,
+  "checkpointActionCount": 16,
+  "finalReplayActionCount": 20,
+  "passed": true
+}

@@ -1,6 +1,6 @@
 # Capability-Driven Runtime Playthrough and Equipment FeatureModule Vertical Slice
 
-Status: GREEN, bundled manual review pending with Goal150
+Status: GREEN, bundled manual review pending after Goal150A full suite and independent audit
 Gate: `capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required`
 Accepted: false
 Accepted by human: false
@@ -21,11 +21,12 @@ Accepted by Codex: false
 
 1. Open an existing Goal148 project in `Игры`; confirm it opens without a stale warning and equipment is not selected.
 2. Build it unchanged; confirm the technical details show a capability-driven 13/8/13 plan and the accepted Goal148 hashes.
-3. Select `Экипировка и оружие`, keep `Бонус урона оружия` at `2`, and build again.
-4. Confirm the human summary contains `Экипировано: Ржавый нож`, `Слот: Оружие` and `Бонус урона: +2`.
-5. In technical details, confirm the plan has 17/13/17 actions, equipment is `slot/weapon:item/rusty_knife`, and the combat delta is `2`.
-6. Save, close and reopen the project; confirm the equipment selection, parameter value, equipped-item proof and deterministic replay remain stable.
+3. After Goal150A completes its exact full suite and is independently audited, select `Экипировка и оружие`, `Характеристики персонажа` and `Уровни и опыт`.
+4. Set weapon bonus `3`, starting strength `8`, damage per strength point `2` and level-two experience `12`.
+5. Build and confirm `Экипировано: Ржавый нож`, `Бонус урона: +3`, `Сила: 8`, `Бонус урона от силы: +6`, `Уровень: 2` and `Опыт: 12`.
+6. In technical details, confirm stat/equipment/total damage `6/3/9`, progression `12:level/2`, and 20/16/20 planned/checkpoint/final actions.
+7. Save, close and reopen the project; confirm selections and all four custom values persist, then rebuild and compare hashes/replay markers.
 
 Goal149 remains accepted=false. Its deferred review is now routed into the
-bundled Goals149/150 mechanics review; do not mark either goal accepted until an
-explicit human decision is recorded.
+bundled Goals149/150/150A mechanics review; do not mark any goal accepted until
+Goal150A is independently audited and an explicit human decision is recorded.

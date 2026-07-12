@@ -96,13 +96,16 @@ equipment vertical slice. Equipment is the fourth optional module and is
 disabled by default; unrelated saved projects remain additive-compatible when
 it appears in the catalog. Goal150 adds default-off character attributes and
 level progression modules through the same capability plan, extended mutation
-registry and canonical Runtime/save/replay path. Strength `7` contributes `+2`
-generic stat damage, combines with equipment `+2` into `4`, and progression
-amount `10` resolves to `level/2`. All six optional modules certify; Goal149
-disabled/equipment hashes remain exact and unselected additions remain
-additive-compatible. Goals149/150 are GREEN and `accepted=false` at the bundled
-manual review gate
-`character_attributes_and_level_progression_featuremodules_vertical_slice_verification required`;
+registry and canonical Runtime/save/replay path. Goal150A repairs the acceptance
+blocker where non-default parameter mutations left Runtime expectations and the
+progression action amount static. One declarative effective-value binding layer
+now drives mutation fields, exact Runtime-effect expected values and numeric
+playthrough args from an immutable effective catalog. The custom `3/8/2/12`
+workspace build is focused GREEN with stat/equipment/total `6/3/9` and level/XP `2/12`;
+default hashes remain exact. Goal150A is BLOCKED because the exact full suite did
+not complete within the 60-minute execution limit; Goals149/150/150A remain
+`accepted=false`. The next step is `goal150a_full_test_suite_completion required`,
+then an independent Goal150A audit and their single bundled human gate;
 Goal141 remains `accepted=false`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
@@ -329,10 +332,11 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-148c-project-identity-preservation-and-project-scoped-composition-hotfix/GOAL.md` | Goal 148C P1 hotfix: records the real template-identity overwrite, adds atomic project identity capture/recovery, migrates the fixed Goal147 authoring file to a deterministic project-scoped composition document, overlays identity before activation, separates composition/activated/final hashes and refreshes MainForm title on every marshalled current-package event. Result is `GREEN`; manual values preserve composition SHA `e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221` and final hash `95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`; Goal148 remains accepted=false and requires a manual retry. |
 | `docs/agent-tasks/goal-149-capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice/GOAL.md` | Goal 149 replaces the normal fixed action list with structured FeatureModule playthrough contracts and adds the default-off equipment vertical slice. Result is `GREEN`, Goal148 is accepted, Goal149 remains accepted=false, disabled/equipment hashes are preserved, and review is bundled with Goal150. |
 | `docs/agent-tasks/goal-150-character-attributes-and-level-progression-featuremodules-vertical-slice/GOAL.md` | Goal 150 adds default-off `Характеристики персонажа` and `Уровни и опыт`, a six-kind extended mutation registry, Runtime-owned player stats, generic stat/equipment damage additivity, `ChangeProgression` through `OutputApplier`, capability-driven inspect actions, 20/16/20 full optional replay and additive compatibility. Result is `GREEN`, Goals149/150 remain accepted=false, and the next action is their bundled human review. |
+| `docs/agent-tasks/goal-150a-parameterized-runtime-contract-synchronization-hotfix/GOAL.md` | Goal 150A synchronizes canonical parameter values with package mutation fields, exact Runtime-effect expectations and Runtime playthrough args through one immutable effective catalog. Custom `3/8/2/12` is focused GREEN at `6/3/9` damage and `2/12` level/XP; defaults and historical Goal149/150 artifacts remain exact. Overall status is BLOCKED until the exact full suite completes; Goals149/150/150A remain accepted=false. |
 | `docs/manual-acceptance/persistent-featuremodule-registry-typed-parameter-authoring-saved-compositions-and-incremental-certification.md` | Exact Goals146/147 human acceptance record plus the completed bundled authoring review evidence. |
 | `docs/manual-acceptance/unified-game-project-workspace-and-legacy-goal-diagnostics-isolation.md` | Goal148 manual checklist for the normal `Игры` workflow, project-local roundtrip, transactional build and explicit diagnostics toggle. |
-| `docs/manual-acceptance/capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice.md` | Goal149 checklist, now routed into the bundled Goals149/150 equipment, attributes and progression review. |
-| `docs/manual-acceptance/character-attributes-and-level-progression-featuremodules-vertical-slice.md` | Goal150 checklist for the bundled Goals149/150 mechanics review; both goals remain accepted=false. |
+| `docs/manual-acceptance/capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice.md` | Goal149 checklist, now routed into the bundled Goals149/150/150A custom equipment, attributes and progression review after independent Goal150A audit. |
+| `docs/manual-acceptance/character-attributes-and-level-progression-featuremodules-vertical-slice.md` | Goal150A-updated custom `3/8/2/12` checklist for the bundled Goals149/150/150A mechanics review after independent audit; all three goals remain accepted=false. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |

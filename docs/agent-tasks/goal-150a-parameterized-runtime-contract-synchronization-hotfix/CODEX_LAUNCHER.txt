@@ -1,0 +1,15 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-150a-parameterized-runtime-contract-synchronization-hotfix/GOAL.md
+
+Codex reasoning: very high
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: a5b17a481ab4aa5807aa7b7d07776d4f7278ab9a
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md; не рассчитывай на память из других диалогов.
+
+После выполнения обязательно commit/push в origin/main со статусом GREEN/BLOCKED/FAILED согласно инструкции в GOAL.md.

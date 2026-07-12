@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "goal150a_custom_parameter_save_reopen_proof_v1",
+  "status": "GREEN",
+  "sameCompositionHash": true,
+  "sameActivatedHash": true,
+  "sameFinalStateHash": true,
+  "samePlaythroughSignature": true,
+  "rollbackPreserved": true,
+  "savedValidCompositionPreserved": true,
+  "projectIdentityPreserved": true,
+  "supportFilesPreserved": true,
+  "previousQualificationHashesPreserved": true,
+  "cleanRollbackState": true,
+  "acceptedProject": {
+    "projectPresent": true,
+    "packageId": "game/goal148-manual",
+    "stale": false,
+    "additiveCompatible": true,
+    "noAutoSelection": true,
+    "noManualJsonEdit": true
+  },
+  "passed": true
+}

@@ -26,6 +26,7 @@ public sealed class FeatureModuleLibraryFingerprintService
         node.Remove("description");
         node.Remove("defaultSelected");
         if (normalized.RuntimePlaythroughContracts.Count == 0) node.Remove("runtimePlaythroughContracts");
+        if (normalized.EffectiveValueBindings.Count == 0) node.Remove("effectiveValueBindings");
         return Hash(node.ToJsonString(JsonOptions));
     }
 
@@ -64,6 +65,7 @@ public sealed class FeatureModuleLibraryFingerprintService
         MutationOperations = module.MutationOperations.OrderBy(item => item.OperationId, StringComparer.Ordinal).ToList(),
         RuntimeEffectContracts = module.RuntimeEffectContracts.OrderBy(item => item.EffectId, StringComparer.Ordinal)
             .Select(item => item with { SourceOperationIds = Sort(item.SourceOperationIds) }).ToList(),
+        EffectiveValueBindings = module.EffectiveValueBindings.OrderBy(item => item.BindingId, StringComparer.Ordinal).ToList(),
         ParameterDefinitions = module.ParameterDefinitions.OrderBy(item => item.ParameterId, StringComparer.Ordinal)
             .Select(item => item with
             {

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "goal150a_multiple_stat_scaled_abilities_proof_v1",
+  "status": "GREEN",
+  "abilityCount": 2,
+  "intendedBasicAttackActionCount": 1,
+  "capabilityPlanDeterministic": true,
+  "summaryReadsStructuredDamageEvent": true,
+  "globalSingleAbilityLookupAbsent": true,
+  "statDamageBonus": 2,
+  "equipmentDamageBonus": 2,
+  "totalAdditionalDamage": 4,
+  "passed": true
+}

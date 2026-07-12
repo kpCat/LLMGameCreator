@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "goal150a_incremental_certification_proof_v1",
+  "status": "GREEN",
+  "firstExecutedCount": 6,
+  "secondReusedCount": 6,
+  "equipmentBindingChange": {
+    "executedCount": 1,
+    "reusedCount": 5,
+    "invalidatedCount": 1
+  },
+  "attributesBindingChange": {
+    "executedCount": 1,
+    "reusedCount": 5,
+    "invalidatedCount": 1
+  },
+  "progressionBindingChange": {
+    "executedCount": 1,
+    "reusedCount": 5,
+    "invalidatedCount": 1
+  },
+  "unrelatedProfileModulesReusable": true,
+  "dependencyClosurePreserved": true,
+  "cycleBehaviorPreserved": true,
+  "passed": true
+}

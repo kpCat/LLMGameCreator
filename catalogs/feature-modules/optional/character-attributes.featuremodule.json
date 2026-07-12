@@ -153,6 +153,22 @@
       "atomicGroupId": "attributes.stat_damage_scaling"
     }
   ],
+  "effectiveValueBindings": [
+    {
+      "bindingId": "attributes.player_strength_expected_value",
+      "targetKind": "runtime_effect_expected_value",
+      "targetId": "runtime_effect.player_strength_equals",
+      "targetField": "expectedValue",
+      "valueExpression": "${operation:attributes.strength_default_value.newValue}"
+    },
+    {
+      "bindingId": "attributes.stat_damage_expected_value",
+      "targetKind": "runtime_effect_expected_value",
+      "targetId": "runtime_effect.combat_stat_damage_delta",
+      "targetField": "expectedValue",
+      "valueExpression": "(${operation:attributes.strength_default_value.newValue} - ${operation:attributes.basic_attack_source_stat_baseline.newValue}) * ${operation:attributes.basic_attack_source_stat_per_point.newValue}"
+    }
+  ],
   "runtimePlaythroughContracts": [
     {
       "contractId": "playthrough.attributes.inspect",

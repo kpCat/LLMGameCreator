@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal150a_base_defect_analysis_v1",
+  "status": "GREEN",
+  "baseMutationBindingOnly": true,
+  "staticRuntimeEffectExpectationsFound": true,
+  "staticProgressionActionAmountFound": true,
+  "globalSingleAbilitySummaryFound": true,
+  "rootCause": "canonical parameters changed package mutation values without changing Runtime expectations or playthrough args",
+  "passed": true
+}

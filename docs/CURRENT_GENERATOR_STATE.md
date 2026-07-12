@@ -1,8 +1,55 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 150 character attributes and level progression FeatureModules vertical slice
+Updated by: Goal 150A parameterized Runtime contract synchronization hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 150A parameterized Runtime contract synchronization hotfix is BLOCKED:
+
+```text
+implementationStatus=BLOCKED
+gateStatus=goal150a_full_test_suite_completion required
+goal149Accepted=false
+goal150Accepted=false
+goal150aAccepted=false
+acceptedByCodex=false
+manualReviewRequired=true
+effectiveValueBindingContract=true
+immutableEffectiveCatalogSnapshot=true
+customValues=3/8/2/12
+customDamage=6/3/9
+customProgression=2/12
+customCompositionPackageSha256=66c6fa980123ad113a6b37e7d6d31b13d946b48df325230a44bac351660c0db3
+customActivatedPackageSha256=578aa5b7b40b87015897c762cb651ef6e61f3a190e5e66fd80a6c1dd79664391
+customFinalStateHash=5f367569870cd8290225e06bba3570b8185c157febb823d444ff9cfa27def09e
+customPlaythroughSignature=9bbcc1573999aa3a82a257bf0c8e2d95ed8453574e8a4a7b1d91042146a01050
+defaultHashesPreserved=true
+checkpointReloadPassed=true
+fullReplayEquivalent=true
+actionBindingPassed=true
+incrementalCertificationPassed=true
+historicalArtifactsPreserved=true
+fullSuitePassed=false
+githubActionsCheckPresent=false
+accepted=false
+nextProductGoal=complete_goal_150a_full_suite_then_independent_audit
+```
+
+Goal150 existed as a GREEN commit but was blocked from acceptance because
+non-default parameters changed package mutations without changing exact Runtime
+effect expectations or the progression playthrough amount. Goal150A adds one
+deterministic module-level effective-value binding contract for mutation fields,
+Runtime expected values and numeric playthrough args. The same immutable
+effective catalog is now used for materialization, capability planning, Runtime
+qualification, semantic effects, checkpoint identity and replay. The normal
+`Игры` path is automated GREEN for weapon/strength/per-point/XP `3/8/2/12`:
+equipment/stat/total damage is `3/6/9`, progression is `12:level/2`, and the
+summary reports level/experience `2/12`. Default Goal149/150 hashes remain exact.
+All focused tests and required Goal149/150/150A runners are GREEN, but the exact
+full `dotnet test` command did not complete within repeated 15-, 30- and
+60-minute limits, so Goal150A is not automated GREEN. Goals149/150/150A remain
+`accepted=false`; no human review is claimed. The next step is completion of the
+exact full suite, then an independent Goal150A audit and the one bundled human gate.
 
 Goal 150 character attributes and level progression FeatureModules vertical slice is GREEN:
 

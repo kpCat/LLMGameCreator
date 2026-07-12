@@ -166,7 +166,7 @@ public sealed class GameProjectBuildAndQualificationService
             var projectQualification = QualifyIdentityOverlaidPackage(
                 qualifiedPackage,
                 compositionPackage,
-                state.Library,
+                materialized.Plan.ParameterBinding.EffectiveCatalog,
                 materializationDocument,
                 activatedPackagePath,
                 overlay.ActivatedProjectPackageSha256);
@@ -251,36 +251,30 @@ public sealed class GameProjectBuildAndQualificationService
             var equipmentSummary = projectQualification.Session.LatestEquipmentSummary;
             var attributesSummary = projectQualification.Session.LatestAttributesSummary;
             var progressionSummary = projectQualification.Session.LatestProgressionSummary;
+            var damageEvent = projectQualification.Session.LatestSnapshot.RuntimeEvents
+                .LastOrDefault(runtimeEvent => runtimeEvent.EventType == "DamageApplied");
             var weaponDamageBonus = 0;
             var combatDamageDelta = 0;
             if (equipmentAction is not null)
             {
-                var itemId = equipmentAction.Args.GetValueOrDefault("itemId") ?? string.Empty;
-                var item = qualifiedPackage.Game.Items.Single(definition => definition.Id == itemId);
-                if (item.Metadata.TryGetValue("combat_damage_bonus", out var rawBonus))
-                    weaponDamageBonus = int.Parse(rawBonus, NumberStyles.Integer, CultureInfo.InvariantCulture);
-                var rawDelta = projectQualification.Session.LatestSnapshot.RuntimeEvents
-                    .Where(runtimeEvent => runtimeEvent.EventType == "DamageApplied")
-                    .Select(runtimeEvent => runtimeEvent.Args.GetValueOrDefault("equipmentDamageBonus"))
-                    .LastOrDefault(value => !string.IsNullOrWhiteSpace(value));
+                var rawDelta = damageEvent?.Args.GetValueOrDefault("equipmentDamageBonus");
                 if (!string.IsNullOrWhiteSpace(rawDelta))
-                    combatDamageDelta = (int)decimal.Parse(rawDelta, NumberStyles.Number, CultureInfo.InvariantCulture);
+                    weaponDamageBonus = combatDamageDelta = (int)decimal.Parse(
+                        rawDelta, NumberStyles.Number, CultureInfo.InvariantCulture);
             }
             var runtimeState = projectQualification.Session.CanonicalSession.RuntimeSession.GameplayState;
             var attributesAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
                 action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.InspectAttributes);
             var statDamageBonus = 0m;
+            var statDamageObserved = false;
             StatValueState? inspectedStat = null;
             if (attributesAction is not null)
             {
                 inspectedStat = runtimeState.Stats.Single(stat => stat.StatId == attributesAction.ResolvedTargetId);
-                var scalingAbility = qualifiedPackage.Game.Abilities.Single(ability =>
-                    ability.Metadata.GetValueOrDefault("source_stat_damage_stat_id") == inspectedStat.StatId);
-                var baseline = decimal.Parse(scalingAbility.Metadata["source_stat_damage_baseline"],
-                    NumberStyles.Number, CultureInfo.InvariantCulture);
-                var perPoint = decimal.Parse(scalingAbility.Metadata["source_stat_damage_per_point"],
-                    NumberStyles.Number, CultureInfo.InvariantCulture);
-                statDamageBonus = ((decimal)inspectedStat.Value - baseline) * perPoint;
+                var rawStatDamage = damageEvent?.Args.GetValueOrDefault("statDamageBonus");
+                statDamageObserved = !string.IsNullOrWhiteSpace(rawStatDamage);
+                if (statDamageObserved)
+                    statDamageBonus = decimal.Parse(rawStatDamage!, NumberStyles.Number, CultureInfo.InvariantCulture);
             }
             var progressionAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
                 action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.InspectProgression);
@@ -288,7 +282,10 @@ public sealed class GameProjectBuildAndQualificationService
             if (progressionAction is not null)
                 inspectedProgression = runtimeState.Progressions.Single(progression =>
                     progression.ProgressionId == progressionAction.ResolvedTargetId);
-            var totalAdditionalDamage = statDamageBonus + weaponDamageBonus;
+            var rawTotalAdditionalDamage = damageEvent?.Args.GetValueOrDefault("totalAdditionalDamage");
+            var totalAdditionalDamage = string.IsNullOrWhiteSpace(rawTotalAdditionalDamage)
+                ? 0m
+                : decimal.Parse(rawTotalAdditionalDamage, NumberStyles.Number, CultureInfo.InvariantCulture);
             var summaryLines = new List<string>
             {
                 "Игра успешно собрана и проверена.",
@@ -303,14 +300,16 @@ public sealed class GameProjectBuildAndQualificationService
             {
                 summaryLines.Add("Экипировано: " + equipmentAction.Args.GetValueOrDefault("itemTitle", equipmentAction.Args.GetValueOrDefault("itemId", string.Empty)));
                 summaryLines.Add("Слот: " + equipmentAction.Args.GetValueOrDefault("slotTitle", equipmentAction.Args.GetValueOrDefault("slotId", string.Empty)));
-                summaryLines.Add("Бонус урона: +" + weaponDamageBonus.ToString(CultureInfo.InvariantCulture));
+                if (damageEvent is not null)
+                    summaryLines.Add("Бонус урона: +" + weaponDamageBonus.ToString(CultureInfo.InvariantCulture));
             }
             if (attributesAction is not null && inspectedStat is not null)
             {
                 summaryLines.Add(attributesAction.Args.GetValueOrDefault("title", inspectedStat.StatId)
                                  + ": " + FormatNumber(inspectedStat.Value));
-                summaryLines.Add(attributesAction.Args.GetValueOrDefault("damageBonusTitle", "Бонус урона")
-                                 + ": +" + statDamageBonus.ToString(CultureInfo.InvariantCulture));
+                if (statDamageObserved)
+                    summaryLines.Add(attributesAction.Args.GetValueOrDefault("damageBonusTitle", "Бонус урона")
+                                     + ": +" + statDamageBonus.ToString(CultureInfo.InvariantCulture));
             }
             if (progressionAction is not null && inspectedProgression is not null)
             {
@@ -462,15 +461,15 @@ public sealed class GameProjectBuildAndQualificationService
     private ProductLineRuntimeQualificationResult QualifyIdentityOverlaidPackage(
         LLMGameCreator.GamePackage.GamePackageDefinition package,
         LLMGameCreator.GamePackage.GamePackageDefinition compositionPackage,
-        FeatureModuleLibrarySnapshot library,
+        LLMGameCreator.Application.Design.FeatureModuleComposition.FeatureModuleCatalogDocument effectiveCatalog,
         FeatureModuleCompositionDocument document,
         string packagePath,
         string packageSha256)
     {
         var selected = document.SelectedModuleIds.OrderBy(id => id, StringComparer.Ordinal).ToList();
         var capabilityPlan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(
-            library.Catalog.Modules.Where(module => module.Required
-                                                    || selected.Contains(module.ModuleId, StringComparer.Ordinal)).ToList(),
+            effectiveCatalog.Modules.Where(module => module.Required
+                                                     || selected.Contains(module.ModuleId, StringComparer.Ordinal)).ToList(),
             compositionPackage);
         var qualifier = new ProductLineRuntimeQualifier(
             new GameProjectIdentityRuntimeQualificationAdapter(_runtime, compositionPackage.Manifest));

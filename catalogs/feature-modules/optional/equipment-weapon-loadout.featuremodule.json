@@ -105,6 +105,15 @@
       "atomicGroupId": "equipment.weapon_damage_bonus"
     }
   ],
+  "effectiveValueBindings": [
+    {
+      "bindingId": "equipment.weapon_damage_expected_value",
+      "targetKind": "runtime_effect_expected_value",
+      "targetId": "runtime_effect.equipment_combat_damage_delta",
+      "targetField": "expectedValue",
+      "valueExpression": "${operation:equipment.rusty_knife_combat_damage_bonus.newValue}"
+    }
+  ],
   "runtimePlaythroughContracts": [
     {
       "contractId": "playthrough.equipment.open_container",

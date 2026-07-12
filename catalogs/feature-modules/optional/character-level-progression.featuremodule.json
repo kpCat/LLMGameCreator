@@ -88,6 +88,22 @@
       "atomicGroupId": "progression.level2_threshold"
     }
   ],
+  "effectiveValueBindings": [
+    {
+      "bindingId": "progression.gain_experience_amount",
+      "targetKind": "runtime_playthrough_arg",
+      "targetId": "gain_character_experience",
+      "targetField": "amount",
+      "valueExpression": "${operation:progression.character_level_level2_required_amount.newValue}"
+    },
+    {
+      "bindingId": "progression.amount_expected_value",
+      "targetKind": "runtime_effect_expected_value",
+      "targetId": "runtime_effect.character_progression_amount",
+      "targetField": "expectedValue",
+      "valueExpression": "${operation:progression.character_level_level2_required_amount.newValue}"
+    }
+  ],
   "runtimePlaythroughContracts": [
     {
       "contractId": "playthrough.progression.gain_experience",

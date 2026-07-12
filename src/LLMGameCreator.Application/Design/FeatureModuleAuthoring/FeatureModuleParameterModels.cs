@@ -18,6 +18,29 @@ public static class FeatureModuleAuthoringControls
     public const string ComboBox = "combo_box";
 }
 
+public static class FeatureModuleEffectiveValueBindingTargetKinds
+{
+    public const string MutationOperationField = "mutation_operation_field";
+    public const string RuntimeEffectExpectedValue = "runtime_effect_expected_value";
+    public const string RuntimePlaythroughArg = "runtime_playthrough_arg";
+
+    public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
+    {
+        MutationOperationField,
+        RuntimeEffectExpectedValue,
+        RuntimePlaythroughArg
+    };
+}
+
+public sealed record FeatureModuleEffectiveValueBinding
+{
+    public string BindingId { get; init; } = string.Empty;
+    public string TargetKind { get; init; } = string.Empty;
+    public string TargetId { get; init; } = string.Empty;
+    public string TargetField { get; init; } = string.Empty;
+    public string ValueExpression { get; init; } = string.Empty;
+}
+
 public sealed record FeatureModuleParameterBinding
 {
     public string OperationId { get; init; } = string.Empty;
@@ -78,5 +101,7 @@ public sealed record FeatureModuleParameterBindingResult
     public IReadOnlyList<ProductLineRuntimeVariantMutationOperation> EffectiveMutationOperations { get; init; } = [];
     public IReadOnlyList<FeatureModuleResolvedParameterValue> EffectiveParameterValues { get; init; } = [];
     public IReadOnlyList<string> AppliedAtomicGroupIds { get; init; } = [];
+    public IReadOnlyList<string> AppliedEffectiveValueBindingIds { get; init; } = [];
+    public FeatureModuleCatalogDocument EffectiveCatalog { get; init; } = new();
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }

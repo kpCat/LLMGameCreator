@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "goal150a_effective_value_binding_contract_proof_v1",
+  "status": "GREEN",
+  "targetKinds": [
+    "mutation_operation_field",
+    "runtime_effect_expected_value",
+    "runtime_playthrough_arg"
+  ],
+  "bindingIds": [
+    "attributes.player_strength_expected_value",
+    "attributes.stat_damage_expected_value",
+    "equipment.weapon_damage_expected_value",
+    "progression.amount_expected_value",
+    "progression.gain_experience_amount"
+  ],
+  "sourceCatalogUnmodified": true,
+  "immutableEffectiveCatalogSnapshot": true,
+  "equipmentExpected": "3",
+  "strengthExpected": "8",
+  "statDamageExpected": "6",
+  "progressionActionAmount": "12",
+  "progressionExpected": "12",
+  "numericOperators": [
+    "()",
+    "+",
+    "-",
+    "*",
+    "/"
+  ],
+  "arbitraryExecutionAbsent": true,
+  "moduleFingerprintParticipation": true,
+  "passed": true
+}

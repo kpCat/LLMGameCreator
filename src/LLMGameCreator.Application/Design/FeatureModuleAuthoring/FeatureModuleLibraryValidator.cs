@@ -140,6 +140,29 @@ public sealed class FeatureModuleLibraryValidator
                 valid = false;
             }
         }
+        var effectiveTargets = new HashSet<string>(StringComparer.Ordinal);
+        var bindingIds = new HashSet<string>(StringComparer.Ordinal);
+        var actions = module.RuntimePlaythroughContracts.ToDictionary(item => item.ActionId, StringComparer.Ordinal);
+        foreach (var binding in module.EffectiveValueBindings)
+        {
+            var target = binding.TargetKind + "|" + binding.TargetId + "|" + binding.TargetField;
+            var targetValid = binding.TargetKind switch
+            {
+                FeatureModuleEffectiveValueBindingTargetKinds.MutationOperationField =>
+                    binding.TargetField == "newValue" && operationSet.Contains(binding.TargetId),
+                FeatureModuleEffectiveValueBindingTargetKinds.RuntimeEffectExpectedValue =>
+                    binding.TargetField == "expectedValue" && effects.ContainsKey(binding.TargetId),
+                FeatureModuleEffectiveValueBindingTargetKinds.RuntimePlaythroughArg =>
+                    actions.TryGetValue(binding.TargetId, out var action) && action.Args.ContainsKey(binding.TargetField),
+                _ => false
+            };
+            if (string.IsNullOrWhiteSpace(binding.BindingId) || !bindingIds.Add(binding.BindingId)
+                || string.IsNullOrWhiteSpace(binding.ValueExpression) || !targetValid || !effectiveTargets.Add(target))
+            {
+                diagnostics.Add("effective binding contract mismatch rejected: " + module.ModuleId + ":" + target);
+                valid = false;
+            }
+        }
         return valid;
     }
 

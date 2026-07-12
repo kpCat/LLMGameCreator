@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "goal150a_file_index_v1",
+  "status": "GREEN",
+  "fileCount": 13,
+  "files": [
+    {
+      "relativePath": "artifact-scope-proof.json",
+      "sha256": "a772788af306489076f308caf53661729956032f2066f7516019da9e2295693a",
+      "byteCount": 1562
+    },
+    {
+      "relativePath": "base-defect-analysis.json",
+      "sha256": "eaf24b48388da0a1030a9b388d31bbfe108ace2021032b36ff3202cce54718b9",
+      "byteCount": 407
+    },
+    {
+      "relativePath": "custom-parameter-runtime-effects-proof.json",
+      "sha256": "30c8a62c457d09ca3c2cc05b311f7ae35dba4f464134b0db8e31a0fea16aace9",
+      "byteCount": 1193
+    },
+    {
+      "relativePath": "custom-parameter-save-reopen-proof.json",
+      "sha256": "319999bdf9600574a21b737522f584a132a756e3597b1b489f29d668b489ea70",
+      "byteCount": 683
+    },
+    {
+      "relativePath": "custom-parameter-workspace-build-proof.json",
+      "sha256": "5088e0111ba1c54d42a4bff9f65400c457ec03d98921face2692b043a5fbc596",
+      "byteCount": 919
+    },
+    {
+      "relativePath": "default-hash-regression-proof.json",
+      "sha256": "fff591e6eea91f662731e465b2ae6734e5d4798cf388b224a98c4843d57073c0",
+      "byteCount": 1712
+    },
+    {
+      "relativePath": "effective-value-binding-contract-proof.json",
+      "sha256": "dadec2059381a2e07b91ae3cd5321c7072c9aba8cfc8ce73e0692b280e993796",
+      "byteCount": 897
+    },
+    {
+      "relativePath": "goal150a-dashboard.json",
+      "sha256": "2717f98cfe022c280d347f633ae51bb52ad56dc172239bdcb9e2b3cc73681eff",
+      "byteCount": 973
+    },
+    {
+      "relativePath": "goal150a-report.md",
+      "sha256": "2a4c6d10751232a1b9dce64186958c6ed14738667b7e3ad2b17e12158f51cc5b",
+      "byteCount": 786
+    },
+    {
+      "relativePath": "historical-artifact-integrity-proof.json",
+      "sha256": "5e14370a23a32f486ed8f4016f165f1819dfd4f7e70ff0cbdce5e075ef2c936d",
+      "byteCount": 349
+    },
+    {
+      "relativePath": "incremental-certification-proof.json",
+      "sha256": "a84034f8a86ac5d3b083e130e3e8ca45320f7215e66bf3b8099ab883c459998d",
+      "byteCount": 624
+    },
+    {
+      "relativePath": "multiple-stat-scaled-abilities-proof.json",
+      "sha256": "98b359ca66623e9691dd2d54ca20a390ad056f42ba8385599575d80a26926827",
+      "byteCount": 395
+    },
+    {
+      "relativePath": "negative-binding-proof.json",
+      "sha256": "d012e3d4b4ef6b12611112d11bc7caf9b2ed88732b905e0523ac13a597721ca4",
+      "byteCount": 597
+    }
+  ],
+  "proceduralExportByteIdentical": true,
+  "passed": true
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "goal150a_artifact_scope_proof_v1",
+  "status": "GREEN",
+  "scenario": "goal-150a-parameterized-runtime-contract-synchronization-hotfix",
+  "productionPaths": [
+    "catalogs/feature-modules/optional/equipment-weapon-loadout.featuremodule.json",
+    "catalogs/feature-modules/optional/character-attributes.featuremodule.json",
+    "catalogs/feature-modules/optional/character-level-progression.featuremodule.json",
+    "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterModels.cs",
+    "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleEffectiveValueExpression.cs",
+    "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterBindingService.cs",
+    "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryFingerprintService.cs",
+    "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryValidator.cs",
+    "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterizedCompositionService.cs",
+    "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleCompositionModels.cs",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs"
+  ],
+  "productionPathCount": 11,
+  "forbiddenProductionPathChanges": 0,
+  "historicalArtifactChanges": 0,
+  "runtimeChanges": 0,
+  "winFormsChanges": 0,
+  "gamePackageSchemaChanges": 0,
+  "artifactScopeViolations": 0,
+  "passed": true
+}

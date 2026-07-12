@@ -71,17 +71,7 @@ public sealed class FeatureModuleParameterizedCompositionService
             document.ParameterValues,
             Relative(root, basePath),
             baseSha);
-        var effectiveById = plan.ParameterBinding.EffectiveMutationOperations
-            .ToDictionary(operation => operation.OperationId, StringComparer.Ordinal);
-        var effectiveCatalog = library.Catalog with
-        {
-            Modules = library.Catalog.Modules.Select(module => document.SelectedModuleIds.Contains(module.ModuleId, StringComparer.Ordinal)
-                ? module with
-                {
-                    MutationOperations = module.MutationOperations.Select(operation => effectiveById[operation.OperationId]).ToList()
-                }
-                : module).ToList()
-        };
+        var effectiveCatalog = plan.ParameterBinding.EffectiveCatalog;
         var qualification = _compositionService.ComposeAndQualify(
             root,
             effectiveCatalog,

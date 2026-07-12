@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "goal150a_custom_parameter_workspace_build_proof_v1",
+  "status": "GREEN",
+  "values": {
+    "weaponDamageBonus": 3,
+    "startingStrength": 8,
+    "damagePerStrengthPoint": 2,
+    "level2RequiredExperience": 12
+  },
+  "package": {
+    "weaponDamageBonus": "3",
+    "statDefault": 8,
+    "playerStat": 8,
+    "perPoint": "2",
+    "requiredAmount": 12
+  },
+  "compositionPackageSha256": "66c6fa980123ad113a6b37e7d6d31b13d946b48df325230a44bac351660c0db3",
+  "activatedProjectPackageSha256": "578aa5b7b40b87015897c762cb651ef6e61f3a190e5e66fd80a6c1dd79664391",
+  "finalStateHash": "5f367569870cd8290225e06bba3570b8185c157febb823d444ff9cfa27def09e",
+  "playthroughSignature": "9bbcc1573999aa3a82a257bf0c8e2d95ed8453574e8a4a7b1d91042146a01050",
+  "packageValidationPassed": true,
+  "projectIdentityOverlayPassed": true,
+  "transactionalActivationPassed": true,
+  "passed": true
+}

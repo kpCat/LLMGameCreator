@@ -2321,7 +2321,7 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-goal_150_character_stats_and_progression_featuremodule_vertical_slice
+complete_goal_150a_full_suite_then_independent_audit
 ```
 
 Goal148 is GREEN at
@@ -2390,8 +2390,24 @@ strength `7` adds `2` damage and combines with equipment `2` into total `4`.
 The generic progression command delegates to `OutputApplier` and reaches amount
 `10`, stage `level/2`. Attributes/progression qualify independently without
 combat, all six optional modules certify, the full workspace is 20/16/20, and
-Goal149 hashes stay exact. Goals149/150 remain `accepted=false`; the next action
-is `review_goals_149_150_equipment_attributes_progression_workflow`.
+Goal149 hashes stay exact. Goal150 remained blocked from acceptance because
+non-default parameter values did not synchronize Runtime expectations or the
+progression action amount.
+
+Goal150A implementation and focused evidence are GREEN. A module-level effective-value binding contract now resolves
+canonical parameters, effective mutation fields, derived numeric expressions,
+exact Runtime-effect expectations and Runtime playthrough args into one immutable
+effective catalog before composition. The normal `Игры` custom build
+weapon/strength/per-point/XP `3/8/2/12` produces stat/equipment/total damage
+`6/3/9`, progression `12:level/2`, level/XP `2/12`, and passes project identity,
+transactional activation, checkpoint reload, full replay, action binding,
+save/reopen and deterministic rebuild. Default disabled/equipment/all-optional
+hashes remain exact, all binding fingerprint invalidation checks are selective,
+and historical Goal149/150 artifacts remain unchanged. The exact full `dotnet test`
+command did not complete within repeated 15-, 30- and 60-minute limits, so overall
+Goal150A status is BLOCKED. Goals149/150/150A remain `accepted=false`; next is
+full-suite completion, then an independent audit and one bundled custom human gate.
+No GitHub Actions workflow exists in the working tree.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,
