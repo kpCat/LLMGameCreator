@@ -4527,6 +4527,27 @@
       ]
     },
     {
+      "scenario": "goal-150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-complete-test-suite.ps1",
+        ".devflow/scripts/run-complete-test-suite.cmd",
+        ".devflow/scripts/run-goal150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix.ps1",
+        ".devflow/scripts/run-goal150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix.cmd",
+        "tests/LLMGameCreator.Tests/Devflow/RunCompleteTestSuiteScriptTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunGoal150CHermeticAdaptiveValidationTests.cs",
+        "tests/LLMGameCreator.Tests/Devflow/RunGoal150DValidationAccountingTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        "docs/agent-tasks/goal-150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix/",
+        ".llmgc/procedural/goal-150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix/",
+        ".llmgc/exports/goal-150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix/"
+      ],
+      "allowedDeletionPathPrefixes": [],
+      "allowedDeletedPaths": [],
+      "excludedPathPrefixes": ["src/LLMGameCreator.Runtime/", "src/LLMGameCreator.WinForms/", "unity/", "provider/", "LLM/", "RAG/"]
+    },
+    {
       "scenario": "goal-150b-zero-value-runtime-evidence-and-complete-suite-closure-hotfix",
       "allowedPaths": [
         ".devflow/artifact-scope/artifact-scope-policy.json",

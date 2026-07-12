@@ -1,0 +1,28 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-150d-validation-accounting-and-bundled-manual-gate-readiness-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 29d8b50493f8af416c71a086f82af7816870ee37
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md; не рассчитывай на память из других диалогов.
+
+План выполнения уже одобрен запуском задачи. Не спрашивай подтверждение плана; после проверки базы сразу выполняй.
+
+Соблюдай command budget:
+- не запускай raw monolithic all-test;
+- не повторяй полный исторический ProductSmoke sweep;
+- выполни один check-all non-ProductSmoke;
+- выполни один hermetic rerun точного closure manifest из 64 failed + 21 missing Goal150B tests;
+- повторяй только точные реально упавшие тесты после новой гипотезы или исправления.
+
+Codex обязан сам создать validation-candidate commit, затем финальный GREEN/BLOCKED/FAILED commit и запушить оба в origin/main. Пользователь не должен пушить вручную.
+
+В финале сообщи candidate SHA, final SHA, push result, candidate reachable, HEAD == origin/main, clean worktree, closure counts и manualGateReady.

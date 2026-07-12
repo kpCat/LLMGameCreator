@@ -4,7 +4,10 @@ param(
     [int]$HeavyTestTimeoutSeconds = 480,
     [int]$ClassesPerShard = 16,
     [int]$MaximumWallClockMinutes = 35,
-    [switch]$PlanOnly
+    [switch]$PlanOnly,
+    [ValidateSet('FullSuite', 'Goal150AcceptanceClosure')]
+    [string]$Mode = 'FullSuite',
+    [string]$ManifestPath = ''
 )
 
 Set-StrictMode -Version 2.0
@@ -86,13 +89,11 @@ function Remove-DisposableWorktree($Snapshot) {
 function Reset-DisposableWorktree($Snapshot, [string]$ShardId) {
     $previousErrorActionPreference = $ErrorActionPreference
     $ErrorActionPreference = "Continue"
-    try { & git -C $Snapshot.path reset --hard HEAD *> $null; $exitCode = $LASTEXITCODE }
+    try { & git -C $Snapshot.path reset --hard $Snapshot.head *> $null; $exitCode = $LASTEXITCODE }
     finally { $ErrorActionPreference = $previousErrorActionPreference }
     if ($exitCode -ne 0) { throw "Unable to reset disposable worktree before $ShardId." }
-    foreach ($relative in @(".llmgc/procedural", ".llmgc/exports")) {
-        $path = Join-Path $Snapshot.path $relative
-        if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path -Recurse -Force }
-    }
+    # Historical .llmgc baselines are tracked candidate inputs.  Disposable
+    # ProductSmoke output belongs only under the external shard environment.
 }
 
 function Initialize-ShardEnvironment($Snapshot, [string]$ShardId) {
@@ -173,28 +174,43 @@ try {
     $discoveryError = Join-Path $ResolvedOutput 'logs/discovery.stderr.log'
     & dotnet test (Join-Path $snapshot.path $ProjectRelativePath) -c Debug --no-build --list-tests 1> $discoveryLog 2> $discoveryError
     if ($LASTEXITCODE -ne 0) { throw "Complete-suite discovery failed." }
-    $tests = @(Get-Content -LiteralPath $discoveryLog -Encoding UTF8 | ForEach-Object { $_.Trim() } | Where-Object { $_ -like 'LLMGameCreator.Tests.*' } | Sort-Object -Unique)
+    $discoveredTests = @(Get-Content -LiteralPath $discoveryLog -Encoding UTF8 | ForEach-Object { $_.Trim() } | Where-Object { $_ -like 'LLMGameCreator.Tests.*' } | Sort-Object -Unique)
+    $tests = $discoveredTests
+    $manifestEntries = @()
+    if ($Mode -eq 'Goal150AcceptanceClosure') {
+        if ([string]::IsNullOrWhiteSpace($ManifestPath) -or -not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) { throw 'Goal150AcceptanceClosure requires a JSON ManifestPath.' }
+        $manifestEntries = @(Get-Content -LiteralPath $ManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json)
+        if ($manifestEntries.Count -eq 0) { throw 'Goal150AcceptanceClosure manifest is empty.' }
+        $duplicates = @($manifestEntries | Group-Object testName | Where-Object Count -gt 1)
+        if ($duplicates.Count -gt 0) { throw 'Goal150AcceptanceClosure manifest contains duplicate test identities.' }
+        $missingManifest = @($manifestEntries | Where-Object { $discoveredTests -notcontains $_.testName })
+        if ($missingManifest.Count -gt 0) { throw "Goal150AcceptanceClosure manifest contains tests missing from candidate discovery: $($missingManifest.testName -join ', ')" }
+        $tests = @($manifestEntries | Select-Object -ExpandProperty testName)
+    }
     if ($tests.Count -eq 0) { throw 'Complete-suite discovery returned zero tests.' }
-    $inventory = @($tests | ForEach-Object { [pscustomobject]@{ name = $_; className = Get-ClassName $_; lane = Get-Lane (Get-ClassName $_) } })
+    $inventory = @($tests | ForEach-Object { $entry = @($manifestEntries | Where-Object testName -eq $_ | Select-Object -First 1); [pscustomobject]@{ name = $_; className = Get-ClassName $_; lane = if ($entry.Count -gt 0) { $entry[0].lane } else { Get-Lane (Get-ClassName $_) } } })
     $duplicateDiscovery = @($tests | Group-Object | Where-Object Count -gt 1)
     $assignment = @{}
     foreach ($test in $inventory) { $assignment[$test.name] = 1 }
     Write-Json 'validation-discovery-summary.json' ([ordered]@{ schemaVersion = 'goal150c_discovery_v1'; snapshotHead = $baselineHead; discovered = $tests.Count; discoveredAtUtc = [DateTime]::UtcNow.ToString('O'); duplicateDiscovery = $duplicateDiscovery.Count; tests = $inventory })
 
     $lanePlan = @()
-    foreach ($lane in @('N', 'P')) {
+    if ($Mode -eq 'Goal150AcceptanceClosure') {
+        foreach ($test in $inventory) { $lanePlan += [pscustomobject]@{ id = "closure-{0:D3}" -f ($lanePlan.Count + 1); lane = $test.lane; classes = @($test.className); tests = @($test.name); exactTests = @($test.name); initial = $true } }
+    }
+    else { foreach ($lane in @('N', 'P')) {
         $classes = @($inventory | Where-Object lane -eq $lane | Select-Object -ExpandProperty className -Unique | Sort-Object)
         for ($offset = 0; $offset -lt $classes.Count; $offset += $ClassesPerShard) {
             $last = [Math]::Min($classes.Count - 1, $offset + $ClassesPerShard - 1)
             $members = @($classes[$offset..$last])
             $lanePlan += [pscustomobject]@{ id = "$lane-{0:D3}" -f ($lanePlan.Count + 1); lane = $lane; classes = $members; tests = @($inventory | Where-Object { $members -contains $_.className } | Select-Object -ExpandProperty name); initial = $true }
         }
-    }
+    } }
     Write-Json 'validation-lane-plan.json' ([ordered]@{ schemaVersion = 'goal150c_lane_plan_v1'; partitionKind = 'deterministic_namespace_class_groups'; initialClassesPerShard = $ClassesPerShard; maximumSimultaneousTesthostProcesses = 1; lanes = @([ordered]@{ id='N'; filter='FullyQualifiedName!~ProductSmoke' }, [ordered]@{ id='P'; filter='FullyQualifiedName~ProductSmoke'; environment='unique project/package roots per shard' }); groups = $lanePlan })
     if ($PlanOnly) { Write-Host 'COMPLETE_TEST_SUITE_PLAN_READY'; return }
 
     function Invoke-Group($Group, [int]$Depth, [bool]$Retry) {
-        if (([DateTime]::UtcNow - $runStarted).TotalMinutes -ge $MaximumWallClockMinutes) { foreach ($name in $Group.tests) { if (-not $terminal.ContainsKey($name)) { $terminal[$name] = [pscustomobject]@{ name=$name; outcome='Aborted'; durationSeconds=0; lane=$Group.lane; groupId=$Group.id; reason='wall_clock_budget_exhausted' } } }; return }
+        if (([DateTime]::UtcNow - $runStarted).TotalMinutes -ge $MaximumWallClockMinutes) { return }
         $suffix = if ($Retry) { 'retry' } else { "d$Depth" }
         $attemptId = "$($Group.id)-$suffix-$($attempts.Count + 1)"
         $groupExactTests = @()
@@ -216,7 +232,7 @@ try {
         if ($groupExactTests.Count -eq 1) {
             $name = $groupExactTests[0]
             $row = if ($byName.ContainsKey($name)) { $byName[$name] } else { $null }
-            $terminal[$name] = [pscustomobject]@{ name=$name; outcome=if ($null -eq $row) { 'Aborted' } elseif ($run.timedOut) { 'Aborted' } else { $row.outcome }; durationSeconds=if ($null -eq $row) { 0 } else { $row.durationSeconds }; lane=$Group.lane; groupId=$Group.id; reason=if ($run.timedOut) { 'single_test_timeout' } else { 'single_test_terminal' } }
+            if ($null -ne $row -and -not $run.timedOut) { $terminal[$name] = [pscustomobject]@{ name=$name; outcome=$row.outcome; durationSeconds=$row.durationSeconds; lane=$Group.lane; groupId=$Group.id; reason='single_test_terminal' } }
             return
         }
         if ($Group.classes.Count -gt 1) {
@@ -236,11 +252,13 @@ try {
     foreach ($group in $lanePlan) { Invoke-Group $group 0 $false }
     $mainHeadAfter = (& git -C $RepoRoot rev-parse HEAD).Trim()
     $mainStatusAfter = (& git -C $RepoRoot status --porcelain=v1) -join "`n"
-    $counts = [ordered]@{ discovered=$tests.Count; assigned=$inventory.Count; executed=$terminal.Count; passed=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failed=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skipped=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; missing=@($tests | Where-Object { -not $terminal.ContainsKey($_) }).Count; duplicate=0; aborted=@($terminal.Values | Where-Object outcome -eq 'Aborted').Count }
-    $passed = $counts.discovered -eq $counts.assigned -and $counts.assigned -eq $counts.executed -and $counts.failed -eq 0 -and $counts.missing -eq 0 -and $counts.duplicate -eq 0 -and $counts.aborted -eq 0
+    $timedOut = @($attempts | Where-Object { $_.run.timedOut } | ForEach-Object { $_.classes } | ForEach-Object { $_ } | Select-Object -Unique).Count
+    $notRun = @($tests | Where-Object { -not $terminal.ContainsKey($_) }).Count - $timedOut
+    $counts = [ordered]@{ discovered=$tests.Count; assigned=$inventory.Count; attempted=$attempts.Count; executed=$terminal.Count; passed=@($terminal.Values | Where-Object outcome -eq 'Passed').Count; failed=@($terminal.Values | Where-Object outcome -eq 'Failed').Count; skipped=@($terminal.Values | Where-Object outcome -eq 'NotExecuted').Count; notRun=[Math]::Max(0,$notRun); timedOut=$timedOut; missing=0; duplicate=0 }
+    $passed = $counts.discovered -eq $counts.executed -and $counts.executed -eq ($counts.passed + $counts.failed + $counts.skipped) -and $counts.discovered -eq ($counts.executed + $counts.notRun + $counts.timedOut) -and $counts.failed -eq 0 -and $counts.notRun -eq 0 -and $counts.timedOut -eq 0 -and $counts.missing -eq 0 -and $counts.duplicate -eq 0
     Write-Json 'terminal-results.json' @($terminal.Values | Sort-Object name)
     Write-Json 'validation-slowest-summary.json' ([ordered]@{ schemaVersion='goal150c_slowest_v1'; slowestTerminalTests=@($terminal.Values | Sort-Object durationSeconds -Descending | Select-Object -First 20); slowestAttempts=@($attempts | Sort-Object { $_.run.durationSeconds } -Descending | Select-Object -First 20) })
-    Write-Json 'validation-result.json' ([ordered]@{ schemaVersion='goal150c_hermetic_validation_v1'; status=if($passed){'GREEN'}else{'BLOCKED'}; passed=$passed; validatedCommit=$baselineHead; validationSnapshotMatchesFinalSources=($baselineHead -eq $mainHeadAfter); hermeticSnapshot=$true; mainWorktreeUnchangedByValidation=($mainHeadBefore -eq $mainHeadAfter -and $mainStatusBefore -eq $mainStatusAfter); maximumSimultaneousTesthostProcesses=1; counts=$counts; lanes=@{ nonProductLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'N' -and $_.outcome -ne 'Passed' }).Count -eq 0); productSmokeLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'P' -and $_.outcome -ne 'Passed' }).Count -eq 0) }; attempts=$attempts.Count; rawOutputRoot=$ResolvedOutput })
+    Write-Json 'validation-result.json' ([ordered]@{ schemaVersion='goal150d_validation_accounting_v1'; mode=$Mode; status=if($passed){'GREEN'}else{'BLOCKED'}; passed=$passed; validatedCommit=$baselineHead; validationSnapshotMatchesFinalSources=($baselineHead -eq $mainHeadAfter); hermeticSnapshot=$true; mainWorktreeUnchangedByValidation=($mainHeadBefore -eq $mainHeadAfter -and $mainStatusBefore -eq $mainStatusAfter); maximumSimultaneousTesthostProcesses=1; counts=$counts; lanes=@{ nonProductLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'N' -and $_.outcome -ne 'Passed' }).Count -eq 0); productSmokeLanePassed=(@($terminal.Values | Where-Object { $_.lane -eq 'P' -and $_.outcome -ne 'Passed' }).Count -eq 0) }; attempts=$attempts.Count; rawOutputRoot=$ResolvedOutput })
     if (-not $passed) { exit 2 }
     Write-Host 'COMPLETE_TEST_SUITE_GREEN'
 }
