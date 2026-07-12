@@ -6,7 +6,7 @@ Accepted: false
 
 ## P0 Release Blockers
 
-Goal152A note: automated proof cannot accept a PlayerAdapter standalone. The framebuffer and responsive-shell repair reduces the reported visual risk, but the five-step human screen review remains required and Goal152/Goal152A stay unaccepted.
+Goal152C note: external LocalAppData Unity workspaces prevent generated Unity settings from contaminating the repository. Automated proof cannot accept a PlayerAdapter standalone; the five-step human screen review remains required and Goal152/Goal152A stay unaccepted.
 
 Goal 110 review note: the offline geoworld Alpha manual acceptance gate supplies a deterministic checklist, result template and release gate dashboard for the existing Goal109 export package. It keeps manual acceptance pending and does not close P0 release blockers until user acceptance and later player/export release proof are completed.
 

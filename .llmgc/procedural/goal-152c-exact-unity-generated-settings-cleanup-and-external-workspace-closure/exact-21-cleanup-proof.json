@@ -1,0 +1,9 @@
+{
+  "authorizedDeleted": 21,
+  "authorizedRemaining": 0,
+  "missingAnomalies": 0,
+  "trackedAnomalies": 0,
+  "reparseEscapeAnomalies": 0,
+  "unknownDirtyPathsAfterCleanup": 0,
+  "repositoryUnitySourceChanged": false
+}

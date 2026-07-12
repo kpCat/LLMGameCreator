@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 152A standalone PlayerAdapter UX framebuffer refresh and Unity execution policy hotfix
+Updated by: Goal 152C exact Unity generated settings cleanup and external workspace closure
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goals149/150/150A/150B/151 are accepted by human. Goal152 remains unaccepted after human feedback; Goal152A is BLOCKED from publication because Unity generated out-of-scope worktree churn that may not be restored without explicit authorization:
+Goal152C is GREEN: the exact 21 authorized untracked generated files were deleted, the repository Unity project is now a read-only source snapshot, and future cache-miss host builds use only a transactional LocalAppData workspace. Goal152 and Goal152A remain unaccepted pending the same five-step human gate:
 
 ```text
 implementationStatus=GREEN
@@ -53,8 +53,12 @@ goal152ManualReviewPerformed=true
 goal152ManualGateReady=false
 goal152aAccepted=false
 goal152aAcceptedByHuman=false
-goal152aManualGateReady=false
-gateStatus=goal152a_standalone_playeradapter_ux_framebuffer_refresh required
+goal152aManualGateReady=true
+goal152aImplementationStatus=GREEN
+goal152bImplementationStatus=BLOCKED historical cleanup attempt
+goal152cImplementationStatus=GREEN
+goal152cAccepted=false
+gateStatus=perform_goal152a_five_step_human_gate required
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -68,7 +72,7 @@ diagnostics and compact history, and Technical Details separates last success, c
 attempt and current saved configuration. The unrelated 64 historical snapshot failures
 remain open validation debt and are not part of the Goal151 acceptance gate.
 
-Goal152A implementation and the one authorized real host build were GREEN: one opaque clearing camera, opaque full-frame repaint, responsive reference canvas, hidden smoke and second-payload cache reuse all passed. Publication is BLOCKED because Unity generated unallowed `.meta`/ProjectSettings files and historical Goal149/150 artifact churn. Local policy forbids deleting or restoring those paths without explicit exact-path authorization. Goal152 remains `accepted=false`, `manualReviewPerformed=true`, `manualGateReady=false`; Goal152A remains `accepted=false`, `acceptedByHuman=false`, `manualGateReady=false`.
+Goal152A implementation and the one authorized real host build are GREEN: one opaque clearing camera, opaque full-frame repaint, responsive reference canvas, hidden smoke and second-payload cache reuse all passed. Goal152C removed exactly the owner-authorized generated paths and proves the cache-hit route skips both workspace preparation and Unity process start. Future cache misses use `%LOCALAPPDATA%\LLMGameCreator\UnityHostBuildWorkspaces\<workspace-key>\prepared` as Unity `-projectPath`; the repository Unity tree is never writable. Goal152 remains `accepted=false`, `manualReviewPerformed=true`, `manualGateReady=false`; Goal152A remains `accepted=false`, `acceptedByHuman=false`, `manualReviewPerformed=false`, `manualGateReady=true`.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

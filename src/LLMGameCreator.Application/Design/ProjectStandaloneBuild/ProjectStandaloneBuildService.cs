@@ -169,15 +169,16 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
 
     private void BuildHost(string unityPath, string hostRoot, string cacheKey, CancellationToken token)
     {
-        var unityProject = Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha");
-        var entrypoint = Path.Combine(unityProject, "Assets", "Editor", "ProjectStandaloneBuildEntrypoint.cs");
+        var workspaceService = new UnityHostBuildWorkspaceService(_repositoryRoot);
+        var workspace = workspaceService.Prepare(token);
+        var entrypoint = Path.Combine(workspace.ProjectPath, "Assets", "Editor", "ProjectStandaloneBuildEntrypoint.cs");
         if (!File.Exists(entrypoint)) throw new FileNotFoundException("Project standalone Unity build entrypoint is missing.", entrypoint);
         var cacheParent = Path.GetDirectoryName(hostRoot)!;
         var temporary = hostRoot + ".tmp-" + Guid.NewGuid().ToString("N");
         Directory.CreateDirectory(cacheParent);
         var log = Path.Combine(temporary, "unity-build.log");
         Directory.CreateDirectory(temporary);
-        var arguments = "-batchmode -nographics -quit -projectPath \"" + unityProject + "\" -executeMethod LLMGameCreator.ProjectStandaloneBuildEntrypoint.BuildWindowsHost -llmgcStandaloneHostOutput \"" + Path.Combine(temporary, "host", ProjectStandaloneBuildVocabulary.HostExecutableName) + "\" -logFile \"" + log + "\"";
+        var arguments = workspaceService.CreateUnityArguments(Path.Combine(temporary, "host", ProjectStandaloneBuildVocabulary.HostExecutableName), log, workspace.ProjectPath);
         using var process = Process.Start(new ProcessStartInfo(unityPath, arguments)
         {
             UseShellExecute = false,

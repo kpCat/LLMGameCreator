@@ -1,6 +1,6 @@
 # Project-Scoped Windows Standalone Build & Launch
 
-Status: superseded by Goal152A UX hotfix; Goal152 remains unaccepted
+Status: implementation GREEN after Goal152C external workspace closure; Goal152 remains unaccepted pending the Goal152A five-step UX gate
 Gate: `goal152_project_scoped_windows_standalone_build_launch required`
 Accepted: false
 Accepted by human: false

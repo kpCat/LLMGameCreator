@@ -125,8 +125,10 @@ Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 
 Goal152 records the human acceptance of Goals149/150/150A/150B/151 and makes the next
 normal `Игры` workflow a project-scoped Windows standalone Alpha build using Runtime-backed
-PlayerAdapter payload with a cached generic Unity host. Goal152 remains `accepted=false`
-until its own final human review; Goal150F's 64 historical failures remain debt, not the active gate.
+PlayerAdapter payload with a cached generic Unity host. Goal152C closes the exact generated-file
+cleanup and moves all future writable Unity host projects to transactional LocalAppData snapshots;
+the active next action is `perform_goal152a_five_step_human_gate required`. Goal152 and Goal152A remain
+`accepted=false`; Goal150F's 64 historical failures remain debt, not the active gate.
 
 ## Full Generator Source-Of-Truth Docs
 

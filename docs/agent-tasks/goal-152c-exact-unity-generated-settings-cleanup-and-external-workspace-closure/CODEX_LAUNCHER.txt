@@ -1,0 +1,32 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-152c-exact-unity-generated-settings-cleanup-and-external-workspace-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: Medium
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: c0ba139fda7a1f8901ec59530828c170d064d2cb
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя чистить worktree вручную.
+
+Критически важно:
+- пользователь явно разрешил удалить ровно 21 путь, перечисленный в GOAL.md;
+- перед удалением докажи, что каждый путь untracked и находится внутри repo Unity project;
+- не используй wildcard/broad cleanup;
+- после cleanup unknown dirty paths должны быть 0;
+- Unity Editor invocation budget = 0;
+- заверши external LocalAppData Unity workspace hardening;
+- существующий Goal152A host cache должен быть reused;
+- выполни один hidden standalone smoke, но не запускай Unity.exe;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи deletion count, unknown count, external workspace contract, Unity process count,
+cache reuse, smoke markers, final SHA, push, HEAD == origin/main, clean worktree и пятишаговый manual gate.

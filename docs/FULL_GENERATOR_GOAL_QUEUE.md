@@ -1,6 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 152A standalone PlayerAdapter UX framebuffer refresh and Unity execution policy hotfix: add a clearing camera and opaque repaint contract, responsive Russian standalone shell, generic payload self-check, hidden smoke/cache reuse proof and a five-step human gate; Goal152 and Goal152A remain `accepted=false`.
+- Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Next action: `perform_goal152a_five_step_human_gate`; Goal152 and Goal152A remain `accepted=false`.
 
 Status: planning control document
 

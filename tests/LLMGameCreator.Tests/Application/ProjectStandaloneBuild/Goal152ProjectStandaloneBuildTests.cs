@@ -39,6 +39,18 @@ public sealed class Goal152ProjectStandaloneBuildTests
             Assert.Equal(first.FrameCount, frames.RootElement.GetArrayLength());
             Assert.DoesNotContain(frames.RootElement.EnumerateArray(), frame => frame.GetProperty("title").GetString()?.StartsWith("Шаг Runtime ", StringComparison.Ordinal) == true);
         }
+        if (string.Equals(Environment.GetEnvironmentVariable("LLMGC_GOAL152C_CACHE_ONLY"), "true", StringComparison.OrdinalIgnoreCase))
+        {
+            Assert.True(first.HostReused, "Goal152C requires an existing valid host cache.");
+            Assert.Equal(before, HashFile(Path.Combine(source, "package.json")));
+            Directory.CreateDirectory(output);
+            File.WriteAllText(Path.Combine(output, "real-project-copy-standalone-proof.json"), JsonSerializer.Serialize(new
+            {
+                status = "GREEN", sourceManifestByteIdentical = true, customValues = "3/8/2/12", equipmentStatTotal = "3/6/9", levelExperience = "2/12",
+                first = new { first.HostRebuilt, first.HostReused, first.ExecutablePath, first.BuildManifestPath, first.FrameCount, first.LaunchSmokePassed }
+            }, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine, new UTF8Encoding(false));
+            return;
+        }
 
         var second = await ConfigureAndBuild(root, secondCopy, 4);
         Assert.Equal("GREEN", second.Status);

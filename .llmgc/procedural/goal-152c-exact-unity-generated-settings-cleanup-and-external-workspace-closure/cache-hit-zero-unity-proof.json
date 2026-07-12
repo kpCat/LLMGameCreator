@@ -1,0 +1,12 @@
+{
+  "status": "GREEN",
+  "hostReused": true,
+  "hostRebuilt": false,
+  "unityProcessStartCount": 0,
+  "frameCount": 20,
+  "customValues": "3/8/2/12",
+  "damage": "3/6/9",
+  "progression": "2/12",
+  "hiddenSmokeMarkersPassed": 5,
+  "sourceProjectByteIdentical": true
+}
