@@ -1,0 +1,6 @@
+{
+    "policy":  "status-aware",
+    "status":  "BLOCKED",
+    "manualAcceptanceClaimed":  false,
+    "publicationPending":  true
+}

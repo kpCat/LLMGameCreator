@@ -1,0 +1,16 @@
+{
+    "root":  ".llmgc/procedural/goal-150c-hermetic-adaptive-validation-and-acceptance-readiness-hotfix",
+    "compactFileCount":  10,
+    "files":  [
+                  "artifact-scope-proof.json",
+                  "focused-regression-proof.json",
+                  "goal150c-dashboard.json",
+                  "historical-hash-regression-proof.json",
+                  "publication-policy-proof.json",
+                  "validation-discovery-summary.json",
+                  "validation-failure-taxonomy.json",
+                  "validation-lane-plan.json",
+                  "validation-result.json",
+                  "validation-slowest-summary.json"
+              ]
+}

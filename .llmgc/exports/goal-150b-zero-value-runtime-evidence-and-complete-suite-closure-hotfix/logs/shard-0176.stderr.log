@@ -1,3 +1,0 @@
-[xUnit.net 00:00:00.71]     LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence [FAIL]
-[xUnit.net 00:00:02.25]     LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness [FAIL]
-Test Run Failed.

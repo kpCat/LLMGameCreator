@@ -1,0 +1,21 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-150c-hermetic-adaptive-validation-and-acceptance-readiness-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 07a8ea17c9ff01a319c1e610b62d020216d0605b
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md; не рассчитывай на память из других диалогов.
+
+Соблюдай command budget: не повторяй raw monolithic dotnet test, используй герметичный adaptive runner и повторяй только упавшие/оборванные группы после новой гипотезы или исправления.
+
+Codex обязан сам выполнить commit и push в origin/main при GREEN, согласованном BLOCKED или безопасном FAILED по status-aware publication policy. Пользователь не должен пушить вручную.
+
+В финале сообщи статус, commit SHA, push result, HEAD == origin/main, clean worktree и итоговые hermetic test counts.

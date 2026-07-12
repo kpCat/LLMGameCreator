@@ -1,20 +1,33 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 150B zero-value Runtime evidence and complete-suite closure hotfix
+Updated by: Goal 150C hermetic adaptive validation and acceptance readiness hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal 150B zero-value Runtime evidence and complete-suite closure hotfix is BLOCKED:
+Goal 150C hermetic adaptive validation and acceptance readiness hotfix is BLOCKED:
 
 ```text
 implementationStatus=BLOCKED
-gateStatus=goal150b_independent_audit_then_bundled_human_gate required
+gateStatus=complete_goal150c_hermetic_validation_then_independent_audit required
 goal149Accepted=false
 goal150Accepted=false
 goal150aAccepted=false
 goal150bAccepted=false
+goal150cAccepted=false
 acceptedByCodex=false
-manualReviewRequired=true
+manualReviewRequired=false
+manualGateReady=false
+hermeticSnapshot=true
+mainWorktreeUnchangedByValidation=true
+completeSuiteDiscovered=1734
+completeSuiteAssigned=1734
+completeSuiteExecuted=1734
+completeSuitePassed=97
+completeSuiteFailed=18
+completeSuiteSkipped=0
+completeSuiteMissing=0
+completeSuiteDuplicate=0
+completeSuiteAborted=1619
 equipmentOnlyZeroRuntimeEvidence=true
 equipmentOnlyPositiveTotal=3/0/3
 zeroMetadataDistinctFromAbsent=true
@@ -48,8 +61,16 @@ completeSuiteDuplicate=0
 completeSuiteAborted=4
 githubActionsCheckPresent=false
 accepted=false
-nextProductGoal=independent_goal150b_audit_then_one_bundled_human_gate
+nextProductGoal=complete_goal150c_hermetic_validation_then_independent_audit
 ```
+
+Goal150C replaces the Goal150B mutable class-shard runner with an exact-HEAD
+disposable-worktree runner. It separates non-ProductSmoke and ProductSmoke lanes,
+creates unique ProductSmoke project/package roots for every shard, restores the
+throwaway worktree before each shard, and recursively splits only non-terminal
+groups after a fresh retry. The one 35-minute hermetic pass accounted for all
+1734 discovered tests but ended BLOCKED at 97 passed, 18 failed and 1619 aborted;
+no bundled human gate is ready and all acceptance flags remain false.
 
 Goal150B fixes the independently audited P1 gap where valid equipped
 `combat_damage_bonus=0` was indistinguishable from absent metadata in

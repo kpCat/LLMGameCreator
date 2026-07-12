@@ -166,7 +166,7 @@ function Get-GitChangedPaths {
             $trackedFiles[(ConvertTo-ScopeRelativePath -Path $tracked)] = $true
         }
 
-        $diffArgs = @("diff", "--name-only")
+        $diffArgs = @("diff", "--name-status")
         if (-not [string]::IsNullOrWhiteSpace($BaselineRef)) {
             $diffArgs += $BaselineRef
         }
@@ -175,8 +175,13 @@ function Get-GitChangedPaths {
         if ($diffResult.exit_code -ne 0) {
             throw "git $($diffArgs -join ' ') failed: $($diffResult.output -join [Environment]::NewLine)"
         }
-        foreach ($path in $diffResult.output) {
-            Add-UniquePath -List $list -Seen $seen -Path $path -Status "modified" -Tracked $true
+        foreach ($line in $diffResult.output) {
+            $parts = $line -split "`t", 2
+            if ($parts.Count -ne 2) { continue }
+            $status = $parts[0]
+            $path = $parts[1]
+            if ($status.StartsWith("R") -and $path.Contains("`t")) { $path = ($path -split "`t")[-1] }
+            Add-UniquePath -List $list -Seen $seen -Path $path -Status $status -Tracked $true
         }
 
         $statusResult = Invoke-ScopeGit -ArgsList @("status", "--porcelain")
@@ -255,11 +260,19 @@ function Classify-ChangedPath {
         [Parameter(Mandatory=$true)]$Change,
         [Parameter(Mandatory=$true)]$Policy,
         [Parameter(Mandatory=$true)][string[]]$ExactAllowed,
-        [Parameter(Mandatory=$true)][string[]]$PrefixAllowed
+        [Parameter(Mandatory=$true)][string[]]$PrefixAllowed,
+        [Parameter(Mandatory=$true)][string[]]$DeletedExactAllowed,
+        [Parameter(Mandatory=$true)][string[]]$DeletedPrefixAllowed
     )
 
     $path = $Change.path
     $extension = [System.IO.Path]::GetExtension($path)
+
+    if ($Change.status.StartsWith("D", [System.StringComparison]::OrdinalIgnoreCase)) {
+        if ((Test-ExactAllowed -Path $path -Allowed $DeletedExactAllowed) -or (Test-PrefixAllowed -Path $path -Allowed $DeletedPrefixAllowed)) {
+            return [pscustomobject]@{ severity = "info"; accepted = $true; category = "allowed_declared_diagnostic_deletion"; code = "artifact_scope.allowed.deletion"; message = "Deletion is explicitly allowed for compact evidence retention." }
+        }
+    }
 
     if (Test-ExactAllowed -Path $path -Allowed $ExactAllowed) {
         $category = if ($path.StartsWith("docs/agent-tasks/", [System.StringComparison]::OrdinalIgnoreCase) -or $path.Contains("GOAL_022")) { "allowed_task_doc" } else { "allowed_current_goal_change" }
@@ -328,6 +341,8 @@ if (-not (Test-Path -LiteralPath $PolicyPath)) {
 $policy = Get-Content -Raw -Encoding UTF8 -LiteralPath $PolicyPath | ConvertFrom-Json
 $exactAllowed = New-Object System.Collections.Generic.List[string]
 $prefixAllowed = New-Object System.Collections.Generic.List[string]
+$deletedExactAllowed = New-Object System.Collections.Generic.List[string]
+$deletedPrefixAllowed = New-Object System.Collections.Generic.List[string]
 
 foreach ($path in $AllowedPath) {
     $exactAllowed.Add((ConvertTo-ScopeRelativePath -Path $path)) | Out-Null
@@ -361,6 +376,14 @@ foreach ($scenarioPolicy in @(Get-ArrayProperty -Object $policy -PropertyName "s
             }
             $prefixAllowed.Add($normalizedPrefix) | Out-Null
         }
+        foreach ($path in @(Get-ArrayProperty -Object $scenarioPolicy -PropertyName "allowedDeletedPaths")) {
+            $deletedExactAllowed.Add((ConvertTo-ScopeRelativePath -Path ("" + $path))) | Out-Null
+        }
+        foreach ($prefix in @(Get-ArrayProperty -Object $scenarioPolicy -PropertyName "allowedDeletionPathPrefixes")) {
+            $normalizedPrefix = ConvertTo-ScopeRelativePath -Path ("" + $prefix)
+            if (-not $normalizedPrefix.EndsWith("/", [System.StringComparison]::Ordinal)) { $normalizedPrefix += "/" }
+            $deletedPrefixAllowed.Add($normalizedPrefix) | Out-Null
+        }
     }
 }
 
@@ -372,7 +395,7 @@ $warningCount = 0
 $allowedCount = 0
 
 foreach ($change in $changes) {
-    $classification = Classify-ChangedPath -Change $change -Policy $policy -ExactAllowed @($exactAllowed) -PrefixAllowed @($prefixAllowed)
+    $classification = Classify-ChangedPath -Change $change -Policy $policy -ExactAllowed @($exactAllowed) -PrefixAllowed @($prefixAllowed) -DeletedExactAllowed @($deletedExactAllowed) -DeletedPrefixAllowed @($deletedPrefixAllowed)
     if ($classification.accepted) {
         $allowedCount++
     }

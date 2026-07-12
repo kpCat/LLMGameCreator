@@ -131,7 +131,7 @@ clean-machine, provider, art and packaging risks remain open.
 | Visual consistency | Deterministic assets can still look incoherent across packs/styles. | Approved renderer/atlas style review and visual consistency diagnostics. |
 | Source-health/code-size | Large files and oversized seams slow review and increase defect risk. | Continue source-health guard and split before source limits are exceeded. |
 | Validation noise/duration | Long full checks can hide actionable failures and waste cycles. | Use Goal089 tiers; reserve full/observed full for milestone/release-like work. |
-| Complete-suite recursive smoke duration | The 1731-test suite includes long ProductSmoke routes and does not complete monolithically inside Goal150B's 15-minute bound. | Use Goal150B exact discovery, isolated testhost shards, TRX/count accounting and explicit BLOCKED publication until failed/missing/aborted counts are zero. |
+| Complete-suite recursive smoke duration | The 1736-test suite includes long ProductSmoke routes and Goal150B shards shared mutable roots. | Use Goal150C exact-HEAD disposable worktrees, per-shard ProductSmoke roots, adaptive split/retry and terminal accounting; keep manual readiness false until failed/missing/aborted are zero. |
 | Runtime vs Unity parity | Headless runtime proof can diverge from Unity/player behavior. | Shared package inputs plus side-by-side runtime/player proof for milestone gates. |
 
 ## P2 Technical Debt

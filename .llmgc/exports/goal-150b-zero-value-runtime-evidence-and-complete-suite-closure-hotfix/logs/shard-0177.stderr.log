@@ -1,3 +1,0 @@
-[xUnit.net 00:00:01.97]     LLMGameCreator.Tests.Application.OfflineGeoworldInteractiveTravelPreview.OfflineGeoworldInteractiveTravelPreviewTests.WorkspaceGroupSurfacesInteractiveTravelReadiness [FAIL]
-[xUnit.net 00:00:02.08]     LLMGameCreator.Tests.Application.OfflineGeoworldInteractiveTravelPreview.OfflineGeoworldInteractiveTravelPreviewTests.ServiceBuildsInteractiveTravelPayloadAndEvidence [FAIL]
-Test Run Failed.

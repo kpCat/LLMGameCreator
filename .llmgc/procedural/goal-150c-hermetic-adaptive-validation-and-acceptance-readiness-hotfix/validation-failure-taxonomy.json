@@ -1,0 +1,591 @@
+{
+    "schemaVersion":  "goal150c_failure_taxonomy_v1",
+    "initialGoal150BFailureCount":  64,
+    "classifiedFailureCount":  64,
+    "classificationTotals":  {
+                                 "A":  0,
+                                 "B":  0,
+                                 "C":  0,
+                                 "D":  64,
+                                 "E":  0,
+                                 "F":  0
+                             },
+    "entries":  [
+                    {
+                        "originalShard":  "shard-0566",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.VisualWorldStreamPreviewWorkspaceProductSmokeTests.Goal092AVisualWorldPreviewServiceSplitSourceHealthProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0180",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0176",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.WorkspaceGroupSurfacesInteractionReadiness",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0505",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldUnityEditorPreviewToolProductSmokeTests.Goal102BActualUnityEditorSourceReformatProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0180",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0159",
+                        "test":  "LLMGameCreator.Tests.Application.ModularGeneratorKernel.ModularGeneratorKernelReadinessTests.CurrentStateRecordsGoal028AcceptedBeforeGoal029",
+                        "originalFailure":  "Assert.Contains() Failure: Sub-string not found\r\nString:    \"# CONTEXT_INDEX.md\\r\\n\\r\\nPurpose: reduce rep\"···\r\nNot found: \"goal150b_independent_audit_then_bundled_h\"···",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0158",
+                        "test":  "LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.CreatesReviewPackageWithRequiredFiles",
+                        "originalFailure":  "minimum_playable_game.build.source_executable_missing\r\nminimum_playable_game.build.source_play_loop_log_missing\r\nminimum_playable_game.review_package.data_folder_missing\r\nminimum_playable_game.review_package.executable_missing\r\nminimum_playable_game.review_smoke.launch_log_missing\r\nminimum_playable_game.review_smoke.launch_not_verified\r\nminimum_playable_game.review_smoke.play_loop_log_missing\r\nminimum_playable_game.review_smoke.quest_completion_missing\r\nminimum_playable_game.review_smoke.quest_completion_missing\r\nminimum_playable_game.review_smoke.quest_completion_missing\r\nminimum_playable_game.review_smoke.quest_completion_missing\r\nminimum_playable_game.validation.asset_manifest_missing\r\nminimum_playable_game.validation.config_missing\r\nminimum_playable_game.validation.data_folder_missing\r\nminimum_playable_game.validation.executable_missing\r\nminimum_playable_game.validation.package_missing\r\nminimum_playable_game.goal019_gate_recorded\r\nminimum_playable_game.invalid_matrix_rejected\r\nminimum_playable_game.no_external_providers\r\nminimum_playable_game.previous.goal019_evidence_present",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0491",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAcceptedAlphaBaselineReviewProductSmokeTests.ProductSmokeWritesBaselineArtifactsAndWorkspaceSurface",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0505",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldUnityEditorPreviewToolProductSmokeTests.Goal102OfflineGeoworldUnityEditorPreviewToolProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0172",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldAlphaPostAcceptanceContinuationSelection.OfflineGeoworldAlphaPostAcceptanceContinuationSelectionTests.RepositoryContinuationSelectionIsGreenAndRecommendsBaselineReview",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0506",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldUnityPlayModeTravelPreviewProductSmokeTests.Goal103OfflineGeoworldUnityPlayModeTravelPreviewProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0181",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityPlayModeTravelPreview.OfflineGeoworldUnityPlayModeTravelPreviewTests.ServiceBuildsPlayModeTravelPayloadAndEvidence",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0178",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldObjectiveAcceptanceRun.OfflineGeoworldObjectiveAcceptanceRunTests.ServiceBuildsObjectivePayloadAndEvidence",
+                        "originalFailure":  "goal107.source.file_over_700 [src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs] Goal107 C# files must remain below 700 logical lines.",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0001",
+                        "test":  "LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.AcceptedAlphaUnityPlayableProjectionTests.RepositoryProjectionBuildIsGreenAndUsesAcceptedBaseline",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0497",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaPostAcceptanceContinuationSelectionProductSmokeTests.ProductSmokeWritesContinuationArtifactsAndWorkspaceSurface",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0012",
+                        "test":  "LLMGameCreator.Tests.Application.AcceptedAlphaUnityPlayableProjection.ProductLineStrategyRebaselineServiceTests.Goal133AProductLineStrategyRebaselineWritesGreenEvidence",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0494",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaManualGateAcceptanceRecordProductSmokeTests.ProductSmokeWritesAcceptanceRecordArtifactsAndWorkspaceSurface",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0339",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WorkspaceActivationLoadsAndBindsRealArtifacts",
+                        "originalFailure":  "Assert.NotNull() Failure: Value is null",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0173",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceExportPackage.OfflineGeoworldAlphaSliceExportPackageTests.BuildAndWriteCreatesPortablePackageEvidenceAndWorkspaceGroup",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"FAILED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0177",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldInteractiveTravelPreview.OfflineGeoworldInteractiveTravelPreviewTests.ServiceBuildsInteractiveTravelPayloadAndEvidence",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0596",
+                        "test":  "LLMGameCreator.Tests.WinForms.Goal145CandidateSelectorBindingTests.Programmatic_binding_is_silent_and_operator_commit_is_single_and_stable",
+                        "originalFailure":  "Assert.Equal() Failure: Values differ\r\nExpected: minimal-map-game-exploration-resource-focus\r\nActual:   null",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0498",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldAlphaSliceExportPackageProductSmokeTests.Goal109OfflineGeoworldAlphaSliceExportPackageProductSmoke",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"FAILED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0507",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldUnityPreviewRunnerProductSmokeTests.Goal101OfflineGeoworldUnityPreviewRunnerProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0182",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityPreviewRunner.OfflineGeoworldUnityPreviewRunnerTests.UnityScriptInventoryAndWorkspaceGroupAreReal",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0387",
+                        "test":  "LLMGameCreator.Tests.Devflow.DevelopmentComplexityStabilizationTests.StateDocsRecordGoal022AcceptedBeforeGoal023",
+                        "originalFailure":  "Assert.Contains() Failure: Sub-string not found\r\nString:    \"# CONTEXT_INDEX.md\\r\\n\\r\\nPurpose: reduce rep\"···\r\nNot found: \"goal150b_independent_audit_then_bundled_h\"···",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0178",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldObjectiveAcceptanceRun.OfflineGeoworldObjectiveAcceptanceRunTests.WorkspaceGroupSurfacesObjectiveAcceptanceReadiness",
+                        "originalFailure":  "goal092.proof.failed [goal101.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal103.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal104.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal105.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal107.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal108.alpha_slice.full_slice_simulated_proof] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal108.alpha_slice.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal109.alpha_export.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal116.manual_gate.human_accepted] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal116.manual_gate.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal117.continuation.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal118.baseline.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal118.baseline.ready] Required visual preview proof is missing or did not pass.\r\ngoal092.quality.proofs_failed [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal101.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal101.workspace.summary_failed [offline_geoworld_unity_preview] Visual world stream preview workspace quality gate did not pass.\r\ngoal103.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal103.workspace.summary_failed [offline_geoworld_playmode_travel] Visual world stream preview workspace quality gate did not pass.\r\ngoal104.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal104.workspace.summary_failed [offline_geoworld_interactive_travel] Visual world stream preview workspace quality gate did not pass.\r\ngoal105.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal105.workspace.summary_failed [offline_geoworld_interactions] Visual world stream preview workspace quality gate did not pass.\r\ngoal107.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal107.workspace.summary_failed [offline_geoworld_objective_acceptance] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.quality.full_slice_proof [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.quality.ready_component_count [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.workspace.summary_failed [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.\r\ngoal109.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal109.workspace.summary_failed [offline_geoworld_alpha_export_package] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.human_accepted [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.manual_gate_status [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.manual_result_sha [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.workspace.summary_failed [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal118.quality.baseline_ready [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.\r\ngoal118.quality.manual_gate_status [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0504",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldSessionPersistenceReplayProductSmokeTests.Goal106OfflineGeoworldSessionPersistenceReplayProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0312",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal118Tests.Goal118AcceptedBaselineSurfacesInWorkspaceAndUiBinding",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0566",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.VisualWorldStreamPreviewWorkspaceProductSmokeTests.Goal096UnityHandoffInspectorProbeReadinessProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0339",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldPlayModeTravelGroupSurfacesGoal103Readiness",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0181",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityPlayModeTravelPreview.OfflineGeoworldUnityPlayModeTravelPreviewTests.EvidenceIsDeterministicAndSourceHealthClean",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0183",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldVisualCacheUnityHandoff.OfflineGeoworldVisualCacheUnityHandoffTests.WorkspaceSurfacesOfflineGeoworldHandoffGroupAndProofs",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0311",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal117Tests.Goal117ContinuationSelectionSurfacesInWorkspaceAndUiBinding",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0169",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldAlphaManualGateAcceptanceRecord.OfflineGeoworldAlphaManualGateAcceptanceRecordTests.RepositoryManualGateAcceptanceRecordIsGreenAndDoesNotEmbedManualInput",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0336",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal144Tests.RealWorkspaceKeepsHistoricalProofsGreen",
+                        "originalFailure":  "goal101.quality_gate:passed=false\r\ngoal103.quality_gate:passed=false\r\ngoal104.quality_gate:passed=false\r\ngoal105.quality_gate:passed=false\r\ngoal106.quality_gate:passed=false\r\ngoal107.quality_gate:passed=false\r\ngoal108.alpha_slice.full_slice_simulated_proof:passed=false\r\ngoal108.alpha_slice.quality_gate:passed=false\r\ngoal109.alpha_export.quality_gate:passed=false\r\ngoal116.manual_gate.human_accepted:humanAccepted=false\r\ngoal116.manual_gate.quality_gate:passed=false\r\ngoal117.continuation.quality_gate:passed=false\r\ngoal118.baseline.quality_gate:passed=false\r\ngoal118.baseline.ready:acceptedBaselineReady=false",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0310",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceGoal116Tests.Goal116ManualGateAcceptanceRecordSurfacesInWorkspaceAndUiBinding",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0179",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldSessionPersistenceReplay.OfflineGeoworldSessionPersistenceReplayTests.ServiceBuildsSessionPayloadAndEvidence",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0179",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldSessionPersistenceReplay.OfflineGeoworldSessionPersistenceReplayTests.WorkspaceGroupSurfacesSessionReplayReadiness",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0501",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldInteractionPlayableProbeProductSmokeTests.Goal105OfflineGeoworldInteractionPlayableProbeProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0339",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0339",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0427",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.AcceptedAlphaUnityPlayableProjectionProductSmokeTests.ProductSmokeWritesProjectionArtifactsAndWorkspaceSurface",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0158",
+                        "test":  "LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ValidGeneratedReviewPackageHasNoTopLevelErrorDiagnostics",
+                        "originalFailure":  "error:minimum_playable_game.build.source_executable_missing\r\nerror:minimum_playable_game.build.source_play_loop_log_missing\r\nerror:minimum_playable_game.review_package.data_folder_missing\r\nerror:minimum_playable_game.review_package.executable_missing\r\nerror:minimum_playable_game.review_smoke.launch_log_missing\r\nerror:minimum_playable_game.review_smoke.launch_not_verified\r\nerror:minimum_playable_game.review_smoke.play_loop_log_missing\r\nerror:minimum_playable_game.review_smoke.quest_completion_missing\r\nerror:minimum_playable_game.review_smoke.quest_completion_missing\r\nerror:minimum_playable_game.review_smoke.quest_completion_missing\r\nerror:minimum_playable_game.review_smoke.quest_completion_missing\r\nerror:minimum_playable_game.validation.asset_manifest_missing\r\nerror:minimum_playable_game.validation.config_missing\r\nerror:minimum_playable_game.validation.data_folder_missing\r\nerror:minimum_playable_game.validation.executable_missing\r\nerror:minimum_playable_game.validation.package_missing\r\ninfo:minimum_playable_game.goal019_gate_recorded\r\ninfo:minimum_playable_game.invalid_matrix_rejected\r\ninfo:minimum_playable_game.no_external_providers\r\ninfo:minimum_playable_game.previous.goal019_evidence_present",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0182",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityPreviewRunner.OfflineGeoworldUnityPreviewRunnerTests.ServiceBuildsPreviewCommandsPayloadAndEvidenceFromGoal100Artifacts",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0509",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldWorldSourceGraphProductSmokeTests.Goal099OfflineGeoworldWorldSourceGraphStreamingProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0104",
+                        "test":  "LLMGameCreator.Tests.Application.GameProfiles.GeneratedGameProfileContractAcceptanceTests.CurrentStateKeepsGoal021RecordAfterLaterGoalHandoff",
+                        "originalFailure":  "Assert.Contains() Failure: Sub-string not found\r\nString:    \"# CONTEXT_INDEX.md\\r\\n\\r\\nPurpose: reduce rep\"···\r\nNot found: \"goal150b_independent_audit_then_bundled_h\"···",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0539",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMediaBoundPlayablePackageProductSmokeTests.UnityAlphaMediaBoundPlayablePackageProductSmoke",
+                        "originalFailure":  "Assert.Contains() Failure: Item not found in collection\r\nCollection: [\"GREEN\", \"BLOCKED\"]\r\nNot found:  \"FAILED\"",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0176",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldInteractionPlayableProbe.OfflineGeoworldInteractionPlayableProbeTests.ServiceBuildsInteractionPayloadAndEvidence",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0158",
+                        "test":  "LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.ReviewPackageManifestHashesMatchPhysicalFiles",
+                        "originalFailure":  "Assert.False() Failure\r\nExpected: False\r\nActual:   True",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0180",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0174",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceManualAcceptanceGate.OfflineGeoworldAlphaSliceManualAcceptanceGateTests.BuildAndWriteCreatesManualAcceptancePayloadEvidenceAndWorkspaceGroup",
+                        "originalFailure":  "goal092.proof.failed [goal101.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal103.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal104.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal105.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal107.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal108.alpha_slice.full_slice_simulated_proof] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal108.alpha_slice.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal109.alpha_export.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal116.manual_gate.human_accepted] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal116.manual_gate.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal117.continuation.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal118.baseline.quality_gate] Required visual preview proof is missing or did not pass.\r\ngoal092.proof.failed [goal118.baseline.ready] Required visual preview proof is missing or did not pass.\r\ngoal092.quality.proofs_failed [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal101.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal101.workspace.summary_failed [offline_geoworld_unity_preview] Visual world stream preview workspace quality gate did not pass.\r\ngoal103.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal103.workspace.summary_failed [offline_geoworld_playmode_travel] Visual world stream preview workspace quality gate did not pass.\r\ngoal104.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal104.workspace.summary_failed [offline_geoworld_interactive_travel] Visual world stream preview workspace quality gate did not pass.\r\ngoal105.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal105.workspace.summary_failed [offline_geoworld_interactions] Visual world stream preview workspace quality gate did not pass.\r\ngoal107.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal107.workspace.summary_failed [offline_geoworld_objective_acceptance] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.quality.full_slice_proof [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.quality.ready_component_count [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.\r\ngoal108.workspace.summary_failed [offline_geoworld_alpha_slice] Visual world stream preview workspace quality gate did not pass.\r\ngoal109.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal109.workspace.summary_failed [offline_geoworld_alpha_export_package] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.human_accepted [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.manual_gate_status [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.manual_result_sha [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.quality.quality_gate [proofStatus] Visual world stream preview workspace quality gate did not pass.\r\ngoal116.workspace.summary_failed [offline_geoworld_alpha_manual_gate_acceptance_record] Visual world stream preview workspace quality gate did not pass.\r\ngoal118.quality.baseline_ready [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.\r\ngoal118.quality.manual_gate_status [offline_geoworld_accepted_alpha_baseline_review] Visual world stream preview workspace quality gate did not pass.",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0166",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldAcceptedAlphaBaselineReview.OfflineGeoworldAcceptedAlphaBaselineReviewTests.RepositoryBaselineReviewIsGreenAndReady",
+                        "originalFailure":  "Assert.Equal() Failure: Strings differ\r\n           ↓ (pos 0)\r\nExpected: \"GREEN\"\r\nActual:   \"BLOCKED\"\r\n           ↑ (pos 0)",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0339",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.WinFormsWorkspaceCanBindApplicationResult",
+                        "originalFailure":  "Assert.Contains() Failure: Sub-string not found\r\nString:    \"id: goal_101_offline_geoworld_unity_previ\"···\r\nNot found: \"offlineGeoworldUnityPreviewQualityGatePas\"···",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0158",
+                        "test":  "LLMGameCreator.Tests.Application.MinimumPlayableGame.MinimumPlayableGeneratedGameAcceptanceTests.AutomatedSmokeProofVerifiesLaunchAndQuestCompletion",
+                        "originalFailure":  "minimum_playable_game.build.source_executable_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/build/windows\r\nminimum_playable_game.build.source_play_loop_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log\r\nminimum_playable_game.review_package.data_folder_missing:LLMGameCreatorAlpha_Data\r\nminimum_playable_game.review_package.executable_missing:LLMGameCreatorAlpha.exe\r\nminimum_playable_game.review_smoke.launch_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-launch.log\r\nminimum_playable_game.review_smoke.launch_not_verified:alpha_runtime.launch_completed\r\nminimum_playable_game.review_smoke.play_loop_log_missing:.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log\r\nminimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.play_loop_completed=true\r\nminimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.quest_completed.after=true\r\nminimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.quest_loop_completed=true\r\nminimum_playable_game.review_smoke.quest_completion_missing:alpha_runtime.reward_granted.after=true\r\nminimum_playable_game.validation.asset_manifest_missing:assets/asset-manifest.json\r\nminimum_playable_game.validation.config_missing:runtime/unity-runtime-config.json\r\nminimum_playable_game.validation.data_folder_missing:LLMGameCreatorAlpha_Data\r\nminimum_playable_game.validation.executable_missing:LLMGameCreatorAlpha.exe\r\nminimum_playable_game.validation.package_missing:game-data/game-package.json\r\nminimum_playable_game.goal019_gate_recorded:unity_alpha_readable_presentation_verification\r\nminimum_playable_game.invalid_matrix_rejected:invalid_matrix\r\nminimum_playable_game.no_external_providers:execution_boundary\r\nminimum_playable_game.previous.goal019_evidence_present:unity-alpha-readable-presentation-report.json",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0502",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldInteractiveTravelPreviewProductSmokeTests.Goal104OfflineGeoworldInteractiveTravelPreviewProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0503",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldObjectiveAcceptanceRunProductSmokeTests.Goal107OfflineGeoworldObjectiveAcceptanceRunProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0508",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.OfflineGeoworldVisualCacheUnityHandoffProductSmokeTests.Goal100OfflineGeoworldVisualCacheUnityHandoffProductSmoke",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0177",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldInteractiveTravelPreview.OfflineGeoworldInteractiveTravelPreviewTests.WorkspaceGroupSurfacesInteractiveTravelReadiness",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0185",
+                        "test":  "LLMGameCreator.Tests.Application.PackageAssemblyCombatProgression.PackageAssemblyCombatProgressionAcceptanceTests.CurrentStatePreservesGoal028AcceptedBeforeGoal029",
+                        "originalFailure":  "Assert.Contains() Failure: Sub-string not found\r\nString:    \"# CONTEXT_INDEX.md\\r\\n\\r\\nPurpose: reduce rep\"···\r\nNot found: \"goal150b_independent_audit_then_bundled_h\"···",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0181",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityPlayModeTravelPreview.OfflineGeoworldUnityPlayModeTravelPreviewTests.WorkspaceGroupSurfacesPlayModeTravelReadiness",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0339",
+                        "test":  "LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace.VisualWorldStreamPreviewWorkspaceServiceTests.ServiceLoadsRealGoal086Through108Artifacts",
+                        "originalFailure":  "Assert.DoesNotContain() Failure: Filter matched in collection\r\n             ↓ (pos 0)\r\nCollection: [VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal101.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal101.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal103.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal103.quality_gate, Message = Required visual preview proof is missing or did not pass. }, VisualWorldPreviewDiagnostic { Severity = error, Code = goal092.proof.failed, Target = goal104.quality_gate, Message = Required visual preview proof is missing or did not pass. }, ···]",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0182",
+                        "test":  "LLMGameCreator.Tests.Application.OfflineGeoworldUnityPreviewRunner.OfflineGeoworldUnityPreviewRunnerTests.EvidenceIsDeterministicAndSourceHealthClean",
+                        "originalFailure":  "Assert.True() Failure\r\nExpected: True\r\nActual:   False",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0205",
+                        "test":  "LLMGameCreator.Tests.Application.RichPackageAssemblyCoverageAudit.RichPackageAssemblyCoverageAuditAcceptanceTests.CurrentStateKeepsGoal024RecordAfterLaterGoalHandoff",
+                        "originalFailure":  "Assert.Contains() Failure: Sub-string not found\r\nString:    \"# CONTEXT_INDEX.md\\r\\n\\r\\nPurpose: reduce rep\"···\r\nNot found: \"goal150b_independent_audit_then_bundled_h\"···",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    },
+                    {
+                        "originalShard":  "shard-0540",
+                        "test":  "LLMGameCreator.Tests.ProductSmoke.UnityAlphaMultiFamilyPlayableLoopProductSmokeTests.UnityAlphaMultiFamilyPlayableLoopProductSmoke",
+                        "originalFailure":  "Assert.Contains() Failure: Item not found in collection\r\nCollection: [\"GREEN\", \"BLOCKED\"]\r\nNot found:  \"FAILED\"",
+                        "cleanIsolatedOutcome":  "missing",
+                        "classification":  "D timeout requiring split",
+                        "finalOutcome":  "missing",
+                        "changedPath":  null
+                    }
+                ]
+}

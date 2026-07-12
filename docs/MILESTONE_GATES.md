@@ -197,8 +197,8 @@ dream_full_final_verification required
 - Release risk register was reviewed and updated.
 - The next goal is not started until this gate is accepted.
 
-Goal 150B gate note: equipment-only zero Runtime evidence, equipment-only positive
+Goal 150C gate note: equipment-only zero Runtime evidence, equipment-only positive
 totals, the Goal150A custom `3/8/2/12` regression and expression-overflow rejection
-are automated. Monolithic and exhaustive sharded suite statuses must be reviewed
-separately. Goals149/150/150A/150B remain `accepted=false`; the only future manual
-gate is their bundled custom case after independent audit.
+remain automated. The required complete suite must first be GREEN from the
+exact-HEAD hermetic runner. Goals149/150/150A/150B remain `accepted=false`; no
+manual gate is ready until independent Goal150C audit follows that result.

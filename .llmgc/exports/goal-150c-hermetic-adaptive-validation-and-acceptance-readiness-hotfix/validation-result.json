@@ -1,0 +1,27 @@
+{
+    "schemaVersion":  "goal150c_hermetic_validation_v1",
+    "status":  "BLOCKED",
+    "passed":  false,
+    "validatedCommit":  "74b36ce2fc15291a167939df37110308533a303e",
+    "validationSnapshotMatchesFinalSources":  true,
+    "hermeticSnapshot":  true,
+    "mainWorktreeUnchangedByValidation":  true,
+    "maximumSimultaneousTesthostProcesses":  1,
+    "counts":  {
+                   "discovered":  1734,
+                   "assigned":  1734,
+                   "executed":  1734,
+                   "passed":  97,
+                   "failed":  18,
+                   "skipped":  0,
+                   "missing":  0,
+                   "duplicate":  0,
+                   "aborted":  1619
+               },
+    "lanes":  {
+                  "productSmokeLanePassed":  false,
+                  "nonProductLanePassed":  false
+              },
+    "attempts":  104,
+    "rawOutputRoot":  "C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\goal150c-final\\complete-suite"
+}

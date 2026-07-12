@@ -1,4 +1,0 @@
-[xUnit.net 00:00:02.55]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.WorkspaceGroupSurfacesEditorToolReadiness [FAIL]
-[xUnit.net 00:00:03.46]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.EvidenceIsDeterministicAndSourceHealthClean [FAIL]
-[xUnit.net 00:00:03.51]     LLMGameCreator.Tests.Application.OfflineGeoworldUnityEditorPreviewTool.OfflineGeoworldUnityEditorPreviewToolTests.ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload [FAIL]
-Test Run Failed.
