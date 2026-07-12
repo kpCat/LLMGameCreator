@@ -24,7 +24,7 @@ $failed = @($oldTaxonomy.entries | Select-Object -ExpandProperty test -Unique)
 $missingShardIds = @($oldResult.shards | Where-Object { $_.missingCount -gt 0 } | Select-Object -ExpandProperty shardId)
 $missing = @($oldPlan.shards | Where-Object { $missingShardIds -contains $_.shardId } | ForEach-Object { $_.testNames })
 if ($failed.Count -ne 64 -or $missing.Count -ne 21) { throw "Historical Goal150B closure extraction is inconsistent: failed=$($failed.Count), missing=$($missing.Count)." }
-$manifest = @($failed | ForEach-Object { [ordered]@{ testName=$_; source='goal150b_failed'; lane=if($_ -like '*ProductSmoke*'){'P'}else{'N'} } }) + @($missing | ForEach-Object { [ordered]@{ testName=$_; source='goal150b_missing'; lane=if($_ -like '*ProductSmoke*'){'P'}else{'N'} } })
+$manifest = @($failed | ForEach-Object { [pscustomobject][ordered]@{ testName=$_; source='goal150b_failed'; lane=if($_ -like '*ProductSmoke*'){'P'}else{'N'} } }) + @($missing | ForEach-Object { [pscustomobject][ordered]@{ testName=$_; source='goal150b_missing'; lane=if($_ -like '*ProductSmoke*'){'P'}else{'N'} } })
 $duplicate = @($manifest | Group-Object testName | Where-Object Count -gt 1)
 if ($duplicate.Count -gt 0) { $manifest = @($manifest | Group-Object testName | ForEach-Object { $_.Group[0] }) }
 $manifestPath = Join-Path $rawRoot 'goal150b-closure-manifest.json'

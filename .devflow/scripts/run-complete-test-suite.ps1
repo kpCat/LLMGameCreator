@@ -228,7 +228,7 @@ try {
         $pending = @($expected | Where-Object { -not $terminal.ContainsKey($_) })
         [void]$script:attempts.Add([pscustomobject]@{ id=$attemptId; lane=$Group.lane; groupId=$Group.id; depth=$Depth; retry=$Retry; classes=$Group.classes; expectedCount=$expected.Count; passedTerminalCount=$passedNow.Count; pendingCount=$pending.Count; run=$run; productSmokeProjectRoot=(Get-RelativeOutputPath $environment.shardProjectRoot); productSmokePackageRoot=(Get-RelativeOutputPath $environment.shardPackageRoot); trxPath=(Get-RelativeOutputPath $trx) })
         if ($pending.Count -eq 0) { return }
-        if (-not $Retry) { Invoke-Group $Group $Depth $true; return }
+        if (-not $Retry -and $groupExactTests.Count -ne 1) { Invoke-Group $Group $Depth $true; return }
         if ($groupExactTests.Count -eq 1) {
             $name = $groupExactTests[0]
             $row = if ($byName.ContainsKey($name)) { $byName[$name] } else { $null }
