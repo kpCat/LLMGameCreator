@@ -94,6 +94,15 @@ Goal 148 review note: the user-facing fragmentation risk is reduced by consolida
 
 Goal 148B review note: the real Goal148 manual build exposed a synchronous worker-thread `CurrentChanged` delivery into WinForms and `_navigation`. Named disposal-safe dispatch now covers every subscriber, async page refresh failures are observed, and a real MainForm + Projects automated build retry is GREEN. The implementation risk is closed, but the Goal148 human workflow retry remains required and Goal148 remains unaccepted.
 
+Goal 149 review note: Goal148 is accepted by human. The normal unified project
+path no longer relies on the fixed 13-action plan: structured FeatureModule
+contracts create a deterministic action/checkpoint/replay plan, and the first
+equipment module proves generic metadata materialization, save/replay and a
+catalog-configured player-only combat bonus. Catalog-only optional growth no
+longer makes unrelated projects stale. Goal149 still requires human review;
+hands-on playable quality, clean-machine release, public-schema, provider, Lua,
+art and Unity packaging risks remain open.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

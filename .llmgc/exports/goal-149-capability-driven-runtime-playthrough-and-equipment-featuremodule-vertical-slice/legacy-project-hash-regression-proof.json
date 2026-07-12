@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "legacy_project_hash_regression_proof_v1",
+  "status": "GREEN",
+  "compositionPackageSha256": "e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221",
+  "activatedProjectPackageSha256": "c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb",
+  "finalStateHash": "95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8",
+  "legacyNoPlanCheckpointActionCount": 8,
+  "legacyNoPlanFinalActionCount": 13,
+  "legacyNoPlanCompatibility": true,
+  "passed": true
+}

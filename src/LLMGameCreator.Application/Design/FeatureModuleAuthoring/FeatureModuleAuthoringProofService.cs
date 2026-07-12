@@ -32,7 +32,7 @@ public sealed class FeatureModuleAuthoringProofService
         var exportRoot = Resolve(root, FeatureModuleAuthoringVocabulary.ExportRoot);
         var unitySmokePath = Resolve(root, request.UnitySmokePath);
         GuardNoManual(root, catalogRoot, workspace, cacheRoot, outputRoot);
-        var library = new FeatureModuleLibraryLoader().Load(catalogRoot);
+        var library = FeatureModuleLegacyProfileLibraryView.Create(new FeatureModuleLibraryLoader().Load(catalogRoot));
         var optionalIds = OptionalIds(library);
         var compatibility = ProveCompatibility(root, workspace, library, optionalIds);
 
@@ -64,7 +64,14 @@ public sealed class FeatureModuleAuthoringProofService
             throw new InvalidOperationException("custom parameterized composition determinism failed");
         var qualifiedDocument = persistence.Save(first.QualifiedDocument, library);
         var atomicWritePassed = !Directory.EnumerateFiles(workspace, "*.tmp-*", SearchOption.AllDirectories).Any();
-        var staleLibrary = library with { CatalogFingerprint = new string('d', 64) };
+        var staleFingerprints = library.ModuleFingerprints.ToDictionary(pair => pair.Key, pair => pair.Value,
+            StringComparer.Ordinal);
+        staleFingerprints[qualifiedDocument.SelectedModuleIds[0]] = new string('d', 64);
+        var staleLibrary = library with
+        {
+            CatalogFingerprint = new FeatureModuleLibraryFingerprintService().CatalogFingerprint(staleFingerprints),
+            ModuleFingerprints = staleFingerprints
+        };
         var staleProof = new FeatureModuleCompositionStalenessService().Evaluate(qualifiedDocument, staleLibrary);
 
         var baseSha = BaselineSha(root);
@@ -209,7 +216,7 @@ public sealed class FeatureModuleAuthoringProofService
             SavedCompositionAtomicWritePassed = atomicWritePassed,
             SavedCompositionStalenessDetectionPassed = staleProof.Stale,
             IncrementalModuleCertification = true,
-            AllOptionalModulesCertified = reuseLedger.CertifiedModuleCount == 3,
+            AllOptionalModulesCertified = reuseLedger.CertifiedModuleCount == library.Index.OptionalModuleCount,
             UnchangedCertificationCacheReusePassed = reuseLedger.ReusedCount == 3,
             ChangedModuleSelectiveInvalidationPassed = changedLedger.ExecutedCount == 1 && changedLedger.ReusedCount == 2,
             InteractionCoverageIndependentFromSingletonCertification = hundredCoverage.SingletonCoverageCount == 0,
@@ -364,7 +371,7 @@ public sealed class FeatureModuleAuthoringProofService
             module["sourceLineage"]!["operationIds"] = new JsonArray();
             var relative = "optional/synthetic-fourth.featuremodule.json";
             File.WriteAllText(Path.Combine(temp, relative.Replace('/', Path.DirectorySeparatorChar)), module.ToJsonString());
-            var manifestPath = Path.Combine(temp, "catalog.json");
+            var manifestPath = Path.Combine(temp, FeatureModuleLibraryVocabulary.ManifestFileName);
             var manifest = JsonNode.Parse(File.ReadAllText(manifestPath))!.AsObject();
             manifest["optionalModuleCount"] = 4;
             manifest["moduleFileCount"] = 14;

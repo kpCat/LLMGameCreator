@@ -32,7 +32,8 @@ public sealed class ProductLineRuntimeQualifier
             CandidateId = request.CandidateId,
             VariantKind = request.VariantKind,
             PackagePath = request.PackagePath,
-            PackageSha256 = request.PackageSha256
+            PackageSha256 = request.PackageSha256,
+            CapabilityPlan = request.CapabilityPlan
         };
         var session = _runtime.StartSession(package, start);
         var catalog = session.AvailableActions.Select(CloneDescriptor).ToList();
@@ -48,13 +49,19 @@ public sealed class ProductLineRuntimeQualifier
                                && session.ActionJournal.Count == 0
                                && session.CurrentActionIndex == 0;
 
-        foreach (var action in CanonicalActionPlan.Take(8)) Execute(package, session, action);
+        var actionPlan = request.CapabilityPlan?.OrderedActions.Select(action => action.ActionId).ToList()
+                         ?? CanonicalActionPlan.ToList();
+        var checkpointCount = request.CapabilityPlan is null
+            ? 8
+            : actionPlan.IndexOf(request.CapabilityPlan.CheckpointBoundaryActionId) + 1;
+        if (checkpointCount <= 0 || checkpointCount > actionPlan.Count)
+            throw new InvalidOperationException("Runtime qualification checkpoint boundary is invalid.");
+        foreach (var action in actionPlan.Take(checkpointCount)) Execute(package, session, action);
         var checkpoint = _runtime.SaveCheckpoint(
             session,
             request.CheckpointId,
             request.CreatedAtUtc);
-        Execute(package, session, "harvest");
-        Execute(package, session, "transaction");
+        foreach (var action in actionPlan.Skip(checkpointCount).Take(2)) Execute(package, session, action);
         var checkpointReplay = _runtime.ReloadCheckpoint(package, start, checkpoint);
         var checkpointEvidence = Freeze("checkpoint_reload", checkpointReplay);
         if (!checkpointReplay.Passed)
@@ -63,7 +70,7 @@ public sealed class ProductLineRuntimeQualifier
         }
 
         session = checkpointReplay.Session;
-        foreach (var action in CanonicalActionPlan.Skip(8)) Execute(package, session, action);
+        foreach (var action in actionPlan.Skip(checkpointCount)) Execute(package, session, action);
         var finalCheckpoint = _runtime.SaveCheckpoint(
             session,
             request.FinalCheckpointId,
@@ -88,9 +95,14 @@ public sealed class ProductLineRuntimeQualifier
             FinalReplay = finalEvidence,
             InvalidActionStateUnchanged = invalidUnchanged,
             ActionDescriptorExecutionBindingPassed = bindingPassed,
-            CanonicalActionPlanSignature = string.Join("|", catalog.Select(action =>
+            CanonicalActionPlanSignature = request.CapabilityPlan?.ActionPlanSignature ?? string.Join("|", catalog.Select(action =>
                 action.ActionId + ":" + action.CanonicalStepId + ":"
-                + action.RuntimeCommandStartIndex + "-" + action.RuntimeCommandEndIndex))
+                + action.RuntimeCommandStartIndex + "-" + action.RuntimeCommandEndIndex)),
+            RuntimePlaythroughPlanId = request.CapabilityPlan?.PlanId ?? string.Empty,
+            CapabilityCount = request.CapabilityPlan?.CapabilityIds.Count ?? 0,
+            PlannedActionCount = actionPlan.Count,
+            CheckpointActionCount = checkpointCount,
+            CapabilityDriven = request.CapabilityPlan is not null
         };
     }
 

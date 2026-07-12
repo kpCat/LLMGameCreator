@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "featuremodule_definition_v1",
+  "moduleId": "feature.equipment.weapon_loadout",
+  "title": "Экипировка и оружие",
+  "description": "Позволяет получать, надевать и сохранять оружие в слотах экипировки.",
+  "category": "Экипировка",
+  "moduleKind": "optional_feature",
+  "required": false,
+  "selectable": true,
+  "defaultSelected": false,
+  "moduleVersion": "1.0.0",
+  "dependencies": ["feature.inventory.basic"],
+  "conflicts": [],
+  "requiredSchemaSections": ["game.items", "game.inventories", "game.equipmentSlots"],
+  "requiredRuntimePrimitives": [
+    "runtime.command.open_container",
+    "runtime.command.take_from_container",
+    "runtime.command.equip_item",
+    "runtime.presentation.inspect_equipment"
+  ],
+  "requiredValidationRules": ["equipment_item_inventory_slot_references", "item_metadata_numeric_binding"],
+  "requiredSaveLoadPolicy": ["equipment_slot_state", "journal_checkpoint_reload", "full_replay_equivalence"],
+  "requiredPlayerAdapterSurface": ["equipment_summary", "combat_bonus_summary"],
+  "generatorInputs": ["feature.equipment.weapon_loadout"],
+  "authoringControls": ["checked_optional_module", "typed_parameter_editor"],
+  "goldenPackages": ["minimal-map-game-equipment-weapon-loadout"],
+  "smokePlaythroughs": ["goal149_capability_runtime_equipment_slice"],
+  "knownLimitations": ["Первая вертикаль использует стартовый сундук и один слот оружия."],
+  "futureExpansionNotes": ["Новые loadout-модули используют те же Runtime-примитивы и декларативные metadata bindings."],
+  "mutationOperations": [
+    {
+      "operationId": "equipment.rusty_knife_combat_damage_bonus",
+      "targetKind": "item_metadata_numeric",
+      "targetId": "item/rusty_knife|combat_damage_bonus",
+      "jsonPath": "game.items[id=item/rusty_knife].metadata.combat_damage_bonus",
+      "expectedValue": "__MISSING__",
+      "newValue": "2",
+      "runtimeDimension": "equipment_weapon_damage_bonus"
+    }
+  ],
+  "runtimeEffectContracts": [
+    {
+      "effectId": "runtime_effect.equipment_slot_weapon",
+      "moduleId": "feature.equipment.weapon_loadout",
+      "metricKind": "equipment_slot_item_equals",
+      "targetId": "slot/weapon",
+      "resourceOrItemId": "item/rusty_knife",
+      "comparisonKind": "equal",
+      "expectedValue": "item/rusty_knife",
+      "sourceOperationIds": ["equipment.rusty_knife_combat_damage_bonus"],
+      "runtimeDimension": "equipment_slot_state"
+    },
+    {
+      "effectId": "runtime_effect.equipment_inventory_transfer",
+      "moduleId": "feature.equipment.weapon_loadout",
+      "metricKind": "inventory_item_absent_or_decreased",
+      "targetId": "inventory/chest_start",
+      "resourceOrItemId": "item/rusty_knife",
+      "comparisonKind": "less_than_baseline",
+      "expectedValue": "0",
+      "sourceOperationIds": ["equipment.rusty_knife_combat_damage_bonus"],
+      "runtimeDimension": "equipment_inventory_transfer"
+    },
+    {
+      "effectId": "runtime_effect.equipment_combat_damage_delta",
+      "moduleId": "feature.equipment.weapon_loadout",
+      "metricKind": "combat_damage_delta",
+      "targetId": "player",
+      "resourceOrItemId": "resource/health",
+      "comparisonKind": "equal",
+      "expectedValue": "2",
+      "sourceOperationIds": ["equipment.rusty_knife_combat_damage_bonus"],
+      "runtimeDimension": "equipment_weapon_damage_bonus"
+    }
+  ],
+  "parameterDefinitions": [
+    {
+      "parameterId": "weaponDamageBonus",
+      "moduleId": "feature.equipment.weapon_loadout",
+      "title": "Бонус урона оружия",
+      "description": "Дополнительный урон базовой атаки от экипированного оружия.",
+      "valueType": "integer",
+      "required": true,
+      "defaultValue": 2,
+      "minimum": 0,
+      "maximum": 10,
+      "step": 1,
+      "allowedValues": [],
+      "unit": "damage",
+      "authoringControl": "numeric_up_down",
+      "bindings": [
+        {
+          "operationId": "equipment.rusty_knife_combat_damage_bonus",
+          "operationField": "newValue",
+          "transformKind": "identity",
+          "atomicGroupId": "equipment.weapon_damage_bonus"
+        }
+      ],
+      "validationRules": ["integer_range", "step"],
+      "runtimeEffectIds": [
+        "runtime_effect.equipment_slot_weapon",
+        "runtime_effect.equipment_inventory_transfer",
+        "runtime_effect.equipment_combat_damage_delta"
+      ],
+      "atomicGroupId": "equipment.weapon_damage_bonus"
+    }
+  ],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.equipment.open_container",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "open_starting_chest",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 92,
+      "runtimePrimitiveId": "runtime.command.open_container",
+      "targetSelector": "container_inventory_id",
+      "args": { "id": "inventory/chest_start" },
+      "dependsOnActionIds": ["show_inventory"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["container_opened"]
+    },
+    {
+      "contractId": "playthrough.equipment.take_weapon",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "take_rusty_knife",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 94,
+      "runtimePrimitiveId": "runtime.command.take_from_container",
+      "targetSelector": "item_id",
+      "args": {
+        "id": "item/rusty_knife",
+        "sourceInventoryId": "inventory/chest_start",
+        "targetInventoryId": "inventory/player_start",
+        "itemId": "item/rusty_knife",
+        "amount": "1"
+      },
+      "dependsOnActionIds": ["open_starting_chest"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["inventory_item_absent_or_decreased"]
+    },
+    {
+      "contractId": "playthrough.equipment.equip_weapon",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "equip_rusty_knife",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 96,
+      "runtimePrimitiveId": "runtime.command.equip_item",
+      "targetSelector": "equipment_slot_id",
+      "args": {
+        "id": "slot/weapon",
+        "itemId": "item/rusty_knife",
+        "slotId": "slot/weapon",
+        "inventoryId": "inventory/player_start",
+        "itemTitle": "Ржавый нож",
+        "slotTitle": "Оружие"
+      },
+      "dependsOnActionIds": ["take_rusty_knife"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["equipment_slot_item_equals"]
+    },
+    {
+      "contractId": "playthrough.equipment.inspect",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "inspect_equipment",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 98,
+      "runtimePrimitiveId": "runtime.presentation.inspect_equipment",
+      "targetSelector": "equipment_slot_id",
+      "args": { "id": "slot/weapon" },
+      "dependsOnActionIds": ["equip_rusty_knife"],
+      "checkpointBoundaryAfter": true,
+      "presentationOnly": true,
+      "required": true,
+      "expectedRuntimeEffects": ["equipment_slot_item_equals"]
+    }
+  ],
+  "sourceLineage": {
+    "goalId": "goal_149_capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice",
+    "catalogPath": "catalogs/feature-modules/optional/equipment-weapon-loadout.featuremodule.json",
+    "recipeId": "equipment_weapon_loadout",
+    "variantKind": "equipment_weapon_loadout",
+    "candidateId": "minimal-map-game-equipment-weapon-loadout",
+    "operationIds": ["equipment.rusty_knife_combat_damage_bonus"]
+  }
+}

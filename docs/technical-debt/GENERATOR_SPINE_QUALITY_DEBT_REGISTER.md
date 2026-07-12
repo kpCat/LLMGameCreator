@@ -82,6 +82,15 @@ Goal 148 note: the user-facing numbered-tab accumulation debt is reduced by movi
 
 Goal 148B note: the current-package event thread-affinity debt is repaired for all five WinForms subscribers through one bounded dispatcher, named lifecycle handlers and async refresh coalescing/error observation. `ICurrentGamePackageService` stays UI-agnostic and heavy qualification stays off the UI thread. The Goal148 manual retry remains open; the sample-backed support source and broader release debts above are unchanged.
 
+Goal 149 note: the normal unified-project fixed-action-plan debt is removed by
+structured FeatureModule playthrough contracts and a deterministic
+dependency-aware planner. Generic item-metadata mutation supports the first
+default-off equipment module without module/composition-ID branches, and
+catalog-only optional additions are additive-compatible with unrelated saved
+projects. Legacy no-plan qualification remains for historical consumers.
+Remaining debt includes broader primitive/module families, Goal141/Goal149
+manual review, release-owned templates, hands-on quality and packaging.
+
 | Finding id | Severity | Area | Evidence | Recommended future goal | Fixed in Goal 072 | Fixed in Goal 073 | Why not fixed |
 |---|---|---|---|---|---|---|---|
 | GQ-P0-SOURCE-EXTREME-LINE-LENGTH | P0 | source-format | Goal 072 found extreme source line length candidates in eight files. Goal 073 repaired the bounded candidate set; p0BeforeCount=8, p0AfterCount=0, repairedFileCount=8. | Repaired by Goal 073; keep monitoring max-line source-format risk in future quality scans. | false | true | Repaired by Goal 073 with local, semantics-preserving source-format edits; historical Goal 072 BLOCKED evidence remains unchanged. |

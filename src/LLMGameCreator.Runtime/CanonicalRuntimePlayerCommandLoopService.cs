@@ -23,10 +23,48 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
     }
 
     private readonly IUnifiedGameRuntimeService _runtime;
+    private readonly IReadOnlyDictionary<string, Func<GamePackageDefinition, UnifiedRuntimeSession, CanonicalRuntimePlayerCommandLoopStep, UnifiedRuntimeResult>> _primitiveHandlers;
 
     public CanonicalRuntimePlayerCommandLoopService(IUnifiedGameRuntimeService runtime)
     {
         _runtime = runtime;
+        _primitiveHandlers = new Dictionary<string, Func<GamePackageDefinition, UnifiedRuntimeSession, CanonicalRuntimePlayerCommandLoopStep, UnifiedRuntimeResult>>(StringComparer.Ordinal)
+        {
+            ["runtime.command.start"] = (package, _, _) => _runtime.Start(package),
+            ["runtime.command.move"] = (package, session, step) => _runtime.ExecutePlayerCommand(package, session,
+                PlayerCommand.Move(ParseDirection(Arg(step, "direction", "right")))),
+            ["runtime.command.interact"] = (package, session, _) => _runtime.ExecutePlayerCommand(package, session, PlayerCommand.Interact()),
+            ["runtime.command.open_dialogue"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.OpenDialogue(step.TargetId)),
+            ["runtime.command.start_or_update_quest"] = (package, session, step) => _runtime.ExecuteMany(package, session,
+                [GameRuntimeCommand.StartQuest(step.TargetId), new GameRuntimeCommand { Type = GameRuntimeCommandType.RefreshQuestObjectives }]),
+            ["runtime.command.show_inventory"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                new GameRuntimeCommand
+                {
+                    Type = GameRuntimeCommandType.AddItem,
+                    Id = Arg(step, "itemId"),
+                    InventoryId = Arg(step, "inventoryId"),
+                    Amount = ParseDouble(Arg(step, "amount", "1"))
+                }),
+            ["runtime.command.craft_recipe"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.CraftRecipe(step.TargetId, Arg(step, "inventoryId"))),
+            ["runtime.command.harvest_resource"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.HarvestResourceNode(step.TargetId, Arg(step, "inventoryId"), Arg(step, "itemId"), ParseInt(Arg(step, "seed", "136")))),
+            ["runtime.command.execute_transaction"] = (package, session, step) => _runtime.ExecuteMany(package, session,
+                [new GameRuntimeCommand { Type = GameRuntimeCommandType.ChangeResource, Id = Arg(step, "grantResourceId"), Amount = ParseDouble(Arg(step, "grantAmount", "0")) },
+                    GameRuntimeCommand.ExecuteTransaction(step.TargetId, Arg(step, "inventoryId"))]),
+            ["runtime.command.start_encounter"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.StartEncounter(step.TargetId, ParseInt(Arg(step, "seed", "136")))),
+            ["runtime.command.basic_attack"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.BasicAttack(Arg(step, "sourceParticipantId", "player"), step.TargetId)),
+            ["runtime.command.open_container"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.OpenContainer(step.TargetId)),
+            ["runtime.command.take_from_container"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.TakeFromContainer(Arg(step, "sourceInventoryId"), Arg(step, "itemId"),
+                    ParseDouble(Arg(step, "amount", "1")), Arg(step, "targetInventoryId"))),
+            ["runtime.command.equip_item"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.EquipItem(Arg(step, "itemId"), Arg(step, "slotId"), Arg(step, "inventoryId")))
+        };
     }
 
     public static IReadOnlyList<string> RequiredCategories =>
@@ -104,7 +142,8 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
             RuntimeStarted = false,
             RuntimeExecutionSucceeded = true,
             RuntimeSession = new UnifiedRuntimeSession(),
-            Steps = BuildSteps()
+            CapabilityPlan = request.CapabilityPlan,
+            Steps = request.CapabilityPlan is null ? BuildSteps() : BuildCapabilitySteps(package, request.CapabilityPlan)
         };
 
     public CanonicalRuntimePlayerCommandLoopExecutionResult ExecuteRange(
@@ -114,7 +153,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
     {
         if (session.Steps.Count == 0)
         {
-            session.Steps = BuildSteps();
+            session.Steps = session.CapabilityPlan is null ? BuildSteps() : BuildCapabilitySteps(package, session.CapabilityPlan);
         }
 
         var steps = session.Steps;
@@ -302,7 +341,14 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
         var eventIndex = session.EventIndex;
         var stateHashBefore = session.CurrentStateHash;
 
-        switch (step.StepId)
+        if (!string.IsNullOrWhiteSpace(step.ActionId))
+        {
+            if (!_primitiveHandlers.TryGetValue(step.RuntimePrimitiveHint, out var handler))
+                throw new InvalidOperationException("Missing Runtime primitive handler: " + step.RuntimePrimitiveHint);
+            result = handler(package, session.RuntimeSession, step);
+            if (step.RuntimePrimitiveHint == "runtime.command.start") session.RuntimeStarted = result.Success;
+        }
+        else switch (step.StepId)
         {
             case "load_selected_package":
                 events.Add(CommandLoopEvent(ref eventIndex, step, "package-loaded", package.Manifest.PackageId));
@@ -450,6 +496,73 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
         public IReadOnlyList<string> Diagnostics { get; }
     }
 
+    private static IReadOnlyList<CanonicalRuntimePlayerCommandLoopStep> BuildCapabilitySteps(
+        GamePackageDefinition package,
+        CapabilityRuntimePlaythroughPlan plan)
+    {
+        var steps = new List<CanonicalRuntimePlayerCommandLoopStep>
+        {
+            Step(0, "load_selected_package", "load_package", "Load selected package", "package",
+                package.Manifest.PackageId, false)
+        };
+        foreach (var action in plan.OrderedActions.Where(item => !item.PresentationOnly))
+        {
+            steps.Add(new CanonicalRuntimePlayerCommandLoopStep
+            {
+                Index = steps.Count,
+                StepId = "capability." + action.ActionId,
+                ActionId = action.ActionId,
+                Category = action.Category,
+                CommandLabel = action.ActionId,
+                RuntimeCommandKind = PrimitiveCommandKind(action.RuntimePrimitiveId),
+                TargetId = action.ResolvedTargetId,
+                RuntimePrimitiveHint = action.RuntimePrimitiveId,
+                Args = new SortedDictionary<string, string>(action.Args.ToDictionary(pair => pair.Key, pair => pair.Value,
+                    StringComparer.Ordinal), StringComparer.Ordinal),
+                RuntimeExecuted = true,
+                RequiredForGreen = action.Required
+            });
+        }
+        return steps;
+    }
+
+    private static string PrimitiveCommandKind(string primitiveId) => primitiveId switch
+    {
+        "runtime.command.start" => nameof(GameRuntimeCommandType.Initialize),
+        "runtime.command.move" => nameof(PlayerCommandType.Move),
+        "runtime.command.interact" => nameof(PlayerCommandType.Interact),
+        "runtime.command.open_dialogue" => nameof(GameRuntimeCommandType.OpenDialogue),
+        "runtime.command.start_or_update_quest" => nameof(GameRuntimeCommandType.StartQuest),
+        "runtime.command.show_inventory" => nameof(GameRuntimeCommandType.AddItem),
+        "runtime.command.craft_recipe" => nameof(GameRuntimeCommandType.CraftRecipe),
+        "runtime.command.harvest_resource" => nameof(GameRuntimeCommandType.HarvestResourceNode),
+        "runtime.command.execute_transaction" => nameof(GameRuntimeCommandType.ExecuteTransaction),
+        "runtime.command.start_encounter" => nameof(GameRuntimeCommandType.StartEncounter),
+        "runtime.command.basic_attack" => nameof(GameRuntimeCommandType.BasicAttack),
+        "runtime.command.open_container" => nameof(GameRuntimeCommandType.OpenContainer),
+        "runtime.command.take_from_container" => nameof(GameRuntimeCommandType.TakeFromContainer),
+        "runtime.command.equip_item" => nameof(GameRuntimeCommandType.EquipItem),
+        _ => string.Empty
+    };
+
+    private static string Arg(CanonicalRuntimePlayerCommandLoopStep step, string key, string fallback = "") =>
+        step.Args.TryGetValue(key, out var value) ? value : fallback;
+
+    private static int ParseInt(string value) =>
+        int.Parse(value, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture);
+
+    private static double ParseDouble(string value) =>
+        double.Parse(value, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture);
+
+    private static Direction2D ParseDirection(string value) => value.ToLowerInvariant() switch
+    {
+        "up" => Direction2D.Up,
+        "down" => Direction2D.Down,
+        "left" => Direction2D.Left,
+        "right" => Direction2D.Right,
+        _ => throw new InvalidOperationException("Unsupported movement direction: " + value)
+    };
+
     private static IReadOnlyList<CanonicalRuntimePlayerCommandLoopStep> BuildSteps() =>
     [
         Step(0, "load_selected_package", "load_package", "Load selected package", "package", "game/minimal-map-game", false),
@@ -526,6 +639,10 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 .Select(inventory => inventory.Id + "=" + string.Join(",", inventory.Stacks
                     .OrderBy(stack => stack.ItemId, StringComparer.Ordinal)
                     .Select(stack => stack.ItemId + ":" + Format(stack.Amount))))),
+            EquipmentSummary = string.Join("; ", state.Equipment
+                .OrderBy(equipment => equipment.OwnerId, StringComparer.Ordinal)
+                .SelectMany(equipment => equipment.Slots.OrderBy(slot => slot.SlotId, StringComparer.Ordinal)
+                    .Select(slot => slot.SlotId + ":" + (slot.ItemId ?? string.Empty)))),
             CombatSummary = CombatSummary(state, events),
             DiagnosticSummary = events.Count == 0 ? "no events emitted" : "eventCount=" + events.Count,
             ProjectionOnly = false,
@@ -566,7 +683,8 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 Source = "map-runtime",
                 EventType = runtimeEvent.Type.ToString(),
                 TargetId = runtimeEvent.TargetId ?? string.Empty,
-                Message = runtimeEvent.Message
+                Message = runtimeEvent.Message,
+                Args = new SortedDictionary<string, string>(runtimeEvent.Args, StringComparer.Ordinal)
             });
         }
 
@@ -580,7 +698,8 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 Source = "gameplay-runtime",
                 EventType = runtimeEvent.Type.ToString(),
                 TargetId = runtimeEvent.TargetId ?? string.Empty,
-                Message = runtimeEvent.Message
+                Message = runtimeEvent.Message,
+                Args = new SortedDictionary<string, string>(runtimeEvent.Args, StringComparer.Ordinal)
             });
         }
 

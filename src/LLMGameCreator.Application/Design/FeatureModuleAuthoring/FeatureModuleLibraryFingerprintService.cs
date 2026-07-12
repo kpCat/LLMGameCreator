@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 
 namespace LLMGameCreator.Application.Design.FeatureModuleAuthoring;
@@ -15,8 +16,18 @@ public sealed class FeatureModuleLibraryFingerprintService
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
 
-    public string ModuleFingerprint(FeatureModuleDefinition module) =>
-        Hash(JsonSerializer.Serialize(Normalize(module), JsonOptions));
+    public string ModuleFingerprint(FeatureModuleDefinition module)
+    {
+        var normalized = Normalize(module);
+        var node = JsonSerializer.SerializeToNode(normalized, JsonOptions)?.AsObject()
+                   ?? throw new InvalidOperationException("FeatureModule fingerprint payload could not be created.");
+        // Presentation/default-selection metadata is additive authoring metadata and does not
+        // invalidate an already selected module. Runtime contracts remain fingerprinted.
+        node.Remove("description");
+        node.Remove("defaultSelected");
+        if (normalized.RuntimePlaythroughContracts.Count == 0) node.Remove("runtimePlaythroughContracts");
+        return Hash(node.ToJsonString(JsonOptions));
+    }
 
     public string CatalogFingerprint(IReadOnlyDictionary<string, string> moduleFingerprints)
     {
@@ -60,6 +71,15 @@ public sealed class FeatureModuleLibraryFingerprintService
                 Bindings = item.Bindings.OrderBy(binding => binding.OperationId, StringComparer.Ordinal).ToList(),
                 ValidationRules = Sort(item.ValidationRules),
                 RuntimeEffectIds = Sort(item.RuntimeEffectIds)
+            }).ToList(),
+        RuntimePlaythroughContracts = module.RuntimePlaythroughContracts
+            .OrderBy(item => item.ActionId, StringComparer.Ordinal)
+            .Select(item => item with
+            {
+                Args = new SortedDictionary<string, string>(item.Args.ToDictionary(pair => pair.Key, pair => pair.Value,
+                    StringComparer.Ordinal), StringComparer.Ordinal),
+                DependsOnActionIds = Sort(item.DependsOnActionIds),
+                ExpectedRuntimeEffects = Sort(item.ExpectedRuntimeEffects)
             }).ToList(),
         SourceLineage = module.SourceLineage with { OperationIds = Sort(module.SourceLineage.OperationIds) }
     };

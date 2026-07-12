@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.dialogue.basic"],
   "conflicts": [],
@@ -23,5 +24,23 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.quest.start_or_update",
+      "capabilityId": "capability.quest.objective_chain",
+      "actionId": "start_or_update_quest",
+      "category": "start_or_update_quest",
+      "phase": "narrative",
+      "order": 60,
+      "runtimePrimitiveId": "runtime.command.start_or_update_quest",
+      "targetSelector": "quest_id",
+      "args": { "id": "quest/help_healer" },
+      "dependsOnActionIds": ["open_dialogue"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["quest_started_or_refreshed"]
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

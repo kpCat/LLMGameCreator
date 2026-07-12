@@ -13,6 +13,7 @@ public sealed record ProductLineRuntimeQualificationRequest
     public string CheckpointId { get; init; } = string.Empty;
     public string FinalCheckpointId { get; init; } = string.Empty;
     public string CreatedAtUtc { get; init; } = "2026-07-11T00:00:00Z";
+    public CapabilityRuntimePlaythroughPlan? CapabilityPlan { get; init; }
 }
 
 public sealed record ProductLineRuntimeQualificationReplayEvidence
@@ -41,4 +42,9 @@ public sealed record ProductLineRuntimeQualificationResult
     public bool InvalidActionStateUnchanged { get; init; }
     public bool ActionDescriptorExecutionBindingPassed { get; init; }
     public string CanonicalActionPlanSignature { get; init; } = string.Empty;
+    public string RuntimePlaythroughPlanId { get; init; } = string.Empty;
+    public int CapabilityCount { get; init; }
+    public int PlannedActionCount { get; init; }
+    public int CheckpointActionCount { get; init; }
+    public bool CapabilityDriven { get; init; }
 }

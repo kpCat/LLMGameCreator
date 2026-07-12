@@ -28,6 +28,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionStartRequest
     public string VariantKind { get; set; } = string.Empty;
     public string PackagePath { get; set; } = string.Empty;
     public string PackageSha256 { get; set; } = string.Empty;
+    public CapabilityRuntimePlaythroughPlan? CapabilityPlan { get; set; }
 }
 
 public sealed class SelectedRuntimeVariantInteractiveActionRequest
@@ -100,6 +101,7 @@ public sealed class SelectedRuntimeVariantInteractiveSession
     public string CurrentStateHash { get; set; } = "not_loaded";
     public bool RuntimeStarted { get; set; }
     public bool Completed { get; set; }
+    public CapabilityRuntimePlaythroughPlan? CapabilityPlan { get; set; }
     public IReadOnlyList<SelectedRuntimeVariantActionDescriptor> AvailableActions { get; set; } =
         new List<SelectedRuntimeVariantActionDescriptor>();
     public List<SelectedRuntimeVariantInteractiveJournalEntry> ActionJournal { get; set; } = new();
@@ -108,6 +110,7 @@ public sealed class SelectedRuntimeVariantInteractiveSession
     public string LatestInventorySummary { get; set; } = string.Empty;
     public string LatestQuestSummary { get; set; } = string.Empty;
     public string LatestCombatSummary { get; set; } = string.Empty;
+    public string LatestEquipmentSummary { get; set; } = string.Empty;
     public CanonicalRuntimePlayerCommandLoopSession CanonicalSession { get; set; } = new();
 }
 
@@ -118,6 +121,8 @@ public sealed class SelectedRuntimeVariantInteractiveCheckpoint
     public string CandidateId { get; set; } = string.Empty;
     public string VariantKind { get; set; } = string.Empty;
     public string PackageSha256 { get; set; } = string.Empty;
+    public string CapabilityPlanId { get; set; } = string.Empty;
+    public string CapabilityPlanSignature { get; set; } = string.Empty;
     public IReadOnlyList<SelectedRuntimeVariantInteractiveJournalEntry> ActionJournal { get; set; } =
         new List<SelectedRuntimeVariantInteractiveJournalEntry>();
     public int RuntimeCommandExecutionCount { get; set; }
@@ -127,6 +132,7 @@ public sealed class SelectedRuntimeVariantInteractiveCheckpoint
     public string InventorySummary { get; set; } = string.Empty;
     public string QuestSummary { get; set; } = string.Empty;
     public string CombatSummary { get; set; } = string.Empty;
+    public string EquipmentSummary { get; set; } = string.Empty;
     public string CreatedAtUtc { get; set; } = string.Empty;
 }
 

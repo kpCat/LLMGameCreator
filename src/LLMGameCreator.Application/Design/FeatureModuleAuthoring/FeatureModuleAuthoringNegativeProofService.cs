@@ -76,9 +76,13 @@ public sealed class FeatureModuleAuthoringNegativeProofService
         var saveAsDuplicate = Throws(() => persistence.SaveAs(savedDocument, savedDocument.CompositionId, "Duplicate", library));
         var missingDocument = savedDocument with { SelectedModuleIds = ["feature.profile.missing"] };
         var missing = new FeatureModuleCompositionStalenessService().Evaluate(missingDocument, library);
+        var staleFingerprints = library.ModuleFingerprints.ToDictionary(pair => pair.Key, pair => pair.Value,
+            StringComparer.Ordinal);
+        staleFingerprints[savedDocument.SelectedModuleIds[0]] = new string('f', 64);
         var stale = new FeatureModuleCompositionStalenessService().Evaluate(savedDocument, library with
         {
-            CatalogFingerprint = new string('f', 64)
+            CatalogFingerprint = new FeatureModuleLibraryFingerprintService().CatalogFingerprint(staleFingerprints),
+            ModuleFingerprints = staleFingerprints
         });
         var parameterSource = Read(repositoryRoot,
             "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterBindingService.cs");
@@ -155,7 +159,7 @@ public sealed class FeatureModuleAuthoringNegativeProofService
         try
         {
             CopyDirectory(sourceRoot, temp);
-            var manifestPath = Path.Combine(temp, "catalog.json");
+            var manifestPath = Path.Combine(temp, FeatureModuleLibraryVocabulary.ManifestFileName);
             var manifest = JsonNode.Parse(File.ReadAllText(manifestPath))!.AsObject();
             var relative = manifest["moduleFiles"]!.AsArray()
                 .Select(item => item!.GetValue<string>())

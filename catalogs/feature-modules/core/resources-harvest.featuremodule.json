@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.world.grid_navigation", "feature.inventory.basic"],
   "conflicts": [],
@@ -23,5 +24,23 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.resources.harvest",
+      "capabilityId": "capability.resources.harvest",
+      "actionId": "harvest",
+      "category": "harvest",
+      "phase": "production",
+      "order": 90,
+      "runtimePrimitiveId": "runtime.command.harvest_resource",
+      "targetSelector": "resource_node_id",
+      "args": { "id": "node/apple_tree", "inventoryId": "inventory/player_start", "itemId": "item/woodcutting_axe", "seed": "136" },
+      "dependsOnActionIds": ["craft"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["resource_harvested"]
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.world.grid_navigation"],
   "conflicts": [],
@@ -23,5 +24,23 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.interaction.basic",
+      "capabilityId": "capability.interaction.basic",
+      "actionId": "interact",
+      "category": "interact",
+      "phase": "interaction",
+      "order": 30,
+      "runtimePrimitiveId": "runtime.command.interact",
+      "targetSelector": "interaction_id",
+      "args": { "id": "interaction/sign_inspect" },
+      "dependsOnActionIds": ["move"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["interaction_triggered"]
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

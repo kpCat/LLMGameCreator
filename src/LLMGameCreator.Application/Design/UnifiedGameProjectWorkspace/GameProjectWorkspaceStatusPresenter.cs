@@ -70,5 +70,7 @@ public sealed class GameProjectWorkspaceStatusPresenter
     private static (string Title, string Description, string Category) Metadata(FeatureModuleDefinition module) =>
         Presentation.TryGetValue(module.ModuleId, out var value)
             ? value
-            : (module.Title, module.KnownLimitations.FirstOrDefault() ?? "Механика из каталога проекта.", module.Category);
+            : (module.Title,
+                string.IsNullOrWhiteSpace(module.Description) ? "Механика из каталога проекта." : module.Description,
+                module.Category);
 }

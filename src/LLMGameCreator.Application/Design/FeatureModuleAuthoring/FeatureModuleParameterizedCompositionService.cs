@@ -53,7 +53,8 @@ public sealed class FeatureModuleParameterizedCompositionService
         string repositoryRoot,
         FeatureModuleLibrarySnapshot library,
         FeatureModuleCompositionDocument document,
-        string outputRoot)
+        string outputRoot,
+        bool useCapabilityDrivenRuntimePlaythrough = false)
     {
         var root = Path.GetFullPath(repositoryRoot);
         var validation = _documentValidator.Validate(document, library);
@@ -86,7 +87,8 @@ public sealed class FeatureModuleParameterizedCompositionService
             effectiveCatalog,
             document.SelectedModuleIds,
             Path.GetFullPath(outputRoot),
-            document.CompositionId);
+            document.CompositionId,
+            useCapabilityDrivenRuntimePlaythrough);
         var semantic = qualification.Artifacts.SemanticEffects;
         var passed = qualification.Result.Passed
                      && semantic.SatisfiedSelectedModuleCount == document.SelectedModuleIds.Count

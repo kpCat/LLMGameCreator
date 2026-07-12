@@ -67,19 +67,29 @@ public sealed class FeatureModuleCompositionStalenessService
                 && (!document.ModuleFingerprints.TryGetValue(id, out var saved)
                     || !string.Equals(current, saved, StringComparison.Ordinal)))
             .OrderBy(id => id, StringComparer.Ordinal).ToList();
+        var changedRequired = library.Catalog.Modules.Where(module => module.Required)
+            .Where(module => document.ModuleFingerprints.TryGetValue(module.ModuleId, out var saved)
+                             && library.ModuleFingerprints.TryGetValue(module.ModuleId, out var current)
+                             && !string.Equals(current, saved, StringComparison.Ordinal))
+            .Select(module => module.ModuleId)
+            .OrderBy(id => id, StringComparer.Ordinal).ToList();
         var catalogChanged = !string.Equals(document.CatalogFingerprint, library.CatalogFingerprint, StringComparison.Ordinal);
         var diagnostics = missing.Select(id => "missing selected module unresolved: " + id)
             .Concat(changed.Select(id => "selected module fingerprint changed: " + id))
+            .Concat(changedRequired.Select(id => "required core module fingerprint changed: " + id))
             .ToList();
-        if (catalogChanged) diagnostics.Add("catalog fingerprint changed");
+        var additiveCompatible = catalogChanged && missing.Count == 0 && changed.Count == 0 && changedRequired.Count == 0;
+        if (additiveCompatible) diagnostics.Add("informational catalog drift: unselected optional additions or changes are compatible");
         var unresolved = missing.Count > 0;
-        var stale = unresolved || catalogChanged || changed.Count > 0;
+        var stale = unresolved || changed.Count > 0 || changedRequired.Count > 0;
         return new FeatureModuleCompositionStaleness
         {
-            Status = unresolved ? "UNRESOLVED" : stale ? "STALE" : "CURRENT",
+            Status = unresolved ? "UNRESOLVED" : stale ? "STALE" : additiveCompatible ? "ADDITIVE_COMPATIBLE" : "CURRENT",
             Stale = stale,
             Unresolved = unresolved,
             CatalogFingerprintChanged = catalogChanged,
+            AdditiveCompatible = additiveCompatible,
+            ChangedRequiredCoreModuleIds = changedRequired,
             ChangedModuleIds = changed,
             MissingModuleIds = missing,
             Diagnostics = diagnostics

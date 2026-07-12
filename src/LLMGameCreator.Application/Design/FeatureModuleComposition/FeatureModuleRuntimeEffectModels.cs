@@ -4,6 +4,9 @@ public static class FeatureModuleRuntimeEffectMetricKinds
 {
     public const string InventoryItemQuantity = "inventory_item_quantity";
     public const string CombatResourceAmount = "combat_resource_amount";
+    public const string EquipmentSlotItemEquals = "equipment_slot_item_equals";
+    public const string InventoryItemAbsentOrDecreased = "inventory_item_absent_or_decreased";
+    public const string CombatDamageDelta = "combat_damage_delta";
 }
 
 public static class FeatureModuleRuntimeEffectComparisonKinds
@@ -12,6 +15,7 @@ public static class FeatureModuleRuntimeEffectComparisonKinds
     public const string ChangedFromBaseline = "changed_from_baseline";
     public const string Equal = "equal";
     public const string AtLeast = "at_least";
+    public const string LessThanBaseline = "less_than_baseline";
 }
 
 public sealed record FeatureModuleRuntimeEffectContract

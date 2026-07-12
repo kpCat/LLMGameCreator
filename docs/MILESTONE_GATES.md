@@ -98,6 +98,15 @@ Goal 148A note: the production New Game path now materializes every package-decl
 
 Goal 148B note: the real Goal148 manual `_navigation` cross-thread failure is recorded. All five WinForms current-package subscribers now use named, disposal-safe owning-thread dispatch; the two async pages coalesce refreshes and observe exceptions. The production New Game + Projects + MainForm automated retry is GREEN with unchanged package/final hashes and support preparation. Goal148 remains unaccepted and requires the human retry; Goal141 remains unaccepted.
 
+Goal 149 note: Goal148 is now accepted by the exact human decision recorded for
+this goal. Ten core and four optional FeatureModules feed a deterministic,
+dependency-aware Runtime playthrough plan on the normal Игры path; the legacy
+no-plan qualifier remains compatible. Equipment is optional/default-off and
+adds chest, transfer, equip, presentation, save/replay and player-only weapon
+bonus proof when enabled. Unselected catalog growth is additive-compatible.
+Goal149 is GREEN with manual review deferred and `accepted=false`; Goal141 stays
+unaccepted, and Goal150 requires a later explicit Goal149 acceptance.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.interaction.basic", "feature.inventory.basic"],
   "conflicts": [],
@@ -23,5 +24,39 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.combat.begin_encounter",
+      "capabilityId": "capability.combat.turn_based_encounter",
+      "actionId": "begin_encounter",
+      "category": "begin_encounter",
+      "phase": "combat",
+      "order": 120,
+      "runtimePrimitiveId": "runtime.command.start_encounter",
+      "targetSelector": "encounter_id",
+      "args": { "id": "encounter/goblin_duel", "seed": "136" },
+      "dependsOnActionIds": ["transaction"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["encounter_started"]
+    },
+    {
+      "contractId": "playthrough.combat.basic_attack",
+      "capabilityId": "capability.combat.turn_based_encounter",
+      "actionId": "basic_attack",
+      "category": "basic_attack",
+      "phase": "combat",
+      "order": 130,
+      "runtimePrimitiveId": "runtime.command.basic_attack",
+      "targetSelector": "encounter_participant_id",
+      "args": { "id": "goblin", "sourceParticipantId": "player" },
+      "dependsOnActionIds": ["begin_encounter"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["combat_damage_applied"]
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

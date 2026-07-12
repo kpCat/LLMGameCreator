@@ -30,7 +30,9 @@ public sealed class FeatureModulePersistenceTests
 
             var changed = library with { CatalogFingerprint = new string('a', 64) };
             var stale = new FeatureModuleCompositionStalenessService().Evaluate(loaded, changed);
-            Assert.True(stale.Stale);
+            Assert.False(stale.Stale);
+            Assert.True(stale.AdditiveCompatible);
+            Assert.Equal("ADDITIVE_COMPATIBLE", stale.Status);
             Assert.True(stale.CatalogFingerprintChanged);
         }
         finally { if (Directory.Exists(workspace)) Directory.Delete(workspace, true); }

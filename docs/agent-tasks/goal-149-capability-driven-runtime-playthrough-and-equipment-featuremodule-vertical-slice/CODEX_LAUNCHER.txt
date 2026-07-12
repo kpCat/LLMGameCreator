@@ -1,0 +1,14 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-149-capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice/GOAL.md
+
+Codex reasoning: very high
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md; не рассчитывай на память из других диалогов.
+
+После выполнения обязательно commit/push в origin/main со статусом GREEN/BLOCKED/FAILED согласно инструкции в GOAL.md.

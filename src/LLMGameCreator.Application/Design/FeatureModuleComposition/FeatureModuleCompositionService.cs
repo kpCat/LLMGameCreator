@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using LLMGameCreator.Application.Design.AcceptedAlphaUnityPlayableProjection;
+using LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Application.Design.ProductLineRuntimeVariantMatrix;
 using LLMGameCreator.Application.Validation;
@@ -184,7 +185,8 @@ public sealed class FeatureModuleCompositionService
         FeatureModuleCatalogDocument catalog,
         IReadOnlyList<string> selectedModuleIds,
         string outputRootPath,
-        string compositionId = "")
+        string compositionId = "",
+        bool useCapabilityDrivenRuntimePlaythrough = false)
     {
         var root = ResolveRepositoryRoot(repositoryRootPath);
         ValidateCatalog(catalog);
@@ -215,7 +217,7 @@ public sealed class FeatureModuleCompositionService
             CoverageReasons = ["runtime_effect_baseline"]
         };
         var baseline = BuildComposition(root, outputRoot, catalog, basePackagePath, baseHash, baseJson,
-            baselineSpec, goal142Hashes, null);
+            baselineSpec, goal142Hashes, null, useCapabilityDrivenRuntimePlaythrough);
         if (selected.Count == 0) return new FeatureModuleCompositionQualification
         {
             Result = baseline.Result,
@@ -232,7 +234,7 @@ public sealed class FeatureModuleCompositionService
             CoverageReasons = ["operator_selected"]
         };
         var composed = BuildComposition(root, outputRoot, catalog, basePackagePath, baseHash, baseJson,
-            selectedSpec, goal142Hashes, baseline.Artifacts.Session);
+            selectedSpec, goal142Hashes, baseline.Artifacts.Session, useCapabilityDrivenRuntimePlaythrough);
         return new FeatureModuleCompositionQualification
         {
             Result = composed.Result,
@@ -249,17 +251,23 @@ public sealed class FeatureModuleCompositionService
         string baseJson,
         FeatureModuleCompositionCoverageSpec spec,
         IReadOnlySet<string> goal142Hashes,
-        RuntimeInteractiveSession? baselineSession)
+        RuntimeInteractiveSession? baselineSession,
+        bool useCapabilityDrivenRuntimePlaythrough = false)
     {
         var request = RequestFor(catalog, spec.CompositionId, spec.ModuleIds);
         var plan = _planner.Plan(catalog, request, Relative(root, basePackagePath), baseHash, true);
+        var metadataOperations = plan.OrderedMutationOperations
+            .Where(operation => operation.TargetKind == FeatureModuleItemMetadataMutationService.TargetKind).ToList();
+        var standardOperations = plan.OrderedMutationOperations
+            .Where(operation => operation.TargetKind != FeatureModuleItemMetadataMutationService.TargetKind).ToList();
+        var metadataMutation = new FeatureModuleItemMetadataMutationService().Apply(baseJson, metadataOperations);
         var recipe = new ProductLineRuntimeVariantRecipe
         {
             RecipeId = "composition_" + FeatureModuleCompositionIdentity.ShortName(catalog, spec.ModuleIds).Replace('-', '_'),
             CandidateId = spec.CompositionId,
             DisplayName = spec.DisplayName,
             VariantKind = spec.ModuleIds.Count == 0 ? "baseline_composition" : string.Join("+", spec.ModuleIds),
-            MutationOperations = plan.OrderedMutationOperations,
+            MutationOperations = standardOperations,
             RequiredAnchors = ProductLineRuntimeVariantMatrixVocabulary.RequiredAnchors
         };
         var context = new ProductLineRuntimeVariantMetadataContext
@@ -286,16 +294,22 @@ public sealed class FeatureModuleCompositionService
                 operationIds = plan.OrderedMutationOperations.Select(operation => operation.OperationId).ToList()
             }, JsonOptions)
         };
-        var materialized = _materializer.Materialize(baseJson, recipe, context);
-        if (!materialized.MutationAudit.Passed)
+        var materialized = _materializer.Materialize(metadataMutation.PackageJson, recipe, context);
+        var mutationAudit = CombineAudit(materialized.MutationAudit, metadataMutation);
+        if (!mutationAudit.Passed)
         {
             throw new InvalidOperationException("Goal146 mutation target or expected old value validation failed: " + spec.CompositionId);
         }
 
         var reverseRequest = request with { SelectedModuleIds = request.SelectedModuleIds.Reverse().ToList() };
         var reversePlan = _planner.Plan(catalog, reverseRequest, Relative(root, basePackagePath), baseHash, true);
-        var reverseRecipe = recipe with { MutationOperations = reversePlan.OrderedMutationOperations };
-        var reverseJson = _materializer.Materialize(baseJson, reverseRecipe, context).PackageJson;
+        var reverseMetadataOperations = reversePlan.OrderedMutationOperations
+            .Where(operation => operation.TargetKind == FeatureModuleItemMetadataMutationService.TargetKind).ToList();
+        var reverseStandardOperations = reversePlan.OrderedMutationOperations
+            .Where(operation => operation.TargetKind != FeatureModuleItemMetadataMutationService.TargetKind).ToList();
+        var reverseMetadata = new FeatureModuleItemMetadataMutationService().Apply(baseJson, reverseMetadataOperations);
+        var reverseRecipe = recipe with { MutationOperations = reverseStandardOperations };
+        var reverseJson = _materializer.Materialize(reverseMetadata.PackageJson, reverseRecipe, context).PackageJson;
         var packageSha = HashText(materialized.PackageJson);
         var reverseSha = HashText(reverseJson);
         var orderProof = new FeatureModuleOrderIndependenceProof
@@ -317,6 +331,11 @@ public sealed class FeatureModuleCompositionService
         var package = DeserializePackage(materialized.PackageJson);
         var sourceUnmodified = HashFile(basePackagePath) == baseHash;
         var packageValidation = ValidatePackage(root, outputRoot, packagePath, package, spec.CompositionId, sourceUnmodified);
+        var capabilityPlan = useCapabilityDrivenRuntimePlaythrough
+            ? new CapabilityDrivenRuntimePlaythroughPlanner().Plan(
+                catalog.Modules.Where(module => module.Required || spec.ModuleIds.Contains(module.ModuleId, StringComparer.Ordinal)).ToList(),
+                package)
+            : null;
         var qualification = _qualifier.Qualify(package, new ProductLineRuntimeQualificationRequest
         {
             SessionId = "goal146-" + spec.CompositionId + "-session",
@@ -325,19 +344,20 @@ public sealed class FeatureModuleCompositionService
             PackagePath = Relative(root, packagePath),
             PackageSha256 = packageSha,
             CheckpointId = "goal146-" + spec.CompositionId + "-checkpoint-after-craft",
-            FinalCheckpointId = "goal146-" + spec.CompositionId + "-final-journal"
+            FinalCheckpointId = "goal146-" + spec.CompositionId + "-final-journal",
+            CapabilityPlan = capabilityPlan
         });
         var semantic = BuildSemanticProof(catalog, spec, qualification.Session, baselineSession ?? qualification.Session);
         var distinctFromGoal142 = !goal142Hashes.Contains(packageSha);
         var passed = packageValidation.Passed
-                     && materialized.MutationAudit.Passed
+                      && mutationAudit.Passed
                      && plan.Validation.Passed
                      && orderProof.Passed
                      && qualification.InvalidActionStateUnchanged
                      && qualification.CheckpointReplay.Passed
-                     && qualification.CheckpointReplay.ReplayedActionCount == 8
+                      && qualification.CheckpointReplay.ReplayedActionCount == qualification.CheckpointActionCount
                      && qualification.FinalReplay.Passed
-                     && qualification.FinalReplay.ReplayedActionCount == 13
+                      && qualification.FinalReplay.ReplayedActionCount == qualification.PlannedActionCount
                      && qualification.ActionDescriptorExecutionBindingPassed
                      && semantic.Passed
                      && distinctFromGoal142;
@@ -351,7 +371,7 @@ public sealed class FeatureModuleCompositionService
             FinalStateHash = qualification.Session.CurrentStateHash,
             CheckpointHash = qualification.Checkpoint.ExpectedStateHash,
             PackageValidationPassed = packageValidation.Passed,
-            MutationAuditPassed = materialized.MutationAudit.Passed,
+            MutationAuditPassed = mutationAudit.Passed,
             DependencyValidationPassed = plan.Validation.DependenciesSatisfied,
             ConflictValidationPassed = plan.Validation.ConflictsAbsent && plan.Validation.MutationTargetsUniqueOrIdentical,
             OrderIndependencePassed = orderProof.Passed,
@@ -370,7 +390,7 @@ public sealed class FeatureModuleCompositionService
         {
             PackageJson = materialized.PackageJson,
             Plan = plan,
-            MutationAudit = materialized.MutationAudit,
+            MutationAudit = mutationAudit,
             PackageValidation = packageValidation,
             Session = qualification.Session,
             ActionCatalog = qualification.ActionCatalog,
@@ -381,6 +401,22 @@ public sealed class FeatureModuleCompositionService
             SemanticEffects = semantic,
             OrderIndependence = orderProof
         });
+    }
+
+    private static ProductLineRuntimeVariantMutationAudit CombineAudit(
+        ProductLineRuntimeVariantMutationAudit standard,
+        FeatureModuleItemMetadataMutationResult metadata)
+    {
+        var operations = standard.Operations.Concat(metadata.Operations)
+            .OrderBy(operation => operation.OperationId, StringComparer.Ordinal).ToList();
+        var diagnostics = standard.Diagnostics.Concat(metadata.Diagnostics).ToList();
+        return standard with
+        {
+            OperationCount = operations.Count,
+            Passed = standard.Passed && metadata.Passed,
+            Operations = operations,
+            Diagnostics = diagnostics
+        };
     }
 
     private FeatureModulePackageValidation ValidatePackage(

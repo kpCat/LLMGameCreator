@@ -1,5 +1,38 @@
 namespace LLMGameCreator.Runtime.Abstractions;
 
+public sealed class CapabilityRuntimePlaythroughAction
+{
+    public string ContractId { get; set; } = string.Empty;
+    public string CapabilityId { get; set; } = string.Empty;
+    public string ActionId { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public string Phase { get; set; } = string.Empty;
+    public int Order { get; set; }
+    public string RuntimePrimitiveId { get; set; } = string.Empty;
+    public string TargetSelector { get; set; } = string.Empty;
+    public string ResolvedTargetId { get; set; } = string.Empty;
+    public IReadOnlyDictionary<string, string> Args { get; set; } =
+        new Dictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyList<string> DependsOnActionIds { get; set; } = new List<string>();
+    public bool CheckpointBoundaryAfter { get; set; }
+    public bool PresentationOnly { get; set; }
+    public bool Required { get; set; } = true;
+    public IReadOnlyList<string> ExpectedRuntimeEffects { get; set; } = new List<string>();
+}
+
+public sealed class CapabilityRuntimePlaythroughPlan
+{
+    public string PlanId { get; set; } = string.Empty;
+    public IReadOnlyList<string> SelectedModuleIds { get; set; } = new List<string>();
+    public IReadOnlyList<string> CapabilityIds { get; set; } = new List<string>();
+    public IReadOnlyList<CapabilityRuntimePlaythroughAction> OrderedActions { get; set; } =
+        new List<CapabilityRuntimePlaythroughAction>();
+    public string CheckpointBoundaryActionId { get; set; } = string.Empty;
+    public IReadOnlyList<string> RuntimePrimitiveIds { get; set; } = new List<string>();
+    public string ActionPlanSignature { get; set; } = string.Empty;
+    public IReadOnlyList<string> Diagnostics { get; set; } = new List<string>();
+}
+
 public sealed class CanonicalRuntimePlayerCommandLoopRequest
 {
     public string CandidateId { get; set; } = string.Empty;
@@ -9,6 +42,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopRequest
     public string Goal134StateSummaryPath { get; set; } = string.Empty;
     public string Goal135PlayerLoopPlanPath { get; set; } = string.Empty;
     public string Goal135PlayerAdapterContractPath { get; set; } = string.Empty;
+    public CapabilityRuntimePlaythroughPlan? CapabilityPlan { get; set; }
 }
 
 public sealed class CanonicalRuntimePlayerCommandLoopInput
@@ -37,6 +71,9 @@ public sealed class CanonicalRuntimePlayerCommandLoopStep
     public string RuntimeCommandKind { get; set; } = string.Empty;
     public string TargetId { get; set; } = string.Empty;
     public string RuntimePrimitiveHint { get; set; } = string.Empty;
+    public string ActionId { get; set; } = string.Empty;
+    public IReadOnlyDictionary<string, string> Args { get; set; } =
+        new Dictionary<string, string>(StringComparer.Ordinal);
     public bool RuntimeExecuted { get; set; } = true;
     public bool RequiredForGreen { get; set; } = true;
 }
@@ -50,6 +87,8 @@ public sealed class CanonicalRuntimePlayerCommandLoopRuntimeEvent
     public string EventType { get; set; } = string.Empty;
     public string TargetId { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
+    public IReadOnlyDictionary<string, string> Args { get; set; } =
+        new Dictionary<string, string>(StringComparer.Ordinal);
 }
 
 public sealed class CanonicalRuntimePlayerCommandLoopSnapshot
@@ -68,6 +107,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopSnapshot
     public string QuestSummary { get; set; } = string.Empty;
     public string InventorySummary { get; set; } = string.Empty;
     public string CombatSummary { get; set; } = string.Empty;
+    public string EquipmentSummary { get; set; } = string.Empty;
     public string DiagnosticSummary { get; set; } = string.Empty;
     public bool ProjectionOnly { get; set; }
     public bool UnityGameplayTruth { get; set; }
@@ -85,6 +125,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopSession
     public bool RuntimeExecutionSucceeded { get; set; } = true;
     public int EventIndex { get; set; }
     public UnifiedRuntimeSession RuntimeSession { get; set; } = new();
+    public CapabilityRuntimePlaythroughPlan? CapabilityPlan { get; set; }
     public IReadOnlyList<CanonicalRuntimePlayerCommandLoopStep> Steps { get; set; } =
         new List<CanonicalRuntimePlayerCommandLoopStep>();
     public List<CanonicalRuntimePlayerCommandLoopSnapshot> Snapshots { get; set; } = new();

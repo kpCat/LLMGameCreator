@@ -50,12 +50,13 @@ public sealed class FeatureModuleCertificationService
                 invalidated++;
             if (state == FeatureModuleCertificationCacheReadState.Corrupt) corrupt = true;
             var output = Path.Combine(Path.GetFullPath(executionRoot), FeatureModuleLibraryFingerprintService.Hash(item.ModuleId));
+            var target = library.Catalog.Modules.Single(module => module.ModuleId == item.ModuleId);
             var qualification = _compositionService.ComposeAndQualify(
                 repositoryRoot, library.Catalog, item.CertificationSelectedModuleIds, output,
-                FeatureModuleCompositionIdentity.CompositionId(library.Catalog, item.CertificationSelectedModuleIds));
+                FeatureModuleCompositionIdentity.CompositionId(library.Catalog, item.CertificationSelectedModuleIds),
+                useCapabilityDrivenRuntimePlaythrough: target.RuntimePlaythroughContracts.Count > 0);
             var parameterValidation = _parameters.Validate(library.Catalog, item.CertificationSelectedModuleIds, []);
             var result = qualification.Result;
-            var target = library.Catalog.Modules.Single(module => module.ModuleId == item.ModuleId);
             var targetObservations = result.SemanticEffects.Observations
                 .Where(observation => observation.ModuleId == item.ModuleId)
                 .ToList();

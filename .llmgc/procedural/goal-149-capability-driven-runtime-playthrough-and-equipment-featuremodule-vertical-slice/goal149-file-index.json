@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "goal149_file_index_v1",
+  "fileCount": 16,
+  "files": [
+    {
+      "relativePath": "goal148-human-acceptance-record.json",
+      "sha256": "64270639cebdb35bb3c2b1812ea15a0f05ef2b88f8232ef86a1c3afdce2199c8",
+      "byteCount": 314
+    },
+    {
+      "relativePath": "capability-runtime-playthrough-contract-catalog.json",
+      "sha256": "4db8be56aba534d0bd27f25901ae932c5a92549831474f8eee0372390b1c04cd",
+      "byteCount": 15710
+    },
+    {
+      "relativePath": "capability-runtime-playthrough-plan.json",
+      "sha256": "d8e2c205e79c44469585bb798ed56f69dd2e1a7e4c8e7a34082a851bd41d0dda",
+      "byteCount": 14735
+    },
+    {
+      "relativePath": "capability-runtime-playthrough-dashboard.json",
+      "sha256": "fefc5d415d272473d9d3999ef49ec372f16b11956069bfc85a65c444f186da3f",
+      "byteCount": 1154
+    },
+    {
+      "relativePath": "legacy-project-additive-compatibility-proof.json",
+      "sha256": "f279fd2c8c0a277a3224225467e05a1e4333d764c677635d4fa122bf3f2e5ade",
+      "byteCount": 596
+    },
+    {
+      "relativePath": "legacy-project-hash-regression-proof.json",
+      "sha256": "4d312c20565f3652a2f68ef86b4103fffeea890113f8a00749317f2fcf321f56",
+      "byteCount": 521
+    },
+    {
+      "relativePath": "equipment-module-definition-proof.json",
+      "sha256": "c804c9b4821b69f3045a529a0f4641f534d96be38417e073c9b8b689a9cd61ce",
+      "byteCount": 9465
+    },
+    {
+      "relativePath": "equipment-enabled-build-proof.json",
+      "sha256": "3d8efcc48b210a72267bc72cda67a8c276106a53922663e7efd2147bb555bcf1",
+      "byteCount": 944
+    },
+    {
+      "relativePath": "equipment-disabled-build-proof.json",
+      "sha256": "b700ff70fd436b4054ec12595bc74d4c38fd42671d443ef53100fefb74296812",
+      "byteCount": 523
+    },
+    {
+      "relativePath": "equipment-without-combat-proof.json",
+      "sha256": "3ee9f33237fe3499a587992650207fa24965fe19986d48b829c0bcbd2ecbe65c",
+      "byteCount": 338
+    },
+    {
+      "relativePath": "combat-without-equipment-proof.json",
+      "sha256": "a0e6a9ddc2f27ebc6a8d5d7ef59f8c4c0b7fbceeda18f00d4fe973e29251af92",
+      "byteCount": 250
+    },
+    {
+      "relativePath": "equipment-save-replay-proof.json",
+      "sha256": "c1c767c8ac47af4c37314ba5d0c3360c232e40e898b69c8123ef5c16a7e55d78",
+      "byteCount": 407
+    },
+    {
+      "relativePath": "equipment-negative-proof.json",
+      "sha256": "4d75917117b4ddf7e80edb84851fffb4391a4c6e4924fb406e13c6ddb9261f57",
+      "byteCount": 446
+    },
+    {
+      "relativePath": "goal149-regression-compatibility-proof.json",
+      "sha256": "70929e5441e2167b62a6fde4c886063c7079be1d0b8526bcb16d107e1e3016e3",
+      "byteCount": 416
+    },
+    {
+      "relativePath": "goal149-negative-proof.json",
+      "sha256": "5d771442bd8071d2fdf0aacbb76ee12c57bc472194ea78c519d85086fe7e361a",
+      "byteCount": 986
+    },
+    {
+      "relativePath": "goal149-report.md",
+      "sha256": "80c3ace5e0c1bc7efaa292a85756ddd03d24482e6ed5ae56f5120c2ff7cbaa5f",
+      "byteCount": 993
+    }
+  ],
+  "sha256Included": true,
+  "passed": true
+}

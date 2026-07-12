@@ -85,6 +85,19 @@ at 8 actions before the returned session continues to the 13-action final state.
 Goal145 records Goal144 human acceptance, discovers every Goal142 candidate,
 runs the same Runtime session/replay kernel across all four, proves semantic
 focus differences and exposes operator selection plus a read-only Unity matrix.
+Goals146-147 replace fixed profile combinations with catalog-driven
+FeatureModule composition, persisted typed authoring and incremental
+certification. Goal148 makes the Игры page the primary project workflow and its
+accepted Goal148C baseline preserves project identity plus honest composition,
+activated-package and Runtime hashes. Goal149 replaces the normal unified
+project's fixed 13-action assumption with structured module playthrough
+contracts and a deterministic capability plan, then proves the first optional
+equipment vertical slice. Equipment is the fourth optional module and is
+disabled by default; unrelated saved projects remain additive-compatible when
+it appears in the catalog. Goal149 is GREEN with manual review deferred and
+`accepted=false` at
+`capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required`;
+Goal150 must not start before an explicit human decision.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 

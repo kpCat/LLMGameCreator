@@ -1,8 +1,54 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 148C project identity preservation and project-scoped composition hotfix
+Updated by: Goal 149 capability-driven Runtime playthrough and equipment FeatureModule vertical slice
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 149 capability-driven Runtime playthrough and equipment FeatureModule vertical slice is GREEN:
+
+```text
+implementationStatus=GREEN
+gateStatus=capability_driven_runtime_playthrough_and_equipment_featuremodule_vertical_slice_verification required
+goal148Accepted=true
+goal148AcceptedByHuman=true
+goal148AcceptedByCodex=false
+goal149Accepted=false
+goal149ManualReviewDeferred=true
+capabilityDrivenRuntimePlaythrough=true
+fixedNormalActionPlanAbsent=true
+requiredCoreModuleCount=10
+optionalFeatureModuleCount=4
+equipmentFeatureModule=true
+equipmentDefaultSelected=false
+additiveCatalogCompatibility=true
+legacyGoal148HashesPreserved=true
+disabledCompositionPackageSha256=e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221
+disabledActivatedPackageSha256=c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb
+disabledFinalStateHash=95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8
+disabledActionCounts=13/8/13
+enabledCompositionPackageSha256=94a47ab896b425a76c2e523acef3ab87d538bb8f0c754b2402b0127e5ad82bf5
+enabledActivatedPackageSha256=147f88ac026f006ab5fbe93dc6c7cb039e85189fcb3421a71a1fd99284d3a5c1
+enabledFinalStateHash=51bba1ffada4ce9ffccfa9132e7e7c007afcbcec8632d7de13d26ce961b3ea0d
+enabledActionCounts=17/13/17
+equipmentSlot=slot/weapon
+equipmentItem=item/rusty_knife
+weaponDamageBonus=2
+combatDamageDelta=2
+accepted=false
+nextProductGoal=goal_150_character_stats_and_progression_featuremodule_vertical_slice
+```
+
+The normal Игры workspace now derives its Runtime playthrough from structured
+FeatureModule contracts and a deterministic dependency-aware plan. The new
+optional equipment module is catalog-visible but disabled by default; when
+selected it opens the starting chest, transfers and equips `item/rusty_knife`,
+surfaces `Экипировано: Ржавый нож`, and adds the configured `+2` only to the
+player's equipped-weapon attack. Save/replay preserves the equipment summary,
+plan identity and dynamic checkpoint/final counts. A newly discovered optional
+module is additive-compatible with unrelated saved projects; selected or
+required module drift remains stale/unresolved. The accepted Goal148 package
+and final hashes remain unchanged when equipment is disabled. Goal149 manual
+review is deferred, so Goal149 and Goal141 remain `accepted=false`.
 
 Goal 148C project identity preservation and project-scoped composition hotfix is GREEN:
 

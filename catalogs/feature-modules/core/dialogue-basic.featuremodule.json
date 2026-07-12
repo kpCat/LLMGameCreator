@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.interaction.basic"],
   "conflicts": [],
@@ -23,5 +24,23 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.dialogue.open",
+      "capabilityId": "capability.dialogue.basic",
+      "actionId": "open_dialogue",
+      "category": "open_dialogue",
+      "phase": "narrative",
+      "order": 50,
+      "runtimePrimitiveId": "runtime.command.open_dialogue",
+      "targetSelector": "dialogue_id",
+      "args": { "id": "dialogue/old_guard_intro" },
+      "dependsOnActionIds": ["inspect_inventory"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["dialogue_opened"]
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": [],
   "conflicts": [],
@@ -23,5 +24,39 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.world.start_runtime",
+      "capabilityId": "capability.runtime.bootstrap",
+      "actionId": "start_runtime",
+      "category": "start_runtime",
+      "phase": "bootstrap",
+      "order": 10,
+      "runtimePrimitiveId": "runtime.command.start",
+      "targetSelector": "start_map",
+      "args": {},
+      "dependsOnActionIds": [],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["runtime_started"]
+    },
+    {
+      "contractId": "playthrough.world.move",
+      "capabilityId": "capability.world.grid_navigation",
+      "actionId": "move",
+      "category": "move",
+      "phase": "world",
+      "order": 20,
+      "runtimePrimitiveId": "runtime.command.move",
+      "targetSelector": "entity_id",
+      "args": { "id": "entity/village/sign", "direction": "right" },
+      "dependsOnActionIds": ["start_runtime"],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": ["player_position_changed"]
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

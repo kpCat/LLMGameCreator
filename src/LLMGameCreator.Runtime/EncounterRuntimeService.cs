@@ -208,9 +208,29 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         }
 
         var outputs = BuildAbilityOutputs(ability, isBasicAttack).ToList();
+        var equipmentBonus = 0d;
+        if (isBasicAttack && RuntimeStateHelpers.IdEquals(source.Id, "player"))
+        {
+            if (!TryResolveEquipmentDamageBonus(package, working, out equipmentBonus, out var bonusDiagnostic))
+            {
+                result.Diagnostics.Add(bonusDiagnostic!);
+                result.Success = false;
+                result.Message = $"Ability failed: {ability.Id}";
+                return result;
+            }
+            if (equipmentBonus > 0)
+            {
+                foreach (var output in outputs.Where(IsDamageOutput)) output.Amount += equipmentBonus;
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic(
+                    "combat.equipment_damage_bonus.applied",
+                    "Equipped weapon damage bonus applied: +" + Format(equipmentBonus),
+                    source.Id,
+                    "info"));
+            }
+        }
         foreach (var output in outputs)
         {
-            ApplyEncounterOutput(package, encounter, source, target, output, result.Events, result.Diagnostics);
+            ApplyEncounterOutput(package, encounter, source, target, output, result.Events, result.Diagnostics, equipmentBonus);
         }
 
         encounter.ActionHistory.Add($"{source.Id}:{ability.Id}:{target.Id}");
@@ -331,7 +351,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         return result;
     }
 
-    private static void ApplyEncounterOutput(GamePackageDefinition package, EncounterRuntimeState encounter, EncounterParticipantState source, EncounterParticipantState target, OutputDefinition output, List<GameRuntimeEvent> events, List<RuntimeDiagnostic> diagnostics)
+    private static void ApplyEncounterOutput(GamePackageDefinition package, EncounterRuntimeState encounter, EncounterParticipantState source, EncounterParticipantState target, OutputDefinition output, List<GameRuntimeEvent> events, List<RuntimeDiagnostic> diagnostics, double equipmentBonus)
     {
         var outputTarget = ResolveOutputTarget(encounter, source, target, output);
         if (IsDamageOutput(output))
@@ -344,7 +364,16 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
             }
 
             resource.Amount = Math.Max(0, resource.Amount - Math.Abs(output.Amount));
-            events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.DamageApplied, $"Damage applied: {output.Id} -{Format(Math.Abs(output.Amount))}", outputTarget.Id));
+            Dictionary<string, string>? args = null;
+            if (equipmentBonus > 0)
+                args = new Dictionary<string, string>
+                {
+                    ["source"] = source.Id,
+                    ["damage"] = Format(Math.Abs(output.Amount)),
+                    ["equipmentDamageBonus"] = Format(equipmentBonus)
+                };
+            events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.DamageApplied,
+                $"Damage applied: {output.Id} -{Format(Math.Abs(output.Amount))}", outputTarget.Id, args));
             return;
         }
 
@@ -651,6 +680,42 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
     {
         return RuntimeStateHelpers.KindEquals(cost.Kind, "resource")
             || RuntimeStateHelpers.KindEquals(cost.Kind, "abstract_resource");
+    }
+
+    private static bool TryResolveEquipmentDamageBonus(
+        GamePackageDefinition package,
+        GameRuntimeState state,
+        out double bonus,
+        out RuntimeDiagnostic? diagnostic)
+    {
+        bonus = 0;
+        diagnostic = null;
+        var equipment = state.Equipment.FirstOrDefault(item =>
+            RuntimeStateHelpers.KindEquals(item.OwnerKind, "player")
+            && (RuntimeStateHelpers.IdEquals(item.OwnerId, state.PlayerEntityId)
+                || string.IsNullOrWhiteSpace(item.OwnerId)))
+                        ?? state.Equipment.FirstOrDefault(item => RuntimeStateHelpers.KindEquals(item.OwnerKind, "player"));
+        if (equipment is null) return true;
+        foreach (var slot in equipment.Slots.Where(item => !string.IsNullOrWhiteSpace(item.ItemId)))
+        {
+            var item = package.Game.Items.FirstOrDefault(definition => RuntimeStateHelpers.IdEquals(definition.Id, slot.ItemId));
+            if (item is null)
+            {
+                diagnostic = RuntimeStateHelpers.Diagnostic("combat.equipment_item_missing",
+                    "Equipped item definition is missing: " + slot.ItemId, slot.ItemId);
+                return false;
+            }
+            if (!item.Metadata.TryGetValue("combat_damage_bonus", out var raw)) continue;
+            if (!double.TryParse(raw, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out var value) || value < 0)
+            {
+                diagnostic = RuntimeStateHelpers.Diagnostic("combat.equipment_damage_bonus.invalid",
+                    "Equipped item combat_damage_bonus is invalid: " + item.Id, item.Id);
+                return false;
+            }
+            bonus += value;
+        }
+        return true;
     }
 
     private static GameRuntimeResult Failure(GameRuntimeState state, string code, string message, string? targetId)

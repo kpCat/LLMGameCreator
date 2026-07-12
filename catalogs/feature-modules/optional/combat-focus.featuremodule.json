@@ -6,6 +6,7 @@
   "moduleKind": "goal142_runtime_profile",
   "required": false,
   "selectable": true,
+  "defaultSelected": true,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.combat.turn_based_encounter"],
   "conflicts": [],

@@ -49,7 +49,10 @@ public sealed class FeatureModuleAuthoringWorkbenchController
 
     public FeatureModuleLibrarySnapshot RefreshLibrary()
     {
-        Library = _loader.Load(_libraryRoot);
+        var loaded = _loader.Load(_libraryRoot);
+        // The explicit legacy Goal147 diagnostics surface remains a profile-authoring view.
+        // New optional mechanics are exposed by the primary Игры workspace instead.
+        Library = FeatureModuleLegacyProfileLibraryView.Create(loaded);
         return Library;
     }
 

@@ -27,8 +27,32 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         RuntimeInteractiveSession baselineSession)
     {
         var diagnostics = new List<string>();
+        if (contract.MetricKind == FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta
+            && session.CapabilityPlan?.OrderedActions.All(action => action.ActionId != "basic_attack") == true)
+        {
+            return new FeatureModuleRuntimeEffectObservation
+            {
+                EffectId = contract.EffectId,
+                ModuleId = contract.ModuleId,
+                MetricKind = contract.MetricKind,
+                TargetId = contract.TargetId,
+                ResourceOrItemId = contract.ResourceOrItemId,
+                ComparisonKind = contract.ComparisonKind,
+                ExpectedValue = contract.ExpectedValue,
+                BaselineValue = "not_applicable",
+                ActualValue = "not_applicable",
+                RuntimeDimension = contract.RuntimeDimension,
+                Passed = true,
+                Diagnostics = ["combat capability absent; equipment combat delta is not applicable"]
+            };
+        }
         var actual = ReadMetric(contract, session, diagnostics);
-        var baseline = ReadMetric(contract, baselineSession, diagnostics);
+        var baseline = contract.MetricKind switch
+        {
+            FeatureModuleRuntimeEffectMetricKinds.EquipmentSlotItemEquals => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta => "0",
+            _ => ReadMetric(contract, baselineSession, diagnostics)
+        };
         var passed = diagnostics.Count == 0 && Compare(contract, actual, baseline);
         if (!passed && diagnostics.Count == 0)
             diagnostics.Add("runtime effect comparison failed");
@@ -57,9 +81,15 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         var value = contract.MetricKind switch
         {
             FeatureModuleRuntimeEffectMetricKinds.InventoryItemQuantity =>
-                InventoryQuantity(session.LatestInventorySummary, contract.TargetId, contract.ResourceOrItemId),
+                InventoryQuantity(session.LatestInventorySummary, contract.TargetId, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.CombatResourceAmount =>
-                CombatQuantity(session.LatestCombatSummary, contract.TargetId, contract.ResourceOrItemId),
+                CombatStartingQuantity(session, contract.TargetId, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.EquipmentSlotItemEquals =>
+                EquipmentItem(session.LatestEquipmentSummary, contract.TargetId),
+            FeatureModuleRuntimeEffectMetricKinds.InventoryItemAbsentOrDecreased =>
+                InventoryQuantity(session.LatestInventorySummary, contract.TargetId, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta =>
+                EquipmentDamageDelta(session)?.ToString(CultureInfo.InvariantCulture),
             _ => null
         };
         if (value is null)
@@ -67,24 +97,27 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             diagnostics.Add("unsupported or missing runtime effect metric: " + contract.MetricKind);
             return string.Empty;
         }
-        return value.Value.ToString(CultureInfo.InvariantCulture);
+        return value;
     }
 
     private static bool Compare(FeatureModuleRuntimeEffectContract contract, string actualText, string baselineText)
     {
-        if (!int.TryParse(actualText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var actual)
-            || !int.TryParse(baselineText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var baseline))
-            return false;
+        if (contract.ComparisonKind == FeatureModuleRuntimeEffectComparisonKinds.Equal
+            && !int.TryParse(contract.ExpectedValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out _))
+            return string.Equals(actualText, contract.ExpectedValue, StringComparison.Ordinal);
+        if (!decimal.TryParse(actualText, NumberStyles.Number, CultureInfo.InvariantCulture, out var actual)
+            || !decimal.TryParse(baselineText, NumberStyles.Number, CultureInfo.InvariantCulture, out var baseline)) return false;
         return contract.ComparisonKind switch
         {
             FeatureModuleRuntimeEffectComparisonKinds.GreaterThanBaseline => actual > baseline,
             FeatureModuleRuntimeEffectComparisonKinds.ChangedFromBaseline => actual != baseline,
             FeatureModuleRuntimeEffectComparisonKinds.Equal =>
-                int.TryParse(contract.ExpectedValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var expected)
+                decimal.TryParse(contract.ExpectedValue, NumberStyles.Number, CultureInfo.InvariantCulture, out var expected)
                 && actual == expected,
             FeatureModuleRuntimeEffectComparisonKinds.AtLeast =>
-                int.TryParse(contract.ExpectedValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var minimum)
+                decimal.TryParse(contract.ExpectedValue, NumberStyles.Number, CultureInfo.InvariantCulture, out var minimum)
                 && actual >= minimum,
+            FeatureModuleRuntimeEffectComparisonKinds.LessThanBaseline => actual < baseline,
             _ => false
         };
     }
@@ -107,5 +140,39 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         return match.Success
             ? int.Parse(match.Groups["value"].Value, CultureInfo.InvariantCulture)
             : null;
+    }
+
+    private static decimal? CombatStartingQuantity(
+        RuntimeInteractiveSession session,
+        string participantId,
+        string resourceId)
+    {
+        var remaining = CombatQuantity(session.LatestCombatSummary, participantId, resourceId);
+        if (!remaining.HasValue) return null;
+        var damage = session.LatestSnapshot.RuntimeEvents
+            .Where(item => item.EventType == "DamageApplied" && item.TargetId == participantId)
+            .Select(item => item.Args.TryGetValue("damage", out var raw)
+                ? raw
+                : Regex.Match(item.Message, @"-(?<value>\d+(?:\.\d+)?)$").Groups["value"].Value)
+            .Select(raw => decimal.TryParse(raw, NumberStyles.Number, CultureInfo.InvariantCulture, out var value) ? value : 0)
+            .Sum();
+        return remaining.Value + damage;
+    }
+
+    private static string? EquipmentItem(string summary, string slotId)
+    {
+        var entry = summary.Split(';').Select(part => part.Trim())
+            .SingleOrDefault(part => part.StartsWith(slotId + ":", StringComparison.Ordinal));
+        return entry is null ? null : entry[(slotId.Length + 1)..];
+    }
+
+    private static decimal? EquipmentDamageDelta(RuntimeInteractiveSession session)
+    {
+        var value = session.LatestSnapshot.RuntimeEvents
+            .Where(item => item.EventType == "DamageApplied")
+            .Select(item => item.Args.TryGetValue("equipmentDamageBonus", out var raw) ? raw : null)
+            .LastOrDefault(raw => raw is not null);
+        return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed)
+            ? parsed : null;
     }
 }

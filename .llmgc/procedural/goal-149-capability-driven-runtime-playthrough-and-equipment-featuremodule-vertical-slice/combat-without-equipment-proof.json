@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "combat_without_equipment_proof_v1",
+  "status": "GREEN",
+  "plannedActionCount": 13,
+  "equipmentActionsAbsent": true,
+  "combatActionsPassed": true,
+  "historicalDamageAndFinalStateUnchanged": true,
+  "passed": true
+}

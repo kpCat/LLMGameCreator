@@ -1,9 +1,9 @@
 # Unified Game Project Workspace and Legacy Diagnostics Isolation
 
-Status: GREEN, manual review required
-Gate: `unified_game_project_workspace_and_legacy_goal_diagnostics_isolation_verification required`
-Accepted: false
-Accepted by human: false
+Status: GREEN, accepted by human
+Gate: `unified_game_project_workspace_and_legacy_goal_diagnostics_isolation_verification passed`
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
 
 ## Review checklist
@@ -64,4 +64,16 @@ manualBuildExecutionPassed=true
 manualCrossThreadFailureResolved=true
 manualFailureClass=project_identity_overwritten_by_template_manifest
 rawScreenshotsNotCommitted=true
+```
+
+## Human acceptance recorded for Goal149
+
+Я принимаю Goal148 unified_game_project_workspace_and_legacy_goal_diagnostics_isolation_verification GREEN. goal148Accepted=true, projectsPageIsPrimaryWorkflow=true, normalWorkspaceGoalNumberControlCount=0, legacyDiagnosticsHiddenByDefault=true, legacyDiagnosticsAvailableByExplicitToggle=true, projectLocalAuthoringPersistence=true, projectAuthoringRoundtripPassed=true, realNewProjectBuildPassed=true, currentPackageUiThreadDispatchPassed=true, crossThreadExceptionAbsent=true, unsafeCurrentChangedSubscriberCount=0, projectIdentityPreserved=true, projectIdentitySidecar=true, legacyAuthoringMigrated=true, projectScopedCompositionId=project-game-goal148-manual-b64404fafc75, projectPackageId=game/goal148-manual, projectTitle=Проверка конструктора, projectVersion=0.1.0, compositionPackageSha256=e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221, activatedProjectPackageSha256=c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb, finalStateHash=95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8, supportFilesPrepared=true, stagedProjectValidationPassed=true, realProjectValidationPassed=true, packageActivationTransactional=true, failureRollbackPassed=true, heavyWorkRunsOffUiThread=true, uiPumpResponsive=true, projectionOnly=false, runtimeAuthority=true, unityGameplayTruth=false.
+
+```text
+goal148Accepted=true
+acceptedByHuman=true
+acceptedByCodex=false
+manualRetryRequired=false
+rawManualInputNotCommitted=true
 ```

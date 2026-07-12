@@ -50,6 +50,8 @@ public sealed record FeatureModuleCompositionStaleness
     public bool Stale { get; init; }
     public bool Unresolved { get; init; }
     public bool CatalogFingerprintChanged { get; init; }
+    public bool AdditiveCompatible { get; init; }
+    public IReadOnlyList<string> ChangedRequiredCoreModuleIds { get; init; } = [];
     public IReadOnlyList<string> ChangedModuleIds { get; init; } = [];
     public IReadOnlyList<string> MissingModuleIds { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];

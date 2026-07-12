@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "equipment_without_combat_proof_v1",
+  "status": "GREEN",
+  "plannedActionCount": 15,
+  "checkpointActionCount": 13,
+  "finalReplayActionCount": 15,
+  "equipmentActionsPassed": true,
+  "combatActionsAbsent": true,
+  "combatBonusAssertionRequired": false,
+  "qualificationPassed": true,
+  "passed": true
+}

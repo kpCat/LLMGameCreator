@@ -45,8 +45,12 @@ public sealed class FeatureModuleCompositionPersistenceService
         GuardId(compositionId);
         if (File.Exists(PathFor(compositionId))) throw new InvalidOperationException("duplicate composition ID rejected: " + compositionId);
         var now = _clock.UtcNow.ToUniversalTime();
-        var selected = (selectedModuleIds ?? library.Catalog.Modules.Where(module => module.Selectable && !module.Required)
+        var selected = (selectedModuleIds ?? library.Catalog.Modules.Where(module => module.Selectable && !module.Required
+                                                                            && module.DefaultSelected)
             .Select(module => module.ModuleId).ToList()).OrderBy(id => id, StringComparer.Ordinal).ToList();
+        var tracked = library.Catalog.Modules.Where(module => module.Required
+                                                              || selected.Contains(module.ModuleId, StringComparer.Ordinal))
+            .Select(module => module.ModuleId).ToList();
         return Normalize(new FeatureModuleCompositionDocument
         {
             CompositionId = compositionId,
@@ -54,7 +58,7 @@ public sealed class FeatureModuleCompositionPersistenceService
             Description = description,
             SelectedModuleIds = selected,
             CatalogFingerprint = library.CatalogFingerprint,
-            ModuleFingerprints = selected.Where(library.ModuleFingerprints.ContainsKey)
+            ModuleFingerprints = tracked.Where(library.ModuleFingerprints.ContainsKey)
                 .ToDictionary(id => id, id => library.ModuleFingerprints[id], StringComparer.Ordinal),
             CreatedAtUtc = now,
             UpdatedAtUtc = now
@@ -86,6 +90,17 @@ public sealed class FeatureModuleCompositionPersistenceService
         FeatureModuleLibrarySnapshot library)
     {
         var normalized = Normalize(document);
+        var staleness = _staleness.Evaluate(normalized, library);
+        if (staleness.Stale)
+            throw new InvalidOperationException("stale or unresolved composition save rejected: " + string.Join("; ", staleness.Diagnostics));
+        var tracked = library.Catalog.Modules.Where(module => module.Required
+                                                              || normalized.SelectedModuleIds.Contains(module.ModuleId, StringComparer.Ordinal))
+            .Select(module => module.ModuleId).ToList();
+        normalized = normalized with
+        {
+            CatalogFingerprint = library.CatalogFingerprint,
+            ModuleFingerprints = tracked.ToDictionary(id => id, id => library.ModuleFingerprints[id], StringComparer.Ordinal)
+        };
         var validation = _validator.Validate(normalized, library);
         if (!validation.Passed)
             throw new InvalidOperationException("composition save validation failed: " + string.Join("; ", validation.Diagnostics));

@@ -132,7 +132,14 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ActivatedProjectPackageSha256 = activatedPackageSha,
             FinalStateHash = state.Document.LastQualifiedFinalStateHash,
             LastCertificationExecutedCount = _lastBuild?.CertificationExecutedCount ?? 0,
-            LastCertificationReusedCount = _lastBuild?.CertificationReusedCount ?? 0
+            LastCertificationReusedCount = _lastBuild?.CertificationReusedCount ?? 0,
+            RuntimePlaythroughPlanId = _lastBuild?.RuntimePlaythroughPlanId ?? string.Empty,
+            CapabilityCount = _lastBuild?.CapabilityCount ?? 0,
+            PlannedActionCount = _lastBuild?.PlannedActionCount ?? 0,
+            CheckpointActionCount = _lastBuild?.CheckpointActionCount ?? 0,
+            FinalReplayActionCount = _lastBuild?.FinalReplayActionCount ?? 0,
+            PlaythroughSignature = _lastBuild?.PlaythroughSignature ?? string.Empty,
+            EquipmentSlotSummary = _lastBuild?.EquipmentSlotSummary ?? string.Empty
         };
     }
 

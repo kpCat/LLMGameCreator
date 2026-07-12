@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "goal148_human_acceptance_record_v1",
+  "goalId": "goal_148_unified_game_project_workspace_and_legacy_goal_diagnostics_isolation",
+  "goal148Accepted": true,
+  "acceptedByHuman": true,
+  "acceptedByCodex": false,
+  "manualRetryRequired": false,
+  "rawManualInputNotCommitted": true
+}

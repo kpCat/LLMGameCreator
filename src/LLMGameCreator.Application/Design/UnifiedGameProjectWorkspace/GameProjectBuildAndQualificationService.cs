@@ -1,9 +1,11 @@
 using System.Security.Cryptography;
+using System.Globalization;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
+using LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 using LLMGameCreator.Application.Design.FeatureModuleCertification;
 using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Application.Projects;
@@ -129,7 +131,8 @@ public sealed class GameProjectBuildAndQualificationService
                 _repositoryRoot,
                 state.Library,
                 materializationDocument,
-                materializationRoot);
+                materializationRoot,
+                useCapabilityDrivenRuntimePlaythrough: true);
             if (!materialized.Passed)
                 return RollbackFailure(
                     authoring,
@@ -163,6 +166,7 @@ public sealed class GameProjectBuildAndQualificationService
             var projectQualification = QualifyIdentityOverlaidPackage(
                 qualifiedPackage,
                 compositionPackage,
+                state.Library,
                 materializationDocument,
                 activatedPackagePath,
                 overlay.ActivatedProjectPackageSha256);
@@ -240,18 +244,48 @@ public sealed class GameProjectBuildAndQualificationService
                 ledger);
             transaction.Commit();
 
+            var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
+                                 ?? throw new InvalidOperationException("Capability-driven Runtime plan is missing.");
+            var equipmentAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
+                action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.EquipItem);
+            var equipmentSummary = projectQualification.Session.LatestEquipmentSummary;
+            var weaponDamageBonus = 0;
+            var combatDamageDelta = 0;
+            if (equipmentAction is not null)
+            {
+                var itemId = equipmentAction.Args.GetValueOrDefault("itemId") ?? string.Empty;
+                var item = qualifiedPackage.Game.Items.Single(definition => definition.Id == itemId);
+                if (item.Metadata.TryGetValue("combat_damage_bonus", out var rawBonus))
+                    weaponDamageBonus = int.Parse(rawBonus, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                var rawDelta = projectQualification.Session.LatestSnapshot.RuntimeEvents
+                    .Where(runtimeEvent => runtimeEvent.EventType == "DamageApplied")
+                    .Select(runtimeEvent => runtimeEvent.Args.GetValueOrDefault("equipmentDamageBonus"))
+                    .LastOrDefault(value => !string.IsNullOrWhiteSpace(value));
+                if (!string.IsNullOrWhiteSpace(rawDelta))
+                    combatDamageDelta = (int)decimal.Parse(rawDelta, NumberStyles.Number, CultureInfo.InvariantCulture);
+            }
+            var summaryLines = new List<string>
+            {
+                "Игра успешно собрана и проверена.",
+                "Механик включено: " + (state.Library.Manifest.RequiredCoreModuleCount + savedDocument.SelectedModuleIds.Count),
+                "Параметров настроено: " + qualifiedDocument.ParameterValues.Count,
+                "Сохранение/загрузка: пройдено",
+                "Повтор действий: пройден",
+                "Файлы проекта подготовлены: " + supportFilePlan.RequiredFileCount,
+                "Пакет проекта обновлён"
+            };
+            if (equipmentAction is not null)
+            {
+                summaryLines.Add("Экипировано: " + equipmentAction.Args.GetValueOrDefault("itemTitle", equipmentAction.Args.GetValueOrDefault("itemId", string.Empty)));
+                summaryLines.Add("Слот: " + equipmentAction.Args.GetValueOrDefault("slotTitle", equipmentAction.Args.GetValueOrDefault("slotId", string.Empty)));
+                summaryLines.Add("Бонус урона: +" + weaponDamageBonus.ToString(CultureInfo.InvariantCulture));
+            }
+
             return new GameProjectBuildResult
             {
                 Status = "GREEN",
                 Passed = true,
-                HumanSummary = string.Join(Environment.NewLine,
-                    "Игра успешно собрана и проверена.",
-                    "Механик включено: " + (state.Library.Manifest.RequiredCoreModuleCount + savedDocument.SelectedModuleIds.Count),
-                    "Параметров настроено: " + qualifiedDocument.ParameterValues.Count,
-                    "Сохранение/загрузка: пройдено",
-                    "Повтор действий: пройден",
-                    "Файлы проекта подготовлены: " + supportFilePlan.RequiredFileCount,
-                    "Пакет проекта обновлён"),
+                HumanSummary = string.Join(Environment.NewLine, summaryLines),
                 SelectedMechanicCount = state.Library.Manifest.RequiredCoreModuleCount + savedDocument.SelectedModuleIds.Count,
                 ConfiguredParameterCount = qualifiedDocument.ParameterValues.Count,
                 PackageSha256 = overlay.ActivatedProjectPackageSha256,
@@ -273,7 +307,16 @@ public sealed class GameProjectBuildAndQualificationService
                 SupportFilesPrepared = true,
                 SupportFileDiagnostics = supportFilePlan.Diagnostics,
                 StagedProjectValidationPassed = true,
-                RealProjectValidationPassed = true
+                RealProjectValidationPassed = true,
+                RuntimePlaythroughPlanId = capabilityPlan.PlanId,
+                CapabilityCount = capabilityPlan.CapabilityIds.Count,
+                PlannedActionCount = capabilityPlan.OrderedActions.Count,
+                CheckpointActionCount = projectQualification.CheckpointActionCount,
+                FinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount,
+                PlaythroughSignature = capabilityPlan.ActionPlanSignature,
+                EquipmentSlotSummary = equipmentSummary,
+                WeaponDamageBonus = weaponDamageBonus,
+                CombatDamageDelta = combatDamageDelta
             };
         }
         catch (Exception exception) when (exception is IOException
@@ -371,11 +414,16 @@ public sealed class GameProjectBuildAndQualificationService
     private ProductLineRuntimeQualificationResult QualifyIdentityOverlaidPackage(
         LLMGameCreator.GamePackage.GamePackageDefinition package,
         LLMGameCreator.GamePackage.GamePackageDefinition compositionPackage,
+        FeatureModuleLibrarySnapshot library,
         FeatureModuleCompositionDocument document,
         string packagePath,
         string packageSha256)
     {
         var selected = document.SelectedModuleIds.OrderBy(id => id, StringComparer.Ordinal).ToList();
+        var capabilityPlan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(
+            library.Catalog.Modules.Where(module => module.Required
+                                                    || selected.Contains(module.ModuleId, StringComparer.Ordinal)).ToList(),
+            compositionPackage);
         var qualifier = new ProductLineRuntimeQualifier(
             new GameProjectIdentityRuntimeQualificationAdapter(_runtime, compositionPackage.Manifest));
         return qualifier.Qualify(package, new ProductLineRuntimeQualificationRequest
@@ -386,7 +434,8 @@ public sealed class GameProjectBuildAndQualificationService
             PackagePath = packagePath,
             PackageSha256 = packageSha256,
             CheckpointId = "project-" + document.CompositionId + "-checkpoint-after-craft",
-            FinalCheckpointId = "project-" + document.CompositionId + "-final-journal"
+            FinalCheckpointId = "project-" + document.CompositionId + "-final-journal",
+            CapabilityPlan = capabilityPlan
         });
     }
 

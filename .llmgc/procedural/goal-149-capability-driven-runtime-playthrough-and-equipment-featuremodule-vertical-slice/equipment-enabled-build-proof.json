@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "equipment_enabled_build_proof_v1",
+  "status": "GREEN",
+  "compositionPackageSha256": "94a47ab896b425a76c2e523acef3ab87d538bb8f0c754b2402b0127e5ad82bf5",
+  "activatedProjectPackageSha256": "147f88ac026f006ab5fbe93dc6c7cb039e85189fcb3421a71a1fd99284d3a5c1",
+  "finalStateHash": "51bba1ffada4ce9ffccfa9132e7e7c007afcbcec8632d7de13d26ce961b3ea0d",
+  "runtimePlaythroughPlanId": "capability-runtime-playthrough-753b92b5a64119db",
+  "capabilityCount": 12,
+  "plannedActionCount": 17,
+  "checkpointActionCount": 13,
+  "finalReplayActionCount": 17,
+  "playthroughSignature": "753b92b5a64119db3c0b2f7a08616b26c3e91717d53ae74fc38388d43232991a",
+  "equipmentSlotSummary": "slot/weapon:item/rusty_knife",
+  "weaponDamageBonus": 2,
+  "combatDamageDelta": 2,
+  "projectPackageId": "game/goal148-manual",
+  "projectTitle": "Проверка конструктора",
+  "projectVersion": "0.1.0",
+  "passed": true
+}

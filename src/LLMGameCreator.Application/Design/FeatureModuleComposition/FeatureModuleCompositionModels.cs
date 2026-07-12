@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.AcceptedAlphaUnityPlayableProjection;
+using LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Runtime.Abstractions;
 using RuntimeInteractiveSession = LLMGameCreator.Runtime.Abstractions.SelectedRuntimeVariantInteractiveSession;
@@ -33,10 +34,12 @@ public sealed record FeatureModuleDefinition
     public string SchemaVersion { get; init; } = "featuremodule_definition_v1";
     public string ModuleId { get; init; } = string.Empty;
     public string Title { get; init; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
     public string Category { get; init; } = string.Empty;
     public string ModuleKind { get; init; } = string.Empty;
     public bool Required { get; init; }
     public bool Selectable { get; init; }
+    public bool DefaultSelected { get; init; }
     public string ModuleVersion { get; init; } = "1.0.0";
     public IReadOnlyList<string> Dependencies { get; init; } = [];
     public IReadOnlyList<string> Conflicts { get; init; } = [];
@@ -54,6 +57,7 @@ public sealed record FeatureModuleDefinition
     public IReadOnlyList<ProductLineRuntimeVariantMutationOperation> MutationOperations { get; init; } = [];
     public IReadOnlyList<FeatureModuleRuntimeEffectContract> RuntimeEffectContracts { get; init; } = [];
     public IReadOnlyList<FeatureModuleParameterDefinition> ParameterDefinitions { get; init; } = [];
+    public IReadOnlyList<FeatureModuleRuntimePlaythroughContract> RuntimePlaythroughContracts { get; init; } = [];
     public FeatureModuleSourceLineage SourceLineage { get; init; } = new();
 }
 

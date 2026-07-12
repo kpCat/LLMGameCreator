@@ -7,7 +7,7 @@ public static class FeatureModuleLibraryVocabulary
     public const string ManifestSchemaVersion = "featuremodule_library_manifest_v1";
     public const string ModuleSchemaVersion = "featuremodule_definition_v1";
     public const string DefaultRelativeRoot = "catalogs/feature-modules";
-    public const string ManifestFileName = "catalog.json";
+    public const string ManifestFileName = "manifest.json";
 }
 
 public sealed record FeatureModuleLibraryManifest

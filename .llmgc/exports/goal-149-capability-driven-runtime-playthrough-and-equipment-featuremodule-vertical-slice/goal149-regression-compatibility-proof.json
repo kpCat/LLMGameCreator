@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "goal149_regression_compatibility_proof_v1",
+  "status": "GREEN",
+  "goal148Accepted": true,
+  "legacyCompositionHashPreserved": true,
+  "legacyActivatedHashPreserved": true,
+  "legacyFinalHashPreserved": true,
+  "legacyNoPlanCompatibility": true,
+  "projectIdentityPreserved": true,
+  "normalWorkspaceGoalNumberControlCount": 0,
+  "newTopLevelPageAdded": false,
+  "passed": true
+}

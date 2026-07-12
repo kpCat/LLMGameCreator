@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "equipment_save_replay_proof_v1",
+  "status": "GREEN",
+  "checkpointActionCount": 13,
+  "finalReplayActionCount": 17,
+  "dynamicCheckpointCountPassed": true,
+  "dynamicFinalReplayCountPassed": true,
+  "equipmentSlotSummary": "slot/weapon:item/rusty_knife",
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "actionBindingPassed": true,
+  "passed": true
+}

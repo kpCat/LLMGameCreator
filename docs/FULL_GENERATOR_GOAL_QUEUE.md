@@ -2321,7 +2321,7 @@ Unity scene/prefab project settings/packages/StreamingAssets or release-packagin
 ## Current Recommended Next Work
 
 ```text
-retry_goal_148_unified_game_project_workspace_manual_verification
+goal_150_character_stats_and_progression_featuremodule_vertical_slice
 ```
 
 Goal148 is GREEN at
@@ -2333,7 +2333,8 @@ normalWorkspaceGoalNumberControlCount=0. Project-local authoring roundtrip,
 exact custom package/final hashes, off-thread UI execution, transactional
 activation and package-save rollback are GREEN. Legacy numbered panels are
 preserved on `Диагностика генератора` but hidden until the explicit toggle.
-Goal148 remains `accepted=false`; the current next work is its manual review.
+Goal148 is accepted by the exact human decision recorded in its manual
+acceptance document. Goal149 is now the current GREEN implementation gate.
 
 Goal148A is GREEN. A project created through the production New Game service now
 builds with an initially empty scripts directory: the qualified package derives
@@ -2360,6 +2361,27 @@ composition SHA `e78356e5c35b777098fea4db22095419aacd69129da012f8ed7216833041022
 and final hash `95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`;
 historical control hashes remain unchanged. Goal148 remains `accepted=false`
 and the next work is its manual retry, not Goal149.
+
+Goal149 records that Goal148 retry as accepted-by-human and replaces the normal
+Игры workspace's fixed 13-action assumption with structured FeatureModule
+playthrough contracts plus a deterministic dependency-aware plan. Ten core and
+four optional modules are catalog-visible; equipment is optional and disabled
+by default. Enabling it adds chest, transfer, equip and equipment-summary
+actions, preserves equipment and plan identity through save/replay, and applies
+the catalog-configured `+2` only to player combat. The disabled baseline keeps
+composition hash
+`e78356e5c35b777098fea4db22095419aacd69129da012f8ed72168330410221`,
+activated hash
+`c46826d8231951ab941f6ee1608d30273b1e186f920ea8cad58c58c25317eeeb`
+and final hash
+`95d1122906521b5ebfbaf85c10061b4e2017c3a4084edf256221e878d30756b8`.
+Disabled planned/checkpoint/final counts are 13/8/13; enabled counts are
+17/13/17. A new unselected optional module is additive-compatible with existing
+projects, while selected/required drift remains stale. Goal149 manual review is
+deferred and `accepted=false`; Goal141 remains unaccepted. Goal150 is the
+recommended next product goal only after explicit Goal149 acceptance. No public
+GamePackage schema, sample, Unity, provider, Lua, generator-library or
+dependency change is authorized by this slice.
 
 Goal145 is accepted by the repository owner's exact human handoff after the
 Goal145A selector lifecycle repair. Acceptance preserves 4/4 Runtime sessions,

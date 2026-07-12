@@ -1,0 +1,458 @@
+{
+  "planId": "capability-runtime-playthrough-753b92b5a64119db",
+  "selectedModuleIds": [
+    "feature.combat.turn_based_encounter",
+    "feature.crafting.recipes",
+    "feature.dialogue.basic",
+    "feature.economy.transaction",
+    "feature.equipment.weapon_loadout",
+    "feature.interaction.basic",
+    "feature.inventory.basic",
+    "feature.player_adapter.runtime_summary",
+    "feature.profile.alchemy_focus",
+    "feature.profile.combat_focus",
+    "feature.profile.exploration_resource_focus",
+    "feature.quest.objective_chain",
+    "feature.resources.harvest",
+    "feature.world.grid_navigation"
+  ],
+  "capabilityIds": [
+    "capability.combat.turn_based_encounter",
+    "capability.crafting.recipes",
+    "capability.dialogue.basic",
+    "capability.economy.transaction",
+    "capability.equipment.weapon_loadout",
+    "capability.interaction.basic",
+    "capability.inventory.basic",
+    "capability.player_adapter.runtime_summary",
+    "capability.quest.objective_chain",
+    "capability.resources.harvest",
+    "capability.runtime.bootstrap",
+    "capability.world.grid_navigation"
+  ],
+  "orderedActions": [
+    {
+      "contractId": "playthrough.world.start_runtime",
+      "capabilityId": "capability.runtime.bootstrap",
+      "actionId": "start_runtime",
+      "category": "start_runtime",
+      "phase": "bootstrap",
+      "order": 10,
+      "runtimePrimitiveId": "runtime.command.start",
+      "targetSelector": "start_map",
+      "resolvedTargetId": "map/village",
+      "args": {},
+      "dependsOnActionIds": [],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "runtime_started"
+      ]
+    },
+    {
+      "contractId": "playthrough.world.move",
+      "capabilityId": "capability.world.grid_navigation",
+      "actionId": "move",
+      "category": "move",
+      "phase": "world",
+      "order": 20,
+      "runtimePrimitiveId": "runtime.command.move",
+      "targetSelector": "entity_id",
+      "resolvedTargetId": "entity/village/sign",
+      "args": {
+        "direction": "right",
+        "id": "entity/village/sign"
+      },
+      "dependsOnActionIds": [
+        "start_runtime"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "player_position_changed"
+      ]
+    },
+    {
+      "contractId": "playthrough.interaction.basic",
+      "capabilityId": "capability.interaction.basic",
+      "actionId": "interact",
+      "category": "interact",
+      "phase": "interaction",
+      "order": 30,
+      "runtimePrimitiveId": "runtime.command.interact",
+      "targetSelector": "interaction_id",
+      "resolvedTargetId": "interaction/sign_inspect",
+      "args": {
+        "id": "interaction/sign_inspect"
+      },
+      "dependsOnActionIds": [
+        "move"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "interaction_triggered"
+      ]
+    },
+    {
+      "contractId": "playthrough.inventory.inspect",
+      "capabilityId": "capability.inventory.basic",
+      "actionId": "inspect_inventory",
+      "category": "show_inventory",
+      "phase": "inventory",
+      "order": 40,
+      "runtimePrimitiveId": "runtime.presentation.inspect_inventory",
+      "targetSelector": "inventory_id",
+      "resolvedTargetId": "inventory/player_start",
+      "args": {
+        "id": "inventory/player_start"
+      },
+      "dependsOnActionIds": [
+        "interact"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": true,
+      "required": true,
+      "expectedRuntimeEffects": []
+    },
+    {
+      "contractId": "playthrough.dialogue.open",
+      "capabilityId": "capability.dialogue.basic",
+      "actionId": "open_dialogue",
+      "category": "open_dialogue",
+      "phase": "narrative",
+      "order": 50,
+      "runtimePrimitiveId": "runtime.command.open_dialogue",
+      "targetSelector": "dialogue_id",
+      "resolvedTargetId": "dialogue/old_guard_intro",
+      "args": {
+        "id": "dialogue/old_guard_intro"
+      },
+      "dependsOnActionIds": [
+        "inspect_inventory"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "dialogue_opened"
+      ]
+    },
+    {
+      "contractId": "playthrough.quest.start_or_update",
+      "capabilityId": "capability.quest.objective_chain",
+      "actionId": "start_or_update_quest",
+      "category": "start_or_update_quest",
+      "phase": "narrative",
+      "order": 60,
+      "runtimePrimitiveId": "runtime.command.start_or_update_quest",
+      "targetSelector": "quest_id",
+      "resolvedTargetId": "quest/help_healer",
+      "args": {
+        "id": "quest/help_healer"
+      },
+      "dependsOnActionIds": [
+        "open_dialogue"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "quest_started_or_refreshed"
+      ]
+    },
+    {
+      "contractId": "playthrough.inventory.show",
+      "capabilityId": "capability.inventory.basic",
+      "actionId": "show_inventory",
+      "category": "show_inventory",
+      "phase": "inventory",
+      "order": 70,
+      "runtimePrimitiveId": "runtime.command.show_inventory",
+      "targetSelector": "inventory_id",
+      "resolvedTargetId": "inventory/player_start",
+      "args": {
+        "amount": "1",
+        "id": "inventory/player_start",
+        "inventoryId": "inventory/player_start",
+        "itemId": "item/apple"
+      },
+      "dependsOnActionIds": [
+        "start_or_update_quest"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "inventory_event_emitted"
+      ]
+    },
+    {
+      "contractId": "playthrough.crafting.recipe",
+      "capabilityId": "capability.crafting.recipes",
+      "actionId": "craft",
+      "category": "craft",
+      "phase": "production",
+      "order": 80,
+      "runtimePrimitiveId": "runtime.command.craft_recipe",
+      "targetSelector": "recipe_id",
+      "resolvedTargetId": "recipe/healing_potion",
+      "args": {
+        "id": "recipe/healing_potion",
+        "inventoryId": "inventory/player_start"
+      },
+      "dependsOnActionIds": [
+        "show_inventory"
+      ],
+      "checkpointBoundaryAfter": true,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "recipe_crafted"
+      ]
+    },
+    {
+      "contractId": "playthrough.resources.harvest",
+      "capabilityId": "capability.resources.harvest",
+      "actionId": "harvest",
+      "category": "harvest",
+      "phase": "production",
+      "order": 90,
+      "runtimePrimitiveId": "runtime.command.harvest_resource",
+      "targetSelector": "resource_node_id",
+      "resolvedTargetId": "node/apple_tree",
+      "args": {
+        "id": "node/apple_tree",
+        "inventoryId": "inventory/player_start",
+        "itemId": "item/woodcutting_axe",
+        "seed": "136"
+      },
+      "dependsOnActionIds": [
+        "craft"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "resource_harvested"
+      ]
+    },
+    {
+      "contractId": "playthrough.equipment.open_container",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "open_starting_chest",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 92,
+      "runtimePrimitiveId": "runtime.command.open_container",
+      "targetSelector": "container_inventory_id",
+      "resolvedTargetId": "inventory/chest_start",
+      "args": {
+        "id": "inventory/chest_start"
+      },
+      "dependsOnActionIds": [
+        "show_inventory"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "container_opened"
+      ]
+    },
+    {
+      "contractId": "playthrough.equipment.take_weapon",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "take_rusty_knife",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 94,
+      "runtimePrimitiveId": "runtime.command.take_from_container",
+      "targetSelector": "item_id",
+      "resolvedTargetId": "item/rusty_knife",
+      "args": {
+        "amount": "1",
+        "id": "item/rusty_knife",
+        "itemId": "item/rusty_knife",
+        "sourceInventoryId": "inventory/chest_start",
+        "targetInventoryId": "inventory/player_start"
+      },
+      "dependsOnActionIds": [
+        "open_starting_chest"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "inventory_item_absent_or_decreased"
+      ]
+    },
+    {
+      "contractId": "playthrough.equipment.equip_weapon",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "equip_rusty_knife",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 96,
+      "runtimePrimitiveId": "runtime.command.equip_item",
+      "targetSelector": "equipment_slot_id",
+      "resolvedTargetId": "slot/weapon",
+      "args": {
+        "id": "slot/weapon",
+        "inventoryId": "inventory/player_start",
+        "itemId": "item/rusty_knife",
+        "itemTitle": "Ржавый нож",
+        "slotId": "slot/weapon",
+        "slotTitle": "Оружие"
+      },
+      "dependsOnActionIds": [
+        "take_rusty_knife"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "equipment_slot_item_equals"
+      ]
+    },
+    {
+      "contractId": "playthrough.equipment.inspect",
+      "capabilityId": "capability.equipment.weapon_loadout",
+      "actionId": "inspect_equipment",
+      "category": "equipment",
+      "phase": "equipment",
+      "order": 98,
+      "runtimePrimitiveId": "runtime.presentation.inspect_equipment",
+      "targetSelector": "equipment_slot_id",
+      "resolvedTargetId": "slot/weapon",
+      "args": {
+        "id": "slot/weapon"
+      },
+      "dependsOnActionIds": [
+        "equip_rusty_knife"
+      ],
+      "checkpointBoundaryAfter": true,
+      "presentationOnly": true,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "equipment_slot_item_equals"
+      ]
+    },
+    {
+      "contractId": "playthrough.economy.transaction",
+      "capabilityId": "capability.economy.transaction",
+      "actionId": "transaction",
+      "category": "transaction",
+      "phase": "economy",
+      "order": 110,
+      "runtimePrimitiveId": "runtime.command.execute_transaction",
+      "targetSelector": "transaction_id",
+      "resolvedTargetId": "transaction/buy_healing_potion",
+      "args": {
+        "grantAmount": "25",
+        "grantResourceId": "resource/gold",
+        "id": "transaction/buy_healing_potion",
+        "inventoryId": "inventory/player_start"
+      },
+      "dependsOnActionIds": [
+        "harvest"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "transaction_executed"
+      ]
+    },
+    {
+      "contractId": "playthrough.combat.begin_encounter",
+      "capabilityId": "capability.combat.turn_based_encounter",
+      "actionId": "begin_encounter",
+      "category": "begin_encounter",
+      "phase": "combat",
+      "order": 120,
+      "runtimePrimitiveId": "runtime.command.start_encounter",
+      "targetSelector": "encounter_id",
+      "resolvedTargetId": "encounter/goblin_duel",
+      "args": {
+        "id": "encounter/goblin_duel",
+        "seed": "136"
+      },
+      "dependsOnActionIds": [
+        "transaction"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "encounter_started"
+      ]
+    },
+    {
+      "contractId": "playthrough.combat.basic_attack",
+      "capabilityId": "capability.combat.turn_based_encounter",
+      "actionId": "basic_attack",
+      "category": "basic_attack",
+      "phase": "combat",
+      "order": 130,
+      "runtimePrimitiveId": "runtime.command.basic_attack",
+      "targetSelector": "encounter_participant_id",
+      "resolvedTargetId": "goblin",
+      "args": {
+        "id": "goblin",
+        "sourceParticipantId": "player"
+      },
+      "dependsOnActionIds": [
+        "begin_encounter"
+      ],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": false,
+      "required": true,
+      "expectedRuntimeEffects": [
+        "combat_damage_applied"
+      ]
+    },
+    {
+      "contractId": "playthrough.player_adapter.final_state",
+      "capabilityId": "capability.player_adapter.runtime_summary",
+      "actionId": "show_final_state",
+      "category": "show_final_state",
+      "phase": "final",
+      "order": 140,
+      "runtimePrimitiveId": "runtime.presentation.final_state",
+      "targetSelector": "manifest_package",
+      "resolvedTargetId": "game/minimal-map-game",
+      "args": {},
+      "dependsOnActionIds": [],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": true,
+      "required": true,
+      "expectedRuntimeEffects": []
+    }
+  ],
+  "checkpointBoundaryActionId": "inspect_equipment",
+  "runtimePrimitiveIds": [
+    "runtime.command.basic_attack",
+    "runtime.command.craft_recipe",
+    "runtime.command.equip_item",
+    "runtime.command.execute_transaction",
+    "runtime.command.harvest_resource",
+    "runtime.command.interact",
+    "runtime.command.move",
+    "runtime.command.open_container",
+    "runtime.command.open_dialogue",
+    "runtime.command.show_inventory",
+    "runtime.command.start",
+    "runtime.command.start_encounter",
+    "runtime.command.start_or_update_quest",
+    "runtime.command.take_from_container",
+    "runtime.presentation.final_state",
+    "runtime.presentation.inspect_equipment",
+    "runtime.presentation.inspect_inventory"
+  ],
+  "actionPlanSignature": "753b92b5a64119db3c0b2f7a08616b26c3e91717d53ae74fc38388d43232991a",
+  "diagnostics": []
+}

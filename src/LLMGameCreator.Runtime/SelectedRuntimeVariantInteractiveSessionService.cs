@@ -36,7 +36,8 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         var canonical = _commandLoop.BeginSession(package, new CanonicalRuntimePlayerCommandLoopRequest
         {
             CandidateId = request.CandidateId,
-            PackagePath = request.PackagePath
+            PackagePath = request.PackagePath,
+            CapabilityPlan = request.CapabilityPlan
         });
         var session = new SelectedRuntimeVariantInteractiveSession
         {
@@ -45,6 +46,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             VariantKind = request.VariantKind,
             PackagePath = request.PackagePath,
             PackageSha256 = request.PackageSha256,
+            CapabilityPlan = request.CapabilityPlan,
             CanonicalSession = canonical,
             CurrentStateHash = canonical.CurrentStateHash
         };
@@ -148,7 +150,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         else
         {
             session.PresentationOnlyActionCount++;
-            if (descriptor.ActionId == "show_final_state")
+            if (session.CapabilityPlan is null && descriptor.ActionId == "show_final_state")
             {
                 session.CanonicalSession.CurrentCommandIndex++;
                 session.Completed = true;
@@ -206,6 +208,8 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             CandidateId = session.CandidateId,
             VariantKind = session.VariantKind,
             PackageSha256 = session.PackageSha256,
+            CapabilityPlanId = session.CapabilityPlan?.PlanId ?? string.Empty,
+            CapabilityPlanSignature = session.CapabilityPlan?.ActionPlanSignature ?? string.Empty,
             ActionJournal = session.ActionJournal.Select(Clone).ToList(),
             RuntimeCommandExecutionCount = session.RuntimeCommandExecutionCount,
             ExpectedStateHash = session.CurrentStateHash,
@@ -214,6 +218,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             InventorySummary = session.LatestInventorySummary,
             QuestSummary = session.LatestQuestSummary,
             CombatSummary = session.LatestCombatSummary,
+            EquipmentSummary = session.LatestEquipmentSummary,
             CreatedAtUtc = createdAtUtc
         };
     }
@@ -228,13 +233,18 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         if (checkpoint is null) throw new ArgumentNullException(nameof(checkpoint));
         var diagnostics = new List<string>();
         var packageHashValid = request.PackageSha256 == checkpoint.PackageSha256;
+        var planValid = string.Equals(request.CapabilityPlan?.PlanId ?? string.Empty,
+                            checkpoint.CapabilityPlanId, StringComparison.Ordinal)
+                        && string.Equals(request.CapabilityPlan?.ActionPlanSignature ?? string.Empty,
+                            checkpoint.CapabilityPlanSignature, StringComparison.Ordinal);
         var candidateValid = request.CandidateId == checkpoint.CandidateId
                              && request.VariantKind == checkpoint.VariantKind
-                             && request.SessionId == checkpoint.SessionId;
+                             && request.SessionId == checkpoint.SessionId
+                             && planValid;
         if (!packageHashValid || !candidateValid)
         {
             diagnostics.Add(packageHashValid
-                ? "goal144.checkpoint_candidate_mismatch"
+                ? planValid ? "goal144.checkpoint_candidate_mismatch" : "goal149.checkpoint_plan_identity_mismatch"
                 : "goal144.checkpoint_package_hash_mismatch");
             return FailedReplay(packageHashValid, candidateValid, checkpoint, diagnostics);
         }
@@ -365,8 +375,12 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
     {
         session.CurrentStateHash = session.CanonicalSession.CurrentStateHash;
         session.RuntimeStarted = session.CanonicalSession.RuntimeStarted;
-        session.Completed = session.CanonicalSession.CurrentCommandIndex >= 13;
-        session.AvailableActions = BuildCatalog(package, session);
+        session.Completed = session.CapabilityPlan is null
+            ? session.CanonicalSession.CurrentCommandIndex >= 13
+            : session.CurrentActionIndex >= session.CapabilityPlan.OrderedActions.Count;
+        session.AvailableActions = session.CapabilityPlan is null
+            ? BuildCatalog(package, session)
+            : BuildCapabilityCatalog(package, session, session.CapabilityPlan);
         UpdateSummaries(session);
     }
 
@@ -395,6 +409,65 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             Presentation("inspect_status", "show_status", package.Manifest.PackageId, session.RuntimeStarted,
                 session.RuntimeStarted ? string.Empty : "runtime not started")
         };
+        return actions;
+    }
+
+    private static IReadOnlyList<SelectedRuntimeVariantActionDescriptor> BuildCapabilityCatalog(
+        GamePackageDefinition package,
+        SelectedRuntimeVariantInteractiveSession session,
+        CapabilityRuntimePlaythroughPlan plan)
+    {
+        var actions = new List<SelectedRuntimeVariantActionDescriptor>();
+        for (var actionIndex = 0; actionIndex < plan.OrderedActions.Count; actionIndex++)
+        {
+            var action = plan.OrderedActions[actionIndex];
+            var available = actionIndex == session.CurrentActionIndex && !session.Completed;
+            if (action.PresentationOnly)
+            {
+                actions.Add(new SelectedRuntimeVariantActionDescriptor
+                {
+                    ActionId = action.ActionId,
+                    Category = action.Category,
+                    Route = PresentationRoute,
+                    CommandKind = "read_state_summary",
+                    TargetId = action.ResolvedTargetId,
+                    ExecutionTargetId = action.ResolvedTargetId,
+                    ExecutionBindingValidated = !string.IsNullOrWhiteSpace(action.ResolvedTargetId),
+                    Prerequisites = action.DependsOnActionIds,
+                    MayMutateState = false,
+                    Available = available,
+                    UnavailableReason = available ? string.Empty : actionIndex < session.CurrentActionIndex
+                        ? "capability action already completed" : "previous capability action required"
+                });
+                continue;
+            }
+
+            var step = session.CanonicalSession.Steps.SingleOrDefault(item => item.ActionId == action.ActionId);
+            var startIndex = action.RuntimePrimitiveId == "runtime.command.start" ? 0 : step?.Index ?? -1;
+            var endIndex = step?.Index ?? -1;
+            var binding = step is not null && step.RuntimePrimitiveHint == action.RuntimePrimitiveId
+                          && step.TargetId == action.ResolvedTargetId && TargetExists(package, step);
+            actions.Add(new SelectedRuntimeVariantActionDescriptor
+            {
+                ActionId = action.ActionId,
+                Category = action.Category,
+                Route = RuntimeRoute,
+                CommandKind = step?.RuntimeCommandKind ?? string.Empty,
+                TargetId = action.ResolvedTargetId,
+                CanonicalStepId = step?.StepId ?? string.Empty,
+                CanonicalStepIndex = step?.Index ?? -1,
+                RuntimeCommandStartIndex = startIndex,
+                RuntimeCommandEndIndex = endIndex,
+                ExecutionTargetId = action.ResolvedTargetId,
+                ExecutionBindingValidated = binding,
+                Prerequisites = action.DependsOnActionIds,
+                MayMutateState = true,
+                Available = available && binding && session.CanonicalSession.CurrentCommandIndex == startIndex,
+                UnavailableReason = binding ? available ? "canonical cursor mismatch" : actionIndex < session.CurrentActionIndex
+                    ? "capability action already completed" : "previous capability action required"
+                    : "capability execution binding or target is invalid"
+            });
+        }
         return actions;
     }
 
@@ -500,7 +573,30 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
 
     private static bool TargetExists(
         GamePackageDefinition package,
-        CanonicalRuntimePlayerCommandLoopStep step) => step.StepId switch
+        CanonicalRuntimePlayerCommandLoopStep step)
+    {
+        if (!string.IsNullOrWhiteSpace(step.ActionId))
+        {
+            return step.RuntimePrimitiveHint switch
+            {
+                "runtime.command.start" => package.Game.Maps.Any(item => item.Id == step.TargetId),
+                "runtime.command.move" => package.Game.Maps.SelectMany(item => item.Entities).Any(item => item.Id == step.TargetId),
+                "runtime.command.interact" => package.Game.Interactions.Any(item => item.Id == step.TargetId),
+                "runtime.command.open_dialogue" => package.Game.Dialogues.Any(item => item.Id == step.TargetId),
+                "runtime.command.start_or_update_quest" => package.Game.Quests.Any(item => item.Id == step.TargetId),
+                "runtime.command.show_inventory" => package.Game.Inventories.Any(item => item.Id == step.TargetId),
+                "runtime.command.craft_recipe" => package.Game.Recipes.Any(item => item.Id == step.TargetId),
+                "runtime.command.harvest_resource" => package.Game.ResourceNodes.Any(item => item.Id == step.TargetId),
+                "runtime.command.execute_transaction" => package.Game.Transactions.Any(item => item.Id == step.TargetId),
+                "runtime.command.start_encounter" => package.Game.Encounters.Any(item => item.Id == step.TargetId),
+                "runtime.command.basic_attack" => package.Game.Encounters.SelectMany(item => item.Participants).Any(item => item.Id == step.TargetId),
+                "runtime.command.open_container" => package.Game.Inventories.Any(item => item.Id == step.TargetId),
+                "runtime.command.take_from_container" => package.Game.Items.Any(item => item.Id == step.TargetId),
+                "runtime.command.equip_item" => package.Game.EquipmentSlots.Any(item => item.Id == step.TargetId),
+                _ => false
+            };
+        }
+        return step.StepId switch
     {
         "load_selected_package" => package.Manifest.PackageId == step.TargetId,
         "start_canonical_runtime" => package.Manifest.StartMapId == step.TargetId
@@ -520,6 +616,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         "final_state" => package.Manifest.PackageId == step.TargetId,
         _ => false
     };
+    }
 
     private static void UpdateSummaries(SelectedRuntimeVariantInteractiveSession session)
     {
@@ -528,6 +625,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         session.LatestInventorySummary = snapshot.InventorySummary;
         session.LatestQuestSummary = snapshot.QuestSummary;
         session.LatestCombatSummary = snapshot.CombatSummary;
+        session.LatestEquipmentSummary = snapshot.EquipmentSummary;
     }
 
     private static SelectedRuntimeVariantInteractiveJournalEntry ToJournal(

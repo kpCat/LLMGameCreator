@@ -6,6 +6,7 @@
   "moduleKind": "required_core",
   "required": true,
   "selectable": false,
+  "defaultSelected": false,
   "moduleVersion": "1.0.0",
   "dependencies": ["feature.world.grid_navigation"],
   "conflicts": [],
@@ -23,5 +24,23 @@
   "mutationOperations": [],
   "runtimeEffectContracts": [],
   "parameterDefinitions": [],
+  "runtimePlaythroughContracts": [
+    {
+      "contractId": "playthrough.player_adapter.final_state",
+      "capabilityId": "capability.player_adapter.runtime_summary",
+      "actionId": "show_final_state",
+      "category": "show_final_state",
+      "phase": "final",
+      "order": 140,
+      "runtimePrimitiveId": "runtime.presentation.final_state",
+      "targetSelector": "manifest_package",
+      "args": {},
+      "dependsOnActionIds": [],
+      "checkpointBoundaryAfter": false,
+      "presentationOnly": true,
+      "required": true,
+      "expectedRuntimeEffects": []
+    }
+  ],
   "sourceLineage": { "goalId": "goal_142_runtime_significant_product_line_variant_matrix_and_selection_handoff", "catalogPath": "", "recipeId": "", "variantKind": "", "candidateId": "minimal-map-game-balanced-baseline", "operationIds": [] }
 }

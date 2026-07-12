@@ -70,6 +70,13 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public string FinalStateHash { get; init; } = string.Empty;
     public int LastCertificationExecutedCount { get; init; }
     public int LastCertificationReusedCount { get; init; }
+    public string RuntimePlaythroughPlanId { get; init; } = string.Empty;
+    public int CapabilityCount { get; init; }
+    public int PlannedActionCount { get; init; }
+    public int CheckpointActionCount { get; init; }
+    public int FinalReplayActionCount { get; init; }
+    public string PlaythroughSignature { get; init; } = string.Empty;
+    public string EquipmentSlotSummary { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectBuildResult
@@ -100,6 +107,15 @@ public sealed record GameProjectBuildResult
     public IReadOnlyList<string> SupportFileDiagnostics { get; init; } = [];
     public bool StagedProjectValidationPassed { get; init; }
     public bool RealProjectValidationPassed { get; init; }
+    public string RuntimePlaythroughPlanId { get; init; } = string.Empty;
+    public int CapabilityCount { get; init; }
+    public int PlannedActionCount { get; init; }
+    public int CheckpointActionCount { get; init; }
+    public int FinalReplayActionCount { get; init; }
+    public string PlaythroughSignature { get; init; } = string.Empty;
+    public string EquipmentSlotSummary { get; init; } = string.Empty;
+    public int WeaponDamageBonus { get; init; }
+    public int CombatDamageDelta { get; init; }
 }
 
 public sealed record GameProjectBuildHistoryEntry

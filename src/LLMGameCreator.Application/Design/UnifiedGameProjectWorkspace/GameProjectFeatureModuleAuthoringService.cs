@@ -121,7 +121,8 @@ public sealed class GameProjectFeatureModuleAuthoringService
             SelectedModuleIds = ids.OrderBy(id => id, StringComparer.Ordinal).ToList(),
             ParameterValues = document.ParameterValues.Where(value => ids.Contains(value.ModuleId)).ToList(),
             CatalogFingerprint = library.CatalogFingerprint,
-            ModuleFingerprints = ids.Where(library.ModuleFingerprints.ContainsKey)
+            ModuleFingerprints = library.Catalog.Modules.Where(item => item.Required || ids.Contains(item.ModuleId))
+                .Select(item => item.ModuleId).Where(library.ModuleFingerprints.ContainsKey)
                 .ToDictionary(id => id, id => library.ModuleFingerprints[id], StringComparer.Ordinal)
         };
         MarkDirty();
