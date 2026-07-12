@@ -1,6 +1,6 @@
 param(
     [string]$SourceProject = "$env:LOCALAPPDATA\LLMGameCreator\Games\goal148-manual",
-    [string]$OutputRoot = ".llmgc\procedural\goal-152-accepted-mechanics-milestone-and-project-scoped-windows-standalone-build-launch\real-project-proof"
+    [string]$OutputRoot = "$env:LOCALAPPDATA\LLMGameCreator\Goal152StandaloneProof"
 )
 
 $ErrorActionPreference = 'Stop'

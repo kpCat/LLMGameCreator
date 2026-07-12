@@ -155,6 +155,16 @@ public sealed record GameProjectBuildResult
     public int AttemptedFinalReplayActionCount { get; init; }
     public string AttemptedCompositionPackageSha256 { get; init; } = string.Empty;
     public string AttemptedFinalStateHash { get; init; } = string.Empty;
+    public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
+}
+
+public sealed record GameProjectRuntimeFrame
+{
+    public int Index { get; init; }
+    public string ActionId { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public string Category { get; init; } = string.Empty;
+    public string StateHash { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectBuildHistoryEntry

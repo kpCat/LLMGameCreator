@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "goal152_host_reuse_parameter_change_proof_v1",
+  "status": "GREEN",
+  "onlyChangedParameter": "feature.equipment.weapon_loadout|weaponDamageBonus=4",
+  "hostReused": true,
+  "unityHostBuildCountDuringTwoCopyProof": 0,
+  "firstPackageSha256": "578aa5b7b40b87015897c762cb651ef6e61f3a190e5e66fd80a6c1dd79664391",
+  "secondPackageSha256": "12ce4909228eabeb6c4f8c094044ec7d7562543950e5dbf03bd7d7ed3fe6aaa3",
+  "hostExecutableSha256Unchanged": true,
+  "standaloneSmokePassed": true
+}

@@ -39,6 +39,16 @@ public sealed record ProjectStandaloneBuildRequest
     public string EquipmentSummary { get; init; } = string.Empty;
     public string AttributesSummary { get; init; } = string.Empty;
     public string ProgressionSummary { get; init; } = string.Empty;
+    public IReadOnlyList<StandaloneRuntimeFrame> RuntimeFrames { get; init; } = [];
+}
+
+public sealed record StandaloneRuntimeFrame
+{
+    public int Index { get; init; }
+    public string ActionId { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public string Category { get; init; } = string.Empty;
+    public string StateHash { get; init; } = string.Empty;
 }
 
 public sealed record StandaloneParameterValue

@@ -1,11 +1,11 @@
 {
   "schemaVersion": "goal152_negative_proof_v1",
-  "status": "BLOCKED",
-  "case": "project_scoped_slugged_executable_launch_smoke",
-  "hostCache": "generic host starts successfully before payload validation",
-  "projectScopedOutput": "renamed slug executable exits 1 before bootstrap and reports MonoBleedingEdge load failure",
+  "status": "GREEN",
+  "case": "deep_disposable_copy_path_is_not_used_for_real_standalone_proof",
+  "hostCache": "generic host cache remains external to copied projects",
+  "projectScopedOutput": "short LocalAppData disposable copies run slugged executables and launch smoke successfully",
   "physicalMonoRuntimeHashMatchedHost": true,
   "sourceProjectManifestByteIdentical": true,
   "noFallbackSourceUsed": true,
-  "requiredOutcome": "not met"
+  "requiredOutcome": "met"
 }

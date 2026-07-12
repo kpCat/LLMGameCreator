@@ -2,8 +2,8 @@
   "schemaVersion": "goal152_artifact_scope_proof_v1",
   "scenario": "goal-152-accepted-mechanics-milestone-and-project-scoped-windows-standalone-build-launch",
   "baselineRef": "HEAD",
-  "changedPathCount": 23,
-  "allowedCount": 23,
+  "changedPathCount": 20,
+  "allowedCount": 20,
   "violationCount": 0,
   "status": "GREEN"
 }

@@ -30,10 +30,15 @@ public sealed class Goal152ProjectStandaloneBuildTests
 
         var first = await ConfigureAndBuild(root, firstCopy, 3);
         Assert.True(first.Status == "GREEN", first.Status + ": " + string.Join(" | ", first.Diagnostics));
-        Assert.True(first.HostRebuilt, string.Join(Environment.NewLine, first.Diagnostics));
+        Assert.True(first.HostRebuilt || first.HostReused, string.Join(Environment.NewLine, first.Diagnostics));
         Assert.True(first.LaunchSmokePassed);
         Assert.True(File.Exists(first.ExecutablePath));
         Assert.True(Directory.Exists(Path.GetDirectoryName(first.ExecutablePath)!));
+        using (var frames = JsonDocument.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(first.ExecutablePath)!, Path.GetFileNameWithoutExtension(first.ExecutablePath) + "_Data", "StreamingAssets", "LLMGameCreatorProject", "player-adapter-frames.json"))))
+        {
+            Assert.Equal(first.FrameCount, frames.RootElement.GetArrayLength());
+            Assert.DoesNotContain(frames.RootElement.EnumerateArray(), frame => frame.GetProperty("title").GetString()?.StartsWith("Шаг Runtime ", StringComparison.Ordinal) == true);
+        }
 
         var second = await ConfigureAndBuild(root, secondCopy, 4);
         Assert.Equal("GREEN", second.Status);

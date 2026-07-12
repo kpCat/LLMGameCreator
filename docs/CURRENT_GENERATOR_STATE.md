@@ -4,15 +4,15 @@ Status: source-of-truth handoff
 Updated by: Goal 152 accepted mechanics milestone and project-scoped Windows standalone build launch
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goals149/150/150A/150B/151 are accepted by human. Goal152 is in progress:
+Goals149/150/150A/150B/151 are accepted by human. Goal152 is GREEN and ready for manual review:
 
 ```text
-implementationStatus=BLOCKED
+implementationStatus=GREEN
 gateStatus=goal152_project_scoped_windows_standalone_build_launch required
 accepted=false
 acceptedByCodex=false
 manualReviewPerformed=false
-manualGateReady=false
+manualGateReady=true
 sourceProjectPresent=true
 originalProjectMutationCount=0
 originalTrackedStateByteIdentical=true
@@ -50,7 +50,7 @@ goal152Accepted=false
 goal152AcceptedByHuman=false
 goal152AcceptedByCodex=false
 goal152ManualReviewPerformed=false
-goal152ManualGateReady=false
+goal152ManualGateReady=true
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -64,12 +64,12 @@ diagnostics and compact history, and Technical Details separates last success, c
 attempt and current saved configuration. The unrelated 64 historical snapshot failures
 remain open validation debt and are not part of the Goal151 acceptance gate.
 
-Goal152 standalone launch status is BLOCKED: Unity `6000.1.10f1` built the generic cached host,
-but the required project-scoped renamed executable exits before the bootstrap because Unity cannot
-load its byte-identical adjacent MonoBleedingEdge runtime. The source `goal148-manual` project
-remained byte-identical, no Goal142/Goal143/sample fallback was used, and Goal152 remains
-`accepted=false`, `manualReviewPerformed=false`, `manualGateReady=false`. The next bounded repair
-must preserve the generic host cache and resolve the slugged executable/runtime packaging contract.
+Goal152 standalone launch status is GREEN: short disposable copies of `goal148-manual` passed the
+normal controller path at `3/8/2/12`, produced the required slugged executable/Data output, and
+emitted all stable smoke markers. A one-parameter second copy changed the payload hash while
+reusing the generic host cache. The source project remained byte-identical and no Goal142/Goal143/
+sample fallback was used. Goal152 remains `accepted=false`, `manualReviewPerformed=false`,
+`manualGateReady=true` pending its own human review.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

@@ -242,7 +242,15 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             FinalReplayActionCount = _lastBuild.FinalReplayActionCount,
             EquipmentSummary = _lastBuild.EquipmentSlotSummary,
             AttributesSummary = _lastBuild.AttributesSummary,
-            ProgressionSummary = _lastBuild.ProgressionSummary
+            ProgressionSummary = _lastBuild.ProgressionSummary,
+            RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame
+            {
+                Index = frame.Index,
+                ActionId = frame.ActionId,
+                Title = frame.Title,
+                Category = frame.Category,
+                StateHash = frame.StateHash
+            }).ToList()
         };
         return _standaloneBuild.Build(request, cancellationToken);
     }

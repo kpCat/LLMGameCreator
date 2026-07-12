@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "goal152_standalone_launch_smoke_proof_v1",
+  "exitCode": 0,
+  "markers": [
+    "LLMGC_PROJECT_STANDALONE_LOAD_PASS",
+    "LLMGC_PROJECT_STANDALONE_FRAME_PASS",
+    "LLMGC_PROJECT_STANDALONE_RUNTIME_AUTHORITY_PASS",
+    "LLMGC_PROJECT_STANDALONE_SMOKE_PASS"
+  ],
+  "status": "GREEN"
+}

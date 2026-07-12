@@ -1,16 +1,16 @@
 {
   "schemaVersion": "goal152_dashboard_v1",
-  "status": "BLOCKED",
-  "stage": "launch_smoke",
+  "status": "GREEN",
+  "stage": "publish_success",
   "goal152Accepted": false,
   "goal152AcceptedByHuman": false,
   "goal152AcceptedByCodex": false,
   "goal152ManualReviewPerformed": false,
-  "goal152ManualGateReady": false,
-  "unityEditorPath": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.1.10f1\\Editor\\Unity.exe",
-  "unityVersion": "6000.1.10f1",
-  "successfulGenericHostBuildCount": 1,
-  "hostCacheReusedAfterBuild": true,
+  "goal152ManualGateReady": true,
+  "unityVersion": "6000.1.10f1_3c681a6c22ff",
+  "hostCacheKey": "ddf8b8e8528c43a0d3f56895a099edc6",
+  "hostCacheReusedForBothProjectAssemblies": true,
   "sourceProjectMutationCount": 0,
-  "failure": "Renamed project-scoped Unity executable cannot load its byte-identical adjacent MonoBleedingEdge runtime; the unrenamed cached generic host starts and reaches payload loading."
+  "firstProject": "GREEN, 20 frames, launch smoke GREEN",
+  "secondParameterChangedProject": "GREEN, package hash changed, host reused, launch smoke GREEN"
 }

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal152_project_payload_proof_v1",
+  "projectPackageId": "game/goal148-manual",
+  "packageSha256": "578aa5b7b40b87015897c762cb651ef6e61f3a190e5e66fd80a6c1dd79664391",
+  "finalStateHash": "5f367569870cd8290225e06bba3570b8185c157febb823d444ff9cfa27def09e",
+  "selectedModuleCount": 6,
+  "configuredParameterCount": 10,
+  "capabilityCount": 14,
+  "frameCount": 20,
+  "framesSource": "current project ProductLineRuntimeQualifier action journal",
+  "firstFrame": "capability.start_runtime",
+  "lastFrame": "show_final_state",
+  "runtimeAuthority": true,
+  "unityGameplayTruth": false,
+  "projectionOnly": false,
+  "status": "GREEN"
+}

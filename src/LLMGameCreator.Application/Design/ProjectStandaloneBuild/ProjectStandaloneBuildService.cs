@@ -203,7 +203,7 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
             HashFile(Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha", "Assets", "Scripts", "ProjectStandalonePlayerAdapterBootstrap.cs")),
             HashFile(Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha", "Assets", "Editor", "ProjectStandaloneBuildEntrypoint.cs")),
             HashFile(Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha", "Packages", "manifest.json")),
-            HashFile(Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha", "ProjectSettings", "ProjectVersion.txt")),
+            UnityProjectVersionIdentity(Path.Combine(_repositoryRoot, "unity", "LLMGameCreatorAlpha", "ProjectSettings", "ProjectVersion.txt")),
             "StandaloneWindows64",
             settings.DevelopmentBuild.ToString(), settings.AllowDebugging.ToString(), settings.ConnectProfiler.ToString()
         };
@@ -213,6 +213,13 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
     private static bool HostIsComplete(string root) => File.Exists(Path.Combine(root, ProjectStandaloneBuildVocabulary.HostExecutableName))
         && Directory.Exists(Path.Combine(root, ProjectStandaloneBuildVocabulary.HostDataDirectoryName))
         && File.Exists(Path.Combine(root, "UnityPlayer.dll"));
+
+    private static string UnityProjectVersionIdentity(string projectVersionPath)
+    {
+        var line = File.ReadLines(projectVersionPath).FirstOrDefault(value => value.StartsWith("m_EditorVersion:", StringComparison.Ordinal));
+        if (string.IsNullOrWhiteSpace(line)) throw new InvalidOperationException("Unity ProjectVersion.txt does not contain m_EditorVersion.");
+        return line.Trim();
+    }
 
     private static string? ResolveUnityEditor(string saved)
     {
@@ -225,13 +232,15 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
     private static StandalonePayload CreatePayload(ProjectStandaloneBuildRequest request, string packagePath, string attemptId, string unityVersion, string cacheKey)
     {
         var packageJson = File.ReadAllText(packagePath);
-        var frames = Enumerable.Range(0, Math.Max(1, request.PlannedActionCount)).Select(index => new StandaloneFrame
-        {
-            Index = index,
-            Title = index == 0 ? "Начало Runtime-сценария" : index == Math.Max(1, request.PlannedActionCount) - 1 ? "Итоговое состояние Runtime" : "Шаг Runtime " + (index + 1),
-            Category = index == 0 ? "start" : index == Math.Max(1, request.PlannedActionCount) - 1 ? "final" : "runtime",
-            StateHash = request.FinalStateHash
-        }).ToList();
+        if (request.RuntimeFrames.Count == 0) throw new InvalidOperationException("Runtime qualification did not produce PlayerAdapter frames.");
+        var frames = request.RuntimeFrames.OrderBy(frame => frame.Index).ThenBy(frame => frame.ActionId, StringComparer.Ordinal)
+            .Select(frame => new StandaloneFrame
+            {
+                Index = frame.Index,
+                Title = frame.Title,
+                Category = frame.Category,
+                StateHash = string.IsNullOrWhiteSpace(frame.StateHash) ? request.FinalStateHash : frame.StateHash
+            }).ToList();
         return new StandalonePayload
         {
             ProjectManifest = new { schemaVersion = "llmgc_project_standalone_v1", request.ProjectPackageId, request.ProjectTitle, request.ProjectVersion, request.CompositionId, request.PackageSha256, request.CompositionPackageSha256, request.FinalStateHash, selectedModuleIds = request.SelectedModuleIds, effectiveParameters = request.Parameters, request.RuntimePlanId, request.CapabilityCount, runtimeAuthority = true, unityGameplayTruth = false, projectionOnly = false, sourceCommit = Environment.GetEnvironmentVariable("GIT_COMMIT") ?? string.Empty, unityVersion, cacheKey, attemptId },

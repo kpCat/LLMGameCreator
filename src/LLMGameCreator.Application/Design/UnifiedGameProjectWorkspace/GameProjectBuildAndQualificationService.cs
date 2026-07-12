@@ -406,7 +406,18 @@ public sealed class GameProjectBuildAndQualificationService
                 AttemptedCheckpointActionCount = projectQualification.CheckpointActionCount,
                 AttemptedFinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount,
                 AttemptedCompositionPackageSha256 = overlay.CompositionPackageSha256,
-                AttemptedFinalStateHash = projectQualification.Session.CurrentStateHash
+                AttemptedFinalStateHash = projectQualification.Session.CurrentStateHash,
+                RuntimeFrames = projectQualification.Session.ActionJournal
+                    .OrderBy(entry => entry.ActionIndex)
+                    .ThenBy(entry => entry.ActionRequestId, StringComparer.Ordinal)
+                    .Select(entry => new GameProjectRuntimeFrame
+                    {
+                        Index = entry.ActionIndex,
+                        ActionId = entry.ActionId,
+                        Title = string.IsNullOrWhiteSpace(entry.CanonicalStepId) ? entry.ActionId : entry.CanonicalStepId,
+                        Category = entry.Category,
+                        StateHash = entry.StateHashAfter
+                    }).ToList()
             };
         }
         catch (Exception exception) when (exception is IOException

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal152_host_cache_proof_v1",
+  "hostCacheKey": "ddf8b8e8528c43a0d3f56895a099edc6",
+  "unityVersion": "6000.1.10f1_3c681a6c22ff",
+  "stableProjectVersionIdentity": "m_EditorVersion: 6000.1.10f1",
+  "firstProjectHostReused": true,
+  "secondProjectHostReused": true,
+  "hostExecutableSha256": "ff43c16687cda9ed26ce0a2f11d7d2a44e545a304a5d82930db0023a05abd3cc",
+  "status": "GREEN"
+}
