@@ -1,0 +1,9 @@
+﻿{
+    "status":  "GREEN",
+    "metric":  "resource_transition_truthful",
+    "correlation":  "capability action ExpectedRuntimeEffects to snapshot StepId",
+    "lockedClaimResourceEventCount":  0,
+    "unrelatedQuestOrTransactionEventsIgnored":  true,
+    "ambiguousClaimEventsRejected":  true,
+    "finalResourceMatchesActionEventAfter":  true
+}

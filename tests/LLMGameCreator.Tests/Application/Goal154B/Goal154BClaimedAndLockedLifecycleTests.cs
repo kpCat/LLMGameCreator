@@ -19,7 +19,7 @@ public sealed class Goal154BClaimedAndLockedLifecycleTests
 
         Assert.Equal(10, state.Factions.Single(item => item.FactionId == "faction/village").Reputation);
         Assert.Equal("completed", state.Quests.Single(item => item.QuestId == "quest/help_healer").State);
-        Assert.Equal(7, Goal154BFixture.Gold(state));
+        Assert.Equal(17, Goal154BFixture.Gold(state));
         Assert.Equal("true", state.Flags.Single(item => item.Id == "flag/village_trusted_reward_claimed").Value);
         Assert.Single(Events(result.Session), item => item.EventType == "DialogueChoiceSelected"
                                                      && item.TargetId == "trusted_village_reward");
@@ -84,7 +84,7 @@ public sealed class Goal154BClaimedAndLockedLifecycleTests
         Assert.Equal(0, claim.RuntimeEventCount);
         Assert.Equal(claim.StateHashBefore, claim.StateHashAfter);
         Assert.Contains(claim.Diagnostics, item => item.Contains("requirement.reputation_too_low", StringComparison.Ordinal));
-        Assert.Equal(0, Goal154BFixture.Gold(state));
+        Assert.Equal(10, Goal154BFixture.Gold(state));
         Assert.DoesNotContain(state.Flags, item => item.Id == "flag/village_trusted_reward_claimed"
                                                   && item.Value.Equals("true", StringComparison.OrdinalIgnoreCase));
         Assert.Equal(["unavailable", "unavailable", "unavailable"], Visibility(execution.Session));
@@ -122,7 +122,7 @@ public sealed class Goal154BClaimedAndLockedLifecycleTests
         var rewardEvent = Events(execution.Session).Last(item => item.EventType == "ResourceChanged"
                                                                && item.TargetId == "resource/gold");
 
-        Assert.Equal(0, Goal154BFixture.Gold(state));
+        Assert.Equal(10, Goal154BFixture.Gold(state));
         Assert.Equal("true", state.Flags.Single(item => item.Id == "flag/village_trusted_reward_claimed").Value);
         Assert.Equal("0", rewardEvent.Args["requestedDelta"]);
         Assert.Equal("0", rewardEvent.Args["actualDelta"]);
@@ -141,8 +141,8 @@ public sealed class Goal154BClaimedAndLockedLifecycleTests
 
         Assert.True(claimed.CheckpointReplay.Passed && claimed.FinalReplay.Passed);
         Assert.True(locked.CheckpointReplay.Passed && locked.FinalReplay.Passed);
-        Assert.Equal(7, Goal154BFixture.Gold(claimedState));
-        Assert.Equal(0, Goal154BFixture.Gold(lockedState));
+        Assert.Equal(17, Goal154BFixture.Gold(claimedState));
+        Assert.Equal(10, Goal154BFixture.Gold(lockedState));
         Assert.Equal("SKIPPED", locked.Session.ActionJournal.Single(item =>
             item.ActionId == "claim_trusted_reward").Status);
 

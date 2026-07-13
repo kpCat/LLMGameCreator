@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
+using LLMGameCreator.Application.Design.AcceptedAlphaUnityPlayableProjection;
 
 namespace LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 
@@ -206,6 +207,13 @@ public sealed class FeatureModuleLibraryValidator
                                 + operation.OperationId + ":" + operation.JsonPath);
                 valid = false;
             }
+            if (TargetsNonReputationQuestReward(operation)
+                && !HasDeclaredRewardCapability(module, operation, classification))
+            {
+                diagnostics.Add("non-reputation quest reward mutation requires a declared user-facing capability: "
+                                + module.ModuleId + ":" + operation.OperationId + ":" + operation.JsonPath);
+                valid = false;
+            }
         }
         foreach (var orphan in claims.Keys.Where(dimension =>
                      module.MutationOperations.All(operation => operation.RuntimeDimension != dimension)))
@@ -214,6 +222,28 @@ public sealed class FeatureModuleLibraryValidator
             valid = false;
         }
         return valid;
+    }
+
+    private static bool TargetsNonReputationQuestReward(ProductLineRuntimeVariantMutationOperation operation)
+    {
+        var target = operation.TargetId.Split('|', StringSplitOptions.None);
+        return operation.TargetKind == "quest_output_amount"
+               && target.Length >= 4
+               && target[1] == "rewards"
+               && target[2] != "reputation";
+    }
+
+    private static bool HasDeclaredRewardCapability(
+        FeatureModuleDefinition module,
+        ProductLineRuntimeVariantMutationOperation operation,
+        string classification)
+    {
+        if (classification is not "declared_user_facing_mechanic" and not "declared_user_facing_starter_content")
+            return false;
+        var effects = module.RuntimeEffectContracts.Where(effect =>
+            effect.RuntimeDimension == operation.RuntimeDimension).ToList();
+        return effects.Count > 0 && module.RuntimePlaythroughContracts.Any(action =>
+            effects.Any(effect => action.ExpectedRuntimeEffects.Contains(effect.MetricKind, StringComparer.Ordinal)));
     }
 
     private static bool SupportedType(string value) => value is FeatureModuleParameterValueTypes.Integer

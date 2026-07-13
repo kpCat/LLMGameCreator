@@ -1,0 +1,10 @@
+﻿{
+    "status":  "GREEN",
+    "factionOnlyQuestAndDialogueBytesPreserved":  true,
+    "questWithoutDialogueGold":  10,
+    "questWithoutDialogueReputation":  10,
+    "allSocialGoldAfterQuest":  10,
+    "allSocialGoldAfterClaim":  17,
+    "moduleOrderPackageAndPlanByteIdentical":  true,
+    "allCurrentOptionalModulesClassified":  true
+}

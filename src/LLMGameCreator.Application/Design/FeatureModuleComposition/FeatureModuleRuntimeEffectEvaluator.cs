@@ -140,7 +140,7 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             FeatureModuleRuntimeEffectMetricKinds.DialogueChoiceVisibilitySequence =>
                 DialogueChoiceVisibilitySequence(session, contract.TargetId),
             FeatureModuleRuntimeEffectMetricKinds.ResourceTransitionTruthful =>
-                ResourceTransitionTruthful(session, contract.TargetId),
+                ResourceTransitionTruthful(session, contract),
             FeatureModuleRuntimeEffectMetricKinds.FlagEquals =>
                 FlagValue(session, contract.TargetId),
             FeatureModuleRuntimeEffectMetricKinds.TrustedRewardSocialOutcome =>
@@ -391,11 +391,16 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         return values.Count < 3 ? null : string.Join(">", values.Take(3));
     }
 
-    private static string? ResourceTransitionTruthful(RuntimeInteractiveSession session, string resourceId)
+    private static string? ResourceTransitionTruthful(
+        RuntimeInteractiveSession session,
+        FeatureModuleRuntimeEffectContract contract)
     {
-        var runtimeEvent = session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
-            .LastOrDefault(item => item.EventType == "ResourceChanged" && item.TargetId == resourceId);
-        if (runtimeEvent is null) return SocialStillLocked(session) ? "not_applicable" : null;
+        var resourceId = contract.TargetId;
+        var events = EventsForMetric(session, contract.MetricKind)
+            .Where(item => item.EventType == "ResourceChanged" && item.TargetId == resourceId).ToList();
+        if (events.Count == 0) return SocialStillLocked(session) ? "not_applicable" : null;
+        if (events.Count != 1) return "false";
+        var runtimeEvent = events[0];
         if (runtimeEvent.Args.GetValueOrDefault("resourceId") != resourceId
             || !DecimalArg(runtimeEvent, "before", out var before)
             || !DecimalArg(runtimeEvent, "requestedDelta", out var requested)

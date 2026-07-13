@@ -1,6 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 154C saved-project, WinForms and standalone social closure: next product goal. Goal154/154A are historical FAILED foundations; Goal154B Runtime core is GREEN with 29 behavioral tests, claimed/still-locked/repeat-claim/clamp/rollback/replay proof and zero Unity/standalone invocation. Goals154/154A/154B remain `accepted=false`, and no manual gate is ready until Goal154C closes the explicitly deferred user workflow.
+- Goal 154C saved-project, WinForms and standalone social closure: next product goal. Goal154/154A are historical FAILED foundations; Goal154B Runtime core and Goal154B1 reward/effect-correlation hotfix are GREEN. The healer quest retains 10 gold, default lifecycle is `0 → 10 → 17`, and trusted resource evidence is action-scoped; Unity/standalone invocation remains zero. Goals154/154A/154B/154B1 remain `accepted=false`, and no manual gate is ready until Goal154C closes the explicitly deferred user workflow.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document

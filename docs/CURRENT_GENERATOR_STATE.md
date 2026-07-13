@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 154B executable social Runtime lifecycle core closure
+Updated by: Goal 154B1 quest reward preservation and action-scoped social effect truth hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154 and Goal154A remain historical FAILED foundations and human-unaccepted. Goal154B closes only the executable social Runtime core with 29 genuine behavioral tests, claimed/still-locked outcomes, atomic second-claim rejection, clamps, transactional rollback and checkpoint/full replay. Goal154B is GREEN but remains human-unaccepted; WinForms, real saved-project and standalone closure are explicitly deferred to Goal154C, so no Goal154 manual gate is ready.
+The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154 and Goal154A remain historical FAILED foundations and human-unaccepted. Goal154B remains GREEN for Runtime core, and Goal154B1 closes its independent P1 product-semantics hotfix: the healer quest retains its existing 10 gold, the reputation-only module is now 1.2.0 and cannot mutate a non-reputation quest reward without a declared capability, and resource truth is scoped to the declaring action. Goal154B1 is GREEN but human-unaccepted; WinForms, real saved-project and standalone closure remain deferred to Goal154C, so no Goal154 manual gate is ready.
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
@@ -156,6 +156,17 @@ goal154bManualReviewPerformed=false
 goal154bManualGateReady=false
 goal154bBehavioralTestDiscoveredCount=29
 goal154bBehavioralTestPassedCount=29
+goal154bAuditBlocker=closed_by_goal154b1
+goal154b1ImplementationStatus=GREEN
+goal154b1Accepted=false
+goal154b1AcceptedByHuman=false
+goal154b1AcceptedByCodex=false
+goal154b1ManualReviewPerformed=false
+goal154b1ManualGateReady=false
+goal154QuestGoldRewardPreserved=true
+goal154DefaultGoldLifecycle=0->10->17
+goal154LockedFinalGold=10
+goal154TrustedEffectActionScoped=true
 goal154CoreRuntimeLifecyclePassed=true
 goal154ClaimedAndStillLockedPassed=true
 goal154AlreadyClaimedAtomic=true
@@ -166,17 +177,16 @@ goal154ArtifactScopeViolationCount=0
 goal154UnityProcessStartCount=0
 goal154StandaloneSmokeInvocationCount=0
 nextProductGoal=goal154c_saved_project_winforms_standalone_social_closure
-gateStatus=goal154b_green_pending_goal154c
+gateStatus=goal154b1_green_pending_goal154c
 ```
 
-Goal154B preserves the published Goal154A foundation and adds generic social capability primitives,
-selectors, conditional `SKIPPED` outcomes and Runtime effect evaluation. The explicit healer graph
-opens, inspects and closes the dialogue around quest completion and claim. Defaults `0/10/5/10/7`
-produce reputation `0 → 10`, completed quest, `unavailable → available → unavailable`, gold `0 → 7`
-and a true claim flag. Threshold 20 produces truthful `still_locked` with no claim mutation or event.
-The activated package edits only existing faction/quest/dialogue contracts; proof fixtures remain zero
-and default-off hashes are preserved. Goals154/154A/154B remain `accepted=false` and
-`manualGateReady=false` until Goal154C supplies the deferred user workflow and standalone proof.
+Goal154B1 preserves the published Goal154B Runtime graph while removing the unrelated
+`quest.00a_gold_reward_reserved` mutation and its claim. Defaults `0/10/5/10/7` now produce
+gold `0 → 10 → 17`; threshold 20 stays at 10 with a `SKIPPED` claim and no claim-action resource
+event; zero reward stays at 10 with the claim flag; custom reward 9 ends at 19. Module order,
+default-off hashes and owner/dependent certification invalidation are covered. Goals154/154A/154B/
+154B1 remain `accepted=false` and `manualGateReady=false` until Goal154C supplies the deferred
+user workflow and standalone proof.
 
 The read-only real source project was inventoried and copied before any Application
 service opened it. Fresh required HEAD passed both its persisted three-profile state

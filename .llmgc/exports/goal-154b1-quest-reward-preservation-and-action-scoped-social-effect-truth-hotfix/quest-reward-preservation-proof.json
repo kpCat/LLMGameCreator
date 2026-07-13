@@ -1,0 +1,12 @@
+﻿{
+    "status":  "GREEN",
+    "removedOperationId":  "quest.00a_gold_reward_reserved",
+    "removedClaim":  "quest_gold_reserved_for_trusted_choice",
+    "moduleVersion":  "1.2.0",
+    "baselineGold":  10,
+    "defaultGoldLifecycle":  "0-\u003e10-\u003e17",
+    "lockedFinalGold":  10,
+    "zeroRewardFinalGold":  10,
+    "customRewardFinalGold":  19,
+    "claimFlagAfterZeroReward":  true
+}

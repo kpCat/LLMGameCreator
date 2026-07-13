@@ -8,7 +8,7 @@
   "required": false,
   "selectable": true,
   "defaultSelected": false,
-  "moduleVersion": "1.1.0",
+  "moduleVersion": "1.2.0",
   "dependencies": ["feature.faction.reputation_standing", "feature.quest.objective_chain"],
   "conflicts": [],
   "requiredSchemaSections": ["game.quests", "game.factions"],
@@ -16,8 +16,7 @@
   "requiredValidationRules": [
     "activated_package_diff_classified",
     "activated_package_diff:quest_completion_reputation:declared_user_facing_mechanic",
-    "activated_package_diff:quest_failure_reputation:declared_user_facing_mechanic",
-    "activated_package_diff:quest_gold_reserved_for_trusted_choice:declared_user_facing_mechanic"
+    "activated_package_diff:quest_failure_reputation:declared_user_facing_mechanic"
   ],
   "requiredSaveLoadPolicy": ["quest_state", "faction_reputation", "journal_checkpoint_reload", "full_replay_equivalence"],
   "requiredPlayerAdapterSurface": ["quest_summary", "faction_summary"],
@@ -29,7 +28,6 @@
   "futureExpansionNotes": ["Дополнительные последствия задаются теми же generic output операциями."],
   "mutationOperations": [
     {"operationId":"quest.00_completion_reputation","targetKind":"quest_output_amount","targetId":"quest/help_healer|rewards|reputation|faction/village","jsonPath":"game.quests[id=quest/help_healer].rewards[kind=reputation,id=faction/village].amount","expectedValue":"5","newValue":"10","runtimeDimension":"quest_completion_reputation"},
-    {"operationId":"quest.00a_gold_reward_reserved","targetKind":"quest_output_amount","targetId":"quest/help_healer|rewards|resource|resource/gold","jsonPath":"game.quests[id=quest/help_healer].rewards[kind=resource,id=resource/gold].amount","expectedValue":"10","newValue":"0","runtimeDimension":"quest_gold_reserved_for_trusted_choice"},
     {"operationId":"quest.01_failure_reputation","targetKind":"quest_failure_output_upsert","targetId":"quest/help_healer|failureEffects|reputation|faction/village","jsonPath":"game.quests[id=quest/help_healer].failureEffects[kind=reputation,id=faction/village]","expectedValue":"__MISSING__","newValue":"{\"kind\":\"reputation\",\"id\":\"faction/village\",\"amount\":-5}","runtimeDimension":"quest_failure_reputation"},
     {"operationId":"quest.02_failure_reputation_amount","targetKind":"quest_failure_output_amount","targetId":"quest/help_healer|failureEffects|reputation|faction/village","jsonPath":"game.quests[id=quest/help_healer].failureEffects[kind=reputation,id=faction/village].amount","expectedValue":"-5","newValue":"-5","runtimeDimension":"quest_failure_reputation"}
   ],
@@ -48,5 +46,5 @@
   "runtimePlaythroughContracts": [
     {"contractId":"playthrough.quest.advance_existing_objective","capabilityId":"capability.quest.faction_reputation_consequences","actionId":"advance_healer_objective","category":"social","phase":"social","order":180,"runtimePrimitiveId":"runtime.command.advance_quest_objective","targetSelector":"quest_objective_id","args":{"questId":"quest/help_healer","objectiveId":"objective/collect_red_herbs","amount":"10"},"dependsOnActionIds":["start_or_update_quest","inspect_initial_faction_reputation"],"dependsOnIfPresentActionIds":["close_healer_before_quest"],"checkpointBoundaryAfter":true,"presentationOnly":false,"required":true,"expectedRuntimeEffects":["quest_state_equals","faction_reputation_transition_truthful"]}
   ],
-  "sourceLineage": {"goalId":"goal154_faction_reputation_quest_consequences_and_trusted_dialogue_reward_vertical_slice","catalogPath":"catalogs/feature-modules/optional/quest-faction-reputation-consequences.featuremodule.json","recipeId":"quest_faction_reputation_consequences","variantKind":"quest_reputation","candidateId":"minimal-map-game-quest-reputation","operationIds":["quest.00_completion_reputation","quest.00a_gold_reward_reserved","quest.01_failure_reputation","quest.02_failure_reputation_amount"]}
+  "sourceLineage": {"goalId":"goal154_faction_reputation_quest_consequences_and_trusted_dialogue_reward_vertical_slice","catalogPath":"catalogs/feature-modules/optional/quest-faction-reputation-consequences.featuremodule.json","recipeId":"quest_faction_reputation_consequences","variantKind":"quest_reputation","candidateId":"minimal-map-game-quest-reputation","operationIds":["quest.00_completion_reputation","quest.01_failure_reputation","quest.02_failure_reputation_amount"]}
 }

@@ -142,7 +142,7 @@ public sealed class Goal154BParameterAndMutationTests
         Assert.Equal(baseline.Game.Dialogues.Count, package.Game.Dialogues.Count);
         Assert.Equal(baseline.Game.Inventories.Count, package.Game.Inventories.Count);
         Assert.Equal(baseline.Game.Maps.SelectMany(map => map.Entities).Count(), package.Game.Maps.SelectMany(map => map.Entities).Count());
-        Assert.Equal(0, package.Game.Quests.Single(item => item.Id == "quest/help_healer").Rewards
+        Assert.Equal(10, package.Game.Quests.Single(item => item.Id == "quest/help_healer").Rewards
             .Single(item => item.Kind == "resource" && item.Id == "resource/gold").Amount);
         Assert.Single(package.Game.Dialogues.Single(item => item.Id == "dialogue/healer").Nodes
             .Single(item => item.Id == "start").Choices, item => item.Id == "trusted_village_reward");

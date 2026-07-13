@@ -1,0 +1,7 @@
+﻿{
+    "status":  "GREEN",
+    "scenario":  "goal-154b1-quest-reward-preservation-and-action-scoped-social-effect-truth-hotfix",
+    "baselineRef":  "58531bcd9cb47cf0091630411fa6c873a6a9e2d4",
+    "artifactScopeViolationCount":  0,
+    "forbiddenRuntimeWinFormsUnityMutationCount":  0
+}

@@ -1,0 +1,18 @@
+﻿{
+    "status":  "GREEN",
+    "behavioralTestsDiscovered":  16,
+    "behavioralTestsPassed":  16,
+    "baselineQuestGoldReward":  10,
+    "defaultGoldAfterQuest":  10,
+    "defaultGoldAfterClaim":  17,
+    "lockedFinalGold":  10,
+    "zeroRewardFinalGold":  10,
+    "customRewardFinalGold":  19,
+    "claimEffectActionScoped":  true,
+    "questModuleIndependent":  true,
+    "defaultOffHashesPreserved":  true,
+    "artifactScopeViolationCount":  0,
+    "accepted":  false,
+    "manualGateReady":  false,
+    "deferredTo":  "Goal154C"
+}

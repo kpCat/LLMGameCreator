@@ -1,0 +1,36 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154b1-quest-reward-preservation-and-action-scoped-social-effect-truth-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 58531bcd9cb47cf0091630411fa6c873a6a9e2d4
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- Goal154B core GREEN, но Goals154/154A/154B/154B1 пока НЕ приняты и manual gate не готов;
+- удали quest.00a_gold_reward_reserved и верни существующую награду quest/help_healer в 10 золота;
+- reputation-only модуль не имеет права менять gold или другие нерепутационные rewards;
+- правильный default lifecycle: gold 0→10 после квеста и 10→17 после trusted claim;
+- threshold 20: final gold 10, claim SKIPPED, claim-action ResourceChanged отсутствует;
+- zero trusted reward: final gold 10, flag true;
+- custom reward 9: final gold 19;
+- ResourceTransitionTruthful обязан читать только events action-а, который объявил metric;
+- unrelated quest/transaction gold events не должны удовлетворять trusted claim contract;
+- prove module independence, order, fingerprint invalidation and default-off hashes;
+- минимум 10 настоящих behavioral Goal154B1 tests;
+- Unity/standalone/WinForms/real-project budgets = 0;
+- не запускай full suite, historical closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи removed mutation, module version, gold lifecycle, action-scoped metric,
+module independence, regressions, artifact scope, final SHA, push, HEAD == origin/main и clean worktree.

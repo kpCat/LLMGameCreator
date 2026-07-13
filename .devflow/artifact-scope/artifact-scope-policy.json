@@ -5144,6 +5144,46 @@
       "excludedPathPrefixes": ["unity/", "samples/", "generator-library/", "provider/", "LLM/", "RAG/"]
     },
     {
+      "scenario": "goal-154b1-quest-reward-preservation-and-action-scoped-social-effect-truth-hotfix",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal154b1-quest-reward-preservation.ps1",
+        ".devflow/scripts/run-goal154b1-quest-reward-preservation.cmd",
+        "catalogs/feature-modules/optional/quest-faction-reputation-consequences.featuremodule.json",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryValidator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectEvaluator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectModels.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154B/Goal154BClaimedAndLockedLifecycleTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154B/Goal154BParameterAndMutationTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/goal154b-executable-social-runtime-core.md",
+        "docs/manual-acceptance/goal154b1-quest-reward-preservation.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal154B1/",
+        "docs/agent-tasks/goal-154b1-quest-reward-preservation-and-action-scoped-social-effect-truth-hotfix/",
+        ".llmgc/procedural/goal-154b1-quest-reward-preservation-and-action-scoped-social-effect-truth-hotfix/",
+        ".llmgc/exports/goal-154b1-quest-reward-preservation-and-action-scoped-social-effect-truth-hotfix/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.WinForms/",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/",
+        "src/LLMGameCreator.Runtime/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
+    },
+    {
       "scenario": "goal-154b-executable-social-runtime-lifecycle-core-closure",
       "allowedPaths": [
         ".devflow/artifact-scope/artifact-scope-policy.json",

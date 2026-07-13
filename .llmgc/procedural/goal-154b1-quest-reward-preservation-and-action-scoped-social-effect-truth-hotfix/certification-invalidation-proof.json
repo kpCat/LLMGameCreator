@@ -1,0 +1,11 @@
+﻿{
+    "status":  "GREEN",
+    "changedModule":  "feature.quest.faction_reputation_consequences",
+    "moduleVersion":  "1.2.0",
+    "invalidatedModules":  [
+                               "feature.dialogue.reputation_gated_reward",
+                               "feature.quest.faction_reputation_consequences"
+                           ],
+    "unrelatedOptionalModulesReused":  true,
+    "defaultOffHashesPreserved":  true
+}
