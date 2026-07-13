@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "goal153_standalone_cache_reuse_proof_v1",
+  "status": "GREEN",
+  "hostCacheKey": "6af4d5eb5b42f956110555b58fb4e276",
+  "hostReused": true,
+  "hostRebuilt": false,
+  "unityProcessStartCount": 0,
+  "hiddenSmokePassed": true,
+  "selfCheckPassedCount": 5,
+  "selfCheckTotalCount": 5,
+  "requiredMarkers": [
+    "LLMGC_PROJECT_STANDALONE_LOAD_PASS",
+    "LLMGC_PROJECT_STANDALONE_INTEGRITY_PASS",
+    "LLMGC_PROJECT_STANDALONE_NAVIGATION_PASS",
+    "LLMGC_PROJECT_STANDALONE_RUNTIME_AUTHORITY_PASS",
+    "LLMGC_PROJECT_STANDALONE_SMOKE_PASS"
+  ],
+  "humanReviewFacts": [
+    "Способность",
+    "Прямой урон",
+    "Начальная мана",
+    "Потрачено маны",
+    "Осталось маны",
+    "Эффект",
+    "Длительность",
+    "Урон за ход",
+    "Эффект завершён"
+  ]
+}

@@ -287,8 +287,10 @@ public sealed class GameProjectBuildAndQualificationService
             var equipmentSummary = projectQualification.Session.LatestEquipmentSummary;
             var attributesSummary = projectQualification.Session.LatestAttributesSummary;
             var progressionSummary = projectQualification.Session.LatestProgressionSummary;
-            var damageEvent = projectQualification.Session.LatestSnapshot.RuntimeEvents
-                .LastOrDefault(runtimeEvent => runtimeEvent.EventType == "DamageApplied");
+            var runtimeEvents = projectQualification.Session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).ToList();
+            var damageEvent = runtimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "DamageApplied"
+                                  && (runtimeEvent.Args.ContainsKey("equipmentDamageBonus") || runtimeEvent.Args.ContainsKey("statDamageBonus")))
+                              ?? runtimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "DamageApplied");
             var weaponDamageBonus = 0;
             var combatDamageDelta = 0;
             if (equipmentAction is not null)
@@ -322,6 +324,38 @@ public sealed class GameProjectBuildAndQualificationService
             var totalAdditionalDamage = string.IsNullOrWhiteSpace(rawTotalAdditionalDamage)
                 ? damageEvent is null ? 0m : weaponDamageBonus + statDamageBonus
                 : decimal.Parse(rawTotalAdditionalDamage, NumberStyles.Number, CultureInfo.InvariantCulture);
+            var useAbilityAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
+                action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.UseAbility);
+            var allSnapshots = projectQualification.Session.CanonicalSession.Snapshots;
+            var abilitySnapshot = useAbilityAction is null ? null : allSnapshots.LastOrDefault(snapshot =>
+                snapshot.RuntimeEvents.Any(runtimeEvent => runtimeEvent.EventType == "AbilityUsed"
+                    && runtimeEvent.TargetId == useAbilityAction.ResolvedTargetId));
+            var abilityDefinition = useAbilityAction is null ? null : qualifiedPackage.Game.Abilities
+                .SingleOrDefault(ability => ability.Id == useAbilityAction.ResolvedTargetId);
+            var abilityDirectDamage = abilitySnapshot?.RuntimeEvents.Where(runtimeEvent => runtimeEvent.EventType == "DamageApplied")
+                .Select(RuntimeEventDamage).FirstOrDefault() ?? 0m;
+            var manaEvent = abilitySnapshot?.RuntimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "CostConsumed"
+                && runtimeEvent.TargetId == "resource/mana");
+            var manaBefore = EventDecimal(manaEvent, "before");
+            var manaSpent = EventDecimal(manaEvent, "cost");
+            var manaRemaining = EventDecimal(manaEvent, "after");
+            var statusAdded = abilitySnapshot?.RuntimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "StatusAdded");
+            var statusId = statusAdded?.Args.GetValueOrDefault("statusId") ?? string.Empty;
+            var statusDefinition = qualifiedPackage.Game.Statuses.SingleOrDefault(status => status.Id == statusId);
+            var statusDuration = (int)EventDecimal(statusAdded, "duration");
+            var tickSnapshot = allSnapshots.FirstOrDefault(snapshot => snapshot.RuntimeEvents.Any(runtimeEvent =>
+                runtimeEvent.EventType == "StatusTicked" && runtimeEvent.Args.GetValueOrDefault("statusId") == statusId));
+            var statusTickDamage = tickSnapshot?.RuntimeEvents.Where(runtimeEvent => runtimeEvent.EventType == "DamageApplied")
+                .Select(RuntimeEventDamage).FirstOrDefault() ?? 0m;
+            var statusExpired = statusId.Length > 0 && allSnapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
+                .Any(runtimeEvent => runtimeEvent.EventType == "StatusRemoved"
+                    && runtimeEvent.Message.Contains("expired", StringComparison.OrdinalIgnoreCase));
+            var statusRemainingTicks = runtimeState.ActiveEncounter?.Participants.SelectMany(participant => participant.Statuses)
+                .SingleOrDefault(status => status.StatusId == statusId)?.RemainingTicks ?? 0;
+            var abilitySummary = abilityDefinition?.Name ?? string.Empty;
+            var manaSummary = manaEvent is null ? string.Empty : FormatNumber((double)manaBefore) + " → "
+                + FormatNumber((double)manaRemaining) + " (стоимость " + FormatNumber((double)manaSpent) + ")";
+            var statusSummary = statusDefinition is null ? string.Empty : statusDefinition.Name + ", " + statusDuration + " ходов";
             var summaryLines = new List<string>
             {
                 "Игра успешно собрана и проверена.",
@@ -355,6 +389,20 @@ public sealed class GameProjectBuildAndQualificationService
                 summaryLines.Add(progressionAction.Args.GetValueOrDefault("stageTitle", "Уровень") + ": " + stageValue);
                 summaryLines.Add(progressionAction.Args.GetValueOrDefault("amountTitle", "Опыт")
                                  + ": " + FormatNumber(inspectedProgression.Amount));
+            }
+            if (useAbilityAction is not null)
+            {
+                summaryLines.Add("Способность: " + abilitySummary);
+                summaryLines.Add("Прямой урон: " + abilityDirectDamage.ToString(CultureInfo.InvariantCulture));
+                if (manaEvent is not null) summaryLines.Add("Мана: " + manaSummary);
+                if (statusDefinition is not null)
+                {
+                    summaryLines.Add("Эффект: " + statusSummary);
+                    summaryLines.Add("Урон эффекта: " + statusTickDamage.ToString(CultureInfo.InvariantCulture) + " за ход");
+                    summaryLines.Add("Эффект завершён: " + (statusExpired ? "да" : "нет"));
+                }
+                summaryLines.Add("Сохранение/повтор: "
+                    + (projectQualification.CheckpointReplay.Passed && projectQualification.FinalReplay.Passed ? "пройдено" : "не пройдено"));
             }
 
             return new GameProjectBuildResult
@@ -397,6 +445,16 @@ public sealed class GameProjectBuildAndQualificationService
                 ProgressionSummary = progressionSummary,
                 StatDamageBonus = statDamageBonus,
                 TotalAdditionalDamage = totalAdditionalDamage,
+                AbilitySummary = abilitySummary,
+                ManaSummary = manaSummary,
+                StatusSummary = statusSummary,
+                AbilityDirectDamage = abilityDirectDamage,
+                ManaBefore = manaBefore,
+                ManaSpent = manaSpent,
+                ManaRemaining = manaRemaining,
+                StatusTickDamage = statusTickDamage,
+                StatusRemainingTicks = (int)statusRemainingTicks,
+                StatusExpired = statusExpired,
                 AttemptId = attempt.AttemptId,
                 AttemptStatus = "GREEN",
                 AttemptedSelectedModuleIds = attempt.AttemptedSelectedModuleIds,
@@ -443,6 +501,19 @@ public sealed class GameProjectBuildAndQualificationService
                 Directory.Delete(stagingRoot, recursive: true);
             Volatile.Write(ref _buildRunning, 0);
         }
+    }
+
+    private static decimal EventDecimal(CanonicalRuntimePlayerCommandLoopRuntimeEvent? runtimeEvent, string key) =>
+        runtimeEvent is not null
+        && decimal.TryParse(runtimeEvent.Args.GetValueOrDefault(key), NumberStyles.Number, CultureInfo.InvariantCulture, out var value)
+            ? value : 0;
+
+    private static decimal RuntimeEventDamage(CanonicalRuntimePlayerCommandLoopRuntimeEvent runtimeEvent)
+    {
+        var raw = runtimeEvent.Args.GetValueOrDefault("damage");
+        if (string.IsNullOrWhiteSpace(raw))
+            raw = System.Text.RegularExpressions.Regex.Match(runtimeEvent.Message, @"-(?<value>\d+(?:\.\d+)?)$").Groups["value"].Value;
+        return decimal.TryParse(raw, NumberStyles.Number, CultureInfo.InvariantCulture, out var value) ? value : 0;
     }
 
     private GameProjectBuildResult RollbackFailure(

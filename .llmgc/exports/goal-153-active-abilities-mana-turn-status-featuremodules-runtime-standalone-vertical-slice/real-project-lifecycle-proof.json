@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal153_real_project_lifecycle_proof_v1",
+  "status": "GREEN",
+  "sourceProject": "goal148-manual",
+  "disposableCopy": true,
+  "sourceProjectByteIdentical": true,
+  "newModulesInitiallyDefaultOff": true,
+  "saveReopenPassed": true,
+  "oldSelectionsPersisted": true,
+  "firstCompositionPackageSha256": "3f51b60b56e63325a20f4799715bd1b38ca1a24abc671f987642b1bd01fce569",
+  "firstFinalStateHash": "6a1391c060fcd7d8012a6071be2bd63b45cbcf046dc6481ab28a3865e75456ef",
+  "changedAbilityBaseDamage": 3,
+  "secondCompositionPackageSha256": "12d6434090b55add5ea8bf91f8ca635b9838bbbb338b0db14d50c63d5473c3fc",
+  "secondFinalStateHash": "ad637b3edc24ce8919c6d07bbe65c49f3b1d974c8ec642d2cd951c94b8ceeda7",
+  "packageHashChanged": true,
+  "finalHashChanged": true
+}

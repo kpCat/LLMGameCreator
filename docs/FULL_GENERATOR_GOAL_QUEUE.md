@@ -1,6 +1,7 @@
 # Full Generator Goal Queue
 
-- Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Next action: `perform_goal152a_five_step_human_gate`; Goal152 and Goal152A remain `accepted=false`.
+- Goal 153 active abilities/mana/turn-status vertical slice: Goals152/152A/152C are accepted by human at `ac97859c8de861641e07f886250d053b5330fbe9`; three default-off data-driven modules add five typed parameters, generic deterministic definition upserts, transactional status-definition ticks, checkpoint/replay and cache-only standalone facts. Goal153 remains `accepted=false`; its four-step manual gate is the next human decision after automated GREEN.
+- Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document
 

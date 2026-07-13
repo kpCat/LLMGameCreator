@@ -152,6 +152,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             "encounter_id" => Matches(package.Game.Encounters.Select(item => item.Id), explicitId),
             "encounter_participant_id" => Matches(package.Game.Encounters.SelectMany(item => item.Participants)
                 .Select(item => item.Id), explicitId),
+            "ability_id" => Matches(package.Game.Abilities.Select(item => item.Id), explicitId),
             "item_id" => Matches(package.Game.Items.Select(item => item.Id), explicitId),
             "equipment_slot_id" => Matches(package.Game.EquipmentSlots.Select(item => item.Id), explicitId),
             "stat_id" => Matches(package.Game.Stats.Select(item => item.Id), explicitId),
@@ -179,6 +180,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             ("targetInventoryId", "inventory_id"), ("recipeId", "recipe_id"),
             ("resourceNodeId", "resource_node_id"), ("transactionId", "transaction_id"),
             ("encounterId", "encounter_id"), ("participantId", "encounter_participant_id"),
+            ("sourceParticipantId", "encounter_participant_id"), ("targetParticipantId", "encounter_participant_id"),
+            ("abilityId", "ability_id"),
             ("itemId", "item_id"), ("slotId", "equipment_slot_id"),
             ("statId", "stat_id"), ("progressionId", "progression_id")
         };
@@ -200,7 +203,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
     private static bool KnownSelector(string selector) => selector is "manifest_package" or "start_map"
         or "entity_id" or "interaction_id" or "dialogue_id" or "quest_id" or "inventory_id"
         or "container_inventory_id" or "recipe_id" or "resource_node_id" or "transaction_id"
-        or "encounter_id" or "encounter_participant_id" or "item_id" or "equipment_slot_id"
+        or "encounter_id" or "encounter_participant_id" or "ability_id" or "item_id" or "equipment_slot_id"
         or "stat_id" or "progression_id";
 
     private static void ValidateStatDamageMetadata(

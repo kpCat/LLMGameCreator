@@ -1,0 +1,33 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-153-active-abilities-mana-turn-status-featuremodules-runtime-standalone-vertical-slice/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: ac97859c8de861641e07f886250d053b5330fbe9
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Обязательно:
+- первым делом зафиксируй человеческую приёмку Goals152/152A/152C;
+- реализуй три default-off data-driven FeatureModules: активные способности, мана/заклинания, эффекты по ходам;
+- никакого C# switch по moduleId/abilityId/statusId;
+- status definition effects должны выполняться транзакционно и replay-stable;
+- все значения берутся из typed parameters пользователя;
+- старые проекты/хэши при отключённых новых модулях не меняются;
+- Unity Editor invocation budget = 0;
+- standalone использует существующий host cache и один hidden smoke;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи acceptance record, модули/параметры, damage/mana/status tick/expiry,
+checkpoint/replay, cache reuse, Unity process count, final SHA, push, HEAD == origin/main,
+clean worktree и короткий Goal153 manual gate.

@@ -52,6 +52,8 @@ public static class CapabilityRuntimePrimitiveIds
     public const string ExecuteTransaction = "runtime.command.execute_transaction";
     public const string StartEncounter = "runtime.command.start_encounter";
     public const string BasicAttack = "runtime.command.basic_attack";
+    public const string UseAbility = "runtime.command.use_ability";
+    public const string EndTurn = "runtime.command.end_turn";
     public const string OpenContainer = "runtime.command.open_container";
     public const string TakeFromContainer = "runtime.command.take_from_container";
     public const string EquipItem = "runtime.command.equip_item";
@@ -66,7 +68,7 @@ public static class CapabilityRuntimePrimitiveIds
     public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
     {
         Start, Move, Interact, OpenDialogue, StartOrUpdateQuest, ShowInventory,
-        CraftRecipe, HarvestResource, ExecuteTransaction, StartEncounter, BasicAttack,
+        CraftRecipe, HarvestResource, ExecuteTransaction, StartEncounter, BasicAttack, UseAbility, EndTurn,
         OpenContainer, TakeFromContainer, EquipItem, ChangeProgression,
         InspectInventory, InspectStatus, InspectEquipment, InspectAttributes, InspectProgression, FinalState
     };

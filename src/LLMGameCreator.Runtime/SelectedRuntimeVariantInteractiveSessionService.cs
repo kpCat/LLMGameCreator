@@ -592,6 +592,8 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 "runtime.command.execute_transaction" => package.Game.Transactions.Any(item => item.Id == step.TargetId),
                 "runtime.command.start_encounter" => package.Game.Encounters.Any(item => item.Id == step.TargetId),
                 "runtime.command.basic_attack" => package.Game.Encounters.SelectMany(item => item.Participants).Any(item => item.Id == step.TargetId),
+                "runtime.command.use_ability" => package.Game.Abilities.Any(item => item.Id == step.TargetId),
+                "runtime.command.end_turn" => package.Game.Encounters.SelectMany(item => item.Participants).Any(item => item.Id == step.TargetId),
                 "runtime.command.open_container" => package.Game.Inventories.Any(item => item.Id == step.TargetId),
                 "runtime.command.take_from_container" => package.Game.Items.Any(item => item.Id == step.TargetId),
                 "runtime.command.equip_item" => package.Game.EquipmentSlots.Any(item => item.Id == step.TargetId),

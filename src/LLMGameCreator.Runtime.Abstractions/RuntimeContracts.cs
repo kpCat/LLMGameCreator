@@ -407,7 +407,8 @@ public enum GameRuntimeEventType
     DialogueClosed = 42,
     DialogueEffectApplied = 43,
     FactionReputationChanged = 44,
-    FactionRelationChanged = 45
+    FactionRelationChanged = 45,
+    StatusTicked = 46
 }
 
 public sealed class GameRuntimeEvent

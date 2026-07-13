@@ -83,6 +83,16 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public decimal StatDamageBonus { get; init; }
     public decimal EquipmentDamageBonus { get; init; }
     public decimal TotalAdditionalDamage { get; init; }
+    public string AbilitySummary { get; init; } = string.Empty;
+    public string ManaSummary { get; init; } = string.Empty;
+    public string StatusSummary { get; init; } = string.Empty;
+    public decimal AbilityDirectDamage { get; init; }
+    public decimal ManaBefore { get; init; }
+    public decimal ManaSpent { get; init; }
+    public decimal ManaRemaining { get; init; }
+    public decimal StatusTickDamage { get; init; }
+    public int StatusRemainingTicks { get; init; }
+    public bool StatusExpired { get; init; }
     public string LastBuildAttemptId { get; init; } = string.Empty;
     public string LastBuildAttemptStatus { get; init; } = "NOT_RUN";
     public string LastBuildFailureStage { get; init; } = string.Empty;
@@ -144,6 +154,16 @@ public sealed record GameProjectBuildResult
     public string ProgressionSummary { get; init; } = string.Empty;
     public decimal StatDamageBonus { get; init; }
     public decimal TotalAdditionalDamage { get; init; }
+    public string AbilitySummary { get; init; } = string.Empty;
+    public string ManaSummary { get; init; } = string.Empty;
+    public string StatusSummary { get; init; } = string.Empty;
+    public decimal AbilityDirectDamage { get; init; }
+    public decimal ManaBefore { get; init; }
+    public decimal ManaSpent { get; init; }
+    public decimal ManaRemaining { get; init; }
+    public decimal StatusTickDamage { get; init; }
+    public int StatusRemainingTicks { get; init; }
+    public bool StatusExpired { get; init; }
     public string AttemptId { get; init; } = string.Empty;
     public string AttemptStatus { get; init; } = "NOT_RUN";
     public string FailureStage { get; init; } = string.Empty;

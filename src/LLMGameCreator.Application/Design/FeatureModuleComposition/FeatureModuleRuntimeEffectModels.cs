@@ -11,6 +11,10 @@ public static class FeatureModuleRuntimeEffectMetricKinds
     public const string CombatStatDamageDelta = "combat_stat_damage_delta";
     public const string ProgressionAmountEquals = "progression_amount_equals";
     public const string ProgressionStageEquals = "progression_stage_equals";
+    public const string AbilityDirectDamageEquals = "ability_direct_damage_equals";
+    public const string ParticipantResourceEquals = "participant_resource_equals";
+    public const string StatusTickDamageEquals = "status_tick_damage_equals";
+    public const string StatusAbsentAfterExpiry = "status_absent_after_expiry";
 }
 
 public static class FeatureModuleRuntimeEffectComparisonKinds

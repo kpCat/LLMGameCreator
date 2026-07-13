@@ -68,8 +68,8 @@ public sealed class CharacterAttributesLevelProgressionGoal150Tests
     {
         var (library, packageJson) = Load();
         Assert.Equal(10, library.Manifest.RequiredCoreModuleCount);
-        Assert.Equal(6, library.Manifest.OptionalModuleCount);
-        Assert.Equal(16, library.Manifest.ModuleFileCount);
+        Assert.Equal(9, library.Manifest.OptionalModuleCount);
+        Assert.Equal(19, library.Manifest.ModuleFileCount);
         var attributes = Module(library, "feature.character.attributes");
         var progression = Module(library, "feature.character.level_progression");
         var equipment = Module(library, "feature.equipment.weapon_loadout");
@@ -269,8 +269,8 @@ public sealed class CharacterAttributesLevelProgressionGoal150Tests
                 new FeatureModuleCertificationCache(cache));
             var first = service.Certify(FindRoot(), library, new string('a', 64), output);
             var second = service.Certify(FindRoot(), library, new string('a', 64), output);
-            Assert.Equal(6, first.ExecutedCount);
-            Assert.Equal(6, second.ReusedCount);
+            Assert.Equal(9, first.ExecutedCount);
+            Assert.Equal(9, second.ReusedCount);
 
             var changedModule = Module(library, moduleId) with
             {
@@ -291,7 +291,7 @@ public sealed class CharacterAttributesLevelProgressionGoal150Tests
             };
             var changed = service.Certify(FindRoot(), changedLibrary, new string('a', 64), output);
             Assert.Equal(1, changed.ExecutedCount);
-            Assert.Equal(5, changed.ReusedCount);
+            Assert.Equal(8, changed.ReusedCount);
             Assert.Equal(1, changed.InvalidatedCount);
             Assert.Equal("GREEN", changed.Entries.Single(entry => entry.ModuleId == "feature.equipment.weapon_loadout").Status);
         }

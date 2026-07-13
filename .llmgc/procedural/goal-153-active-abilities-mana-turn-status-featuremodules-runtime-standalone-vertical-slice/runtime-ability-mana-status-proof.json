@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "goal153_runtime_ability_mana_status_proof_v1",
+  "status": "GREEN",
+  "abilityId": "ability/arcane_impulse",
+  "abilityTitle": "Магический импульс",
+  "abilityDirectDamage": 2,
+  "manaBefore": 12,
+  "manaCost": 3,
+  "manaAfter": 9,
+  "statusId": "status/arcane_burn",
+  "statusTitle": "Магическое горение",
+  "statusDurationTurns": 2,
+  "statusTickDamage": 1,
+  "statusTickCount": 2,
+  "statusExpired": true,
+  "basicAttackEquipmentStatTotals": "3/6/9",
+  "progression": "2/12"
+}

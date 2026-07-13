@@ -119,7 +119,8 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `goal152_project_scoped_windows_standalone_build_launch required`.
+Current gate token: `goal153_active_abilities_mana_turn_status_featuremodules_manual_review required`.
+Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
 
@@ -127,8 +128,10 @@ Goal152 records the human acceptance of Goals149/150/150A/150B/151 and makes the
 normal `Игры` workflow a project-scoped Windows standalone Alpha build using Runtime-backed
 PlayerAdapter payload with a cached generic Unity host. Goal152C closes the exact generated-file
 cleanup and moves all future writable Unity host projects to transactional LocalAppData snapshots;
-the active next action is `perform_goal152a_five_step_human_gate required`. Goal152 and Goal152A remain
-`accepted=false`; Goal150F's 64 historical failures remain debt, not the active gate.
+the owner accepted Goals152/152A/152C at `ac97859c8de861641e07f886250d053b5330fbe9` after the
+standalone self-check, readable navigation, framebuffer refresh and cache reuse were reviewed.
+Goal153 now adds three default-off data-driven ability, mana and turn-status FeatureModules while
+remaining `accepted=false`; Goal152B and Goal150F historical failures remain debt, not the active gate.
 
 ## Full Generator Source-Of-Truth Docs
 

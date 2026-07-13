@@ -111,7 +111,13 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         var working = RuntimeStateHelpers.CloneState(state);
         var result = new GameRuntimeResult { State = state, Success = true, Message = "Turn ended." };
-        TickCurrentParticipant(working.ActiveEncounter!, result.Events);
+        TickCurrentParticipant(package, working.ActiveEncounter!, result.Events, result.Diagnostics);
+        if (result.Diagnostics.Any(d => d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
+        {
+            result.Success = false;
+            result.Message = "Turn end failed.";
+            return result;
+        }
         AdvanceTurn(working.ActiveEncounter!, result.Events);
         RuntimeStateHelpers.CopyState(working, state);
         result.State = state;
@@ -257,7 +263,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         foreach (var output in outputs)
         {
             ApplyEncounterOutput(package, encounter, source, target, output, result.Events, result.Diagnostics,
-                equipmentBonus, equipmentMetadataPresent, statBonus, statId, statValue, statMetadataPresent);
+                equipmentBonus, equipmentMetadataPresent, statBonus, statId, statValue, statMetadataPresent, ability.Id);
         }
 
         encounter.ActionHistory.Add($"{source.Id}:{ability.Id}:{target.Id}");
@@ -368,7 +374,8 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
     private static CostConsumptionResult ConsumeAbilityCosts(EncounterParticipantState source, IEnumerable<CostDefinition> costs)
     {
         var result = new CostConsumptionResult();
-        foreach (var cost in costs)
+        var materialized = costs.ToList();
+        foreach (var cost in materialized)
         {
             if (cost.Amount <= 0)
             {
@@ -389,8 +396,22 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
                 continue;
             }
 
+        }
+
+        if (!result.Success) return result;
+        foreach (var cost in materialized)
+        {
+            var resource = source.Resources.First(r => RuntimeStateHelpers.IdEquals(r.ResourceId, cost.Id));
             resource.Amount -= cost.Amount;
-            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.CostConsumed, $"Consumed ability resource {cost.Id} x{Format(cost.Amount)}", cost.Id));
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.CostConsumed,
+                $"Consumed ability resource {cost.Id} x{Format(cost.Amount)}", cost.Id,
+                new Dictionary<string, string>
+                {
+                    ["sourceParticipantId"] = source.Id,
+                    ["before"] = Format(resource.Amount + cost.Amount),
+                    ["cost"] = Format(cost.Amount),
+                    ["after"] = Format(resource.Amount)
+                }));
         }
 
         return result;
@@ -409,7 +430,8 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         double statBonus,
         string statId,
         double statValue,
-        bool statMetadataPresent)
+        bool statMetadataPresent,
+        string sourceAbilityId)
     {
         var outputTarget = ResolveOutputTarget(encounter, source, target, output);
         if (IsDamageOutput(output))
@@ -464,13 +486,35 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         if (RuntimeStateHelpers.KindEquals(output.Kind, "add_status") || RuntimeStateHelpers.KindEquals(output.Kind, "status"))
         {
-            outputTarget.Statuses.Add(new StatusState
+            if (!package.Game.Statuses.Any(status => RuntimeStateHelpers.IdEquals(status.Id, output.Id)))
             {
-                StatusId = output.Id,
-                TargetId = outputTarget.Id,
-                RemainingTicks = output.Amount > 0 ? (long?)Math.Ceiling(output.Amount) : null
-            });
-            events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.StatusAdded, $"Status added: {output.Id}", outputTarget.Id));
+                diagnostics.Add(RuntimeStateHelpers.Diagnostic("ability.effect.status_missing",
+                    $"Status definition not found: {output.Id}", output.Id));
+                return;
+            }
+
+            var duration = output.Amount > 0 ? (long?)Math.Ceiling(output.Amount) : null;
+            var existing = outputTarget.Statuses.FirstOrDefault(status => RuntimeStateHelpers.IdEquals(status.StatusId, output.Id));
+            if (existing is null)
+            {
+                existing = new StatusState { StatusId = output.Id, TargetId = outputTarget.Id };
+                outputTarget.Statuses.Add(existing);
+            }
+            existing.RemainingTicks = duration;
+            existing.Stacks = 1;
+            existing.Metadata["sourceParticipantId"] = source.Id;
+            existing.Metadata["sourceAbilityId"] = sourceAbilityId;
+            existing.Metadata["appliedRound"] = encounter.Round.ToString();
+            events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.StatusAdded,
+                $"Status added: {output.Id}", outputTarget.Id,
+                new Dictionary<string, string>
+                {
+                    ["statusId"] = output.Id,
+                    ["duration"] = duration?.ToString() ?? string.Empty,
+                    ["sourceParticipantId"] = source.Id,
+                    ["sourceAbilityId"] = sourceAbilityId,
+                    ["appliedRound"] = encounter.Round.ToString()
+                }));
             return;
         }
 
@@ -672,7 +716,11 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         return encounter.Participants[index];
     }
 
-    private static void TickCurrentParticipant(EncounterRuntimeState encounter, List<GameRuntimeEvent> events)
+    private static void TickCurrentParticipant(
+        GamePackageDefinition package,
+        EncounterRuntimeState encounter,
+        List<GameRuntimeEvent> events,
+        List<RuntimeDiagnostic> diagnostics)
     {
         var participant = CurrentTurnParticipant(encounter);
         if (participant == null)
@@ -687,6 +735,36 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         foreach (var status in participant.Statuses.ToList())
         {
+            var definition = package.Game.Statuses.FirstOrDefault(item => RuntimeStateHelpers.IdEquals(item.Id, status.StatusId));
+            if (definition is null)
+            {
+                diagnostics.Add(RuntimeStateHelpers.Diagnostic("status.tick.definition_missing",
+                    $"Status definition not found while ticking: {status.StatusId}", status.StatusId));
+                return;
+            }
+
+            var eventStart = events.Count;
+            foreach (var effect in definition.Effects)
+            {
+                var output = RuntimeEffectMapper.ToOutput(effect);
+                ApplyEncounterOutput(package, encounter, participant, participant, output, events, diagnostics,
+                    0, false, 0, string.Empty, 0, false,
+                    status.Metadata.TryGetValue("sourceAbilityId", out var abilityId) ? abilityId : string.Empty);
+                if (diagnostics.Any(d => d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
+                {
+                    if (events.Count > eventStart) events.RemoveRange(eventStart, events.Count - eventStart);
+                    return;
+                }
+            }
+
+            events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.StatusTicked,
+                $"Status ticked: {status.StatusId}", participant.Id,
+                new Dictionary<string, string>
+                {
+                    ["statusId"] = status.StatusId,
+                    ["remainingTicksBefore"] = status.RemainingTicks?.ToString() ?? string.Empty,
+                    ["stacks"] = status.Stacks.ToString()
+                }));
             if (!status.RemainingTicks.HasValue)
             {
                 continue;

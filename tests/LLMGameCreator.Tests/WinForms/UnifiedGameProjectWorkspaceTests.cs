@@ -67,9 +67,9 @@ public sealed class UnifiedGameProjectWorkspaceTests
 
             var mechanics = Descendants(page).OfType<CheckBox>()
                 .Where(control => control.Tag is GameProjectMechanicPresentation).ToList();
-            Assert.Equal(16, mechanics.Count);
+            Assert.Equal(19, mechanics.Count);
             Assert.Equal(10, mechanics.Count(control => !control.Enabled && control.Checked));
-            Assert.Equal(6, mechanics.Count(control => control.Enabled));
+            Assert.Equal(9, mechanics.Count(control => control.Enabled));
             Assert.Contains(mechanics, control => control.Text == "Углублённая алхимия");
             Assert.Contains(mechanics, control => control.Text == "Усиленный бой");
             Assert.Contains(mechanics, control => control.Text == "Расширенный сбор ресурсов");

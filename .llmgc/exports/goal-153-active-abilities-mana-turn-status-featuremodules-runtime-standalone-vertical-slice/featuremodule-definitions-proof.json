@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "goal153_featuremodule_definitions_proof_v1",
+  "status": "GREEN",
+  "defaultOff": true,
+  "moduleOrderIndependent": true,
+  "modules": [
+    {
+      "moduleId": "feature.combat.active_ability_loadout",
+      "title": "Активные способности",
+      "dependencies": [
+        "feature.combat.turn_based_encounter",
+        "feature.player_adapter.runtime_summary"
+      ]
+    },
+    {
+      "moduleId": "feature.magic.mana_spellcasting",
+      "title": "Мана и заклинания",
+      "dependencies": [
+        "feature.combat.active_ability_loadout"
+      ]
+    },
+    {
+      "moduleId": "feature.status.turn_effects",
+      "title": "Эффекты по ходам",
+      "dependencies": [
+        "feature.combat.active_ability_loadout"
+      ]
+    }
+  ],
+  "definitionUpsert": {
+    "missingAdds": true,
+    "equivalentIsIdempotent": true,
+    "conflictIsCausal": true,
+    "reverseOrderByteIdentical": true
+  },
+  "moduleIdSwitches": 0,
+  "fixtureIdSwitches": 0
+}

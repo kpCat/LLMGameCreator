@@ -205,7 +205,13 @@ closure is BLOCKED with 21 passed and 64 terminal failures. Goals149/150/150A/15
 150E/150F remain `accepted=false`; no manual gate is ready until the failures are
 repaired and a later bounded closure plus independent audit are GREEN.
 
-Goal152C closes the exact generated Unity settings cleanup and external-workspace hardening. Goal152A's five-step manual gate is ready after GREEN hidden smoke and host-cache reuse; `goal152Accepted=false` and `goal152aAccepted=false` remain explicit until human review.
+Goal152C closes the exact generated Unity settings cleanup and external-workspace hardening. The owner accepted Goals152/152A/152C at required base `ac97859c8de861641e07f886250d053b5330fbe9`: standalone self-check, readable interface, navigation controls, framebuffer refresh without ghosting and host-cache reuse without Unity Editor were accepted. Acceptance is human-only (`acceptedByCodex=false`); Goal152B remains a BLOCKED historical cleanup attempt. Goal153 is now the active gate and remains `accepted=false`, `manualReviewPerformed=false`.
+
+Goal153 implementation is GREEN and `manualGateReady=true`: three default-off ability/mana/turn-status
+FeatureModules, five typed parameters, transactional definition-driven status ticks, checkpoint/full replay,
+real-project save/reopen and one cache-only hidden standalone smoke are automated. The active four-step
+human gate remains `goal153_active_abilities_mana_turn_status_featuremodules_manual_review required`;
+no Goal153 human acceptance is claimed.
 
 Goals149/150/150A/150B/151 are accepted by human through the exact Goal152 acceptance
 record at commit `2516931f9c8242bbd59fe5cf73f9e66b405ef16c`, with `3/8/2/12`, `3/6/9`

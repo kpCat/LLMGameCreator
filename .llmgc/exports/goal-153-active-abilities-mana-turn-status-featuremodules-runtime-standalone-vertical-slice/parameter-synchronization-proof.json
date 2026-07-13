@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "goal153_parameter_synchronization_proof_v1",
+  "status": "GREEN",
+  "saveReopenPassed": true,
+  "invalidValuesRejectedWithoutPackageMutation": true,
+  "values": {
+    "abilityBaseDamage": 2,
+    "startingMana": 12,
+    "abilityManaCost": 3,
+    "statusDurationTurns": 2,
+    "statusTickDamage": 1
+  },
+  "atomicBindings": [
+    "package definitions",
+    "Runtime expectations",
+    "playthrough args",
+    "human summary",
+    "standalone facts"
+  ]
+}

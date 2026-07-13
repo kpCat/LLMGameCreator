@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "goal153_artifact_scope_proof_v1",
+  "status": "GREEN",
+  "scenario": "goal-153-active-abilities-mana-turn-status-featuremodules-runtime-standalone-vertical-slice",
+  "violationCount": 0,
+  "unityHostChanged": false,
+  "samplesChanged": false,
+  "generatorLibraryChanged": false,
+  "providerLlmRagLuaChanged": false,
+  "historicalGeneratedChurnRestored": true
+}

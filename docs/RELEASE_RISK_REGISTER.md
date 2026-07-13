@@ -167,3 +167,8 @@ Goal151 adds an explicit stale executable/launch-target risk: Technical Details 
 shows executable path, SHA-256 and file/informational version, and saved-project
 diagnosis must use a fresh-build disposable-copy proof before attributing a defect to
 current composition code.
+
+Goal153 closes the immediate active-ability/mana/turn-status Runtime gap with generic
+effect/cost/definition contracts. Remaining risk: future status stacking policy and richer
+effect kinds must extend the same transactional replay-stable seam; they must not add
+module/status/ability ID switches or Unity-owned gameplay truth.

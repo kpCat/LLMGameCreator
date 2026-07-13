@@ -56,6 +56,10 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             FeatureModuleRuntimeEffectMetricKinds.PlayerStatEquals => string.Empty,
             FeatureModuleRuntimeEffectMetricKinds.ProgressionAmountEquals => "0",
             FeatureModuleRuntimeEffectMetricKinds.ProgressionStageEquals => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.AbilityDirectDamageEquals => "0",
+            FeatureModuleRuntimeEffectMetricKinds.ParticipantResourceEquals => "0",
+            FeatureModuleRuntimeEffectMetricKinds.StatusTickDamageEquals => "0",
+            FeatureModuleRuntimeEffectMetricKinds.StatusAbsentAfterExpiry => "absent",
             _ => ReadMetric(contract, baselineSession, diagnostics)
         };
         var passed = diagnostics.Count == 0 && Compare(contract, actual, baseline);
@@ -103,6 +107,14 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
                 Progression(session, contract.TargetId)?.Amount.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.ProgressionStageEquals =>
                 Progression(session, contract.TargetId)?.StageId,
+            FeatureModuleRuntimeEffectMetricKinds.AbilityDirectDamageEquals =>
+                AbilityDamage(session, contract.TargetId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.ParticipantResourceEquals =>
+                ParticipantResource(session, contract.TargetId, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.StatusTickDamageEquals =>
+                StatusTickDamage(session, contract.TargetId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.StatusAbsentAfterExpiry =>
+                StatusAbsent(session, contract.TargetId, contract.ResourceOrItemId) ? "absent" : "present",
             _ => null
         };
         if (value is null)
@@ -183,7 +195,7 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
 
     private static decimal? EquipmentDamageDelta(RuntimeInteractiveSession session)
     {
-        var value = session.LatestSnapshot.RuntimeEvents
+        var value = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
             .Where(item => item.EventType == "DamageApplied")
             .Select(item => item.Args.TryGetValue("equipmentDamageBonus", out var raw) ? raw : null)
             .LastOrDefault(raw => raw is not null);
@@ -201,11 +213,49 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
 
     private static decimal? CombatDamageEventValue(RuntimeInteractiveSession session, string key)
     {
-        var value = session.LatestSnapshot.RuntimeEvents
+        var value = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
             .Where(item => item.EventType == "DamageApplied")
             .Select(item => item.Args.GetValueOrDefault(key))
             .LastOrDefault(raw => !string.IsNullOrWhiteSpace(raw));
         return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed)
             ? parsed : null;
+    }
+
+    private static decimal? AbilityDamage(RuntimeInteractiveSession session, string abilityId)
+    {
+        var snapshot = session.CanonicalSession.Snapshots.LastOrDefault(item =>
+            item.RuntimeEvents.Any(runtimeEvent => runtimeEvent.EventType == "AbilityUsed" && runtimeEvent.TargetId == abilityId));
+        return snapshot is null ? null : snapshot.RuntimeEvents.Where(item => item.EventType == "DamageApplied").Sum(EventDamage);
+    }
+
+    private static decimal? ParticipantResource(RuntimeInteractiveSession session, string participantId, string resourceId) =>
+        session.CanonicalSession.RuntimeSession.GameplayState.ActiveEncounter?.Participants
+            .SingleOrDefault(item => item.Id == participantId)?.Resources
+            .SingleOrDefault(item => item.ResourceId == resourceId)?.Amount is double value ? (decimal)value : null;
+
+    private static decimal? StatusTickDamage(RuntimeInteractiveSession session, string statusId)
+    {
+        var snapshots = session.CanonicalSession.Snapshots.Where(item =>
+            item.RuntimeEvents.Any(runtimeEvent => runtimeEvent.EventType == "StatusTicked"
+                && runtimeEvent.Args.GetValueOrDefault("statusId") == statusId)).ToList();
+        return snapshots.Count == 0 ? null : snapshots.SelectMany(item => item.RuntimeEvents)
+            .Where(item => item.EventType == "DamageApplied").Select(EventDamage).FirstOrDefault();
+    }
+
+    private static bool StatusAbsent(RuntimeInteractiveSession session, string participantId, string statusId)
+    {
+        var participant = session.CanonicalSession.RuntimeSession.GameplayState.ActiveEncounter?.Participants
+            .SingleOrDefault(item => item.Id == participantId);
+        return participant is not null && participant.Statuses.All(item => item.StatusId != statusId)
+            && session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
+                .Any(item => item.EventType == "StatusRemoved" && item.Message.Contains("expired", StringComparison.OrdinalIgnoreCase)
+                    && item.TargetId == participantId);
+    }
+
+    private static decimal EventDamage(CanonicalRuntimePlayerCommandLoopRuntimeEvent runtimeEvent)
+    {
+        var raw = runtimeEvent.Args.GetValueOrDefault("damage");
+        if (string.IsNullOrWhiteSpace(raw)) raw = Regex.Match(runtimeEvent.Message, @"-(?<value>\d+(?:\.\d+)?)$").Groups["value"].Value;
+        return decimal.TryParse(raw, NumberStyles.Number, CultureInfo.InvariantCulture, out var value) ? value : 0;
     }
 }

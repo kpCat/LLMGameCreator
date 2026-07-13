@@ -1,10 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 152C exact Unity generated settings cleanup and external workspace closure
+Updated by: Goal 153 accepted Goal152 family record and active abilities/mana/turn-status vertical slice
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal152C is GREEN: the exact 21 authorized untracked generated files were deleted, the repository Unity project is now a read-only source snapshot, and future cache-miss host builds use only a transactional LocalAppData workspace. Goal152 and Goal152A remain unaccepted pending the same five-step human gate:
+The owner accepted Goals152/152A/152C before Goal153 implementation with the exact statement recorded in the three manual-acceptance documents and compact Goal153 evidence. Goal153 implementation is GREEN and manual-gate ready; Goal153 itself remains unaccepted:
+
+Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
 ```text
 implementationStatus=GREEN
@@ -46,19 +48,45 @@ goal151Accepted=true
 goal151AcceptedByHuman=true
 acceptedCommit=2516931f9c8242bbd59fe5cf73f9e66b405ef16c
 interfaceAndDiagnosticsAccepted=true
-goal152Accepted=false
-goal152AcceptedByHuman=false
+goal152Accepted=true
+goal152AcceptedByHuman=true
 goal152AcceptedByCodex=false
 goal152ManualReviewPerformed=true
 goal152ManualGateReady=false
-goal152aAccepted=false
-goal152aAcceptedByHuman=false
-goal152aManualGateReady=true
+goal152aAccepted=true
+goal152aAcceptedByHuman=true
+goal152aAcceptedByCodex=false
+goal152aManualReviewPerformed=true
+goal152aManualGateReady=false
 goal152aImplementationStatus=GREEN
 goal152bImplementationStatus=BLOCKED historical cleanup attempt
 goal152cImplementationStatus=GREEN
-goal152cAccepted=false
-gateStatus=perform_goal152a_five_step_human_gate required
+goal152cAccepted=true
+goal152cAcceptedByHuman=true
+goal152cAcceptedByCodex=false
+goal152cManualReviewPerformed=true
+acceptedCommit=ac97859c8de861641e07f886250d053b5330fbe9
+standaloneSelfCheckAccepted=true
+standaloneReadable=true
+standaloneNavigationAccepted=true
+standaloneGhostingAbsent=true
+hostCacheReusedWithoutUnityEditor=true
+rawManualInputNotCommitted=true
+goal153Accepted=false
+goal153AcceptedByHuman=false
+goal153AcceptedByCodex=false
+goal153ManualReviewPerformed=false
+goal153ImplementationStatus=GREEN
+goal153ManualGateReady=true
+goal153ConfiguredValues=2/12/3/2/1
+goal153DamageManaStatus=2/12->9/1x2/expired
+goal153CheckpointReloadPassed=true
+goal153FullReplayEquivalent=true
+goal153HostCacheReused=true
+goal153HostRebuilt=false
+goal153UnityProcessStartCount=0
+goal153HiddenSmokePassed=true
+gateStatus=goal153_active_abilities_mana_turn_status_featuremodules_manual_review required
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -72,7 +100,17 @@ diagnostics and compact history, and Technical Details separates last success, c
 attempt and current saved configuration. The unrelated 64 historical snapshot failures
 remain open validation debt and are not part of the Goal151 acceptance gate.
 
-Goal152A implementation and the one authorized real host build are GREEN: one opaque clearing camera, opaque full-frame repaint, responsive reference canvas, hidden smoke and second-payload cache reuse all passed. Goal152C removed exactly the owner-authorized generated paths and proves the cache-hit route skips both workspace preparation and Unity process start. Future cache misses use `%LOCALAPPDATA%\LLMGameCreator\UnityHostBuildWorkspaces\<workspace-key>\prepared` as Unity `-projectPath`; the repository Unity tree is never writable. Goal152 remains `accepted=false`, `manualReviewPerformed=true`, `manualGateReady=false`; Goal152A remains `accepted=false`, `acceptedByHuman=false`, `manualReviewPerformed=false`, `manualGateReady=true`.
+Goal152A implementation and the one authorized real host build are GREEN: one opaque clearing camera, opaque full-frame repaint, responsive reference canvas, hidden smoke and second-payload cache reuse all passed. Goal152C removed exactly the owner-authorized generated paths and proves the cache-hit route skips both workspace preparation and Unity process start. The human acceptance recorded at required base `ac97859c8de861641e07f886250d053b5330fbe9` closes Goals152/152A/152C only; Goal152B remains a BLOCKED historical cleanup attempt and Goal153 acceptance is not claimed.
+
+Goal153 adds three independently selectable default-off modules: `feature.combat.active_ability_loadout`,
+`feature.magic.mana_spellcasting` and `feature.status.turn_effects`. Typed values `2/12/3/2/1`
+produced direct damage 2, mana `12 → 9`, two status ticks of 1 and deterministic expiry.
+Definition upserts are add/idempotent/conflict-safe and module-order independent; status ticks use
+generic effect kinds transactionally before duration decrement and turn advance. The disposable
+`goal148-manual` lifecycle, save/reopen, checkpoint/full replay and parameter-driven package/final-hash
+changes passed while the source project stayed byte-identical. Cache key
+`6af4d5eb5b42f956110555b58fb4e276` was reused with `HostRebuilt=false`, all five hidden-smoke
+markers GREEN and zero Unity process starts. Goal153 remains human-unaccepted.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

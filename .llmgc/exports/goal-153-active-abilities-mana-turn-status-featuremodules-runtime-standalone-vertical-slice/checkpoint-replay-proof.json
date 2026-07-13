@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "goal153_checkpoint_replay_proof_v1",
+  "status": "GREEN",
+  "checkpointAfterFirstStatusTick": true,
+  "statusRemainingTicksAtCheckpoint": 1,
+  "checkpointReloadPassed": true,
+  "fullReplayEquivalent": true,
+  "eventSequenceEquivalent": true,
+  "firstFinalStateHash": "6a1391c060fcd7d8012a6071be2bd63b45cbcf046dc6481ab28a3865e75456ef"
+}

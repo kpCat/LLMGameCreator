@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "goal153_focused_regression_proof_v1",
+  "status": "GREEN",
+  "fullSuiteRun": false,
+  "allProductSmokeRun": false,
+  "historical85CaseClosureRun": false,
+  "lanes": {
+    "goal153": 9,
+    "capabilityDrivenRuntimePlaythrough": 12,
+    "unifiedGameProjectWorkspace": 34,
+    "projectsPage": 5,
+    "currentState": 16,
+    "equipmentAccepted": 7,
+    "attributesProgressionAccepted": 1
+  },
+  "disabledPathHistoricalRegressionsPassed": true,
+  "allCurrentOptionalCertificationPassed": true
+}

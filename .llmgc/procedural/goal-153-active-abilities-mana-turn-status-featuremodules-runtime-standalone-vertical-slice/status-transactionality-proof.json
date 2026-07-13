@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal153_status_transactionality_proof_v1",
+  "status": "GREEN",
+  "tickPolicy": "affected participant end turn; effects before decrement and advance",
+  "unknownEffectLeavesStateByteEquivalent": true,
+  "missingResourceLeavesStateByteEquivalent": true,
+  "unknownDefinitionLeavesStateByteEquivalent": true,
+  "insufficientManaLeavesStateByteEquivalent": true,
+  "turnUnchangedOnFailure": true,
+  "durationUnchangedOnFailure": true,
+  "duplicateApplicationPolicy": "refresh duration and keep one logical status",
+  "provenance": [
+    "sourceParticipantId",
+    "sourceAbilityId",
+    "appliedRound"
+  ]
+}

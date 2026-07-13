@@ -161,6 +161,16 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             StatDamageBonus = _lastBuild?.StatDamageBonus ?? 0,
             EquipmentDamageBonus = _lastBuild?.WeaponDamageBonus ?? 0,
             TotalAdditionalDamage = _lastBuild?.TotalAdditionalDamage ?? 0,
+            AbilitySummary = _lastBuild?.AbilitySummary ?? string.Empty,
+            ManaSummary = _lastBuild?.ManaSummary ?? string.Empty,
+            StatusSummary = _lastBuild?.StatusSummary ?? string.Empty,
+            AbilityDirectDamage = _lastBuild?.AbilityDirectDamage ?? 0,
+            ManaBefore = _lastBuild?.ManaBefore ?? 0,
+            ManaSpent = _lastBuild?.ManaSpent ?? 0,
+            ManaRemaining = _lastBuild?.ManaRemaining ?? 0,
+            StatusTickDamage = _lastBuild?.StatusTickDamage ?? 0,
+            StatusRemainingTicks = _lastBuild?.StatusRemainingTicks ?? 0,
+            StatusExpired = _lastBuild?.StatusExpired ?? false,
             LastBuildAttemptId = _lastBuild?.AttemptId ?? string.Empty,
             LastBuildAttemptStatus = _lastBuild?.AttemptStatus ?? "NOT_RUN",
             LastBuildFailureStage = _lastBuild?.FailureStage ?? string.Empty,
@@ -277,6 +287,24 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         {
             facts.Add(new StandaloneHumanReviewFact { Label = "Уровень", Value = progression.Groups[2].Value });
             facts.Add(new StandaloneHumanReviewFact { Label = "Опыт", Value = progression.Groups[1].Value });
+        }
+        if (!string.IsNullOrWhiteSpace(build.AbilitySummary))
+        {
+            facts.Add(new StandaloneHumanReviewFact { Label = "Способность", Value = build.AbilitySummary });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Прямой урон", Value = build.AbilityDirectDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
+        }
+        if (!string.IsNullOrWhiteSpace(build.ManaSummary))
+        {
+            facts.Add(new StandaloneHumanReviewFact { Label = "Начальная мана", Value = build.ManaBefore.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Потрачено маны", Value = build.ManaSpent.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Осталось маны", Value = build.ManaRemaining.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
+        }
+        if (!string.IsNullOrWhiteSpace(build.StatusSummary))
+        {
+            facts.Add(new StandaloneHumanReviewFact { Label = "Эффект", Value = build.StatusSummary.Split(',')[0] });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Длительность", Value = build.StatusSummary.Contains(',') ? build.StatusSummary[(build.StatusSummary.IndexOf(',') + 1)..].Trim() : build.StatusSummary });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Урон за ход", Value = build.StatusTickDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
+            facts.Add(new StandaloneHumanReviewFact { Label = "Эффект завершён", Value = build.StatusExpired ? "да" : "нет" });
         }
         return facts;
     }
