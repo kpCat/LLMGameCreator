@@ -1,12 +1,14 @@
 # Goal 153/153A/153B/153C combined manual gate
 
-Status: automated implementation GREEN; independent Goal153C audit required; no Goal is accepted
-Accepted: false
-Accepted by human: false
+Status: accepted by human
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
-Manual review performed: false
+Manual review performed: true
 
-Short combined manual gate after independent audit:
+The owner completed the combined review with values `2/12/3/5/1`: damage 2, mana `12 → 9`, five ticks of 1, expiry, saved/reopened values and cached standalone presentation were accepted at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`.
+
+Historical combined manual gate:
 
 1. Enable «Активные способности», «Мана и заклинания» and «Эффекты по ходам» and set `2/12/3/5/1`.
 2. Build and verify one GREEN card.

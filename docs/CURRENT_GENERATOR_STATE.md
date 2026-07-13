@@ -4,7 +4,7 @@ Status: source-of-truth handoff
 Updated by: Goal 153C product/proof separation and outcome-aware qualification hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals152/152A/152C before Goal153 implementation. Goal153C removes qualification-only content from the activated package and makes the real-target lifecycle outcome-aware. Goals153, 153A, 153B and 153C are manual-gate ready, remain human-unaccepted, and share one combined review after independent Goal153C audit:
+The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. The recorded human review confirms saved/reopened parameters `2/12/3/5/1`, damage 2, mana `12 → 9`, five ticks of 1, expiry and cached standalone reuse without Unity Editor. Goal154 remains human-unaccepted and FAILED because required focused tests and full runtime/workspace/standalone lifecycle proof are absent.
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
@@ -72,10 +72,10 @@ standaloneNavigationAccepted=true
 standaloneGhostingAbsent=true
 hostCacheReusedWithoutUnityEditor=true
 rawManualInputNotCommitted=true
-goal153Accepted=false
-goal153AcceptedByHuman=false
+goal153Accepted=true
+goal153AcceptedByHuman=true
 goal153AcceptedByCodex=false
-goal153ManualReviewPerformed=false
+goal153ManualReviewPerformed=true
 goal153ImplementationStatus=GREEN
 goal153ManualGateReady=true
 goal153ConfiguredValues=2/12/3/5/1
@@ -86,10 +86,10 @@ goal153HostCacheReused=true
 goal153HostRebuilt=false
 goal153UnityProcessStartCount=0
 goal153HiddenSmokePassed=true
-goal153aAccepted=false
-goal153aAcceptedByHuman=false
+goal153aAccepted=true
+goal153aAcceptedByHuman=true
 goal153aAcceptedByCodex=false
-goal153aManualReviewPerformed=false
+goal153aManualReviewPerformed=true
 goal153aImplementationStatus=GREEN
 goal153aManualGateReady=true
 goal153aFullQualificationDurations=1/2/5
@@ -107,20 +107,20 @@ goal153aHostCacheReused=true
 goal153aHostRebuilt=false
 goal153aUnityProcessStartCount=0
 goal153aHiddenSmokePassed=true
-goal153bAccepted=false
-goal153bAcceptedByHuman=false
+goal153bAccepted=true
+goal153bAcceptedByHuman=true
 goal153bAcceptedByCodex=false
-goal153bManualReviewPerformed=false
+goal153bManualReviewPerformed=true
 goal153bImplementationStatus=GREEN
 goal153bManualGateReady=true
 goal153bDeclarativeConstraintFingerprinted=true
 goal153bResourceDomainValidation=true
 goal153bUnityProcessStartCount=0
 goal153bHiddenSmokePassed=true
-goal153cAccepted=false
-goal153cAcceptedByHuman=false
+goal153cAccepted=true
+goal153cAcceptedByHuman=true
 goal153cAcceptedByCodex=false
-goal153cManualReviewPerformed=false
+goal153cManualReviewPerformed=true
 goal153cImplementationStatus=GREEN
 goal153cManualGateReady=true
 goal153cActivatedFixtureCount=0
@@ -134,7 +134,14 @@ goal153cHostReused=true
 goal153cHostRebuilt=false
 goal153cUnityProcessStartCount=0
 goal153cArtifactScopeViolationCount=0
-gateStatus=independent_goal153c_audit_then_combined_goal153_family_human_gate required
+goal154ImplementationStatus=FAILED
+goal154Accepted=false
+goal154AcceptedByHuman=false
+goal154AcceptedByCodex=false
+goal154ManualReviewPerformed=false
+goal154ManualGateReady=false
+goal154FailureReason=Required focused tests and full runtime/workspace/standalone lifecycle proof are absent; GREEN is prohibited.
+gateStatus=goal154_failed_incomplete_vertical_slice
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -161,16 +168,11 @@ changes passed while the source project stayed byte-identical. Cache key
 markers GREEN and zero Unity process starts. Goal153 remains human-unaccepted.
 
 Goal153A replaces the fixed two-status-tick qualification chain with package-driven expansion.
-Durations 1, 2 and 5 execute through canonical Runtime and replay; duration 1000 is bounded
-plan-only proof with 1000 target ticks and 2999 unique expected-participant-bound EndTurn actions.
-Expected-turn mismatch, late ability failure, multi-status failure and canonical failed snapshots are
-state/event atomic. Lethal status damage now resolves defeat plus win/loss/end before any turn advance.
-The training target health 1001001 covers the full allowed damage/duration domain, and mana cost above
-starting mana is rejected causally at parameter binding. Goal153B moves that relation into module-owned
-declarative data, fingerprints it, expands mana capacity to the declared authoring maximum and rejects
-out-of-domain participant resource amounts before Runtime. The training target capacity remains explicit
-first-vertical-slice data. Goals153/Goal153A/Goal153B remain unaccepted; the next action is independent
-Goal153B audit followed by the short combined manual gate.
+Durations 1, 2 and 5 execute through canonical Runtime and replay; plan-only extreme evidence remains
+historical qualification evidence, not activated product content. Expected-turn mismatch, late ability
+failure, multi-status failure and canonical failed snapshots are state/event atomic. Lethal status damage
+resolves defeat plus win/loss/end before any turn advance. Goals153/153A/153B/153C are accepted by human;
+their historical audit fixtures do not define the current product result.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

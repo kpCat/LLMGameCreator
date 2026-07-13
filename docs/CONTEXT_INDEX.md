@@ -121,8 +121,8 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `independent_goal153c_audit_then_combined_goal153_family_human_gate required`.
-Goal153C is GREEN but human-unaccepted: the activated package has no qualification participant, health remains `30/0/30`, the active ability targets the real deterministic hostile `goblin`, defaults `2/12/3/5/1` produce five ticks and expiry, and lethal direct/tick paths terminate truthfully with replay-stable conditional skips. Independent Goal153C audit is required before the combined family gate.
+Current gate token: `goal154_failed_incomplete_vertical_slice`.
+Goals153/153A/153B/153C are accepted by human at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`: defaults `2/12/3/5/1` were saved/reopened and replayed, with damage 2, mana `12 → 9`, five ticks of 1, expiry and cached standalone reuse without Unity Editor. Goal154 remains human-unaccepted and FAILED because its required focused tests and full runtime/workspace/standalone proof are absent.
 Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
@@ -133,12 +133,9 @@ PlayerAdapter payload with a cached generic Unity host. Goal152C closes the exac
 cleanup and moves all future writable Unity host projects to transactional LocalAppData snapshots;
 the owner accepted Goals152/152A/152C at `ac97859c8de861641e07f886250d053b5330fbe9` after the
 standalone self-check, readable navigation, framebuffer refresh and cache reuse were reviewed.
-Goal153 now adds three default-off data-driven ability, mana and turn-status FeatureModules while
-remaining `accepted=false`; Goal152B and Goal150F historical failures remain debt, not the active gate.
-Goal153A closes the duration-domain, expected-turn binding, rollback event truth and lethal-status
-audit findings. Goal153B replaces the remaining module-specific relation with a module-owned declarative
-constraint and closes the mana resource-domain audit. Goals153, 153A and 153B remain human-unaccepted
-pending independent Goal153B audit and one combined manual gate.
+Goal153 added three default-off data-driven ability, mana and turn-status FeatureModules. Goals153,
+153A, 153B and 153C are accepted by human; Goal152B and Goal150F historical failures remain debt,
+not the active gate.
 
 ## Full Generator Source-Of-Truth Docs
 

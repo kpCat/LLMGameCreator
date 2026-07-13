@@ -109,9 +109,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
         result.Diagnostics.AddRange(costs.Diagnostics);
         if (!costs.Success)
         {
-            result.Success = false;
-            result.Message = $"Dialogue choice failed: {choice.Id}";
-            return result;
+            return RolledBackFailure(state, result, $"Dialogue choice failed: {choice.Id}", choice.Id);
         }
 
         var outputs = choice.Effects.Select(RuntimeEffectMapper.ToOutput).Concat(choice.Rewards).ToList();
@@ -120,9 +118,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
         result.Diagnostics.AddRange(applied.Diagnostics);
         if (!applied.Success)
         {
-            result.Success = false;
-            result.Message = $"Dialogue choice effects failed: {choice.Id}";
-            return result;
+            return RolledBackFailure(state, result, $"Dialogue choice effects failed: {choice.Id}", choice.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(choice.StartQuestId))
@@ -132,9 +128,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             result.Diagnostics.AddRange(startQuest.Diagnostics);
             if (!startQuest.Success)
             {
-                result.Success = false;
-                result.Message = startQuest.Message;
-                return result;
+                return RolledBackFailure(state, result, startQuest.Message, choice.Id);
             }
         }
 
@@ -181,6 +175,8 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var exit = _outputApplier.Apply(package, working, node.ExitEffects.Concat(dialogue.ExitEffects), inventoryId);
             result.Events.AddRange(exit.Events);
             result.Diagnostics.AddRange(exit.Diagnostics);
+            if (!exit.Success)
+                return RolledBackFailure(state, result, $"Dialogue close effects failed: {choice.Id}", choice.Id);
             active.Open = false;
             result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.DialogueClosed, $"Dialogue closed: {dialogue.Id}", dialogue.Id));
         }
@@ -189,7 +185,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var target = dialogue.Nodes.FirstOrDefault(n => RuntimeStateHelpers.IdEquals(n.Id, choice.TargetNodeId));
             if (target == null)
             {
-                return Failure(state, "dialogue.choice.target_missing", $"Dialogue choice target node not found: {choice.TargetNodeId}", choice.Id);
+                return RolledBackFailure(state, result, $"Dialogue choice target node not found: {choice.TargetNodeId}", choice.Id);
             }
 
             active.CurrentNodeId = target.Id;
@@ -198,14 +194,14 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var enter = _outputApplier.Apply(package, working, node.ExitEffects.Concat(target.EnterEffects), inventoryId);
             result.Events.AddRange(enter.Events);
             result.Diagnostics.AddRange(enter.Diagnostics);
+            if (!enter.Success)
+                return RolledBackFailure(state, result, $"Dialogue node effects failed: {choice.Id}", choice.Id);
             result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.DialogueNodeChanged, $"Dialogue node changed: {target.Id}", target.Id, ChoiceArgs(package, working, dialogue, target)));
         }
 
         if (result.Diagnostics.Any(d => d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
         {
-            result.Success = false;
-            result.Message = $"Dialogue choice failed: {choice.Id}";
-            return result;
+            return RolledBackFailure(state, result, $"Dialogue choice failed: {choice.Id}", choice.Id);
         }
 
         RuntimeStateHelpers.CopyState(working, state);
@@ -263,5 +259,15 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             Diagnostics = new List<RuntimeDiagnostic> { RuntimeStateHelpers.Diagnostic(code, message, targetId) },
             Events = new List<GameRuntimeEvent> { RuntimeStateHelpers.Event(GameRuntimeEventType.ValidationFailed, message, targetId) }
         };
+    }
+
+    private static GameRuntimeResult RolledBackFailure(GameRuntimeState state, GameRuntimeResult result, string message, string? targetId)
+    {
+        result.State = state;
+        result.Success = false;
+        result.Message = message;
+        result.Events.Clear();
+        result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.ValidationFailed, message, targetId));
+        return result;
     }
 }

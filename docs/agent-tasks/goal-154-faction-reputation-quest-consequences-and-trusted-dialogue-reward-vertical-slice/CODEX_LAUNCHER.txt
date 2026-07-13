@@ -1,0 +1,37 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154-faction-reputation-quest-consequences-and-trusted-dialogue-reward-vertical-slice/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: ad2e404f1c938113a0c111d4c1fe1bfb55e0e836
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- первым делом зафиксируй человеческую приёмку Goals153/153A/153B/153C;
+- удали stale current-state narrative про goal153_target/1001001/старый следующий аудит;
+- реализуй три default-off модуля: фракционная репутация, последствия квеста, репутационная ветка диалога;
+- default 0/10/5/10/7 должен дать reputation 0→10, trusted choice unlock, gold 0→7 и одноразовый claim;
+- unreachable threshold — валидный truthful still_locked, а не ложный FAILED;
+- generic C# не содержит module/parameter/faction/quest/dialogue/choice IDs;
+- quest/dialogue rollback не возвращает success events для откатившегося state;
+- никаких dummy faction/quest/dialogue/inventory и proof fixtures в активированном пакете;
+- Unity Editor invocation budget = 0;
+- standalone использует существующий host cache и один hidden smoke;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- соблюдай command budget и не повторяй неизменённые команды;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи acceptance record, модули/параметры, reputation completion/failure/clamps,
+trusted choice lock/unlock/one-time claim, gold, rollback event truth, checkpoint/replay,
+activated package diff, cache reuse, Unity process count, final SHA, push, HEAD == origin/main,
+clean worktree и короткий Goal154 manual gate.

@@ -26,6 +26,13 @@ public static class FeatureModulePackageMutationTargetKinds
     public const string EncounterParticipantResourceAmount = "encounter_participant_resource_amount";
     public const string AbilityCostAmount = "ability_cost_amount";
     public const string StatusEffectAmount = "status_effect_amount";
+    public const string QuestOutputUpsert = "quest_output_upsert";
+    public const string QuestOutputAmount = "quest_output_amount";
+    public const string QuestFailureOutputUpsert = "quest_failure_output_upsert";
+    public const string QuestFailureOutputAmount = "quest_failure_output_amount";
+    public const string DialogueChoiceUpsert = "dialogue_choice_upsert";
+    public const string DialogueChoiceRequirementAmount = "dialogue_choice_requirement_amount";
+    public const string DialogueChoiceRewardAmount = "dialogue_choice_reward_amount";
 
     public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
     {
@@ -33,7 +40,8 @@ public static class FeatureModulePackageMutationTargetKinds
         AbilityMetadataString, AbilityMetadataNumeric, ProgressionStageRequiredAmount,
         DefinitionUpsert, DefinitionNumericProperty, EncounterParticipantAbilityReferenceUpsert, EncounterParticipantResourceUpsert, EncounterParticipantUpsert,
         AbilityCostUpsert, AbilityEffectUpsert, AbilityEffectAmount, EncounterParticipantResourceAmount,
-        AbilityCostAmount, StatusEffectAmount
+        AbilityCostAmount, StatusEffectAmount, QuestOutputUpsert, QuestOutputAmount, QuestFailureOutputUpsert,
+        QuestFailureOutputAmount, DialogueChoiceUpsert, DialogueChoiceRequirementAmount, DialogueChoiceRewardAmount
     };
 }
 
@@ -77,6 +85,13 @@ public sealed class FeatureModulePackageMutationService
             , [FeatureModulePackageMutationTargetKinds.EncounterParticipantResourceAmount] = ApplyParticipantResourceAmount
             , [FeatureModulePackageMutationTargetKinds.AbilityCostAmount] = ApplyAbilityCostAmount
             , [FeatureModulePackageMutationTargetKinds.StatusEffectAmount] = ApplyStatusEffectAmount
+            , [FeatureModulePackageMutationTargetKinds.QuestOutputUpsert] = (root, operation) => ApplyQuestOutputUpsert(root, operation, "rewards")
+            , [FeatureModulePackageMutationTargetKinds.QuestFailureOutputUpsert] = (root, operation) => ApplyQuestOutputUpsert(root, operation, "failureEffects")
+            , [FeatureModulePackageMutationTargetKinds.QuestOutputAmount] = (root, operation) => ApplyQuestOutputAmount(root, operation, "rewards")
+            , [FeatureModulePackageMutationTargetKinds.QuestFailureOutputAmount] = (root, operation) => ApplyQuestOutputAmount(root, operation, "failureEffects")
+            , [FeatureModulePackageMutationTargetKinds.DialogueChoiceUpsert] = ApplyDialogueChoiceUpsert
+            , [FeatureModulePackageMutationTargetKinds.DialogueChoiceRequirementAmount] = (root, operation) => ApplyDialogueChoiceChildAmount(root, operation, "requirements")
+            , [FeatureModulePackageMutationTargetKinds.DialogueChoiceRewardAmount] = (root, operation) => ApplyDialogueChoiceChildAmount(root, operation, "rewards")
         };
     }
 
@@ -202,7 +217,7 @@ public sealed class FeatureModulePackageMutationService
         try
         {
             var parts = Parts(operation, 2, "Definition upsert target must be collection|id.");
-            if (parts[0] is not ("abilities" or "resources" or "statuses"))
+            if (parts[0] is not ("abilities" or "resources" or "statuses" or "factions"))
                 throw new InvalidOperationException("Definition upsert collection is unsupported: " + parts[0]);
             var payload = ParseObject(operation.NewValue, "Definition upsert payload must be a JSON object.");
             if (payload["id"]?.GetValue<string>() != parts[1])
@@ -235,7 +250,7 @@ public sealed class FeatureModulePackageMutationService
         try
         {
             var parts = Parts(operation, 3, "Definition numeric property target must be collection|id|property.");
-            if (parts[0] is not ("abilities" or "resources" or "statuses"))
+            if (parts[0] is not ("abilities" or "resources" or "statuses" or "factions"))
                 throw new InvalidOperationException("Definition numeric property collection is unsupported: " + parts[0]);
             if (string.IsNullOrWhiteSpace(parts[2]))
                 throw new InvalidOperationException("Definition numeric property name is required.");
@@ -374,6 +389,69 @@ public sealed class FeatureModulePackageMutationService
         {
             return Entry(operation, actual, false, false, exception.Message);
         }
+    }
+
+    private static ProductLineRuntimeVariantMutationAuditEntry ApplyQuestOutputUpsert(JsonObject root, ProductLineRuntimeVariantMutationOperation operation, string field)
+    {
+        var actual = ExpectedMissing;
+        try
+        {
+            var parts = Parts(operation, 4, "Quest output target must be questId|collection|kind|id.");
+            if (!string.Equals(parts[1], field, StringComparison.Ordinal)) throw new InvalidOperationException("Quest output collection mismatch.");
+            var payload = ParseObject(operation.NewValue, "Quest output payload must be a JSON object.");
+            if (payload["kind"]?.GetValue<string>() != parts[2] || payload["id"]?.GetValue<string>() != parts[3]) throw new InvalidOperationException("Quest output payload must match target kind and ID.");
+            var outputs = EnsureArray(ExactlyOne(Collection(root, "quests"), parts[0], "Quest"), field);
+            var matches = outputs.OfType<JsonObject>().Where(item => item["kind"]?.GetValue<string>() == parts[2] && item["id"]?.GetValue<string>() == parts[3]).ToList();
+            if (matches.Count > 1) throw new InvalidOperationException("Duplicate quest output rejected: " + operation.TargetId);
+            if (matches.Count == 1) { actual = matches[0].ToJsonString(); if (!JsonNode.DeepEquals(matches[0], payload)) throw new InvalidOperationException("Conflicting quest output upsert rejected: " + operation.TargetId); return Entry(operation, actual, false, true, string.Empty); }
+            outputs.Add(payload); return Entry(operation, actual, true, true, string.Empty);
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or JsonException) { return Entry(operation, actual, false, false, exception.Message); }
+    }
+
+    private static ProductLineRuntimeVariantMutationAuditEntry ApplyQuestOutputAmount(JsonObject root, ProductLineRuntimeVariantMutationOperation operation, string field)
+    {
+        var actual = string.Empty;
+        try
+        {
+            var parts = Parts(operation, 4, "Quest output amount target must be questId|collection|kind|id.");
+            if (!string.Equals(parts[1], field, StringComparison.Ordinal)) throw new InvalidOperationException("Quest output collection mismatch.");
+            var outputs = EnsureArray(ExactlyOne(Collection(root, "quests"), parts[0], "Quest"), field);
+            var output = outputs.OfType<JsonObject>().Single(item => item["kind"]?.GetValue<string>() == parts[2] && item["id"]?.GetValue<string>() == parts[3]);
+            actual = SetNumericProperty(output, "amount", operation); return Entry(operation, actual, true, true, string.Empty);
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or FormatException) { return Entry(operation, actual, false, false, exception.Message); }
+    }
+
+    private static ProductLineRuntimeVariantMutationAuditEntry ApplyDialogueChoiceUpsert(JsonObject root, ProductLineRuntimeVariantMutationOperation operation)
+    {
+        var actual = ExpectedMissing;
+        try
+        {
+            var parts = Parts(operation, 3, "Dialogue choice target must be dialogueId|nodeId|choiceId.");
+            var payload = ParseObject(operation.NewValue, "Dialogue choice payload must be a JSON object.");
+            if (payload["id"]?.GetValue<string>() != parts[2]) throw new InvalidOperationException("Dialogue choice payload ID must match target ID.");
+            var node = ExactlyOne(RequiredArray(ExactlyOne(Collection(root, "dialogues"), parts[0], "Dialogue"), "nodes"), parts[1], "Dialogue node");
+            var choices = EnsureArray(node, "choices"); var matches = choices.OfType<JsonObject>().Where(item => item["id"]?.GetValue<string>() == parts[2]).ToList();
+            if (matches.Count > 1) throw new InvalidOperationException("Duplicate dialogue choice rejected: " + operation.TargetId);
+            if (matches.Count == 1) { actual = matches[0].ToJsonString(); if (!JsonNode.DeepEquals(matches[0], payload)) throw new InvalidOperationException("Conflicting dialogue choice upsert rejected: " + operation.TargetId); return Entry(operation, actual, false, true, string.Empty); }
+            choices.Add(payload); return Entry(operation, actual, true, true, string.Empty);
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or JsonException) { return Entry(operation, actual, false, false, exception.Message); }
+    }
+
+    private static ProductLineRuntimeVariantMutationAuditEntry ApplyDialogueChoiceChildAmount(JsonObject root, ProductLineRuntimeVariantMutationOperation operation, string childField)
+    {
+        var actual = string.Empty;
+        try
+        {
+            var parts = Parts(operation, 5, "Dialogue choice child target must be dialogueId|nodeId|choiceId|kind|id.");
+            var node = ExactlyOne(RequiredArray(ExactlyOne(Collection(root, "dialogues"), parts[0], "Dialogue"), "nodes"), parts[1], "Dialogue node");
+            var choice = ExactlyOne(EnsureArray(node, "choices"), parts[2], "Dialogue choice");
+            var child = EnsureArray(choice, childField).OfType<JsonObject>().Single(item => item["kind"]?.GetValue<string>() == parts[3] && item["id"]?.GetValue<string>() == parts[4]);
+            actual = SetNumericProperty(child, "amount", operation); return Entry(operation, actual, true, true, string.Empty);
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or FormatException) { return Entry(operation, actual, false, false, exception.Message); }
     }
 
     private static JsonObject Participant(JsonObject root, string encounterId, string participantId) =>

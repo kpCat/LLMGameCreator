@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "goal154_design_quality_review_v1",
+  "status": "completed_before_implementation",
+  "userVisibleClaim": "A configured quest consequence changes faction reputation, unlocks a trusted healer dialogue reward and grants it exactly once through save/replay and cached standalone presentation.",
+  "gameplaySourceOfTruth": "GamePackage definitions and canonical Runtime state; PlayerAdapter is presentation only.",
+  "fixtureData": "Automated runtime commands and disposable LocalAppData copies only.",
+  "forbiddenActivatedData": ["dummy faction", "dummy quest", "dummy dialogue", "proof NPC", "qualification inventory", "artificial gold", "test-only reputation entity"],
+  "parameterCoverage": ["minimum", "default", "maximum", "interior", "below minimum rejection", "above maximum rejection", "clamps", "still_locked", "already_trusted", "zero reward"],
+  "rollbackPolicy": "Quest and dialogue commands clone state and publish success events only after commit.",
+  "genericArchitecturePolicy": "Production services use stable protocol vocabulary only; Goal154 module, parameter and starter-content identifiers remain catalog/test/evidence data.",
+  "savedProjectPolicy": "The source project is read-only; only a disposable LocalAppData copy may be modified.",
+  "unityEditorInvocationBudget": 0,
+  "cachedStandaloneHiddenSmokeBudget": 1,
+  "publicationPolicy": "one final GREEN, BLOCKED or FAILED commit"
+}

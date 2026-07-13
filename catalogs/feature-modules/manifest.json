@@ -3,8 +3,8 @@
   "catalogId": "llmgc.feature-modules",
   "catalogVersion": "1.3.0",
   "requiredCoreModuleCount": 10,
-  "optionalModuleCount": 9,
-  "moduleFileCount": 19,
+  "optionalModuleCount": 12,
+  "moduleFileCount": 22,
   "moduleFiles": [
     "core/combat-turn-based-encounter.featuremodule.json",
     "core/crafting-recipes.featuremodule.json",
@@ -24,6 +24,9 @@
     "optional/equipment-weapon-loadout.featuremodule.json",
     "optional/exploration-resource-focus.featuremodule.json",
     "optional/magic-mana-spellcasting.featuremodule.json",
-    "optional/status-turn-effects.featuremodule.json"
+    "optional/status-turn-effects.featuremodule.json",
+    "optional/faction-reputation-standing.featuremodule.json",
+    "optional/quest-faction-reputation-consequences.featuremodule.json",
+    "optional/dialogue-reputation-gated-reward.featuremodule.json"
   ]
 }

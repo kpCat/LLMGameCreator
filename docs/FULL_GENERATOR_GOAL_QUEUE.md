@@ -1,6 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 153C product/proof separation and outcome-aware qualification hotfix: qualification-only participant/capacity mutations are absent from activated output, real hostile selection is deterministic, defaults `2/12/3/5/1` expire after five ticks, lethal outcomes and conditional skips are truthful and replay-stable, and compact evidence is mirrored. Goals153/153A/153B/153C are GREEN but `accepted=false`; `independent_goal153c_audit_then_combined_goal153_family_human_gate required` is next.
+- Goal 154 faction reputation, quest consequences and trusted dialogue reward: FAILED incomplete vertical slice. Goals153/153A/153B/153C are accepted by human at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`; Goal154 remains `accepted=false` and requires its missing focused tests and full runtime/workspace/standalone proof before any audit or human gate.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document

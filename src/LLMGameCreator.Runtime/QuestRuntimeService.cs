@@ -48,9 +48,7 @@ public sealed class QuestRuntimeService : IQuestRuntimeService
         result.Diagnostics.AddRange(output.Diagnostics);
         if (!output.Success)
         {
-            result.Success = false;
-            result.Message = $"Quest start failed: {quest.Id}";
-            return result;
+            return RolledBackFailure(state, result, $"Quest start failed: {quest.Id}", quest.Id);
         }
 
         working.Quests.RemoveAll(q => RuntimeStateHelpers.IdEquals(q.QuestId, quest.Id));
@@ -106,7 +104,7 @@ public sealed class QuestRuntimeService : IQuestRuntimeService
         CompleteStageOrQuestIfReady(package, working, quest, runtimeQuest, result);
         if (!result.Success)
         {
-            return result;
+            return RolledBackFailure(state, result, result.Message, quest.Id);
         }
 
         RuntimeStateHelpers.CopyState(working, state);
@@ -155,7 +153,7 @@ public sealed class QuestRuntimeService : IQuestRuntimeService
         ApplyQuestCompletion(package, working, quest, runtimeQuest, result);
         if (!result.Success)
         {
-            return result;
+            return RolledBackFailure(state, result, result.Message, quest.Id);
         }
 
         RuntimeStateHelpers.CopyState(working, state);
@@ -185,9 +183,7 @@ public sealed class QuestRuntimeService : IQuestRuntimeService
         result.Diagnostics.AddRange(effects.Diagnostics);
         if (!effects.Success)
         {
-            result.Success = false;
-            result.Message = $"Quest fail effects failed: {quest.Id}";
-            return result;
+            return RolledBackFailure(state, result, $"Quest fail effects failed: {quest.Id}", quest.Id);
         }
 
         runtimeQuest.State = "failed";
@@ -395,5 +391,15 @@ public sealed class QuestRuntimeService : IQuestRuntimeService
             Diagnostics = new List<RuntimeDiagnostic> { RuntimeStateHelpers.Diagnostic(code, message, targetId) },
             Events = new List<GameRuntimeEvent> { RuntimeStateHelpers.Event(GameRuntimeEventType.ValidationFailed, message, targetId) }
         };
+    }
+
+    private static GameRuntimeResult RolledBackFailure(GameRuntimeState state, GameRuntimeResult result, string message, string targetId)
+    {
+        result.State = state;
+        result.Success = false;
+        result.Message = message;
+        result.Events.Clear();
+        result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.ValidationFailed, message, targetId));
+        return result;
     }
 }

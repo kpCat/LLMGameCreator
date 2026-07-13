@@ -1,9 +1,9 @@
 # Goal 153B declarative constraints and domain integrity
 
-Status: automated regression GREEN; superseded by the combined Goal153C-reviewed family gate
-Accepted: false
-Accepted by human: false
+Status: accepted by human through the combined Goal153-family gate
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
-Manual review performed: false
+Manual review performed: true
 
-Declarative constraints, default-value validation, resource-domain validation and fingerprint invalidation are automated. Human review follows the short combined gate in `goal153a-parameter-domain-turn-binding-event-atomicity.md` after independent Goal153C audit.
+Declarative constraints, default-value validation, resource-domain validation and fingerprint invalidation remain automated. The owner accepted the combined family behavior at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`; acceptance is human-only.

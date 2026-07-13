@@ -62,6 +62,15 @@ public sealed class RequirementEvaluator : IRequirementEvaluator
             return;
         }
 
+        if (RuntimeStateHelpers.KindEquals(kind, "flag_not_equals"))
+        {
+            var forbidden = requirement.Value ?? "true";
+            var actual = RuntimeStateHelpers.GetFlagValue(state, requirement.Id);
+            if (string.Equals(actual, forbidden, StringComparison.OrdinalIgnoreCase))
+                AddFailure(result, "requirement.flag_match", kind, requirement.Id, $"Flag {requirement.Id} must not be {forbidden}");
+            return;
+        }
+
         if (RuntimeStateHelpers.KindEquals(kind, "quest_state"))
         {
             var expected = requirement.Value ?? "completed";

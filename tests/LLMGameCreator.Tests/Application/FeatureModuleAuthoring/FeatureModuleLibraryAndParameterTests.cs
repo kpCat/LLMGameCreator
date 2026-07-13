@@ -17,9 +17,9 @@ public sealed class FeatureModuleLibraryAndParameterTests
 
         Assert.True(first.Validation.Passed);
         Assert.Equal(10, first.Index.RequiredCoreModuleCount);
-        Assert.Equal(9, first.Index.OptionalModuleCount);
-        Assert.Equal(17, first.Index.ParameterDefinitionCount);
-        Assert.Equal(19, first.Index.Modules.Count);
+        Assert.Equal(12, first.Index.OptionalModuleCount);
+        Assert.Equal(22, first.Index.ParameterDefinitionCount);
+        Assert.Equal(22, first.Index.Modules.Count);
         Assert.Equal(first.CatalogFingerprint, second.CatalogFingerprint);
         Assert.Equal(first.ModuleFingerprints, second.ModuleFingerprints);
         Assert.All(first.Catalog.Modules, module => Assert.Equal("featuremodule_definition_v1", module.SchemaVersion));
@@ -42,7 +42,7 @@ public sealed class FeatureModuleLibraryAndParameterTests
         ]);
 
         Assert.True(defaults.Passed);
-        Assert.Equal(17, defaults.EffectiveParameterValues.Count);
+        Assert.Equal(22, defaults.EffectiveParameterValues.Count);
         Assert.Equal("6", defaults.EffectiveMutationOperations.Single(item => item.OperationId == "combat.basic_attack_power").NewValue);
         Assert.True(custom.Passed);
         Assert.Equal("9", custom.EffectiveMutationOperations.Single(item => item.OperationId == "combat.basic_attack_power").NewValue);

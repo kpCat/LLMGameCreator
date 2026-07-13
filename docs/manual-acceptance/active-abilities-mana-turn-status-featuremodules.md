@@ -1,13 +1,16 @@
 # Active abilities, mana and turn-status FeatureModules
 
-Status: automated implementation GREEN and combined Goal153/Goal153A/Goal153B/Goal153C manual gate ready after independent Goal153C audit; no Goal is accepted
-Accepted: false
-Accepted by human: false
+Status: accepted by human; automated implementation remains GREEN
+Accepted: true
+Accepted by human: true
 Accepted by Codex: false
-Manual review performed: false
+Manual review performed: true
 
-The current review is the combined gate in
-`docs/manual-acceptance/goal153a-parameter-domain-turn-binding-event-atomicity.md` after independent Goal153C audit.
+Owner statement recorded verbatim:
+
+> Я принимаю Goals153/153A/153B/153C: механики «Активные способности», «Мана и заклинания» и «Эффекты по ходам» с параметрами 2/12/3/5/1 успешно сохранены, собраны и воспроизведены; урон 2, мана 12→9, пять срабатываний по 1 и завершение эффекта отображаются корректно; standalone переиспользовал host cache без запуска Unity Editor.
+
+Accepted commit: `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`.
 
 Superseded Goal153-only checklist:
 
@@ -16,4 +19,4 @@ Superseded Goal153-only checklist:
 3. Build and confirm one concise GREEN ability/mana/status summary.
 4. Save, reopen and confirm selections and values remain.
 
-Standalone review uses the accepted cached host and is included once in the combined gate.
+Standalone self-check, readable navigation and cache reuse without Unity Editor are accepted. Raw manual input is not committed; acceptance remains human-only.
