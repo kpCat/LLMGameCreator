@@ -67,6 +67,7 @@ public sealed class SelectedRuntimeVariantInteractiveActionResult
 
 public sealed class SelectedRuntimeVariantInteractiveJournalEntry
 {
+    public string Status { get; set; } = string.Empty;
     public string ActionRequestId { get; set; } = string.Empty;
     public string SessionId { get; set; } = string.Empty;
     public int ActionIndex { get; set; }
@@ -86,6 +87,7 @@ public sealed class SelectedRuntimeVariantInteractiveJournalEntry
     public bool RuntimeExecuted { get; set; }
     public bool RuntimeMutation { get; set; }
     public int RuntimeEventCount { get; set; }
+    public IReadOnlyList<string> Diagnostics { get; set; } = new List<string>();
 }
 
 public sealed class SelectedRuntimeVariantInteractiveSession

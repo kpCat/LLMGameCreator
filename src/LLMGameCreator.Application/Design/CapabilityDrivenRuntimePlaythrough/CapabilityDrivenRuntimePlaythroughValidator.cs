@@ -23,6 +23,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         ArgumentNullException.ThrowIfNull(package);
         var diagnostics = new List<string>();
         ValidateParticipantResourceDomains(package, diagnostics);
+        ValidateSelectedModuleContracts(selectedModules, diagnostics);
+        ValidateSocialPackageReferences(package, diagnostics);
         var originalContracts = selectedModules.SelectMany(module => module.RuntimePlaythroughContracts).ToList();
         var replacements = originalContracts.SelectMany(contract => contract.ReplacesActionIds
                 .Select(actionId => (Replacement: contract, ActionId: actionId)))
@@ -76,6 +78,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                 diagnostics.Add("unknown Runtime primitive rejected: " + contract.RuntimePrimitiveId);
             foreach (var dependency in contract.DependsOnActionIds.Where(id => !actionIds.Contains(id)))
                 diagnostics.Add("missing action dependency rejected: " + contract.ActionId + "->" + dependency);
+            if (contract.DependsOnIfPresentActionIds.Contains(contract.ActionId, StringComparer.Ordinal))
+                diagnostics.Add("conditional action self-dependency rejected: " + contract.ActionId);
         }
 
         if (!HasCycle(contracts.Select(item => item.Contract).ToList(), actionIds))
@@ -86,7 +90,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                 var target = ResolveTarget(package, item.Contract.TargetSelector, item.Contract.Args, diagnostics,
                     item.Contract.ActionId);
                 ValidateReferencedArgs(package, item.Contract, diagnostics);
-                ValidateExecutionPredicates(item.Contract, diagnostics);
+                ValidateExecutionPredicates(package, item.Contract, diagnostics);
                 var args = new SortedDictionary<string, string>(item.Contract.Args.ToDictionary(pair => pair.Key,
                     pair => pair.Value, StringComparer.Ordinal), StringComparer.Ordinal);
                 if (item.Contract.TargetSelector == "hostile_encounter_participant")
@@ -103,7 +107,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                     TargetSelector = item.Contract.TargetSelector,
                     ResolvedTargetId = target,
                     Args = args,
-                    DependsOnActionIds = item.Contract.DependsOnActionIds.OrderBy(id => id, StringComparer.Ordinal).ToList(),
+                    DependsOnActionIds = Dependencies(item.Contract, actionIds),
                     CheckpointBoundaryAfter = item.Contract.CheckpointBoundaryAfter,
                     PresentationOnly = item.Contract.PresentationOnly,
                     Required = item.Contract.Required,
@@ -134,7 +138,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         var indegree = contracts.ToDictionary(item => item.ActionId, _ => 0, StringComparer.Ordinal);
         var edges = contracts.ToDictionary(item => item.ActionId, _ => new List<string>(), StringComparer.Ordinal);
         foreach (var contract in contracts)
-        foreach (var dependency in contract.DependsOnActionIds.Where(actionIds.Contains))
+        foreach (var dependency in Dependencies(contract, actionIds))
         {
             indegree[contract.ActionId]++;
             edges[dependency].Add(contract.ActionId);
@@ -150,6 +154,13 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         }
         return visited != contracts.Count;
     }
+
+    private static IReadOnlyList<string> Dependencies(
+        FeatureModuleRuntimePlaythroughContract contract,
+        IReadOnlySet<string> actionIds) =>
+        contract.DependsOnActionIds.Where(actionIds.Contains)
+            .Concat(contract.DependsOnIfPresentActionIds.Where(actionIds.Contains))
+            .Distinct(StringComparer.Ordinal).OrderBy(id => id, StringComparer.Ordinal).ToList();
 
     internal static string ResolveTarget(
         GamePackageDefinition package,
@@ -186,13 +197,27 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             "equipment_slot_id" => Matches(package.Game.EquipmentSlots.Select(item => item.Id), explicitId),
             "stat_id" => Matches(package.Game.Stats.Select(item => item.Id), explicitId),
             "progression_id" => Matches(package.Game.Progressions.Select(item => item.Id), explicitId),
+            "faction_id" => Matches(package.Game.Factions.Select(item => item.Id),
+                explicitId.Length == 0 ? args.GetValueOrDefault("factionId") ?? string.Empty : explicitId),
+            "quest_objective_id" => QuestObjectives(package, args, diagnostics, actionId),
+            "dialogue_node_id" => DialogueNodes(package, args, diagnostics, actionId),
+            "dialogue_choice_id" => DialogueChoices(package, args, diagnostics, actionId),
             _ => []
+        };
+        var resolvedInput = selector switch
+        {
+            "faction_id" => explicitId.Length == 0 ? args.GetValueOrDefault("factionId") ?? string.Empty : explicitId,
+            "quest_objective_id" => args.GetValueOrDefault("questId") + "/" + args.GetValueOrDefault("objectiveId"),
+            "dialogue_node_id" => args.GetValueOrDefault("dialogueId") + "/" + args.GetValueOrDefault("nodeId"),
+            "dialogue_choice_id" => args.GetValueOrDefault("dialogueId") + "/" + args.GetValueOrDefault("nodeId")
+                                    + "/" + args.GetValueOrDefault("choiceId"),
+            _ => explicitId
         };
         if (matches.Count == 0)
             diagnostics.Add((KnownSelector(selector) ? "unresolved target rejected: " : "unknown target selector rejected: ")
-                            + actionId + ":" + selector + ":" + explicitId);
+                            + actionId + ":" + selector + ":" + resolvedInput);
         else if (matches.Count > 1)
-            diagnostics.Add("ambiguous target rejected: " + actionId + ":" + selector + ":" + explicitId);
+            diagnostics.Add("ambiguous target rejected: " + actionId + ":" + selector + ":" + resolvedInput);
         return matches.Count == 1 ? matches[0] : string.Empty;
     }
 
@@ -212,7 +237,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             ("sourceParticipantId", "encounter_participant_id"), ("targetParticipantId", "encounter_participant_id"),
             ("abilityId", "ability_id"),
             ("itemId", "item_id"), ("slotId", "equipment_slot_id"),
-            ("statId", "stat_id"), ("progressionId", "progression_id")
+            ("statId", "stat_id"), ("progressionId", "progression_id"),
+            ("factionId", "faction_id")
         };
         foreach (var reference in references)
         {
@@ -221,6 +247,12 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                 new Dictionary<string, string>(StringComparer.Ordinal) { ["id"] = value }, diagnostics,
                 contract.ActionId + "." + reference.Key);
         }
+        if (contract.Args.ContainsKey("objectiveId"))
+            ResolveTarget(package, "quest_objective_id", contract.Args, diagnostics, contract.ActionId + ".objectiveId");
+        if (contract.Args.ContainsKey("nodeId"))
+            ResolveTarget(package, "dialogue_node_id", contract.Args, diagnostics, contract.ActionId + ".nodeId");
+        if (contract.Args.ContainsKey("choiceId"))
+            ResolveTarget(package, "dialogue_choice_id", contract.Args, diagnostics, contract.ActionId + ".choiceId");
     }
 
     private static IReadOnlyList<string> HostileEncounterParticipants(
@@ -266,6 +298,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
     }
 
     private static void ValidateExecutionPredicates(
+        GamePackageDefinition package,
         FeatureModuleRuntimePlaythroughContract contract,
         List<string> diagnostics)
     {
@@ -273,7 +306,8 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         var predicates = raw.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         foreach (var predicate in predicates)
         {
-            if (predicate is not "encounter_active" and not "participant_alive" and not "status_present")
+            if (predicate is not "encounter_active" and not "participant_alive" and not "status_present"
+                and not "dialogue_choice_available" and not "dialogue_open")
                 diagnostics.Add("unknown execution predicate rejected: " + contract.ActionId + ":" + predicate);
         }
         if (predicates.Contains("encounter_active", StringComparer.Ordinal)
@@ -286,6 +320,26 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             && (string.IsNullOrWhiteSpace(contract.Args.GetValueOrDefault("statusId"))
                 || string.IsNullOrWhiteSpace(contract.Args.GetValueOrDefault("statusTargetParticipantId"))))
             diagnostics.Add("execution predicate status binding rejected: " + contract.ActionId);
+        if (predicates.Contains("dialogue_choice_available", StringComparer.Ordinal))
+        {
+            if (contract.Args.GetValueOrDefault("unavailableOutcome") != "still_locked")
+                diagnostics.Add("dialogue choice unavailable outcome rejected: " + contract.ActionId + ":"
+                                + contract.Args.GetValueOrDefault("unavailableOutcome"));
+            var matches = DialogueChoices(package, contract.Args, diagnostics, contract.ActionId + ".predicate");
+            if (matches.Count == 1)
+            {
+                var dialogue = package.Game.Dialogues.Single(item => item.Id == contract.Args.GetValueOrDefault("dialogueId"));
+                var node = dialogue.Nodes.Single(item => item.Id == contract.Args.GetValueOrDefault("nodeId"));
+                var choice = node.Choices.Single(item => item.Id == contract.Args.GetValueOrDefault("choiceId"));
+                foreach (var requirement in choice.Conditions.Select(RuntimeEffectRequirement).Concat(choice.Requirements))
+                    if (!KnownRequirementKind(requirement.Kind))
+                        diagnostics.Add("dialogue choice requirement kind rejected: " + contract.ActionId + ":" + requirement.Kind);
+            }
+        }
+        if (predicates.Contains("dialogue_open", StringComparer.Ordinal)
+            && contract.Args.TryGetValue("dialogueId", out var dialogueId)
+            && package.Game.Dialogues.Count(item => item.Id == dialogueId) != 1)
+            diagnostics.Add("dialogue open predicate binding rejected: " + contract.ActionId + ":" + dialogueId);
     }
 
     private static IReadOnlyList<string> Match(string actual, string expected) =>
@@ -298,7 +352,123 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         or "entity_id" or "interaction_id" or "dialogue_id" or "quest_id" or "inventory_id"
         or "container_inventory_id" or "recipe_id" or "resource_node_id" or "transaction_id"
         or "encounter_id" or "encounter_participant_id" or "hostile_encounter_participant" or "ability_id" or "item_id" or "equipment_slot_id"
-        or "stat_id" or "progression_id";
+        or "stat_id" or "progression_id" or "faction_id" or "quest_objective_id"
+        or "dialogue_node_id" or "dialogue_choice_id";
+
+    private static IReadOnlyList<string> QuestObjectives(
+        GamePackageDefinition package,
+        IReadOnlyDictionary<string, string> args,
+        List<string> diagnostics,
+        string actionId)
+    {
+        var questId = args.GetValueOrDefault("questId") ?? string.Empty;
+        var objectiveId = args.GetValueOrDefault("objectiveId") ?? string.Empty;
+        var quests = package.Game.Quests.Where(item => item.Id == questId).ToList();
+        if (quests.Count != 1)
+        {
+            diagnostics.Add("quest objective owner rejected: " + actionId + ":" + questId + ":matches=" + quests.Count);
+            return [];
+        }
+        return quests[0].Objectives.Concat(quests[0].Stages.SelectMany(stage => stage.Objectives))
+            .Where(item => item.Id == objectiveId).Select(item => item.Id).ToList();
+    }
+
+    private static IReadOnlyList<string> DialogueNodes(
+        GamePackageDefinition package,
+        IReadOnlyDictionary<string, string> args,
+        List<string> diagnostics,
+        string actionId)
+    {
+        var dialogueId = args.GetValueOrDefault("dialogueId") ?? string.Empty;
+        var nodeId = args.GetValueOrDefault("nodeId") ?? string.Empty;
+        var dialogues = package.Game.Dialogues.Where(item => item.Id == dialogueId).ToList();
+        if (dialogues.Count != 1)
+        {
+            diagnostics.Add("dialogue node owner rejected: " + actionId + ":" + dialogueId + ":matches=" + dialogues.Count);
+            return [];
+        }
+        return dialogues[0].Nodes.Where(item => item.Id == nodeId).Select(item => item.Id).ToList();
+    }
+
+    private static IReadOnlyList<string> DialogueChoices(
+        GamePackageDefinition package,
+        IReadOnlyDictionary<string, string> args,
+        List<string> diagnostics,
+        string actionId)
+    {
+        var nodes = DialogueNodes(package, args, diagnostics, actionId);
+        if (nodes.Count != 1) return [];
+        var dialogue = package.Game.Dialogues.Single(item => item.Id == args.GetValueOrDefault("dialogueId"));
+        var node = dialogue.Nodes.Single(item => item.Id == args.GetValueOrDefault("nodeId"));
+        var choiceId = args.GetValueOrDefault("choiceId") ?? string.Empty;
+        return node.Choices.Where(item => item.Id == choiceId).Select(item => item.Id).ToList();
+    }
+
+    private static RequirementDefinition RuntimeEffectRequirement(ConditionDefinition condition) => new()
+    {
+        Kind = condition.Type,
+        Id = condition.Args.GetValueOrDefault("id") ?? string.Empty,
+        Amount = double.TryParse(condition.Args.GetValueOrDefault("amount"),
+            System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var amount)
+            ? amount : null,
+        Value = condition.Args.GetValueOrDefault("value"),
+        Scope = condition.Args.GetValueOrDefault("scope")
+    };
+
+    private static bool KnownRequirementKind(string kind) => kind.Trim().ToLowerInvariant() is
+        "always" or "has_item" or "inventory_has" or "resource_at_least" or "network_resource_at_least"
+        or "flag_equals" or "flag_not_equals" or "quest_state" or "reputation_at_least"
+        or "faction_reputation_at_least" or "faction_relation_is" or "status_present" or "status_active"
+        or "time_available";
+
+    private static void ValidateSelectedModuleContracts(
+        IReadOnlyList<FeatureModuleDefinition> selectedModules,
+        List<string> diagnostics)
+    {
+        foreach (var module in selectedModules)
+        {
+            var usesDeclaredQualificationPlan = module.RequiredRuntimePrimitives.Any(primitive =>
+                primitive.StartsWith("runtime.qualification.", StringComparison.Ordinal));
+            foreach (var primitive in module.RequiredRuntimePrimitives.Where(primitive =>
+                         !module.Required &&
+                         !primitive.StartsWith("runtime.qualification.", StringComparison.Ordinal) &&
+                         !CapabilityRuntimePrimitiveIds.Supported.Contains(primitive)))
+                diagnostics.Add("required Runtime primitive rejected: " + module.ModuleId + ":" + primitive);
+            if (!module.Required && (module.MutationOperations.Count > 0 || module.RequiredRuntimePrimitives.Count > 0))
+            {
+                if (module.RuntimeEffectContracts.Count == 0)
+                    diagnostics.Add("selected optional module effect contract missing: " + module.ModuleId);
+                if (module.RuntimePlaythroughContracts.Count == 0 && !usesDeclaredQualificationPlan)
+                    diagnostics.Add("selected optional module playthrough contract missing: " + module.ModuleId);
+            }
+        }
+    }
+
+    private static void ValidateSocialPackageReferences(GamePackageDefinition package, List<string> diagnostics)
+    {
+        foreach (var quest in package.Game.Quests)
+        foreach (var output in quest.Rewards.Concat(quest.FailureEffects)
+                     .Where(output => output.Kind is "reputation" or "faction_reputation" or "change_reputation"))
+            if (package.Game.Factions.Count(faction => faction.Id == output.Id) != 1)
+                diagnostics.Add("faction reputation output rejected: " + quest.Id + ":" + output.Id);
+
+        foreach (var dialogue in package.Game.Dialogues)
+        {
+            foreach (var duplicate in dialogue.Nodes.SelectMany(node => node.Choices.GroupBy(choice => choice.Id)
+                         .Where(group => string.IsNullOrWhiteSpace(group.Key) || group.Count() > 1)))
+                diagnostics.Add("duplicate dialogue choice rejected: " + dialogue.Id + ":" + duplicate.Key);
+            foreach (var choice in dialogue.Nodes.SelectMany(node => node.Choices))
+            {
+                if (!string.IsNullOrWhiteSpace(choice.TargetNodeId)
+                    && dialogue.Nodes.Count(node => node.Id == choice.TargetNodeId) != 1)
+                    diagnostics.Add("dialogue choice target node rejected: " + dialogue.Id + ":" + choice.Id + ":" + choice.TargetNodeId);
+                foreach (var requirement in choice.Requirements.Where(requirement =>
+                             requirement.Kind is "reputation_at_least" or "faction_reputation_at_least"))
+                    if (package.Game.Factions.Count(faction => faction.Id == requirement.Id) != 1)
+                        diagnostics.Add("faction reputation requirement rejected: " + dialogue.Id + ":" + choice.Id + ":" + requirement.Id);
+            }
+        }
+    }
 
     private static void ValidateStatDamageMetadata(
         GamePackageDefinition package,

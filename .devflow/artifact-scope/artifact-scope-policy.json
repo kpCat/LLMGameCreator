@@ -5142,6 +5142,73 @@
         ".llmgc/exports/goal-154-faction-reputation-quest-consequences-and-trusted-dialogue-reward-vertical-slice/"
       ],
       "excludedPathPrefixes": ["unity/", "samples/", "generator-library/", "provider/", "LLM/", "RAG/"]
+    },
+    {
+      "scenario": "goal-154b-executable-social-runtime-lifecycle-core-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal154b-social-runtime-core.ps1",
+        ".devflow/scripts/run-goal154b-social-runtime-core.cmd",
+        "catalogs/feature-modules/optional/faction-reputation-standing.featuremodule.json",
+        "catalogs/feature-modules/optional/quest-faction-reputation-consequences.featuremodule.json",
+        "catalogs/feature-modules/optional/dialogue-reputation-gated-reward.featuremodule.json",
+        "src/LLMGameCreator.Application/Design/CapabilityDrivenRuntimePlaythrough/CapabilityDrivenRuntimePlaythroughModels.cs",
+        "src/LLMGameCreator.Application/Design/CapabilityDrivenRuntimePlaythrough/CapabilityDrivenRuntimePlaythroughValidator.cs",
+        "src/LLMGameCreator.Application/Design/CapabilityDrivenRuntimePlaythrough/CapabilityDrivenRuntimePlaythroughPlanner.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryValidator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModulePackageMutationService.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectModels.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectEvaluator.cs",
+        "src/LLMGameCreator.Application/Design/ProductLineRuntimeQualification/ProductLineRuntimeQualifier.cs",
+        "src/LLMGameCreator.Runtime.Abstractions/CanonicalRuntimePlayerCommandLoopContracts.cs",
+        "src/LLMGameCreator.Runtime.Abstractions/SelectedRuntimeVariantInteractiveSessionContracts.cs",
+        "src/LLMGameCreator.Runtime/CanonicalRuntimePlayerCommandLoopService.cs",
+        "src/LLMGameCreator.Runtime/SelectedRuntimeVariantInteractiveSessionService.cs",
+        "src/LLMGameCreator.Runtime/GameRuntimeService.cs",
+        "src/LLMGameCreator.Runtime/FactionRuntimeService.cs",
+        "src/LLMGameCreator.Runtime/QuestRuntimeService.cs",
+        "src/LLMGameCreator.Runtime/DialogueRuntimeService.cs",
+        "src/LLMGameCreator.Runtime/OutputApplier.cs",
+        "src/LLMGameCreator.Runtime/RequirementEvaluator.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154A/Goal154ASocialModuleContractTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154A/Goal154ASocialRuntimeLifecycleTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154A/Goal154ARollbackEventTruthTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154A/Goal154AParameterDomainTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154A/Goal154ASavedProjectStandaloneTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154B/Goal154BPlannerAndModuleTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154B/Goal154BClaimedAndLockedLifecycleTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154B/Goal154BRollbackAndEventTruthTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154B/Goal154BParameterAndMutationTests.cs",
+        "tests/LLMGameCreator.Tests/Runtime/Goal154B/Goal154BRuntimeSocialTests.cs",
+        "tests/LLMGameCreator.Tests/Application/CapabilityDrivenRuntimePlaythrough/CharacterAttributesLevelProgressionGoal150Tests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/goal154-faction-reputation-social-consequences.md",
+        "docs/manual-acceptance/goal154a-social-lifecycle-runtime-proof.md",
+        "docs/manual-acceptance/goal154b-executable-social-runtime-core.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal154B/",
+        "tests/LLMGameCreator.Tests/Runtime/Goal154B/",
+        "docs/agent-tasks/goal-154b-executable-social-runtime-lifecycle-core-closure/",
+        ".llmgc/procedural/goal-154b-executable-social-runtime-lifecycle-core-closure/",
+        ".llmgc/exports/goal-154b-executable-social-runtime-lifecycle-core-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.WinForms/",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

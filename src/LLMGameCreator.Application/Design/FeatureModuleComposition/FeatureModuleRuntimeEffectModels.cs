@@ -16,6 +16,13 @@ public static class FeatureModuleRuntimeEffectMetricKinds
     public const string StatusTickDamageEquals = "status_tick_damage_equals";
     public const string StatusAbsentAfterExpiry = "status_absent_after_expiry";
     public const string StatusTerminalOutcome = "status_terminal_outcome";
+    public const string FactionReputationInitialized = "faction_reputation_initialized";
+    public const string QuestStateEquals = "quest_state_equals";
+    public const string FactionReputationTransitionTruthful = "faction_reputation_transition_truthful";
+    public const string DialogueChoiceVisibilitySequence = "dialogue_choice_visibility_sequence";
+    public const string ResourceTransitionTruthful = "resource_transition_truthful";
+    public const string FlagEquals = "flag_equals";
+    public const string TrustedRewardSocialOutcome = "trusted_reward_social_outcome";
 }
 
 public static class FeatureModuleRuntimeEffectComparisonKinds

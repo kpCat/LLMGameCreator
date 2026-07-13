@@ -1,0 +1,49 @@
+﻿{
+    "schemaVersion":  "goal154b_claimed_and_locked_lifecycle_proof_v1",
+    "status":  "GREEN",
+    "defaults":  {
+                     "startingReputation":  0,
+                     "trustedGoldReward":  7,
+                     "questFailurePenalty":  5,
+                     "trustedReputationThreshold":  10,
+                     "questReputationReward":  10
+                 },
+    "claimed":  {
+                    "reputationBefore":  0,
+                    "reputationAfter":  10,
+                    "questState":  "completed",
+                    "choiceVisibility":  [
+                                             "unavailable",
+                                             "available",
+                                             "unavailable"
+                                         ],
+                    "goldBefore":  0,
+                    "goldAfter":  7,
+                    "flag":  "true",
+                    "socialOutcome":  "claimed",
+                    "choiceSelectionCount":  1
+                },
+    "stillLocked":  {
+                        "threshold":  20,
+                        "reputationAfter":  10,
+                        "questState":  "completed",
+                        "claimStatus":  "SKIPPED",
+                        "choiceVisibility":  [
+                                                 "unavailable",
+                                                 "unavailable",
+                                                 "unavailable"
+                                             ],
+                        "goldBefore":  0,
+                        "goldAfter":  0,
+                        "claimFlagPresent":  false,
+                        "mutationOnSkip":  false,
+                        "eventCountOnSkip":  0,
+                        "socialOutcome":  "still_locked"
+                    },
+    "alreadyClaimed":  {
+                           "stateHashUnchanged":  true,
+                           "result":  "REJECTED",
+                           "successEventCount":  0,
+                           "atomic":  true
+                       }
+}

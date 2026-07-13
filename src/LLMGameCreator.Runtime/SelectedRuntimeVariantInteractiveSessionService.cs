@@ -9,11 +9,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
     private const string RuntimeRoute = "runtime_session";
     private const string PresentationRoute = "presentation_only";
     private readonly ICanonicalRuntimePlayerCommandLoopService _commandLoop;
+    private readonly IRequirementEvaluator _requirementEvaluator;
 
     public SelectedRuntimeVariantInteractiveSessionService(
-        ICanonicalRuntimePlayerCommandLoopService commandLoop)
+        ICanonicalRuntimePlayerCommandLoopService commandLoop,
+        IRequirementEvaluator? requirementEvaluator = null)
     {
         _commandLoop = commandLoop ?? throw new ArgumentNullException(nameof(commandLoop));
+        _requirementEvaluator = requirementEvaluator ?? new RequirementEvaluator();
     }
 
     public static SelectedRuntimeVariantInteractiveSessionService CreateDefault() =>
@@ -88,9 +91,15 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
 
         var plannedAction = session.CapabilityPlan?.OrderedActions.SingleOrDefault(action =>
             action.ActionId == descriptor.ActionId);
-        var skipReason = plannedAction is null ? null : ConditionalSkipReason(session, plannedAction);
-        if (skipReason is not null)
-            return SkipConditionalAction(package, session, request, descriptor, before, skipReason);
+        var conditional = plannedAction is null
+            ? ConditionalActionDecision.Execute()
+            : EvaluateConditionalAction(package, session, plannedAction);
+        if (conditional.Kind == ConditionalActionDecisionKind.Failure)
+            return Rejected(request, before, "conditional_action_failed:" + conditional.Reason,
+                descriptor, conditional.Diagnostics);
+        if (conditional.Kind == ConditionalActionDecisionKind.Skip)
+            return SkipConditionalAction(package, session, request, descriptor, before,
+                conditional.Reason, conditional.Diagnostics);
 
         var runtimeExecuted = false;
         var runtimeMutation = false;
@@ -156,6 +165,15 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         else
         {
             session.PresentationOnlyActionCount++;
+            if (plannedAction?.RuntimePrimitiveId is "runtime.presentation.inspect_faction"
+                or "runtime.presentation.inspect_dialogue_choices"
+                or "runtime.presentation.inspect_social_summary")
+            {
+                var snapshot = BuildPresentationSnapshot(package, session, descriptor, plannedAction, before);
+                session.CanonicalSession.Snapshots.Add(snapshot);
+                session.CanonicalSession.StateHashChain.Add(before);
+                session.LatestSnapshot = snapshot;
+            }
             if (session.CapabilityPlan is null && descriptor.ActionId == "show_final_state")
             {
                 session.CanonicalSession.CurrentCommandIndex++;
@@ -196,16 +214,62 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         return result;
     }
 
-    private static string? ConditionalSkipReason(
+    private ConditionalActionDecision EvaluateConditionalAction(
+        GamePackageDefinition package,
         SelectedRuntimeVariantInteractiveSession session,
         CapabilityRuntimePlaythroughAction action)
     {
         if (!action.Args.TryGetValue("executionPredicates", out var raw) || string.IsNullOrWhiteSpace(raw))
-            return null;
+            return ConditionalActionDecision.Execute();
+        var predicates = raw.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(value => value.Trim()).ToList();
+        if (predicates.Contains("dialogue_choice_available", StringComparer.Ordinal))
+        {
+            var dialogueId = action.Args.GetValueOrDefault("dialogueId") ?? string.Empty;
+            var nodeId = action.Args.GetValueOrDefault("nodeId") ?? string.Empty;
+            var choiceId = action.Args.GetValueOrDefault("choiceId") ?? string.Empty;
+            var dialogues = package.Game.Dialogues.Where(item => item.Id == dialogueId).ToList();
+            if (dialogues.Count != 1)
+                return ConditionalActionDecision.Failure("dialogue_choice.dialogue_matches=" + dialogues.Count);
+            var nodes = dialogues[0].Nodes.Where(item => item.Id == nodeId).ToList();
+            if (nodes.Count != 1)
+                return ConditionalActionDecision.Failure("dialogue_choice.node_matches=" + nodes.Count);
+            var choices = nodes[0].Choices.Where(item => item.Id == choiceId).ToList();
+            if (choices.Count != 1)
+                return ConditionalActionDecision.Failure("dialogue_choice.choice_matches=" + choices.Count);
+            if (action.Args.GetValueOrDefault("unavailableOutcome") != "still_locked")
+                return ConditionalActionDecision.Failure("dialogue_choice.unavailable_outcome_invalid");
+            var choice = choices[0];
+            var requirements = _requirementEvaluator.Evaluate(package,
+                session.CanonicalSession.RuntimeSession.GameplayState,
+                choice.Conditions.Select(RuntimeEffectMapper.ToRequirement).Concat(choice.Requirements),
+                action.Args.GetValueOrDefault("inventoryId"));
+            if (requirements.Diagnostics.Any(diagnostic =>
+                    diagnostic.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
+                return ConditionalActionDecision.Failure("dialogue_choice.requirement_evaluation_failed",
+                    requirements.Diagnostics.Select(item => item.Code + ":" + item.Message).ToList());
+            if (!requirements.Success)
+            {
+                var codes = requirements.Failures.Select(item => item.Code).Distinct(StringComparer.Ordinal)
+                    .OrderBy(item => item, StringComparer.Ordinal).ToList();
+                return ConditionalActionDecision.Skip(
+                    "socialOutcome=still_locked;failedRequirements=" + string.Join(",", codes),
+                    codes.Select(code => "failed_requirement:" + code).Append("socialOutcome=still_locked").ToList());
+            }
+        }
+        if (predicates.Contains("dialogue_open", StringComparer.Ordinal))
+        {
+            var active = session.CanonicalSession.RuntimeSession.GameplayState.ActiveDialogue;
+            if (active is null || !active.Open)
+                return ConditionalActionDecision.Skip("dialogue_open=false", ["dialogue_open=false"]);
+            var expected = action.Args.GetValueOrDefault("dialogueId");
+            if (!string.IsNullOrWhiteSpace(expected) && active.DialogueId != expected)
+                return ConditionalActionDecision.Failure("dialogue_open.mismatched=" + active.DialogueId + ";expected=" + expected);
+        }
         var state = session.CanonicalSession.RuntimeSession.GameplayState;
         var encounter = state.ActiveEncounter;
         var failed = new List<string>();
-        foreach (var predicate in raw.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(value => value.Trim()))
+        foreach (var predicate in predicates.Where(predicate => predicate is "encounter_active" or "participant_alive" or "status_present"))
         {
             var passed = predicate switch
             {
@@ -220,7 +284,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             };
             if (!passed) failed.Add(predicate);
         }
-        if (failed.Count == 0) return null;
+        if (failed.Count == 0) return ConditionalActionDecision.Execute();
 
         var events = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).ToList();
         var statusTarget = action.Args.GetValueOrDefault("statusTargetParticipantId");
@@ -235,8 +299,9 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 ? "expired"
                 : string.Empty;
         return terminalOutcome.Length == 0
-            ? null
-            : "terminal_outcome=" + terminalOutcome + ";predicates=" + string.Join(",", failed);
+            ? ConditionalActionDecision.Execute()
+            : ConditionalActionDecision.Skip(
+                "terminal_outcome=" + terminalOutcome + ";predicates=" + string.Join(",", failed));
     }
 
     private static SelectedRuntimeVariantInteractiveActionResult SkipConditionalAction(
@@ -245,12 +310,14 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         SelectedRuntimeVariantInteractiveActionRequest request,
         SelectedRuntimeVariantActionDescriptor descriptor,
         string before,
-        string reason)
+        string reason,
+        IReadOnlyList<string>? decisionDiagnostics = null)
     {
         session.CanonicalSession.CurrentCommandIndex = descriptor.RuntimeCommandEndIndex + 1;
         var source = session.LatestSnapshot;
         var snapshot = new CanonicalRuntimePlayerCommandLoopSnapshot
         {
+            Status = "SKIPPED",
             StepIndex = descriptor.CanonicalStepIndex,
             StepId = descriptor.CanonicalStepId,
             Category = descriptor.Category,
@@ -268,6 +335,11 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             EquipmentSummary = source.EquipmentSummary,
             AttributesSummary = source.AttributesSummary,
             ProgressionSummary = source.ProgressionSummary,
+            FactionSummary = source.FactionSummary,
+            DialogueChoicesSummary = source.DialogueChoicesSummary,
+            ResourceSummary = source.ResourceSummary,
+            FlagSummary = source.FlagSummary,
+            SocialSummary = source.SocialSummary,
             DiagnosticSummary = "conditional action skipped: " + reason,
             ProjectionOnly = false,
             UnityGameplayTruth = false,
@@ -299,13 +371,108 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             RuntimeMutation = false,
             RuntimeEventCount = 0,
             CorrelationPassed = true,
-            Status = "EXECUTED",
-            Diagnostics = ["conditional_action_skipped:" + reason]
+            Status = "SKIPPED",
+            Diagnostics = decisionDiagnostics is null
+                ? ["conditional_action_skipped:" + reason]
+                : ["conditional_action_skipped:" + reason, .. decisionDiagnostics]
         };
         session.ActionJournal.Add(ToJournal(result));
         session.CurrentActionIndex++;
         Refresh(session, package);
         return result;
+    }
+
+    private CanonicalRuntimePlayerCommandLoopSnapshot BuildPresentationSnapshot(
+        GamePackageDefinition package,
+        SelectedRuntimeVariantInteractiveSession session,
+        SelectedRuntimeVariantActionDescriptor descriptor,
+        CapabilityRuntimePlaythroughAction? action,
+        string stateHash)
+    {
+        var source = session.LatestSnapshot;
+        var state = session.CanonicalSession.RuntimeSession.GameplayState;
+        var factionSummary = string.Join("; ", state.Factions.OrderBy(item => item.FactionId, StringComparer.Ordinal)
+            .Select(item => item.FactionId + "=" + Format(item.Reputation) + ":" + item.RelationKind));
+        var resourceSummary = string.Join("; ", state.Resources.OrderBy(item => item.ResourceId, StringComparer.Ordinal)
+            .ThenBy(item => item.Scope, StringComparer.Ordinal)
+            .Select(item => item.ResourceId + "@" + item.Scope + "=" + Format(item.Amount)));
+        var flagSummary = string.Join("; ", state.Flags.OrderBy(item => item.Id, StringComparer.Ordinal)
+            .Select(item => item.Id + "=" + item.Value));
+        var choiceSummary = source.DialogueChoicesSummary;
+        var socialSummary = source.SocialSummary;
+        var diagnostic = "presentation snapshot read from Runtime state";
+        if (action?.RuntimePrimitiveId == "runtime.presentation.inspect_dialogue_choices")
+        {
+            var dialogueId = action.Args.GetValueOrDefault("dialogueId") ?? string.Empty;
+            var nodeId = action.Args.GetValueOrDefault("nodeId") ?? string.Empty;
+            var dialogue = package.Game.Dialogues.Single(item => item.Id == dialogueId);
+            var node = dialogue.Nodes.Single(item => item.Id == nodeId);
+            choiceSummary = string.Join("; ", node.Choices.OrderBy(choice => choice.Id, StringComparer.Ordinal).Select(choice =>
+            {
+                var evaluated = _requirementEvaluator.Evaluate(package, state,
+                    choice.Conditions.Select(RuntimeEffectMapper.ToRequirement).Concat(choice.Requirements),
+                    action.Args.GetValueOrDefault("inventoryId"));
+                var codes = evaluated.Failures.Select(failure => failure.Code)
+                    .Concat(evaluated.Diagnostics.Select(item => item.Code)).Distinct(StringComparer.Ordinal)
+                    .OrderBy(item => item, StringComparer.Ordinal).ToList();
+                return choice.Id + "=" + (evaluated.Success ? "available" : "unavailable")
+                       + (codes.Count == 0 ? string.Empty : "[" + string.Join(",", codes) + "]");
+            }));
+            diagnostic = dialogueId + ":" + nodeId + ":" + choiceSummary;
+        }
+        else if (action?.RuntimePrimitiveId == "runtime.presentation.inspect_faction")
+        {
+            var factionId = action.Args.GetValueOrDefault("factionId") ?? action.ResolvedTargetId;
+            diagnostic = factionSummary.Split(';').Select(item => item.Trim())
+                .Single(item => item.StartsWith(factionId + "=", StringComparison.Ordinal));
+        }
+        else if (action?.RuntimePrimitiveId == "runtime.presentation.inspect_social_summary")
+        {
+            var choiceId = action.Args.GetValueOrDefault("choiceId") ?? string.Empty;
+            var flagId = action.Args.GetValueOrDefault("flagId") ?? string.Empty;
+            var selected = session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
+                .Any(item => item.EventType == "DialogueChoiceSelected" && item.TargetId == choiceId);
+            var locked = session.ActionJournal.Any(entry => entry.Status == "SKIPPED"
+                && entry.Diagnostics.Any(item => item.Contains("socialOutcome=still_locked", StringComparison.Ordinal)));
+            var flag = state.Flags.SingleOrDefault(item => item.Id == flagId)?.Value;
+            var outcome = selected ? "claimed" : locked ? "still_locked"
+                : string.Equals(flag, "true", StringComparison.OrdinalIgnoreCase) ? "already_claimed" : "unknown";
+            socialSummary = "socialOutcome=" + outcome + ";" + factionSummary + ";" + resourceSummary + ";" + flagSummary;
+            diagnostic = socialSummary;
+        }
+        return new CanonicalRuntimePlayerCommandLoopSnapshot
+        {
+            Status = "EXECUTED",
+            StepIndex = session.CurrentActionIndex,
+            StepId = "presentation." + descriptor.ActionId,
+            Category = descriptor.Category,
+            CommandLabel = descriptor.ActionId,
+            StateHashBefore = stateHash,
+            StateHashAfter = stateHash,
+            MapSummary = source.MapSummary,
+            PlayerX = source.PlayerX,
+            PlayerY = source.PlayerY,
+            VisibleInteractionSummary = source.VisibleInteractionSummary,
+            DialogueSummary = state.ActiveDialogue is null
+                ? string.Empty
+                : state.ActiveDialogue.DialogueId + ":" + state.ActiveDialogue.CurrentNodeId + ":" + state.ActiveDialogue.Open,
+            QuestSummary = string.Join("; ", state.Quests.OrderBy(item => item.QuestId, StringComparer.Ordinal)
+                .Select(item => item.QuestId + ":" + item.State + ":" + (item.CurrentStageId ?? string.Empty))),
+            InventorySummary = source.InventorySummary,
+            CombatSummary = source.CombatSummary,
+            EquipmentSummary = source.EquipmentSummary,
+            AttributesSummary = source.AttributesSummary,
+            ProgressionSummary = source.ProgressionSummary,
+            FactionSummary = factionSummary,
+            DialogueChoicesSummary = choiceSummary,
+            ResourceSummary = resourceSummary,
+            FlagSummary = flagSummary,
+            SocialSummary = socialSummary,
+            DiagnosticSummary = diagnostic,
+            ProjectionOnly = false,
+            UnityGameplayTruth = false,
+            RuntimeEvents = []
+        };
     }
 
     public SelectedRuntimeVariantInteractiveCheckpoint SaveCheckpoint(
@@ -391,7 +558,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 ActionId = entry.ActionId
             });
             correlation &= replay.CorrelationPassed
-                           && replay.Status == "EXECUTED"
+                           && replay.Status == entry.Status
                            && replay.Category == entry.Category
                            && replay.Route == entry.Route
                            && replay.CommandKind == entry.CommandKind
@@ -718,6 +885,16 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 "runtime.command.take_from_container" => package.Game.Items.Any(item => item.Id == step.TargetId),
                 "runtime.command.equip_item" => package.Game.EquipmentSlots.Any(item => item.Id == step.TargetId),
                 "runtime.command.change_progression" => package.Game.Progressions.Any(item => item.Id == step.TargetId),
+                "runtime.command.advance_quest_objective" => package.Game.Quests.Any(quest =>
+                    quest.Id == step.Args.GetValueOrDefault("questId")
+                    && quest.Objectives.Concat(quest.Stages.SelectMany(stage => stage.Objectives))
+                        .Count(objective => objective.Id == step.Args.GetValueOrDefault("objectiveId", step.TargetId)) == 1),
+                "runtime.command.fail_quest" => package.Game.Quests.Any(item => item.Id == step.Args.GetValueOrDefault("questId", step.TargetId)),
+                "runtime.command.choose_dialogue_option" => package.Game.Dialogues.Any(dialogue =>
+                    dialogue.Id == step.Args.GetValueOrDefault("dialogueId")
+                    && dialogue.Nodes.Any(node => node.Id == step.Args.GetValueOrDefault("nodeId")
+                        && node.Choices.Count(choice => choice.Id == step.Args.GetValueOrDefault("choiceId", step.TargetId)) == 1)),
+                "runtime.command.close_dialogue" => package.Game.Dialogues.Any(item => item.Id == step.TargetId),
                 _ => false
             };
         }
@@ -759,6 +936,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         SelectedRuntimeVariantInteractiveActionResult result) =>
         new()
         {
+            Status = result.Status,
             ActionRequestId = result.ActionRequestId,
             SessionId = result.SessionId,
             ActionIndex = result.ActionIndex,
@@ -777,13 +955,15 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             StateHashAfter = result.StateHashAfter,
             RuntimeExecuted = result.RuntimeExecuted,
             RuntimeMutation = result.RuntimeMutation,
-            RuntimeEventCount = result.RuntimeEventCount
+            RuntimeEventCount = result.RuntimeEventCount,
+            Diagnostics = result.Diagnostics.ToList()
         };
 
     private static SelectedRuntimeVariantInteractiveJournalEntry Clone(
         SelectedRuntimeVariantInteractiveJournalEntry entry) =>
         new()
         {
+            Status = entry.Status,
             ActionRequestId = entry.ActionRequestId,
             SessionId = entry.SessionId,
             ActionIndex = entry.ActionIndex,
@@ -802,6 +982,40 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             StateHashAfter = entry.StateHashAfter,
             RuntimeExecuted = entry.RuntimeExecuted,
             RuntimeMutation = entry.RuntimeMutation,
-            RuntimeEventCount = entry.RuntimeEventCount
+            RuntimeEventCount = entry.RuntimeEventCount,
+            Diagnostics = entry.Diagnostics.ToList()
         };
+
+    private static string Format(double value) =>
+        value.ToString("0.####", System.Globalization.CultureInfo.InvariantCulture);
+
+    private enum ConditionalActionDecisionKind
+    {
+        Execute,
+        Skip,
+        Failure
+    }
+
+    private sealed class ConditionalActionDecision
+    {
+        private ConditionalActionDecision(
+            ConditionalActionDecisionKind kind,
+            string reason,
+            IReadOnlyList<string> diagnostics)
+        {
+            Kind = kind;
+            Reason = reason;
+            Diagnostics = diagnostics;
+        }
+
+        public ConditionalActionDecisionKind Kind { get; }
+        public string Reason { get; }
+        public IReadOnlyList<string> Diagnostics { get; }
+
+        public static ConditionalActionDecision Execute() => new(ConditionalActionDecisionKind.Execute, string.Empty, []);
+        public static ConditionalActionDecision Skip(string reason, IReadOnlyList<string>? diagnostics = null) =>
+            new(ConditionalActionDecisionKind.Skip, reason, diagnostics ?? []);
+        public static ConditionalActionDecision Failure(string reason, IReadOnlyList<string>? diagnostics = null) =>
+            new(ConditionalActionDecisionKind.Failure, reason, diagnostics ?? []);
+    }
 }

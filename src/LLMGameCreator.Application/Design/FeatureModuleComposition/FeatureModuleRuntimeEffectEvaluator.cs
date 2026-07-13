@@ -1,5 +1,7 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
+using LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
+using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
 using RuntimeInteractiveSession = LLMGameCreator.Runtime.Abstractions.SelectedRuntimeVariantInteractiveSession;
 
@@ -10,21 +12,23 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
     public IReadOnlyList<FeatureModuleRuntimeEffectObservation> Evaluate(
         IReadOnlyList<FeatureModuleDefinition> selectedModules,
         RuntimeInteractiveSession session,
-        RuntimeInteractiveSession baselineSession)
+        RuntimeInteractiveSession baselineSession,
+        GamePackageDefinition? package = null)
     {
         ArgumentNullException.ThrowIfNull(selectedModules);
         ArgumentNullException.ThrowIfNull(session);
         ArgumentNullException.ThrowIfNull(baselineSession);
         return selectedModules.SelectMany(module => module.RuntimeEffectContracts)
             .OrderBy(contract => contract.EffectId, StringComparer.Ordinal)
-            .Select(contract => Observe(contract, session, baselineSession))
+            .Select(contract => Observe(contract, session, baselineSession, package))
             .ToList();
     }
 
     private static FeatureModuleRuntimeEffectObservation Observe(
         FeatureModuleRuntimeEffectContract contract,
         RuntimeInteractiveSession session,
-        RuntimeInteractiveSession baselineSession)
+        RuntimeInteractiveSession baselineSession,
+        GamePackageDefinition? package)
     {
         var diagnostics = new List<string>();
         if (contract.MetricKind is FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta
@@ -47,7 +51,7 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
                 Diagnostics = ["combat capability absent; combat delta is not applicable"]
             };
         }
-        var actual = ReadMetric(contract, session, diagnostics);
+        var actual = ReadMetric(contract, session, diagnostics, package);
         var baseline = contract.MetricKind switch
         {
             FeatureModuleRuntimeEffectMetricKinds.EquipmentSlotItemEquals => string.Empty,
@@ -61,7 +65,14 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             FeatureModuleRuntimeEffectMetricKinds.StatusTickDamageEquals => "0",
             FeatureModuleRuntimeEffectMetricKinds.StatusAbsentAfterExpiry => "absent",
             FeatureModuleRuntimeEffectMetricKinds.StatusTerminalOutcome => "not_applicable",
-            _ => ReadMetric(contract, baselineSession, diagnostics)
+            FeatureModuleRuntimeEffectMetricKinds.FactionReputationInitialized => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.QuestStateEquals => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.FactionReputationTransitionTruthful => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.DialogueChoiceVisibilitySequence => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.ResourceTransitionTruthful => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.FlagEquals => string.Empty,
+            FeatureModuleRuntimeEffectMetricKinds.TrustedRewardSocialOutcome => string.Empty,
+            _ => ReadMetric(contract, baselineSession, diagnostics, package)
         };
         var passed = diagnostics.Count == 0 && Compare(contract, actual, baseline);
         if (!passed && diagnostics.Count == 0)
@@ -86,7 +97,8 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
     private static string ReadMetric(
         FeatureModuleRuntimeEffectContract contract,
         RuntimeInteractiveSession session,
-        List<string> diagnostics)
+        List<string> diagnostics,
+        GamePackageDefinition? package)
     {
         var value = contract.MetricKind switch
         {
@@ -118,6 +130,21 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
                 StatusAbsent(session, contract.TargetId, contract.ResourceOrItemId) ? "absent" : "present",
             FeatureModuleRuntimeEffectMetricKinds.StatusTerminalOutcome =>
                 StatusTerminalOutcome(session, contract.TargetId, contract.ResourceOrItemId),
+            FeatureModuleRuntimeEffectMetricKinds.FactionReputationInitialized =>
+                InitialFactionReputation(session, contract.TargetId)?.ToString(CultureInfo.InvariantCulture),
+            FeatureModuleRuntimeEffectMetricKinds.QuestStateEquals =>
+                session.CanonicalSession.RuntimeSession.GameplayState.Quests
+                    .SingleOrDefault(item => item.QuestId == contract.TargetId)?.State,
+            FeatureModuleRuntimeEffectMetricKinds.FactionReputationTransitionTruthful =>
+                FactionTransitionTruthful(session, contract, package) ? "true" : "false",
+            FeatureModuleRuntimeEffectMetricKinds.DialogueChoiceVisibilitySequence =>
+                DialogueChoiceVisibilitySequence(session, contract.TargetId),
+            FeatureModuleRuntimeEffectMetricKinds.ResourceTransitionTruthful =>
+                ResourceTransitionTruthful(session, contract.TargetId),
+            FeatureModuleRuntimeEffectMetricKinds.FlagEquals =>
+                FlagValue(session, contract.TargetId),
+            FeatureModuleRuntimeEffectMetricKinds.TrustedRewardSocialOutcome =>
+                TrustedRewardSocialOutcome(session, contract.TargetId),
             _ => null
         };
         if (value is null)
@@ -311,4 +338,121 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         if (string.IsNullOrWhiteSpace(raw)) raw = Regex.Match(runtimeEvent.Message, @"-(?<value>\d+(?:\.\d+)?)$").Groups["value"].Value;
         return decimal.TryParse(raw, NumberStyles.Number, CultureInfo.InvariantCulture, out var value) ? value : 0;
     }
+
+    private static decimal? InitialFactionReputation(RuntimeInteractiveSession session, string factionId)
+    {
+        var snapshot = session.CanonicalSession.Snapshots.FirstOrDefault(item =>
+            item.StepId.StartsWith("presentation.", StringComparison.Ordinal)
+            && Regex.IsMatch(item.FactionSummary, @"(?:^|;\s*)" + Regex.Escape(factionId) + @"=(?<value>-?\d+(?:\.\d+)?)"));
+        if (snapshot is null) return null;
+        var match = Regex.Match(snapshot.FactionSummary,
+            @"(?:^|;\s*)" + Regex.Escape(factionId) + @"=(?<value>-?\d+(?:\.\d+)?)");
+        return decimal.TryParse(match.Groups["value"].Value, NumberStyles.Number,
+            CultureInfo.InvariantCulture, out var value) ? value : null;
+    }
+
+    private static bool FactionTransitionTruthful(
+        RuntimeInteractiveSession session,
+        FeatureModuleRuntimeEffectContract contract,
+        GamePackageDefinition? package)
+    {
+        var runtimeEvent = EventsForMetric(session, contract.MetricKind)
+            .LastOrDefault(item => item.EventType == "FactionReputationChanged" && item.TargetId == contract.TargetId);
+        if (runtimeEvent is null
+            || !DecimalArg(runtimeEvent, "before", out var before)
+            || !DecimalArg(runtimeEvent, "requested", out var requested)
+            || !DecimalArg(runtimeEvent, "after", out var after)
+            || !DecimalArg(runtimeEvent, "delta", out var delta)
+            || !bool.TryParse(runtimeEvent.Args.GetValueOrDefault("clamped"), out var clamped)) return false;
+        var final = session.CanonicalSession.RuntimeSession.GameplayState.Factions
+            .SingleOrDefault(item => item.FactionId == contract.TargetId)?.Reputation;
+        if (!final.HasValue || (decimal)final.Value != after || delta != after - before
+            || clamped != (after != before + requested)) return false;
+        if (package is null) return true;
+        var definition = package.Game.Factions.SingleOrDefault(item => item.Id == contract.TargetId);
+        if (definition is null) return false;
+        if (definition.MinReputation.HasValue && after < (decimal)definition.MinReputation.Value) return false;
+        if (definition.MaxReputation.HasValue && after > (decimal)definition.MaxReputation.Value) return false;
+        if (!clamped) return true;
+        return requested >= 0
+            ? !definition.MaxReputation.HasValue || after == (decimal)definition.MaxReputation.Value
+            : !definition.MinReputation.HasValue || after == (decimal)definition.MinReputation.Value;
+    }
+
+    private static string? DialogueChoiceVisibilitySequence(RuntimeInteractiveSession session, string choiceId)
+    {
+        var values = session.CanonicalSession.Snapshots
+            .Where(item => item.StepId.StartsWith("presentation.", StringComparison.Ordinal)
+                           && Regex.IsMatch(item.DialogueChoicesSummary,
+                               @"(?:^|;\s*)" + Regex.Escape(choiceId) + @"=(available|unavailable)"))
+            .Select(item => Regex.Match(item.DialogueChoicesSummary,
+                    @"(?:^|;\s*)" + Regex.Escape(choiceId) + @"=(?<value>available|unavailable)")
+                .Groups["value"].Value).ToList();
+        return values.Count < 3 ? null : string.Join(">", values.Take(3));
+    }
+
+    private static string? ResourceTransitionTruthful(RuntimeInteractiveSession session, string resourceId)
+    {
+        var runtimeEvent = session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
+            .LastOrDefault(item => item.EventType == "ResourceChanged" && item.TargetId == resourceId);
+        if (runtimeEvent is null) return SocialStillLocked(session) ? "not_applicable" : null;
+        if (runtimeEvent.Args.GetValueOrDefault("resourceId") != resourceId
+            || !DecimalArg(runtimeEvent, "before", out var before)
+            || !DecimalArg(runtimeEvent, "requestedDelta", out var requested)
+            || !DecimalArg(runtimeEvent, "after", out var after)
+            || !DecimalArg(runtimeEvent, "actualDelta", out var actual)
+            || !bool.TryParse(runtimeEvent.Args.GetValueOrDefault("clamped"), out var clamped)
+            || actual != after - before || clamped != (actual != requested)) return "false";
+        var scope = runtimeEvent.Args.GetValueOrDefault("scope");
+        if (string.IsNullOrWhiteSpace(scope)) scope = "global";
+        var final = session.CanonicalSession.RuntimeSession.GameplayState.Resources.SingleOrDefault(item =>
+            item.ResourceId == resourceId && item.Scope == scope)?.Amount;
+        return final.HasValue && (decimal)final.Value == after ? "true" : "false";
+    }
+
+    private static string FlagValue(RuntimeInteractiveSession session, string flagId)
+    {
+        var value = session.CanonicalSession.RuntimeSession.GameplayState.Flags
+            .SingleOrDefault(item => item.Id == flagId)?.Value;
+        return value ?? (SocialStillLocked(session) ? "not_applicable" : string.Empty);
+    }
+
+    private static string? TrustedRewardSocialOutcome(RuntimeInteractiveSession session, string choiceId)
+    {
+        if (session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
+            .Any(item => item.EventType == "DialogueChoiceSelected" && item.TargetId == choiceId)) return "claimed";
+        var action = session.CapabilityPlan?.OrderedActions.SingleOrDefault(item =>
+            item.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.ChooseDialogueOption
+            && item.Args.GetValueOrDefault("choiceId") == choiceId);
+        var journal = action is null ? null : session.ActionJournal.SingleOrDefault(item => item.ActionId == action.ActionId);
+        if (journal?.Status == "SKIPPED" && journal.Diagnostics.Any(item =>
+                item.Contains("socialOutcome=still_locked", StringComparison.Ordinal))) return "still_locked";
+        var flagId = action?.Args.GetValueOrDefault("claimFlagId");
+        if (!string.IsNullOrWhiteSpace(flagId) && session.CanonicalSession.RuntimeSession.GameplayState.Flags.Any(item =>
+                item.Id == flagId && item.Value.Equals("true", StringComparison.OrdinalIgnoreCase))) return "already_claimed";
+        return null;
+    }
+
+    private static IReadOnlyList<CanonicalRuntimePlayerCommandLoopRuntimeEvent> EventsForMetric(
+        RuntimeInteractiveSession session,
+        string metricKind)
+    {
+        var actionIds = session.CapabilityPlan?.OrderedActions.Where(action =>
+                action.ExpectedRuntimeEffects.Contains(metricKind, StringComparer.Ordinal))
+            .Select(action => "capability." + action.ActionId).ToHashSet(StringComparer.Ordinal)
+            ?? new HashSet<string>(StringComparer.Ordinal);
+        var snapshots = actionIds.Count == 0 ? session.CanonicalSession.Snapshots
+            : session.CanonicalSession.Snapshots.Where(snapshot => actionIds.Contains(snapshot.StepId));
+        return snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).ToList();
+    }
+
+    private static bool SocialStillLocked(RuntimeInteractiveSession session) =>
+        session.ActionJournal.Any(entry => entry.Status == "SKIPPED" && entry.Diagnostics.Any(item =>
+            item.Contains("socialOutcome=still_locked", StringComparison.Ordinal)));
+
+    private static bool DecimalArg(
+        CanonicalRuntimePlayerCommandLoopRuntimeEvent runtimeEvent,
+        string key,
+        out decimal value) => decimal.TryParse(runtimeEvent.Args.GetValueOrDefault(key), NumberStyles.Number,
+        CultureInfo.InvariantCulture, out value);
 }

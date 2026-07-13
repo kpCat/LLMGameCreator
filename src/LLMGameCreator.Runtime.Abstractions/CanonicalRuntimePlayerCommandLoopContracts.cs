@@ -93,6 +93,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopRuntimeEvent
 
 public sealed class CanonicalRuntimePlayerCommandLoopSnapshot
 {
+    public string Status { get; set; } = "EXECUTED";
     public int StepIndex { get; set; }
     public string StepId { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
@@ -110,6 +111,11 @@ public sealed class CanonicalRuntimePlayerCommandLoopSnapshot
     public string EquipmentSummary { get; set; } = string.Empty;
     public string AttributesSummary { get; set; } = string.Empty;
     public string ProgressionSummary { get; set; } = string.Empty;
+    public string FactionSummary { get; set; } = string.Empty;
+    public string DialogueChoicesSummary { get; set; } = string.Empty;
+    public string ResourceSummary { get; set; } = string.Empty;
+    public string FlagSummary { get; set; } = string.Empty;
+    public string SocialSummary { get; set; } = string.Empty;
     public string DiagnosticSummary { get; set; } = string.Empty;
     public bool ProjectionOnly { get; set; }
     public bool UnityGameplayTruth { get; set; }

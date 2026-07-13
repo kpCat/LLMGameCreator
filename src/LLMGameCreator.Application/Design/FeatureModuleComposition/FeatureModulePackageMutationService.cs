@@ -489,8 +489,10 @@ public sealed class FeatureModulePackageMutationService
     {
         var existing = target[propertyName];
         var actual = NodeValue(existing);
-        ValidateExpected(operation, actual, existing is null);
-        target[propertyName] = decimal.Parse(Numeric(operation.NewValue), NumberStyles.Number,
+        var desired = Numeric(operation.NewValue);
+        if (!string.Equals(actual, desired, StringComparison.Ordinal))
+            ValidateExpected(operation, actual, existing is null);
+        target[propertyName] = decimal.Parse(desired, NumberStyles.Number,
             CultureInfo.InvariantCulture);
         return actual;
     }

@@ -135,7 +135,7 @@ public sealed class ProductLineRuntimeQualifier
             ActionIndex = session.CurrentActionIndex,
             ActionId = actionId
         });
-        if (result.Status != "EXECUTED" || !result.CorrelationPassed)
+        if (result.Status is not ("EXECUTED" or "SKIPPED") || !result.CorrelationPassed)
         {
             throw new InvalidOperationException(
                 "Runtime qualification action failed: " + actionId + ":" + string.Join(";", result.Diagnostics));

@@ -1,0 +1,37 @@
+﻿{
+    "schemaVersion":  "goal154b_capability_plan_proof_v1",
+    "status":  "GREEN",
+    "capabilityPlanSignature":  "c3a2254a3dc8f59558cce42fb99b4a5c853a2d85ed26d617ea48776f073fdc5a",
+    "plannedActionCount":  26,
+    "checkpointActionCount":  18,
+    "checkpointActionId":  "advance_healer_objective",
+    "socialPrimitives":  [
+                             "runtime.command.advance_quest_objective",
+                             "runtime.command.fail_quest",
+                             "runtime.command.choose_dialogue_option",
+                             "runtime.command.close_dialogue",
+                             "runtime.presentation.inspect_faction",
+                             "runtime.presentation.inspect_dialogue_choices",
+                             "runtime.presentation.inspect_social_summary"
+                         ],
+    "socialSelectors":  [
+                            "faction_id",
+                            "quest_objective_id",
+                            "dialogue_node_id",
+                            "dialogue_choice_id"
+                        ],
+    "healerDialogueLifecycle":  [
+                                    "open_healer_before_quest",
+                                    "inspect_trusted_choice_before_quest",
+                                    "close_healer_before_quest",
+                                    "open_healer_after_quest",
+                                    "inspect_trusted_choice_after_quest",
+                                    "claim_trusted_reward",
+                                    "close_healer_after_claim_if_open",
+                                    "open_healer_after_outcome",
+                                    "inspect_trusted_choice_after_outcome",
+                                    "close_healer_final"
+                                ],
+    "dependencyGraphAcyclic":  true,
+    "allTargetsResolved":  true
+}

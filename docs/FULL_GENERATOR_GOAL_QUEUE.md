@@ -1,6 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 154 faction reputation, quest consequences and trusted dialogue reward: FAILED incomplete vertical slice. Goals153/153A/153B/153C are accepted by human at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`; Goal154 remains `accepted=false` and requires its missing focused tests and full runtime/workspace/standalone proof before any audit or human gate.
+- Goal 154C saved-project, WinForms and standalone social closure: next product goal. Goal154/154A are historical FAILED foundations; Goal154B Runtime core is GREEN with 29 behavioral tests, claimed/still-locked/repeat-claim/clamp/rollback/replay proof and zero Unity/standalone invocation. Goals154/154A/154B remain `accepted=false`, and no manual gate is ready until Goal154C closes the explicitly deferred user workflow.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document

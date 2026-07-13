@@ -17,6 +17,7 @@ public sealed record FeatureModuleRuntimePlaythroughContract
     public IReadOnlyDictionary<string, string> Args { get; init; } =
         new Dictionary<string, string>(StringComparer.Ordinal);
     public IReadOnlyList<string> DependsOnActionIds { get; init; } = [];
+    public IReadOnlyList<string> DependsOnIfPresentActionIds { get; init; } = [];
     public IReadOnlyList<string> ReplacesActionIds { get; init; } = [];
     public bool CheckpointBoundaryAfter { get; init; }
     public bool PresentationOnly { get; init; }
@@ -67,11 +68,18 @@ public static class CapabilityRuntimePrimitiveIds
     public const string TakeFromContainer = "runtime.command.take_from_container";
     public const string EquipItem = "runtime.command.equip_item";
     public const string ChangeProgression = "runtime.command.change_progression";
+    public const string AdvanceQuestObjective = "runtime.command.advance_quest_objective";
+    public const string FailQuest = "runtime.command.fail_quest";
+    public const string ChooseDialogueOption = "runtime.command.choose_dialogue_option";
+    public const string CloseDialogue = "runtime.command.close_dialogue";
     public const string InspectInventory = "runtime.presentation.inspect_inventory";
     public const string InspectStatus = "runtime.presentation.inspect_status";
     public const string InspectEquipment = "runtime.presentation.inspect_equipment";
     public const string InspectAttributes = "runtime.presentation.inspect_attributes";
     public const string InspectProgression = "runtime.presentation.inspect_progression";
+    public const string InspectFaction = "runtime.presentation.inspect_faction";
+    public const string InspectDialogueChoices = "runtime.presentation.inspect_dialogue_choices";
+    public const string InspectSocialSummary = "runtime.presentation.inspect_social_summary";
     public const string FinalState = "runtime.presentation.final_state";
 
     public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
@@ -79,6 +87,8 @@ public static class CapabilityRuntimePrimitiveIds
         Start, Move, Interact, OpenDialogue, StartOrUpdateQuest, ShowInventory,
         CraftRecipe, HarvestResource, ExecuteTransaction, StartEncounter, BasicAttack, UseAbility, EndTurn,
         OpenContainer, TakeFromContainer, EquipItem, ChangeProgression,
-        InspectInventory, InspectStatus, InspectEquipment, InspectAttributes, InspectProgression, FinalState
+        AdvanceQuestObjective, FailQuest, ChooseDialogueOption, CloseDialogue,
+        InspectInventory, InspectStatus, InspectEquipment, InspectAttributes, InspectProgression,
+        InspectFaction, InspectDialogueChoices, InspectSocialSummary, FinalState
     };
 }

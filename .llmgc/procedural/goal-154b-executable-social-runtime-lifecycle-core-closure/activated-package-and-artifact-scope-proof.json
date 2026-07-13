@@ -1,0 +1,23 @@
+﻿{
+    "schemaVersion":  "goal154b_activated_package_and_artifact_scope_proof_v1",
+    "status":  "GREEN",
+    "basePackageSha256":  "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+    "activatedPackageSha256":  "a5318817437746f9033f7360e2f992c76dcfb06ba71fb94306831edb9c76c433",
+    "activatedMutationOperationCount":  8,
+    "activatedProofFixtureCount":  0,
+    "forbiddenArtificialGoldContentCount":  0,
+    "defaultOffHashesPreserved":  true,
+    "classifiedDiffs":  [
+                            "faction_default_reputation:declared_user_facing_mechanic",
+                            "quest_completion_reputation:declared_user_facing_mechanic",
+                            "quest_failure_reputation:declared_user_facing_mechanic",
+                            "quest_gold_reserved_for_trusted_choice:declared_user_facing_mechanic",
+                            "trusted_dialogue_choice:declared_user_facing_starter_content"
+                        ],
+    "artifactScopeScenario":  "goal-154b-executable-social-runtime-lifecycle-core-closure",
+    "artifactScopeViolationCount":  0,
+    "boundedScopeExceptions":  [
+                                   "ProductLineRuntimeQualifier.cs accepts declared SKIPPED outcomes so still_locked remains a successful qualification without executing a handler.",
+                                   "CharacterAttributesLevelProgressionGoal150Tests.cs updates only the catalog cardinality assertions from 9/19 to the inherited Goal154A manifest truth 12/22 and certification counts from 9 to 12."
+                               ]
+}

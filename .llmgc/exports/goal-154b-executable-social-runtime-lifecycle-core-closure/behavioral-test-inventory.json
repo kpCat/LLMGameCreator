@@ -1,0 +1,429 @@
+﻿{
+    "schemaVersion":  "goal154b_behavioral_test_inventory_v1",
+    "status":  "GREEN",
+    "discoveredCount":  29,
+    "behavioralCount":  29,
+    "minimumRequired":  16,
+    "placeholderGoal154ATestCount":  18,
+    "tests":  [
+                  {
+                      "testName":  "LLMGameCreator.Tests.Runtime.Goal154B.Goal154BRuntimeSocialTests.Behavioral_direct_second_claim_is_atomic_and_emits_no_success_event",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "GameRuntimeService",
+                                              "FactionRuntimeService",
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "atomic claim state",
+                                                     "reputation clamps",
+                                                     "non-mutating presentation snapshot"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Runtime.Goal154B.Goal154BRuntimeSocialTests.Behavioral_already_claimed_effect_observation_is_derived_from_contract_fields",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "GameRuntimeService",
+                                              "FactionRuntimeService",
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "atomic claim state",
+                                                     "reputation clamps",
+                                                     "non-mutating presentation snapshot"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Runtime.Goal154B.Goal154BRuntimeSocialTests.Behavioral_positive_reputation_clamp_reports_requested_10_actual_5",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "GameRuntimeService",
+                                              "FactionRuntimeService",
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "atomic claim state",
+                                                     "reputation clamps",
+                                                     "non-mutating presentation snapshot"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Runtime.Goal154B.Goal154BRuntimeSocialTests.Behavioral_negative_reputation_clamp_reports_requested_minus_10_actual_minus_5_and_failed_quest",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "GameRuntimeService",
+                                              "FactionRuntimeService",
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "atomic claim state",
+                                                     "reputation clamps",
+                                                     "non-mutating presentation snapshot"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Runtime.Goal154B.Goal154BRuntimeSocialTests.Behavioral_presentation_primitives_create_truthful_non_mutating_snapshots",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "GameRuntimeService",
+                                              "FactionRuntimeService",
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "atomic claim state",
+                                                     "reputation clamps",
+                                                     "non-mutating presentation snapshot"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_default_0_10_5_10_7_composition_executes_claimed_lifecycle",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_interactive_actions_open_healer_and_observe_unavailable_available_unavailable",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_claimed_checkpoint_reload_and_full_replay_match_hashes_and_social_events",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_threshold_20_truthfully_skips_claim_without_gold_or_flag_mutation",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_still_locked_checkpoint_and_full_replay_repeat_the_same_skip_decision",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_zero_gold_reward_claims_once_sets_flag_and_keeps_gold_zero",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BClaimedAndLockedLifecycleTests.Behavioral_evidence_projection_is_derived_from_claimed_and_locked_runtime_sessions",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "ProductLineRuntimeQualifier",
+                                              "SelectedRuntimeVariantInteractiveSessionService",
+                                              "GameRuntimeService",
+                                              "FeatureModuleRuntimeEffectEvaluator"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "Runtime state",
+                                                     "structured events",
+                                                     "checkpoint/replay hashes",
+                                                     "social outcome"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_all_five_parameters_bind_min_default_max_and_interior_values",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_parameter_binding_rejects_below_above_fractional_unknown_and_unselected_values",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_threshold_above_start_plus_reward_is_a_valid_still_locked_product_outcome",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_nested_social_mutations_are_additive_idempotent_and_order_independent",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_mutation_conflicts_wrong_owners_and_duplicate_targets_preserve_input_bytes",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_activated_package_diff_contains_only_declared_existing_social_content",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BParameterAndMutationTests.Behavioral_generic_package_validation_rejects_ambiguous_and_broken_social_references",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "package/state contract"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BPlannerAndModuleTests.Behavioral_all_social_modules_plan_every_primitive_selector_and_checkpoint",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleLibraryLoader",
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService",
+                                              "CapabilityDrivenRuntimePlaythroughPlanner"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "resolved action plan",
+                                                     "dependency/checkpoint contract",
+                                                     "package/state hash"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BPlannerAndModuleTests.Behavioral_malformed_social_selectors_fail_with_causal_diagnostics",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleLibraryLoader",
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService",
+                                              "CapabilityDrivenRuntimePlaythroughPlanner"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "resolved action plan",
+                                                     "dependency/checkpoint contract",
+                                                     "package/state hash"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BPlannerAndModuleTests.Behavioral_reverse_module_order_preserves_package_and_plan_signature",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleLibraryLoader",
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService",
+                                              "CapabilityDrivenRuntimePlaythroughPlanner"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "resolved action plan",
+                                                     "dependency/checkpoint contract",
+                                                     "package/state hash"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BPlannerAndModuleTests.Behavioral_each_valid_social_dependency_closure_plans",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleLibraryLoader",
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService",
+                                              "CapabilityDrivenRuntimePlaythroughPlanner"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "resolved action plan",
+                                                     "dependency/checkpoint contract",
+                                                     "package/state hash"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BPlannerAndModuleTests.Behavioral_default_off_social_composition_preserves_package_and_initial_state_hashes",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "FeatureModuleLibraryLoader",
+                                              "FeatureModuleParameterBindingService",
+                                              "FeatureModulePackageMutationService",
+                                              "CapabilityDrivenRuntimePlaythroughPlanner"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "resolved action plan",
+                                                     "dependency/checkpoint contract",
+                                                     "package/state hash"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BRollbackAndEventTruthTests.Behavioral_quest_completion_rolls_back_reputation_when_later_resource_output_fails",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "OutputApplier",
+                                              "GameRuntimeService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "byte-identical rollback state",
+                                                     "zero leaked success events",
+                                                     "invariant event args"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BRollbackAndEventTruthTests.Behavioral_quest_failure_rolls_back_negative_reputation_when_later_output_fails",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "OutputApplier",
+                                              "GameRuntimeService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "byte-identical rollback state",
+                                                     "zero leaked success events",
+                                                     "invariant event args"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BRollbackAndEventTruthTests.Behavioral_dialogue_outputs_roll_back_flag_when_later_resource_output_fails",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "OutputApplier",
+                                              "GameRuntimeService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "byte-identical rollback state",
+                                                     "zero leaked success events",
+                                                     "invariant event args"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BRollbackAndEventTruthTests.Behavioral_nested_dialogue_action_failure_rolls_back_earlier_flag_output",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "OutputApplier",
+                                              "GameRuntimeService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "byte-identical rollback state",
+                                                     "zero leaked success events",
+                                                     "invariant event args"
+                                                 ]
+                  },
+                  {
+                      "testName":  "LLMGameCreator.Tests.Application.Goal154B.Goal154BRollbackAndEventTruthTests.Behavioral_social_event_numeric_arguments_are_invariant_under_comma_decimal_culture",
+                      "behavioral":  true,
+                      "servicesInvoked":  [
+                                              "QuestRuntimeService",
+                                              "DialogueRuntimeService",
+                                              "OutputApplier",
+                                              "GameRuntimeService"
+                                          ],
+                      "stateOrEventAssertions":  [
+                                                     "byte-identical rollback state",
+                                                     "zero leaked success events",
+                                                     "invariant event args"
+                                                 ]
+                  }
+              ]
+}

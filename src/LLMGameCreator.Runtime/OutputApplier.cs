@@ -1,6 +1,7 @@
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
+using System.Globalization;
 
 namespace LLMGameCreator.Runtime;
 
@@ -115,9 +116,10 @@ public sealed class OutputApplier : IOutputApplier
             var args = new Dictionary<string, string>
             {
                 ["factionId"] = output.Id,
-                ["before"] = Format(before),
-                ["after"] = Format(faction.Reputation),
-                ["delta"] = Format(faction.Reputation - before),
+                ["before"] = FormatInvariant(before),
+                ["requested"] = FormatInvariant(output.Amount),
+                ["after"] = FormatInvariant(faction.Reputation),
+                ["delta"] = FormatInvariant(faction.Reputation - before),
                 ["clamped"] = (Math.Abs((before + output.Amount) - faction.Reputation) > 0.0000001).ToString().ToLowerInvariant()
             };
             result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Changed faction reputation {output.Id} by {Format(output.Amount)}", output.Id));
@@ -141,7 +143,7 @@ public sealed class OutputApplier : IOutputApplier
 
         if (RuntimeStateHelpers.KindEquals(output.Kind, "flag") || RuntimeStateHelpers.KindEquals(output.Kind, "set_flag"))
         {
-            var value = output.Mode ?? output.Amount.ToString("0.####");
+            var value = output.Mode ?? output.Amount.ToString("0.####", CultureInfo.InvariantCulture);
             if (output.Metadata.TryGetValue("value", out var metadataValue))
             {
                 value = metadataValue;
@@ -261,4 +263,7 @@ public sealed class OutputApplier : IOutputApplier
     {
         return value.ToString("0.####");
     }
+
+    private static string FormatInvariant(double value) =>
+        value.ToString("0.####", CultureInfo.InvariantCulture);
 }

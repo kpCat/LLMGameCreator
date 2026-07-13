@@ -1,0 +1,43 @@
+﻿{
+    "schemaVersion":  "goal154b_rollback_event_truth_proof_v1",
+    "status":  "GREEN",
+    "upperClamp":  {
+                       "actualDelta":  5,
+                       "clamped":  true,
+                       "starting":  95,
+                       "final":  100,
+                       "requested":  10
+                   },
+    "lowerClamp":  {
+                       "requested":  -10,
+                       "starting":  -95,
+                       "actualDelta":  -5,
+                       "clamped":  true,
+                       "final":  -100,
+                       "questState":  "failed"
+                   },
+    "rollbackMatrix":  [
+                           {
+                               "scenario":  "quest_completion_then_missing_resource",
+                               "leakedSuccessEventCount":  0,
+                               "stateByteIdentical":  true
+                           },
+                           {
+                               "scenario":  "quest_failure_then_invalid_output",
+                               "leakedSuccessEventCount":  0,
+                               "stateByteIdentical":  true
+                           },
+                           {
+                               "scenario":  "dialogue_flag_then_missing_resource",
+                               "leakedSuccessEventCount":  0,
+                               "stateByteIdentical":  true
+                           },
+                           {
+                               "scenario":  "nested_dialogue_action_failure",
+                               "leakedSuccessEventCount":  0,
+                               "stateByteIdentical":  true
+                           }
+                       ],
+    "invariantCultureEventArgsPassed":  true,
+    "commaDecimalCultureExecuted":  "uk-UA"
+}

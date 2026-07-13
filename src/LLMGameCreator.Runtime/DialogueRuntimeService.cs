@@ -1,6 +1,7 @@
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
+using System.Globalization;
 
 namespace LLMGameCreator.Runtime;
 
@@ -114,6 +115,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
 
         var outputs = choice.Effects.Select(RuntimeEffectMapper.ToOutput).Concat(choice.Rewards).ToList();
         var applied = _outputApplier.Apply(package, working, outputs, inventoryId);
+        NormalizeStructuredNumericArgs(applied.Events);
         result.Events.AddRange(applied.Events);
         result.Diagnostics.AddRange(applied.Diagnostics);
         if (!applied.Success)
@@ -240,6 +242,19 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             ["nodeId"] = node.Id,
             ["choiceIds"] = string.Join(",", available)
         };
+    }
+
+    private static void NormalizeStructuredNumericArgs(IEnumerable<GameRuntimeEvent> events)
+    {
+        var numericKeys = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "before", "requested", "after", "delta", "requestedDelta", "actualDelta"
+        };
+        foreach (var runtimeEvent in events.Where(item => item.Type is GameRuntimeEventType.ResourceChanged
+                     or GameRuntimeEventType.FactionReputationChanged))
+        foreach (var key in runtimeEvent.Args.Keys.Where(numericKeys.Contains).ToList())
+            if (double.TryParse(runtimeEvent.Args[key], NumberStyles.Number, CultureInfo.CurrentCulture, out var value))
+                runtimeEvent.Args[key] = value.ToString("0.####", CultureInfo.InvariantCulture);
     }
 
     private static GameRuntimeResult Success(GameRuntimeState state, string message, GameRuntimeEventType eventType, string targetId)

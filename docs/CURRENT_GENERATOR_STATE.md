@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 153C product/proof separation and outcome-aware qualification hotfix
+Updated by: Goal 154B executable social Runtime lifecycle core closure
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. The recorded human review confirms saved/reopened parameters `2/12/3/5/1`, damage 2, mana `12 → 9`, five ticks of 1, expiry and cached standalone reuse without Unity Editor. Goal154 remains human-unaccepted. Goal154A established 18 discoverable focused contracts and partial Runtime event-truth fixes, but it remains FAILED because generic primitive/evaluator closure, full Runtime lifecycle/rollback matrix, saved-project/cache proof and artifact-scope evidence are not complete.
+The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154 and Goal154A remain historical FAILED foundations and human-unaccepted. Goal154B closes only the executable social Runtime core with 29 genuine behavioral tests, claimed/still-locked outcomes, atomic second-claim rejection, clamps, transactional rollback and checkpoint/full replay. Goal154B is GREEN but remains human-unaccepted; WinForms, real saved-project and standalone closure are explicitly deferred to Goal154C, so no Goal154 manual gate is ready.
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
@@ -134,15 +134,49 @@ goal153cHostReused=true
 goal153cHostRebuilt=false
 goal153cUnityProcessStartCount=0
 goal153cArtifactScopeViolationCount=0
-goal154ImplementationStatus=FAILED
+goal154ImplementationStatus=FAILED historical foundation
 goal154Accepted=false
 goal154AcceptedByHuman=false
 goal154AcceptedByCodex=false
 goal154ManualReviewPerformed=false
 goal154ManualGateReady=false
-goal154FailureReason=Required focused tests and full runtime/workspace/standalone lifecycle proof are absent; GREEN is prohibited.
-gateStatus=goal154_failed_incomplete_vertical_slice
+goal154aImplementationStatus=FAILED historical partial closure
+goal154aAccepted=false
+goal154aAcceptedByHuman=false
+goal154aAcceptedByCodex=false
+goal154aManualReviewPerformed=false
+goal154aManualGateReady=false
+goal154aFocusedTestDiscoveredCount=18
+goal154aFocusedTestPassedCount=18
+goal154bImplementationStatus=GREEN
+goal154bAccepted=false
+goal154bAcceptedByHuman=false
+goal154bAcceptedByCodex=false
+goal154bManualReviewPerformed=false
+goal154bManualGateReady=false
+goal154bBehavioralTestDiscoveredCount=29
+goal154bBehavioralTestPassedCount=29
+goal154CoreRuntimeLifecyclePassed=true
+goal154ClaimedAndStillLockedPassed=true
+goal154AlreadyClaimedAtomic=true
+goal154ClampsPassed=true
+goal154CheckpointReplayPassed=true
+goal154RollbackEventTruthPassed=true
+goal154ArtifactScopeViolationCount=0
+goal154UnityProcessStartCount=0
+goal154StandaloneSmokeInvocationCount=0
+nextProductGoal=goal154c_saved_project_winforms_standalone_social_closure
+gateStatus=goal154b_green_pending_goal154c
 ```
+
+Goal154B preserves the published Goal154A foundation and adds generic social capability primitives,
+selectors, conditional `SKIPPED` outcomes and Runtime effect evaluation. The explicit healer graph
+opens, inspects and closes the dialogue around quest completion and claim. Defaults `0/10/5/10/7`
+produce reputation `0 → 10`, completed quest, `unavailable → available → unavailable`, gold `0 → 7`
+and a true claim flag. Threshold 20 produces truthful `still_locked` with no claim mutation or event.
+The activated package edits only existing faction/quest/dialogue contracts; proof fixtures remain zero
+and default-off hashes are preserved. Goals154/154A/154B remain `accepted=false` and
+`manualGateReady=false` until Goal154C supplies the deferred user workflow and standalone proof.
 
 The read-only real source project was inventoried and copied before any Application
 service opened it. Fresh required HEAD passed both its persisted three-profile state

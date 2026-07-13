@@ -71,7 +71,21 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
             ["runtime.command.equip_item"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
                 GameRuntimeCommand.EquipItem(Arg(step, "itemId"), Arg(step, "slotId"), Arg(step, "inventoryId"))),
             ["runtime.command.change_progression"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
-                GameRuntimeCommand.ChangeProgression(step.TargetId, ParseDouble(Arg(step, "amount"))))
+                GameRuntimeCommand.ChangeProgression(step.TargetId, ParseDouble(Arg(step, "amount")))),
+            ["runtime.command.advance_quest_objective"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.AdvanceQuestObjective(Arg(step, "questId"), Arg(step, "objectiveId", step.TargetId),
+                    ParseDouble(Arg(step, "amount", "1")))),
+            ["runtime.command.fail_quest"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                new GameRuntimeCommand { Type = GameRuntimeCommandType.FailQuest, Id = Arg(step, "questId", step.TargetId) }),
+            ["runtime.command.choose_dialogue_option"] = (package, session, step) => _runtime.ExecuteGameplayCommand(package, session,
+                new GameRuntimeCommand
+                {
+                    Type = GameRuntimeCommandType.ChooseDialogueOption,
+                    Id = Arg(step, "choiceId", step.TargetId),
+                    InventoryId = string.IsNullOrWhiteSpace(Arg(step, "inventoryId")) ? null : Arg(step, "inventoryId")
+                }),
+            ["runtime.command.close_dialogue"] = (package, session, _) => _runtime.ExecuteGameplayCommand(package, session,
+                new GameRuntimeCommand { Type = GameRuntimeCommandType.CloseDialogue })
         };
     }
 
@@ -553,6 +567,10 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
         "runtime.command.take_from_container" => nameof(GameRuntimeCommandType.TakeFromContainer),
         "runtime.command.equip_item" => nameof(GameRuntimeCommandType.EquipItem),
         "runtime.command.change_progression" => nameof(GameRuntimeCommandType.ChangeProgression),
+        "runtime.command.advance_quest_objective" => nameof(GameRuntimeCommandType.AdvanceQuestObjective),
+        "runtime.command.fail_quest" => nameof(GameRuntimeCommandType.FailQuest),
+        "runtime.command.choose_dialogue_option" => nameof(GameRuntimeCommandType.ChooseDialogueOption),
+        "runtime.command.close_dialogue" => nameof(GameRuntimeCommandType.CloseDialogue),
         _ => string.Empty
     };
 
@@ -629,6 +647,7 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
         var state = session.GameplayState;
         return new CanonicalRuntimePlayerCommandLoopSnapshot
         {
+            Status = "EXECUTED",
             StepIndex = step.Index,
             StepId = step.StepId,
             Category = step.Category,
@@ -661,6 +680,13 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
                 .OrderBy(progression => progression.ProgressionId, StringComparer.Ordinal)
                 .Select(progression => progression.ProgressionId + "=" + Format(progression.Amount)
                                        + ":" + (progression.StageId ?? string.Empty))),
+            FactionSummary = string.Join("; ", state.Factions.OrderBy(faction => faction.FactionId, StringComparer.Ordinal)
+                .Select(faction => faction.FactionId + "=" + Format(faction.Reputation) + ":" + faction.RelationKind)),
+            ResourceSummary = string.Join("; ", state.Resources.OrderBy(resource => resource.ResourceId, StringComparer.Ordinal)
+                .ThenBy(resource => resource.Scope, StringComparer.Ordinal)
+                .Select(resource => resource.ResourceId + "@" + resource.Scope + "=" + Format(resource.Amount))),
+            FlagSummary = string.Join("; ", state.Flags.OrderBy(flag => flag.Id, StringComparer.Ordinal)
+                .Select(flag => flag.Id + "=" + flag.Value)),
             CombatSummary = CombatSummary(state, events),
             DiagnosticSummary = events.Count == 0 ? "no events emitted" : "eventCount=" + events.Count,
             ProjectionOnly = false,
@@ -769,6 +795,17 @@ public sealed class CanonicalRuntimePlayerCommandLoopService :
             && gameplay["stats"] is JsonArray stats
             && stats.Count == 0)
             gameplay.Remove("stats");
+        if (node["gameplayEvents"] is JsonArray gameplayEvents)
+        {
+            foreach (var runtimeEvent in gameplayEvents.OfType<JsonObject>())
+            {
+                var eventType = runtimeEvent["type"]?.GetValue<string>();
+                var args = runtimeEvent["args"] as JsonObject;
+                if (eventType is "ResourceChanged" or "FactionReputationChanged"
+                    || eventType == "OutputApplied" && args?.ContainsKey("flagId") == true)
+                    runtimeEvent["args"] = new JsonObject();
+            }
+        }
         return HashText(node.ToJsonString(StableJsonOptions));
     }
 

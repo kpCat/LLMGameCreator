@@ -1,0 +1,40 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154b-executable-social-runtime-lifecycle-core-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: bcfde451cf2dfac8571531e640bc9bcb2d12b4ae
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- продолжай от опубликованного FAILED Goal154A, не откатывай полезную основу;
+- Goal153/153A/153B/153C уже приняты человеком;
+- Goal154/154A/154B пока НЕ приняты, manual gate не готов;
+- эта задача закрывает только executable Runtime core; WinForms, real-project и standalone честно
+  отложены в Goal154C;
+- существующие 18 Goal154A string/reflection tests НЕ считаются lifecycle proof;
+- создай минимум 16 настоящих behavioral tests, которые вызывают реальные composition/planner/Runtime
+  services и проверяют state/events/checkpoint/replay;
+- добавь social primitives, selectors, canonical handlers и effect evaluator;
+- явно открывай dialogue/healer до проверки и claim;
+- default 0/10/5/10/7: rep 0→10, quest completed, choice unlock, gold 0→7, flag true, repeat unavailable;
+- threshold 20: truthful still_locked, no gold/flag mutation;
+- prove already-claimed atomicity, clamps, quest/dialogue rollback and invariant event args;
+- Unity Editor invocation budget = 0; standalone smoke budget = 0;
+- не запускай full suite, historical closure или all-ProductSmoke;
+- соблюдай command budget и не повторяй неизменённые команды;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи behavioral test count, primitives/selectors, claimed/still_locked/second-claim,
+clamps, rollback, checkpoint/replay, package diff, artifact scope, final SHA, push,
+HEAD == origin/main и clean worktree.
