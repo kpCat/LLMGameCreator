@@ -66,6 +66,7 @@ public sealed class FeatureModuleLibraryValidator
                 }
             }
             referencesValid &= ValidateOwnedReferences(module, diagnostics);
+            referencesValid &= FeatureModuleParameterConstraintEvaluator.ValidateDefinitions(module, byId, diagnostics);
         }
 
         var result = new FeatureModuleLibraryValidationResult

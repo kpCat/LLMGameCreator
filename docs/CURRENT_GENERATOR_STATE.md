@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 153A parameter-domain, turn-binding, event-atomicity and lethal-status hotfix
+Updated by: Goal 153B declarative parameter constraints, domain integrity and Goal quality gate hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals152/152A/152C before Goal153 implementation. Goal153A closes the independent P1 audit findings and is GREEN. Goal153 and Goal153A are manual-gate ready, remain human-unaccepted, and share one combined review:
+The owner accepted Goals152/152A/152C before Goal153 implementation. Goal153B closes the independent declarative-constraint and resource-domain audit findings. Goals153, 153A and 153B are manual-gate ready, remain human-unaccepted, and share one combined review after independent Goal153B audit:
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
@@ -105,7 +105,17 @@ goal153aHostCacheReused=true
 goal153aHostRebuilt=false
 goal153aUnityProcessStartCount=0
 goal153aHiddenSmokePassed=true
-gateStatus=perform_goal153_combined_human_gate required
+goal153bAccepted=false
+goal153bAcceptedByHuman=false
+goal153bAcceptedByCodex=false
+goal153bManualReviewPerformed=false
+goal153bImplementationStatus=GREEN
+goal153bManualGateReady=true
+goal153bDeclarativeConstraintFingerprinted=true
+goal153bResourceDomainValidation=true
+goal153bUnityProcessStartCount=0
+goal153bHiddenSmokePassed=true
+gateStatus=independent_goal153b_audit_then_combined_goal153_family_human_gate required
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -137,8 +147,11 @@ plan-only proof with 1000 target ticks and 2999 unique expected-participant-boun
 Expected-turn mismatch, late ability failure, multi-status failure and canonical failed snapshots are
 state/event atomic. Lethal status damage now resolves defeat plus win/loss/end before any turn advance.
 The training target health 1001001 covers the full allowed damage/duration domain, and mana cost above
-starting mana is rejected causally at parameter binding. Goal153/Goal153A remain unaccepted; the next
-action is the short combined manual gate.
+starting mana is rejected causally at parameter binding. Goal153B moves that relation into module-owned
+declarative data, fingerprints it, expands mana capacity to the declared authoring maximum and rejects
+out-of-domain participant resource amounts before Runtime. The training target capacity remains explicit
+first-vertical-slice data. Goals153/Goal153A/Goal153B remain unaccepted; the next action is independent
+Goal153B audit followed by the short combined manual gate.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

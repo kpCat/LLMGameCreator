@@ -178,3 +178,6 @@ ignored EndTurn target binding, leaked success events after rollback, missing le
 encounter resolution, undersized qualification health and non-causal mana configuration.
 The remaining release risk is manual usability/readability only and is covered by the combined
 Goal153/Goal153A gate; human acceptance is not inferred from automated GREEN.
+
+Goal153B removes the remaining module-specific parameter relation, makes the declared parameter domain
+and participant resource domain causal before Runtime, and requires independent audit before the combined family gate.

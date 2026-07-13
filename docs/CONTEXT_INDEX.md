@@ -20,6 +20,8 @@ For any generator/Codex task:
 
 For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` before any Unity invocation.
 
+Before implementing or auditing any Codex Goal, read `docs/GOAL_DESIGN_QUALITY_POLICY.md` for the mandatory design review and pre-commit self-audit.
+
 For Goal 029 specifically, read:
 
 1. `AGENTS.md`
@@ -119,7 +121,7 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `perform_goal153_combined_human_gate required`.
+Current gate token: `independent_goal153b_audit_then_combined_goal153_family_human_gate required`.
 Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
@@ -133,7 +135,9 @@ standalone self-check, readable navigation, framebuffer refresh and cache reuse 
 Goal153 now adds three default-off data-driven ability, mana and turn-status FeatureModules while
 remaining `accepted=false`; Goal152B and Goal150F historical failures remain debt, not the active gate.
 Goal153A closes the duration-domain, expected-turn binding, rollback event truth and lethal-status
-audit findings. Goal153 and Goal153A remain human-unaccepted and share one combined manual gate.
+audit findings. Goal153B replaces the remaining module-specific relation with a module-owned declarative
+constraint and closes the mana resource-domain audit. Goals153, 153A and 153B remain human-unaccepted
+pending independent Goal153B audit and one combined manual gate.
 
 ## Full Generator Source-Of-Truth Docs
 

@@ -16,6 +16,7 @@ public static class FeatureModulePackageMutationTargetKinds
     public const string AbilityMetadataNumeric = "ability_metadata_numeric";
     public const string ProgressionStageRequiredAmount = "progression_stage_required_amount";
     public const string DefinitionUpsert = "definition_upsert";
+    public const string DefinitionNumericProperty = "definition_numeric_property";
     public const string EncounterParticipantAbilityReferenceUpsert = "encounter_participant_ability_reference_upsert";
     public const string EncounterParticipantResourceUpsert = "encounter_participant_resource_upsert";
     public const string EncounterParticipantUpsert = "encounter_participant_upsert";
@@ -30,7 +31,7 @@ public static class FeatureModulePackageMutationTargetKinds
     {
         ItemMetadataNumeric, StatDefaultValue, EncounterParticipantStatAmount,
         AbilityMetadataString, AbilityMetadataNumeric, ProgressionStageRequiredAmount,
-        DefinitionUpsert, EncounterParticipantAbilityReferenceUpsert, EncounterParticipantResourceUpsert, EncounterParticipantUpsert,
+        DefinitionUpsert, DefinitionNumericProperty, EncounterParticipantAbilityReferenceUpsert, EncounterParticipantResourceUpsert, EncounterParticipantUpsert,
         AbilityCostUpsert, AbilityEffectUpsert, AbilityEffectAmount, EncounterParticipantResourceAmount,
         AbilityCostAmount, StatusEffectAmount
     };
@@ -66,6 +67,7 @@ public sealed class FeatureModulePackageMutationService
                 (root, operation) => ApplyMetadata(root, operation, "abilities", "Ability", true),
             [FeatureModulePackageMutationTargetKinds.ProgressionStageRequiredAmount] = ApplyProgressionStageRequiredAmount
             , [FeatureModulePackageMutationTargetKinds.DefinitionUpsert] = ApplyDefinitionUpsert
+            , [FeatureModulePackageMutationTargetKinds.DefinitionNumericProperty] = ApplyDefinitionNumericProperty
             , [FeatureModulePackageMutationTargetKinds.EncounterParticipantAbilityReferenceUpsert] = ApplyParticipantAbilityUpsert
             , [FeatureModulePackageMutationTargetKinds.EncounterParticipantResourceUpsert] = ApplyParticipantResourceUpsert
             , [FeatureModulePackageMutationTargetKinds.EncounterParticipantUpsert] = ApplyParticipantUpsert
@@ -220,6 +222,28 @@ public sealed class FeatureModulePackageMutationService
             return Entry(operation, actual, true, true, string.Empty);
         }
         catch (Exception exception) when (exception is InvalidOperationException or JsonException)
+        {
+            return Entry(operation, actual, false, false, exception.Message);
+        }
+    }
+
+    private static ProductLineRuntimeVariantMutationAuditEntry ApplyDefinitionNumericProperty(
+        JsonObject root,
+        ProductLineRuntimeVariantMutationOperation operation)
+    {
+        var actual = string.Empty;
+        try
+        {
+            var parts = Parts(operation, 3, "Definition numeric property target must be collection|id|property.");
+            if (parts[0] is not ("abilities" or "resources" or "statuses"))
+                throw new InvalidOperationException("Definition numeric property collection is unsupported: " + parts[0]);
+            if (string.IsNullOrWhiteSpace(parts[2]))
+                throw new InvalidOperationException("Definition numeric property name is required.");
+            var definition = ExactlyOne(Collection(root, parts[0]), parts[1], "Definition");
+            actual = SetNumericProperty(definition, parts[2], operation);
+            return Entry(operation, actual, true, true, string.Empty);
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or FormatException)
         {
             return Entry(operation, actual, false, false, exception.Message);
         }

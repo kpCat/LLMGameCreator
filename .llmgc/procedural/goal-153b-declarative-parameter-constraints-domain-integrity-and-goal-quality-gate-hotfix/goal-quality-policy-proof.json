@@ -1,0 +1,6 @@
+﻿{
+    "status":  "GREEN",
+    "policy":  "docs/GOAL_DESIGN_QUALITY_POLICY.md",
+    "linkedFromAgents":  true,
+    "linkedFromContextIndex":  true
+}

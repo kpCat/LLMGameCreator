@@ -51,6 +51,15 @@
       "runtimeDimension": "active_ability_training_target"
     },
     {
+      "operationId": "active.02a_training_target_health_capacity",
+      "targetKind": "definition_numeric_property",
+      "targetId": "resources|resource/health|maxValue",
+      "jsonPath": "game.resources[id=resource/health].maxValue",
+      "expectedValue": "30",
+      "newValue": "1001001",
+      "runtimeDimension": "training_target_health_capacity"
+    },
+    {
       "operationId": "active.10_arcane_impulse_damage",
       "targetKind": "ability_effect_amount",
       "targetId": "ability/arcane_impulse|damage_resource|resource/health",
@@ -133,5 +142,5 @@
       "expectedRuntimeEffects": ["turn_advanced"]
     }
   ],
-  "sourceLineage": {"goalId":"goal_153_active_abilities_mana_turn_status_featuremodules_runtime_standalone_vertical_slice","catalogPath":"catalogs/feature-modules/optional/combat-active-ability-loadout.featuremodule.json","recipeId":"active_ability_loadout","variantKind":"active_ability","candidateId":"minimal-map-game-active-ability","operationIds":["active.00_arcane_impulse_definition","active.01_player_ability_reference","active.02_training_target","active.10_arcane_impulse_damage"]}
+  "sourceLineage": {"goalId":"goal_153_active_abilities_mana_turn_status_featuremodules_runtime_standalone_vertical_slice","catalogPath":"catalogs/feature-modules/optional/combat-active-ability-loadout.featuremodule.json","recipeId":"active_ability_loadout","variantKind":"active_ability","candidateId":"minimal-map-game-active-ability","operationIds":["active.00_arcane_impulse_definition","active.01_player_ability_reference","active.02_training_target","active.02a_training_target_health_capacity","active.10_arcane_impulse_damage"]}
 }

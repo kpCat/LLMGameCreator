@@ -66,6 +66,7 @@ public sealed class FeatureModuleLibraryFingerprintService
         RuntimeEffectContracts = module.RuntimeEffectContracts.OrderBy(item => item.EffectId, StringComparer.Ordinal)
             .Select(item => item with { SourceOperationIds = Sort(item.SourceOperationIds) }).ToList(),
         EffectiveValueBindings = module.EffectiveValueBindings.OrderBy(item => item.BindingId, StringComparer.Ordinal).ToList(),
+        ParameterConstraints = module.ParameterConstraints.OrderBy(item => item.ConstraintId, StringComparer.Ordinal).ToList(),
         ParameterDefinitions = module.ParameterDefinitions.OrderBy(item => item.ParameterId, StringComparer.Ordinal)
             .Select(item => item with
             {

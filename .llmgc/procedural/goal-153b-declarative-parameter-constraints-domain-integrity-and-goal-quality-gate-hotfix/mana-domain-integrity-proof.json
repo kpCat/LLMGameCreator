@@ -1,0 +1,13 @@
+﻿{
+    "costDomain":  "1..1000",
+    "participantDomainValidatedBeforeRuntime":  true,
+    "validBoundaries":  [
+                            "1/1",
+                            "12/3",
+                            "1000/1000"
+                        ],
+    "startingManaDomain":  "0..1000",
+    "invalidBoundary":  "2/3",
+    "status":  "GREEN",
+    "manaCapacity":  1000
+}

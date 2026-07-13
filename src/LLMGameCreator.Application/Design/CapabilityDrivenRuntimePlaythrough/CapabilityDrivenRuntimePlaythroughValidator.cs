@@ -21,6 +21,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         ArgumentNullException.ThrowIfNull(selectedModules);
         ArgumentNullException.ThrowIfNull(package);
         var diagnostics = new List<string>();
+        ValidateParticipantResourceDomains(package, diagnostics);
         var originalContracts = selectedModules.SelectMany(module => module.RuntimePlaythroughContracts).ToList();
         var replacements = originalContracts.SelectMany(contract => contract.ReplacesActionIds
                 .Select(actionId => (Replacement: contract, ActionId: actionId)))
@@ -257,6 +258,36 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             if (!decimal.TryParse(perPoint, System.Globalization.NumberStyles.Number,
                     System.Globalization.CultureInfo.InvariantCulture, out var multiplier) || multiplier < 0)
                 diagnostics.Add("invalid stat multiplier rejected: " + ability.Id + ":" + perPoint);
+        }
+    }
+
+    private static void ValidateParticipantResourceDomains(GamePackageDefinition package, List<string> diagnostics)
+    {
+        foreach (var encounter in package.Game.Encounters)
+        foreach (var participant in encounter.Participants)
+        foreach (var resource in participant.Resources.Where(item => item.Kind == "resource"))
+        {
+            var definitions = package.Game.Resources.Where(definition => definition.Id == resource.Id).ToList();
+            if (definitions.Count != 1)
+            {
+                diagnostics.Add("participant resource definition rejected: " + encounter.Id + ":" + participant.Id + ":"
+                                + resource.Id + ":matches=" + definitions.Count);
+                continue;
+            }
+
+            if (!double.IsFinite(resource.Amount))
+            {
+                diagnostics.Add("participant resource amount must be finite: " + encounter.Id + ":" + participant.Id + ":" + resource.Id);
+                continue;
+            }
+
+            var definition = definitions[0];
+            if (definition.MinValue is { } minimum && resource.Amount < minimum)
+                diagnostics.Add("participant resource amount below minimum rejected: " + encounter.Id + ":" + participant.Id + ":"
+                                + resource.Id + ":amount=" + resource.Amount + ":minimum=" + minimum);
+            if (definition.MaxValue is { } maximum && resource.Amount > maximum)
+                diagnostics.Add("participant resource amount above maximum rejected: " + encounter.Id + ":" + participant.Id + ":"
+                                + resource.Id + ":amount=" + resource.Amount + ":maximum=" + maximum);
         }
     }
 }

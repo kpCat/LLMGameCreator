@@ -1,7 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 153A parameter-domain/turn-binding/event-atomicity/lethal-status hotfix: duration 1/2/5 full Runtime/replay and duration 1000 plan-only expansion are GREEN; all generated EndTurn actions bind the expected participant, failed operations leak no committed-success events, lethal ticks resolve encounters, and the cached hidden smoke uses zero Unity Editor starts. Goal153/Goal153A remain `accepted=false`; `perform_goal153_combined_human_gate required` is next.
-- Goal 153 active abilities/mana/turn-status vertical slice: Goals152/152A/152C are accepted by human at `ac97859c8de861641e07f886250d053b5330fbe9`; three default-off data-driven modules add five typed parameters, generic deterministic definition upserts, transactional status-definition ticks, checkpoint/replay and cache-only standalone facts. Goal153 remains `accepted=false` and is reviewed together with Goal153A.
+- Goal 153B declarative constraints/domain-integrity hotfix: the mana relation is module data evaluated by a generic six-operator constraint evaluator; fingerprints include constraints, resource amounts are rejected outside declared domains before Runtime, and the qualification proof derives maxima from declarations. Goals153/153A/153B are GREEN but `accepted=false`; `independent_goal153b_audit_then_combined_goal153_family_human_gate required` is next.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document

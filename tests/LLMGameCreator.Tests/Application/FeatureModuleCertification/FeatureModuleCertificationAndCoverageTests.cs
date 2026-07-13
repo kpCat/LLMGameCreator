@@ -71,6 +71,7 @@ public sealed class FeatureModuleCertificationAndCoverageTests
     {
         var root = FindRoot();
         var library = Load(root);
+        var certifiedModuleCount = library.Catalog.Modules.Count(module => module.Selectable && !module.Required);
         var cacheRoot = Temp("cache");
         var executionRoot = Temp("execution");
         try
@@ -82,21 +83,21 @@ public sealed class FeatureModuleCertificationAndCoverageTests
             var first = service.Certify(root, library, baseSha, executionRoot);
             var second = service.Certify(root, library, baseSha, executionRoot);
             Assert.Equal("GREEN", first.Status);
-            Assert.Equal(6, first.ExecutedCount);
+            Assert.Equal(certifiedModuleCount, first.ExecutedCount);
             Assert.Equal(0, first.ReusedCount);
             Assert.Equal(0, second.ExecutedCount);
-            Assert.Equal(6, second.ReusedCount);
+            Assert.Equal(certifiedModuleCount, second.ReusedCount);
 
             File.WriteAllText(cache.PathForModule(first.Entries[0].ModuleId), "{corrupt");
             var afterCorruption = service.Certify(root, library, baseSha, executionRoot);
             Assert.Equal(1, afterCorruption.ExecutedCount);
-            Assert.Equal(5, afterCorruption.ReusedCount);
+            Assert.Equal(certifiedModuleCount - 1, afterCorruption.ReusedCount);
             Assert.Equal(1, afterCorruption.InvalidatedCount);
             Assert.True(afterCorruption.CorruptCacheRejected);
 
             var changedContract = service.Certify(root, library, baseSha, executionRoot, "product_line_runtime_qualifier_v2");
-            Assert.Equal(6, changedContract.ExecutedCount);
-            Assert.Equal(6, changedContract.InvalidatedCount);
+            Assert.Equal(certifiedModuleCount, changedContract.ExecutedCount);
+            Assert.Equal(certifiedModuleCount, changedContract.InvalidatedCount);
             Assert.All(changedContract.Entries, entry => Assert.Equal("GREEN", entry.Status));
         }
         finally { Delete(cacheRoot); Delete(executionRoot); }
@@ -202,7 +203,16 @@ public sealed class FeatureModuleCertificationAndCoverageTests
 
             var changedBase = library.Catalog.Modules.Single(module => module.ModuleId == SyntheticBaseId) with
             {
-                ModuleVersion = "1.0.1"
+                ParameterConstraints = [new FeatureModuleParameterConstraint
+                {
+                    ConstraintId = "synthetic.certification_constraint",
+                    Kind = FeatureModuleParameterConstraintKinds.NumericCompare,
+                    LeftExpression = "${parameter:healingPotionOutput}",
+                    Operator = "<=",
+                    RightExpression = "100",
+                    DiagnosticCode = "synthetic.certification_constraint",
+                    Message = "Synthetic certification constraint."
+                }]
             };
             var changedCatalog = library.Catalog with
             {

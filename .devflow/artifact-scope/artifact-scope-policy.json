@@ -5010,6 +5010,56 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-153b-declarative-parameter-constraints-domain-integrity-and-goal-quality-gate-hotfix",
+      "allowedPaths": [
+        "AGENTS.md",
+        "docs/GOAL_DESIGN_QUALITY_POLICY.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/active-abilities-mana-turn-status-featuremodules.md",
+        "docs/manual-acceptance/goal153a-parameter-domain-turn-binding-event-atomicity.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal153b-declarative-constraints-domain-integrity.ps1",
+        ".devflow/scripts/run-goal153b-declarative-constraints-domain-integrity.cmd",
+        "catalogs/feature-modules/optional/combat-active-ability-loadout.featuremodule.json",
+        "catalogs/feature-modules/optional/magic-mana-spellcasting.featuremodule.json",
+        "src/LLMGameCreator.Application/Design/CapabilityDrivenRuntimePlaythrough/CapabilityDrivenRuntimePlaythroughValidator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryFingerprintService.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryValidator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterBindingService.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterConstraintEvaluator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterModels.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleCompositionModels.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModulePackageMutationService.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal153B/Goal153BDeclarativeParameterConstraintTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal153B/Goal153BManaDomainIntegrityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal153B/Goal153BArchitecturePolicyTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal153A/Goal153AParameterizedLifecyclePlannerTests.cs",
+        "tests/LLMGameCreator.Tests/Application/FeatureModuleCertification/FeatureModuleCertificationAndCoverageTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal153B/",
+        "docs/agent-tasks/goal-153b-declarative-parameter-constraints-domain-integrity-and-goal-quality-gate-hotfix/",
+        ".llmgc/procedural/goal-153b-declarative-parameter-constraints-domain-integrity-and-goal-quality-gate-hotfix/",
+        ".llmgc/exports/goal-153b-declarative-parameter-constraints-domain-integrity-and-goal-quality-gate-hotfix/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

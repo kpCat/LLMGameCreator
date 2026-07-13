@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "goal153_real_project_lifecycle_run_v1",
+  "status": "GREEN",
+  "configuredValues": {
+    "abilityBaseDamage": 2,
+    "startingMana": 12,
+    "abilityManaCost": 3,
+    "statusDurationTurns": 2,
+    "statusTickDamage": 1
+  },
+  "firstBuild": {
+    "CompositionPackageSha256": "cb675878baebc091a9e417823bd9f96ef81e41c645d6fb2eba96bed0f02ef5c4",
+    "FinalStateHash": "6666436738e7118a69b91601508336d929fd2030d97fbb453216904c128d9081",
+    "AbilityDirectDamage": 2,
+    "ManaBefore": 12,
+    "ManaSpent": 3,
+    "ManaRemaining": 9,
+    "StatusTickDamage": 1,
+    "StatusExpired": true,
+    "CheckpointReloadPassed": true,
+    "FullReplayEquivalent": true,
+    "PlannedActionCount": 28
+  },
+  "secondBuild": {
+    "CompositionPackageSha256": "27d5b25d6587f06cb678e3b50685cfee72747379021015813a349b213aa12300",
+    "FinalStateHash": "64bb2c88dde99c9a017f801fa3b3c405a2c4c7c1bf4230b8f7a9423ec438d1b2",
+    "AbilityDirectDamage": 3
+  },
+  "packageHashChanged": true,
+  "finalHashChanged": true,
+  "sourceProjectByteIdentical": true
+}

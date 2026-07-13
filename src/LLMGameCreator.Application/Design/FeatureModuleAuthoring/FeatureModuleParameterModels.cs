@@ -32,6 +32,35 @@ public static class FeatureModuleEffectiveValueBindingTargetKinds
     };
 }
 
+public static class FeatureModuleParameterConstraintKinds
+{
+    public const string NumericCompare = "numeric_compare";
+
+    public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
+    {
+        NumericCompare
+    };
+}
+
+public static class FeatureModuleParameterConstraintOperators
+{
+    public static IReadOnlySet<string> Supported { get; } = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "<", "<=", "==", "!=", ">=", ">"
+    };
+}
+
+public sealed record FeatureModuleParameterConstraint
+{
+    public string ConstraintId { get; init; } = string.Empty;
+    public string Kind { get; init; } = string.Empty;
+    public string LeftExpression { get; init; } = string.Empty;
+    public string Operator { get; init; } = string.Empty;
+    public string RightExpression { get; init; } = string.Empty;
+    public string DiagnosticCode { get; init; } = string.Empty;
+    public string Message { get; init; } = string.Empty;
+}
+
 public sealed record FeatureModuleEffectiveValueBinding
 {
     public string BindingId { get; init; } = string.Empty;

@@ -1,0 +1,13 @@
+﻿{
+    "diagnosticsContainValues":  true,
+    "status":  "GREEN",
+    "operators":  [
+                      "\u003c",
+                      "\u003c=",
+                      "==",
+                      "!=",
+                      "\u003e=",
+                      "\u003e"
+                  ],
+    "mutationAppliedOnFailure":  false
+}

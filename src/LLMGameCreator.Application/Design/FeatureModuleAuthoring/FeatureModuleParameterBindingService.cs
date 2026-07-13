@@ -7,10 +7,14 @@ namespace LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 public sealed class FeatureModuleParameterBindingService
 {
     private readonly FeatureModuleParameterValidator _validator;
+    private readonly FeatureModuleParameterConstraintEvaluator _constraints;
 
-    public FeatureModuleParameterBindingService(FeatureModuleParameterValidator? validator = null)
+    public FeatureModuleParameterBindingService(
+        FeatureModuleParameterValidator? validator = null,
+        FeatureModuleParameterConstraintEvaluator? constraints = null)
     {
         _validator = validator ?? new FeatureModuleParameterValidator();
+        _constraints = constraints ?? new FeatureModuleParameterConstraintEvaluator();
     }
 
     public FeatureModuleParameterBindingResult Bind(
@@ -20,12 +24,12 @@ public sealed class FeatureModuleParameterBindingService
     {
         var validation = _validator.Validate(catalog, selectedModuleIds, suppliedValues);
         if (!validation.Passed) return new FeatureModuleParameterBindingResult { Diagnostics = validation.Diagnostics };
-        var relationDiagnostics = ValidateParameterRelations(validation.EffectiveValues);
-        if (relationDiagnostics.Count > 0)
+        var constraintDiagnostics = _constraints.Evaluate(catalog, selectedModuleIds, validation.EffectiveValues);
+        if (constraintDiagnostics.Count > 0)
             return new FeatureModuleParameterBindingResult
             {
                 EffectiveParameterValues = validation.EffectiveValues,
-                Diagnostics = relationDiagnostics
+                Diagnostics = constraintDiagnostics
             };
         var selectedSet = selectedModuleIds.ToHashSet(StringComparer.Ordinal);
         var selectedModules = catalog.Modules.Where(module => selectedSet.Contains(module.ModuleId)).ToList();
@@ -244,25 +248,4 @@ public sealed class FeatureModuleParameterBindingService
     private static string Format(decimal value) =>
         value.ToString("0.############################", CultureInfo.InvariantCulture);
 
-    private static IReadOnlyList<string> ValidateParameterRelations(
-        IReadOnlyList<FeatureModuleResolvedParameterValue> values)
-    {
-        const string moduleId = "feature.magic.mana_spellcasting";
-        const string startingManaId = "startingMana";
-        const string abilityManaCostId = "abilityManaCost";
-        var startingMana = values.SingleOrDefault(value =>
-            value.ModuleId == moduleId && value.ParameterId == startingManaId);
-        var abilityManaCost = values.SingleOrDefault(value =>
-            value.ModuleId == moduleId && value.ParameterId == abilityManaCostId);
-        if (startingMana is null || abilityManaCost is null) return [];
-        var startingValue = startingMana.Value.GetDecimal();
-        var costValue = abilityManaCost.Value.GetDecimal();
-        if (costValue <= startingValue) return [];
-        return
-        [
-            "parameter relation rejected: " + moduleId + "." + abilityManaCostId + "="
-            + Format(costValue) + " must be <= " + moduleId + "." + startingManaId + "="
-            + Format(startingValue)
-        ];
-    }
 }

@@ -101,7 +101,13 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         var targetHealth = fixture.Package.Game.Encounters.Single(item => item.Id == "encounter/goblin_duel")
             .Participants.Single(item => item.Id == "goal153_target").Resources
             .Single(item => item.Id == "resource/health").Amount;
-        Assert.True(targetHealth > 1000 + (1000 * 1000));
+        var declarationLibrary = new FeatureModuleLibraryLoader().Load(Path.Combine(FindRoot(), "catalogs", "feature-modules"));
+        decimal Maximum(string moduleId, string parameterId) => declarationLibrary.Catalog.Modules.Single(module => module.ModuleId == moduleId)
+            .ParameterDefinitions.Single(parameter => parameter.ParameterId == parameterId).Maximum!.Value;
+        var declaredMaximumDamage = Maximum(Goal153Ids[0], "abilityBaseDamage");
+        var declaredMaximumTickDamage = Maximum(Goal153Ids[2], "statusTickDamage");
+        var declaredMaximumDuration = Maximum(Goal153Ids[2], "statusDurationTurns");
+        Assert.True((decimal)targetHealth > checked(declaredMaximumDamage + checked(declaredMaximumTickDamage * declaredMaximumDuration)));
         var plan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(fixture.Modules, fixture.Package);
         var result = Qualify(fixture, plan, "high-damage");
         Assert.True(result.FinalReplay.Passed, string.Join("; ", result.FinalReplay.Diagnostics));

@@ -73,6 +73,10 @@ Runtime/Player исполняет GamePackage без LLM.
 
 ## Документы, которые нужно читать перед крупными задачами
 
+Для проектирования и аудита Goal:
+
+* docs/GOAL_DESIGN_QUALITY_POLICY.md
+
 Для архитектурных задач:
 
 * docs/PROJECT_VISION.md

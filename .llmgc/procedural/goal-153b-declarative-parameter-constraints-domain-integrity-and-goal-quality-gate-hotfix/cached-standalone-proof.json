@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "goal153a_cached_standalone_proof_v1",
+  "status": "GREEN",
+  "HostCacheKey": "6af4d5eb5b42f956110555b58fb4e276",
+  "HostReused": true,
+  "HostRebuilt": false,
+  "LaunchSmokePassed": true,
+  "SelfCheckTotalCount": 5,
+  "SelfCheckPassedCount": 5,
+  "FrameCount": 28,
+  "unityProcessStartCount": 0,
+  "humanFacts": {
+    "abilityDamage": 3,
+    "manaStart": 12,
+    "manaCost": 3,
+    "manaRemaining": 9,
+    "tickDamage": 1,
+    "configuredDuration": 2,
+    "statusExpired": true
+  }
+}

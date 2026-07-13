@@ -1,13 +1,13 @@
 # Active abilities, mana and turn-status FeatureModules
 
-Status: automated implementation GREEN and combined Goal153/Goal153A manual gate ready; neither Goal is accepted
+Status: automated implementation GREEN and combined Goal153/Goal153A/Goal153B manual gate ready; no Goal is accepted
 Accepted: false
 Accepted by human: false
 Accepted by Codex: false
 Manual review performed: false
 
 The current review is the combined gate in
-`docs/manual-acceptance/goal153a-parameter-domain-turn-binding-event-atomicity.md`.
+`docs/manual-acceptance/goal153a-parameter-domain-turn-binding-event-atomicity.md` after independent Goal153B audit.
 
 Superseded Goal153-only checklist:
 
