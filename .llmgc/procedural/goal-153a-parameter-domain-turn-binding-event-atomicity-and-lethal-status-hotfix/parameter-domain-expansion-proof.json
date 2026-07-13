@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "goal153a_parameter_domain_expansion_proof_v1",
+  "status": "GREEN",
+  "fullQualification": [
+    {
+      "duration": 1,
+      "fullQualification": true,
+      "plannedActionCount": 18,
+      "generatedEndTurnCount": 2,
+      "targetTickCount": 1,
+      "uniqueActionIds": true,
+      "allExpectedParticipantsBound": true,
+      "ActionPlanSignature": "221356b99ba1cfd4d4d55238d84feda0db566ed8df5fd913a7ab9628680e8bf3",
+      "CurrentStateHash": "18292d3a810e78904c36dec92f880363da5bc6caf5e616265b5aff101f247ec8"
+    },
+    {
+      "duration": 2,
+      "fullQualification": true,
+      "plannedActionCount": 21,
+      "generatedEndTurnCount": 5,
+      "targetTickCount": 2,
+      "uniqueActionIds": true,
+      "allExpectedParticipantsBound": true,
+      "ActionPlanSignature": "6274223ba7b0e301f23188f057518029743e79ea2ea74b07d97eb3ce6149981d",
+      "CurrentStateHash": "0ba8d12c9bde590e98c87e0766e72f87f938c62124bec431356ac40cc6e3bd4b"
+    },
+    {
+      "duration": 5,
+      "fullQualification": true,
+      "plannedActionCount": 30,
+      "generatedEndTurnCount": 14,
+      "targetTickCount": 5,
+      "uniqueActionIds": true,
+      "allExpectedParticipantsBound": true,
+      "ActionPlanSignature": "4fef073e4f30ec69d31f4e1357d68f127380e656cf7c79e74e4e70c9c1e4209e",
+      "CurrentStateHash": "ba18cbea83506c5bda64ee6826e2ddfcd6cd3f7fead9690539f9c47dada71441"
+    }
+  ],
+  "planOnly": {
+    "duration": 1000,
+    "executed": false,
+    "plannedActionCount": 3015,
+    "generatedEndTurnCount": 2999,
+    "targetTickCount": 1000,
+    "uniqueActionIds": true,
+    "allExpectedParticipantsBound": true,
+    "ActionPlanSignature": "57628b2f7390c18711e046fa937e2b0c14829424bc0559a510056732fd01e304"
+  },
+  "trainingTargetHealth": 1001001
+}

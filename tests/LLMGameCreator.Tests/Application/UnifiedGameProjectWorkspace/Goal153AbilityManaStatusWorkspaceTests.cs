@@ -98,6 +98,35 @@ public sealed class Goal153AbilityManaStatusWorkspaceTests
                 Assert.Equal(standalone.SelfCheckTotalCount, standalone.SelfCheckPassedCount);
                 Assert.True(standalone.FrameCount >= secondBuild.RuntimeFrames.Count);
                 Assert.Empty(System.Diagnostics.Process.GetProcessesByName("Unity"));
+                var goal153aRoot = Environment.GetEnvironmentVariable("LLMGC_GOAL153A_EVIDENCE_ROOT");
+                if (!string.IsNullOrWhiteSpace(goal153aRoot))
+                {
+                    Directory.CreateDirectory(goal153aRoot);
+                    File.WriteAllText(Path.Combine(goal153aRoot, "cached-standalone-proof.json"),
+                        JsonSerializer.Serialize(new
+                        {
+                            schemaVersion = "goal153a_cached_standalone_proof_v1",
+                            status = "GREEN",
+                            standalone.HostCacheKey,
+                            standalone.HostReused,
+                            standalone.HostRebuilt,
+                            standalone.LaunchSmokePassed,
+                            standalone.SelfCheckTotalCount,
+                            standalone.SelfCheckPassedCount,
+                            standalone.FrameCount,
+                            unityProcessStartCount = 0,
+                            humanFacts = new
+                            {
+                                abilityDamage = secondBuild.AbilityDirectDamage,
+                                manaStart = secondBuild.ManaBefore,
+                                manaCost = secondBuild.ManaSpent,
+                                manaRemaining = secondBuild.ManaRemaining,
+                                tickDamage = secondBuild.StatusTickDamage,
+                                configuredDuration = 2,
+                                statusExpired = secondBuild.StatusExpired
+                            }
+                        }, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine);
+                }
             }
             Assert.Equal(sourceBefore, TreeHash(source));
         }

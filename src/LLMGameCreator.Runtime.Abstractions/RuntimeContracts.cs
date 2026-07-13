@@ -538,7 +538,7 @@ public interface IEncounterRuntimeService
     GameRuntimeResult StartEncounter(GamePackageDefinition package, GameRuntimeState state, string encounterId, int? seed = null);
     GameRuntimeResult UseAbility(GamePackageDefinition package, GameRuntimeState state, string abilityId, string sourceParticipantId, string? targetParticipantId = null);
     GameRuntimeResult BasicAttack(GamePackageDefinition package, GameRuntimeState state, string sourceParticipantId, string? targetParticipantId = null);
-    GameRuntimeResult EndTurn(GamePackageDefinition package, GameRuntimeState state);
+    GameRuntimeResult EndTurn(GamePackageDefinition package, GameRuntimeState state, string? expectedParticipantId = null);
     GameRuntimeResult FleeEncounter(GamePackageDefinition package, GameRuntimeState state);
     GameRuntimeResult ResolveEncounter(GamePackageDefinition package, GameRuntimeState state);
 }

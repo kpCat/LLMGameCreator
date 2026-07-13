@@ -172,3 +172,9 @@ Goal153 closes the immediate active-ability/mana/turn-status Runtime gap with ge
 effect/cost/definition contracts. Remaining risk: future status stacking policy and richer
 effect kinds must extend the same transactional replay-stable seam; they must not add
 module/status/ability ID switches or Unity-owned gameplay truth.
+
+Goal153A closes the P1 correctness risks found after Goal153: fixed two-tick qualification,
+ignored EndTurn target binding, leaked success events after rollback, missing lethal-status
+encounter resolution, undersized qualification health and non-causal mana configuration.
+The remaining release risk is manual usability/readability only and is covered by the combined
+Goal153/Goal153A gate; human acceptance is not inferred from automated GREEN.

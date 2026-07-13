@@ -6,6 +6,14 @@ namespace LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 
 public sealed class CapabilityDrivenRuntimePlaythroughValidator
 {
+    private readonly CapabilityDrivenRuntimePlaythroughExpansionService _expansionService;
+
+    public CapabilityDrivenRuntimePlaythroughValidator(
+        CapabilityDrivenRuntimePlaythroughExpansionService? expansionService = null)
+    {
+        _expansionService = expansionService ?? new CapabilityDrivenRuntimePlaythroughExpansionService();
+    }
+
     public CapabilityDrivenRuntimePlaythroughPlanningResult Validate(
         IReadOnlyList<FeatureModuleDefinition> selectedModules,
         GamePackageDefinition package)
@@ -13,8 +21,27 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         ArgumentNullException.ThrowIfNull(selectedModules);
         ArgumentNullException.ThrowIfNull(package);
         var diagnostics = new List<string>();
-        var contracts = selectedModules.SelectMany(module => module.RuntimePlaythroughContracts)
-            .Select(contract => (ModuleId: moduleId(contract, selectedModules), Contract: contract))
+        var originalContracts = selectedModules.SelectMany(module => module.RuntimePlaythroughContracts).ToList();
+        var replacements = originalContracts.SelectMany(contract => contract.ReplacesActionIds
+                .Select(actionId => (Replacement: contract, ActionId: actionId)))
+            .ToList();
+        foreach (var replacement in replacements)
+        {
+            var count = originalContracts.Count(contract => contract.ActionId == replacement.ActionId);
+            if (count != 1 || replacement.Replacement.ActionId == replacement.ActionId)
+                diagnostics.Add("playthrough action replacement rejected: " + replacement.Replacement.ActionId
+                                + "->" + replacement.ActionId + ":matches=" + count);
+        }
+        var replacedIds = replacements.Select(item => item.ActionId).ToHashSet(StringComparer.Ordinal);
+        var replacementModules = selectedModules.Select(module => module with
+        {
+            RuntimePlaythroughContracts = module.RuntimePlaythroughContracts
+                .Where(contract => !replacedIds.Contains(contract.ActionId)).ToList()
+        }).ToList();
+        var expansion = _expansionService.Expand(replacementModules, package);
+        diagnostics.AddRange(expansion.Diagnostics);
+        var contracts = expansion.Modules.SelectMany(module => module.RuntimePlaythroughContracts
+                .Select(contract => (ModuleId: module.ModuleId, Contract: contract)))
             .ToList();
 
         foreach (var duplicate in contracts.GroupBy(item => item.Contract.ActionId, StringComparer.Ordinal)
@@ -93,11 +120,6 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             Plan = new CapabilityRuntimePlaythroughPlan { Diagnostics = diagnostics }
         };
     }
-
-    private static string moduleId(
-        FeatureModuleRuntimePlaythroughContract contract,
-        IReadOnlyList<FeatureModuleDefinition> selectedModules) =>
-        selectedModules.First(module => module.RuntimePlaythroughContracts.Contains(contract)).ModuleId;
 
     private static bool HasCycle(
         IReadOnlyList<FeatureModuleRuntimePlaythroughContract> contracts,

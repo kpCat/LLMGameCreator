@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "goal153a_turn_binding_proof_v1",
+  "status": "GREEN",
+  "expandedEndTurnCount": 2999,
+  "allExpectedParticipantsBound": true,
+  "uniqueActionIds": true,
+  "firstBindings": [
+    {
+      "ActionId": "complete_arcane_burn_lifecycle.turn.0001",
+      "ResolvedTargetId": "goblin"
+    },
+    {
+      "ActionId": "complete_arcane_burn_lifecycle.turn.0002",
+      "ResolvedTargetId": "goal153_target"
+    },
+    {
+      "ActionId": "complete_arcane_burn_lifecycle.turn.0003",
+      "ResolvedTargetId": "player"
+    },
+    {
+      "ActionId": "complete_arcane_burn_lifecycle.turn.0004",
+      "ResolvedTargetId": "goblin"
+    }
+  ],
+  "terminalBinding": {
+    "ActionId": "complete_arcane_burn_lifecycle",
+    "ResolvedTargetId": "goal153_target"
+  }
+}

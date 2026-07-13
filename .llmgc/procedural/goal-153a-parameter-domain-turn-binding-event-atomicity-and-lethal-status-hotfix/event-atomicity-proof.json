@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "goal153a_event_atomicity_proof_v1",
+  "status": "GREEN",
+  "lateAbilityFailure": {
+    "stateByteIdentical": true,
+    "successEventCount": 0,
+    "diagnostics": [
+      "ability.effect.kind.unknown"
+    ]
+  },
+  "secondStatusFailure": {
+    "stateByteIdentical": true,
+    "successEventCount": 0,
+    "diagnostics": [
+      "ability.effect.kind.unknown"
+    ]
+  },
+  "canonicalFailedSnapshotRegression": "Goal153ATurnBindingEventAtomicityTests.Canonical_failed_snapshot_contains_no_uncommitted_success_events"
+}

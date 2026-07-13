@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "goal153a_artifact_scope_proof_v1",
+  "status": "GREEN",
+  "scenario": "goal-153a-parameter-domain-turn-binding-event-atomicity-and-lethal-status-hotfix",
+  "violationCount": 0
+}

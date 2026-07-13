@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "goal153a_mana_constraint_proof_v1",
+  "status": "GREEN",
+  "startingMana": 2,
+  "abilityManaCost": 3,
+  "rejectedAtStage": "parameter_binding",
+  "diagnostic": "parameter relation rejected: feature.magic.mana_spellcasting.abilityManaCost=3 must be \u003C= feature.magic.mana_spellcasting.startingMana=2"
+}

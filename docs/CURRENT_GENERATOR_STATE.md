@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 153 accepted Goal152 family record and active abilities/mana/turn-status vertical slice
+Updated by: Goal 153A parameter-domain, turn-binding, event-atomicity and lethal-status hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals152/152A/152C before Goal153 implementation with the exact statement recorded in the three manual-acceptance documents and compact Goal153 evidence. Goal153 implementation is GREEN and manual-gate ready; Goal153 itself remains unaccepted:
+The owner accepted Goals152/152A/152C before Goal153 implementation. Goal153A closes the independent P1 audit findings and is GREEN. Goal153 and Goal153A are manual-gate ready, remain human-unaccepted, and share one combined review:
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
@@ -86,7 +86,26 @@ goal153HostCacheReused=true
 goal153HostRebuilt=false
 goal153UnityProcessStartCount=0
 goal153HiddenSmokePassed=true
-gateStatus=goal153_active_abilities_mana_turn_status_featuremodules_manual_review required
+goal153aAccepted=false
+goal153aAcceptedByHuman=false
+goal153aAcceptedByCodex=false
+goal153aManualReviewPerformed=false
+goal153aImplementationStatus=GREEN
+goal153aManualGateReady=true
+goal153aFullQualificationDurations=1/2/5
+goal153aPlanOnlyDurationTicksEndTurns=1000/1000/2999
+goal153aEveryEndTurnExpectedParticipantBound=true
+goal153aAbilityStatusCanonicalEventAtomicity=true
+goal153aLethalEnemyVictoryAndPlayerLoss=true
+goal153aDuration5RemainingTicksAtCheckpoint=4
+goal153aDuration5ReplayEquivalent=true
+goal153aManaRelationRejectedAtParameterStage=true
+goal153aTrainingTargetHealth=1001001
+goal153aHostCacheReused=true
+goal153aHostRebuilt=false
+goal153aUnityProcessStartCount=0
+goal153aHiddenSmokePassed=true
+gateStatus=perform_goal153_combined_human_gate required
 ```
 
 The read-only real source project was inventoried and copied before any Application
@@ -111,6 +130,15 @@ generic effect kinds transactionally before duration decrement and turn advance.
 changes passed while the source project stayed byte-identical. Cache key
 `6af4d5eb5b42f956110555b58fb4e276` was reused with `HostRebuilt=false`, all five hidden-smoke
 markers GREEN and zero Unity process starts. Goal153 remains human-unaccepted.
+
+Goal153A replaces the fixed two-status-tick qualification chain with package-driven expansion.
+Durations 1, 2 and 5 execute through canonical Runtime and replay; duration 1000 is bounded
+plan-only proof with 1000 target ticks and 2999 unique expected-participant-bound EndTurn actions.
+Expected-turn mismatch, late ability failure, multi-status failure and canonical failed snapshots are
+state/event atomic. Lethal status damage now resolves defeat plus win/loss/end before any turn advance.
+The training target health 1001001 covers the full allowed damage/duration domain, and mana cost above
+starting mana is rejected causally at parameter binding. Goal153/Goal153A remain unaccepted; the next
+action is the short combined manual gate.
 
 Goal 150F historical closure status remains recorded as validation debt:
 

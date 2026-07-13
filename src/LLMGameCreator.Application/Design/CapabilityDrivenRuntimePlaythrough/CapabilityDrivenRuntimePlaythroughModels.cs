@@ -1,4 +1,5 @@
 using LLMGameCreator.Runtime.Abstractions;
+using LLMGameCreator.Application.Design.FeatureModuleComposition;
 
 namespace LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 
@@ -11,10 +12,12 @@ public sealed record FeatureModuleRuntimePlaythroughContract
     public string Phase { get; init; } = string.Empty;
     public int Order { get; init; }
     public string RuntimePrimitiveId { get; init; } = string.Empty;
+    public string ExpansionKind { get; init; } = string.Empty;
     public string TargetSelector { get; init; } = string.Empty;
     public IReadOnlyDictionary<string, string> Args { get; init; } =
         new Dictionary<string, string>(StringComparer.Ordinal);
     public IReadOnlyList<string> DependsOnActionIds { get; init; } = [];
+    public IReadOnlyList<string> ReplacesActionIds { get; init; } = [];
     public bool CheckpointBoundaryAfter { get; init; }
     public bool PresentationOnly { get; init; }
     public bool Required { get; init; } = true;
@@ -25,6 +28,12 @@ public sealed record CapabilityDrivenRuntimePlaythroughPlanningResult
 {
     public bool Passed { get; init; }
     public CapabilityRuntimePlaythroughPlan Plan { get; init; } = new();
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record CapabilityDrivenRuntimePlaythroughExpansionResult
+{
+    public IReadOnlyList<FeatureModuleDefinition> Modules { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 

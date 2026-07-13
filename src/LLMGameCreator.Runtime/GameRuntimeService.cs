@@ -141,7 +141,7 @@ public sealed class GameRuntimeService : IGameRuntimeService
                     ? Fail(state, "runtime.command.id_missing", "BasicAttack requires sourceParticipantId arg.", command.Id)
                     : Track(package, state, _encounterRuntimeService.BasicAttack(package, state, basicSourceId.Trim(), command.TargetId));
             case GameRuntimeCommandType.EndTurn:
-                return _encounterRuntimeService.EndTurn(package, state);
+                return _encounterRuntimeService.EndTurn(package, state, command.TargetId);
             case GameRuntimeCommandType.ResolveEncounter:
                 return Track(package, state, _encounterRuntimeService.ResolveEncounter(package, state));
             case GameRuntimeCommandType.FleeEncounter:

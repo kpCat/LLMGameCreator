@@ -40,7 +40,7 @@
     {"bindingId":"mana.remaining_expected","targetKind":"runtime_effect_expected_value","targetId":"runtime_effect.mana_remaining","targetField":"expectedValue","valueExpression":"${operation:mana.10_starting_amount.newValue} - ${operation:mana.11_cost_amount.newValue}"}
   ],
   "runtimePlaythroughContracts": [
-    {"contractId":"playthrough.mana.inspect","capabilityId":"capability.magic.mana_spellcasting","actionId":"inspect_mana_after_ability","category":"mana","phase":"combat","order":134,"runtimePrimitiveId":"runtime.presentation.inspect_status","targetSelector":"encounter_participant_id","args":{"id":"player"},"dependsOnActionIds":["end_target_turn_for_expiry"],"checkpointBoundaryAfter":false,"presentationOnly":true,"required":true,"expectedRuntimeEffects":["participant_resource_equals"]}
+    {"contractId":"playthrough.mana.inspect","capabilityId":"capability.magic.mana_spellcasting","actionId":"inspect_mana_after_ability","category":"mana","phase":"combat","order":134,"runtimePrimitiveId":"runtime.presentation.inspect_status","targetSelector":"encounter_participant_id","args":{"id":"player"},"dependsOnActionIds":["use_arcane_impulse"],"checkpointBoundaryAfter":false,"presentationOnly":true,"required":true,"expectedRuntimeEffects":["participant_resource_equals"]}
   ],
   "sourceLineage": {"goalId":"goal_153_active_abilities_mana_turn_status_featuremodules_runtime_standalone_vertical_slice","catalogPath":"catalogs/feature-modules/optional/magic-mana-spellcasting.featuremodule.json","recipeId":"mana_spellcasting","variantKind":"mana_spellcasting","candidateId":"minimal-map-game-mana-spellcasting","operationIds":["mana.00_resource_definition","mana.01_player_resource","mana.02_ability_cost","mana.10_starting_amount","mana.11_cost_amount"]}
 }

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "goal153a_duration5_checkpoint_replay_proof_v1",
+  "status": "GREEN",
+  "remainingTicksAfterFirstTick": 4,
+  "ExpectedStateHash": "a6d9835975263dbee5ef2107ce24176dedeecfe6057f3871f03f7fb18ba4bce5",
+  "checkpointActualStateHash": "a6d9835975263dbee5ef2107ce24176dedeecfe6057f3871f03f7fb18ba4bce5",
+  "checkpointReplayPassed": true,
+  "finalExpectedStateHash": "ba18cbea83506c5bda64ee6826e2ddfcd6cd3f7fead9690539f9c47dada71441",
+  "finalActualStateHash": "ba18cbea83506c5bda64ee6826e2ddfcd6cd3f7fead9690539f9c47dada71441",
+  "finalReplayEquivalent": true,
+  "replayedActionCount": 30
+}

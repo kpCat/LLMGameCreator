@@ -1,0 +1,35 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-153a-parameter-domain-turn-binding-event-atomicity-and-lethal-status-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 8664b19c8fddb60e347402d0dc92535630c99cf3
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- Goal153 пока НЕ принят и manual gate не готов;
+- исправь жёстко зашитые два status tick: план зависит от configured duration;
+- каждый EndTurn проверяет ожидаемого текущего участника;
+- failed ability/status tick не возвращает success events для откатившегося state;
+- lethal status tick помечает defeat и завершает encounter;
+- qualification target переживает весь разрешённый parameter domain;
+- cost > starting mana даёт причинный parameter-stage отказ;
+- duration 1/2/5 — полный Runtime/replay, duration 1000 — plan-only proof;
+- Unity Editor invocation budget = 0;
+- standalone использует существующий cache и один hidden smoke;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи duration/action expansion, turn binding, event atomicity, lethal status,
+checkpoint/replay, cache reuse, Unity process count, final SHA, push, HEAD == origin/main,
+clean worktree и короткий combined manual gate.

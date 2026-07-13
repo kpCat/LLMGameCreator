@@ -102,11 +102,25 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         return ExecuteAbility(package, state, fallback, sourceParticipantId, targetParticipantId, isBasicAttack: true);
     }
 
-    public GameRuntimeResult EndTurn(GamePackageDefinition package, GameRuntimeState state)
+    public GameRuntimeResult EndTurn(
+        GamePackageDefinition package,
+        GameRuntimeState state,
+        string? expectedParticipantId = null)
     {
         if (state.ActiveEncounter == null || !state.ActiveEncounter.Active)
         {
             return Failure(state, "encounter.not_active", "No active encounter.", null);
+        }
+
+        var currentParticipant = CurrentTurnParticipant(state.ActiveEncounter);
+        if (!string.IsNullOrWhiteSpace(expectedParticipantId)
+            && !RuntimeStateHelpers.IdEquals(currentParticipant?.Id, expectedParticipantId))
+        {
+            return Failure(
+                state,
+                "encounter.turn.expected_participant_mismatch",
+                $"Expected current participant {expectedParticipantId}, but found {currentParticipant?.Id ?? "<none>"}.",
+                expectedParticipantId);
         }
 
         var working = RuntimeStateHelpers.CloneState(state);
@@ -114,11 +128,24 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
         TickCurrentParticipant(package, working.ActiveEncounter!, result.Events, result.Diagnostics);
         if (result.Diagnostics.Any(d => d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
         {
+            result.Events.Clear();
             result.Success = false;
             result.Message = "Turn end failed.";
             return result;
         }
-        AdvanceTurn(working.ActiveEncounter!, result.Events);
+        MarkDefeated(package, working.ActiveEncounter!, result.Events);
+        ResolveEncounterIfComplete(package, working, result.Events, result.Diagnostics, force: false);
+        if (result.Diagnostics.Any(d => d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
+        {
+            result.Events.Clear();
+            result.Success = false;
+            result.Message = "Turn end failed.";
+            return result;
+        }
+        if (working.ActiveEncounter?.Active == true)
+        {
+            AdvanceTurn(working.ActiveEncounter, result.Events);
+        }
         RuntimeStateHelpers.CopyState(working, state);
         result.State = state;
         return result;
@@ -186,7 +213,9 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         if (!RuntimeStateHelpers.IdEquals(CurrentTurnParticipant(encounter)?.Id, source.Id))
         {
-            return Failure(state, "encounter.turn.invalid", $"It is not {source.Id}'s turn.", source.Id);
+            return Failure(state, "encounter.turn.invalid",
+                $"It is not {source.Id}'s turn; current participant is {CurrentTurnParticipant(encounter)?.Id ?? "<none>"}.",
+                source.Id);
         }
 
         var target = ResolveTarget(encounter, source, targetParticipantId);
@@ -225,6 +254,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
             if (!TryResolveEquipmentDamageBonus(package, working, out equipmentBonus,
                     out equipmentMetadataPresent, out var bonusDiagnostic))
             {
+                result.Events.Clear();
                 result.Diagnostics.Add(bonusDiagnostic!);
                 result.Success = false;
                 result.Message = $"Ability failed: {ability.Id}";
@@ -233,6 +263,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
             if (!TryResolveStatDamageBonus(package, ability, source, out statBonus, out statId,
                     out statValue, out statMetadataPresent, out var statDiagnostic))
             {
+                result.Events.Clear();
                 result.Diagnostics.Add(statDiagnostic!);
                 result.Success = false;
                 result.Message = $"Ability failed: {ability.Id}";
@@ -282,6 +313,7 @@ public sealed class EncounterRuntimeService : IEncounterRuntimeService
 
         if (result.Diagnostics.Any(d => d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)))
         {
+            result.Events.Clear();
             result.Success = false;
             result.Message = $"Ability failed: {ability.Id}";
             return result;

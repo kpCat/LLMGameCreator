@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "goal153a_lethal_status_resolution_proof_v1",
+  "status": "GREEN",
+  "enemy": {
+    "defeated": 1,
+    "won": 1,
+    "ended": 1,
+    "turnAdvanced": false
+  },
+  "player": {
+    "defeated": 1,
+    "lost": 1,
+    "ended": 1,
+    "turnAdvanced": false
+  }
+}
