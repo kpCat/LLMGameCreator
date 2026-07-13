@@ -30,8 +30,8 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         var plan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(fixture.Modules, fixture.Package);
         var endTurns = StatusEndTurns(plan);
 
-        Assert.Equal((duration * 3) - 1, endTurns.Count);
-        Assert.Equal(duration, endTurns.Count(action => action.ResolvedTargetId == "goal153_target"));
+        Assert.Equal((duration * 2) - 1, endTurns.Count);
+        Assert.Equal(duration, endTurns.Count(action => action.ResolvedTargetId == "goblin"));
         Assert.All(endTurns, action => Assert.False(string.IsNullOrWhiteSpace(action.ResolvedTargetId)));
         Assert.Equal(endTurns.Count, endTurns.Select(action => action.ActionId).Distinct(StringComparer.Ordinal).Count());
         Assert.Equal("complete_arcane_burn_lifecycle", endTurns[^1].ActionId);
@@ -56,8 +56,8 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         var second = planner.Plan(fixture.Modules, fixture.Package);
         var endTurns = StatusEndTurns(first);
 
-        Assert.Equal(2999, endTurns.Count);
-        Assert.Equal(1000, endTurns.Count(action => action.ResolvedTargetId == "goal153_target"));
+        Assert.Equal(1999, endTurns.Count);
+        Assert.Equal(1000, endTurns.Count(action => action.ResolvedTargetId == "goblin"));
         Assert.Equal(endTurns.Count, endTurns.Select(action => action.ActionId).Distinct(StringComparer.Ordinal).Count());
         Assert.All(endTurns, action => Assert.False(string.IsNullOrWhiteSpace(action.ResolvedTargetId)));
         Assert.Equal(first.ActionPlanSignature, second.ActionPlanSignature);
@@ -75,10 +75,10 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         var service = new EncounterRuntimeService(new RequirementEvaluator(), new OutputApplier());
         var state = new GameRuntimeStateFactory().CreateInitialState(fixture.Package).State;
         Assert.True(service.StartEncounter(fixture.Package, state, "encounter/goblin_duel", 136).Success);
-        Assert.True(service.UseAbility(fixture.Package, state, "ability/arcane_impulse", "player", "goal153_target").Success);
+        Assert.True(service.UseAbility(fixture.Package, state, "ability/arcane_impulse", "player", "goblin").Success);
         foreach (var action in endTurns.Take(checkpointIndex + 1))
             Assert.True(service.EndTurn(fixture.Package, state, action.ResolvedTargetId).Success);
-        var status = state.ActiveEncounter!.Participants.Single(item => item.Id == "goal153_target").Statuses.Single();
+        var status = state.ActiveEncounter!.Participants.Single(item => item.Id == "goblin").Statuses.Single();
         Assert.Equal(4, status.RemainingTicks);
         Assert.Equal("player", status.Metadata["sourceParticipantId"]);
         Assert.Equal("ability/arcane_impulse", status.Metadata["sourceAbilityId"]);
@@ -91,15 +91,15 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         Assert.Equal(4, uninterruptedEvents.Count(item => item.StartsWith("StatusTicked:", StringComparison.Ordinal)));
         Assert.Equal(uninterruptedEvents, resumedEvents);
         Assert.Equal(Stable(state), Stable(resumed));
-        Assert.Empty(state.ActiveEncounter!.Participants.Single(item => item.Id == "goal153_target").Statuses);
+        Assert.Empty(state.ActiveEncounter!.Participants.Single(item => item.Id == "goblin").Statuses);
     }
 
     [Fact]
-    public void High_damage_fixture_survives_and_mana_relation_fails_at_parameter_stage()
+    public void High_capacity_fixture_is_proof_only_and_mana_relation_fails_at_parameter_stage()
     {
         var fixture = Fixture(5, 100, 50);
         var targetHealth = fixture.Package.Game.Encounters.Single(item => item.Id == "encounter/goblin_duel")
-            .Participants.Single(item => item.Id == "goal153_target").Resources
+            .Participants.Single(item => item.Id == "goblin").Resources
             .Single(item => item.Id == "resource/health").Amount;
         var declarationLibrary = new FeatureModuleLibraryLoader().Load(Path.Combine(FindRoot(), "catalogs", "feature-modules"));
         decimal Maximum(string moduleId, string parameterId) => declarationLibrary.Catalog.Modules.Single(module => module.ModuleId == moduleId)
@@ -107,9 +107,23 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         var declaredMaximumDamage = Maximum(Goal153Ids[0], "abilityBaseDamage");
         var declaredMaximumTickDamage = Maximum(Goal153Ids[2], "statusTickDamage");
         var declaredMaximumDuration = Maximum(Goal153Ids[2], "statusDurationTurns");
-        Assert.True((decimal)targetHealth > checked(declaredMaximumDamage + checked(declaredMaximumTickDamage * declaredMaximumDuration)));
-        var plan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(fixture.Modules, fixture.Package);
-        var result = Qualify(fixture, plan, "high-damage");
+        var required = checked(declaredMaximumDamage + checked(declaredMaximumTickDamage * declaredMaximumDuration));
+        Assert.True((decimal)targetHealth < required);
+        Assert.Equal(30, fixture.Package.Game.Resources.Single(item => item.Id == "resource/health").MaxValue);
+        Assert.DoesNotContain(fixture.Package.Game.Encounters.SelectMany(item => item.Participants),
+            item => item.Id == "goal153_target");
+
+        var proofPackage = JsonSerializer.Deserialize<GamePackageDefinition>(
+            JsonSerializer.Serialize(fixture.Package, JsonOptions()), JsonOptions())!;
+        proofPackage.Game.Resources.Single(item => item.Id == "resource/health").MaxValue = (double)(required + 1);
+        proofPackage.Game.Encounters.Single(item => item.Id == "encounter/goblin_duel")
+            .Participants.Single(item => item.Id == "goblin").Resources
+            .Single(item => item.Id == "resource/health").Amount = (double)(required + 1);
+        var proofFixture = new FixtureData(proofPackage, fixture.Modules);
+        Assert.NotEqual(JsonSerializer.Serialize(fixture.Package, JsonOptions()),
+            JsonSerializer.Serialize(proofPackage, JsonOptions()));
+        var plan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(proofFixture.Modules, proofFixture.Package);
+        var result = Qualify(proofFixture, plan, "proof-only-high-capacity");
         Assert.True(result.FinalReplay.Passed, string.Join("; ", result.FinalReplay.Diagnostics));
         Assert.Contains(result.Session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents),
             item => item.EventType == "StatusRemoved" && item.Message.Contains("expired"));
@@ -146,7 +160,7 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
                 fullQualification = true,
                 plannedActionCount = plan.OrderedActions.Count,
                 generatedEndTurnCount = turns.Count,
-                targetTickCount = turns.Count(action => action.ResolvedTargetId == "goal153_target"),
+                targetTickCount = turns.Count(action => action.ResolvedTargetId == "goblin"),
                 uniqueActionIds = turns.Select(action => action.ActionId).Distinct(StringComparer.Ordinal).Count() == turns.Count,
                 allExpectedParticipantsBound = turns.All(action => !string.IsNullOrWhiteSpace(action.ResolvedTargetId)),
                 plan.ActionPlanSignature,
@@ -157,7 +171,7 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
         var planOnlyFixture = Fixture(1000, 2, 1);
         var planOnly = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(planOnlyFixture.Modules, planOnlyFixture.Package);
         var planOnlyTurns = StatusEndTurns(planOnly);
-        Assert.Equal(1000, planOnlyTurns.Count(action => action.ResolvedTargetId == "goal153_target"));
+        Assert.Equal(1000, planOnlyTurns.Count(action => action.ResolvedTargetId == "goblin"));
         var root = Environment.GetEnvironmentVariable("LLMGC_GOAL153A_EVIDENCE_ROOT");
         if (string.IsNullOrWhiteSpace(root)) return;
         Directory.CreateDirectory(root);
@@ -177,8 +191,8 @@ public sealed class Goal153AParameterizedLifecyclePlannerTests
                 allExpectedParticipantsBound = planOnlyTurns.All(action => !string.IsNullOrWhiteSpace(action.ResolvedTargetId)),
                 planOnly.ActionPlanSignature
             },
-            trainingTargetHealth = planOnlyFixture.Package.Game.Encounters.Single(item => item.Id == "encounter/goblin_duel")
-                .Participants.Single(item => item.Id == "goal153_target").Resources.Single(item => item.Id == "resource/health").Amount
+            realTargetId = "goblin",
+            activatedHealthMaximum = planOnlyFixture.Package.Game.Resources.Single(item => item.Id == "resource/health").MaxValue
         });
         Write(root, "turn-binding-proof.json", new
         {

@@ -1,0 +1,18 @@
+﻿{
+    "status":  "GREEN",
+    "implementationStatus":  "GREEN",
+    "manualGateReady":  true,
+    "accepted":  false,
+    "acceptedByHuman":  false,
+    "acceptedByCodex":  false,
+    "manualReviewPerformed":  false,
+    "activatedFixtureCount":  0,
+    "healthDefinitionUnchanged":  true,
+    "defaultExpiryPassed":  true,
+    "highDamageLethalPassed":  true,
+    "conditionalSkipReplayPassed":  true,
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "unityProcessStartCount":  0,
+    "artifactScopeViolationCount":  0
+}

@@ -15,6 +15,7 @@ public static class FeatureModuleRuntimeEffectMetricKinds
     public const string ParticipantResourceEquals = "participant_resource_equals";
     public const string StatusTickDamageEquals = "status_tick_damage_equals";
     public const string StatusAbsentAfterExpiry = "status_absent_after_expiry";
+    public const string StatusTerminalOutcome = "status_terminal_outcome";
 }
 
 public static class FeatureModuleRuntimeEffectComparisonKinds
@@ -24,6 +25,7 @@ public static class FeatureModuleRuntimeEffectComparisonKinds
     public const string Equal = "equal";
     public const string AtLeast = "at_least";
     public const string LessThanBaseline = "less_than_baseline";
+    public const string OneOf = "one_of";
 }
 
 public sealed record FeatureModuleRuntimeEffectContract

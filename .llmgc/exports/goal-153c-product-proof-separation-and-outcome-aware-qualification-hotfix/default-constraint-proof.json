@@ -1,0 +1,8 @@
+﻿{
+    "schemaVersion":  "goal153c_default_constraint_proof_v1",
+    "status":  "GREEN",
+    "validDefaultsAccepted":  true,
+    "invalidSameModuleDefaultsRejected":  true,
+    "invalidDependentDefaultsRejected":  true,
+    "diagnosticContainsConstraintAndValues":  true
+}

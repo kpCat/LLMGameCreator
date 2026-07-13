@@ -102,7 +102,10 @@ public sealed class CapabilityDrivenRuntimePlaythroughExpansionService
         List<string> diagnostics)
     {
         var encounterId = Arg(descriptor, "encounterId");
-        var targetParticipantId = Arg(descriptor, "targetParticipantId");
+        var targetParticipantId = descriptor.TargetSelector == "hostile_encounter_participant"
+            ? CapabilityDrivenRuntimePlaythroughValidator.ResolveTarget(
+                package, descriptor.TargetSelector, descriptor.Args, diagnostics, descriptor.ActionId + ".target")
+            : Arg(descriptor, "targetParticipantId");
         var sourceParticipantId = Arg(descriptor, "sourceParticipantId");
         var resumeParticipantId = Arg(descriptor, "resumeParticipantId");
         var sourceAbilityId = Arg(descriptor, "sourceAbilityId");
@@ -198,6 +201,19 @@ public sealed class CapabilityDrivenRuntimePlaythroughExpansionService
             var isTerminal = index == turns.Count - 1;
             var actionId = isTerminal ? descriptor.ActionId : descriptor.ActionId + ".turn." + (index + 1).ToString("D4", CultureInfo.InvariantCulture);
             var dependencies = previousActionId is null ? descriptor.DependsOnActionIds : [previousActionId];
+            var args = new SortedDictionary<string, string>(StringComparer.Ordinal)
+            {
+                ["id"] = participantId,
+                ["encounterId"] = encounterId,
+                ["statusId"] = statusId,
+                ["statusTargetParticipantId"] = targetParticipantId,
+                ["targetTick"] = targetTick.ToString(CultureInfo.InvariantCulture),
+                ["configuredDuration"] = duration.ToString(CultureInfo.InvariantCulture),
+                ["predicateParticipantId"] = participantId,
+                ["executionPredicates"] = string.IsNullOrWhiteSpace(statusId)
+                    ? "encounter_active,participant_alive"
+                    : "encounter_active,participant_alive,status_present"
+            };
             actions.Add(descriptor with
             {
                 ContractId = isTerminal ? descriptor.ContractId : descriptor.ContractId + ".turn." + (index + 1).ToString("D4", CultureInfo.InvariantCulture),
@@ -205,15 +221,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughExpansionService
                 RuntimePrimitiveId = CapabilityRuntimePrimitiveIds.EndTurn,
                 ExpansionKind = string.Empty,
                 TargetSelector = "encounter_participant_id",
-                Args = new SortedDictionary<string, string>(StringComparer.Ordinal)
-                {
-                    ["id"] = participantId,
-                    ["encounterId"] = encounterId,
-                    ["statusId"] = statusId,
-                    ["statusTargetParticipantId"] = targetParticipantId,
-                    ["targetTick"] = targetTick.ToString(CultureInfo.InvariantCulture),
-                    ["configuredDuration"] = duration.ToString(CultureInfo.InvariantCulture)
-                },
+                Args = args,
                 DependsOnActionIds = dependencies,
                 CheckpointBoundaryAfter = targetTick == checkpointAfterTick,
                 PresentationOnly = false

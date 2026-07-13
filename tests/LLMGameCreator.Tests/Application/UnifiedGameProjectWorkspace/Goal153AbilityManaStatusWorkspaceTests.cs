@@ -35,7 +35,7 @@ public sealed class Goal153AbilityManaStatusWorkspaceTests
             Set(first, "feature.combat.active_ability_loadout", "abilityBaseDamage", 2);
             Set(first, "feature.magic.mana_spellcasting", "startingMana", 12);
             Set(first, "feature.magic.mana_spellcasting", "abilityManaCost", 3);
-            Set(first, "feature.status.turn_effects", "statusDurationTurns", 2);
+            Set(first, "feature.status.turn_effects", "statusDurationTurns", 5);
             Set(first, "feature.status.turn_effects", "statusTickDamage", 1);
             first.SaveAuthoring();
 
@@ -69,6 +69,19 @@ public sealed class Goal153AbilityManaStatusWorkspaceTests
             Assert.Equal(3, secondBuild.AbilityDirectDamage);
             Assert.NotEqual(firstPackageHash, secondBuild.CompositionPackageSha256);
             Assert.NotEqual(firstFinalHash, secondBuild.FinalStateHash);
+            var activatedPackageText = File.ReadAllText(Path.Combine(project, "package.json"));
+            Assert.DoesNotContain("goal153_target", activatedPackageText, StringComparison.Ordinal);
+            Assert.DoesNotContain("Магическая мишень", activatedPackageText, StringComparison.Ordinal);
+            Assert.DoesNotContain("1001001", activatedPackageText, StringComparison.Ordinal);
+            using (var activatedPackage = JsonDocument.Parse(activatedPackageText))
+            {
+                var health = activatedPackage.RootElement.GetProperty("game").GetProperty("resources")
+                    .EnumerateArray().Single(item => item.GetProperty("id").GetString() == "resource/health");
+                Assert.Equal(30, health.GetProperty("maxValue").GetDouble());
+                Assert.Contains(activatedPackage.RootElement.GetProperty("game").GetProperty("encounters")
+                    .EnumerateArray().SelectMany(encounter => encounter.GetProperty("participants").EnumerateArray()),
+                    participant => participant.GetProperty("id").GetString() == "goblin");
+            }
             Assert.All(new[] { "feature.combat.active_ability_loadout", "feature.magic.mana_spellcasting", "feature.status.turn_effects" },
                 id => Assert.Contains(reopened.Snapshot().Mechanics, item => item.ModuleId == id && item.Selected));
             var evidencePath = Environment.GetEnvironmentVariable("LLMGC_GOAL153_EVIDENCE_PATH");
@@ -79,7 +92,7 @@ public sealed class Goal153AbilityManaStatusWorkspaceTests
                 {
                     schemaVersion = "goal153_real_project_lifecycle_run_v1",
                     status = "GREEN",
-                    configuredValues = new { abilityBaseDamage = 2, startingMana = 12, abilityManaCost = 3, statusDurationTurns = 2, statusTickDamage = 1 },
+                    configuredValues = new { abilityBaseDamage = 2, startingMana = 12, abilityManaCost = 3, statusDurationTurns = 5, statusTickDamage = 1 },
                     firstBuild = new { firstBuild.CompositionPackageSha256, firstBuild.FinalStateHash, firstBuild.AbilityDirectDamage, firstBuild.ManaBefore, firstBuild.ManaSpent, firstBuild.ManaRemaining, firstBuild.StatusTickDamage, firstBuild.StatusExpired, firstBuild.CheckpointReloadPassed, firstBuild.FullReplayEquivalent, firstBuild.PlannedActionCount },
                     secondBuild = new { secondBuild.CompositionPackageSha256, secondBuild.FinalStateHash, secondBuild.AbilityDirectDamage },
                     packageHashChanged = firstPackageHash != secondBuild.CompositionPackageSha256,
@@ -122,7 +135,7 @@ public sealed class Goal153AbilityManaStatusWorkspaceTests
                                 manaCost = secondBuild.ManaSpent,
                                 manaRemaining = secondBuild.ManaRemaining,
                                 tickDamage = secondBuild.StatusTickDamage,
-                                configuredDuration = 2,
+                                configuredDuration = 5,
                                 statusExpired = secondBuild.StatusExpired
                             }
                         }, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine);

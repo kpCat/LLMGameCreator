@@ -63,7 +63,7 @@ public sealed class Goal153BManaDomainIntegrityTests
     }
 
     [Fact]
-    public void Qualification_domain_is_derived_from_declarations_and_rejects_fixture_that_is_too_small()
+    public void Qualification_domain_is_derived_from_declarations_without_mutating_product_capacity()
     {
         var library = Load();
         decimal Maximum(string moduleId, string parameterId) => library.Catalog.Modules.Single(module => module.ModuleId == moduleId)
@@ -72,11 +72,21 @@ public sealed class Goal153BManaDomainIntegrityTests
         var tick = Maximum("feature.status.turn_effects", "statusTickDamage");
         var duration = Maximum("feature.status.turn_effects", "statusDurationTurns");
         var package = Materialize(new FeatureModuleParameterBindingService().Bind(library.Catalog, Selected(library), []));
-        var target = (decimal)package.Game.Encounters.Single().Participants.Single(item => item.Id == "goal153_target").Resources
+        var target = (decimal)package.Game.Encounters.Single().Participants.Single(item => item.Id == "goblin").Resources
             .Single(item => item.Id == "resource/health").Amount;
         var required = checked(ability + checked(tick * duration));
-        Assert.True(target > required);
-        Assert.False(target > checked((target + 1) + checked(tick * duration)));
+        Assert.True(target < required);
+        Assert.Equal(30, package.Game.Resources.Single(item => item.Id == "resource/health").MaxValue);
+        Assert.DoesNotContain(package.Game.Encounters.SelectMany(item => item.Participants),
+            participant => participant.Id == "goal153_target");
+
+        var proof = Copy(package);
+        proof.Game.Resources.Single(item => item.Id == "resource/health").MaxValue = (double)(required + 1);
+        proof.Game.Encounters.Single().Participants.Single(item => item.Id == "goblin").Resources
+            .Single(item => item.Id == "resource/health").Amount = (double)(required + 1);
+        Assert.True((decimal)proof.Game.Encounters.Single().Participants.Single(item => item.Id == "goblin").Resources
+            .Single(item => item.Id == "resource/health").Amount > required);
+        Assert.NotEqual(JsonSerializer.Serialize(package, JsonOptions()), JsonSerializer.Serialize(proof, JsonOptions()));
     }
 
     private static GamePackageDefinition Materialize(FeatureModuleParameterBindingResult result)

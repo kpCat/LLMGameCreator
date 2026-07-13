@@ -1,6 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 153B declarative constraints/domain-integrity hotfix: the mana relation is module data evaluated by a generic six-operator constraint evaluator; fingerprints include constraints, resource amounts are rejected outside declared domains before Runtime, and the qualification proof derives maxima from declarations. Goals153/153A/153B are GREEN but `accepted=false`; `independent_goal153b_audit_then_combined_goal153_family_human_gate required` is next.
+- Goal 153C product/proof separation and outcome-aware qualification hotfix: qualification-only participant/capacity mutations are absent from activated output, real hostile selection is deterministic, defaults `2/12/3/5/1` expire after five ticks, lethal outcomes and conditional skips are truthful and replay-stable, and compact evidence is mirrored. Goals153/153A/153B/153C are GREEN but `accepted=false`; `independent_goal153c_audit_then_combined_goal153_family_human_gate required` is next.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document

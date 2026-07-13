@@ -66,10 +66,20 @@ public sealed class FeatureModuleParameterConstraintEvaluator
             if (!referencesValid) continue;
             try
             {
-                _ = FeatureModuleEffectiveValueExpression.Evaluate(constraint.LeftExpression,
+                var left = FeatureModuleEffectiveValueExpression.Evaluate(constraint.LeftExpression,
                     reference => ResolveDefaultParameterValue(module, catalog, reference));
-                _ = FeatureModuleEffectiveValueExpression.Evaluate(constraint.RightExpression,
+                var right = FeatureModuleEffectiveValueExpression.Evaluate(constraint.RightExpression,
                     reference => ResolveDefaultParameterValue(module, catalog, reference));
+                if (!Compare(left, constraint.Operator, right))
+                {
+                    diagnostics.Add("default parameter constraint rejected: " + module.ModuleId + ":"
+                                    + constraint.ConstraintId + "; left=" + Format(left) + "; right=" + Format(right)
+                                    + "; parameters=" + string.Join(",", References(module, constraint)
+                                        .Select(reference => reference.DisplayId + "=" + Format(ResolveDefaultParameterValue(
+                                            module, catalog, "parameter:" + reference.DisplayId)))
+                                        .Distinct(StringComparer.Ordinal)));
+                    valid = false;
+                }
             }
             catch (InvalidOperationException exception)
             {

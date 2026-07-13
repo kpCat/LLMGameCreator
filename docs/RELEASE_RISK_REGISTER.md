@@ -181,3 +181,5 @@ Goal153/Goal153A gate; human acceptance is not inferred from automated GREEN.
 
 Goal153B removes the remaining module-specific parameter relation, makes the declared parameter domain
 and participant resource domain causal before Runtime, and requires independent audit before the combined family gate.
+
+Goal153C closes the activated proof-fixture/global-capacity release risk. Qualification now uses real deterministic hostile content, proof-only high capacity stays in test memory, and expiry/defeat/encounter terminal outcomes plus conditional skips are replay-stable. Independent audit and the combined human gate remain required; no acceptance is inferred from automated GREEN.

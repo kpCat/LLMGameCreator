@@ -67,6 +67,7 @@ public sealed class FeatureModuleLibraryValidator
             }
             referencesValid &= ValidateOwnedReferences(module, diagnostics);
             referencesValid &= FeatureModuleParameterConstraintEvaluator.ValidateDefinitions(module, byId, diagnostics);
+            referencesValid &= ValidateActivatedPackageDiffClaims(module, diagnostics);
         }
 
         var result = new FeatureModuleLibraryValidationResult
@@ -163,6 +164,54 @@ public sealed class FeatureModuleLibraryValidator
                 diagnostics.Add("effective binding contract mismatch rejected: " + module.ModuleId + ":" + target);
                 valid = false;
             }
+        }
+        return valid;
+    }
+
+    public static bool ValidateActivatedPackageDiffClaims(
+        FeatureModuleDefinition module,
+        List<string> diagnostics)
+    {
+        const string marker = "activated_package_diff_classified";
+        const string prefix = "activated_package_diff:";
+        if (!module.RequiredValidationRules.Contains(marker, StringComparer.Ordinal)) return true;
+        var valid = true;
+        var claims = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var rule in module.RequiredValidationRules.Where(rule => rule.StartsWith(prefix, StringComparison.Ordinal)))
+        {
+            var parts = rule.Split(':', StringSplitOptions.None);
+            if (parts.Length != 3 || string.IsNullOrWhiteSpace(parts[1])
+                                  || parts[2] is not "declared_user_facing_mechanic"
+                                      and not "declared_user_facing_starter_content"
+                                      and not "authoring_identity_metadata"
+                                      and not "forbidden_qualification_proof_fixture"
+                || !claims.TryAdd(parts[1], parts[2]))
+            {
+                diagnostics.Add("activated package diff claim rejected: " + module.ModuleId + ":" + rule);
+                valid = false;
+            }
+        }
+        foreach (var operation in module.MutationOperations)
+        {
+            if (!claims.TryGetValue(operation.RuntimeDimension, out var classification))
+            {
+                diagnostics.Add("unclassified activated package mutation rejected: " + module.ModuleId + ":"
+                                + operation.OperationId + ":" + operation.RuntimeDimension);
+                valid = false;
+                continue;
+            }
+            if (classification == "forbidden_qualification_proof_fixture")
+            {
+                diagnostics.Add("proof-only activated package mutation rejected: " + module.ModuleId + ":"
+                                + operation.OperationId + ":" + operation.JsonPath);
+                valid = false;
+            }
+        }
+        foreach (var orphan in claims.Keys.Where(dimension =>
+                     module.MutationOperations.All(operation => operation.RuntimeDimension != dimension)))
+        {
+            diagnostics.Add("activated package diff claim has no structured mutation: " + module.ModuleId + ":" + orphan);
+            valid = false;
         }
         return valid;
     }

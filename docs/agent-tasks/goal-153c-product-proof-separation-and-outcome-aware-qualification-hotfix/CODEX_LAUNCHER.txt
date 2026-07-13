@@ -1,0 +1,37 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-153c-product-proof-separation-and-outcome-aware-qualification-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: b9c8a83453fcf5a262c4dd7b368252c53c35860b
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- Goal153/153A/153B пока НЕ приняты и manual gate не готов;
+- удали qualification-only goal153_target и глобальное изменение health max из активируемого продукта;
+- не заменяй их другим скрытым dummy target;
+- активная способность и статус должны работать на реальном deterministic hostile target;
+- default 2/12/3/5/1 должен дать пять ticks и expiry;
+- high direct/tick damage должен проходить через truthful lethal terminal outcome;
+- conditional EndTurn actions должны skip без мутаций и replay-стабильно после завершения encounter;
+- high-capacity fixture допускается только в test/certification memory и никогда не активируется;
+- activated-package diff gate обязан доказывать отсутствие proof fixtures;
+- исправь default-constraint validation, module versions и evidence mirror/schema;
+- Unity Editor invocation budget = 0;
+- используй существующий host cache и один hidden smoke;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи activated package diff, removed fixture operations, real target/outcomes,
+conditional replay, Goal153A/B regressions, evidence mirror, cache reuse, Unity process count,
+final SHA, push, HEAD == origin/main, clean worktree и короткий combined manual gate.

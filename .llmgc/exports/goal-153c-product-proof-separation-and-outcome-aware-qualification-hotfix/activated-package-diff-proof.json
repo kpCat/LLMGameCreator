@@ -1,0 +1,22 @@
+﻿{
+    "schemaVersion":  "goal153c_activated_package_diff_proof_v1",
+    "status":  "GREEN",
+    "baseHealth":  {
+                       "maxValue":  30,
+                       "minValue":  0,
+                       "defaultValue":  30
+                   },
+    "activatedHealth":  {
+                            "maxValue":  30,
+                            "minValue":  0,
+                            "defaultValue":  30
+                        },
+    "removedOperationIds":  [
+                                "active.02_training_target",
+                                "active.02a_training_target_health_capacity"
+                            ],
+    "forbiddenQualificationProofFixtureCount":  0,
+    "structuredDiffClassificationsValidated":  true,
+    "realTargetId":  "goblin",
+    "sourceProjectByteIdentical":  true
+}

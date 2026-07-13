@@ -8,19 +8,19 @@
   "required": false,
   "selectable": true,
   "defaultSelected": false,
-  "moduleVersion": "1.0.0",
+  "moduleVersion": "1.1.0",
   "dependencies": ["feature.combat.turn_based_encounter", "feature.player_adapter.runtime_summary"],
   "conflicts": [],
   "requiredSchemaSections": ["game.abilities", "game.encounters"],
   "requiredRuntimePrimitives": ["runtime.command.use_ability"],
-  "requiredValidationRules": ["encounter_ability_references", "definition_upsert_conflicts"],
+  "requiredValidationRules": ["encounter_ability_references", "definition_upsert_conflicts", "activated_package_diff_classified", "activated_package_diff:active_ability_definition:declared_user_facing_mechanic", "activated_package_diff:active_ability_loadout:declared_user_facing_starter_content", "activated_package_diff:active_ability_direct_damage:declared_user_facing_mechanic"],
   "requiredSaveLoadPolicy": ["encounter_state", "journal_checkpoint_reload", "full_replay_equivalence"],
   "requiredPlayerAdapterSurface": ["ability_summary"],
   "generatorInputs": ["feature.combat.active_ability_loadout"],
   "authoringControls": ["checked_optional_module", "typed_parameter_editor"],
   "goldenPackages": ["minimal-map-game-active-ability"],
   "smokePlaythroughs": ["goal153_active_ability_slice"],
-  "knownLimitations": ["Первая фикстура содержит одну способность; Runtime не ограничивает число способностей."],
+  "knownLimitations": ["Стартовый набор содержит одну способность; Runtime не ограничивает число способностей."],
   "futureExpansionNotes": ["Новые способности добавляются определениями и generic effect/cost kinds без C# ветвления по ID."],
   "mutationOperations": [
     {
@@ -40,24 +40,6 @@
       "expectedValue": "__MISSING_OR_EQUIVALENT__",
       "newValue": "ability/arcane_impulse",
       "runtimeDimension": "active_ability_loadout"
-    },
-    {
-      "operationId": "active.02_training_target",
-      "targetKind": "encounter_participant_upsert",
-      "targetId": "encounter/goblin_duel|goal153_target",
-      "jsonPath": "game.encounters[id=encounter/goblin_duel].participants[id=goal153_target]",
-      "expectedValue": "__MISSING_OR_EQUIVALENT__",
-      "newValue": "{\"id\":\"goal153_target\",\"name\":\"Магическая мишень\",\"kind\":\"enemy\",\"team\":\"enemy\",\"resources\":[{\"kind\":\"resource\",\"id\":\"resource/health\",\"amount\":1001001}],\"abilities\":[]}",
-      "runtimeDimension": "active_ability_training_target"
-    },
-    {
-      "operationId": "active.02a_training_target_health_capacity",
-      "targetKind": "definition_numeric_property",
-      "targetId": "resources|resource/health|maxValue",
-      "jsonPath": "game.resources[id=resource/health].maxValue",
-      "expectedValue": "30",
-      "newValue": "1001001",
-      "runtimeDimension": "training_target_health_capacity"
     },
     {
       "operationId": "active.10_arcane_impulse_damage",
@@ -116,9 +98,10 @@
       "phase": "combat",
       "order": 125,
       "runtimePrimitiveId": "runtime.command.use_ability",
-      "targetSelector": "ability_id",
-      "args": {"id":"ability/arcane_impulse","sourceParticipantId":"player","targetParticipantId":"goal153_target","expectedDamage":"2"},
+      "targetSelector": "hostile_encounter_participant",
+      "args": {"abilityId":"ability/arcane_impulse","encounterId":"encounter/goblin_duel","sourceParticipantId":"player","selectionPolicy":"first_by_encounter_order","expectedDamage":"2"},
       "dependsOnActionIds": ["begin_encounter"],
+      "replacesActionIds": ["basic_attack"],
       "checkpointBoundaryAfter": false,
       "presentationOnly": false,
       "required": true,
@@ -142,5 +125,5 @@
       "expectedRuntimeEffects": ["turn_advanced"]
     }
   ],
-  "sourceLineage": {"goalId":"goal_153_active_abilities_mana_turn_status_featuremodules_runtime_standalone_vertical_slice","catalogPath":"catalogs/feature-modules/optional/combat-active-ability-loadout.featuremodule.json","recipeId":"active_ability_loadout","variantKind":"active_ability","candidateId":"minimal-map-game-active-ability","operationIds":["active.00_arcane_impulse_definition","active.01_player_ability_reference","active.02_training_target","active.02a_training_target_health_capacity","active.10_arcane_impulse_damage"]}
+  "sourceLineage": {"goalId":"goal_153_active_abilities_mana_turn_status_featuremodules_runtime_standalone_vertical_slice","catalogPath":"catalogs/feature-modules/optional/combat-active-ability-loadout.featuremodule.json","recipeId":"active_ability_loadout","variantKind":"active_ability","candidateId":"minimal-map-game-active-ability","operationIds":["active.00_arcane_impulse_definition","active.01_player_ability_reference","active.10_arcane_impulse_damage"]}
 }

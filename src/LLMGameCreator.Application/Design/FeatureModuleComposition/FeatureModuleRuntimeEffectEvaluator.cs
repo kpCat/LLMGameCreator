@@ -60,6 +60,7 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             FeatureModuleRuntimeEffectMetricKinds.ParticipantResourceEquals => "0",
             FeatureModuleRuntimeEffectMetricKinds.StatusTickDamageEquals => "0",
             FeatureModuleRuntimeEffectMetricKinds.StatusAbsentAfterExpiry => "absent",
+            FeatureModuleRuntimeEffectMetricKinds.StatusTerminalOutcome => "not_applicable",
             _ => ReadMetric(contract, baselineSession, diagnostics)
         };
         var passed = diagnostics.Count == 0 && Compare(contract, actual, baseline);
@@ -115,6 +116,8 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
                 StatusTickDamage(session, contract.TargetId)?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.StatusAbsentAfterExpiry =>
                 StatusAbsent(session, contract.TargetId, contract.ResourceOrItemId) ? "absent" : "present",
+            FeatureModuleRuntimeEffectMetricKinds.StatusTerminalOutcome =>
+                StatusTerminalOutcome(session, contract.TargetId, contract.ResourceOrItemId),
             _ => null
         };
         if (value is null)
@@ -127,6 +130,9 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
 
     private static bool Compare(FeatureModuleRuntimeEffectContract contract, string actualText, string baselineText)
     {
+        if (contract.ComparisonKind == FeatureModuleRuntimeEffectComparisonKinds.OneOf)
+            return contract.ExpectedValue.Split('|', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+                .Contains(actualText, StringComparer.Ordinal);
         if (contract.ComparisonKind == FeatureModuleRuntimeEffectComparisonKinds.Equal)
         {
             return decimal.TryParse(contract.ExpectedValue, NumberStyles.Number, CultureInfo.InvariantCulture,
@@ -176,7 +182,7 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
     {
         var remaining = CombatQuantity(session.LatestCombatSummary, participantId, resourceId);
         if (!remaining.HasValue) return null;
-        var damage = session.LatestSnapshot.RuntimeEvents
+        var damage = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
             .Where(item => item.EventType == "DamageApplied" && item.TargetId == participantId)
             .Select(item => item.Args.TryGetValue("damage", out var raw)
                 ? raw
@@ -207,9 +213,31 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         session.CanonicalSession.RuntimeSession.GameplayState.Stats
             .SingleOrDefault(stat => stat.StatId == statId)?.Value;
 
-    private static ProgressionState? Progression(RuntimeInteractiveSession session, string progressionId) =>
-        session.CanonicalSession.RuntimeSession.GameplayState.Progressions
+    private static ProgressionState? Progression(RuntimeInteractiveSession session, string progressionId)
+    {
+        var action = session.CapabilityPlan?.OrderedActions.LastOrDefault(item =>
+            item.RuntimePrimitiveId == "runtime.command.change_progression" && item.ResolvedTargetId == progressionId);
+        var summary = action is null ? null : session.CanonicalSession.Snapshots.LastOrDefault(snapshot =>
+            snapshot.StepId == "capability." + action.ActionId)?.ProgressionSummary;
+        if (!string.IsNullOrWhiteSpace(summary))
+        {
+            var entry = summary.Split(';').Select(part => part.Trim()).SingleOrDefault(part =>
+                part.StartsWith(progressionId + "=", StringComparison.Ordinal));
+            if (entry is not null)
+            {
+                var parts = entry[(progressionId.Length + 1)..].Split(':');
+                if (double.TryParse(parts[0], NumberStyles.Number, CultureInfo.InvariantCulture, out var amount))
+                    return new ProgressionState
+                    {
+                        ProgressionId = progressionId,
+                        Amount = amount,
+                        StageId = parts.Length > 1 ? parts[1] : string.Empty
+                    };
+            }
+        }
+        return session.CanonicalSession.RuntimeSession.GameplayState.Progressions
             .SingleOrDefault(progression => progression.ProgressionId == progressionId);
+    }
 
     private static decimal? CombatDamageEventValue(RuntimeInteractiveSession session, string key)
     {
@@ -250,6 +278,31 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             && session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
                 .Any(item => item.EventType == "StatusRemoved" && item.Message.Contains("expired", StringComparison.OrdinalIgnoreCase)
                     && item.TargetId == participantId);
+    }
+
+    private static string? StatusTerminalOutcome(
+        RuntimeInteractiveSession session,
+        string participantSelector,
+        string statusId)
+    {
+        var participantId = participantSelector == "hostile_encounter_participant"
+            ? session.CapabilityPlan?.OrderedActions.FirstOrDefault(action =>
+                action.TargetSelector == participantSelector)?.ResolvedTargetId
+            : participantSelector;
+        var events = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).ToList();
+        if (!string.IsNullOrWhiteSpace(participantId)
+            && events.Any(item => item.EventType == "ParticipantDefeated" && item.TargetId == participantId))
+            return "target_defeated";
+        if (events.Any(item => item.EventType == "EncounterWon")) return "encounter_won";
+        if (events.Any(item => item.EventType == "EncounterLost")) return "encounter_lost";
+        if (!string.IsNullOrWhiteSpace(participantId)
+            && events.Any(item => item.EventType == "StatusRemoved"
+                                  && item.TargetId == participantId
+                                  && item.Message.Contains(statusId, StringComparison.Ordinal)
+                                  && item.Message.Contains("expired", StringComparison.OrdinalIgnoreCase)))
+            return "expired";
+        if (events.Any(item => item.EventType == "EncounterEnded")) return "encounter_ended";
+        return null;
     }
 
     private static decimal EventDamage(CanonicalRuntimePlayerCommandLoopRuntimeEvent runtimeEvent)

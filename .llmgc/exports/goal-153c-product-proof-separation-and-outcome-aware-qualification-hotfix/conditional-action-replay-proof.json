@@ -1,0 +1,16 @@
+﻿{
+    "schemaVersion":  "goal153c_conditional_action_replay_v1",
+    "status":  "GREEN",
+    "predicates":  [
+                       "encounter_active",
+                       "participant_alive",
+                       "status_present"
+                   ],
+    "handlerCalledOnSkip":  false,
+    "stateHashChangedOnSkip":  false,
+    "gameplayEventEmittedOnSkip":  false,
+    "snapshotReasonPresent":  true,
+    "journalReasonPresent":  true,
+    "checkpointReplayPassed":  true,
+    "fullReplayPassed":  true
+}

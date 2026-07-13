@@ -121,7 +121,8 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `independent_goal153b_audit_then_combined_goal153_family_human_gate required`.
+Current gate token: `independent_goal153c_audit_then_combined_goal153_family_human_gate required`.
+Goal153C is GREEN but human-unaccepted: the activated package has no qualification participant, health remains `30/0/30`, the active ability targets the real deterministic hostile `goblin`, defaults `2/12/3/5/1` produce five ticks and expiry, and lethal direct/tick paths terminate truthfully with replay-stable conditional skips. Independent Goal153C audit is required before the combined family gate.
 Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.

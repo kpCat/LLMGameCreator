@@ -5060,6 +5060,55 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-153c-product-proof-separation-and-outcome-aware-qualification-hotfix",
+      "allowedPaths": [
+        "docs/GOAL_DESIGN_QUALITY_POLICY.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/active-abilities-mana-turn-status-featuremodules.md",
+        "docs/manual-acceptance/goal153a-parameter-domain-turn-binding-event-atomicity.md",
+        "docs/manual-acceptance/goal153b-declarative-parameter-constraints-domain-integrity.md",
+        "docs/manual-acceptance/goal153c-product-proof-separation.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal153c-product-proof-separation.ps1",
+        ".devflow/scripts/run-goal153c-product-proof-separation.cmd",
+        "catalogs/feature-modules/optional/combat-active-ability-loadout.featuremodule.json",
+        "catalogs/feature-modules/optional/magic-mana-spellcasting.featuremodule.json",
+        "catalogs/feature-modules/optional/status-turn-effects.featuremodule.json",
+        "src/LLMGameCreator.Application/Design/CapabilityDrivenRuntimePlaythrough/CapabilityDrivenRuntimePlaythroughValidator.cs",
+        "src/LLMGameCreator.Application/Design/CapabilityDrivenRuntimePlaythrough/CapabilityDrivenRuntimePlaythroughExpansionService.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleLibraryValidator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleAuthoring/FeatureModuleParameterConstraintEvaluator.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectModels.cs",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectEvaluator.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+        "src/LLMGameCreator.Runtime/CanonicalRuntimePlayerCommandLoopService.cs",
+        "src/LLMGameCreator.Runtime/SelectedRuntimeVariantInteractiveSessionService.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal153A/Goal153AParameterizedLifecyclePlannerTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal153B/Goal153BManaDomainIntegrityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/UnifiedGameProjectWorkspace/Goal153AbilityManaStatusWorkspaceTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal153C/",
+        "docs/agent-tasks/goal-153c-product-proof-separation-and-outcome-aware-qualification-hotfix/",
+        ".llmgc/procedural/goal-153c-product-proof-separation-and-outcome-aware-qualification-hotfix/",
+        ".llmgc/exports/goal-153c-product-proof-separation-and-outcome-aware-qualification-hotfix/"
+      ],
+      "excludedPathPrefixes": [
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

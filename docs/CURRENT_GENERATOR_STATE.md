@@ -1,10 +1,10 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 153B declarative parameter constraints, domain integrity and Goal quality gate hotfix
+Updated by: Goal 153C product/proof separation and outcome-aware qualification hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals152/152A/152C before Goal153 implementation. Goal153B closes the independent declarative-constraint and resource-domain audit findings. Goals153, 153A and 153B are manual-gate ready, remain human-unaccepted, and share one combined review after independent Goal153B audit:
+The owner accepted Goals152/152A/152C before Goal153 implementation. Goal153C removes qualification-only content from the activated package and makes the real-target lifecycle outcome-aware. Goals153, 153A, 153B and 153C are manual-gate ready, remain human-unaccepted, and share one combined review after independent Goal153C audit:
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 
@@ -78,8 +78,8 @@ goal153AcceptedByCodex=false
 goal153ManualReviewPerformed=false
 goal153ImplementationStatus=GREEN
 goal153ManualGateReady=true
-goal153ConfiguredValues=2/12/3/2/1
-goal153DamageManaStatus=2/12->9/1x2/expired
+goal153ConfiguredValues=2/12/3/5/1
+goal153DamageManaStatus=2/12->9/1x5/expired
 goal153CheckpointReloadPassed=true
 goal153FullReplayEquivalent=true
 goal153HostCacheReused=true
@@ -93,14 +93,16 @@ goal153aManualReviewPerformed=false
 goal153aImplementationStatus=GREEN
 goal153aManualGateReady=true
 goal153aFullQualificationDurations=1/2/5
-goal153aPlanOnlyDurationTicksEndTurns=1000/1000/2999
+goal153aPlanOnlyDurationTicksEndTurns=1000/1000/1999
 goal153aEveryEndTurnExpectedParticipantBound=true
 goal153aAbilityStatusCanonicalEventAtomicity=true
 goal153aLethalEnemyVictoryAndPlayerLoss=true
 goal153aDuration5RemainingTicksAtCheckpoint=4
 goal153aDuration5ReplayEquivalent=true
 goal153aManaRelationRejectedAtParameterStage=true
-goal153aTrainingTargetHealth=1001001
+goal153aProofOnlyFixtureCapacityDerivedInMemory=true
+goal153ActivatedFixtureCount=0
+goal153ActivatedHealthMaximum=30
 goal153aHostCacheReused=true
 goal153aHostRebuilt=false
 goal153aUnityProcessStartCount=0
@@ -115,7 +117,24 @@ goal153bDeclarativeConstraintFingerprinted=true
 goal153bResourceDomainValidation=true
 goal153bUnityProcessStartCount=0
 goal153bHiddenSmokePassed=true
-gateStatus=independent_goal153b_audit_then_combined_goal153_family_human_gate required
+goal153cAccepted=false
+goal153cAcceptedByHuman=false
+goal153cAcceptedByCodex=false
+goal153cManualReviewPerformed=false
+goal153cImplementationStatus=GREEN
+goal153cManualGateReady=true
+goal153cActivatedFixtureCount=0
+goal153cHealthDefinitionUnchanged=true
+goal153cRealTargetId=goblin
+goal153cDefaultExpiryPassed=true
+goal153cHighDamageLethalPassed=true
+goal153cConditionalSkipReplayPassed=true
+goal153cEvidenceMirroredByteIdentical=true
+goal153cHostReused=true
+goal153cHostRebuilt=false
+goal153cUnityProcessStartCount=0
+goal153cArtifactScopeViolationCount=0
+gateStatus=independent_goal153c_audit_then_combined_goal153_family_human_gate required
 ```
 
 The read-only real source project was inventoried and copied before any Application

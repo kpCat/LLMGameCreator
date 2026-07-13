@@ -326,12 +326,14 @@ public sealed class GameProjectBuildAndQualificationService
                 : decimal.Parse(rawTotalAdditionalDamage, NumberStyles.Number, CultureInfo.InvariantCulture);
             var useAbilityAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
                 action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.UseAbility);
+            var useAbilityId = useAbilityAction?.Args.GetValueOrDefault("abilityId", useAbilityAction.ResolvedTargetId)
+                               ?? string.Empty;
             var allSnapshots = projectQualification.Session.CanonicalSession.Snapshots;
             var abilitySnapshot = useAbilityAction is null ? null : allSnapshots.LastOrDefault(snapshot =>
                 snapshot.RuntimeEvents.Any(runtimeEvent => runtimeEvent.EventType == "AbilityUsed"
-                    && runtimeEvent.TargetId == useAbilityAction.ResolvedTargetId));
+                    && runtimeEvent.TargetId == useAbilityId));
             var abilityDefinition = useAbilityAction is null ? null : qualifiedPackage.Game.Abilities
-                .SingleOrDefault(ability => ability.Id == useAbilityAction.ResolvedTargetId);
+                .SingleOrDefault(ability => ability.Id == useAbilityId);
             var abilityDirectDamage = abilitySnapshot?.RuntimeEvents.Where(runtimeEvent => runtimeEvent.EventType == "DamageApplied")
                 .Select(RuntimeEventDamage).FirstOrDefault() ?? 0m;
             var manaEvent = abilitySnapshot?.RuntimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "CostConsumed"

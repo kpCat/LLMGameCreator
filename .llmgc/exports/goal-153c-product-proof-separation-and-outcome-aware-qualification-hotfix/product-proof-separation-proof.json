@@ -1,0 +1,10 @@
+﻿{
+    "schemaVersion":  "goal153c_product_proof_separation_v1",
+    "status":  "GREEN",
+    "activatedFixtureCount":  0,
+    "productHealthMaximum":  30,
+    "proofFixtureLocation":  "test-local in-memory only",
+    "fixtureSavedOrActivated":  false,
+    "fixtureSentToStandalonePayload":  false,
+    "productAndFixtureHashesDistinct":  true
+}

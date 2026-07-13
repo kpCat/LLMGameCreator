@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
+using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
 
@@ -85,6 +86,11 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                 var target = ResolveTarget(package, item.Contract.TargetSelector, item.Contract.Args, diagnostics,
                     item.Contract.ActionId);
                 ValidateReferencedArgs(package, item.Contract, diagnostics);
+                ValidateExecutionPredicates(item.Contract, diagnostics);
+                var args = new SortedDictionary<string, string>(item.Contract.Args.ToDictionary(pair => pair.Key,
+                    pair => pair.Value, StringComparer.Ordinal), StringComparer.Ordinal);
+                if (item.Contract.TargetSelector == "hostile_encounter_participant")
+                    args["targetParticipantId"] = target;
                 resolved.Add(new CapabilityRuntimePlaythroughAction
                 {
                     ContractId = item.Contract.ContractId,
@@ -96,8 +102,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
                     RuntimePrimitiveId = item.Contract.RuntimePrimitiveId,
                     TargetSelector = item.Contract.TargetSelector,
                     ResolvedTargetId = target,
-                    Args = new SortedDictionary<string, string>(item.Contract.Args.ToDictionary(pair => pair.Key,
-                        pair => pair.Value, StringComparer.Ordinal), StringComparer.Ordinal),
+                    Args = args,
                     DependsOnActionIds = item.Contract.DependsOnActionIds.OrderBy(id => id, StringComparer.Ordinal).ToList(),
                     CheckpointBoundaryAfter = item.Contract.CheckpointBoundaryAfter,
                     PresentationOnly = item.Contract.PresentationOnly,
@@ -146,7 +151,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         return visited != contracts.Count;
     }
 
-    private static string ResolveTarget(
+    internal static string ResolveTarget(
         GamePackageDefinition package,
         string selector,
         IReadOnlyDictionary<string, string> args,
@@ -175,6 +180,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
             "encounter_id" => Matches(package.Game.Encounters.Select(item => item.Id), explicitId),
             "encounter_participant_id" => Matches(package.Game.Encounters.SelectMany(item => item.Participants)
                 .Select(item => item.Id), explicitId),
+            "hostile_encounter_participant" => HostileEncounterParticipants(package, args, diagnostics, actionId),
             "ability_id" => Matches(package.Game.Abilities.Select(item => item.Id), explicitId),
             "item_id" => Matches(package.Game.Items.Select(item => item.Id), explicitId),
             "equipment_slot_id" => Matches(package.Game.EquipmentSlots.Select(item => item.Id), explicitId),
@@ -217,6 +223,71 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
         }
     }
 
+    private static IReadOnlyList<string> HostileEncounterParticipants(
+        GamePackageDefinition package,
+        IReadOnlyDictionary<string, string> args,
+        List<string> diagnostics,
+        string actionId)
+    {
+        var encounterId = args.GetValueOrDefault("encounterId") ?? string.Empty;
+        var sourceParticipantId = args.GetValueOrDefault("sourceParticipantId") ?? string.Empty;
+        var policy = args.GetValueOrDefault("selectionPolicy") ?? string.Empty;
+        if (policy != "first_by_encounter_order")
+        {
+            diagnostics.Add("ambiguous hostile participant selection policy rejected: " + actionId + ":" + policy);
+            return [];
+        }
+        var encounter = package.Game.Encounters.SingleOrDefault(item => item.Id == encounterId);
+        if (encounter is null)
+        {
+            diagnostics.Add("hostile participant encounter rejected: " + actionId + ":" + encounterId);
+            return [];
+        }
+        var sources = encounter.Participants.Where(item => item.Id == sourceParticipantId).ToList();
+        if (sources.Count != 1)
+        {
+            diagnostics.Add("hostile participant source rejected: " + actionId + ":" + sourceParticipantId
+                            + ":matches=" + sources.Count);
+            return [];
+        }
+        var source = sources[0];
+        var selected = encounter.Participants.FirstOrDefault(item => item.Team != source.Team
+                                                                      && StartingHealth(package, item) > 0);
+        return selected is null ? [] : [selected.Id];
+    }
+
+    private static double StartingHealth(GamePackageDefinition package, EncounterParticipantDefinition participant)
+    {
+        var health = participant.Resources.FirstOrDefault(resource => resource.Id == "resource/health");
+        if (health is not null) return health.Amount;
+        return participant.Resources.FirstOrDefault(resource => package.Game.Resources.Any(definition =>
+            definition.Id == resource.Id && (definition.Kind.Equals("health", StringComparison.OrdinalIgnoreCase)
+                                               || definition.Tags.Contains("health", StringComparer.OrdinalIgnoreCase))))?.Amount ?? 0;
+    }
+
+    private static void ValidateExecutionPredicates(
+        FeatureModuleRuntimePlaythroughContract contract,
+        List<string> diagnostics)
+    {
+        if (!contract.Args.TryGetValue("executionPredicates", out var raw) || string.IsNullOrWhiteSpace(raw)) return;
+        var predicates = raw.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        foreach (var predicate in predicates)
+        {
+            if (predicate is not "encounter_active" and not "participant_alive" and not "status_present")
+                diagnostics.Add("unknown execution predicate rejected: " + contract.ActionId + ":" + predicate);
+        }
+        if (predicates.Contains("encounter_active", StringComparer.Ordinal)
+            && string.IsNullOrWhiteSpace(contract.Args.GetValueOrDefault("encounterId")))
+            diagnostics.Add("execution predicate encounter binding rejected: " + contract.ActionId);
+        if (predicates.Contains("participant_alive", StringComparer.Ordinal)
+            && string.IsNullOrWhiteSpace(contract.Args.GetValueOrDefault("predicateParticipantId")))
+            diagnostics.Add("execution predicate participant binding rejected: " + contract.ActionId);
+        if (predicates.Contains("status_present", StringComparer.Ordinal)
+            && (string.IsNullOrWhiteSpace(contract.Args.GetValueOrDefault("statusId"))
+                || string.IsNullOrWhiteSpace(contract.Args.GetValueOrDefault("statusTargetParticipantId"))))
+            diagnostics.Add("execution predicate status binding rejected: " + contract.ActionId);
+    }
+
     private static IReadOnlyList<string> Match(string actual, string expected) =>
         expected.Length == 0 || actual == expected ? [actual] : [];
 
@@ -226,7 +297,7 @@ public sealed class CapabilityDrivenRuntimePlaythroughValidator
     private static bool KnownSelector(string selector) => selector is "manifest_package" or "start_map"
         or "entity_id" or "interaction_id" or "dialogue_id" or "quest_id" or "inventory_id"
         or "container_inventory_id" or "recipe_id" or "resource_node_id" or "transaction_id"
-        or "encounter_id" or "encounter_participant_id" or "ability_id" or "item_id" or "equipment_slot_id"
+        or "encounter_id" or "encounter_participant_id" or "hostile_encounter_participant" or "ability_id" or "item_id" or "equipment_slot_id"
         or "stat_id" or "progression_id";
 
     private static void ValidateStatDamageMetadata(

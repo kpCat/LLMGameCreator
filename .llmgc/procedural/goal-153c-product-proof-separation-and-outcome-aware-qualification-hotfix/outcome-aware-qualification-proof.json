@@ -1,0 +1,23 @@
+﻿{
+    "schemaVersion":  "goal153c_outcome_aware_qualification_v1",
+    "status":  "GREEN",
+    "realTargetId":  "goblin",
+    "defaults":  {
+                     "tickDamage":  1,
+                     "ticks":  5,
+                     "terminalOutcome":  "expired",
+                     "abilityDamage":  2,
+                     "startingMana":  12,
+                     "manaCost":  3,
+                     "duration":  5
+                 },
+    "highDirectDamage":  {
+                             "value":  1000,
+                             "terminalOutcome":  "target_defeated"
+                         },
+    "highTickDamage":  {
+                           "postEndTurnAdvance":  false,
+                           "value":  1000,
+                           "terminalOutcome":  "target_defeated"
+                       }
+}

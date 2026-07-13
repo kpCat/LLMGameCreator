@@ -86,6 +86,12 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 descriptor);
         }
 
+        var plannedAction = session.CapabilityPlan?.OrderedActions.SingleOrDefault(action =>
+            action.ActionId == descriptor.ActionId);
+        var skipReason = plannedAction is null ? null : ConditionalSkipReason(session, plannedAction);
+        if (skipReason is not null)
+            return SkipConditionalAction(package, session, request, descriptor, before, skipReason);
+
         var runtimeExecuted = false;
         var runtimeMutation = false;
         var eventCount = 0;
@@ -183,6 +189,118 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
             CorrelationPassed = true,
             Status = "EXECUTED",
             Diagnostics = diagnostics
+        };
+        session.ActionJournal.Add(ToJournal(result));
+        session.CurrentActionIndex++;
+        Refresh(session, package);
+        return result;
+    }
+
+    private static string? ConditionalSkipReason(
+        SelectedRuntimeVariantInteractiveSession session,
+        CapabilityRuntimePlaythroughAction action)
+    {
+        if (!action.Args.TryGetValue("executionPredicates", out var raw) || string.IsNullOrWhiteSpace(raw))
+            return null;
+        var state = session.CanonicalSession.RuntimeSession.GameplayState;
+        var encounter = state.ActiveEncounter;
+        var failed = new List<string>();
+        foreach (var predicate in raw.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(value => value.Trim()))
+        {
+            var passed = predicate switch
+            {
+                "encounter_active" => encounter is not null && encounter.Active
+                                      && encounter.EncounterId == action.Args.GetValueOrDefault("encounterId"),
+                "participant_alive" => encounter?.Participants.SingleOrDefault(item =>
+                    item.Id == action.Args.GetValueOrDefault("predicateParticipantId"))?.Alive == true,
+                "status_present" => encounter?.Participants.SingleOrDefault(item =>
+                    item.Id == action.Args.GetValueOrDefault("statusTargetParticipantId"))?.Statuses.Any(status =>
+                    status.StatusId == action.Args.GetValueOrDefault("statusId")) == true,
+                _ => false
+            };
+            if (!passed) failed.Add(predicate);
+        }
+        if (failed.Count == 0) return null;
+
+        var events = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).ToList();
+        var statusTarget = action.Args.GetValueOrDefault("statusTargetParticipantId");
+        var terminalOutcome = events.Any(item => item.EventType == "ParticipantDefeated" && item.TargetId == statusTarget)
+            ? "target_defeated"
+            : events.Any(item => item.EventType == "EncounterWon") ? "encounter_won"
+            : events.Any(item => item.EventType == "EncounterLost") ? "encounter_lost"
+            : events.Any(item => item.EventType == "EncounterEnded") ? "encounter_ended"
+            : events.Any(item => item.EventType == "StatusRemoved"
+                                      && item.TargetId == statusTarget
+                                      && item.Message.Contains("expired", StringComparison.OrdinalIgnoreCase))
+                ? "expired"
+                : string.Empty;
+        return terminalOutcome.Length == 0
+            ? null
+            : "terminal_outcome=" + terminalOutcome + ";predicates=" + string.Join(",", failed);
+    }
+
+    private static SelectedRuntimeVariantInteractiveActionResult SkipConditionalAction(
+        GamePackageDefinition package,
+        SelectedRuntimeVariantInteractiveSession session,
+        SelectedRuntimeVariantInteractiveActionRequest request,
+        SelectedRuntimeVariantActionDescriptor descriptor,
+        string before,
+        string reason)
+    {
+        session.CanonicalSession.CurrentCommandIndex = descriptor.RuntimeCommandEndIndex + 1;
+        var source = session.LatestSnapshot;
+        var snapshot = new CanonicalRuntimePlayerCommandLoopSnapshot
+        {
+            StepIndex = descriptor.CanonicalStepIndex,
+            StepId = descriptor.CanonicalStepId,
+            Category = descriptor.Category,
+            CommandLabel = descriptor.ActionId,
+            StateHashBefore = before,
+            StateHashAfter = before,
+            MapSummary = source.MapSummary,
+            PlayerX = source.PlayerX,
+            PlayerY = source.PlayerY,
+            VisibleInteractionSummary = source.VisibleInteractionSummary,
+            DialogueSummary = source.DialogueSummary,
+            QuestSummary = source.QuestSummary,
+            InventorySummary = source.InventorySummary,
+            CombatSummary = source.CombatSummary,
+            EquipmentSummary = source.EquipmentSummary,
+            AttributesSummary = source.AttributesSummary,
+            ProgressionSummary = source.ProgressionSummary,
+            DiagnosticSummary = "conditional action skipped: " + reason,
+            ProjectionOnly = false,
+            UnityGameplayTruth = false,
+            RuntimeEvents = []
+        };
+        session.CanonicalSession.Snapshots.Add(snapshot);
+        session.CanonicalSession.StateHashChain.Add(before);
+        session.LatestSnapshot = snapshot;
+        UpdateSummaries(session);
+        var result = new SelectedRuntimeVariantInteractiveActionResult
+        {
+            ActionRequestId = request.ActionRequestId,
+            SessionId = request.SessionId,
+            ActionIndex = request.ActionIndex,
+            ActionId = descriptor.ActionId,
+            Category = descriptor.Category,
+            Route = "conditional_skip",
+            CommandKind = reason,
+            TargetId = descriptor.TargetId,
+            CanonicalStepId = descriptor.CanonicalStepId,
+            CanonicalStepIndex = descriptor.CanonicalStepIndex,
+            RuntimeCommandStartIndex = descriptor.RuntimeCommandStartIndex,
+            RuntimeCommandEndIndex = descriptor.RuntimeCommandEndIndex,
+            ExecutionTargetId = descriptor.ExecutionTargetId,
+            ExecutionBindingValidated = descriptor.ExecutionBindingValidated,
+            StateHashBefore = before,
+            StateHashAfter = before,
+            RuntimeExecuted = false,
+            RuntimeMutation = false,
+            RuntimeEventCount = 0,
+            CorrelationPassed = true,
+            Status = "EXECUTED",
+            Diagnostics = ["conditional_action_skipped:" + reason]
         };
         session.ActionJournal.Add(ToJournal(result));
         session.CurrentActionIndex++;
@@ -592,7 +710,9 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
                 "runtime.command.execute_transaction" => package.Game.Transactions.Any(item => item.Id == step.TargetId),
                 "runtime.command.start_encounter" => package.Game.Encounters.Any(item => item.Id == step.TargetId),
                 "runtime.command.basic_attack" => package.Game.Encounters.SelectMany(item => item.Participants).Any(item => item.Id == step.TargetId),
-                "runtime.command.use_ability" => package.Game.Abilities.Any(item => item.Id == step.TargetId),
+                "runtime.command.use_ability" => package.Game.Abilities.Any(item => item.Id == step.Args.GetValueOrDefault("abilityId", step.TargetId))
+                                                   && package.Game.Encounters.SelectMany(item => item.Participants)
+                                                       .Any(item => item.Id == step.Args.GetValueOrDefault("targetParticipantId", step.TargetId)),
                 "runtime.command.end_turn" => package.Game.Encounters.SelectMany(item => item.Participants).Any(item => item.Id == step.TargetId),
                 "runtime.command.open_container" => package.Game.Inventories.Any(item => item.Id == step.TargetId),
                 "runtime.command.take_from_container" => package.Game.Items.Any(item => item.Id == step.TargetId),
