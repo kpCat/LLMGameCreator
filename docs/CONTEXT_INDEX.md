@@ -121,7 +121,7 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `goal154_failed_incomplete_vertical_slice`.
+Current gate token: `goal154_failed_pending_goal154a_closure`.
 Goals153/153A/153B/153C are accepted by human at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`: defaults `2/12/3/5/1` were saved/reopened and replayed, with damage 2, mana `12 → 9`, five ticks of 1, expiry and cached standalone reuse without Unity Editor. Goal154 remains human-unaccepted and FAILED because its required focused tests and full runtime/workspace/standalone proof are absent.
 Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical

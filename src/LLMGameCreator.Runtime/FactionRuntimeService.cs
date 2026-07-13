@@ -1,3 +1,4 @@
+using System.Globalization;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
 
@@ -31,9 +32,10 @@ public sealed class FactionRuntimeService : IFactionRuntimeService
 
         var working = RuntimeStateHelpers.CloneState(state);
         var runtime = RuntimeStateHelpers.EnsureFaction(working, faction);
+        var before = runtime.Reputation;
         runtime.Reputation = RuntimeStateHelpers.Clamp(value, faction.MinReputation, faction.MaxReputation);
         RuntimeStateHelpers.CopyState(working, state);
-        return Success(state, $"Faction reputation set: {factionId} = {runtime.Reputation:0.####}", GameRuntimeEventType.FactionReputationChanged, factionId, runtime.Reputation, runtime.Reputation, 0);
+        return Success(state, $"Faction reputation set: {factionId} = {runtime.Reputation:0.####}", GameRuntimeEventType.FactionReputationChanged, factionId, before, runtime.Reputation, value, setOperation: true);
     }
 
     public GameRuntimeResult SetFactionRelation(GamePackageDefinition package, GameRuntimeState state, string factionId, string relationKind)
@@ -51,14 +53,14 @@ public sealed class FactionRuntimeService : IFactionRuntimeService
         return Success(state, $"Faction relation set: {factionId} = {runtime.RelationKind}", GameRuntimeEventType.FactionRelationChanged, factionId);
     }
 
-    private static GameRuntimeResult Success(GameRuntimeState state, string message, GameRuntimeEventType eventType, string targetId, double? before = null, double? after = null, double requested = 0)
+    private static GameRuntimeResult Success(GameRuntimeState state, string message, GameRuntimeEventType eventType, string targetId, double? before = null, double? after = null, double requested = 0, bool setOperation = false)
     {
         return new GameRuntimeResult
         {
             Success = true,
             State = state,
             Message = message,
-            Events = new List<GameRuntimeEvent> { RuntimeStateHelpers.Event(eventType, message, targetId, before.HasValue ? new Dictionary<string, string> { ["factionId"] = targetId, ["before"] = before.Value.ToString("0.####"), ["after"] = after!.Value.ToString("0.####"), ["delta"] = (after.Value - before.Value).ToString("0.####"), ["clamped"] = (Math.Abs((before.Value + requested) - after.Value) > 0.0000001).ToString().ToLowerInvariant() } : null) }
+            Events = new List<GameRuntimeEvent> { RuntimeStateHelpers.Event(eventType, message, targetId, before.HasValue ? new Dictionary<string, string> { ["factionId"] = targetId, ["before"] = before.Value.ToString("0.####", CultureInfo.InvariantCulture), ["requested"] = requested.ToString("0.####", CultureInfo.InvariantCulture), ["after"] = after!.Value.ToString("0.####", CultureInfo.InvariantCulture), ["delta"] = (after.Value - before.Value).ToString("0.####", CultureInfo.InvariantCulture), ["clamped"] = (Math.Abs((setOperation ? requested : before.Value + requested) - after.Value) > 0.0000001).ToString().ToLowerInvariant() } : null) }
         };
     }
 

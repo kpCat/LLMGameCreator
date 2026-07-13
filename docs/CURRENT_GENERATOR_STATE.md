@@ -4,7 +4,7 @@ Status: source-of-truth handoff
 Updated by: Goal 153C product/proof separation and outcome-aware qualification hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. The recorded human review confirms saved/reopened parameters `2/12/3/5/1`, damage 2, mana `12 → 9`, five ticks of 1, expiry and cached standalone reuse without Unity Editor. Goal154 remains human-unaccepted and FAILED because required focused tests and full runtime/workspace/standalone lifecycle proof are absent.
+The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. The recorded human review confirms saved/reopened parameters `2/12/3/5/1`, damage 2, mana `12 → 9`, five ticks of 1, expiry and cached standalone reuse without Unity Editor. Goal154 remains human-unaccepted. Goal154A established 18 discoverable focused contracts and partial Runtime event-truth fixes, but it remains FAILED because generic primitive/evaluator closure, full Runtime lifecycle/rollback matrix, saved-project/cache proof and artifact-scope evidence are not complete.
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 

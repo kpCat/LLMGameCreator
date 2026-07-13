@@ -138,6 +138,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var advance = _questRuntimeService.AdvanceQuestObjective(package, working, choice.AdvanceQuestId!, objectiveId, 1);
             result.Events.AddRange(advance.Events);
             result.Diagnostics.AddRange(advance.Diagnostics);
+            if (!advance.Success) return RolledBackFailure(state, result, advance.Message, choice.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(choice.SetQuestStageId) && !string.IsNullOrWhiteSpace(choice.AdvanceQuestId))
@@ -145,6 +146,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var setStage = _questRuntimeService.SetQuestStage(package, working, choice.AdvanceQuestId!, choice.SetQuestStageId!);
             result.Events.AddRange(setStage.Events);
             result.Diagnostics.AddRange(setStage.Diagnostics);
+            if (!setStage.Success) return RolledBackFailure(state, result, setStage.Message, choice.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(choice.OpenTransactionId))
@@ -152,6 +154,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var transaction = _transactionRuntimeService.ExecuteTransaction(package, working, choice.OpenTransactionId!, inventoryId);
             result.Events.AddRange(transaction.Events);
             result.Diagnostics.AddRange(transaction.Diagnostics);
+            if (!transaction.Success) return RolledBackFailure(state, result, transaction.Message, choice.Id);
         }
 
         if (!string.IsNullOrWhiteSpace(choice.StartEncounterId))
@@ -159,6 +162,7 @@ public sealed class DialogueRuntimeService : IDialogueRuntimeService
             var encounter = _encounterRuntimeService.StartEncounter(package, working, choice.StartEncounterId!);
             result.Events.AddRange(encounter.Events);
             result.Diagnostics.AddRange(encounter.Diagnostics);
+            if (!encounter.Success) return RolledBackFailure(state, result, encounter.Message, choice.Id);
         }
 
         var active = working.ActiveDialogue!;

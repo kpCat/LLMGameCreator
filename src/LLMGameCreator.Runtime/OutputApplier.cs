@@ -66,9 +66,14 @@ public sealed class OutputApplier : IOutputApplier
                 return;
             }
 
+            var before = RuntimeStateHelpers.GetResourceAmount(state, output.Id, output.Scope);
             RuntimeStateHelpers.ChangeResource(state, definition, output.Amount, output.Scope);
+            var after = RuntimeStateHelpers.GetResourceAmount(state, output.Id, output.Scope);
             result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Changed resource {output.Id} by {Format(output.Amount)}", output.Id));
-            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.ResourceChanged, $"Resource changed: {output.Id}", output.Id));
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.ResourceChanged, $"Resource changed: {output.Id}", output.Id, new Dictionary<string, string>
+            {
+                ["resourceId"] = output.Id, ["scope"] = output.Scope ?? string.Empty, ["before"] = Format(before), ["requestedDelta"] = Format(output.Amount), ["after"] = Format(after), ["actualDelta"] = Format(after - before), ["clamped"] = (Math.Abs(after - before - output.Amount) > 0.0000001).ToString().ToLowerInvariant()
+            }));
             return;
         }
 
@@ -142,8 +147,12 @@ public sealed class OutputApplier : IOutputApplier
                 value = metadataValue;
             }
 
+            var before = RuntimeStateHelpers.GetFlagValue(state, output.Id);
             RuntimeStateHelpers.SetFlag(state, output.Id, value);
-            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Set flag {output.Id} = {value}", output.Id));
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Set flag {output.Id} = {value}", output.Id, new Dictionary<string, string>
+            {
+                ["flagId"] = output.Id, ["before"] = before, ["after"] = value
+            }));
             return;
         }
 

@@ -1,0 +1,42 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154a-social-lifecycle-runtime-proof-and-one-time-reward-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 7a63b6388907e978ed0f57b953fec93cb1a36935
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- продолжай от честного FAILED Goal154; не откатывай partial foundation и не начинай всё заново;
+- Goal153/153A/153B/153C уже приняты человеком и должны остаться принятыми;
+- Goal154/154A пока НЕ приняты и manual gate не готов;
+- сначала создай Goal154A tests и докажи, что filter обнаруживает минимум 18 тестов;
+- пустой test filter не считается GREEN;
+- добавь реальные runtimePlaythroughContracts/runtimeEffectContracts всем трём социальным модулям;
+- default 0/10/5/10/7 должен дать reputation 0→10, quest completed, trusted choice unlock,
+  gold 0→7, claim flag true и повторную недоступность;
+- threshold 20 должен дать truthful still_locked без Runtime failure;
+- исправь SetReputation event before/requested/after/delta/clamped и invariant event args;
+- quest/dialogue rollback не должен возвращать success events откатившегося state;
+- второй claim должен быть state/event atomic;
+- никаких dummy faction/quest/dialogue/inventory и искусственного стартового золота;
+- Unity Editor invocation budget = 0;
+- используй существующий host cache и один hidden smoke;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- соблюдай command budget, не повторяй неизменённые команды;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи test discovery/count, модули/параметры, reputation completion/failure/clamps,
+trusted choice lock/unlock/claim/repeat, gold/flag, rollback event truth, checkpoint/replay,
+real project, standalone cache, Unity process count, final SHA, push, HEAD == origin/main,
+clean worktree и короткий manual gate.
