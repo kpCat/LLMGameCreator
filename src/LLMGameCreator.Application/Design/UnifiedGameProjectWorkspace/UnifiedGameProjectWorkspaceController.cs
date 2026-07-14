@@ -39,6 +39,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private readonly GameProjectWorkspaceStatusPresenter _presenter;
     private readonly IProjectStandaloneBuildService _standaloneBuild;
     private GameProjectBuildResult? _lastBuild;
+    private GameProjectBuildResult? _lastSuccessfulBuild;
 
     public UnifiedGameProjectWorkspaceController(
         ICurrentGamePackageService currentPackageService,
@@ -73,6 +74,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _authoring.OpenProject(requested, currentPackage);
         HasOpenProject = true;
         _lastBuild = null;
+        _lastSuccessfulBuild = null;
         return Snapshot();
     }
 
@@ -189,6 +191,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ExecutableInformationalVersion = executable.InformationalVersion
             ,LastStandaloneBuild = _standaloneBuild.LastResult
             ,StandaloneUnityEditorPath = _standaloneBuild.LoadSettings(state.ProjectFolder).UnityEditorPath
+            ,Social = _lastSuccessfulBuild?.Social is { Present: true, Passed: true } social ? social : null
         };
     }
 
@@ -217,6 +220,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     {
         EnsureOpen();
         _lastBuild = _builder.Build(_authoring, cancellationToken);
+        if (_lastBuild.Passed) _lastSuccessfulBuild = _lastBuild;
         return _lastBuild;
     }
 
@@ -224,6 +228,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     {
         EnsureOpen();
         _lastBuild = _builder.Build(_authoring, cancellationToken);
+        if (_lastBuild.Passed) _lastSuccessfulBuild = _lastBuild;
         var snapshot = Snapshot();
         if (!_lastBuild.Passed)
             return new ProjectStandaloneBuildResult { Status = "FAILED", Stage = "qualify_current_project", Diagnostics = _lastBuild.Diagnostics, ProjectFolder = snapshot.ProjectFolder };
@@ -305,6 +310,14 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             facts.Add(new StandaloneHumanReviewFact { Label = "Длительность", Value = build.StatusSummary.Contains(',') ? build.StatusSummary[(build.StatusSummary.IndexOf(',') + 1)..].Trim() : build.StatusSummary });
             facts.Add(new StandaloneHumanReviewFact { Label = "Урон за ход", Value = build.StatusTickDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
             facts.Add(new StandaloneHumanReviewFact { Label = "Эффект завершён", Value = build.StatusExpired ? "да" : "нет" });
+        }
+        if (build.Social is { Present: true, Passed: true } social)
+        {
+            facts.AddRange(social.HumanFacts.Select(fact => new StandaloneHumanReviewFact
+            {
+                Label = fact.Label,
+                Value = fact.Value
+            }));
         }
         return facts;
     }

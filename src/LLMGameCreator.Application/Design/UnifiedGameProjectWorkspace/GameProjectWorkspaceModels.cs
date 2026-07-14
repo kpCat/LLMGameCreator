@@ -43,6 +43,40 @@ public sealed record GameProjectParameterPresentation
     public string ValidationError { get; init; } = string.Empty;
 }
 
+public sealed record GameProjectSocialHumanFact
+{
+    public string Label { get; init; } = string.Empty;
+    public string Value { get; init; } = string.Empty;
+}
+
+public sealed record GameProjectSocialSummary
+{
+    public bool Present { get; init; }
+    public bool Passed { get; init; }
+    public string FactionId { get; init; } = string.Empty;
+    public string FactionTitle { get; init; } = string.Empty;
+    public decimal ReputationBefore { get; init; }
+    public decimal ReputationAfter { get; init; }
+    public string QuestId { get; init; } = string.Empty;
+    public string QuestTitle { get; init; } = string.Empty;
+    public string QuestState { get; init; } = string.Empty;
+    public string ChoiceId { get; init; } = string.Empty;
+    public string ChoiceText { get; init; } = string.Empty;
+    public IReadOnlyList<string> ChoiceVisibilitySequence { get; init; } = [];
+    public decimal GoldBefore { get; init; }
+    public decimal GoldAfterQuest { get; init; }
+    public decimal GoldAfterClaim { get; init; }
+    public decimal TrustedRewardDelta { get; init; }
+    public string ClaimFlagId { get; init; } = string.Empty;
+    public bool RewardClaimed { get; init; }
+    public bool RepeatRewardAvailable { get; init; }
+    public string SocialOutcome { get; init; } = string.Empty;
+    public bool CheckpointReplayPassed { get; init; }
+    public bool FullReplayEquivalent { get; init; }
+    public IReadOnlyList<GameProjectSocialHumanFact> HumanFacts { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
 public sealed record UnifiedGameProjectWorkspaceSnapshot
 {
     public string ProjectFolder { get; init; } = string.Empty;
@@ -111,6 +145,7 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public string ExecutableInformationalVersion { get; init; } = string.Empty;
     public ProjectStandaloneBuildResult? LastStandaloneBuild { get; init; }
     public string StandaloneUnityEditorPath { get; init; } = string.Empty;
+    public GameProjectSocialSummary? Social { get; init; }
 }
 
 public sealed record GameProjectBuildResult
@@ -176,6 +211,7 @@ public sealed record GameProjectBuildResult
     public string AttemptedCompositionPackageSha256 { get; init; } = string.Empty;
     public string AttemptedFinalStateHash { get; init; } = string.Empty;
     public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
+    public GameProjectSocialSummary? Social { get; init; }
 }
 
 public sealed record GameProjectRuntimeFrame
@@ -212,6 +248,7 @@ public sealed record GameProjectBuildHistoryEntry
     public int AttemptedCheckpointActionCount { get; init; }
     public int AttemptedFinalReplayActionCount { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
+    public GameProjectSocialSummary? Social { get; init; }
 }
 
 public sealed record GameProjectAuthoringState

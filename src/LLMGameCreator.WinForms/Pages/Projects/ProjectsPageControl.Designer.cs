@@ -56,6 +56,8 @@ namespace LLMGameCreator.WinForms.Pages
         private Button _buildAndQualifyButton;
         private Label _buildStatusLabel;
         private TextBox _buildResultTextBox;
+        private Panel _socialCardPanel;
+        private Label _socialCardLabel;
         private TableLayoutPanel _standaloneLayout;
         private Label _unityEditorLabel;
         private TextBox _unityEditorPathTextBox;
@@ -130,6 +132,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildAndQualifyButton = new Button();
             this._buildStatusLabel = new Label();
             this._buildResultTextBox = new TextBox();
+            this._socialCardPanel = new Panel();
+            this._socialCardLabel = new Label();
             this._standaloneLayout = new TableLayoutPanel();
             this._unityEditorLabel = new Label();
             this._unityEditorPathTextBox = new TextBox();
@@ -371,14 +375,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildLayout.Controls.Add(this._buildAndQualifyButton, 0, 0);
             this._buildLayout.Controls.Add(this._buildStatusLabel, 0, 1);
             this._buildLayout.Controls.Add(this._buildResultTextBox, 0, 2);
-            this._buildLayout.Controls.Add(this._standaloneLayout, 0, 3);
+            this._buildLayout.Controls.Add(this._socialCardPanel, 0, 3);
+            this._buildLayout.Controls.Add(this._standaloneLayout, 0, 4);
             this._buildLayout.Dock = DockStyle.Fill;
             this._buildLayout.Padding = new Padding(18);
-            this._buildLayout.RowCount = 4;
+            this._buildLayout.RowCount = 5;
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 54F));
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 45F));
-            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 55F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 190F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
             this._buildAndQualifyButton.Dock = DockStyle.Left;
             this._buildAndQualifyButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             this._buildAndQualifyButton.Size = new Size(270, 42);
@@ -391,6 +397,19 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildResultTextBox.Multiline = true;
             this._buildResultTextBox.ReadOnly = true;
             this._buildResultTextBox.ScrollBars = ScrollBars.Vertical;
+            //
+            // _socialCardPanel
+            //
+            this._socialCardPanel.BorderStyle = BorderStyle.FixedSingle;
+            this._socialCardPanel.Controls.Add(this._socialCardLabel);
+            this._socialCardPanel.Dock = DockStyle.Fill;
+            this._socialCardPanel.Margin = new Padding(0, 8, 0, 8);
+            this._socialCardPanel.Padding = new Padding(12);
+            this._socialCardPanel.Visible = false;
+            this._socialCardLabel.AutoSize = false;
+            this._socialCardLabel.Dock = DockStyle.Fill;
+            this._socialCardLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+            this._socialCardLabel.TextAlign = ContentAlignment.TopLeft;
             //
             // _standaloneLayout
             //

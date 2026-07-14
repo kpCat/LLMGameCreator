@@ -7,6 +7,7 @@ using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 using LLMGameCreator.Application.Design.FeatureModuleCertification;
+using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
@@ -206,6 +207,36 @@ public sealed class GameProjectBuildAndQualificationService
                 || !projectQualification.ActionDescriptorExecutionBindingPassed)
                 throw new InvalidOperationException("Identity-overlaid project package failed canonical Runtime qualification.");
 
+            var effectiveSelectedModules = materialized.Plan.ParameterBinding.EffectiveCatalog.Modules
+                .Where(module => module.Required || savedDocument.SelectedModuleIds.Contains(module.ModuleId, StringComparer.Ordinal))
+                .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
+                .ToList();
+            var socialObservations = new FeatureModuleRuntimeEffectEvaluator().Evaluate(
+                effectiveSelectedModules,
+                projectQualification.Session,
+                new LLMGameCreator.Runtime.Abstractions.SelectedRuntimeVariantInteractiveSession(),
+                qualifiedPackage);
+            var social = new SocialRuntimeReviewProjectionService().Project(
+                effectiveSelectedModules,
+                qualifiedPackage,
+                projectQualification.StartRequest.CapabilityPlan
+                    ?? throw new InvalidOperationException("Capability-driven Runtime plan is missing."),
+                projectQualification.Session,
+                socialObservations,
+                projectQualification.CheckpointReplay.Passed,
+                projectQualification.FinalReplay.Passed
+                    && projectQualification.FinalReplay.ActualStateHash == projectQualification.Session.CurrentStateHash);
+            if (social.Present && !social.Passed)
+                return RollbackFailure(
+                    authoring,
+                    preBuildDocument,
+                    preBuildDirty,
+                    transaction,
+                    "Социальные последствия не прошли причинную проверку.",
+                    social.Diagnostics,
+                    "social.projection",
+                    attempt);
+
             supportFilePlan = _supportFileMaterializer.CreatePlan(
                 qualifiedPackage,
                 state.ProjectFolder,
@@ -277,7 +308,8 @@ public sealed class GameProjectBuildAndQualificationService
                 projectQualification.Session.CurrentStateHash,
                 qualifiedDocument.ParameterValues.Count,
                 ledger,
-                attempt.AttemptId);
+                attempt.AttemptId,
+                social);
             transaction.Commit();
 
             var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
@@ -406,6 +438,7 @@ public sealed class GameProjectBuildAndQualificationService
                 summaryLines.Add("Сохранение/повтор: "
                     + (projectQualification.CheckpointReplay.Passed && projectQualification.FinalReplay.Passed ? "пройдено" : "не пройдено"));
             }
+            summaryLines.AddRange(SocialRuntimeReviewProjectionService.HumanSummaryLines(social));
 
             return new GameProjectBuildResult
             {
@@ -478,6 +511,7 @@ public sealed class GameProjectBuildAndQualificationService
                         Category = entry.Category,
                         StateHash = entry.StateHashAfter
                     }).ToList()
+                ,Social = social
             };
         }
         catch (Exception exception) when (exception is IOException
@@ -559,7 +593,8 @@ public sealed class GameProjectBuildAndQualificationService
         string finalStateHash,
         int configuredParameterCount,
         FeatureModuleCertificationLedger ledger,
-        string attemptId)
+        string attemptId,
+        GameProjectSocialSummary social)
     {
         var root = GameProjectFeatureModuleAuthoringService.ConfinedPath(
             projectFolder,
@@ -589,6 +624,7 @@ public sealed class GameProjectBuildAndQualificationService
             AttemptedPlannedActionCount = result.Qualification.Artifacts.Session.CapabilityPlan?.OrderedActions.Count ?? 0,
             AttemptedCheckpointActionCount = result.Qualification.Artifacts.CheckpointReplay.ReplayedActionCount,
             AttemptedFinalReplayActionCount = result.Qualification.Artifacts.FinalReplay.ReplayedActionCount
+            ,Social = social.Present && social.Passed ? social : null
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
         return path;
