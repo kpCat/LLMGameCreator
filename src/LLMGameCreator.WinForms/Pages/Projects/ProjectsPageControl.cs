@@ -267,7 +267,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             _overviewRuntimeLabel.Text = "Последняя Runtime-проверка: " + snapshot.LastRuntimeQualification;
             BindMechanics(snapshot);
             BindParameters(snapshot);
-            BindSocialCard(snapshot.Social);
+            BindSocialCard(snapshot);
             BindTechnicalDetails(snapshot);
             BindStandalone(snapshot);
             if (snapshot.Diagnostics.Count > 0 && !_buildUiRunning)
@@ -279,13 +279,14 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         }
     }
 
-    private void BindSocialCard(GameProjectSocialSummary? social)
+    private void BindSocialCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
     {
+        var social = snapshot.Social;
         var visible = social is { Present: true, Passed: true } && social.HumanFacts.Count > 0;
         _socialCardPanel.Visible = visible;
         _socialCardLabel.Text = !visible
             ? string.Empty
-            : "Социальные последствия" + Environment.NewLine + Environment.NewLine
+            : "Социальные последствия" + (snapshot.Dirty ? " — последняя успешная проверка" : string.Empty) + Environment.NewLine + Environment.NewLine
               + string.Join(Environment.NewLine, social!.HumanFacts.Select(fact => fact.Label + "    " + fact.Value));
     }
 

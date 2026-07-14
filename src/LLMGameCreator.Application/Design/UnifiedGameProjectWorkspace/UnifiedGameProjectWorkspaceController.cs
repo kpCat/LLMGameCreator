@@ -38,21 +38,25 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private readonly GameProjectBuildAndQualificationService _builder;
     private readonly GameProjectWorkspaceStatusPresenter _presenter;
     private readonly IProjectStandaloneBuildService _standaloneBuild;
+    private readonly GameProjectBuildHistoryReader _historyReader;
     private GameProjectBuildResult? _lastBuild;
     private GameProjectBuildResult? _lastSuccessfulBuild;
+    private IReadOnlyList<string> _persistedHistoryDiagnostics = [];
 
     public UnifiedGameProjectWorkspaceController(
         ICurrentGamePackageService currentPackageService,
         GameProjectFeatureModuleAuthoringService authoring,
         GameProjectBuildAndQualificationService builder,
         GameProjectWorkspaceStatusPresenter? presenter = null,
-        IProjectStandaloneBuildService? standaloneBuild = null)
+        IProjectStandaloneBuildService? standaloneBuild = null,
+        GameProjectBuildHistoryReader? historyReader = null)
     {
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _authoring = authoring ?? throw new ArgumentNullException(nameof(authoring));
         _builder = builder ?? throw new ArgumentNullException(nameof(builder));
         _presenter = presenter ?? new GameProjectWorkspaceStatusPresenter();
         _standaloneBuild = standaloneBuild ?? new ProjectStandaloneBuildService(Directory.GetCurrentDirectory());
+        _historyReader = historyReader ?? new GameProjectBuildHistoryReader();
     }
 
     public bool HasOpenProject { get; private set; }
@@ -74,7 +78,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _authoring.OpenProject(requested, currentPackage);
         HasOpenProject = true;
         _lastBuild = null;
-        _lastSuccessfulBuild = null;
+        var persisted = _historyReader.ReadLatestMatchingSocialSuccess(requested, _authoring.State.Document);
+        _lastSuccessfulBuild = persisted.LastSuccessfulBuild;
+        _persistedHistoryDiagnostics = persisted.Diagnostics;
         return Snapshot();
     }
 
@@ -142,7 +148,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             CatalogFingerprint = state.Library.CatalogFingerprint,
             Mechanics = mechanics,
             Parameters = parameters,
-            Diagnostics = validation.Diagnostics.Concat(parameterValidation.Diagnostics).Distinct(StringComparer.Ordinal).ToList(),
+            Diagnostics = validation.Diagnostics.Concat(parameterValidation.Diagnostics).Concat(_persistedHistoryDiagnostics).Distinct(StringComparer.Ordinal).ToList(),
             PackageSha256 = activatedPackageSha,
             CompositionPackageSha256 = string.IsNullOrWhiteSpace(state.Document.LastCompositionPackageSha256)
                 ? state.Document.LastMaterializedPackageSha256

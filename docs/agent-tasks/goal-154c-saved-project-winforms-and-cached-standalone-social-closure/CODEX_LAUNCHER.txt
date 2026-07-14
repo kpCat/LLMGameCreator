@@ -1,0 +1,41 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154c-saved-project-winforms-and-cached-standalone-social-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: d12370117a462ded2f8d414eab854562be1c7726
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- Goals153/153A/153B/153C уже приняты человеком;
+- Goal154/154A/154B/154B1/154C пока НЕ приняты;
+- Goal154B/B1 Runtime core уже GREEN; не переделывай Runtime и module JSON без нового доказанного P0/P1;
+- реализуй generic typed social projection в GameProjectBuildResult/workspace;
+- default 0/10/5/10/7 показывает reputation 0→10 и gold 0→10→17;
+- threshold 20 остаётся GREEN со still_locked и final gold 10;
+- WinForms показывает одну краткую русскую social card без IDs/hashes;
+- save/close/reopen сохраняет пять значений;
+- invalid threshold 101 сохраняет last-success package/hash/social card;
+- автоматический real-project proof использует только disposable LocalAppData copy; source byte-identical;
+- trustedGoldReward 7→9 меняет facts на 0→10→19 и меняет package/final hashes;
+- standalone получает social HumanReviewFacts без изменений Unity host;
+- Unity Editor/build budget = 0; существующий host cache должен быть reused;
+- один hidden standalone smoke, никаких видимых автоматических окон;
+- historical Goal154B1 evidence не переписывать; новую evidence проверять на NUL/control chars;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- соблюдай command budget и не повторяй неизменённые команды;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи test counts, WinForms facts, save/reopen, default/custom/locked values,
+rollback, source immutability, cache reuse, Unity process count, hidden smoke markers,
+artifact scope, final SHA, push, HEAD == origin/main, clean worktree и четырёхшаговый manual gate.

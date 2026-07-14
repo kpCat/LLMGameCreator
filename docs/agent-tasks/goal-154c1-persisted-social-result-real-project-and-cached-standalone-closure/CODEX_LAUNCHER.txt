@@ -1,0 +1,45 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154c1-persisted-social-result-real-project-and-cached-standalone-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 237a48b87f744ef917536244b3306c02154ad367
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- продолжай от честного FAILED Goal154C; typed projection, build propagation, WinForms card и
+  standalone HumanReviewFacts уже реализованы, не начинай заново;
+- Goals153/153A/153B/153C уже приняты человеком;
+- Goal154-family пока НЕ принята;
+- в начале разрешены ровно шесть untracked task-pack файлов двух Goal154C/Goal154C1 директорий;
+  включи их в итоговый commit; любые другие dirty paths блокируют задачу;
+- восстанови last-success Social из newest matching GREEN .llmgc/build-history после fresh reopen;
+- history Social принимается только при совпадении package/composition/final hashes и GREEN replay/binding;
+- failed invalid threshold 101 не должен скрывать/заменять last-success card даже после fresh reopen;
+- dirty config помечает card как последнюю успешную;
+- ChoiceText берётся из package data; locked facts не показывают повторную награду;
+- default 0/10/5/10/7: reputation 0→10, gold 0→10→17;
+- custom reward 9: gold 0→10→19 и новые package/final hashes;
+- locked threshold 20: GREEN, final gold 10;
+- real proof использует только disposable LocalAppData copies; source goal148-manual byte-identical;
+- Unity Editor/host build budget = 0; existing host cache reused;
+- ровно один hidden standalone smoke, никаких видимых автоматических окон;
+- historical Goal154B1 evidence не переписывать; новые reports проверять на NUL/control chars;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- соблюдай command budget и не повторяй неизменённые команды;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи initial inventory, task-pack tracking, test counts, persisted reopen,
+WinForms facts, default/custom/locked/rollback, source immutability, cache reuse,
+Unity process count, hidden smoke markers, artifact scope, final SHA, push,
+HEAD == origin/main, clean worktree и четырёхшаговый manual gate.

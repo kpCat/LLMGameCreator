@@ -94,6 +94,10 @@ public sealed class SocialRuntimeReviewProjectionService
             .ActualValue.Split('>', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         if (visibility.Length != 3)
             diagnostics.Add("social.projection.visibility_sequence_invalid");
+        if (!checkpointReplayPassed)
+            diagnostics.Add("social.projection.checkpoint_replay_failed");
+        if (!fullReplayEquivalent)
+            diagnostics.Add("social.projection.full_replay_not_equivalent");
 
         if (!decimal.TryParse(observationByMetric[FeatureModuleRuntimeEffectMetricKinds.FactionReputationInitialized].ActualValue,
                 NumberStyles.Number, CultureInfo.InvariantCulture, out var reputationBefore))
@@ -124,10 +128,13 @@ public sealed class SocialRuntimeReviewProjectionService
             .SelectMany(snapshot => snapshot.RuntimeEvents)
             .Where(runtimeEvent => runtimeEvent.EventType == "ResourceChanged" && runtimeEvent.TargetId == resourceContract.TargetId)
             .ToList();
-        var questEvent = questEvents.SingleOrDefault();
         decimal goldBefore = 0;
         decimal goldAfterQuest = 0;
-        if (questEvent is null || !ReadDecimal(questEvent, "before", out goldBefore) || !ReadDecimal(questEvent, "after", out goldAfterQuest))
+        if (questEvents.Count == 0)
+            diagnostics.Add("social.projection.quest_resource_transition_missing");
+        else if (questEvents.Count > 1)
+            diagnostics.Add("social.projection.quest_resource_transition_ambiguous");
+        else if (!ReadDecimal(questEvents[0], "before", out goldBefore) || !ReadDecimal(questEvents[0], "after", out goldAfterQuest))
             diagnostics.Add("social.projection.quest_resource_transition_missing");
         var claimed = string.Equals(outcomeObservation.ActualValue, "claimed", StringComparison.Ordinal);
         var locked = string.Equals(outcomeObservation.ActualValue, "still_locked", StringComparison.Ordinal);
@@ -153,6 +160,13 @@ public sealed class SocialRuntimeReviewProjectionService
 
         var faction = package.Game.Factions.SingleOrDefault(item => item.Id == factionContract.TargetId);
         var quest = package.Game.Quests.SingleOrDefault(item => item.Id == questContract.TargetId);
+        var dialogueId = claimAction!.Args.GetValueOrDefault("dialogueId", string.Empty);
+        var nodeId = claimAction.Args.GetValueOrDefault("nodeId", string.Empty);
+        var dialogueMatches = package.Game.Dialogues.Where(item => item.Id == dialogueId).ToList();
+        var nodeMatches = dialogueMatches.SelectMany(item => item.Nodes).Where(item => item.Id == nodeId).ToList();
+        var choiceMatches = nodeMatches.SelectMany(item => item.Choices).Where(item => item.Id == choiceContract.TargetId).ToList();
+        if (dialogueMatches.Count != 1 || nodeMatches.Count != 1 || choiceMatches.Count != 1)
+            return Failed(["social.projection.choice_text_missing_or_ambiguous"]);
         var reputationAfterValue = reputationAfter ?? 0;
         return new GameProjectSocialSummary
         {
@@ -166,7 +180,7 @@ public sealed class SocialRuntimeReviewProjectionService
             QuestTitle = quest?.Title ?? string.Empty,
             QuestState = questState!,
             ChoiceId = choiceContract.TargetId,
-            ChoiceText = string.Empty,
+            ChoiceText = choiceMatches[0].Text,
             ChoiceVisibilitySequence = visibility,
             GoldBefore = goldBefore,
             GoldAfterQuest = goldAfterQuest,
@@ -201,6 +215,9 @@ public sealed class SocialRuntimeReviewProjectionService
     private static IReadOnlyList<GameProjectSocialHumanFact> HumanFacts(
         decimal reputationBefore, decimal reputationAfter, string questState, IReadOnlyList<string> visibility,
         decimal goldBefore, decimal goldAfterQuest, decimal goldAfterClaim, decimal reward, bool claimed, string outcome) =>
+        HumanFactsCore(reputationBefore, reputationAfter, questState, visibility, goldBefore, goldAfterQuest, goldAfterClaim, reward, claimed, outcome);
+
+    /* Historical expression body retained below only for patch-local context; the active formatter is HumanFactsCore. 
     [
         new() { Label = "Репутация", Value = Number(reputationBefore) + " → " + Number(reputationAfter) },
         new() { Label = "Квест", Value = string.Equals(questState, "completed", StringComparison.OrdinalIgnoreCase) ? "завершён" : questState },
@@ -210,6 +227,29 @@ public sealed class SocialRuntimeReviewProjectionService
         new() { Label = "Повторная награда", Value = "недоступна" },
         new() { Label = "Социальный итог", Value = outcome == "claimed" ? "награда получена" : "порог репутации ещё не достигнут" }
     ];
+
+    */
+
+    private static IReadOnlyList<GameProjectSocialHumanFact> HumanFactsCore(
+        decimal reputationBefore, decimal reputationAfter, string questState, IReadOnlyList<string> visibility,
+        decimal goldBefore, decimal goldAfterQuest, decimal goldAfterClaim, decimal reward, bool claimed, string outcome)
+    {
+        var facts = new List<GameProjectSocialHumanFact>
+        {
+            new() { Label = "Репутация", Value = Number(reputationBefore) + " → " + Number(reputationAfter) },
+            new() { Label = "Квест", Value = string.Equals(questState, "completed", StringComparison.OrdinalIgnoreCase) ? "завершён" : questState },
+            new() { Label = "Доверенная реплика", Value = string.Join(" → ", visibility.Select(Visibility)) },
+            new() { Label = "Золото", Value = Number(goldBefore) + " → " + Number(goldAfterQuest) + (claimed ? " → " + Number(goldAfterClaim) : string.Empty) },
+            new() { Label = "Награда за доверие", Value = claimed ? "+" + Number(reward) : "пока недоступна" }
+        };
+        if (claimed) facts.Add(new GameProjectSocialHumanFact { Label = "Повторная награда", Value = "недоступна" });
+        facts.Add(new GameProjectSocialHumanFact
+        {
+            Label = "Социальный итог",
+            Value = outcome == "claimed" ? "награда получена" : "порог репутации ещё не достигнут"
+        });
+        return facts;
+    }
 
     private static string Visibility(string value) => value switch
     {
