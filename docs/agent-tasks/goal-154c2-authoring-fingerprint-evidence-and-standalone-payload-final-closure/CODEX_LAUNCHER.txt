@@ -1,0 +1,46 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154c2-authoring-fingerprint-evidence-and-standalone-payload-final-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: d791a1196234e1ea527bfaabe329163806e5d24d
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- продолжай от честного FAILED Goal154C1; history reader, real-project lifecycle и один cached smoke уже есть;
+- Goals153/153A/153B/153C уже приняты человеком; Goal154-family пока НЕ принята;
+- добавь semantic authoring fingerprint из selected modules/current module fingerprints/effective typed parameters;
+- revision/timestamps/last hashes не входят в fingerprint; omitted default == explicit default;
+- сохраняй QualifiedAuthoringFingerprint в GREEN build result/history;
+- history card восстанавливается, но получает CURRENT/LAST_SUCCESS/UNKNOWN по сравнению fingerprints;
+- saved reward 7→9 без build после reopen обязан показывать старые gold 17 как LAST_SUCCESS;
+- после custom build gold 19 и status CURRENT;
+- возврат 9→7 без build должен снова дать CURRENT, несмотря на revision;
+- WinForms heading использует configuration status, а не только Dirty;
+- history Social с false replay flags не принимается;
+- default real project и locked/invalid regressions сохранить;
+- ровно один реальный hidden standalone smoke: cache reused, HostRebuilt=false, Unity 0, 5/5;
+- прочитай actual player-adapter-model.json и докажи default social facts;
+- custom reward 9 докажи через captured ProjectStandaloneBuildRequest, без второго smoke;
+- custom second smoke invocation count = 0;
+- опубликуй 10+10 mirrored evidence, current-state/docs/manual files и artifact-scope proof;
+- historical evidence не переписывать; новые файлы проверить на NUL/control chars/mojibake;
+- Goal153C focused regression обязателен;
+- Unity Editor/host build budget = 0;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи fingerprint values, CURRENT/LAST_SUCCESS cases, test counts,
+default/custom/locked/invalid lifecycle, source immutability, cache reuse, Unity count,
+one-smoke markers, custom captured facts, evidence/artifact scope, final SHA, push,
+HEAD == origin/main, clean worktree и четырёхшаговый manual gate.

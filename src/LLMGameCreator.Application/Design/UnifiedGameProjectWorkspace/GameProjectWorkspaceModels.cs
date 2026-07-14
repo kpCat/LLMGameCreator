@@ -146,6 +146,8 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public ProjectStandaloneBuildResult? LastStandaloneBuild { get; init; }
     public string StandaloneUnityEditorPath { get; init; } = string.Empty;
     public GameProjectSocialSummary? Social { get; init; }
+    public bool SocialMatchesCurrentConfiguration { get; init; }
+    public string SocialConfigurationStatus { get; init; } = "ABSENT";
 }
 
 public sealed record GameProjectBuildResult
@@ -212,6 +214,7 @@ public sealed record GameProjectBuildResult
     public string AttemptedFinalStateHash { get; init; } = string.Empty;
     public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
     public GameProjectSocialSummary? Social { get; init; }
+    public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectRuntimeFrame
@@ -249,6 +252,7 @@ public sealed record GameProjectBuildHistoryEntry
     public int AttemptedFinalReplayActionCount { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
     public GameProjectSocialSummary? Social { get; init; }
+    public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectAuthoringState

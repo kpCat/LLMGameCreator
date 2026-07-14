@@ -176,7 +176,7 @@ public sealed class Goal154C1PersistedLastSuccessTests
         RunSta(() =>
         {
             using var page = new ProjectsPageControl();
-            Bind(page, new UnifiedGameProjectWorkspaceSnapshot { Social = Social(), Dirty = true });
+            Bind(page, new UnifiedGameProjectWorkspaceSnapshot { Social = Social(), Dirty = false, SocialConfigurationStatus = "LAST_SUCCESS" });
             Assert.Contains("последняя успешная проверка", Field<Label>(page, "_socialCardLabel").Text, StringComparison.Ordinal);
         });
     }

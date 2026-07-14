@@ -108,6 +108,17 @@ public sealed class GameProjectBuildAndQualificationService
                     validation.Diagnostics,
                     "authoring.validation",
                     attempt);
+            var authoringFingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(savedDocument, state.Library);
+            if (!authoringFingerprint.Passed)
+                return RollbackFailure(
+                    authoring,
+                    preBuildDocument,
+                    preBuildDirty,
+                    transaction,
+                    "Не удалось подтвердить семантическую конфигурацию механик.",
+                    authoringFingerprint.Diagnostics,
+                    "authoring.fingerprint",
+                    attempt);
 
             stagingRoot = GameProjectFeatureModuleAuthoringService.ConfinedPath(
                 state.ProjectFolder,
@@ -309,7 +320,8 @@ public sealed class GameProjectBuildAndQualificationService
                 qualifiedDocument.ParameterValues.Count,
                 ledger,
                 attempt.AttemptId,
-                social);
+                social,
+                authoringFingerprint.Sha256);
             transaction.Commit();
 
             var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
@@ -512,6 +524,7 @@ public sealed class GameProjectBuildAndQualificationService
                         StateHash = entry.StateHashAfter
                     }).ToList()
                 ,Social = social
+                ,QualifiedAuthoringFingerprint = authoringFingerprint.Sha256
             };
         }
         catch (Exception exception) when (exception is IOException
@@ -594,7 +607,8 @@ public sealed class GameProjectBuildAndQualificationService
         int configuredParameterCount,
         FeatureModuleCertificationLedger ledger,
         string attemptId,
-        GameProjectSocialSummary social)
+        GameProjectSocialSummary social,
+        string qualifiedAuthoringFingerprint)
     {
         var root = GameProjectFeatureModuleAuthoringService.ConfinedPath(
             projectFolder,
@@ -625,6 +639,7 @@ public sealed class GameProjectBuildAndQualificationService
             AttemptedCheckpointActionCount = result.Qualification.Artifacts.CheckpointReplay.ReplayedActionCount,
             AttemptedFinalReplayActionCount = result.Qualification.Artifacts.FinalReplay.ReplayedActionCount
             ,Social = social.Present && social.Passed ? social : null
+            ,QualifiedAuthoringFingerprint = qualifiedAuthoringFingerprint
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
         return path;

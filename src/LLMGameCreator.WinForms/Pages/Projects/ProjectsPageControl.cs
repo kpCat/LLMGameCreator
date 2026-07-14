@@ -286,7 +286,8 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _socialCardPanel.Visible = visible;
         _socialCardLabel.Text = !visible
             ? string.Empty
-            : "Социальные последствия" + (snapshot.Dirty ? " — последняя успешная проверка" : string.Empty) + Environment.NewLine + Environment.NewLine
+            : "Социальные последствия" + (snapshot.SocialConfigurationStatus is "LAST_SUCCESS" or "UNKNOWN"
+                ? " — последняя успешная проверка" : string.Empty) + Environment.NewLine + Environment.NewLine
               + string.Join(Environment.NewLine, social!.HumanFacts.Select(fact => fact.Label + "    " + fact.Value));
     }
 

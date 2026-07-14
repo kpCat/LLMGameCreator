@@ -78,7 +78,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _authoring.OpenProject(requested, currentPackage);
         HasOpenProject = true;
         _lastBuild = null;
-        var persisted = _historyReader.ReadLatestMatchingSocialSuccess(requested, _authoring.State.Document);
+        var persisted = _historyReader.ReadLatestMatchingSocialSuccess(requested, _authoring.State.Document, _authoring.State.Library);
         _lastSuccessfulBuild = persisted.LastSuccessfulBuild;
         _persistedHistoryDiagnostics = persisted.Diagnostics;
         return Snapshot();
@@ -127,6 +127,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ? state.Document.LastMaterializedPackageSha256
             : state.Document.LastActivatedProjectPackageSha256;
         var executable = ExecutableProvenance();
+        var social = _lastSuccessfulBuild?.Social is { Present: true, Passed: true } currentSocial ? currentSocial : null;
+        var socialTruth = SocialTruth(state, _lastSuccessfulBuild, social is not null);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -197,7 +199,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ExecutableInformationalVersion = executable.InformationalVersion
             ,LastStandaloneBuild = _standaloneBuild.LastResult
             ,StandaloneUnityEditorPath = _standaloneBuild.LoadSettings(state.ProjectFolder).UnityEditorPath
-            ,Social = _lastSuccessfulBuild?.Social is { Present: true, Passed: true } social ? social : null
+            ,Social = social
+            ,SocialMatchesCurrentConfiguration = socialTruth.Matches
+            ,SocialConfigurationStatus = socialTruth.Status
         };
     }
 
@@ -326,6 +330,20 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             }));
         }
         return facts;
+    }
+
+    private static (bool Matches, string Status) SocialTruth(
+        GameProjectAuthoringState state,
+        GameProjectBuildResult? lastSuccessfulBuild,
+        bool socialPresent)
+    {
+        if (!socialPresent) return (false, "ABSENT");
+        var qualified = lastSuccessfulBuild?.QualifiedAuthoringFingerprint;
+        if (string.IsNullOrWhiteSpace(qualified)) return (false, "UNKNOWN");
+        var current = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);
+        if (!current.Passed || string.IsNullOrWhiteSpace(current.Sha256)) return (false, "UNKNOWN");
+        var matches = string.Equals(current.Sha256, qualified, StringComparison.Ordinal);
+        return (matches, matches ? "CURRENT" : "LAST_SUCCESS");
     }
 
     private static void AddSummaryFact(string summary, string marker, string label, ICollection<StandaloneHumanReviewFact> facts)

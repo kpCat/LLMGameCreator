@@ -13,6 +13,12 @@ public sealed class GameProjectBuildHistoryReader
     public GameProjectBuildHistoryReadResult ReadLatestMatchingSocialSuccess(
         string projectFolder,
         FeatureModuleCompositionDocument document)
+        => ReadLatestMatchingSocialSuccess(projectFolder, document, null);
+
+    public GameProjectBuildHistoryReadResult ReadLatestMatchingSocialSuccess(
+        string projectFolder,
+        FeatureModuleCompositionDocument document,
+        FeatureModuleLibrarySnapshot? library)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(projectFolder);
         ArgumentNullException.ThrowIfNull(document);
@@ -46,6 +52,9 @@ public sealed class GameProjectBuildHistoryReader
         }
 
         var entry = selected.Entry;
+        var fingerprint = library is null ? new FeatureModuleAuthoringFingerprintResult()
+            : new FeatureModuleAuthoringFingerprintService().Calculate(document, library);
+        var status = ResolveConfigurationStatus(entry.QualifiedAuthoringFingerprint, fingerprint);
         return new GameProjectBuildHistoryReadResult
         {
             LastSuccessfulBuild = new GameProjectBuildResult
@@ -58,16 +67,21 @@ public sealed class GameProjectBuildHistoryReader
                 ActionBindingPassed = entry.ActionBindingPassed, AttemptId = entry.AttemptId, AttemptStatus = entry.AttemptStatus,
                 AttemptedSelectedModuleIds = entry.AttemptedSelectedModuleIds, AttemptedCapabilityCount = entry.AttemptedCapabilityCount,
                 AttemptedPlannedActionCount = entry.AttemptedPlannedActionCount, AttemptedCheckpointActionCount = entry.AttemptedCheckpointActionCount,
-                AttemptedFinalReplayActionCount = entry.AttemptedFinalReplayActionCount, Social = entry.Social
+                AttemptedFinalReplayActionCount = entry.AttemptedFinalReplayActionCount, Social = entry.Social,
+                QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint
             },
-            Diagnostics = diagnostics
+            Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
+            CurrentAuthoringFingerprint = fingerprint.Sha256,
+            QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint,
+            SocialConfigurationStatus = status,
+            MatchesCurrentConfiguration = status == "CURRENT"
         };
     }
 
     private static bool IsMatchingGreenSocial(GameProjectBuildHistoryEntry entry, FeatureModuleCompositionDocument document) =>
         string.Equals(entry.Status, "GREEN", StringComparison.Ordinal)
         && string.Equals(entry.AttemptStatus, "GREEN", StringComparison.Ordinal)
-        && entry.Social is { Present: true, Passed: true }
+        && entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true }
         && string.Equals(entry.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.FinalStateHash, document.LastQualifiedFinalStateHash, StringComparison.Ordinal)
@@ -77,10 +91,21 @@ public sealed class GameProjectBuildHistoryReader
         !string.IsNullOrWhiteSpace(document.LastActivatedProjectPackageSha256)
         || !string.IsNullOrWhiteSpace(document.LastCompositionPackageSha256)
         || !string.IsNullOrWhiteSpace(document.LastQualifiedFinalStateHash);
+
+    private static string ResolveConfigurationStatus(string qualified, FeatureModuleAuthoringFingerprintResult current)
+    {
+        if (string.IsNullOrWhiteSpace(qualified)) return "UNKNOWN";
+        if (!current.Passed || string.IsNullOrWhiteSpace(current.Sha256)) return "UNKNOWN";
+        return string.Equals(qualified, current.Sha256, StringComparison.Ordinal) ? "CURRENT" : "LAST_SUCCESS";
+    }
 }
 
 public sealed record GameProjectBuildHistoryReadResult
 {
     public GameProjectBuildResult? LastSuccessfulBuild { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
+    public string CurrentAuthoringFingerprint { get; init; } = string.Empty;
+    public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
+    public bool MatchesCurrentConfiguration { get; init; }
+    public string SocialConfigurationStatus { get; init; } = "ABSENT";
 }
