@@ -219,3 +219,7 @@ historical Goal150F failures remain validation debt.
 ## Goal154C3 gate record
 
 Goal154C3 implementation is GREEN and `manualGateReady=true`; `accepted=false` remains unchanged. The independent proof used one complete cached host, one hidden standalone smoke, five of five self-checks, zero Unity process starts, actual social payload facts and a zero-smoke custom captured request. The four-step combined human gate is the only remaining gate.
+
+## Goal154D failed-gate repair record
+
+The first combined human attempt at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed before product launch at `composition.qualification`: `advance_healer_objective` received `quest.not_active` because Alchemy Focus made `start_or_update_quest` complete the quest during inventory refresh. Goal154D is GREEN with the exact 22/10 composition, truthful EXECUTED/SKIPPED paths, direct Runtime strictness, completion-snapshot effect/projection truth, replay and cache-only standalone proof. `accepted=false` remains unchanged; the same four-step human gate must be retried.

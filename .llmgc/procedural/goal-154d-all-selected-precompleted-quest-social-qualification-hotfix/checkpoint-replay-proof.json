@@ -1,0 +1,13 @@
+﻿{
+    "status":  "GREEN",
+    "explicitAdvanceCheckpointReload":  true,
+    "alreadyCompletedSkipCheckpointReload":  true,
+    "explicitAdvanceFullReplay":  true,
+    "alreadyCompletedFullReplay":  true,
+    "journalStatusStable":  true,
+    "runtimeEventsEquivalent":  true,
+    "finalStateHashesEqual":  true,
+    "socialHumanFactsEqual":  true,
+    "explicitStatus":  "EXECUTED",
+    "alreadyCompletedStatus":  "SKIPPED"
+}

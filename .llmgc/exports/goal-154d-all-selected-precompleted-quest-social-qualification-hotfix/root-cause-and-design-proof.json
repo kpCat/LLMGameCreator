@@ -1,0 +1,20 @@
+﻿{
+    "status":  "GREEN",
+    "failedHumanGateBase":  "2c95ee8f689ef104946859432706fd6d4b22deb2",
+    "failureStage":  "composition.qualification",
+    "failureAction":  "advance_healer_objective",
+    "failureDiagnostic":  "quest.not_active",
+    "questRequiredHerbs":  3,
+    "alchemyStartingHerbs":  4,
+    "causalChain":  [
+                        "StartQuest",
+                        "RefreshQuestObjectives",
+                        "has_item objective completed",
+                        "QuestCompleted and QuestRewardGranted",
+                        "redundant capability advance"
+                    ],
+    "hotfixLayer":  "capability-driven interactive qualification",
+    "directRuntimeChanged":  false,
+    "genericGuard":  "runtime.command.advance_quest_objective with data-derived questId/objectiveId and prior canonical event proof",
+    "boundedAdditionalPath":  "FeatureModuleCompositionService passes the already materialized package into the effect evaluator so data-derived visibility requirements remain truthful."
+}

@@ -1,0 +1,49 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154d-all-selected-precompleted-quest-social-qualification-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 2c95ee8f689ef104946859432706fd6d4b22deb2
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- это P1 из реального human gate на точной композиции 22 modules / 10 configured parameters;
+- не отключай feature.profile.alchemy_focus и вообще никакие выбранные профили;
+- root cause: quest requires 3 herbs, Alchemy gives 4, start_or_update performs StartQuest+Refresh,
+  quest completes before advance_healer_objective;
+- не меняй QuestRuntimeService/GameRuntimeService и не ослабляй direct AdvanceQuestObjective:
+  прямой advance completed quest обязан остаться quest.not_active;
+- в capability qualification redundant advance должен truthfully SKIP, только если completed quest,
+  completed objective и prior QuestCompleted+QuestRewardGranted events доказаны;
+- active quest path по-прежнему EXECUTED;
+- effect evaluator и social projection обязаны находить фактический quest-completion snapshot:
+  start/update для precompleted path или advance для explicit path;
+- quest gold и reputation events должны быть в том же causal completion snapshot;
+- trusted claim resource/flag остаются scoped к claim action;
+- generic C# не содержит Goal/module/quest/objective/item IDs;
+- не меняй FeatureModule JSON и versions без доказанного неизбежного P0/P1;
+- saved authoring пользователя не должен стать STALE;
+- основной regression — exact disposable copy goal148-manual без reset authoring и без изменения selection;
+- assert exact 22 selected, 10 configured, build/repeat/reopen GREEN;
+- boundary startingRedHerbQuantity 2/3/4/20;
+- checkpoint/full replay для explicit и already-completed paths;
+- source goal148-manual byte-identical;
+- Unity Editor/host build budget = 0; максимум один cached hidden smoke;
+- запиши failed human gate 2c95ee8f... и на GREEN закрой blocker Goal154D;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи exact reproduction, test counts, 22/10 project result, path matrix,
+SKIPPED/EXECUTED journal truth, direct Runtime strictness, effect/projection correlation,
+checkpoint/replay, source immutability, cache/Unity facts, regressions, evidence/artifact scope,
+final SHA, push, HEAD == origin/main и clean worktree.

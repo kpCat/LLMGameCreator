@@ -1,0 +1,24 @@
+﻿{
+    "status":  "GREEN",
+    "explicitCompletionSnapshot":  "capability.advance_healer_objective",
+    "alreadyCompletedSnapshot":  "capability.start_or_update_quest",
+    "uniqueCompletionSnapshotRequired":  true,
+    "factionTransitionInCompletionSnapshot":  true,
+    "questGoldInCompletionSnapshot":  true,
+    "trustedClaimResourceScopedToClaimAction":  true,
+    "trustedClaimFlagScopedToClaimAction":  true,
+    "unrelatedReputationRejected":  true,
+    "unrelatedQuestGoldRejected":  true,
+    "missingCompletionRejected":  true,
+    "duplicateCompletionSnapshotsRejected":  true,
+    "duplicateQuestGoldEventsRejected":  true,
+    "humanFacts":  [
+                       "Репутация: 0 → 10",
+                       "Квест: завершён",
+                       "Доверенная реплика: недоступна → доступна → недоступна",
+                       "Золото: 0 → 10 → 17",
+                       "Награда за доверие: +7",
+                       "Повторная награда: недоступна",
+                       "Социальный итог: награда получена"
+                   ]
+}

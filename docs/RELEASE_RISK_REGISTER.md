@@ -184,9 +184,15 @@ and participant resource domain causal before Runtime, and requires independent 
 
 Goal153C closes the activated proof-fixture/global-capacity release risk. Qualification now uses real deterministic hostile content, proof-only high capacity stays in test memory, and expiry/defeat/encounter terminal outcomes plus conditional skips are replay-stable. Independent audit and the combined human gate remain required; no acceptance is inferred from automated GREEN.
 
-Goal154B1 closes the P1 reward-preservation and effect-correlation risk left in Goal154B: the reputation-only module cannot remove a non-reputation quest reward without a declared capability, the healer reward remains 10 gold, and the trusted resource metric accepts only the action that declares it. The remaining P1 release risk is the intentionally deferred Goal154C user path: real saved-project persistence, WinForms review/operation and standalone consumption are not yet proven, so `manualGateReady=false` and no Goal154-family acceptance is inferred.
+Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect risk left in Goal154B. Goal154C3 subsequently closes the saved-project/WinForms/standalone publication surface, and Goal154D closes the exact all-selected precompleted-quest qualification blocker exposed by the first human attempt. `manualGateReady=true`, but no Goal154-family acceptance is inferred before the retry.
 ## Goal154C3 closure risks
 
 - Human acceptance remains pending by design; no Codex or human acceptance is claimed.
 - Historical malformed Goal154B1 evidence remains immutable; this closure records only its truthful intended meaning.
 - Standalone proof is cache-only by contract: the recorded host cache was reused, `HostRebuilt=false`, and Unity process starts were zero.
+
+## Goal154D all-selected qualification closure
+
+- The P1 all-selected precompleted-quest blocker is closed by a generic capability qualification guard. It never treats `quest.not_active` as Runtime success and never restarts a completed quest.
+- A redundant advance skips only when the exact quest/objective are completed and the prior canonical history contains one `QuestCompleted` and one `QuestRewardGranted`; malformed, failed, missing or ambiguous states fail causally.
+- Residual risk is human product confirmation only: Goal154 remains `accepted=false` until the exact four-step combined gate is retried successfully.

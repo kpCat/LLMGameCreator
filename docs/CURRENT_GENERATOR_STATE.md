@@ -1,20 +1,35 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 154C3 real project standalone evidence and publication closure
+Updated by: Goal 154D all-selected precompleted quest social qualification hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154C3 is GREEN for the real disposable project, cached standalone evidence and publication closure, while the Goal154 family remains human-unaccepted. Default values `0/10/5/10/7` prove reputation `0 -> 10` and gold `0 -> 10 -> 17`; saved reward `7 -> 9` returns `LAST_SUCCESS` with the old card, then saved `9 -> 7` returns `CURRENT`. Custom reward 9 proves gold 19, threshold 20 proves gold 10 without a repeat row, and invalid threshold 101 preserves last success after fresh reopen.
+The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed in `composition.qualification`: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D fixes only the capability qualification orchestration, preserves direct Runtime strictness, and proves exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse. Goal154 remains human-unaccepted.
 
 ```text
-gate_status=goal154c3_green_pending_goal154_combined_human_gate
-current_user_action=perform_goal154_combined_human_gate required
+gate_status=goal154d_green_pending_goal154_combined_human_gate_retry
+current_user_action=retry_goal154_combined_human_gate required
 goal154ImplementationStatus=GREEN
 goal154Accepted=false
 goal154AcceptedByHuman=false
 goal154AcceptedByCodex=false
-goal154ManualReviewPerformed=false
+goal154ManualReviewPerformed=true
 goal154ManualGateReady=true
+goal154c3HumanGateAttempted=true
+goal154c3HumanGatePassed=false
+goal154c3HumanGateFailureStage=composition.qualification
+goal154c3HumanGateFailureAction=advance_healer_objective
+goal154c3HumanGateFailureDiagnostic=quest.not_active
+goal154c3AuditBlocker=closed_by_goal154d
+goal154dImplementationStatus=GREEN
+goal154dAccepted=false
+goal154dAcceptedByHuman=false
+goal154dAcceptedByCodex=false
+goal154dManualReviewPerformed=false
+goal154dManualGateReady=true
+goal154AllSelectedModuleCount=22
+goal154AllSelectedConfiguredParameterCount=10
+nextAction=retry_goal154_combined_human_gate
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

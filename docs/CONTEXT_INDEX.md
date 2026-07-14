@@ -1247,9 +1247,9 @@ Stop and ask/plan first if a change would:
 - add UI polish unrelated to the generated playable/simulatable loop;
 - expand old archive/manual-import/semantic UI workflows;
 - introduce broad refactors unrelated to the task acceptance criteria.
-## Goal154C3 publication closure
+## Goal154D all-selected precompleted quest hotfix
 
-Goal154C3 is GREEN and human-unaccepted. The real disposable `goal148-manual` lifecycle proves the CURRENT -> LAST_SUCCESS -> CURRENT semantic sequence, default/custom/locked/invalid reward cases, one cached hidden standalone smoke with host reuse and zero Unity processes, actual social payload facts, and a custom captured standalone request with zero second smoke. Evidence is mirrored under `.llmgc/procedural/goal-154c3-real-project-standalone-evidence-publication-closure/` and `.llmgc/exports/goal-154c3-real-project-standalone-evidence-publication-closure/`. The next action is the combined four-step Goal154 human gate.
+The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed at `composition.qualification / advance_healer_objective / quest.not_active`. Goal154D is GREEN and human-unaccepted: the exact owner attempt retains all 22 selected mechanics and 10 configured parameters, including Alchemy Focus; 2 starting herbs executes the advance, while 3/4/20 truthfully skip only after completed quest/objective plus prior completion/reward events. Direct Runtime remains strict. Effect truth and the social card follow the actual completion snapshot, and both paths are replay-stable. Nine mirrored evidence files are under the Goal154D procedural/export roots.
 
-`gate_status=goal154c3_green_pending_goal154_combined_human_gate`
-`current_user_action=perform_goal154_combined_human_gate required`
+`gate_status=goal154d_green_pending_goal154_combined_human_gate_retry`
+`current_user_action=retry_goal154_combined_human_gate required`

@@ -347,7 +347,8 @@ public sealed class FeatureModuleCompositionService
             FinalCheckpointId = "goal146-" + spec.CompositionId + "-final-journal",
             CapabilityPlan = capabilityPlan
         });
-        var semantic = BuildSemanticProof(catalog, spec, qualification.Session, baselineSession ?? qualification.Session);
+        var semantic = BuildSemanticProof(catalog, spec, qualification.Session,
+            baselineSession ?? qualification.Session, package);
         var distinctFromGoal142 = !goal142Hashes.Contains(packageSha);
         var passed = packageValidation.Passed
                       && mutationAudit.Passed
@@ -620,7 +621,8 @@ public sealed class FeatureModuleCompositionService
         FeatureModuleCatalogDocument catalog,
         FeatureModuleCompositionCoverageSpec spec,
         RuntimeInteractiveSession session,
-        RuntimeInteractiveSession baselineSession)
+        RuntimeInteractiveSession baselineSession,
+        GamePackageDefinition package)
     {
         var potion = InventoryQuantity(session.LatestInventorySummary, "item/healing_potion");
         var apple = InventoryQuantity(session.LatestInventorySummary, "item/apple");
@@ -629,7 +631,7 @@ public sealed class FeatureModuleCompositionService
         var water = InventoryQuantity(session.LatestInventorySummary, "item/water_flask");
         var goblin = CombatQuantity(session.LatestCombatSummary, "goblin", "resource/health");
         var selected = spec.ModuleIds.Select(id => catalog.Modules.Single(module => module.ModuleId == id)).ToList();
-        var observations = _effectEvaluator.Evaluate(selected, session, baselineSession);
+        var observations = _effectEvaluator.Evaluate(selected, session, baselineSession, package);
         var alchemy = observations.Any(observation => observation.Passed
             && observation.RuntimeDimension.StartsWith("alchemy_", StringComparison.Ordinal));
         var combat = observations.Any(observation => observation.Passed

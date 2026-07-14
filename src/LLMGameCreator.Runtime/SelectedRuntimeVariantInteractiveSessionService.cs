@@ -104,7 +104,7 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         var runtimeExecuted = false;
         var runtimeMutation = false;
         var eventCount = 0;
-        var diagnostics = new List<string>();
+        var diagnostics = new List<string>(conditional.Diagnostics);
         if (descriptor.Route == RuntimeRoute)
         {
             if (!ValidateExecutionBinding(package, session, descriptor))
@@ -219,6 +219,73 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         SelectedRuntimeVariantInteractiveSession session,
         CapabilityRuntimePlaythroughAction action)
     {
+        if (action.RuntimePrimitiveId == "runtime.command.advance_quest_objective")
+        {
+            var questId = action.Args.GetValueOrDefault("questId") ?? string.Empty;
+            var objectiveId = action.Args.GetValueOrDefault("objectiveId");
+            if (string.IsNullOrWhiteSpace(objectiveId)) objectiveId = action.ResolvedTargetId;
+            var questDefinitions = package.Game.Quests.Where(item => item.Id == questId).ToList();
+            var runtimeQuests = session.CanonicalSession.RuntimeSession.GameplayState.Quests
+                .Where(item => item.QuestId == questId).ToList();
+            var observedState = runtimeQuests.Count == 1 ? runtimeQuests[0].State : "matches=" + runtimeQuests.Count;
+            var priorEvents = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents).ToList();
+            var completionEventCount = priorEvents.Count(item =>
+                item.EventType == "QuestCompleted" && item.TargetId == questId);
+            var rewardEventCount = priorEvents.Count(item =>
+                item.EventType == "QuestRewardGranted" && item.TargetId == questId);
+            var context = new List<string>
+            {
+                "actionId=" + action.ActionId,
+                "questId=" + questId,
+                "objectiveId=" + objectiveId,
+                "observedQuestState=" + observedState,
+                "priorCompletionEventCount=" + completionEventCount,
+                "priorRewardEventCount=" + rewardEventCount
+            };
+            if (string.IsNullOrWhiteSpace(questId) || string.IsNullOrWhiteSpace(objectiveId)
+                || questDefinitions.Count != 1 || runtimeQuests.Count != 1)
+                return ConditionalActionDecision.Failure("quest_advance_state_invalid", context);
+            var objectiveDefinitions = questDefinitions[0].Objectives
+                .Where(item => item.Id == objectiveId).ToList();
+            var runtimeObjectives = runtimeQuests[0].Objectives
+                .Where(item => item.ObjectiveId == objectiveId).ToList();
+            if (objectiveDefinitions.Count != 1 || runtimeObjectives.Count != 1)
+                return ConditionalActionDecision.Failure("quest_advance_state_invalid", context);
+
+            var runtimeQuest = runtimeQuests[0];
+            var runtimeObjective = runtimeObjectives[0];
+            if (string.Equals(runtimeQuest.State, "active", StringComparison.Ordinal)
+                && !runtimeObjective.Completed)
+                return ConditionalActionDecision.Execute(["questCompletionPath=explicit_advance"]);
+
+            if (string.Equals(runtimeQuest.State, "completed", StringComparison.Ordinal)
+                && runtimeObjective.Completed
+                && completionEventCount == 1
+                && rewardEventCount == 1)
+            {
+                var completionSnapshots = session.CanonicalSession.Snapshots.Where(snapshot =>
+                    snapshot.RuntimeEvents.Any(item => item.EventType == "QuestCompleted" && item.TargetId == questId)
+                    && snapshot.RuntimeEvents.Any(item => item.EventType == "QuestRewardGranted" && item.TargetId == questId))
+                    .ToList();
+                var completedDuringAction = completionSnapshots.Count == 1
+                    ? session.CapabilityPlan?.OrderedActions.SingleOrDefault(item =>
+                        "capability." + item.ActionId == completionSnapshots[0].StepId)?.ActionId
+                    : null;
+                if (!string.IsNullOrWhiteSpace(completedDuringAction))
+                    return ConditionalActionDecision.Skip(
+                        "quest_already_completed",
+                        [
+                            "questCompletionPath=already_completed",
+                            "questAlreadyCompletedBeforeAdvance=true",
+                            "completedDuringAction=" + completedDuringAction,
+                            "redundantAdvanceSkipped=true",
+                            .. context
+                        ]);
+            }
+
+            return ConditionalActionDecision.Failure("quest_advance_state_invalid", context);
+        }
+
         if (!action.Args.TryGetValue("executionPredicates", out var raw) || string.IsNullOrWhiteSpace(raw))
             return ConditionalActionDecision.Execute();
         var predicates = raw.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
@@ -1012,7 +1079,8 @@ public sealed class SelectedRuntimeVariantInteractiveSessionService :
         public string Reason { get; }
         public IReadOnlyList<string> Diagnostics { get; }
 
-        public static ConditionalActionDecision Execute() => new(ConditionalActionDecisionKind.Execute, string.Empty, []);
+        public static ConditionalActionDecision Execute(IReadOnlyList<string>? diagnostics = null) =>
+            new(ConditionalActionDecisionKind.Execute, string.Empty, diagnostics ?? []);
         public static ConditionalActionDecision Skip(string reason, IReadOnlyList<string>? diagnostics = null) =>
             new(ConditionalActionDecisionKind.Skip, reason, diagnostics ?? []);
         public static ConditionalActionDecision Failure(string reason, IReadOnlyList<string>? diagnostics = null) =>

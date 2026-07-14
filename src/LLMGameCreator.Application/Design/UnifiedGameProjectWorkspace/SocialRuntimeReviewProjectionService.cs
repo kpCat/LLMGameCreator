@@ -121,13 +121,29 @@ public sealed class SocialRuntimeReviewProjectionService
             .Where(snapshot => snapshot.StepId == "capability." + claimAction.ActionId).ToList();
         var claimEvents = claimSnapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
             .Where(runtimeEvent => runtimeEvent.EventType == "ResourceChanged" && runtimeEvent.TargetId == resourceContract.TargetId).ToList();
-        var questAction = capabilityPlan.OrderedActions.SingleOrDefault(action =>
-            action.ExpectedRuntimeEffects.Contains(FeatureModuleRuntimeEffectMetricKinds.FactionReputationTransitionTruthful, StringComparer.Ordinal));
-        var questEvents = questAction is null ? [] : session.CanonicalSession.Snapshots
-            .Where(snapshot => snapshot.StepId == "capability." + questAction.ActionId)
-            .SelectMany(snapshot => snapshot.RuntimeEvents)
-            .Where(runtimeEvent => runtimeEvent.EventType == "ResourceChanged" && runtimeEvent.TargetId == resourceContract.TargetId)
-            .ToList();
+        var completionSnapshots = session.CanonicalSession.Snapshots.Where(snapshot =>
+            snapshot.RuntimeEvents.Any(runtimeEvent =>
+                runtimeEvent.EventType == "QuestCompleted" && runtimeEvent.TargetId == questContract.TargetId)
+            && snapshot.RuntimeEvents.Any(runtimeEvent =>
+                runtimeEvent.EventType == "QuestRewardGranted" && runtimeEvent.TargetId == questContract.TargetId)).ToList();
+        if (completionSnapshots.Count != 1)
+            diagnostics.Add("social.projection.quest_completion_snapshot_"
+                            + (completionSnapshots.Count == 0 ? "missing:" : "ambiguous:")
+                            + questContract.TargetId);
+        var completionSnapshot = completionSnapshots.Count == 1 ? completionSnapshots[0] : null;
+        if (completionSnapshot is not null)
+        {
+            var completedCount = completionSnapshot.RuntimeEvents.Count(runtimeEvent =>
+                runtimeEvent.EventType == "QuestCompleted" && runtimeEvent.TargetId == questContract.TargetId);
+            var rewardCount = completionSnapshot.RuntimeEvents.Count(runtimeEvent =>
+                runtimeEvent.EventType == "QuestRewardGranted" && runtimeEvent.TargetId == questContract.TargetId);
+            if (completedCount != 1 || rewardCount != 1)
+                diagnostics.Add("social.projection.quest_completion_event_counts:completed=" + completedCount
+                                + ";reward=" + rewardCount + ";questId=" + questContract.TargetId);
+        }
+        var questEvents = completionSnapshot?.RuntimeEvents
+            .Where(runtimeEvent => runtimeEvent.EventType == "ResourceChanged"
+                                   && runtimeEvent.TargetId == resourceContract.TargetId).ToList() ?? [];
         decimal goldBefore = 0;
         decimal goldAfterQuest = 0;
         if (questEvents.Count == 0)

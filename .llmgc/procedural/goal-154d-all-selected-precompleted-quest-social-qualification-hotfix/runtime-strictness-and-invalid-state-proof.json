@@ -1,0 +1,20 @@
+﻿{
+    "status":  "GREEN",
+    "directStartQuestPassed":  true,
+    "directRefreshCompletedQuest":  true,
+    "directAdvancePassed":  false,
+    "directAdvanceDiagnostic":  "quest.not_active",
+    "directFailureStateUnchanged":  true,
+    "directFailureSuccessEventCount":  0,
+    "invalidStatesRejected":  [
+                                  "missing runtime quest",
+                                  "failed quest",
+                                  "completed quest with incomplete objective",
+                                  "completed quest without completion events",
+                                  "ambiguous runtime quest",
+                                  "missing runtime objective"
+                              ],
+    "invalidStateSkipCount":  0,
+    "QuestRuntimeServiceChanged":  false,
+    "GameRuntimeServiceChanged":  false
+}

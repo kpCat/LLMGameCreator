@@ -1,0 +1,35 @@
+﻿{
+    "status":  "GREEN",
+    "requiredAmountDerivedFromPackage":  3,
+    "rows":  [
+                 {
+                     "startingRedHerbQuantity":  2,
+                     "startUpdateState":  "active",
+                     "advanceStatus":  "EXECUTED",
+                     "questCompletionPath":  "explicit_advance"
+                 },
+                 {
+                     "startingRedHerbQuantity":  3,
+                     "startUpdateState":  "completed",
+                     "advanceStatus":  "SKIPPED",
+                     "questCompletionPath":  "already_completed"
+                 },
+                 {
+                     "startingRedHerbQuantity":  4,
+                     "startUpdateState":  "completed",
+                     "advanceStatus":  "SKIPPED",
+                     "questCompletionPath":  "already_completed"
+                 },
+                 {
+                     "startingRedHerbQuantity":  20,
+                     "startUpdateState":  "completed",
+                     "advanceStatus":  "SKIPPED",
+                     "questCompletionPath":  "already_completed"
+                 }
+             ],
+    "skippedPathAtomic":  true,
+    "skippedBeforeAfterHashEqual":  true,
+    "skippedRuntimeEventCount":  0,
+    "completedDuringAction":  "start_or_update_quest",
+    "redundantAdvanceSkipped":  true
+}

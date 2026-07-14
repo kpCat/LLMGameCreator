@@ -1,0 +1,26 @@
+﻿{
+    "status":  "GREEN",
+    "source":  "%LOCALAPPDATA%/LLMGameCreator/Games/goal148-manual",
+    "failedAttemptSelectedOptionalCount":  12,
+    "effectiveSelectedModuleCount":  22,
+    "configuredParameterCount":  10,
+    "allCurrentlySelectableOptionalModulesRetained":  true,
+    "profilesDisabled":  [
+
+                         ],
+    "alchemyFocusSelected":  true,
+    "build":  "GREEN",
+    "repeatBuild":  "GREEN",
+    "freshReopen":  "CURRENT",
+    "packageHashDeterministic":  true,
+    "compositionHashDeterministic":  true,
+    "finalStateHashDeterministic":  true,
+    "socialValues":  "0/10/5/10/7",
+    "reputation":  "0 -\u003e 10",
+    "gold":  "0 -\u003e 10 -\u003e 17",
+    "socialOutcome":  "claimed",
+    "sourceProjectByteIdentical":  true,
+    "sourceMutationCount":  0,
+    "migrationPrompt":  false,
+    "parameterLoss":  false
+}

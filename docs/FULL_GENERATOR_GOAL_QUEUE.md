@@ -2534,4 +2534,8 @@ Goal150F historical snapshot failures remain validation debt and are not this ga
 Gate: `goal152_project_scoped_windows_standalone_build_launch required`.
 ## Goal154C3 - real project standalone evidence and publication closure
 
-Status: GREEN implementation, human acceptance pending. Goal154C3 closes the real saved-project lifecycle, authoring fingerprint status, cached standalone payload inspection, custom request capture, focused regressions, mirrored evidence and artifact-scope publication. It does not claim Goal154 human acceptance. Next action: perform the combined Goal154 human gate.
+Status: GREEN implementation, human acceptance not granted. Goal154C3 closed the saved-project/publication surface, but its first combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed at `composition.qualification / advance_healer_objective / quest.not_active` on the exact all-selected project.
+
+## Goal154D - all-selected precompleted quest social qualification hotfix
+
+Status: GREEN implementation, `accepted=false`. The exact 22-module/10-parameter owner composition, all-current optional composition, 2/3/4/20 herb boundary, strict direct Runtime, causal completion-snapshot correlation, invalid states, checkpoint/full replay, repeat/reopen lifecycle and one cache-only hidden smoke are GREEN. The Goal154C3 blocker is `closed_by_goal154d`. Next action: retry the same four-step combined Goal154 human gate; no acceptance is inferred.

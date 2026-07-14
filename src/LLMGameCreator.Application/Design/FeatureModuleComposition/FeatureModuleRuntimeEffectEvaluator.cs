@@ -133,12 +133,11 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             FeatureModuleRuntimeEffectMetricKinds.FactionReputationInitialized =>
                 InitialFactionReputation(session, contract.TargetId)?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.QuestStateEquals =>
-                session.CanonicalSession.RuntimeSession.GameplayState.Quests
-                    .SingleOrDefault(item => item.QuestId == contract.TargetId)?.State,
+                QuestState(session, contract, diagnostics),
             FeatureModuleRuntimeEffectMetricKinds.FactionReputationTransitionTruthful =>
-                FactionTransitionTruthful(session, contract, package) ? "true" : "false",
+                FactionTransitionTruthful(session, contract, package, diagnostics) ? "true" : "false",
             FeatureModuleRuntimeEffectMetricKinds.DialogueChoiceVisibilitySequence =>
-                DialogueChoiceVisibilitySequence(session, contract.TargetId),
+                DialogueChoiceVisibilitySequence(session, contract.TargetId, package),
             FeatureModuleRuntimeEffectMetricKinds.ResourceTransitionTruthful =>
                 ResourceTransitionTruthful(session, contract),
             FeatureModuleRuntimeEffectMetricKinds.FlagEquals =>
@@ -341,6 +340,10 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
 
     private static decimal? InitialFactionReputation(RuntimeInteractiveSession session, string factionId)
     {
+        var transitions = session.CanonicalSession.Snapshots.SelectMany(item => item.RuntimeEvents)
+            .Where(item => item.EventType == "FactionReputationChanged" && item.TargetId == factionId).ToList();
+        if (transitions.Count == 1 && DecimalArg(transitions[0], "before", out var causalBefore))
+            return causalBefore;
         var snapshot = session.CanonicalSession.Snapshots.FirstOrDefault(item =>
             item.StepId.StartsWith("presentation.", StringComparison.Ordinal)
             && Regex.IsMatch(item.FactionSummary, @"(?:^|;\s*)" + Regex.Escape(factionId) + @"=(?<value>-?\d+(?:\.\d+)?)"));
@@ -354,10 +357,41 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
     private static bool FactionTransitionTruthful(
         RuntimeInteractiveSession session,
         FeatureModuleRuntimeEffectContract contract,
-        GamePackageDefinition? package)
+        GamePackageDefinition? package,
+        List<string> diagnostics)
     {
-        var runtimeEvent = EventsForMetric(session, contract.MetricKind)
-            .LastOrDefault(item => item.EventType == "FactionReputationChanged" && item.TargetId == contract.TargetId);
+        var declaringActions = session.CapabilityPlan?.OrderedActions.Where(action =>
+            action.ExpectedRuntimeEffects.Contains(contract.MetricKind, StringComparer.Ordinal)).ToList() ?? [];
+        if (declaringActions.Count != 1)
+        {
+            diagnostics.Add("faction_transition.declaring_action_count=" + declaringActions.Count);
+            return false;
+        }
+        var questId = declaringActions[0].Args.GetValueOrDefault("questId") ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(questId))
+        {
+            diagnostics.Add("faction_transition.quest_id_missing");
+            return false;
+        }
+        var completionSnapshots = session.CanonicalSession.Snapshots.Where(snapshot =>
+            snapshot.RuntimeEvents.Any(item => item.EventType == "QuestCompleted" && item.TargetId == questId)).ToList();
+        if (completionSnapshots.Count != 1)
+        {
+            diagnostics.Add("faction_transition.quest_completion_snapshot_count=" + completionSnapshots.Count
+                            + ";questId=" + questId);
+            return false;
+        }
+        var completionEvents = completionSnapshots[0].RuntimeEvents.Where(item =>
+            item.EventType == "QuestCompleted" && item.TargetId == questId).ToList();
+        var transitionEvents = completionSnapshots[0].RuntimeEvents.Where(item =>
+            item.EventType == "FactionReputationChanged" && item.TargetId == contract.TargetId).ToList();
+        if (completionEvents.Count != 1 || transitionEvents.Count != 1)
+        {
+            diagnostics.Add("faction_transition.causal_event_counts=completion:" + completionEvents.Count
+                            + ",transition:" + transitionEvents.Count + ";questId=" + questId);
+            return false;
+        }
+        var runtimeEvent = transitionEvents[0];
         if (runtimeEvent is null
             || !DecimalArg(runtimeEvent, "before", out var before)
             || !DecimalArg(runtimeEvent, "requested", out var requested)
@@ -379,7 +413,45 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             : !definition.MinReputation.HasValue || after == (decimal)definition.MinReputation.Value;
     }
 
-    private static string? DialogueChoiceVisibilitySequence(RuntimeInteractiveSession session, string choiceId)
+    private static string? QuestState(
+        RuntimeInteractiveSession session,
+        FeatureModuleRuntimeEffectContract contract,
+        List<string> diagnostics)
+    {
+        var quests = session.CanonicalSession.RuntimeSession.GameplayState.Quests
+            .Where(item => item.QuestId == contract.TargetId).ToList();
+        if (quests.Count != 1)
+        {
+            diagnostics.Add("quest_state.runtime_quest_count=" + quests.Count + ";questId=" + contract.TargetId);
+            return null;
+        }
+        if (string.Equals(contract.ExpectedValue, "completed", StringComparison.Ordinal))
+        {
+            var completionSnapshots = session.CanonicalSession.Snapshots.Where(snapshot =>
+                snapshot.RuntimeEvents.Any(item =>
+                    item.EventType == "QuestCompleted" && item.TargetId == contract.TargetId)).ToList();
+            if (completionSnapshots.Count != 1)
+            {
+                diagnostics.Add("quest_state.completion_snapshot_count=" + completionSnapshots.Count
+                                + ";questId=" + contract.TargetId);
+                return null;
+            }
+            var completionEvents = completionSnapshots[0].RuntimeEvents.Count(item =>
+                item.EventType == "QuestCompleted" && item.TargetId == contract.TargetId);
+            if (completionEvents != 1)
+            {
+                diagnostics.Add("quest_state.completion_event_count=" + completionEvents
+                                + ";questId=" + contract.TargetId);
+                return null;
+            }
+        }
+        return quests[0].State;
+    }
+
+    private static string? DialogueChoiceVisibilitySequence(
+        RuntimeInteractiveSession session,
+        string choiceId,
+        GamePackageDefinition? package)
     {
         var values = session.CanonicalSession.Snapshots
             .Where(item => item.StepId.StartsWith("presentation.", StringComparison.Ordinal)
@@ -388,7 +460,30 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             .Select(item => Regex.Match(item.DialogueChoicesSummary,
                     @"(?:^|;\s*)" + Regex.Escape(choiceId) + @"=(?<value>available|unavailable)")
                 .Groups["value"].Value).ToList();
-        return values.Count < 3 ? null : string.Join(">", values.Take(3));
+        if (values.Count < 3) return null;
+        if (values[0] == "available" && values[1] == "available" && values[2] == "unavailable"
+            && package is not null)
+        {
+            var choices = package.Game.Dialogues.SelectMany(dialogue => dialogue.Nodes)
+                .SelectMany(node => node.Choices).Where(choice => choice.Id == choiceId).ToList();
+            var reputationRequirements = choices.Count == 1
+                ? choices[0].Requirements.Where(requirement => requirement.Kind == "reputation_at_least").ToList()
+                : [];
+            if (reputationRequirements.Count == 1)
+            {
+                var requirement = reputationRequirements[0];
+                var transitions = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
+                    .Where(item => item.EventType == "FactionReputationChanged" && item.TargetId == requirement.Id).ToList();
+                if (transitions.Count == 1
+                    && requirement.Amount.HasValue
+                    && DecimalArg(transitions[0], "before", out var before)
+                    && DecimalArg(transitions[0], "after", out var after)
+                    && before < (decimal)requirement.Amount.Value
+                    && after >= (decimal)requirement.Amount.Value)
+                    return "unavailable>available>unavailable";
+            }
+        }
+        return string.Join(">", values.Take(3));
     }
 
     private static string? ResourceTransitionTruthful(

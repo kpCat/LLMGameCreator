@@ -1,0 +1,12 @@
+﻿{
+    "status":  "GREEN",
+    "scenario":  "goal-154d-all-selected-precompleted-quest-social-qualification-hotfix",
+    "baselineRef":  "2c95ee8f689ef104946859432706fd6d4b22deb2",
+    "artifactScopeViolationCount":  0,
+    "forbiddenMutationCount":  0,
+    "featureModuleJsonChanged":  false,
+    "featureModuleVersionsChanged":  false,
+    "historicalArtifactMutationCount":  0,
+    "boundedAdditionalPath":  "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleCompositionService.cs",
+    "boundedAdditionalReason":  "All-current optional regression proved the existing caller omitted the materialized package required for data-derived visibility correlation."
+}
