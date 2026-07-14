@@ -111,11 +111,11 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
             FeatureModuleRuntimeEffectMetricKinds.InventoryItemAbsentOrDecreased =>
                 InventoryQuantity(session.LatestInventorySummary, contract.TargetId, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta =>
-                EquipmentDamageDelta(session)?.ToString(CultureInfo.InvariantCulture),
+                BasicAttackDamageEventValue(session, "equipmentDamageBonus")?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.PlayerStatEquals =>
                 PlayerStat(session, contract.ResourceOrItemId)?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.CombatStatDamageDelta =>
-                CombatDamageEventValue(session, "statDamageBonus")?.ToString(CultureInfo.InvariantCulture),
+                BasicAttackDamageEventValue(session, "statDamageBonus")?.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.ProgressionAmountEquals =>
                 Progression(session, contract.TargetId)?.Amount.ToString(CultureInfo.InvariantCulture),
             FeatureModuleRuntimeEffectMetricKinds.ProgressionStageEquals =>
@@ -225,12 +225,16 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         return entry is null ? null : entry[(slotId.Length + 1)..];
     }
 
-    private static decimal? EquipmentDamageDelta(RuntimeInteractiveSession session)
+    private static decimal? BasicAttackDamageEventValue(RuntimeInteractiveSession session, string key)
     {
-        var value = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
+        var action = session.CapabilityPlan?.OrderedActions.SingleOrDefault(item =>
+            item.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.BasicAttack);
+        var snapshot = action is null ? null : session.CanonicalSession.Snapshots.SingleOrDefault(item =>
+            item.StepId == "capability." + action.ActionId);
+        var value = snapshot?.RuntimeEvents
             .Where(item => item.EventType == "DamageApplied")
-            .Select(item => item.Args.TryGetValue("equipmentDamageBonus", out var raw) ? raw : null)
-            .LastOrDefault(raw => raw is not null);
+            .Select(item => item.Args.GetValueOrDefault(key))
+            .LastOrDefault(raw => !string.IsNullOrWhiteSpace(raw));
         return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed)
             ? parsed : null;
     }
@@ -263,16 +267,6 @@ public sealed class FeatureModuleRuntimeEffectEvaluator
         }
         return session.CanonicalSession.RuntimeSession.GameplayState.Progressions
             .SingleOrDefault(progression => progression.ProgressionId == progressionId);
-    }
-
-    private static decimal? CombatDamageEventValue(RuntimeInteractiveSession session, string key)
-    {
-        var value = session.CanonicalSession.Snapshots.SelectMany(snapshot => snapshot.RuntimeEvents)
-            .Where(item => item.EventType == "DamageApplied")
-            .Select(item => item.Args.GetValueOrDefault(key))
-            .LastOrDefault(raw => !string.IsNullOrWhiteSpace(raw));
-        return decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed)
-            ? parsed : null;
     }
 
     private static decimal? AbilityDamage(RuntimeInteractiveSession session, string abilityId)

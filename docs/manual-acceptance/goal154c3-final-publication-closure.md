@@ -16,3 +16,7 @@ Focused regressions, Goal153C, source immutability, ten procedural evidence file
 ## Four-step human gate
 
 Do not repeat these historical preparation steps or disable profiles. Use the four-step retry in `goal154d-all-selected-precompleted-quest-hotfix.md`.
+
+## Human acceptance recorded by Goal155
+
+The owner completed and accepted the retry for Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first failure remains historical. `accepted=true`, `acceptedByHuman=true`, `acceptedByCodex=false`, `humanGatePassed=true`.

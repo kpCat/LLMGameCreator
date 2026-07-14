@@ -1,0 +1,28 @@
+{
+    "status":  "GREEN",
+    "testCounts":  {
+                       "Goal155":  41,
+                       "Goal154D":  24,
+                       "Goal154C3":  15,
+                       "Goal153C":  7,
+                       "Goal150":  6,
+                       "Goal149":  7,
+                       "CapabilityDrivenRuntimePlaythrough":  12,
+                       "UnifiedGameProjectWorkspace":  36,
+                       "ProjectsPage":  5,
+                       "ProjectStandaloneBuild":  9,
+                       "FeatureModuleLibrary":  4,
+                       "FeatureModuleCertification":  5,
+                       "RuntimeNarrative":  1,
+                       "Goal155HiddenSmoke":  1
+                   },
+    "goal154dPassed":  true,
+    "goal154c3Passed":  true,
+    "goal153cPassed":  true,
+    "goal150Passed":  true,
+    "goal149Passed":  true,
+    "defaultOffPassed":  true,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false
+}

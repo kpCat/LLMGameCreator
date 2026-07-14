@@ -121,8 +121,8 @@ provenance and truthful last-success/current-attempt/current-config UI sections.
 The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
-Current gate token: `goal154b1_green_pending_goal154c`.
-Goals153/153A/153B/153C are accepted by human at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154 and Goal154A remain human-unaccepted historical FAILED foundations. Goal154B remains GREEN for executable Runtime core; Goal154B1 is GREEN with 16 real behavioral tests that preserve the healer 10-gold reward, prove `0 → 10 → 17`, action-scoped resource truth, module independence and certification invalidation. Goals154/154A/154B/154B1 remain human-unaccepted and `manualGateReady=false`; Goal154C owns the deferred saved-project, WinForms and standalone closure.
+Current gate token: `goal155_green_acceptable_candidate_pending_independent_audit`.
+The complete Goal154 family is accepted by the owner at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; historical FAILED implementation labels remain historical. Goal155 integrates the accepted Goals149–154 mechanics as a release candidate with owner Profile A `22/10`, maximal Profile B `22/14`, typed build-history recovery, a portable atomic RC record, one compact WinForms card and one cache-only hidden standalone smoke. Goal155 itself remains `accepted=false`, creates no human gate and requires independent audit.
 Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical
 Runtime/PlayerAdapter/Unity evidence instead of adding projection-only wrappers.
@@ -367,6 +367,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/manual-acceptance/capability-driven-runtime-playthrough-and-equipment-featuremodule-vertical-slice.md` | Goal149 checklist, now routed into the bundled Goals149/150/150A custom equipment, attributes and progression review after independent Goal150A audit. |
 | `docs/manual-acceptance/character-attributes-and-level-progression-featuremodules-vertical-slice.md` | Goal150A-updated custom `3/8/2/12` checklist for the bundled Goals149/150/150A mechanics review after independent audit; all three goals remain accepted=false. |
 | `docs/manual-acceptance/goal154b-executable-social-runtime-core.md` | Goal154B implementation record: Runtime core GREEN, no human review or acceptance, manualGateReady=false, Goal154C deferred scope explicit. |
+| `docs/manual-acceptance/goal154-family-human-acceptance.md` | Exact owner acceptance of Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; historical implementation statuses are preserved. |
+| `docs/manual-acceptance/goal155-accepted-mechanics-release-candidate.md` | Goal155 automated RC candidate record: no human gate, accepted=false, independent audit required. |
+| `docs/agent-tasks/goal-155-accepted-mechanics-release-candidate-integration-and-operator-readiness/GOAL.md` | Goal155 integrates accepted mechanics across exact owner 22/10 and maximal 22/14 profiles, typed history, portable RC record, WinForms card and one cached hidden smoke. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -1251,5 +1254,11 @@ Stop and ask/plan first if a change would:
 
 The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed at `composition.qualification / advance_healer_objective / quest.not_active`. Goal154D is GREEN and human-unaccepted: the exact owner attempt retains all 22 selected mechanics and 10 configured parameters, including Alchemy Focus; 2 starting herbs executes the advance, while 3/4/20 truthfully skip only after completed quest/objective plus prior completion/reward events. Direct Runtime remains strict. Effect truth and the social card follow the actual completion snapshot, and both paths are replay-stable. Nine mirrored evidence files are under the Goal154D procedural/export roots.
 
-`gate_status=goal154d_green_pending_goal154_combined_human_gate_retry`
-`current_user_action=retry_goal154_combined_human_gate required`
+The owner later accepted the complete Goal154 family at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; the failed first attempt above remains historical evidence rather than current gate state.
+
+## Goal155 accepted-mechanics release candidate
+
+Goal155 is `GREEN_ACCEPTABLE_CANDIDATE`: Profile A preserves exact `22/10`; Profile B proves `22/14`, damage `3/6/9`, ability 2, mana `12 → 9`, status tick 1 with expiry, reputation `0 → 10` and gold `0 → 10 → 17`. AcceptedMechanics restores from GREEN history. The project-local atomic RC record is CURRENT after correlated standalone payload, portable without execution, and preserves LAST_SUCCESS across failed build/standalone attempts. The compact Projects card exposes no IDs, hashes or paths. One hidden smoke reused the existing host, rebuilt nothing and started Unity zero times.
+
+`gate_status=goal155_green_acceptable_candidate_pending_independent_audit`
+`current_user_action=independent_goal155_audit_and_select_next_major_product_vertical_slice`

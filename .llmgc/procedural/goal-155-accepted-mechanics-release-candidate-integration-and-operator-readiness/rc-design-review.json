@@ -1,0 +1,146 @@
+{
+    "status":  "RESOLVED",
+    "acceptedProductFamilies":  [
+                                    "equipment",
+                                    "character_attributes",
+                                    "level_progression",
+                                    "saved_project_recovery",
+                                    "project_scoped_cached_windows_standalone",
+                                    "active_ability",
+                                    "mana_spellcasting",
+                                    "turn_status_effects",
+                                    "faction_reputation",
+                                    "quest_consequences",
+                                    "trusted_dialogue_reward"
+                                ],
+    "existingTypedFacts":  {
+                               "build":  [
+                                             "selected/configured counts",
+                                             "equipment/stat/total damage",
+                                             "ability damage",
+                                             "mana before/spent/remaining",
+                                             "status tick/expiry",
+                                             "checkpoint/full replay/action binding",
+                                             "qualified authoring fingerprint"
+                                         ],
+                               "social":  [
+                                              "reputation transition",
+                                              "quest state",
+                                              "gold lifecycle",
+                                              "trusted reward",
+                                              "checkpoint/full replay",
+                                              "human facts"
+                                          ],
+                               "standalone":  [
+                                                  "package/final hashes",
+                                                  "host key/reuse/rebuild",
+                                                  "hidden smoke",
+                                                  "self-check counts",
+                                                  "actual project manifest and player-adapter payload"
+                                              ]
+                           },
+    "missingPersistentRcFacts":  [
+                                     "one generic accepted-mechanics summary on build result/history/workspace",
+                                     "one atomically written project-local RC record",
+                                     "payload-correlated player-adapter and human-facts hashes",
+                                     "portable CURRENT/LAST_SUCCESS/UNKNOWN/ABSENT read state",
+                                     "one concise operator RC card"
+                                 ],
+    "savedCurrentLastSuccessStateMachine":  {
+                                                "ABSENT":  "no valid record and no complete accepted build",
+                                                "BUILD_GREEN_STANDALONE_PENDING":  "complete current accepted build exists but no hash-correlated CURRENT RC record exists",
+                                                "CURRENT":  "valid RC record fingerprint and qualified package/final hashes equal the current successful build",
+                                                "LAST_SUCCESS":  "valid record remains visible after a saved semantic change or newer differently qualified build",
+                                                "UNKNOWN":  "valid record exists but the current semantic fingerprint cannot be calculated",
+                                                "semanticReturn":  "returning to the same qualified values restores CURRENT without build",
+                                                "failedBuild":  "keeps the prior successful accepted summary and RC record",
+                                                "failedStandalone":  "keeps the prior RC record byte-identical and exposes attempt diagnostics"
+                                            },
+    "standaloneCorrelationContract":  {
+                                          "writeAfter":  "successful BuildWindowsStandalone only",
+                                          "requires":  [
+                                                           "normal build GREEN and accepted summary passed",
+                                                           "standalone GREEN with build package/final hashes",
+                                                           "HostReused=true and HostRebuilt=false",
+                                                           "hidden smoke and every self-check passed",
+                                                           "actual project-manifest package/composition/final correlation",
+                                                           "actual player-adapter final hash and every accepted human fact",
+                                                           "Release Candidate=готов"
+                                                       ],
+                                          "identity":  "project package identity, semantic fingerprint and hashes; never an absolute project folder",
+                                          "writeMode":  "temporary sibling, flush-to-disk, close, atomic overwrite move"
+                                      },
+    "ownerProjectProfile":  {
+                                "source":  "goal148-manual",
+                                "readOnly":  true,
+                                "requiredMechanics":  10,
+                                "selectedOptionalMechanics":  12,
+                                "selectedMechanicCount":  22,
+                                "configuredParameterCount":  10,
+                                "mutation":  "none; copy complete project and preserve saved selection/parameters"
+                            },
+    "maxInteractionProfile":  {
+                                  "base":  "complete disposable owner-project copy",
+                                  "selectedMechanicCount":  22,
+                                  "configuredParameterCount":  14,
+                                  "damage":  "3/6/9",
+                                  "abilityManaStatus":  "2/12→9/1 each turn/expired",
+                                  "social":  "reputation 0→10; gold 0→10→17",
+                                  "standalone":  "exactly one hidden cache-only smoke"
+                              },
+    "failureRollbackMatrix":  {
+                                  "invalidAuthoringBuild":  "reject, preserve activated package, accepted last success and RC bytes",
+                                  "standaloneServiceFailure":  "preserve RC bytes and expose failure stage/diagnostics",
+                                  "payloadCorrelationFailure":  "publish failed attempt and do not replace RC bytes",
+                                  "incompleteComposition":  "buildable, accepted summary failed with missing kinds, no READY/no RC write",
+                                  "malformedRecord":  "leave file untouched, return ABSENT with causal diagnostic"
+                              },
+    "uiCardContract":  {
+                           "title":  "Принятые механики — Release Candidate",
+                           "source":  "typed accepted summary plus typed RC state only",
+                           "states":  [
+                                          "BUILD_GREEN_STANDALONE_PENDING",
+                                          "CURRENT",
+                                          "LAST_SUCCESS",
+                                          "UNKNOWN"
+                                      ],
+                           "rows":  [
+                                        "Механики",
+                                        "Настроенные параметры",
+                                        "Снаряжение и характеристики",
+                                        "Прогрессия",
+                                        "Способность и мана",
+                                        "Эффект по ходам",
+                                        "Репутация",
+                                        "Золото",
+                                        "Сохранение и повтор",
+                                        "Windows standalone"
+                                    ],
+                           "forbidden":  "module/content IDs, hashes, fingerprints, absolute paths and raw Runtime events",
+                           "layout":  "Designer-owned fixed card row with wrapping; social card hidden while the RC summary is visible"
+                       },
+    "nonGoals":  [
+                     "new gameplay mechanics or Runtime primitives",
+                     "FeatureModule or parameter additions",
+                     "public GamePackage schema changes",
+                     "Unity host/project changes or host rebuild",
+                     "provider/network/Lua/generator-library work",
+                     "historical 64-failure closure",
+                     "clean-machine installer or release packaging"
+                 ],
+    "testInventory":  {
+                          "discoveredActual":  41,
+                          "behavioralActual":  37,
+                          "groups":  {
+                                         "acceptanceLedger":  4,
+                                         "acceptedMechanicsProjection":  11,
+                                         "ownerAndBenchmarkProfiles":  4,
+                                         "releaseCandidateRecord":  11,
+                                         "winFormsCard":  6,
+                                         "standaloneAndPortability":  1,
+                                         "workspaceHistoryAndRollback":  2,
+                                         "payloadCorrelation":  2
+                                     },
+                          "coverage":  "all 48 required matrix claims are grouped into 41 actually discovered tests, including theory rows; 37 behavioral cases execute product behavior"
+                      }
+}

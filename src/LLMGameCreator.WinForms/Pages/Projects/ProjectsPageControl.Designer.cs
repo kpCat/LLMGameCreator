@@ -58,6 +58,8 @@ namespace LLMGameCreator.WinForms.Pages
         private TextBox _buildResultTextBox;
         private Panel _socialCardPanel;
         private Label _socialCardLabel;
+        private Panel _releaseCandidateCardPanel;
+        private Label _releaseCandidateCardLabel;
         private TableLayoutPanel _standaloneLayout;
         private Label _unityEditorLabel;
         private TextBox _unityEditorPathTextBox;
@@ -134,6 +136,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildResultTextBox = new TextBox();
             this._socialCardPanel = new Panel();
             this._socialCardLabel = new Label();
+            this._releaseCandidateCardPanel = new Panel();
+            this._releaseCandidateCardLabel = new Label();
             this._standaloneLayout = new TableLayoutPanel();
             this._unityEditorLabel = new Label();
             this._unityEditorPathTextBox = new TextBox();
@@ -376,6 +380,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildLayout.Controls.Add(this._buildStatusLabel, 0, 1);
             this._buildLayout.Controls.Add(this._buildResultTextBox, 0, 2);
             this._buildLayout.Controls.Add(this._socialCardPanel, 0, 3);
+            this._buildLayout.Controls.Add(this._releaseCandidateCardPanel, 0, 3);
             this._buildLayout.Controls.Add(this._standaloneLayout, 0, 4);
             this._buildLayout.Dock = DockStyle.Fill;
             this._buildLayout.Padding = new Padding(18);
@@ -383,7 +388,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 54F));
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
-            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 190F));
+            this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 235F));
             this._buildLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 65F));
             this._buildAndQualifyButton.Dock = DockStyle.Left;
             this._buildAndQualifyButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
@@ -410,6 +415,19 @@ namespace LLMGameCreator.WinForms.Pages
             this._socialCardLabel.Dock = DockStyle.Fill;
             this._socialCardLabel.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
             this._socialCardLabel.TextAlign = ContentAlignment.TopLeft;
+            //
+            // _releaseCandidateCardPanel
+            //
+            this._releaseCandidateCardPanel.BorderStyle = BorderStyle.FixedSingle;
+            this._releaseCandidateCardPanel.Controls.Add(this._releaseCandidateCardLabel);
+            this._releaseCandidateCardPanel.Dock = DockStyle.Fill;
+            this._releaseCandidateCardPanel.Margin = new Padding(0, 8, 0, 8);
+            this._releaseCandidateCardPanel.Padding = new Padding(12);
+            this._releaseCandidateCardPanel.Visible = false;
+            this._releaseCandidateCardLabel.AutoSize = false;
+            this._releaseCandidateCardLabel.Dock = DockStyle.Fill;
+            this._releaseCandidateCardLabel.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
+            this._releaseCandidateCardLabel.TextAlign = ContentAlignment.TopLeft;
             //
             // _standaloneLayout
             //

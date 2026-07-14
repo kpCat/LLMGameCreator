@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "profile":  "owner-current",
+    "selectedMechanicCount":  22,
+    "configuredParameterCount":  10,
+    "selectionAndParametersUnchanged":  true,
+    "buildPassed":  true,
+    "repeatBuildDeterministic":  true,
+    "freshReopenCurrent":  true,
+    "acceptedMechanicsRestored":  true,
+    "sourceProjectByteIdentical":  true
+}

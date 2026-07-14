@@ -1,35 +1,59 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 154D all-selected precompleted quest social qualification hotfix
+Updated by: Goal 155 accepted-mechanics release candidate integration and operator readiness
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed in `composition.qualification`: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D fixes only the capability qualification orchestration, preserves direct Runtime strictness, and proves exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse. Goal154 remains human-unaccepted.
+The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
 
 ```text
-gate_status=goal154d_green_pending_goal154_combined_human_gate_retry
-current_user_action=retry_goal154_combined_human_gate required
+gate_status=goal155_green_acceptable_candidate_pending_independent_audit
+current_user_action=independent_goal155_audit_and_select_next_major_product_vertical_slice
 goal154ImplementationStatus=GREEN
-goal154Accepted=false
-goal154AcceptedByHuman=false
+goal154Accepted=true
+goal154AcceptedByHuman=true
 goal154AcceptedByCodex=false
 goal154ManualReviewPerformed=true
-goal154ManualGateReady=true
+goal154ManualGateReady=false
+goal154ManualGateStatus=ACCEPTED_BY_HUMAN
 goal154c3HumanGateAttempted=true
-goal154c3HumanGatePassed=false
+goal154c3HumanGatePassed=true
 goal154c3HumanGateFailureStage=composition.qualification
 goal154c3HumanGateFailureAction=advance_healer_objective
 goal154c3HumanGateFailureDiagnostic=quest.not_active
 goal154c3AuditBlocker=closed_by_goal154d
 goal154dImplementationStatus=GREEN
-goal154dAccepted=false
-goal154dAcceptedByHuman=false
+goal154dAccepted=true
+goal154dAcceptedByHuman=true
 goal154dAcceptedByCodex=false
-goal154dManualReviewPerformed=false
-goal154dManualGateReady=true
+goal154dManualReviewPerformed=true
+goal154dManualGateReady=false
+goal154dHumanGatePassed=true
+goal154FamilyAcceptedImplementationCommit=fc2ac34db60d2627e1cafc86493396937bf63fe4
+goal154FamilyAcceptanceRecordedByGoal=Goal155
 goal154AllSelectedModuleCount=22
 goal154AllSelectedConfiguredParameterCount=10
-nextAction=retry_goal154_combined_human_gate
+goal155ImplementationStatus=GREEN
+goal155CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal155Accepted=false
+goal155AcceptedByHuman=false
+goal155AcceptedByCodex=false
+goal155ManualReviewRequired=false
+goal155ManualGateReady=false
+goal155IndependentAuditRequired=true
+goal155OwnerProfile=22/10
+goal155MaxInteractionProfile=22/14
+goal155MaxInteractionDamage=3/6/9
+goal155MaxInteractionAbilityManaStatus=2/12->9/1/expired
+goal155MaxInteractionSocial=0->10/0->10->17
+goal155ReleaseCandidateRecordPassed=true
+goal155PortableCopyPassed=true
+goal155HostReused=true
+goal155HostRebuilt=false
+goal155UnityProcessStartCount=0
+goal155HiddenSmokeInvocationCount=1
+goal155ArtifactScopeViolationCount=0
+nextAction=independent_goal155_audit_and_select_next_major_product_vertical_slice
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
@@ -161,33 +185,33 @@ goal153cHostRebuilt=false
 goal153cUnityProcessStartCount=0
 goal153cArtifactScopeViolationCount=0
 goal154ImplementationStatus=FAILED historical foundation
-goal154Accepted=false
-goal154AcceptedByHuman=false
+goal154Accepted=true
+goal154AcceptedByHuman=true
 goal154AcceptedByCodex=false
-goal154ManualReviewPerformed=false
+goal154ManualReviewPerformed=true
 goal154ManualGateReady=false
 goal154aImplementationStatus=FAILED historical partial closure
-goal154aAccepted=false
-goal154aAcceptedByHuman=false
+goal154aAccepted=true
+goal154aAcceptedByHuman=true
 goal154aAcceptedByCodex=false
-goal154aManualReviewPerformed=false
+goal154aManualReviewPerformed=true
 goal154aManualGateReady=false
 goal154aFocusedTestDiscoveredCount=18
 goal154aFocusedTestPassedCount=18
 goal154bImplementationStatus=GREEN
-goal154bAccepted=false
-goal154bAcceptedByHuman=false
+goal154bAccepted=true
+goal154bAcceptedByHuman=true
 goal154bAcceptedByCodex=false
-goal154bManualReviewPerformed=false
+goal154bManualReviewPerformed=true
 goal154bManualGateReady=false
 goal154bBehavioralTestDiscoveredCount=29
 goal154bBehavioralTestPassedCount=29
 goal154bAuditBlocker=closed_by_goal154b1
 goal154b1ImplementationStatus=GREEN
-goal154b1Accepted=false
-goal154b1AcceptedByHuman=false
+goal154b1Accepted=true
+goal154b1AcceptedByHuman=true
 goal154b1AcceptedByCodex=false
-goal154b1ManualReviewPerformed=false
+goal154b1ManualReviewPerformed=true
 goal154b1ManualGateReady=false
 goal154QuestGoldRewardPreserved=true
 goal154DefaultGoldLifecycle=0->10->17
@@ -202,17 +226,17 @@ goal154RollbackEventTruthPassed=true
 goal154ArtifactScopeViolationCount=0
 goal154UnityProcessStartCount=0
 goal154StandaloneSmokeInvocationCount=0
-nextProductGoal=goal154c_saved_project_winforms_standalone_social_closure
-gateStatus=goal154b1_green_pending_goal154c
+nextProductGoal=independent_goal155_audit_and_select_next_major_product_vertical_slice
+gateStatus=goal155_green_acceptable_candidate_pending_independent_audit
 ```
 
 Goal154B1 preserves the published Goal154B Runtime graph while removing the unrelated
 `quest.00a_gold_reward_reserved` mutation and its claim. Defaults `0/10/5/10/7` now produce
 gold `0 → 10 → 17`; threshold 20 stays at 10 with a `SKIPPED` claim and no claim-action resource
 event; zero reward stays at 10 with the claim flag; custom reward 9 ends at 19. Module order,
-default-off hashes and owner/dependent certification invalidation are covered. Goals154/154A/154B/
-154B1 remain `accepted=false` and `manualGateReady=false` until Goal154C supplies the deferred
-user workflow and standalone proof.
+default-off hashes and owner/dependent certification invalidation are covered. This paragraph records
+the historical implementation split; the complete Goal154 family was later accepted by the owner at
+`fc2ac34db60d2627e1cafc86493396937bf63fe4`, while the historical FAILED implementation labels remain intact.
 
 The read-only real source project was inventoried and copied before any Application
 service opened it. Fresh required HEAD passed both its persisted three-profile state

@@ -1,0 +1,43 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-155-accepted-mechanics-release-candidate-integration-and-operator-readiness/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: fc2ac34db60d2627e1cafc86493396937bf63fe4
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- это milestone release-candidate pass, а не очередной узкий hotfix;
+- сначала дословно запиши human acceptance всей семьи Goal154 на implementation commit fc2ac34db60d2627e1cafc86493396937bf63fe4;
+- historical FAILED/BLOCKED implementation statuses не переписывай, но accepted/acceptedByHuman выставь true для всех названных Goal154 IDs;
+- Goal155 не создаёт нового human gate: manualReviewRequired=false;
+- exact Profile A: реальный goal148-manual, 22 selected / 10 configured, без изменения selection/parameters;
+- Profile B: те же 22 механики и полный accepted-value набор из 14 параметров;
+- Profile B обязан доказать 3/6/9, ability 2, mana 12→9, status tick 1 + expiry, reputation 0→10, gold 0→10→17;
+- создай typed AcceptedMechanics summary, сохрани в GREEN build history и восстанавливай после reopen;
+- создай атомарный project-local RC record только после успешного standalone и actual payload correlation;
+- RC record должен различать CURRENT / LAST_SUCCESS / UNKNOWN / ABSENT;
+- portable copy проекта должна восстановить CURRENT RC record без build/Runtime/Unity;
+- failed build и failed standalone не заменяют last success/RC record;
+- WinForms показывает одну краткую карточку «Принятые механики — Release Candidate» без IDs/hashes/paths;
+- ровно один real hidden standalone smoke на Profile B;
+- HostReused=true, HostRebuilt=false, Unity starts=0, actual player-adapter-model.json содержит все accepted facts и Release Candidate=готов;
+- incomplete/core-only composition остаётся buildable и не может заявить RC READY;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- P0/P1 из обязательной RC-матрицы исправляй внутри Goal155; P2/P3 только записывай в debt;
+- не откладывай evidence/docs/artifact scope после product code;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit стандартным push.
+
+В финале сообщи acceptance flags, test counts, Profile A/B результаты, RC summary/history,
+RC record portability/rollback, WinForms card, cache/Unity/smoke, actual payload,
+регрессии, evidence/artifact scope, final SHA, push, HEAD == origin/main и clean worktree.

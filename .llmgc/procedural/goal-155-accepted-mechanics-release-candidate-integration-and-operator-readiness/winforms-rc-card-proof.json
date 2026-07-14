@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "title":  "Принятые механики — Release Candidate",
+    "compactSingleCard":  true,
+    "states":  [
+                   "BUILD_GREEN_STANDALONE_PENDING",
+                   "CURRENT",
+                   "LAST_SUCCESS",
+                   "UNKNOWN"
+               ],
+    "idsHashesPathsVisible":  false,
+    "layout1100x720Passed":  true,
+    "designerLayoutOnly":  true
+}

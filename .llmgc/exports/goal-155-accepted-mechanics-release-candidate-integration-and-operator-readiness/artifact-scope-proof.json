@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-155-accepted-mechanics-release-candidate-integration-and-operator-readiness",
+    "baselineRef":  "fc2ac34db60d2627e1cafc86493396937bf63fe4",
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "boundedP1AdditionalPath":  "src/LLMGameCreator.Application/Design/FeatureModuleComposition/FeatureModuleRuntimeEffectEvaluator.cs",
+    "boundedP1Reason":  "The Profile B matrix reproduced action-uncorrelated combat metrics after later ability/status damage; the existing evaluator was scoped to the basic-attack capability step.",
+    "boundedP2AdditionalPath":  "tests/LLMGameCreator.Tests/Application/Goal154D/Goal154DAllSelectedRealProjectTests.cs",
+    "boundedP2Reason":  "The accepted external owner project now truthfully has a latest GREEN build; the historical Goal154D regression accepts either its original FAILED attempt or the accepted GREEN state while retaining all behavioral assertions."
+}

@@ -186,7 +186,7 @@ public sealed class GameProjectBuildAndQualificationService
             var qualifiedPackagePath = Path.Combine(
                 materializationRoot,
                 "compositions",
-                materializationDocument.CompositionId,
+                materialized.Qualification.Result.CompositionId,
                 "package.json");
             if (!File.Exists(qualifiedPackagePath))
                 throw new FileNotFoundException("Qualified package was not materialized.", qualifiedPackagePath);
@@ -204,6 +204,10 @@ public sealed class GameProjectBuildAndQualificationService
             var compositionPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(qualifiedPackagePath)!, cancellationToken)
                 .GetAwaiter().GetResult();
             AssertIdentity(qualifiedPackage, state.Identity);
+            var effectiveSelectedModules = materialized.Plan.ParameterBinding.EffectiveCatalog.Modules
+                .Where(module => module.Required || savedDocument.SelectedModuleIds.Contains(module.ModuleId, StringComparer.Ordinal))
+                .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
+                .ToList();
             var projectQualification = QualifyIdentityOverlaidPackage(
                 qualifiedPackage,
                 compositionPackage,
@@ -218,15 +222,72 @@ public sealed class GameProjectBuildAndQualificationService
                 || !projectQualification.ActionDescriptorExecutionBindingPassed)
                 throw new InvalidOperationException("Identity-overlaid project package failed canonical Runtime qualification.");
 
-            var effectiveSelectedModules = materialized.Plan.ParameterBinding.EffectiveCatalog.Modules
-                .Where(module => module.Required || savedDocument.SelectedModuleIds.Contains(module.ModuleId, StringComparer.Ordinal))
-                .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
-                .ToList();
-            var socialObservations = new FeatureModuleRuntimeEffectEvaluator().Evaluate(
+            var effectEvaluator = new FeatureModuleRuntimeEffectEvaluator();
+            var socialObservations = effectEvaluator.Evaluate(
                 effectiveSelectedModules,
                 projectQualification.Session,
                 new LLMGameCreator.Runtime.Abstractions.SelectedRuntimeVariantInteractiveSession(),
                 qualifiedPackage);
+            IReadOnlyList<FeatureModuleRuntimeEffectObservation> acceptedObservations = socialObservations;
+            var combatMetricKinds = new HashSet<string>(StringComparer.Ordinal)
+            {
+                FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta,
+                FeatureModuleRuntimeEffectMetricKinds.CombatStatDamageDelta
+            };
+            var combatEffectModuleIds = effectiveSelectedModules
+                .Where(module => module.RuntimeEffectContracts.Any(effect => combatMetricKinds.Contains(effect.MetricKind)))
+                .Select(module => module.ModuleId)
+                .ToHashSet(StringComparer.Ordinal);
+            var combatEffectCount = effectiveSelectedModules.Sum(module =>
+                module.RuntimeEffectContracts.Count(effect => combatMetricKinds.Contains(effect.MetricKind)));
+            if (combatEffectModuleIds.Count > 0)
+            {
+                var combatProbeModules = effectiveSelectedModules
+                    .Where(module => module.Required || combatEffectModuleIds.Contains(module.ModuleId))
+                    .ToList();
+                var combatProbe = QualifyIdentityOverlaidPackage(
+                    qualifiedPackage,
+                    compositionPackage,
+                    materialized.Plan.ParameterBinding.EffectiveCatalog,
+                    materializationDocument,
+                    activatedPackagePath,
+                    overlay.ActivatedProjectPackageSha256,
+                    combatProbeModules);
+                if (!combatProbe.CheckpointReplay.Passed
+                    || !combatProbe.FinalReplay.Passed
+                    || !combatProbe.ActionDescriptorExecutionBindingPassed)
+                    return RollbackFailure(
+                        authoring,
+                        preBuildDocument,
+                        preBuildDirty,
+                        transaction,
+                        "Интегрированные боевые эффекты не прошли Runtime-проверку.",
+                        ["accepted mechanics combat probe failed"],
+                        "accepted_mechanics.combat_probe",
+                        attempt);
+                var combatObservations = effectEvaluator.Evaluate(
+                        combatProbeModules,
+                        combatProbe.Session,
+                        new LLMGameCreator.Runtime.Abstractions.SelectedRuntimeVariantInteractiveSession(),
+                        qualifiedPackage)
+                    .Where(observation => combatMetricKinds.Contains(observation.MetricKind))
+                    .ToList();
+                if (combatObservations.Count != combatEffectCount || combatObservations.Any(observation => !observation.Passed))
+                    return RollbackFailure(
+                        authoring,
+                        preBuildDocument,
+                        preBuildDirty,
+                        transaction,
+                        "Интегрированные боевые эффекты не подтверждены.",
+                        combatObservations.SelectMany(observation => observation.Diagnostics)
+                            .DefaultIfEmpty("accepted mechanics combat observations failed").ToList(),
+                        "accepted_mechanics.combat_observations",
+                        attempt);
+                acceptedObservations = socialObservations
+                    .Where(observation => !combatMetricKinds.Contains(observation.MetricKind))
+                    .Concat(combatObservations)
+                    .ToList();
+            }
             var social = new SocialRuntimeReviewProjectionService().Project(
                 effectiveSelectedModules,
                 qualifiedPackage,
@@ -311,18 +372,6 @@ public sealed class GameProjectBuildAndQualificationService
                 LastQualificationStatus = "GREEN"
             });
             var qualifiedDocument = authoring.Save();
-            var historyPath = WriteHistory(
-                state.ProjectFolder,
-                materialized,
-                overlay.CompositionPackageSha256,
-                overlay.ActivatedProjectPackageSha256,
-                projectQualification.Session.CurrentStateHash,
-                qualifiedDocument.ParameterValues.Count,
-                ledger,
-                attempt.AttemptId,
-                social,
-                authoringFingerprint.Sha256);
-            transaction.Commit();
 
             var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
                                  ?? throw new InvalidOperationException("Capability-driven Runtime plan is missing.");
@@ -335,12 +384,20 @@ public sealed class GameProjectBuildAndQualificationService
             var damageEvent = runtimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "DamageApplied"
                                   && (runtimeEvent.Args.ContainsKey("equipmentDamageBonus") || runtimeEvent.Args.ContainsKey("statDamageBonus")))
                               ?? runtimeEvents.LastOrDefault(runtimeEvent => runtimeEvent.EventType == "DamageApplied");
+            var qualifiedEquipmentDamage = QualifiedObservationDecimal(
+                acceptedObservations,
+                FeatureModuleRuntimeEffectMetricKinds.CombatDamageDelta);
+            var qualifiedStatDamage = QualifiedObservationDecimal(
+                acceptedObservations,
+                FeatureModuleRuntimeEffectMetricKinds.CombatStatDamageDelta);
             var weaponDamageBonus = 0;
             var combatDamageDelta = 0;
             if (equipmentAction is not null)
             {
                 var rawDelta = damageEvent?.Args.GetValueOrDefault("equipmentDamageBonus");
-                if (!string.IsNullOrWhiteSpace(rawDelta))
+                if (qualifiedEquipmentDamage.HasValue)
+                    weaponDamageBonus = combatDamageDelta = (int)qualifiedEquipmentDamage.Value;
+                else if (!string.IsNullOrWhiteSpace(rawDelta))
                     weaponDamageBonus = combatDamageDelta = (int)decimal.Parse(
                         rawDelta, NumberStyles.Number, CultureInfo.InvariantCulture);
             }
@@ -354,8 +411,10 @@ public sealed class GameProjectBuildAndQualificationService
             {
                 inspectedStat = runtimeState.Stats.Single(stat => stat.StatId == attributesAction.ResolvedTargetId);
                 var rawStatDamage = damageEvent?.Args.GetValueOrDefault("statDamageBonus");
-                statDamageObserved = !string.IsNullOrWhiteSpace(rawStatDamage);
-                if (statDamageObserved)
+                statDamageObserved = qualifiedStatDamage.HasValue || !string.IsNullOrWhiteSpace(rawStatDamage);
+                if (qualifiedStatDamage.HasValue)
+                    statDamageBonus = qualifiedStatDamage.Value;
+                else if (statDamageObserved)
                     statDamageBonus = decimal.Parse(rawStatDamage!, NumberStyles.Number, CultureInfo.InvariantCulture);
             }
             var progressionAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
@@ -365,7 +424,9 @@ public sealed class GameProjectBuildAndQualificationService
                 inspectedProgression = runtimeState.Progressions.Single(progression =>
                     progression.ProgressionId == progressionAction.ResolvedTargetId);
             var rawTotalAdditionalDamage = damageEvent?.Args.GetValueOrDefault("totalAdditionalDamage");
-            var totalAdditionalDamage = string.IsNullOrWhiteSpace(rawTotalAdditionalDamage)
+            var totalAdditionalDamage = qualifiedEquipmentDamage.HasValue && qualifiedStatDamage.HasValue
+                ? qualifiedEquipmentDamage.Value + qualifiedStatDamage.Value
+                : string.IsNullOrWhiteSpace(rawTotalAdditionalDamage)
                 ? damageEvent is null ? 0m : weaponDamageBonus + statDamageBonus
                 : decimal.Parse(rawTotalAdditionalDamage, NumberStyles.Number, CultureInfo.InvariantCulture);
             var useAbilityAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
@@ -452,7 +513,7 @@ public sealed class GameProjectBuildAndQualificationService
             }
             summaryLines.AddRange(SocialRuntimeReviewProjectionService.HumanSummaryLines(social));
 
-            return new GameProjectBuildResult
+            var buildResult = new GameProjectBuildResult
             {
                 Status = "GREEN",
                 Passed = true,
@@ -471,7 +532,6 @@ public sealed class GameProjectBuildAndQualificationService
                 PackageActivationTransactional = true,
                 CertificationExecutedCount = ledger.ExecutedCount,
                 CertificationReusedCount = ledger.ReusedCount,
-                BuildHistoryPath = historyPath,
                 RequiredSupportFileCount = supportFilePlan.RequiredFileCount,
                 CopiedSupportFileCount = supportActivation.CopiedFileCount,
                 ReusedSupportFileCount = supportActivation.ReusedFileCount,
@@ -526,6 +586,13 @@ public sealed class GameProjectBuildAndQualificationService
                 ,Social = social
                 ,QualifiedAuthoringFingerprint = authoringFingerprint.Sha256
             };
+            buildResult = buildResult with
+            {
+                AcceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult)
+            };
+            var historyPath = WriteHistory(state.ProjectFolder, buildResult, ledger);
+            transaction.Commit();
+            return buildResult with { BuildHistoryPath = historyPath };
         }
         catch (Exception exception) when (exception is IOException
             or UnauthorizedAccessException
@@ -565,6 +632,18 @@ public sealed class GameProjectBuildAndQualificationService
         return decimal.TryParse(raw, NumberStyles.Number, CultureInfo.InvariantCulture, out var value) ? value : 0;
     }
 
+    private static decimal? QualifiedObservationDecimal(
+        IReadOnlyList<FeatureModuleRuntimeEffectObservation> observations,
+        string metricKind)
+    {
+        var raw = observations.LastOrDefault(observation =>
+            observation.Passed
+            && string.Equals(observation.MetricKind, metricKind, StringComparison.Ordinal))?.ActualValue;
+        return decimal.TryParse(raw, NumberStyles.Number, CultureInfo.InvariantCulture, out var value)
+            ? value
+            : null;
+    }
+
     private GameProjectBuildResult RollbackFailure(
         GameProjectFeatureModuleAuthoringService authoring,
         FeatureModuleCompositionDocument preBuildDocument,
@@ -600,46 +679,41 @@ public sealed class GameProjectBuildAndQualificationService
 
     private static string WriteHistory(
         string projectFolder,
-        FeatureModuleParameterizedCompositionResult result,
-        string compositionPackageSha256,
-        string activatedProjectPackageSha256,
-        string finalStateHash,
-        int configuredParameterCount,
+        GameProjectBuildResult build,
         FeatureModuleCertificationLedger ledger,
-        string attemptId,
-        GameProjectSocialSummary social,
-        string qualifiedAuthoringFingerprint)
+        string? fileName = null)
     {
         var root = GameProjectFeatureModuleAuthoringService.ConfinedPath(
             projectFolder,
             UnifiedGameProjectWorkspaceVocabulary.BuildHistoryRelativeRoot);
         Directory.CreateDirectory(root);
-        var fileName = DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffffffZ") + ".json";
+        fileName ??= DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffffffZ") + ".json";
         var path = Path.Combine(root, fileName);
         var entry = new GameProjectBuildHistoryEntry
         {
             CompletedAtUtc = DateTimeOffset.UtcNow,
             Status = "GREEN",
-            PackageSha256 = activatedProjectPackageSha256,
-            CompositionPackageSha256 = compositionPackageSha256,
-            ActivatedProjectPackageSha256 = activatedProjectPackageSha256,
-            FinalStateHash = finalStateHash,
-            SelectedMechanicCount = result.SelectedModuleCount,
-            ConfiguredParameterCount = configuredParameterCount,
+            PackageSha256 = build.PackageSha256,
+            CompositionPackageSha256 = build.CompositionPackageSha256,
+            ActivatedProjectPackageSha256 = build.ActivatedProjectPackageSha256,
+            FinalStateHash = build.FinalStateHash,
+            SelectedMechanicCount = build.SelectedMechanicCount,
+            ConfiguredParameterCount = build.ConfiguredParameterCount,
             CertificationExecutedCount = ledger.ExecutedCount,
             CertificationReusedCount = ledger.ReusedCount,
-            CheckpointReloadPassed = result.CheckpointReloadPassed,
-            FullReplayEquivalent = result.FullReplayEquivalent,
-            ActionBindingPassed = result.ActionBindingPassed,
-            AttemptId = attemptId,
+            CheckpointReloadPassed = build.CheckpointReloadPassed,
+            FullReplayEquivalent = build.FullReplayEquivalent,
+            ActionBindingPassed = build.ActionBindingPassed,
+            AttemptId = build.AttemptId,
             AttemptStatus = "GREEN",
-            AttemptedSelectedModuleIds = result.SourceDocument.SelectedModuleIds,
-            AttemptedCapabilityCount = result.Qualification.Artifacts.Session.CapabilityPlan?.CapabilityIds.Count ?? 0,
-            AttemptedPlannedActionCount = result.Qualification.Artifacts.Session.CapabilityPlan?.OrderedActions.Count ?? 0,
-            AttemptedCheckpointActionCount = result.Qualification.Artifacts.CheckpointReplay.ReplayedActionCount,
-            AttemptedFinalReplayActionCount = result.Qualification.Artifacts.FinalReplay.ReplayedActionCount
-            ,Social = social.Present && social.Passed ? social : null
-            ,QualifiedAuthoringFingerprint = qualifiedAuthoringFingerprint
+            AttemptedSelectedModuleIds = build.AttemptedSelectedModuleIds,
+            AttemptedCapabilityCount = build.AttemptedCapabilityCount,
+            AttemptedPlannedActionCount = build.AttemptedPlannedActionCount,
+            AttemptedCheckpointActionCount = build.AttemptedCheckpointActionCount,
+            AttemptedFinalReplayActionCount = build.AttemptedFinalReplayActionCount,
+            Social = build.Social is { Present: true, Passed: true } ? build.Social : null,
+            QualifiedAuthoringFingerprint = build.QualifiedAuthoringFingerprint,
+            AcceptedMechanics = build.AcceptedMechanics
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
         return path;
@@ -660,12 +734,14 @@ public sealed class GameProjectBuildAndQualificationService
         LLMGameCreator.Application.Design.FeatureModuleComposition.FeatureModuleCatalogDocument effectiveCatalog,
         FeatureModuleCompositionDocument document,
         string packagePath,
-        string packageSha256)
+        string packageSha256,
+        IReadOnlyList<FeatureModuleDefinition>? qualificationModules = null)
     {
         var selected = document.SelectedModuleIds.OrderBy(id => id, StringComparer.Ordinal).ToList();
+        qualificationModules ??= effectiveCatalog.Modules.Where(module => module.Required
+                                                                          || selected.Contains(module.ModuleId, StringComparer.Ordinal)).ToList();
         var capabilityPlan = new CapabilityDrivenRuntimePlaythroughPlanner().Plan(
-            effectiveCatalog.Modules.Where(module => module.Required
-                                                     || selected.Contains(module.ModuleId, StringComparer.Ordinal)).ToList(),
+            qualificationModules,
             compositionPackage);
         var qualifier = new ProductLineRuntimeQualifier(
             new GameProjectIdentityRuntimeQualificationAdapter(_runtime, compositionPackage.Manifest));

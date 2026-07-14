@@ -9,3 +9,7 @@ Sixteen behavioral tests exercise actual binding, mutation, planner, Runtime and
 Goals154, 154A, 154B and 154B1 remain human-unaccepted. `manualGateReady=false`; saved-project, WinForms and standalone work remains deferred to Goal154C. Unity Editor and standalone smoke invocation counts are zero.
 
 Goal154C3 later verified the inherited truthful meaning on disposable copies: default gold `0 -> 10 -> 17`, locked final gold 10, and custom reward 9 final gold 19. Historical evidence remains read-only.
+
+## Human acceptance recorded by Goal155
+
+The owner accepted the complete Goal154 family at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. Earlier `accepted=false` text remains a historical implementation-stage statement. `accepted=true`, `acceptedByHuman=true`, `acceptedByCodex=false`.

@@ -1,0 +1,9 @@
+{
+    "status":  "GREEN",
+    "typedAcceptedMechanicsSummary":  true,
+    "greenHistoryPersistence":  true,
+    "freshReopenRecovery":  true,
+    "failedBuildPreservedLastSuccess":  true,
+    "currentLastSuccessUnknownAbsentSemantics":  true,
+    "olderHistoryReadable":  true
+}

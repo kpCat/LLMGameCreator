@@ -68,7 +68,8 @@ public sealed class GameProjectBuildHistoryReader
                 AttemptedSelectedModuleIds = entry.AttemptedSelectedModuleIds, AttemptedCapabilityCount = entry.AttemptedCapabilityCount,
                 AttemptedPlannedActionCount = entry.AttemptedPlannedActionCount, AttemptedCheckpointActionCount = entry.AttemptedCheckpointActionCount,
                 AttemptedFinalReplayActionCount = entry.AttemptedFinalReplayActionCount, Social = entry.Social,
-                QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint
+                QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint,
+                AcceptedMechanics = entry.AcceptedMechanics
             },
             Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
             CurrentAuthoringFingerprint = fingerprint.Sha256,

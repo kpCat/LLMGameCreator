@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "atomicProjectLocalRecord":  true,
+    "writtenOnlyAfterStandalone":  true,
+    "actualPayloadCorrelation":  true,
+    "current":  true,
+    "lastSuccess":  true,
+    "unknown":  true,
+    "absent":  true,
+    "portableCopyCurrentWithoutExecution":  true,
+    "failedBuildPreservedRecord":  true,
+    "failedStandalonePreservedRecord":  true,
+    "absoluteProjectPathIdentity":  false
+}

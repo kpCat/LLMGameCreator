@@ -184,7 +184,7 @@ and participant resource domain causal before Runtime, and requires independent 
 
 Goal153C closes the activated proof-fixture/global-capacity release risk. Qualification now uses real deterministic hostile content, proof-only high capacity stays in test memory, and expiry/defeat/encounter terminal outcomes plus conditional skips are replay-stable. Independent audit and the combined human gate remain required; no acceptance is inferred from automated GREEN.
 
-Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect risk left in Goal154B. Goal154C3 subsequently closes the saved-project/WinForms/standalone publication surface, and Goal154D closes the exact all-selected precompleted-quest qualification blocker exposed by the first human attempt. `manualGateReady=true`, but no Goal154-family acceptance is inferred before the retry.
+Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect risk left in Goal154B. Goal154C3 subsequently closes the saved-project/WinForms/standalone publication surface, and Goal154D closes the exact all-selected precompleted-quest qualification blocker exposed by the first human attempt. The complete family was later accepted by the owner at `fc2ac34db60d2627e1cafc86493396937bf63fe4`.
 ## Goal154C3 closure risks
 
 - Human acceptance remains pending by design; no Codex or human acceptance is claimed.
@@ -195,4 +195,11 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 
 - The P1 all-selected precompleted-quest blocker is closed by a generic capability qualification guard. It never treats `quest.not_active` as Runtime success and never restarts a completed quest.
 - A redundant advance skips only when the exact quest/objective are completed and the prior canonical history contains one `QuestCompleted` and one `QuestRewardGranted`; malformed, failed, missing or ambiguous states fail causally.
-- Residual risk is human product confirmation only: Goal154 remains `accepted=false` until the exact four-step combined gate is retried successfully.
+- The first failed gate remains historical. The exact retry was accepted by the owner; no current Goal154 human gate remains.
+
+## Goal155 accepted-mechanics RC integration
+
+- Goals149–154 accepted-mechanics RC integration has no known P0/P1 from the required matrix. The reproduced all-selected combat observation P1 was fixed in Goal155 by action-scoped evaluation plus a generic same-package combat qualification probe.
+- Historical 64-test closure remains validation debt and is not reopened.
+- Clean-machine install and final release packaging remain future milestone work.
+- Goal155 creates no human gate; it remains `accepted=false` and requires independent audit.

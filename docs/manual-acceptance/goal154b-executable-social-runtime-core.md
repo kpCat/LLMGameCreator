@@ -12,3 +12,7 @@ Goal154B retains the Goal154A foundation and closes executable Runtime core only
 WinForms, real saved-project and standalone closure are explicitly deferred to Goal154C. Unity Editor invocation count and standalone smoke invocation count are both zero. Goals154, Goal154A and Goal154B remain human-unaccepted; this file does not claim or simulate human review.
 
 Goal154C3 closes that deferred implementation/evidence surface and leaves this Goal154B record human-unaccepted.
+
+## Human acceptance recorded by Goal155
+
+The owner accepted the complete Goal154 family at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The sentence above is retained as historical publication context. `accepted=true`, `acceptedByHuman=true`, `acceptedByCodex=false`.

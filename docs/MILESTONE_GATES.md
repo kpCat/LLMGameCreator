@@ -209,7 +209,7 @@ Goal152C closes the exact generated Unity settings cleanup and external-workspac
 
 Goals153, Goal153A, Goal153B and Goal153C are accepted by human at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`: defaults `2/12/3/5/1` produced damage 2, mana `12 → 9`, five ticks of 1 and expiry; cached standalone reuse started no Unity Editor. Acceptance is human-only.
 
-Goal154 and Goal154A remain historical FAILED, human-unaccepted foundations. Goal154B remains GREEN for executable social Runtime core; Goal154B1 corrects the independent P1 semantics: defaults `0/10/5/10/7` yield gold `0 → 10 → 17`, threshold 20 remains at 10, and trusted resource evidence is action-scoped. Goal154B1 does not open a manual gate: Goals154/154A/154B/154B1 remain `accepted=false`, `manualGateReady=false`, and Goal154C must close saved-project, WinForms and standalone workflow without retroactively claiming acceptance.
+Goal154 and Goal154A retain their historical FAILED implementation labels. Goal154B remains GREEN for executable social Runtime core; Goal154B1 corrects the independent P1 semantics: defaults `0/10/5/10/7` yield gold `0 → 10 → 17`, threshold 20 remains at 10, and trusted resource evidence is action-scoped. The complete Goal154 family was subsequently accepted by the owner at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; acceptance does not rewrite historical implementation outcomes.
 
 Goals149/150/150A/150B/151 are accepted by human through the exact Goal152 acceptance
 record at commit `2516931f9c8242bbd59fe5cf73f9e66b405ef16c`, with `3/8/2/12`, `3/6/9`
@@ -222,4 +222,8 @@ Goal154C3 implementation is GREEN and `manualGateReady=true`; `accepted=false` r
 
 ## Goal154D failed-gate repair record
 
-The first combined human attempt at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed before product launch at `composition.qualification`: `advance_healer_objective` received `quest.not_active` because Alchemy Focus made `start_or_update_quest` complete the quest during inventory refresh. Goal154D is GREEN with the exact 22/10 composition, truthful EXECUTED/SKIPPED paths, direct Runtime strictness, completion-snapshot effect/projection truth, replay and cache-only standalone proof. `accepted=false` remains unchanged; the same four-step human gate must be retried.
+The first combined human attempt at `2c95ee8f689ef104946859432706fd6d4b22deb2` failed before product launch at `composition.qualification`: `advance_healer_objective` received `quest.not_active` because Alchemy Focus made `start_or_update_quest` complete the quest during inventory refresh. Goal154D is GREEN with the exact 22/10 composition, truthful EXECUTED/SKIPPED paths, direct Runtime strictness, completion-snapshot effect/projection truth, replay and cache-only standalone proof. That failure remains historical; the successful retry was accepted by the owner at `fc2ac34db60d2627e1cafc86493396937bf63fe4`.
+
+## Goal155 release-candidate gate record
+
+Goal155 is a GREEN acceptable automated candidate, not a new human gate. Exact owner `22/10` and maximal `22/14` profiles, typed accepted-mechanics history, atomic portable RC record, compact WinForms card, correlated actual payload and one cache-only hidden smoke are GREEN. `goal155Accepted=false`, `goal155ManualReviewRequired=false`, and independent audit is required before selecting the next major product slice.

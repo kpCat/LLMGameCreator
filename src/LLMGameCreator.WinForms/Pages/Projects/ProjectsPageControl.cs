@@ -268,6 +268,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             BindMechanics(snapshot);
             BindParameters(snapshot);
             BindSocialCard(snapshot);
+            BindReleaseCandidateCard(snapshot);
             BindTechnicalDetails(snapshot);
             BindStandalone(snapshot);
             if (snapshot.Diagnostics.Count > 0 && !_buildUiRunning)
@@ -290,6 +291,60 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 ? " — последняя успешная проверка" : string.Empty) + Environment.NewLine + Environment.NewLine
               + string.Join(Environment.NewLine, social!.HumanFacts.Select(fact => fact.Label + "    " + fact.Value));
     }
+
+    private void BindReleaseCandidateCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var visible = snapshot.AcceptedMechanics is { Passed: true };
+        _releaseCandidateCardPanel.Visible = visible;
+        _releaseCandidateCardLabel.Text = visible ? BuildReleaseCandidateCardText(snapshot) : string.Empty;
+        if (visible) _socialCardPanel.Visible = false;
+    }
+
+    private static string BuildReleaseCandidateCardText(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var summary = snapshot.AcceptedMechanics
+                      ?? throw new InvalidOperationException("Accepted mechanics summary is required for the RC card.");
+        var status = snapshot.ReleaseCandidateConfigurationStatus switch
+        {
+            "CURRENT" => "Статус: RC готов",
+            "LAST_SUCCESS" => "Статус: последняя успешная RC-проверка",
+            "UNKNOWN" => "Статус: последняя RC-проверка; соответствие текущим настройкам не подтверждено",
+            _ => "Статус: сборка пройдена; Windows RC ещё не подтверждён"
+        };
+        var social = summary.Social;
+        var reputation = social is null ? "не подтверждено" : Number(social.ReputationBefore) + " → " + Number(social.ReputationAfter);
+        var gold = social is null ? "не подтверждено" : Number(social.GoldBefore) + " → "
+            + Number(social.GoldAfterQuest) + " → " + Number(social.GoldAfterClaim);
+        var standalone = snapshot.ReleaseCandidateConfigurationStatus switch
+        {
+            "CURRENT" => "cache reused; проверки пройдены",
+            "LAST_SUCCESS" => "последняя успешная проверка",
+            "UNKNOWN" => "последняя проверка; текущие настройки не подтверждены",
+            _ => "ещё не подтверждён"
+        };
+        return string.Join(Environment.NewLine, new[]
+        {
+            "Принятые механики — Release Candidate",
+            status,
+            "Механики    " + summary.SelectedMechanicCount,
+            "Настроенные параметры    " + summary.ConfiguredParameterCount,
+            "Снаряжение и характеристики    " + Signed(summary.EquipmentDamageBonus) + " / "
+                + Signed(summary.StatDamageBonus) + " / " + Signed(summary.TotalAdditionalDamage),
+            "Прогрессия    пройдена",
+            "Способность и мана    урон " + Number(summary.AbilityDirectDamage) + "; "
+                + Number(summary.ManaBefore) + " → " + Number(summary.ManaRemaining),
+            "Эффект по ходам    " + Number(summary.StatusTickDamage) + " за ход; "
+                + (summary.StatusExpired ? "завершён" : "не завершён"),
+            "Репутация    " + reputation,
+            "Золото    " + gold,
+            "Сохранение и повтор    " + (summary.CheckpointReloadPassed && summary.FullReplayEquivalent
+                && summary.ActionBindingPassed ? "пройдено" : "не пройдено"),
+            "Windows standalone    " + standalone
+        });
+    }
+
+    private static string Signed(decimal value) => (value >= 0 ? "+" : string.Empty) + Number(value);
+    private static string Number(decimal value) => value.ToString("0.####", CultureInfo.InvariantCulture);
 
     private void BindStandalone(UnifiedGameProjectWorkspaceSnapshot snapshot)
     {

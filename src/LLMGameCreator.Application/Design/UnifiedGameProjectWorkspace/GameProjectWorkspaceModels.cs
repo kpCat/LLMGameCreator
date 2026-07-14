@@ -11,6 +11,9 @@ public static class UnifiedGameProjectWorkspaceVocabulary
     public const string CertificationCacheRelativeRoot = ".llmgc/certification-cache";
     public const string BuildStagingRelativeRoot = ".llmgc/build-staging";
     public const string BuildHistoryRelativeRoot = ".llmgc/build-history";
+    public const string ReleaseCandidateRelativeRoot = ".llmgc/release-candidate";
+    public const string ReleaseCandidateRecordRelativePath = ".llmgc/release-candidate/accepted-mechanics-rc1.json";
+    public const string ReleaseCandidateSchemaVersion = "accepted_mechanics_release_candidate_v1";
     public const string PrimaryActionText = "Собрать и проверить игру";
 }
 
@@ -74,6 +77,31 @@ public sealed record GameProjectSocialSummary
     public bool CheckpointReplayPassed { get; init; }
     public bool FullReplayEquivalent { get; init; }
     public IReadOnlyList<GameProjectSocialHumanFact> HumanFacts { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record GameProjectAcceptedMechanicsSummary
+{
+    public bool Present { get; init; }
+    public bool Passed { get; init; }
+    public int SelectedMechanicCount { get; init; }
+    public int ConfiguredParameterCount { get; init; }
+    public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
+    public decimal EquipmentDamageBonus { get; init; }
+    public decimal StatDamageBonus { get; init; }
+    public decimal TotalAdditionalDamage { get; init; }
+    public decimal AbilityDirectDamage { get; init; }
+    public decimal ManaBefore { get; init; }
+    public decimal ManaSpent { get; init; }
+    public decimal ManaRemaining { get; init; }
+    public decimal StatusTickDamage { get; init; }
+    public bool StatusExpired { get; init; }
+    public GameProjectSocialSummary? Social { get; init; }
+    public bool CheckpointReloadPassed { get; init; }
+    public bool FullReplayEquivalent { get; init; }
+    public bool ActionBindingPassed { get; init; }
+    public IReadOnlyList<GameProjectSocialHumanFact> HumanFacts { get; init; } = [];
+    public IReadOnlyList<string> MissingFactKinds { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
@@ -148,6 +176,11 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public GameProjectSocialSummary? Social { get; init; }
     public bool SocialMatchesCurrentConfiguration { get; init; }
     public string SocialConfigurationStatus { get; init; } = "ABSENT";
+    public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
+    public GameProjectReleaseCandidateRecord? ReleaseCandidate { get; init; }
+    public string ReleaseCandidateRecordConfigurationStatus { get; init; } = "ABSENT";
+    public string ReleaseCandidateConfigurationStatus { get; init; } = "ABSENT";
+    public string ReleaseCandidateRecordPath { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectBuildResult
@@ -215,6 +248,7 @@ public sealed record GameProjectBuildResult
     public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
     public GameProjectSocialSummary? Social { get; init; }
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
+    public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
 }
 
 public sealed record GameProjectRuntimeFrame
@@ -253,6 +287,7 @@ public sealed record GameProjectBuildHistoryEntry
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
     public GameProjectSocialSummary? Social { get; init; }
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
+    public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
 }
 
 public sealed record GameProjectAuthoringState

@@ -1,0 +1,13 @@
+{
+    "status":  "GREEN",
+    "hiddenSmokeInvocationCount":  1,
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "hostFileSetHashUnchanged":  true,
+    "unityProcessStartCount":  0,
+    "standaloneSelfChecksPassed":  true,
+    "actualPayloadAcceptedFactsPassed":  true,
+    "releaseCandidateFact":  "готов",
+    "playerAdapterModelSha256":  "bf4598b343c625dcc6e29d08f18e99630616afa0648df38bb25430eba3d30e20"
+}

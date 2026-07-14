@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "selectedMechanicCount":  22,
+    "configuredParameterCount":  14,
+    "equipmentStatTotalDamage":  "3/6/9",
+    "abilityDirectDamage":  2,
+    "mana":  "12 → 9",
+    "statusTickDamage":  1,
+    "statusExpired":  true,
+    "reputation":  "0 → 10",
+    "gold":  "0 → 10 → 17",
+    "checkpointReloadPassed":  true,
+    "fullReplayEquivalent":  true,
+    "actionBindingPassed":  true,
+    "repeatBuildDeterministic":  true
+}

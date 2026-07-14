@@ -39,8 +39,11 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private readonly GameProjectWorkspaceStatusPresenter _presenter;
     private readonly IProjectStandaloneBuildService _standaloneBuild;
     private readonly GameProjectBuildHistoryReader _historyReader;
+    private readonly GameProjectAcceptedMechanicsSummaryService _acceptedMechanicsSummaryService;
+    private readonly GameProjectReleaseCandidateRecordService _releaseCandidateRecordService;
     private GameProjectBuildResult? _lastBuild;
     private GameProjectBuildResult? _lastSuccessfulBuild;
+    private ProjectStandaloneBuildResult? _lastStandaloneAttempt;
     private IReadOnlyList<string> _persistedHistoryDiagnostics = [];
 
     public UnifiedGameProjectWorkspaceController(
@@ -49,7 +52,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         GameProjectBuildAndQualificationService builder,
         GameProjectWorkspaceStatusPresenter? presenter = null,
         IProjectStandaloneBuildService? standaloneBuild = null,
-        GameProjectBuildHistoryReader? historyReader = null)
+        GameProjectBuildHistoryReader? historyReader = null,
+        GameProjectAcceptedMechanicsSummaryService? acceptedMechanicsSummaryService = null,
+        GameProjectReleaseCandidateRecordService? releaseCandidateRecordService = null)
     {
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _authoring = authoring ?? throw new ArgumentNullException(nameof(authoring));
@@ -57,6 +62,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _presenter = presenter ?? new GameProjectWorkspaceStatusPresenter();
         _standaloneBuild = standaloneBuild ?? new ProjectStandaloneBuildService(Directory.GetCurrentDirectory());
         _historyReader = historyReader ?? new GameProjectBuildHistoryReader();
+        _acceptedMechanicsSummaryService = acceptedMechanicsSummaryService ?? new GameProjectAcceptedMechanicsSummaryService();
+        _releaseCandidateRecordService = releaseCandidateRecordService ?? new GameProjectReleaseCandidateRecordService();
     }
 
     public bool HasOpenProject { get; private set; }
@@ -78,6 +85,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _authoring.OpenProject(requested, currentPackage);
         HasOpenProject = true;
         _lastBuild = null;
+        _lastStandaloneAttempt = null;
         var persisted = _historyReader.ReadLatestMatchingSocialSuccess(requested, _authoring.State.Document, _authoring.State.Library);
         _lastSuccessfulBuild = persisted.LastSuccessfulBuild;
         _persistedHistoryDiagnostics = persisted.Diagnostics;
@@ -129,6 +137,20 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var executable = ExecutableProvenance();
         var social = _lastSuccessfulBuild?.Social is { Present: true, Passed: true } currentSocial ? currentSocial : null;
         var socialTruth = SocialTruth(state, _lastSuccessfulBuild, social is not null);
+        var releaseCandidate = _releaseCandidateRecordService.Read(state.ProjectFolder, state.Document, state.Library);
+        var acceptedMechanics = _lastSuccessfulBuild?.AcceptedMechanics
+                                ?? releaseCandidate.Record?.AcceptedMechanicsSummary;
+        var currentFingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);
+        var acceptedMechanicsCurrent = acceptedMechanics is { Passed: true }
+                                       && currentFingerprint.Passed
+                                       && !string.IsNullOrWhiteSpace(currentFingerprint.Sha256)
+                                       && string.Equals(acceptedMechanics.QualifiedAuthoringFingerprint,
+                                           currentFingerprint.Sha256, StringComparison.Ordinal);
+        var releaseCandidateStatus = ResolveReleaseCandidateStatus(
+            acceptedMechanics,
+            acceptedMechanicsCurrent,
+            _lastSuccessfulBuild,
+            releaseCandidate);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -150,7 +172,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             CatalogFingerprint = state.Library.CatalogFingerprint,
             Mechanics = mechanics,
             Parameters = parameters,
-            Diagnostics = validation.Diagnostics.Concat(parameterValidation.Diagnostics).Concat(_persistedHistoryDiagnostics).Distinct(StringComparer.Ordinal).ToList(),
+            Diagnostics = validation.Diagnostics.Concat(parameterValidation.Diagnostics)
+                .Concat(_persistedHistoryDiagnostics).Concat(releaseCandidate.Diagnostics)
+                .Distinct(StringComparer.Ordinal).ToList(),
             PackageSha256 = activatedPackageSha,
             CompositionPackageSha256 = string.IsNullOrWhiteSpace(state.Document.LastCompositionPackageSha256)
                 ? state.Document.LastMaterializedPackageSha256
@@ -197,11 +221,16 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ExecutableSha256 = executable.Sha256,
             ExecutableFileVersion = executable.FileVersion,
             ExecutableInformationalVersion = executable.InformationalVersion
-            ,LastStandaloneBuild = _standaloneBuild.LastResult
+            ,LastStandaloneBuild = _lastStandaloneAttempt ?? _standaloneBuild.LastResult
             ,StandaloneUnityEditorPath = _standaloneBuild.LoadSettings(state.ProjectFolder).UnityEditorPath
             ,Social = social
             ,SocialMatchesCurrentConfiguration = socialTruth.Matches
             ,SocialConfigurationStatus = socialTruth.Status
+            ,AcceptedMechanics = acceptedMechanics
+            ,ReleaseCandidate = releaseCandidate.Record
+            ,ReleaseCandidateRecordConfigurationStatus = releaseCandidate.ConfigurationStatus
+            ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
+            ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
         };
     }
 
@@ -241,8 +270,22 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         if (_lastBuild.Passed) _lastSuccessfulBuild = _lastBuild;
         var snapshot = Snapshot();
         if (!_lastBuild.Passed)
-            return new ProjectStandaloneBuildResult { Status = "FAILED", Stage = "qualify_current_project", Diagnostics = _lastBuild.Diagnostics, ProjectFolder = snapshot.ProjectFolder };
+        {
+            _lastStandaloneAttempt = new ProjectStandaloneBuildResult
+            {
+                Status = "FAILED",
+                Stage = "qualify_current_project",
+                Diagnostics = _lastBuild.Diagnostics,
+                ProjectFolder = snapshot.ProjectFolder
+            };
+            return _lastStandaloneAttempt;
+        }
         var state = _authoring.State;
+        var currentFingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);
+        var releaseCandidateFactsAllowed = _lastBuild.AcceptedMechanics is { Passed: true }
+                                           && currentFingerprint.Passed
+                                           && string.Equals(_lastBuild.QualifiedAuthoringFingerprint,
+                                               currentFingerprint.Sha256, StringComparison.Ordinal);
         var request = new ProjectStandaloneBuildRequest
         {
             ProjectFolder = snapshot.ProjectFolder,
@@ -275,7 +318,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             EquipmentDamageBonus = _lastBuild.WeaponDamageBonus,
             StatDamageBonus = _lastBuild.StatDamageBonus,
             TotalAdditionalDamage = _lastBuild.TotalAdditionalDamage,
-            HumanReviewFacts = BuildHumanReviewFacts(_lastBuild),
+            HumanReviewFacts = _acceptedMechanicsSummaryService.StandaloneHumanFacts(
+                _lastBuild, releaseCandidateFactsAllowed),
             RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame
             {
                 Index = frame.Index,
@@ -285,51 +329,28 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                 StateHash = frame.StateHash
             }).ToList()
         };
-        return _standaloneBuild.Build(request, cancellationToken);
-    }
-
-    private static IReadOnlyList<StandaloneHumanReviewFact> BuildHumanReviewFacts(GameProjectBuildResult build)
-    {
-        var facts = new List<StandaloneHumanReviewFact>
+        var standalone = _standaloneBuild.Build(request, cancellationToken);
+        _lastStandaloneAttempt = standalone;
+        if (!string.Equals(standalone.Status, "GREEN", StringComparison.Ordinal)) return standalone;
+        try
         {
-            new() { Label = "Бонус оружия", Value = build.WeaponDamageBonus.ToString() },
-            new() { Label = "Бонус от характеристик", Value = build.StatDamageBonus.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) },
-            new() { Label = "Общий дополнительный урон", Value = build.TotalAdditionalDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) }
-        };
-        AddSummaryFact(build.AttributesSummary, "stat/strength=", "Сила", facts);
-        var progression = System.Text.RegularExpressions.Regex.Match(build.ProgressionSummary ?? string.Empty, @"=(\d+):[^/]+/(\d+)");
-        if (progression.Success)
-        {
-            facts.Add(new StandaloneHumanReviewFact { Label = "Уровень", Value = progression.Groups[2].Value });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Опыт", Value = progression.Groups[1].Value });
+            _releaseCandidateRecordService.Write(state.ProjectFolder, state.Identity, _lastBuild, standalone);
+            return standalone;
         }
-        if (!string.IsNullOrWhiteSpace(build.AbilitySummary))
+        catch (Exception exception) when (exception is IOException
+                                          or UnauthorizedAccessException
+                                          or InvalidOperationException
+                                          or JsonException)
         {
-            facts.Add(new StandaloneHumanReviewFact { Label = "Способность", Value = build.AbilitySummary });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Прямой урон", Value = build.AbilityDirectDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
-        }
-        if (!string.IsNullOrWhiteSpace(build.ManaSummary))
-        {
-            facts.Add(new StandaloneHumanReviewFact { Label = "Начальная мана", Value = build.ManaBefore.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Потрачено маны", Value = build.ManaSpent.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Осталось маны", Value = build.ManaRemaining.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
-        }
-        if (!string.IsNullOrWhiteSpace(build.StatusSummary))
-        {
-            facts.Add(new StandaloneHumanReviewFact { Label = "Эффект", Value = build.StatusSummary.Split(',')[0] });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Длительность", Value = build.StatusSummary.Contains(',') ? build.StatusSummary[(build.StatusSummary.IndexOf(',') + 1)..].Trim() : build.StatusSummary });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Урон за ход", Value = build.StatusTickDamage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) });
-            facts.Add(new StandaloneHumanReviewFact { Label = "Эффект завершён", Value = build.StatusExpired ? "да" : "нет" });
-        }
-        if (build.Social is { Present: true, Passed: true } social)
-        {
-            facts.AddRange(social.HumanFacts.Select(fact => new StandaloneHumanReviewFact
+            var failed = standalone with
             {
-                Label = fact.Label,
-                Value = fact.Value
-            }));
+                Status = "FAILED",
+                Stage = "release_candidate_record",
+                Diagnostics = [exception.Message]
+            };
+            _lastStandaloneAttempt = failed;
+            return failed;
         }
-        return facts;
     }
 
     private static (bool Matches, string Status) SocialTruth(
@@ -346,13 +367,29 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         return (matches, matches ? "CURRENT" : "LAST_SUCCESS");
     }
 
-    private static void AddSummaryFact(string summary, string marker, string label, ICollection<StandaloneHumanReviewFact> facts)
+
+    private static string ResolveReleaseCandidateStatus(
+        GameProjectAcceptedMechanicsSummary? acceptedMechanics,
+        bool acceptedMechanicsCurrent,
+        GameProjectBuildResult? lastSuccessfulBuild,
+        GameProjectReleaseCandidateReadResult releaseCandidate)
     {
-        summary ??= string.Empty;
-        var index = summary.IndexOf(marker, StringComparison.Ordinal);
-        if (index < 0) return;
-        var value = summary[(index + marker.Length)..].TakeWhile(char.IsDigit).ToArray();
-        if (value.Length > 0) facts.Add(new StandaloneHumanReviewFact { Label = label, Value = new string(value) });
+        if (acceptedMechanics is { Passed: true } && acceptedMechanicsCurrent)
+        {
+            var recordMatchesBuild = releaseCandidate.Record is not null
+                                     && (lastSuccessfulBuild is null
+                                         || string.Equals(releaseCandidate.Record.PackageSha256,
+                                             lastSuccessfulBuild.PackageSha256, StringComparison.Ordinal)
+                                         && string.Equals(releaseCandidate.Record.CompositionPackageSha256,
+                                             lastSuccessfulBuild.CompositionPackageSha256, StringComparison.Ordinal)
+                                         && string.Equals(releaseCandidate.Record.FinalStateHash,
+                                             lastSuccessfulBuild.FinalStateHash, StringComparison.Ordinal));
+            return releaseCandidate.ConfigurationStatus == "CURRENT" && recordMatchesBuild
+                ? "CURRENT"
+                : "BUILD_GREEN_STANDALONE_PENDING";
+        }
+        if (releaseCandidate.Record is not null) return releaseCandidate.ConfigurationStatus;
+        return "ABSENT";
     }
 
     public void CancelWindowsStandaloneBuild() => _standaloneBuild.Cancel();

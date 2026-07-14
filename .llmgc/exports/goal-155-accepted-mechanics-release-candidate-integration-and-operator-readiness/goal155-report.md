@@ -1,0 +1,12 @@
+# Goal 155 accepted mechanics release candidate
+
+Status: GREEN
+
+- Goal154/154A/154B/154B1/154C/154C1/154C2/154C3/154D human acceptance is recorded against $baseline; historical implementation statuses are preserved.
+- Profile A is the unchanged owner project: 22 mechanics, 10 configured parameters, deterministic build/repeat/reopen and byte-identical source.
+- Profile B is 22/14 and proves damage 3/6/9, ability 2, mana 12 → 9, status tick 1 with expiry, reputation 0 → 10 and gold 0 → 10 → 17.
+- AcceptedMechanics persists in GREEN history and reopens; failed build preserves last success.
+- The atomic project-local RC record distinguishes CURRENT/LAST_SUCCESS/UNKNOWN/ABSENT, survives a portable copy without execution, and survives failed build/standalone attempts.
+- One hidden standalone smoke reused host $(@{status=GREEN; ownerSelectedMechanicCount=22; ownerConfiguredParameterCount=10; benchmarkSelectedMechanicCount=22; benchmarkConfiguredParameterCount=14; benchmarkEquipmentDamageBonus=3; benchmarkStatDamageBonus=6; benchmarkTotalAdditionalDamage=9; benchmarkAbilityDirectDamage=2; benchmarkManaBefore=12; benchmarkManaRemaining=9; benchmarkStatusTickDamage=1; benchmarkStatusExpired=True; benchmarkReputationBefore=0; benchmarkReputationAfter=10; benchmarkGoldAfterQuest=10; benchmarkGoldAfterClaim=17; benchmarkCheckpointReloadPassed=True; benchmarkFullReplayEquivalent=True; benchmarkActionBindingPassed=True; acceptedMechanicsSummaryPersisted=True; releaseCandidateRecordWritten=True; releaseCandidateRecordCurrent=True; portableCopyRecordCurrent=True; failedBuildPreservedLastSuccess=True; failedStandalonePreservedRecord=True; HostCacheKey=6af4d5eb5b42f956110555b58fb4e276; HostReused=True; HostRebuilt=False; hostFileSetHashUnchanged=True; unityProcessStartCount=0; hiddenSmokeInvocationCount=1; hiddenSmokePassed=True; standaloneSelfChecksPassed=True; actualPayloadAcceptedFactsPassed=True; playerAdapterModelSha256=bf4598b343c625dcc6e29d08f18e99630616afa0648df38bb25430eba3d30e20; sourceProjectByteIdentical=True}.HostCacheKey), rebuilt nothing, started Unity zero times, passed self-checks and correlated the actual payload including Release Candidate=готов.
+- Focused Goal155 and regression filters are GREEN. Full suite, historical 85-case closure and all-ProductSmoke were not run.
+- Goal155 creates no human gate: accepted=false, manualReviewRequired=false, independentAuditRequired=true.
