@@ -1,0 +1,22 @@
+﻿{
+    "status":  "GREEN",
+    "payloadRelativePurpose":  "\u003coutput\u003e/\u003cslug\u003e_Data/StreamingAssets/LLMGameCreatorProject/player-adapter-model.json",
+    "actualPayloadPath":  "\u003cdisposable-output\u003e/player-adapter-model.json",
+    "humanReviewFacts":  [
+                             "Бонус оружия = 0",
+                             "Бонус от характеристик = 0",
+                             "Общий дополнительный урон = 0",
+                             "Уровень = 1",
+                             "Опыт = 0",
+                             "Репутация = 0 → 10",
+                             "Квест = завершён",
+                             "Доверенная реплика = недоступна → доступна → недоступна",
+                             "Золото = 0 → 10 → 17",
+                             "Награда за доверие = +7",
+                             "Повторная награда = недоступна",
+                             "Социальный итог = награда получена"
+                         ],
+    "typedRuntimeObservations":  "three visibility observations retained",
+    "rawIdsOrHashesInHumanFacts":  false,
+    "payloadFactsPassed":  true
+}

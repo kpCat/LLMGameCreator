@@ -1,0 +1,13 @@
+﻿{
+    "status":  "GREEN",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "hostFileSetHashUnchanged":  true,
+    "unityProcessCountBefore":  0,
+    "unityProcessCountAfter":  0,
+    "hiddenSmokeInvocationCount":  1,
+    "launchSmokePassed":  true,
+    "selfCheckPassed":  "5/5",
+    "packageHashMatchesNormalBuild":  true
+}

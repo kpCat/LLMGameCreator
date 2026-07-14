@@ -1,0 +1,19 @@
+﻿{
+    "status":  "GREEN",
+    "Goal154C3":  "15/15",
+    "Goal154C2":  "14/14",
+    "Goal154C1":  "18/18",
+    "Goal154C":  "61/61",
+    "Goal154B1":  "16/16",
+    "Goal154B":  "45/45",
+    "Goal153C":  "7/7",
+    "UnifiedGameProjectWorkspace":  "34/34",
+    "ProjectsPage":  "5/5",
+    "ProjectStandaloneBuild":  "7/7",
+    "FeatureModuleLibrary":  "4/4",
+    "FeatureModuleCertification":  "5/5",
+    "Goal149FocusedSlice":  "7/7",
+    "Goal150FocusedSlice":  "1/1",
+    "currentStateGuard":  "16/16",
+    "staleCatalogExpectationRepair":  "4 exact existing test paths updated from obsolete 9/19/8 assumptions to current 12/22/11 catalog counts; no product code changed."
+}

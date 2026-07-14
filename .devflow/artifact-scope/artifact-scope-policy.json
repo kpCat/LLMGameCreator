@@ -5249,6 +5249,59 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-154c3-real-project-standalone-evidence-publication-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal154c3-final-publication.ps1",
+        ".devflow/scripts/run-goal154c3-final-publication.cmd",
+        "tests/LLMGameCreator.Tests/Application/Goal154C3/Goal154C3AuthoringLifecycleTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154C3/Goal154C3RealProjectAndStandaloneTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154C3/Goal154C3WinFormsAndEvidenceTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal154C3/Goal154C3AuthoringLifecycleTests.cs",
+        "tests/LLMGameCreator.Tests/Application/UnifiedGameProjectWorkspace/Goal154SocialConsequenceWorkspaceTests.cs",
+        "tests/LLMGameCreator.Tests/Application/ProjectStandaloneBuild/Goal154C3SocialPayloadTests.cs",
+        "tests/LLMGameCreator.Tests/Application/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceControllerTests.cs",
+        "tests/LLMGameCreator.Tests/Application/UnifiedGameProjectWorkspace/Goal150AParameterizedRuntimeContractSynchronizationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/UnifiedGameProjectWorkspace/Goal153AbilityManaStatusWorkspaceTests.cs",
+        "tests/LLMGameCreator.Tests/WinForms/UnifiedGameProjectWorkspaceTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/goal154-faction-reputation-social-consequences.md",
+        "docs/manual-acceptance/goal154a-social-lifecycle-runtime-proof.md",
+        "docs/manual-acceptance/goal154b-executable-social-runtime-core.md",
+        "docs/manual-acceptance/goal154b1-quest-reward-preservation.md",
+        "docs/manual-acceptance/goal154c-saved-project-winforms-standalone-social-closure.md",
+        "docs/manual-acceptance/goal154c1-persisted-social-result-real-project-standalone.md",
+        "docs/manual-acceptance/goal154c2-authoring-fingerprint-final-closure.md",
+        "docs/manual-acceptance/goal154c3-final-publication-closure.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal154C3/",
+        "docs/agent-tasks/goal-154c3-real-project-standalone-evidence-publication-closure/",
+        ".llmgc/procedural/goal-154c3-real-project-standalone-evidence-publication-closure/",
+        ".llmgc/exports/goal-154c3-real-project-standalone-evidence-publication-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "catalogs/feature-modules/",
+        "src/LLMGameCreator.Application/Design/FeatureModuleComposition/",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.Designer.cs",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

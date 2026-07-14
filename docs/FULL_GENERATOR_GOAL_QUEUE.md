@@ -2532,3 +2532,6 @@ last-success/current-attempt/current-configuration UI evidence are now present. 
 Goal150F historical snapshot failures remain validation debt and are not this gate.
 
 Gate: `goal152_project_scoped_windows_standalone_build_launch required`.
+## Goal154C3 - real project standalone evidence and publication closure
+
+Status: GREEN implementation, human acceptance pending. Goal154C3 closes the real saved-project lifecycle, authoring fingerprint status, cached standalone payload inspection, custom request capture, focused regressions, mirrored evidence and artifact-scope publication. It does not claim Goal154 human acceptance. Next action: perform the combined Goal154 human gate.

@@ -1,0 +1,13 @@
+﻿{
+    "status":  "GREEN",
+    "source":  "%LOCALAPPDATA%/LLMGameCreator/Games/goal148-manual",
+    "sourceManifestByteIdentical":  true,
+    "sourceMutationCount":  0,
+    "defaultValues":  "0/10/5/10/7",
+    "defaultReputation":  "0 -\u003e 10",
+    "defaultGold":  "0 -\u003e 10 -\u003e 17",
+    "customReward9Gold":  "0 -\u003e 10 -\u003e 19",
+    "lockedFinalGold":  10,
+    "invalidThreshold":  101,
+    "noPartialActivation":  true
+}

@@ -1,0 +1,7 @@
+﻿{
+    "status":  "GREEN",
+    "scenario":  "goal-154c3-real-project-standalone-evidence-publication-closure",
+    "baselineRef":  "9e3bde92b44c6bf1c1d5dbf08a5f886f8829813e",
+    "artifactScopeViolationCount":  0,
+    "forbiddenMutationCount":  0
+}

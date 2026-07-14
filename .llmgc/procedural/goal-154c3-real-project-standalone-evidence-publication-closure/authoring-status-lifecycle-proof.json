@@ -1,0 +1,14 @@
+﻿{
+    "status":  "GREEN",
+    "defaultQualifiedFingerprint":  "9f7fc7b059d75c28228000d0e288fca1f67360a0e4eb2bc3f78f05f7f493d9e6",
+    "defaultAfterBuild":  "CURRENT",
+    "savedReward9WithoutBuild":  "LAST_SUCCESS",
+    "lastSuccessGold":  "0 → 10 → 17",
+    "returnedReward7WithoutBuild":  "CURRENT",
+    "returnedGold":  "0 → 10 → 17",
+    "customReward9":  "CURRENT",
+    "customGold":  19,
+    "lockedThreshold20":  "CURRENT",
+    "lockedGold":  10,
+    "invalidThreshold101":  "preserved"
+}

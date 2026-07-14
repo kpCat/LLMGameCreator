@@ -1,10 +1,21 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 154B1 quest reward preservation and action-scoped social effect truth hotfix
+Updated by: Goal 154C3 real project standalone evidence and publication closure
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154 and Goal154A remain historical FAILED foundations and human-unaccepted. Goal154B remains GREEN for Runtime core, and Goal154B1 closes its independent P1 product-semantics hotfix: the healer quest retains its existing 10 gold, the reputation-only module is now 1.2.0 and cannot mutate a non-reputation quest reward without a declared capability, and resource truth is scoped to the declaring action. Goal154B1 is GREEN but human-unaccepted; WinForms, real saved-project and standalone closure remain deferred to Goal154C, so no Goal154 manual gate is ready.
+The owner accepted Goals153/153A/153B/153C at `ad2e404f1c938113a0c111d4c1fe1bfb55e0e836`. Goal154C3 is GREEN for the real disposable project, cached standalone evidence and publication closure, while the Goal154 family remains human-unaccepted. Default values `0/10/5/10/7` prove reputation `0 -> 10` and gold `0 -> 10 -> 17`; saved reward `7 -> 9` returns `LAST_SUCCESS` with the old card, then saved `9 -> 7` returns `CURRENT`. Custom reward 9 proves gold 19, threshold 20 proves gold 10 without a repeat row, and invalid threshold 101 preserves last success after fresh reopen.
+
+```text
+gate_status=goal154c3_green_pending_goal154_combined_human_gate
+current_user_action=perform_goal154_combined_human_gate required
+goal154ImplementationStatus=GREEN
+goal154Accepted=false
+goal154AcceptedByHuman=false
+goal154AcceptedByCodex=false
+goal154ManualReviewPerformed=false
+goal154ManualGateReady=true
+```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).
 

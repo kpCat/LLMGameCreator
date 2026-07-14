@@ -1,0 +1,30 @@
+﻿{
+    "status":  "GREEN",
+    "resultStatus":  "CAPTURED_TEST_ONLY",
+    "packageSha256":  "cd554aa946f074fb4c232b1244f134ad04a927349b0828c965c0de4a3f4bdc30",
+    "finalStateHash":  "a1c8456ee373f1bea16642e50485bf57340b4f704072d128a32d8941fa21b59c",
+    "humanReviewFacts":  [
+                             "Бонус оружия = 0",
+                             "Бонус от характеристик = 0",
+                             "Общий дополнительный урон = 0",
+                             "Уровень = 1",
+                             "Опыт = 0",
+                             "Репутация = 0 → 10",
+                             "Квест = завершён",
+                             "Доверенная реплика = недоступна → доступна → недоступна",
+                             "Золото = 0 → 10 → 19",
+                             "Награда за доверие = +9",
+                             "Повторная награда = недоступна",
+                             "Социальный итог = награда получена"
+                         ],
+    "selectedModules":  [
+                            "feature.dialogue.reputation_gated_reward",
+                            "feature.faction.reputation_standing",
+                            "feature.quest.faction_reputation_consequences"
+                        ],
+    "selectedReward":  9,
+    "runtimeFrameCount":  26,
+    "realSmokeInvocationCount":  0,
+    "unityProcessCount":  0,
+    "providerInvocations":  0
+}

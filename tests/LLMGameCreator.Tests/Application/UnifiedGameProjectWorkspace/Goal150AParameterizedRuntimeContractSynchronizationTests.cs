@@ -38,7 +38,7 @@ public sealed class Goal150AParameterizedRuntimeContractSynchronizationTests
             var first = firstController.BuildAndQualify();
             Assert.True(first.Passed, first.HumanSummary + Environment.NewLine + string.Join(Environment.NewLine, first.Diagnostics));
             AssertCustomBuild(first);
-            Assert.Equal(9, first.CertificationExecutedCount);
+            Assert.Equal(12, first.CertificationExecutedCount);
 
             var package = await new JsonGamePackageRepository().LoadAsync(temp, CancellationToken.None);
             Assert.Equal("3", package.Game.Items.Single(item => item.Id == "item/rusty_knife").Metadata["combat_damage_bonus"]);
@@ -62,7 +62,7 @@ public sealed class Goal150AParameterizedRuntimeContractSynchronizationTests
             Assert.True(second.Passed, second.HumanSummary + Environment.NewLine + string.Join(Environment.NewLine, second.Diagnostics));
             AssertCustomBuild(second);
             Assert.Equal(0, second.CertificationExecutedCount);
-            Assert.Equal(9, second.CertificationReusedCount);
+            Assert.Equal(12, second.CertificationReusedCount);
             Assert.Equal(first.CompositionPackageSha256, second.CompositionPackageSha256);
             Assert.Equal(first.ActivatedProjectPackageSha256, second.ActivatedProjectPackageSha256);
             Assert.Equal(first.FinalStateHash, second.FinalStateHash);
@@ -296,8 +296,8 @@ public sealed class Goal150AParameterizedRuntimeContractSynchronizationTests
                 new FeatureModuleCertificationCache(cache));
             var first = service.Certify(root, library, new string('a', 64), output);
             var second = service.Certify(root, library, new string('a', 64), output);
-            Assert.Equal(9, first.ExecutedCount);
-            Assert.Equal(9, second.ReusedCount);
+            Assert.Equal(12, first.ExecutedCount);
+            Assert.Equal(12, second.ReusedCount);
 
             var changedModule = Module(library.Catalog, moduleId) with
             {
@@ -316,7 +316,7 @@ public sealed class Goal150AParameterizedRuntimeContractSynchronizationTests
             };
             var changed = service.Certify(root, changedLibrary, new string('a', 64), output);
             Assert.Equal(1, changed.ExecutedCount);
-            Assert.Equal(8, changed.ReusedCount);
+            Assert.Equal(11, changed.ReusedCount);
             Assert.Equal(1, changed.InvalidatedCount);
             Assert.NotEqual(second.Entries.Single(entry => entry.ModuleId == moduleId).ModuleFingerprint,
                 changed.Entries.Single(entry => entry.ModuleId == moduleId).ModuleFingerprint);

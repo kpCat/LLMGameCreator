@@ -22,6 +22,9 @@ public sealed class Goal153AbilityManaStatusWorkspaceTests
         var disposableRoot = Path.Combine(Path.GetTempPath(), "LLMGameCreator", "goal153-real-project-" + Guid.NewGuid().ToString("N"));
         var project = Path.Combine(disposableRoot, "goal148-manual-copy");
         CopyDirectory(source, project);
+        var copiedAuthoring = Path.Combine(project, ".llmgc", "authoring");
+        if (Directory.Exists(copiedAuthoring))
+            foreach (var file in Directory.EnumerateFiles(copiedAuthoring, "*.featurecomposition.json")) File.Delete(file);
         try
         {
             var first = await Controller(root, project);

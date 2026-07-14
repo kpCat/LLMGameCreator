@@ -1247,3 +1247,9 @@ Stop and ask/plan first if a change would:
 - add UI polish unrelated to the generated playable/simulatable loop;
 - expand old archive/manual-import/semantic UI workflows;
 - introduce broad refactors unrelated to the task acceptance criteria.
+## Goal154C3 publication closure
+
+Goal154C3 is GREEN and human-unaccepted. The real disposable `goal148-manual` lifecycle proves the CURRENT -> LAST_SUCCESS -> CURRENT semantic sequence, default/custom/locked/invalid reward cases, one cached hidden standalone smoke with host reuse and zero Unity processes, actual social payload facts, and a custom captured standalone request with zero second smoke. Evidence is mirrored under `.llmgc/procedural/goal-154c3-real-project-standalone-evidence-publication-closure/` and `.llmgc/exports/goal-154c3-real-project-standalone-evidence-publication-closure/`. The next action is the combined four-step Goal154 human gate.
+
+`gate_status=goal154c3_green_pending_goal154_combined_human_gate`
+`current_user_action=perform_goal154_combined_human_gate required`

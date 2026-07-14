@@ -1,0 +1,45 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-154c3-real-project-standalone-evidence-publication-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Luna
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 9e3bde92b44c6bf1c1d5dbf08a5f886f8829813e
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План уже одобрен; не спрашивай подтверждение и не проси пользователя выполнять промежуточные проверки.
+
+Критически важно:
+- продуктовый social Runtime/UI/fingerprint core уже реализован; не переделывай его без нового P0/P1;
+- Goals153/153A/153B/153C уже приняты человеком; Goal154-family пока НЕ принята;
+- default build reward 7 -> CURRENT;
+- save 7→9 без build/reopen -> LAST_SUCCESS и старая карточка gold 17;
+- вернуть 9→7 без промежуточной сборки/reopen -> CURRENT;
+- custom reward 9 проверяй на отдельной копии: build CURRENT, gold 19;
+- locked threshold 20: GREEN/CURRENT, final gold 10;
+- invalid threshold 101 сохраняет last success/fingerprint/card после fresh reopen;
+- source goal148-manual только read-only; manifest byte-identical;
+- ровно один реальный hidden standalone smoke на default copy;
+- host cache reused, HostRebuilt=false, Unity processes 0, self-check 5/5;
+- прочитай actual player-adapter-model.json и докажи social facts 0→10→17;
+- custom reward 9 докажи captured ProjectStandaloneBuildRequest, без второго smoke;
+- custom second smoke count=0;
+- Goal153C и остальные focused regressions обязательны;
+- опубликуй ровно 10+10 mirrored evidence files, docs/current-state/manual updates;
+- просканируй новые файлы на NUL/control chars/mojibake;
+- artifact-scope proof обязателен и запускается последним;
+- не запускай full suite, 85-case closure или all-ProductSmoke;
+- Unity Editor/host build budget = 0;
+- создай и запушь ровно один финальный GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи test counts, CURRENT/LAST_SUCCESS sequence, default/custom/locked/invalid,
+source immutability, host reuse, Unity/smoke counts, actual payload facts,
+custom captured facts, Goal153C regression, evidence/artifact scope,
+final SHA, push, HEAD == origin/main, clean worktree и четырёхшаговый manual gate.
