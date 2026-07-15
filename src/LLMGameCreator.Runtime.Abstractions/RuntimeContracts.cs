@@ -41,6 +41,20 @@ public sealed class GameState
     public Dictionary<string, string> Flags { get; set; } = new Dictionary<string, string>();
 }
 
+public static class MapTransitionInteractionContract
+{
+    public const string ComponentType = "interactable";
+    public const string TransitionKindKey = "transitionKind";
+    public const string TransitionKindMap = "map";
+    public const string ConnectionIdKey = "connectionId";
+    public const string SourceMapIdKey = "sourceMapId";
+    public const string DestinationMapIdKey = "destinationMapId";
+    public const string DestinationXKey = "destinationX";
+    public const string DestinationYKey = "destinationY";
+    public const string FromRegionIdKey = "fromRegionId";
+    public const string ToRegionIdKey = "toRegionId";
+}
+
 public enum RuntimeEventType
 {
     Message = 0,
@@ -50,7 +64,8 @@ public enum RuntimeEventType
     DialogueRequested = 4,
     SoundRequested = 5,
     MusicRequested = 6,
-    Error = 7
+    Error = 7,
+    MapChanged = 8
 }
 
 public sealed class RuntimeEvent

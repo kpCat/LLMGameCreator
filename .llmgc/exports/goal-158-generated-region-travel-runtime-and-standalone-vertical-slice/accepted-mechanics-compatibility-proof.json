@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "lane":  "A",
+    "compatibilityPassed":  true,
+    "acceptedMechanicsPassed":  true,
+    "socialPassed":  true,
+    "qualificationPackageSha256":  "edbaf1f4e26dbe6e6a8602f105a6b79829c8ebc629d38d2acb6aaa803e822ec2",
+    "qualificationFinalStateHash":  "ac288a540a5b673c26ce2df0aad7be1c7a8377dbd29720173868da1b80eb761b",
+    "primaryTravelPackageSha256":  "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "primaryTravelFinalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e",
+    "laneAUnchanged":  true
+}

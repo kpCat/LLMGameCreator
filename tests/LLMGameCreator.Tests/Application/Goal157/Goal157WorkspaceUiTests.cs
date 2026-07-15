@@ -30,11 +30,11 @@ public sealed class Goal157WorkspaceUiTests
     }
 
     [Fact]
-    public void Behavioral_fresh_reopen_restores_activation_build_current_without_execution()
+    public void Behavioral_fresh_reopen_restores_complete_travel_current_without_execution()
     {
         var snapshot = Goal157BuildState.Value.Reopen;
 
-        Assert.Equal("BUILD_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("TRAVEL_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.GeneratedWorldActivation?.Passed);
         Assert.True(snapshot.GeneratedWorldActivation?.ReplayEquivalent);
         Assert.True(snapshot.GeneratedWorldActivation?.StateRoundtripPassed);
@@ -54,7 +54,7 @@ public sealed class Goal157WorkspaceUiTests
                 new UTF8Encoding(false));
         }
 
-        var snapshot = Goal156TestKit.OpenWorkspace(copy.Path).Snapshot();
+        var snapshot = Goal157TestKit.OpenTravelWorkspace(copy.Path).Snapshot();
 
         Assert.NotEqual("BUILD_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.Null(snapshot.GeneratedWorldActivation);
@@ -64,7 +64,7 @@ public sealed class Goal157WorkspaceUiTests
     public void Behavioral_saved_mechanic_change_yields_last_success_for_generated_activation()
     {
         using var copy = Goal156TestKit.Copy(Goal157BuildState.Value.Project, "authoring-last-success");
-        var controller = Goal156TestKit.OpenWorkspace(copy.Path);
+        var controller = Goal157TestKit.OpenTravelWorkspace(copy.Path);
         var selected = Goal157TestKit.RemovableSelectedModule(copy.Path);
 
         controller.SetModuleSelected(selected, false);
@@ -84,7 +84,7 @@ public sealed class Goal157WorkspaceUiTests
         var historyBefore = Goal157TestKit.HistoryFileHashes(copy.Path);
         Goal157TestKit.EditSource(copy.Path, root => root["seed"] = "goal157-provenance-build-failure");
 
-        var failed = Goal156TestKit.OpenWorkspace(copy.Path).BuildAndQualify();
+        var failed = Goal157TestKit.OpenTravelWorkspace(copy.Path).BuildAndQualify();
 
         Assert.False(failed.Passed);
         Assert.Equal("generated_source.validation", failed.FailureStage);
@@ -100,7 +100,7 @@ public sealed class Goal157WorkspaceUiTests
         var packagePath = Path.Combine(copy.Path, "package.json");
         var packageBefore = File.ReadAllBytes(packagePath);
         var historyBefore = Goal157TestKit.HistoryFileHashes(copy.Path);
-        var controller = Goal156TestKit.OpenWorkspace(copy.Path, runtime: new FaultInjectingRuntime(failMove: true));
+        var controller = Goal157TestKit.OpenTravelWorkspace(copy.Path, runtime: new FaultInjectingRuntime(failMove: true));
 
         var failed = controller.BuildAndQualify();
 
@@ -109,7 +109,7 @@ public sealed class Goal157WorkspaceUiTests
         Assert.True(failed.RollbackApplied);
         Assert.Equal(packageBefore, File.ReadAllBytes(packagePath));
         Goal157TestKit.AssertExistingHistoryUnchanged(copy.Path, historyBefore);
-        Assert.Equal("BUILD_CURRENT", Goal156TestKit.OpenWorkspace(copy.Path).Snapshot().GeneratedWorld?.Status);
+        Assert.Equal("TRAVEL_CURRENT", Goal157TestKit.OpenTravelWorkspace(copy.Path).Snapshot().GeneratedWorld?.Status);
     }
 
     [Fact]

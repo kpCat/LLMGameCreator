@@ -1,0 +1,8 @@
+{
+    "status":  "GREEN",
+    "result":  "GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0",
+    "independentAuditPassed":  true,
+    "independentAuditRequired":  false,
+    "accepted":  false,
+    "humanGateRequired":  false
+}

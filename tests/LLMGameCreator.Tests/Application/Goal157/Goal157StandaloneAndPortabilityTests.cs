@@ -11,16 +11,17 @@ namespace LLMGameCreator.Tests.Application.Goal157;
 public sealed class Goal157StandaloneAndPortabilityTests
 {
     [Fact]
-    public void Behavioral_standalone_request_uses_activation_lane_hashes_and_frames()
+    public void Behavioral_standalone_request_uses_complete_travel_hashes_and_frames()
     {
         var fixture = Goal157PortableState.Value;
         var request = Assert.IsType<ProjectStandaloneBuildRequest>(fixture.Service.Request);
 
         Assert.Equal(fixture.Build.PackageSha256, request.PackageSha256);
         Assert.Equal(fixture.Build.CompositionPackageSha256, request.CompositionPackageSha256);
-        Assert.Equal(fixture.Build.GeneratedWorldActivation?.FinalStateHash, request.FinalStateHash);
-        Assert.Equal(["00_start_generated_world", "01_move_right", "02_interact"],
-            request.RuntimeFrames.Select(frame => frame.ActionId));
+        Assert.Equal(fixture.Build.GeneratedRegionTravel?.FinalStateHash, request.FinalStateHash);
+        Assert.Equal(fixture.Build.RuntimeFrames.Select(frame => frame.Category),
+            request.RuntimeFrames.Select(frame => frame.Category));
+        Assert.Contains(request.RuntimeFrames, frame => frame.Category == "generated_travel");
     }
 
     [Fact]
@@ -45,13 +46,13 @@ public sealed class Goal157StandaloneAndPortabilityTests
     }
 
     [Fact]
-    public void Behavioral_payload_final_hash_matches_activation_lane()
+    public void Behavioral_payload_final_hash_matches_complete_travel_route()
     {
         var fixture = Goal157PortableState.Value;
         using var model = JsonDocument.Parse(File.ReadAllText(
             Path.Combine(Goal157TestKit.CapturedPayloadRoot(fixture), "player-adapter-model.json")));
 
-        Assert.Equal(fixture.Build.GeneratedWorldActivation?.FinalStateHash,
+        Assert.Equal(fixture.Build.GeneratedRegionTravel?.FinalStateHash,
             model.RootElement.GetProperty("finalStateHash").GetString());
         Assert.Equal(fixture.Build.FinalStateHash, fixture.Standalone.FinalStateHash);
     }
@@ -97,11 +98,12 @@ public sealed class Goal157StandaloneAndPortabilityTests
         using var copy = Goal156TestKit.Copy(fixture.Project, "goal157-portable");
         var unityBefore = System.Diagnostics.Process.GetProcessesByName("Unity").Length;
 
-        var snapshot = Goal156TestKit.OpenWorkspace(copy.Path).Snapshot();
+        var snapshot = Goal157TestKit.OpenTravelWorkspace(copy.Path).Snapshot();
 
         Assert.Equal(unityBefore, System.Diagnostics.Process.GetProcessesByName("Unity").Length);
-        Assert.Equal("BUILD_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("TRAVEL_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.GeneratedWorldActivation?.Passed);
+        Assert.True(snapshot.GeneratedRegionTravel?.Passed);
         Assert.True(snapshot.AcceptedMechanics?.Passed);
         Assert.True(snapshot.AcceptedMechanicsCompatibility?.Passed);
         Assert.Equal("CURRENT", snapshot.ReleaseCandidateConfigurationStatus);
@@ -117,11 +119,11 @@ public sealed class Goal157StandaloneAndPortabilityTests
         var before = File.ReadAllBytes(recordPath);
         var failure = new CapturingFailureStandaloneService();
 
-        var result = Goal156TestKit.OpenWorkspace(copy.Path, failure).BuildWindowsStandalone();
+        var result = Goal157TestKit.OpenTravelWorkspace(copy.Path, failure).BuildWindowsStandalone();
 
         Assert.Equal("FAILED", result.Status);
         Assert.Equal(before, File.ReadAllBytes(recordPath));
-        Assert.Equal("CURRENT", Goal156TestKit.OpenWorkspace(copy.Path).Snapshot().ReleaseCandidateConfigurationStatus);
+        Assert.Equal("CURRENT", Goal157TestKit.OpenTravelWorkspace(copy.Path).Snapshot().ReleaseCandidateConfigurationStatus);
     }
 
     [Fact]
@@ -150,7 +152,7 @@ public sealed class Goal157StandaloneAndPortabilityTests
         var goal148Before = Goal157TestKit.TreeHashes(goal148);
         var hostBefore = caches.ToDictionary(path => path, Goal157TestKit.TreeHashes,
             StringComparer.OrdinalIgnoreCase);
-        var controller = Goal156TestKit.OpenWorkspace(project.Path,
+        var controller = Goal157TestKit.OpenTravelWorkspace(project.Path,
             new ProjectStandaloneBuildService(Goal156TestKit.RepositoryRoot));
 
         var standalone = controller.BuildWindowsStandalone();
@@ -184,8 +186,10 @@ public sealed class Goal157StandaloneAndPortabilityTests
         Assert.Equal(snapshot.PackageSha256, manifest.RootElement.GetProperty("packageSha256").GetString());
         Assert.Equal(snapshot.CompositionPackageSha256,
             manifest.RootElement.GetProperty("compositionPackageSha256").GetString());
-        Assert.Equal(snapshot.GeneratedWorldActivation?.FinalStateHash,
+        Assert.Equal(snapshot.GeneratedRegionTravel?.FinalStateHash,
             manifest.RootElement.GetProperty("finalStateHash").GetString());
+        Assert.All(snapshot.GeneratedRegionTravel!.HumanFacts, expected => Assert.Contains(facts,
+            actual => actual.Label == expected.Label && actual.Value == expected.Value));
         Assert.All(snapshot.GeneratedWorldActivation!.HumanFacts, expected => Assert.Contains(facts,
             actual => actual.Label == expected.Label && actual.Value == expected.Value));
         Assert.All(snapshot.AcceptedMechanics!.HumanFacts, expected => Assert.Contains(facts,
@@ -193,10 +197,11 @@ public sealed class Goal157StandaloneAndPortabilityTests
 
         using var portable = Goal156TestKit.Copy(project, "goal157-real-portable");
         var portableUnityBefore = System.Diagnostics.Process.GetProcessesByName("Unity").Length;
-        var portableSnapshot = Goal156TestKit.OpenWorkspace(portable.Path).Snapshot();
+        var portableSnapshot = Goal157TestKit.OpenTravelWorkspace(portable.Path).Snapshot();
         Assert.Equal(portableUnityBefore, System.Diagnostics.Process.GetProcessesByName("Unity").Length);
-        Assert.Equal("BUILD_CURRENT", portableSnapshot.GeneratedWorld?.Status);
+        Assert.Equal("TRAVEL_CURRENT", portableSnapshot.GeneratedWorld?.Status);
         Assert.True(portableSnapshot.GeneratedWorldActivation?.Passed);
+        Assert.True(portableSnapshot.GeneratedRegionTravel?.Passed);
         Assert.True(portableSnapshot.AcceptedMechanics?.Passed);
         Assert.Equal("CURRENT", portableSnapshot.ReleaseCandidateConfigurationStatus);
         Goal157TestKit.WriteSmokeCapture(standalone, snapshot, portableSnapshot,
@@ -237,7 +242,7 @@ internal static class Goal157PortableState
         var project = Goal156TestKit.Copy(Goal157BuildState.Value.Project, "goal157-portable-fixture");
         var before = Goal157TestKit.TreeHashes(Path.Combine(project.Path, ".llmgc", "generation"));
         var service = new CapturingPayloadStandaloneService();
-        var controller = Goal156TestKit.OpenWorkspace(project.Path, service);
+        var controller = Goal157TestKit.OpenTravelWorkspace(project.Path, service);
         var standalone = controller.BuildWindowsStandalone();
         var build = controller.LastBuild ?? throw new InvalidOperationException("Goal157 build was not captured.");
         return new Goal157PortableFixture(project, service, build, standalone, controller.Snapshot(), before);
@@ -315,14 +320,17 @@ internal static partial class Goal157TestKit
             actualPayloadActivationFactsPassed = true,
             actualPayloadAcceptedFactsPassed = true,
             releaseCandidateRecordCurrent = snapshot.ReleaseCandidateConfigurationStatus == "CURRENT",
-            portableCopyCurrent = portable.GeneratedWorld?.Status == "BUILD_CURRENT"
+            portableCopyCurrent = portable.GeneratedWorld?.Status == "TRAVEL_CURRENT"
                                   && portable.GeneratedWorldActivation?.Passed == true
+                                  && portable.GeneratedRegionTravel?.Passed == true
                                   && portable.AcceptedMechanics?.Passed == true
                                   && portable.ReleaseCandidateConfigurationStatus == "CURRENT",
             goal142SourceByteIdentical,
             sourceGoal148ByteIdentical,
             generatedWorld = snapshot.GeneratedWorld,
             generatedWorldActivation = snapshot.GeneratedWorldActivation,
+            generatedWorldTravelOverlay = snapshot.GeneratedWorldTravelOverlay,
+            generatedRegionTravel = snapshot.GeneratedRegionTravel,
             acceptedMechanicsCompatibility = snapshot.AcceptedMechanicsCompatibility,
             acceptedMechanics = snapshot.AcceptedMechanics,
             releaseCandidate = snapshot.ReleaseCandidate,

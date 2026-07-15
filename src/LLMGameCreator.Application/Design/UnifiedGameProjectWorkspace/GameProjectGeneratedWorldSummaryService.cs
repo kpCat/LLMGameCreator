@@ -38,18 +38,31 @@ public sealed class GameProjectGeneratedWorldSummaryService
         SeededGeneratedProjectSourceValidationResult validation,
         GamePackageDefinition compositionPackage,
         GamePackageDefinition activatedPackage,
-        GameProjectGeneratedWorldActivationSummary? activation = null)
+        GameProjectGeneratedWorldActivationSummary? activation = null,
+        GeneratedWorldTravelOverlayDocument? travelOverlay = null,
+        GameProjectGeneratedRegionTravelSummary? travel = null)
     {
         ArgumentNullException.ThrowIfNull(validation);
         ArgumentNullException.ThrowIfNull(compositionPackage);
         ArgumentNullException.ThrowIfNull(activatedPackage);
         if (!validation.Present || !validation.Passed || validation.Source is null || validation.Overlay is null)
             return ProjectSource(validation) ?? new GameProjectGeneratedWorldSummary();
+        var travelReady = travelOverlay is
+                          {
+                              ControlledDeltaPassed: true,
+                              GatePlacementPassed: true,
+                              ConnectionCount: > 0,
+                              GateCount: > 0
+                          }
+                          && travel is { Present: true, Passed: true };
         var diagnostics = _overlayService.ValidatePackageRecords(compositionPackage, validation.Overlay, includeBaseline: false)
             .Concat(_overlayService.ValidatePackageRecords(activatedPackage, validation.Overlay, includeBaseline: false))
+            .Where(diagnostic => !travelReady || !AuthorizedTravelMapChange(diagnostic, travelOverlay!))
             .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
         var status = diagnostics.Count > 0
             ? "INVALID"
+            : travelReady && activation is { Present: true, Passed: true }
+                ? "BUILD_CURRENT"
             : activation is { Present: true, Passed: true }
                 ? "BUILD_CURRENT"
                 : "SOURCE_READY";
@@ -61,7 +74,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
         SeededGeneratedProjectSourceValidationResult validation,
         GameProjectGeneratedWorldSummary? lastSuccessful,
         bool matchesCurrentAuthoring,
-        GameProjectGeneratedWorldActivationSummary? activation = null)
+        GameProjectGeneratedWorldActivationSummary? activation = null,
+        GameProjectGeneratedRegionTravelSummary? travel = null)
     {
         var source = ProjectSource(validation);
         if (source is null || !source.Passed || lastSuccessful is not { Present: true, Passed: true }) return source;
@@ -76,7 +90,13 @@ public sealed class GameProjectGeneratedWorldSummaryService
             Diagnostics = ["generated_summary.history_source_mismatch"]
         };
         if (activation is not { Present: true, Passed: true }) return source;
-        var status = matchesCurrentAuthoring ? "BUILD_CURRENT" : "LAST_SUCCESS";
+        var status = travel is { Present: true, Passed: true }
+            ? matchesCurrentAuthoring ? "TRAVEL_CURRENT" : "LAST_SUCCESS"
+            : matchesCurrentAuthoring
+                ? string.Equals(lastSuccessful.Status, "START_CURRENT", StringComparison.Ordinal)
+                    ? "START_CURRENT"
+                    : "BUILD_CURRENT"
+                : "LAST_SUCCESS";
         return lastSuccessful with
         {
             Status = status,
@@ -103,20 +123,43 @@ public sealed class GameProjectGeneratedWorldSummaryService
         }).ToList()
         : [];
 
+    public static IReadOnlyList<StandaloneHumanReviewFact> StandaloneTravelHumanFacts(
+        GameProjectGeneratedRegionTravelSummary? summary) => summary is { Present: true, Passed: true }
+        ? summary.HumanFacts.Select(fact => new StandaloneHumanReviewFact
+        {
+            Label = fact.Label,
+            Value = fact.Value
+        }).ToList()
+        : [];
+
+    private static bool AuthorizedTravelMapChange(
+        string diagnostic,
+        GeneratedWorldTravelOverlayDocument overlay)
+    {
+        const string prefix = "generated_overlay.record_changed:game.maps:";
+        if (!diagnostic.StartsWith(prefix, StringComparison.Ordinal)) return false;
+        var mapId = diagnostic[prefix.Length..];
+        return overlay.MapFingerprintsAfter.Any(item =>
+            string.Equals(item.RecordId, mapId, StringComparison.Ordinal));
+    }
+
     public static string FormatCard(
         GameProjectGeneratedWorldSummary summary,
-        GameProjectGeneratedWorldActivationSummary? activation = null)
+        GameProjectGeneratedWorldActivationSummary? activation = null,
+        GameProjectGeneratedRegionTravelSummary? travel = null)
     {
         ArgumentNullException.ThrowIfNull(summary);
         var status = summary.Status switch
         {
             "SOURCE_READY" => "Источник готов; сборка ещё не запускалась",
-            "BUILD_CURRENT" => "Сборка соответствует текущим настройкам",
+            "START_CURRENT" or "BUILD_CURRENT" => "Игровой старт проверен; переходы ещё не подтверждены",
+            "TRAVEL_CURRENT" => "Сгенерированный маршрут проверен",
             "LAST_SUCCESS" => "Показана последняя успешная сборка",
             _ => "Источник генерации повреждён или не подтверждён"
         };
         var rows = summary.HumanFacts
             .Concat(activation is { Present: true, Passed: true } ? activation.HumanFacts : [])
+            .Concat(travel is { Present: true, Passed: true } ? travel.HumanFacts : [])
             .Select(fact => fact.Label + "    " + fact.Value)
             .Append("Статус сборки    " + status);
         return "Сгенерированный мир" + Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, rows);

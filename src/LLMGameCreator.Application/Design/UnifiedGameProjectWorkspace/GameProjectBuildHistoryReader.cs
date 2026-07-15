@@ -7,7 +7,8 @@ namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 /// <summary>Reads validated persisted last-success summaries without mutating project history.</summary>
 public sealed class GameProjectBuildHistoryReader
 {
-    private const string SupportedSchemaVersion = "unified_game_project_build_history_v2";
+    private const string Goal157SchemaVersion = "unified_game_project_build_history_v2";
+    private const string Goal158SchemaVersion = "unified_game_project_build_history_v3";
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
 
     public GameProjectBuildHistoryReadResult ReadLatestMatchingSocialSuccess(
@@ -35,7 +36,8 @@ public sealed class GameProjectBuildHistoryReader
             catch (JsonException) { diagnostics.Add("social.history.invalid_json:" + Path.GetFileName(path)); continue; }
             catch (IOException) { diagnostics.Add("social.history.unreadable:" + Path.GetFileName(path)); continue; }
 
-            if (historyEntry is null || !string.Equals(historyEntry.SchemaVersion, SupportedSchemaVersion, StringComparison.Ordinal))
+            if (historyEntry is null
+                || historyEntry.SchemaVersion is not Goal157SchemaVersion and not Goal158SchemaVersion)
             {
                 diagnostics.Add("social.history.unsupported_schema:" + Path.GetFileName(path));
                 continue;
@@ -70,8 +72,10 @@ public sealed class GameProjectBuildHistoryReader
                 AttemptedFinalReplayActionCount = entry.AttemptedFinalReplayActionCount, Social = entry.Social,
                 QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint,
                 AcceptedMechanics = entry.AcceptedMechanics,
-                GeneratedWorld = entry.GeneratedWorld,
+                GeneratedWorld = ProjectGeneratedWorld(entry),
                 GeneratedWorldActivation = entry.GeneratedWorldActivation,
+                GeneratedWorldTravelOverlay = entry.GeneratedWorldTravelOverlay,
+                GeneratedRegionTravel = entry.GeneratedRegionTravel,
                 AcceptedMechanicsCompatibility = entry.AcceptedMechanicsCompatibility
             },
             Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
@@ -89,11 +93,49 @@ public sealed class GameProjectBuildHistoryReader
             ? entry.GeneratedWorld is { Passed: true, PackageContentPreserved: true }
               && entry.GeneratedWorldActivation is
                   { Present: true, Passed: true, ReplayEquivalent: true, StateRoundtripPassed: true }
+              && (entry.SchemaVersion == Goal157SchemaVersion || TravelEligible(entry))
             : entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true })
         && string.Equals(entry.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.FinalStateHash, document.LastQualifiedFinalStateHash, StringComparison.Ordinal)
         && entry.CheckpointReloadPassed && entry.FullReplayEquivalent && entry.ActionBindingPassed;
+
+    private static bool TravelEligible(GameProjectBuildHistoryEntry entry) =>
+        entry.GeneratedWorldTravelOverlay is
+        {
+            SchemaVersion: "generated_world_travel_overlay_v1",
+            ControlledDeltaPassed: true,
+            GatePlacementPassed: true,
+            ConnectionCount: > 0,
+            GateCount: > 0
+        }
+        && entry.GeneratedRegionTravel is
+        {
+            Present: true,
+            Passed: true,
+            TransitionCount: > 0,
+            OriginInteractionObserved: true,
+            TravelGateInteractionsPassed: true,
+            DestinationInteractionObserved: true,
+            ReplayEquivalent: true,
+            StateRoundtripPassed: true
+        } travel
+        && travel.VisitedMapIds.Distinct(StringComparer.Ordinal).Count() >= 2
+        && travel.VisitedRegionIds.Distinct(StringComparer.Ordinal).Count() >= 2
+        && string.Equals(travel.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal);
+
+    private static GameProjectGeneratedWorldSummary? ProjectGeneratedWorld(GameProjectBuildHistoryEntry entry)
+    {
+        var generatedWorld = entry.GeneratedWorld;
+        if (generatedWorld is null
+            || !string.Equals(entry.SchemaVersion, Goal157SchemaVersion, StringComparison.Ordinal)
+            || !string.Equals(generatedWorld.Status, "BUILD_CURRENT", StringComparison.Ordinal)
+            || entry.GeneratedWorldActivation is not { Present: true, Passed: true } activation
+            || string.Equals(entry.FinalStateHash, activation.FinalStateHash, StringComparison.Ordinal))
+            return generatedWorld;
+
+        return generatedWorld with { Status = "START_CURRENT" };
+    }
 
     private static bool HasPersistedSuccessIdentity(FeatureModuleCompositionDocument document) =>
         !string.IsNullOrWhiteSpace(document.LastActivatedProjectPackageSha256)

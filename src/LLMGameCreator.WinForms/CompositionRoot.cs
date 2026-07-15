@@ -225,11 +225,23 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IUnifiedGameRuntimeService, UnifiedGameRuntimeService>(Reuse.Singleton);
         _container.Register<IRuntimeStateSerializer, RuntimeStateSerializer>(Reuse.Singleton);
         _container.Register<IRuntimeSnapshotStore, RuntimeSnapshotStore>(Reuse.Singleton);
+        _container.Register<GeneratedWorldRegionMapBindingService>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedWorldTravelOverlayService>(resolver =>
+            new GeneratedWorldTravelOverlayService(
+                resolver.Resolve<GeneratedWorldRegionMapBindingService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedWorldTravelRoutePlanner>(resolver =>
+            new GeneratedWorldTravelRoutePlanner(
+                resolver.Resolve<GeneratedWorldRegionMapBindingService>()), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldActivationService>(resolver =>
             new GameProjectGeneratedWorldActivationService(
                 resolver.Resolve<IGameRuntime>(),
                 resolver.Resolve<IRuntimeStateSerializer>(),
                 resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectGeneratedRegionTravelActivationService>(resolver =>
+            new GameProjectGeneratedRegionTravelActivationService(
+                resolver.Resolve<IGameRuntime>(),
+                resolver.Resolve<IRuntimeStateSerializer>(),
+                resolver.Resolve<GeneratedWorldTravelRoutePlanner>()), Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
         _container.RegisterDelegate<ISelectedRuntimeVariantInteractiveSessionService>(
@@ -245,7 +257,9 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<ICurrentGamePackageService>(),
                 generatedSource: resolver.Resolve<SeededGeneratedProjectSourceService>(),
                 generatedSummary: resolver.Resolve<GameProjectGeneratedWorldSummaryService>(),
-                generatedActivation: resolver.Resolve<GameProjectGeneratedWorldActivationService>()), Reuse.Singleton);
+                generatedActivation: resolver.Resolve<GameProjectGeneratedWorldActivationService>(),
+                generatedTravelOverlay: resolver.Resolve<GeneratedWorldTravelOverlayService>(),
+                generatedTravelActivation: resolver.Resolve<GameProjectGeneratedRegionTravelActivationService>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
         _container.Register<UnifiedGameProjectWorkspaceController>(Reuse.Singleton);

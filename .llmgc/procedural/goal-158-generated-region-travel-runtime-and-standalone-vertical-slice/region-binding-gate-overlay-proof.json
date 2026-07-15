@@ -1,0 +1,81 @@
+{
+    "status":  "GREEN",
+    "regionBindingCount":  5,
+    "connectionCount":  7,
+    "gateCount":  7,
+    "gatePlacementPassed":  true,
+    "connectionValidationPassed":  true,
+    "deterministicGateIdsPassed":  true,
+    "gateFingerprints":  [
+                             {
+                                 "ConnectionId":  "connection/blue_ditch__drift_garden",
+                                 "EntityId":  "entity/generated_travel_gate/3fe4fe0337175c82",
+                                 "SourceMapId":  "generated/map/region_blue_ditch",
+                                 "X":  0,
+                                 "Y":  0,
+                                 "ApproachX":  1,
+                                 "ApproachY":  0,
+                                 "CanonicalSha256":  "6b912b2dc557a9f8d1b99bff6be422e1c9602579994f5b5472abf82201537bb0"
+                             },
+                             {
+                                 "ConnectionId":  "connection/blue_ditch__glass_fen",
+                                 "EntityId":  "entity/generated_travel_gate/f79fda6e64dafffd",
+                                 "SourceMapId":  "generated/map/region_blue_ditch",
+                                 "X":  3,
+                                 "Y":  0,
+                                 "ApproachX":  4,
+                                 "ApproachY":  0,
+                                 "CanonicalSha256":  "e4d3b4325e32b66b898bef2027bc6d9f69cbf36e4fbfbfcd12946886b93a0411"
+                             },
+                             {
+                                 "ConnectionId":  "connection/blue_ditch__lantern_fold",
+                                 "EntityId":  "entity/generated_travel_gate/f05c767327498b72",
+                                 "SourceMapId":  "generated/map/region_blue_ditch",
+                                 "X":  0,
+                                 "Y":  1,
+                                 "ApproachX":  0,
+                                 "ApproachY":  2,
+                                 "CanonicalSha256":  "df6cac32caebfcef4f60e4661ac2259d095775156e2a8dcc735af5bcef7ce35c"
+                             },
+                             {
+                                 "ConnectionId":  "connection/blue_ditch__salt_orchard",
+                                 "EntityId":  "entity/generated_travel_gate/ca89480ff12e2a69",
+                                 "SourceMapId":  "generated/map/region_blue_ditch",
+                                 "X":  2,
+                                 "Y":  2,
+                                 "ApproachX":  1,
+                                 "ApproachY":  2,
+                                 "CanonicalSha256":  "6215c3bdd2e2c0e333cd147d2048da2079b403be2a23e4cb8e9ea2906363dafe"
+                             },
+                             {
+                                 "ConnectionId":  "connection/drift_garden__glass_fen",
+                                 "EntityId":  "entity/generated_travel_gate/a8edd029f53316e4",
+                                 "SourceMapId":  "generated/map/region_drift_garden",
+                                 "X":  0,
+                                 "Y":  0,
+                                 "ApproachX":  1,
+                                 "ApproachY":  0,
+                                 "CanonicalSha256":  "8d3be86e58aec412f503be86704c906809a48f66748e47bde5158932d43327f3"
+                             },
+                             {
+                                 "ConnectionId":  "connection/glass_fen__lantern_fold",
+                                 "EntityId":  "entity/generated_travel_gate/f57c552eac690c65",
+                                 "SourceMapId":  "generated/map/region_glass_fen",
+                                 "X":  0,
+                                 "Y":  0,
+                                 "ApproachX":  1,
+                                 "ApproachY":  0,
+                                 "CanonicalSha256":  "2c9619e9fdaf53f62dea9d5a68dd564382793330e35c553e372778497363e311"
+                             },
+                             {
+                                 "ConnectionId":  "connection/lantern_fold__salt_orchard",
+                                 "EntityId":  "entity/generated_travel_gate/31b72185847025ef",
+                                 "SourceMapId":  "generated/map/region_lantern_fold",
+                                 "X":  0,
+                                 "Y":  0,
+                                 "ApproachX":  1,
+                                 "ApproachY":  0,
+                                 "CanonicalSha256":  "7bb558bcce766f7d74d48542607afb45dd8a253c1bb660abc7f4f9a95429aa9b"
+                             }
+                         ]
+}

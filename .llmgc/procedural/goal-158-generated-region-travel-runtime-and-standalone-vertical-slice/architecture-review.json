@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "goal158_architecture_review_v1",
+  "status": "RESOLVED_BEFORE_PRODUCTION_EDITS",
+  "goal157IndependentAudit": {
+    "types": ["SeededGeneratedProjectSourceValidationResult", "GameProjectGeneratedWorldActivationSummary", "GameProjectAcceptedMechanicsCompatibilityResult"],
+    "inputs": ["GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0", "required base 8939aea01f759e1c22409c7fbce871cba113d856"],
+    "outputs": ["goal157IndependentAuditPassed=true", "goal157IndependentAuditRequired=false"],
+    "invariants": ["Goal157 accepted=false", "no human gate", "Lane A remains AcceptedMechanics/Social authority"],
+    "behavioralTests": ["Goal157 audit intake is persisted", "Goal157 regression filter remains GREEN"]
+  },
+  "existingTravelProofVersusRuntimeGap": {
+    "types": ["ConnectedWorldTravelAcceptanceService", "DefaultGameRuntime", "IGameRuntime"],
+    "inputs": ["Goal007 private fixture graph", "current Runtime Interact implementation"],
+    "outputs": ["historical proof remains unchanged", "generic Runtime map transition is added to DefaultGameRuntime"],
+    "invariants": ["Goal007 fixture-specific Travel method is not reused as product authority", "PlayerCommandType is unchanged"],
+    "behavioralTests": ["ConnectedWorldTravel regressions pass", "actual DefaultGameRuntime changes maps through Interact"]
+  },
+  "genericMapTransitionContract": {
+    "types": ["MapTransitionInteractionContract", "RuntimeEventType.MapChanged", "DefaultGameRuntime"],
+    "inputs": ["nearby EntityInstanceDefinition interactable ComponentDefinition.Args", "current GameState", "GamePackageDefinition maps and tiles"],
+    "outputs": ["InteractionTriggered", "updated CurrentMapId and PlayerPosition", "MapChanged with exact correlation args"],
+    "invariants": ["MapChanged numeric value is 8", "no GamePackage schema change", "ordinary Interact remains the command"],
+    "behavioralTests": ["valid transition", "exact MapChanged args", "legacy text", "legacy dialogue", "no-nearby", "numeric enum stability"]
+  },
+  "runtimeAtomicity": {
+    "types": ["DefaultGameRuntime", "CommandResult", "RuntimeEvent"],
+    "inputs": ["complete or malformed map-transition Args"],
+    "outputs": ["success mutates only after complete validation", "failure emits one Error with causal code"],
+    "invariants": ["invalid transition preserves map, position and flags", "invalid transition emits neither InteractionTriggered nor MapChanged"],
+    "behavioralTests": ["wrong source", "missing destination", "malformed coordinates", "blocked destination", "incomplete contract"]
+  },
+  "validatedPlanAuthority": {
+    "types": ["SeededGeneratedProjectSourceService", "SeededGeneratedProjectSourceValidationResult", "ProceduralGeneratedGamePlan", "GenerationPresetOptions"],
+    "inputs": ["strict Goal157 regeneration chain"],
+    "outputs": ["RegeneratedPlan", "RegeneratedPlanJson", "ResolvedGenerationOptions"],
+    "invariants": ["typed fields are populated only for passed CURRENT validation", "persisted v1 source and sidecars are unchanged", "no second plan deserialization is an authority"],
+    "behavioralTests": ["strict validation exposes regenerated typed values", "failed validation exposes no typed authority", "source sidecars remain byte-identical"]
+  },
+  "regionMapBinding": {
+    "types": ["GeneratedWorldRegionMapBindingService", "GeneratedWorldRegionMapBindingResult", "GeneratedWorldRegionMapBinding", "GeneratedWorldTravelConnectionBinding"],
+    "inputs": ["strict RegeneratedPlan", "Lane A module-composed package", "GeneratedContent.Regions and SceneIds"],
+    "outputs": ["one typed binding per plan region", "one typed directed binding per plan connection", "causal diagnostics"],
+    "invariants": ["map IDs come only from generated provenance", "current generated/ namespace correlation is explicit", "connection IDs are unique and endpoints exist", "self loops are rejected"],
+    "behavioralTests": ["exact region bindings", "missing and ambiguous binding", "duplicate, missing-region and self-loop connection", "destination map missing"]
+  },
+  "travelGateOverlay": {
+    "types": ["GeneratedWorldTravelOverlayService", "GeneratedWorldTravelOverlayDocument", "GeneratedWorldTravelOverlayResult"],
+    "inputs": ["strict source validation", "Lane A composition package", "typed region/connection bindings"],
+    "outputs": ["baseline-start travel-overlay package", "generated-start player-composition preview", "one prototype", "one gate per directed connection", "typed fingerprints and hashes"],
+    "invariants": ["only Manifest.StartMapId, one prototype and gate entities are authorized deltas", "all pre-existing records are canonical-equal", "source sidecars are not written"],
+    "behavioralTests": ["gate count equals connection count", "deterministic IDs and args", "collision rejection", "controlled delta", "repeat determinism"]
+  },
+  "deterministicGatePlacement": {
+    "types": ["GeneratedWorldTravelOverlayService", "MapDefinition", "Position2D"],
+    "inputs": ["walkable tiles", "map start", "existing entity cells", "collidable cells", "outgoing connections sorted ordinal"],
+    "outputs": ["distinct deterministic gate cells with reachable adjacent approach cells"],
+    "invariants": ["no fixed production gate maximum", "no existing entity position reuse", "maps are not resized", "insufficient cells fail causally"],
+    "behavioralTests": ["walkable distinct reachable placement", "existing positions excluded", "insufficient safe cells rejected", "large connection count is data-driven"]
+  },
+  "routePlanner": {
+    "types": ["GeneratedWorldTravelRoutePlanner", "GeneratedWorldTravelRoutePlan", "GeneratedWorldTravelPlannedCommand"],
+    "inputs": ["strict plan", "travel-overlaid player package", "generated start binding", "generated non-gate entity provenance"],
+    "outputs": ["origin interaction commands", "directed connection route", "deterministic shortest movement commands", "destination interaction commands"],
+    "invariants": ["destination order is hop count then region ID then connection IDs", "direction tie order is Up, Left, Right, Down", "planning never mutates Runtime state", "multi-hop is supported"],
+    "behavioralTests": ["deterministic destination", "plan connection IDs used", "shortest path", "multi-hop", "unreachable gate", "missing destination interactable"]
+  },
+  "originInteraction": {
+    "types": ["GameProjectGeneratedRegionTravelActivationService", "IGameRuntime", "GeneratedWorldTravelRoutePlan"],
+    "inputs": ["generated start state", "planned origin entity"],
+    "outputs": ["successful movement and InteractionTriggered for a source-generated non-gate entity"],
+    "invariants": ["the origin target exists in validated generated MVP provenance", "travel gates cannot satisfy origin proof"],
+    "behavioralTests": ["origin interaction succeeds", "wrong interaction target fails correlation"]
+  },
+  "destinationInteraction": {
+    "types": ["GameProjectGeneratedRegionTravelActivationService", "IGameRuntime", "GameProjectGeneratedRegionTravelSummary"],
+    "inputs": ["state after the final MapChanged", "planned destination generated entity"],
+    "outputs": ["successful destination InteractionTriggered", "destination facts and final state hash"],
+    "invariants": ["destination differs from origin", "destination target is generated and not a gate"],
+    "behavioralTests": ["destination interaction succeeds", "missing destination interaction fails"]
+  },
+  "replayAndRoundtrip": {
+    "types": ["GameProjectGeneratedRegionTravelActivationService", "IRuntimeStateSerializer", "UnifiedRuntimeSession"],
+    "inputs": ["exact planned command sequence", "final GameState"],
+    "outputs": ["ReplayEquivalent", "ReplayFinalStateHash", "StateRoundtripPassed"],
+    "invariants": ["per-command result, maps, positions, interaction targets and MapChanged args match", "map state roundtrip preserves map, position, mode, flags and canonical hash"],
+    "behavioralTests": ["full replay equivalent", "replay divergence rejected", "exact roundtrip", "roundtrip divergence rejected"]
+  },
+  "twoLanePreservation": {
+    "types": ["GameProjectBuildAndQualificationService", "GameProjectAcceptedMechanicsCompatibilityResult", "GeneratedWorldTravelOverlayResult"],
+    "inputs": ["Lane A qualified module composition", "strict generated source"],
+    "outputs": ["unchanged Lane A AcceptedMechanics/Social", "Lane B gates, generated start, identity and complete travel-route authority"],
+    "invariants": ["legacy projects remain single-lane", "core_only travels but does not claim AcceptedMechanics", "primary hashes/frames belong to Lane B complete route"],
+    "behavioralTests": ["all-selectable compatibility", "core-only travel", "legacy hashes", "primary route hashes and frames"]
+  },
+  "historyAndUiTruth": {
+    "types": ["GameProjectBuildHistoryEntry", "GameProjectBuildHistoryReader", "GameProjectGeneratedWorldSummaryService", "UnifiedGameProjectWorkspaceSnapshot", "ProjectsPageControl"],
+    "inputs": ["current source", "typed build history", "current authoring fingerprint"],
+    "outputs": ["SOURCE_READY, START_CURRENT, TRAVEL_CURRENT, LAST_SUCCESS or INVALID", "human card rows", "technical route fields"],
+    "invariants": ["historical BUILD_CURRENT maps only to START_CURRENT", "old Goal157 rows never claim TRAVEL_CURRENT", "card has no IDs, hashes or paths"],
+    "behavioralTests": ["fresh reopen TRAVEL_CURRENT", "old history START_CURRENT", "authoring change LAST_SUCCESS", "card rows and redaction", "technical fields"]
+  },
+  "standaloneCorrelation": {
+    "types": ["ProjectStandaloneBuildRequest", "StandaloneRuntimeFrame", "StandaloneHumanReviewFact", "GameProjectReleaseCandidateRecord"],
+    "inputs": ["Lane B package/composition/final hashes", "complete route frames", "generated and accepted facts"],
+    "outputs": ["cached hidden standalone payload", "current RC record", "portable restore"],
+    "invariants": ["HostReused=true", "HostRebuilt=false", "Unity starts=0", "exactly one hidden smoke", "no Unity host code change"],
+    "behavioralTests": ["payload starts generated", "MapChanged frame representation", "destination and route facts", "final hash", "accepted facts", "RC CURRENT", "portable TRAVEL_CURRENT"]
+  },
+  "legacyCompatibility": {
+    "types": ["DefaultGameRuntime", "GameProjectBuildAndQualificationService", "GameProjectGeneratedWorldSummaryService"],
+    "inputs": ["ordinary text/dialogue/no-nearby interactions", "legacy non-generated project", "old Goal157 history"],
+    "outputs": ["unchanged legacy events and hashes", "START_CURRENT compatibility state"],
+    "invariants": ["transition detection occurs only for transitionKind=map", "no broad refactor or schema migration"],
+    "behavioralTests": ["legacy Runtime interaction regressions", "legacy single-lane build", "Goal157 history compatibility"]
+  },
+  "rollbackMatrix": {
+    "types": ["GameProjectBuildTransaction", "GameProjectBuildAndQualificationService", "GeneratedWorldTravelOverlayService", "GameProjectGeneratedRegionTravelActivationService"],
+    "inputs": ["overlay, plan, Runtime, replay, roundtrip or final validation failure"],
+    "outputs": ["FAILED build with causal stage and rollback", "previous package/history/source/RC unchanged"],
+    "invariants": ["travel artifacts remain in staging until success", "no success history or event leaks", "source validators are read-only"],
+    "behavioralTests": ["overlay failure rollback", "suppressed MapChanged rollback", "replay/roundtrip failure rollback", "source and RC bytes preserved"]
+  },
+  "nonGoals": {
+    "types": ["scope guard"],
+    "inputs": ["Goal158 allowlist and forbidden paths"],
+    "outputs": ["bounded Runtime/Application/WinForms/tests/docs/evidence changes only"],
+    "invariants": ["no FeatureModule", "no public GamePackage schema", "no seed regeneration", "no Unity/provider/LLM/RAG/Lua/media execution", "no region-selection UI"],
+    "behavioralTests": ["artifact scope violation count is zero", "source and historical baselines are byte-identical"]
+  },
+  "scopeException": {
+    "path": "tests/LLMGameCreator.Tests/Application/Goal157/Goal157CompatibilityBuildTests.cs",
+    "reason": "Concrete Goal157CompatibilityBuildTests failure reproduced after H2 moved primary final hash, plan ID and RuntimeFrames from the Goal157 start-only route to the complete Goal158 travel route; two obsolete assertions required synchronization while the Goal157 activation summary remains separately GREEN.",
+    "reproducedFailureCount": 2,
+    "command": "dotnet test tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj -c Debug --filter FullyQualifiedName~Goal157CompatibilityBuildTests"
+  },
+  "testInventory": {
+    "minimumDiscovered": 44,
+    "minimumBehavioral": 38,
+    "runtimeContract": ["01 valid transition", "02 exact MapChanged args", "03 wrong source atomic", "04 missing destination atomic", "05 malformed coordinates atomic", "06 blocked destination atomic", "07 incomplete contract atomic", "08 legacy text", "09 legacy dialogue", "10 no nearby", "11 enum values stable"],
+    "bindingAndOverlay": ["12 exact region bindings", "13 missing or ambiguous binding", "14 invalid connections", "15 one gate per connection", "16 deterministic unique gate IDs", "17 exact gate args", "18 safe distinct reachable placement", "19 no existing position reuse", "20 insufficient cells", "21 repeated overlay deterministic", "22 pre-existing canonical equality", "23 controlled deltas only", "24 collision rejection", "25 source sidecars unchanged"],
+    "routeAndRuntime": ["26 deterministic reachable destination", "27 plan connection IDs", "28 origin interaction", "29 shortest path", "30 MapChanged observed", "31 destination state", "32 destination interaction", "33 visited maps and regions", "34 multi-hop", "35 unreachable gate", "36 missing destination interactable", "37 wrong transition correlation", "38 suppressed MapChanged", "39 replay equivalent", "40 roundtrip exact"],
+    "buildHistoryUi": ["41 all-selectable travel GREEN", "42 Lane A accepted and social GREEN", "43 primary route hashes and frames", "44 repeat deterministic", "45 reopen TRAVEL_CURRENT", "46 old Goal157 START_CURRENT", "47 authoring LAST_SUCCESS", "48 rollback", "49 core-only", "50 legacy single-lane", "51 card travel rows", "52 card redaction", "53 technical route fields"],
+    "standalonePortable": ["54 exactly one hidden smoke", "55 host reused and Unity zero", "56 generated start and destination payload", "57 payload final hash", "58 payload route and destination facts", "59 accepted facts and RC ready", "60 RC primary hashes", "61 portable restore"],
+    "regressions": ["62 Goal157", "63 Goal156", "64 Goal155A and Goal155", "65 Goal154D, Goal153C, Goal150A and Goal149", "66 DefaultGameRuntime", "67 ConnectedWorldTravel", "68 procedural generation and preview", "69 Goal142 and goal148-manual immutability"]
+  }
+}

@@ -1,6 +1,7 @@
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
+using System.Globalization;
 
 namespace LLMGameCreator.Runtime;
 
@@ -121,6 +122,17 @@ public sealed class DefaultGameRuntime : IGameRuntime
         }
 
         var interactionComponent = GetComponent(package, nearby, "interactable");
+        if (interactionComponent?.Args.TryGetValue(
+                MapTransitionInteractionContract.TransitionKindKey,
+                out var transitionKind) == true
+            && string.Equals(
+                transitionKind,
+                MapTransitionInteractionContract.TransitionKindMap,
+                StringComparison.Ordinal))
+        {
+            return MapTransition(package, state, nearby, interactionComponent);
+        }
+
         var events = new List<RuntimeEvent>
         {
             new RuntimeEvent { Type = RuntimeEventType.InteractionTriggered, TargetId = nearby.Id, Message = $"Взаимодействие: {nearby.Id}" }
@@ -141,6 +153,131 @@ public sealed class DefaultGameRuntime : IGameRuntime
         }
 
         return new CommandResult { State = state, Events = events };
+    }
+
+    private static CommandResult MapTransition(
+        GamePackageDefinition package,
+        GameState state,
+        EntityInstanceDefinition gate,
+        ComponentDefinition interaction)
+    {
+        var requiredKeys = new[]
+        {
+            MapTransitionInteractionContract.ConnectionIdKey,
+            MapTransitionInteractionContract.SourceMapIdKey,
+            MapTransitionInteractionContract.DestinationMapIdKey,
+            MapTransitionInteractionContract.DestinationXKey,
+            MapTransitionInteractionContract.DestinationYKey,
+            MapTransitionInteractionContract.FromRegionIdKey,
+            MapTransitionInteractionContract.ToRegionIdKey
+        };
+        if (requiredKeys.Any(key => !interaction.Args.TryGetValue(key, out var value)
+                                    || string.IsNullOrWhiteSpace(value)))
+        {
+            return MapTransitionError(
+                state,
+                "map_transition.contract_incomplete",
+                "Контракт перехода между картами заполнен не полностью.");
+        }
+
+        var sourceMapId = interaction.Args[MapTransitionInteractionContract.SourceMapIdKey];
+        if (!string.Equals(sourceMapId, state.CurrentMapId, StringComparison.Ordinal))
+        {
+            return MapTransitionError(
+                state,
+                "map_transition.source_map_mismatch",
+                "Переход не относится к текущей карте.");
+        }
+
+        var destinationMapId = interaction.Args[MapTransitionInteractionContract.DestinationMapIdKey];
+        var destinationMaps = package.Game.Maps
+            .Where(map => string.Equals(map.Id, destinationMapId, StringComparison.Ordinal))
+            .ToList();
+        if (destinationMaps.Count != 1)
+        {
+            return MapTransitionError(
+                state,
+                "map_transition.destination_map_missing",
+                "Карта назначения не найдена или определена неоднозначно.");
+        }
+
+        if (!int.TryParse(
+                interaction.Args[MapTransitionInteractionContract.DestinationXKey],
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var destinationX)
+            || !int.TryParse(
+                interaction.Args[MapTransitionInteractionContract.DestinationYKey],
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var destinationY))
+        {
+            return MapTransitionError(
+                state,
+                "map_transition.destination_position_invalid",
+                "Координаты назначения имеют неверный формат.");
+        }
+
+        var destinationMap = destinationMaps[0];
+        if (destinationX < 0 || destinationY < 0
+            || destinationX >= destinationMap.Width || destinationY >= destinationMap.Height)
+        {
+            return MapTransitionError(
+                state,
+                "map_transition.destination_position_invalid",
+                "Координаты назначения находятся за пределами карты.");
+        }
+
+        var destinationTileId = GetTileId(destinationMap, destinationX, destinationY);
+        var destinationTile = package.Game.TilePrototypes
+            .SingleOrDefault(tile => string.Equals(tile.Id, destinationTileId, StringComparison.Ordinal));
+        var destinationBlockedByEntity = destinationMap.Entities.Any(entity =>
+            entity.Position.X == destinationX
+            && entity.Position.Y == destinationY
+            && HasComponent(package, entity, "collidable"));
+        if (destinationTile is null || !destinationTile.Walkable || destinationBlockedByEntity)
+        {
+            return MapTransitionError(
+                state,
+                "map_transition.destination_tile_blocked",
+                "Точка назначения недоступна для перемещения.");
+        }
+
+        var eventArgs = new Dictionary<string, string>
+        {
+            [MapTransitionInteractionContract.ConnectionIdKey] =
+                interaction.Args[MapTransitionInteractionContract.ConnectionIdKey],
+            [MapTransitionInteractionContract.SourceMapIdKey] = sourceMapId,
+            [MapTransitionInteractionContract.DestinationMapIdKey] = destinationMapId,
+            [MapTransitionInteractionContract.FromRegionIdKey] =
+                interaction.Args[MapTransitionInteractionContract.FromRegionIdKey],
+            [MapTransitionInteractionContract.ToRegionIdKey] =
+                interaction.Args[MapTransitionInteractionContract.ToRegionIdKey],
+            [MapTransitionInteractionContract.DestinationXKey] =
+                destinationX.ToString(CultureInfo.InvariantCulture),
+            [MapTransitionInteractionContract.DestinationYKey] =
+                destinationY.ToString(CultureInfo.InvariantCulture)
+        };
+        var events = new List<RuntimeEvent>
+        {
+            new()
+            {
+                Type = RuntimeEventType.InteractionTriggered,
+                TargetId = gate.Id,
+                Message = $"Взаимодействие: {gate.Id}"
+            }
+        };
+
+        state.CurrentMapId = destinationMapId;
+        state.PlayerPosition = new Position2D(destinationX, destinationY);
+        events.Add(new RuntimeEvent
+        {
+            Type = RuntimeEventType.MapChanged,
+            TargetId = destinationMapId,
+            Message = "Выполнен переход между картами.",
+            Args = eventArgs
+        });
+        return new CommandResult { State = state, Events = events, Success = true };
     }
 
     private static MapDefinition? FindCurrentMap(GamePackageDefinition package, GameState state)
@@ -193,6 +330,24 @@ public sealed class DefaultGameRuntime : IGameRuntime
             State = state,
             Success = false,
             Events = new List<RuntimeEvent> { new RuntimeEvent { Type = RuntimeEventType.Error, Message = message } }
+        };
+    }
+
+    private static CommandResult MapTransitionError(GameState state, string code, string message)
+    {
+        return new CommandResult
+        {
+            State = state,
+            Success = false,
+            Events = new List<RuntimeEvent>
+            {
+                new()
+                {
+                    Type = RuntimeEventType.Error,
+                    Message = message,
+                    Args = new Dictionary<string, string> { ["code"] = code }
+                }
+            }
         };
     }
 }

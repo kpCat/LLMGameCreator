@@ -172,11 +172,13 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                                       && string.Equals(_lastSuccessfulBuild.QualifiedAuthoringFingerprint,
                                           currentFingerprint.Sha256, StringComparison.Ordinal);
         var generatedWorldActivation = _lastSuccessfulBuild?.GeneratedWorldActivation;
+        var generatedRegionTravel = _lastSuccessfulBuild?.GeneratedRegionTravel;
         var generatedWorld = _generatedWorldSummaryService.Restore(
             generatedSource,
             _lastSuccessfulBuild?.GeneratedWorld,
             generatedMatchesCurrent,
-            generatedWorldActivation);
+            generatedWorldActivation,
+            generatedRegionTravel);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -258,8 +260,14 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
             ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
             ,GeneratedWorld = generatedWorld
-            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "LAST_SUCCESS"
                 ? generatedWorldActivation
+                : null
+            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "LAST_SUCCESS"
+                ? _lastSuccessfulBuild?.GeneratedWorldTravelOverlay
+                : null
+            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "LAST_SUCCESS"
+                ? generatedRegionTravel
                 : null
             ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
         };
@@ -352,6 +360,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             HumanReviewFacts = _generatedWorldSummaryService.StandaloneHumanFacts(_lastBuild.GeneratedWorld)
                 .Concat(GameProjectGeneratedWorldSummaryService.StandaloneActivationHumanFacts(
                     _lastBuild.GeneratedWorldActivation))
+                .Concat(GameProjectGeneratedWorldSummaryService.StandaloneTravelHumanFacts(
+                    _lastBuild.GeneratedRegionTravel))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
                     _lastBuild, releaseCandidateFactsAllowed)).ToList(),
             RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame

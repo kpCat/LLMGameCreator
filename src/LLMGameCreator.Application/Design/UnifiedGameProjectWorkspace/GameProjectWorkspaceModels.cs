@@ -1,6 +1,7 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
+using LLMGameCreator.Application.Generation.Procedural;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 
@@ -99,6 +100,36 @@ public sealed record GameProjectGeneratedWorldActivationSummary
     public bool MoveSucceeded { get; init; }
     public bool InteractSucceeded { get; init; }
     public bool GeneratedInteractionObserved { get; init; }
+    public string InitialStateHash { get; init; } = string.Empty;
+    public string FinalStateHash { get; init; } = string.Empty;
+    public string ReplayFinalStateHash { get; init; } = string.Empty;
+    public bool ReplayEquivalent { get; init; }
+    public bool StateRoundtripPassed { get; init; }
+    public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
+    public IReadOnlyList<GameProjectGeneratedWorldHumanFact> HumanFacts { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record GameProjectGeneratedRegionTravelSummary
+{
+    public bool Present { get; init; }
+    public bool Passed { get; init; }
+    public string OriginRegionId { get; init; } = string.Empty;
+    public string OriginRegionTitle { get; init; } = string.Empty;
+    public string OriginMapId { get; init; } = string.Empty;
+    public string OriginMapTitle { get; init; } = string.Empty;
+    public string DestinationRegionId { get; init; } = string.Empty;
+    public string DestinationRegionTitle { get; init; } = string.Empty;
+    public string DestinationMapId { get; init; } = string.Empty;
+    public string DestinationMapTitle { get; init; } = string.Empty;
+    public IReadOnlyList<string> ConnectionIds { get; init; } = [];
+    public int TransitionCount { get; init; }
+    public IReadOnlyList<string> VisitedRegionIds { get; init; } = [];
+    public IReadOnlyList<string> VisitedMapIds { get; init; } = [];
+    public int MovementCommandCount { get; init; }
+    public bool OriginInteractionObserved { get; init; }
+    public bool TravelGateInteractionsPassed { get; init; }
+    public bool DestinationInteractionObserved { get; init; }
     public string InitialStateHash { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public string ReplayFinalStateHash { get; init; } = string.Empty;
@@ -260,6 +291,8 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public string ReleaseCandidateRecordPath { get; init; } = string.Empty;
     public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
     public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
+    public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
+    public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
@@ -331,6 +364,8 @@ public sealed record GameProjectBuildResult
     public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
     public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
     public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
+    public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
+    public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
@@ -345,7 +380,7 @@ public sealed record GameProjectRuntimeFrame
 
 public sealed record GameProjectBuildHistoryEntry
 {
-    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v2";
+    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v3";
     public DateTimeOffset CompletedAtUtc { get; init; }
     public string Status { get; init; } = string.Empty;
     public string PackageSha256 { get; init; } = string.Empty;
@@ -373,6 +408,8 @@ public sealed record GameProjectBuildHistoryEntry
     public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
     public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
     public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
+    public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
+    public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 

@@ -1,0 +1,13 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-158-generated-region-travel-runtime-and-standalone-vertical-slice",
+    "baselineRef":  "8939aea01f759e1c22409c7fbce871cba113d856",
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false,
+    "unityHostBuildRun":  false,
+    "hiddenStandaloneSmokeInvocationCount":  1,
+    "additionalPathException":  "tests/LLMGameCreator.Tests/Application/Goal157/Goal157CompatibilityBuildTests.cs"
+}

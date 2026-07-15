@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "finalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e",
+    "replayFinalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e",
+    "replayEquivalent":  true,
+    "stateRoundtripPassed":  true,
+    "visitedRegionIds":  [
+                             "region/blue_ditch",
+                             "region/drift_garden"
+                         ],
+    "visitedMapIds":  [
+                          "generated/map/region_blue_ditch",
+                          "generated/map/region_drift_garden"
+                      ]
+}

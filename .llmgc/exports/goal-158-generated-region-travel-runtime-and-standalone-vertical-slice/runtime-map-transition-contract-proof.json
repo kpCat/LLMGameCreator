@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "command":  "PlayerCommand.Interact",
+    "transitionContractSource":  "interactable.Args",
+    "mapChangedNumericValue":  8,
+    "priorRuntimeEventValuesPreserved":  true,
+    "validTransitionPassed":  true,
+    "atomicFailureMatrixPassed":  true,
+    "legacyTextPassed":  true,
+    "legacyDialoguePassed":  true,
+    "noNearbyPassed":  true
+}

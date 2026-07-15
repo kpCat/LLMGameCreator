@@ -286,7 +286,10 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         var summary = snapshot.GeneratedWorld;
         _generatedWorldCardPanel.Visible = summary is { Present: true };
         _generatedWorldCardLabel.Text = summary is { Present: true }
-            ? GameProjectGeneratedWorldSummaryService.FormatCard(summary, snapshot.GeneratedWorldActivation)
+            ? GameProjectGeneratedWorldSummaryService.FormatCard(
+                summary,
+                snapshot.GeneratedWorldActivation,
+                snapshot.GeneratedRegionTravel)
             : string.Empty;
     }
 
@@ -667,6 +670,8 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         if (snapshot.GeneratedWorld is { Present: true } generated)
         {
             var activation = snapshot.GeneratedWorldActivation;
+            var travelOverlay = snapshot.GeneratedWorldTravelOverlay;
+            var travel = snapshot.GeneratedRegionTravel;
             var compatibility = snapshot.AcceptedMechanicsCompatibility;
             lines.InsertRange(lines.Count - 1,
             [
@@ -688,6 +693,20 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                     + (activation?.StartSucceeded ?? false) + "/"
                     + (activation?.MoveSucceeded ?? false) + "/"
                     + (activation?.InteractSucceeded ?? false),
+                "Travel overlay SHA-256: " + (travelOverlay?.TravelOverlaySha256 ?? string.Empty),
+                "Travel connection/gate/transition counts: "
+                    + (travelOverlay?.ConnectionCount ?? 0) + "/"
+                    + (travelOverlay?.GateCount ?? 0) + "/"
+                    + (travel?.TransitionCount ?? 0),
+                "Travel origin region/map IDs: "
+                    + (travel?.OriginRegionId ?? string.Empty) + "/"
+                    + (travel?.OriginMapId ?? string.Empty),
+                "Travel destination region/map IDs: "
+                    + (travel?.DestinationRegionId ?? string.Empty) + "/"
+                    + (travel?.DestinationMapId ?? string.Empty),
+                "Travel route connection IDs: "
+                    + string.Join(",", travel?.ConnectionIds ?? []),
+                "Travel final Runtime state hash: " + (travel?.FinalStateHash ?? string.Empty),
                 "Source: .llmgc/generation/seeded-project-source.json"
             ]);
         }

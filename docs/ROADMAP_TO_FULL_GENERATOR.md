@@ -303,10 +303,12 @@ The project succeeds if each stage increases either:
 - export/runtime reality;
 - user control over generated games.
 
-## Current Goal157 bridge
+## Current Goal158 bridge
 
 Goal156 completed the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. Its independent audit then identified missing causal source provenance and canonical overlay/base reconstruction.
 
-Goal157 closes that provenance blocker and activates the generated start map in the final player lane while retaining a baseline-start accepted-mechanics compatibility lane. Start, move right, generated-target interaction, replay, state roundtrip, standalone payload, RC and portable recovery are now verified through existing seams.
+Goal157 closes that provenance blocker and activates the generated start map in the final player lane while retaining a baseline-start accepted-mechanics compatibility lane. Its independent audit is GREEN at `8939aea0`.
 
-The next roadmap decision follows an independent Goal157 audit: either add bounded generated-region travel or transactional seed regeneration with preview/validate/apply rollback. Neither is implied complete by Goal157.
+Goal158 adds deterministic generated-region travel through those same seams: exact strict-plan bindings, one safe gate per directed connection, generic atomic Runtime map transitions, origin and destination interactions, multi-hop planning, replay, exact state roundtrip, primary route hashes/frames, `TRAVEL_CURRENT` history/UI, cached standalone truth and portable RC recovery. Lane A AcceptedMechanics/Social remains unchanged.
+
+The next roadmap decision follows an independent Goal158 audit: plan transactional seed regeneration with preview/validate/apply rollback. Goal158 does not authorize source migration, automatic regeneration, Unity host changes, provider work or public package-schema changes.

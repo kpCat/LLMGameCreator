@@ -1,0 +1,22 @@
+{
+    "status":  "GREEN",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "hostFileSetHashUnchanged":  true,
+    "unityProcessStartCount":  0,
+    "hiddenSmokeInvocationCount":  1,
+    "hiddenSmokePassed":  true,
+    "standaloneSelfChecksPassed":  true,
+    "actualPayloadGeneratedStartMapPassed":  true,
+    "actualPayloadMapChangedRepresentationPassed":  true,
+    "actualPayloadDestinationInteractionPassed":  true,
+    "actualPayloadTravelFinalHashPassed":  true,
+    "actualPayloadTravelFactsPassed":  true,
+    "actualPayloadAcceptedFactsPassed":  true,
+    "releaseCandidateRecordCurrent":  true,
+    "portableCopyTravelCurrentWithoutExecution":  true,
+    "packageSha256":  "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "compositionPackageSha256":  "379bded6642377cb36c0bc055f82346146d2098b1dcfb97acc29b1a0af08f5d5",
+    "finalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e"
+}

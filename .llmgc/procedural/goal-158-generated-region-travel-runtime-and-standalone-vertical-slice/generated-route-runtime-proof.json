@@ -1,0 +1,62 @@
+{
+    "status":  "GREEN",
+    "originRegionId":  "region/blue_ditch",
+    "originMapId":  "generated/map/region_blue_ditch",
+    "destinationRegionId":  "region/drift_garden",
+    "destinationMapId":  "generated/map/region_drift_garden",
+    "connectionIds":  [
+                          "connection/blue_ditch__drift_garden"
+                      ],
+    "transitionCount":  1,
+    "visitedRegionIds":  [
+                             "region/blue_ditch",
+                             "region/drift_garden"
+                         ],
+    "visitedMapIds":  [
+                          "generated/map/region_blue_ditch",
+                          "generated/map/region_drift_garden"
+                      ],
+    "movementCommandCount":  1,
+    "originInteractionObserved":  true,
+    "travelGateInteractionsPassed":  true,
+    "destinationInteractionObserved":  true,
+    "initialStateHash":  "ea324208d7735196d6202e8cb845328add7166162c2b346b7794ffa0f5caf6d3",
+    "finalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e",
+    "runtimeFrames":  [
+                          {
+                              "Index":  0,
+                              "ActionId":  "00_generated_start",
+                              "Title":  "Игровой старт в сгенерированном регионе",
+                              "Category":  "generated_start",
+                              "StateHash":  "ea324208d7735196d6202e8cb845328add7166162c2b346b7794ffa0f5caf6d3"
+                          },
+                          {
+                              "Index":  1,
+                              "ActionId":  "000_OriginInteraction_entity/actor_seed_npc_archetype_mechanic_05",
+                              "Title":  "Взаимодействие в начальном регионе",
+                              "Category":  "generated_origin_interaction",
+                              "StateHash":  "ea324208d7735196d6202e8cb845328add7166162c2b346b7794ffa0f5caf6d3"
+                          },
+                          {
+                              "Index":  2,
+                              "ActionId":  "001_Move_",
+                              "Title":  "Движение по маршруту",
+                              "Category":  "generated_navigation",
+                              "StateHash":  "639b25a940a287bf8e20c9a6bdfbb566706937928c20281e9fdc42baea7d7f8e"
+                          },
+                          {
+                              "Index":  3,
+                              "ActionId":  "002_GateInteraction_connection/blue_ditch__drift_garden",
+                              "Title":  "Переход между регионами",
+                              "Category":  "generated_travel",
+                              "StateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e"
+                          },
+                          {
+                              "Index":  4,
+                              "ActionId":  "003_DestinationInteraction_entity/actor_seed_npc_archetype_scout_06",
+                              "Title":  "Взаимодействие после перехода",
+                              "Category":  "generated_destination_interaction",
+                              "StateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e"
+                          }
+                      ]
+}

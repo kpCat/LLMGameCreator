@@ -190,6 +190,9 @@ public sealed class GameProjectGeneratedWorldActivationService
         };
     }
 
+    internal GameProjectGeneratedRegionTravelActivationService CreateRegionTravelActivationService() =>
+        new(_runtime, _stateSerializer);
+
     private ActivationAttempt Run(GamePackageDefinition package, IReadOnlySet<string> generatedEntityIds)
     {
         var start = _runtime.Start(package);

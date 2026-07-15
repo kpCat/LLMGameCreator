@@ -214,6 +214,13 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 
 - Generated project provenance is now reproducible from its declared request. Seed/mode/style/variants drive full plan/rule/tiny/MVP regeneration and canonical Goal142 overlay/base reconstruction; a source-only seed edit fails validation.
 - The final player package starts on generated content and executes a Runtime-owned move/interact loop. Accepted modern mechanics remain a separately typed baseline-start compatibility proof with their own hashes and qualification flags.
-- Residual bounded risks: generated-region travel and seed regeneration are future product choices. Goal157 does not change Runtime projects, public GamePackage schema, Unity host, provider, LLM, Lua, catalog or generator-library surfaces.
+- Goal157 independent audit is GREEN at `8939aea0`. Goal158 closes the generated-region travel risk while preserving the strict source and two-lane foundation.
 - Post-creation seed regeneration is not implemented; project-local generation source and sidecars are immutable inputs to the current build path.
 - Cache-only proof is bounded to one hidden smoke: host reused, host not rebuilt, Unity process starts zero.
+
+## Goal158 generated-region travel Runtime and standalone
+
+- Generated projects now start in generated content and traverse at least one generated plan connection through a generic Runtime-owned map transition, with deterministic replay/save/standalone truth. Seed regeneration remains the next explicit product decision.
+- Lane A accepted mechanics/social remains the compatibility authority. Lane B's only gameplay additions are one namespaced prototype and one deterministic gate entity per directed connection; project identity and generated start remain explicit controlled deltas.
+- Runtime invalid-transition, route-planning, replay, roundtrip and final-validation failures are transactional. Old v2 Goal157 history can prove only `START_CURRENT`, never `TRAVEL_CURRENT`.
+- Preset-label ambiguity is recorded as bounded P2 debt; it does not affect ID-based deterministic travel selection.

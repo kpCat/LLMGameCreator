@@ -1,4 +1,10 @@
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
+using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
+using LLMGameCreator.Application.Generation.Procedural;
+using LLMGameCreator.Application.Projects;
+using LLMGameCreator.Application.RuntimePreview;
+using LLMGameCreator.Runtime;
+using LLMGameCreator.Runtime.Abstractions;
 using LLMGameCreator.Tests.Application.Goal156;
 using Xunit;
 
@@ -60,12 +66,15 @@ public sealed class Goal157CompatibilityBuildTests
     }
 
     [Fact]
-    public void Behavioral_primary_final_state_hash_belongs_to_activation_lane()
+    public void Behavioral_primary_final_state_hash_belongs_to_complete_travel_route()
     {
         var build = Goal157BuildState.Value.First;
         var activation = Assert.IsType<GameProjectGeneratedWorldActivationSummary>(build.GeneratedWorldActivation);
+        var travel = Assert.IsType<GameProjectGeneratedRegionTravelSummary>(build.GeneratedRegionTravel);
 
-        Assert.Equal(activation.FinalStateHash, build.FinalStateHash);
+        Assert.True(activation.Passed);
+        Assert.Equal(travel.FinalStateHash, build.FinalStateHash);
+        Assert.NotEqual(activation.FinalStateHash, build.FinalStateHash);
         Assert.NotEqual(build.AcceptedMechanicsCompatibility?.CompatibilityFinalStateHash, build.FinalStateHash);
     }
 
@@ -110,15 +119,18 @@ public sealed class Goal157CompatibilityBuildTests
     }
 
     [Fact]
-    public void Contract_generated_primary_runtime_contract_is_activation_lane_only()
+    public void Contract_generated_primary_runtime_contract_is_complete_travel_route()
     {
         var build = Goal157BuildState.Value.First;
+        var travel = Assert.IsType<GameProjectGeneratedRegionTravelSummary>(build.GeneratedRegionTravel);
 
-        Assert.Equal("generated-world-activation-v1", build.RuntimePlaythroughPlanId);
-        Assert.Equal("start>move_right>interact", build.PlaythroughSignature);
-        Assert.Equal(3, build.CapabilityCount);
-        Assert.Equal(3, build.PlannedActionCount);
-        Assert.Equal(3, build.RuntimeFrames.Count);
+        Assert.Equal("generated-region-travel-v1", build.RuntimePlaythroughPlanId);
+        Assert.Contains("OriginInteraction", build.PlaythroughSignature, StringComparison.Ordinal);
+        Assert.Contains("GateInteraction", build.PlaythroughSignature, StringComparison.Ordinal);
+        Assert.Contains("DestinationInteraction", build.PlaythroughSignature, StringComparison.Ordinal);
+        Assert.Equal(travel.ConnectionIds.Count + 2, build.CapabilityCount);
+        Assert.Equal(build.PlannedActionCount + 1, build.RuntimeFrames.Count);
+        Assert.Equal(travel.RuntimeFrames.Count, build.RuntimeFrames.Count);
         Assert.NotEqual(build.RuntimeFrames.Count, build.AcceptedMechanicsCompatibility?.RuntimeFrames.Count);
     }
 }
@@ -141,15 +153,56 @@ internal sealed record Goal157BuildFixture(
     public static Goal157BuildFixture Create()
     {
         var project = Goal156TestKit.Copy(Goal156TestKit.AllSelectable, "goal157-build-fixture");
-        var first = Goal156TestKit.OpenWorkspace(project.Path).BuildAndQualify();
-        var repeat = Goal156TestKit.OpenWorkspace(project.Path).BuildAndQualify();
-        var reopen = Goal156TestKit.OpenWorkspace(project.Path).Snapshot();
+        var first = Goal157TestKit.OpenTravelWorkspace(project.Path).BuildAndQualify();
+        var repeat = Goal157TestKit.OpenTravelWorkspace(project.Path).BuildAndQualify();
+        var reopen = Goal157TestKit.OpenTravelWorkspace(project.Path).Snapshot();
         var core = Goal156TestKit.Copy(Goal156TestKit.CoreOnly, "goal157-core-fixture");
-        var coreBuild = Goal156TestKit.OpenWorkspace(core.Path).BuildAndQualify();
+        var coreBuild = Goal157TestKit.OpenTravelWorkspace(core.Path).BuildAndQualify();
         using var scope = Goal156TestKit.Scope("goal157-legacy");
         var legacySummary = scope.Service.CreateAsync(Goal156TestKit.TemplateRequest(scope.Root, "legacy"),
             CancellationToken.None).GetAwaiter().GetResult();
-        var legacy = Goal156TestKit.OpenWorkspace(legacySummary.FolderPath).BuildAndQualify();
+        var legacy = Goal157TestKit.OpenTravelWorkspace(legacySummary.FolderPath).BuildAndQualify();
         return new Goal157BuildFixture(project, first, repeat, reopen, core, coreBuild, legacy);
+    }
+}
+
+internal static partial class Goal157TestKit
+{
+    public static UnifiedGameProjectWorkspaceController OpenTravelWorkspace(
+        string project,
+        IProjectStandaloneBuildService? standalone = null,
+        IGameRuntime? runtime = null,
+        IRuntimeStateSerializer? stateSerializer = null)
+    {
+        var current = new CurrentGamePackageService(Goal156TestKit.Repository);
+        current.LoadAsync(project, CancellationToken.None).GetAwaiter().GetResult();
+        var source = Goal156TestKit.SourceService;
+        var summary = new GameProjectGeneratedWorldSummaryService();
+        var selectedRuntime = runtime ?? new DefaultGameRuntime();
+        var serializer = stateSerializer ?? new RuntimeStateSerializer();
+        var controller = new UnifiedGameProjectWorkspaceController(
+            current,
+            new GameProjectFeatureModuleAuthoringService(Goal156TestKit.RepositoryRoot),
+            new GameProjectBuildAndQualificationService(
+                Goal156TestKit.RepositoryRoot,
+                SelectedRuntimeVariantInteractiveSessionService.CreateDefault(),
+                Goal156TestKit.Repository,
+                Goal156TestKit.Validator,
+                current,
+                generatedSource: source,
+                generatedSummary: summary,
+                generatedActivation: new GameProjectGeneratedWorldActivationService(
+                    selectedRuntime,
+                    serializer,
+                    Goal156TestKit.Validator),
+                generatedTravelOverlay: new GeneratedWorldTravelOverlayService(),
+                generatedTravelActivation: new GameProjectGeneratedRegionTravelActivationService(
+                    selectedRuntime,
+                    serializer)),
+            standaloneBuild: standalone,
+            generatedSourceService: source,
+            generatedWorldSummaryService: summary);
+        controller.OpenProject(project);
+        return controller;
     }
 }

@@ -330,4 +330,10 @@ Goal156 turns the existing procedural kernel/registry/tiny-loop/MVP proof into n
 
 Goal157 makes the declared v1 source request causal: validation regenerates the deterministic chain and reconstructs overlay/base from the canonical Goal142 package. Modern generated builds use two explicit views of one module-composed package. The baseline-start view qualifies previously accepted mechanics; the generated-start view is the final player package and supplies primary hashes and Runtime frames. The existing Runtime owns Start → Move Right → Interact, replay and save/load truth. This preserves GamePackage authority and avoids introducing generator, UI, provider or LLM dependencies into Runtime.
 
-The immutable Goal142 baseline remains the active anchor and start map. The next selected product slice may address generated-world activation/travel or safe seed regeneration, but must preserve explicit validation, apply and rollback boundaries.
+The immutable Goal142 baseline remains the compatibility anchor. Goal158 advances the player lane into generated-region travel; safe seed regeneration remains separate and must preserve explicit validation, apply and rollback boundaries.
+
+## 17. Goal158 deterministic generated-region travel
+
+Goal158 derives exact region-to-map bindings and directed connections only from the strict regenerated plan plus generated provenance. A build-time overlay appends one generic travel prototype and one deterministic gate per directed connection without changing pre-existing records. The ordinary `PlayerCommand.Interact` path validates the complete Args contract atomically, changes map/position only after validation and emits additive `MapChanged` correlation.
+
+The Application planner uses package walkability/collision data and a fixed direction tie-order to execute a real origin interaction, one or more plan connections and a destination interaction. Complete-route hashes, frames, replay and save/load are player-lane authority; the baseline-start AcceptedMechanics/Social lane stays unchanged. History/UI/standalone/portable truth follows this split. Runtime remains independent from generation, UI, LLM and providers.

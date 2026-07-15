@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "historySchemaVersion":  "unified_game_project_build_history_v3",
+    "freshReopenStatus":  "TRAVEL_CURRENT",
+    "oldGoal157Status":  "START_CURRENT",
+    "authoringDriftStatus":  "LAST_SUCCESS",
+    "buildCurrentLegacyValueMapsToStartCurrent":  true,
+    "generatedCardTravelRowsPassed":  true,
+    "generatedCardRedactionPassed":  true,
+    "technicalDetailsPassed":  true,
+    "rollbackMatrixPassed":  true
+}

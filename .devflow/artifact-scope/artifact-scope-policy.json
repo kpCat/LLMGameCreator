@@ -5583,6 +5583,71 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-158-generated-region-travel-runtime-and-standalone-vertical-slice",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal158-generated-region-travel.ps1",
+        ".devflow/scripts/run-goal158-generated-region-travel.cmd",
+        "src/LLMGameCreator.Runtime.Abstractions/RuntimeContracts.cs",
+        "src/LLMGameCreator.Runtime/DefaultGameRuntime.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectModels.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectSourceService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedWorldRegionMapBindingService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedWorldTravelOverlayService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedWorldTravelRoutePlanner.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedWorldActivationService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedRegionTravelActivationService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectGeneratedWorldSummaryService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectAcceptedMechanicsSummaryService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectReleaseCandidateRecordService.cs",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal158/Goal158RuntimeMapTransitionTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal158/Goal158RegionBindingAndGateOverlayTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal158/Goal158TravelRouteRuntimeTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal158/Goal158TravelBuildCompatibilityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal158/Goal158HistoryUiRollbackTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal158/Goal158StandaloneAndPortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157RuntimeActivationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157CompatibilityBuildTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157WorkspaceUiTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157StandaloneAndPortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/RuntimeUnifiedBridgeTests.cs",
+        "tests/LLMGameCreator.Tests/SmokeTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal157-generated-world-runtime-start-activation.md",
+        "docs/manual-acceptance/goal158-generated-region-travel.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal158/",
+        "docs/agent-tasks/goal-158-generated-region-travel-runtime-and-standalone-vertical-slice/",
+        ".llmgc/procedural/goal-158-generated-region-travel-runtime-and-standalone-vertical-slice/",
+        ".llmgc/exports/goal-158-generated-region-travel-runtime-and-standalone-vertical-slice/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

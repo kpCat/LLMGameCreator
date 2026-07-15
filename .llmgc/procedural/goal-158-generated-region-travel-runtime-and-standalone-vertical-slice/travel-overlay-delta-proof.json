@@ -1,0 +1,81 @@
+{
+    "status":  "GREEN",
+    "schemaVersion":  "generated_world_travel_overlay_v1",
+    "sourceRequestSha256":  "df05d6940ce18315be89295aae8ff4a9105b81468510da3ea90d4619f5095cc5",
+    "planSha256":  "08863618ab11eb608921261901cc1bf035715760750bd2a10dd3ec695292f71d",
+    "compatibilityPackageSha256":  "1f07336a115a06591d80ded2fd77f584d9196deb91151ac6d981c07ac60e15a2",
+    "travelOverlaySha256":  "0dc42edf9951bb77a1f9aa86848baf1108e7c1f3d6ae65086f743e5ca66a20b9",
+    "playerCompositionPackageSha256":  "379bded6642377cb36c0bc055f82346146d2098b1dcfb97acc29b1a0af08f5d5",
+    "controlledDeltaPassed":  true,
+    "preExistingRecordsCanonicalEqual":  true,
+    "sourceSidecarsByteIdentical":  true,
+    "prototypeFingerprint":  {
+                                 "CollectionPath":  "game.entityPrototypes",
+                                 "RecordId":  "entity_prototype/generated_region_travel_gate",
+                                 "CanonicalSha256":  "f732f0ed2912fc6515d304d5776fbcafcbf9fd78779a68a3b09a27947359fc4d"
+                             },
+    "mapFingerprintsBefore":  [
+                                  {
+                                      "CollectionPath":  "game.maps",
+                                      "RecordId":  "generated/map/region_blue_ditch",
+                                      "CanonicalSha256":  "d73537d6a6f64a7deb97527762661c4f2fafe3138d2cd703ca6e799b43ceb565"
+                                  },
+                                  {
+                                      "CollectionPath":  "game.maps",
+                                      "RecordId":  "generated/map/region_drift_garden",
+                                      "CanonicalSha256":  "b0ec5c2c5d74013db15b2447719e027368aa399ee0568a007b459ee11f6d585b"
+                                  },
+                                  {
+                                      "CollectionPath":  "game.maps",
+                                      "RecordId":  "generated/map/region_glass_fen",
+                                      "CanonicalSha256":  "9f1af17515b6bd0dc5d233f069b95b38270927b0182fa9f2a9c8d22ca3a75ae7"
+                                  },
+                                  {
+                                      "CollectionPath":  "game.maps",
+                                      "RecordId":  "generated/map/region_lantern_fold",
+                                      "CanonicalSha256":  "c2cb8fbb13084373a228737c33c9527e2fc4f3cdf1cb70dfcc330bba9c08c9c1"
+                                  },
+                                  {
+                                      "CollectionPath":  "game.maps",
+                                      "RecordId":  "generated/map/region_salt_orchard",
+                                      "CanonicalSha256":  "ecb0eae944db16f094e85aacd49846fdf540f79916a399973ead1a58ff51dad9"
+                                  },
+                                  {
+                                      "CollectionPath":  "game.maps",
+                                      "RecordId":  "map/village",
+                                      "CanonicalSha256":  "50bc370c64f8834fe5acefa5c3325de74f2195299c36773111ad830a369becf9"
+                                  }
+                              ],
+    "mapFingerprintsAfter":  [
+                                 {
+                                     "CollectionPath":  "game.maps",
+                                     "RecordId":  "generated/map/region_blue_ditch",
+                                     "CanonicalSha256":  "7f9021ce0bf3adf355a22fe1b1d0c98087a5f59aeae3da26e68bd10256471454"
+                                 },
+                                 {
+                                     "CollectionPath":  "game.maps",
+                                     "RecordId":  "generated/map/region_drift_garden",
+                                     "CanonicalSha256":  "abc0838fcda073f4b3ddf591db160cd3f29c78d4a846b44d271c6c60c7f33c3b"
+                                 },
+                                 {
+                                     "CollectionPath":  "game.maps",
+                                     "RecordId":  "generated/map/region_glass_fen",
+                                     "CanonicalSha256":  "7f41c706685b40de6cc7e8f71829ee8122058dadb2a9b7362ba133df4cb03e25"
+                                 },
+                                 {
+                                     "CollectionPath":  "game.maps",
+                                     "RecordId":  "generated/map/region_lantern_fold",
+                                     "CanonicalSha256":  "7c499974e4df51a9bbb7388fef446c9c05feae789f6bc0160e96c80ddd0c5307"
+                                 },
+                                 {
+                                     "CollectionPath":  "game.maps",
+                                     "RecordId":  "generated/map/region_salt_orchard",
+                                     "CanonicalSha256":  "ecb0eae944db16f094e85aacd49846fdf540f79916a399973ead1a58ff51dad9"
+                                 },
+                                 {
+                                     "CollectionPath":  "game.maps",
+                                     "RecordId":  "map/village",
+                                     "CanonicalSha256":  "50bc370c64f8834fe5acefa5c3325de74f2195299c36773111ad830a369becf9"
+                                 }
+                             ]
+}

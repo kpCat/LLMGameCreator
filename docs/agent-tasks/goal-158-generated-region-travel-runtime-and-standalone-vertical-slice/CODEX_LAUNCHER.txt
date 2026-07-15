@@ -1,0 +1,50 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-158-generated-region-travel-runtime-and-standalone-vertical-slice/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 8939aea01f759e1c22409c7fbce871cba113d856
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- Goal157 прошёл independent audit: record GREEN intake, no human gate;
+- это крупный playable product slice, не Runtime hotfix ради hotfix;
+- source schema/plan/rule/tiny/MVP/overlay/base Goal156/157 не менять и не мигрировать;
+- добавь generic data-driven map transition через существующий PlayerCommand.Interact;
+- transition contract хранится в interactable Args; добавь additive RuntimeEventType.MapChanged без renumber;
+- legacy text/dialogue/no-nearby interactions сохраняются;
+- invalid transition state/event atomic;
+- из strict validated RegeneratedPlan получи exact region→map bindings и directed connections;
+- build-time travel overlay добавляет один prototype и deterministic gate entity на каждую connection;
+- gate positions walkable/distinct/reachable; no fixed max/count in production;
+- Lane A AcceptedMechanics/Social unchanged;
+- Lane B = Lane A package + travel gates + generated start + identity;
+- all pre-existing records canonical-equal; only authorized travel additions;
+- actual IGameRuntime route: origin generated interaction → path to gate → Interact/MapChanged →
+  destination generated interaction;
+- route selection/pathfinding deterministic and data-driven; support multi-hop;
+- primary hashes/final state/RuntimeFrames belong to complete travel route;
+- replay, map-state roundtrip and rollback required;
+- old Goal157 history may show START_CURRENT but never TRAVEL_CURRENT;
+- generated card adds travel/visited/destination facts without IDs/hashes/paths;
+- exactly one cached hidden standalone smoke; HostReused=true, HostRebuilt=false, Unity starts=0;
+- actual payload final map/hash/route facts + accepted facts; RC CURRENT;
+- portable copy restores TRAVEL_CURRENT/accepted/RC without execution;
+- no full suite, 85-case closure, all-ProductSmoke or Unity host build;
+- P0/P1 mandatory matrix defects fix inside Goal158; P2/P3 debt only;
+- create/push exactly one final GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи Runtime transition truth, binding/gate counts, selected route, visited maps/regions,
+origin/travel/destination facts, replay/roundtrip, lane hashes, builds/history/UI/rollback,
+cache/Unity/smoke, payload/RC/portable, regressions, evidence/artifact scope,
+final SHA, push, HEAD==origin/main и clean worktree.

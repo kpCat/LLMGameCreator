@@ -1,4 +1,5 @@
 using LLMGameCreator.GamePackage;
+using LLMGameCreator.Application.RuntimePreview;
 
 namespace LLMGameCreator.Application.Generation.Procedural;
 
@@ -125,5 +126,8 @@ public sealed record SeededGeneratedProjectSourceValidationResult
     public GeneratedProjectOverlayDocument? Overlay { get; init; }
     public GamePackageDefinition? GeneratedBasePackage { get; init; }
     public GamePackageDefinition? GeneratedMvpPackage { get; init; }
+    public ProceduralGeneratedGamePlan? RegeneratedPlan { get; init; }
+    public string RegeneratedPlanJson { get; init; } = string.Empty;
+    public GenerationPresetOptions? ResolvedGenerationOptions { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }

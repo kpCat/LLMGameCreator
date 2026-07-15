@@ -241,3 +241,9 @@ Independent audit at `12ef8a4d` was blocked by missing source-request-to-plan co
 ## Goal157 generated-world activation gate record
 
 Goal157 is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false` and `independentAuditRequired=true`. Strict source reproduction, canonical Goal142 chain rebuild, Lane A accepted-mechanics compatibility, Lane B generated-start player activation, generated-target Start → Move Right → Interact, replay/roundtrip, current history/UI, one cache-only hidden standalone smoke, RC CURRENT and execution-free portable recovery are required. This creates no human gate and does not imply generated-region travel or seed regeneration.
+
+Goal157 independent audit is GREEN at `8939aea0`; `goal157IndependentAuditRequired=false`.
+
+## Goal158 generated-region travel gate record
+
+Goal158 is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false` and `independentAuditRequired=true`. Required truth is a generic atomic Runtime map transition, exact strict-plan region bindings, one deterministic safe gate per directed connection, unchanged Lane A AcceptedMechanics/Social, a real origin/travel/destination `IGameRuntime` route with replay and exact state roundtrip, primary route hashes/frames, `TRAVEL_CURRENT` history/UI, one reused-cache hidden standalone smoke, RC CURRENT and execution-free portable recovery. This creates no human gate. Transactional seed regeneration remains the next explicit product decision.

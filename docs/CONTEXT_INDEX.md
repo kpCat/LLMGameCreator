@@ -371,6 +371,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/manual-acceptance/goal154-family-human-acceptance.md` | Exact owner acceptance of Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; historical implementation statuses are preserved. |
 | `docs/manual-acceptance/goal155-accepted-mechanics-release-candidate.md` | Goal155 automated RC candidate record: no human gate, accepted=false, independent audit required. |
 | `docs/agent-tasks/goal-155-accepted-mechanics-release-candidate-integration-and-operator-readiness/GOAL.md` | Goal155 integrates accepted mechanics across exact owner 22/10 and maximal 22/14 profiles, typed history, portable RC record, WinForms card and one cached hidden smoke. |
+| `docs/agent-tasks/goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice/GOAL.md` | Goal157 strict generated-source reproduction and generated-start two-lane activation; independent audit is GREEN at `8939aea0`, accepted=false, no human gate. |
+| `docs/agent-tasks/goal-158-generated-region-travel-runtime-and-standalone-vertical-slice/GOAL.md` | Goal158 adds exact strict-plan region-map bindings, deterministic per-connection gates, generic atomic Runtime map transitions, complete origin/travel/destination replay and standalone/portable `TRAVEL_CURRENT` truth while Lane A remains unchanged. |
+| `docs/manual-acceptance/goal158-generated-region-travel.md` | Goal158 automated candidate record: no manual action or Unity review, accepted=false, independent audit required. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -1277,3 +1280,10 @@ Goal157 is `GREEN_ACCEPTABLE_CANDIDATE`: strict source validation re-resolves se
 
 `gate_status=goal157_green_acceptable_candidate_pending_independent_audit`
 `current_user_action=independent_goal157_audit_and_plan_generated_region_travel_or_seed_regeneration`
+
+## Goal158 generated-region travel Runtime and standalone vertical slice
+
+Goal157 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0`. Goal158 is `GREEN_ACCEPTABLE_CANDIDATE`: strict regenerated-plan regions bind to exact generated maps, every directed connection receives one deterministic safe travel gate, and `PlayerCommand.Interact` performs an atomic Runtime-owned map transition with additive `MapChanged`. Lane A AcceptedMechanics/Social remains unchanged. Lane B owns generated start, travel gates, identity and the primary complete route: origin interaction, deterministic path to each gate, one or more directed transitions, and destination interaction. Replay, exact map-state roundtrip, v3 history, `TRAVEL_CURRENT` UI, one cached hidden standalone smoke, RC CURRENT and portable recovery are verified without Unity starts.
+
+`gate_status=goal158_green_acceptable_candidate_pending_independent_audit`
+`current_user_action=independent_goal158_audit_and_plan_transactional_seed_regeneration`

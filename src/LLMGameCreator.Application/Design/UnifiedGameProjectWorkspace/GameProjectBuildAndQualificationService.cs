@@ -37,6 +37,8 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly SeededGeneratedProjectSourceService _generatedSource;
     private readonly GameProjectGeneratedWorldSummaryService _generatedSummary;
     private readonly GameProjectGeneratedWorldActivationService? _generatedActivation;
+    private readonly GeneratedWorldTravelOverlayService _generatedTravelOverlay;
+    private readonly GameProjectGeneratedRegionTravelActivationService? _generatedTravelActivation;
     private int _buildRunning;
 
     public GameProjectBuildAndQualificationService(
@@ -49,7 +51,9 @@ public sealed class GameProjectBuildAndQualificationService
         IGameProjectSupportFileSource? supportFileSource = null,
         SeededGeneratedProjectSourceService? generatedSource = null,
         GameProjectGeneratedWorldSummaryService? generatedSummary = null,
-        GameProjectGeneratedWorldActivationService? generatedActivation = null)
+        GameProjectGeneratedWorldActivationService? generatedActivation = null,
+        GeneratedWorldTravelOverlayService? generatedTravelOverlay = null,
+        GameProjectGeneratedRegionTravelActivationService? generatedTravelActivation = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -62,6 +66,8 @@ public sealed class GameProjectBuildAndQualificationService
         _generatedSource = generatedSource ?? new SeededGeneratedProjectSourceService(packageValidator);
         _generatedSummary = generatedSummary ?? new GameProjectGeneratedWorldSummaryService();
         _generatedActivation = generatedActivation;
+        _generatedTravelOverlay = generatedTravelOverlay ?? new GeneratedWorldTravelOverlayService();
+        _generatedTravelActivation = generatedTravelActivation;
     }
 
     public bool BuildRunning => Volatile.Read(ref _buildRunning) != 0;
@@ -431,6 +437,8 @@ public sealed class GameProjectBuildAndQualificationService
             var primaryFinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount;
             var primaryPlaythroughSignature = capabilityPlan.ActionPlanSignature;
             GameProjectGeneratedWorldActivationSummary? generatedWorldActivation = null;
+            GeneratedWorldTravelOverlayDocument? generatedWorldTravelOverlay = null;
+            GameProjectGeneratedRegionTravelSummary? generatedRegionTravel = null;
             if (generatedSource.Present)
             {
                 if (_generatedActivation is null)
@@ -443,10 +451,39 @@ public sealed class GameProjectBuildAndQualificationService
                         ["generated_activation.runtime_unavailable"],
                         "generated_activation.runtime",
                         attempt);
+                GeneratedWorldTravelOverlayResult? travelOverlay = null;
+                var activationCompatibilityPath = qualifiedPackagePath;
+                var activationCompatibilityPackage = compositionPackage;
+                if (_generatedTravelActivation is not null)
+                {
+                    travelOverlay = _generatedTravelOverlay.Build(generatedSource, compositionPackage);
+                    if (!travelOverlay.Passed)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Не удалось подготовить переходы между сгенерированными регионами.",
+                            travelOverlay.Diagnostics,
+                            "generated_travel.overlay",
+                            attempt);
+                    activationCompatibilityPath = Path.Combine(
+                        stagingRoot,
+                        "generated-region-travel",
+                        "travel-overlay",
+                        "package.json");
+                    Directory.CreateDirectory(Path.GetDirectoryName(activationCompatibilityPath)!);
+                    File.WriteAllText(
+                        activationCompatibilityPath,
+                        travelOverlay.TravelOverlayPackageJson,
+                        new UTF8Encoding(false));
+                    activationCompatibilityPackage = travelOverlay.TravelOverlayPackage;
+                }
+
                 var activation = _generatedActivation.Activate(new GameProjectGeneratedWorldActivationRequest
                 {
-                    CompatibilityPackagePath = qualifiedPackagePath,
-                    CompatibilityPackage = compositionPackage,
+                    CompatibilityPackagePath = activationCompatibilityPath,
+                    CompatibilityPackage = activationCompatibilityPackage,
                     GeneratedSource = generatedSource,
                     ProjectIdentity = state.Identity,
                     OutputRoot = Path.Combine(stagingRoot, "generated-world-activation")
@@ -481,11 +518,48 @@ public sealed class GameProjectBuildAndQualificationService
                 primaryFinalReplayActionCount = 3;
                 primaryPlaythroughSignature = "start>move_right>interact";
                 generatedWorldActivation = activation.Summary;
+                if (_generatedTravelActivation is not null && travelOverlay is not null)
+                {
+                    var travelActivation = _generatedTravelActivation.Activate(
+                        new GameProjectGeneratedRegionTravelActivationRequest
+                        {
+                            GeneratedSource = generatedSource,
+                            PlayerPackage = activation.ActivatedProjectPackage
+                        });
+                    if (!travelActivation.Passed)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Сгенерированный маршрут между регионами не прошёл Runtime-проверку.",
+                            travelActivation.Diagnostics,
+                            "generated_travel.runtime",
+                            attempt);
+                    primaryFinalStateHash = travelActivation.Summary.FinalStateHash;
+                    primaryCheckpointReloadPassed = travelActivation.Summary.StateRoundtripPassed;
+                    primaryFullReplayEquivalent = travelActivation.Summary.ReplayEquivalent;
+                    primaryActionBindingPassed = travelActivation.Summary.OriginInteractionObserved
+                                                 && travelActivation.Summary.TravelGateInteractionsPassed
+                                                 && travelActivation.Summary.DestinationInteractionObserved;
+                    primaryRuntimeFrames = travelActivation.Summary.RuntimeFrames;
+                    primaryRuntimePlanId = "generated-region-travel-v1";
+                    primaryCapabilityCount = travelActivation.RoutePlan.ConnectionIds.Count + 2;
+                    primaryPlannedActionCount = travelActivation.RoutePlan.Actions.Count;
+                    primaryCheckpointActionCount = travelActivation.RoutePlan.Actions.Count;
+                    primaryFinalReplayActionCount = travelActivation.RoutePlan.Actions.Count;
+                    primaryPlaythroughSignature = string.Join(">", travelActivation.RoutePlan.Actions
+                        .Select(action => action.Kind.ToString()));
+                    generatedWorldTravelOverlay = travelOverlay.Document;
+                    generatedRegionTravel = travelActivation.Summary;
+                }
                 generatedWorld = _generatedSummary.BuildCurrent(
                     generatedSource,
                     finalCompositionPackage,
                     finalPackage,
-                    generatedWorldActivation);
+                    generatedWorldActivation,
+                    generatedWorldTravelOverlay,
+                    generatedRegionTravel);
                 if (generatedWorld is { Present: true, Passed: false })
                     return RollbackFailure(
                         authoring,
@@ -703,6 +777,8 @@ public sealed class GameProjectBuildAndQualificationService
                 summaryLines.Add("Сгенерированный мир: источник и записи подтверждены");
             if (generatedWorldActivation is { Present: true, Passed: true })
                 summaryLines.AddRange(generatedWorldActivation.HumanFacts.Select(fact => fact.Label + ": " + fact.Value));
+            if (generatedRegionTravel is { Present: true, Passed: true })
+                summaryLines.AddRange(generatedRegionTravel.HumanFacts.Select(fact => fact.Label + ": " + fact.Value));
 
             var buildResult = new GameProjectBuildResult
             {
@@ -767,6 +843,8 @@ public sealed class GameProjectBuildAndQualificationService
                 ,QualifiedAuthoringFingerprint = authoringFingerprint.Sha256
                 ,GeneratedWorld = generatedWorld
                 ,GeneratedWorldActivation = generatedWorldActivation
+                ,GeneratedWorldTravelOverlay = generatedWorldTravelOverlay
+                ,GeneratedRegionTravel = generatedRegionTravel
                 ,AcceptedMechanicsCompatibility = compatibility
             };
             var acceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult);
@@ -876,6 +954,9 @@ public sealed class GameProjectBuildAndQualificationService
         var path = Path.Combine(root, fileName);
         var entry = new GameProjectBuildHistoryEntry
         {
+            SchemaVersion = build.GeneratedRegionTravel is { Present: true, Passed: true }
+                ? "unified_game_project_build_history_v3"
+                : "unified_game_project_build_history_v2",
             CompletedAtUtc = DateTimeOffset.UtcNow,
             Status = "GREEN",
             PackageSha256 = build.PackageSha256,
@@ -901,6 +982,8 @@ public sealed class GameProjectBuildAndQualificationService
             AcceptedMechanics = build.AcceptedMechanics
             ,GeneratedWorld = build.GeneratedWorld
             ,GeneratedWorldActivation = build.GeneratedWorldActivation
+            ,GeneratedWorldTravelOverlay = build.GeneratedWorldTravelOverlay
+            ,GeneratedRegionTravel = build.GeneratedRegionTravel
             ,AcceptedMechanicsCompatibility = build.AcceptedMechanicsCompatibility
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));

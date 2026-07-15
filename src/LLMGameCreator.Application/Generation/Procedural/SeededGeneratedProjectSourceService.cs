@@ -210,16 +210,20 @@ public sealed class SeededGeneratedProjectSourceService
                 diagnostics.Add("generated_source.sidecar_hash_mismatch");
 
             diagnostics = diagnostics.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
+            var passed = diagnostics.Count == 0;
             return new SeededGeneratedProjectSourceValidationResult
             {
                 Present = true,
-                Passed = diagnostics.Count == 0,
-                Status = diagnostics.Count == 0 ? "CURRENT" : "INVALID",
+                Passed = passed,
+                Status = passed ? "CURRENT" : "INVALID",
                 SourcePath = sourcePath,
                 Source = source,
                 Overlay = overlay,
                 GeneratedBasePackage = generatedBase,
                 GeneratedMvpPackage = generatedMvp,
+                RegeneratedPlan = passed ? regeneratedPlan.Plan : null,
+                RegeneratedPlanJson = passed ? regeneratedPlan.Json : string.Empty,
+                ResolvedGenerationOptions = passed ? resolved : null,
                 Diagnostics = diagnostics
             };
         }
