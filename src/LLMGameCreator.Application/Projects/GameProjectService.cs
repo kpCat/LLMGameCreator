@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Abstractions;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Domain.Validation;
 
@@ -15,15 +16,28 @@ public sealed class GameProjectService : IGameProjectService
     private readonly IGamePackageRepository _repository;
     private readonly IGamePackageValidator _validator;
     private readonly NewGamePackageFactory _factory;
+    private readonly SeededGeneratedGameProjectCreationService? _seededCreation;
+    private readonly SeededGeneratedProjectSourceService _generatedSource;
 
     public GameProjectService(
         IGamePackageRepository repository,
         IGamePackageValidator validator,
         NewGamePackageFactory factory)
+        : this(repository, validator, factory, null)
+    {
+    }
+
+    public GameProjectService(
+        IGamePackageRepository repository,
+        IGamePackageValidator validator,
+        NewGamePackageFactory factory,
+        SeededGeneratedGameProjectCreationService? seededCreation)
     {
         _repository = repository;
         _validator = validator;
         _factory = factory;
+        _seededCreation = seededCreation;
+        _generatedSource = seededCreation?.SourceService ?? new SeededGeneratedProjectSourceService(validator);
     }
 
     public async Task<IReadOnlyList<GameProjectSummary>> ListAsync(string gamesRootPath, CancellationToken cancellationToken)
@@ -90,6 +104,19 @@ public sealed class GameProjectService : IGameProjectService
             throw new InvalidOperationException($"Project folder already exists: {targetFolder}");
         }
 
+        var creationKind = string.IsNullOrWhiteSpace(request.CreationKind)
+            ? GameProjectCreationKinds.Template
+            : request.CreationKind.Trim();
+        if (creationKind == GameProjectCreationKinds.SeededGenerated)
+        {
+            if (_seededCreation is null)
+                throw new InvalidOperationException("Seeded generated project creation is not configured.");
+            await _seededCreation.CreateAsync(request, gamesRootPath, targetFolder, cancellationToken).ConfigureAwait(false);
+            return await CreateSummaryAsync(targetFolder, cancellationToken).ConfigureAwait(false);
+        }
+        if (creationKind != GameProjectCreationKinds.Template)
+            throw new ArgumentException("Unknown project creation kind: " + creationKind, nameof(request));
+
         Directory.CreateDirectory(targetFolder);
         Directory.CreateDirectory(Path.Combine(targetFolder, "assets"));
         Directory.CreateDirectory(Path.Combine(targetFolder, "scripts"));
@@ -130,6 +157,26 @@ public sealed class GameProjectService : IGameProjectService
             summary.HasValidationErrors = !report.IsValid;
             summary.IsValidPackage = report.IsValid;
             summary.ErrorMessage = report.IsValid ? null : report.Issues.FirstOrDefault(IsError)?.Message;
+
+            var generated = _generatedSource.Validate(folder);
+            if (generated.Present)
+            {
+                summary.CreationKind = GameProjectCreationKinds.SeededGenerated;
+                summary.GenerationSeed = generated.Source?.Seed ?? string.Empty;
+                summary.GenerationMode = generated.Source?.Mode ?? string.Empty;
+                summary.GenerationPresetId = generated.Source?.PresetId ?? string.Empty;
+                summary.MechanicsProfileId = generated.Source?.MechanicsProfileId ?? string.Empty;
+                summary.GeneratedSourcePresent = true;
+                summary.GeneratedSourceStatus = generated.Status;
+                summary.GeneratedCounts = generated.Source?.Counts ?? new GeneratedProjectCounts();
+                if (!generated.Passed)
+                {
+                    summary.IsValidPackage = false;
+                    summary.HasValidationErrors = true;
+                    summary.ErrorCount++;
+                    summary.ErrorMessage ??= generated.Diagnostics.FirstOrDefault();
+                }
+            }
         }
         catch (Exception ex) when (ex is IOException || ex is InvalidOperationException || ex is System.Text.Json.JsonException || ex is UnauthorizedAccessException)
         {

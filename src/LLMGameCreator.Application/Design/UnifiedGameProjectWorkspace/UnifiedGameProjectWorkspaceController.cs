@@ -4,6 +4,7 @@ using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
@@ -41,6 +42,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private readonly GameProjectBuildHistoryReader _historyReader;
     private readonly GameProjectAcceptedMechanicsSummaryService _acceptedMechanicsSummaryService;
     private readonly GameProjectReleaseCandidateRecordService _releaseCandidateRecordService;
+    private readonly SeededGeneratedProjectSourceService _generatedSourceService;
+    private readonly GameProjectGeneratedWorldSummaryService _generatedWorldSummaryService;
     private GameProjectBuildResult? _lastBuild;
     private GameProjectBuildResult? _lastSuccessfulBuild;
     private ProjectStandaloneBuildResult? _lastStandaloneAttempt;
@@ -54,7 +57,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         IProjectStandaloneBuildService? standaloneBuild = null,
         GameProjectBuildHistoryReader? historyReader = null,
         GameProjectAcceptedMechanicsSummaryService? acceptedMechanicsSummaryService = null,
-        GameProjectReleaseCandidateRecordService? releaseCandidateRecordService = null)
+        GameProjectReleaseCandidateRecordService? releaseCandidateRecordService = null,
+        SeededGeneratedProjectSourceService? generatedSourceService = null,
+        GameProjectGeneratedWorldSummaryService? generatedWorldSummaryService = null)
     {
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _authoring = authoring ?? throw new ArgumentNullException(nameof(authoring));
@@ -64,6 +69,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _historyReader = historyReader ?? new GameProjectBuildHistoryReader();
         _acceptedMechanicsSummaryService = acceptedMechanicsSummaryService ?? new GameProjectAcceptedMechanicsSummaryService();
         _releaseCandidateRecordService = releaseCandidateRecordService ?? new GameProjectReleaseCandidateRecordService();
+        _generatedSourceService = generatedSourceService ?? new SeededGeneratedProjectSourceService();
+        _generatedWorldSummaryService = generatedWorldSummaryService ?? new GameProjectGeneratedWorldSummaryService();
     }
 
     public bool HasOpenProject { get; private set; }
@@ -157,6 +164,16 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             acceptedMechanicsCurrent,
             _lastSuccessfulBuild,
             releaseCandidate);
+        var generatedSource = _generatedSourceService.Validate(state.ProjectFolder);
+        var generatedMatchesCurrent = _lastSuccessfulBuild is not null
+                                      && currentFingerprint.Passed
+                                      && !string.IsNullOrWhiteSpace(currentFingerprint.Sha256)
+                                      && string.Equals(_lastSuccessfulBuild.QualifiedAuthoringFingerprint,
+                                          currentFingerprint.Sha256, StringComparison.Ordinal);
+        var generatedWorld = _generatedWorldSummaryService.Restore(
+            generatedSource,
+            _lastSuccessfulBuild?.GeneratedWorld,
+            generatedMatchesCurrent);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -237,6 +254,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,ReleaseCandidateRecordConfigurationStatus = releaseCandidate.ConfigurationStatus
             ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
             ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
+            ,GeneratedWorld = generatedWorld
         };
     }
 
@@ -324,8 +342,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             EquipmentDamageBonus = _lastBuild.WeaponDamageBonus,
             StatDamageBonus = _lastBuild.StatDamageBonus,
             TotalAdditionalDamage = _lastBuild.TotalAdditionalDamage,
-            HumanReviewFacts = _acceptedMechanicsSummaryService.StandaloneHumanFacts(
-                _lastBuild, releaseCandidateFactsAllowed),
+            HumanReviewFacts = _generatedWorldSummaryService.StandaloneHumanFacts(_lastBuild.GeneratedWorld)
+                .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
+                    _lastBuild, releaseCandidateFactsAllowed)).ToList(),
             RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame
             {
                 Index = frame.Index,

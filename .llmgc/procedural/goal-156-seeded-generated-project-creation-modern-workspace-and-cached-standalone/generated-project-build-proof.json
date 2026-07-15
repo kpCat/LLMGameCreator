@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "allSelectableBuildPassed":  true,
+    "repeatBuildDeterministic":  true,
+    "freshReopenCurrent":  true,
+    "acceptedMechanicsPassed":  true,
+    "generatedSummaryPassed":  true,
+    "generatedRecordsPreserved":  true,
+    "coreOnlyBuildPassed":  true,
+    "coreOnlyAcceptedMechanicsPassed":  false,
+    "coreOnlyRcReadyClaimed":  false
+}

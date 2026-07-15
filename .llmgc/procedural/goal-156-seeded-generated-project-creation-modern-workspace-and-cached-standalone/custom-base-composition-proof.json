@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "explicitGeneratedBaseUsed":  true,
+    "explicitBaseHashValidated":  true,
+    "defaultGoal142LaneUnchanged":  true,
+    "defaultHistoricalHashesPreserved":  true,
+    "allSelectableQualified":  true,
+    "coreOnlyQualified":  true,
+    "checkpointReloadPassed":  true,
+    "fullReplayEquivalent":  true,
+    "actionBindingPassed":  true
+}

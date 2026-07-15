@@ -265,6 +265,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             _overviewMechanicsCountLabel.Text = "Выбрано механик: " + snapshot.SelectedMechanicCount;
             _overviewLastBuildLabel.Text = "Последняя успешная сборка: " + snapshot.LastSuccessfulBuild;
             _overviewRuntimeLabel.Text = "Последняя Runtime-проверка: " + snapshot.LastRuntimeQualification;
+            BindGeneratedWorldCard(snapshot);
             BindMechanics(snapshot);
             BindParameters(snapshot);
             BindSocialCard(snapshot);
@@ -278,6 +279,15 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         {
             _workspaceBinding = false;
         }
+    }
+
+    private void BindGeneratedWorldCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var summary = snapshot.GeneratedWorld;
+        _generatedWorldCardPanel.Visible = summary is { Present: true };
+        _generatedWorldCardLabel.Text = summary is { Present: true }
+            ? GameProjectGeneratedWorldSummaryService.FormatCard(summary)
+            : string.Empty;
     }
 
     private void BindSocialCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
@@ -654,6 +664,19 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             string.Empty,
             "Identity recovery diagnostics:"
         };
+        if (snapshot.GeneratedWorld is { Present: true } generated)
+        {
+            lines.InsertRange(lines.Count - 1,
+            [
+                string.Empty,
+                "Generated world",
+                "Status: " + generated.Status,
+                "Plan SHA-256: " + generated.PlanSha256,
+                "Overlay SHA-256: " + generated.OverlaySha256,
+                "Generated base SHA-256: " + generated.GeneratedBasePackageSha256,
+                "Source: .llmgc/generation/seeded-project-source.json"
+            ]);
+        }
         lines.AddRange(snapshot.IdentityRecoveryDiagnostics);
         lines.AddRange(new[]
         {

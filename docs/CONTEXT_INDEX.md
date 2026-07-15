@@ -1261,5 +1261,13 @@ The owner later accepted the complete Goal154 family at `fc2ac34db60d2627e1cafc8
 
 Goal155 is `GREEN_ACCEPTABLE_CANDIDATE`: Profile A preserves exact `22/10`; Profile B proves `22/14`, damage `3/6/9`, ability 2, mana `12 → 9`, status tick 1 with expiry, reputation `0 → 10` and gold `0 → 10 → 17`. AcceptedMechanics restores from GREEN history. The project-local atomic RC record is CURRENT after correlated standalone payload, portable without execution, and preserves LAST_SUCCESS across failed build/standalone attempts. The compact Projects card exposes no IDs, hashes or paths. One hidden smoke reused the existing host, rebuilt nothing and started Unity zero times.
 
-`gate_status=goal155_green_acceptable_candidate_pending_independent_audit`
-`current_user_action=independent_goal155_audit_and_select_next_major_product_vertical_slice`
+Goal155A independent-audit intake is GREEN at `ebaa4aba`, so the Goal155 RC milestone is closed while Goal155 and Goal155A remain `accepted=false`.
+
+## Goal156 seeded generated project creation
+
+Goal156 is `GREEN_ACCEPTABLE_CANDIDATE`: ordinary project creation now supports `seeded_generated`, persists deterministic project-local generation source/sidecars, overlays namespaced generated records onto the immutable Goal142 baseline, and supplies that explicit custom base to the existing FeatureModule composition path. `all_selectable_defaults` derives every selectable optional module from the library; `core_only` selects none. Both build through canonical Runtime/checkpoint/replay, while only all-selectable establishes RC READY. Generated summary, AcceptedMechanics and the RC record persist/reopen and are portable without execution. One hidden standalone smoke reused the existing host with zero Unity starts.
+
+The baseline start map remains active by design. Generated-map activation/travel and post-creation seed regeneration are later product decisions.
+
+`gate_status=goal156_green_acceptable_candidate_pending_independent_audit`
+`current_user_action=independent_goal156_audit_and_plan_seed_regeneration_or_generated_world_activation`

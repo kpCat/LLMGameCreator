@@ -203,3 +203,11 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 - Historical 64-test closure remains validation debt and is not reopened.
 - Clean-machine install and final release packaging remain future milestone work.
 - Goal155 creates no human gate; it remains `accepted=false` and requires independent audit.
+
+## Goal156 seeded generated project integration
+
+- Goal155A independent-audit intake is GREEN at `ebaa4aba`, closing the Goal155 RC milestone without changing Goal155/155A acceptance.
+- Goal156 creates a real seeded generated project without LLM, provider, Lua or Unity generation. The generated world is additive and preserved through modern FeatureModule build, replay and standalone.
+- The baseline start map remains active by design. Switching gameplay start/travel into generated maps is the next product decision, not hidden completion in Goal156.
+- Post-creation seed regeneration is not implemented; project-local generation source and sidecars are immutable inputs to the current build path.
+- Cache-only proof is bounded to one hidden smoke: host reused, host not rebuilt, Unity process starts zero.

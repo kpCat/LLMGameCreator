@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "goal142BaselineSha256":  "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+    "goal142SourceByteIdentical":  true,
+    "baselineDefinitionsPreserved":  true,
+    "baselineStartMapPreserved":  true,
+    "generatedRecordsAdditive":  true,
+    "generatedRecordsNamespaced":  true,
+    "generatedReferencesValid":  true,
+    "differingDefinitionCollisionRejected":  true
+}

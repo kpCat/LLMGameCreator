@@ -19,6 +19,20 @@ public static class FeatureModuleCompositionVocabulary
 
 }
 
+public static class FeatureModuleCompositionBasePackageSourceKinds
+{
+    public const string Goal142BalancedBaseline = "goal142_balanced_baseline";
+    public const string SeededGeneratedBase = "seeded_generated_base";
+}
+
+public sealed record FeatureModuleCompositionBasePackage
+{
+    public string PackagePath { get; init; } = string.Empty;
+    public string PackageSha256 { get; init; } = string.Empty;
+    public string SourceKind { get; init; } = FeatureModuleCompositionBasePackageSourceKinds.Goal142BalancedBaseline;
+    public string SourceIdentity { get; init; } = FeatureModuleCompositionVocabulary.BaselineCandidateId;
+}
+
 public sealed record FeatureModuleSourceLineage
 {
     public string GoalId { get; init; } = string.Empty;

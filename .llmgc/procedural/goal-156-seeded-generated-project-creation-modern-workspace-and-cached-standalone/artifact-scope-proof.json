@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-156-seeded-generated-project-creation-modern-workspace-and-cached-standalone",
+    "baselineRef":  "ebaa4abac2273b185e6da0a3fb15e22fa2be3996",
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false,
+    "unityHostBuildRun":  false,
+    "hiddenStandaloneSmokeInvocationCount":  1
+}

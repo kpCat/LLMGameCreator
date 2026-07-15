@@ -302,3 +302,9 @@ The project succeeds if each stage increases either:
 - validation automation;
 - export/runtime reality;
 - user control over generated games.
+
+## Current Goal156 bridge
+
+Goal156 completes the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. A seeded project can be created, opened, configured, built, replayed, reopened and packaged with the cached standalone host while preserving generated records and typed operator summaries.
+
+The next roadmap decision follows an independent Goal156 audit: either add bounded seed regeneration with preview/validate/apply rollback, or activate/travel into generated maps while retaining the baseline anchor contract. Neither is implied complete by Goal156.

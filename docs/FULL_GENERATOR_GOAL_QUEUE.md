@@ -1,6 +1,7 @@
 # Full Generator Goal Queue
 
-- Goal 155A current-package-correlated RC truth hotfix: GREEN, `accepted=false`, no human gate. It closes Goal155's `BLOCKED_AT_7084244a` P1 by requiring actual current package SHA, document package/composition/final hashes, package ID/title/version and semantic authoring fingerprint before an RC record can be CURRENT. Valid older records remain LAST_SUCCESS; missing current truth is UNKNOWN; package mismatch/missing is ABSENT. Next work is independent Goal155A audit and selection of the next major product vertical slice.
+- Goal 156 seeded generated project creation: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, no human gate. Seed/mode/preset/mechanics profile now create a real deterministic project, preserve the Goal142 baseline with additive generated records, survive modern composition/build/reopen, and reuse the cached standalone host. Next work is independent Goal156 audit and planning seed regeneration or generated-world activation.
+- Goal 155A current-package-correlated RC truth hotfix: independent audit intake GREEN at `ebaa4aba`, `accepted=false`, no human gate. Goal155's RC milestone is closed; package/document/identity/fingerprint correlation remains required for CURRENT.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document
@@ -2547,3 +2548,9 @@ Status: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, `manualReviewRequired=fa
 ## Goal155A - current-package-correlated RC record truth hotfix
 
 Status: `GREEN`, `accepted=false`, `manualReviewRequired=false`. The independent audit found the record reader at `7084244a` did not correlate current package bytes, current document build identity or typed project identity. Goal155A rejects missing/tampered current package evidence, retains valid older records as LAST_SUCCESS, returns UNKNOWN for missing current hashes/fingerprint failure, and preserves portable/history-independent CURRENT records. No standalone smoke or Unity process was run.
+
+Goal156 records the Goal155A independent-audit intake as `GREEN_ACCEPTABLE_CANDIDATE_AT_EBAA4ABA` and closes the Goal155 RC milestone. Goal155 and Goal155A remain unaccepted and require no human gate.
+
+## Goal156 - seeded generated project creation, modern workspace and cached standalone
+
+Status: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, `manualReviewRequired=false`. Normal project creation supports deterministic `seeded_generated` inputs and data-derived `all_selectable_defaults`/`core_only` mechanics profiles while retaining the legacy template path. A project-local generated source and sidecars feed an additive namespaced overlay over the immutable Goal142 baseline; explicit custom-base composition preserves those records through canonical Runtime/checkpoint/replay. Generated-world and AcceptedMechanics summaries persist in GREEN history, reopen in one compact card, correlate with the actual standalone payload and portable CURRENT RC truth. Exactly one hidden smoke reused the cache, rebuilt no host and started Unity zero times. The baseline start map remains active; activation/travel and seed regeneration are future slices.

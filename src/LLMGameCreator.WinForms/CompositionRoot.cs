@@ -17,6 +17,7 @@ using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.RuntimePreview;
 using LLMGameCreator.Application.Validation;
@@ -47,6 +48,7 @@ public sealed class CompositionRoot : IDisposable
         var logsPath = Path.Combine(appData, "Logs");
         var logFilePath = Path.Combine(logsPath, "LLMGameCreator.log");
         var settingsPath = Path.Combine(appData, "appsettings.json");
+        var repositoryRoot = ResolveRepositoryRoot();
 
         _loggerFactory = LoggerFactory.Create(builder =>
         {
@@ -80,8 +82,24 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<AssembledGamePackageActivationService>(Reuse.Singleton);
         _container.Register<ContentLanguagePolicyService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
-        _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedProjectOverlayService>(resolver =>
+            new GeneratedProjectOverlayService(resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
+        _container.RegisterDelegate<SeededGeneratedProjectSourceService>(resolver =>
+            new SeededGeneratedProjectSourceService(
+                resolver.Resolve<IGamePackageValidator>(),
+                overlayService: resolver.Resolve<GeneratedProjectOverlayService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectGeneratedWorldSummaryService>(resolver =>
+            new GameProjectGeneratedWorldSummaryService(resolver.Resolve<GeneratedProjectOverlayService>()), Reuse.Singleton);
+        _container.RegisterDelegate<SeededGeneratedGameProjectCreationService>(resolver =>
+            new SeededGeneratedGameProjectCreationService(
+                repositoryRoot,
+                resolver.Resolve<IGamePackageRepository>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<NewGamePackageFactory>(),
+                overlay: resolver.Resolve<GeneratedProjectOverlayService>(),
+                sourceService: resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<GameBlueprintPresetProvider>(Reuse.Singleton);
         _container.RegisterDelegate<CapabilityRegistry>(_ => BuiltInCapabilityRegistry.Create(), Reuse.Singleton);
         _container.RegisterDelegate<GeneratorCatalog>(_ => BuiltInGeneratorCatalog.Create(), Reuse.Singleton);
@@ -207,7 +225,6 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
         _container.RegisterDelegate<ISelectedRuntimeVariantInteractiveSessionService>(
             _ => SelectedRuntimeVariantInteractiveSessionService.CreateDefault(), Reuse.Singleton);
-        var repositoryRoot = ResolveRepositoryRoot();
         _container.RegisterDelegate<GameProjectFeatureModuleAuthoringService>(
             _ => new GameProjectFeatureModuleAuthoringService(repositoryRoot), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectBuildAndQualificationService>(resolver =>
@@ -216,7 +233,9 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<ISelectedRuntimeVariantInteractiveSessionService>(),
                 resolver.Resolve<IGamePackageRepository>(),
                 resolver.Resolve<IGamePackageValidator>(),
-                resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+                resolver.Resolve<ICurrentGamePackageService>(),
+                generatedSource: resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                generatedSummary: resolver.Resolve<GameProjectGeneratedWorldSummaryService>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
         _container.Register<UnifiedGameProjectWorkspaceController>(Reuse.Singleton);

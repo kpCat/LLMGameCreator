@@ -321,3 +321,9 @@ Before expanding the platform, prove the generated game kernel.
 ## 14. One-line rule for agents
 
 If a proposed next task does not make the generated game more playable, simulatable, or runtime-facing, stop and ask for explicit user approval before spending limit.
+
+## 15. Goal156 durable generated-project bridge
+
+Goal156 turns the existing procedural kernel/registry/tiny-loop/MVP proof into normal durable project creation. Deterministic seed/mode/preset inputs produce project-local source and sidecars, then an additive generated overlay is composed through the existing FeatureModule and canonical Runtime/checkpoint/replay seams. This keeps GamePackage as the only game truth and keeps LLM/provider/Lua/Unity generation outside Runtime.
+
+The immutable Goal142 baseline remains the active anchor and start map. The next selected product slice may address generated-world activation/travel or safe seed regeneration, but must preserve explicit validation, apply and rollback boundaries.

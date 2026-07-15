@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "supportedModeCount":  3,
+    "supportedModes":  [
+                           "authored_small_world",
+                           "fully_seeded_world",
+                           "semi_procedural_regions"
+                       ],
+    "supportedModeMatrixPassed":  true,
+    "presetsDataDriven":  true
+}

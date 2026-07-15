@@ -52,6 +52,42 @@ public sealed record GameProjectSocialHumanFact
     public string Value { get; init; } = string.Empty;
 }
 
+public sealed record GameProjectGeneratedWorldHumanFact
+{
+    public string Label { get; init; } = string.Empty;
+    public string Value { get; init; } = string.Empty;
+}
+
+public sealed record GameProjectGeneratedWorldSummary
+{
+    public bool Present { get; init; }
+    public bool Passed { get; init; }
+    public string Status { get; init; } = "ABSENT";
+    public string Seed { get; init; } = string.Empty;
+    public string Mode { get; init; } = string.Empty;
+    public string PresetId { get; init; } = string.Empty;
+    public string MechanicsProfileId { get; init; } = string.Empty;
+    public string PlanSha256 { get; init; } = string.Empty;
+    public string OverlaySha256 { get; init; } = string.Empty;
+    public string GeneratedBasePackageSha256 { get; init; } = string.Empty;
+    public int RegionCount { get; init; }
+    public int FactionCount { get; init; }
+    public int ActorCount { get; init; }
+    public int ItemResourceCount { get; init; }
+    public int EncounterCount { get; init; }
+    public int QuestEventCount { get; init; }
+    public string GeneratedStartMapTitle { get; init; } = string.Empty;
+    public bool TinyLoopPassed { get; init; }
+    public int TinyLoopStepCount { get; init; }
+    public string TinyLoopInitialStateHash { get; init; } = string.Empty;
+    public string TinyLoopFinalStateHash { get; init; } = string.Empty;
+    public bool RewardOrCostObserved { get; init; }
+    public bool StateChangeObserved { get; init; }
+    public bool PackageContentPreserved { get; init; }
+    public IReadOnlyList<GameProjectGeneratedWorldHumanFact> HumanFacts { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
 public sealed record GameProjectSocialSummary
 {
     public bool Present { get; init; }
@@ -181,6 +217,7 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public string ReleaseCandidateRecordConfigurationStatus { get; init; } = "ABSENT";
     public string ReleaseCandidateConfigurationStatus { get; init; } = "ABSENT";
     public string ReleaseCandidateRecordPath { get; init; } = string.Empty;
+    public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
 }
 
 public sealed record GameProjectBuildResult
@@ -249,6 +286,7 @@ public sealed record GameProjectBuildResult
     public GameProjectSocialSummary? Social { get; init; }
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
+    public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
 }
 
 public sealed record GameProjectRuntimeFrame
@@ -288,6 +326,7 @@ public sealed record GameProjectBuildHistoryEntry
     public GameProjectSocialSummary? Social { get; init; }
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
+    public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
 }
 
 public sealed record GameProjectAuthoringState

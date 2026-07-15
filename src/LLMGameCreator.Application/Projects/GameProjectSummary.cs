@@ -1,3 +1,5 @@
+using LLMGameCreator.Application.Generation.Procedural;
+
 namespace LLMGameCreator.Application.Projects;
 
 public sealed class GameProjectSummary
@@ -13,4 +15,12 @@ public sealed class GameProjectSummary
     public string? ErrorMessage { get; set; }
     public int ErrorCount { get; set; }
     public int WarningCount { get; set; }
+    public string CreationKind { get; set; } = GameProjectCreationKinds.Template;
+    public string GenerationSeed { get; set; } = string.Empty;
+    public string GenerationMode { get; set; } = string.Empty;
+    public string GenerationPresetId { get; set; } = string.Empty;
+    public string MechanicsProfileId { get; set; } = string.Empty;
+    public bool GeneratedSourcePresent { get; set; }
+    public string GeneratedSourceStatus { get; set; } = "ABSENT";
+    public GeneratedProjectCounts GeneratedCounts { get; set; } = new();
 }

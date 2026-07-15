@@ -50,6 +50,8 @@ namespace LLMGameCreator.WinForms.Pages
         private Label _overviewMechanicsCountLabel;
         private Label _overviewLastBuildLabel;
         private Label _overviewRuntimeLabel;
+        private Panel _generatedWorldCardPanel;
+        private Label _generatedWorldCardLabel;
         private FlowLayoutPanel _mechanicsFlow;
         private FlowLayoutPanel _settingsFlow;
         private TableLayoutPanel _buildLayout;
@@ -128,6 +130,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewMechanicsCountLabel = new Label();
             this._overviewLastBuildLabel = new Label();
             this._overviewRuntimeLabel = new Label();
+            this._generatedWorldCardPanel = new Panel();
+            this._generatedWorldCardLabel = new Label();
             this._mechanicsFlow = new FlowLayoutPanel();
             this._settingsFlow = new FlowLayoutPanel();
             this._buildLayout = new TableLayoutPanel();
@@ -336,6 +340,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewLayout.Controls.Add(this._overviewMechanicsCountLabel, 0, 4);
             this._overviewLayout.Controls.Add(this._overviewLastBuildLabel, 0, 5);
             this._overviewLayout.Controls.Add(this._overviewRuntimeLabel, 0, 6);
+            this._overviewLayout.Controls.Add(this._generatedWorldCardPanel, 0, 7);
             this._overviewLayout.Dock = DockStyle.Fill;
             this._overviewLayout.Padding = new Padding(18);
             this._overviewLayout.RowCount = 8;
@@ -355,6 +360,19 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewMechanicsCountLabel.Dock = DockStyle.Fill;
             this._overviewLastBuildLabel.Dock = DockStyle.Fill;
             this._overviewRuntimeLabel.Dock = DockStyle.Fill;
+            this._generatedWorldCardPanel.AutoScroll = true;
+            this._generatedWorldCardPanel.BackColor = Color.FromArgb(245, 249, 255);
+            this._generatedWorldCardPanel.BorderStyle = BorderStyle.FixedSingle;
+            this._generatedWorldCardPanel.Controls.Add(this._generatedWorldCardLabel);
+            this._generatedWorldCardPanel.Dock = DockStyle.Fill;
+            this._generatedWorldCardPanel.Margin = new Padding(0, 8, 0, 0);
+            this._generatedWorldCardPanel.Padding = new Padding(12);
+            this._generatedWorldCardPanel.Visible = false;
+            this._generatedWorldCardLabel.AutoSize = false;
+            this._generatedWorldCardLabel.Dock = DockStyle.Fill;
+            this._generatedWorldCardLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+            this._generatedWorldCardLabel.TextAlign = ContentAlignment.TopLeft;
+            this._generatedWorldCardLabel.UseMnemonic = false;
             //
             // dynamic sections
             //

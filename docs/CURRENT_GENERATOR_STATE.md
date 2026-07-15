@@ -1,14 +1,18 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 155A current-package-correlated release candidate record truth hotfix
+Updated by: Goal 156 seeded generated project creation, modern workspace and cached standalone
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
 
+Goal155A independent audit intake is GREEN at `ebaa4aba`: exact package/document/identity/fingerprint correlation produces CURRENT, missing or tampered package evidence is rejected, older valid truth remains LAST_SUCCESS, incomplete truth is UNKNOWN, and portable history-independent truth restores CURRENT. This closes the Goal155 release-candidate milestone without accepting Goal155 or Goal155A and without creating a human gate.
+
+Goal156 connects deterministic seeded generation to ordinary project creation and the modern FeatureModule workspace. `seeded_generated` projects persist a project-local source and sidecars, preserve the immutable Goal142 baseline records, append namespaced generated records, build/repeat/reopen through canonical Runtime/checkpoint/replay, retain typed generated-world and AcceptedMechanics summaries, and reuse the cached standalone host. The baseline start map intentionally remains active; seed regeneration or activation/travel into generated maps is the next product decision.
+
 ```text
-gate_status=goal155_green_acceptable_candidate_pending_independent_audit
-current_user_action=independent_goal155_audit_and_select_next_major_product_vertical_slice
+gate_status=goal156_green_acceptable_candidate_pending_independent_audit
+current_user_action=independent_goal156_audit_and_plan_seed_regeneration_or_generated_world_activation
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -43,7 +47,7 @@ goal155AcceptedByHuman=false
 goal155AcceptedByCodex=false
 goal155ManualReviewRequired=false
 goal155ManualGateReady=false
-goal155IndependentAuditRequired=true
+goal155IndependentAuditRequired=false
 goal155OwnerProfile=22/10
 goal155MaxInteractionProfile=22/14
 goal155MaxInteractionDamage=3/6/9
@@ -60,16 +64,40 @@ goal155RcCurrentPackageCorrelationPassed=true
 goal155RcCurrentDocumentCorrelationPassed=true
 goal155RcIdentityCorrelationPassed=true
 goal155RcTamperRejectionPassed=true
+goal155aIndependentAuditResult=GREEN_ACCEPTABLE_CANDIDATE_AT_EBAA4ABA
+goal155aIndependentAuditPassed=true
+goal155MilestoneRcPassed=true
 goal155aImplementationStatus=GREEN
 goal155aAccepted=false
 goal155aAcceptedByHuman=false
 goal155aAcceptedByCodex=false
 goal155aManualReviewRequired=false
 goal155aManualGateReady=false
-goal155aIndependentAuditRequired=true
+goal155aIndependentAuditRequired=false
 goal155aUnityProcessStartCount=0
 goal155aStandaloneSmokeInvocationCount=0
-nextAction=independent_goal155a_audit_and_select_next_major_product_vertical_slice
+goal156ImplementationStatus=GREEN
+goal156CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal156Accepted=false
+goal156AcceptedByHuman=false
+goal156AcceptedByCodex=false
+goal156ManualReviewRequired=false
+goal156ManualGateReady=false
+goal156IndependentAuditRequired=true
+goal156SeededProjectCreationPassed=true
+goal156LegacyTemplateCompatibilityPassed=true
+goal156GeneratedOverlayPassed=true
+goal156CustomBaseCompositionPassed=true
+goal156AllSelectableGeneratedBuildPassed=true
+goal156CoreOnlyGeneratedBuildPassed=true
+goal156GeneratedSummaryPersistencePassed=true
+goal156HostReused=true
+goal156HostRebuilt=false
+goal156UnityProcessStartCount=0
+goal156HiddenSmokeInvocationCount=1
+goal156PortableCopyPassed=true
+goal156ArtifactScopeViolationCount=0
+nextAction=independent_goal156_audit_and_plan_seed_regeneration_or_generated_world_activation
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

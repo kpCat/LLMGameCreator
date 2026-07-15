@@ -229,3 +229,9 @@ The first combined human attempt at `2c95ee8f689ef104946859432706fd6d4b22deb2` f
 Goal155 is a GREEN acceptable automated candidate, not a new human gate. Exact owner `22/10` and maximal `22/14` profiles, typed accepted-mechanics history, atomic portable RC record, compact WinForms card, correlated actual payload and one cache-only hidden smoke are GREEN. `goal155Accepted=false`, `goal155ManualReviewRequired=false`, and independent audit is required before selecting the next major product slice.
 
 Goal155A closes the independent-audit P1 without creating a human gate. CURRENT now requires current package bytes, document build identity, typed identity and authoring fingerprint correlation; old valid evidence is LAST_SUCCESS, incomplete current truth is UNKNOWN, and missing/tampered package evidence is ABSENT. `goal155Accepted=false` and `goal155aAccepted=false` remain unchanged.
+
+Goal155A independent-audit intake is GREEN at `ebaa4aba`; `goal155MilestoneRcPassed=true`, and neither Goal155 nor Goal155A is accepted or assigned a human gate.
+
+## Goal156 seeded generated project gate record
+
+Goal156 is a GREEN acceptable automated candidate, not a human gate. Real seeded project creation, data-derived all-selectable/core-only profiles, deterministic additive overlay, explicit custom-base composition, build/repeat/reopen, typed generated summary, actual standalone payload correlation and portable RC recovery are GREEN. Exactly one hidden smoke reused the host without rebuild and with zero Unity starts. `goal156Accepted=false`; an independent audit is required before choosing seed regeneration or activation/travel into generated maps.

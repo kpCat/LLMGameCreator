@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "creationKind":  "seeded_generated",
+    "atomicSiblingTransaction":  true,
+    "immediatelyListedAndOpened":  true,
+    "legacyTemplateSemanticCompatibility":  true,
+    "profiles":  [
+                     "all_selectable_defaults",
+                     "core_only"
+                 ],
+    "allSelectableDataDriven":  true,
+    "generatedSourceSidecarCount":  8,
+    "sidecarsUnchangedAfterBuild":  true
+}

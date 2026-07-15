@@ -1,0 +1,10 @@
+{
+    "status":  "GREEN",
+    "sourceScenario":  "goal-155a-current-package-correlated-release-candidate-record-truth-hotfix",
+    "goal155aIndependentAuditPassed":  true,
+    "goal155AuditBlockerClosed":  true,
+    "goal155CandidateStatus":  "GREEN_ACCEPTABLE_CANDIDATE",
+    "goal155MilestoneRcPassed":  true,
+    "accepted":  false,
+    "evidenceSource":  "goal155a-dashboard.json"
+}

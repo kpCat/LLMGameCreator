@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "goal156_architecture_review_v1",
+  "status": "RESOLVED",
+  "existingGenerationAssets": {
+    "decision": "Reuse VisibleGeneratedPlayablePreviewService as the in-process deterministic coordinator for ProceduralGameKernelService, FormulaEffectActionRegistryService, TinyGeneratedRuntimeLoopService and GeneratedPackageMvpService; copy their stable result strings into the project-local generation contract without external execution.",
+    "affectedTypes": [
+      "SeededGeneratedGameProjectCreationService",
+      "SeededGeneratedProjectSourceService"
+    ],
+    "behavioralTests": [
+      "same seed and options preserve plan, rule-pack, tiny-loop and MVP bytes",
+      "every supported mode produces a valid nonempty source"
+    ]
+  },
+  "modernProjectBaselineConstraint": {
+    "decision": "Keep the existing null-base lane resolving the immutable Goal142 balanced baseline; generated projects supply a hash-validated explicit base only from project-confined staging.",
+    "affectedTypes": [
+      "FeatureModuleParameterizedCompositionService",
+      "FeatureModuleCompositionService",
+      "FeatureModuleCompositionBasePackage"
+    ],
+    "behavioralTests": [
+      "null base preserves historical package hashes",
+      "explicit base does not leak into the next default build"
+    ]
+  },
+  "generatedOverlayContract": {
+    "decision": "Merge generated MVP collection records additively by stable id or sourceId; equal canonical definitions deduplicate and differing collisions fail before any project folder is committed.",
+    "affectedTypes": [
+      "GeneratedProjectOverlayService",
+      "GeneratedProjectOverlayDocument"
+    ],
+    "behavioralTests": [
+      "generated records are additive",
+      "equal collisions deduplicate",
+      "differing collisions fail causally"
+    ]
+  },
+  "baselineAnchorPreservation": {
+    "decision": "Before project identity overlay preserve the Goal142 manifest identity and start map plus every baseline collection definition in canonical JSON; retain the generated start map as an additive map and record it in source metadata.",
+    "affectedTypes": [
+      "GeneratedProjectOverlayService",
+      "SeededGeneratedProjectSourceRecord"
+    ],
+    "behavioralTests": [
+      "every baseline definition is canonical-equal after overlay",
+      "baseline start map is unchanged",
+      "generated start map is present"
+    ]
+  },
+  "customBaseCompositionContract": {
+    "decision": "Forward plan, reverse plan, metadata mutations, standard mutations, materialization, qualification and order proof consume the same descriptor path and SHA-256; custom core-only validity does not require Goal142 matrix distinctness.",
+    "affectedTypes": [
+      "FeatureModuleCompositionBasePackage",
+      "FeatureModuleParameterizedCompositionService",
+      "FeatureModuleCompositionService"
+    ],
+    "behavioralTests": [
+      "tampered explicit base hash is rejected",
+      "reverse order uses the explicit base",
+      "custom core-only qualifies"
+    ]
+  },
+  "projectCreationTransaction": {
+    "decision": "Template creation remains on the original direct factory path; seeded creation materializes and validates under a sibling .creating directory and commits with one directory move only after package, identity, authoring and source validation pass.",
+    "affectedTypes": [
+      "GameProjectService",
+      "SeededGeneratedGameProjectCreationService"
+    ],
+    "behavioralTests": [
+      "legacy template bytes and folders remain compatible",
+      "injected failure removes temporary and final folders",
+      "existing target is not mutated"
+    ]
+  },
+  "generationSourceIntegrity": {
+    "decision": "The seeded source record contains identity-free generation inputs, actual UTF-8 sidecar byte hashes, generated counts and tiny-loop facts; missing, malformed, mismatched or unsupported records fail without baseline fallback.",
+    "affectedTypes": [
+      "SeededGeneratedProjectSourceService",
+      "SeededGeneratedProjectSourceRecord"
+    ],
+    "behavioralTests": [
+      "every required sidecar hash validates",
+      "count mismatch fails causally",
+      "source corruption preserves last success"
+    ]
+  },
+  "buildAndReplayFlow": {
+    "decision": "Validate generated source before certification, copy its generated base into build staging, compose modules over that exact base, assert generated canonical records survive composition and identity activation, then run the existing capability-driven Runtime, checkpoint and replay qualification.",
+    "affectedTypes": [
+      "GameProjectBuildAndQualificationService",
+      "GameProjectGeneratedWorldSummaryService"
+    ],
+    "behavioralTests": [
+      "all-selectable generated build and repeat pass",
+      "generated records survive composition and activation",
+      "core-only build passes without false distinctness failure"
+    ]
+  },
+  "standaloneCorrelation": {
+    "decision": "Append generated-world facts from the same typed formatter used by WinForms to the existing standalone request; retain the accepted-mechanics and RC record flow unchanged.",
+    "affectedTypes": [
+      "GameProjectGeneratedWorldSummaryService",
+      "UnifiedGameProjectWorkspaceController"
+    ],
+    "behavioralTests": [
+      "payload generated facts equal the typed summary",
+      "accepted-mechanics and RC facts remain complete",
+      "host reuse starts no Unity process"
+    ]
+  },
+  "failureRollbackMatrix": {
+    "decision": "Creation failures delete the sibling temporary tree; build failures use GameProjectBuildTransaction to restore package, authoring and current-package state while generated sidecars remain read-only and the last GREEN history entry remains available.",
+    "affectedTypes": [
+      "SeededGeneratedGameProjectCreationService",
+      "GameProjectBuildAndQualificationService",
+      "GameProjectBuildHistoryReader"
+    ],
+    "behavioralTests": [
+      "sidecar write failure leaves no project",
+      "source corruption preserves package and GREEN history",
+      "qualification failure preserves authoring"
+    ]
+  },
+  "legacyProjectCompatibility": {
+    "decision": "Requests with no creation kind remain template; projects without seeded-project-source.json continue through the exact Goal142 baseline lane and older history entries deserialize with a null generated summary.",
+    "affectedTypes": [
+      "CreateGameProjectRequest",
+      "GameProjectService",
+      "GameProjectBuildHistoryReader"
+    ],
+    "behavioralTests": [
+      "old request creates the original package",
+      "legacy build uses the historical baseline",
+      "old history remains readable"
+    ]
+  },
+  "nonGoals": {
+    "decision": "No Runtime, Runtime.Abstractions, public GamePackage schema, FeatureModule catalog, Unity, provider, LLM, RAG, Lua execution, media generation or generated-map activation change is required.",
+    "affectedTypes": [],
+    "behavioralTests": [
+      "artifact scope rejects forbidden paths",
+      "Goal142 baseline and goal148-manual remain byte-identical",
+      "Unity process start count remains zero"
+    ]
+  }
+}

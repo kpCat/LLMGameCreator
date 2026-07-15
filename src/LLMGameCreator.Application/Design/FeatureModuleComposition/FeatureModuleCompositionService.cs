@@ -187,6 +187,40 @@ public sealed class FeatureModuleCompositionService
         string outputRootPath,
         string compositionId = "",
         bool useCapabilityDrivenRuntimePlaythrough = false)
+        => ComposeAndQualifyCore(
+            repositoryRootPath,
+            catalog,
+            selectedModuleIds,
+            outputRootPath,
+            compositionId,
+            useCapabilityDrivenRuntimePlaythrough,
+            null);
+
+    public FeatureModuleCompositionQualification ComposeAndQualify(
+        string repositoryRootPath,
+        FeatureModuleCatalogDocument catalog,
+        IReadOnlyList<string> selectedModuleIds,
+        string outputRootPath,
+        string compositionId,
+        bool useCapabilityDrivenRuntimePlaythrough,
+        FeatureModuleCompositionBasePackage? basePackage)
+        => ComposeAndQualifyCore(
+            repositoryRootPath,
+            catalog,
+            selectedModuleIds,
+            outputRootPath,
+            compositionId,
+            useCapabilityDrivenRuntimePlaythrough,
+            basePackage);
+
+    private FeatureModuleCompositionQualification ComposeAndQualifyCore(
+        string repositoryRootPath,
+        FeatureModuleCatalogDocument catalog,
+        IReadOnlyList<string> selectedModuleIds,
+        string outputRootPath,
+        string compositionId,
+        bool useCapabilityDrivenRuntimePlaythrough,
+        FeatureModuleCompositionBasePackage? basePackage)
     {
         var root = ResolveRepositoryRoot(repositoryRootPath);
         ValidateCatalog(catalog);
@@ -199,15 +233,16 @@ public sealed class FeatureModuleCompositionService
         var matrix = ReadJson<ProductLineRuntimeVariantMatrixResult>(Path.Combine(
             goal142Root,
             ProductLineRuntimeVariantMatrixVocabulary.MatrixResultFileName));
-        var baselineRow = matrix.Candidates.Single(row => row.CandidateId == FeatureModuleCompositionVocabulary.BaselineCandidateId);
-        var basePackagePath = Path.GetFullPath(Path.Combine(root, baselineRow.PackagePath.Replace('/', Path.DirectorySeparatorChar)));
-        var baseHash = HashFile(basePackagePath);
-        if (!string.Equals(baseHash, baselineRow.PackageSha256, StringComparison.Ordinal))
-            throw new InvalidOperationException("Goal142 balanced baseline package hash mismatch rejected.");
-        var baseJson = File.ReadAllText(basePackagePath, Encoding.UTF8);
         var outputRoot = Path.GetFullPath(outputRootPath);
         GuardNoManual(root, outputRoot);
         Directory.CreateDirectory(outputRoot);
+        var baselineRow = matrix.Candidates.Single(row => row.CandidateId == FeatureModuleCompositionVocabulary.BaselineCandidateId);
+        var resolvedBase = basePackage is null
+            ? ResolveDefaultBase(root, baselineRow.PackagePath, baselineRow.PackageSha256)
+            : ResolveExplicitBase(root, outputRoot, basePackage);
+        var basePackagePath = resolvedBase.Path;
+        var baseHash = resolvedBase.Sha256;
+        var baseJson = File.ReadAllText(basePackagePath, Encoding.UTF8);
         var goal142Hashes = matrix.Candidates.Select(row => row.PackageSha256).ToHashSet(StringComparer.Ordinal);
 
         var baselineSpec = new FeatureModuleCompositionCoverageSpec
@@ -217,7 +252,8 @@ public sealed class FeatureModuleCompositionService
             CoverageReasons = ["runtime_effect_baseline"]
         };
         var baseline = BuildComposition(root, outputRoot, catalog, basePackagePath, baseHash, baseJson,
-            baselineSpec, goal142Hashes, null, useCapabilityDrivenRuntimePlaythrough);
+            baselineSpec, goal142Hashes, null, useCapabilityDrivenRuntimePlaythrough,
+            basePackage, requireGoal142Distinctness: basePackage is null);
         if (selected.Count == 0) return new FeatureModuleCompositionQualification
         {
             Result = baseline.Result,
@@ -234,7 +270,8 @@ public sealed class FeatureModuleCompositionService
             CoverageReasons = ["operator_selected"]
         };
         var composed = BuildComposition(root, outputRoot, catalog, basePackagePath, baseHash, baseJson,
-            selectedSpec, goal142Hashes, baseline.Artifacts.Session, useCapabilityDrivenRuntimePlaythrough);
+            selectedSpec, goal142Hashes, baseline.Artifacts.Session, useCapabilityDrivenRuntimePlaythrough,
+            basePackage, requireGoal142Distinctness: basePackage is null);
         return new FeatureModuleCompositionQualification
         {
             Result = composed.Result,
@@ -252,7 +289,9 @@ public sealed class FeatureModuleCompositionService
         FeatureModuleCompositionCoverageSpec spec,
         IReadOnlySet<string> goal142Hashes,
         RuntimeInteractiveSession? baselineSession,
-        bool useCapabilityDrivenRuntimePlaythrough = false)
+        bool useCapabilityDrivenRuntimePlaythrough = false,
+        FeatureModuleCompositionBasePackage? basePackage = null,
+        bool requireGoal142Distinctness = true)
     {
         var request = RequestFor(catalog, spec.CompositionId, spec.ModuleIds);
         var plan = _planner.Plan(catalog, request, Relative(root, basePackagePath), baseHash, true);
@@ -270,6 +309,28 @@ public sealed class FeatureModuleCompositionService
             MutationOperations = standardOperations,
             RequiredAnchors = ProductLineRuntimeVariantMatrixVocabulary.RequiredAnchors
         };
+        var sourceContext = basePackage is null
+            ? JsonSerializer.Serialize(new
+            {
+                goalId = FeatureModuleCompositionVocabulary.GoalId,
+                compositionId = spec.CompositionId,
+                baseCandidateId = FeatureModuleCompositionVocabulary.BaselineCandidateId,
+                requiredModuleIds = plan.RequiredModuleIds,
+                selectedOptionalModuleIds = plan.SelectedOptionalModuleIds,
+                orderedModuleIds = plan.OrderedModuleIds,
+                operationIds = plan.OrderedMutationOperations.Select(operation => operation.OperationId).ToList()
+            }, JsonOptions)
+            : JsonSerializer.Serialize(new
+            {
+                goalId = FeatureModuleCompositionVocabulary.GoalId,
+                compositionId = spec.CompositionId,
+                baseCandidateId = basePackage.SourceIdentity,
+                baseSourceKind = basePackage.SourceKind,
+                requiredModuleIds = plan.RequiredModuleIds,
+                selectedOptionalModuleIds = plan.SelectedOptionalModuleIds,
+                orderedModuleIds = plan.OrderedModuleIds,
+                operationIds = plan.OrderedMutationOperations.Select(operation => operation.OperationId).ToList()
+            }, JsonOptions);
         var context = new ProductLineRuntimeVariantMetadataContext
         {
             GoalId = FeatureModuleCompositionVocabulary.GoalId,
@@ -283,22 +344,19 @@ public sealed class FeatureModuleCompositionService
             WorldTopology = "minimal-map-vertical-slice",
             ActorModel = "package-runtime",
             CombatModel = "turn-based-encounter",
-            SourceContext = JsonSerializer.Serialize(new
-            {
-                goalId = FeatureModuleCompositionVocabulary.GoalId,
-                compositionId = spec.CompositionId,
-                baseCandidateId = FeatureModuleCompositionVocabulary.BaselineCandidateId,
-                requiredModuleIds = plan.RequiredModuleIds,
-                selectedOptionalModuleIds = plan.SelectedOptionalModuleIds,
-                orderedModuleIds = plan.OrderedModuleIds,
-                operationIds = plan.OrderedMutationOperations.Select(operation => operation.OperationId).ToList()
-            }, JsonOptions)
+            SourceContext = sourceContext
         };
         var materialized = _materializer.Materialize(metadataMutation.PackageJson, recipe, context);
         var mutationAudit = CombineAudit(materialized.MutationAudit, metadataMutation);
         if (!mutationAudit.Passed)
         {
-            throw new InvalidOperationException("Goal146 mutation target or expected old value validation failed: " + spec.CompositionId);
+            var failures = mutationAudit.Operations.Where(operation => !operation.Passed)
+                .Select(operation => operation.OperationId + "[" + operation.JsonPath + "]:" + operation.Diagnostic
+                                     + ":expected=" + operation.ExpectedValue + ":actual=" + operation.ActualOldValue)
+                .Concat(mutationAudit.Diagnostics)
+                .Distinct(StringComparer.Ordinal);
+            throw new InvalidOperationException("Goal146 mutation target or expected old value validation failed: "
+                                                + spec.CompositionId + ": " + string.Join("; ", failures));
         }
 
         var reverseRequest = request with { SelectedModuleIds = request.SelectedModuleIds.Reverse().ToList() };
@@ -361,7 +419,7 @@ public sealed class FeatureModuleCompositionService
                       && qualification.FinalReplay.ReplayedActionCount == qualification.PlannedActionCount
                      && qualification.ActionDescriptorExecutionBindingPassed
                      && semantic.Passed
-                     && distinctFromGoal142;
+                     && (!requireGoal142Distinctness || distinctFromGoal142);
         var result = new FeatureModuleCompositionResult
         {
             CompositionId = spec.CompositionId,
@@ -767,6 +825,41 @@ public sealed class FeatureModuleCompositionService
     private static T ReadJson<T>(string path) =>
         JsonSerializer.Deserialize<T>(File.ReadAllText(path, Encoding.UTF8), JsonOptions)
         ?? throw new InvalidOperationException("JSON file could not be read: " + path);
+
+    private static (string Path, string Sha256) ResolveDefaultBase(
+        string root,
+        string relativePath,
+        string expectedSha256)
+    {
+        var path = Path.GetFullPath(Path.Combine(root, relativePath.Replace('/', Path.DirectorySeparatorChar)));
+        var sha = HashFile(path);
+        if (!string.Equals(sha, expectedSha256, StringComparison.Ordinal))
+            throw new InvalidOperationException("Goal142 balanced baseline package hash mismatch rejected.");
+        return (path, sha);
+    }
+
+    private static (string Path, string Sha256) ResolveExplicitBase(
+        string root,
+        string outputRoot,
+        FeatureModuleCompositionBasePackage descriptor)
+    {
+        if (string.IsNullOrWhiteSpace(descriptor.PackagePath)
+            || string.IsNullOrWhiteSpace(descriptor.PackageSha256)
+            || string.IsNullOrWhiteSpace(descriptor.SourceKind)
+            || string.IsNullOrWhiteSpace(descriptor.SourceIdentity))
+            throw new InvalidOperationException("explicit composition base descriptor is incomplete");
+        if (descriptor.SourceKind != FeatureModuleCompositionBasePackageSourceKinds.SeededGeneratedBase
+            && descriptor.SourceKind != FeatureModuleCompositionBasePackageSourceKinds.Goal142BalancedBaseline)
+            throw new InvalidOperationException("explicit composition base source kind is unsupported");
+        var path = Path.GetFullPath(descriptor.PackagePath);
+        if (!IsUnder(path, outputRoot) && !IsUnder(path, root))
+            throw new InvalidOperationException("explicit composition base path escape rejected");
+        if (!File.Exists(path)) throw new FileNotFoundException("explicit composition base package was not found", path);
+        var sha = HashFile(path);
+        if (!string.Equals(sha, descriptor.PackageSha256, StringComparison.Ordinal))
+            throw new InvalidOperationException("explicit composition base package hash mismatch rejected");
+        return (path, sha);
+    }
 
     private static JsonSerializerOptions CreateJsonOptions()
     {

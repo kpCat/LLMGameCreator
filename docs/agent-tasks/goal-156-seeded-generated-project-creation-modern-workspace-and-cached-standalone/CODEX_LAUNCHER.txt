@@ -1,0 +1,49 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-156-seeded-generated-project-creation-modern-workspace-and-cached-standalone/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: ebaa4abac2273b185e6da0a3fb15e22fa2be3996
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- Goal155A проходит independent audit; зафиксируй его GREEN intake и закрой RC milestone;
+- это крупный generated-product vertical slice, не validation/docs-only задача;
+- свяжи существующие procedural kernel/registry/tiny loop/generated MVP с обычным созданием проекта;
+- в «Игры → Новая игра» добавь seeded_generated: seed, mode, preset, mechanics profile;
+- legacy template creation остаётся byte/semantic-compatible;
+- seeded project создаётся атомарно и сразу открывается как обычный проект;
+- profile all_selectable_defaults выбирает все текущие selectable optional modules data-driven, без fixed count;
+- profile core_only не выбирает optional modules;
+- создай deterministic project-local generation source + sidecars + generated additive overlay;
+- generated base = immutable Goal142 baseline + additive namespaced generated records;
+- baseline definitions/start map сохраняются канонически; collisions differing definitions fail;
+- никаких public GamePackage schema changes;
+- добавь explicit custom-base support в FeatureModule composition; default baseline lane/hashes не меняются;
+- modern build обязан использовать generated base, не терять generated records и проходить Runtime/checkpoint/replay;
+- generated summary typed, persisted in GREEN history and shown in one concise «Сгенерированный мир» card;
+- same seed/options stable, different seed visibly varied, all supported modes valid;
+- all-selectable generated project build/repeat/reopen GREEN and AcceptedMechanics passed;
+- core-only generated project build GREEN but RC READY не заявляет;
+- exactly one cached hidden standalone smoke on generated all-selectable project;
+- HostReused=true, HostRebuilt=false, Unity starts=0;
+- actual payload contains generated-world + accepted-mechanics facts, RC record CURRENT;
+- portable complete copy restores generated/accepted/RC CURRENT without execution;
+- P0/P1 mandatory-matrix defects fix inside Goal156; P2/P3 only debt;
+- no full suite, 85-case closure, all-ProductSmoke or Unity host build;
+- create/push exactly one final GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи architecture review, tests, creation/profile facts, determinism/variation,
+overlay/baseline/custom-base proof, builds/reopen, generated UI summary, rollback,
+cache/Unity/smoke, actual payload/RC portability, regressions, evidence/artifact scope,
+final SHA, push, HEAD==origin/main и clean worktree.

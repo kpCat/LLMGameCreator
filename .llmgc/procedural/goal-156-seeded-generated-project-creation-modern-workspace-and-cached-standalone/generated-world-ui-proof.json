@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "cardTitle":  "Generated world",
+    "russianCardTitlePassed":  true,
+    "conciseSingleCard":  true,
+    "typedSummaryPersistedInGreenHistory":  true,
+    "sourceReadyBuildCurrentLastSuccessInvalidStates":  true,
+    "hashesHiddenFromOverview":  true,
+    "technicalHashesAvailableInTechnicalTab":  true,
+    "designerLayoutOnly":  true
+}

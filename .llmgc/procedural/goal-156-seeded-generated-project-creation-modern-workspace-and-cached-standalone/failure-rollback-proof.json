@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "unsupportedModeRejected":  true,
+    "unknownProfileRejected":  true,
+    "existingTargetPreserved":  true,
+    "differingIdCollisionRejected":  true,
+    "sidecarTamperRejected":  true,
+    "invalidSourceBlocksBuild":  true,
+    "currentPackagePreservedOnFailure":  true,
+    "failedStandalonePreservesRcRecord":  true,
+    "temporaryDirectoryLeakCount":  0
+}

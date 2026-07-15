@@ -40,7 +40,7 @@ public sealed class GameProjectBuildHistoryReader
                 diagnostics.Add("social.history.unsupported_schema:" + Path.GetFileName(path));
                 continue;
             }
-            if (IsMatchingGreenSocial(historyEntry, document)) candidates.Add((historyEntry, Path.GetFileName(path)));
+            if (IsMatchingGreenSuccess(historyEntry, document)) candidates.Add((historyEntry, Path.GetFileName(path)));
         }
 
         var selected = candidates.OrderByDescending(candidate => candidate.Entry.CompletedAtUtc)
@@ -69,7 +69,8 @@ public sealed class GameProjectBuildHistoryReader
                 AttemptedPlannedActionCount = entry.AttemptedPlannedActionCount, AttemptedCheckpointActionCount = entry.AttemptedCheckpointActionCount,
                 AttemptedFinalReplayActionCount = entry.AttemptedFinalReplayActionCount, Social = entry.Social,
                 QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint,
-                AcceptedMechanics = entry.AcceptedMechanics
+                AcceptedMechanics = entry.AcceptedMechanics,
+                GeneratedWorld = entry.GeneratedWorld
             },
             Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
             CurrentAuthoringFingerprint = fingerprint.Sha256,
@@ -79,10 +80,11 @@ public sealed class GameProjectBuildHistoryReader
         };
     }
 
-    private static bool IsMatchingGreenSocial(GameProjectBuildHistoryEntry entry, FeatureModuleCompositionDocument document) =>
+    private static bool IsMatchingGreenSuccess(GameProjectBuildHistoryEntry entry, FeatureModuleCompositionDocument document) =>
         string.Equals(entry.Status, "GREEN", StringComparison.Ordinal)
         && string.Equals(entry.AttemptStatus, "GREEN", StringComparison.Ordinal)
-        && entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true }
+        && (entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true }
+            || entry.GeneratedWorld is { Present: true, Passed: true, PackageContentPreserved: true })
         && string.Equals(entry.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.FinalStateHash, document.LastQualifiedFinalStateHash, StringComparison.Ordinal)

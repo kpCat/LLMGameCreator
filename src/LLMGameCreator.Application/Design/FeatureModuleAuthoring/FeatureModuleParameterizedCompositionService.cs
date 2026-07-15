@@ -57,6 +57,36 @@ public sealed class FeatureModuleParameterizedCompositionService
         FeatureModuleCompositionDocument document,
         string outputRoot,
         bool useCapabilityDrivenRuntimePlaythrough = false)
+        => MaterializeAndQualifyCore(
+            repositoryRoot,
+            library,
+            document,
+            outputRoot,
+            useCapabilityDrivenRuntimePlaythrough,
+            null);
+
+    public FeatureModuleParameterizedCompositionResult MaterializeAndQualify(
+        string repositoryRoot,
+        FeatureModuleLibrarySnapshot library,
+        FeatureModuleCompositionDocument document,
+        string outputRoot,
+        bool useCapabilityDrivenRuntimePlaythrough,
+        FeatureModuleCompositionBasePackage basePackage)
+        => MaterializeAndQualifyCore(
+            repositoryRoot,
+            library,
+            document,
+            outputRoot,
+            useCapabilityDrivenRuntimePlaythrough,
+            basePackage ?? throw new ArgumentNullException(nameof(basePackage)));
+
+    private FeatureModuleParameterizedCompositionResult MaterializeAndQualifyCore(
+        string repositoryRoot,
+        FeatureModuleLibrarySnapshot library,
+        FeatureModuleCompositionDocument document,
+        string outputRoot,
+        bool useCapabilityDrivenRuntimePlaythrough,
+        FeatureModuleCompositionBasePackage? basePackage)
     {
         var root = Path.GetFullPath(repositoryRoot);
         var validation = _documentValidator.Validate(document, library);
@@ -65,7 +95,10 @@ public sealed class FeatureModuleParameterizedCompositionService
         var stale = _staleness.Evaluate(document, library);
         if (stale.Stale)
             throw new InvalidOperationException("stale or unresolved composition rejected: " + string.Join("; ", stale.Diagnostics));
-        var (basePath, baseSha) = ResolveBaseline(root);
+        var output = Path.GetFullPath(outputRoot);
+        var (basePath, baseSha) = basePackage is null
+            ? ResolveBaseline(root)
+            : ResolveExplicitBase(root, output, basePackage);
         var plan = _planner.Plan(
             library.Catalog,
             document.CompositionId,
@@ -83,7 +116,8 @@ public sealed class FeatureModuleParameterizedCompositionService
                 document.SelectedModuleIds,
                 Path.GetFullPath(outputRoot),
                 document.CompositionId,
-                useCapabilityDrivenRuntimePlaythrough);
+                useCapabilityDrivenRuntimePlaythrough,
+                basePackage);
         }
         catch (InvalidOperationException exception) when (IsQualificationFailure(exception.Message))
         {
@@ -106,7 +140,11 @@ public sealed class FeatureModuleParameterizedCompositionService
         var passed = qualification.Result.Passed
                      && semantic.SatisfiedSelectedModuleCount == document.SelectedModuleIds.Count
                      && plan.ParameterBinding.Passed;
-        var failure = BuildFailureDiagnostics(plan, qualification, document.SelectedModuleIds.Count);
+        var failure = BuildFailureDiagnostics(
+            plan,
+            qualification,
+            document.SelectedModuleIds.Count,
+            requireGoal142Distinctness: basePackage is null);
         if (!passed && failure.Diagnostics.Count == 0)
             failure = ("composition.qualification", ["composition.qualification.failed"]);
         qualification = qualification with
@@ -148,7 +186,8 @@ public sealed class FeatureModuleParameterizedCompositionService
     private static (string Stage, IReadOnlyList<string> Diagnostics) BuildFailureDiagnostics(
         FeatureModuleParameterizedCompositionPlan plan,
         FeatureModuleCompositionQualification qualification,
-        int selectedModuleCount)
+        int selectedModuleCount,
+        bool requireGoal142Distinctness)
     {
         var result = qualification.Result;
         var artifacts = qualification.Artifacts;
@@ -195,7 +234,7 @@ public sealed class FeatureModuleParameterizedCompositionService
         if (artifacts.SemanticEffects.SatisfiedSelectedModuleCount != selectedModuleCount)
             Failed("runtime.selected_module", "runtime.selected_module_unsatisfied",
             ["satisfied=" + artifacts.SemanticEffects.SatisfiedSelectedModuleCount + "; selected=" + selectedModuleCount]);
-        if (!result.PackageDistinctFromGoal142Candidates)
+        if (requireGoal142Distinctness && !result.PackageDistinctFromGoal142Candidates)
             Failed("composition.distinctness", "composition.package_distinctness.failed");
         return (stage, diagnostics.Distinct(StringComparer.Ordinal).ToList());
     }
@@ -234,6 +273,38 @@ public sealed class FeatureModuleParameterizedCompositionService
         if (!string.Equals(sha, row.PackageSha256, StringComparison.Ordinal))
             throw new InvalidOperationException("Goal142 baseline package hash mismatch rejected");
         return (path, sha);
+    }
+
+    private static (string Path, string Sha256) ResolveExplicitBase(
+        string root,
+        string outputRoot,
+        FeatureModuleCompositionBasePackage descriptor)
+    {
+        if (string.IsNullOrWhiteSpace(descriptor.PackagePath)
+            || string.IsNullOrWhiteSpace(descriptor.PackageSha256)
+            || string.IsNullOrWhiteSpace(descriptor.SourceKind)
+            || string.IsNullOrWhiteSpace(descriptor.SourceIdentity))
+            throw new InvalidOperationException("explicit composition base descriptor is incomplete");
+        if (descriptor.SourceKind != FeatureModuleCompositionBasePackageSourceKinds.SeededGeneratedBase
+            && descriptor.SourceKind != FeatureModuleCompositionBasePackageSourceKinds.Goal142BalancedBaseline)
+            throw new InvalidOperationException("explicit composition base source kind is unsupported");
+        var path = Path.GetFullPath(descriptor.PackagePath);
+        if (!IsUnder(path, outputRoot) && !IsUnder(path, root))
+            throw new InvalidOperationException("explicit composition base path escape rejected");
+        if (!File.Exists(path)) throw new FileNotFoundException("explicit composition base package was not found", path);
+        using var stream = File.OpenRead(path);
+        var sha = Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+        if (!string.Equals(sha, descriptor.PackageSha256, StringComparison.Ordinal))
+            throw new InvalidOperationException("explicit composition base package hash mismatch rejected");
+        return (path, sha);
+    }
+
+    private static bool IsUnder(string path, string root)
+    {
+        var full = Path.GetFullPath(path);
+        var parent = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        var comparison = OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+        return full.Equals(parent, comparison) || full.StartsWith(parent + Path.DirectorySeparatorChar, comparison);
     }
 
     private static string Relative(string root, string path) => Path.GetRelativePath(root, path).Replace('\\', '/');

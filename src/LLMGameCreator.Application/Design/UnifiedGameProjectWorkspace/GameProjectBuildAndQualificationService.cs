@@ -9,6 +9,7 @@ using LLMGameCreator.Application.Design.CapabilityDrivenRuntimePlaythrough;
 using LLMGameCreator.Application.Design.FeatureModuleCertification;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Runtime.Abstractions;
@@ -33,6 +34,8 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly IGameProjectSupportFileSource _supportFileSource;
     private readonly GameProjectSupportFileMaterializer _supportFileMaterializer = new();
     private readonly GameProjectPackageIdentityOverlayService _identityOverlay = new();
+    private readonly SeededGeneratedProjectSourceService _generatedSource;
+    private readonly GameProjectGeneratedWorldSummaryService _generatedSummary;
     private int _buildRunning;
 
     public GameProjectBuildAndQualificationService(
@@ -42,7 +45,9 @@ public sealed class GameProjectBuildAndQualificationService
         IGamePackageValidator packageValidator,
         ICurrentGamePackageService currentPackageService,
         IGameProjectPackageActivationStore? activationStore = null,
-        IGameProjectSupportFileSource? supportFileSource = null)
+        IGameProjectSupportFileSource? supportFileSource = null,
+        SeededGeneratedProjectSourceService? generatedSource = null,
+        GameProjectGeneratedWorldSummaryService? generatedSummary = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -52,6 +57,8 @@ public sealed class GameProjectBuildAndQualificationService
         _activationStore = activationStore ?? new AtomicGameProjectPackageActivationStore();
         _supportFileSource = supportFileSource ?? new NarrowAlphaTemplateSupportFileSource(
             Path.Combine(_repositoryRoot, "samples", "minimal-map-game"));
+        _generatedSource = generatedSource ?? new SeededGeneratedProjectSourceService(packageValidator);
+        _generatedSummary = generatedSummary ?? new GameProjectGeneratedWorldSummaryService();
     }
 
     public bool BuildRunning => Volatile.Read(ref _buildRunning) != 0;
@@ -127,6 +134,47 @@ public sealed class GameProjectBuildAndQualificationService
             var certificationExecutionRoot = Path.Combine(stagingRoot, "certification");
             Directory.CreateDirectory(stagingRoot);
 
+            var generatedSource = _generatedSource.Validate(state.ProjectFolder);
+            if (generatedSource.Present && !generatedSource.Passed)
+                return RollbackFailure(
+                    authoring,
+                    preBuildDocument,
+                    preBuildDirty,
+                    transaction,
+                    "Источник сгенерированного проекта повреждён.",
+                    generatedSource.Diagnostics,
+                    "generated_source.validation",
+                    attempt);
+            FeatureModuleCompositionBasePackage? explicitBase = null;
+            if (generatedSource is { Present: true, Passed: true, Source: not null })
+            {
+                var sourceBasePath = GameProjectFeatureModuleAuthoringService.ConfinedPath(
+                    state.ProjectFolder,
+                    SeededGeneratedProjectVocabulary.GenerationRelativeRoot + "/"
+                    + SeededGeneratedProjectVocabulary.GeneratedBasePackageJsonFileName);
+                var stagedBasePath = Path.Combine(materializationRoot, "base", "generated-base-package.json");
+                Directory.CreateDirectory(Path.GetDirectoryName(stagedBasePath)!);
+                File.Copy(sourceBasePath, stagedBasePath, overwrite: false);
+                var stagedBaseSha = HashFile(stagedBasePath);
+                if (!string.Equals(stagedBaseSha, generatedSource.Source.GeneratedBasePackageSha256, StringComparison.Ordinal))
+                    return RollbackFailure(
+                        authoring,
+                        preBuildDocument,
+                        preBuildDirty,
+                        transaction,
+                        "Сгенерированная база проекта не прошла проверку целостности.",
+                        ["generated_source.sidecar_hash_mismatch:" + SeededGeneratedProjectVocabulary.GeneratedBasePackageJsonFileName],
+                        "generated_source.base_hash",
+                        attempt);
+                explicitBase = new FeatureModuleCompositionBasePackage
+                {
+                    PackagePath = stagedBasePath,
+                    PackageSha256 = stagedBaseSha,
+                    SourceKind = FeatureModuleCompositionBasePackageSourceKinds.SeededGeneratedBase,
+                    SourceIdentity = generatedSource.Source.PlanId
+                };
+            }
+
             var certification = new FeatureModuleCertificationService(
                 _runtime,
                 new FeatureModuleCertificationCache(GameProjectFeatureModuleAuthoringService.ConfinedPath(
@@ -156,12 +204,20 @@ public sealed class GameProjectBuildAndQualificationService
             {
                 CompositionId = UnifiedGameProjectWorkspaceVocabulary.LegacyCompositionId
             };
-            var materialized = materializer.MaterializeAndQualify(
-                _repositoryRoot,
-                state.Library,
-                materializationDocument,
-                materializationRoot,
-                useCapabilityDrivenRuntimePlaythrough: true);
+            var materialized = explicitBase is null
+                ? materializer.MaterializeAndQualify(
+                    _repositoryRoot,
+                    state.Library,
+                    materializationDocument,
+                    materializationRoot,
+                    useCapabilityDrivenRuntimePlaythrough: true)
+                : materializer.MaterializeAndQualify(
+                    _repositoryRoot,
+                    state.Library,
+                    materializationDocument,
+                    materializationRoot,
+                    useCapabilityDrivenRuntimePlaythrough: true,
+                    explicitBase);
             var attemptedPlan = materialized.Qualification.Artifacts.Session.CapabilityPlan;
             attempt = attempt with
             {
@@ -204,6 +260,19 @@ public sealed class GameProjectBuildAndQualificationService
             var compositionPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(qualifiedPackagePath)!, cancellationToken)
                 .GetAwaiter().GetResult();
             AssertIdentity(qualifiedPackage, state.Identity);
+            var generatedWorld = generatedSource.Present
+                ? _generatedSummary.BuildCurrent(generatedSource, compositionPackage, qualifiedPackage)
+                : null;
+            if (generatedWorld is { Present: true, Passed: false })
+                return RollbackFailure(
+                    authoring,
+                    preBuildDocument,
+                    preBuildDirty,
+                    transaction,
+                    "Сгенерированные записи не сохранились в собранном пакете.",
+                    generatedWorld.Diagnostics,
+                    "generated_content.preservation",
+                    attempt);
             var effectiveSelectedModules = materialized.Plan.ParameterBinding.EffectiveCatalog.Modules
                 .Where(module => module.Required || savedDocument.SelectedModuleIds.Contains(module.ModuleId, StringComparer.Ordinal))
                 .OrderBy(module => module.ModuleId, StringComparer.Ordinal)
@@ -512,6 +581,8 @@ public sealed class GameProjectBuildAndQualificationService
                     + (projectQualification.CheckpointReplay.Passed && projectQualification.FinalReplay.Passed ? "пройдено" : "не пройдено"));
             }
             summaryLines.AddRange(SocialRuntimeReviewProjectionService.HumanSummaryLines(social));
+            if (generatedWorld is { Present: true, Passed: true })
+                summaryLines.Add("Сгенерированный мир: источник и записи подтверждены");
 
             var buildResult = new GameProjectBuildResult
             {
@@ -585,6 +656,7 @@ public sealed class GameProjectBuildAndQualificationService
                     }).ToList()
                 ,Social = social
                 ,QualifiedAuthoringFingerprint = authoringFingerprint.Sha256
+                ,GeneratedWorld = generatedWorld
             };
             buildResult = buildResult with
             {
@@ -714,6 +786,7 @@ public sealed class GameProjectBuildAndQualificationService
             Social = build.Social is { Present: true, Passed: true } ? build.Social : null,
             QualifiedAuthoringFingerprint = build.QualifiedAuthoringFingerprint,
             AcceptedMechanics = build.AcceptedMechanics
+            ,GeneratedWorld = build.GeneratedWorld
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
         return path;
