@@ -137,7 +137,13 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var executable = ExecutableProvenance();
         var social = _lastSuccessfulBuild?.Social is { Present: true, Passed: true } currentSocial ? currentSocial : null;
         var socialTruth = SocialTruth(state, _lastSuccessfulBuild, social is not null);
-        var releaseCandidate = _releaseCandidateRecordService.Read(state.ProjectFolder, state.Document, state.Library);
+        var releaseCandidate = _releaseCandidateRecordService.Read(new GameProjectReleaseCandidateReadRequest
+        {
+            ProjectFolder = state.ProjectFolder,
+            Document = state.Document,
+            Library = state.Library,
+            Identity = state.Identity
+        });
         var acceptedMechanics = _lastSuccessfulBuild?.AcceptedMechanics
                                 ?? releaseCandidate.Record?.AcceptedMechanicsSummary;
         var currentFingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);

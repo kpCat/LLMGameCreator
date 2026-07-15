@@ -199,7 +199,7 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 
 ## Goal155 accepted-mechanics RC integration
 
-- Goals149–154 accepted-mechanics RC integration has no known P0/P1 from the required matrix. The reproduced all-selected combat observation P1 was fixed in Goal155 by action-scoped evaluation plus a generic same-package combat qualification probe.
+- Goal155 independent audit found P1 `rc_record_not_correlated_with_current_package_and_document` at `7084244a`; Goal155A closes it by rejecting current package mismatch/missing evidence and correlating record, document, identity and authoring fingerprint before CURRENT.
 - Historical 64-test closure remains validation debt and is not reopened.
 - Clean-machine install and final release packaging remain future milestone work.
 - Goal155 creates no human gate; it remains `accepted=false` and requires independent audit.

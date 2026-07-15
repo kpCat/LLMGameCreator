@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 155 accepted-mechanics release candidate integration and operator readiness
+Updated by: Goal 155A current-package-correlated release candidate record truth hotfix
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -33,6 +33,9 @@ goal154FamilyAcceptedImplementationCommit=fc2ac34db60d2627e1cafc86493396937bf63f
 goal154FamilyAcceptanceRecordedByGoal=Goal155
 goal154AllSelectedModuleCount=22
 goal154AllSelectedConfiguredParameterCount=10
+goal155IndependentAuditResult=BLOCKED_AT_7084244a
+goal155IndependentAuditBlocker=rc_record_not_correlated_with_current_package_and_document
+goal155AuditBlocker=closed_by_goal155a
 goal155ImplementationStatus=GREEN
 goal155CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
 goal155Accepted=false
@@ -53,7 +56,20 @@ goal155HostRebuilt=false
 goal155UnityProcessStartCount=0
 goal155HiddenSmokeInvocationCount=1
 goal155ArtifactScopeViolationCount=0
-nextAction=independent_goal155_audit_and_select_next_major_product_vertical_slice
+goal155RcCurrentPackageCorrelationPassed=true
+goal155RcCurrentDocumentCorrelationPassed=true
+goal155RcIdentityCorrelationPassed=true
+goal155RcTamperRejectionPassed=true
+goal155aImplementationStatus=GREEN
+goal155aAccepted=false
+goal155aAcceptedByHuman=false
+goal155aAcceptedByCodex=false
+goal155aManualReviewRequired=false
+goal155aManualGateReady=false
+goal155aIndependentAuditRequired=true
+goal155aUnityProcessStartCount=0
+goal155aStandaloneSmokeInvocationCount=0
+nextAction=independent_goal155a_audit_and_select_next_major_product_vertical_slice
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

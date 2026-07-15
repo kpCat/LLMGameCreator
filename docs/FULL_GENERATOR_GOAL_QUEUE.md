@@ -1,6 +1,6 @@
 # Full Generator Goal Queue
 
-- Goal 155 accepted-mechanics release candidate: GREEN acceptable candidate, `accepted=false`, no human gate. The complete Goal154 family is accepted by the owner at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; historical implementation statuses remain intact. Exact Profile A is `22/10`; maximal Profile B is `22/14` with `3/6/9`, ability 2, mana `12 → 9`, status tick 1/expiry and social `0 → 10` / `0 → 10 → 17`. Next work is independent Goal155 audit and selection of the next major product vertical slice.
+- Goal 155A current-package-correlated RC truth hotfix: GREEN, `accepted=false`, no human gate. It closes Goal155's `BLOCKED_AT_7084244a` P1 by requiring actual current package SHA, document package/composition/final hashes, package ID/title/version and semantic authoring fingerprint before an RC record can be CURRENT. Valid older records remain LAST_SUCCESS; missing current truth is UNKNOWN; package mismatch/missing is ABSENT. Next work is independent Goal155A audit and selection of the next major product vertical slice.
 - Goal 152C exact Unity generated settings cleanup and external workspace closure: exact authorized cleanup is GREEN, future writable Unity host snapshots are external to the repository, and the existing host cache was reused with zero Unity Editor starts. Goals152/152A/152C are accepted by human; Goal152B remains a BLOCKED historical cleanup attempt.
 
 Status: planning control document
@@ -2543,3 +2543,7 @@ Status: GREEN implementation. The exact 22-module/10-parameter owner composition
 ## Goal155 - accepted mechanics release candidate integration and operator readiness
 
 Status: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, `manualReviewRequired=false`. Owner Profile A remains exact `22/10`; maximal Profile B is `22/14` and proves damage `3/6/9`, ability 2, mana `12 → 9`, status tick 1/expiry, reputation `0 → 10`, and gold `0 → 10 → 17`. Typed AcceptedMechanics persists and reopens; the atomic RC record supports CURRENT/LAST_SUCCESS/UNKNOWN/ABSENT and portable copy recovery. One hidden standalone smoke reused the host, rebuilt nothing and started Unity zero times. Next action: independent audit, then select the next major product vertical slice.
+
+## Goal155A - current-package-correlated RC record truth hotfix
+
+Status: `GREEN`, `accepted=false`, `manualReviewRequired=false`. The independent audit found the record reader at `7084244a` did not correlate current package bytes, current document build identity or typed project identity. Goal155A rejects missing/tampered current package evidence, retains valid older records as LAST_SUCCESS, returns UNKNOWN for missing current hashes/fingerprint failure, and preserves portable/history-independent CURRENT records. No standalone smoke or Unity process was run.

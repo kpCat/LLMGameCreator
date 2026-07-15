@@ -227,3 +227,5 @@ The first combined human attempt at `2c95ee8f689ef104946859432706fd6d4b22deb2` f
 ## Goal155 release-candidate gate record
 
 Goal155 is a GREEN acceptable automated candidate, not a new human gate. Exact owner `22/10` and maximal `22/14` profiles, typed accepted-mechanics history, atomic portable RC record, compact WinForms card, correlated actual payload and one cache-only hidden smoke are GREEN. `goal155Accepted=false`, `goal155ManualReviewRequired=false`, and independent audit is required before selecting the next major product slice.
+
+Goal155A closes the independent-audit P1 without creating a human gate. CURRENT now requires current package bytes, document build identity, typed identity and authoring fingerprint correlation; old valid evidence is LAST_SUCCESS, incomplete current truth is UNKNOWN, and missing/tampered package evidence is ABSENT. `goal155Accepted=false` and `goal155aAccepted=false` remain unchanged.

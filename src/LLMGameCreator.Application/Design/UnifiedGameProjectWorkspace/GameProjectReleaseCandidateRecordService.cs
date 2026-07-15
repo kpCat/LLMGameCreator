@@ -41,6 +41,14 @@ public sealed record GameProjectReleaseCandidateReadResult
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
+public sealed record GameProjectReleaseCandidateReadRequest
+{
+    public string ProjectFolder { get; init; } = string.Empty;
+    public FeatureModuleCompositionDocument Document { get; init; } = new();
+    public FeatureModuleLibrarySnapshot Library { get; init; } = new();
+    public GameProjectIdentityDocument Identity { get; init; } = new();
+}
+
 public sealed class GameProjectReleaseCandidateRecordService
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -119,14 +127,17 @@ public sealed class GameProjectReleaseCandidateRecordService
         return record;
     }
 
-    public GameProjectReleaseCandidateReadResult Read(
-        string projectFolder,
-        FeatureModuleCompositionDocument document,
-        FeatureModuleLibrarySnapshot library)
+    public GameProjectReleaseCandidateReadResult Read(GameProjectReleaseCandidateReadRequest request)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(projectFolder);
-        ArgumentNullException.ThrowIfNull(document);
-        ArgumentNullException.ThrowIfNull(library);
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentException.ThrowIfNullOrWhiteSpace(request.ProjectFolder);
+        ArgumentNullException.ThrowIfNull(request.Document);
+        ArgumentNullException.ThrowIfNull(request.Library);
+        ArgumentNullException.ThrowIfNull(request.Identity);
+        var projectFolder = request.ProjectFolder;
+        var document = request.Document;
+        var library = request.Library;
+        var identity = request.Identity;
         var path = RecordPath(projectFolder);
         if (!File.Exists(path)) return new GameProjectReleaseCandidateReadResult { RecordPath = path };
 
@@ -186,19 +197,41 @@ public sealed class GameProjectReleaseCandidateRecordService
             return Rejected(path, "rc.read.payload_invalid_shape");
         }
 
+        var packagePath = Confined(projectFolder, "package.json");
+        if (!File.Exists(packagePath)) return Rejected(path, "rc.read.current_package_missing");
+        string actualPackageSha;
+        try
+        {
+            actualPackageSha = HashFile(packagePath);
+        }
+        catch (IOException)
+        {
+            return Rejected(path, "rc.read.current_package_unreadable");
+        }
+
+        if (string.IsNullOrWhiteSpace(document.LastActivatedProjectPackageSha256)
+            || string.IsNullOrWhiteSpace(document.LastCompositionPackageSha256)
+            || string.IsNullOrWhiteSpace(document.LastQualifiedFinalStateHash))
+            return Result(record, "UNKNOWN", path, ["rc.read.current_build_identity_missing"]);
+        if (!string.Equals(actualPackageSha, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal))
+            return Rejected(path, "rc.read.current_package_hash_mismatch");
+        if (!string.Equals(record.ProjectPackageId, identity.PackageId, StringComparison.Ordinal))
+            return Rejected(path, "rc.read.project_package_id_mismatch");
+        if (!string.Equals(record.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(record.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(record.FinalStateHash, document.LastQualifiedFinalStateHash, StringComparison.Ordinal))
+            return Result(record, "LAST_SUCCESS", path, ["rc.read.record_build_identity_differs_from_current"]);
+        if (!string.Equals(record.ProjectTitle, identity.Title, StringComparison.Ordinal)
+            || !string.Equals(record.ProjectVersion, identity.Version, StringComparison.Ordinal))
+            return Result(record, "LAST_SUCCESS", path, ["rc.read.project_identity_metadata_differs"]);
+
         var fingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(document, library);
         var status = !fingerprint.Passed || string.IsNullOrWhiteSpace(fingerprint.Sha256)
             ? "UNKNOWN"
             : string.Equals(record.QualifiedAuthoringFingerprint, fingerprint.Sha256, StringComparison.Ordinal)
                 ? "CURRENT"
                 : "LAST_SUCCESS";
-        return new GameProjectReleaseCandidateReadResult
-        {
-            Record = record,
-            ConfigurationStatus = status,
-            RecordPath = path,
-            Diagnostics = fingerprint.Diagnostics
-        };
+        return Result(record, status, path, fingerprint.Diagnostics);
     }
 
     private static string? ValidateRecord(GameProjectReleaseCandidateRecord record)
@@ -301,6 +334,18 @@ public sealed class GameProjectReleaseCandidateRecordService
     {
         RecordPath = path,
         Diagnostics = [diagnostic]
+    };
+
+    private static GameProjectReleaseCandidateReadResult Result(
+        GameProjectReleaseCandidateRecord record,
+        string status,
+        string path,
+        IReadOnlyList<string> diagnostics) => new()
+    {
+        Record = record,
+        ConfigurationStatus = status,
+        RecordPath = path,
+        Diagnostics = diagnostics
     };
 
     private static void Require(bool condition, string diagnostic)

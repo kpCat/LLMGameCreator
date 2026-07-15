@@ -20,4 +20,6 @@ Goal155 creates no new human gate. It integrates the already accepted Goals149â€
 - one compact WinForms card without IDs, hashes or paths;
 - exactly one cache-only hidden standalone smoke, host reused, host not rebuilt, zero Unity starts, correlated actual payload.
 
-Next action: independent Goal155 audit and selection of the next major product vertical slice.
+Goal155A closed the independent-audit P1 at `7084244a`: CURRENT now requires current package/document/identity correlation. Goal155 acceptance remains exactly unchanged.
+
+Next action: independent Goal155A audit and selection of the next major product vertical slice.

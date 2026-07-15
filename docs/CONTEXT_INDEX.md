@@ -122,6 +122,7 @@ The 64 historical closure failures are explicit validation debt, not the Goal151
 gate; Goal141 remains `accepted=false`.
 
 Current gate token: `goal155_green_acceptable_candidate_pending_independent_audit`.
+Goal155A closes the independent-audit P1: an RC record is CURRENT only when its current confined `package.json` hash, document build hashes, typed project identity and semantic authoring fingerprint all correlate. Goal155 remains `accepted=false`, has no human gate, and requires the next independent Goal155A audit.
 The complete Goal154 family is accepted by the owner at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; historical FAILED implementation labels remain historical. Goal155 integrates the accepted Goals149–154 mechanics as a release candidate with owner Profile A `22/10`, maximal Profile B `22/14`, typed build-history recovery, a portable atomic RC record, one compact WinForms card and one cache-only hidden standalone smoke. Goal155 itself remains `accepted=false`, creates no human gate and requires independent audit.
 Historical closed token retained for compatibility: `perform_goal152a_five_step_human_gate required`.
 Future work should build on this canonical

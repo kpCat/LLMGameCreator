@@ -34,7 +34,7 @@ public sealed class Goal155ReleaseCandidateRecordTests
         {
             SelectedModuleIds = ["feature.profile.alchemy_focus"]
         };
-        Assert.Equal("LAST_SUCCESS", fixture.Service.Read(fixture.Project, changed, fixture.Library).ConfigurationStatus);
+        Assert.Equal("LAST_SUCCESS", fixture.Read(changed).ConfigurationStatus);
         Assert.Equal("CURRENT", fixture.Read().ConfigurationStatus);
     }
 
@@ -185,6 +185,13 @@ internal sealed class Goal155RcFixture : IDisposable
         var packageSha = HashFile(packagePath);
         var compositionSha = new string('b', 64);
         var finalHash = new string('c', 64);
+        document = document with
+        {
+            LastActivatedProjectPackageSha256 = packageSha,
+            LastCompositionPackageSha256 = compositionSha,
+            LastQualifiedFinalStateHash = finalHash,
+            LastQualificationStatus = "GREEN"
+        };
         var sourceBuild = Goal155AcceptedMechanicsProjectionTests.Complete() with
         {
             QualifiedAuthoringFingerprint = fingerprint.Sha256,
@@ -251,7 +258,29 @@ internal sealed class Goal155RcFixture : IDisposable
     }
 
     public GameProjectReleaseCandidateRecord Write() => Service.Write(Project, Identity, Build, Standalone);
-    public GameProjectReleaseCandidateReadResult Read() => Service.Read(Project, Document, Library);
+    public GameProjectReleaseCandidateReadResult Read(
+        FeatureModuleCompositionDocument? document = null,
+        GameProjectIdentityDocument? identity = null) => Service.Read(new GameProjectReleaseCandidateReadRequest
+    {
+        ProjectFolder = Project,
+        Document = document ?? Document,
+        Library = Library,
+        Identity = identity ?? Identity
+    });
+
+    public void RewriteRecord(Action<JsonObject> change)
+    {
+        var path = Service.RecordPath(Project);
+        var root = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+        change(root);
+        File.WriteAllText(path, root.ToJsonString(), new UTF8Encoding(false));
+    }
+
+    public void RemovePayload()
+    {
+        var builds = Path.Combine(Project, "Builds");
+        if (Directory.Exists(builds)) Directory.Delete(builds, true);
+    }
 
     public void Dispose()
     {

@@ -1,0 +1,38 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-155a-current-package-correlated-release-candidate-record-truth-hotfix/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 7084244a67bd863f128a6bfb67d5fa5031bf0832
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- Goal155 Profile A/B, acceptance ledger, typed summary, RC card и cached standalone сохраняются;
+- independent audit нашёл P1: RC reader не связывает record с текущим package.json и last-qualified hashes;
+- CURRENT разрешён только при совпадении actual package SHA, document package/composition/final hashes,
+  current identity и semantic authoring fingerprint;
+- actual package отсутствует/повреждён относительно document -> record rejected/ABSENT, card не READY;
+- более новый корректный build с другими hashes -> старый record остаётся LAST_SUCCESS;
+- missing current hashes/fingerprint failure -> UNKNOWN, никогда CURRENT;
+- package ID mismatch -> reject; title/version mismatch -> LAST_SUCCESS;
+- portable complete copy и history-independent valid record остаются CURRENT;
+- failed reads не меняют record bytes;
+- WinForms менять не надо: existing card должен получить правдивый controller status;
+- не запускай standalone smoke и Unity;
+- Goal154 acceptance не менять;
+- Goal155 accepted=false, human gate не создавать;
+- минимум 16 Goal155A tests / 14 behavioral;
+- создай и запушь ровно один GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи status matrix, package/document/identity tests, controller result, regressions,
+zero smoke/Unity, evidence/artifact scope, final SHA, push, HEAD==origin/main и clean worktree.
