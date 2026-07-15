@@ -1269,5 +1269,11 @@ Goal156 is `GREEN_ACCEPTABLE_CANDIDATE`: ordinary project creation now supports 
 
 The baseline start map remains active by design. Generated-map activation/travel and post-creation seed regeneration are later product decisions.
 
-`gate_status=goal156_green_acceptable_candidate_pending_independent_audit`
-`current_user_action=independent_goal156_audit_and_plan_seed_regeneration_or_generated_world_activation`
+Goal156 independent audit result at `12ef8a4d`: `BLOCKED`. The source request was not causally correlated with its saved plan, and overlay/base were not reconstructed from the canonical Goal142 baseline. Goal157 closes this blocker without changing the v1 source schema.
+
+## Goal157 generated-world provenance and Runtime start activation
+
+Goal157 is `GREEN_ACCEPTABLE_CANDIDATE`: strict source validation re-resolves seed/mode/preset/style/variants, regenerates plan/rule/tiny/MVP, re-resolves the canonical Goal142 baseline and rebuilds overlay/base. The modern generated build has two typed lanes: Lane A preserves the baseline start and qualifies AcceptedMechanics/Social; Lane B changes only `Manifest.StartMapId`, owns primary hashes/frames and proves generated-map Start → Move Right → Interact, generated-target correlation, deterministic replay and state roundtrip through the existing `IGameRuntime`. Typed history, UI, standalone payload, RC and portable-copy recovery preserve the separation. Legacy projects remain single-lane.
+
+`gate_status=goal157_green_acceptable_candidate_pending_independent_audit`
+`current_user_action=independent_goal157_audit_and_plan_generated_region_travel_or_seed_regeneration`

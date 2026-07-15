@@ -5520,6 +5520,69 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal157-generated-world-activation.ps1",
+        ".devflow/scripts/run-goal157-generated-world-activation.cmd",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectSourceService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectModels.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedProjectBaselineProvider.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedWorldActivationService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectGeneratedWorldSummaryService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectAcceptedMechanicsSummaryService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectReleaseCandidateRecordService.cs",
+        "src/LLMGameCreator.Application/Projects/SeededGeneratedGameProjectCreationService.cs",
+        "src/LLMGameCreator.Application/Projects/GameProjectService.cs",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157SourceProvenanceTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157PlayerPackageActivationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157RuntimeActivationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157CompatibilityBuildTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157WorkspaceUiTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal157/Goal157StandaloneAndPortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156ProjectCreationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156DeterminismAndOverlayTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156GeneratedWorkspaceTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156StandaloneAndPortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/WinForms/UnifiedGameProjectWorkspaceTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal156-seeded-generated-project-creation.md",
+        "docs/manual-acceptance/goal157-generated-world-runtime-start-activation.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal157/",
+        "docs/agent-tasks/goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice/",
+        ".llmgc/procedural/goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice/",
+        ".llmgc/exports/goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

@@ -153,6 +153,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         });
         var acceptedMechanics = _lastSuccessfulBuild?.AcceptedMechanics
                                 ?? releaseCandidate.Record?.AcceptedMechanicsSummary;
+        var acceptedMechanicsCompatibility = _lastSuccessfulBuild?.AcceptedMechanicsCompatibility;
         var currentFingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);
         var acceptedMechanicsCurrent = acceptedMechanics is { Passed: true }
                                        && currentFingerprint.Passed
@@ -170,10 +171,12 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                                       && !string.IsNullOrWhiteSpace(currentFingerprint.Sha256)
                                       && string.Equals(_lastSuccessfulBuild.QualifiedAuthoringFingerprint,
                                           currentFingerprint.Sha256, StringComparison.Ordinal);
+        var generatedWorldActivation = _lastSuccessfulBuild?.GeneratedWorldActivation;
         var generatedWorld = _generatedWorldSummaryService.Restore(
             generatedSource,
             _lastSuccessfulBuild?.GeneratedWorld,
-            generatedMatchesCurrent);
+            generatedMatchesCurrent,
+            generatedWorldActivation);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -255,6 +258,10 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
             ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
             ,GeneratedWorld = generatedWorld
+            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "LAST_SUCCESS"
+                ? generatedWorldActivation
+                : null
+            ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
         };
     }
 
@@ -343,6 +350,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             StatDamageBonus = _lastBuild.StatDamageBonus,
             TotalAdditionalDamage = _lastBuild.TotalAdditionalDamage,
             HumanReviewFacts = _generatedWorldSummaryService.StandaloneHumanFacts(_lastBuild.GeneratedWorld)
+                .Concat(GameProjectGeneratedWorldSummaryService.StandaloneActivationHumanFacts(
+                    _lastBuild.GeneratedWorldActivation))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
                     _lastBuild, releaseCandidateFactsAllowed)).ToList(),
             RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame

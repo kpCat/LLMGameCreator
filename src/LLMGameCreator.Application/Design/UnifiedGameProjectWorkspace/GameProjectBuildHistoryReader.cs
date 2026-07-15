@@ -70,7 +70,9 @@ public sealed class GameProjectBuildHistoryReader
                 AttemptedFinalReplayActionCount = entry.AttemptedFinalReplayActionCount, Social = entry.Social,
                 QualifiedAuthoringFingerprint = entry.QualifiedAuthoringFingerprint,
                 AcceptedMechanics = entry.AcceptedMechanics,
-                GeneratedWorld = entry.GeneratedWorld
+                GeneratedWorld = entry.GeneratedWorld,
+                GeneratedWorldActivation = entry.GeneratedWorldActivation,
+                AcceptedMechanicsCompatibility = entry.AcceptedMechanicsCompatibility
             },
             Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
             CurrentAuthoringFingerprint = fingerprint.Sha256,
@@ -83,8 +85,11 @@ public sealed class GameProjectBuildHistoryReader
     private static bool IsMatchingGreenSuccess(GameProjectBuildHistoryEntry entry, FeatureModuleCompositionDocument document) =>
         string.Equals(entry.Status, "GREEN", StringComparison.Ordinal)
         && string.Equals(entry.AttemptStatus, "GREEN", StringComparison.Ordinal)
-        && (entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true }
-            || entry.GeneratedWorld is { Present: true, Passed: true, PackageContentPreserved: true })
+        && (entry.GeneratedWorld is { Present: true }
+            ? entry.GeneratedWorld is { Passed: true, PackageContentPreserved: true }
+              && entry.GeneratedWorldActivation is
+                  { Present: true, Passed: true, ReplayEquivalent: true, StateRoundtripPassed: true }
+            : entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true })
         && string.Equals(entry.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.FinalStateHash, document.LastQualifiedFinalStateHash, StringComparison.Ordinal)

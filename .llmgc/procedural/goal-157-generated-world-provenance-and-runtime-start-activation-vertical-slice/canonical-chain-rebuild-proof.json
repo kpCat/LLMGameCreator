@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "rulePackRegenerationPassed":  true,
+    "tinyLoopRegenerationPassed":  true,
+    "mvpRegenerationPassed":  true,
+    "canonicalGoal142BaselineReResolved":  true,
+    "overlayRegenerationPassed":  true,
+    "generatedBaseRegenerationPassed":  true,
+    "planSha256":  "08863618ab11eb608921261901cc1bf035715760750bd2a10dd3ec695292f71d",
+    "rulePackSha256":  "43c484068dc28d9c0437b4816330db431c7d86f9aa6737d94571b6587b3f66b9",
+    "tinyLoopStateSha256":  "d50d78f7093074d492acf2339020c43a9a370699e917f34951a3993bd9a5d79d",
+    "generatedMvpPackageSha256":  "2f2fda6311300103b19db742518e378c8068691ee50ccbf7fb3f2761cb106d06",
+    "goal142BaselinePackageSha256":  "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+    "overlaySha256":  "b3aa5af8a2376c0d7eb78db99ab32e2e55c848b11e81f030a485778d45c3df26",
+    "generatedBasePackageSha256":  "1e044875379793bd3a57cf06de710c891c69450e008ebd89503d328d2cd92dfd"
+}

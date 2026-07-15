@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "compatibilityPassed":  true,
+    "acceptedMechanicsPassed":  true,
+    "socialPassed":  true,
+    "qualificationPackageSha256":  "edbaf1f4e26dbe6e6a8602f105a6b79829c8ebc629d38d2acb6aaa803e822ec2",
+    "qualificationFinalStateHash":  "ac288a540a5b673c26ce2df0aad7be1c7a8377dbd29720173868da1b80eb761b",
+    "playerFinalStateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681",
+    "checkpointReloadPassed":  true,
+    "fullReplayEquivalent":  true,
+    "actionBindingPassed":  true
+}

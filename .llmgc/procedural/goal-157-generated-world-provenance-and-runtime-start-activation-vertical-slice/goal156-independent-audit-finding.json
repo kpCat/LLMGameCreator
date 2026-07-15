@@ -1,0 +1,7 @@
+{
+    "status":  "CLOSED_BY_GOAL157",
+    "auditedBase":  "12ef8a4dca81911a2f270bc24477a31a884291b8",
+    "finding":  "source seed mode style variants were not correlated with the saved plan and overlay/base were not rebuilt from the canonical Goal142 baseline",
+    "seedOnlyEditReproducedFailure":  true,
+    "canonicalRebuildImplemented":  true
+}

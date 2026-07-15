@@ -1,0 +1,49 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 12ef8a4dca81911a2f270bc24477a31a884291b8
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- это следующий крупный product vertical slice, а не Goal156A docs/validation hotfix;
+- запиши Goal156 independent-audit P1: source seed/mode/style/variants не коррелируют с сохранённым plan,
+  overlay/base не пересобираются из canonical Goal142 baseline;
+- source validator обязан заново resolve request, regenerate plan/rule/tiny/MVP и rebuild overlay/base;
+- изменение только seed в source JSON обязано стать causal failure;
+- сохрани существующий Goal156 v1 source schema, если новые поля не нужны;
+- build разделяется на typed Lane A accepted-mechanics compatibility и Lane B final player activation;
+- Lane A сохраняет baseline start map и все accepted FeatureModule facts;
+- Lane B использует тот же module-composed package, но final Manifest.StartMapId = generated start map;
+- gameplay collections между lanes должны быть canonical-equivalent;
+- primary package/composition/final hashes и RuntimeFrames относятся к Lane B;
+- AcceptedMechanics/Social несут собственные Lane A qualification hashes/flags;
+- используй существующий IGameRuntime без изменений Runtime проектов;
+- final player package должен реально Start → Move Right → Interact на generated map;
+- generated interaction/target correlation, deterministic replay и state roundtrip обязательны;
+- generated card дополняется игровым стартом/движением/взаимодействием;
+- old Goal156 history без activation evidence не может заявить BUILD_CURRENT;
+- exactly one cached hidden standalone smoke;
+- actual package start map generated, payload final hash/frames/facts относятся к activation lane;
+- accepted mechanics/RC остаются complete/current;
+- portable project восстанавливает source/activation/accepted/RC без execution;
+- legacy projects remain exact single-lane behavior;
+- не запускай full suite, 85-case closure, all-ProductSmoke или Unity host build;
+- P0/P1 mandatory matrix defects fix inside Goal157; P2/P3 debt only;
+- create/push exactly one final GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи provenance reproduction/fix, full chain hashes, lane separation,
+generated Runtime start/move/interact/replay/roundtrip, accepted compatibility,
+build/history/UI, standalone package/payload/RC, portable copy, regressions,
+evidence/artifact scope, final SHA, push, HEAD==origin/main и clean worktree.

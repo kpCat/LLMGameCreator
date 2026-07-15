@@ -67,6 +67,7 @@ public sealed record GameProjectGeneratedWorldSummary
     public string Mode { get; init; } = string.Empty;
     public string PresetId { get; init; } = string.Empty;
     public string MechanicsProfileId { get; init; } = string.Empty;
+    public string SourceRequestSha256 { get; init; } = string.Empty;
     public string PlanSha256 { get; init; } = string.Empty;
     public string OverlaySha256 { get; init; } = string.Empty;
     public string GeneratedBasePackageSha256 { get; init; } = string.Empty;
@@ -84,6 +85,26 @@ public sealed record GameProjectGeneratedWorldSummary
     public bool RewardOrCostObserved { get; init; }
     public bool StateChangeObserved { get; init; }
     public bool PackageContentPreserved { get; init; }
+    public IReadOnlyList<GameProjectGeneratedWorldHumanFact> HumanFacts { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record GameProjectGeneratedWorldActivationSummary
+{
+    public bool Present { get; init; }
+    public bool Passed { get; init; }
+    public string GeneratedStartMapId { get; init; } = string.Empty;
+    public string GeneratedStartMapTitle { get; init; } = string.Empty;
+    public bool StartSucceeded { get; init; }
+    public bool MoveSucceeded { get; init; }
+    public bool InteractSucceeded { get; init; }
+    public bool GeneratedInteractionObserved { get; init; }
+    public string InitialStateHash { get; init; } = string.Empty;
+    public string FinalStateHash { get; init; } = string.Empty;
+    public string ReplayFinalStateHash { get; init; } = string.Empty;
+    public bool ReplayEquivalent { get; init; }
+    public bool StateRoundtripPassed { get; init; }
+    public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
     public IReadOnlyList<GameProjectGeneratedWorldHumanFact> HumanFacts { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
@@ -136,8 +157,28 @@ public sealed record GameProjectAcceptedMechanicsSummary
     public bool CheckpointReloadPassed { get; init; }
     public bool FullReplayEquivalent { get; init; }
     public bool ActionBindingPassed { get; init; }
+    public string QualificationPackageSha256 { get; init; } = string.Empty;
+    public string QualificationFinalStateHash { get; init; } = string.Empty;
+    public bool QualificationCheckpointReloadPassed { get; init; }
+    public bool QualificationFullReplayEquivalent { get; init; }
+    public bool QualificationActionBindingPassed { get; init; }
     public IReadOnlyList<GameProjectSocialHumanFact> HumanFacts { get; init; } = [];
     public IReadOnlyList<string> MissingFactKinds { get; init; } = [];
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record GameProjectAcceptedMechanicsCompatibilityResult
+{
+    public bool Passed { get; init; }
+    public string CompatibilityCompositionPackageSha256 { get; init; } = string.Empty;
+    public string CompatibilityActivatedPackageSha256 { get; init; } = string.Empty;
+    public string CompatibilityFinalStateHash { get; init; } = string.Empty;
+    public bool CheckpointReloadPassed { get; init; }
+    public bool FullReplayEquivalent { get; init; }
+    public bool ActionBindingPassed { get; init; }
+    public IReadOnlyList<GameProjectRuntimeFrame> RuntimeFrames { get; init; } = [];
+    public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
+    public GameProjectSocialSummary? Social { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
@@ -218,6 +259,8 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public string ReleaseCandidateConfigurationStatus { get; init; } = "ABSENT";
     public string ReleaseCandidateRecordPath { get; init; } = string.Empty;
     public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
+    public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
+    public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
 public sealed record GameProjectBuildResult
@@ -287,6 +330,8 @@ public sealed record GameProjectBuildResult
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
     public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
+    public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
+    public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
 public sealed record GameProjectRuntimeFrame
@@ -327,6 +372,8 @@ public sealed record GameProjectBuildHistoryEntry
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public GameProjectAcceptedMechanicsSummary? AcceptedMechanics { get; init; }
     public GameProjectGeneratedWorldSummary? GeneratedWorld { get; init; }
+    public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
+    public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
 public sealed record GameProjectAuthoringState

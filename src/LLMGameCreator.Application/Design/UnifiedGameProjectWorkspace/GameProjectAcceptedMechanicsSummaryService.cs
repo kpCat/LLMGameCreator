@@ -10,6 +10,17 @@ public sealed class GameProjectAcceptedMechanicsSummaryService
     {
         ArgumentNullException.ThrowIfNull(build);
 
+        var compatibility = build.AcceptedMechanicsCompatibility;
+        var checkpointReloadPassed = compatibility?.CheckpointReloadPassed ?? build.CheckpointReloadPassed;
+        var fullReplayEquivalent = compatibility?.FullReplayEquivalent ?? build.FullReplayEquivalent;
+        var actionBindingPassed = compatibility?.ActionBindingPassed ?? build.ActionBindingPassed;
+        var qualificationPackageSha256 = compatibility is null
+            ? build.PackageSha256
+            : string.IsNullOrWhiteSpace(compatibility.CompatibilityActivatedPackageSha256)
+                ? compatibility.CompatibilityCompositionPackageSha256
+                : compatibility.CompatibilityActivatedPackageSha256;
+        var qualificationFinalStateHash = compatibility?.CompatibilityFinalStateHash ?? build.FinalStateHash;
+
         var equipmentPresent = !string.IsNullOrWhiteSpace(build.EquipmentSlotSummary);
         var attributesPresent = !string.IsNullOrWhiteSpace(build.AttributesSummary);
         var progressionPresent = !string.IsNullOrWhiteSpace(build.ProgressionSummary);
@@ -28,9 +39,9 @@ public sealed class GameProjectAcceptedMechanicsSummaryService
         AddMissing(manaPresent, "mana", missing);
         AddMissing(statusPresent, "turn_status", missing);
         AddMissing(socialPresent, "social", missing);
-        AddMissing(build.CheckpointReloadPassed, "checkpoint_reload", missing);
-        AddMissing(build.FullReplayEquivalent, "full_replay", missing);
-        AddMissing(build.ActionBindingPassed, "action_binding", missing);
+        AddMissing(checkpointReloadPassed, "checkpoint_reload", missing);
+        AddMissing(fullReplayEquivalent, "full_replay", missing);
+        AddMissing(actionBindingPassed, "action_binding", missing);
         AddMissing(!string.IsNullOrWhiteSpace(build.QualifiedAuthoringFingerprint),
             "qualified_authoring_fingerprint", missing);
 
@@ -64,7 +75,7 @@ public sealed class GameProjectAcceptedMechanicsSummaryService
             }
         }
         facts.Add(Fact("Сохранение и повтор",
-            build.CheckpointReloadPassed && build.FullReplayEquivalent && build.ActionBindingPassed
+            checkpointReloadPassed && fullReplayEquivalent && actionBindingPassed
                 ? "пройдено" : "не пройдено"));
 
         var diagnostics = missing.Select(kind => "accepted_mechanics.missing:" + kind).ToList();
@@ -86,9 +97,14 @@ public sealed class GameProjectAcceptedMechanicsSummaryService
             StatusTickDamage = build.StatusTickDamage,
             StatusExpired = build.StatusExpired,
             Social = build.Social,
-            CheckpointReloadPassed = build.CheckpointReloadPassed,
-            FullReplayEquivalent = build.FullReplayEquivalent,
-            ActionBindingPassed = build.ActionBindingPassed,
+            CheckpointReloadPassed = checkpointReloadPassed,
+            FullReplayEquivalent = fullReplayEquivalent,
+            ActionBindingPassed = actionBindingPassed,
+            QualificationPackageSha256 = qualificationPackageSha256,
+            QualificationFinalStateHash = qualificationFinalStateHash,
+            QualificationCheckpointReloadPassed = checkpointReloadPassed,
+            QualificationFullReplayEquivalent = fullReplayEquivalent,
+            QualificationActionBindingPassed = actionBindingPassed,
             HumanFacts = facts,
             MissingFactKinds = missing,
             Diagnostics = diagnostics

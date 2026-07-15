@@ -36,6 +36,7 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly GameProjectPackageIdentityOverlayService _identityOverlay = new();
     private readonly SeededGeneratedProjectSourceService _generatedSource;
     private readonly GameProjectGeneratedWorldSummaryService _generatedSummary;
+    private readonly GameProjectGeneratedWorldActivationService? _generatedActivation;
     private int _buildRunning;
 
     public GameProjectBuildAndQualificationService(
@@ -47,7 +48,8 @@ public sealed class GameProjectBuildAndQualificationService
         IGameProjectPackageActivationStore? activationStore = null,
         IGameProjectSupportFileSource? supportFileSource = null,
         SeededGeneratedProjectSourceService? generatedSource = null,
-        GameProjectGeneratedWorldSummaryService? generatedSummary = null)
+        GameProjectGeneratedWorldSummaryService? generatedSummary = null,
+        GameProjectGeneratedWorldActivationService? generatedActivation = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -59,6 +61,7 @@ public sealed class GameProjectBuildAndQualificationService
             Path.Combine(_repositoryRoot, "samples", "minimal-map-game"));
         _generatedSource = generatedSource ?? new SeededGeneratedProjectSourceService(packageValidator);
         _generatedSummary = generatedSummary ?? new GameProjectGeneratedWorldSummaryService();
+        _generatedActivation = generatedActivation;
     }
 
     public bool BuildRunning => Volatile.Read(ref _buildRunning) != 0;
@@ -250,7 +253,7 @@ public sealed class GameProjectBuildAndQualificationService
             if (!string.Equals(qualifiedHash, materialized.PackageSha256, StringComparison.Ordinal))
                 throw new InvalidOperationException("Qualified package hash mismatch rejected.");
 
-            var activatedPackagePath = Path.Combine(stagingRoot, "identity-overlaid", "package.json");
+            var activatedPackagePath = Path.Combine(stagingRoot, "compatibility-identity-overlaid", "package.json");
             var overlay = _identityOverlay.Overlay(qualifiedPackagePath, activatedPackagePath, state.Identity);
             if (!string.Equals(overlay.CompositionPackageSha256, materialized.PackageSha256, StringComparison.Ordinal))
                 throw new InvalidOperationException("Composition package hash changed during identity overlay.");
@@ -260,7 +263,7 @@ public sealed class GameProjectBuildAndQualificationService
             var compositionPackage = _packageRepository.LoadAsync(Path.GetDirectoryName(qualifiedPackagePath)!, cancellationToken)
                 .GetAwaiter().GetResult();
             AssertIdentity(qualifiedPackage, state.Identity);
-            var generatedWorld = generatedSource.Present
+            GameProjectGeneratedWorldSummary? generatedWorld = generatedSource.Present
                 ? _generatedSummary.BuildCurrent(generatedSource, compositionPackage, qualifiedPackage)
                 : null;
             if (generatedWorld is { Present: true, Passed: false })
@@ -378,8 +381,125 @@ public sealed class GameProjectBuildAndQualificationService
                     "social.projection",
                     attempt);
 
+            var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
+                                 ?? throw new InvalidOperationException("Capability-driven Runtime plan is missing.");
+            var compatibilityFrames = projectQualification.Session.ActionJournal
+                .OrderBy(entry => entry.ActionIndex)
+                .ThenBy(entry => entry.ActionRequestId, StringComparer.Ordinal)
+                .Select(entry => new GameProjectRuntimeFrame
+                {
+                    Index = entry.ActionIndex,
+                    ActionId = entry.ActionId,
+                    Title = string.IsNullOrWhiteSpace(entry.CanonicalStepId) ? entry.ActionId : entry.CanonicalStepId,
+                    Category = entry.Category,
+                    StateHash = entry.StateHashAfter
+                }).ToList();
+            var compatibility = new GameProjectAcceptedMechanicsCompatibilityResult
+            {
+                Passed = projectQualification.CheckpointReplay.Passed
+                         && projectQualification.FinalReplay.Passed
+                         && projectQualification.ActionDescriptorExecutionBindingPassed,
+                CompatibilityCompositionPackageSha256 = materialized.PackageSha256,
+                CompatibilityActivatedPackageSha256 = overlay.ActivatedProjectPackageSha256,
+                CompatibilityFinalStateHash = projectQualification.Session.CurrentStateHash,
+                CheckpointReloadPassed = projectQualification.CheckpointReplay.Passed,
+                FullReplayEquivalent = projectQualification.FinalReplay.Passed
+                                       && projectQualification.FinalReplay.ActualStateHash
+                                       == projectQualification.Session.CurrentStateHash,
+                ActionBindingPassed = projectQualification.ActionDescriptorExecutionBindingPassed,
+                RuntimeFrames = compatibilityFrames,
+                Social = social,
+                Diagnostics = []
+            };
+
+            var finalCompositionPackage = compositionPackage;
+            var finalPackage = qualifiedPackage;
+            var finalActivatedPath = activatedPackagePath;
+            var primaryCompositionSha256 = overlay.CompositionPackageSha256;
+            var primaryPackageSha256 = overlay.ActivatedProjectPackageSha256;
+            var primaryFinalStateHash = projectQualification.Session.CurrentStateHash;
+            var primaryCheckpointReloadPassed = projectQualification.CheckpointReplay.Passed;
+            var primaryFullReplayEquivalent = projectQualification.FinalReplay.Passed
+                                              && projectQualification.FinalReplay.ActualStateHash
+                                              == projectQualification.Session.CurrentStateHash;
+            var primaryActionBindingPassed = projectQualification.ActionDescriptorExecutionBindingPassed;
+            IReadOnlyList<GameProjectRuntimeFrame> primaryRuntimeFrames = compatibilityFrames;
+            var primaryRuntimePlanId = capabilityPlan.PlanId;
+            var primaryCapabilityCount = capabilityPlan.CapabilityIds.Count;
+            var primaryPlannedActionCount = capabilityPlan.OrderedActions.Count;
+            var primaryCheckpointActionCount = projectQualification.CheckpointActionCount;
+            var primaryFinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount;
+            var primaryPlaythroughSignature = capabilityPlan.ActionPlanSignature;
+            GameProjectGeneratedWorldActivationSummary? generatedWorldActivation = null;
+            if (generatedSource.Present)
+            {
+                if (_generatedActivation is null)
+                    return RollbackFailure(
+                        authoring,
+                        preBuildDocument,
+                        preBuildDirty,
+                        transaction,
+                        "Runtime-активация сгенерированного мира недоступна.",
+                        ["generated_activation.runtime_unavailable"],
+                        "generated_activation.runtime",
+                        attempt);
+                var activation = _generatedActivation.Activate(new GameProjectGeneratedWorldActivationRequest
+                {
+                    CompatibilityPackagePath = qualifiedPackagePath,
+                    CompatibilityPackage = compositionPackage,
+                    GeneratedSource = generatedSource,
+                    ProjectIdentity = state.Identity,
+                    OutputRoot = Path.Combine(stagingRoot, "generated-world-activation")
+                });
+                if (!activation.Passed)
+                    return RollbackFailure(
+                        authoring,
+                        preBuildDocument,
+                        preBuildDirty,
+                        transaction,
+                        "Сгенерированный мир не прошёл игровой старт, движение и взаимодействие.",
+                        activation.Diagnostics,
+                        "generated_activation.runtime",
+                        attempt);
+                finalCompositionPackage = activation.PlayerCompositionPackage;
+                finalPackage = activation.ActivatedProjectPackage;
+                finalActivatedPath = activation.ActivatedProjectPackagePath;
+                primaryCompositionSha256 = activation.PlayerCompositionPackageSha256;
+                primaryPackageSha256 = activation.ActivatedProjectPackageSha256;
+                primaryFinalStateHash = activation.Summary.FinalStateHash;
+                primaryCheckpointReloadPassed = activation.Summary.StateRoundtripPassed;
+                primaryFullReplayEquivalent = activation.Summary.ReplayEquivalent;
+                primaryActionBindingPassed = activation.Summary.StartSucceeded
+                                             && activation.Summary.MoveSucceeded
+                                             && activation.Summary.InteractSucceeded
+                                             && activation.Summary.GeneratedInteractionObserved;
+                primaryRuntimeFrames = activation.Summary.RuntimeFrames;
+                primaryRuntimePlanId = "generated-world-activation-v1";
+                primaryCapabilityCount = 3;
+                primaryPlannedActionCount = 3;
+                primaryCheckpointActionCount = 3;
+                primaryFinalReplayActionCount = 3;
+                primaryPlaythroughSignature = "start>move_right>interact";
+                generatedWorldActivation = activation.Summary;
+                generatedWorld = _generatedSummary.BuildCurrent(
+                    generatedSource,
+                    finalCompositionPackage,
+                    finalPackage,
+                    generatedWorldActivation);
+                if (generatedWorld is { Present: true, Passed: false })
+                    return RollbackFailure(
+                        authoring,
+                        preBuildDocument,
+                        preBuildDirty,
+                        transaction,
+                        "Сгенерированные записи не сохранились в активированном пакете.",
+                        generatedWorld.Diagnostics,
+                        "generated_content.activation_preservation",
+                        attempt);
+            }
+
             supportFilePlan = _supportFileMaterializer.CreatePlan(
-                qualifiedPackage,
+                finalPackage,
                 state.ProjectFolder,
                 _supportFileSource);
             if (!supportFilePlan.IsValid)
@@ -395,7 +515,7 @@ public sealed class GameProjectBuildAndQualificationService
                     supportFilePlan);
 
             var validationProjectRoot = _supportFileMaterializer.StageValidationProject(
-                activatedPackagePath,
+                finalActivatedPath,
                 supportFilePlan,
                 Path.Combine(stagingRoot, "validation-project"));
             var stagedPackage = _packageRepository.LoadAsync(validationProjectRoot, cancellationToken)
@@ -414,10 +534,10 @@ public sealed class GameProjectBuildAndQualificationService
                     supportFilePlan);
 
             var supportActivation = transaction.ActivateSupportFiles(supportFilePlan, cancellationToken);
-            transaction.ActivatePackageAsync(activatedPackagePath, cancellationToken)
+            transaction.ActivatePackageAsync(finalActivatedPath, cancellationToken)
                 .GetAwaiter().GetResult();
 
-            var realProjectValidation = _packageValidator.Validate(qualifiedPackage, state.ProjectFolder);
+            var realProjectValidation = _packageValidator.Validate(finalPackage, state.ProjectFolder);
             if (!realProjectValidation.IsValid)
                 return RollbackFailure(
                     authoring,
@@ -430,20 +550,18 @@ public sealed class GameProjectBuildAndQualificationService
                     attempt,
                     supportFilePlan);
 
-            transaction.ReplaceCurrentPackage(qualifiedPackage);
+            transaction.ReplaceCurrentPackage(finalPackage);
 
             authoring.ApplyQualifiedDocument(savedDocument with
             {
-                LastMaterializedPackageSha256 = overlay.CompositionPackageSha256,
-                LastCompositionPackageSha256 = overlay.CompositionPackageSha256,
-                LastActivatedProjectPackageSha256 = overlay.ActivatedProjectPackageSha256,
-                LastQualifiedFinalStateHash = projectQualification.Session.CurrentStateHash,
+                LastMaterializedPackageSha256 = primaryCompositionSha256,
+                LastCompositionPackageSha256 = primaryCompositionSha256,
+                LastActivatedProjectPackageSha256 = primaryPackageSha256,
+                LastQualifiedFinalStateHash = primaryFinalStateHash,
                 LastQualificationStatus = "GREEN"
             });
             var qualifiedDocument = authoring.Save();
 
-            var capabilityPlan = projectQualification.StartRequest.CapabilityPlan
-                                 ?? throw new InvalidOperationException("Capability-driven Runtime plan is missing.");
             var equipmentAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
                 action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.EquipItem);
             var equipmentSummary = projectQualification.Session.LatestEquipmentSummary;
@@ -583,6 +701,8 @@ public sealed class GameProjectBuildAndQualificationService
             summaryLines.AddRange(SocialRuntimeReviewProjectionService.HumanSummaryLines(social));
             if (generatedWorld is { Present: true, Passed: true })
                 summaryLines.Add("Сгенерированный мир: источник и записи подтверждены");
+            if (generatedWorldActivation is { Present: true, Passed: true })
+                summaryLines.AddRange(generatedWorldActivation.HumanFacts.Select(fact => fact.Label + ": " + fact.Value));
 
             var buildResult = new GameProjectBuildResult
             {
@@ -591,14 +711,13 @@ public sealed class GameProjectBuildAndQualificationService
                 HumanSummary = string.Join(Environment.NewLine, summaryLines),
                 SelectedMechanicCount = state.Library.Manifest.RequiredCoreModuleCount + savedDocument.SelectedModuleIds.Count,
                 ConfiguredParameterCount = qualifiedDocument.ParameterValues.Count,
-                PackageSha256 = overlay.ActivatedProjectPackageSha256,
-                CompositionPackageSha256 = overlay.CompositionPackageSha256,
-                ActivatedProjectPackageSha256 = overlay.ActivatedProjectPackageSha256,
-                FinalStateHash = projectQualification.Session.CurrentStateHash,
-                CheckpointReloadPassed = projectQualification.CheckpointReplay.Passed,
-                FullReplayEquivalent = projectQualification.FinalReplay.Passed
-                                       && projectQualification.FinalReplay.ActualStateHash == projectQualification.Session.CurrentStateHash,
-                ActionBindingPassed = projectQualification.ActionDescriptorExecutionBindingPassed,
+                PackageSha256 = primaryPackageSha256,
+                CompositionPackageSha256 = primaryCompositionSha256,
+                ActivatedProjectPackageSha256 = primaryPackageSha256,
+                FinalStateHash = primaryFinalStateHash,
+                CheckpointReloadPassed = primaryCheckpointReloadPassed,
+                FullReplayEquivalent = primaryFullReplayEquivalent,
+                ActionBindingPassed = primaryActionBindingPassed,
                 PackageActivated = true,
                 PackageActivationTransactional = true,
                 CertificationExecutedCount = ledger.ExecutedCount,
@@ -610,12 +729,12 @@ public sealed class GameProjectBuildAndQualificationService
                 SupportFileDiagnostics = supportFilePlan.Diagnostics,
                 StagedProjectValidationPassed = true,
                 RealProjectValidationPassed = true,
-                RuntimePlaythroughPlanId = capabilityPlan.PlanId,
-                CapabilityCount = capabilityPlan.CapabilityIds.Count,
-                PlannedActionCount = capabilityPlan.OrderedActions.Count,
-                CheckpointActionCount = projectQualification.CheckpointActionCount,
-                FinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount,
-                PlaythroughSignature = capabilityPlan.ActionPlanSignature,
+                RuntimePlaythroughPlanId = primaryRuntimePlanId,
+                CapabilityCount = primaryCapabilityCount,
+                PlannedActionCount = primaryPlannedActionCount,
+                CheckpointActionCount = primaryCheckpointActionCount,
+                FinalReplayActionCount = primaryFinalReplayActionCount,
+                PlaythroughSignature = primaryPlaythroughSignature,
                 EquipmentSlotSummary = equipmentSummary,
                 WeaponDamageBonus = weaponDamageBonus,
                 CombatDamageDelta = combatDamageDelta,
@@ -637,30 +756,24 @@ public sealed class GameProjectBuildAndQualificationService
                 AttemptStatus = "GREEN",
                 AttemptedSelectedModuleIds = attempt.AttemptedSelectedModuleIds,
                 AttemptedConfiguredParameterCount = attempt.AttemptedConfiguredParameterCount,
-                AttemptedCapabilityCount = capabilityPlan.CapabilityIds.Count,
-                AttemptedPlannedActionCount = capabilityPlan.OrderedActions.Count,
-                AttemptedCheckpointActionCount = projectQualification.CheckpointActionCount,
-                AttemptedFinalReplayActionCount = projectQualification.FinalReplay.ReplayedActionCount,
-                AttemptedCompositionPackageSha256 = overlay.CompositionPackageSha256,
-                AttemptedFinalStateHash = projectQualification.Session.CurrentStateHash,
-                RuntimeFrames = projectQualification.Session.ActionJournal
-                    .OrderBy(entry => entry.ActionIndex)
-                    .ThenBy(entry => entry.ActionRequestId, StringComparer.Ordinal)
-                    .Select(entry => new GameProjectRuntimeFrame
-                    {
-                        Index = entry.ActionIndex,
-                        ActionId = entry.ActionId,
-                        Title = string.IsNullOrWhiteSpace(entry.CanonicalStepId) ? entry.ActionId : entry.CanonicalStepId,
-                        Category = entry.Category,
-                        StateHash = entry.StateHashAfter
-                    }).ToList()
+                AttemptedCapabilityCount = primaryCapabilityCount,
+                AttemptedPlannedActionCount = primaryPlannedActionCount,
+                AttemptedCheckpointActionCount = primaryCheckpointActionCount,
+                AttemptedFinalReplayActionCount = primaryFinalReplayActionCount,
+                AttemptedCompositionPackageSha256 = primaryCompositionSha256,
+                AttemptedFinalStateHash = primaryFinalStateHash,
+                RuntimeFrames = primaryRuntimeFrames
                 ,Social = social
                 ,QualifiedAuthoringFingerprint = authoringFingerprint.Sha256
                 ,GeneratedWorld = generatedWorld
+                ,GeneratedWorldActivation = generatedWorldActivation
+                ,AcceptedMechanicsCompatibility = compatibility
             };
+            var acceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult);
             buildResult = buildResult with
             {
-                AcceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult)
+                AcceptedMechanics = acceptedMechanics,
+                AcceptedMechanicsCompatibility = compatibility with { AcceptedMechanics = acceptedMechanics }
             };
             var historyPath = WriteHistory(state.ProjectFolder, buildResult, ledger);
             transaction.Commit();
@@ -787,6 +900,8 @@ public sealed class GameProjectBuildAndQualificationService
             QualifiedAuthoringFingerprint = build.QualifiedAuthoringFingerprint,
             AcceptedMechanics = build.AcceptedMechanics
             ,GeneratedWorld = build.GeneratedWorld
+            ,GeneratedWorldActivation = build.GeneratedWorldActivation
+            ,AcceptedMechanicsCompatibility = build.AcceptedMechanicsCompatibility
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));
         return path;

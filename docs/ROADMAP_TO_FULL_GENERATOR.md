@@ -303,8 +303,10 @@ The project succeeds if each stage increases either:
 - export/runtime reality;
 - user control over generated games.
 
-## Current Goal156 bridge
+## Current Goal157 bridge
 
-Goal156 completes the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. A seeded project can be created, opened, configured, built, replayed, reopened and packaged with the cached standalone host while preserving generated records and typed operator summaries.
+Goal156 completed the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. Its independent audit then identified missing causal source provenance and canonical overlay/base reconstruction.
 
-The next roadmap decision follows an independent Goal156 audit: either add bounded seed regeneration with preview/validate/apply rollback, or activate/travel into generated maps while retaining the baseline anchor contract. Neither is implied complete by Goal156.
+Goal157 closes that provenance blocker and activates the generated start map in the final player lane while retaining a baseline-start accepted-mechanics compatibility lane. Start, move right, generated-target interaction, replay, state roundtrip, standalone payload, RC and portable recovery are now verified through existing seams.
+
+The next roadmap decision follows an independent Goal157 audit: either add bounded generated-region travel or transactional seed regeneration with preview/validate/apply rollback. Neither is implied complete by Goal157.

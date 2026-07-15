@@ -37,7 +37,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
     public GameProjectGeneratedWorldSummary BuildCurrent(
         SeededGeneratedProjectSourceValidationResult validation,
         GamePackageDefinition compositionPackage,
-        GamePackageDefinition activatedPackage)
+        GamePackageDefinition activatedPackage,
+        GameProjectGeneratedWorldActivationSummary? activation = null)
     {
         ArgumentNullException.ThrowIfNull(validation);
         ArgumentNullException.ThrowIfNull(compositionPackage);
@@ -47,18 +48,25 @@ public sealed class GameProjectGeneratedWorldSummaryService
         var diagnostics = _overlayService.ValidatePackageRecords(compositionPackage, validation.Overlay, includeBaseline: false)
             .Concat(_overlayService.ValidatePackageRecords(activatedPackage, validation.Overlay, includeBaseline: false))
             .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
-        return Build(validation, diagnostics.Count == 0 ? "BUILD_CURRENT" : "INVALID",
+        var status = diagnostics.Count > 0
+            ? "INVALID"
+            : activation is { Present: true, Passed: true }
+                ? "BUILD_CURRENT"
+                : "SOURCE_READY";
+        return Build(validation, status,
             packageContentPreserved: diagnostics.Count == 0, diagnostics);
     }
 
     public GameProjectGeneratedWorldSummary? Restore(
         SeededGeneratedProjectSourceValidationResult validation,
         GameProjectGeneratedWorldSummary? lastSuccessful,
-        bool matchesCurrentAuthoring)
+        bool matchesCurrentAuthoring,
+        GameProjectGeneratedWorldActivationSummary? activation = null)
     {
         var source = ProjectSource(validation);
         if (source is null || !source.Passed || lastSuccessful is not { Present: true, Passed: true }) return source;
-        var sourceMatches = string.Equals(source.PlanSha256, lastSuccessful.PlanSha256, StringComparison.Ordinal)
+        var sourceMatches = string.Equals(source.SourceRequestSha256, lastSuccessful.SourceRequestSha256, StringComparison.Ordinal)
+                            && string.Equals(source.PlanSha256, lastSuccessful.PlanSha256, StringComparison.Ordinal)
                             && string.Equals(source.OverlaySha256, lastSuccessful.OverlaySha256, StringComparison.Ordinal)
                             && string.Equals(source.GeneratedBasePackageSha256, lastSuccessful.GeneratedBasePackageSha256, StringComparison.Ordinal);
         if (!sourceMatches) return source with
@@ -67,6 +75,7 @@ public sealed class GameProjectGeneratedWorldSummaryService
             Status = "INVALID",
             Diagnostics = ["generated_summary.history_source_mismatch"]
         };
+        if (activation is not { Present: true, Passed: true }) return source;
         var status = matchesCurrentAuthoring ? "BUILD_CURRENT" : "LAST_SUCCESS";
         return lastSuccessful with
         {
@@ -85,7 +94,18 @@ public sealed class GameProjectGeneratedWorldSummaryService
         }).ToList()
         : [];
 
-    public static string FormatCard(GameProjectGeneratedWorldSummary summary)
+    public static IReadOnlyList<StandaloneHumanReviewFact> StandaloneActivationHumanFacts(
+        GameProjectGeneratedWorldActivationSummary? summary) => summary is { Present: true, Passed: true }
+        ? summary.HumanFacts.Select(fact => new StandaloneHumanReviewFact
+        {
+            Label = fact.Label,
+            Value = fact.Value
+        }).ToList()
+        : [];
+
+    public static string FormatCard(
+        GameProjectGeneratedWorldSummary summary,
+        GameProjectGeneratedWorldActivationSummary? activation = null)
     {
         ArgumentNullException.ThrowIfNull(summary);
         var status = summary.Status switch
@@ -95,7 +115,9 @@ public sealed class GameProjectGeneratedWorldSummaryService
             "LAST_SUCCESS" => "Показана последняя успешная сборка",
             _ => "Источник генерации повреждён или не подтверждён"
         };
-        var rows = summary.HumanFacts.Select(fact => fact.Label + "    " + fact.Value)
+        var rows = summary.HumanFacts
+            .Concat(activation is { Present: true, Passed: true } ? activation.HumanFacts : [])
+            .Select(fact => fact.Label + "    " + fact.Value)
             .Append("Статус сборки    " + status);
         return "Сгенерированный мир" + Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, rows);
     }
@@ -118,6 +140,14 @@ public sealed class GameProjectGeneratedWorldSummaryService
             Mode = source.Mode,
             PresetId = source.PresetId,
             MechanicsProfileId = source.MechanicsProfileId,
+            SourceRequestSha256 = SeededGeneratedProjectSourceService.HashText(string.Join("\n", new[]
+            {
+                source.Seed,
+                source.Mode,
+                source.PresetId,
+                string.Join("|", source.StyleHintIds.OrderBy(value => value, StringComparer.Ordinal)),
+                string.Join("|", source.VariantIds.OrderBy(value => value, StringComparer.Ordinal))
+            })),
             PlanSha256 = source.PlanSha256,
             OverlaySha256 = source.GeneratedOverlaySha256,
             GeneratedBasePackageSha256 = source.GeneratedBasePackageSha256,

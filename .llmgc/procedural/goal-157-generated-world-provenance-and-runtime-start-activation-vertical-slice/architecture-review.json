@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "goal157_architecture_review_v1",
+  "reviewedAtUtc": "2026-07-15T00:00:00Z",
+  "goal156AuditFinding": {
+    "finding": "BLOCKED_AT_12EF8A4D",
+    "blocker": "generated_source_request_not_correlated_with_deterministic_plan_and_overlay_chain",
+    "concreteTypes": [
+      "SeededGeneratedProjectSourceService",
+      "SeededGeneratedProjectSourceRecord",
+      "GeneratedProjectOverlayService"
+    ],
+    "inputs": ["seeded-project-source.json", "unchanged Goal156 sidecars"],
+    "outputs": ["causal request or chain mismatch diagnostic", "no project mutation"],
+    "behavioralTests": ["source_seed_only_edit_fails", "self_consistent_overlay_base_forgery_fails"]
+  },
+  "deterministicRequestRegeneration": {
+    "concreteTypes": [
+      "GenerationPresetOptionsRequest",
+      "GenerationPresetOptionsService",
+      "ProceduralGameKernelService"
+    ],
+    "inputs": ["Seed", "Mode", "PresetId", "StyleHintIds", "VariantIds"],
+    "outputs": ["resolved options", "regenerated generated-game-plan.json", "regenerated generated-game-plan.md"],
+    "behavioralTests": ["exact_v1_source_reproduces", "seed_mismatch", "mode_mismatch", "style_mismatch", "variant_mismatch", "plan_byte_mismatch"]
+  },
+  "canonicalBaselineProvider": {
+    "concreteTypes": ["IGeneratedProjectBaselineProvider", "Goal142GeneratedProjectBaselineProvider"],
+    "inputs": ["repository root", "Goal142 matrix candidate minimal-map-game-balanced-baseline"],
+    "outputs": ["confined package path", "actual package bytes", "verified SHA-256", "candidate and matrix identity"],
+    "behavioralTests": ["canonical_baseline_hash_matches", "source_baseline_hash_mismatch_fails", "portable_project_uses_repository_baseline"]
+  },
+  "fullArtifactChainComparison": {
+    "concreteTypes": [
+      "FormulaEffectActionRegistryService",
+      "TinyGeneratedRuntimeLoopService",
+      "GeneratedPackageMvpService",
+      "GeneratedProjectOverlayService"
+    ],
+    "inputs": ["regenerated plan", "canonical Goal142 package bytes and hash"],
+    "outputs": ["byte-identical rule pack", "byte-identical tiny state/report", "byte-identical namespaced MVP", "byte-identical overlay/base"],
+    "behavioralTests": ["rule_pack_tamper_fails", "tiny_loop_tamper_fails", "mvp_tamper_fails", "overlay_rebuild_mismatch_fails", "base_rebuild_mismatch_fails"]
+  },
+  "compatibilityLane": {
+    "concreteTypes": [
+      "FeatureModuleParameterizedCompositionService",
+      "ProductLineRuntimeQualifier",
+      "GameProjectAcceptedMechanicsCompatibilityResult"
+    ],
+    "inputs": ["strictly validated generated base", "saved FeatureModule document", "effective catalog"],
+    "outputs": ["baseline-start compatibility composition", "checkpoint/replay/action-binding qualification", "accepted mechanics and social facts"],
+    "behavioralTests": ["compatibility_retains_baseline_start", "all_selectable_accepted_passes", "core_only_accepted_incomplete", "legacy_single_lane_unchanged"]
+  },
+  "activationLane": {
+    "concreteTypes": [
+      "GameProjectGeneratedWorldActivationService",
+      "GameProjectPackageIdentityOverlayService",
+      "GameProjectGeneratedWorldActivationSummary"
+    ],
+    "inputs": ["Lane A composition package", "strict source validation", "project identity", "staging root"],
+    "outputs": ["generated-start player composition", "identity-overlaid final package", "Lane B hashes and activation summary"],
+    "behavioralTests": ["player_start_is_generated", "gameplay_collections_equal", "identity_preserves_generated_start", "missing_or_invalid_start_rejected"]
+  },
+  "hashAndStateAuthority": {
+    "concreteTypes": ["GameProjectBuildResult", "GameProjectGeneratedWorldActivationSummary"],
+    "inputs": ["Lane B player composition", "Lane B final package", "activation Runtime frames"],
+    "outputs": ["primary CompositionPackageSha256", "primary PackageSha256", "primary FinalStateHash", "primary RuntimeFrames"],
+    "behavioralTests": ["primary_hashes_are_lane_b", "activation_final_hash_matches_frames", "repeat_build_is_deterministic"]
+  },
+  "acceptedMechanicsSeparation": {
+    "concreteTypes": ["GameProjectAcceptedMechanicsCompatibilityResult", "GameProjectAcceptedMechanicsSummaryService"],
+    "inputs": ["Lane A hashes", "Lane A qualification flags", "Lane A observations and social projection"],
+    "outputs": ["qualification hashes and flags", "accepted mechanics summary independent of Lane B final hash"],
+    "behavioralTests": ["accepted_summary_uses_qualification_hash", "compatibility_and_activation_hashes_are_distinct", "social_facts_remain_lane_a"]
+  },
+  "runtimeActivationCommands": {
+    "concreteTypes": ["IGameRuntime", "PlayerCommand", "Direction2D.Right"],
+    "inputs": ["final Lane B GamePackageDefinition", "Start", "Move Right", "Interact"],
+    "outputs": ["ordered frames", "ordered event semantics", "generated target correlation", "final map state"],
+    "behavioralTests": ["runtime_starts_generated", "move_right_succeeds", "interact_succeeds", "generated_target_observed", "baseline_only_target_rejected"]
+  },
+  "checkpointReplayContract": {
+    "concreteTypes": ["IGameRuntime", "IRuntimeStateSerializer", "UnifiedRuntimeSession"],
+    "inputs": ["fresh repeated command script", "final map state wrapped in accepted serializer session"],
+    "outputs": ["equivalent per-step results and events", "equal replay final hash", "equal restored state hash and generated map"],
+    "behavioralTests": ["activation_replay_exact", "state_roundtrip_exact", "replay_difference_rejected", "roundtrip_difference_rejected"]
+  },
+  "standaloneCorrelation": {
+    "concreteTypes": ["ProjectStandaloneBuildRequest", "ProjectStandaloneBuildService", "GameProjectReleaseCandidateRecordService"],
+    "inputs": ["Lane B package/final hashes", "Lane B RuntimeFrames", "generated activation facts", "Lane A accepted facts"],
+    "outputs": ["generated-start payload", "activation-correlated PlayerAdapter model/frames", "CURRENT RC record"],
+    "behavioralTests": ["standalone_request_uses_activation", "payload_generated_start", "payload_activation_hash_and_facts", "payload_accepted_facts", "rc_current"]
+  },
+  "rollbackMatrix": {
+    "concreteTypes": ["GameProjectBuildTransaction", "AtomicGameProjectPackageActivationStore"],
+    "inputs": ["source failure", "compatibility failure", "activation mapping/runtime/replay/roundtrip failure", "standalone failure"],
+    "outputs": ["unchanged package and authoring document", "preserved sidecars/history/activation/RC", "no staging leak"],
+    "behavioralTests": ["source_failure_preserves_last_success", "activation_failure_rolls_back", "standalone_failure_preserves_rc", "validation_is_read_only"]
+  },
+  "legacyCompatibility": {
+    "concreteTypes": ["GameProjectBuildAndQualificationService", "GameProjectAcceptedMechanicsCompatibilityResult"],
+    "inputs": ["project without seeded generated source"],
+    "outputs": ["existing single-lane package/runtime hashes", "qualification fields copied from that lane"],
+    "behavioralTests": ["legacy_single_lane_hash_compatible", "legacy_workspace_regression"]
+  },
+  "nonGoals": {
+    "unchanged": [
+      "Runtime and Runtime.Abstractions projects",
+      "public GamePackage schema",
+      "Unity project and host",
+      "FeatureModule catalogs",
+      "LLM, provider, RAG, Lua and media execution"
+    ],
+    "behavioralTests": ["unity_process_count_zero", "host_reused_not_rebuilt", "goal142_and_goal148_manual_immutable"]
+  },
+  "boundedAdditionalPath": {
+    "path": "tests/LLMGameCreator.Tests/Application/Goal156/Goal156ProjectCreationTests.cs",
+    "reason": "Targeted Goal156GeneratedWorkspaceTests reproduced generated_activation.runtime_unavailable because the shared Goal156 test harness constructed GameProjectBuildAndQualificationService without the new injected existing IGameRuntime and IRuntimeStateSerializer seams.",
+    "scope": "Test wiring only; DefaultGameRuntime and RuntimeStateSerializer are reused without Runtime project changes."
+  },
+  "testInventory": {
+    "minimumTotal": 40,
+    "minimumBehavioral": 34,
+    "plannedBehavioral": [
+      "exact_valid_v1_source_reproduces_full_chain",
+      "editing_only_source_seed_fails",
+      "source_mode_mismatch_fails",
+      "source_style_hints_mismatch_fails",
+      "source_variant_ids_mismatch_fails",
+      "stored_plan_from_another_seed_fails",
+      "stored_plan_metadata_mismatch_fails",
+      "altered_rule_pack_fails",
+      "altered_tiny_loop_fails",
+      "altered_mvp_fails",
+      "self_consistent_overlay_base_fails",
+      "source_baseline_hash_mismatch_fails",
+      "existing_v1_source_remains_valid",
+      "failed_validation_changes_no_files",
+      "compatibility_package_retains_baseline_start",
+      "player_package_uses_generated_start",
+      "gameplay_collections_equal_between_lanes",
+      "generated_start_map_exists",
+      "identity_overlay_preserves_generated_start",
+      "missing_start_map_fails",
+      "invalid_start_position_fails",
+      "runtime_starts_on_generated_map",
+      "move_right_succeeds",
+      "interact_succeeds",
+      "generated_target_observed",
+      "activation_state_changes",
+      "activation_replay_equivalent",
+      "activation_state_roundtrip_exact",
+      "failed_move_rejects_activation",
+      "failed_interact_rejects_activation",
+      "baseline_only_interaction_rejected",
+      "all_selectable_accepted_mechanics_pass",
+      "accepted_effective_defaults_remain",
+      "social_facts_remain_correct",
+      "lane_hashes_are_separate",
+      "primary_final_hash_is_activation",
+      "core_only_build_green_accepted_false",
+      "legacy_single_lane_hash_compatible",
+      "generated_repeat_build_deterministic",
+      "fresh_reopen_restores_activation_current",
+      "old_goal156_history_not_build_current",
+      "authoring_change_yields_last_success",
+      "source_failure_preserves_last_success",
+      "activation_failure_rolls_back",
+      "generated_card_has_activation_rows",
+      "generated_card_has_no_technical_values",
+      "technical_details_expose_both_lanes",
+      "standalone_request_uses_activation_frames",
+      "host_reused_without_rebuild",
+      "actual_package_start_map_generated",
+      "payload_final_hash_matches_activation",
+      "payload_activation_facts_present",
+      "payload_accepted_facts_present",
+      "release_candidate_current",
+      "portable_copy_restores_without_execution",
+      "goal156_regression_contract",
+      "goal155_family_regression_contract",
+      "procedural_preview_regression_contract",
+      "goal142_source_immutable",
+      "goal148_manual_source_immutable"
+    ],
+    "plannedContractTests": [
+      "source_schema_remains_v1",
+      "activation_summary_is_typed",
+      "accepted_compatibility_result_is_typed",
+      "history_fields_are_additive",
+      "dashboard_required_fields_are_non_null",
+      "evidence_twins_are_byte_identical"
+    ]
+  }
+}

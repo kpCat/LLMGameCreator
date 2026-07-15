@@ -1,0 +1,33 @@
+{
+    "status":  "GREEN",
+    "generatedStartMapId":  "generated/map/region_blue_ditch",
+    "startSucceeded":  true,
+    "moveRightSucceeded":  true,
+    "interactSucceeded":  true,
+    "generatedInteractionObserved":  true,
+    "initialStateHash":  "ea324208d7735196d6202e8cb845328add7166162c2b346b7794ffa0f5caf6d3",
+    "finalStateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681",
+    "runtimeFrames":  [
+                          {
+                              "Index":  0,
+                              "ActionId":  "00_start_generated_world",
+                              "Title":  "Игровой старт",
+                              "Category":  "generated_activation",
+                              "StateHash":  "ea324208d7735196d6202e8cb845328add7166162c2b346b7794ffa0f5caf6d3"
+                          },
+                          {
+                              "Index":  1,
+                              "ActionId":  "01_move_right",
+                              "Title":  "Движение",
+                              "Category":  "generated_activation",
+                              "StateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681"
+                          },
+                          {
+                              "Index":  2,
+                              "ActionId":  "02_interact",
+                              "Title":  "Взаимодействие",
+                              "Category":  "generated_activation",
+                              "StateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681"
+                          }
+                      ]
+}

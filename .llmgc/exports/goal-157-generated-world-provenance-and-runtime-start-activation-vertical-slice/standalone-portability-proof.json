@@ -1,0 +1,19 @@
+{
+    "status":  "GREEN",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "hostFileSetHashUnchanged":  true,
+    "unityProcessStartCount":  0,
+    "hiddenSmokeInvocationCount":  1,
+    "hiddenSmokePassed":  true,
+    "actualPackageGeneratedStartMapPassed":  true,
+    "actualPayloadActivationHashPassed":  true,
+    "actualPayloadActivationFactsPassed":  true,
+    "actualPayloadAcceptedFactsPassed":  true,
+    "releaseCandidateRecordCurrent":  true,
+    "portableCopyCurrentWithoutExecution":  true,
+    "playerCompositionPackageSha256":  "0d441592a06c904bdb875d69f48fcc488b7d60e2a0f28a16c17ffe5782fa2eda",
+    "playerPackageSha256":  "6b7720063fb33d0d51a98333839a0b52efdde4a4085aad81f41155474be1ec0c",
+    "playerFinalStateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681"
+}

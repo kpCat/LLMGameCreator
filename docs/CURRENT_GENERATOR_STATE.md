@@ -1,18 +1,20 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 156 seeded generated project creation, modern workspace and cached standalone
+Updated by: Goal 157 generated-world provenance and Runtime start activation
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
 
 Goal155A independent audit intake is GREEN at `ebaa4aba`: exact package/document/identity/fingerprint correlation produces CURRENT, missing or tampered package evidence is rejected, older valid truth remains LAST_SUCCESS, incomplete truth is UNKNOWN, and portable history-independent truth restores CURRENT. This closes the Goal155 release-candidate milestone without accepting Goal155 or Goal155A and without creating a human gate.
 
-Goal156 connects deterministic seeded generation to ordinary project creation and the modern FeatureModule workspace. `seeded_generated` projects persist a project-local source and sidecars, preserve the immutable Goal142 baseline records, append namespaced generated records, build/repeat/reopen through canonical Runtime/checkpoint/replay, retain typed generated-world and AcceptedMechanics summaries, and reuse the cached standalone host. The baseline start map intentionally remains active; seed regeneration or activation/travel into generated maps is the next product decision.
+Goal156 connects deterministic seeded generation to ordinary project creation and the modern FeatureModule workspace. Its independent audit at `12ef8a4d` found that declared seed/mode/style/variants were not causally correlated with the saved deterministic plan and that overlay/base were not rebuilt from the canonical Goal142 baseline. Goal157 closes that P1: source validation now regenerates plan/rule/tiny/MVP and rebuilds overlay/base from the re-resolved baseline; a source-only seed edit fails.
+
+Goal157 adds a typed two-lane build. Lane A retains the baseline start map and owns AcceptedMechanics/Social qualification hashes and flags. Lane B changes only `Manifest.StartMapId` to the generated map, preserves canonical gameplay collections and identity, and owns the primary package/composition/final hashes and RuntimeFrames. The existing `IGameRuntime` proves generated-map Start → Move Right → Interact, generated-target correlation, deterministic replay and state roundtrip. History/UI/standalone/RC/portable restore this split without execution. No manual gate is created; Goal157 remains unaccepted pending independent audit.
 
 ```text
-gate_status=goal156_green_acceptable_candidate_pending_independent_audit
-current_user_action=independent_goal156_audit_and_plan_seed_regeneration_or_generated_world_activation
+gate_status=goal157_green_acceptable_candidate_pending_independent_audit
+current_user_action=independent_goal157_audit_and_plan_generated_region_travel_or_seed_regeneration
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -83,7 +85,7 @@ goal156AcceptedByHuman=false
 goal156AcceptedByCodex=false
 goal156ManualReviewRequired=false
 goal156ManualGateReady=false
-goal156IndependentAuditRequired=true
+goal156IndependentAuditRequired=false
 goal156SeededProjectCreationPassed=true
 goal156LegacyTemplateCompatibilityPassed=true
 goal156GeneratedOverlayPassed=true
@@ -97,7 +99,33 @@ goal156UnityProcessStartCount=0
 goal156HiddenSmokeInvocationCount=1
 goal156PortableCopyPassed=true
 goal156ArtifactScopeViolationCount=0
-nextAction=independent_goal156_audit_and_plan_seed_regeneration_or_generated_world_activation
+goal156IndependentAuditResult=BLOCKED_AT_12EF8A4D
+goal156IndependentAuditBlocker=generated_source_request_not_correlated_with_deterministic_plan_and_overlay_chain
+goal156AuditBlocker=closed_by_goal157
+goal157ImplementationStatus=GREEN
+goal157CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal157Accepted=false
+goal157AcceptedByHuman=false
+goal157AcceptedByCodex=false
+goal157ManualReviewRequired=false
+goal157ManualGateReady=false
+goal157IndependentAuditRequired=true
+goal157SourceProvenancePassed=true
+goal157CanonicalChainRebuildPassed=true
+goal157CompatibilityLanePassed=true
+goal157GeneratedStartMapActivated=true
+goal157RuntimeStartMoveInteractPassed=true
+goal157ActivationReplayPassed=true
+goal157ActivationStateRoundtripPassed=true
+goal157AcceptedMechanicsCompatibilityPassed=true
+goal157GeneratedHistoryPersistencePassed=true
+goal157HostReused=true
+goal157HostRebuilt=false
+goal157UnityProcessStartCount=0
+goal157HiddenSmokeInvocationCount=1
+goal157PortableCopyPassed=true
+goal157ArtifactScopeViolationCount=0
+nextAction=independent_goal157_audit_and_plan_generated_region_travel_or_seed_regeneration
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

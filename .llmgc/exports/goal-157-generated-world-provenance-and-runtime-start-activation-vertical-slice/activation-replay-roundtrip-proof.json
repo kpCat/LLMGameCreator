@@ -1,0 +1,7 @@
+{
+    "status":  "GREEN",
+    "finalStateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681",
+    "replayFinalStateHash":  "bf032cc40c5b6f8abeb9313cc28da6e81ee1065bfc072810476f44e37c0a3681",
+    "replayEquivalent":  true,
+    "stateRoundtripPassed":  true
+}

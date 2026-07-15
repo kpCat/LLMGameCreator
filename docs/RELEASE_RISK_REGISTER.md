@@ -208,6 +208,12 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 
 - Goal155A independent-audit intake is GREEN at `ebaa4aba`, closing the Goal155 RC milestone without changing Goal155/155A acceptance.
 - Goal156 creates a real seeded generated project without LLM, provider, Lua or Unity generation. The generated world is additive and preserved through modern FeatureModule build, replay and standalone.
-- The baseline start map remains active by design. Switching gameplay start/travel into generated maps is the next product decision, not hidden completion in Goal156.
+- Independent audit at `12ef8a4d` found a P1 provenance risk: declared source inputs did not causally reproduce the stored plan, and overlay/base were not rebuilt from the canonical Goal142 baseline. Goal157 closes this risk.
+
+## Goal157 generated-world provenance and activation
+
+- Generated project provenance is now reproducible from its declared request. Seed/mode/style/variants drive full plan/rule/tiny/MVP regeneration and canonical Goal142 overlay/base reconstruction; a source-only seed edit fails validation.
+- The final player package starts on generated content and executes a Runtime-owned move/interact loop. Accepted modern mechanics remain a separately typed baseline-start compatibility proof with their own hashes and qualification flags.
+- Residual bounded risks: generated-region travel and seed regeneration are future product choices. Goal157 does not change Runtime projects, public GamePackage schema, Unity host, provider, LLM, Lua, catalog or generator-library surfaces.
 - Post-creation seed regeneration is not implemented; project-local generation source and sidecars are immutable inputs to the current build path.
 - Cache-only proof is bounded to one hidden smoke: host reused, host not rebuilt, Unity process starts zero.

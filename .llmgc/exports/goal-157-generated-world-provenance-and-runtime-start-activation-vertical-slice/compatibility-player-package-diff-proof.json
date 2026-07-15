@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "compatibilityBaselineStartMapPreserved":  true,
+    "playerGeneratedStartMapActivated":  true,
+    "manifestDiff":  [
+                         "manifest.startMapId"
+                     ],
+    "gameplayCollectionsEquivalent":  true,
+    "projectIdentityPreserved":  true,
+    "compatibilityCompositionPackageSha256":  "c6b415b141b0501e8e9e6b2d1a84d27446390ac0ef9bcbc3403bb9497f84a26b",
+    "compatibilityActivatedPackageSha256":  "edbaf1f4e26dbe6e6a8602f105a6b79829c8ebc629d38d2acb6aaa803e822ec2",
+    "playerCompositionPackageSha256":  "0d441592a06c904bdb875d69f48fcc488b7d60e2a0f28a16c17ffe5782fa2eda",
+    "playerActivatedPackageSha256":  "6b7720063fb33d0d51a98333839a0b52efdde4a4085aad81f41155474be1ec0c"
+}

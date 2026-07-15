@@ -1,12 +1,9 @@
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using LLMGameCreator.Application.Abstractions;
-using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.AcceptedAlphaUnityPlayableProjection;
-using LLMGameCreator.Application.Design.ProductLineRuntimeVariantMatrix;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.RuntimePreview;
@@ -34,6 +31,7 @@ public sealed class SeededGeneratedGameProjectCreationService
     private readonly GenerationPresetOptionsService _presetOptions;
     private readonly VisibleGeneratedPlayablePreviewService _generation;
     private readonly GeneratedProjectOverlayService _overlay;
+    private readonly IGeneratedProjectBaselineProvider _baselineProvider;
 
     public SeededGeneratedGameProjectCreationService(
         string repositoryRoot,
@@ -43,7 +41,8 @@ public sealed class SeededGeneratedGameProjectCreationService
         GenerationPresetOptionsService? presetOptions = null,
         VisibleGeneratedPlayablePreviewService? generation = null,
         GeneratedProjectOverlayService? overlay = null,
-        SeededGeneratedProjectSourceService? sourceService = null)
+        SeededGeneratedProjectSourceService? sourceService = null,
+        IGeneratedProjectBaselineProvider? baselineProvider = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -53,7 +52,12 @@ public sealed class SeededGeneratedGameProjectCreationService
         _generation = generation ?? new VisibleGeneratedPlayablePreviewService(
             generationOptionsService: _presetOptions);
         _overlay = overlay ?? new GeneratedProjectOverlayService(_validator);
-        SourceService = sourceService ?? new SeededGeneratedProjectSourceService(_validator, _presetOptions, _overlay);
+        _baselineProvider = baselineProvider ?? new Goal142GeneratedProjectBaselineProvider(_repositoryRoot);
+        SourceService = sourceService ?? new SeededGeneratedProjectSourceService(
+            _validator,
+            _presetOptions,
+            _overlay,
+            baselineProvider: _baselineProvider);
     }
 
     public SeededGeneratedProjectSourceService SourceService { get; }
@@ -110,11 +114,11 @@ public sealed class SeededGeneratedGameProjectCreationService
                 || generated.TinyLoopResult.Report.HasErrors)
                 throw new InvalidOperationException("generated_project.generation_failed");
 
-            var baseline = ResolveGoal142Baseline();
+            var baseline = _baselineProvider.Resolve();
             var generatedMvpPackageJson = _overlay.NamespaceGeneratedPackage(generated.PackageMvpResult.PackageJson);
             var overlay = _overlay.Build(
-                baseline.Json,
-                baseline.Sha256,
+                baseline.PackageJson,
+                baseline.PackageSha256,
                 generatedMvpPackageJson,
                 generated.PlanResult.Plan);
             if (!overlay.Passed)
@@ -155,7 +159,7 @@ public sealed class SeededGeneratedGameProjectCreationService
                 GeneratedMvpPackageSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.GeneratedMvpPackageJsonFileName],
                 GeneratedOverlaySha256 = sidecarHashes[SeededGeneratedProjectVocabulary.GeneratedOverlayJsonFileName],
                 GeneratedBasePackageSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.GeneratedBasePackageJsonFileName],
-                Goal142BaselinePackageSha256 = baseline.Sha256,
+                Goal142BaselinePackageSha256 = baseline.PackageSha256,
                 GeneratedStartMapId = overlay.Document.GeneratedStartMapId,
                 Counts = SeededGeneratedProjectSourceService.Counts(generated.PlanResult.Plan),
                 TinyLoop = SeededGeneratedProjectSourceService.BuildTinyLoopFacts(
@@ -235,27 +239,6 @@ public sealed class SeededGeneratedGameProjectCreationService
             if (!string.Equals(GameProjectSupportFileMaterializer.HashFile(entry.TargetPath), entry.SourceSha256, StringComparison.Ordinal))
                 throw new InvalidOperationException("generated_project.support_file_hash_mismatch:" + entry.RelativePath);
         }
-    }
-
-    private (string Path, string Json, string Sha256) ResolveGoal142Baseline()
-    {
-        var matrixPath = Path.Combine(
-            _repositoryRoot,
-            FeatureModuleCompositionVocabulary.Goal142Root.Replace('/', Path.DirectorySeparatorChar),
-            ProductLineRuntimeVariantMatrixVocabulary.MatrixResultFileName);
-        using var matrix = JsonDocument.Parse(File.ReadAllText(matrixPath, Encoding.UTF8));
-        var row = matrix.RootElement.GetProperty("candidates").EnumerateArray()
-            .Single(candidate => candidate.GetProperty("candidateId").GetString()
-                                 == FeatureModuleCompositionVocabulary.BaselineCandidateId);
-        var relativePath = row.GetProperty("packagePath").GetString()
-                           ?? throw new InvalidOperationException("generated_project.baseline_path_missing");
-        var expectedHash = row.GetProperty("packageSha256").GetString()
-                           ?? throw new InvalidOperationException("generated_project.baseline_hash_missing");
-        var path = Resolve(_repositoryRoot, relativePath);
-        var actualHash = SeededGeneratedProjectSourceService.HashFile(path);
-        if (!string.Equals(actualHash, expectedHash, StringComparison.Ordinal))
-            throw new InvalidOperationException("generated_project.baseline_hash_mismatch");
-        return (path, File.ReadAllText(path, Encoding.UTF8), actualHash);
     }
 
     private void ValidateGenerationRequest(CreateGameProjectRequest request)

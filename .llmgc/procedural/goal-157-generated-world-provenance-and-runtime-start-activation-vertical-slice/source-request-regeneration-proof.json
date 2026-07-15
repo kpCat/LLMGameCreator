@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "schemaVersionPreserved":  "seeded_generated_project_source_v1",
+    "sourceRecordFileSha256":  "39ca4f9f832a761daed9325d3ace85102166fe9e9feda77c62243630b18b6215",
+    "sourceRequestSha256":  "df05d6940ce18315be89295aae8ff4a9105b81468510da3ea90d4619f5095cc5",
+    "planSha256":  "08863618ab11eb608921261901cc1bf035715760750bd2a10dd3ec695292f71d",
+    "seedModeStyleVariantCorrelationPassed":  true,
+    "planRegenerationPassed":  true,
+    "seedOnlyEditCausalFailurePassed":  true,
+    "validationReadOnly":  true
+}

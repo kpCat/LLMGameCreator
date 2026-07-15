@@ -9,6 +9,7 @@ using LLMGameCreator.Application.Validation;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Infrastructure.Storage;
 using LLMGameCreator.Runtime;
+using LLMGameCreator.Runtime.Abstractions;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application.Goal156;
@@ -224,7 +225,9 @@ internal static class Goal156TestKit
 
     public static UnifiedGameProjectWorkspaceController OpenWorkspace(
         string project,
-        IProjectStandaloneBuildService? standalone = null)
+        IProjectStandaloneBuildService? standalone = null,
+        IGameRuntime? runtime = null,
+        IRuntimeStateSerializer? stateSerializer = null)
     {
         var current = new CurrentGamePackageService(Repository);
         current.LoadAsync(project, CancellationToken.None).GetAwaiter().GetResult();
@@ -240,7 +243,11 @@ internal static class Goal156TestKit
                 Validator,
                 current,
                 generatedSource: source,
-                generatedSummary: summary),
+                generatedSummary: summary,
+                generatedActivation: new GameProjectGeneratedWorldActivationService(
+                    runtime ?? new DefaultGameRuntime(),
+                    stateSerializer ?? new RuntimeStateSerializer(),
+                    Validator)),
             standaloneBuild: standalone,
             generatedSourceService: source,
             generatedWorldSummaryService: summary);

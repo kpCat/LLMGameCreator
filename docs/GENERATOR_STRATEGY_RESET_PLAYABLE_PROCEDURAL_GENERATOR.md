@@ -326,4 +326,8 @@ If a proposed next task does not make the generated game more playable, simulata
 
 Goal156 turns the existing procedural kernel/registry/tiny-loop/MVP proof into normal durable project creation. Deterministic seed/mode/preset inputs produce project-local source and sidecars, then an additive generated overlay is composed through the existing FeatureModule and canonical Runtime/checkpoint/replay seams. This keeps GamePackage as the only game truth and keeps LLM/provider/Lua/Unity generation outside Runtime.
 
+## 16. Goal157 reproducible provenance and generated start
+
+Goal157 makes the declared v1 source request causal: validation regenerates the deterministic chain and reconstructs overlay/base from the canonical Goal142 package. Modern generated builds use two explicit views of one module-composed package. The baseline-start view qualifies previously accepted mechanics; the generated-start view is the final player package and supplies primary hashes and Runtime frames. The existing Runtime owns Start → Move Right → Interact, replay and save/load truth. This preserves GamePackage authority and avoids introducing generator, UI, provider or LLM dependencies into Runtime.
+
 The immutable Goal142 baseline remains the active anchor and start map. The next selected product slice may address generated-world activation/travel or safe seed regeneration, but must preserve explicit validation, apply and rollback boundaries.

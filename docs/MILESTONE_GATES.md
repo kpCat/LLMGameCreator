@@ -235,3 +235,9 @@ Goal155A independent-audit intake is GREEN at `ebaa4aba`; `goal155MilestoneRcPas
 ## Goal156 seeded generated project gate record
 
 Goal156 is a GREEN acceptable automated candidate, not a human gate. Real seeded project creation, data-derived all-selectable/core-only profiles, deterministic additive overlay, explicit custom-base composition, build/repeat/reopen, typed generated summary, actual standalone payload correlation and portable RC recovery are GREEN. Exactly one hidden smoke reused the host without rebuild and with zero Unity starts. `goal156Accepted=false`; an independent audit is required before choosing seed regeneration or activation/travel into generated maps.
+
+Independent audit at `12ef8a4d` was blocked by missing source-request-to-plan correlation and missing canonical overlay/base reconstruction. Goal157 closes that blocker. Goal156 remains `accepted=false`, but `goal156IndependentAuditRequired=false` because its audit has completed.
+
+## Goal157 generated-world activation gate record
+
+Goal157 is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false` and `independentAuditRequired=true`. Strict source reproduction, canonical Goal142 chain rebuild, Lane A accepted-mechanics compatibility, Lane B generated-start player activation, generated-target Start → Move Right → Interact, replay/roundtrip, current history/UI, one cache-only hidden standalone smoke, RC CURRENT and execution-free portable recovery are required. This creates no human gate and does not imply generated-region travel or seed regeneration.

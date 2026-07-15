@@ -33,15 +33,21 @@ public sealed class SeededGeneratedProjectSourceService
     private readonly IGamePackageValidator _validator;
     private readonly GenerationPresetOptionsService _presetOptions;
     private readonly GeneratedProjectOverlayService _overlayService;
+    private readonly ProceduralGameKernelService _kernelService;
+    private readonly IGeneratedProjectBaselineProvider? _baselineProvider;
 
     public SeededGeneratedProjectSourceService(
         IGamePackageValidator? validator = null,
         GenerationPresetOptionsService? presetOptions = null,
-        GeneratedProjectOverlayService? overlayService = null)
+        GeneratedProjectOverlayService? overlayService = null,
+        ProceduralGameKernelService? kernelService = null,
+        IGeneratedProjectBaselineProvider? baselineProvider = null)
     {
         _validator = validator ?? new GamePackageValidator();
         _presetOptions = presetOptions ?? new GenerationPresetOptionsService();
         _overlayService = overlayService ?? new GeneratedProjectOverlayService(_validator);
+        _kernelService = kernelService ?? new ProceduralGameKernelService();
+        _baselineProvider = baselineProvider;
     }
 
     public SeededGeneratedProjectSourceValidationResult Validate(string projectFolder)
@@ -71,6 +77,15 @@ public sealed class SeededGeneratedProjectSourceService
                 return Failed(sourcePath, diagnostics.Append("generated_source.invalid_json"));
 
             ValidateVocabulary(source, diagnostics);
+            var resolved = _presetOptions.Resolve(new GenerationPresetOptionsRequest
+            {
+                Seed = source.Seed,
+                Mode = source.Mode,
+                PresetId = source.PresetId,
+                CompactStyleHintIds = source.StyleHintIds,
+                SelectedVariantIds = source.VariantIds
+            });
+            ValidateResolvedRequest(source, resolved, diagnostics);
             var generationRoot = Resolve(root, SeededGeneratedProjectVocabulary.GenerationRelativeRoot);
             ValidateSidecars(generationRoot, source, diagnostics);
             if (diagnostics.Count > 0) return Failed(sourcePath, diagnostics, source);
@@ -90,31 +105,49 @@ public sealed class SeededGeneratedProjectSourceService
             var overlay = Deserialize<GeneratedProjectOverlayDocument>(overlayJson, "generated_source.overlay_invalid_json");
             var generatedBase = Deserialize<GamePackageDefinition>(generatedBaseJson, "generated_source.base_invalid_json");
 
-            ValidateCounts(source.Counts, plan, diagnostics);
-            if (!string.Equals(source.PlanId, plan.PlanId, StringComparison.Ordinal)
-                || !string.Equals(source.RulePackId, rulePack.Metadata.RulePackId, StringComparison.Ordinal))
+            var regeneratedPlan = _kernelService.Generate(new ProceduralGameKernelRequest
+            {
+                Seed = resolved.Seed,
+                Mode = resolved.Mode,
+                CompactStyleHintIds = resolved.CompactStyleHintIds,
+                SelectedVariantIds = resolved.SelectedVariantIds
+            });
+            if (!string.Equals(regeneratedPlan.Json, planJson, StringComparison.Ordinal)
+                || !string.Equals(regeneratedPlan.Markdown, Read(
+                    generationRoot,
+                    SeededGeneratedProjectVocabulary.PlanMarkdownFileName), StringComparison.Ordinal))
+                diagnostics.Add("generated_source.plan_regeneration_mismatch");
+            if (!string.Equals(source.PlanId, regeneratedPlan.Plan.PlanId, StringComparison.Ordinal)
+                || !string.Equals(source.Seed, plan.Metadata.Seed, StringComparison.Ordinal)
+                || !string.Equals(source.Mode, plan.Metadata.Mode, StringComparison.Ordinal))
+                diagnostics.Add("generated_source.plan_metadata_mismatch");
+            if (!source.StyleHintIds.All(plan.Profile.StyleHintIds.Contains)
+                || !source.VariantIds.All(plan.Profile.VariantIds.Contains)
+                || !OrdinalSetEquals(regeneratedPlan.Plan.Profile.StyleHintIds, plan.Profile.StyleHintIds)
+                || !OrdinalSetEquals(regeneratedPlan.Plan.Profile.VariantIds, plan.Profile.VariantIds))
+                diagnostics.Add("generated_source.plan_profile_mismatch");
+
+            ValidateCounts(source.Counts, regeneratedPlan.Plan, diagnostics);
+            if (!string.Equals(source.RulePackId, rulePack.Metadata.RulePackId, StringComparison.Ordinal))
                 diagnostics.Add("generated_source.identity_mismatch");
             if (!string.Equals(source.GeneratedStartMapId, overlay.GeneratedStartMapId, StringComparison.Ordinal)
                 || !generatedBase.Game.Maps.Any(map => map.Id == source.GeneratedStartMapId))
                 diagnostics.Add("generated_source.generated_start_map_missing");
-            if (!string.Equals(source.Goal142BaselinePackageSha256, overlay.Goal142BaselinePackageSha256, StringComparison.Ordinal)
-                || !string.Equals(source.GeneratedBasePackageSha256, overlay.GeneratedBasePackageSha256, StringComparison.Ordinal))
-                diagnostics.Add("generated_source.overlay_hash_chain_mismatch");
 
             var regeneratedRulePack = new FormulaEffectActionRegistryService().Generate(
-                new FormulaEffectActionRegistryRequest { SourcePlan = plan });
+                new FormulaEffectActionRegistryRequest { SourcePlan = regeneratedPlan.Plan });
             if (!string.Equals(regeneratedRulePack.Json, rulePackJson, StringComparison.Ordinal))
                 diagnostics.Add("generated_source.rule_pack_regeneration_mismatch");
             var regeneratedTinyLoop = new TinyGeneratedRuntimeLoopService().Run(new TinyGeneratedRuntimeLoopRequest
             {
-                SourcePlan = plan,
+                SourcePlan = regeneratedPlan.Plan,
                 RulePack = regeneratedRulePack.RulePack,
                 RulePackValidationReport = regeneratedRulePack.ValidationReport
             });
             if (!string.Equals(regeneratedTinyLoop.StateJson, tinyStateJson, StringComparison.Ordinal)
                 || !string.Equals(regeneratedTinyLoop.ReportMarkdown, tinyReportMarkdown, StringComparison.Ordinal))
                 diagnostics.Add("generated_source.tiny_loop_regeneration_mismatch");
-            var expectedTiny = BuildTinyLoopFacts(plan, regeneratedRulePack.RulePack, regeneratedTinyLoop);
+            var expectedTiny = BuildTinyLoopFacts(regeneratedPlan.Plan, regeneratedRulePack.RulePack, regeneratedTinyLoop);
             if (expectedTiny != source.TinyLoop
                 || !string.Equals(tinyState.DeterministicHash, source.TinyLoop.FinalStateHash, StringComparison.Ordinal)
                 || !source.TinyLoop.Passed)
@@ -122,7 +155,7 @@ public sealed class SeededGeneratedProjectSourceService
 
             var regeneratedMvp = new GeneratedPackageMvpService(_validator).Generate(new GeneratedPackageMvpRequest
             {
-                SourcePlan = plan,
+                SourcePlan = regeneratedPlan.Plan,
                 RulePack = regeneratedRulePack.RulePack,
                 RulePackValidationReport = regeneratedRulePack.ValidationReport,
                 TinyLoopResult = regeneratedTinyLoop
@@ -130,6 +163,40 @@ public sealed class SeededGeneratedProjectSourceService
             var regeneratedNamespacedMvp = _overlayService.NamespaceGeneratedPackage(regeneratedMvp.PackageJson);
             if (!string.Equals(regeneratedNamespacedMvp, generatedMvpJson, StringComparison.Ordinal))
                 diagnostics.Add("generated_source.mvp_regeneration_mismatch");
+
+            GeneratedProjectBaseline? baseline = null;
+            try
+            {
+                baseline = _baselineProvider?.Resolve();
+                if (baseline is null) diagnostics.Add("generated_source.baseline_unavailable");
+            }
+            catch (InvalidOperationException exception) when (
+                exception.Message is "generated_source.baseline_unavailable" or "generated_source.baseline_hash_mismatch")
+            {
+                diagnostics.Add(exception.Message);
+            }
+            if (baseline is not null)
+            {
+                if (!string.Equals(source.Goal142BaselinePackageSha256, baseline.PackageSha256, StringComparison.Ordinal)
+                    || !string.Equals(overlay.Goal142BaselinePackageSha256, baseline.PackageSha256, StringComparison.Ordinal))
+                    diagnostics.Add("generated_source.baseline_hash_mismatch");
+                var rebuilt = _overlayService.Build(
+                    baseline.PackageJson,
+                    baseline.PackageSha256,
+                    regeneratedNamespacedMvp,
+                    regeneratedPlan.Plan);
+                if (!string.Equals(rebuilt.OverlayJson, overlayJson, StringComparison.Ordinal))
+                    diagnostics.Add("generated_source.overlay_regeneration_mismatch");
+                if (!string.Equals(rebuilt.GeneratedBasePackageJson, generatedBaseJson, StringComparison.Ordinal))
+                    diagnostics.Add("generated_source.base_regeneration_mismatch");
+                if (!string.Equals(source.GeneratedBasePackageSha256, rebuilt.Document.GeneratedBasePackageSha256,
+                        StringComparison.Ordinal)
+                    || !string.Equals(source.GeneratedMvpPackageSha256, rebuilt.Document.GeneratedMvpPackageSha256,
+                        StringComparison.Ordinal)
+                    || !string.Equals(source.GeneratedBasePackageSha256, overlay.GeneratedBasePackageSha256,
+                        StringComparison.Ordinal))
+                    diagnostics.Add("generated_source.overlay_hash_chain_mismatch");
+            }
 
             diagnostics.AddRange(_overlayService.ValidatePackageRecords(generatedBaseJson, overlay, includeBaseline: true));
             var validation = _validator.Validate(generatedBase);
@@ -213,6 +280,41 @@ public sealed class SeededGeneratedProjectSourceService
         if (!GeneratedProjectMechanicsProfiles.Supported.Contains(source.MechanicsProfileId, StringComparer.Ordinal))
             diagnostics.Add("generated_source.profile_unknown");
     }
+
+    private static void ValidateResolvedRequest(
+        SeededGeneratedProjectSourceRecord source,
+        GenerationPresetOptions resolved,
+        ICollection<string> diagnostics)
+    {
+        var mismatch = false;
+        if (!string.Equals(source.Seed, resolved.Seed, StringComparison.Ordinal))
+        {
+            diagnostics.Add("generated_source.seed_mismatch");
+            mismatch = true;
+        }
+        if (!string.Equals(source.Mode, resolved.Mode, StringComparison.Ordinal))
+        {
+            diagnostics.Add("generated_source.mode_mismatch");
+            mismatch = true;
+        }
+        if (!string.Equals(source.PresetId, resolved.PresetId, StringComparison.Ordinal))
+            mismatch = true;
+        if (!OrdinalSetEquals(source.StyleHintIds, resolved.CompactStyleHintIds))
+        {
+            diagnostics.Add("generated_source.style_hints_mismatch");
+            mismatch = true;
+        }
+        if (!OrdinalSetEquals(source.VariantIds, resolved.SelectedVariantIds))
+        {
+            diagnostics.Add("generated_source.variant_ids_mismatch");
+            mismatch = true;
+        }
+        if (mismatch) diagnostics.Add("generated_source.request_resolution_mismatch");
+    }
+
+    private static bool OrdinalSetEquals(IReadOnlyList<string> left, IReadOnlyList<string> right) =>
+        left.OrderBy(value => value, StringComparer.Ordinal)
+            .SequenceEqual(right.OrderBy(value => value, StringComparer.Ordinal), StringComparer.Ordinal);
 
     private static void ValidateSidecars(
         string generationRoot,

@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice",
+    "baselineRef":  "12ef8a4dca81911a2f270bc24477a31a884291b8",
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false,
+    "unityHostBuildRun":  false,
+    "hiddenStandaloneSmokeInvocationCount":  1
+}

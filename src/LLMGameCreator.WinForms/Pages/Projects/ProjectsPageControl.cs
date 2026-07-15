@@ -286,7 +286,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         var summary = snapshot.GeneratedWorld;
         _generatedWorldCardPanel.Visible = summary is { Present: true };
         _generatedWorldCardLabel.Text = summary is { Present: true }
-            ? GameProjectGeneratedWorldSummaryService.FormatCard(summary)
+            ? GameProjectGeneratedWorldSummaryService.FormatCard(summary, snapshot.GeneratedWorldActivation)
             : string.Empty;
     }
 
@@ -666,14 +666,28 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         };
         if (snapshot.GeneratedWorld is { Present: true } generated)
         {
+            var activation = snapshot.GeneratedWorldActivation;
+            var compatibility = snapshot.AcceptedMechanicsCompatibility;
             lines.InsertRange(lines.Count - 1,
             [
                 string.Empty,
                 "Generated world",
                 "Status: " + generated.Status,
+                "Source request SHA-256: " + generated.SourceRequestSha256,
                 "Plan SHA-256: " + generated.PlanSha256,
                 "Overlay SHA-256: " + generated.OverlaySha256,
                 "Generated base SHA-256: " + generated.GeneratedBasePackageSha256,
+                "Compatibility package SHA-256: " + (compatibility?.CompatibilityCompositionPackageSha256 ?? string.Empty),
+                "Compatibility activated package SHA-256: " + (compatibility?.CompatibilityActivatedPackageSha256 ?? string.Empty),
+                "Compatibility final Runtime state hash: " + (compatibility?.CompatibilityFinalStateHash ?? string.Empty),
+                "Player composition package SHA-256: " + snapshot.CompositionPackageSha256,
+                "Player project package SHA-256: " + snapshot.PackageSha256,
+                "Player final Runtime state hash: " + snapshot.FinalStateHash,
+                "Generated start map ID: " + (activation?.GeneratedStartMapId ?? string.Empty),
+                "Activation start/move/interact: "
+                    + (activation?.StartSucceeded ?? false) + "/"
+                    + (activation?.MoveSucceeded ?? false) + "/"
+                    + (activation?.InteractSucceeded ?? false),
                 "Source: .llmgc/generation/seeded-project-source.json"
             ]);
         }
