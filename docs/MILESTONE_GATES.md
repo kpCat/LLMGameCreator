@@ -6,7 +6,7 @@ Accepted: false
 
 Each milestone must produce visible product progress. Contract and proof artifacts are required, but they are not sufficient by themselves.
 
-Goal161R note: the short output seam is implemented, but qualification is `BLOCKED_PUBLICATION_AFTER_GREEN_SHORT_PATH_SMOKE`. The recovered payload history remains valid and the one new hidden smoke reused the host with zero Unity starts, exited 0, wrote all five markers and captured Player.log from the short staging path. Publication then failed and rolled staging back; RC CURRENT, portable all-selectable and portable core-only were not reached, Goal160's audit blocker remains open, Goal161/161R remain unaccepted, and no human gate exists.
+Goal161S note: immutable run publication is implemented, but qualification is `BLOCKED_RELEASE_CANDIDATE_RECORD_AFTER_GREEN_IMMUTABLE_PUBLICATION`. The one new hidden smoke reused the host with zero Unity starts, exited 0, wrote all five markers and Player.log in the immutable run, wrote GREEN run-status and atomically validated current.json. The returned controller failure is exactly `release_candidate_record: rc.payload.missing`; RC CURRENT, portable all-selectable and portable core-only were not reached, Goal160's audit blocker remains open, Goal161/161S remain unaccepted, and no human gate exists.
 
 ## Vertical Slice Final
 

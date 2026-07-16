@@ -159,6 +159,7 @@ internal sealed record Goal161StandaloneFixture(
         var goal148Before = Goal157TestKit.TreeHashes(goal148);
         var unityBefore = System.Diagnostics.Process.GetProcessesByName("Unity").Length;
         var standalone = bundle.Controller.BuildWindowsStandalone();
+        WriteAttemptCapture(standalone);
         var unityAfter = System.Diagnostics.Process.GetProcessesByName("Unity").Length;
         Assert.Equal("GREEN", standalone.Status);
         var snapshot = bundle.Controller.Snapshot();
@@ -279,6 +280,29 @@ internal sealed record Goal161StandaloneFixture(
                     migrationState.SaveTreeAfterRollback)
         }, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine,
             new UTF8Encoding(false));
+    }
+
+    private static void WriteAttemptCapture(ProjectStandaloneBuildResult standalone)
+    {
+        var path = Environment.GetEnvironmentVariable("LLMGC_GOAL161_CAPTURE_PATH");
+        if (string.IsNullOrWhiteSpace(path)) return;
+        Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
+        File.WriteAllText(path, JsonSerializer.Serialize(new
+        {
+            schemaVersion = "goal161_cached_hidden_standalone_smoke_v2",
+            standalone.Status,
+            standalone.Stage,
+            standalone.Diagnostics,
+            standalone.PublicationStage,
+            standalone.PublicationDiagnostic,
+            standalone.OutputFolder,
+            standalone.OutputRunDirectoryName,
+            standalone.CurrentPointerPath,
+            standalone.CurrentPointerSha256,
+            standalone.RunStatusPath,
+            pointerPresent = !string.IsNullOrWhiteSpace(standalone.CurrentPointerPath)
+                             && File.Exists(standalone.CurrentPointerPath)
+        }, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine, new UTF8Encoding(false));
     }
 
     private static bool PayloadHasFact(string payloadRoot, string label, string value)

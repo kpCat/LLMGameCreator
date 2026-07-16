@@ -4,7 +4,7 @@ Status: Goal 097 planning register
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
 Accepted: false
 
-Goal161R standalone release-risk note: the short output path removes the proved `standalone.player.payload_path_unreadable` failure. Its one authorized smoke reused the cache, rebuilt no host, started Unity zero times, exited 0 and wrote all five markers plus Player.log. The build nevertheless returned FAILED during publication and rolled staging back; no player retry is authorized. RC/portable closure remains blocked pending independent publication diagnosis.
+Goal161S standalone release-risk note: immutable run plus atomic pointer publication removes post-smoke player-tree relocation. Its one authorized smoke reused cache, rebuilt no host, started Unity zero times, exited 0, wrote five markers/Player.log and published validated current.json. The build nevertheless returned `FAILED` at `release_candidate_record` with `rc.payload.missing`; no player retry is authorized. RC/portable closure remains blocked pending independent payload-resolution diagnosis.
 
 ## P0 Release Blockers
 

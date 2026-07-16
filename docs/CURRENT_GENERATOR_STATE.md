@@ -26,11 +26,11 @@ Generated gameplay saves now use immutable content-addressed revisions plus an a
 
 Runtime Simulator and the Projects save card/manager use the generated-aware workflow; legacy/template projects retain raw `RuntimeSnapshotStore`, while raw snapshots found in generated projects are `LEGACY_RAW` and never directly loaded. Goal161Q recovered the exact failed output and proved all 13 Application structural checks plus exact legacy frame/fact parser compatibility. It installed a staging preflight, named failures, a confined `-logFile` and bounded Player.log diagnostics without changing Unity or rebuilding the host.
 
-Goal161R moved the operational staging output to `%LOCALAPPDATA%/LGC/O/<token>/s-<attempt>` with `g.exe`/`g_Data` and a hard 240-character player-path budget. The one newly authorized hidden smoke is GREEN: exit code 0, all five markers and Player.log are present, cache `6af4d5eb5b42f956110555b58fb4e276` was reused, host rebuild=false and Unity Editor starts=0. Publication then returned FAILED and rolled staging back; the failed fixture did not persist the returned publication diagnostic. No retry is authorized. RC CURRENT and portable assertions were not reached, Goal160's blocker remains open, Goal161 remains unaccepted, and no human gate is created.
+Goal161S replaces the post-smoke tree relocation with immutable `%LOCALAPPDATA%/LGC/O/<token>/runs/r-<attempt>` and atomic `current.json`. Its one authorized player run was GREEN at the player/output layer: exit=0, all five markers, Player.log, run-status GREEN, validated current pointer, cache reuse and Unity=0. The controller then returned `FAILED` at `release_candidate_record` with exact diagnostic `rc.payload.missing`; retry=0. The immutable run and pointer remain for forensics, but RC CURRENT and portable assertions were not reached, Goal160's blocker remains open, Goal161 remains unaccepted, and no human gate is created.
 
 ```text
-gate_status=goal161r_blocked_publication_after_green_short_path_smoke
-current_user_action=independently_diagnose_goal161r_publication_failure_without_player_retry
+gate_status=goal161s_blocked_release_candidate_record_after_green_immutable_publication
+current_user_action=independently_diagnose_goal161s_release_candidate_payload_resolution_without_player_retry
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -204,7 +204,7 @@ goal160ManualGateReady=false
 goal160IndependentAuditRequired=true
 goal160IndependentAuditResult=BLOCKED_AT_D8DD05E7
 goal160IndependentAuditBlocker=semantic_commit_validator_requires_complete_accepted_mechanics_for_core_only_generated_projects
-goal160AuditBlocker=profile_neutral_fix_implemented_pending_goal161r_green_publication
+goal160AuditBlocker=profile_neutral_fix_implemented_pending_goal161s_rc_current
 goal160SharedOperationLeasePassed=true
 goal160CandidateSealPassed=true
 goal160TransactionTruthRecheckPassed=true
@@ -221,7 +221,7 @@ goal160HiddenSmokeInvocationCount=1
 goal160PortableCopyPassed=true
 goal160ArtifactScopeViolationCount=0
 goal161ImplementationStatus=GREEN
-goal161CandidateStatus=BLOCKED_PUBLICATION_AFTER_GREEN_SHORT_PATH_SMOKE
+goal161CandidateStatus=BLOCKED_RELEASE_CANDIDATE_RECORD_AFTER_GREEN_IMMUTABLE_PUBLICATION
 goal161QualificationStatus=BLOCKED
 goal161Accepted=false
 goal161AcceptedByHuman=false
@@ -240,15 +240,29 @@ goal161SaveUiPassed=true
 goal161HostReused=true
 goal161HostRebuilt=false
 goal161UnityProcessStartCount=0
-goal161HiddenSmokeInvocationCount=3
+goal161HiddenSmokeInvocationCount=4
 goal161HiddenSmokePassed=true
-goal161StandaloneFailureStage=publish_output
+goal161StandaloneFailureStage=release_candidate_record
 goal161StandaloneNamedRootCause=standalone.player.payload_path_unreadable
 goal161PayloadSelfCheckPassed=true
 goal161LegacyHostParserCompatibilityPassed=true
+goal161StandaloneCurrentPointerPassed=true
+goal161ImmutableRunPlayerSmokePassed=true
+goal161ImmutableRunTreeMovedAfterSmoke=false
+goal161StandaloneFailureDiagnostic=rc.payload.missing
 goal161PortableAllSelectablePassed=false
 goal161PortableCoreOnlyPassed=false
 goal161ArtifactScopeViolationCount=0
+goal161sImplementationStatus=BLOCKED
+goal161sCandidateStatus=BLOCKED_RELEASE_CANDIDATE_RECORD_AFTER_GREEN_IMMUTABLE_PUBLICATION
+goal161sAccepted=false
+goal161sManualReviewRequired=false
+goal161sIndependentAuditRequired=false
+goal161sNewHiddenSmokeInvocationCount=1
+goal161sCorrectiveRetryCount=0
+goal161sPublicationPassed=true
+goal161sReleaseCandidateRecordCurrent=false
+goal161sExactDiagnostic=rc.payload.missing
 goal161rImplementationStatus=BLOCKED
 goal161rCandidateStatus=BLOCKED_PUBLICATION_AFTER_GREEN_SMOKE
 goal161rAccepted=false
@@ -283,7 +297,7 @@ goal161qHostRebuilt=false
 goal161qUnityEditorProcessStartCount=0
 goal161qSmokeExitCode=2
 goal161qPlayerLogDiagnosticCaptured=true
-nextAction=independently_diagnose_goal161r_publication_failure_without_player_retry
+nextAction=independently_diagnose_goal161s_release_candidate_payload_resolution_without_player_retry
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

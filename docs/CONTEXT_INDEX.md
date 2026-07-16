@@ -24,6 +24,8 @@ Before implementing or auditing any Codex Goal, read `docs/GOAL_DESIGN_QUALITY_P
 
 Goal161R standalone qualification is `BLOCKED_PUBLICATION_AFTER_GREEN_SHORT_PATH_SMOKE`; `gate_status=goal161r_blocked_publication_after_green_short_path_smoke`. Goal161Q's exact 260-character root cause remains recorded, and Goal161R proves the short `%LOCALAPPDATA%/LGC/O` staging path lets the cached player complete with exit 0, all five markers and Player.log. Publication then returned FAILED and rolled staging back; no player retry is authorized. The next bounded work is independent publication diagnosis without Unity, host rebuild or player invocation.
 
+Goal161S replaces post-smoke relocation with immutable `runs/r-<attempt>` and atomic `current.json`; `gate_status=goal161s_blocked_release_candidate_record_after_green_immutable_publication`. Its sole player run is GREEN at the output layer (exit 0, five markers, Player.log, GREEN run status and validated pointer); the containing controller returned `release_candidate_record: rc.payload.missing`. The run and pointer are retained, retry remains zero, and independent RC payload-resolution diagnosis is the only next standalone work.
+
 For Goal 029 specifically, read:
 
 1. `AGENTS.md`

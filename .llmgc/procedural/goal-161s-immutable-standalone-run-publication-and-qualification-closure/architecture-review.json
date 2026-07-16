@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "goal161s_architecture_review_v1",
+  "goal161rVerifiedFacts": "short LocalAppData staging, 13/13 payload preflight, legacy parser compatibility, exit 0, five markers, Player.log, host cache reuse and zero Unity starts were GREEN; post-smoke publication failed",
+  "lostPublicationDiagnostic": "Goal161R asserted GREEN before persisting the returned standalone result, so no concrete file-lock cause is claimed.",
+  "immutableRunLayout": "<operational-root>/<project-token>/runs/r-<attempt-token>; assembly, self-check, smoke and post-smoke validation all use that immutable run.",
+  "currentPointerSchema": "standalone_current_output_v1; safe relative run name plus executable, manifest, package, composition, final-state, host, self-check, marker, Player.log and exit-code hashes; no absolute paths.",
+  "pointerAtomicity": "validate run, write-through sibling temporary pointer, reread and validate it, atomically replace current.json, then reread and resolve it.",
+  "postSmokeValidation": "only read-only output validation and path validation occur before atomically creating run-status.json; no executed player-tree move, rename or payload rewrite occurs.",
+  "failureForensics": "any preflight, smoke or pointer failure retains the immutable run and returns its exact stage/code/exception; a failed run has no current pointer.",
+  "priorCurrentPreservation": "publication failure removes a temporary pointer only and preserves pre-existing current.json bytes exactly.",
+  "historyAndLaunchResolution": "GREEN history and launch/open targets reference the immutable run; a fresh service resolves validated current.json without in-memory state.",
+  "singleSmokePlan": "run the sole hidden Goal161 migrated all-selectable smoke only after focused offline tests and regressions; no retry, Unity start or host rebuild is authorized.",
+  "nonGoals": "Unity source, host cache key/build, Runtime, GamePackage, FeatureModule catalog and generated save/migration/history implementation remain untouched."
+}

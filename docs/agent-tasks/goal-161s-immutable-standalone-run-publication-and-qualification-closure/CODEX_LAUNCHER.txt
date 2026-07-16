@@ -1,0 +1,43 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-161s-immutable-standalone-run-publication-and-qualification-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 63158d213693df7898122c8d9e56517a7efc6349
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- Goal161R short-path fix и Player smoke GREEN признаны;
+- blocker остался только после smoke при staging -> current publication;
+- exact exception была потеряна fixture, поэтому не придумывай конкретный file-lock root cause;
+- устрани весь fragile class: executed player tree больше никогда не move/rename после smoke;
+- output layout: immutable runs/r-<attempt> + atomic current.json pointer;
+- assemble/smoke/post-check происходят в exact immutable run directory;
+- after smoke разрешены только read-only checks, run-status write и pointer write outside run;
+- current pointer содержит только safe relative run name и hashes, никаких absolute paths;
+- pointer validation and atomic replacement required;
+- publication failure preserves old current pointer, retains new run for forensics and persists exact diagnostic;
+- fixture must persist returned result even when BLOCKED/FAILED;
+- path budget <=240 remains mandatory;
+- no Unity changes, no host rebuild, cache key unchanged;
+- new player invocation exactly 1, retry 0;
+- after GREEN: standalone GREEN, RC CURRENT, portable all-selectable/core-only, no false core-only READY;
+- Goal160 blocker closes only on GREEN;
+- no full suite, 85-case closure or all-ProductSmoke;
+- create/push exactly one GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи immutable run/pointer layout, no-move proof,
+pointer failure matrix and exact diagnostics, test/regression counts,
+host/Unity/player counts, smoke exit/markers/log,
+standalone/RC/portable results, evidence/artifact scope,
+final SHA, push, HEAD==origin/main и clean worktree.
