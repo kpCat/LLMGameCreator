@@ -306,6 +306,11 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public GeneratedWorldHistoryReadResult? GeneratedWorldHistory { get; init; }
     public GameProjectGeneratedWorldChangeRecord? LastSuccessfulWorldChange { get; init; }
     public GameProjectGeneratedWorldRollbackResult? LastWorldRollbackAttempt { get; init; }
+    public GeneratedGameplaySavesSummary? GeneratedGameplaySaves { get; init; }
+    public int GeneratedGameplaySaveCurrentCount { get; init; }
+    public int GeneratedGameplaySaveMigrationRequiredCount { get; init; }
+    public int GeneratedGameplaySaveInvalidCount { get; init; }
+    public GeneratedGameplaySaveMigration? LastGeneratedGameplaySaveMigration { get; init; }
 }
 
 public sealed record GameProjectBuildResult

@@ -44,6 +44,19 @@ public interface IUnifiedGameProjectWorkspaceController
         GameProjectGeneratedWorldRollbackRequest request,
         GameProjectGeneratedWorldRollbackPreview preview) =>
         throw new InvalidOperationException("История миров недоступна для этого контроллера.");
+    GeneratedGameplaySaveListResult ListGeneratedGameplaySaves() => new();
+    GeneratedGameplaySaveMigrationPreview PreviewGeneratedGameplaySaveMigration(string slotName) => new()
+    {
+        SlotName = slotName,
+        Diagnostics = ["generated_save.not_available"]
+    };
+    GeneratedGameplaySaveMigrationResult ApplyGeneratedGameplaySaveMigration(
+        GeneratedGameplaySaveMigrationPreview preview) => new()
+    {
+        SlotName = preview.SlotName,
+        SourceRevisionSha256 = preview.SourceRevisionSha256,
+        Diagnostics = ["generated_save.not_available"]
+    };
     ProjectStandaloneBuildResult BuildWindowsStandalone(CancellationToken cancellationToken = default) => new()
     {
         Status = "FAILED", Stage = "standalone_not_supported", Diagnostics = ["Standalone build is not available for this controller."]
@@ -69,6 +82,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private readonly GameProjectGeneratedWorldSummaryService _generatedWorldSummaryService;
     private readonly GameProjectSeedRegenerationService? _regenerationService;
     private readonly GameProjectGeneratedWorldRollbackService? _worldRollbackService;
+    private readonly GeneratedGameplaySaveService? _generatedGameplaySaveService;
+    private readonly GeneratedGameplaySaveMigrationService? _generatedGameplaySaveMigrationService;
+    private readonly GeneratedGameplaySavesSummaryService? _generatedGameplaySavesSummaryService;
     private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private GameProjectBuildResult? _lastBuild;
     private GameProjectBuildResult? _lastSuccessfulBuild;
@@ -76,6 +92,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
     private IReadOnlyList<string> _persistedHistoryDiagnostics = [];
     private GameProjectSeedRegenerationResult? _lastRegenerationAttempt;
     private GameProjectGeneratedWorldRollbackResult? _lastWorldRollbackAttempt;
+    private GeneratedGameplaySavesSummary? _lastGeneratedGameplaySaves;
+    private GeneratedGameplaySaveMigrationResult? _lastGeneratedGameplaySaveMigration;
 
     public UnifiedGameProjectWorkspaceController(
         ICurrentGamePackageService currentPackageService,
@@ -90,7 +108,10 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         GameProjectGeneratedWorldSummaryService? generatedWorldSummaryService = null,
         GameProjectSeedRegenerationService? regenerationService = null,
         IGameProjectOperationCoordinator? operationCoordinator = null,
-        GameProjectGeneratedWorldRollbackService? worldRollbackService = null)
+        GameProjectGeneratedWorldRollbackService? worldRollbackService = null,
+        GeneratedGameplaySaveService? generatedGameplaySaveService = null,
+        GeneratedGameplaySaveMigrationService? generatedGameplaySaveMigrationService = null,
+        GeneratedGameplaySavesSummaryService? generatedGameplaySavesSummaryService = null)
     {
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _authoring = authoring ?? throw new ArgumentNullException(nameof(authoring));
@@ -105,6 +126,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         _regenerationService = regenerationService;
         _operationCoordinator = operationCoordinator ?? builder.OperationCoordinator;
         _worldRollbackService = worldRollbackService;
+        _generatedGameplaySaveService = generatedGameplaySaveService;
+        _generatedGameplaySaveMigrationService = generatedGameplaySaveMigrationService;
+        _generatedGameplaySavesSummaryService = generatedGameplaySavesSummaryService;
     }
 
     public bool HasOpenProject { get; private set; }
@@ -232,12 +256,21 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                 ConfigurationStatus = releaseCandidate.Record is null ? "ABSENT" : "LAST_SUCCESS"
             }
             : releaseCandidate;
-        var releaseCandidateStatus = ResolveReleaseCandidateStatus(
+        var releaseCandidateStatus = GameProjectReleaseCandidateRecordService.ResolveOverallStatus(
             acceptedMechanics,
             acceptedMechanicsCurrent,
-            _lastSuccessfulBuild,
+            _lastSuccessfulBuild?.PackageSha256 ?? activatedPackageSha,
+            _lastSuccessfulBuild?.CompositionPackageSha256 ?? state.Document.LastCompositionPackageSha256,
+            _lastSuccessfulBuild?.FinalStateHash ?? state.Document.LastQualifiedFinalStateHash,
             effectiveReleaseCandidate);
         var generatedSource = _generatedSourceService.Validate(state.ProjectFolder);
+        if (generatedSource is { Present: true, Passed: true }
+            && _generatedGameplaySavesSummaryService is not null
+            && !_operationCoordinator.IsBusy)
+            _lastGeneratedGameplaySaves = _generatedGameplaySavesSummaryService.Read(state.ProjectFolder);
+        var generatedGameplaySaves = generatedSource is { Present: true }
+            ? _lastGeneratedGameplaySaves
+            : null;
         var lastRegeneration = _regenerationService?.ReadLastSuccessful(state.ProjectFolder);
         var worldHistory = _regenerationService?.ReadWorldHistory(state.ProjectFolder);
         var generatedMatchesCurrent = _lastSuccessfulBuild is not null
@@ -365,6 +398,12 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                                              && generatedSource is { Present: true, Passed: true }
             ,LastSuccessfulWorldChange = lastWorldChange is { Passed: true } ? lastWorldChange.Record : null
             ,LastWorldRollbackAttempt = _lastWorldRollbackAttempt
+            ,GeneratedGameplaySaves = generatedGameplaySaves
+            ,GeneratedGameplaySaveCurrentCount = generatedGameplaySaves?.CurrentCount ?? 0
+            ,GeneratedGameplaySaveMigrationRequiredCount = generatedGameplaySaves?.MigrationRequiredCount ?? 0
+            ,GeneratedGameplaySaveInvalidCount = generatedGameplaySaves?.InvalidCount ?? 0
+            ,LastGeneratedGameplaySaveMigration = _lastGeneratedGameplaySaveMigration?.Revision?.Migration
+                                                      ?? generatedGameplaySaves?.LastMigration
         };
     }
 
@@ -422,6 +461,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         };
         _lastBuild = _builder.Build(_authoring, buildOperation, cancellationToken);
         if (_lastBuild.Passed) _lastSuccessfulBuild = _lastBuild;
+        if (_lastBuild.Passed && _generatedGameplaySavesSummaryService is not null)
+            _lastGeneratedGameplaySaves = _generatedGameplaySavesSummaryService.Read(
+                _authoring.State.ProjectFolder, operation);
         var snapshot = Snapshot();
         if (!_lastBuild.Passed)
         {
@@ -478,7 +520,13 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                 .Concat(GameProjectGeneratedWorldSummaryService.StandaloneTravelHumanFacts(
                     _lastBuild.GeneratedRegionTravel))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
-                    _lastBuild, releaseCandidateFactsAllowed)).ToList(),
+                    _lastBuild, releaseCandidateFactsAllowed))
+                .Concat(GeneratedGameplaySavesSummaryService.StandaloneHumanFacts(
+                    _lastGeneratedGameplaySaves).Select(fact => new StandaloneHumanReviewFact
+                    {
+                        Label = fact.Label,
+                        Value = fact.Value
+                    })).ToList(),
             RuntimeFrames = _lastBuild.RuntimeFrames.Select(frame => new StandaloneRuntimeFrame
             {
                 Index = frame.Index,
@@ -594,6 +642,51 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         };
     }
 
+    public GeneratedGameplaySaveListResult ListGeneratedGameplaySaves()
+    {
+        EnsureOpen();
+        return _generatedGameplaySaveService?.List(_authoring.State.ProjectFolder)
+               ?? new GeneratedGameplaySaveListResult { Diagnostics = ["generated_save.not_available"] };
+    }
+
+    public GeneratedGameplaySaveMigrationPreview PreviewGeneratedGameplaySaveMigration(string slotName)
+    {
+        EnsureOpen();
+        return _generatedGameplaySaveMigrationService?.Preview(_authoring.State.ProjectFolder, slotName)
+               ?? new GeneratedGameplaySaveMigrationPreview
+               {
+                   SlotName = slotName,
+                   Diagnostics = ["generated_save.not_available"]
+               };
+    }
+
+    public GeneratedGameplaySaveMigrationResult ApplyGeneratedGameplaySaveMigration(
+        GeneratedGameplaySaveMigrationPreview preview)
+    {
+        EnsureOpen();
+        ArgumentNullException.ThrowIfNull(preview);
+        if (_generatedGameplaySaveMigrationService is null)
+            return new GeneratedGameplaySaveMigrationResult
+            {
+                SlotName = preview.SlotName,
+                SourceRevisionSha256 = preview.SourceRevisionSha256,
+                Diagnostics = ["generated_save.not_available"]
+            };
+        var result = _generatedGameplaySaveMigrationService.Apply(
+            new GeneratedGameplaySaveMigrationApplyRequest
+            {
+                ProjectFolder = _authoring.State.ProjectFolder,
+                SlotName = preview.SlotName,
+                SourceRevisionSha256 = preview.SourceRevisionSha256,
+                CandidateSessionSha256 = preview.CandidateSessionSha256
+            });
+        _lastGeneratedGameplaySaveMigration = result;
+        if (result.Passed && _generatedGameplaySavesSummaryService is not null)
+            _lastGeneratedGameplaySaves = _generatedGameplaySavesSummaryService.Read(
+                _authoring.State.ProjectFolder);
+        return result;
+    }
+
     private static (bool Matches, string Status) SocialTruth(
         GameProjectAuthoringState state,
         GameProjectBuildResult? lastSuccessfulBuild,
@@ -608,30 +701,6 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         return (matches, matches ? "CURRENT" : "LAST_SUCCESS");
     }
 
-
-    private static string ResolveReleaseCandidateStatus(
-        GameProjectAcceptedMechanicsSummary? acceptedMechanics,
-        bool acceptedMechanicsCurrent,
-        GameProjectBuildResult? lastSuccessfulBuild,
-        GameProjectReleaseCandidateReadResult releaseCandidate)
-    {
-        if (acceptedMechanics is { Passed: true } && acceptedMechanicsCurrent)
-        {
-            var recordMatchesBuild = releaseCandidate.Record is not null
-                                     && (lastSuccessfulBuild is null
-                                         || string.Equals(releaseCandidate.Record.PackageSha256,
-                                             lastSuccessfulBuild.PackageSha256, StringComparison.Ordinal)
-                                         && string.Equals(releaseCandidate.Record.CompositionPackageSha256,
-                                             lastSuccessfulBuild.CompositionPackageSha256, StringComparison.Ordinal)
-                                         && string.Equals(releaseCandidate.Record.FinalStateHash,
-                                             lastSuccessfulBuild.FinalStateHash, StringComparison.Ordinal));
-            return releaseCandidate.ConfigurationStatus == "CURRENT" && recordMatchesBuild
-                ? "CURRENT"
-                : "BUILD_GREEN_STANDALONE_PENDING";
-        }
-        if (releaseCandidate.Record is not null) return releaseCandidate.ConfigurationStatus;
-        return "ABSENT";
-    }
 
     private static bool WorldChangeRequiresStandalone(
         string projectFolder,

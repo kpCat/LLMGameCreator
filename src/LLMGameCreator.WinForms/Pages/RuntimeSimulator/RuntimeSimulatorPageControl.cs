@@ -1,4 +1,5 @@
 using System.Text.Json;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
@@ -18,6 +19,8 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
     private readonly IUnifiedGameRuntimeService? _unifiedRuntimeService;
     private readonly IRuntimeStateSerializer? _runtimeStateSerializer;
     private readonly IRuntimeSnapshotStore? _runtimeSnapshotStore;
+    private readonly GeneratedGameplaySaveService? _generatedGameplaySaveService;
+    private readonly GeneratedGameplaySaveMigrationService? _generatedGameplaySaveMigrationService;
     private UnifiedRuntimeSession? _session;
 
     public RuntimeSimulatorPageControl()
@@ -30,13 +33,17 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         IGameRuntimeService runtimeService,
         IUnifiedGameRuntimeService unifiedRuntimeService,
         IRuntimeStateSerializer runtimeStateSerializer,
-        IRuntimeSnapshotStore runtimeSnapshotStore)
+        IRuntimeSnapshotStore runtimeSnapshotStore,
+        GeneratedGameplaySaveService? generatedGameplaySaveService = null,
+        GeneratedGameplaySaveMigrationService? generatedGameplaySaveMigrationService = null)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtimeService = runtimeService;
         _unifiedRuntimeService = unifiedRuntimeService;
         _runtimeStateSerializer = runtimeStateSerializer;
         _runtimeSnapshotStore = runtimeSnapshotStore;
+        _generatedGameplaySaveService = generatedGameplaySaveService;
+        _generatedGameplaySaveMigrationService = generatedGameplaySaveMigrationService;
         InitializeComponent();
         WireEvents();
     }
@@ -90,6 +97,7 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _saveSnapshotButton.Click += (_, _) => SaveSnapshot();
         _loadSnapshotButton.Click += (_, _) => LoadSnapshot();
         _listSnapshotsButton.Click += (_, _) => ListSnapshots();
+        _migrateSnapshotButton.Click += (_, _) => MigrateSnapshot();
         _tickButton.Click += (_, _) => ExecuteTick();
         _waitButton.Click += (_, _) => ExecuteWait();
         _refreshButton.Click += (_, _) => RefreshOptions();
@@ -632,8 +640,16 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             return;
         }
 
-        var result = _runtimeSnapshotStore!.SaveSnapshot(_currentGamePackageService!.CurrentFolder!, _snapshotSlotTextBox.Text.Trim(), _session!);
-        ApplySnapshotResult(result, replaceSession: false);
+        var project = _currentGamePackageService!.CurrentFolder!;
+        if (GeneratedProject(project))
+        {
+            var result = _generatedGameplaySaveService!.Save(
+                project, _snapshotSlotTextBox.Text.Trim(), _session!);
+            ApplyGeneratedSaveResult(result, replaceSession: false);
+            return;
+        }
+        var legacy = _runtimeSnapshotStore!.SaveSnapshot(project, _snapshotSlotTextBox.Text.Trim(), _session!);
+        ApplySnapshotResult(legacy, replaceSession: false);
     }
 
     private void LoadSnapshot()
@@ -644,7 +660,14 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             return;
         }
 
-        var result = _runtimeSnapshotStore.LoadSnapshot(_currentGamePackageService.CurrentFolder, _snapshotSlotTextBox.Text.Trim());
+        var project = _currentGamePackageService.CurrentFolder;
+        if (GeneratedProject(project))
+        {
+            var generated = _generatedGameplaySaveService!.Load(project, _snapshotSlotTextBox.Text.Trim());
+            ApplyGeneratedSaveResult(generated, replaceSession: true);
+            return;
+        }
+        var result = _runtimeSnapshotStore.LoadSnapshot(project, _snapshotSlotTextBox.Text.Trim());
         ApplySnapshotResult(result, replaceSession: true);
     }
 
@@ -656,12 +679,56 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             return;
         }
 
-        var result = _runtimeSnapshotStore.ListSnapshots(_currentGamePackageService.CurrentFolder);
+        var project = _currentGamePackageService.CurrentFolder;
+        if (GeneratedProject(project))
+        {
+            var generated = _generatedGameplaySaveService!.List(project);
+            AppendLog(generated.Entries.Count == 0
+                ? "Сохранения: нет"
+                : "Сохранения: " + string.Join(", ", generated.Entries.Select(entry =>
+                    entry.SlotName + " — " + GeneratedStatusText(entry.Status))));
+            foreach (var diagnostic in generated.Diagnostics) AppendLog(diagnostic);
+            return;
+        }
+        var result = _runtimeSnapshotStore.ListSnapshots(project);
         AppendLog(result.Success ? $"Snapshots: {string.Join(", ", result.SlotNames)}" : result.Message);
         foreach (var diagnostic in result.Diagnostics)
         {
             AppendLog($"{diagnostic.Severity} {diagnostic.Code}: {diagnostic.Message}");
         }
+    }
+
+    private void MigrateSnapshot()
+    {
+        if (_currentGamePackageService?.CurrentFolder is not { Length: > 0 } project
+            || !GeneratedProject(project)
+            || _generatedGameplaySaveMigrationService is null)
+        {
+            AppendLog("Перенос доступен только для сгенерированного проекта.");
+            return;
+        }
+        var preview = _generatedGameplaySaveMigrationService.Preview(
+            project, _snapshotSlotTextBox.Text.Trim());
+        if (!preview.Passed)
+        {
+            AppendLog(preview.Diagnostics.FirstOrDefault() ?? "Перенос не требуется.");
+            return;
+        }
+        AppendLog("Проверка переноса: сохранено " + preview.PreservedCountsByKind.Values.Sum()
+                  + ", сброшено " + preview.DroppedCountsByKind.Values.Sum() + ".");
+        var result = _generatedGameplaySaveMigrationService.Apply(
+            new GeneratedGameplaySaveMigrationApplyRequest
+            {
+                ProjectFolder = project,
+                SlotName = preview.SlotName,
+                SourceRevisionSha256 = preview.SourceRevisionSha256,
+                CandidateSessionSha256 = preview.CandidateSessionSha256
+            });
+        if (result.Passed && result.Session is not null) _session = result.Session;
+        AppendLog(result.Passed
+            ? "Сохранение перенесено и загружено."
+            : result.Diagnostics.FirstOrDefault() ?? "Перенос не выполнен.");
+        RefreshStateJson();
     }
 
     private bool EnsureSnapshotReady()
@@ -696,6 +763,27 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
 
         RefreshStateJson();
     }
+
+    private void ApplyGeneratedSaveResult(GeneratedGameplaySaveResult result, bool replaceSession)
+    {
+        if (replaceSession && result.Passed && result.Session is not null) _session = result.Session;
+        AppendLog(result.Passed
+            ? result.SlotName + " — " + GeneratedStatusText(result.Status)
+            : result.Diagnostics.FirstOrDefault() ?? GeneratedStatusText(result.Status));
+        RefreshStateJson();
+    }
+
+    private bool GeneratedProject(string project) =>
+        _generatedGameplaySaveService?.IsGeneratedProject(project) == true;
+
+    private static string GeneratedStatusText(GeneratedGameplaySaveStatus status) => status switch
+    {
+        GeneratedGameplaySaveStatus.CURRENT => "Текущее",
+        GeneratedGameplaySaveStatus.PACKAGE_REBASE_REQUIRED => "Требуется обновление пакета",
+        GeneratedGameplaySaveStatus.WORLD_MIGRATION_REQUIRED => "Требуется перенос в новый мир",
+        GeneratedGameplaySaveStatus.LEGACY_RAW => "Старое непроверенное сохранение",
+        _ => "Повреждено"
+    };
 
     private void ApplyUnifiedResult(UnifiedRuntimeResult result)
     {

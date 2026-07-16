@@ -1,0 +1,20 @@
+{
+    "status":  "BLOCKED",
+    "failureStage":  "launch_smoke",
+    "failureDiagnostic":  "Standalone smoke failed with exit code 2.",
+    "smokeLog":  "standalone-smoke-f5cc302642774119a46226ffea871850.log",
+    "smokeMarker":  "LLMGC_PROJECT_STANDALONE_SMOKE_FAIL",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "unityProcessStartCount":  0,
+    "hiddenSmokeInvocationCount":  1,
+    "hiddenSmokePassed":  false,
+    "payloadSaveMigrationFactsPassed":  true,
+    "payloadTravelFactsPassed":  true,
+    "payloadAcceptedFactsPassed":  true,
+    "allSelectableRcCurrent":  false,
+    "portableAllSelectablePostSmokeReached":  false,
+    "portableCoreOnlyPostSmokeReached":  false,
+    "coreOnlyFalseRcReady":  true
+}

@@ -64,6 +64,33 @@ public sealed class GameProjectReleaseCandidateRecordService
         projectFolder,
         UnifiedGameProjectWorkspaceVocabulary.ReleaseCandidateRecordRelativePath);
 
+    public static string ResolveOverallStatus(
+        GameProjectAcceptedMechanicsSummary? acceptedMechanics,
+        bool acceptedMechanicsCurrent,
+        string packageSha256,
+        string compositionPackageSha256,
+        string finalStateHash,
+        GameProjectReleaseCandidateReadResult releaseCandidate)
+    {
+        if (acceptedMechanics is { Passed: true } && acceptedMechanicsCurrent)
+        {
+            var recordMatchesBuild = releaseCandidate.Record is not null
+                                     && string.Equals(releaseCandidate.Record.PackageSha256,
+                                         packageSha256, StringComparison.Ordinal)
+                                     && string.Equals(releaseCandidate.Record.CompositionPackageSha256,
+                                         compositionPackageSha256, StringComparison.Ordinal)
+                                     && string.Equals(releaseCandidate.Record.FinalStateHash,
+                                         finalStateHash, StringComparison.Ordinal);
+            return releaseCandidate.ConfigurationStatus == "CURRENT" && recordMatchesBuild
+                ? "CURRENT"
+                : "BUILD_GREEN_STANDALONE_PENDING";
+        }
+
+        return releaseCandidate.Record is not null
+            ? releaseCandidate.ConfigurationStatus
+            : "ABSENT";
+    }
+
     public GameProjectReleaseCandidateRecord Write(
         string projectFolder,
         GameProjectIdentityDocument identity,

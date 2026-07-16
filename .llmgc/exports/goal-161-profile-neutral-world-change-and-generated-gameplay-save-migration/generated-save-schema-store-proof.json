@@ -1,0 +1,17 @@
+{
+    "status":  "GREEN",
+    "revisionSchema":  "generated_gameplay_save_v1",
+    "slotSchema":  "generated_gameplay_save_slot_v1",
+    "root":  ".llmgc/gameplay-saves",
+    "immutableRevisions":  true,
+    "atomicSlotManifest":  true,
+    "identicalSaveDeduplicated":  true,
+    "observedRevisionCount":  3,
+    "statuses":  [
+                     "CURRENT",
+                     "PACKAGE_REBASE_REQUIRED",
+                     "WORLD_MIGRATION_REQUIRED",
+                     "INVALID",
+                     "LEGACY_RAW"
+                 ]
+}

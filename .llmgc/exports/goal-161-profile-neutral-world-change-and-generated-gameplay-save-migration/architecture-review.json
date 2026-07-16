@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "goal161_architecture_review_v1",
+  "status": "RESOLVED_BEFORE_PRODUCTION_EDIT",
+  "goal160IndependentAudit": {
+    "types": ["GameProjectSeedRegenerationCandidateSeal", "GameProjectSeedRegenerationCommitValidator"],
+    "inputs": ["core_only candidate build history", "candidate workspace snapshot", "candidate release-candidate projection"],
+    "outputs": ["exact sealed accepted-mechanics truth", "profile-neutral semantic commit decision"],
+    "statusTransitions": ["Goal160 audit BLOCKED_AT_D8DD05E7 -> closed_by_goal161 only after GREEN"],
+    "behavioralTests": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  },
+  "profileNeutralCommitValidation": {
+    "types": ["GameProjectSeedRegenerationCandidateSealService", "GameProjectSeedRegenerationCommitValidator", "GameProjectReleaseCandidateRecordService"],
+    "inputs": ["MechanicsProfileId", "GameProjectAcceptedMechanicsSummary", "GameProjectAcceptedMechanicsCompatibilityResult", "candidate RC record and overall statuses"],
+    "outputs": ["canonical summary hashes", "exact generic RC-status agreement"],
+    "statusTransitions": ["all selectable -> BUILD_GREEN_STANDALONE_PENDING", "core only -> ABSENT or LAST_SUCCESS", "custom -> generic accepted-mechanics projection"],
+    "behavioralTests": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  },
+  "existingRawSnapshotBoundary": {
+    "types": ["IRuntimeSnapshotStore", "RuntimeSnapshotStore", "GeneratedGameplaySaveService"],
+    "inputs": ["project source kind", ".llmgc/runtime-saves"],
+    "outputs": ["legacy/template raw load", "generated LEGACY_RAW listing and direct-load rejection"],
+    "statusTransitions": ["legacy raw remains legacy", "generated raw -> LEGACY_RAW"],
+    "behavioralTests": [25, 62, 63, 81]
+  },
+  "generatedSaveEnvelope": {
+    "types": ["GeneratedGameplaySaveRevision", "GeneratedGameplaySaveMigration", "GeneratedGameplaySaveProjectTruth"],
+    "inputs": ["exact UnifiedRuntimeSession JSON", "project/world/source/build/package/authoring/history truth", "definition fingerprints"],
+    "outputs": ["generated_gameplay_save_v1 revision", "content-addressed RevisionSha256"],
+    "statusTransitions": ["new exact session -> immutable revision", "identical truth/session -> deduplicated revision"],
+    "behavioralTests": [13, 14, 15, 16, 20, 21, 22]
+  },
+  "immutableRevisionStore": {
+    "types": ["GeneratedGameplaySaveStore", "GeneratedGameplaySaveSlotManifest"],
+    "inputs": ["safe slot name", "canonical revision bytes", "stable append manifest"],
+    "outputs": ["revisions/<sha256>.json", "atomic slot.json"],
+    "statusTransitions": ["missing -> created", "equal existing -> no-op", "unequal same hash -> revision_collision", "write failure -> byte-identical rollback"],
+    "behavioralTests": [13, 14, 15, 16, 17, 18, 19, 45, 46]
+  },
+  "definitionFingerprintInventory": {
+    "types": ["GeneratedGameplayDefinitionFingerprintService", "GeneratedGameplayDefinitionFingerprint", "GeneratedGameplaySessionReferenceInventory"],
+    "inputs": ["actual GamePackageDefinition", "GeneratedContent provenance", "strict MVP metadata", "travel-gate namespace", "UnifiedRuntimeSession"],
+    "outputs": ["same-kind/same-ID canonical hashes", "generated reference IDs", "unresolved references"],
+    "statusTransitions": ["resolved reference -> fingerprinted", "allowed structural ID -> portable scalar", "unresolved package reference -> save rejected"],
+    "behavioralTests": [21, 23, 24, 37, 38, 39, 40, 49]
+  },
+  "sameWorldLoadContract": {
+    "types": ["GeneratedGameplaySaveService", "GeneratedGameplaySaveValidator"],
+    "inputs": ["CURRENT slot revision", "recaptured project truth"],
+    "outputs": ["exact deserialized UnifiedRuntimeSession"],
+    "statusTransitions": ["CURRENT -> exact load", "PACKAGE_REBASE_REQUIRED/WORLD_MIGRATION_REQUIRED/INVALID -> direct load rejected"],
+    "behavioralTests": [26, 27, 28, 29, 30, 31]
+  },
+  "crossWorldMigrationPolicy": {
+    "types": ["GeneratedGameplaySaveMigrationService", "GeneratedGameplaySaveMigrationPreview"],
+    "inputs": ["cached immutable source revision", "current project truth", "source and target definition inventories"],
+    "outputs": ["candidate session", "preserved/dropped report", "new immutable revision"],
+    "statusTransitions": ["WORLD_MIGRATION_REQUIRED or PACKAGE_REBASE_REQUIRED -> preview", "matching cached hashes -> CURRENT migrated revision"],
+    "behavioralTests": [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+  },
+  "mapStateMigration": {
+    "types": ["GameState", "MapDefinition", "GeneratedGameplaySaveMigration"],
+    "inputs": ["source map fingerprint and position", "target generated start map and start position"],
+    "outputs": ["validated current map/position/mode", "MapReset report"],
+    "statusTransitions": ["cross world -> unconditional generated-start reset", "same world rebase -> retain only exact map fingerprint and walkable position"],
+    "behavioralTests": [23, 35, 41, 48]
+  },
+  "gameplayStateMigration": {
+    "types": ["GameRuntimeState", "GeneratedGameplaySaveMigrationService"],
+    "inputs": ["inventory/equipment/resources/stats/progressions/statuses/quests/dialogue/factions/metadata"],
+    "outputs": ["portable target-bound GameRuntimeState", "per-kind preserved/dropped counts"],
+    "statusTransitions": ["portable canonical definition -> preserved", "changed/missing/generated old-world definition -> dropped", "events/encounter/dialogue/tick -> reset"],
+    "behavioralTests": [36, 37, 38, 39, 40, 41, 49, 50]
+  },
+  "generatedReferenceClassification": {
+    "types": ["GeneratedGameplayDefinitionFingerprintService", "GeneratedContentDefinition", "GeneratedWorldTravelOverlayService"],
+    "inputs": ["GeneratedContent mappings", "strict MVP source metadata", "travel gate prototype/entity IDs"],
+    "outputs": ["Generated=true with optional SourceId"],
+    "statusTransitions": ["correlated definition -> generated", "arbitrary string containing generated -> no classification"],
+    "behavioralTests": [21, 24, 38, 39, 49]
+  },
+  "operationLeaseIntegration": {
+    "types": ["GameProjectOperationCoordinator", "GameProjectOperationKinds", "GeneratedGameplaySaveService"],
+    "inputs": ["gameplay_save", "gameplay_load", "gameplay_save_migration"],
+    "outputs": ["single process-wide and cross-process owner"],
+    "statusTransitions": ["idle -> acquired -> released", "busy mutation/build/standalone/world change -> rejected"],
+    "behavioralTests": [59, 60, 83]
+  },
+  "worldChangeStatusPropagation": {
+    "types": ["GameProjectSeedRegenerationService", "GameProjectGeneratedWorldRollbackService", "GeneratedGameplaySaveService"],
+    "inputs": ["unchanged save tree", "new current WorldId/package truth"],
+    "outputs": ["dynamic WORLD_MIGRATION_REQUIRED or PACKAGE_REBASE_REQUIRED"],
+    "statusTransitions": ["world change -> stale status without save writes", "historical restore -> matching original revision CURRENT"],
+    "behavioralTests": [32, 33, 55, 56, 57, 58]
+  },
+  "runtimeSimulatorWorkflow": {
+    "types": ["RuntimeSimulatorPageControl", "GeneratedGameplaySaveService", "IRuntimeSnapshotStore"],
+    "inputs": ["current project source kind", "current _session", "selected slot"],
+    "outputs": ["generated save/list/exact load/migration", "legacy raw behavior"],
+    "statusTransitions": ["generated migratable -> explicit preview/apply -> loaded migrated session", "legacy -> raw store"],
+    "behavioralTests": [61, 62, 63]
+  },
+  "projectsSaveManagementUi": {
+    "types": ["UnifiedGameProjectWorkspaceSnapshot", "ProjectsPageControl", "GeneratedGameplaySavesDialog"],
+    "inputs": ["GeneratedGameplaySavesSummary", "slot status rows"],
+    "outputs": ["compact card", "preview/apply actions", "no primary full hashes/paths/IDs"],
+    "statusTransitions": ["migratable selected -> actions enabled", "CURRENT/INVALID/LEGACY_RAW -> migration disabled"],
+    "behavioralTests": [64, 65, 66]
+  },
+  "standaloneCorrelation": {
+    "types": ["GeneratedGameplaySavesSummary", "ProjectStandaloneBuildRequest", "GameProjectReleaseCandidateRecordService"],
+    "inputs": ["successful CURRENT migration facts", "accepted mechanics and travel facts"],
+    "outputs": ["HumanReviewFacts and actual payload correlation without session payload"],
+    "statusTransitions": ["all selectable complete + one smoke -> RC CURRENT", "core only incomplete -> no false RC readiness"],
+    "behavioralTests": [67, 68, 69, 70, 71, 72]
+  },
+  "portableCopy": {
+    "types": ["GeneratedGameplaySaveStore", "GeneratedGameplaySaveValidator", "GameProjectReleaseCandidateRecordService"],
+    "inputs": ["copied project tree only"],
+    "outputs": ["validated slots/revisions/migration/world/travel/accepted/RC truth without execution"],
+    "statusTransitions": ["all selectable copy -> CURRENT migrated revision and RC CURRENT", "core-only copy -> valid save truth with ABSENT/LAST_SUCCESS RC"],
+    "behavioralTests": [72, 73]
+  },
+  "legacySnapshotCompatibility": {
+    "types": ["RuntimeSnapshotStore", "RuntimeSimulatorPageControl", "GeneratedGameplaySaveService"],
+    "inputs": [".llmgc/runtime-saves/*.runtime.json"],
+    "outputs": ["unchanged legacy bytes and behavior", "generated warning/listing"],
+    "statusTransitions": ["legacy project -> loadable", "generated project -> LEGACY_RAW not direct-loaded"],
+    "behavioralTests": [25, 62, 63, 81, 82]
+  },
+  "failureRollbackMatrix": {
+    "types": ["GeneratedGameplaySaveStore", "GeneratedGameplaySaveMigrationService", "GameProjectSeedRegenerationTransaction"],
+    "inputs": ["tampered manifest/revision/session/fingerprint", "modified preview", "source/current truth race", "write failure"],
+    "outputs": ["causal diagnostic", "byte-identical slot tree", "world-change rollback unchanged"],
+    "statusTransitions": ["validation failure -> no write", "apply failure -> source manifest/revisions unchanged"],
+    "behavioralTests": [18, 19, 20, 21, 22, 31, 42, 43, 44, 46, 74, 75]
+  },
+  "nonGoals": {
+    "types": ["scope guard"],
+    "inputs": ["Goal161 allowlist and forbidden roots"],
+    "outputs": ["zero Runtime/GamePackage/FeatureModule catalog/Unity changes"],
+    "statusTransitions": ["scope violation -> publication blocked"],
+    "behavioralTests": [74, 75, 76, 77, 78, 79, 80, 84]
+  },
+  "testInventory": {
+    "goal161BehavioralCount": 76,
+    "behavioralTheoryCaseExpansion": 3,
+    "regressionContractCount": 11,
+    "items": [
+      "1 all-selectable regeneration apply remains GREEN",
+      "2 all-selectable history rollback remains GREEN",
+      "3 real core-only regeneration candidate builds TRAVEL_CURRENT",
+      "4 core-only regeneration semantic commit succeeds",
+      "5 real core-only history rollback candidate builds TRAVEL_CURRENT",
+      "6 core-only rollback semantic commit succeeds",
+      "7 core-only AcceptedMechanics remains false with MissingFactKinds",
+      "8 core-only RC never claims READY/PENDING/CURRENT",
+      "9 custom partial selection exact sealed summary commits",
+      "10 tampered AcceptedMechanics summary fails semantic validation",
+      "11 tampered compatibility summary fails",
+      "12 candidate RC-status mismatch fails and rolls back",
+      "13 generated save creates immutable revision and slot manifest",
+      "14 repeated identical save deduplicates",
+      "15 changed session creates a new revision with parent",
+      "16 prior revision bytes remain unchanged",
+      "17 invalid slot names/path escape rejected",
+      "18 revision filename/hash mismatch rejected",
+      "19 slot current pointer mismatch rejected",
+      "20 session hash mismatch rejected",
+      "21 definition fingerprint tamper rejected",
+      "22 foreign project identity rejected",
+      "23 current map/position validation enforced",
+      "24 unresolved package definition reference rejected",
+      "25 legacy raw snapshots remain untouched",
+      "26 CURRENT generated save loads exact session",
+      "27 exact serialized session equality",
+      "28 map/gameplay hashes equal",
+      "29 no Runtime Start/reset occurs during load",
+      "30 same-world package mismatch reports PACKAGE_REBASE_REQUIRED",
+      "31 direct load of migratable/invalid save rejected",
+      "32 regeneration leaves save tree byte-identical and changes status to WORLD_MIGRATION_REQUIRED",
+      "33 history rollback leaves save tree byte-identical",
+      "34 migration preview is zero-write",
+      "35 cross-world map resets to new generated start",
+      "36 transient events/encounter/dialogue/tick reset",
+      "37 canonically equal baseline inventory/resources/stats/progression/faction data preserved",
+      "38 changed/missing generated items/quests/statuses dropped",
+      "39 flag/metadata exact generated references dropped",
+      "40 portable scalar structural IDs retained",
+      "41 migration preview counts match actual candidate session",
+      "42 caller-modified migration preview rejected",
+      "43 source revision tamper after preview rejected",
+      "44 current world/package race after preview rejected",
+      "45 migration apply writes one immutable revision and updates manifest atomically",
+      "46 migration failure leaves slot tree byte-identical",
+      "47 migrated revision becomes CURRENT",
+      "48 exact migrated load succeeds",
+      "49 no dropped reference remains in migrated session",
+      "50 migration object matches preserved/dropped lists",
+      "51 loaded migrated session executes valid movement",
+      "52 loaded migrated session crosses a generated travel gate",
+      "53 destination generated interaction succeeds",
+      "54 repeat load/command sequence final hash/events equivalent",
+      "55 restore the original historical world after migration",
+      "56 original source revision becomes CURRENT again",
+      "57 migrated revision becomes WORLD_MIGRATION_REQUIRED for restored world",
+      "58 no revision rewrite occurs during world changes",
+      "59 save operation rejects during regeneration/rollback/build/standalone",
+      "60 world-change operation rejects during save migration",
+      "61 Runtime Simulator generated save/list/load uses generated service",
+      "62 Runtime Simulator legacy project uses raw snapshot store",
+      "63 generated legacy raw snapshot is LEGACY_RAW and not direct-loaded",
+      "64 Projects save card reports current/migration/invalid counts",
+      "65 saves dialog migration actions/statuses truthful",
+      "66 primary UI contains no full hashes/paths/generated IDs",
+      "67 migration facts append to standalone request",
+      "68 exactly one hidden smoke after migration",
+      "69 host reused/not rebuilt and Unity zero",
+      "70 actual payload contains save-migration and accepted/travel facts",
+      "71 all-selectable RC CURRENT after standalone",
+      "72 core-only portable/save truth restores without false RC readiness",
+      "73 all-selectable portable copy restores slots/revisions/migration/RC without execution",
+      "74 Goal160 sealed regeneration/history rollback regressions GREEN",
+      "75 Goal159 v1/v2 regeneration regressions GREEN",
+      "76 Goal158 travel regressions GREEN",
+      "77 Goal157 provenance/two-lane regressions GREEN",
+      "78 Goal156 creation/custom-base regressions GREEN",
+      "79 Goal155A/155 regressions GREEN",
+      "80 Goal154D/153C/150/149 regressions GREEN",
+      "81 RuntimeSnapshotStore legacy tests GREEN",
+      "82 Runtime Simulator existing command behavior GREEN",
+      "83 operation coordinator/race regressions GREEN",
+      "84 Goal142 and goal148-manual byte-identical"
+    ]
+  }
+}

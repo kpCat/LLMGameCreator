@@ -126,7 +126,7 @@ internal sealed class CandidateSealFixture : IDisposable
     public GameProjectSeedRegenerationDiff Diff { get; }
     public GameProjectAuthoringState Authoring { get; }
 
-    public static CandidateSealFixture Create()
+    public static CandidateSealFixture Create(UnifiedGameProjectWorkspaceSnapshot? snapshotOverride = null)
     {
         var root = Path.Combine(Path.GetTempPath(), "LLMGameCreator", "Goal160Seal", Guid.NewGuid().ToString("N"));
         Write(root, ".llmgc/generation/seeded-project-source.json", "source");
@@ -163,7 +163,7 @@ internal sealed class CandidateSealFixture : IDisposable
             FinalStateHash = new string('f', 64),
             QualifiedAuthoringFingerprint = new string('a', 64)
         };
-        var snapshot = new UnifiedGameProjectWorkspaceSnapshot
+        var snapshot = snapshotOverride ?? new UnifiedGameProjectWorkspaceSnapshot
         {
             GeneratedWorld = new GameProjectGeneratedWorldSummary
             {

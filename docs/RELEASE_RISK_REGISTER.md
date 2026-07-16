@@ -239,3 +239,13 @@ Regeneration and history rollback now share one operation lease, sealed candidat
 - Goal159 independent audit found P1 `regeneration_commit_not_sealed_inside_shared_operation_and_semantic_rollback_boundary` at `c7788e1e`; Goal160 closes it with a whole-operation cross-process lock, cached immutable seal authority, in-transaction truth/inventory recheck, journal `validating`, and semantic rollback/recovery before commit cleanup.
 - Historical rollback never promotes historical package, authoring, identity or RC as current truth. It restores historical generation into an isolated candidate, rebuilds with current mechanics/parameters/identity, repeats and reopens `TRAVEL_CURRENT`, then uses the normal sealed transaction.
 - Cross-world gameplay save-state migration remains unimplemented and is the next explicit product decision. It must not be inferred from world-history rollback or portable project recovery.
+
+## Goal161 generated gameplay save migration
+
+Generated gameplay saves are now bound to exact world/package/build truth. Same-world loads are exact; world or package changes require an explicit migration that resets location/transient state and preserves only canonically compatible definitions. Original revisions remain immutable. Gameplay campaign UX beyond Runtime Simulator remains future work.
+
+- Goal160's profile-neutral core-only semantic-commit correction is implemented and passes the focused matrix, but the P1 is not formally closed because Goal161 is BLOCKED.
+- Generated legacy raw snapshots intentionally remain `LEGACY_RAW`, unverified and unavailable for direct generated-project load.
+- Migration is definition-fingerprint based; it does not promise semantic conversion for changed definitions. Dropped state is explicit in the migration report.
+- The single permitted cached hidden standalone smoke failed with exit code 2 after emitting `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`; RC CURRENT and portable post-smoke assertions were not reached.
+- Next action is a bounded standalone diagnosis with an explicitly renewed smoke budget; broader player-driven campaign save UX remains out of scope.

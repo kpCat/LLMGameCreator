@@ -1,0 +1,7 @@
+{
+    "status":  "GREEN",
+    "movePassed":  true,
+    "generatedTravelGatePassed":  true,
+    "destinationInteractionPassed":  true,
+    "replayEquivalent":  true
+}

@@ -1,0 +1,61 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-161-profile-neutral-world-change-and-generated-gameplay-save-migration/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: d8dd05e7be8d87496c75a15a0c2f7ab2e454d0dc
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- Goal160 independent audit BLOCKED на одном profile-neutral P1;
+- core_only generated build/travel GREEN и AcceptedMechanics намеренно false/incomplete;
+- semantic commit validator не имеет права безусловно требовать AcceptedMechanics.Passed=true;
+- seal и commit validator сравнивают exact AcceptedMechanics/Compatibility hashes и generic RC statuses;
+- real core-only regeneration и world-history rollback обязаны commit GREEN без false RC READY;
+- не ломай all-selectable и custom partial selection;
+- добавь generated-aware gameplay saves, не меняя Runtime schemas;
+- raw RuntimeSnapshotStore остаётся legacy/template workflow;
+- generated save root: immutable revisions + atomic slot manifest;
+- revision связан с project identity, WorldId, source/build/package/authoring/history и definition fingerprints;
+- same-world CURRENT load восстанавливает exact UnifiedRuntimeSession без Start/reset;
+- after regeneration/rollback save status WORLD_MIGRATION_REQUIRED или PACKAGE_REBASE_REQUIRED;
+- direct stale load запрещён;
+- migration preview zero-write; apply trusts cached source revision + candidate session hashes;
+- cross-world map resets to current generated start; events/encounter/dialogue/tick reset;
+- preserve only state whose same-kind/same-ID definition has canonical-equal fingerprint;
+- drop incompatible generated item/quest/status/faction/etc references with explicit report;
+- original revision immutable; migration creates a new revision and atomically updates slot manifest;
+- post-migration exact load + real Move/travel/destination interaction + replay required;
+- restore original historical world and prove original revision becomes CURRENT again;
+- save tree must remain byte-identical during regeneration/history rollback;
+- operation coordinator adds gameplay_save/load/migration and rejects races;
+- Runtime Simulator uses generated-aware save/list/load/migrate for generated projects;
+- legacy projects keep existing raw snapshot behavior;
+- generated legacy raw snapshots are LEGACY_RAW and never direct-loaded;
+- Projects page adds compact save card and manager dialog;
+- exactly one cached hidden standalone smoke after migration;
+- HostReused=true, HostRebuilt=false, Unity starts=0;
+- payload save-migration + travel + accepted facts;
+- all-selectable RC CURRENT; core-only no false RC readiness;
+- portable all-selectable and core-only saves restore without execution;
+- no Runtime/GamePackage/FeatureModule catalog/Unity changes;
+- no full suite, 85-case closure or all-ProductSmoke;
+- P0/P1 mandatory matrix defects fix inside Goal161; P2/P3 debt only;
+- create/push exactly one final GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи profile-neutral commit matrix, save schema/revisions/statuses,
+same-world load, preserved/dropped migration, map/transient reset,
+post-load Runtime/travel/replay, historical revision reuse,
+operation/UI, cache/Unity/smoke, payload/RC/portable,
+regressions, evidence/artifact scope, final SHA, push,
+HEAD==origin/main и clean worktree.

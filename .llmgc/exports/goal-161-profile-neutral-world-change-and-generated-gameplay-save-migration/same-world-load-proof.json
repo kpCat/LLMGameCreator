@@ -1,0 +1,8 @@
+{
+    "status":  "GREEN",
+    "exactUnifiedRuntimeSession":  true,
+    "runtimeStartCalled":  false,
+    "mapAndGameplayHashesExact":  true,
+    "loadWrites":  0,
+    "packageRebaseDirectLoadRejected":  true
+}

@@ -288,6 +288,37 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<GeneratedWorldHistoryService>(resolver =>
             new GeneratedWorldHistoryService(
                 resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.Register<GeneratedGameplayDefinitionFingerprintService>(Reuse.Singleton);
+        _container.Register<GeneratedGameplaySaveStore>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedGameplaySaveValidator>(resolver =>
+            new GeneratedGameplaySaveValidator(
+                repositoryRoot,
+                resolver.Resolve<IGamePackageRepository>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                resolver.Resolve<GeneratedWorldHistoryService>(),
+                resolver.Resolve<GeneratedGameplayDefinitionFingerprintService>(),
+                resolver.Resolve<IRuntimeStateSerializer>(),
+                resolver.Resolve<IGameProjectOperationCoordinator>(),
+                resolver.Resolve<GeneratedWorldRegionMapBindingService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedGameplaySaveService>(resolver =>
+            new GeneratedGameplaySaveService(
+                resolver.Resolve<IGameProjectOperationCoordinator>(),
+                resolver.Resolve<GeneratedGameplaySaveValidator>(),
+                resolver.Resolve<GeneratedGameplaySaveStore>(),
+                resolver.Resolve<IRuntimeStateSerializer>(),
+                resolver.Resolve<IRuntimeSnapshotStore>(),
+                resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedGameplaySaveMigrationService>(resolver =>
+            new GeneratedGameplaySaveMigrationService(
+                resolver.Resolve<IGameProjectOperationCoordinator>(),
+                resolver.Resolve<GeneratedGameplaySaveValidator>(),
+                resolver.Resolve<GeneratedGameplaySaveStore>(),
+                resolver.Resolve<GeneratedGameplayDefinitionFingerprintService>(),
+                resolver.Resolve<IRuntimeStateSerializer>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedGameplaySavesSummaryService>(resolver =>
+            new GeneratedGameplaySavesSummaryService(
+                resolver.Resolve<GeneratedGameplaySaveService>()), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldChangeRecordService>(resolver =>
             new GameProjectGeneratedWorldChangeRecordService(
                 resolver.Resolve<SeededGeneratedProjectSourceService>(),
@@ -347,7 +378,10 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<GameProjectGeneratedWorldSummaryService>(),
                 resolver.Resolve<GameProjectSeedRegenerationService>(),
                 resolver.Resolve<IGameProjectOperationCoordinator>(),
-                resolver.Resolve<GameProjectGeneratedWorldRollbackService>()), Reuse.Singleton);
+                resolver.Resolve<GameProjectGeneratedWorldRollbackService>(),
+                resolver.Resolve<GeneratedGameplaySaveService>(),
+                resolver.Resolve<GeneratedGameplaySaveMigrationService>(),
+                resolver.Resolve<GeneratedGameplaySavesSummaryService>()), Reuse.Singleton);
         _container.RegisterDelegate<IUnifiedGameProjectWorkspaceController>(
             resolver => resolver.Resolve<UnifiedGameProjectWorkspaceController>(), Reuse.Singleton);
 
@@ -389,7 +423,9 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGameRuntimeService>(),
             resolver.Resolve<IUnifiedGameRuntimeService>(),
             resolver.Resolve<IRuntimeStateSerializer>(),
-            resolver.Resolve<IRuntimeSnapshotStore>()), Reuse.Singleton);
+            resolver.Resolve<IRuntimeSnapshotStore>(),
+            resolver.Resolve<GeneratedGameplaySaveService>(),
+            resolver.Resolve<GeneratedGameplaySaveMigrationService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GeneratorLibraryPageControl>(resolver => new GeneratorLibraryPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

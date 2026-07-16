@@ -215,6 +215,11 @@ public sealed record GameProjectSeedRegenerationCandidateSeal
     public string CandidateOverlaySha256 { get; init; } = string.Empty;
     public string CandidateGeneratedBaseSha256 { get; init; } = string.Empty;
     public string CandidateSnapshotStatus { get; init; } = string.Empty;
+    public string MechanicsProfileId { get; init; } = string.Empty;
+    public string AcceptedMechanicsSummarySha256 { get; init; } = string.Empty;
+    public string AcceptedMechanicsCompatibilitySha256 { get; init; } = string.Empty;
+    public string ExpectedCandidateRcRecordStatus { get; init; } = string.Empty;
+    public string ExpectedCandidateRcOverallStatus { get; init; } = string.Empty;
     public string DiffSha256 { get; init; } = string.Empty;
     public string SealSha256 { get; init; } = string.Empty;
 }

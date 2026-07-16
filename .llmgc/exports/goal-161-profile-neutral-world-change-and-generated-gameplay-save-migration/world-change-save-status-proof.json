@@ -1,0 +1,9 @@
+{
+    "status":  "GREEN",
+    "regenerationStatus":  "WORLD_MIGRATION_REQUIRED",
+    "rollbackStatus":  "WORLD_MIGRATION_REQUIRED",
+    "worldChangeSaveWrites":  0,
+    "saveTreeByteIdentical":  true,
+    "originalWorldRestored":  true,
+    "originalRevisionCurrentAgain":  true
+}

@@ -1,0 +1,9 @@
+{
+    "status":  "FIX_IMPLEMENTED_GOAL161_NOT_GREEN",
+    "auditedCommit":  "d8dd05e7",
+    "result":  "BLOCKED_AT_D8DD05E7",
+    "blocker":  "semantic_commit_validator_requires_complete_accepted_mechanics_for_core_only_generated_projects",
+    "exactReproduction":  "regeneration.commit_semantic_validation_failed:semantic.history_qualification_incomplete",
+    "profileNeutralExactHashCorrectionPassed":  true,
+    "formallyClosedByGoal161":  false
+}

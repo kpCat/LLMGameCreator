@@ -1,0 +1,21 @@
+{
+    "status":  "GREEN",
+    "canonicalSameKindSameIdRequired":  true,
+    "generatedProvenanceCorrelated":  true,
+    "tamperRejected":  true,
+    "unresolvedReferenceRejected":  true,
+    "preservedReferenceCount":  19,
+    "droppedReferenceCount":  10,
+    "droppedReasons":  [
+                           "faction:generated/faction/lantern_keepers:definition_missing_or_changed",
+                           "faction:generated/faction/roadbound_surveyors:definition_missing_or_changed",
+                           "faction:generated/faction/salt_orchard_league:definition_missing_or_changed",
+                           "gameplay_event:events:transient_events_reset",
+                           "map:generated/map/region_blue_ditch:map_reset_to_current_generated_start",
+                           "map_event:events:transient_events_reset",
+                           "metadata:remembered_map:references_dropped_definition:generated/map/region_blue_ditch",
+                           "resource:generated/resource/route_key:definition_missing_or_changed",
+                           "resource:generated/resource/trade_charm:definition_missing_or_changed",
+                           "tick:runtime_tick:transient_tick_reset"
+                       ]
+}

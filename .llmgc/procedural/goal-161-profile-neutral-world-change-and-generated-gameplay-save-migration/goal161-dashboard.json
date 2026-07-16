@@ -1,0 +1,16 @@
+{
+    "schemaVersion":  "goal161_dashboard_v1",
+    "status":  "BLOCKED_HIDDEN_STANDALONE_SMOKE_FAILED",
+    "blocker":  "launch_smoke_exit_2_llmgc_project_standalone_smoke_fail",
+    "goal161TestsDiscovered":  76,
+    "goal161BehavioralTestsPassed":  76,
+    "profileNeutralCommitMatrixPassed":  true,
+    "generatedGameplaySaveMatrixPassed":  true,
+    "hiddenSmokeInvocationCount":  1,
+    "hiddenSmokePassed":  false,
+    "releaseCandidateCurrentReached":  false,
+    "portablePostSmokeAssertionsReached":  false,
+    "goal161Accepted":  false,
+    "goal161ManualReviewRequired":  false,
+    "goal161IndependentAuditRequired":  false
+}

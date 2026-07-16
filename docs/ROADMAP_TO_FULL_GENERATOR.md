@@ -303,7 +303,7 @@ The project succeeds if each stage increases either:
 - export/runtime reality;
 - user control over generated games.
 
-## Current Goal160 bridge
+## Current Goal161 bridge
 
 Goal156 completed the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. Its independent audit then identified missing causal source provenance and canonical overlay/base reconstruction.
 
@@ -315,4 +315,6 @@ Goal158 independent audit is GREEN at `9a350c63`. Goal159 adds source v2 request
 
 Goal160 closes that P1 by placing build, standalone, authoring mutation, regeneration, history rollback and recovery behind one operation coordinator and cross-process project lock. Candidate truth is immutably sealed; Apply trusts cached attempt authority, rechecks truth/inventory inside the locked transaction, enters journal `validating`, and performs semantic validation before commit/cleanup. Failure and validating crash restore exact before hashes.
 
-Generated-world history stores only generation source/sidecars. Historical rollback rebuilds the target generation with current mechanics/parameters/identity, repeats and reopens `TRAVEL_CURRENT`, then uses the same sealed transaction. Old histories and RC bytes are retained; ordinary standalone renews CURRENT RC. The next roadmap decision follows an independent Goal160 audit: plan generated gameplay save-state migration between worlds. Goal160 does not authorize Unity host changes, Runtime/public package schema changes, provider work or catalog changes.
+Generated-world history stores only generation source/sidecars. Historical rollback rebuilds the target generation with current mechanics/parameters/identity, repeats and reopens `TRAVEL_CURRENT`, then uses the same sealed transaction. Old histories and RC bytes are retained; ordinary standalone renews CURRENT RC.
+
+Goal160 independent audit found a profile-neutral P1 at `d8dd05e7`: core-only world changes were incorrectly forced through complete AcceptedMechanics. Goal161 implements and tests the correction with exact sealed summary/compatibility hashes and generic RC projections. Generated gameplay saves now use immutable revisions and an atomic slot manifest, exact same-world load and explicit fingerprint-based package/world migration. Cross-world map/transients reset, compatible state is preserved, incompatible references are reported/dropped, and historical revisions become current again when their world is restored. The single permitted cached standalone attempt reused the host with zero Unity starts but failed the player self-check, so Goal161 is BLOCKED and portable post-smoke proof was not reached. The next roadmap decision is a bounded standalone diagnosis with a newly authorized smoke budget; independent audit and player-driven campaign planning wait.

@@ -212,9 +212,19 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                 || history.GeneratedWorldActivation is not { Present: true, Passed: true }
                 || history.GeneratedRegionTravel is not { Present: true, Passed: true, ReplayEquivalent: true,
                     StateRoundtripPassed: true }
-                || history.AcceptedMechanics is not { Present: true, Passed: true }
+                || history.AcceptedMechanics is not { Present: true }
                 || history.AcceptedMechanicsCompatibility is not { Passed: true })
                 diagnostics.Add("semantic.history_qualification_incomplete");
+            Match(history.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
+                request.CandidateSeal.MechanicsProfileId,
+                "semantic.mechanics_profile_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(history.AcceptedMechanics),
+                request.CandidateSeal.AcceptedMechanicsSummarySha256,
+                "semantic.accepted_mechanics_summary_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.AcceptedMechanicsCompatibility),
+                request.CandidateSeal.AcceptedMechanicsCompatibilitySha256,
+                "semantic.accepted_mechanics_compatibility_mismatch", diagnostics);
             Match(history.PackageSha256, request.CandidateSeal.CandidatePackageSha256,
                 "semantic.history_package_mismatch", diagnostics);
             Match(history.CompositionPackageSha256, request.CandidateSeal.CandidateCompositionSha256,
@@ -251,6 +261,24 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             }
             else if (rc.ConfigurationStatus != "LAST_SUCCESS")
                 diagnostics.Add("semantic.release_candidate_status_invalid");
+            Match(rc.ConfigurationStatus,
+                request.CandidateSeal.ExpectedCandidateRcRecordStatus,
+                "semantic.release_candidate_record_status_mismatch", diagnostics);
+            var acceptedMechanicsCurrent = history.AcceptedMechanics is { Passed: true }
+                                           && fingerprint.Passed
+                                           && !string.IsNullOrWhiteSpace(fingerprint.Sha256)
+                                           && string.Equals(history.AcceptedMechanics.QualifiedAuthoringFingerprint,
+                                               fingerprint.Sha256, StringComparison.Ordinal);
+            var overallStatus = GameProjectReleaseCandidateRecordService.ResolveOverallStatus(
+                history.AcceptedMechanics,
+                acceptedMechanicsCurrent,
+                history.PackageSha256,
+                history.CompositionPackageSha256,
+                history.FinalStateHash,
+                rc);
+            Match(overallStatus,
+                request.CandidateSeal.ExpectedCandidateRcOverallStatus,
+                "semantic.release_candidate_overall_status_mismatch", diagnostics);
 
             return new GameProjectSeedRegenerationCommitValidationResult
             {

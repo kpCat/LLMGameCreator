@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "operationKinds":  [
+                           "gameplay_save",
+                           "gameplay_load",
+                           "gameplay_save_migration"
+                       ],
+    "raceMatrixPassed":  true,
+    "runtimeSimulatorGeneratedAware":  true,
+    "legacyRawWorkflowPreserved":  true,
+    "generatedLegacyRawDirectLoad":  false,
+    "projectsCardPassed":  true,
+    "managerDialogPassed":  true,
+    "primaryUiFullHashesOrPaths":  false
+}

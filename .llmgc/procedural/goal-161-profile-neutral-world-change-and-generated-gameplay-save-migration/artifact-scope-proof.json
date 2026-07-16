@@ -1,0 +1,16 @@
+{
+    "status":  "BLOCKED_BY_STANDALONE_NOT_SCOPE",
+    "scenario":  "goal-161-profile-neutral-world-change-and-generated-gameplay-save-migration",
+    "baselineRef":  "d8dd05e7be8d87496c75a15a0c2f7ab2e454d0dc",
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "runtimeSchemaChanges":  0,
+    "gamePackageSchemaChanges":  0,
+    "featureModuleCatalogChanges":  0,
+    "unityChanges":  0,
+    "unityHostBuildRun":  false,
+    "hiddenStandaloneSmokeInvocationCount":  1,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false
+}

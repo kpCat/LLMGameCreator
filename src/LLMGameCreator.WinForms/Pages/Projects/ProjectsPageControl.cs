@@ -77,6 +77,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _buildAndQualifyButton.Click += async (_, _) => await BuildAndQualifyAsync();
         _regenerateGeneratedWorldButton.Click += async (_, _) => await RegenerateGeneratedWorldAsync();
         _generatedWorldHistoryButton.Click += async (_, _) => await OpenGeneratedWorldHistoryAsync();
+        _manageGeneratedGameplaySavesButton.Click += (_, _) => OpenGeneratedGameplaySaves();
         _buildWindowsStandaloneButton.Click += async (_, _) => await BuildWindowsStandaloneAsync();
         _cancelWindowsStandaloneButton.Click += (_, _) => _workspaceController?.CancelWindowsStandaloneBuild();
         _launchWindowsStandaloneButton.Click += (_, _) => LaunchWindowsStandalone();
@@ -269,6 +270,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             _overviewLastBuildLabel.Text = "Последняя успешная сборка: " + snapshot.LastSuccessfulBuild;
             _overviewRuntimeLabel.Text = "Последняя Runtime-проверка: " + snapshot.LastRuntimeQualification;
             BindGeneratedWorldCard(snapshot);
+            BindGeneratedGameplaySavesCard(snapshot);
             BindMechanics(snapshot);
             BindParameters(snapshot);
             BindSocialCard(snapshot);
@@ -349,6 +351,41 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 ? "сохранённый мир" : change?.OperationKind == "regeneration" ? "новые параметры" : "исходный мир"),
             "Windows standalone    " + standalone
         });
+    }
+
+    private void BindGeneratedGameplaySavesCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var visible = snapshot.GeneratedWorld is { Present: true };
+        _generatedGameplaySavesCardPanel.Visible = visible;
+        if (!visible)
+        {
+            _generatedGameplaySavesCardLabel.Text = string.Empty;
+            return;
+        }
+        var summary = snapshot.GeneratedGameplaySaves;
+        var migration = snapshot.LastGeneratedGameplaySaveMigration;
+        _generatedGameplaySavesCardLabel.Text = string.Join(Environment.NewLine, new[]
+        {
+            "Игровые сохранения",
+            "Слотов    " + (summary?.SlotCount ?? 0),
+            "Текущих    " + snapshot.GeneratedGameplaySaveCurrentCount,
+            "Требуют переноса    " + snapshot.GeneratedGameplaySaveMigrationRequiredCount,
+            "Повреждено    " + snapshot.GeneratedGameplaySaveInvalidCount,
+            "Последний перенос    " + (migration is null
+                ? "не выполнялся"
+                : "сохранено " + migration.PreservedCounts.Values.Sum()
+                  + ", сброшено " + migration.DroppedCounts.Values.Sum())
+        });
+        _manageGeneratedGameplaySavesButton.Enabled = !_buildUiRunning
+                                                       && !snapshot.ProjectOperationBusy;
+    }
+
+    private void OpenGeneratedGameplaySaves()
+    {
+        if (_workspaceController?.HasOpenProject != true || _buildUiRunning) return;
+        using var dialog = new GeneratedGameplaySavesDialog(_workspaceController);
+        dialog.ShowDialog(this);
+        BindWorkspace(_workspaceController.Snapshot());
     }
 
     private void BindSocialCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
@@ -1058,6 +1095,8 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _generatedWorldHistoryButton.Enabled = !busy
             && _workspaceController?.HasOpenProject == true
             && _workspaceController.Snapshot().CanOpenGeneratedWorldHistory;
+        _manageGeneratedGameplaySavesButton.Enabled = !busy
+            && _workspaceController?.HasOpenProject == true;
         _workspaceTabs.Enabled = !busy;
         _buildAndQualifyButton.Enabled = !busy;
         _buildWindowsStandaloneButton.Enabled = !busy;

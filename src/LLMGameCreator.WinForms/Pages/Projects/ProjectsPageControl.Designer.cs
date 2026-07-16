@@ -54,6 +54,9 @@ namespace LLMGameCreator.WinForms.Pages
         private Label _overviewRuntimeLabel;
         private Panel _generatedWorldCardPanel;
         private Label _generatedWorldCardLabel;
+        private Panel _generatedGameplaySavesCardPanel;
+        private Label _generatedGameplaySavesCardLabel;
+        private Button _manageGeneratedGameplaySavesButton;
         private FlowLayoutPanel _mechanicsFlow;
         private FlowLayoutPanel _settingsFlow;
         private TableLayoutPanel _buildLayout;
@@ -136,6 +139,9 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewRuntimeLabel = new Label();
             this._generatedWorldCardPanel = new Panel();
             this._generatedWorldCardLabel = new Label();
+            this._generatedGameplaySavesCardPanel = new Panel();
+            this._generatedGameplaySavesCardLabel = new Label();
+            this._manageGeneratedGameplaySavesButton = new Button();
             this._mechanicsFlow = new FlowLayoutPanel();
             this._settingsFlow = new FlowLayoutPanel();
             this._buildLayout = new TableLayoutPanel();
@@ -353,9 +359,10 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewLayout.Controls.Add(this._overviewLastBuildLabel, 0, 5);
             this._overviewLayout.Controls.Add(this._overviewRuntimeLabel, 0, 6);
             this._overviewLayout.Controls.Add(this._generatedWorldCardPanel, 0, 7);
+            this._overviewLayout.Controls.Add(this._generatedGameplaySavesCardPanel, 0, 8);
             this._overviewLayout.Dock = DockStyle.Fill;
             this._overviewLayout.Padding = new Padding(18);
-            this._overviewLayout.RowCount = 8;
+            this._overviewLayout.RowCount = 9;
             this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
@@ -363,7 +370,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 62F));
+            this._overviewLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 38F));
             this._overviewProjectLabel.Dock = DockStyle.Fill;
             this._overviewProjectLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             this._overviewFolderLabel.Dock = DockStyle.Fill;
@@ -385,6 +393,27 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedWorldCardLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
             this._generatedWorldCardLabel.TextAlign = ContentAlignment.TopLeft;
             this._generatedWorldCardLabel.UseMnemonic = false;
+            //
+            // _generatedGameplaySavesCardPanel
+            //
+            this._generatedGameplaySavesCardPanel.AutoScroll = true;
+            this._generatedGameplaySavesCardPanel.BackColor = Color.FromArgb(248, 250, 246);
+            this._generatedGameplaySavesCardPanel.BorderStyle = BorderStyle.FixedSingle;
+            this._generatedGameplaySavesCardPanel.Controls.Add(this._generatedGameplaySavesCardLabel);
+            this._generatedGameplaySavesCardPanel.Controls.Add(this._manageGeneratedGameplaySavesButton);
+            this._generatedGameplaySavesCardPanel.Dock = DockStyle.Fill;
+            this._generatedGameplaySavesCardPanel.Margin = new Padding(0, 8, 0, 0);
+            this._generatedGameplaySavesCardPanel.Padding = new Padding(12);
+            this._generatedGameplaySavesCardPanel.Visible = false;
+            this._generatedGameplaySavesCardLabel.AutoSize = false;
+            this._generatedGameplaySavesCardLabel.Dock = DockStyle.Fill;
+            this._generatedGameplaySavesCardLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+            this._generatedGameplaySavesCardLabel.TextAlign = ContentAlignment.TopLeft;
+            this._generatedGameplaySavesCardLabel.UseMnemonic = false;
+            this._manageGeneratedGameplaySavesButton.AutoSize = true;
+            this._manageGeneratedGameplaySavesButton.Dock = DockStyle.Bottom;
+            this._manageGeneratedGameplaySavesButton.Text = "Управление сохранениями";
+            this._manageGeneratedGameplaySavesButton.UseVisualStyleBackColor = true;
             //
             // dynamic sections
             //

@@ -106,6 +106,17 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
                 "regeneration.candidate_tampered", diagnostics);
             Compare(persisted.CandidateSnapshotStatus, actual.CandidateSnapshotStatus,
                 "regeneration.candidate_tampered", diagnostics);
+            Compare(persisted.MechanicsProfileId, actual.MechanicsProfileId,
+                "regeneration.candidate_tampered", diagnostics);
+            Compare(persisted.AcceptedMechanicsSummarySha256, actual.AcceptedMechanicsSummarySha256,
+                "regeneration.candidate_history_changed", diagnostics);
+            Compare(persisted.AcceptedMechanicsCompatibilitySha256,
+                actual.AcceptedMechanicsCompatibilitySha256,
+                "regeneration.candidate_history_changed", diagnostics);
+            Compare(persisted.ExpectedCandidateRcRecordStatus, actual.ExpectedCandidateRcRecordStatus,
+                "regeneration.candidate_tampered", diagnostics);
+            Compare(persisted.ExpectedCandidateRcOverallStatus, actual.ExpectedCandidateRcOverallStatus,
+                "regeneration.candidate_tampered", diagnostics);
             Compare(persisted.DiffSha256, actual.DiffSha256,
                 "regeneration.candidate_seal_mismatch", diagnostics);
             Compare(expected.CandidateRootIdentity, persisted.CandidateRootIdentity,
@@ -195,6 +206,11 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
             CandidateOverlaySha256 = snapshot.GeneratedWorld?.OverlaySha256 ?? string.Empty,
             CandidateGeneratedBaseSha256 = snapshot.GeneratedWorld?.GeneratedBasePackageSha256 ?? string.Empty,
             CandidateSnapshotStatus = snapshot.GeneratedWorld?.Status ?? string.Empty,
+            MechanicsProfileId = snapshot.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
+            AcceptedMechanicsSummarySha256 = CanonicalSha256(snapshot.AcceptedMechanics),
+            AcceptedMechanicsCompatibilitySha256 = CanonicalSha256(snapshot.AcceptedMechanicsCompatibility),
+            ExpectedCandidateRcRecordStatus = snapshot.ReleaseCandidateRecordConfigurationStatus,
+            ExpectedCandidateRcOverallStatus = snapshot.ReleaseCandidateConfigurationStatus,
             DiffSha256 = HashText(JsonSerializer.Serialize(diff, JsonOptions))
         };
     }
@@ -231,6 +247,9 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
 
     private static string HashText(string value) =>
         Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value))).ToLowerInvariant();
+
+    public static string CanonicalSha256<T>(T value) =>
+        HashText(JsonSerializer.Serialize(value, JsonOptions));
 
     public static string SelectedModuleIdsSha256(GameProjectAuthoringState authoring) => HashText(
         JsonSerializer.Serialize(authoring.Document.SelectedModuleIds

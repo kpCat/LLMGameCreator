@@ -11,6 +11,9 @@ public static class GameProjectOperationKinds
     public const string RegenerationApply = "regeneration_apply";
     public const string WorldHistoryRollbackPreview = "world_history_rollback_preview";
     public const string WorldHistoryRollbackApply = "world_history_rollback_apply";
+    public const string GameplaySave = "gameplay_save";
+    public const string GameplayLoad = "gameplay_load";
+    public const string GameplaySaveMigration = "gameplay_save_migration";
     public const string Recovery = "recovery";
 }
 

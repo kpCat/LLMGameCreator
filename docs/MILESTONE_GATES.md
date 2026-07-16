@@ -257,3 +257,9 @@ Goal159 is a GREEN acceptable automated candidate with `accepted=false`, `manual
 ## Goal160 sealed regeneration commit and generated-world history rollback gate record
 
 Goal160 is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false`, `manualGateReady=false` and `independentAuditRequired=true`. Required truth is one operation coordinator/cross-process lock for every project mutation, an immutable cached candidate seal, truth/inventory recheck after lock and before backups, journal `validating`, semantic validation before commit/cleanup, exact semantic/crash rollback, strict generation-only history, sealed rollback with current authoring/identity, truthful RC transition, data-derived history UI, one reused-cache hidden standalone smoke and execution-free portable recovery. This creates no human gate.
+
+Goal160 independent audit is `BLOCKED_AT_D8DD05E7` on `semantic_commit_validator_requires_complete_accepted_mechanics_for_core_only_generated_projects`; Goal161 implements and tests the correction, but formal closure remains pending because Goal161 did not reach GREEN. Therefore `goal160IndependentAuditRequired=true`.
+
+## Goal161 profile-neutral world change and generated gameplay save migration gate record
+
+Goal161 is BLOCKED with `accepted=false`, `manualReviewRequired=false`, `manualGateReady=false` and `independentAuditRequired=false`. Profile-neutral world-change commit validation, immutable generated save revisions, atomic slot manifests, exact same-world load, explicit cross-world/package migration, canonical preserved/dropped reporting, map/transient reset, post-load Runtime travel/replay, historical revision reuse and generated-aware WinForms flows pass. The one permitted reused-cache hidden smoke returned exit code 2 with `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`; RC CURRENT and execution-free portable recovery were not reached. This creates no human gate.

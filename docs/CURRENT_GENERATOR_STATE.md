@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 160 sealed regeneration commit and generated world history rollback
+Updated by: Goal 161 profile-neutral world change and generated gameplay save migration
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -18,11 +18,17 @@ Goal158 independent audit intake is `GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63`. Go
 
 Goal159 independent audit is `BLOCKED_AT_C7788E1E`: its final token check was outside the shared mutation lock, caller/candidate truth was not immutably sealed, and semantic reopen followed irreversible commit and backup cleanup. Goal160 closes that blocker. Build, standalone, authoring mutation, regeneration, history rollback and recovery use one operation coordinator and a cross-process project lock for the complete mutation. Candidate Preview publishes an immutable seal; Apply trusts only cached `AttemptId` plus that seal, and the transaction rechecks truth tokens and authoritative inventory after lock acquisition and before backups. Journal state `validating` and semantic validation remain inside the rollback window, so failure or validating crash restores exact before hashes.
 
-Generated-world history stores only strict generation source and sidecars. Regeneration and rollback archive current/candidate worlds atomically. History rollback rebuilds an isolated sealed candidate from historical generation with current mechanics, parameters and identity; it never promotes historical package, authoring, identity or RC bytes as current truth. The candidate builds/repeats/reopens `TRAVEL_CURRENT`, then uses the same lock/seal/transaction/semantic validator. Old histories remain, exactly one GREEN build-history row is added per apply, and old RC bytes remain `LAST_SUCCESS`/pending until an ordinary standalone writes a new `CURRENT` record. The Projects UI exposes «История миров» and «Проверить и восстановить». One cache-only hidden smoke reused its host with zero Unity starts and portable recovery. Goal160 creates no human gate and remains unaccepted pending independent audit.
+Generated-world history stores only strict generation source and sidecars. Regeneration and rollback archive current/candidate worlds atomically. History rollback rebuilds an isolated sealed candidate from historical generation with current mechanics, parameters and identity; it never promotes historical package, authoring, identity or RC bytes as current truth. The candidate builds/repeats/reopens `TRAVEL_CURRENT`, then uses the same lock/seal/transaction/semantic validator. Old histories remain, exactly one GREEN build-history row is added per apply, and old RC bytes remain `LAST_SUCCESS`/pending until an ordinary standalone writes a new `CURRENT` record. The Projects UI exposes «История миров» and «Проверить и восстановить». One cache-only hidden smoke reused its host with zero Unity starts and portable recovery.
+
+Goal160 independent audit is `BLOCKED_AT_D8DD05E7`: its semantic commit validator incorrectly required complete AcceptedMechanics for the supported `core_only` generated profile. Goal161 implements and tests the profile-neutral correction by sealing and validating exact AcceptedMechanics, compatibility and generic RC projections. Real all-selectable and core-only regeneration/history rollback commit GREEN; core-only AcceptedMechanics remains intentionally false/incomplete and never claims false RC readiness. The audit blocker is not formally closed because Goal161 did not reach GREEN publication.
+
+Generated gameplay saves now use immutable content-addressed revisions plus an atomic slot manifest under `.llmgc/gameplay-saves`. Revisions bind exact project identity, world, generated source, package/composition, authoring, selected GREEN travel history and canonical definition fingerprints. Same-world CURRENT load restores the exact serialized `UnifiedRuntimeSession` without Start/reset. World/package changes never write the save tree and require explicit controlled migration: cross-world location and transient state reset, canonically compatible same-kind/same-ID state is preserved, incompatible generated references are dropped with reasons, and apply creates a new revision while retaining the source. Restoring the original historical world makes the original revision CURRENT again. Runtime Move, generated travel gate, destination interaction and replay pass after migration.
+
+Runtime Simulator and the Projects save card/manager use the generated-aware workflow; legacy/template projects retain raw `RuntimeSnapshotStore`, while raw snapshots found in generated projects are `LEGACY_RAW` and never directly loaded. The single permitted cached hidden standalone attempt ran after migration, reused the existing host without rebuild and started Unity zero times, but the player returned exit code 2 with `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`. Therefore Goal161 is BLOCKED; RC CURRENT and portable post-smoke assertions were not reached. No human gate is created.
 
 ```text
-gate_status=goal160_green_acceptable_candidate_pending_independent_audit
-current_user_action=independent_goal160_audit_and_plan_generated_gameplay_save_migration
+gate_status=goal161_blocked_hidden_standalone_smoke_failed
+current_user_action=authorize_goal161_standalone_failure_diagnosis_and_new_smoke_budget
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -194,6 +200,9 @@ goal160AcceptedByCodex=false
 goal160ManualReviewRequired=false
 goal160ManualGateReady=false
 goal160IndependentAuditRequired=true
+goal160IndependentAuditResult=BLOCKED_AT_D8DD05E7
+goal160IndependentAuditBlocker=semantic_commit_validator_requires_complete_accepted_mechanics_for_core_only_generated_projects
+goal160AuditBlocker=profile_neutral_fix_implemented_pending_goal161_green
 goal160SharedOperationLeasePassed=true
 goal160CandidateSealPassed=true
 goal160TransactionTruthRecheckPassed=true
@@ -209,7 +218,32 @@ goal160UnityProcessStartCount=0
 goal160HiddenSmokeInvocationCount=1
 goal160PortableCopyPassed=true
 goal160ArtifactScopeViolationCount=0
-nextAction=independent_goal160_audit_and_plan_generated_gameplay_save_migration
+goal161ImplementationStatus=BLOCKED
+goal161CandidateStatus=BLOCKED_HIDDEN_STANDALONE_SMOKE_FAILED
+goal161Accepted=false
+goal161AcceptedByHuman=false
+goal161AcceptedByCodex=false
+goal161ManualReviewRequired=false
+goal161ManualGateReady=false
+goal161IndependentAuditRequired=false
+goal161ProfileNeutralWorldChangePassed=true
+goal161CoreOnlyRegenerationPassed=true
+goal161CoreOnlyRollbackPassed=true
+goal161GeneratedSaveStorePassed=true
+goal161SameWorldLoadPassed=true
+goal161CrossWorldMigrationPassed=true
+goal161MigrationRuntimeContinuationPassed=true
+goal161SaveUiPassed=true
+goal161HostReused=true
+goal161HostRebuilt=false
+goal161UnityProcessStartCount=0
+goal161HiddenSmokeInvocationCount=1
+goal161HiddenSmokePassed=false
+goal161StandaloneFailureStage=launch_smoke
+goal161PortableAllSelectablePassed=false
+goal161PortableCoreOnlyPassed=false
+goal161ArtifactScopeViolationCount=0
+nextAction=independent_goal161_audit_and_plan_player_driven_generated_campaign_session
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

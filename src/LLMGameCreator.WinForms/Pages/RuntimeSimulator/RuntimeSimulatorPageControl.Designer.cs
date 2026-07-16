@@ -97,6 +97,7 @@ namespace LLMGameCreator.WinForms.Pages
         private Button _saveSnapshotButton;
         private Button _loadSnapshotButton;
         private Button _listSnapshotsButton;
+        private Button _migrateSnapshotButton;
         private Label _ticksLabel;
         private NumericUpDown _ticksNumericUpDown;
         private Button _tickButton;
@@ -204,6 +205,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._saveSnapshotButton = new Button();
             this._loadSnapshotButton = new Button();
             this._listSnapshotsButton = new Button();
+            this._migrateSnapshotButton = new Button();
             this._ticksLabel = new Label();
             this._ticksNumericUpDown = new NumericUpDown();
             this._tickButton = new Button();
@@ -225,9 +227,9 @@ namespace LLMGameCreator.WinForms.Pages
             this._rightSplitContainer.Panel2.SuspendLayout();
             this._rightSplitContainer.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // _rootSplitContainer
-            // 
+            //
             this._rootSplitContainer.Dock = DockStyle.Fill;
             this._rootSplitContainer.Location = new Point(0, 0);
             this._rootSplitContainer.Name = "_rootSplitContainer";
@@ -336,6 +338,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.Controls.Add(this._saveSnapshotButton);
             this._topToolbarPanel.Controls.Add(this._loadSnapshotButton);
             this._topToolbarPanel.Controls.Add(this._listSnapshotsButton);
+            this._topToolbarPanel.Controls.Add(this._migrateSnapshotButton);
             this._topToolbarPanel.Controls.Add(this._ticksLabel);
             this._topToolbarPanel.Controls.Add(this._ticksNumericUpDown);
             this._topToolbarPanel.Controls.Add(this._tickButton);
@@ -1108,6 +1111,15 @@ namespace LLMGameCreator.WinForms.Pages
             this._listSnapshotsButton.Text = "List Snapshots";
             this._listSnapshotsButton.UseVisualStyleBackColor = true;
             // 
+            // _migrateSnapshotButton
+            //
+            this._migrateSnapshotButton.Location = new Point(3, 1167);
+            this._migrateSnapshotButton.Name = "_migrateSnapshotButton";
+            this._migrateSnapshotButton.Size = new Size(220, 30);
+            this._migrateSnapshotButton.TabIndex = 67;
+            this._migrateSnapshotButton.Text = "Перенести сохранение";
+            this._migrateSnapshotButton.UseVisualStyleBackColor = true;
+            //
             // _ticksLabel
             // 
             this._ticksLabel.AutoSize = true;

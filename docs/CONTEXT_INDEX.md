@@ -1309,3 +1309,14 @@ Task authority: `docs/agent-tasks/goal-160-sealed-regeneration-commit-and-genera
 
 `gate_status=goal160_green_acceptable_candidate_pending_independent_audit`
 `current_user_action=independent_goal160_audit_and_plan_generated_gameplay_save_migration`
+
+## Goal161 profile-neutral world change and generated gameplay save migration
+
+Goal160 independent audit is `BLOCKED_AT_D8DD05E7` because semantic commit validation imposed complete AcceptedMechanics on the supported `core_only` profile. Goal161 implements and tests the correction with exact sealed AcceptedMechanics/compatibility hashes and generic RC-status projections. All-selectable and core-only regeneration/history rollback commit GREEN; core-only remains intentionally incomplete without false RC readiness. Formal closure remains pending because Goal161 is not GREEN.
+
+Generated projects use immutable gameplay-save revisions and an atomic slot manifest. CURRENT loads restore exact `UnifiedRuntimeSession`; package/world changes require explicit zero-write preview and controlled migration. Cross-world location/transients reset, only canonically equal same-kind/same-ID definitions persist, incompatible references are reported and dropped, and historical revisions remain reusable. Runtime Simulator and Projects expose the generated-aware flow; raw legacy snapshots remain unverified `LEGACY_RAW` for generated projects. The single permitted cached hidden smoke reused the host with zero Unity starts but failed its player self-check, so RC CURRENT and portable post-smoke proof remain blocked.
+
+Task authority: `docs/agent-tasks/goal-161-profile-neutral-world-change-and-generated-gameplay-save-migration/GOAL.md`. Evidence: `.llmgc/procedural/goal-161-profile-neutral-world-change-and-generated-gameplay-save-migration/` and mirrored export.
+
+`gate_status=goal161_blocked_hidden_standalone_smoke_failed`
+`current_user_action=authorize_goal161_standalone_failure_diagnosis_and_new_smoke_budget`

@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "previewZeroWrite":  true,
+    "sourceWorldId":  "090dbf3611a49b40fc2d83d8b053cb9065dc9543a72be0238bb542b00f70584f",
+    "targetWorldId":  "0d29914bdfbf1dd935f2a729bf7207f7519451403a5031481600f920b9f126d1",
+    "sourcePackageSha256":  "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "targetPackageSha256":  "ba317abc8b5fbf79ed00de6c5b9669a6744c5f630942aa59248b767180eadbca",
+    "mapResetToCurrentGeneratedStart":  true,
+    "transientEventsEncounterDialogueTickReset":  true,
+    "portableCanonicalStatePreserved":  true,
+    "sourceRevisionSha256":  "2e3acaf11aa30e088291107dde114d5da7ddf005b5fe3abd688ed6e91c389ce8",
+    "migratedRevisionSha256":  "17c549f2d1b713cb477d7f95cf7b81ffec9936674ade0582c4d10b647a45f8db",
+    "atomicManifestUpdate":  true,
+    "sourceRevisionImmutable":  true
+}

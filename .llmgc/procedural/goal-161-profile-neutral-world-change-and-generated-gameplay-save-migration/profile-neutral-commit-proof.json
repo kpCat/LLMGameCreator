@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "allSelectableRegeneration":  true,
+    "allSelectableRollback":  true,
+    "coreOnlyRegeneration":  true,
+    "coreOnlyRollback":  true,
+    "coreOnlyAcceptedMechanicsPassed":  false,
+    "coreOnlyMissingFactKindsPresent":  true,
+    "coreOnlyFalseRcReady":  false,
+    "customPartialExactSealPassed":  true,
+    "tamperedAcceptedSummaryRejected":  true,
+    "tamperedCompatibilityRejected":  true,
+    "rcMismatchRejected":  true
+}
