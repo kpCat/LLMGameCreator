@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "journalSchema":  "seed_regeneration_journal_v1",
+    "preparedBeforeMutation":  true,
+    "generationSwapJournaled":  true,
+    "packageReplaceJournaled":  true,
+    "authoringReplaceJournaled":  true,
+    "supportReplaceJournaled":  true,
+    "historyAppendJournaled":  true,
+    "regenerationRecordJournaled":  true,
+    "secondConcurrencyRecheckPassed":  true,
+    "journalCommitted":  true,
+    "exactBeforeHashesVerified":  true,
+    "oldReleaseCandidateSha256":  "07c2eb417dd536343ff9d5df9e1d0dfa890cf1a0d522d49ce553faf1e7e2e1d3"
+}

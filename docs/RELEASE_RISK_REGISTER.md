@@ -224,3 +224,10 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 - Lane A accepted mechanics/social remains the compatibility authority. Lane B's only gameplay additions are one namespaced prototype and one deterministic gate entity per directed connection; project identity and generated start remain explicit controlled deltas.
 - Runtime invalid-transition, route-planning, replay, roundtrip and final-validation failures are transactional. Old v2 Goal157 history can prove only `START_CURRENT`, never `TRAVEL_CURRENT`.
 - Preset-label ambiguity is recorded as bounded P2 debt; it does not affect ID-based deterministic travel selection.
+
+## Goal159 transactional seed regeneration
+
+- Goal158 independent audit is GREEN at `9a350c63`. Existing generated projects now regenerate from a new deterministic request only after a complete isolated candidate builds, repeats deterministically and reopens `TRAVEL_CURRENT`.
+- Source v2 separates requested and resolved options and correlates preset definition plus explicit overrides. v1 remains no-rewrite compatible and upgrades only on successful regeneration.
+- Promotion is protected by source/authoring/package/identity/RC tokens, a second concurrency recheck, a durable journal and exact before-hash rollback/crash recovery. Identity, authoring, history and prior RC evidence are preserved.
+- User-selectable historical-world rollback and cross-seed gameplay-save migration remain release risks for later explicit slices; Goal159 neither claims nor implements them.

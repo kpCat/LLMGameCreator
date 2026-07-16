@@ -6,6 +6,7 @@ namespace LLMGameCreator.Application.Generation.Procedural;
 public static class SeededGeneratedProjectVocabulary
 {
     public const string SourceSchemaVersion = "seeded_generated_project_source_v1";
+    public const string SourceV2SchemaVersion = "seeded_generated_project_source_v2";
     public const string OverlaySchemaVersion = "generated_project_overlay_v1";
     public const string GenerationRelativeRoot = ".llmgc/generation";
     public const string PlanJsonFileName = "generated-game-plan.json";
@@ -30,6 +31,34 @@ public static class SeededGeneratedProjectVocabulary
         GeneratedOverlayJsonFileName,
         GeneratedBasePackageJsonFileName
     ];
+}
+
+public static class SeededGeneratedProjectRequestOrigins
+{
+    public const string LegacyV1EffectiveOptions = "legacy_v1_effective_options";
+    public const string ExplicitV2Request = "explicit_v2_request";
+}
+
+public sealed record SeededGeneratedProjectGenerationRequest
+{
+    public string Seed { get; init; } = string.Empty;
+    public string Mode { get; init; } = string.Empty;
+    public string PresetId { get; init; } = string.Empty;
+    public IReadOnlyList<string> CompactStyleHintIds { get; init; } = [];
+    public IReadOnlyList<string> SelectedVariantIds { get; init; } = [];
+}
+
+public sealed record SeededGeneratedProjectResolvedOptions
+{
+    public string Seed { get; init; } = string.Empty;
+    public string Mode { get; init; } = string.Empty;
+    public string PresetId { get; init; } = string.Empty;
+    public IReadOnlyList<string> CompactStyleHintIds { get; init; } = [];
+    public IReadOnlyList<string> SelectedVariantIds { get; init; } = [];
+    public string StableSummary { get; init; } = string.Empty;
+    public string PresetDefinitionSha256 { get; init; } = string.Empty;
+    public bool StyleOverridesApplied { get; init; }
+    public bool VariantOverridesApplied { get; init; }
 }
 
 public sealed record GeneratedProjectCounts
@@ -61,6 +90,9 @@ public sealed record SeededGeneratedProjectSourceRecord
     public string PresetId { get; init; } = string.Empty;
     public IReadOnlyList<string> StyleHintIds { get; init; } = [];
     public IReadOnlyList<string> VariantIds { get; init; } = [];
+    internal SeededGeneratedProjectGenerationRequest GenerationRequest { get; init; } = new();
+    internal SeededGeneratedProjectResolvedOptions ResolvedGenerationOptions { get; init; } = new();
+    internal string RequestOrigin { get; init; } = SeededGeneratedProjectRequestOrigins.LegacyV1EffectiveOptions;
     public string MechanicsProfileId { get; init; } = string.Empty;
     public string PlanId { get; init; } = string.Empty;
     public string PlanSha256 { get; init; } = string.Empty;
@@ -128,6 +160,30 @@ public sealed record SeededGeneratedProjectSourceValidationResult
     public GamePackageDefinition? GeneratedMvpPackage { get; init; }
     public ProceduralGeneratedGamePlan? RegeneratedPlan { get; init; }
     public string RegeneratedPlanJson { get; init; } = string.Empty;
-    public GenerationPresetOptions? ResolvedGenerationOptions { get; init; }
+    public SeededGeneratedProjectGenerationRequest? GenerationRequest { get; init; }
+    public SeededGeneratedProjectResolvedOptions? ResolvedGenerationOptions { get; init; }
+    public string RequestOrigin { get; init; } = string.Empty;
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record SeededGeneratedProjectArtifactFactoryRequest
+{
+    public SeededGeneratedProjectGenerationRequest GenerationRequest { get; init; } = new();
+    public string MechanicsProfileId { get; init; } = string.Empty;
+    public string OutputDirectory { get; init; } = string.Empty;
+}
+
+public sealed record SeededGeneratedProjectArtifactFactoryResult
+{
+    public SeededGeneratedProjectResolvedOptions ResolvedOptions { get; init; } = new();
+    public VisibleGeneratedPlayablePreviewResult Generated { get; init; } = new();
+    public GeneratedProjectOverlayResult Overlay { get; init; } = new();
+    public SeededGeneratedProjectSourceRecord Source { get; init; } = new();
+    public string SourceJson { get; init; } = string.Empty;
+    public IReadOnlyDictionary<string, string> SidecarBytes { get; init; }
+        = new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, string> SidecarSha256 { get; init; }
+        = new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+    public bool Passed { get; init; }
 }

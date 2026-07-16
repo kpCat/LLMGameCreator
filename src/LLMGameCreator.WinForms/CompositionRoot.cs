@@ -102,7 +102,8 @@ public sealed class CompositionRoot : IDisposable
                  resolver.Resolve<NewGamePackageFactory>(),
                  overlay: resolver.Resolve<GeneratedProjectOverlayService>(),
                  sourceService: resolver.Resolve<SeededGeneratedProjectSourceService>(),
-                 baselineProvider: resolver.Resolve<IGeneratedProjectBaselineProvider>()), Reuse.Singleton);
+                 baselineProvider: resolver.Resolve<IGeneratedProjectBaselineProvider>(),
+                 artifactFactory: resolver.Resolve<SeededGeneratedProjectArtifactFactory>()), Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<GameBlueprintPresetProvider>(Reuse.Singleton);
         _container.RegisterDelegate<CapabilityRegistry>(_ => BuiltInCapabilityRegistry.Create(), Reuse.Singleton);
@@ -187,6 +188,13 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<VisibleGeneratedPlayablePreviewService>(resolver => new VisibleGeneratedPlayablePreviewService(
             generationOptionsService: resolver.Resolve<GenerationPresetOptionsService>(),
             runtimeAdapter: resolver.Resolve<IVisibleGeneratedPlayableRuntimeAdapter>()), Reuse.Singleton);
+        _container.RegisterDelegate<SeededGeneratedProjectArtifactFactory>(resolver =>
+            new SeededGeneratedProjectArtifactFactory(
+                resolver.Resolve<IGeneratedProjectBaselineProvider>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<GenerationPresetOptionsService>(),
+                resolver.Resolve<VisibleGeneratedPlayablePreviewService>(),
+                resolver.Resolve<GeneratedProjectOverlayService>()), Reuse.Singleton);
         _container.Register<GeneratedMicrogameGoalPreviewService>(Reuse.Singleton);
         _container.Register<GeneratedMicrogameChallengePreviewService>(Reuse.Singleton);
         _container.RegisterDelegate<RuntimeBackedMicrogameStateAcceptanceService>(resolver => new RuntimeBackedMicrogameStateAcceptanceService(
@@ -262,6 +270,24 @@ public sealed class CompositionRoot : IDisposable
                 generatedTravelActivation: resolver.Resolve<GameProjectGeneratedRegionTravelActivationService>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
+        _container.Register<GameProjectSeedRegenerationDiffService>(Reuse.Singleton);
+        _container.Register<GameProjectSeedRegenerationTransaction>(Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectSeedRegenerationRecordService>(resolver =>
+            new GameProjectSeedRegenerationRecordService(
+                repositoryRoot,
+                resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectSeedRegenerationService>(resolver =>
+            new GameProjectSeedRegenerationService(
+                repositoryRoot,
+                resolver.Resolve<ICurrentGamePackageService>(),
+                resolver.Resolve<IGamePackageRepository>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<GameProjectBuildAndQualificationService>(),
+                resolver.Resolve<SeededGeneratedProjectArtifactFactory>(),
+                resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                resolver.Resolve<GameProjectSeedRegenerationDiffService>(),
+                resolver.Resolve<GameProjectSeedRegenerationTransaction>(),
+                resolver.Resolve<GameProjectSeedRegenerationRecordService>()), Reuse.Singleton);
         _container.Register<UnifiedGameProjectWorkspaceController>(Reuse.Singleton);
         _container.RegisterDelegate<IUnifiedGameProjectWorkspaceController>(
             resolver => resolver.Resolve<UnifiedGameProjectWorkspaceController>(), Reuse.Singleton);

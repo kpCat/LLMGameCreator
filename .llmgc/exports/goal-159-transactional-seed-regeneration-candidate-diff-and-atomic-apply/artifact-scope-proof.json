@@ -1,0 +1,17 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-159-transactional-seed-regeneration-candidate-diff-and-atomic-apply",
+    "baselineRef":  "9a350c63829e699ce24bbd5ef33611c6c8d79537",
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false,
+    "unityHostBuildRun":  false,
+    "hiddenStandaloneSmokeInvocationCount":  1,
+    "boundedAdditionalPaths":  [
+                                   "src/LLMGameCreator.Application/RuntimePreview/GenerationPresetOptionsService.cs",
+                                   "tests/LLMGameCreator.Tests/Application/Goal156/Goal156GeneratedWorkspaceTests.cs",
+                                   "tests/LLMGameCreator.Tests/Application/Goal156/Goal156StandaloneAndPortabilityTests.cs"
+                               ]
+}

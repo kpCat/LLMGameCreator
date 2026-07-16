@@ -1287,3 +1287,12 @@ Goal157 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0`. Goal158 i
 
 `gate_status=goal158_green_acceptable_candidate_pending_independent_audit`
 `current_user_action=independent_goal158_audit_and_plan_transactional_seed_regeneration`
+
+## Goal159 transactional seed regeneration
+
+Goal158 independent audit intake is `GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63`. Goal159 adds generated source v2 with separate `GenerationRequest` and `ResolvedOptions`, preset-definition hash and explicit style/variant override truth. v1 remains readable/buildable without rewrite and upgrades only after successful regeneration; new generated projects use v2 through the same deterministic artifact factory as regeneration.
+
+Regeneration captures source/authoring/package/identity/RC concurrency tokens, creates and qualifies a complete short-root LocalAppData candidate twice, reopens it as `TRAVEL_CURRENT`, and calculates a data-derived typed old/new world diff. Apply uses a durable journal, second concurrency recheck, atomic swaps and exact rollback/recovery. Identity, authoring and old histories are retained; exactly one GREEN history is added; old RC bytes remain and read `LAST_SUCCESS` until the one cached standalone smoke produces a new CURRENT record. The Projects page exposes «Перегенерировать мир», causal Russian validation and a non-technical result card.
+
+`gate_status=goal159_green_acceptable_candidate_pending_independent_audit`
+`current_user_action=independent_goal159_audit_and_plan_generated_save_migration_or_world_history_rollback`

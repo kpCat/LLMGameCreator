@@ -8,4 +8,4 @@ Lane B adds a deterministic travel overlay derived from exact strict-plan region
 
 History/UI restore `TRAVEL_CURRENT`; old Goal157 history restores only `START_CURRENT`. Exactly one cached hidden standalone smoke must reuse the host, rebuild nothing and start Unity zero times. The actual payload, RC CURRENT and a portable copy retain travel and accepted-mechanics truth without execution.
 
-No user action or manual Unity review is requested. `goal158Accepted=false`, `goal158ManualReviewRequired=false`, and the next action is an independent Goal158 audit followed by planning transactional seed regeneration.
+No user action or manual Unity review is requested. `goal158Accepted=false` and `goal158ManualReviewRequired=false`. Independent audit completed GREEN as `GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63`; `goal158IndependentAuditRequired=false`. Goal159 records this intake without creating a human gate.

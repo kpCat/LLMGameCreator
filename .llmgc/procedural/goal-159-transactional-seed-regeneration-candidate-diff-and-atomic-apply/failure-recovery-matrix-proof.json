@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "failurePointsPassed":  [
+                                "generation_swap",
+                                "package_replace",
+                                "authoring_replace",
+                                "history_append",
+                                "pre_final_validation"
+                            ],
+    "crashStatesPassed":  [
+                              "prepared",
+                              "applying",
+                              "committed"
+                          ],
+    "incompleteBackupRefused":  true,
+    "exactAuthoritativeBeforeHashesRestored":  true,
+    "nonterminalRecoveryBeforeOpen":  true
+}

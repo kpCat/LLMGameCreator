@@ -5648,6 +5648,64 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-159-transactional-seed-regeneration-candidate-diff-and-atomic-apply",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal159-transactional-regeneration.ps1",
+        ".devflow/scripts/run-goal159-transactional-regeneration.cmd",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectModels.cs",
+        "src/LLMGameCreator.Application/RuntimePreview/GenerationPresetOptionsService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectSourceService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/SeededGeneratedProjectArtifactFactory.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationModels.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationDiffService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationTransaction.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationRecordService.cs",
+        "src/LLMGameCreator.Application/Projects/SeededGeneratedGameProjectCreationService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/RegenerateGeneratedWorldDialog.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/RegenerateGeneratedWorldDialog.Designer.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.Designer.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156ProjectCreationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156GeneratedWorkspaceTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal156/Goal156StandaloneAndPortabilityTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal158-generated-region-travel.md",
+        "docs/manual-acceptance/goal159-transactional-seed-regeneration.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal159/",
+        "docs/agent-tasks/goal-159-transactional-seed-regeneration-candidate-diff-and-atomic-apply/",
+        ".llmgc/procedural/goal-159-transactional-seed-regeneration-candidate-diff-and-atomic-apply/",
+        ".llmgc/exports/goal-159-transactional-seed-regeneration-candidate-diff-and-atomic-apply/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

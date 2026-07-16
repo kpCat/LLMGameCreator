@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text;
 using LLMGameCreator.Application.Generation.Procedural;
 
 namespace LLMGameCreator.Application.RuntimePreview;
@@ -93,6 +95,44 @@ public sealed class GenerationPresetOptionsService
     }
 
     public GenerationPresetOptions ResolveDefault() => Resolve(new GenerationPresetOptionsRequest());
+
+    public SeededGeneratedProjectResolvedOptions Resolve(SeededGeneratedProjectGenerationRequest request)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        var options = Resolve(new GenerationPresetOptionsRequest
+        {
+            Seed = request.Seed,
+            Mode = request.Mode,
+            PresetId = request.PresetId,
+            CompactStyleHintIds = request.CompactStyleHintIds,
+            SelectedVariantIds = request.SelectedVariantIds
+        });
+        return new SeededGeneratedProjectResolvedOptions
+        {
+            Seed = options.Seed,
+            Mode = options.Mode,
+            PresetId = options.PresetId,
+            CompactStyleHintIds = options.CompactStyleHintIds,
+            SelectedVariantIds = options.SelectedVariantIds,
+            StableSummary = options.StableSummary,
+            PresetDefinitionSha256 = PresetDefinitionSha256(options.PresetId),
+            StyleOverridesApplied = NormalizeIds(request.CompactStyleHintIds).Count > 0,
+            VariantOverridesApplied = NormalizeIds(request.SelectedVariantIds).Count > 0
+        };
+    }
+
+    public string PresetDefinitionSha256(string presetId)
+    {
+        var preset = Presets.SingleOrDefault(item => string.Equals(item.PresetId, presetId, StringComparison.Ordinal))
+                     ?? throw new InvalidOperationException("generated_source.preset_unknown");
+        var exactDefinition = string.Join("\n", new[]
+        {
+            preset.PresetId,
+            preset.Title,
+            string.Join("|", NormalizeIds(preset.CompactStyleHintIds))
+        });
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(exactDefinition))).ToLowerInvariant();
+    }
 
     private static IReadOnlyList<string> NormalizeIds(IReadOnlyList<string> values) =>
         values

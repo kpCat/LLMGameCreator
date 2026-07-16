@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "hostFileSetHashUnchanged":  true,
+    "unityProcessStartCount":  0,
+    "hiddenSmokeInvocationCount":  1,
+    "hiddenSmokePassed":  true,
+    "selfChecksPassed":  true,
+    "payloadNewWorldTravelPassed":  true,
+    "payloadAcceptedMechanicsPassed":  true,
+    "payloadHashesPassed":  true,
+    "releaseCandidateCurrent":  true,
+    "portableCopyCurrentWithoutExecution":  true,
+    "finalStateHash":  "b599adf43e537b5b965e638bc055f744cb31c5effefc3b6c08ac76ede3548205",
+    "packageSha256":  "7a7b1064522111a233bca990d3cdd12f69be9de8455a46046b702fe0d488959e"
+}

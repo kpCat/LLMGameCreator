@@ -294,6 +294,12 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
+    public bool CanRegenerateGeneratedWorld { get; init; }
+    public bool RegenerationRunning { get; init; }
+    public SeededGeneratedProjectGenerationRequest? GeneratedWorldGenerationRequest { get; init; }
+    public SeededGeneratedProjectResolvedOptions? GeneratedWorldResolvedOptions { get; init; }
+    public GameProjectSeedRegenerationRecord? LastSuccessfulRegeneration { get; init; }
+    public GameProjectSeedRegenerationResult? LastRegenerationAttempt { get; init; }
 }
 
 public sealed record GameProjectBuildResult

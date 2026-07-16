@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "tokens":  [
+                   "source",
+                   "authoring",
+                   "package",
+                   "identity",
+                   "release_candidate"
+               ],
+    "previewRecheckPassed":  true,
+    "immediatePreApplyRecheckPassed":  true,
+    "staleTokenRejected":  true,
+    "concurrentBuildStandaloneRegenerationExcluded":  true,
+    "semanticNoOpPerformedWrites":  false
+}

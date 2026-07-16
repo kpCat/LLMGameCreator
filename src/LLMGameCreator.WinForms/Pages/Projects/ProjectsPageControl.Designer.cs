@@ -35,6 +35,7 @@ namespace LLMGameCreator.WinForms.Pages
         private FlowLayoutPanel _workspaceToolbar;
         private Button _backToGamesButton;
         private Button _saveCurrentButton;
+        private Button _regenerateGeneratedWorldButton;
         private Label _workspaceTitleLabel;
         private TabControl _workspaceTabs;
         private TabPage _overviewTab;
@@ -115,6 +116,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._workspaceToolbar = new FlowLayoutPanel();
             this._backToGamesButton = new Button();
             this._saveCurrentButton = new Button();
+            this._regenerateGeneratedWorldButton = new Button();
             this._workspaceTitleLabel = new Label();
             this._workspaceTabs = new TabControl();
             this._overviewTab = new TabPage();
@@ -302,6 +304,7 @@ namespace LLMGameCreator.WinForms.Pages
             //
             this._workspaceToolbar.Controls.Add(this._backToGamesButton);
             this._workspaceToolbar.Controls.Add(this._saveCurrentButton);
+            this._workspaceToolbar.Controls.Add(this._regenerateGeneratedWorldButton);
             this._workspaceToolbar.Controls.Add(this._workspaceTitleLabel);
             this._workspaceToolbar.Dock = DockStyle.Fill;
             this._backToGamesButton.AutoSize = true;
@@ -310,6 +313,9 @@ namespace LLMGameCreator.WinForms.Pages
             this._saveCurrentButton.AutoSize = true;
             this._saveCurrentButton.Text = "Сохранить проект";
             this._saveCurrentButton.UseVisualStyleBackColor = true;
+            this._regenerateGeneratedWorldButton.AutoSize = true;
+            this._regenerateGeneratedWorldButton.Text = "Перегенерировать мир";
+            this._regenerateGeneratedWorldButton.UseVisualStyleBackColor = true;
             this._workspaceTitleLabel.AutoSize = true;
             this._workspaceTitleLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             this._workspaceTitleLabel.Margin = new Padding(18, 7, 3, 3);

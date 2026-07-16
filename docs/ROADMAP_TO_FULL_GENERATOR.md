@@ -303,7 +303,7 @@ The project succeeds if each stage increases either:
 - export/runtime reality;
 - user control over generated games.
 
-## Current Goal158 bridge
+## Current Goal159 bridge
 
 Goal156 completed the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. Its independent audit then identified missing causal source provenance and canonical overlay/base reconstruction.
 
@@ -311,4 +311,6 @@ Goal157 closes that provenance blocker and activates the generated start map in 
 
 Goal158 adds deterministic generated-region travel through those same seams: exact strict-plan bindings, one safe gate per directed connection, generic atomic Runtime map transitions, origin and destination interactions, multi-hop planning, replay, exact state roundtrip, primary route hashes/frames, `TRAVEL_CURRENT` history/UI, cached standalone truth and portable RC recovery. Lane A AcceptedMechanics/Social remains unchanged.
 
-The next roadmap decision follows an independent Goal158 audit: plan transactional seed regeneration with preview/validate/apply rollback. Goal158 does not authorize source migration, automatic regeneration, Unity host changes, provider work or public package-schema changes.
+Goal158 independent audit is GREEN at `9a350c63`. Goal159 adds source v2 request/resolution truth and a shared creation/regeneration factory, then proves isolated candidate build/repeat/reopen, typed world diff, five-token optimistic concurrency and journaled atomic apply with exact rollback/recovery. Authoring, identity, old history and old RC bytes are retained; one GREEN history is added. Travel becomes current while standalone remains pending until exactly one cache-only hidden smoke records CURRENT RC and portable truth.
+
+The next roadmap decision follows an independent Goal159 audit: plan either cross-seed generated-save migration or user-selectable historical-world rollback. Goal159 does not authorize either feature, Unity host changes, Runtime/public package schema changes, provider work or catalog changes.

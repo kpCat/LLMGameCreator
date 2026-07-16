@@ -74,7 +74,7 @@ public sealed class Goal156GeneratedWorkspaceTests
         var snapshot = Goal156TestKit.OpenWorkspace(fixture.AllSelectableProject).Snapshot();
 
         Assert.Equal(unityBefore, System.Diagnostics.Process.GetProcessesByName("Unity").Length);
-        Assert.Equal("BUILD_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("START_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.GeneratedWorld?.PackageContentPreserved);
         Assert.True(snapshot.AcceptedMechanics?.Passed);
         Assert.Equal(fixture.SecondAllSelectableBuild.PackageSha256, snapshot.PackageSha256);

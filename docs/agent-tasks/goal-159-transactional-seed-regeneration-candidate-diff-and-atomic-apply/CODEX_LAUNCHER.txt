@@ -1,0 +1,56 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-159-transactional-seed-regeneration-candidate-diff-and-atomic-apply/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 9a350c63829e699ce24bbd5ef33611c6c8d79537
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- Goal158 прошёл independent audit; зафиксируй GREEN intake и не создавай human gate;
+- это крупный project-lifecycle slice, не простая перезапись seed/sidecars;
+- добавь backward-compatible seeded source v2 с разделением GenerationRequest и ResolvedOptions;
+- v1 продолжает открываться/строиться без rewrite; successful regeneration v1→v2;
+- preset definition hash и explicit style/variant overrides должны быть правдивыми;
+- creation и regeneration обязаны использовать один shared deterministic artifact factory;
+- regeneration request содержит optimistic concurrency tokens source/authoring/package/identity/RC;
+- semantic no-op должен завершаться без единого изменения;
+- complete candidate project создаётся вне authoritative project под short LocalAppData root;
+- candidate сохраняет identity, selected modules, parameter JSON и проходит реальный build:
+  Lane A accepted mechanics + Lane B generated start/travel;
+- build candidate repeat/reopen GREEN/TRAVEL_CURRENT до apply;
+- сформируй typed old/new world diff без fixed content counts;
+- apply только через journaled rollback-safe transaction с двойным concurrency recheck;
+- authoritative generation/package/authoring/support/history меняются только после candidate GREEN;
+- на failure/crash восстановить exact before hashes; nonterminal journal recovery обязательна;
+- old histories retained; добавляется ровно одна new GREEN history;
+- old RC bytes retained, после apply RC=LAST_SUCCESS и overall BUILD_GREEN_STANDALONE_PENDING;
+- no standalone during regeneration;
+- UI: «Перегенерировать мир» + dialog seed/mode/preset/advanced overrides;
+- no random seed; no-op apply disabled; Russian causal validation;
+- result card old→new counts/diff, mechanics preserved, route checked, standalone pending;
+- normalize genuine Goal157 v2 history BUILD_CURRENT→START_CURRENT, never TRAVEL_CURRENT;
+- exactly one cached hidden standalone smoke after successful regeneration;
+- HostReused=true, HostRebuilt=false, Unity starts=0;
+- payload contains new world/travel + accepted facts; new RC CURRENT;
+- portable copy restores v2/regeneration/TRAVEL_CURRENT/accepted/RC without execution;
+- no Runtime, GamePackage, FeatureModule catalog or Unity changes;
+- no full suite, 85-case closure or all-ProductSmoke;
+- P0/P1 mandatory matrix defects fix inside Goal159; P2/P3 debt only;
+- create/push exactly one final GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи v1/v2 truth, exact regeneration request, candidate build,
+diff counts/hashes, concurrency, journal/apply/rollback/recovery,
+authoring/identity preservation, reopen/history/RC/UI, cache/Unity/smoke,
+payload/portable, regressions, evidence/artifact scope, final SHA,
+push, HEAD==origin/main и clean worktree.

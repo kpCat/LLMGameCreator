@@ -48,7 +48,7 @@ public sealed class Goal156StandaloneAndPortabilityTests
         var snapshot = Goal156TestKit.OpenWorkspace(copy.Path).Snapshot();
 
         Assert.Equal(unityBefore, System.Diagnostics.Process.GetProcessesByName("Unity").Length);
-        Assert.Equal("BUILD_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("START_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.AcceptedMechanics?.Passed);
         Assert.Equal("CURRENT", snapshot.ReleaseCandidateConfigurationStatus);
         Assert.Equal("CURRENT", snapshot.ReleaseCandidateRecordConfigurationStatus);

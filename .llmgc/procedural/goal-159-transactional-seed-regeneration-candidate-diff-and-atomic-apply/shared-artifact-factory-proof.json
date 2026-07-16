@@ -1,0 +1,8 @@
+{
+    "status":  "GREEN",
+    "factory":  "SeededGeneratedProjectArtifactFactory",
+    "creationUsesFactory":  true,
+    "regenerationUsesFactory":  true,
+    "sameRequestByteStable":  true,
+    "semanticNoOpChanges":  0
+}

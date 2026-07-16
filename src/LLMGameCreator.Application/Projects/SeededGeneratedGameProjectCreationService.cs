@@ -29,9 +29,8 @@ public sealed class SeededGeneratedGameProjectCreationService
     private readonly IGamePackageValidator _validator;
     private readonly NewGamePackageFactory _templateFactory;
     private readonly GenerationPresetOptionsService _presetOptions;
-    private readonly VisibleGeneratedPlayablePreviewService _generation;
-    private readonly GeneratedProjectOverlayService _overlay;
     private readonly IGeneratedProjectBaselineProvider _baselineProvider;
+    private readonly SeededGeneratedProjectArtifactFactory _artifactFactory;
 
     public SeededGeneratedGameProjectCreationService(
         string repositoryRoot,
@@ -42,21 +41,28 @@ public sealed class SeededGeneratedGameProjectCreationService
         VisibleGeneratedPlayablePreviewService? generation = null,
         GeneratedProjectOverlayService? overlay = null,
         SeededGeneratedProjectSourceService? sourceService = null,
-        IGeneratedProjectBaselineProvider? baselineProvider = null)
+        IGeneratedProjectBaselineProvider? baselineProvider = null,
+        SeededGeneratedProjectArtifactFactory? artifactFactory = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         _validator = validator ?? throw new ArgumentNullException(nameof(validator));
         _templateFactory = templateFactory ?? throw new ArgumentNullException(nameof(templateFactory));
         _presetOptions = presetOptions ?? new GenerationPresetOptionsService();
-        _generation = generation ?? new VisibleGeneratedPlayablePreviewService(
+        var generationService = generation ?? new VisibleGeneratedPlayablePreviewService(
             generationOptionsService: _presetOptions);
-        _overlay = overlay ?? new GeneratedProjectOverlayService(_validator);
+        var overlayService = overlay ?? new GeneratedProjectOverlayService(_validator);
         _baselineProvider = baselineProvider ?? new Goal142GeneratedProjectBaselineProvider(_repositoryRoot);
+        _artifactFactory = artifactFactory ?? new SeededGeneratedProjectArtifactFactory(
+            _baselineProvider,
+            _validator,
+            _presetOptions,
+            generationService,
+            overlayService);
         SourceService = sourceService ?? new SeededGeneratedProjectSourceService(
             _validator,
             _presetOptions,
-            _overlay,
+            overlayService,
             baselineProvider: _baselineProvider);
     }
 
@@ -91,88 +97,28 @@ public sealed class SeededGeneratedGameProjectCreationService
             Directory.CreateDirectory(Path.Combine(temporary, "scripts"));
             Directory.CreateDirectory(Path.Combine(temporary, "saves"));
 
-            var options = _presetOptions.Resolve(new GenerationPresetOptionsRequest
+            var generationRequest = new SeededGeneratedProjectGenerationRequest
             {
                 Seed = request.GenerationSeed.Trim(),
                 Mode = request.GenerationMode.Trim(),
                 PresetId = request.GenerationPresetId.Trim(),
                 CompactStyleHintIds = request.CompactStyleHintIds,
                 SelectedVariantIds = request.SelectedVariantIds
-            });
-            AssertResolvedRequest(request, options);
-            var generated = _generation.Generate(new VisibleGeneratedPlayablePreviewRequest
-            {
-                Seed = options.Seed,
-                Mode = options.Mode,
-                PresetId = options.PresetId,
-                CompactStyleHintIds = options.CompactStyleHintIds,
-                SelectedVariantIds = options.SelectedVariantIds
-            });
-            if (generated.PlanResult.Diagnostics.Any(diagnostic => diagnostic.Severity == "error")
-                || generated.RulePackResult.ValidationReport.HasErrors
-                || generated.PackageMvpResult.Report.HasErrors
-                || generated.TinyLoopResult.Report.HasErrors)
-                throw new InvalidOperationException("generated_project.generation_failed");
-
-            var baseline = _baselineProvider.Resolve();
-            var generatedMvpPackageJson = _overlay.NamespaceGeneratedPackage(generated.PackageMvpResult.PackageJson);
-            var overlay = _overlay.Build(
-                baseline.PackageJson,
-                baseline.PackageSha256,
-                generatedMvpPackageJson,
-                generated.PlanResult.Plan);
-            if (!overlay.Passed)
-                throw new InvalidOperationException("generated_project.overlay_failed:" + string.Join(";", overlay.Diagnostics));
+            };
 
             var generationRoot = Resolve(temporary, SeededGeneratedProjectVocabulary.GenerationRelativeRoot);
-            Directory.CreateDirectory(generationRoot);
-            var sidecars = new SortedDictionary<string, string>(StringComparer.Ordinal)
+            var artifacts = _artifactFactory.Create(new SeededGeneratedProjectArtifactFactoryRequest
             {
-                [SeededGeneratedProjectVocabulary.PlanJsonFileName] = generated.PlanResult.Json,
-                [SeededGeneratedProjectVocabulary.PlanMarkdownFileName] = generated.PlanResult.Markdown,
-                [SeededGeneratedProjectVocabulary.RulePackJsonFileName] = generated.RulePackResult.Json,
-                [SeededGeneratedProjectVocabulary.TinyLoopStateJsonFileName] = generated.TinyLoopResult.StateJson,
-                [SeededGeneratedProjectVocabulary.TinyLoopReportMarkdownFileName] = generated.TinyLoopResult.ReportMarkdown,
-                [SeededGeneratedProjectVocabulary.GeneratedMvpPackageJsonFileName] = generatedMvpPackageJson,
-                [SeededGeneratedProjectVocabulary.GeneratedOverlayJsonFileName] = overlay.OverlayJson,
-                [SeededGeneratedProjectVocabulary.GeneratedBasePackageJsonFileName] = overlay.GeneratedBasePackageJson
-            };
-            foreach (var sidecar in sidecars)
-                await WriteAsync(Resolve(generationRoot, sidecar.Key), sidecar.Value, cancellationToken).ConfigureAwait(false);
-
-            var sidecarHashes = new SortedDictionary<string, string>(StringComparer.Ordinal);
-            foreach (var fileName in SeededGeneratedProjectVocabulary.RequiredSidecarFileNames)
-                sidecarHashes[fileName] = SeededGeneratedProjectSourceService.HashFile(Resolve(generationRoot, fileName));
-            var source = new SeededGeneratedProjectSourceRecord
-            {
-                Seed = options.Seed,
-                Mode = options.Mode,
-                PresetId = options.PresetId,
-                StyleHintIds = options.CompactStyleHintIds,
-                VariantIds = options.SelectedVariantIds,
+                GenerationRequest = generationRequest,
                 MechanicsProfileId = request.MechanicsProfileId.Trim(),
-                PlanId = generated.PlanResult.Plan.PlanId,
-                PlanSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.PlanJsonFileName],
-                RulePackId = generated.RulePackResult.RulePack.Metadata.RulePackId,
-                RulePackSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.RulePackJsonFileName],
-                TinyLoopStateSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.TinyLoopStateJsonFileName],
-                GeneratedMvpPackageSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.GeneratedMvpPackageJsonFileName],
-                GeneratedOverlaySha256 = sidecarHashes[SeededGeneratedProjectVocabulary.GeneratedOverlayJsonFileName],
-                GeneratedBasePackageSha256 = sidecarHashes[SeededGeneratedProjectVocabulary.GeneratedBasePackageJsonFileName],
-                Goal142BaselinePackageSha256 = baseline.PackageSha256,
-                GeneratedStartMapId = overlay.Document.GeneratedStartMapId,
-                Counts = SeededGeneratedProjectSourceService.Counts(generated.PlanResult.Plan),
-                TinyLoop = SeededGeneratedProjectSourceService.BuildTinyLoopFacts(
-                    generated.PlanResult.Plan,
-                    generated.RulePackResult.RulePack,
-                    generated.TinyLoopResult),
-                SidecarSha256 = sidecarHashes
-            };
-            var sourceJson = JsonSerializer.Serialize(source, JsonOptions);
-            await WriteAsync(Resolve(generationRoot, SeededGeneratedProjectVocabulary.SourceJsonFileName), sourceJson, cancellationToken)
-                .ConfigureAwait(false);
+                OutputDirectory = generationRoot
+            });
+            if (!artifacts.Passed)
+                throw new InvalidOperationException("generated_project.generation_failed:"
+                                                    + string.Join(";", artifacts.Diagnostics));
+            cancellationToken.ThrowIfCancellationRequested();
 
-            var package = DeserializePackage(overlay.GeneratedBasePackageJson);
+            var package = DeserializePackage(artifacts.Overlay.GeneratedBasePackageJson);
             var templateManifest = _templateFactory.Create(request).Manifest;
             package.Manifest.PackageId = request.PackageId.Trim();
             package.Manifest.Title = request.Title.Trim();

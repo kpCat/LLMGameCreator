@@ -1,0 +1,23 @@
+{
+    "status":  "GREEN",
+    "schema":  "seeded_generated_project_source_v2",
+    "newCreationWritesV2":  true,
+    "v1OpenAndBuildWithoutRewrite":  true,
+    "successfulV1RegenerationWritesV2":  true,
+    "generationRequestSeparatedFromResolvedOptions":  true,
+    "presetDefinitionHashCorrelated":  true,
+    "explicitStyleOverrideTruthPassed":  true,
+    "explicitVariantOverrideTruthPassed":  true,
+    "request":  {
+                    "seed":  "goal159-regenerated-world",
+                    "mode":  "semi_procedural_regions",
+                    "presetId":  "survival_exploration",
+                    "styleOverrides":  [
+
+                                       ],
+                    "variantOverrides":  [
+
+                                         ],
+                    "requestSha256":  "34d914d5306d8cbb9d2af1d250b50a74d208e7496ef64656d051d4d489ac8f80"
+                }
+}

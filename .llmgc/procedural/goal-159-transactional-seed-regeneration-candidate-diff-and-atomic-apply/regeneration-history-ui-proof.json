@@ -1,0 +1,20 @@
+{
+    "status":  "GREEN",
+    "oldHistoriesRetained":  true,
+    "newGreenHistoryEntryCount":  1,
+    "regenerationRecordCurrent":  true,
+    "oldReleaseCandidateBytesRetained":  true,
+    "oldReleaseCandidateStatusAfterApply":  "LAST_SUCCESS",
+    "overallAfterApply":  "BUILD_GREEN_STANDALONE_PENDING",
+    "reopenedGeneratedWorldStatus":  "TRAVEL_CURRENT",
+    "genuineGoal157V2Status":  "START_CURRENT",
+    "genuineGoal157V2NeverTravelCurrent":  true,
+    "regenerateWorldButtonLabelPassed":  true,
+    "noRandomSeed":  true,
+    "semanticNoOpApplyDisabled":  true,
+    "russianCausalValidation":  true,
+    "resultCardOldToNewCounts":  true,
+    "mechanicsPreserved":  true,
+    "routeChecked":  true,
+    "standalonePending":  true
+}

@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "goal159_architecture_review_v1",
+  "status": "RESOLVED",
+  "readFirst": {
+    "orientation": [
+      "AGENTS.md",
+      "README.md",
+      "docs/CONTEXT_INDEX.md",
+      "docs/CURRENT_GENERATOR_STATE.md",
+      "docs/PRODUCT_LINE_CORE_STRATEGY.md",
+      "docs/NARROW_ALPHA_EXPANSION_POLICY.md",
+      "docs/AUTOMATED_VALIDATION_TIERS.md",
+      "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+      "docs/ROADMAP_TO_FULL_GENERATOR.md",
+      "docs/GOAL_DESIGN_QUALITY_POLICY.md",
+      "docs/UNITY_EXECUTION_POLICY.md",
+      "docs/WINFORMS_DESIGNER_RULES.md"
+    ],
+    "primaryTypes": [
+      "SeededGeneratedProjectModels",
+      "SeededGeneratedProjectSourceService",
+      "SeededGeneratedGameProjectCreationService",
+      "GenerationPresetOptionsService",
+      "GeneratedProjectOverlayService",
+      "GameProjectBuildAndQualificationService",
+      "GameProjectBuildTransaction",
+      "GameProjectFeatureModuleAuthoringService",
+      "GameProjectBuildHistoryReader",
+      "GameProjectReleaseCandidateRecordService",
+      "UnifiedGameProjectWorkspaceController",
+      "GameProjectGeneratedWorldSummaryService",
+      "CreateGameDialog",
+      "ProjectsPageControl"
+    ],
+    "localPatterns": [
+      "SeededGeneratedProjectSourceService strict schema and deterministic full-chain regeneration",
+      "GameProjectBuildTransaction atomic replacement and reverse rollback",
+      "GameProjectBuildAndQualificationService real Lane A compatibility plus Lane B generated start and travel qualification",
+      "CreateGameDialog data-derived choices and Designer-safe split",
+      "UnifiedGameProjectWorkspaceController snapshot-to-ProjectsPageControl binding"
+    ]
+  },
+  "goal158IndependentAudit": {
+    "result": "GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63",
+    "passed": true,
+    "required": false,
+    "accepted": false,
+    "humanGateCreated": false,
+    "inputs": ["Goal158 v3 history", "travel overlay", "route activation", "RC and portable truth"],
+    "outputs": ["Goal159 intake evidence", "Goal158 manual-acceptance update", "current-state mirrors"],
+    "commitOrder": ["record intake before Goal159 candidate status"],
+    "rollbackOrder": ["state-doc updates are published only after final proof"],
+    "behavioralTests": ["Goal158 regression filter", "Goal158 history UI rollback regression"]
+  },
+  "v1SourceCompatibility": {
+    "types": ["SeededGeneratedProjectSourceService", "SeededGeneratedProjectSourceRecord", "SeededGeneratedProjectGenerationRequest", "SeededGeneratedProjectResolvedOptions"],
+    "inputs": ["seeded_generated_project_source_v1", "eight existing deterministic sidecars", "current matching preset definition"],
+    "outputs": ["normalized inferred request", "resolved effective options", "RequestOrigin=legacy_v1_effective_options"],
+    "commitOrder": ["parse exact v1 properties", "validate existing Goal157 chain", "project normalized view without writing source"],
+    "rollbackOrder": ["ordinary open and build never write the v1 source", "failed regeneration leaves v1 bytes exact"],
+    "behavioralTests": ["valid v1 readable without rewrite", "v1 inferred request exposed", "v1 upgrades only after successful regeneration"]
+  },
+  "v2RequestResolutionContract": {
+    "types": ["SeededGeneratedProjectGenerationRequest", "SeededGeneratedProjectResolvedOptions", "GenerationPresetOptionsService", "SeededGeneratedProjectSourceService"],
+    "inputs": ["seed", "mode", "presetId", "explicit style overrides", "explicit variant overrides", "exact preset id/title/sorted defaults"],
+    "outputs": ["seeded_generated_project_source_v2", "stable summary", "presetDefinitionSha256", "truthful override booleans"],
+    "commitOrder": ["normalize request", "resolve empty lists from preset/defaults", "hash preset definition", "serialize exact v2 properties", "validate request/resolution equality"],
+    "rollbackOrder": ["factory output remains outside authoritative project until apply"],
+    "behavioralTests": ["preset default causality", "explicit style truth", "explicit variant truth", "four required mismatch diagnostics"]
+  },
+  "sharedGenerationArtifactFactory": {
+    "types": ["SeededGeneratedProjectArtifactFactory", "GeneratedProjectOverlayService", "VisibleGeneratedPlayablePreviewService", "IGeneratedProjectBaselineProvider"],
+    "inputs": ["canonical Goal142 baseline", "v2 generation request", "mechanicsProfileId", "confined output directory"],
+    "outputs": ["resolved options", "plan", "rule pack", "tiny loop", "namespaced MVP", "overlay", "generated base", "v2 source", "exact sidecar bytes and hashes"],
+    "commitOrder": ["generate full deterministic chain", "validate overlay", "write eight sidecars", "write v2 source last"],
+    "rollbackOrder": ["caller removes uncommitted output root"],
+    "behavioralTests": ["new creation uses factory", "same effective options preserve gameplay", "factory owns no identity/authoring/history/RC"]
+  },
+  "candidateProjectIsolation": {
+    "types": ["GameProjectSeedRegenerationService", "SeededGeneratedProjectArtifactFactory", "GameProjectFeatureModuleAuthoringService", "GameProjectBuildAndQualificationService"],
+    "inputs": ["complete authoritative project", "resolved changed request", "first optimistic-concurrency snapshot"],
+    "outputs": ["short LocalAppData candidate", "v2 generation directory", "identity-overlaid prebuild package", "two deterministic GREEN builds", "fresh TRAVEL_CURRENT reopen"],
+    "commitOrder": ["recheck tokens", "clone excluding transient build/standalone/lock paths", "replace candidate generation", "clear candidate qualified hashes", "build twice", "reopen"],
+    "rollbackOrder": ["delete disposable candidate only", "authoritative bytes remain untouched"],
+    "behavioralTests": ["candidate outside authority", "transients excluded", "Lane A accepted", "Lane B travel", "repeat deterministic", "fresh reopen current", "old RC never current"]
+  },
+  "authoringAndIdentityPreservation": {
+    "types": ["GameProjectFeatureModuleAuthoringService", "GameProjectIdentityStore", "FeatureModuleAuthoringFingerprintService", "GameProjectSeedRegenerationDiff"],
+    "inputs": ["selected module ids", "parameter JSON", "catalog/module fingerprints", "identity document bytes and fingerprint"],
+    "outputs": ["candidate and authoritative semantic authoring equality", "unchanged project identity", "AuthoringPreserved=true", "ProjectIdentityPreserved=true"],
+    "commitOrder": ["capture exact originals", "build candidate with same selections and parameters", "apply candidate qualified hashes without changing selections/parameters/identity"],
+    "rollbackOrder": ["restore authoring and identity snapshots in reverse apply order"],
+    "behavioralTests": ["module ids exact", "parameter JSON exact", "authoring fingerprint exact", "identity exact before/candidate/after"]
+  },
+  "optimisticConcurrencyContract": {
+    "types": ["GameProjectSeedRegenerationRequest", "GameProjectSeedRegenerationTruthTokens", "GameProjectSeedRegenerationService"],
+    "inputs": ["source record hash", "qualified authoring fingerprint", "authoring revision", "activated package hash", "composition package hash", "final state hash", "identity fingerprint", "optional RC record hash"],
+    "outputs": ["first and final recheck results", "causal regeneration.* rejection"],
+    "commitOrder": ["capture snapshot immediately before dialog", "recheck before candidate", "acquire gate and lock", "recheck immediately before apply"],
+    "rollbackOrder": ["token mismatch before mutation removes candidate and releases gate", "token mismatch at final recheck leaves authority exact"],
+    "behavioralTests": ["source changed", "authoring fingerprint/revision changed", "package/document hashes changed", "identity changed", "RC changed", "concurrent operation"]
+  },
+  "candidateQualificationMatrix": {
+    "types": ["GameProjectBuildAndQualificationService", "GameProjectGeneratedWorldActivationService", "GameProjectGeneratedRegionTravelActivationService", "GameProjectBuildHistoryReader"],
+    "inputs": ["complete candidate project", "current FeatureModule authoring", "new strict v2 source"],
+    "outputs": ["GREEN candidate build", "AcceptedMechanics compatibility", "GeneratedWorldActivation passed", "GeneratedRegionTravel passed", "TRAVEL_CURRENT snapshot", "one selected final candidate history"],
+    "commitOrder": ["build 1", "build 2", "compare package/composition/final hashes", "fresh controller reopen"],
+    "rollbackOrder": ["failed candidate is discarded before authoritative mutation"],
+    "behavioralTests": ["actual builder used", "candidate build GREEN", "repeat deterministic", "reopen TRAVEL_CURRENT", "candidate RC LAST_SUCCESS or ABSENT"]
+  },
+  "generatedWorldDiffContract": {
+    "types": ["GameProjectSeedRegenerationDiffService", "GameProjectSeedRegenerationDiff", "GeneratedProjectRecordFingerprint"],
+    "inputs": ["old and new normalized source", "old and new overlay fingerprints", "old and new generated packages/plans"],
+    "outputs": ["old/new request plan overlay base hashes", "data-derived counts", "added/removed/changed/unchanged records by collection", "old/new start and travel titles", "gameplay changed flag"],
+    "commitOrder": ["index canonical fingerprints", "classify union of keys", "derive titles and counts", "reject non-meaningful change"],
+    "rollbackOrder": ["diff is pure and writes no project state"],
+    "behavioralTests": ["seed diff", "mode diff", "preset diff", "canonical count equality", "no fixed content counts", "no-op rejection"]
+  },
+  "atomicApplyJournal": {
+    "types": ["GameProjectSeedRegenerationTransaction", "SeedRegenerationTransactionJournal"],
+    "inputs": ["authoritative relative path inventory", "exact before bytes/hashes", "candidate bytes/hashes", "final candidate history"],
+    "outputs": ["seed_regeneration_transaction_v1 journal", "prepared/applying/committed or rolled_back terminal state", "exact authoritative candidate state"],
+    "commitOrder": ["gate and lock", "final concurrency recheck", "backups", "applying", "generation swap", "support replace", "package replace", "authoring/identity replace", "one history add", "last-success record", "disk validation", "committed", "cleanup"],
+    "rollbackOrder": ["rolling_back", "remove new regeneration/history files", "restore authoring/identity", "restore package", "restore support", "restore generation", "validate every before hash", "rolled_back"],
+    "behavioralTests": ["success exact candidate", "failure after each mutation family", "before hashes exact", "journal terminal states"]
+  },
+  "packageSupportHistoryCommit": {
+    "types": ["GameProjectSeedRegenerationTransaction", "GameProjectBuildHistoryReader", "GameProjectSupportFileMaterializer"],
+    "inputs": ["candidate activated package", "changed support files", "original history inventory", "final candidate GREEN history"],
+    "outputs": ["new package/support bytes", "old histories retained", "exactly one collision-free new GREEN history"],
+    "commitOrder": ["generation", "changed support", "package", "authoring/identity", "single history"],
+    "rollbackOrder": ["remove added history first", "restore replaced files and directories from backups"],
+    "behavioralTests": ["one history added", "old history hashes retained", "candidate copied-old histories never imported"]
+  },
+  "releaseCandidateTransition": {
+    "types": ["GameProjectReleaseCandidateRecordService", "UnifiedGameProjectWorkspaceController"],
+    "inputs": ["unchanged old RC bytes", "new build hashes", "current authoring fingerprint"],
+    "outputs": ["old RC read as LAST_SUCCESS", "overall BUILD_GREEN_STANDALONE_PENDING", "new CURRENT RC only after ordinary standalone"],
+    "commitOrder": ["do not replace RC during regeneration", "reopen pending", "one explicit BuildWindowsStandalone proof writes new RC"],
+    "rollbackOrder": ["apply failure preserves old RC bytes", "standalone failure preserves last RC"],
+    "behavioralTests": ["old RC bytes retained", "LAST_SUCCESS after apply", "pending overall", "CURRENT after one smoke"]
+  },
+  "failureRollbackMatrix": {
+    "types": ["GameProjectSeedRegenerationTransaction", "GameProjectSeedRegenerationRecoveryService", "GameProjectSeedRegenerationFailurePoint"],
+    "inputs": ["prepared/applying/committed journals", "complete/incomplete backups", "injected failures after mutation steps"],
+    "outputs": ["exact before hashes", "rolled_back journal", "committed cleanup", "regeneration.recovery_required without mutation"],
+    "commitOrder": ["persist journal atomically before each state transition", "record applied step after durable mutation"],
+    "rollbackOrder": ["reverse appliedStepIds", "verify full authoritative inventory"],
+    "behavioralTests": ["generation swap failure", "package failure", "authoring failure", "history failure", "pre-final validation failure", "prepared recovery", "applying recovery", "committed cleanup", "incomplete backup refusal"]
+  },
+  "uiWorkflow": {
+    "types": ["RegenerateGeneratedWorldDialog", "UnifiedGameProjectWorkspaceController", "ProjectsPageControl"],
+    "inputs": ["snapshot current request and truth tokens", "data-derived modes and presets", "deterministically normalized advanced id lists"],
+    "outputs": ["Перегенерировать мир button", "Проверить и применить action", "Russian causal validation", "old to new result card", "technical transaction/diff details"],
+    "commitOrder": ["snapshot", "dialog", "preview candidate", "apply", "refresh same project", "render result"],
+    "rollbackOrder": ["failure renders attempt diagnostics and retains last successful card"],
+    "behavioralTests": ["availability", "dialog preload", "no-op disabled", "data-derived choices", "advanced normalization", "card truth", "no IDs hashes paths in human card"]
+  },
+  "portableCopy": {
+    "types": ["SeededGeneratedProjectSourceService", "GameProjectSeedRegenerationRecordService", "UnifiedGameProjectWorkspaceController", "GameProjectReleaseCandidateRecordService"],
+    "inputs": ["complete regenerated project after standalone"],
+    "outputs": ["v2 CURRENT", "valid regeneration record", "TRAVEL_CURRENT", "accepted compatibility", "RC CURRENT", "restored human facts"],
+    "commitOrder": ["copy complete project", "load package", "open workspace without build Runtime or Unity"],
+    "rollbackOrder": ["portable read is non-mutating except terminal journal cleanup when already committed"],
+    "behavioralTests": ["portable copy restores all Goal159 truth without execution", "no absolute candidate dependency"]
+  },
+  "legacyCompatibility": {
+    "types": ["GameProjectService", "SeededGeneratedGameProjectCreationService", "SeededGeneratedProjectSourceService", "GameProjectBuildHistoryReader"],
+    "inputs": ["legacy template", "valid v1 generated project", "new v2 generated project", "genuine Goal157 v2 history"],
+    "outputs": ["template byte compatibility", "v1 open/build unchanged", "new creation v2", "Goal157 history START_CURRENT and never TRAVEL_CURRENT"],
+    "commitOrder": ["schema-dispatch reads", "no implicit rewrite", "v2 only on new creation/successful regeneration"],
+    "rollbackOrder": ["failed v1 regeneration retains v1 source"],
+    "behavioralTests": ["template unavailable", "v1 build unchanged", "new v2 creation", "genuine v2 history normalization"]
+  },
+  "nonGoals": {
+    "forbidden": ["Runtime changes", "Runtime.Abstractions changes", "public GamePackage fields", "FeatureModule catalog changes", "Unity host/project changes", "provider LLM RAG Lua media work", "random seed", "world merge", "save migration", "historical user rollback"],
+    "inputs": ["Goal159 allowlist and reproduced P0/P1 policy"],
+    "outputs": ["artifact scope violation count zero"],
+    "commitOrder": ["scope guard last"],
+    "rollbackOrder": ["any forbidden mutation blocks GREEN and is removed only by exact-path correction allowed by task"],
+    "behavioralTests": ["Goal142 and goal148-manual byte identity", "Runtime and procedural regressions"]
+  },
+  "testInventory": {
+    "plannedTotal": 88,
+    "plannedBehavioral": 80,
+    "plannedContract": 8,
+    "files": {
+      "Goal159SourceV2Tests.cs": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+      "Goal159CandidateIsolationTests.cs": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
+      "Goal159RegenerationDiffTests.cs": [35, 36, 37, 38, 39, 40, 41],
+      "Goal159AtomicApplyRollbackTests.cs": [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 58],
+      "Goal159CrashRecoveryTests.cs": [54, 55, 56, 57],
+      "Goal159WorkspaceUiTests.cs": [59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73],
+      "Goal159StandaloneAndPortabilityTests.cs": [74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
+    },
+    "caseDefinitions": [
+      "1 new creation exact v2", "2 same effective gameplay", "3 v2 exact resolution", "4 preset hash", "5 preset defaults", "6 style override truth", "7 variant override truth", "8 request resolution mismatch", "9 preset mismatch", "10 v1 read no rewrite", "11 v1 inferred request", "12 v1 regeneration upgrades", "13 template byte compatibility",
+      "14 legacy reject", "15 invalid source reject", "16 semantic no-op no writes", "17 source token", "18 authoring token", "19 package token", "20 identity token", "21 RC token", "22 concurrent operation", "23 outside candidate root", "24 transient exclusion", "25 candidate v2 strict", "26 selected modules exact", "27 parameters exact", "28 identity exact", "29 Lane A accepted", "30 travel build", "31 repeat deterministic", "32 reopen TRAVEL_CURRENT", "33 old RC not CURRENT", "34 candidate failure authority unchanged",
+      "35 seed gameplay diff", "36 mode gameplay diff", "37 preset gameplay diff", "38 canonical diff counts", "39 preservation flags", "40 no fixed counts", "41 same request no-op",
+      "42 successful exact apply", "43 one new history", "44 old histories retained", "45 old RC bytes retained", "46 old RC LAST_SUCCESS", "47 journal committed", "48 generation swap rollback", "49 package rollback", "50 authoring rollback", "51 history rollback", "52 final validation rollback", "53 before hashes exact", "54 prepared recovery", "55 applying recovery", "56 committed cleanup", "57 incomplete backup recovery required", "58 final stale token",
+      "59 controller generated-only", "60 dialog preload", "61 current seed and no-op disabled", "62 choices data-derived", "63 advanced normalization", "64 same project refresh", "65 old to new card", "66 standalone pending card", "67 no technical facts in card", "68 technical transaction diff", "69 failed attempt retains last success", "70 Goal157 v2 START_CURRENT", "71 v2 never TRAVEL_CURRENT", "72 authoritative reopen TRAVEL_CURRENT", "73 regenerated pending RC",
+      "74 exactly one hidden smoke", "75 cache reused Unity zero", "76 payload new world travel", "77 payload accepted mechanics", "78 payload hashes", "79 new RC CURRENT", "80 portable restore", "81 Goal158 regression", "82 Goal157 regression", "83 Goal156 regression", "84 Goal155A and Goal155 regressions", "85 Goal154D Goal153C Goal150 Goal149 regressions", "86 Runtime legacy regressions", "87 procedural regressions", "88 Goal142 and goal148-manual immutable"
+    ]
+  },
+  "preCommitSelfAudit": {
+    "unexecutedValidParameterCombinations": "record as P2/P3 only after required matrix; no powerset is claimed",
+    "proofOnlyProductData": "none may enter candidate or authoritative package",
+    "newGenericProductionLiterals": "only stable regeneration schema, diagnostic and relative-path vocabulary",
+    "rollbackEventLeaks": "no success result or history may survive rollback",
+    "maximumValidRuntimeStateRisk": "unchanged Runtime and FeatureModule semantics; real existing qualification owns the risk",
+    "oldProjectBehavior": "template unchanged; v1 open/build without rewrite; successful regeneration alone migrates v1 to v2"
+  },
+  "executionReview": {
+    "status": "GREEN",
+    "goal159TestsDiscovered": 80,
+    "goal159BehavioralTestsPassed": 80,
+    "requiredMatrixClassCount": 20,
+    "hiddenStandaloneSmokeInvocationCount": 1,
+    "hostReused": true,
+    "hostRebuilt": false,
+    "unityProcessStartCount": 0,
+    "p0P1Repairs": [
+      "GameProjectSeedRegenerationRecordService gained JsonStringEnumConverter after record reopen exposed enum deserialization failure.",
+      "Historical Goal156 shared fixtures are explicitly retained as v1 while separate Goal159 fixtures prove new production creation writes v2.",
+      "Two stale Goal156 UI/history assertions now expect START_CURRENT for genuine unified_game_project_build_history_v2 records."
+    ],
+    "boundedScopeExceptions": [
+      {
+        "path": "src/LLMGameCreator.Application/RuntimePreview/GenerationPresetOptionsService.cs",
+        "reason": "Source v2 requires one truthful preset resolution seam with definition hash and explicit override correlation."
+      },
+      {
+        "path": "tests/LLMGameCreator.Tests/Application/Goal156/Goal156GeneratedWorkspaceTests.cs",
+        "reason": "Required Goal159 matrix exposed a stale BUILD_CURRENT assertion after mandatory v2 history normalization."
+      },
+      {
+        "path": "tests/LLMGameCreator.Tests/Application/Goal156/Goal156StandaloneAndPortabilityTests.cs",
+        "reason": "Required Goal159 matrix exposed the same stale v2 portable-history assertion."
+      }
+    ],
+    "remainingP2P3Debt": [
+      "Cross-seed gameplay-save migration is not implemented.",
+      "User-selectable historical world rollback is not implemented."
+    ],
+    "forbiddenAreasChanged": false,
+    "fullSuiteRun": false,
+    "historical85CaseClosureRun": false,
+    "allProductSmokeRun": false
+  }
+}

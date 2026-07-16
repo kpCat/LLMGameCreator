@@ -74,8 +74,8 @@ public sealed class GameProjectBuildHistoryReader
                 AcceptedMechanics = entry.AcceptedMechanics,
                 GeneratedWorld = ProjectGeneratedWorld(entry),
                 GeneratedWorldActivation = entry.GeneratedWorldActivation,
-                GeneratedWorldTravelOverlay = entry.GeneratedWorldTravelOverlay,
-                GeneratedRegionTravel = entry.GeneratedRegionTravel,
+                GeneratedWorldTravelOverlay = IsGoal157(entry) ? null : entry.GeneratedWorldTravelOverlay,
+                GeneratedRegionTravel = IsGoal157(entry) ? null : entry.GeneratedRegionTravel,
                 AcceptedMechanicsCompatibility = entry.AcceptedMechanicsCompatibility
             },
             Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
@@ -128,14 +128,15 @@ public sealed class GameProjectBuildHistoryReader
     {
         var generatedWorld = entry.GeneratedWorld;
         if (generatedWorld is null
-            || !string.Equals(entry.SchemaVersion, Goal157SchemaVersion, StringComparison.Ordinal)
-            || !string.Equals(generatedWorld.Status, "BUILD_CURRENT", StringComparison.Ordinal)
-            || entry.GeneratedWorldActivation is not { Present: true, Passed: true } activation
-            || string.Equals(entry.FinalStateHash, activation.FinalStateHash, StringComparison.Ordinal))
+            || !IsGoal157(entry)
+            || entry.GeneratedWorldActivation is not { Present: true, Passed: true })
             return generatedWorld;
 
         return generatedWorld with { Status = "START_CURRENT" };
     }
+
+    private static bool IsGoal157(GameProjectBuildHistoryEntry entry) =>
+        string.Equals(entry.SchemaVersion, Goal157SchemaVersion, StringComparison.Ordinal);
 
     private static bool HasPersistedSuccessIdentity(FeatureModuleCompositionDocument document) =>
         !string.IsNullOrWhiteSpace(document.LastActivatedProjectPackageSha256)

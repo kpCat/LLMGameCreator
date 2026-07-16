@@ -21,13 +21,33 @@ public sealed class SeededGeneratedProjectSourceService
         Converters = { new JsonStringEnumConverter() }
     };
 
-    private static readonly IReadOnlySet<string> ExactSourceProperties = new HashSet<string>(StringComparer.Ordinal)
+    private static readonly IReadOnlySet<string> ExactV1SourceProperties = new HashSet<string>(StringComparer.Ordinal)
     {
         "schemaVersion", "creationKind", "seed", "mode", "presetId", "styleHintIds", "variantIds",
         "mechanicsProfileId", "planId", "planSha256", "rulePackId", "rulePackSha256",
         "tinyLoopStateSha256", "generatedMvpPackageSha256", "generatedOverlaySha256",
         "generatedBasePackageSha256", "goal142BaselinePackageSha256", "generatedStartMapId",
         "counts", "tinyLoop", "sidecarSha256"
+    };
+
+    private static readonly IReadOnlySet<string> ExactV2SourceProperties = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "schemaVersion", "creationKind", "generationRequest", "resolvedGenerationOptions",
+        "mechanicsProfileId", "planId", "planSha256", "rulePackId", "rulePackSha256",
+        "tinyLoopStateSha256", "generatedMvpPackageSha256", "generatedOverlaySha256",
+        "generatedBasePackageSha256", "goal142BaselinePackageSha256", "generatedStartMapId",
+        "counts", "tinyLoop", "sidecarSha256"
+    };
+
+    private static readonly IReadOnlySet<string> ExactRequestProperties = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "seed", "mode", "presetId", "compactStyleHintIds", "selectedVariantIds"
+    };
+
+    private static readonly IReadOnlySet<string> ExactResolvedProperties = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "seed", "mode", "presetId", "compactStyleHintIds", "selectedVariantIds", "stableSummary",
+        "presetDefinitionSha256", "styleOverridesApplied", "variantOverridesApplied"
     };
 
     private readonly IGamePackageValidator _validator;
@@ -68,23 +88,33 @@ public sealed class SeededGeneratedProjectSourceService
         {
             var sourceJson = File.ReadAllText(sourcePath, Encoding.UTF8);
             using var sourceDocument = JsonDocument.Parse(sourceJson);
-            var actualProperties = sourceDocument.RootElement.EnumerateObject()
-                .Select(property => property.Name).ToHashSet(StringComparer.Ordinal);
-            if (!actualProperties.SetEquals(ExactSourceProperties))
-                diagnostics.Add("generated_source.unsupported_schema");
-            var source = JsonSerializer.Deserialize<SeededGeneratedProjectSourceRecord>(sourceJson, JsonOptions);
-            if (source is null)
+            var schemaVersion = sourceDocument.RootElement.TryGetProperty("schemaVersion", out var schemaElement)
+                ? schemaElement.GetString() ?? string.Empty
+                : string.Empty;
+            ValidateExactProperties(sourceDocument.RootElement, schemaVersion, diagnostics);
+            var deserialized = JsonSerializer.Deserialize<SeededGeneratedProjectSourceRecord>(sourceJson, JsonOptions);
+            if (deserialized is null)
                 return Failed(sourcePath, diagnostics.Append("generated_source.invalid_json"));
-
-            ValidateVocabulary(source, diagnostics);
-            var resolved = _presetOptions.Resolve(new GenerationPresetOptionsRequest
+            if (schemaVersion == SeededGeneratedProjectVocabulary.SourceV2SchemaVersion)
             {
-                Seed = source.Seed,
-                Mode = source.Mode,
-                PresetId = source.PresetId,
-                CompactStyleHintIds = source.StyleHintIds,
-                SelectedVariantIds = source.VariantIds
-            });
+                var request = sourceDocument.RootElement.TryGetProperty("generationRequest", out var requestElement)
+                    ? JsonSerializer.Deserialize<SeededGeneratedProjectGenerationRequest>(
+                        requestElement.GetRawText(), JsonOptions)
+                    : null;
+                var resolvedOptions = sourceDocument.RootElement.TryGetProperty(
+                    "resolvedGenerationOptions", out var resolvedElement)
+                    ? JsonSerializer.Deserialize<SeededGeneratedProjectResolvedOptions>(
+                        resolvedElement.GetRawText(), JsonOptions)
+                    : null;
+                deserialized = deserialized with
+                {
+                    GenerationRequest = request ?? new SeededGeneratedProjectGenerationRequest(),
+                    ResolvedGenerationOptions = resolvedOptions ?? new SeededGeneratedProjectResolvedOptions()
+                };
+            }
+            var source = NormalizeSource(deserialized, schemaVersion, diagnostics);
+            ValidateVocabulary(source, diagnostics);
+            var resolved = _presetOptions.Resolve(source.GenerationRequest);
             ValidateResolvedRequest(source, resolved, diagnostics);
             var generationRoot = Resolve(root, SeededGeneratedProjectVocabulary.GenerationRelativeRoot);
             ValidateSidecars(generationRoot, source, diagnostics);
@@ -223,7 +253,9 @@ public sealed class SeededGeneratedProjectSourceService
                 GeneratedMvpPackage = generatedMvp,
                 RegeneratedPlan = passed ? regeneratedPlan.Plan : null,
                 RegeneratedPlanJson = passed ? regeneratedPlan.Json : string.Empty,
+                GenerationRequest = passed ? source.GenerationRequest : null,
                 ResolvedGenerationOptions = passed ? resolved : null,
+                RequestOrigin = passed ? source.RequestOrigin : string.Empty,
                 Diagnostics = diagnostics
             };
         }
@@ -251,6 +283,35 @@ public sealed class SeededGeneratedProjectSourceService
         QuestEvents = plan.QuestEventSeeds.Count
     };
 
+    public static string SerializeV2(SeededGeneratedProjectSourceRecord source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        if (!string.Equals(source.SchemaVersion, SeededGeneratedProjectVocabulary.SourceV2SchemaVersion,
+                StringComparison.Ordinal))
+            throw new InvalidOperationException("generated_source.v2_schema_required");
+        return JsonSerializer.Serialize(new
+        {
+            source.SchemaVersion,
+            source.CreationKind,
+            source.GenerationRequest,
+            source.ResolvedGenerationOptions,
+            source.MechanicsProfileId,
+            source.PlanId,
+            source.PlanSha256,
+            source.RulePackId,
+            source.RulePackSha256,
+            source.TinyLoopStateSha256,
+            source.GeneratedMvpPackageSha256,
+            source.GeneratedOverlaySha256,
+            source.GeneratedBasePackageSha256,
+            source.Goal142BaselinePackageSha256,
+            source.GeneratedStartMapId,
+            source.Counts,
+            source.TinyLoop,
+            source.SidecarSha256
+        }, JsonOptions);
+    }
+
     public static GeneratedProjectTinyLoopFacts BuildTinyLoopFacts(
         ProceduralGeneratedGamePlan plan,
         FormulaEffectActionRulePack rulePack,
@@ -275,7 +336,8 @@ public sealed class SeededGeneratedProjectSourceService
 
     private void ValidateVocabulary(SeededGeneratedProjectSourceRecord source, ICollection<string> diagnostics)
     {
-        if (!string.Equals(source.SchemaVersion, SeededGeneratedProjectVocabulary.SourceSchemaVersion, StringComparison.Ordinal)
+        if (source.SchemaVersion is not SeededGeneratedProjectVocabulary.SourceSchemaVersion
+                and not SeededGeneratedProjectVocabulary.SourceV2SchemaVersion
             || !string.Equals(source.CreationKind, GameProjectCreationKinds.SeededGenerated, StringComparison.Ordinal))
             diagnostics.Add("generated_source.unsupported_schema");
         if (string.IsNullOrWhiteSpace(source.Seed)) diagnostics.Add("generated_source.seed_missing");
@@ -287,9 +349,26 @@ public sealed class SeededGeneratedProjectSourceService
 
     private static void ValidateResolvedRequest(
         SeededGeneratedProjectSourceRecord source,
-        GenerationPresetOptions resolved,
+        SeededGeneratedProjectResolvedOptions resolved,
         ICollection<string> diagnostics)
     {
+        if (source.SchemaVersion == SeededGeneratedProjectVocabulary.SourceV2SchemaVersion)
+        {
+            var normalizedRequest = NormalizeRequest(source.GenerationRequest);
+            if (!RequestEquals(source.GenerationRequest, normalizedRequest))
+                diagnostics.Add("generated_source.request_options_mismatch");
+            if (!ResolvedEquals(source.ResolvedGenerationOptions, resolved))
+                diagnostics.Add("generated_source.v2_request_resolution_mismatch");
+            if (!string.Equals(source.ResolvedGenerationOptions.PresetDefinitionSha256,
+                    resolved.PresetDefinitionSha256, StringComparison.Ordinal))
+                diagnostics.Add("generated_source.preset_definition_mismatch");
+            if (!RequestMatchesResolved(source.GenerationRequest, source.ResolvedGenerationOptions))
+                diagnostics.Add("generated_source.request_options_mismatch");
+            if (!ResolvedEquals(source.ResolvedGenerationOptions, resolved))
+                diagnostics.Add("generated_source.resolved_options_mismatch");
+            return;
+        }
+
         var mismatch = false;
         if (!string.Equals(source.Seed, resolved.Seed, StringComparison.Ordinal))
         {
@@ -315,6 +394,120 @@ public sealed class SeededGeneratedProjectSourceService
         }
         if (mismatch) diagnostics.Add("generated_source.request_resolution_mismatch");
     }
+
+    private SeededGeneratedProjectSourceRecord NormalizeSource(
+        SeededGeneratedProjectSourceRecord source,
+        string schemaVersion,
+        ICollection<string> diagnostics)
+    {
+        if (schemaVersion == SeededGeneratedProjectVocabulary.SourceSchemaVersion)
+        {
+            var request = new SeededGeneratedProjectGenerationRequest
+            {
+                Seed = source.Seed,
+                Mode = source.Mode,
+                PresetId = source.PresetId,
+                CompactStyleHintIds = source.StyleHintIds,
+                SelectedVariantIds = source.VariantIds
+            };
+            SeededGeneratedProjectResolvedOptions resolved;
+            try { resolved = _presetOptions.Resolve(request); }
+            catch (InvalidOperationException exception)
+            {
+                diagnostics.Add(exception.Message);
+                resolved = new SeededGeneratedProjectResolvedOptions();
+            }
+            return source with
+            {
+                GenerationRequest = request,
+                ResolvedGenerationOptions = resolved,
+                RequestOrigin = SeededGeneratedProjectRequestOrigins.LegacyV1EffectiveOptions
+            };
+        }
+        if (schemaVersion != SeededGeneratedProjectVocabulary.SourceV2SchemaVersion) return source;
+        var effective = source.ResolvedGenerationOptions;
+        return source with
+        {
+            Seed = effective.Seed,
+            Mode = effective.Mode,
+            PresetId = effective.PresetId,
+            StyleHintIds = effective.CompactStyleHintIds,
+            VariantIds = effective.SelectedVariantIds,
+            RequestOrigin = SeededGeneratedProjectRequestOrigins.ExplicitV2Request
+        };
+    }
+
+    private static void ValidateExactProperties(
+        JsonElement root,
+        string schemaVersion,
+        ICollection<string> diagnostics)
+    {
+        var properties = root.EnumerateObject().Select(property => property.Name).ToHashSet(StringComparer.Ordinal);
+        var expected = schemaVersion == SeededGeneratedProjectVocabulary.SourceSchemaVersion
+            ? ExactV1SourceProperties
+            : schemaVersion == SeededGeneratedProjectVocabulary.SourceV2SchemaVersion
+                ? ExactV2SourceProperties
+                : null;
+        if (expected is null || !properties.SetEquals(expected)) diagnostics.Add("generated_source.unsupported_schema");
+        if (schemaVersion != SeededGeneratedProjectVocabulary.SourceV2SchemaVersion) return;
+        if (!root.TryGetProperty("generationRequest", out var request)
+            || request.ValueKind != JsonValueKind.Object
+            || !request.EnumerateObject().Select(property => property.Name).ToHashSet(StringComparer.Ordinal)
+                .SetEquals(ExactRequestProperties))
+            diagnostics.Add("generated_source.request_options_mismatch");
+        if (!root.TryGetProperty("resolvedGenerationOptions", out var resolved)
+            || resolved.ValueKind != JsonValueKind.Object
+            || !resolved.EnumerateObject().Select(property => property.Name).ToHashSet(StringComparer.Ordinal)
+                .SetEquals(ExactResolvedProperties))
+            diagnostics.Add("generated_source.resolved_options_mismatch");
+    }
+
+    internal static SeededGeneratedProjectGenerationRequest NormalizeRequest(
+        SeededGeneratedProjectGenerationRequest request) => new()
+    {
+        Seed = request.Seed.Trim(),
+        Mode = request.Mode.Trim(),
+        PresetId = request.PresetId.Trim(),
+        CompactStyleHintIds = NormalizeIds(request.CompactStyleHintIds),
+        SelectedVariantIds = NormalizeIds(request.SelectedVariantIds)
+    };
+
+    private static IReadOnlyList<string> NormalizeIds(IReadOnlyList<string> values) => values
+        .Where(value => !string.IsNullOrWhiteSpace(value)).Select(value => value.Trim())
+        .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
+
+    internal static bool RequestEquals(
+        SeededGeneratedProjectGenerationRequest left,
+        SeededGeneratedProjectGenerationRequest right) =>
+        string.Equals(left.Seed, right.Seed, StringComparison.Ordinal)
+        && string.Equals(left.Mode, right.Mode, StringComparison.Ordinal)
+        && string.Equals(left.PresetId, right.PresetId, StringComparison.Ordinal)
+        && OrdinalSetEquals(left.CompactStyleHintIds, right.CompactStyleHintIds)
+        && OrdinalSetEquals(left.SelectedVariantIds, right.SelectedVariantIds);
+
+    internal static bool ResolvedEquals(
+        SeededGeneratedProjectResolvedOptions left,
+        SeededGeneratedProjectResolvedOptions right) =>
+        string.Equals(left.Seed, right.Seed, StringComparison.Ordinal)
+        && string.Equals(left.Mode, right.Mode, StringComparison.Ordinal)
+        && string.Equals(left.PresetId, right.PresetId, StringComparison.Ordinal)
+        && OrdinalSetEquals(left.CompactStyleHintIds, right.CompactStyleHintIds)
+        && OrdinalSetEquals(left.SelectedVariantIds, right.SelectedVariantIds)
+        && string.Equals(left.StableSummary, right.StableSummary, StringComparison.Ordinal)
+        && string.Equals(left.PresetDefinitionSha256, right.PresetDefinitionSha256, StringComparison.Ordinal)
+        && left.StyleOverridesApplied == right.StyleOverridesApplied
+        && left.VariantOverridesApplied == right.VariantOverridesApplied;
+
+    private static bool RequestMatchesResolved(
+        SeededGeneratedProjectGenerationRequest request,
+        SeededGeneratedProjectResolvedOptions resolved) =>
+        string.Equals(request.Seed, resolved.Seed, StringComparison.Ordinal)
+        && string.Equals(request.Mode, resolved.Mode, StringComparison.Ordinal)
+        && string.Equals(request.PresetId, resolved.PresetId, StringComparison.Ordinal)
+        && (request.CompactStyleHintIds.Count == 0
+            || OrdinalSetEquals(request.CompactStyleHintIds, resolved.CompactStyleHintIds))
+        && (request.SelectedVariantIds.Count == 0
+            || OrdinalSetEquals(request.SelectedVariantIds, resolved.SelectedVariantIds));
 
     private static bool OrdinalSetEquals(IReadOnlyList<string> left, IReadOnlyList<string> right) =>
         left.OrderBy(value => value, StringComparer.Ordinal)

@@ -4,6 +4,7 @@ using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Settings;
 using LLMGameCreator.Application.Validation;
@@ -74,6 +75,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _saveCurrentButton.Click += async (_, _) => await SaveCurrentGameAsync();
         _backToGamesButton.Click += (_, _) => ShowProjectStart();
         _buildAndQualifyButton.Click += async (_, _) => await BuildAndQualifyAsync();
+        _regenerateGeneratedWorldButton.Click += async (_, _) => await RegenerateGeneratedWorldAsync();
         _buildWindowsStandaloneButton.Click += async (_, _) => await BuildWindowsStandaloneAsync();
         _cancelWindowsStandaloneButton.Click += (_, _) => _workspaceController?.CancelWindowsStandaloneBuild();
         _launchWindowsStandaloneButton.Click += (_, _) => LaunchWindowsStandalone();
@@ -290,7 +292,32 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 summary,
                 snapshot.GeneratedWorldActivation,
                 snapshot.GeneratedRegionTravel)
+              + FormatRegenerationCard(snapshot)
             : string.Empty;
+        _regenerateGeneratedWorldButton.Enabled = !_buildUiRunning && snapshot.CanRegenerateGeneratedWorld;
+    }
+
+    private static string FormatRegenerationCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var record = snapshot.LastSuccessfulRegeneration;
+        if (record is null) return string.Empty;
+        var diff = record.Diff;
+        return Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, new[]
+        {
+            "Последняя перегенерация мира",
+            "Seed    " + diff.OldSeed + " → " + diff.NewSeed,
+            "Регионы    " + diff.OldCounts.Regions + " → " + diff.NewCounts.Regions,
+            "Фракции    " + diff.OldCounts.Factions + " → " + diff.NewCounts.Factions,
+            "Акторы    " + diff.OldCounts.Actors + " → " + diff.NewCounts.Actors,
+            "Предметы и ресурсы    " + diff.OldCounts.ItemsAndResources + " → " + diff.NewCounts.ItemsAndResources,
+            "Столкновения    " + diff.OldCounts.Encounters + " → " + diff.NewCounts.Encounters,
+            "Квесты и события    " + diff.OldCounts.QuestEvents + " → " + diff.NewCounts.QuestEvents,
+            "Добавлено / удалено / изменено    " + diff.AddedRecordCount + " / "
+                + diff.RemovedRecordCount + " / " + diff.ChangedRecordCount,
+            "Принятые механики    сохранены",
+            "Маршрут между регионами    проверен",
+            "Windows standalone    ожидает подтверждения"
+        });
     }
 
     private void BindSocialCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
@@ -710,6 +737,29 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 "Source: .llmgc/generation/seeded-project-source.json"
             ]);
         }
+        if (snapshot.LastSuccessfulRegeneration is { } regeneration)
+        {
+            lines.InsertRange(lines.Count - 1,
+            [
+                string.Empty,
+                "Seed regeneration",
+                "Attempt ID: " + regeneration.AttemptId,
+                "Old/new source SHA-256: " + regeneration.OldSourceRecordSha256 + " / "
+                    + regeneration.NewSourceRecordSha256,
+                "Old/new request SHA-256: " + regeneration.OldRequestSha256 + " / "
+                    + regeneration.NewRequestSha256,
+                "Old/new plan SHA-256: " + regeneration.OldPlanSha256 + " / "
+                    + regeneration.NewPlanSha256,
+                "Old/new overlay SHA-256: " + regeneration.OldOverlaySha256 + " / "
+                    + regeneration.NewOverlaySha256,
+                "Old/new generated base SHA-256: " + regeneration.OldGeneratedBaseSha256 + " / "
+                    + regeneration.NewGeneratedBaseSha256,
+                "New package SHA-256: " + regeneration.NewPackageSha256,
+                "New final Runtime state hash: " + regeneration.NewFinalStateHash,
+                "Retained RC status: " + regeneration.PreviousReleaseCandidateStatus,
+                "Result: .llmgc/regeneration/last-successful-regeneration.json"
+            ]);
+        }
         lines.AddRange(snapshot.IdentityRecoveryDiagnostics);
         lines.AddRange(new[]
         {
@@ -765,10 +815,97 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         }
     }
 
+    private async Task RegenerateGeneratedWorldAsync()
+    {
+        if (_workspaceController?.HasOpenProject != true || _buildUiRunning) return;
+        var snapshot = _workspaceController.Snapshot();
+        if (!snapshot.CanRegenerateGeneratedWorld
+            || snapshot.GeneratedWorldGenerationRequest is null
+            || snapshot.GeneratedWorldResolvedOptions is null)
+        {
+            MessageBox.Show(this,
+                "Перегенерация доступна только для сохранённого сгенерированного проекта без незаписанных изменений.",
+                "Перегенерация мира", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        using var dialog = new RegenerateGeneratedWorldDialog(
+            snapshot.GeneratedWorldGenerationRequest,
+            snapshot.GeneratedWorldResolvedOptions);
+        if (dialog.ShowDialog(this) != DialogResult.OK) return;
+
+        GameProjectSeedRegenerationRequest request;
+        try
+        {
+            request = _workspaceController.CreateGeneratedWorldRegenerationRequest(dialog.GenerationRequest);
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show(this, RegenerationDiagnostic(exception.Message), "Перегенерация мира",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        _buildUiRunning = true;
+        SetWorkspaceBusy(true);
+        _buildStatusLabel.Text = "Проверяется кандидат нового мира...";
+        _buildResultTextBox.Text = "Авторитетный проект не изменяется до завершения двух сборок кандидата.";
+        try
+        {
+            var preview = await Task.Run(() =>
+                _workspaceController.PreviewGeneratedWorldRegeneration(request)).ConfigureAwait(true);
+            if (preview.Status != "GREEN")
+            {
+                _buildStatusLabel.Text = "Перегенерация не применена";
+                _buildResultTextBox.Text = RegenerationDiagnostic(
+                    preview.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_failed");
+                BindWorkspace(_workspaceController.Snapshot());
+                return;
+            }
+
+            _buildStatusLabel.Text = "Кандидат проверен; выполняется атомарное применение...";
+            var result = await Task.Run(() =>
+                _workspaceController.ApplyGeneratedWorldRegeneration(request, preview)).ConfigureAwait(true);
+            _buildStatusLabel.Text = result.Status == "GREEN" ? "Мир перегенерирован" : "Перегенерация не применена";
+            _buildResultTextBox.Text = result.Status == "GREEN"
+                ? "Новый мир прошёл повторную сборку, reopen и маршрутную проверку. Принятые механики сохранены. "
+                  + "Windows standalone ожидает подтверждения."
+                : RegenerationDiagnostic(result.Diagnostics.FirstOrDefault() ?? "regeneration.apply_failed");
+            BindWorkspace(result.AuthoritativeSnapshot ?? _workspaceController.Snapshot());
+        }
+        catch (Exception exception)
+        {
+            _buildStatusLabel.Text = "Перегенерация не применена";
+            _buildResultTextBox.Text = RegenerationDiagnostic(exception.Message);
+        }
+        finally
+        {
+            _buildUiRunning = false;
+            SetWorkspaceBusy(false);
+        }
+    }
+
+    private static string RegenerationDiagnostic(string diagnostic) => diagnostic switch
+    {
+        "regeneration.no_semantic_change" => "Параметры не изменяют текущий мир; применение не требуется.",
+        "regeneration.source_changed" => "Источник генерации изменился после открытия диалога. Откройте диалог снова.",
+        "regeneration.authoring_changed" => "Настройки механик изменились после открытия диалога. Сохраните их и повторите.",
+        "regeneration.package_changed" => "Пакет или последняя проверка изменились. Повторно откройте проект.",
+        "regeneration.identity_changed" => "Идентичность проекта изменилась. Повторно откройте проект.",
+        "regeneration.release_candidate_changed" => "Release Candidate изменился. Повторно откройте проект.",
+        "regeneration.concurrent_operation" => "Уже выполняется сборка или перегенерация. Дождитесь завершения.",
+        "regeneration.candidate_repeat_mismatch" => "Повторная сборка кандидата дала другой результат; проект не изменён.",
+        "regeneration.candidate_qualification_incomplete" => "Кандидат не подтвердил мир, маршрут и принятые механики; проект не изменён.",
+        _ => "Перегенерация остановлена: " + diagnostic
+    };
+
     private void SetWorkspaceBusy(bool busy)
     {
         _backToGamesButton.Enabled = !busy;
         _saveCurrentButton.Enabled = !busy;
+        _regenerateGeneratedWorldButton.Enabled = !busy
+            && _workspaceController?.HasOpenProject == true
+            && _workspaceController.Snapshot().CanRegenerateGeneratedWorld;
         _workspaceTabs.Enabled = !busy;
         _buildAndQualifyButton.Enabled = !busy;
         _buildWindowsStandaloneButton.Enabled = !busy;

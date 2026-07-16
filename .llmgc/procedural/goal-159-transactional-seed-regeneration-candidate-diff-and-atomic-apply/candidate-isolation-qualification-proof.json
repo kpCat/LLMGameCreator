@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "shortLocalAppDataRoot":  true,
+    "outsideAuthoritativeProject":  true,
+    "completeProjectCopy":  true,
+    "transientFilesExcluded":  true,
+    "authoringPreserved":  true,
+    "identityPreserved":  true,
+    "selectedModuleCount":  12,
+    "configuredParameterCount":  0,
+    "laneAAcceptedMechanicsPassed":  true,
+    "laneBGeneratedTravelPassed":  true,
+    "firstBuildGreen":  true,
+    "repeatBuildGreen":  true,
+    "repeatDeterministic":  true,
+    "freshReopenStatus":  "TRAVEL_CURRENT",
+    "oldRcStatus":  "LAST_SUCCESS"
+}

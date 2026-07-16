@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 158 generated-region travel Runtime and standalone vertical slice
+Updated by: Goal 159 transactional seed regeneration candidate diff and atomic apply
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -12,11 +12,13 @@ Goal156 connects deterministic seeded generation to ordinary project creation an
 
 Goal157 adds a typed two-lane build. Lane A retains the baseline start map and owns AcceptedMechanics/Social qualification hashes and flags. Lane B changes only `Manifest.StartMapId` to the generated map, preserves canonical gameplay collections and identity, and owns the primary package/composition/final hashes and RuntimeFrames. The existing `IGameRuntime` proves generated-map Start → Move Right → Interact, generated-target correlation, deterministic replay and state roundtrip. History/UI/standalone/RC/portable restore this split without execution. No manual gate is created; Goal157 remains unaccepted pending independent audit.
 
-Goal157 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0`. Goal158 keeps Lane A unchanged and extends Lane B with a deterministic travel overlay derived from the strict regenerated plan: exact region-to-map bindings, one safe gate per directed connection, generic atomic `PlayerCommand.Interact` map transitions, deterministic multi-hop planning, origin and destination generated interactions, replay and exact map-state roundtrip. Primary hashes and RuntimeFrames now belong to the complete travel route. History/UI distinguish `START_CURRENT` from `TRAVEL_CURRENT`; one cached hidden standalone smoke and portable recovery preserve travel, accepted-mechanics and RC truth without Unity starts. Goal158 creates no human gate and remains unaccepted pending independent audit.
+Goal157 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0`. Goal158 keeps Lane A unchanged and extends Lane B with a deterministic travel overlay derived from the strict regenerated plan: exact region-to-map bindings, one safe gate per directed connection, generic atomic `PlayerCommand.Interact` map transitions, deterministic multi-hop planning, origin and destination generated interactions, replay and exact map-state roundtrip. Primary hashes and RuntimeFrames now belong to the complete travel route. History/UI distinguish `START_CURRENT` from `TRAVEL_CURRENT`; one cached hidden standalone smoke and portable recovery preserve travel, accepted-mechanics and RC truth without Unity starts.
+
+Goal158 independent audit intake is `GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63`. Goal159 adds backward-compatible generated source v2 with distinct requested and resolved options, truthful preset-definition/override correlation and one shared deterministic artifact factory for creation and regeneration. Regeneration builds and reopens a complete isolated LocalAppData candidate twice before producing a typed world diff. A journaled transaction performs a second concurrency recheck, atomic promotion and exact rollback/recovery; a semantic no-op performs no writes. Identity, authoring, old histories and old RC bytes are preserved, one GREEN history is added, and the old RC becomes `LAST_SUCCESS` while the regenerated project is `TRAVEL_CURRENT` and `BUILD_GREEN_STANDALONE_PENDING`. One cached hidden standalone smoke then records CURRENT RC and portable truth with zero Unity starts. Goal159 creates no human gate and remains unaccepted pending independent audit.
 
 ```text
-gate_status=goal158_green_acceptable_candidate_pending_independent_audit
-current_user_action=independent_goal158_audit_and_plan_transactional_seed_regeneration
+gate_status=goal159_green_acceptable_candidate_pending_independent_audit
+current_user_action=independent_goal159_audit_and_plan_generated_save_migration_or_world_history_rollback
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -136,7 +138,9 @@ goal158AcceptedByHuman=false
 goal158AcceptedByCodex=false
 goal158ManualReviewRequired=false
 goal158ManualGateReady=false
-goal158IndependentAuditRequired=true
+goal158IndependentAuditRequired=false
+goal158IndependentAuditResult=GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63
+goal158IndependentAuditPassed=true
 goal158RuntimeMapTransitionPassed=true
 goal158GeneratedTravelOverlayPassed=true
 goal158GeneratedRegionTravelPassed=true
@@ -150,7 +154,32 @@ goal158UnityProcessStartCount=0
 goal158HiddenSmokeInvocationCount=1
 goal158PortableCopyPassed=true
 goal158ArtifactScopeViolationCount=0
-nextAction=independent_goal158_audit_and_plan_transactional_seed_regeneration
+goal159ImplementationStatus=GREEN
+goal159CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal159Accepted=false
+goal159AcceptedByHuman=false
+goal159AcceptedByCodex=false
+goal159ManualReviewRequired=false
+goal159ManualGateReady=false
+goal159IndependentAuditRequired=true
+goal159GeneratedSourceV2Passed=true
+goal159V1CompatibilityPassed=true
+goal159CandidateIsolationPassed=true
+goal159RegenerationDiffPassed=true
+goal159OptimisticConcurrencyPassed=true
+goal159AtomicApplyPassed=true
+goal159RollbackRecoveryPassed=true
+goal159AuthoringPreservationPassed=true
+goal159IdentityPreservationPassed=true
+goal159TravelRequalificationPassed=true
+goal159OldRcLastSuccessPassed=true
+goal159HostReused=true
+goal159HostRebuilt=false
+goal159UnityProcessStartCount=0
+goal159HiddenSmokeInvocationCount=1
+goal159PortableCopyPassed=true
+goal159ArtifactScopeViolationCount=0
+nextAction=independent_goal159_audit_and_plan_generated_save_migration_or_world_history_rollback
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

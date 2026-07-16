@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 using LLMGameCreator.Application.Generation.Procedural;
@@ -280,7 +282,36 @@ internal static class Goal156TestKit
         var request = GeneratedRequest(root, folder, seed, profile);
         var service = new GameProjectService(Repository, Validator, new NewGamePackageFactory(), Creation);
         var summary = service.CreateAsync(request, CancellationToken.None).GetAwaiter().GetResult();
+        DowngradeSharedHistoricalFixtureToV1(summary.FolderPath);
         return new GeneratedProject(root, summary.FolderPath, request, service, DeleteOnDispose: false);
+    }
+
+    private static void DowngradeSharedHistoricalFixtureToV1(string project)
+    {
+        var path = Path.Combine(project, SeededGeneratedProjectVocabulary.SourceRelativePath
+            .Replace('/', Path.DirectorySeparatorChar));
+        var v2 = JsonNode.Parse(File.ReadAllText(path, Encoding.UTF8))!.AsObject();
+        var resolved = v2["resolvedGenerationOptions"]!.AsObject();
+        var v1 = new JsonObject
+        {
+            ["schemaVersion"] = SeededGeneratedProjectVocabulary.SourceSchemaVersion,
+            ["creationKind"] = v2["creationKind"]!.DeepClone(),
+            ["seed"] = resolved["seed"]!.DeepClone(),
+            ["mode"] = resolved["mode"]!.DeepClone(),
+            ["presetId"] = resolved["presetId"]!.DeepClone(),
+            ["styleHintIds"] = resolved["compactStyleHintIds"]!.DeepClone(),
+            ["variantIds"] = resolved["selectedVariantIds"]!.DeepClone()
+        };
+        foreach (var name in new[]
+                 {
+                     "mechanicsProfileId", "planId", "planSha256", "rulePackId", "rulePackSha256",
+                     "tinyLoopStateSha256", "generatedMvpPackageSha256", "generatedOverlaySha256",
+                     "generatedBasePackageSha256", "goal142BaselinePackageSha256", "generatedStartMapId",
+                     "counts", "tinyLoop", "sidecarSha256"
+                 })
+            v1[name] = v2[name]!.DeepClone();
+        File.WriteAllText(path, v1.ToJsonString(new JsonSerializerOptions { WriteIndented = true }),
+            new UTF8Encoding(false));
     }
 
     private static string FindRepositoryRoot()

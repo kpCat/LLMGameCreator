@@ -247,3 +247,9 @@ Goal157 independent audit is GREEN at `8939aea0`; `goal157IndependentAuditRequir
 ## Goal158 generated-region travel gate record
 
 Goal158 is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false` and `independentAuditRequired=true`. Required truth is a generic atomic Runtime map transition, exact strict-plan region bindings, one deterministic safe gate per directed connection, unchanged Lane A AcceptedMechanics/Social, a real origin/travel/destination `IGameRuntime` route with replay and exact state roundtrip, primary route hashes/frames, `TRAVEL_CURRENT` history/UI, one reused-cache hidden standalone smoke, RC CURRENT and execution-free portable recovery. This creates no human gate. Transactional seed regeneration remains the next explicit product decision.
+
+Goal158 independent audit is GREEN at `9a350c63`; `goal158IndependentAuditRequired=false`.
+
+## Goal159 transactional seed regeneration gate record
+
+Goal159 is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false` and `independentAuditRequired=true`. The gate requires truthful v1/v2 migration, a shared deterministic creation/regeneration factory, isolated repeatable candidate qualification, typed old/new diff, five optimistic-concurrency tokens, semantic no-op immutability, journaled atomic apply with exact rollback/crash recovery, identity/authoring/history/RC preservation, `TRAVEL_CURRENT` reopen with standalone pending, and one cache-only hidden standalone proof with CURRENT RC and portable recovery. This creates no human gate. Generated-save migration and user-selectable historical-world rollback remain future work.
