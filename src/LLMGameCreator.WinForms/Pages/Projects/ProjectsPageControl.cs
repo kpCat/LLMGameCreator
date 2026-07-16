@@ -76,6 +76,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _backToGamesButton.Click += (_, _) => ShowProjectStart();
         _buildAndQualifyButton.Click += async (_, _) => await BuildAndQualifyAsync();
         _regenerateGeneratedWorldButton.Click += async (_, _) => await RegenerateGeneratedWorldAsync();
+        _generatedWorldHistoryButton.Click += async (_, _) => await OpenGeneratedWorldHistoryAsync();
         _buildWindowsStandaloneButton.Click += async (_, _) => await BuildWindowsStandaloneAsync();
         _cancelWindowsStandaloneButton.Click += (_, _) => _workspaceController?.CancelWindowsStandaloneBuild();
         _launchWindowsStandaloneButton.Click += (_, _) => LaunchWindowsStandalone();
@@ -293,8 +294,11 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 snapshot.GeneratedWorldActivation,
                 snapshot.GeneratedRegionTravel)
               + FormatRegenerationCard(snapshot)
+              + FormatWorldHistoryCard(snapshot)
             : string.Empty;
         _regenerateGeneratedWorldButton.Enabled = !_buildUiRunning && snapshot.CanRegenerateGeneratedWorld;
+        _generatedWorldHistoryButton.Visible = summary is { Present: true, Passed: true };
+        _generatedWorldHistoryButton.Enabled = !_buildUiRunning && snapshot.CanOpenGeneratedWorldHistory;
     }
 
     private static string FormatRegenerationCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
@@ -317,6 +321,33 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             "Принятые механики    сохранены",
             "Маршрут между регионами    проверен",
             "Windows standalone    ожидает подтверждения"
+        });
+    }
+
+    private static string FormatWorldHistoryCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var history = snapshot.GeneratedWorldHistory;
+        var change = snapshot.LastSuccessfulWorldChange;
+        if (history is null && change is null) return string.Empty;
+        var current = history?.Entries.FirstOrDefault(entry => entry.IsCurrent)?.Manifest;
+        var changeTitle = change?.OperationKind switch
+        {
+            "history_rollback" => "восстановление из истории",
+            "regeneration" => "перегенерация",
+            _ => "не выполнялось"
+        };
+        var standalone = snapshot.ReleaseCandidateConfigurationStatus == "CURRENT"
+            ? "подтверждён"
+            : "требуется повторная проверка";
+        return Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, new[]
+        {
+            "История сгенерированных миров",
+            "Сохранённых миров    " + (history?.Entries.Count ?? 0),
+            "Текущий мир    " + (current is null ? "текущий сгенерированный мир" : "seed " + current.Seed),
+            "Последнее изменение мира    " + changeTitle,
+            "Источник последнего изменения    " + (change?.OperationKind == "history_rollback"
+                ? "сохранённый мир" : change?.OperationKind == "regeneration" ? "новые параметры" : "исходный мир"),
+            "Windows standalone    " + standalone
         });
     }
 
@@ -760,6 +791,31 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 "Result: .llmgc/regeneration/last-successful-regeneration.json"
             ]);
         }
+        if (snapshot.LastSuccessfulWorldChange is { } worldChange)
+        {
+            lines.InsertRange(lines.Count - 1,
+            [
+                string.Empty,
+                "Generated world history",
+                "Operation kind: " + worldChange.OperationKind,
+                "From world ID: " + worldChange.FromWorldId,
+                "To world ID: " + worldChange.ToWorldId,
+                "Candidate seal SHA-256: " + worldChange.CandidateSealSha256,
+                "Transaction state: " + worldChange.TransactionState,
+                "World history entry count: " + (snapshot.GeneratedWorldHistory?.Entries.Count ?? 0),
+                "Result: .llmgc/regeneration/last-successful-world-change.json"
+            ]);
+        }
+        if (snapshot.LastWorldRollbackAttempt is { } rollbackAttempt)
+        {
+            lines.InsertRange(lines.Count - 1,
+            [
+                "Rollback attempt ID: " + rollbackAttempt.AttemptId,
+                "Rollback target world ID: " + rollbackAttempt.TargetWorldId,
+                "Rollback candidate seal SHA-256: " + rollbackAttempt.CandidateSealSha256,
+                "Rollback transaction state: " + rollbackAttempt.TransactionState
+            ]);
+        }
         lines.AddRange(snapshot.IdentityRecoveryDiagnostics);
         lines.AddRange(new[]
         {
@@ -885,6 +941,99 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         }
     }
 
+    private async Task OpenGeneratedWorldHistoryAsync()
+    {
+        if (_workspaceController?.HasOpenProject != true || _buildUiRunning) return;
+        var history = _workspaceController.ReadGeneratedWorldHistory();
+        if (!history.Passed)
+        {
+            MessageBox.Show(this,
+                WorldRollbackDiagnostic(history.Diagnostics.FirstOrDefault() ?? "world_history.invalid"),
+                "История миров", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        if (history.Entries.Count == 0)
+        {
+            MessageBox.Show(this, "Сохранённые миры появятся после успешной перегенерации.",
+                "История миров", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+        using var dialog = new GeneratedWorldHistoryDialog(history);
+        if (dialog.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.SelectedWorldId)) return;
+
+        GameProjectGeneratedWorldRollbackRequest request;
+        try
+        {
+            request = _workspaceController.CreateGeneratedWorldRollbackRequest(dialog.SelectedWorldId);
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show(this, WorldRollbackDiagnostic(exception.Message), "История миров",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        _buildUiRunning = true;
+        SetWorkspaceBusy(true);
+        _buildStatusLabel.Text = "Проверяется кандидат сохранённого мира...";
+        _buildResultTextBox.Text = "Сохранённый источник будет заново собран с текущими механиками и идентичностью проекта.";
+        try
+        {
+            var preview = await Task.Run(() =>
+                _workspaceController.PreviewGeneratedWorldRollback(request)).ConfigureAwait(true);
+            if (preview.Status != "GREEN" || preview.Diff is null)
+            {
+                _buildStatusLabel.Text = "Восстановление не применено";
+                _buildResultTextBox.Text = WorldRollbackDiagnostic(
+                    preview.Diagnostics.FirstOrDefault() ?? "world_rollback.candidate_failed");
+                return;
+            }
+            _buildResultTextBox.Text = string.Join(Environment.NewLine, new[]
+            {
+                "Проверенный переход к сохранённому миру:",
+                "Seed    " + preview.Diff.OldSeed + " → " + preview.Diff.NewSeed,
+                "Регионы    " + preview.Diff.OldCounts.Regions + " → " + preview.Diff.NewCounts.Regions,
+                "Фракции    " + preview.Diff.OldCounts.Factions + " → " + preview.Diff.NewCounts.Factions,
+                "Персонажи    " + preview.Diff.OldCounts.Actors + " → " + preview.Diff.NewCounts.Actors,
+                "Маршрут    " + preview.Diff.OldTravelDestinationTitle + " → "
+                    + preview.Diff.NewTravelDestinationTitle,
+                "Кандидат прошёл повторную сборку и reopen. Выполняется атомарное восстановление."
+            });
+            var result = await Task.Run(() =>
+                _workspaceController.ApplyGeneratedWorldRollback(request, preview)).ConfigureAwait(true);
+            _buildStatusLabel.Text = result.Status == "GREEN"
+                ? "Мир восстановлен из истории" : "Восстановление не применено";
+            _buildResultTextBox.Text = result.Status == "GREEN"
+                ? "Сохранённый мир восстановлен через проверенный кандидат. Текущие механики и идентичность сохранены. "
+                  + "Windows standalone требуется проверить повторно."
+                : WorldRollbackDiagnostic(result.Diagnostics.FirstOrDefault() ?? "world_rollback.apply_failed");
+            BindWorkspace(result.AuthoritativeSnapshot ?? _workspaceController.Snapshot());
+        }
+        catch (Exception exception)
+        {
+            _buildStatusLabel.Text = "Восстановление не применено";
+            _buildResultTextBox.Text = WorldRollbackDiagnostic(exception.Message);
+        }
+        finally
+        {
+            _buildUiRunning = false;
+            SetWorkspaceBusy(false);
+        }
+    }
+
+    private static string WorldRollbackDiagnostic(string diagnostic) => diagnostic switch
+    {
+        "world_rollback.no_semantic_change" => "Этот мир уже является текущим.",
+        "world_rollback.target_missing" => "Сохранённый мир не найден.",
+        "world_rollback.target_invalid" => "Сохранённый мир повреждён или изменился.",
+        "world_rollback.current_truth_changed" => "Текущий проект изменился. Откройте историю миров снова.",
+        "regeneration.candidate_seal_mismatch" => "Проверенный кандидат изменился; проект не затронут.",
+        "regeneration.candidate_tampered" => "Файлы проверенного кандидата изменились; проект не затронут.",
+        _ when diagnostic.StartsWith("project_operation.busy:", StringComparison.Ordinal) =>
+            "Уже выполняется другая операция проекта. Дождитесь её завершения.",
+        _ => "Восстановление остановлено: " + diagnostic
+    };
+
     private static string RegenerationDiagnostic(string diagnostic) => diagnostic switch
     {
         "regeneration.no_semantic_change" => "Параметры не изменяют текущий мир; применение не требуется.",
@@ -906,6 +1055,9 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _regenerateGeneratedWorldButton.Enabled = !busy
             && _workspaceController?.HasOpenProject == true
             && _workspaceController.Snapshot().CanRegenerateGeneratedWorld;
+        _generatedWorldHistoryButton.Enabled = !busy
+            && _workspaceController?.HasOpenProject == true
+            && _workspaceController.Snapshot().CanOpenGeneratedWorldHistory;
         _workspaceTabs.Enabled = !busy;
         _buildAndQualifyButton.Enabled = !busy;
         _buildWindowsStandaloneButton.Enabled = !busy;

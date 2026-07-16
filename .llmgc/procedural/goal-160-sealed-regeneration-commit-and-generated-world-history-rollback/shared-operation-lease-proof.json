@@ -1,0 +1,46 @@
+{
+    "status":  "GREEN",
+    "authoritativeLock":  ".llmgc/operations/project-mutation.lock",
+    "operationKinds":  [
+                           "build",
+                           "standalone",
+                           "authoring_save",
+                           "authoring_module_change",
+                           "authoring_parameter_change",
+                           "regeneration_preview",
+                           "regeneration_apply",
+                           "world_history_rollback_preview",
+                           "world_history_rollback_apply",
+                           "recovery"
+                       ],
+    "raceMatrix":  [
+                       {
+                           "rejected":  "regeneration_preview",
+                           "owner":  "build",
+                           "passed":  true
+                       },
+                       {
+                           "rejected":  "build",
+                           "owner":  "regeneration_preview",
+                           "passed":  true
+                       },
+                       {
+                           "rejected":  "standalone",
+                           "owner":  "regeneration_apply",
+                           "passed":  true
+                       },
+                       {
+                           "rejected":  "authoring/regeneration/rollback",
+                           "owner":  "standalone",
+                           "passed":  true
+                       },
+                       {
+                           "rejected":  "second_coordinator",
+                           "owner":  "cross_process_lock",
+                           "passed":  true
+                       }
+                   ],
+    "lockHeldForWholeMutation":  true,
+    "childCandidateBuildScoped":  true,
+    "releaseOnSuccessAndFailure":  true
+}

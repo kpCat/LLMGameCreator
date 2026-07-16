@@ -23,14 +23,19 @@ public sealed class GameProjectSeedRegenerationService
     private readonly string _repositoryRoot;
     private readonly ICurrentGamePackageService _currentPackageService;
     private readonly IGamePackageRepository _packageRepository;
-    private readonly IGamePackageValidator _packageValidator;
     private readonly GameProjectBuildAndQualificationService _builder;
     private readonly SeededGeneratedProjectArtifactFactory _artifactFactory;
     private readonly SeededGeneratedProjectSourceService _sourceService;
     private readonly GameProjectSeedRegenerationDiffService _diffService;
     private readonly GameProjectSeedRegenerationTransaction _transaction;
     private readonly GameProjectSeedRegenerationRecordService _recordService;
-    private readonly Dictionary<string, GameProjectSeedRegenerationPreview> _previews = new(StringComparer.Ordinal);
+    private readonly IGameProjectOperationCoordinator _operationCoordinator;
+    private readonly GameProjectSeedRegenerationCandidateSealService _sealService;
+    private readonly IGameProjectSeedRegenerationTruthReader _truthReader;
+    private readonly IGameProjectSeedRegenerationCommitValidator _commitValidator;
+    private readonly GeneratedWorldHistoryService _worldHistoryService;
+    private readonly GameProjectGeneratedWorldChangeRecordService _worldChangeRecordService;
+    private readonly Dictionary<string, SealedRegenerationCandidate> _previews = new(StringComparer.Ordinal);
     private int _running;
 
     public GameProjectSeedRegenerationService(
@@ -43,30 +48,57 @@ public sealed class GameProjectSeedRegenerationService
         SeededGeneratedProjectSourceService sourceService,
         GameProjectSeedRegenerationDiffService? diffService = null,
         GameProjectSeedRegenerationTransaction? transaction = null,
-        GameProjectSeedRegenerationRecordService? recordService = null)
+        GameProjectSeedRegenerationRecordService? recordService = null,
+        IGameProjectOperationCoordinator? operationCoordinator = null,
+        GameProjectSeedRegenerationCandidateSealService? sealService = null,
+        IGameProjectSeedRegenerationTruthReader? truthReader = null,
+        IGameProjectSeedRegenerationCommitValidator? commitValidator = null,
+        GeneratedWorldHistoryService? worldHistoryService = null,
+        GameProjectGeneratedWorldChangeRecordService? worldChangeRecordService = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _currentPackageService = currentPackageService ?? throw new ArgumentNullException(nameof(currentPackageService));
         _packageRepository = packageRepository ?? throw new ArgumentNullException(nameof(packageRepository));
-        _packageValidator = packageValidator ?? throw new ArgumentNullException(nameof(packageValidator));
+        ArgumentNullException.ThrowIfNull(packageValidator);
         _builder = builder ?? throw new ArgumentNullException(nameof(builder));
         _artifactFactory = artifactFactory ?? throw new ArgumentNullException(nameof(artifactFactory));
         _sourceService = sourceService ?? throw new ArgumentNullException(nameof(sourceService));
         _diffService = diffService ?? new GameProjectSeedRegenerationDiffService();
         _transaction = transaction ?? new GameProjectSeedRegenerationTransaction();
         _recordService = recordService ?? new GameProjectSeedRegenerationRecordService(_repositoryRoot, _sourceService);
+        _operationCoordinator = operationCoordinator ?? builder.OperationCoordinator;
+        _sealService = sealService ?? new GameProjectSeedRegenerationCandidateSealService();
+        _truthReader = truthReader ?? new GameProjectSeedRegenerationTruthReader(_repositoryRoot, _sourceService);
+        _worldHistoryService = worldHistoryService ?? new GeneratedWorldHistoryService(_sourceService);
+        _worldChangeRecordService = worldChangeRecordService
+                                    ?? new GameProjectGeneratedWorldChangeRecordService(
+                                        _sourceService, _worldHistoryService);
+        _commitValidator = commitValidator ?? new GameProjectSeedRegenerationCommitValidator(
+            _repositoryRoot, _sourceService, packageValidator, _recordService);
     }
 
     public bool Running => Volatile.Read(ref _running) != 0;
 
-    public GameProjectSeedRegenerationTransactionResult Recover(string projectFolder) =>
-        _transaction.Recover(projectFolder);
+    public GameProjectSeedRegenerationTransactionResult Recover(string projectFolder)
+    {
+        using var operation = _operationCoordinator.TryAcquire(projectFolder, GameProjectOperationKinds.Recovery);
+        return !operation.Acquired ? new GameProjectSeedRegenerationTransactionResult
+        {
+            Diagnostics = [operation.Diagnostic]
+        } : _transaction.Recover(projectFolder, operation);
+    }
+
+    public GameProjectSeedRegenerationTransactionResult Recover(
+        string projectFolder,
+        GameProjectOperationLease operationLease) =>
+        _transaction.Recover(projectFolder, operationLease);
 
     public GameProjectSeedRegenerationRequest CreateRequest(
         string projectFolder,
         SeededGeneratedProjectGenerationRequest generationRequest)
     {
-        var tokens = Capture(projectFolder).Tokens;
+        using var operation = RequireOperation(projectFolder, GameProjectOperationKinds.Recovery);
+        var tokens = Capture(projectFolder, operation).Tokens;
         return new GameProjectSeedRegenerationRequest
         {
             ProjectFolder = Path.GetFullPath(projectFolder),
@@ -85,23 +117,36 @@ public sealed class GameProjectSeedRegenerationService
     public GameProjectSeedRegenerationRecordReadResult ReadLastSuccessful(string projectFolder) =>
         _recordService.Read(projectFolder);
 
+    public GeneratedWorldHistoryReadResult ReadWorldHistory(string projectFolder) =>
+        _worldHistoryService.ReadAll(projectFolder);
+
+    public GameProjectGeneratedWorldChangeReadResult ReadLastWorldChange(string projectFolder) =>
+        _worldChangeRecordService.Read(projectFolder);
+
     public GameProjectSeedRegenerationPreview Preview(
         GameProjectSeedRegenerationRequest request,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
-        if (Interlocked.CompareExchange(ref _running, 1, 0) != 0 || _builder.BuildRunning)
-            return FailedPreview("regeneration.concurrent_operation");
+        using var operation = _operationCoordinator.TryAcquire(
+            request.ProjectFolder, GameProjectOperationKinds.RegenerationPreview);
+        if (!operation.Acquired) return new GameProjectSeedRegenerationPreview
+        {
+            Stage = "precondition",
+            Diagnostics = [operation.Diagnostic, "regeneration.concurrent_operation"]
+        };
+        if (Interlocked.CompareExchange(ref _running, 1, 0) != 0)
+            return FailedPreview("project_operation.busy:" + GameProjectOperationKinds.RegenerationPreview);
         var attemptId = Guid.NewGuid().ToString("N")[..12];
         string? candidate = null;
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var recovery = _transaction.Recover(request.ProjectFolder);
+            var recovery = _transaction.Recover(request.ProjectFolder, operation);
             if (!recovery.Passed) return FailedPreview(
                 recovery.Diagnostics.FirstOrDefault() ?? "regeneration.recovery_required", attemptId);
-            var current = Capture(request.ProjectFolder);
-            var concurrency = CompareTokens(request, current.Tokens);
+            var current = Capture(request.ProjectFolder, operation);
+            var concurrency = CompareTokens(ExpectedTokens(request), current.Tokens);
             if (concurrency.Count > 0) return FailedPreview(concurrency[0], attemptId);
             var normalizedRequest = SeededGeneratedProjectSourceService.NormalizeRequest(request.GenerationRequest);
             var requestedResolved = new LLMGameCreator.Application.RuntimePreview.GenerationPresetOptionsService()
@@ -111,6 +156,10 @@ public sealed class GameProjectSeedRegenerationService
 
             candidate = CandidateRoot(attemptId);
             CloneProject(current.ProjectFolder, candidate);
+            using var candidateOperation = _operationCoordinator.TryAcquireChild(
+                operation, candidate, GameProjectOperationKinds.Build);
+            if (!candidateOperation.Acquired)
+                return CandidateFailure(attemptId, candidate, candidateOperation.Diagnostic);
             var generationRoot = Confined(candidate, SeededGeneratedProjectVocabulary.GenerationRelativeRoot);
             if (Directory.Exists(generationRoot)) Directory.Delete(generationRoot, recursive: true);
             var artifacts = _artifactFactory.Create(new SeededGeneratedProjectArtifactFactoryRequest
@@ -123,9 +172,9 @@ public sealed class GameProjectSeedRegenerationService
                 artifacts.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_generation_failed");
             cancellationToken.ThrowIfCancellationRequested();
             PrepareCandidatePackage(candidate, current.Identity);
-            var candidateAuthoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
+            var candidateAuthoring = NewAuthoring();
             var candidatePackage = LoadPackage(candidate);
-            var candidateState = candidateAuthoring.OpenProject(candidate, candidatePackage);
+            var candidateState = candidateAuthoring.OpenProject(candidate, candidatePackage, candidateOperation);
             var preservedSelected = candidateState.Document.SelectedModuleIds.ToList();
             var preservedParameters = ParameterJson(candidateState.Document);
             candidateAuthoring.ApplyQualifiedDocument(candidateState.Document with
@@ -136,26 +185,28 @@ public sealed class GameProjectSeedRegenerationService
                 LastQualifiedFinalStateHash = string.Empty,
                 LastQualificationStatus = "NOT_RUN"
             });
-            candidateAuthoring.Save();
+            candidateAuthoring.Save(candidateOperation);
 
             _currentPackageService.LoadAsync(candidate, cancellationToken).GetAwaiter().GetResult();
             GameProjectBuildResult first;
             GameProjectBuildResult second;
             UnifiedGameProjectWorkspaceSnapshot candidateSnapshot;
+            GameProjectAuthoringState reopenedState;
             try
             {
-                first = _builder.Build(candidateAuthoring, cancellationToken);
+                first = _builder.Build(candidateAuthoring, candidateOperation, cancellationToken);
                 if (!first.Passed) return CandidateFailure(attemptId, candidate,
                     first.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_build_failed", first);
-                second = _builder.Build(candidateAuthoring, cancellationToken);
+                second = _builder.Build(candidateAuthoring, candidateOperation, cancellationToken);
                 if (!second.Passed) return CandidateFailure(attemptId, candidate,
                     second.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_repeat_failed", second);
                 if (!BuildIdentityEquals(first, second)) return CandidateFailure(
                     attemptId, candidate, "regeneration.candidate_repeat_mismatch", second);
                 _currentPackageService.LoadAsync(candidate, cancellationToken).GetAwaiter().GetResult();
-                var reopenedAuthoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
+                var reopenedAuthoring = NewAuthoring();
                 var reopenedController = NewController(reopenedAuthoring);
-                candidateSnapshot = reopenedController.OpenProject(candidate);
+                candidateSnapshot = reopenedController.OpenProject(candidate, candidateOperation);
+                reopenedState = reopenedAuthoring.State;
             }
             finally
             {
@@ -163,16 +214,15 @@ public sealed class GameProjectSeedRegenerationService
             }
 
             var candidateSource = _sourceService.Validate(candidate);
-            var finalCandidateState = candidateAuthoring.State;
-            var authoringPreserved = finalCandidateState.Document.SelectedModuleIds
+            var authoringPreserved = reopenedState.Document.SelectedModuleIds
                                          .SequenceEqual(preservedSelected, StringComparer.Ordinal)
-                                     && string.Equals(ParameterJson(finalCandidateState.Document), preservedParameters,
+                                     && string.Equals(ParameterJson(reopenedState.Document), preservedParameters,
                                          StringComparison.Ordinal)
                                      && string.Equals(
                                          new FeatureModuleAuthoringFingerprintService().Calculate(
-                                             finalCandidateState.Document, finalCandidateState.Library).Sha256,
+                                             reopenedState.Document, reopenedState.Library).Sha256,
                                          current.Tokens.QualifiedAuthoringFingerprint, StringComparison.Ordinal);
-            var identityPreserved = string.Equals(IdentityFingerprint(finalCandidateState.Identity),
+            var identityPreserved = string.Equals(IdentityFingerprint(reopenedState.Identity),
                 current.Tokens.ProjectIdentityFingerprint, StringComparison.Ordinal);
             var diff = _diffService.Compare(current.Source, candidateSource, authoringPreserved, identityPreserved);
             if (!diff.GameplayChanged || !authoringPreserved || !identityPreserved)
@@ -183,23 +233,45 @@ public sealed class GameProjectSeedRegenerationService
                 || candidateSnapshot.GeneratedRegionTravel is not { Passed: true }
                 || candidateSnapshot.AcceptedMechanicsCompatibility is not { Passed: true }
                 || candidateSnapshot.ReleaseCandidateRecordConfigurationStatus == "CURRENT")
-                return CandidateFailure(attemptId, candidate, "regeneration.candidate_qualification_incomplete", second);
+                return CandidateFailure(attemptId, candidate,
+                    "regeneration.candidate_qualification_incomplete", second);
+
+            var publicationCapture = Capture(current.ProjectFolder, operation);
+            var publicationRace = CompareTokens(ExpectedTokens(request), publicationCapture.Tokens);
+            if (publicationRace.Count > 0)
+                return CandidateFailure(attemptId, candidate, publicationRace[0], second);
+            var inventory = _truthReader.CaptureAuthoritativeInventorySha256(current.ProjectFolder);
             var historyFileName = Path.GetFileName(second.BuildHistoryPath);
+            var rootIdentity = Guid.NewGuid().ToString("N");
+            var seal = _sealService.Create(candidate, rootIdentity, attemptId, historyFileName,
+                second, candidateSnapshot, diff, reopenedState);
             var preview = new GameProjectSeedRegenerationPreview
             {
                 AttemptId = attemptId,
                 Status = "GREEN",
-                Stage = "candidate_qualified",
+                Stage = "candidate_sealed",
                 CurrentSourceSummary = current.Source.ResolvedGenerationOptions!.StableSummary,
                 CandidateSourceSummary = candidateSource.ResolvedGenerationOptions!.StableSummary,
                 Diff = diff,
                 CandidateBuild = second,
                 CandidateSnapshot = candidateSnapshot,
-                ExpectedTruthTokens = current.Tokens,
+                ExpectedTruthTokens = publicationCapture.Tokens,
                 CandidateRoot = candidate,
-                CandidateBuildHistoryFileName = historyFileName
+                CandidateBuildHistoryFileName = historyFileName,
+                CandidateSealSha256 = seal.SealSha256,
+                TransactionState = "not_started"
             };
-            _previews[attemptId] = preview;
+            _previews[attemptId] = new SealedRegenerationCandidate
+            {
+                CandidateRoot = candidate,
+                Seal = seal,
+                PublicPreview = preview,
+                CandidateBuild = second,
+                CandidateSnapshot = candidateSnapshot,
+                Diff = diff,
+                ExpectedTruthTokens = publicationCapture.Tokens,
+                ExpectedAuthoritativeInventorySha256 = inventory
+            };
             return preview;
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException
@@ -219,108 +291,169 @@ public sealed class GameProjectSeedRegenerationService
     {
         ArgumentNullException.ThrowIfNull(request);
         ArgumentNullException.ThrowIfNull(preview);
-        if (Interlocked.CompareExchange(ref _running, 1, 0) != 0 || _builder.BuildRunning)
-            return FailedResult(preview, "regeneration.concurrent_operation");
+        using var operation = _operationCoordinator.TryAcquire(
+            request.ProjectFolder, GameProjectOperationKinds.RegenerationApply);
+        if (!operation.Acquired) return FailedResult(preview, operation.Diagnostic);
+        if (Interlocked.CompareExchange(ref _running, 1, 0) != 0)
+            return FailedResult(preview, "project_operation.busy:" + GameProjectOperationKinds.RegenerationApply);
+        SealedRegenerationCandidate? cached = null;
         try
         {
-            if (!_previews.TryGetValue(preview.AttemptId, out var cached)
-                || cached.Status != "GREEN"
-                || !string.Equals(cached.CandidateRoot, preview.CandidateRoot, StringComparison.Ordinal)
+            if (!_previews.TryGetValue(preview.AttemptId, out cached)
+                || cached.PublicPreview.Status != "GREEN"
+                || !string.Equals(preview.CandidateSealSha256, cached.Seal.SealSha256, StringComparison.Ordinal)
+                || !CallerPreviewMatches(preview, cached.PublicPreview)
                 || !Directory.Exists(cached.CandidateRoot))
-                return FailedResult(preview, "regeneration.preview_unavailable");
-            var current = Capture(request.ProjectFolder);
-            var concurrency = CompareTokens(request, current.Tokens);
-            if (concurrency.Count > 0) return FailedResult(preview, concurrency[0]);
-            var candidateSource = _sourceService.Validate(preview.CandidateRoot);
-            if (candidateSource is not { Present: true, Passed: true, Source: not null })
-                return FailedResult(preview, "regeneration.candidate_source_invalid");
-            var rcPath = new GameProjectReleaseCandidateRecordService().RecordPath(current.ProjectFolder);
-            var previousRcHash = File.Exists(rcPath) ? GameProjectSeedRegenerationRecordService.HashFile(rcPath) : null;
-            var record = new GameProjectSeedRegenerationRecord
+                return FailedResult(cached?.PublicPreview ?? preview,
+                    "regeneration.candidate_seal_mismatch");
+
+            using var candidateOperation = _operationCoordinator.TryAcquireChild(
+                operation, cached.CandidateRoot, GameProjectOperationKinds.Build);
+            if (!candidateOperation.Acquired)
+                return FailedResult(cached.PublicPreview, candidateOperation.Diagnostic);
+            var candidatePackage = LoadPackage(cached.CandidateRoot);
+            var candidateAuthoring = NewAuthoring();
+            candidateAuthoring.OpenProject(cached.CandidateRoot, candidatePackage, candidateOperation);
+            UnifiedGameProjectWorkspaceSnapshot freshCandidateSnapshot;
+            _currentPackageService.LoadAsync(cached.CandidateRoot, CancellationToken.None).GetAwaiter().GetResult();
+            try
             {
-                AttemptId = preview.AttemptId,
+                freshCandidateSnapshot = NewController(candidateAuthoring)
+                    .OpenProject(cached.CandidateRoot, candidateOperation);
+            }
+            finally
+            {
+                _currentPackageService.LoadAsync(request.ProjectFolder, CancellationToken.None).GetAwaiter().GetResult();
+            }
+            var sealValidation = _sealService.Verify(cached.CandidateRoot, cached.Seal,
+                cached.CandidateBuild, freshCandidateSnapshot, cached.Diff, candidateAuthoring.State);
+            if (!sealValidation.Passed)
+                return FailedResult(cached.PublicPreview,
+                    sealValidation.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_tampered");
+            var candidateSource = _sourceService.Validate(cached.CandidateRoot);
+            if (candidateSource is not { Present: true, Passed: true, Source: not null })
+                return FailedResult(cached.PublicPreview, "regeneration.candidate_tampered");
+            if (freshCandidateSnapshot.GeneratedWorld?.Status != "TRAVEL_CURRENT"
+                || freshCandidateSnapshot.GeneratedWorldActivation is not { Passed: true }
+                || freshCandidateSnapshot.GeneratedRegionTravel is not { Passed: true }
+                || freshCandidateSnapshot.AcceptedMechanicsCompatibility is not { Passed: true }
+                || freshCandidateSnapshot.ReleaseCandidateRecordConfigurationStatus == "CURRENT")
+                return FailedResult(cached.PublicPreview, "regeneration.candidate_tampered");
+
+            var current = Capture(request.ProjectFolder, operation);
+            var concurrency = CompareTokens(cached.ExpectedTruthTokens, current.Tokens);
+            if (concurrency.Count > 0) return FailedResult(cached.PublicPreview, concurrency[0]);
+            if (!string.Equals(_truthReader.CaptureAuthoritativeInventorySha256(current.ProjectFolder),
+                    cached.ExpectedAuthoritativeInventorySha256, StringComparison.Ordinal))
+                return FailedResult(cached.PublicPreview, "regeneration.authoritative_inventory_changed");
+            var rcPath = new GameProjectReleaseCandidateRecordService().RecordPath(current.ProjectFolder);
+            var previousRcHash = File.Exists(rcPath) ? HashFile(rcPath) : null;
+            var record = BuildRegenerationRecord(cached, current, previousRcHash);
+            var fromWorldId = _worldHistoryService.WorldId(current.ProjectFolder, current.Source);
+            var toWorldId = _worldHistoryService.WorldId(cached.CandidateRoot, candidateSource);
+            var worldChange = new GameProjectGeneratedWorldChangeRecord
+            {
+                OperationKind = "regeneration",
+                AttemptId = cached.PublicPreview.AttemptId,
+                FromWorldId = fromWorldId,
+                ToWorldId = toWorldId,
                 OldSourceRecordSha256 = current.Tokens.SourceRecordSha256,
-                NewSourceRecordSha256 = GameProjectSeedRegenerationRecordService.HashFile(Confined(
-                    preview.CandidateRoot, SeededGeneratedProjectVocabulary.SourceRelativePath)),
-                OldRequestSha256 = preview.Diff!.OldSourceRequestSha256,
-                NewRequestSha256 = preview.Diff.NewSourceRequestSha256,
-                OldPlanSha256 = preview.Diff.OldPlanSha256,
-                NewPlanSha256 = preview.Diff.NewPlanSha256,
-                OldOverlaySha256 = preview.Diff.OldOverlaySha256,
-                NewOverlaySha256 = preview.Diff.NewOverlaySha256,
-                OldGeneratedBaseSha256 = preview.Diff.OldGeneratedBaseSha256,
-                NewGeneratedBaseSha256 = preview.Diff.NewGeneratedBaseSha256,
+                NewSourceRecordSha256 = cached.Seal.SourceRecordSha256,
                 OldPackageSha256 = current.Tokens.ActivatedPackageSha256,
-                NewPackageSha256 = preview.CandidateBuild!.PackageSha256,
-                NewCompositionPackageSha256 = preview.CandidateBuild.CompositionPackageSha256,
-                NewFinalStateHash = preview.CandidateBuild.FinalStateHash,
-                QualifiedAuthoringFingerprint = preview.CandidateBuild.QualifiedAuthoringFingerprint,
-                SelectedModuleCount = preview.CandidateBuild.AttemptedSelectedModuleIds.Count,
-                ConfiguredParameterCount = preview.CandidateBuild.ConfiguredParameterCount,
-                Diff = preview.Diff,
-                CandidateBuildHistoryFileName = preview.CandidateBuildHistoryFileName,
+                NewPackageSha256 = cached.CandidateBuild.PackageSha256,
+                OldCompositionPackageSha256 = current.Tokens.CompositionPackageSha256,
+                NewCompositionPackageSha256 = cached.CandidateBuild.CompositionPackageSha256,
+                OldFinalStateHash = current.Tokens.FinalStateHash,
+                NewFinalStateHash = cached.CandidateBuild.FinalStateHash,
+                QualifiedAuthoringFingerprint = cached.CandidateBuild.QualifiedAuthoringFingerprint,
+                Diff = cached.Diff,
+                SelectedBuildHistoryFileName = cached.Seal.SelectedBuildHistoryFileName,
                 PreviousReleaseCandidateRecordSha256 = previousRcHash,
-                PreviousReleaseCandidateStatus = previousRcHash is null ? "ABSENT" : "LAST_SUCCESS"
+                PreviousReleaseCandidateStatus = previousRcHash is null ? "ABSENT" : "LAST_SUCCESS",
+                CandidateSealSha256 = cached.Seal.SealSha256
             };
             var applied = _transaction.Apply(new GameProjectSeedRegenerationTransactionRequest
             {
-                AttemptId = preview.AttemptId,
+                AttemptId = cached.PublicPreview.AttemptId,
                 ProjectFolder = current.ProjectFolder,
-                CandidateFolder = preview.CandidateRoot,
-                CandidateBuildHistoryFileName = preview.CandidateBuildHistoryFileName,
+                CandidateFolder = cached.CandidateRoot,
+                CandidateBuildHistoryFileName = cached.Seal.SelectedBuildHistoryFileName,
                 RegenerationRecordJson = _recordService.Serialize(record),
-                FailurePoint = failurePoint
+                FailurePoint = failurePoint,
+                ExpectedTruthTokens = cached.ExpectedTruthTokens,
+                ExpectedAuthoritativeInventorySha256 = cached.ExpectedAuthoritativeInventorySha256,
+                CandidateSealSha256 = cached.Seal.SealSha256,
+                OperationLease = operation,
+                TruthReader = _truthReader,
+                CommitValidator = _commitValidator,
+                CommitValidationRequest = new GameProjectSeedRegenerationCommitValidationRequest
+                {
+                    ProjectFolder = current.ProjectFolder,
+                    OperationKind = "regeneration",
+                    CandidateSeal = cached.Seal,
+                    ExpectedProjectIdentityFingerprint = current.Tokens.ProjectIdentityFingerprint,
+                    SelectedBuildHistoryFileName = cached.Seal.SelectedBuildHistoryFileName,
+                    PreviousReleaseCandidateRecordSha256 = previousRcHash
+                },
+                WorldHistoryService = _worldHistoryService,
+                BeforeWorldHistoryOperationKind = GeneratedWorldHistoryOperationKinds.RegenerationBefore,
+                AfterWorldHistoryOperationKind = GeneratedWorldHistoryOperationKinds.RegenerationAfter,
+                WorldChangeRecordRelativePath = GameProjectGeneratedWorldChangeVocabulary.RelativePath,
+                WorldChangeRecordJson = _worldChangeRecordService.Serialize(worldChange)
             });
             if (!applied.Passed) return new GameProjectSeedRegenerationResult
             {
-                AttemptId = preview.AttemptId,
+                AttemptId = cached.PublicPreview.AttemptId,
                 Status = "FAILED",
                 Stage = "atomic_apply",
-                Diff = preview.Diff,
-                CandidateBuild = preview.CandidateBuild,
+                Diff = cached.Diff,
+                CandidateBuild = cached.CandidateBuild,
                 Diagnostics = applied.Diagnostics,
                 RollbackApplied = applied.RollbackApplied,
                 AuthoritativeFilesChanged = applied.ChangedRelativePaths,
-                JournalStatus = applied.JournalStatus
-            };
-            _currentPackageService.LoadAsync(current.ProjectFolder, CancellationToken.None).GetAwaiter().GetResult();
-            var authoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
-            var controller = NewController(authoring);
-            var authoritative = controller.OpenProject(current.ProjectFolder);
-            var recordRead = _recordService.Read(current.ProjectFolder);
-            if (!recordRead.Passed
-                || authoritative.GeneratedWorld?.Status != "TRAVEL_CURRENT"
-                || authoritative.ReleaseCandidateConfigurationStatus != "BUILD_GREEN_STANDALONE_PENDING")
-                throw new InvalidOperationException("regeneration.authoritative_validation_failed:"
-                                                    + string.Join(";", recordRead.Diagnostics));
-            if (Directory.Exists(preview.CandidateRoot)) Directory.Delete(preview.CandidateRoot, recursive: true);
-            _previews.Remove(preview.AttemptId);
-            return new GameProjectSeedRegenerationResult
-            {
-                AttemptId = preview.AttemptId,
-                Status = "GREEN",
-                Stage = "committed",
-                Diff = preview.Diff,
-                CandidateBuild = preview.CandidateBuild,
-                AuthoritativeSnapshot = authoritative,
-                Applied = true,
-                AuthoritativeFilesChanged = applied.ChangedRelativePaths,
                 JournalStatus = applied.JournalStatus,
-                BuildHistoryFileName = applied.BuildHistoryFileName
+                TransactionState = applied.TransactionState,
+                CandidateSealSha256 = cached.Seal.SealSha256
             };
+
+            candidateOperation.Dispose();
+            if (Directory.Exists(cached.CandidateRoot)) Directory.Delete(cached.CandidateRoot, recursive: true);
+            _previews.Remove(cached.PublicPreview.AttemptId);
+            operation.Dispose();
+            try
+            {
+                _currentPackageService.LoadAsync(current.ProjectFolder, CancellationToken.None).GetAwaiter().GetResult();
+                var authoring = NewAuthoring();
+                var authoritative = NewController(authoring).OpenProject(current.ProjectFolder);
+                return Success(cached, applied, authoritative, []);
+            }
+            catch (Exception presentationException) when (presentationException is IOException
+                                                           or UnauthorizedAccessException
+                                                           or InvalidOperationException
+                                                           or JsonException)
+            {
+                return Success(cached, applied, null,
+                    ["regeneration.presentation_reopen_failed:" + presentationException.Message]) with
+                {
+                    CommittedWithPresentationDiagnostic = true
+                };
+            }
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException
                                            or InvalidOperationException or JsonException)
         {
-            return FailedResult(preview, exception.Message);
+            return FailedResult(cached?.PublicPreview ?? preview, exception.Message);
         }
         finally { Volatile.Write(ref _running, 0); }
     }
 
-    public GameProjectSeedRegenerationTruthTokens CaptureTruthTokens(string projectFolder) =>
-        Capture(projectFolder).Tokens;
+    public GameProjectSeedRegenerationTruthTokens CaptureTruthTokens(string projectFolder)
+    {
+        using var operation = RequireOperation(projectFolder, GameProjectOperationKinds.Recovery);
+        return Capture(projectFolder, operation).Tokens;
+    }
 
-    private CurrentCapture Capture(string projectFolder)
+    private CurrentCapture Capture(string projectFolder, GameProjectOperationLease operationLease)
     {
         var project = Path.GetFullPath(projectFolder);
         var source = _sourceService.Validate(project);
@@ -329,21 +462,20 @@ public sealed class GameProjectSeedRegenerationService
                 ? "regeneration.generated_source_invalid"
                 : "regeneration.not_generated_project");
         var package = LoadPackage(project);
-        var authoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
-        var state = authoring.OpenProject(project, package);
+        var authoring = NewAuthoring();
+        var state = authoring.OpenProject(project, package, operationLease);
         var fingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);
         if (!fingerprint.Passed) throw new InvalidOperationException("regeneration.authoring_invalid");
-        var packageHash = GameProjectSeedRegenerationRecordService.HashFile(Confined(project, "package.json"));
+        var packageHash = HashFile(Confined(project, "package.json"));
         if (!string.IsNullOrWhiteSpace(state.Document.LastActivatedProjectPackageSha256)
             && !string.Equals(packageHash, state.Document.LastActivatedProjectPackageSha256, StringComparison.Ordinal))
             throw new InvalidOperationException("regeneration.package_changed");
         var identityFingerprint = IdentityFingerprint(state.Identity);
         var rcPath = new GameProjectReleaseCandidateRecordService().RecordPath(project);
-        var rcHash = File.Exists(rcPath) ? GameProjectSeedRegenerationRecordService.HashFile(rcPath) : null;
+        var rcHash = File.Exists(rcPath) ? HashFile(rcPath) : null;
         return new CurrentCapture(project, source, state.Identity, new GameProjectSeedRegenerationTruthTokens
         {
-            SourceRecordSha256 = GameProjectSeedRegenerationRecordService.HashFile(Confined(
-                project, SeededGeneratedProjectVocabulary.SourceRelativePath)),
+            SourceRecordSha256 = HashFile(Confined(project, SeededGeneratedProjectVocabulary.SourceRelativePath)),
             QualifiedAuthoringFingerprint = fingerprint.Sha256,
             AuthoringRevision = state.Document.Revision,
             ActivatedPackageSha256 = packageHash,
@@ -354,25 +486,35 @@ public sealed class GameProjectSeedRegenerationService
         });
     }
 
+    private static GameProjectSeedRegenerationTruthTokens ExpectedTokens(GameProjectSeedRegenerationRequest request) => new()
+    {
+        SourceRecordSha256 = request.ExpectedSourceRecordSha256,
+        QualifiedAuthoringFingerprint = request.ExpectedQualifiedAuthoringFingerprint,
+        AuthoringRevision = request.ExpectedAuthoringRevision,
+        ActivatedPackageSha256 = request.ExpectedActivatedPackageSha256,
+        CompositionPackageSha256 = request.ExpectedCompositionPackageSha256,
+        FinalStateHash = request.ExpectedFinalStateHash,
+        ProjectIdentityFingerprint = request.ExpectedProjectIdentityFingerprint,
+        ReleaseCandidateRecordSha256 = request.ExpectedReleaseCandidateRecordSha256
+    };
+
     private static IReadOnlyList<string> CompareTokens(
-        GameProjectSeedRegenerationRequest expected,
+        GameProjectSeedRegenerationTruthTokens expected,
         GameProjectSeedRegenerationTruthTokens actual)
     {
         var diagnostics = new List<string>();
-        if (!string.Equals(expected.ExpectedSourceRecordSha256, actual.SourceRecordSha256, StringComparison.Ordinal))
+        if (!string.Equals(expected.SourceRecordSha256, actual.SourceRecordSha256, StringComparison.Ordinal))
             diagnostics.Add("regeneration.source_changed");
-        if (!string.Equals(expected.ExpectedQualifiedAuthoringFingerprint, actual.QualifiedAuthoringFingerprint,
-                StringComparison.Ordinal) || expected.ExpectedAuthoringRevision != actual.AuthoringRevision)
+        if (!string.Equals(expected.QualifiedAuthoringFingerprint, actual.QualifiedAuthoringFingerprint,
+                StringComparison.Ordinal) || expected.AuthoringRevision != actual.AuthoringRevision)
             diagnostics.Add("regeneration.authoring_changed");
-        if (!string.Equals(expected.ExpectedActivatedPackageSha256, actual.ActivatedPackageSha256,
-                StringComparison.Ordinal)
-            || !string.Equals(expected.ExpectedCompositionPackageSha256, actual.CompositionPackageSha256,
-                StringComparison.Ordinal)
-            || !string.Equals(expected.ExpectedFinalStateHash, actual.FinalStateHash, StringComparison.Ordinal))
+        if (!string.Equals(expected.ActivatedPackageSha256, actual.ActivatedPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(expected.CompositionPackageSha256, actual.CompositionPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(expected.FinalStateHash, actual.FinalStateHash, StringComparison.Ordinal))
             diagnostics.Add("regeneration.package_changed");
-        if (!string.Equals(expected.ExpectedProjectIdentityFingerprint, actual.ProjectIdentityFingerprint,
+        if (!string.Equals(expected.ProjectIdentityFingerprint, actual.ProjectIdentityFingerprint,
                 StringComparison.Ordinal)) diagnostics.Add("regeneration.identity_changed");
-        if (!string.Equals(expected.ExpectedReleaseCandidateRecordSha256, actual.ReleaseCandidateRecordSha256,
+        if (!string.Equals(expected.ReleaseCandidateRecordSha256, actual.ReleaseCandidateRecordSha256,
                 StringComparison.Ordinal)) diagnostics.Add("regeneration.release_candidate_changed");
         return diagnostics;
     }
@@ -398,12 +540,16 @@ public sealed class GameProjectSeedRegenerationService
         if (Directory.Exists(stagingRoot)) Directory.Delete(stagingRoot, recursive: true);
     }
 
+    private GameProjectFeatureModuleAuthoringService NewAuthoring() =>
+        new(_repositoryRoot, operationCoordinator: _operationCoordinator);
+
     private UnifiedGameProjectWorkspaceController NewController(GameProjectFeatureModuleAuthoringService authoring) => new(
         _currentPackageService,
         authoring,
         _builder,
         generatedSourceService: _sourceService,
-        generatedWorldSummaryService: new GameProjectGeneratedWorldSummaryService());
+        generatedWorldSummaryService: new GameProjectGeneratedWorldSummaryService(),
+        operationCoordinator: _operationCoordinator);
 
     private GamePackageDefinition LoadPackage(string projectFolder) =>
         _packageRepository.LoadAsync(projectFolder, CancellationToken.None).GetAwaiter().GetResult();
@@ -437,7 +583,7 @@ public sealed class GameProjectSeedRegenerationService
         return root;
     }
 
-    private static void CloneProject(string source, string target)
+    internal static void CloneProject(string source, string target)
     {
         Directory.CreateDirectory(target);
         foreach (var directory in Directory.EnumerateDirectories(source, "*", SearchOption.AllDirectories))
@@ -466,12 +612,14 @@ public sealed class GameProjectSeedRegenerationService
         || relative.Equals(GameProjectSeedRegenerationVocabulary.RegenerationRelativeRoot,
             StringComparison.OrdinalIgnoreCase)
         || relative.StartsWith(GameProjectSeedRegenerationVocabulary.RegenerationRelativeRoot + "/",
-            StringComparison.OrdinalIgnoreCase);
+            StringComparison.OrdinalIgnoreCase)
+        || relative.Equals(".llmgc/operations", StringComparison.OrdinalIgnoreCase)
+        || relative.StartsWith(".llmgc/operations/", StringComparison.OrdinalIgnoreCase);
 
     private static string Relative(string root, string path) =>
         Path.GetRelativePath(root, path).Replace('\\', '/');
 
-    private static string Confined(string root, string relative)
+    internal static string Confined(string root, string relative)
     {
         var fullRoot = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         var path = Path.GetFullPath(Path.Combine(fullRoot, relative.Replace('/', Path.DirectorySeparatorChar)));
@@ -481,13 +629,80 @@ public sealed class GameProjectSeedRegenerationService
         return path;
     }
 
+    private static bool CallerPreviewMatches(
+        GameProjectSeedRegenerationPreview caller,
+        GameProjectSeedRegenerationPreview cached) =>
+        string.Equals(caller.AttemptId, cached.AttemptId, StringComparison.Ordinal)
+        && string.Equals(caller.CandidateSealSha256, cached.CandidateSealSha256, StringComparison.Ordinal)
+        && string.Equals(caller.CandidateRoot, cached.CandidateRoot, StringComparison.Ordinal)
+        && string.Equals(caller.CandidateBuildHistoryFileName, cached.CandidateBuildHistoryFileName,
+            StringComparison.Ordinal)
+        && string.Equals(caller.CandidateBuild?.PackageSha256, cached.CandidateBuild?.PackageSha256,
+            StringComparison.Ordinal)
+        && string.Equals(caller.CandidateBuild?.FinalStateHash, cached.CandidateBuild?.FinalStateHash,
+            StringComparison.Ordinal)
+        && string.Equals(JsonSerializer.Serialize(caller.Diff, JsonOptions),
+            JsonSerializer.Serialize(cached.Diff, JsonOptions), StringComparison.Ordinal);
+
+    private GameProjectSeedRegenerationRecord BuildRegenerationRecord(
+        SealedRegenerationCandidate cached,
+        CurrentCapture current,
+        string? previousRcHash) => new()
+    {
+        AttemptId = cached.PublicPreview.AttemptId,
+        OldSourceRecordSha256 = current.Tokens.SourceRecordSha256,
+        NewSourceRecordSha256 = cached.Seal.SourceRecordSha256,
+        OldRequestSha256 = cached.Diff.OldSourceRequestSha256,
+        NewRequestSha256 = cached.Diff.NewSourceRequestSha256,
+        OldPlanSha256 = cached.Diff.OldPlanSha256,
+        NewPlanSha256 = cached.Diff.NewPlanSha256,
+        OldOverlaySha256 = cached.Diff.OldOverlaySha256,
+        NewOverlaySha256 = cached.Diff.NewOverlaySha256,
+        OldGeneratedBaseSha256 = cached.Diff.OldGeneratedBaseSha256,
+        NewGeneratedBaseSha256 = cached.Diff.NewGeneratedBaseSha256,
+        OldPackageSha256 = current.Tokens.ActivatedPackageSha256,
+        NewPackageSha256 = cached.CandidateBuild.PackageSha256,
+        NewCompositionPackageSha256 = cached.CandidateBuild.CompositionPackageSha256,
+        NewFinalStateHash = cached.CandidateBuild.FinalStateHash,
+        QualifiedAuthoringFingerprint = cached.CandidateBuild.QualifiedAuthoringFingerprint,
+        SelectedModuleCount = cached.CandidateBuild.AttemptedSelectedModuleIds.Count,
+        ConfiguredParameterCount = cached.CandidateBuild.ConfiguredParameterCount,
+        Diff = cached.Diff,
+        CandidateBuildHistoryFileName = cached.Seal.SelectedBuildHistoryFileName,
+        PreviousReleaseCandidateRecordSha256 = previousRcHash,
+        PreviousReleaseCandidateStatus = previousRcHash is null ? "ABSENT" : "LAST_SUCCESS"
+    };
+
+    private static GameProjectSeedRegenerationResult Success(
+        SealedRegenerationCandidate cached,
+        GameProjectSeedRegenerationTransactionResult applied,
+        UnifiedGameProjectWorkspaceSnapshot? snapshot,
+        IReadOnlyList<string> diagnostics) => new()
+    {
+        AttemptId = cached.PublicPreview.AttemptId,
+        Status = "GREEN",
+        Stage = "committed",
+        Diff = cached.Diff,
+        CandidateBuild = cached.CandidateBuild,
+        AuthoritativeSnapshot = snapshot,
+        Diagnostics = diagnostics,
+        Applied = true,
+        AuthoritativeFilesChanged = applied.ChangedRelativePaths,
+        JournalStatus = applied.JournalStatus,
+        TransactionState = applied.TransactionState,
+        BuildHistoryFileName = applied.BuildHistoryFileName,
+        CandidateSealSha256 = cached.Seal.SealSha256
+    };
+
     private static GameProjectSeedRegenerationPreview CandidateFailure(
         string attemptId,
         string candidate,
         string diagnostic,
         GameProjectBuildResult? build = null)
     {
-        if (Directory.Exists(candidate)) Directory.Delete(candidate, recursive: true);
+        try { if (Directory.Exists(candidate)) Directory.Delete(candidate, recursive: true); }
+        catch (IOException) { }
+        catch (UnauthorizedAccessException) { }
         return new GameProjectSeedRegenerationPreview
         {
             AttemptId = attemptId,
@@ -512,8 +727,18 @@ public sealed class GameProjectSeedRegenerationService
         Stage = "apply_precondition",
         Diff = preview.Diff,
         CandidateBuild = preview.CandidateBuild,
+        CandidateSealSha256 = preview.CandidateSealSha256,
         Diagnostics = [diagnostic]
     };
+
+    private GameProjectOperationLease RequireOperation(string projectFolder, string operationKind)
+    {
+        var operation = _operationCoordinator.TryAcquire(projectFolder, operationKind);
+        if (!operation.Acquired) throw new InvalidOperationException(operation.Diagnostic);
+        return operation;
+    }
+
+    private static string HashFile(string path) => GameProjectSeedRegenerationRecordService.HashFile(path);
 
     private sealed record CurrentCapture(
         string ProjectFolder,

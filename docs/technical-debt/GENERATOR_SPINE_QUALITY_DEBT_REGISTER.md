@@ -173,3 +173,10 @@ Goal154C3 publication debt is closed for the implementation/evidence surface: re
 ## Goal155 RC note
 
 No new P2/P3 finding was produced by the required RC matrix. Historical 64-test closure, clean-machine install and final release packaging remain deferred under their existing owners and must not block the bounded Goal155 candidate.
+
+## Goal160 world-history rollback note
+
+| ID | Priority | Area | Finding | Resolution / next action | Deferred | Closed | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| GQ-P1-GOAL159-UNSEALED-COMMIT-BOUNDARY | P1 | generated-product-integrity | Goal159 rechecked tokens outside a shared operation lock, trusted unsealed caller/candidate state, and performed semantic reopen after irreversible commit cleanup. | Closed by Goal160 whole-operation coordinator/cross-process lock, cached immutable seal, locked truth/inventory recheck, journal `validating`, and semantic rollback/recovery. | false | true | Goal159 product behavior is retained; its independent audit result remains recorded as `BLOCKED_AT_C7788E1E`. |
+| GQ-P2-GOAL160-GENERATED-SAVE-MIGRATION | P2 | generated-product | Project/world rollback and portable recovery are qualified, but gameplay save-state migration between different generated worlds is not defined. | Plan a separate data-driven migration/compatibility contract after Goal160 independent audit. | true | false | Do not infer save migration from `TRAVEL_CURRENT`, world-history rollback, or portable project reopen. |

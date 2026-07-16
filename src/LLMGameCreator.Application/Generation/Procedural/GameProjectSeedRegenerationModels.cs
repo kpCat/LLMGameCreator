@@ -4,11 +4,14 @@ namespace LLMGameCreator.Application.Generation.Procedural;
 
 public static class GameProjectSeedRegenerationVocabulary
 {
-    public const string TransactionSchemaVersion = "seed_regeneration_transaction_v1";
+    public const string TransactionSchemaVersion = "seed_regeneration_transaction_v2";
+    public const string LegacyTransactionSchemaVersion = "seed_regeneration_transaction_v1";
     public const string ResultSchemaVersion = "seed_regeneration_result_v1";
+    public const string CandidateSealSchemaVersion = "seed_regeneration_candidate_seal_v1";
     public const string RegenerationRelativeRoot = ".llmgc/regeneration";
     public const string TransactionsRelativeRoot = RegenerationRelativeRoot + "/transactions";
     public const string LastSuccessfulRelativePath = RegenerationRelativeRoot + "/last-successful-regeneration.json";
+    public const string CandidateSealRelativePath = ".llmgc/regeneration-candidate/seal.json";
 }
 
 public sealed record GameProjectSeedRegenerationRequest
@@ -102,6 +105,8 @@ public sealed record GameProjectSeedRegenerationPreview
     public IReadOnlyList<string> AuthoritativeFilesChanged { get; init; } = [];
     public string CandidateRoot { get; init; } = string.Empty;
     public string CandidateBuildHistoryFileName { get; init; } = string.Empty;
+    public string CandidateSealSha256 { get; init; } = string.Empty;
+    public string TransactionState { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectSeedRegenerationResult
@@ -118,6 +123,9 @@ public sealed record GameProjectSeedRegenerationResult
     public IReadOnlyList<string> AuthoritativeFilesChanged { get; init; } = [];
     public string JournalStatus { get; init; } = string.Empty;
     public string BuildHistoryFileName { get; init; } = string.Empty;
+    public string CandidateSealSha256 { get; init; } = string.Empty;
+    public string TransactionState { get; init; } = string.Empty;
+    public bool CommittedWithPresentationDiagnostic { get; init; }
 }
 
 public sealed record SeedRegenerationTransactionJournal
@@ -131,6 +139,8 @@ public sealed record SeedRegenerationTransactionJournal
     public IReadOnlyDictionary<string, string> CandidateSha256 { get; init; }
         = new SortedDictionary<string, string>(StringComparer.Ordinal);
     public IReadOnlyList<string> AppliedStepIds { get; init; } = [];
+    public string ExpectedAuthoritativeInventorySha256 { get; init; } = string.Empty;
+    public string CandidateSealSha256 { get; init; } = string.Empty;
 }
 
 public enum GameProjectSeedRegenerationFailurePoint
@@ -142,6 +152,7 @@ public enum GameProjectSeedRegenerationFailurePoint
     AfterAuthoringReplace,
     AfterHistoryAdd,
     BeforeFinalValidation
+    ,DuringSemanticValidation
 }
 
 public sealed record GameProjectSeedRegenerationTransactionRequest
@@ -152,6 +163,18 @@ public sealed record GameProjectSeedRegenerationTransactionRequest
     public string CandidateBuildHistoryFileName { get; init; } = string.Empty;
     public string RegenerationRecordJson { get; init; } = string.Empty;
     public GameProjectSeedRegenerationFailurePoint FailurePoint { get; init; }
+    public GameProjectSeedRegenerationTruthTokens ExpectedTruthTokens { get; init; } = new();
+    public string ExpectedAuthoritativeInventorySha256 { get; init; } = string.Empty;
+    public string CandidateSealSha256 { get; init; } = string.Empty;
+    public GameProjectOperationLease? OperationLease { get; init; }
+    public IGameProjectSeedRegenerationTruthReader? TruthReader { get; init; }
+    public IGameProjectSeedRegenerationCommitValidator? CommitValidator { get; init; }
+    public GameProjectSeedRegenerationCommitValidationRequest? CommitValidationRequest { get; init; }
+    public GeneratedWorldHistoryService? WorldHistoryService { get; init; }
+    public string BeforeWorldHistoryOperationKind { get; init; } = string.Empty;
+    public string AfterWorldHistoryOperationKind { get; init; } = string.Empty;
+    public string WorldChangeRecordRelativePath { get; init; } = string.Empty;
+    public string WorldChangeRecordJson { get; init; } = string.Empty;
 }
 
 public sealed record GameProjectSeedRegenerationTransactionResult
@@ -163,6 +186,81 @@ public sealed record GameProjectSeedRegenerationTransactionResult
     public string BuildHistoryFileName { get; init; } = string.Empty;
     public IReadOnlyList<string> ChangedRelativePaths { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
+    public string TransactionState { get; init; } = string.Empty;
+    public string FromWorldId { get; init; } = string.Empty;
+    public string ToWorldId { get; init; } = string.Empty;
+}
+
+public sealed record GameProjectSeedRegenerationCandidateSeal
+{
+    public string SchemaVersion { get; init; } = GameProjectSeedRegenerationVocabulary.CandidateSealSchemaVersion;
+    public string AttemptId { get; init; } = string.Empty;
+    public string CandidateRootIdentity { get; init; } = string.Empty;
+    public string SourceRecordSha256 { get; init; } = string.Empty;
+    public string GenerationTreeSha256 { get; init; } = string.Empty;
+    public string PackageSha256 { get; init; } = string.Empty;
+    public string AuthoringTreeSha256 { get; init; } = string.Empty;
+    public string IdentitySha256 { get; init; } = string.Empty;
+    public string SelectedBuildHistoryFileName { get; init; } = string.Empty;
+    public string SelectedBuildHistorySha256 { get; init; } = string.Empty;
+    public string SupportTreeSha256 { get; init; } = string.Empty;
+    public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
+    public string SelectedModuleIdsSha256 { get; init; } = string.Empty;
+    public string ParameterValuesSha256 { get; init; } = string.Empty;
+    public string CandidatePackageSha256 { get; init; } = string.Empty;
+    public string CandidateCompositionSha256 { get; init; } = string.Empty;
+    public string CandidateFinalStateHash { get; init; } = string.Empty;
+    public string CandidateSourceRequestSha256 { get; init; } = string.Empty;
+    public string CandidatePlanSha256 { get; init; } = string.Empty;
+    public string CandidateOverlaySha256 { get; init; } = string.Empty;
+    public string CandidateGeneratedBaseSha256 { get; init; } = string.Empty;
+    public string CandidateSnapshotStatus { get; init; } = string.Empty;
+    public string DiffSha256 { get; init; } = string.Empty;
+    public string SealSha256 { get; init; } = string.Empty;
+}
+
+internal sealed record SealedRegenerationCandidate
+{
+    public string CandidateRoot { get; init; } = string.Empty;
+    public GameProjectSeedRegenerationCandidateSeal Seal { get; init; } = new();
+    public GameProjectSeedRegenerationPreview PublicPreview { get; init; } = new();
+    public GameProjectBuildResult CandidateBuild { get; init; } = new();
+    public UnifiedGameProjectWorkspaceSnapshot CandidateSnapshot { get; init; } = new();
+    public GameProjectSeedRegenerationDiff Diff { get; init; } = new();
+    public GameProjectSeedRegenerationTruthTokens ExpectedTruthTokens { get; init; } = new();
+    public string ExpectedAuthoritativeInventorySha256 { get; init; } = string.Empty;
+}
+
+public interface IGameProjectSeedRegenerationTruthReader
+{
+    GameProjectSeedRegenerationTruthTokens CaptureTruthTokens(
+        string projectFolder,
+        GameProjectOperationLease operationLease);
+    string CaptureAuthoritativeInventorySha256(string projectFolder);
+}
+
+public sealed record GameProjectSeedRegenerationCommitValidationRequest
+{
+    public string ProjectFolder { get; init; } = string.Empty;
+    public string OperationKind { get; init; } = "regeneration";
+    public GameProjectSeedRegenerationCandidateSeal CandidateSeal { get; init; } = new();
+    public string ExpectedProjectIdentityFingerprint { get; init; } = string.Empty;
+    public string SelectedBuildHistoryFileName { get; init; } = string.Empty;
+    public string? PreviousReleaseCandidateRecordSha256 { get; init; }
+    public string ExpectedWorldChangeRecordSha256 { get; init; } = string.Empty;
+}
+
+public sealed record GameProjectSeedRegenerationCommitValidationResult
+{
+    public bool Passed { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public interface IGameProjectSeedRegenerationCommitValidator
+{
+    GameProjectSeedRegenerationCommitValidationResult Validate(
+        GameProjectSeedRegenerationCommitValidationRequest request,
+        GameProjectOperationLease operationLease);
 }
 
 public sealed record GameProjectSeedRegenerationRecord

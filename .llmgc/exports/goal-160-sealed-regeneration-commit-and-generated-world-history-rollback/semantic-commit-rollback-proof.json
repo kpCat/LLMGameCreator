@@ -1,0 +1,24 @@
+{
+    "status":  "GREEN",
+    "stateSequence":  [
+                          "prepared",
+                          "applying",
+                          "validating",
+                          "committed"
+                      ],
+    "validatorInsideRollbackWindow":  true,
+    "committedAfterSemanticPass":  true,
+    "cleanupAfterSemanticPass":  true,
+    "semanticFailureCauses":  [
+                                  "source",
+                                  "package",
+                                  "authoring",
+                                  "identity",
+                                  "history",
+                                  "release_candidate",
+                                  "world_change"
+                              ],
+    "semanticFailureExactBeforeHashesRestored":  true,
+    "validatingCrashExactBeforeHashesRestored":  true,
+    "committedPresentationReopenFailureReportsDiagnosticWithoutFalseRollback":  true
+}

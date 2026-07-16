@@ -11,6 +11,7 @@ public sealed class GameProjectFeatureModuleAuthoringService
     private readonly FeatureModuleLibraryLoader _libraryLoader;
     private readonly GameProjectIdentityStore _identityStore;
     private readonly GameProjectCompositionIdentityService _compositionIdentity;
+    private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private FeatureModuleCompositionPersistenceService? _persistence;
     private FeatureModuleLibrarySnapshot? _library;
     private FeatureModuleCompositionDocument? _document;
@@ -24,13 +25,15 @@ public sealed class GameProjectFeatureModuleAuthoringService
         string repositoryRoot,
         FeatureModuleLibraryLoader? libraryLoader = null,
         GameProjectIdentityStore? identityStore = null,
-        GameProjectCompositionIdentityService? compositionIdentity = null)
+        GameProjectCompositionIdentityService? compositionIdentity = null,
+        IGameProjectOperationCoordinator? operationCoordinator = null)
     {
         if (string.IsNullOrWhiteSpace(repositoryRoot)) throw new ArgumentException("repository root is required", nameof(repositoryRoot));
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _libraryLoader = libraryLoader ?? new FeatureModuleLibraryLoader();
         _identityStore = identityStore ?? new GameProjectIdentityStore();
         _compositionIdentity = compositionIdentity ?? new GameProjectCompositionIdentityService();
+        _operationCoordinator = operationCoordinator ?? new GameProjectOperationCoordinator();
     }
 
     public GameProjectAuthoringState State => new()
@@ -54,8 +57,25 @@ public sealed class GameProjectFeatureModuleAuthoringService
 
     public GameProjectAuthoringState OpenProject(string projectFolder, GamePackageDefinition currentPackage)
     {
+        var project = RequireProject(projectFolder);
+        using var operation = RequireOperation(project, GameProjectOperationKinds.Recovery);
+        return OpenProjectCore(project, currentPackage);
+    }
+
+    public GameProjectAuthoringState OpenProject(
+        string projectFolder,
+        GamePackageDefinition currentPackage,
+        GameProjectOperationLease operationLease)
+    {
+        var project = RequireProject(projectFolder);
+        RequireCurrent(operationLease, project);
+        return OpenProjectCore(project, currentPackage);
+    }
+
+    private GameProjectAuthoringState OpenProjectCore(string projectFolder, GamePackageDefinition currentPackage)
+    {
         ArgumentNullException.ThrowIfNull(currentPackage);
-        var fullProjectFolder = RequireProject(projectFolder);
+        var fullProjectFolder = projectFolder;
         _projectFolder = fullProjectFolder;
         _library = _libraryLoader.Load(Path.Combine(_repositoryRoot,
             FeatureModuleLibraryVocabulary.DefaultRelativeRoot.Replace('/', Path.DirectorySeparatorChar)));
@@ -106,6 +126,18 @@ public sealed class GameProjectFeatureModuleAuthoringService
 
     public bool SetModuleSelected(string moduleId, bool selected)
     {
+        using var operation = RequireOperation(RequireProjectFolder(), GameProjectOperationKinds.AuthoringSave);
+        return SetModuleSelectedCore(moduleId, selected);
+    }
+
+    public bool SetModuleSelected(string moduleId, bool selected, GameProjectOperationLease operationLease)
+    {
+        RequireCurrent(operationLease, RequireProjectFolder());
+        return SetModuleSelectedCore(moduleId, selected);
+    }
+
+    private bool SetModuleSelectedCore(string moduleId, bool selected)
+    {
         var library = RequireLibrary();
         var document = RequireDocument();
         var module = library.Catalog.Modules.SingleOrDefault(item => item.ModuleId == moduleId)
@@ -130,6 +162,22 @@ public sealed class GameProjectFeatureModuleAuthoringService
     }
 
     public bool SetParameterValue(string moduleId, string parameterId, JsonElement value)
+    {
+        using var operation = RequireOperation(RequireProjectFolder(), GameProjectOperationKinds.AuthoringSave);
+        return SetParameterValueCore(moduleId, parameterId, value);
+    }
+
+    public bool SetParameterValue(
+        string moduleId,
+        string parameterId,
+        JsonElement value,
+        GameProjectOperationLease operationLease)
+    {
+        RequireCurrent(operationLease, RequireProjectFolder());
+        return SetParameterValueCore(moduleId, parameterId, value);
+    }
+
+    private bool SetParameterValueCore(string moduleId, string parameterId, JsonElement value)
     {
         var document = RequireDocument();
         var existing = document.ParameterValues.SingleOrDefault(item =>
@@ -156,6 +204,18 @@ public sealed class GameProjectFeatureModuleAuthoringService
         new FeatureModuleCompositionDocumentValidator().Validate(RequireDocument(), RequireLibrary());
 
     public FeatureModuleCompositionDocument Save()
+    {
+        using var operation = RequireOperation(RequireProjectFolder(), GameProjectOperationKinds.AuthoringSave);
+        return SaveCore();
+    }
+
+    public FeatureModuleCompositionDocument Save(GameProjectOperationLease operationLease)
+    {
+        RequireCurrent(operationLease, RequireProjectFolder());
+        return SaveCore();
+    }
+
+    private FeatureModuleCompositionDocument SaveCore()
     {
         _document = RequirePersistence().Save(RequireDocument(), RequireLibrary());
         _dirty = false;
@@ -218,6 +278,21 @@ public sealed class GameProjectFeatureModuleAuthoringService
         if (!File.Exists(Path.Combine(full, "package.json")))
             throw new FileNotFoundException("Game project package.json was not found.", Path.Combine(full, "package.json"));
         return full;
+    }
+
+    private GameProjectOperationLease RequireOperation(string projectFolder, string operationKind)
+    {
+        var operation = _operationCoordinator.TryAcquire(projectFolder, operationKind);
+        if (!operation.Acquired) throw new InvalidOperationException(operation.Diagnostic);
+        return operation;
+    }
+
+    private void RequireCurrent(GameProjectOperationLease operationLease, string projectFolder)
+    {
+        ArgumentNullException.ThrowIfNull(operationLease);
+        if (operationLease.Coordinator is null
+            || !operationLease.Coordinator.IsCurrent(operationLease, projectFolder))
+            throw new InvalidOperationException("project_operation.lease_invalid");
     }
 
     internal static string ConfinedPath(string root, string relativePath)

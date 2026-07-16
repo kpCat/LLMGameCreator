@@ -5,6 +5,7 @@ using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
+using LLMGameCreator.Application.Generation.Procedural;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 
@@ -231,7 +232,32 @@ public sealed class GameProjectReleaseCandidateRecordService
             : string.Equals(record.QualifiedAuthoringFingerprint, fingerprint.Sha256, StringComparison.Ordinal)
                 ? "CURRENT"
                 : "LAST_SUCCESS";
+        if (status == "CURRENT" && WorldChangeRequiresStandalone(projectFolder, path))
+            status = "LAST_SUCCESS";
         return Result(record, status, path, fingerprint.Diagnostics);
+    }
+
+    private static bool WorldChangeRequiresStandalone(string projectFolder, string releaseCandidatePath)
+    {
+        var worldChangePath = Confined(projectFolder, GameProjectGeneratedWorldChangeVocabulary.RelativePath);
+        if (!File.Exists(worldChangePath)) return false;
+        try
+        {
+            var change = JsonSerializer.Deserialize<GameProjectGeneratedWorldChangeRecord>(
+                File.ReadAllText(worldChangePath, Encoding.UTF8), JsonOptions);
+            return change is
+                {
+                    SchemaVersion: GameProjectGeneratedWorldChangeVocabulary.SchemaVersion,
+                    Status: "GREEN",
+                    TransactionState: "committed"
+                }
+                && string.Equals(change.PreviousReleaseCandidateRecordSha256,
+                    HashFile(releaseCandidatePath), StringComparison.Ordinal);
+        }
+        catch (Exception exception) when (exception is IOException or JsonException)
+        {
+            return false;
+        }
     }
 
     private static string? ValidateRecord(GameProjectReleaseCandidateRecord record)

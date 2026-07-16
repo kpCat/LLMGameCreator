@@ -303,7 +303,7 @@ The project succeeds if each stage increases either:
 - export/runtime reality;
 - user control over generated games.
 
-## Current Goal159 bridge
+## Current Goal160 bridge
 
 Goal156 completed the durable bridge from the deterministic procedural generator spine to ordinary project creation and the modern FeatureModule workspace. Its independent audit then identified missing causal source provenance and canonical overlay/base reconstruction.
 
@@ -311,6 +311,8 @@ Goal157 closes that provenance blocker and activates the generated start map in 
 
 Goal158 adds deterministic generated-region travel through those same seams: exact strict-plan bindings, one safe gate per directed connection, generic atomic Runtime map transitions, origin and destination interactions, multi-hop planning, replay, exact state roundtrip, primary route hashes/frames, `TRAVEL_CURRENT` history/UI, cached standalone truth and portable RC recovery. Lane A AcceptedMechanics/Social remains unchanged.
 
-Goal158 independent audit is GREEN at `9a350c63`. Goal159 adds source v2 request/resolution truth and a shared creation/regeneration factory, then proves isolated candidate build/repeat/reopen, typed world diff, five-token optimistic concurrency and journaled atomic apply with exact rollback/recovery. Authoring, identity, old history and old RC bytes are retained; one GREEN history is added. Travel becomes current while standalone remains pending until exactly one cache-only hidden smoke records CURRENT RC and portable truth.
+Goal158 independent audit is GREEN at `9a350c63`. Goal159 adds source v2 request/resolution truth and a shared creation/regeneration factory, then proves isolated candidate build/repeat/reopen, typed world diff and journaled promotion. Its independent audit is `BLOCKED_AT_C7788E1E` at the commit boundary.
 
-The next roadmap decision follows an independent Goal159 audit: plan either cross-seed generated-save migration or user-selectable historical-world rollback. Goal159 does not authorize either feature, Unity host changes, Runtime/public package schema changes, provider work or catalog changes.
+Goal160 closes that P1 by placing build, standalone, authoring mutation, regeneration, history rollback and recovery behind one operation coordinator and cross-process project lock. Candidate truth is immutably sealed; Apply trusts cached attempt authority, rechecks truth/inventory inside the locked transaction, enters journal `validating`, and performs semantic validation before commit/cleanup. Failure and validating crash restore exact before hashes.
+
+Generated-world history stores only generation source/sidecars. Historical rollback rebuilds the target generation with current mechanics/parameters/identity, repeats and reopens `TRAVEL_CURRENT`, then uses the same sealed transaction. Old histories and RC bytes are retained; ordinary standalone renews CURRENT RC. The next roadmap decision follows an independent Goal160 audit: plan generated gameplay save-state migration between worlds. Goal160 does not authorize Unity host changes, Runtime/public package schema changes, provider work or catalog changes.

@@ -1,0 +1,55 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-160-sealed-regeneration-commit-and-generated-world-history-rollback/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: c7788e1e872576fbc37d53550a679ebe3477c5f3
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси пользователя выполнять ручные проверки.
+
+Критически важно:
+- Goal159 independent audit BLOCKED на commit-boundary P1, но его product foundation сохраняется;
+- service-level final token check недостаточен: recheck должен быть внутри transaction после shared lock;
+- build/standalone/authoring/regeneration/rollback обязаны использовать один operation coordinator;
+- cross-process authoritative project lock держится весь mutation operation;
+- candidate Preview должен создавать immutable seal; Apply доверяет только cached AttemptId+seal;
+- caller-modified preview и candidate package/authoring/identity/history/support tamper отклоняются до mutation;
+- transaction получает expected tokens/inventory, проверяет их после lock и перед backups/mutation;
+- journal state validating обязателен;
+- semantic authoritative validation выполняется до journal=committed и backup cleanup;
+- semantic failure/crash in validating rolls back exact before hashes;
+- presentation reopen after committed не должен ложно заявлять rollback;
+- сохрани Goal159 v1/v2, diff, UI и regeneration product behavior;
+- добавь strict generated world history storing only generation source+sidecars, not package/authoring/identity/RC;
+- archive current and candidate worlds atomically in regeneration/rollback transaction;
+- rollback to history must build an isolated sealed candidate using current identity/mechanics/parameters;
+- never copy old package/authoring as current truth;
+- rollback build/repeat/reopen TRAVEL_CURRENT before apply;
+- history rollback uses same lock/seal/transaction/semantic validator;
+- old histories retained; exactly one new GREEN history per apply;
+- old RC bytes retained, LAST_SUCCESS/pending until ordinary standalone;
+- UI «История миров» with data-derived world list and «Проверить и восстановить»;
+- exactly one cached hidden standalone smoke after rollback;
+- HostReused=true, HostRebuilt=false, Unity starts=0;
+- payload restored-world/travel+accepted facts, new RC CURRENT;
+- portable copy restores history/world-change/TRAVEL_CURRENT/accepted/RC without execution;
+- no Runtime/GamePackage/FeatureModule catalog/Unity changes;
+- no full suite, 85-case closure or all-ProductSmoke;
+- P0/P1 mandatory matrix defects fix inside Goal160; P2/P3 debt only;
+- create/push exactly one final GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи operation/race matrix, candidate seal/tamper matrix,
+in-transaction recheck, semantic validation/rollback/recovery,
+world-history entries, rollback target/diff/candidate/apply,
+authoring/identity/history/RC preservation, UI,
+cache/Unity/smoke, payload/portable, regressions, evidence/artifact scope,
+final SHA, push, HEAD==origin/main и clean worktree.

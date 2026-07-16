@@ -1,0 +1,57 @@
+{
+    "status":  "GREEN",
+    "attemptId":  "37decccd8c46",
+    "sealSha256":  "5c1c111230c9807a5be9c78aa88df3e68d7a687730ba3f90531b288c006724b7",
+    "fields":  [
+                   "AttemptId",
+                   "CandidateRootIdentity",
+                   "SourceRecordSha256",
+                   "GenerationTreeSha256",
+                   "PackageSha256",
+                   "AuthoringTreeSha256",
+                   "IdentitySha256",
+                   "SelectedBuildHistoryFileName",
+                   "SelectedBuildHistorySha256",
+                   "SupportTreeSha256",
+                   "QualifiedAuthoringFingerprint",
+                   "SelectedModuleIdsSha256",
+                   "ParameterValuesSha256",
+                   "CandidatePackageSha256",
+                   "CandidateCompositionSha256",
+                   "CandidateFinalStateHash",
+                   "CandidateSourceRequestSha256",
+                   "CandidatePlanSha256",
+                   "CandidateOverlaySha256",
+                   "CandidateGeneratedBaseSha256",
+                   "CandidateSnapshotStatus",
+                   "DiffSha256",
+                   "SealSha256"
+               ],
+    "tamperMatrix":  [
+                         {
+                             "target":  "caller_preview",
+                             "rejectedBeforeMutation":  true
+                         },
+                         {
+                             "target":  "package",
+                             "rejectedBeforeMutation":  true
+                         },
+                         {
+                             "target":  "authoring",
+                             "rejectedBeforeMutation":  true
+                         },
+                         {
+                             "target":  "identity",
+                             "rejectedBeforeMutation":  true
+                         },
+                         {
+                             "target":  "selected_history",
+                             "rejectedBeforeMutation":  true
+                         },
+                         {
+                             "target":  "support",
+                             "rejectedBeforeMutation":  true
+                         }
+                     ],
+    "applyAuthority":  "cached AttemptId plus persisted seal only"
+}

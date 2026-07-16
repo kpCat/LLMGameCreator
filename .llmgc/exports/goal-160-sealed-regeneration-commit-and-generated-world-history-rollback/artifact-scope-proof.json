@@ -1,0 +1,26 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-160-sealed-regeneration-commit-and-generated-world-history-rollback",
+    "baselineRef":  "c7788e1e872576fbc37d53550a679ebe3477c5f3",
+    "changedPathCount":  74,
+    "artifactScopeViolationCount":  0,
+    "historicalArtifactMutationCount":  0,
+    "boundedAdditionalPaths":  [
+                                   {
+                                       "path":  "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectFeatureModuleAuthoringService.cs",
+                                       "reason":  "The Goal160 allowlist named a non-existent FeatureModuleAuthoring folder; the existing service is in UnifiedGameProjectWorkspace and is required for the shared operation coordinator."
+                                   }
+                               ],
+    "textIntegrityFailureCount":  0,
+    "validUtf8Passed":  true,
+    "nulAndC0Passed":  true,
+    "mojibakeMarkersPassed":  true,
+    "escapedCyrillicPassed":  true,
+    "absoluteEvidencePathsPassed":  true,
+    "fullSuiteRun":  false,
+    "historical85CaseClosureRun":  false,
+    "allProductSmokeRun":  false,
+    "unityHostBuildRun":  false,
+    "visibleStandaloneLaunchCount":  0,
+    "hiddenStandaloneSmokeInvocationCount":  1
+}

@@ -1,0 +1,13 @@
+{
+    "status":  "CLOSED_BY_GOAL160",
+    "auditedCommit":  "c7788e1e",
+    "result":  "BLOCKED_AT_C7788E1E",
+    "blocker":  "regeneration_commit_not_sealed_inside_shared_operation_and_semantic_rollback_boundary",
+    "reproduction":  [
+                         "final token recheck outside shared lock",
+                         "caller preview and candidate not sealed",
+                         "semantic reopen after committed and backup cleanup"
+                     ],
+    "productFoundationRetained":  true,
+    "closedByGoal160":  true
+}

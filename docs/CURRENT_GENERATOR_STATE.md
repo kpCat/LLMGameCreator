@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 159 transactional seed regeneration candidate diff and atomic apply
+Updated by: Goal 160 sealed regeneration commit and generated world history rollback
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -14,11 +14,15 @@ Goal157 adds a typed two-lane build. Lane A retains the baseline start map and o
 
 Goal157 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_8939AEA0`. Goal158 keeps Lane A unchanged and extends Lane B with a deterministic travel overlay derived from the strict regenerated plan: exact region-to-map bindings, one safe gate per directed connection, generic atomic `PlayerCommand.Interact` map transitions, deterministic multi-hop planning, origin and destination generated interactions, replay and exact map-state roundtrip. Primary hashes and RuntimeFrames now belong to the complete travel route. History/UI distinguish `START_CURRENT` from `TRAVEL_CURRENT`; one cached hidden standalone smoke and portable recovery preserve travel, accepted-mechanics and RC truth without Unity starts.
 
-Goal158 independent audit intake is `GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63`. Goal159 adds backward-compatible generated source v2 with distinct requested and resolved options, truthful preset-definition/override correlation and one shared deterministic artifact factory for creation and regeneration. Regeneration builds and reopens a complete isolated LocalAppData candidate twice before producing a typed world diff. A journaled transaction performs a second concurrency recheck, atomic promotion and exact rollback/recovery; a semantic no-op performs no writes. Identity, authoring, old histories and old RC bytes are preserved, one GREEN history is added, and the old RC becomes `LAST_SUCCESS` while the regenerated project is `TRAVEL_CURRENT` and `BUILD_GREEN_STANDALONE_PENDING`. One cached hidden standalone smoke then records CURRENT RC and portable truth with zero Unity starts. Goal159 creates no human gate and remains unaccepted pending independent audit.
+Goal158 independent audit intake is `GREEN_ACCEPTABLE_CANDIDATE_AT_9A350C63`. Goal159 adds backward-compatible generated source v2 with distinct requested and resolved options, truthful preset-definition/override correlation and one shared deterministic artifact factory for creation and regeneration. Regeneration builds and reopens a complete isolated LocalAppData candidate twice before producing a typed world diff. A journaled transaction performs a second concurrency recheck, atomic promotion and exact rollback/recovery; a semantic no-op performs no writes. Identity, authoring, old histories and old RC bytes are preserved, one GREEN history is added, and the old RC becomes `LAST_SUCCESS` while the regenerated project is `TRAVEL_CURRENT` and `BUILD_GREEN_STANDALONE_PENDING`. One cached hidden standalone smoke then records CURRENT RC and portable truth with zero Unity starts. Goal159 creates no human gate and remains unaccepted.
+
+Goal159 independent audit is `BLOCKED_AT_C7788E1E`: its final token check was outside the shared mutation lock, caller/candidate truth was not immutably sealed, and semantic reopen followed irreversible commit and backup cleanup. Goal160 closes that blocker. Build, standalone, authoring mutation, regeneration, history rollback and recovery use one operation coordinator and a cross-process project lock for the complete mutation. Candidate Preview publishes an immutable seal; Apply trusts only cached `AttemptId` plus that seal, and the transaction rechecks truth tokens and authoritative inventory after lock acquisition and before backups. Journal state `validating` and semantic validation remain inside the rollback window, so failure or validating crash restores exact before hashes.
+
+Generated-world history stores only strict generation source and sidecars. Regeneration and rollback archive current/candidate worlds atomically. History rollback rebuilds an isolated sealed candidate from historical generation with current mechanics, parameters and identity; it never promotes historical package, authoring, identity or RC bytes as current truth. The candidate builds/repeats/reopens `TRAVEL_CURRENT`, then uses the same lock/seal/transaction/semantic validator. Old histories remain, exactly one GREEN build-history row is added per apply, and old RC bytes remain `LAST_SUCCESS`/pending until an ordinary standalone writes a new `CURRENT` record. The Projects UI exposes «История миров» and «Проверить и восстановить». One cache-only hidden smoke reused its host with zero Unity starts and portable recovery. Goal160 creates no human gate and remains unaccepted pending independent audit.
 
 ```text
-gate_status=goal159_green_acceptable_candidate_pending_independent_audit
-current_user_action=independent_goal159_audit_and_plan_generated_save_migration_or_world_history_rollback
+gate_status=goal160_green_acceptable_candidate_pending_independent_audit
+current_user_action=independent_goal160_audit_and_plan_generated_gameplay_save_migration
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -161,7 +165,10 @@ goal159AcceptedByHuman=false
 goal159AcceptedByCodex=false
 goal159ManualReviewRequired=false
 goal159ManualGateReady=false
-goal159IndependentAuditRequired=true
+goal159IndependentAuditRequired=false
+goal159IndependentAuditResult=BLOCKED_AT_C7788E1E
+goal159IndependentAuditBlocker=regeneration_commit_not_sealed_inside_shared_operation_and_semantic_rollback_boundary
+goal159AuditBlocker=closed_by_goal160
 goal159GeneratedSourceV2Passed=true
 goal159V1CompatibilityPassed=true
 goal159CandidateIsolationPassed=true
@@ -179,7 +186,30 @@ goal159UnityProcessStartCount=0
 goal159HiddenSmokeInvocationCount=1
 goal159PortableCopyPassed=true
 goal159ArtifactScopeViolationCount=0
-nextAction=independent_goal159_audit_and_plan_generated_save_migration_or_world_history_rollback
+goal160ImplementationStatus=GREEN
+goal160CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal160Accepted=false
+goal160AcceptedByHuman=false
+goal160AcceptedByCodex=false
+goal160ManualReviewRequired=false
+goal160ManualGateReady=false
+goal160IndependentAuditRequired=true
+goal160SharedOperationLeasePassed=true
+goal160CandidateSealPassed=true
+goal160TransactionTruthRecheckPassed=true
+goal160SemanticCommitRollbackPassed=true
+goal160WorldHistoryPassed=true
+goal160WorldRollbackPassed=true
+goal160AuthoringPreservationPassed=true
+goal160IdentityPreservationPassed=true
+goal160OldRcLastSuccessPassed=true
+goal160HostReused=true
+goal160HostRebuilt=false
+goal160UnityProcessStartCount=0
+goal160HiddenSmokeInvocationCount=1
+goal160PortableCopyPassed=true
+goal160ArtifactScopeViolationCount=0
+nextAction=independent_goal160_audit_and_plan_generated_gameplay_save_migration
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

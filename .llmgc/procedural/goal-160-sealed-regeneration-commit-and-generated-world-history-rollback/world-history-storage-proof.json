@@ -1,0 +1,42 @@
+{
+    "status":  "GREEN",
+    "entryCount":  2,
+    "entries":  [
+                    {
+                        "WorldId":  "090dbf3611a49b40fc2d83d8b053cb9065dc9543a72be0238bb542b00f70584f",
+                        "IsCurrent":  true,
+                        "Seed":  "goal156-stable-seed",
+                        "Mode":  "semi_procedural_regions",
+                        "PresetId":  "survival_exploration",
+                        "GenerationTreeSha256":  "c8a60c50c5e5565dad5d7f7436b9677eb843f18251b035a696c01b546d707c24"
+                    },
+                    {
+                        "WorldId":  "3cae9db724d8f4481b48bfebb8e28f9871da92434ea1c50d71f0f1612c2e4cef",
+                        "IsCurrent":  false,
+                        "Seed":  "goal159-regenerated-world",
+                        "Mode":  "semi_procedural_regions",
+                        "PresetId":  "survival_exploration",
+                        "GenerationTreeSha256":  "a3727e767711bcf3e9e8253875a922fd49695e7ffb304c23e47de815026fcf41"
+                    }
+                ],
+    "currentWorldId":  "090dbf3611a49b40fc2d83d8b053cb9065dc9543a72be0238bb542b00f70584f",
+    "storedPaths":  [
+                        "manifest.json",
+                        "generation/source.json",
+                        "generation/plan.json",
+                        "generation/overlay.json",
+                        "generation/generated-base.game.json"
+                    ],
+    "forbiddenCurrentTruth":  [
+                                  "game-package.json",
+                                  ".llmgc/authoring",
+                                  ".llmgc/project-identity.json",
+                                  ".llmgc/release-candidate"
+                              ],
+    "currentAndCandidateArchivedAtomically":  true,
+    "deterministicIds":  true,
+    "dedupPassed":  true,
+    "unequalCollisionRejected":  true,
+    "sidecarTamperRejected":  true,
+    "strictSourceCorrelationPassed":  true
+}

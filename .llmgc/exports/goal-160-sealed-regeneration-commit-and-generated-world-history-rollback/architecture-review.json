@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "goal160_architecture_review_v1",
+  "status": "RESOLVED_BEFORE_PRODUCTION_EDITS",
+  "primaryFileCount": 18,
+  "goal159IndependentAudit": {
+    "types": ["GameProjectSeedRegenerationService", "GameProjectSeedRegenerationTransaction"],
+    "lockOrder": ["service running flag only", "late regeneration.lock"],
+    "persistedFiles": [".llmgc/regeneration/last-successful-regeneration.json", ".llmgc/regeneration/transactions/<attempt>/journal.json"],
+    "mutationOrder": ["service token check", "candidate source-only check", "transaction bytes", "commit", "service semantic reopen"],
+    "rollbackOrder": ["available only before committed"],
+    "behavioralTests": [24, 25, 28, 29, 31, 38],
+    "finding": "BLOCKED_AT_C7788E1E: final truth check is outside the shared lock, caller/candidate truth is unsealed, and semantic validation is after irreversible commit."
+  },
+  "sharedOperationLease": {
+    "types": ["IGameProjectOperationCoordinator", "GameProjectOperationCoordinator", "GameProjectOperationLease"],
+    "lockOrder": ["process-wide TryAcquire", "controlled child lease", "cross-process project mutation lock"],
+    "persistedFiles": [],
+    "mutationOrder": ["acquire top-level lease", "create child scope for candidate build", "dispose child", "dispose owner"],
+    "rollbackOrder": ["dispose every acquired scope in finally"],
+    "behavioralTests": [1, 2, 3, 4, 5, 7, 8, 9, 10]
+  },
+  "crossProcessProjectLock": {
+    "types": ["GameProjectOperationLease"],
+    "lockOrder": ["in-process owner lease", "FileStream FileShare.None"],
+    "persistedFiles": [".llmgc/operations/project-mutation.lock"],
+    "mutationOrder": ["acquire before authoritative mutation", "hold for complete operation"],
+    "rollbackOrder": ["release stream only after success or rollback/recovery completes"],
+    "behavioralTests": [6, 9, 10, 24, 25, 27, 28]
+  },
+  "candidateSeal": {
+    "types": ["GameProjectSeedRegenerationCandidateSeal", "GameProjectSeedRegenerationCandidateSealService", "SealedRegenerationCandidate"],
+    "lockOrder": ["regeneration preview owner", "candidate child build lease", "candidate project lock"],
+    "persistedFiles": ["<candidate>/.llmgc/regeneration-candidate/seal.json"],
+    "mutationOrder": ["build twice", "fresh reopen", "typed diff", "calculate tree/file hashes", "atomic seal publication", "cache immutable authority"],
+    "rollbackOrder": ["discard candidate root; authoritative project remains unchanged"],
+    "behavioralTests": [11, 12, 16, 17, 18, 19, 20, 21, 22, 23]
+  },
+  "callerPreviewTrustBoundary": {
+    "types": ["GameProjectSeedRegenerationPreview", "SealedRegenerationCandidate"],
+    "lockOrder": ["apply owner lease before cache lookup"],
+    "persistedFiles": [],
+    "mutationOrder": ["accept AttemptId and CandidateSealSha256 only", "load all authority from cache"],
+    "rollbackOrder": ["reject before mutation"],
+    "behavioralTests": [13, 14, 15, 22, 23]
+  },
+  "transactionTruthRecheck": {
+    "types": ["GameProjectSeedRegenerationTruthTokens", "IGameProjectSeedRegenerationTruthReader", "GameProjectSeedRegenerationTransactionRequest"],
+    "lockOrder": ["operation lease", "project mutation lock", "recapture tokens and inventory"],
+    "persistedFiles": ["transaction journal expected inventory"],
+    "mutationOrder": ["verify lease", "confirm lock", "recapture tokens", "compare exact inventory", "only then create backups"],
+    "rollbackOrder": ["zero authoritative writes on mismatch"],
+    "behavioralTests": [24, 25, 26, 27, 28]
+  },
+  "semanticValidationInsideRollbackWindow": {
+    "types": ["IGameProjectSeedRegenerationCommitValidator", "GameProjectSeedRegenerationCommitValidator"],
+    "lockOrder": ["operation lease", "project mutation lock", "transaction rollback window"],
+    "persistedFiles": ["authoritative source/package/authoring/identity/history/RC/world-change files"],
+    "mutationOrder": ["apply bytes", "validate candidate hashes", "journal validating", "validate semantic authority", "journal committed", "cleanup"],
+    "rollbackOrder": ["semantic error", "journal rolling_back", "restore exact before inventory", "validate before hashes", "journal rolled_back"],
+    "behavioralTests": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38]
+  },
+  "journalStateMachine": {
+    "types": ["SeedRegenerationTransactionJournal"],
+    "lockOrder": ["recovery owner lease", "project mutation lock"],
+    "persistedFiles": [".llmgc/regeneration/transactions/<attempt>/journal.json"],
+    "mutationOrder": ["prepared", "applying", "validating", "committed"],
+    "rollbackOrder": ["rolling_back", "rolled_back"],
+    "behavioralTests": [29, 37, 39, 46]
+  },
+  "regenerationCompatibility": {
+    "types": ["GameProjectSeedRegenerationService", "SeededGeneratedProjectSourceService", "GameProjectSeedRegenerationRecordService"],
+    "lockOrder": ["regeneration preview/apply owner", "candidate child build", "transaction project lock"],
+    "persistedFiles": ["source v1/v2", "typed diff", "Goal159 regeneration record"],
+    "mutationOrder": ["preserve shared artifact factory and v1-to-v2 successful upgrade", "seal", "apply"],
+    "rollbackOrder": ["preserve semantic no-op zero-write and Goal159 recovery compatibility"],
+    "behavioralTests": [40, 41, 42, 43, 44, 45, 46]
+  },
+  "worldHistoryStorage": {
+    "types": ["GeneratedWorldHistoryService", "GeneratedWorldHistoryManifest", "GeneratedWorldHistoryEntry", "GeneratedWorldHistoryReadResult"],
+    "lockOrder": ["operation lease", "project mutation lock", "transaction history staging"],
+    "persistedFiles": [".llmgc/regeneration/world-history/<world-id>/manifest.json", ".llmgc/regeneration/world-history/<world-id>/generation/**"],
+    "mutationOrder": ["stage current", "stage candidate", "validate both", "promote both within transaction"],
+    "rollbackOrder": ["remove newly promoted entries and restore prior history bytes from inventory"],
+    "behavioralTests": [47, 48, 49, 50, 54, 55]
+  },
+  "worldHistoryValidation": {
+    "types": ["GeneratedWorldHistoryService", "SeededGeneratedProjectSourceService"],
+    "lockOrder": ["read-only confined validation"],
+    "persistedFiles": ["history manifest", "generation source and required sidecars only"],
+    "mutationOrder": ["validate directory identity", "tree hash", "strict source chain", "manifest counts and route titles"],
+    "rollbackOrder": ["reject invalid history before candidate construction"],
+    "behavioralTests": [48, 50, 51, 52, 53, 54]
+  },
+  "historyRollbackCandidate": {
+    "types": ["GameProjectGeneratedWorldRollbackService", "GameProjectGeneratedWorldRollbackRequest", "GameProjectGeneratedWorldRollbackPreview", "GameProjectGeneratedWorldRollbackResult"],
+    "lockOrder": ["world_history_rollback_preview owner", "candidate child build", "candidate project lock"],
+    "persistedFiles": ["isolated candidate generation tree", "candidate seal"],
+    "mutationOrder": ["clone current", "replace generation only", "retain identity/mechanics/parameters", "clear qualified hashes", "build/repeat/reopen", "diff", "seal"],
+    "rollbackOrder": ["discard isolated candidate"],
+    "behavioralTests": [56, 57, 58, 59, 60, 61, 62, 63]
+  },
+  "currentAuthoringPreservation": {
+    "types": ["GameProjectFeatureModuleAuthoringService", "FeatureModuleAuthoringFingerprintService"],
+    "lockOrder": ["operation lease before save/module/parameter mutation"],
+    "persistedFiles": [".llmgc/authoring/**", ".llmgc/project-identity.json"],
+    "mutationOrder": ["candidate starts from current authoring and identity", "qualified hashes alone advance after build"],
+    "rollbackOrder": ["exact before bytes and revision/fingerprint restored"],
+    "behavioralTests": [4, 17, 18, 28, 58, 59, 60]
+  },
+  "historyDiff": {
+    "types": ["GameProjectSeedRegenerationDiffService", "GameProjectSeedRegenerationDiff"],
+    "lockOrder": ["sealed preview owner"],
+    "persistedFiles": ["seal DiffSha256", "world-change record diff"],
+    "mutationOrder": ["strict current source versus target candidate source", "cache immutable diff"],
+    "rollbackOrder": ["no diff-derived mutation"],
+    "behavioralTests": [43, 63, 68]
+  },
+  "releaseCandidateTransition": {
+    "types": ["GameProjectReleaseCandidateRecordService", "UnifiedGameProjectWorkspaceController"],
+    "lockOrder": ["world mutation lease", "project mutation lock", "ordinary standalone lease later"],
+    "persistedFiles": ["unchanged RC record bytes", "ordinary standalone payload and renewed RC record"],
+    "mutationOrder": ["world apply retains RC bytes and yields LAST_SUCCESS", "ordinary standalone writes CURRENT"],
+    "rollbackOrder": ["world apply rollback restores exact RC bytes"],
+    "behavioralTests": [35, 45, 62, 69, 76, 78, 79]
+  },
+  "uiWorkflow": {
+    "types": ["ProjectsPageControl", "GeneratedWorldHistoryDialog", "UnifiedGameProjectWorkspaceSnapshot"],
+    "lockOrder": ["disable mutation UI while coordinator busy"],
+    "persistedFiles": [],
+    "mutationOrder": ["read data-derived list", "select noncurrent", "preview sealed candidate", "show diff", "apply", "refresh"],
+    "rollbackOrder": ["show causal diagnostic; retain authoritative card state"],
+    "behavioralTests": [73, 74, 75, 76, 77, 79]
+  },
+  "crashRecovery": {
+    "types": ["GameProjectSeedRegenerationTransaction", "UnifiedGameProjectWorkspaceController"],
+    "lockOrder": ["recovery operation lease", "project mutation lock", "open project"],
+    "persistedFiles": ["transaction journal", "backups", "candidate hash inventory"],
+    "mutationOrder": ["committed validates candidate hashes then cleans", "rolled_back retains evidence"],
+    "rollbackOrder": ["prepared/applying/validating/rolling_back restore exact before state", "unknown state recovery_required"],
+    "behavioralTests": [39, 46, 72]
+  },
+  "legacyAndV1Compatibility": {
+    "types": ["SeededGeneratedProjectSourceService", "GameProjectSeedRegenerationTransaction"],
+    "lockOrder": ["legacy callers acquire normal coordinator lease"],
+    "persistedFiles": ["source v1 readable", "Goal159 transaction v1 readable"],
+    "mutationOrder": ["no rewrite on open", "upgrade only through successful sealed regeneration"],
+    "rollbackOrder": ["older nonterminal journal remains recoverable"],
+    "behavioralTests": [40, 41, 42, 46, 86, 93]
+  },
+  "nonGoals": {
+    "types": [],
+    "lockOrder": [],
+    "persistedFiles": [],
+    "mutationOrder": ["no Runtime", "no public GamePackage schema", "no FeatureModule catalog", "no Unity", "no provider/LLM/RAG/Lua/media", "no gameplay save migration"],
+    "rollbackOrder": [],
+    "behavioralTests": [81, 94]
+  },
+  "completeTestInventory": {
+    "totalCases": 94,
+    "behavioralTargetMinimum": 48,
+    "groups": {
+      "sharedOperationLease": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "candidateSeal": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+      "truthRecheckAndSemanticRollback": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+      "goal159Compatibility": [40, 41, 42, 43, 44, 45, 46],
+      "worldHistoryStorage": [47, 48, 49, 50, 51, 52, 53, 54, 55],
+      "worldRollbackCandidateApply": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72],
+      "historyUiRc": [73, 74, 75, 76, 77, 78, 79],
+      "standalonePortable": [80, 81, 82, 83, 84, 85],
+      "regressions": [86, 87, 88, 89, 90, 91, 92, 93, 94]
+    }
+  }
+}

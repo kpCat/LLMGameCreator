@@ -254,8 +254,11 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
         _container.RegisterDelegate<ISelectedRuntimeVariantInteractiveSessionService>(
             _ => SelectedRuntimeVariantInteractiveSessionService.CreateDefault(), Reuse.Singleton);
-        _container.RegisterDelegate<GameProjectFeatureModuleAuthoringService>(
-            _ => new GameProjectFeatureModuleAuthoringService(repositoryRoot), Reuse.Singleton);
+        _container.RegisterDelegate<IGameProjectOperationCoordinator>(
+            _ => new GameProjectOperationCoordinator(), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectFeatureModuleAuthoringService>(resolver =>
+            new GameProjectFeatureModuleAuthoringService(repositoryRoot,
+                operationCoordinator: resolver.Resolve<IGameProjectOperationCoordinator>()), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectBuildAndQualificationService>(resolver =>
             new GameProjectBuildAndQualificationService(
                 repositoryRoot,
@@ -267,15 +270,34 @@ public sealed class CompositionRoot : IDisposable
                 generatedSummary: resolver.Resolve<GameProjectGeneratedWorldSummaryService>(),
                 generatedActivation: resolver.Resolve<GameProjectGeneratedWorldActivationService>(),
                 generatedTravelOverlay: resolver.Resolve<GeneratedWorldTravelOverlayService>(),
-                generatedTravelActivation: resolver.Resolve<GameProjectGeneratedRegionTravelActivationService>()), Reuse.Singleton);
+                generatedTravelActivation: resolver.Resolve<GameProjectGeneratedRegionTravelActivationService>(),
+                operationCoordinator: resolver.Resolve<IGameProjectOperationCoordinator>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
         _container.Register<GameProjectSeedRegenerationDiffService>(Reuse.Singleton);
         _container.Register<GameProjectSeedRegenerationTransaction>(Reuse.Singleton);
+        _container.Register<GameProjectSeedRegenerationCandidateSealService>(Reuse.Singleton);
         _container.RegisterDelegate<GameProjectSeedRegenerationRecordService>(resolver =>
             new GameProjectSeedRegenerationRecordService(
                 repositoryRoot,
                 resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.RegisterDelegate<IGameProjectSeedRegenerationTruthReader>(resolver =>
+            new GameProjectSeedRegenerationTruthReader(
+                repositoryRoot,
+                resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedWorldHistoryService>(resolver =>
+            new GeneratedWorldHistoryService(
+                resolver.Resolve<SeededGeneratedProjectSourceService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectGeneratedWorldChangeRecordService>(resolver =>
+            new GameProjectGeneratedWorldChangeRecordService(
+                resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                resolver.Resolve<GeneratedWorldHistoryService>()), Reuse.Singleton);
+        _container.RegisterDelegate<IGameProjectSeedRegenerationCommitValidator>(resolver =>
+            new GameProjectSeedRegenerationCommitValidator(
+                repositoryRoot,
+                resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<GameProjectSeedRegenerationRecordService>()), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectSeedRegenerationService>(resolver =>
             new GameProjectSeedRegenerationService(
                 repositoryRoot,
@@ -287,8 +309,45 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<SeededGeneratedProjectSourceService>(),
                 resolver.Resolve<GameProjectSeedRegenerationDiffService>(),
                 resolver.Resolve<GameProjectSeedRegenerationTransaction>(),
+                resolver.Resolve<GameProjectSeedRegenerationRecordService>(),
+                resolver.Resolve<IGameProjectOperationCoordinator>(),
+                resolver.Resolve<GameProjectSeedRegenerationCandidateSealService>(),
+                resolver.Resolve<IGameProjectSeedRegenerationTruthReader>(),
+                resolver.Resolve<IGameProjectSeedRegenerationCommitValidator>(),
+                resolver.Resolve<GeneratedWorldHistoryService>(),
+                resolver.Resolve<GameProjectGeneratedWorldChangeRecordService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GameProjectGeneratedWorldRollbackService>(resolver =>
+            new GameProjectGeneratedWorldRollbackService(
+                repositoryRoot,
+                resolver.Resolve<ICurrentGamePackageService>(),
+                resolver.Resolve<IGamePackageRepository>(),
+                resolver.Resolve<IGamePackageValidator>(),
+                resolver.Resolve<GameProjectBuildAndQualificationService>(),
+                resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                resolver.Resolve<GeneratedWorldHistoryService>(),
+                resolver.Resolve<GameProjectGeneratedWorldChangeRecordService>(),
+                resolver.Resolve<GameProjectSeedRegenerationDiffService>(),
+                resolver.Resolve<GameProjectSeedRegenerationTransaction>(),
+                resolver.Resolve<IGameProjectOperationCoordinator>(),
+                resolver.Resolve<GameProjectSeedRegenerationCandidateSealService>(),
+                resolver.Resolve<IGameProjectSeedRegenerationTruthReader>(),
+                resolver.Resolve<IGameProjectSeedRegenerationCommitValidator>(),
                 resolver.Resolve<GameProjectSeedRegenerationRecordService>()), Reuse.Singleton);
-        _container.Register<UnifiedGameProjectWorkspaceController>(Reuse.Singleton);
+        _container.RegisterDelegate<UnifiedGameProjectWorkspaceController>(resolver =>
+            new UnifiedGameProjectWorkspaceController(
+                resolver.Resolve<ICurrentGamePackageService>(),
+                resolver.Resolve<GameProjectFeatureModuleAuthoringService>(),
+                resolver.Resolve<GameProjectBuildAndQualificationService>(),
+                resolver.Resolve<GameProjectWorkspaceStatusPresenter>(),
+                resolver.Resolve<IProjectStandaloneBuildService>(),
+                new GameProjectBuildHistoryReader(),
+                new GameProjectAcceptedMechanicsSummaryService(),
+                new GameProjectReleaseCandidateRecordService(),
+                resolver.Resolve<SeededGeneratedProjectSourceService>(),
+                resolver.Resolve<GameProjectGeneratedWorldSummaryService>(),
+                resolver.Resolve<GameProjectSeedRegenerationService>(),
+                resolver.Resolve<IGameProjectOperationCoordinator>(),
+                resolver.Resolve<GameProjectGeneratedWorldRollbackService>()), Reuse.Singleton);
         _container.RegisterDelegate<IUnifiedGameProjectWorkspaceController>(
             resolver => resolver.Resolve<UnifiedGameProjectWorkspaceController>(), Reuse.Singleton);
 

@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "sharedLockHeld":  true,
+    "beforeBackupsAndMutation":  true,
+    "expectedTokens":  [
+                           "source",
+                           "authoring",
+                           "package",
+                           "identity",
+                           "release_candidate"
+                       ],
+    "authoritativeInventoryRechecked":  true,
+    "staleTokenRejected":  true,
+    "staleInventoryRejected":  true,
+    "mismatchAuthoritativeWrites":  0
+}

@@ -1296,3 +1296,16 @@ Regeneration captures source/authoring/package/identity/RC concurrency tokens, c
 
 `gate_status=goal159_green_acceptable_candidate_pending_independent_audit`
 `current_user_action=independent_goal159_audit_and_plan_generated_save_migration_or_world_history_rollback`
+
+## Goal160 sealed regeneration commit and generated-world history rollback
+
+Goal159 independent audit is `BLOCKED_AT_C7788E1E` because the commit boundary lacked a shared operation lock, immutable candidate authority and semantic rollback protection. Goal160 closes that P1 while retaining Goal159 v1/v2 migration, shared artifact factory, typed diff and UI behavior.
+
+Build, standalone, authoring mutation, regeneration, history rollback and recovery share one operation coordinator and cross-process project lock. Preview seals complete candidate truth; Apply accepts only the cached attempt plus seal and rechecks truth/inventory inside the transaction after the lock. Semantic validation runs in journal state `validating` before `committed` and cleanup.
+
+Strict history stores only generation source and sidecars. Historical rollback rebuilds a sealed candidate with current authoring and identity, repeats/reopens `TRAVEL_CURRENT`, then applies through the same transaction and validator. The Projects page exposes «История миров» and «Проверить и восстановить»; old RC bytes remain `LAST_SUCCESS` until ordinary standalone. Gameplay save-state migration between generated worlds remains the next product decision.
+
+Task authority: `docs/agent-tasks/goal-160-sealed-regeneration-commit-and-generated-world-history-rollback/GOAL.md`. Evidence: `.llmgc/procedural/goal-160-sealed-regeneration-commit-and-generated-world-history-rollback/` and mirrored export.
+
+`gate_status=goal160_green_acceptable_candidate_pending_independent_audit`
+`current_user_action=independent_goal160_audit_and_plan_generated_gameplay_save_migration`

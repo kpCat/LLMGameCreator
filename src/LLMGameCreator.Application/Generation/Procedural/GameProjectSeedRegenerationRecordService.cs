@@ -36,7 +36,11 @@ public sealed class GameProjectSeedRegenerationRecordService
     public string RecordPath(string projectFolder) => GameProjectFeatureModuleAuthoringService.ConfinedPath(
         projectFolder, GameProjectSeedRegenerationVocabulary.LastSuccessfulRelativePath);
 
-    public GameProjectSeedRegenerationRecordReadResult Read(string projectFolder)
+    public GameProjectSeedRegenerationRecordReadResult Read(string projectFolder) => Read(projectFolder, null);
+
+    public GameProjectSeedRegenerationRecordReadResult Read(
+        string projectFolder,
+        GameProjectOperationLease? operationLease)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(projectFolder);
         var path = RecordPath(projectFolder);
@@ -69,7 +73,9 @@ public sealed class GameProjectSeedRegenerationRecordService
             var package = JsonSerializer.Deserialize<GamePackageDefinition>(File.ReadAllText(packagePath), JsonOptions)
                           ?? throw new InvalidOperationException("regeneration_record.package_invalid");
             var authoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
-            var state = authoring.OpenProject(projectFolder, package);
+            var state = operationLease is null
+                ? authoring.OpenProject(projectFolder, package)
+                : authoring.OpenProject(projectFolder, package, operationLease);
             var fingerprint = new FeatureModuleAuthoringFingerprintService().Calculate(state.Document, state.Library);
             if (!fingerprint.Passed
                 || !string.Equals(fingerprint.Sha256, record.QualifiedAuthoringFingerprint, StringComparison.Ordinal)

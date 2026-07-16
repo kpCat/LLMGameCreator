@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "buttonId":  "_generatedWorldHistoryButton",
+    "actionId":  "_restoreButton",
+    "localizedLabelsVerifiedByGoal160UiTests":  true,
+    "dataDerivedWorldList":  true,
+    "worldIdsHiddenFromPrimaryList":  true,
+    "afterRollback":  {
+                          "overall":  "BUILD_GREEN_STANDALONE_PENDING",
+                          "standalone":  "RECHECK_REQUIRED",
+                          "releaseCandidate":  "LAST_SUCCESS"
+                      },
+    "afterStandalone":  {
+                            "standalone":  "CONFIRMED",
+                            "releaseCandidate":  "CURRENT"
+                        },
+    "historyUiStandaloneConfirmed":  true
+}

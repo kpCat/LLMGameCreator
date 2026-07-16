@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "hostFileSetHashUnchanged":  true,
+    "unityProcessStartCount":  0,
+    "hiddenSmokeInvocationCount":  1,
+    "hiddenSmokePassed":  true,
+    "selfChecksPassed":  true,
+    "payloadRollbackWorldAndTravelPassed":  true,
+    "payloadAcceptedMechanicsPassed":  true,
+    "payloadHashesPassed":  true,
+    "releaseCandidateCurrent":  true,
+    "portableCopyCurrentWithoutExecution":  true,
+    "goal142SourceByteIdentical":  true,
+    "sourceGoal148ByteIdentical":  true
+}

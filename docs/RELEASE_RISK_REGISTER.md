@@ -231,3 +231,11 @@ Goal154B1 closes the P1 reward-preservation and action-scoped trusted-effect ris
 - Source v2 separates requested and resolved options and correlates preset definition plus explicit overrides. v1 remains no-rewrite compatible and upgrades only on successful regeneration.
 - Promotion is protected by source/authoring/package/identity/RC tokens, a second concurrency recheck, a durable journal and exact before-hash rollback/crash recovery. Identity, authoring, history and prior RC evidence are preserved.
 - User-selectable historical-world rollback and cross-seed gameplay-save migration remain release risks for later explicit slices; Goal159 neither claims nor implements them.
+
+## Goal160 sealed regeneration and generated-world history rollback
+
+Regeneration and history rollback now share one operation lease, sealed candidate truth and semantic validation inside the rollback window. Historical worlds contain only strict generation artifacts and are rebuilt with current mechanics before apply. Gameplay save-state migration between generated worlds remains the next product decision.
+
+- Goal159 independent audit found P1 `regeneration_commit_not_sealed_inside_shared_operation_and_semantic_rollback_boundary` at `c7788e1e`; Goal160 closes it with a whole-operation cross-process lock, cached immutable seal authority, in-transaction truth/inventory recheck, journal `validating`, and semantic rollback/recovery before commit cleanup.
+- Historical rollback never promotes historical package, authoring, identity or RC as current truth. It restores historical generation into an isolated candidate, rebuilds with current mechanics/parameters/identity, repeats and reopens `TRAVEL_CURRENT`, then uses the normal sealed transaction.
+- Cross-world gameplay save-state migration remains unimplemented and is the next explicit product decision. It must not be inferred from world-history rollback or portable project recovery.

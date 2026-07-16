@@ -39,6 +39,7 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly GameProjectGeneratedWorldActivationService? _generatedActivation;
     private readonly GeneratedWorldTravelOverlayService _generatedTravelOverlay;
     private readonly GameProjectGeneratedRegionTravelActivationService? _generatedTravelActivation;
+    private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private int _buildRunning;
 
     public GameProjectBuildAndQualificationService(
@@ -53,7 +54,8 @@ public sealed class GameProjectBuildAndQualificationService
         GameProjectGeneratedWorldSummaryService? generatedSummary = null,
         GameProjectGeneratedWorldActivationService? generatedActivation = null,
         GeneratedWorldTravelOverlayService? generatedTravelOverlay = null,
-        GameProjectGeneratedRegionTravelActivationService? generatedTravelActivation = null)
+        GameProjectGeneratedRegionTravelActivationService? generatedTravelActivation = null,
+        IGameProjectOperationCoordinator? operationCoordinator = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -68,19 +70,44 @@ public sealed class GameProjectBuildAndQualificationService
         _generatedActivation = generatedActivation;
         _generatedTravelOverlay = generatedTravelOverlay ?? new GeneratedWorldTravelOverlayService();
         _generatedTravelActivation = generatedTravelActivation;
+        _operationCoordinator = operationCoordinator ?? new GameProjectOperationCoordinator();
     }
 
     public bool BuildRunning => Volatile.Read(ref _buildRunning) != 0;
+    public IGameProjectOperationCoordinator OperationCoordinator => _operationCoordinator;
 
     public GameProjectBuildResult Build(
         GameProjectFeatureModuleAuthoringService authoring,
         CancellationToken cancellationToken = default)
     {
+        ArgumentNullException.ThrowIfNull(authoring);
+        using var operation = _operationCoordinator.TryAcquire(
+            authoring.State.ProjectFolder, GameProjectOperationKinds.Build);
+        if (!operation.Acquired)
+            return Failure("Сборка уже выполняется. Дождитесь её завершения.",
+                [operation.Diagnostic], "build.concurrent", new GameProjectBuildResult
+                {
+                    AttemptId = Guid.NewGuid().ToString("N"),
+                    AttemptStatus = "RUNNING"
+                });
+        return Build(authoring, operation, cancellationToken);
+    }
+
+    public GameProjectBuildResult Build(
+        GameProjectFeatureModuleAuthoringService authoring,
+        GameProjectOperationLease operationLease,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(authoring);
+        ArgumentNullException.ThrowIfNull(operationLease);
         var attempt = new GameProjectBuildResult
         {
             AttemptId = Guid.NewGuid().ToString("N"),
             AttemptStatus = "RUNNING"
         };
+        if (!_operationCoordinator.IsCurrent(operationLease, authoring.State.ProjectFolder))
+            return Failure("Сборка не запущена: операция проекта недействительна.",
+                ["project_operation.lease_invalid"], "build.operation_lease", attempt);
         if (Interlocked.CompareExchange(ref _buildRunning, 1, 0) != 0)
             return Failure("Сборка уже выполняется. Дождитесь её завершения.",
                 ["build.concurrent_rejected"], "build.concurrent", attempt);
@@ -106,7 +133,7 @@ public sealed class GameProjectBuildAndQualificationService
                 authoring.LegacyDocumentPath,
                 _currentPackageService,
                 _activationStore);
-            savedDocument = authoring.Save();
+            savedDocument = authoring.Save(operationLease);
             var state = authoring.State;
             attempt = attempt with
             {
@@ -634,7 +661,7 @@ public sealed class GameProjectBuildAndQualificationService
                 LastQualifiedFinalStateHash = primaryFinalStateHash,
                 LastQualificationStatus = "GREEN"
             });
-            var qualifiedDocument = authoring.Save();
+            var qualifiedDocument = authoring.Save(operationLease);
 
             var equipmentAction = capabilityPlan.OrderedActions.FirstOrDefault(action =>
                 action.RuntimePrimitiveId == CapabilityRuntimePrimitiveIds.EquipItem);

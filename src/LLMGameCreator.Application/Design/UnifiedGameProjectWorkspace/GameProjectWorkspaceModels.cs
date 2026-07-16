@@ -300,6 +300,12 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public SeededGeneratedProjectResolvedOptions? GeneratedWorldResolvedOptions { get; init; }
     public GameProjectSeedRegenerationRecord? LastSuccessfulRegeneration { get; init; }
     public GameProjectSeedRegenerationResult? LastRegenerationAttempt { get; init; }
+    public bool ProjectOperationBusy { get; init; }
+    public string ActiveProjectOperationKind { get; init; } = string.Empty;
+    public bool CanOpenGeneratedWorldHistory { get; init; }
+    public GeneratedWorldHistoryReadResult? GeneratedWorldHistory { get; init; }
+    public GameProjectGeneratedWorldChangeRecord? LastSuccessfulWorldChange { get; init; }
+    public GameProjectGeneratedWorldRollbackResult? LastWorldRollbackAttempt { get; init; }
 }
 
 public sealed record GameProjectBuildResult
