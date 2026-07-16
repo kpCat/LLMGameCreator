@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal161r_architecture_review_v1",
+  "status": "RESOLVED",
+  "primaryFilesRead": ["ProjectStandaloneBuildService.cs", "ProjectStandaloneBuildModels.cs", "ProjectStandalonePayloadSelfCheckService.cs", "UnifiedGameProjectWorkspaceController.cs", "Goal161StandaloneAndPortabilityTests.cs", "Goal161QQualificationTests.cs", "Goal161Q named-root-cause-proof.json", "Goal161Q single-smoke-proof.json", "docs/UNITY_EXECUTION_POLICY.md", "docs/CURRENT_GENERATOR_STATE.md"],
+  "provenPathFailure": "standalone.player.payload_path_unreadable at legacy 260; Goal161Q preflight was 13/13 and parser-compatible",
+  "shortOutputRoot": "ProjectStandaloneOutputLocationService: %LOCALAPPDATA%/LGC/O, constructor override only for tests",
+  "projectToken": "SHA-256 lowercase first 16 hex of normalized full project path plus package ID",
+  "stagingAndFinalPaths": "root/token/s-attempt and b-attempt, then current; g.exe and g_Data",
+  "pathBudget": "ProjectStandaloneOutputPathBudgetResult, 240, after assembly/completeness and before self-check/process",
+  "smokeBeforePublish": "assemble staging -> completeness -> budget -> self-check -> one hidden staging smoke -> atomic current publish -> final no-smoke validation",
+  "priorOutputPreservation": "path/preflight/smoke delete staging; publication restores backup",
+  "standaloneHistory": "additive ProjectStandaloneBuildResult history only after final GREEN",
+  "rcAndPortability": "UnifiedGameProjectWorkspaceController writes RC only after GREEN; portable save/RC does not dereference output",
+  "singleSmokePlan": "Goal161Q ledger consumed one failed diagnostic smoke; Goal161R permits exactly one cached-host hidden smoke and zero retry",
+  "nonGoals": "Unity, Runtime, GamePackage, FeatureModules, generated saves/history, identity and host key unchanged",
+  "testInventoryBeforeProductionEdits": { "tests": 22, "behavioral": 22, "files": ["Goal161ROutputLocationTests.cs", "Goal161RPathBudgetTests.cs", "Goal161RPublicationRollbackTests.cs", "Goal161RQualificationTests.cs"] }
+}

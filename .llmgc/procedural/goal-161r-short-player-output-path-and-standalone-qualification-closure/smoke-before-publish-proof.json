@@ -1,0 +1,1 @@
+{"status":"BLOCKED_AFTER_GREEN_SMOKE","ordering":"staging completeness -> path budget -> 13/13 payload preflight -> one hidden staging smoke -> publish","smokeExitCode":0,"allFiveMarkers":true,"playerLogPresent":true,"publicationPassed":false,"stagingRemoved":true,"currentPublished":false,"retryCount":0}

@@ -1,0 +1,46 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-161r-short-player-output-path-and-standalone-qualification-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 8219cd1bd2a99c7ff7232f502be143c56eb95e7f
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- Goal161Q доказал root cause: standalone.player.payload_path_unreadable;
+- recovered payload 13/13 GREEN, legacy parser 5/5 frames и 62/62 facts;
+- player прочитал manifest при 256 символах и упал на model при 260; frames был 261;
+- Unity и host parser менять нельзя и не нужно;
+- текущий project-local Builds/Windows layout является причиной;
+- authoritative output перенести в %LOCALAPPDATA%\LGC\O\<project-token>\current;
+- fixed operational names: g.exe / g_Data; short staging/backup siblings;
+- project token deterministic from normalized project path + package ID;
+- hard player path budget 240 for staging/final payload/log paths;
+- budget failure blocks process start and preserves prior successful output;
+- mandatory order: assemble short staging → completeness → path budget → payload preflight →
+  exactly one hidden smoke on staging → only then atomic publish to current;
+- smoke/preflight failure deletes staging and leaves prior current byte-identical;
+- old project-local Builds/Windows outputs untouched and never treated as new current;
+- no Unity source changes, no host rebuild, cache key remains 6af4d5eb5b42f956110555b58fb4e276;
+- new player invocation budget exactly 1, retry 0;
+- after GREEN: RC CURRENT, portable all-selectable and core-only, no false core-only READY;
+- Goal160 blocker closes only on GREEN;
+- Goal161 accepted=false, no human gate;
+- no full suite, 85-case closure or all-ProductSmoke;
+- create/push exactly one GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи old/new maximum path lengths, output token/layout,
+path-budget and smoke-before-publish matrix, prior-output preservation,
+test/regression counts, host/Unity/player counts, smoke exit/markers/log,
+RC/portable results, evidence/artifact scope, final SHA,
+push, HEAD==origin/main и clean worktree.

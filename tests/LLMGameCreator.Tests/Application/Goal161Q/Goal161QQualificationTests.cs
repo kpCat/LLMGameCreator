@@ -46,18 +46,18 @@ public sealed class Goal161QQualificationTests
     }
 
     [Fact]
-    public void Behavioral_payload_preflight_occurs_before_publish_and_process_start()
+    public void Behavioral_payload_preflight_occurs_before_staging_smoke_and_publish()
     {
         var source = File.ReadAllText(Path.Combine(Goal161QForensics.RepositoryRoot(), "src",
             "LLMGameCreator.Application", "Design", "ProjectStandaloneBuild",
             "ProjectStandaloneBuildService.cs"));
         var preflight = source.IndexOf(".CheckOutput(staged.OutputFolder", StringComparison.Ordinal);
-        var publish = source.IndexOf("PublishProjectOutput(staged)", StringComparison.Ordinal);
-        var smoke = source.IndexOf("RunSmoke(output.ExecutablePath", StringComparison.Ordinal);
+        var smoke = source.IndexOf("RunSmoke(staged.ExecutablePath", StringComparison.Ordinal);
+        var publish = source.IndexOf("_outputLocations.Publish(location", StringComparison.Ordinal);
 
         Assert.True(preflight >= 0);
-        Assert.True(publish > preflight);
-        Assert.True(smoke > publish);
+        Assert.True(smoke > preflight);
+        Assert.True(publish > smoke);
     }
 
     [Fact]

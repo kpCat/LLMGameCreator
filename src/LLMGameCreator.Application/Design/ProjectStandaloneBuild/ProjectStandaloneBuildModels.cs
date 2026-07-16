@@ -9,6 +9,32 @@ public static class ProjectStandaloneBuildVocabulary
     public const string HostCacheRootName = "LLMGameCreator/StandaloneHostCache";
     public const string HostExecutableName = "LLMGameCreatorProjectHost.exe";
     public const string HostDataDirectoryName = "LLMGameCreatorProjectHost_Data";
+    public const string OutputLocationKind = "short_local_appdata";
+    public const string OperationalExecutableName = "g.exe";
+    public const string OperationalDataDirectoryName = "g_Data";
+    public const string CurrentOutputDirectoryName = "current";
+    public const int PlayerPathBudgetLimit = 240;
+}
+
+public sealed record ProjectStandaloneOutputLocation
+{
+    public string Root { get; init; } = string.Empty;
+    public string ProjectToken { get; init; } = string.Empty;
+    public string ProjectRoot { get; init; } = string.Empty;
+    public string CurrentOutputFolder { get; init; } = string.Empty;
+    public string StagingOutputFolder { get; init; } = string.Empty;
+    public string BackupOutputFolder { get; init; } = string.Empty;
+    public string ExecutableName { get; init; } = ProjectStandaloneBuildVocabulary.OperationalExecutableName;
+    public string DataDirectoryName { get; init; } = ProjectStandaloneBuildVocabulary.OperationalDataDirectoryName;
+}
+
+public sealed record ProjectStandaloneOutputPathBudgetResult
+{
+    public int MaximumAbsolutePathLength { get; init; }
+    public string LongestRelativePath { get; init; } = string.Empty;
+    public int BudgetLimit { get; init; } = ProjectStandaloneBuildVocabulary.PlayerPathBudgetLimit;
+    public bool Passed { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
 public sealed record ProjectStandaloneBuildSettings
@@ -101,10 +127,18 @@ public sealed record ProjectStandaloneBuildResult
     public IReadOnlyList<string> PayloadSelfCheckFailedCodes { get; init; } = [];
     public int SmokeExitCode { get; init; } = -1;
     public string SmokeMarkerText { get; init; } = string.Empty;
+    public string SmokeMarkerPath { get; init; } = string.Empty;
+    public string PlayerLogPath { get; init; } = string.Empty;
     public bool PlayerLogPresent { get; init; }
     public IReadOnlyList<string> PlayerLogRelevantLines { get; init; } = [];
     public string NamedSmokeFailure { get; init; } = string.Empty;
     public string BuildManifestPath { get; init; } = string.Empty;
+    public string OutputLocationKind { get; init; } = string.Empty;
+    public string OutputProjectToken { get; init; } = string.Empty;
+    public int MaximumPlayerPathLength { get; init; }
+    public int PlayerPathBudgetLimit { get; init; }
+    public bool PlayerPathBudgetPassed { get; init; }
+    public bool PriorSuccessfulOutputPreserved { get; init; }
     public TimeSpan Duration { get; init; }
 }
 
@@ -142,6 +176,8 @@ public sealed record ProjectStandaloneSmokeResult
     public bool ProcessStarted { get; init; }
     public int ExitCode { get; init; } = -1;
     public string SmokeMarkerText { get; init; } = string.Empty;
+    public string SmokeMarkerPath { get; init; } = string.Empty;
+    public string PlayerLogPath { get; init; } = string.Empty;
     public bool PlayerLogPresent { get; init; }
     public IReadOnlyList<string> PlayerLogRelevantLines { get; init; } = [];
     public string NamedFailure { get; init; } = string.Empty;

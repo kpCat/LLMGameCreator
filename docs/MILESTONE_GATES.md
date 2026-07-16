@@ -6,7 +6,7 @@ Accepted: false
 
 Each milestone must produce visible product progress. Contract and proof artifacts are required, but they are not sufficient by themselves.
 
-Goal161Q note: the standalone diagnostic seam is GREEN, but qualification is `BLOCKED_PLAYER_PAYLOAD_PATH_LENGTH_260`. The recovered payload and the newly assembled payload both pass all 13 Application checks and exact cached-host regex compatibility. The single new hidden smoke reused the host and started Unity zero times; its confined Player.log proves `player-adapter-model.json` could not be opened at an exact 260-character path. RC CURRENT, portable all-selectable and portable core-only were not reached, Goal160's audit blocker remains open, Goal161/161Q remain unaccepted, and no human gate exists.
+Goal161R note: the short output seam is implemented, but qualification is `BLOCKED_PUBLICATION_AFTER_GREEN_SHORT_PATH_SMOKE`. The recovered payload history remains valid and the one new hidden smoke reused the host with zero Unity starts, exited 0, wrote all five markers and captured Player.log from the short staging path. Publication then failed and rolled staging back; RC CURRENT, portable all-selectable and portable core-only were not reached, Goal160's audit blocker remains open, Goal161/161R remain unaccepted, and no human gate exists.
 
 ## Vertical Slice Final
 
