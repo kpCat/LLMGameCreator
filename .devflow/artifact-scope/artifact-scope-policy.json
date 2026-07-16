@@ -5853,6 +5853,50 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-161q-standalone-self-check-diagnosis-and-qualification-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal161q-standalone-closure.ps1",
+        ".devflow/scripts/run-goal161q-standalone-closure.cmd",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildModels.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildService.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandalonePayloadSelfCheckService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161Q/Goal161QPayloadForensicsTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161Q/Goal161QPayloadSelfCheckTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161Q/Goal161QSmokeDiagnosticsTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161Q/Goal161QQualificationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161/Goal161StandaloneAndPortabilityTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/goal161-generated-gameplay-save-migration.md",
+        "docs/manual-acceptance/goal161q-standalone-qualification-closure.md"
+      ],
+      "allowedPathPrefixes": [
+        "docs/agent-tasks/goal-161q-standalone-self-check-diagnosis-and-qualification-closure/",
+        "tests/LLMGameCreator.Tests/Application/Goal161Q/",
+        ".llmgc/procedural/goal-161q-standalone-self-check-diagnosis-and-qualification-closure/",
+        ".llmgc/exports/goal-161q-standalone-self-check-diagnosis-and-qualification-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

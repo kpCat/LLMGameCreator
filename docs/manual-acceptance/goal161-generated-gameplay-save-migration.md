@@ -1,6 +1,6 @@
 # Goal161 profile-neutral world change and generated gameplay save migration
 
-Status: `BLOCKED_HIDDEN_STANDALONE_SMOKE_FAILED`
+Status: `GREEN_IMPLEMENTATION_BLOCKED_STANDALONE_PATH_LENGTH_260`
 
 Goal160 independent audit is `BLOCKED_AT_D8DD05E7` because its semantic commit validator required complete AcceptedMechanics for supported core-only generated projects. Goal161 implements and tests the correction with exact sealed AcceptedMechanics, compatibility and generic RC-status projections. Real all-selectable and core-only regeneration/history rollback commit GREEN; core-only remains intentionally incomplete and never claims false RC readiness. Custom partial selection and seal-tamper rejection are profile-neutral. Formal P1 closure awaits a GREEN Goal161.
 
@@ -10,6 +10,6 @@ CURRENT same-world load restores the exact serialized session without Runtime St
 
 The migrated exact load executes real movement, crosses a generated travel gate, completes the destination interaction and replays equivalently. Restoring the original historical world leaves the save tree byte-identical and makes the original revision CURRENT again. Runtime Simulator uses generated-aware save/list/load/migrate for generated projects; legacy projects retain raw snapshots, while raw snapshots discovered in generated projects are `LEGACY_RAW` and never directly loaded. Projects exposes a compact save card and manager without full paths, hashes or generated IDs.
 
-The one permitted hidden standalone smoke ran after migration, reused the cached host, rebuilt nothing and started Unity zero times. Its payload was assembled with migration/travel/accepted facts, but the cached player returned exit code 2 with `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`. All-selectable RC CURRENT and portable all-selectable/core-only post-smoke assertions were not reached.
+Goal161Q recovered the exact Goal161 payload and proved 13/13 named Application checks, package SHA and exact legacy frame/fact parser compatibility. The one new permitted hidden smoke also passed preflight, reused the cached host, rebuilt nothing and started Unity zero times, but returned exit code 2. Its confined Player.log proves the exact blocker: `player-adapter-model.json` is unreadable at a 260-character path. All-selectable RC CURRENT and portable all-selectable/core-only post-smoke assertions were not reached.
 
-No user action or manual Unity review is requested. `goal161Accepted=false`, `goal161AcceptedByHuman=false`, `goal161AcceptedByCodex=false`, `goal161ManualReviewRequired=false`, `goal161ManualGateReady=false`, `goal161IndependentAuditRequired=false`. Next action: authorize a bounded standalone diagnosis and a new smoke budget before independent Goal161 audit.
+No user action or manual Unity review is requested. `goal161Accepted=false`, `goal161AcceptedByHuman=false`, `goal161AcceptedByCodex=false`, `goal161ManualReviewRequired=false`, `goal161ManualGateReady=false`, `goal161IndependentAuditRequired=false`. Next action: authorize an Application-side short confined smoke-path fix and one new explicit smoke budget.

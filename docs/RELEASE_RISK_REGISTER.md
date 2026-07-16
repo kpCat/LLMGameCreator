@@ -4,6 +4,8 @@ Status: Goal 097 planning register
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
 Accepted: false
 
+Goal161Q standalone release-risk note: the diagnostic gap is closed by an Application-side named payload preflight and confined Player.log capture, but the one authorized qualification smoke is BLOCKED. Exact failure: `standalone.player.payload_path_unreadable`; the first unreadable payload file path is 260 characters and the following frames path is 261. Host cache was reused, host rebuild=false, Unity Editor starts=0, player invocations=1, retries=0. A short confined smoke-path fix and a new explicit smoke budget are required before RC/portable closure.
+
 ## P0 Release Blockers
 
 Goal152C note: external LocalAppData Unity workspaces prevent generated Unity settings from contaminating the repository. Automated proof cannot accept a PlayerAdapter standalone; the five-step human screen review remains required and Goal152/Goal152A stay unaccepted.

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "goal161q_failed_output_forensics_v1",
+  "status": "RECOVERED",
+  "failedPayloadLocation": "%TEMP%/LLMGameCreator/Goal156Copies/<capture>/goal161-standalone-proof/Builds/Windows/game-goal156-all-selectable",
+  "historicalHostCacheKey": "6af4d5eb5b42f956110555b58fb4e276",
+  "historicalExitCode": 2,
+  "historicalSmokeMarker": "LLMGC_PROJECT_STANDALONE_SMOKE_FAIL",
+  "historicalSmokeMarkerSha256": "eea44312549e7c99179c71196fe459eb4dc7846e8ed1f791f26d4e7fe4ae49cc",
+  "historicalCausallyMatchedPlayerLogRecovered": false,
+  "fileHashes": {
+    "project-manifest.json": "bf5634ae114909187065a52867cad1813c2ca705e8e8d7d4726e68dbbf3a2509",
+    "player-adapter-model.json": "62b66a554060e98e19273ccfa6f6c79c453b33ec8365df49716148feafa315aa",
+    "player-adapter-frames.json": "3e9791f0f96f8d02dab089e48ee29640ea5d5274b29e1ba1c0b752482005d3a4",
+    "standalone-launch.json": "79c93caf805dbf68c8968b0ca1c7b8e7a480cca76370acd7062d87af9c92f37c",
+    "game-package.json": "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "build-manifest.json": "6eda52b1b3c071dce49e79fac3bca0864c9bf22214a434fe5d8d01ca38e57dda"
+  },
+  "offlineStructuralChecksPassed": 13,
+  "offlineStructuralChecksTotal": 13,
+  "legacyFramesParsed": 5,
+  "structuralFrames": 5,
+  "legacyHumanFactsParsed": 62,
+  "structuralHumanFacts": 62,
+  "packageShaMatches": true,
+  "requiredMigrationTravelAcceptedFactsPresent": true
+}

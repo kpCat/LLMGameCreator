@@ -22,6 +22,8 @@ For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` be
 
 Before implementing or auditing any Codex Goal, read `docs/GOAL_DESIGN_QUALITY_POLICY.md` for the mandatory design review and pre-commit self-audit.
 
+Goal161Q standalone qualification is `BLOCKED_PLAYER_PAYLOAD_PATH_LENGTH_260`; `gate_status=goal161q_blocked_player_payload_path_length_260`. The exact failed Goal161 and Goal161Q payloads pass 13/13 Application checks and exact legacy frame/fact parser compatibility. The new confined Player.log proves the cached player cannot read `player-adapter-model.json` when its path length is exactly 260 characters. Do not rerun the consumed smoke. The next bounded work is an Application-side short confined smoke-path fix under a new explicit budget; Unity source and host rebuild remain unauthorized.
+
 For Goal 029 specifically, read:
 
 1. `AGENTS.md`

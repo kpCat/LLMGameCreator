@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "goal161q_diagnosis_plan_v1",
+  "failedPayloadLocation": {
+    "project": "%TEMP%/LLMGameCreator/Goal156Copies/<capture>/goal161-standalone-proof",
+    "output": "Builds/Windows/game-goal156-all-selectable",
+    "payload": "game-goal156-all-selectable_Data/StreamingAssets/LLMGameCreatorProject",
+    "smokeMarker": "%LOCALAPPDATA%/LLMGameCreator/S/standalone-smoke-f5cc302642774119a46226ffea871850.log"
+  },
+  "failedOutputHashes": {
+    "project-manifest.json": "bf5634ae114909187065a52867cad1813c2ca705e8e8d7d4726e68dbbf3a2509",
+    "player-adapter-model.json": "62b66a554060e98e19273ccfa6f6c79c453b33ec8365df49716148feafa315aa",
+    "player-adapter-frames.json": "3e9791f0f96f8d02dab089e48ee29640ea5d5274b29e1ba1c0b752482005d3a4",
+    "standalone-launch.json": "79c93caf805dbf68c8968b0ca1c7b8e7a480cca76370acd7062d87af9c92f37c",
+    "game-package.json": "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "build-manifest.json": "6eda52b1b3c071dce49e79fac3bca0864c9bf22214a434fe5d8d01ca38e57dda",
+    "smoke-marker": "eea44312549e7c99179c71196fe459eb4dc7846e8ed1f791f26d4e7fe4ae49cc"
+  },
+  "hostCacheIdentity": {
+    "cacheKey": "6af4d5eb5b42f956110555b58fb4e276",
+    "assemblySha256": "8eb6b3078297278a1994787f66cce341d00a9e631f9b952c117688ed7a8f8165",
+    "outputAssemblyMatchesCache": true,
+    "historicalHostReused": true,
+    "historicalHostRebuilt": false
+  },
+  "twelveHostChecks": [
+    { "number": 1, "code": "standalone.payload.files_and_schemas", "passed": true },
+    { "number": 2, "code": "standalone.payload.project_identity", "passed": true },
+    { "number": 3, "code": "standalone.payload.hash_identity", "passed": true },
+    { "number": 4, "code": "standalone.payload.runtime_authority", "passed": true },
+    { "number": 5, "code": "standalone.payload.frames_present", "passed": true },
+    { "number": 6, "code": "standalone.payload.frames_contiguous", "passed": true },
+    { "number": 7, "code": "standalone.payload.selected_optional_count", "passed": true },
+    { "number": 8, "code": "standalone.payload.active_count", "passed": true },
+    { "number": 9, "code": "standalone.payload.parameter_count", "passed": true },
+    { "number": 10, "code": "standalone.payload.human_facts", "passed": true },
+    { "number": 11, "code": "standalone.payload.frame_cursor", "passed": true },
+    { "number": 12, "code": "standalone.payload.damage_invariant", "passed": true },
+    { "number": 13, "code": "standalone.payload.package_hash", "passed": true }
+  ],
+  "offlineReproduction": {
+    "structuralChecksPassed": 13,
+    "structuralChecksTotal": 13,
+    "offlineFailedCheckCodes": [],
+    "structuralFrameCount": 5,
+    "legacyFrameCount": 5,
+    "structuralHumanFactCount": 62,
+    "legacyHumanFactCount": 62,
+    "legacyHostParserCompatibilityPassed": true,
+    "historicalExitCode": 2,
+    "historicalSmokeMarker": "LLMGC_PROJECT_STANDALONE_SMOKE_FAIL",
+    "causallyMatchedHistoricalPlayerLogRecovered": false
+  },
+  "namedRootCause": {
+    "code": "standalone.smoke.historical_diagnostic_loss",
+    "classification": "application_diagnostics",
+    "proof": "The exact failed payload passes every host-equivalent check, package SHA validation and exact legacy parser extraction. Historical RunSmoke did not pass -logFile, returned only exit code 2, and the bootstrap failure writer discarded the check or exception by writing only the generic FAIL marker."
+  },
+  "applicationFixOption": {
+    "allowed": true,
+    "changes": [
+      "Add named System.Text.Json payload checks plus exact legacy parser compatibility.",
+      "Block process start at payload_self_check when any named check fails.",
+      "Pass a confined -logFile and return typed exit, marker, bounded log and named failure diagnostics."
+    ]
+  },
+  "hostFixOption": {
+    "allowed": false,
+    "reason": "Structural checks and exact legacy parser compatibility both pass; no parser or bootstrap defect is proven."
+  },
+  "chosenMinimalFix": "application_preflight_and_smoke_diagnostics_only",
+  "singleSmokePlan": {
+    "newHiddenSmokeInvocationBudget": 1,
+    "correctiveRetryBudget": 0,
+    "expectedHostReused": true,
+    "expectedHostRebuilt": false,
+    "expectedUnityEditorStarts": 0
+  },
+  "postSmokeRcAndPortability": {
+    "runOnlyAfterGreenSmoke": true,
+    "releaseCandidateCurrent": "required",
+    "portableAllSelectable": "required",
+    "portableCoreOnly": "required_without_false_rc_ready"
+  },
+  "nonGoals": [
+    "No generated save schema or migration semantic changes.",
+    "No Runtime, GamePackage, FeatureModule or provider changes.",
+    "No Unity source, host rebuild, visible launch, retry, full suite, 85-case closure or all-ProductSmoke."
+  ]
+}

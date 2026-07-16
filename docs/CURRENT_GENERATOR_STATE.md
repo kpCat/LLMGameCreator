@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 161 profile-neutral world change and generated gameplay save migration
+Updated by: Goal 161Q standalone self-check diagnosis and blocked qualification closure
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -24,11 +24,13 @@ Goal160 independent audit is `BLOCKED_AT_D8DD05E7`: its semantic commit validato
 
 Generated gameplay saves now use immutable content-addressed revisions plus an atomic slot manifest under `.llmgc/gameplay-saves`. Revisions bind exact project identity, world, generated source, package/composition, authoring, selected GREEN travel history and canonical definition fingerprints. Same-world CURRENT load restores the exact serialized `UnifiedRuntimeSession` without Start/reset. World/package changes never write the save tree and require explicit controlled migration: cross-world location and transient state reset, canonically compatible same-kind/same-ID state is preserved, incompatible generated references are dropped with reasons, and apply creates a new revision while retaining the source. Restoring the original historical world makes the original revision CURRENT again. Runtime Move, generated travel gate, destination interaction and replay pass after migration.
 
-Runtime Simulator and the Projects save card/manager use the generated-aware workflow; legacy/template projects retain raw `RuntimeSnapshotStore`, while raw snapshots found in generated projects are `LEGACY_RAW` and never directly loaded. The single permitted cached hidden standalone attempt ran after migration, reused the existing host without rebuild and started Unity zero times, but the player returned exit code 2 with `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`. Therefore Goal161 is BLOCKED; RC CURRENT and portable post-smoke assertions were not reached. No human gate is created.
+Runtime Simulator and the Projects save card/manager use the generated-aware workflow; legacy/template projects retain raw `RuntimeSnapshotStore`, while raw snapshots found in generated projects are `LEGACY_RAW` and never directly loaded. Goal161Q recovered the exact failed output and proved all 13 Application structural checks plus exact legacy frame/fact parser compatibility. It installed a staging preflight, named failures, a confined `-logFile` and bounded Player.log diagnostics without changing Unity or rebuilding the host.
+
+The one new authorized hidden smoke was consumed with no retry. Preflight passed, cache `6af4d5eb5b42f956110555b58fb4e276` was reused, host rebuild and Unity Editor starts remained zero, but the player returned exit code 2. The new Player.log names the exact exception: `player-adapter-model.json` was unreadable at a 260-character path; the next payload filename is 261 characters. Goal161Q is therefore BLOCKED at `standalone.player.payload_path_unreadable`. RC CURRENT and portable assertions were not reached, Goal160's blocker remains open, Goal161 stays unaccepted, and no human gate is created.
 
 ```text
-gate_status=goal161_blocked_hidden_standalone_smoke_failed
-current_user_action=authorize_goal161_standalone_failure_diagnosis_and_new_smoke_budget
+gate_status=goal161q_blocked_player_payload_path_length_260
+current_user_action=authorize_short_confined_standalone_smoke_path_fix_and_new_budget
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -218,8 +220,9 @@ goal160UnityProcessStartCount=0
 goal160HiddenSmokeInvocationCount=1
 goal160PortableCopyPassed=true
 goal160ArtifactScopeViolationCount=0
-goal161ImplementationStatus=BLOCKED
-goal161CandidateStatus=BLOCKED_HIDDEN_STANDALONE_SMOKE_FAILED
+goal161ImplementationStatus=GREEN
+goal161CandidateStatus=BLOCKED_STANDALONE_PATH_LENGTH_260
+goal161QualificationStatus=BLOCKED
 goal161Accepted=false
 goal161AcceptedByHuman=false
 goal161AcceptedByCodex=false
@@ -237,13 +240,29 @@ goal161SaveUiPassed=true
 goal161HostReused=true
 goal161HostRebuilt=false
 goal161UnityProcessStartCount=0
-goal161HiddenSmokeInvocationCount=1
+goal161HiddenSmokeInvocationCount=2
 goal161HiddenSmokePassed=false
 goal161StandaloneFailureStage=launch_smoke
+goal161StandaloneNamedRootCause=standalone.player.payload_path_unreadable
+goal161PayloadSelfCheckPassed=true
+goal161LegacyHostParserCompatibilityPassed=true
 goal161PortableAllSelectablePassed=false
 goal161PortableCoreOnlyPassed=false
 goal161ArtifactScopeViolationCount=0
-nextAction=independent_goal161_audit_and_plan_player_driven_generated_campaign_session
+goal161qImplementationStatus=GREEN_DIAGNOSTICS
+goal161qQualificationStatus=BLOCKED_PLAYER_PAYLOAD_PATH_LENGTH_260
+goal161qAccepted=false
+goal161qManualReviewRequired=false
+goal161qManualGateReady=false
+goal161qIndependentAuditRequired=false
+goal161qNewHiddenSmokeInvocationCount=1
+goal161qCorrectiveRetryCount=0
+goal161qHostReused=true
+goal161qHostRebuilt=false
+goal161qUnityEditorProcessStartCount=0
+goal161qSmokeExitCode=2
+goal161qPlayerLogDiagnosticCaptured=true
+nextAction=authorize_short_confined_standalone_smoke_path_fix_and_new_budget
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

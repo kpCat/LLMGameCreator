@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "goal161q_named_root_cause_proof_v1",
+  "status": "PROVEN_BLOCKER",
+  "preLaunchNamedDiagnosticDefect": "standalone.smoke.historical_diagnostic_loss",
+  "qualificationNamedRootCause": "standalone.player.payload_path_unreadable",
+  "classification": "application_launch_path",
+  "exactException": "Could not find a part of the path <payload>/player-adapter-model.json",
+  "playerAdapterModelPathLength": 260,
+  "playerAdapterFramesPathLength": 261,
+  "legacyWindowsPathBoundary": 260,
+  "causalProof": [
+    "Application preflight read the same files and passed 13/13.",
+    "The cached player loaded the 256-character project manifest path.",
+    "The next read failed at the 260-character player-adapter-model path.",
+    "The confined Player.log contains the exact failing file and exception."
+  ],
+  "speculativeFixApplied": false,
+  "unityParserDefectProven": false,
+  "unityBootstrapChanged": false,
+  "requiredNextFix": "short_confined_application_smoke_path",
+  "requiredNextSmokeBudget": 1
+}

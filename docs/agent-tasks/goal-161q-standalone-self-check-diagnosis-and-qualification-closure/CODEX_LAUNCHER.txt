@@ -1,0 +1,42 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-161q-standalone-self-check-diagnosis-and-qualification-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Sol
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 7935eaba5039c908b9807a09b3651f63b95ab912
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- Goal161 product/save migration implementation сохраняется; это standalone qualification closure;
+- до любого запуска EXE/Unity найди и офлайн разбери точный failed Goal161 payload;
+- реализуй Application-side named self-check всех 12 host checks + package SHA и exact legacy parser compatibility;
+- назови один точный root cause до исправления;
+- никаких speculative fixes;
+- self-check preflight обязан блокировать smoke без запуска при payload mismatch;
+- RunSmoke обязан писать отдельный -logFile и возвращать exit code, marker и bounded named Player.log diagnostic;
+- если root cause в Application/payload: Unity не менять, host cache reused;
+- Unity bootstrap разрешён только при доказанном parser/bootstrap defect;
+- при Unity fix: только ProjectStandalonePlayerAdapterBootstrap.cs, ровно один normal host rebuild;
+- новый hidden smoke budget ровно 1, corrective retry 0;
+- если smoke снова fails — BLOCKED с точным check/exception, без повторов;
+- после GREEN smoke: RC CURRENT, portable all-selectable и core-only, core-only без false READY;
+- Goal160 blocker закрывается только на GREEN;
+- Goal161 accepted=false, human gate отсутствует;
+- не запускать full suite, 85-case closure или all-ProductSmoke;
+- создать и запушить ровно один GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи recovered failed payload hashes, offline failed check,
+named root cause, exact fix, preflight results, host reuse/rebuild,
+Unity/player invocation counts, smoke markers/exit/log,
+RC/portable results, regressions, evidence/artifact scope,
+final SHA, push, HEAD==origin/main и clean worktree.

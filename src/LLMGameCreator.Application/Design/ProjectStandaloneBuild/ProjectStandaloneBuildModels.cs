@@ -96,8 +96,55 @@ public sealed record ProjectStandaloneBuildResult
     public bool HostRebuilt { get; init; }
     public bool HostReused { get; init; }
     public bool LaunchSmokePassed { get; init; }
+    public bool PayloadSelfCheckPassed { get; init; }
+    public bool LegacyHostParserCompatibilityPassed { get; init; }
+    public IReadOnlyList<string> PayloadSelfCheckFailedCodes { get; init; } = [];
+    public int SmokeExitCode { get; init; } = -1;
+    public string SmokeMarkerText { get; init; } = string.Empty;
+    public bool PlayerLogPresent { get; init; }
+    public IReadOnlyList<string> PlayerLogRelevantLines { get; init; } = [];
+    public string NamedSmokeFailure { get; init; } = string.Empty;
     public string BuildManifestPath { get; init; } = string.Empty;
     public TimeSpan Duration { get; init; }
+}
+
+public sealed record ProjectStandalonePayloadCheckResult
+{
+    public int Number { get; init; }
+    public string Code { get; init; } = string.Empty;
+    public bool Passed { get; init; }
+    public string Diagnostic { get; init; } = string.Empty;
+}
+
+public sealed record LegacyHostParserCompatibility
+{
+    public bool Passed { get; init; }
+    public int StructuralFrameCount { get; init; }
+    public int LegacyFrameCount { get; init; }
+    public int StructuralHumanFactCount { get; init; }
+    public int LegacyHumanFactCount { get; init; }
+    public IReadOnlyList<string> FailedCodes { get; init; } = [];
+}
+
+public sealed record ProjectStandalonePayloadSelfCheckResult
+{
+    public bool Passed { get; init; }
+    public int PassedCount { get; init; }
+    public int TotalCount { get; init; }
+    public IReadOnlyList<ProjectStandalonePayloadCheckResult> Checks { get; init; } = [];
+    public LegacyHostParserCompatibility LegacyHostParserCompatibility { get; init; } = new();
+    public IReadOnlyList<string> FailedCheckCodes { get; init; } = [];
+}
+
+public sealed record ProjectStandaloneSmokeResult
+{
+    public bool Passed { get; init; }
+    public bool ProcessStarted { get; init; }
+    public int ExitCode { get; init; } = -1;
+    public string SmokeMarkerText { get; init; } = string.Empty;
+    public bool PlayerLogPresent { get; init; }
+    public IReadOnlyList<string> PlayerLogRelevantLines { get; init; } = [];
+    public string NamedFailure { get; init; } = string.Empty;
 }
 
 public interface IProjectStandaloneBuildService

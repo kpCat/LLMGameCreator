@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "goal161q_single_smoke_proof_v1",
+  "status": "BLOCKED",
+  "newHiddenSmokeInvocationCount": 1,
+  "correctiveRetryCount": 0,
+  "payloadPreflightPassed": true,
+  "legacyHostParserCompatibilityPassed": true,
+  "hostCacheKey": "6af4d5eb5b42f956110555b58fb4e276",
+  "hostReused": true,
+  "hostRebuilt": false,
+  "hostCacheManifestSha256": "b9a14db24eaf78c1c0d3f1d0c9e6832463c3e9ae7f92941df2549f4508a88861",
+  "hostAssemblySha256": "8eb6b3078297278a1994787f66cce341d00a9e631f9b952c117688ed7a8f8165",
+  "unityEditorProcessStartCount": 0,
+  "playerExitCode": 2,
+  "smokeMarkerText": "LLMGC_PROJECT_STANDALONE_SMOKE_FAIL",
+  "smokeMarkerSha256": "eea44312549e7c99179c71196fe459eb4dc7846e8ed1f791f26d4e7fe4ae49cc",
+  "playerLogPresent": true,
+  "playerLogSha256": "20acfd0d72116f7cf37ba9f440a0a6422f0511b734634d83074140934438266c",
+  "playerLogRelevantLine": "LLMGC_PROJECT_STANDALONE_SMOKE_FAIL Could not find a part of the path <payload>/player-adapter-model.json",
+  "namedFailure": "standalone.player.payload_path_unreadable",
+  "requiredSmokeMarkersPassed": 0,
+  "newHiddenSmokePassed": false
+}

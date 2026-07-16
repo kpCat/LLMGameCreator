@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "goal161q_payload_self_check_proof_v1",
+  "status": "GREEN",
+  "service": "ProjectStandalonePayloadSelfCheckService",
+  "exactFailedGoal161PayloadPassed": true,
+  "newGoal161QPayloadPassed": true,
+  "checksPassed": 13,
+  "checksTotal": 13,
+  "checkCodes": [
+    "standalone.payload.files_and_schemas",
+    "standalone.payload.project_identity",
+    "standalone.payload.hash_identity",
+    "standalone.payload.runtime_authority",
+    "standalone.payload.frames_present",
+    "standalone.payload.frames_contiguous",
+    "standalone.payload.selected_optional_count_mismatch",
+    "standalone.payload.active_count_mismatch",
+    "standalone.payload.parameter_count_mismatch",
+    "standalone.payload.human_facts_invalid",
+    "standalone.payload.frame_cursor_nondeterministic",
+    "standalone.payload.damage_invariant_failed",
+    "standalone.payload.package_hash_mismatch"
+  ],
+  "legacyHostParserCompatibilityPassed": true,
+  "legacyFrameCount": 5,
+  "legacyHumanFactCount": 62,
+  "preflightBeforePublish": true,
+  "failedPreflightProcessStarted": false,
+  "priorOutputPreservedOnPreflightFailure": true,
+  "goal161qTestsDiscovered": 24,
+  "goal161qTestsPassed": 24,
+  "goal161qBehavioralTestsPassed": 20
+}

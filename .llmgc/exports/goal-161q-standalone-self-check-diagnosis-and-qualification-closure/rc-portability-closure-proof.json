@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "goal161q_rc_portability_closure_proof_v1",
+  "status": "BLOCKED_BEFORE_RC_AND_PORTABILITY",
+  "releaseCandidateWriteGuardedByGreenSmoke": true,
+  "releaseCandidateRecordCurrent": false,
+  "portableAssertionsGuardedByGreenSmoke": true,
+  "portableAllSelectablePassed": false,
+  "portableCoreOnlyPassed": false,
+  "coreOnlyNoFalseRcReady": true,
+  "goal160AuditBlockerClosed": false,
+  "reason": "The single authorized player invocation failed before the controller could write RC CURRENT or construct portable copies.",
+  "goal161Accepted": false,
+  "goal161qAccepted": false,
+  "humanGate": false
+}

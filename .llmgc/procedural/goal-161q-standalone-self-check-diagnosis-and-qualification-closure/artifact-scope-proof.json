@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "goal161q_artifact_scope_proof_v1",
+  "status": "GREEN",
+  "scenario": "goal-161q-standalone-self-check-diagnosis-and-qualification-closure",
+  "baselineRef": "7935eaba5039c908b9807a09b3651f63b95ab912",
+  "artifactScopeViolationCount": 0,
+  "unityChanges": 0,
+  "runtimeSchemaChanges": 0,
+  "gamePackageSchemaChanges": 0,
+  "featureModuleCatalogChanges": 0,
+  "fullSuiteRun": false,
+  "historical85CaseClosureRun": false,
+  "allProductSmokeRun": false,
+  "hiddenStandaloneSmokeInvocationCount": 1,
+  "correctiveRetryCount": 0
+}

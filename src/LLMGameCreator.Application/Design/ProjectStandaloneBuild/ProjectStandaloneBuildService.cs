@@ -9,6 +9,9 @@ namespace LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 
 public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildService
 {
+    private const string LegacySmokeArgumentContract =
+        "-batchmode -nographics -llmgcStandaloneSmokeExit";
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -87,11 +90,57 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
 
             token.ThrowIfCancellationRequested();
             var payload = CreatePayload(request, packagePath, attemptId, unityVersion, cacheKey);
-            var output = AssembleProjectOutput(request, hostRoot, payload, token);
-            ValidateOutput(output, payload);
-            var smoke = RunSmoke(output.ExecutablePath, token);
+            var staged = AssembleProjectOutput(request, hostRoot, payload, token);
+            ValidateOutput(staged, payload);
+            var selfCheck = new ProjectStandalonePayloadSelfCheckService()
+                .CheckOutput(staged.OutputFolder, staged.ExecutablePath);
+            if (!selfCheck.Passed)
+            {
+                Directory.Delete(staged.OutputFolder, true);
+                var diagnostics = selfCheck.Checks.Where(check => !check.Passed)
+                    .Select(check => check.Code + ": " + check.Diagnostic)
+                    .Concat(selfCheck.LegacyHostParserCompatibility.FailedCodes)
+                    .ToList();
+                return Finish(Fail(request, "payload_self_check",
+                    "Standalone payload self-check failed.", attemptId, started,
+                    cacheKey: cacheKey, rebuilt: rebuilt) with
+                {
+                    Diagnostics = diagnostics,
+                    PayloadSelfCheckPassed = false,
+                    LegacyHostParserCompatibilityPassed =
+                        selfCheck.LegacyHostParserCompatibility.Passed,
+                    PayloadSelfCheckFailedCodes = selfCheck.FailedCheckCodes
+                });
+            }
+            var output = PublishProjectOutput(staged);
+            var smoke = RunSmoke(output.ExecutablePath, selfCheck, token);
             if (!smoke.Passed)
-                return Finish(Fail(request, "launch_smoke", smoke.Diagnostic, attemptId, started, output.OutputFolder, output.ExecutablePath, unity, unityVersion, cacheKey, rebuilt));
+            {
+                var diagnostics = new List<string>
+                {
+                    "payload preflight: GREEN "
+                    + selfCheck.PassedCount + "/" + selfCheck.TotalCount
+                    + " legacy=GREEN",
+                    "exit code: " + smoke.ExitCode,
+                    "smoke marker: " + (string.IsNullOrWhiteSpace(smoke.SmokeMarkerText)
+                        ? "<missing>" : smoke.SmokeMarkerText),
+                    "named failure: " + smoke.NamedFailure
+                };
+                diagnostics.AddRange(smoke.PlayerLogRelevantLines.Select(line => "player log: " + line));
+                return Finish(Fail(request, "launch_smoke", smoke.NamedFailure,
+                    attemptId, started, output.OutputFolder, output.ExecutablePath,
+                    unity, unityVersion, cacheKey, rebuilt) with
+                {
+                    Diagnostics = diagnostics,
+                    PayloadSelfCheckPassed = true,
+                    LegacyHostParserCompatibilityPassed = true,
+                    SmokeExitCode = smoke.ExitCode,
+                    SmokeMarkerText = smoke.SmokeMarkerText,
+                    PlayerLogPresent = smoke.PlayerLogPresent,
+                    PlayerLogRelevantLines = smoke.PlayerLogRelevantLines,
+                    NamedSmokeFailure = smoke.NamedFailure
+                });
+            }
 
             var result = new ProjectStandaloneBuildResult
             {
@@ -117,6 +166,12 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
                 HostRebuilt = rebuilt,
                 HostReused = !rebuilt,
                 LaunchSmokePassed = true,
+                PayloadSelfCheckPassed = true,
+                LegacyHostParserCompatibilityPassed = true,
+                SmokeExitCode = smoke.ExitCode,
+                SmokeMarkerText = smoke.SmokeMarkerText,
+                PlayerLogPresent = smoke.PlayerLogPresent,
+                PlayerLogRelevantLines = smoke.PlayerLogRelevantLines,
                 BuildManifestPath = output.ManifestPath,
                 Duration = started.Elapsed
             };
@@ -288,21 +343,31 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
         var manifest = Path.Combine(staging, "build-manifest.json");
         var hashes = Directory.GetFiles(staging, "*", SearchOption.AllDirectories).OrderBy(path => path, StringComparer.Ordinal).ToDictionary(path => Path.GetRelativePath(staging, path).Replace('\\', '/'), HashFile, StringComparer.Ordinal);
         File.WriteAllText(manifest, JsonSerializer.Serialize(new { schemaVersion = "llmgc_project_standalone_build_v1", projectPackageId = request.ProjectPackageId, packageSha256 = request.PackageSha256, finalStateHash = request.FinalStateHash, files = hashes }, JsonOptions), new UTF8Encoding(false));
+        return new OutputAssembly(staging, exe, manifest, output);
+    }
+
+    private static OutputAssembly PublishProjectOutput(OutputAssembly staged)
+    {
+        var output = staged.FinalOutputFolder;
         var backup = output + ".previous-" + Guid.NewGuid().ToString("N");
         try
         {
             if (Directory.Exists(output)) Directory.Move(output, backup);
-            Directory.Move(staging, output);
+            Directory.Move(staged.OutputFolder, output);
             if (Directory.Exists(backup)) Directory.Delete(backup, true);
         }
         catch
         {
             if (Directory.Exists(output)) Directory.Delete(output, true);
             if (Directory.Exists(backup)) Directory.Move(backup, output);
-            if (Directory.Exists(staging)) Directory.Delete(staging, true);
+            if (Directory.Exists(staged.OutputFolder)) Directory.Delete(staged.OutputFolder, true);
             throw;
         }
-        return new OutputAssembly(output, Path.Combine(output, slug + ".exe"), Path.Combine(output, "build-manifest.json"));
+        return new OutputAssembly(
+            output,
+            Path.Combine(output, Path.GetFileName(staged.ExecutablePath)),
+            Path.Combine(output, Path.GetFileName(staged.ManifestPath)),
+            output);
     }
 
     private static void ValidateOutput(OutputAssembly output, StandalonePayload payload)
@@ -314,16 +379,87 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
         if (payload.Frames.Count == 0) throw new InvalidOperationException("PlayerAdapter payload has no frames.");
     }
 
-    private static SmokeResult RunSmoke(string executable, CancellationToken token)
+    public ProjectStandaloneSmokeResult RunSmoke(
+        string executable,
+        ProjectStandalonePayloadSelfCheckResult preflight,
+        CancellationToken token = default)
     {
+        ArgumentNullException.ThrowIfNull(preflight);
+        if (!preflight.Passed)
+            return new ProjectStandaloneSmokeResult
+            {
+                ProcessStarted = false,
+                NamedFailure = "standalone.payload.preflight_failed"
+            };
         var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LLMGameCreator", "S");
         Directory.CreateDirectory(root);
-        var log = Path.Combine(root, "standalone-smoke-" + Guid.NewGuid().ToString("N") + ".log");
-        using var process = Process.Start(new ProcessStartInfo(executable, "-batchmode -nographics -llmgcStandaloneSmokeExit -llmgcStandaloneSmokeLogPath \"" + log + "\"") { UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = Path.GetDirectoryName(executable)! }) ?? throw new InvalidOperationException("Standalone executable could not be started.");
+        var id = Guid.NewGuid().ToString("N");
+        var markerLog = Path.Combine(root, "standalone-smoke-" + id + ".log");
+        var playerLog = Path.Combine(root, "standalone-player-" + id + ".log");
+        var start = new ProcessStartInfo(executable)
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            WorkingDirectory = Path.GetDirectoryName(executable)!
+        };
+        foreach (var argument in new[]
+                 {
+                     "-batchmode", "-nographics", "-llmgcStandaloneSmokeExit",
+                     "-llmgcStandaloneSmokeLogPath", markerLog, "-logFile", playerLog
+                 })
+            start.ArgumentList.Add(argument);
+        using var process = Process.Start(start)
+                            ?? throw new InvalidOperationException("Standalone executable could not be started.");
         while (!process.WaitForExit(250)) token.ThrowIfCancellationRequested();
-        var contents = File.Exists(log) ? File.ReadAllText(log) : string.Empty;
-        var passed = process.ExitCode == 0 && StandaloneSelfCheck.RequiredMarkers.All(marker => contents.Contains(marker, StringComparison.Ordinal));
-        return new SmokeResult(passed, passed ? string.Empty : "Standalone smoke failed with exit code " + process.ExitCode + ".");
+        return InterpretSmokeArtifacts(process.ExitCode, markerLog, playerLog, processStarted: true);
+    }
+
+    public static ProjectStandaloneSmokeResult InterpretSmokeArtifacts(
+        int exitCode,
+        string markerLog,
+        string playerLog,
+        bool processStarted = true)
+    {
+        var markerText = File.Exists(markerLog)
+            ? Bound(File.ReadAllText(markerLog).Trim(), 1000)
+            : string.Empty;
+        var playerPresent = File.Exists(playerLog);
+        var relevant = playerPresent
+            ? File.ReadLines(playerLog)
+                .Where(IsRelevantPlayerLine)
+                .TakeLast(20)
+                .Select(SanitizePlayerLine)
+                .Where(line => line.Length > 0)
+                .ToList()
+            : [];
+        var markersPassed = StandaloneSelfCheck.RequiredMarkers.All(marker =>
+            markerText.Contains(marker, StringComparison.Ordinal));
+        var passed = processStarted && exitCode == 0 && markersPassed && playerPresent;
+        var namedFailure = passed
+            ? string.Empty
+            : !processStarted
+                ? "standalone.payload.preflight_failed"
+                : !playerPresent
+                    ? "standalone.smoke.player_log_missing"
+                : exitCode != 0
+                        ? relevant.Any(line => line.Contains(
+                            "Could not find a part of the path", StringComparison.OrdinalIgnoreCase))
+                            ? "standalone.player.payload_path_unreadable"
+                            : relevant.Any(line => line.Contains(
+                                "Exception", StringComparison.OrdinalIgnoreCase))
+                                ? "standalone.player.exception"
+                                : "standalone.player.exit_nonzero"
+                        : "standalone.smoke.marker_mismatch";
+        return new ProjectStandaloneSmokeResult
+        {
+            Passed = passed,
+            ProcessStarted = processStarted,
+            ExitCode = exitCode,
+            SmokeMarkerText = markerText,
+            PlayerLogPresent = playerPresent,
+            PlayerLogRelevantLines = relevant,
+            NamedFailure = namedFailure
+        };
     }
 
     private static void CopyDirectory(string source, string destination, CancellationToken token)
@@ -349,14 +485,33 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
     }
 
     private ProjectStandaloneBuildResult Finish(ProjectStandaloneBuildResult result) { LastResult = result; return result; }
-    private static ProjectStandaloneBuildResult Fail(ProjectStandaloneBuildRequest request, string stage, string diagnostic, string attemptId = "", Stopwatch? duration = null, string output = "", string executable = "", string unity = "", string version = "", string cacheKey = "", bool rebuilt = false) => new() { AttemptId = attemptId, Status = stage == "cancelled" ? "CANCELLED" : "FAILED", Stage = stage, Diagnostics = [diagnostic], ProjectFolder = request.ProjectFolder, OutputFolder = output, ExecutablePath = executable, PackageSha256 = request.PackageSha256, FinalStateHash = request.FinalStateHash, SelectedModuleCount = request.SelectedModuleIds.Count, ConfiguredParameterCount = request.Parameters.Count, UnityEditorPath = unity, UnityVersion = version, HostCacheKey = cacheKey, HostRebuilt = rebuilt, Duration = duration?.Elapsed ?? TimeSpan.Zero };
+    private static ProjectStandaloneBuildResult Fail(ProjectStandaloneBuildRequest request, string stage, string diagnostic, string attemptId = "", Stopwatch? duration = null, string output = "", string executable = "", string unity = "", string version = "", string cacheKey = "", bool rebuilt = false) => new() { AttemptId = attemptId, Status = stage == "cancelled" ? "CANCELLED" : "FAILED", Stage = stage, Diagnostics = [diagnostic], ProjectFolder = request.ProjectFolder, OutputFolder = output, ExecutablePath = executable, PackageSha256 = request.PackageSha256, FinalStateHash = request.FinalStateHash, SelectedModuleCount = request.SelectedModuleIds.Count, ConfiguredParameterCount = request.Parameters.Count, UnityEditorPath = unity, UnityVersion = version, HostCacheKey = cacheKey, HostRebuilt = rebuilt, HostReused = !rebuilt && !string.IsNullOrWhiteSpace(cacheKey), Duration = duration?.Elapsed ?? TimeSpan.Zero };
     private static string HashFile(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }
     private static string HashText(string value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value))).ToLowerInvariant();
     private static string SafeSlug(string value) { var builder = new StringBuilder(); foreach (var c in value.ToLowerInvariant()) builder.Append(char.IsLetterOrDigit(c) ? c : '-'); return builder.ToString().Trim('-') is { Length: > 0 } slug ? slug : "game"; }
     private sealed record StandaloneFrame { public int Index { get; init; } public string Title { get; init; } = string.Empty; public string Category { get; init; } = string.Empty; public string StateHash { get; init; } = string.Empty; }
     private sealed record StandalonePayload { public object ProjectManifest { get; init; } = new(); public string PackageJson { get; init; } = string.Empty; public object Model { get; init; } = new(); public List<StandaloneFrame> Frames { get; init; } = []; public object Launch { get; init; } = new(); }
-    private sealed record OutputAssembly(string OutputFolder, string ExecutablePath, string ManifestPath);
-    private sealed record SmokeResult(bool Passed, string Diagnostic);
+    private static bool IsRelevantPlayerLine(string line) =>
+        line.Contains("LLMGC_PROJECT", StringComparison.Ordinal)
+        || line.Contains("Exception", StringComparison.OrdinalIgnoreCase)
+        || line.Contains("Error", StringComparison.OrdinalIgnoreCase)
+        || line.Contains("self-check", StringComparison.OrdinalIgnoreCase)
+        || line.Contains("Автопроверка", StringComparison.Ordinal);
+    private static string SanitizePlayerLine(string line)
+    {
+        var sanitized = line;
+        foreach (var root in new[]
+                 {
+                     Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                     Path.GetTempPath().TrimEnd(Path.DirectorySeparatorChar)
+                 }.Where(value => !string.IsNullOrWhiteSpace(value)).Distinct(StringComparer.OrdinalIgnoreCase))
+            sanitized = sanitized.Replace(root, "<machine-root>", StringComparison.OrdinalIgnoreCase);
+        return Bound(sanitized.Trim(), 400);
+    }
+    private static string Bound(string value, int length) =>
+        value.Length <= length ? value : value[..length] + "…";
+    private sealed record OutputAssembly(string OutputFolder, string ExecutablePath, string ManifestPath, string FinalOutputFolder);
 }
 
 internal static class StandaloneSelfCheck

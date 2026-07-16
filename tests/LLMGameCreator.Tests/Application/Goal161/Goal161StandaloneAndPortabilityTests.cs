@@ -209,6 +209,14 @@ internal sealed record Goal161StandaloneFixture(
             state.Standalone.HostReused,
             state.Standalone.HostRebuilt,
             hiddenSmokePassed = state.Standalone.LaunchSmokePassed,
+            payloadSelfCheckPassed = state.Standalone.PayloadSelfCheckPassed,
+            legacyHostParserCompatibilityPassed =
+                state.Standalone.LegacyHostParserCompatibilityPassed,
+            smokeExitCode = state.Standalone.SmokeExitCode,
+            smokeMarkerText = state.Standalone.SmokeMarkerText,
+            playerLogPresent = state.Standalone.PlayerLogPresent,
+            playerLogRelevantLines = state.Standalone.PlayerLogRelevantLines,
+            namedSmokeFailure = state.Standalone.NamedSmokeFailure,
             standaloneSelfChecksPassed = state.Standalone.SelfCheckTotalCount > 0
                                          && state.Standalone.SelfCheckTotalCount
                                          == state.Standalone.SelfCheckPassedCount,

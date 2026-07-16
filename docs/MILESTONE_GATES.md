@@ -6,6 +6,8 @@ Accepted: false
 
 Each milestone must produce visible product progress. Contract and proof artifacts are required, but they are not sufficient by themselves.
 
+Goal161Q note: the standalone diagnostic seam is GREEN, but qualification is `BLOCKED_PLAYER_PAYLOAD_PATH_LENGTH_260`. The recovered payload and the newly assembled payload both pass all 13 Application checks and exact cached-host regex compatibility. The single new hidden smoke reused the host and started Unity zero times; its confined Player.log proves `player-adapter-model.json` could not be opened at an exact 260-character path. RC CURRENT, portable all-selectable and portable core-only were not reached, Goal160's audit blocker remains open, Goal161/161Q remain unaccepted, and no human gate exists.
+
 ## Vertical Slice Final
 
 Goal 110 note: `offline_geoworld_alpha_manual_acceptance_verification` now packages the offline geoworld Alpha manual checklist, result template and release-risk/milestone links for review, but it remains `accepted=false` and does not by itself close `vertical_slice_final_verification`.
