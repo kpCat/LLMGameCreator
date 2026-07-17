@@ -1,0 +1,26 @@
+﻿{
+    "status":  "GREEN_APPLICATION_CONTRACT",
+    "sources":  [
+                    "exact state delta",
+                    "exact Runtime event",
+                    "typed save result"
+                ],
+    "kindsPassed":  [
+                        "Damage",
+                        "EncounterStarted",
+                        "EncounterFled",
+                        "EncounterWon",
+                        "Reward",
+                        "Inventory",
+                        "QuestReady",
+                        "QuestCompleted",
+                        "Reputation",
+                        "MapTravel",
+                        "Failure"
+                    ],
+    "inventedOutcomeCount":  0,
+    "boundedTimelineMaximum":  64,
+    "primaryUiRawIdCount":  0,
+    "primaryUiHashCount":  0,
+    "primaryUiAbsolutePathCount":  0
+}

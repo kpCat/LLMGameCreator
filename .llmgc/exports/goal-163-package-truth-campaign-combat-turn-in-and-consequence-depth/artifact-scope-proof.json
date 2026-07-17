@@ -1,0 +1,7 @@
+﻿{
+    "status":  "GREEN",
+    "scenario":  "goal-163-package-truth-campaign-combat-turn-in-and-consequence-depth",
+    "violationCount":  0,
+    "forbiddenRuntimeGamePackageGeneratedSaveUnityStandaloneRcChanges":  0,
+    "boundedExistingPathException":  "Goal162WinFormsWorkspaceTests one tab-count assertion after concrete 4-to-5 failure"
+}

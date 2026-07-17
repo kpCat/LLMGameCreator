@@ -1,0 +1,18 @@
+﻿{
+    "status":  "BLOCKED_REAL_GENERATED_ROUTE",
+    "readinessEvaluationReadOnly":  true,
+    "supportedRequiredKinds":  [
+                                   "complete_encounter",
+                                   "has_item"
+                               ],
+    "generatedRefreshCommandCount":  0,
+    "controlledQuestActiveBeforeClick":  true,
+    "controlledQuestReadyBeforeClick":  true,
+    "completeQuestCommandCountBeforeClick":  0,
+    "completeQuestCommandCountAfterClick":  1,
+    "advanceQuestObjectiveCommandCount":  0,
+    "controlledRewardApplied":  true,
+    "controlledReputationApplied":  true,
+    "realGeneratedVictoryAvailable":  false,
+    "realManualTurnInPassed":  false
+}

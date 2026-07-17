@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 162C generated campaign session completion and publication
+Updated by: Goal 163 package-truth campaign repair — BLOCKED real generated encounter route
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -35,6 +35,10 @@ The retained Goal161S project finalized GREEN with unchanged run, pointer, stand
 Goal162C closes the manually published incomplete Goal162 scaffold at `92d419862443e84e2bfafa02f1a985edd96a5889`. The player-facing WinForms campaign workspace now consumes the qualified generated project through existing Runtime commands: strict project truth and stale-session rejection, generated map context, actor dialogue, current-region encounters with bounded AI, automatic quest/reward/reputation flow, generated travel, immutable save/deduplicate/exact continue, explicit migration and post-migration continuation are all behaviorally proven. Projects Build and Play builds exactly once only when needed and navigates without auto-start. All-selectable, core-only and legacy matrices pass; primary UI exposes human titles rather than raw IDs, hashes or paths.
 
 Runtime Simulator, Runtime, Runtime.Abstractions, GamePackage schema, FeatureModule catalog, Unity, generated source/save/migration and standalone/RC implementations remain unchanged. Protected RC/run/pointer/history and source bytes are identical; Player, Unity and standalone Build counts are zero. Goal162 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, creates no human gate and requires independent audit.
+
+Goal162 independent audit is `BLOCKED_AT_8164185B`. Goal163 removes the Application-time package clone, transient `campaign/session-compatible-attack`, fixed combat power and BasicAttack-to-UseAbility rewrite. Every Runtime dispatch now carries the captured package reference and checks its SHA; actual package abilities are allowed only when present on the exact participant. Generated quest readiness is read-only (`complete_encounter` plus player `has_item`), generated quests are not refreshed into completion, and the manual path dispatches exactly one `CompleteQuest` with zero `AdvanceQuestObjective`. The UI adds a human `Последствия` ledger derived only from state deltas, Runtime events or typed save results. Actual `FinalStateHash` and `SelectedBuildHistorySha256` are separate.
+
+The real qualified package proves ordinary exact-package combat through `encounter/goblin_duel`, but its current-region generated quest encounters are not executable: generated participants own `generated/resource/health` and expose only `generated/ability/action_resolve_encounter` (`generated_action`, no effects), while Runtime BasicAttack requires the ordinary health contract. Goal163 correctly disables those generated encounters with a causal diagnostic and never mutates the package. Therefore the all-selectable/core-only player route cannot reach generated victory, reward, manual turn-in, same-world post-turn-in consequence continue or post-migration combat. Goal163 is honestly `BLOCKED_EXACT_GENERATED_ENCOUNTER_PACKAGE_CONTRACT`, `accepted=false`, has no human gate, and leaves the Goal162 audit blocker open.
 
 ```text
 gate_status=goal162_green_player_driven_generated_campaign_session_workspace
@@ -347,7 +351,30 @@ goal162PlayerProcessStartCount=0
 goal162UnityEditorProcessStartCount=0
 goal162StandaloneBuildInvocationCount=0
 goal162ArtifactScopeViolationCount=0
-nextAction=independent_goal162_audit_and_plan_generated_campaign_consequence_depth
+goal162IndependentAuditResult=BLOCKED_AT_8164185B
+goal162IndependentAuditBlocker=campaign_combat_executes_against_synthetic_runtime_package_and_manual_quest_turn_in_not_proven
+goal162AuditBlocker=open_after_goal163_generated_encounter_package_contract_blocker
+goal163ImplementationStatus=BLOCKED
+goal163CandidateStatus=BLOCKED_EXACT_GENERATED_ENCOUNTER_PACKAGE_CONTRACT
+goal163Accepted=false
+goal163AcceptedByHuman=false
+goal163AcceptedByCodex=false
+goal163ManualReviewRequired=false
+goal163ManualGateReady=false
+goal163IndependentAuditRequired=true
+goal163ExactPackageReferencePassed=true
+goal163ExactPackageCombatPassed=true
+goal163GeneratedEncounterCombatPassed=false
+goal163ManualQuestTurnInPassed=false
+goal163ConsequenceDepthPassed=true
+goal163SaveContinueConsequencePassed=false
+goal163MigrationConsequencePassed=false
+goal163CoreOnlyPassed=false
+goal163PlayerProcessStartCount=0
+goal163UnityEditorProcessStartCount=0
+goal163StandaloneBuildInvocationCount=0
+goal163ArtifactScopeViolationCount=0
+nextAction=repair_generated_encounter_runtime_contract_then_repeat_goal163_real_matrix
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

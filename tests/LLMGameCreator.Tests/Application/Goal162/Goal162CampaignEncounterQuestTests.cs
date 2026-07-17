@@ -10,99 +10,88 @@ namespace LLMGameCreator.Tests.Application.Goal162;
 public sealed class Goal162CampaignEncounterQuestTests
 {
     [Fact]
-    public void Behavioral_generated_encounter_starts_with_real_participants()
+    public void Behavioral_generated_encounter_without_exact_combat_route_is_causally_disabled()
     {
-        var started = Goal162EncounterQuestState.Value.EncounterStarted;
+        var state = Goal162EncounterQuestState.Value;
+        var action = Assert.Single(state.BeforeFight.Actions,
+            item => item.Kind == GeneratedCampaignActionKind.StartEncounter
+                    && item.TargetTitle == state.EncounterTitle);
 
-        Assert.True(started.Encounter?.Active);
-        Assert.True(started.Encounter?.Participants.Count >= 2);
-        Assert.Contains(started.Encounter!.Participants, participant => participant.TeamTitle == "Игрок");
-        Assert.Contains(started.Encounter.Participants, participant => participant.TeamTitle == "Противник");
+        Assert.False(action.Enabled);
+        Assert.False(string.IsNullOrWhiteSpace(action.DisabledReason));
+        Assert.Null(state.EncounterStarted.Encounter);
     }
 
     [Fact]
-    public void Behavioral_bounded_enemy_ai_hands_control_to_player()
+    public void Behavioral_disabled_generated_encounter_dispatches_no_enemy_ai()
     {
         var state = Goal162EncounterQuestState.Value;
-        var encounter = Assert.IsType<GeneratedCampaignEncounter>(state.EncounterStarted.Encounter);
-
-        Assert.Contains(encounter.Participants, participant => participant.CurrentTurn
-            && participant.TeamTitle == "Игрок");
-        var playerTurnCommands = state.Runtime.GameplayCommands.Count(command => command is
-            GameRuntimeCommandType.BasicAttack or GameRuntimeCommandType.UseAbility or GameRuntimeCommandType.EndTurn);
-        Assert.True(state.Runtime.GameplayCommands.Count(command =>
-            command == GameRuntimeCommandType.RunCurrentTurnAi)
-                    <= (playerTurnCommands + 1) * encounter.Participants.Count * 2);
+        Assert.DoesNotContain(GameRuntimeCommandType.RunCurrentTurnAi, state.Runtime.GameplayCommands);
     }
 
     [Fact]
-    public void Behavioral_player_combat_actions_change_participant_resources()
+    public void Behavioral_disabled_generated_encounter_does_not_fake_resource_damage()
     {
         var state = Goal162EncounterQuestState.Value;
-        var startedValues = state.EncounterStarted.Encounter!.Participants
-            .SelectMany(participant => participant.Resources.Select(resource => resource.Value)).ToList();
-        var changed = state.FightSnapshots.Skip(1)
-            .SelectMany(snapshot => snapshot.Encounter?.Participants ?? [])
-            .SelectMany(participant => participant.Resources.Select(resource => resource.Value)).ToList();
-
-        Assert.NotEmpty(startedValues);
-        Assert.Contains(changed, value => !startedValues.Contains(value, StringComparer.Ordinal));
-        Assert.Contains(state.Runtime.GameplayCommands, command => command is GameRuntimeCommandType.BasicAttack
-            or GameRuntimeCommandType.UseAbility);
+        Assert.DoesNotContain(GameRuntimeCommandType.BasicAttack, state.Runtime.GameplayCommands);
+        Assert.DoesNotContain(state.AfterFight.Consequences,
+            consequence => consequence.Kind == GeneratedCampaignConsequenceKind.Damage);
     }
 
     [Fact]
-    public void Behavioral_real_encounter_reaches_runtime_victory_without_direct_state_mutation()
+    public void Behavioral_disabled_generated_encounter_does_not_claim_runtime_victory()
     {
         var state = Goal162EncounterQuestState.Value;
 
-        Assert.False(state.AfterFight.Encounter?.Active);
-        Assert.Contains(state.FightSnapshots.SelectMany(snapshot => snapshot.RecentEvents),
+        Assert.Null(state.AfterFight.Encounter);
+        Assert.DoesNotContain(state.FightSnapshots.SelectMany(snapshot => snapshot.RecentEvents),
             message => message.Contains("побед", StringComparison.OrdinalIgnoreCase));
     }
 
     [Fact]
-    public void Behavioral_encounter_reward_item_appears_in_projected_inventory()
+    public void Behavioral_disabled_generated_encounter_grants_no_reward_item()
     {
         var state = Goal162EncounterQuestState.Value;
 
         Assert.DoesNotContain(state.BeforeFight.Inventory, row => row.Title == state.RewardItemTitle);
-        Assert.Contains(state.AfterFight.Inventory, row => row.Title == state.RewardItemTitle);
+        Assert.DoesNotContain(state.AfterFight.Inventory, row => row.Title == state.RewardItemTitle);
     }
 
     [Fact]
-    public void Behavioral_causal_encounter_and_item_complete_real_quest_objectives()
+    public void Behavioral_disabled_generated_encounter_leaves_quest_active_and_not_ready()
     {
         var state = Goal162EncounterQuestState.Value;
         var quest = Assert.Single(state.AfterFight.Quests, quest => quest.Title == state.QuestTitle);
 
-        Assert.Equal("Завершено", quest.StateTitle);
+        Assert.Equal("Активно", quest.StateTitle);
         Assert.False(quest.Completable);
-        Assert.All(quest.Objectives, objective => Assert.True(objective.Completed));
-        Assert.All(quest.Objectives, objective => Assert.Equal("1 / 1", objective.Progress));
+        Assert.Contains(quest.Objectives, objective => !objective.Completed);
     }
 
     [Fact]
-    public void Behavioral_completed_quest_exposes_no_duplicate_completion_action()
+    public void Behavioral_not_ready_quest_exposes_no_manual_completion_action()
     {
         var state = Goal162EncounterQuestState.Value;
 
         Assert.DoesNotContain(state.AfterFight.Actions,
             action => action.Kind == GeneratedCampaignActionKind.CompleteQuest
                       && action.TargetTitle == state.QuestTitle);
-        Assert.Contains(state.AfterFight.RecentEvents,
+        Assert.DoesNotContain(state.AfterFight.RecentEvents,
             message => message.Contains("Задание завершено", StringComparison.OrdinalIgnoreCase));
     }
 
     [Fact]
-    public void Behavioral_quest_completion_changes_reputation_and_marks_quest_complete()
+    public void Behavioral_no_turn_in_leaves_reputation_and_quest_unchanged()
     {
         var state = Goal162EncounterQuestState.Value;
         var quest = Assert.Single(state.AfterComplete.Quests, quest => quest.Title == state.QuestTitle);
 
-        Assert.Equal("Завершено", quest.StateTitle);
-        Assert.NotEqual(state.ReputationBefore, state.ReputationAfter);
-        Assert.Contains(state.AfterComplete.RecentEvents,
+        Assert.Equal("Активно", quest.StateTitle);
+        Assert.Equal(state.ReputationBefore, state.ReputationAfter);
+        Assert.DoesNotContain(state.AfterComplete.Actions,
+            action => action.Kind == GeneratedCampaignActionKind.CompleteQuest
+                      && action.TargetTitle == state.QuestTitle);
+        Assert.DoesNotContain(state.AfterComplete.RecentEvents,
             message => message.Contains("Задание завершено", StringComparison.OrdinalIgnoreCase)
                        || message.Contains("репутац", StringComparison.OrdinalIgnoreCase));
     }
@@ -113,7 +102,7 @@ public sealed class Goal162CampaignEncounterQuestTests
         var commands = Goal162EncounterQuestState.Value.Runtime.GameplayCommands;
 
         Assert.DoesNotContain(GameRuntimeCommandType.AdvanceQuestObjective, commands);
-        Assert.Contains(GameRuntimeCommandType.RefreshQuestObjectives, commands);
+        Assert.DoesNotContain(GameRuntimeCommandType.RefreshQuestObjectives, commands);
         Assert.DoesNotContain(GameRuntimeCommandType.CompleteQuest, commands);
     }
 
@@ -163,12 +152,16 @@ internal static class Goal162EncounterQuestState
             : Goal162TestKit.TravelTo(service, destination.Name);
         var beforeFight = atRegion;
         var reputationBefore = Assert.Single(beforeFight.Factions, row => row.Title == factionTitle).Value;
-        var fight = Goal162TestKit.Fight(service, encounter.Name);
-        var afterFight = fight[^1];
-        var afterComplete = afterFight;
+        var startAction = Assert.Single(beforeFight.Actions,
+            action => action.Kind == GeneratedCampaignActionKind.StartEncounter
+                      && action.TargetTitle == encounter.Name);
+        Assert.False(startAction.Enabled);
+        var fight = new[] { beforeFight };
+        var afterFight = beforeFight;
+        var afterComplete = beforeFight;
         var reputationAfter = Assert.Single(afterComplete.Factions, row => row.Title == factionTitle).Value;
         return new Goal162EncounterQuestFixture(runtime, beforeFight, fight[0], fight, afterFight,
-            afterComplete, quest.Title, itemTitle, reputationBefore, reputationAfter);
+            afterComplete, encounter.Name, quest.Title, itemTitle, reputationBefore, reputationAfter);
     }
 }
 
@@ -179,6 +172,7 @@ internal sealed record Goal162EncounterQuestFixture(
     IReadOnlyList<GeneratedCampaignSnapshot> FightSnapshots,
     GeneratedCampaignSnapshot AfterFight,
     GeneratedCampaignSnapshot AfterComplete,
+    string EncounterTitle,
     string QuestTitle,
     string RewardItemTitle,
     string ReputationBefore,

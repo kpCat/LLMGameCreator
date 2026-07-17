@@ -1,4 +1,6 @@
 using System.Security.Cryptography;
+using System.Text.Json;
+using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
@@ -10,9 +12,19 @@ public sealed class GeneratedCampaignSessionTruthService
     private readonly ICurrentGamePackageService _currentProject;
     private readonly GeneratedGameplaySaveValidator _validator;
     private readonly IGameProjectOperationCoordinator _operations;
+    private readonly GameProjectBuildHistoryReader _history;
 
-    public GeneratedCampaignSessionTruthService(ICurrentGamePackageService currentProject, GeneratedGameplaySaveValidator validator, IGameProjectOperationCoordinator operations)
-    { _currentProject = currentProject; _validator = validator; _operations = operations; }
+    public GeneratedCampaignSessionTruthService(
+        ICurrentGamePackageService currentProject,
+        GeneratedGameplaySaveValidator validator,
+        IGameProjectOperationCoordinator operations,
+        GameProjectBuildHistoryReader? history = null)
+    {
+        _currentProject = currentProject;
+        _validator = validator;
+        _operations = operations;
+        _history = history ?? new GameProjectBuildHistoryReader();
+    }
 
     public (GeneratedCampaignSessionStatus Status, GeneratedCampaignProjectTruth? Truth, IReadOnlyList<string> Diagnostics) Capture()
     {
@@ -29,6 +41,17 @@ public sealed class GeneratedCampaignSessionTruthService
         }
         var truth = captured.Truth;
         var source = truth.StrictGeneratedSource.Source!;
+        var build = ReadCurrentBuildHistory(folder);
+        if (build.Result?.LastSuccessfulBuild is null)
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null, [build.Diagnostic]);
+        var finalStateHash = build.Result.LastSuccessfulBuild.FinalStateHash;
+        if (string.IsNullOrWhiteSpace(finalStateHash)
+            || !string.Equals(finalStateHash, build.DocumentFinalStateHash, StringComparison.Ordinal))
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.current_final_state_mismatch"]);
+        if (string.IsNullOrWhiteSpace(truth.SelectedBuildHistorySha256))
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.current_build_history_missing"]);
         return (GeneratedCampaignSessionStatus.READY, new GeneratedCampaignProjectTruth
         {
             ProjectFolder = truth.ProjectFolder,
@@ -41,7 +64,8 @@ public sealed class GeneratedCampaignSessionTruthService
             GeneratedBasePackageSha256 = source.GeneratedBasePackageSha256,
             PackageSha256 = truth.PackageSha256,
             CompositionPackageSha256 = truth.CompositionPackageSha256,
-            FinalStateHash = truth.SelectedBuildHistorySha256,
+            FinalStateHash = finalStateHash,
+            SelectedBuildHistorySha256 = truth.SelectedBuildHistorySha256,
             QualifiedAuthoringFingerprint = truth.QualifiedAuthoringFingerprint,
             SelectedBuildHistoryFileName = truth.SelectedBuildHistoryFileName,
             GeneratedStartMapId = truth.GeneratedStartMapId,
@@ -59,6 +83,7 @@ public sealed class GeneratedCampaignSessionTruthService
         && left.PackageSha256 == right.PackageSha256
         && left.CompositionPackageSha256 == right.CompositionPackageSha256
         && left.FinalStateHash == right.FinalStateHash
+        && left.SelectedBuildHistorySha256 == right.SelectedBuildHistorySha256
         && left.QualifiedAuthoringFingerprint == right.QualifiedAuthoringFingerprint
         && left.SelectedBuildHistoryFileName == right.SelectedBuildHistoryFileName
         && left.GeneratedStartMapId == right.GeneratedStartMapId
@@ -66,4 +91,32 @@ public sealed class GeneratedCampaignSessionTruthService
             .SequenceEqual(right.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal));
 
     private static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }
+
+    private (GameProjectBuildHistoryReadResult? Result, string DocumentFinalStateHash, string Diagnostic)
+        ReadCurrentBuildHistory(string projectFolder)
+    {
+        try
+        {
+            var identityStore = new GameProjectIdentityStore();
+            var identity = identityStore.Load(identityStore.PathFor(projectFolder));
+            var compositionId = new GameProjectCompositionIdentityService().Create(identity.PackageId);
+            var authoringRoot = GameProjectFeatureModuleAuthoringService.ConfinedPath(projectFolder,
+                UnifiedGameProjectWorkspaceVocabulary.AuthoringRelativeRoot);
+            var path = GameProjectFeatureModuleAuthoringService.ConfinedPath(authoringRoot,
+                compositionId + FeatureModuleCompositionDocumentVocabulary.FileExtension);
+            if (!File.Exists(path)) return (null, string.Empty, "campaign.current_build_history_missing");
+            var document = JsonSerializer.Deserialize<FeatureModuleCompositionDocument>(
+                File.ReadAllText(path), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            if (document is null) return (null, string.Empty, "campaign.current_build_history_missing");
+            var result = _history.ReadLatestMatchingSocialSuccess(projectFolder, document);
+            return result.LastSuccessfulBuild is null
+                ? (result, document.LastQualifiedFinalStateHash, "campaign.current_build_history_missing")
+                : (result, document.LastQualifiedFinalStateHash, string.Empty);
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException
+                                           or JsonException or InvalidOperationException)
+        {
+            return (null, string.Empty, "campaign.current_build_history_missing");
+        }
+    }
 }

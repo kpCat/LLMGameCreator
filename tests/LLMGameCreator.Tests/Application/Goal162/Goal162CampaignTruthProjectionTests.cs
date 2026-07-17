@@ -26,6 +26,7 @@ public sealed class Goal162CampaignTruthProjectionTests
             truth.SourceRecordSha256, truth.SourceRequestSha256, truth.PlanSha256,
             truth.GeneratedBasePackageSha256, truth.PackageSha256,
             truth.CompositionPackageSha256, truth.FinalStateHash,
+            truth.SelectedBuildHistorySha256,
             truth.QualifiedAuthoringFingerprint, truth.SelectedBuildHistoryFileName,
             truth.GeneratedStartMapId
         }, value => Assert.False(string.IsNullOrWhiteSpace(value)));
@@ -224,6 +225,16 @@ internal static class Goal162TestKit
                 .Concat(snapshot.Encounter.Participants.SelectMany(participant =>
                     new[] { participant.Title, participant.TeamTitle })));
         values.AddRange(snapshot.RecentEvents);
+        if (snapshot.LastActionOutcome is not null)
+            values.AddRange(new[]
+            {
+                snapshot.LastActionOutcome.ActionTitle,
+                snapshot.LastActionOutcome.Summary
+            });
+        values.AddRange(snapshot.Consequences.SelectMany(item => new[]
+        {
+            item.Title, item.BeforeValue, item.AfterValue, item.Delta, item.Description
+        }));
         return string.Join(Environment.NewLine, values.Where(value => !string.IsNullOrWhiteSpace(value)));
     }
 
@@ -320,7 +331,8 @@ internal static class Goal162TestKit
 
     public static IReadOnlyList<GeneratedCampaignSnapshot> Fight(
         GeneratedCampaignSessionService service,
-        string encounterTitle)
+        string encounterTitle,
+        Goal162CountingRuntime? runtime = null)
     {
         var snapshots = new List<GeneratedCampaignSnapshot>();
         var before = service.Refresh();
@@ -334,8 +346,6 @@ internal static class Goal162TestKit
             var action = snapshot.Actions.FirstOrDefault(item => item.Enabled
                 && item.Kind == GeneratedCampaignActionKind.BasicAttack)
                          ?? snapshot.Actions.FirstOrDefault(item => item.Enabled
-                             && item.Kind == GeneratedCampaignActionKind.UseAbility)
-                         ?? snapshot.Actions.FirstOrDefault(item => item.Enabled
                              && item.Kind == GeneratedCampaignActionKind.EndTurn);
             Assert.NotNull(action);
             snapshot = service.Execute(action.ActionId);
@@ -345,10 +355,28 @@ internal static class Goal162TestKit
         Assert.NotNull(snapshot.Encounter);
         Assert.False(snapshot.Encounter!.Active,
             $"Encounter remained active. Status={snapshot.Status}; diagnostics={string.Join(",", snapshot.Diagnostics)}; " +
+            $"dispatch={service.LastRuntimeDispatch?.CommandKind}:passed={service.LastRuntimeDispatch?.Passed}:" +
+            $"runtimeSuccess={service.LastRuntimeDispatch?.UnifiedRuntimeResult.Success}:" +
+            $"dispatchDiagnostics={string.Join(",", service.LastRuntimeDispatch?.Diagnostics ?? [])}:" +
+            $"runtimeDiagnostics={string.Join(",", service.LastRuntimeDispatch?.UnifiedRuntimeResult.Diagnostics.Select(item => item.Code) ?? [])}; " +
+            $"commands={string.Join(",", runtime?.GameplayCommands.GroupBy(item => item).Select(group => group.Key + "=" + group.Count()) ?? [])}; " +
+            $"definition={CombatDefinitionSummary(encounterTitle)}; " +
             $"turn={snapshot.Encounter.CurrentTurnTitle}; participants=" +
             string.Join(" | ", snapshot.Encounter.Participants.Select(item =>
                 $"{item.Title}:{item.TeamTitle}:resources={string.Join("/", item.Resources.Select(row => row.Value))}:alive={item.Alive}")));
         return snapshots;
+    }
+
+    private static string CombatDefinitionSummary(string encounterTitle)
+    {
+        var encounter = Package.Game.Encounters.Single(item => item.Name == encounterTitle);
+        var player = encounter.Participants.Single(item => item.Team == "player");
+        var abilities = player.Abilities.Select(id => Package.Game.Abilities.Single(item => item.Id == id))
+            .Select(item => $"{item.Id}:kind={item.Kind}:resource={item.ResourceId}:power={item.Power}:" +
+                            $"tags={string.Join("/", item.Tags)}:effects={string.Join("/", item.Effects.Select(effect => effect.Type + "(" + string.Join(",", effect.Args.Select(pair => pair.Key + "=" + pair.Value)) + ")"))}");
+        return $"metadata={string.Join(",", encounter.Metadata.Select(item => item.Key + "=" + item.Value))};" +
+               $"playerResources={string.Join(",", player.Resources.Select(item => item.Id))};" +
+               $"abilities={string.Join("|", abilities)}";
     }
 
     public static GeneratedCampaignSnapshot InteractWithFirstLocalObject(

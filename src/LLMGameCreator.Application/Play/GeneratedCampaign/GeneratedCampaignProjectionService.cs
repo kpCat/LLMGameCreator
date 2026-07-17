@@ -18,7 +18,10 @@ public sealed class GeneratedCampaignProjectionService
         IReadOnlyList<string> events,
         string slot,
         IReadOnlyList<string> diagnostics,
-        GeneratedCampaignSaveState? saveState = null)
+        GeneratedCampaignSaveState? saveState = null,
+        IReadOnlyList<GeneratedCampaignQuestReadiness>? questReadiness = null,
+        GeneratedCampaignActionOutcome? lastActionOutcome = null,
+        IReadOnlyList<GeneratedCampaignConsequence>? consequences = null)
     {
         if (package is null || session is null || truth is null)
         {
@@ -28,13 +31,15 @@ public sealed class GeneratedCampaignProjectionService
                 StatusTitle = StatusTitle(status),
                 StatusDescription = HumanDiagnostic(diagnostics.FirstOrDefault(), status),
                 SaveState = saveState ?? new GeneratedCampaignSaveState { Slot = slot },
+                LastActionOutcome = lastActionOutcome,
+                Consequences = consequences ?? [],
                 Diagnostics = diagnostics
             };
         }
 
         var map = package.Game.Maps.FirstOrDefault(item => IdEquals(item.Id, session.MapState.CurrentMapId));
         var region = CurrentRegion(package, session.MapState.CurrentMapId);
-        var quests = Quests(package, session.GameplayState);
+        var quests = Quests(package, session.GameplayState, questReadiness ?? []);
         return new GeneratedCampaignSnapshot
         {
             Status = status,
@@ -106,12 +111,16 @@ public sealed class GeneratedCampaignProjectionService
             }).ToList(),
             RecentEvents = events,
             SaveState = saveState ?? new GeneratedCampaignSaveState { Slot = slot },
+            LastActionOutcome = lastActionOutcome,
+            Consequences = consequences ?? [],
             TechnicalDetails = new Dictionary<string, string>
             {
                 ["projectFolder"] = truth.ProjectFolder,
                 ["worldId"] = truth.WorldId,
                 ["packageSha256"] = truth.PackageSha256,
                 ["compositionPackageSha256"] = truth.CompositionPackageSha256,
+                ["finalStateHash"] = truth.FinalStateHash,
+                ["selectedBuildHistorySha256"] = truth.SelectedBuildHistorySha256,
                 ["authoringFingerprint"] = truth.QualifiedAuthoringFingerprint,
                 ["sessionSha256"] = Hash(session),
                 ["currentMapId"] = session.MapState.CurrentMapId
@@ -265,25 +274,34 @@ public sealed class GeneratedCampaignProjectionService
 
     private static IReadOnlyList<GeneratedCampaignQuest> Quests(
         GamePackageDefinition package,
-        GameRuntimeState state) => state.Quests.Select(runtime =>
+        GameRuntimeState state,
+        IReadOnlyList<GeneratedCampaignQuestReadiness> readiness) => state.Quests.Select(runtime =>
     {
         var definition = package.Game.Quests.FirstOrDefault(item => IdEquals(item.Id, runtime.QuestId));
+        var computed = readiness.SingleOrDefault(item => IdEquals(item.QuestId, runtime.QuestId)
+                                                        && item.Generated && item.MappingExact);
         var objectives = runtime.Objectives.Select(objective =>
         {
             var source = definition?.Objectives.FirstOrDefault(item => IdEquals(item.Id, objective.ObjectiveId));
+            var calculated = computed?.Objectives.SingleOrDefault(item =>
+                IdEquals(item.ObjectiveId, objective.ObjectiveId));
+            var currentAmount = calculated?.CurrentAmount ?? objective.CurrentAmount;
+            var requiredAmount = calculated?.RequiredAmount ?? objective.RequiredAmount;
             return new GeneratedCampaignQuestObjective
             {
                 Title = ObjectiveTitle(package, source, objective),
-                Progress = Number(objective.CurrentAmount) + " / " + Number(objective.RequiredAmount),
-                Completed = objective.Completed
+                Progress = Number(currentAmount) + " / " + Number(requiredAmount),
+                Completed = calculated?.Satisfied ?? objective.Completed
             };
         }).ToList();
+        var completed = runtime.State == "completed";
         return new GeneratedCampaignQuest
         {
             Title = Safe(definition?.Title, "Задание"),
-            StateTitle = runtime.State == "completed" ? "Завершено" : "Активно",
-            Completable = runtime.State != "completed" && objectives.Count > 0
-                          && objectives.All(objective => objective.Completed),
+            StateTitle = completed ? "Завершено" : computed?.Ready == true
+                ? "Готово к завершению" : "Активно",
+            Completable = !completed && (computed?.Ready == true
+                || computed is null && objectives.Count > 0 && objectives.All(objective => objective.Completed)),
             Objectives = objectives
         };
     }).ToList();

@@ -1,5 +1,7 @@
 # Generator Spine Quality Debt Register
 
+Goal163 P1 blocker: generated encounter participants and generated combat abilities are internally valid data but not executable by the existing Runtime combat contract (`generated/resource/health` versus ordinary health semantics; `generated_action` with no effects). Application-time package mutation is removed and forbidden. Resolve this in a separately scoped generator/package-authoring contract change, then repeat the real campaign victory, turn-in, save/continue and migration matrix. The remaining entity-title suffix heuristic and RC finalizer lease concern stay P2 and are not widened into this blocker.
+
 Goal162 note: the generated campaign player closes the missing human-facing Runtime route for map, dialogue, encounters, quests, travel and generated save lifecycle without changing lower-level implementation seams. `FinalizeCurrentReleaseCandidate()` remains a recovery-only mutation without an explicit shared operation lease; its package/history/pointer checks and final reread prevent false CURRENT, so this remains P2 concurrency hygiene for future RC work and is not widened into Goal162.
 
 Goal152C note: the standalone framebuffer persistence and debug-layout usability defect remains repaired by a clearing camera, opaque repaint and responsive PlayerAdapter canvas. External transactional Unity workspaces prevent repository project-settings churn. Remaining proof is human visual confirmation only; no Runtime, GamePackage schema or Unity project-settings debt is introduced.

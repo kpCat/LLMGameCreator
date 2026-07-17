@@ -1,0 +1,16 @@
+﻿{
+    "status":  "BLOCKED_GENERATED_ENCOUNTER_ROUTE",
+    "exactQualifiedPackageSha256":  "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "exactPackageReferencePassed":  true,
+    "beforeAfterPackageShaEqual":  true,
+    "abilityResourceStatusStatInventoriesUnchanged":  true,
+    "basicAttackCommand":  "BasicAttack",
+    "basicAttackRewritten":  false,
+    "exactPackageAbilityCommand":  "UseAbility",
+    "exactPackageAbilityOwnedByParticipant":  true,
+    "ordinaryExactEncounterDamagePassed":  true,
+    "generatedCurrentRegionEncounterPlayable":  false,
+    "syntheticCampaignAbilityCount":  0,
+    "fixedCampaignPowerPathCount":  0,
+    "causalDiagnostic":  "campaign.encounter_no_executable_player_action"
+}

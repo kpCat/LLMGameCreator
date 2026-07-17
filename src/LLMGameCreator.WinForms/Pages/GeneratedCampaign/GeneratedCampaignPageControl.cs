@@ -28,6 +28,8 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
     internal IReadOnlyList<string> VisibleActionTitles => _actions.Controls.OfType<Button>()
         .Select(button => button.Text).ToList();
     internal bool TechnicalDetailsVisible => _technical.Visible;
+    internal string ConsequenceText => _consequencesTab.Controls.OfType<Label>()
+        .FirstOrDefault()?.Text ?? string.Empty;
 
     public void OnActivated() => Bind(_service?.Refresh());
 
@@ -134,6 +136,7 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
         WriteTab(_characterTab, snapshot.Resources.Concat(snapshot.Stats).Concat(snapshot.Progressions));
         WriteTab(_questsTab, snapshot.Quests.Select(QuestRow));
         WriteTab(_inventoryTab, snapshot.Inventory.Concat(snapshot.Equipment).Concat(snapshot.Factions));
+        WriteTab(_consequencesTab, ConsequenceRows(snapshot));
         WriteTab(_eventsTab, snapshot.RecentEvents.Select(value => new GeneratedCampaignTextRow { Title = value }));
         _technical.Text = string.Join(Environment.NewLine,
             snapshot.TechnicalDetails.Select(item => item.Key + ": " + item.Value)
@@ -223,6 +226,33 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
             : Environment.NewLine + string.Join(Environment.NewLine,
                 quest.Objectives.Select(objective => "• " + objective.Title + ": " + objective.Progress)))
     };
+
+    private static IEnumerable<GeneratedCampaignTextRow> ConsequenceRows(
+        GeneratedCampaignSnapshot snapshot)
+    {
+        if (snapshot.LastActionOutcome is not null)
+        {
+            yield return new GeneratedCampaignTextRow
+            {
+                Title = snapshot.LastActionOutcome.ActionTitle,
+                Value = snapshot.LastActionOutcome.Summary
+            };
+        }
+        foreach (var consequence in snapshot.Consequences)
+        {
+            var transition = string.IsNullOrWhiteSpace(consequence.BeforeValue)
+                             && string.IsNullOrWhiteSpace(consequence.AfterValue)
+                ? string.Empty
+                : consequence.BeforeValue + " → " + consequence.AfterValue;
+            var value = string.Join("; ", new[] { transition, consequence.Delta, consequence.Description }
+                .Where(item => !string.IsNullOrWhiteSpace(item)));
+            yield return new GeneratedCampaignTextRow
+            {
+                Title = consequence.Title,
+                Value = value
+            };
+        }
+    }
 
     private static void WriteTab(TabPage tab, IEnumerable<GeneratedCampaignTextRow> rows)
     {

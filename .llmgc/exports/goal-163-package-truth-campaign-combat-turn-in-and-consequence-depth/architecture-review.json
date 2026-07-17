@@ -1,0 +1,127 @@
+{
+  "status": "RESOLVED_BEFORE_PRODUCTION_EDITS",
+  "goal162IndependentAudit": {
+    "types": ["GeneratedCampaignSessionService", "Goal162CampaignEncounterQuestTests"],
+    "inputs": ["Goal162 BasicAttack planned action", "generated quest state after victory"],
+    "outputs": ["recorded synthetic-package P1", "recorded false manual-turn-in P1"],
+    "behavioralTests": ["BasicAttack remains BasicAttack", "CompleteQuest executes exactly once"]
+  },
+  "authoritativePackageBoundary": {
+    "types": ["GeneratedCampaignRuntimeDispatchService", "GeneratedCampaignRuntimeDispatchResult"],
+    "inputs": ["captured GamePackageDefinition reference", "UnifiedRuntimeSession", "GeneratedCampaignPlannedAction"],
+    "outputs": ["UnifiedRuntimeResult", "command kind", "before/after package SHA", "reference preservation", "definition IDs", "diagnostics"],
+    "behavioralTests": ["exact package reference reaches Runtime", "package SHA and definition inventories remain unchanged"]
+  },
+  "basicAttackDispatch": {
+    "types": ["GeneratedCampaignActionPlanner", "GeneratedCampaignRuntimeDispatchService", "EncounterRuntimeService"],
+    "inputs": ["current player participant", "live opposing participant", "GameRuntimeCommand.BasicAttack"],
+    "outputs": ["GameRuntimeCommandType.BasicAttack", "Runtime-owned fallback or package attack resolution"],
+    "behavioralTests": ["BasicAttack command type is not rewritten", "synthetic campaign ability and fixed Power=3 path are absent"]
+  },
+  "packageAbilityDispatch": {
+    "types": ["GeneratedCampaignActionPlanner", "GeneratedCampaignRuntimeDispatchService"],
+    "inputs": ["exact package ability ID", "encounter participant ability inventory", "live opposing target"],
+    "outputs": ["UseAbility dispatch or causal disabled diagnostic"],
+    "behavioralTests": ["exact package ability succeeds", "unavailable ability and invalid target dispatch zero Runtime commands"]
+  },
+  "combatReadiness": {
+    "types": ["GeneratedCampaignCombatReadinessService", "GeneratedCampaignActionPlanner"],
+    "inputs": ["GamePackageDefinition", "EncounterDefinition", "current Runtime encounter state"],
+    "outputs": ["playable flag", "available BasicAttack/ability routes", "causal diagnostics"],
+    "behavioralTests": ["playable generated encounter is exposed", "nonplayable encounter is disabled without Runtime execution"]
+  },
+  "generatedQuestTurnInContract": {
+    "types": ["GeneratedCampaignQuestReadinessService", "GeneratedCampaignActionPlanner", "GeneratedCampaignSessionService"],
+    "inputs": ["exact generated quest mapping", "active Runtime quest", "computed objective readiness"],
+    "outputs": ["manual CompleteQuest action only when ready", "one Runtime CompleteQuest command"],
+    "behavioralTests": ["generated quest stays active when ready", "turn-in action appears then disappears", "CompleteQuest count is exactly one"]
+  },
+  "objectiveReadinessEvaluation": {
+    "types": ["GeneratedCampaignQuestReadiness", "GeneratedCampaignQuestObjectiveReadiness", "GeneratedCampaignQuestReadinessService"],
+    "inputs": ["complete_encounter definition/state", "has_item definition/player inventory"],
+    "outputs": ["read-only amount/completed rows", "unsupported-kind diagnostic"],
+    "behavioralTests": ["victory satisfies complete_encounter", "flee does not", "has_item amount is exact", "unsupported required kind blocks readiness"]
+  },
+  "nonGeneratedQuestCompatibility": {
+    "types": ["GeneratedCampaignSessionService", "QuestRuntimeService"],
+    "inputs": ["causal successful command", "non-generated active quest"],
+    "outputs": ["at most one RefreshQuestObjectives dispatch"],
+    "behavioralTests": ["non-generated quest refresh behavior is preserved", "generated quest path never refreshes or advances objectives"]
+  },
+  "consequenceDeltaModel": {
+    "types": ["GeneratedCampaignActionOutcome", "GeneratedCampaignConsequence", "GeneratedCampaignConsequenceTimeline", "GeneratedCampaignConsequenceProjector"],
+    "inputs": ["exact package", "before/after session", "planned action", "quest readiness before/after"],
+    "outputs": ["human damage/healing/status/encounter/reward/inventory/quest/reputation/travel rows"],
+    "behavioralTests": ["state deltas produce exact consequence kinds", "failed action produces failure without false success"]
+  },
+  "consequenceEventCorrelation": {
+    "types": ["GeneratedCampaignConsequenceProjector", "UnifiedRuntimeResult", "GameRuntimeEvent", "RuntimeEvent"],
+    "inputs": ["exact Runtime events", "state delta"],
+    "outputs": ["correlated encounter outcome and reward rows"],
+    "behavioralTests": ["flee and victory are distinct", "every primary row has state/event/typed-result support"]
+  },
+  "sameWorldSaveContinue": {
+    "types": ["GeneratedGameplaySaveService", "GeneratedCampaignSessionService", "GeneratedCampaignConsequenceProjector"],
+    "inputs": ["typed save result", "exact loaded UnifiedRuntimeSession", "persisted Runtime events"],
+    "outputs": ["Save consequence", "rebuilt bounded timeline plus Load consequence"],
+    "behavioralTests": ["exact continue uses zero Runtime Start", "map/inventory/quest/reputation and package truth remain exact"]
+  },
+  "migrationConsequenceReset": {
+    "types": ["GeneratedGameplaySaveMigrationService", "GeneratedGameplaySaveMigrationResult", "GeneratedCampaignConsequenceProjector"],
+    "inputs": ["typed migration preview/result", "migrated session"],
+    "outputs": ["new timeline with preserved/dropped/map-reset Migration consequence"],
+    "behavioralTests": ["transient timeline resets on migration", "post-migration combat uses exact new package"]
+  },
+  "typedCampaignTruth": {
+    "types": ["GeneratedCampaignProjectTruth", "GeneratedCampaignSessionTruthService", "GameProjectBuildHistoryReader"],
+    "inputs": ["current authoring document", "current correlated build-history result", "selected history file SHA"],
+    "outputs": ["actual FinalStateHash", "separate SelectedBuildHistorySha256"],
+    "behavioralTests": ["actual final-state value comes from current history", "stale comparison checks both fields"]
+  },
+  "uiConsequenceSurface": {
+    "types": ["GeneratedCampaignPageControl", "GeneratedCampaignSnapshot"],
+    "inputs": ["LastActionOutcome", "bounded Consequences"],
+    "outputs": ["Последствия tab", "human before-to-after/delta rows", "manual turn-in status/button"],
+    "behavioralTests": ["visible consequence section", "primary text contains no raw IDs, SHA values, absolute paths, or Runtime codes"]
+  },
+  "failureMatrix": {
+    "types": ["GeneratedCampaignRuntimeDispatchResult", "GeneratedCampaignCombatReadiness", "GeneratedCampaignQuestReadiness"],
+    "inputs": ["package mutation", "missing/ambiguous ability", "invalid target", "unsupported objective", "stale readiness"],
+    "outputs": ["campaign.package_mutated_during_dispatch", "campaign.ability_not_available", "campaign.ability_target_invalid", "campaign.quest_objective_kind_unsupported", "zero-dispatch rejection"],
+    "behavioralTests": ["each failure is causal and mutation-free", "package mutation forces FAILED"]
+  },
+  "regressionAndImmutability": {
+    "types": ["Goal163 regression tests", "Goal162 regressions", "Goal161T/S/R/Q/161 through Goal157 regressions", "Goal163 evidence runner"],
+    "inputs": ["qualified all-selectable/core-only fixtures", "pre-matrix immutable hashes", "process/build counters"],
+    "outputs": ["52 Goal163 checks", "13 mirrored evidence twins", "artifact scope zero", "byte-identical RC/standalone/source trees", "zero Player/Unity/standalone starts"],
+    "behavioralTests": ["all focused filters have nonzero matches and pass", "immutable byte hashes and zero counts survive the real matrix"]
+  },
+  "nonGoals": {
+    "types": ["scope guard"],
+    "inputs": ["changed path inventory"],
+    "outputs": ["zero forbidden-path changes"],
+    "behavioralTests": ["Runtime, Runtime.Abstractions, GamePackage, FeatureModules, generated save/migration, Unity, standalone and RC remain unchanged"]
+  },
+  "boundedExistingPathException": {
+    "path": "tests/LLMGameCreator.Tests/Application/Goal162/Goal162WinFormsWorkspaceTests.cs",
+    "reason": "The first Goal163 focused compile/test run reproduced one concrete Goal162 UI regression: expected HUD tab count 4, actual 5 after adding the required Последствия tab. Only that exact assertion was updated to 5.",
+    "failureObserved": "Goal162WinFormsWorkspaceTests active campaign HUD tab count mismatch",
+    "scope": "one assertion only"
+  },
+  "testInventory": {
+    "packageBoundary": [
+      "01 exact package reference", "02 BasicAttack not rewritten", "03 package SHA equal", "04 definition inventories unchanged", "05 synthetic ability absent", "06 fixed Power path absent", "07 exact package ability", "08 unavailable ability disabled", "09 invalid target disabled", "10 nonplayable encounter disabled"
+    ],
+    "questTurnIn": [
+      "11 exact generated quest classification", "12 victory readiness", "13 flee not ready", "14 has-item amount", "15 unsupported kind", "16 generated path no refresh", "17 ready quest active", "18 turn-in action appears", "19 readiness recheck", "20 CompleteQuest once", "21 no AdvanceQuestObjective", "22 reward and reputation", "23 turn-in disappears", "24 non-generated refresh compatibility"
+    ],
+    "consequences": [
+      "25 damage delta", "26 encounter started", "27 flee no rewards", "28 victory outcome", "29 inventory reward", "30 quest ready", "31 quest completed", "32 reputation delta", "33 map travel", "34 failed action", "35 human text", "36 bounded retention", "37 continue rebuild", "38 migration summary"
+    ],
+    "truthUiRegression": [
+      "39 actual FinalStateHash", "40 selected history SHA separate", "41 stale comparison both", "42 Последствия section", "43 manual turn-in UI", "44 all-selectable route", "45 core-only route", "46 Goal162 regressions", "47 Goal161 family regressions", "48 Goal160-157 regressions", "49 Runtime Simulator unchanged", "50 generated save/migration regressions", "51 RC/standalone immutable", "52 process/build counts zero"
+    ],
+    "behavioralCountPlanned": 53,
+    "totalCountPlanned": 54
+  }
+}

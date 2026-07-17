@@ -1,0 +1,11 @@
+﻿{
+    "status":  "GREEN_CONTROLLED_EXACT_PACKAGE",
+    "fleeConsequence":  "EncounterFled",
+    "fleeRewardCount":  0,
+    "fleeReputationDelta":  0,
+    "fleeQuestReady":  false,
+    "victoryConsequence":  "EncounterWon",
+    "victoryRewardReceived":  true,
+    "pathsDistinct":  true,
+    "generatedCurrentRegionVictoryBlocked":  true
+}

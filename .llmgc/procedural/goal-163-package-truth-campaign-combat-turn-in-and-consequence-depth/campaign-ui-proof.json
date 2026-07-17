@@ -1,0 +1,12 @@
+﻿{
+    "status":  "GREEN",
+    "consequenceTabTitle":  "Последствия",
+    "humanBeforeAfterDeltaVisible":  true,
+    "questReadyTitle":  "Готово к завершению",
+    "manualTurnInTitle":  "Завершить задание",
+    "unavailableGeneratedEncounterDisabledCausally":  true,
+    "primaryRawIdCount":  0,
+    "primaryShaLikeCount":  0,
+    "primaryAbsolutePathCount":  0,
+    "technicalDetailsCollapsed":  true
+}

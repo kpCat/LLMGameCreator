@@ -54,6 +54,7 @@ public sealed record GeneratedCampaignProjectTruth
     public string PackageSha256 { get; init; } = string.Empty;
     public string CompositionPackageSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
+    public string SelectedBuildHistorySha256 { get; init; } = string.Empty;
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public string SelectedBuildHistoryFileName { get; init; } = string.Empty;
     public string GeneratedStartMapId { get; init; } = string.Empty;
@@ -193,6 +194,65 @@ public sealed record GeneratedCampaignSaveEntryProjection
     public bool CanMigrate { get; init; }
 }
 
+public enum GeneratedCampaignConsequenceKind
+{
+    Dialogue,
+    Damage,
+    Healing,
+    Status,
+    EncounterStarted,
+    EncounterWon,
+    EncounterLost,
+    EncounterFled,
+    Reward,
+    Inventory,
+    QuestReady,
+    QuestCompleted,
+    Reputation,
+    MapTravel,
+    Save,
+    Load,
+    Migration,
+    Failure
+}
+
+public enum GeneratedCampaignConsequenceTone
+{
+    Positive,
+    Negative,
+    Neutral
+}
+
+public sealed record GeneratedCampaignConsequence
+{
+    public GeneratedCampaignConsequenceKind Kind { get; init; }
+    public string Title { get; init; } = string.Empty;
+    public string BeforeValue { get; init; } = string.Empty;
+    public string AfterValue { get; init; } = string.Empty;
+    public string Delta { get; init; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
+    public GeneratedCampaignConsequenceTone Tone { get; init; }
+}
+
+public sealed record GeneratedCampaignActionOutcome
+{
+    public string ActionTitle { get; init; } = string.Empty;
+    public bool Success { get; init; }
+    public string Summary { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedCampaignConsequence> Consequences { get; init; } = [];
+    public string BeforeSessionSha256 { get; init; } = string.Empty;
+    public string AfterSessionSha256 { get; init; } = string.Empty;
+    public int RuntimeEventCount { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignConsequenceTimeline
+{
+    public const int DefaultMaximumEntries = 64;
+    public int MaximumEntries { get; init; } = DefaultMaximumEntries;
+    public IReadOnlyList<GeneratedCampaignConsequence> Entries { get; init; } = [];
+}
+
 public sealed record GeneratedCampaignSnapshot
 {
     public GeneratedCampaignSessionStatus Status { get; init; }
@@ -220,6 +280,8 @@ public sealed record GeneratedCampaignSnapshot
     public IReadOnlyList<GeneratedCampaignTextRow> Factions { get; init; } = [];
     public IReadOnlyList<string> RecentEvents { get; init; } = [];
     public GeneratedCampaignSaveState SaveState { get; init; } = new();
+    public GeneratedCampaignActionOutcome? LastActionOutcome { get; init; }
+    public IReadOnlyList<GeneratedCampaignConsequence> Consequences { get; init; } = [];
     public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; }
         = new Dictionary<string, string>();
     public IReadOnlyList<string> Diagnostics { get; init; } = [];

@@ -1,6 +1,6 @@
 # Generator Strategy Reset: Playable Procedural Generator
 
-Goal162 update: the strategy now has a player-facing WinForms campaign workspace over qualified generated projects. It consumes existing Runtime authority and generated-save services for real map exploration, dialogue, encounter/quest/reward/reputation, travel, exact continue and migration. All-selectable and core-only routes pass; legacy projects remain outside this player. This is a development-player workspace, not a Unity consumer or a new Runtime layer, and Goal162 remains unaccepted pending independent audit.
+Goal163 update: the player-facing WinForms campaign workspace now preserves exact qualified package truth for every Runtime command and exposes human consequences. The prior synthetic combat package/fixed power path is removed. The package's ordinary sample combat is executable, but generated current-region quest encounters are not: their generated health/action definitions do not satisfy existing Runtime combat contracts. Strategy therefore requires a bounded generated encounter package-contract repair before campaign victory/turn-in continuation; Application orchestration must never patch definitions at action time. Goal163 remains blocked and unaccepted, with no human gate.
 
 Status: source-of-truth strategy pivot  
 Scope: product direction, Codex task selection, generation architecture, limit discipline  

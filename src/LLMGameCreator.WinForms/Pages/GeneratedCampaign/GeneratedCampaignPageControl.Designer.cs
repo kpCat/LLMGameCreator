@@ -24,6 +24,7 @@ partial class GeneratedCampaignPageControl
     private TabPage _characterTab = null!;
     private TabPage _questsTab = null!;
     private TabPage _inventoryTab = null!;
+    private TabPage _consequencesTab = null!;
     private TabPage _eventsTab = null!;
     private TextBox _technical = null!;
     private ToolTip _actionToolTip = null!;
@@ -58,6 +59,7 @@ partial class GeneratedCampaignPageControl
         _characterTab = new TabPage();
         _questsTab = new TabPage();
         _inventoryTab = new TabPage();
+        _consequencesTab = new TabPage();
         _eventsTab = new TabPage();
         _technical = new TextBox();
         _actionToolTip = new ToolTip(components);
@@ -220,6 +222,7 @@ partial class GeneratedCampaignPageControl
         _hud.Controls.Add(_characterTab);
         _hud.Controls.Add(_questsTab);
         _hud.Controls.Add(_inventoryTab);
+        _hud.Controls.Add(_consequencesTab);
         _hud.Controls.Add(_eventsTab);
         _hud.Dock = DockStyle.Fill;
         _hud.Margin = new Padding(3, 0, 3, 3);
@@ -235,6 +238,9 @@ partial class GeneratedCampaignPageControl
         _inventoryTab.AutoScroll = true;
         _inventoryTab.Text = "Инвентарь";
         _inventoryTab.UseVisualStyleBackColor = true;
+        _consequencesTab.AutoScroll = true;
+        _consequencesTab.Text = "Последствия";
+        _consequencesTab.UseVisualStyleBackColor = true;
         _eventsTab.AutoScroll = true;
         _eventsTab.Text = "События";
         _eventsTab.UseVisualStyleBackColor = true;

@@ -1,0 +1,48 @@
+/goal
+
+Выполни задачу из файла:
+
+docs/agent-tasks/goal-163-package-truth-campaign-combat-turn-in-and-consequence-depth/GOAL.md
+
+Модель: GPT-5.6 Sol
+Reasoning: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 8164185bb31bacfb9b0813b3fa726fdefcc095e4
+
+Это новый отдельный диалог Codex.
+
+Критически важно:
+- Goal162 implementation GREEN, но independent audit BLOCKED на двух product-truth P1;
+- BasicAttack сейчас подменяется: campaign service клонирует package, добавляет
+  campaign/session-compatible-attack с fixed Power=3 и вызывает UseAbility;
+- удалить package clone, synthetic definitions и fixed combat power;
+- каждый Runtime command получает exact captured package reference; package SHA/inventory unchanged;
+- BasicAttack обязан остаться GameRuntimeCommandType.BasicAttack;
+- UseAbility только для ability, реально существующей в exact package и доступной participant;
+- тесты не могут больше принимать «BasicAttack или UseAbility» как эквивалент;
+- Goal162 manual quest turn-in не доказан: CompleteQuest count=0, AfterComplete==AfterFight;
+- generated quest readiness считать read-only из exact state: complete_encounter + has_item;
+- generated quest не auto-refresh в completion;
+- показать «Завершить задание» только при готовности;
+- перед click quest active, после click CompleteQuest count ровно 1, rewards/reputation;
+- AdvanceQuestObjective count 0;
+- non-generated quest refresh compatibility сохранить;
+- исправить typed truth: actual FinalStateHash отдельно от SelectedBuildHistorySha256;
+- добавить human «Последствия»: damage, flee/victory, reward, quest ready/completed,
+  reputation, travel, save/load/migration;
+- consequence rows только из state delta / exact Runtime event / typed save result;
+- primary UI без raw IDs/hashes/paths;
+- all-selectable и core-only реальные маршруты;
+- Runtime/GamePackage/FeatureModules/generated-save/Unity/standalone/RC не менять;
+- RC/run/pointer/history byte-identical; Player/Unity/standalone Build = 0;
+- required regressions, 13×2 evidence, docs/state, artifact scope 0;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать ровно один commit и push origin/main;
+- запрещено оставлять изменения пользователю для ручного push.
+
+В финале сообщи exact package combat proof, BasicAttack/ability commands,
+flee/victory, manual turn-in/CompleteQuest count, consequence UI,
+save/migration, core-only, zero process/immutability,
+tests/regressions/evidence/scope, SHA, push, HEAD==origin/main и clean worktree.

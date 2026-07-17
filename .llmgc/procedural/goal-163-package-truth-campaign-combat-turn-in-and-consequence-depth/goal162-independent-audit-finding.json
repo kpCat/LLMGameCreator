@@ -1,0 +1,10 @@
+﻿{
+    "status":  "BLOCKED_AT_8164185B",
+    "blocker":  "campaign_combat_executes_against_synthetic_runtime_package_and_manual_quest_turn_in_not_proven",
+    "syntheticPackageCloneRemoved":  true,
+    "transientAbilityRemoved":  true,
+    "fixedCampaignPowerRemoved":  true,
+    "generatedQuestAutoCompletionRemoved":  true,
+    "blockerClosedByGoal163":  false,
+    "remainingBlocker":  "exact generated current-region quest encounters have no executable Runtime combat route"
+}

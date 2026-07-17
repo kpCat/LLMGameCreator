@@ -6,14 +6,25 @@ using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.Application.Play.GeneratedCampaign;
 
-internal sealed record GeneratedCampaignPlannedAction(
+public sealed record GeneratedCampaignPlannedAction(
     GeneratedCampaignAction Action,
     PlayerCommand? PlayerCommand,
     GameRuntimeCommand? RuntimeCommand);
 
 public sealed class GeneratedCampaignActionPlanner
 {
-    internal IReadOnlyList<GeneratedCampaignPlannedAction> Plan(
+    private readonly GeneratedCampaignCombatReadinessService _combatReadiness;
+    private readonly GeneratedCampaignQuestReadinessService _questReadiness;
+
+    public GeneratedCampaignActionPlanner(
+        GeneratedCampaignCombatReadinessService? combatReadiness = null,
+        GeneratedCampaignQuestReadinessService? questReadiness = null)
+    {
+        _combatReadiness = combatReadiness ?? new GeneratedCampaignCombatReadinessService();
+        _questReadiness = questReadiness ?? new GeneratedCampaignQuestReadinessService();
+    }
+
+    public IReadOnlyList<GeneratedCampaignPlannedAction> Plan(
         GamePackageDefinition package,
         UnifiedRuntimeSession session)
     {
@@ -60,7 +71,7 @@ public sealed class GeneratedCampaignActionPlanner
             new GameRuntimeCommand { Type = GameRuntimeCommandType.CloseDialogue });
     }
 
-    private static void PlanEncounter(
+    private void PlanEncounter(
         GamePackageDefinition package,
         EncounterRuntimeState encounter,
         List<GeneratedCampaignPlannedAction> result)
@@ -82,28 +93,39 @@ public sealed class GeneratedCampaignActionPlanner
         var targets = encounter.Participants
             .Where(item => item.Alive && !KindEquals(item.Team, current.Team))
             .ToList();
+        var definition = package.Game.Encounters.SingleOrDefault(item =>
+            IdEquals(item.Id, encounter.EncounterId));
+        var readiness = _combatReadiness.Evaluate(package, definition);
         foreach (var target in targets)
         {
             Add(result, GeneratedCampaignActionKind.BasicAttack,
-                "Атаковать: " + SafeTitle(target.Name, "Противник"),
-                "Обычная атака по выбранной цели", true,
+                "Обычная атака: " + SafeTitle(target.Name, "Противник"),
+                readiness.BasicAttackAvailable
+                    ? "Обычная атака по выбранной цели"
+                    : "Обычная атака недоступна для точного пакета",
+                readiness.BasicAttackAvailable,
                 GameRuntimeCommand.BasicAttack(current.Id, target.Id),
+                disabled: readiness.BasicAttackAvailable ? string.Empty
+                    : "Встреча не содержит исполнимой обычной атаки",
                 targetTitle: SafeTitle(target.Name, "Противник"), primary: result.Count == 0);
         }
 
-        var definition = package.Game.Encounters.FirstOrDefault(item => IdEquals(item.Id, encounter.EncounterId));
         var participant = definition?.Participants.FirstOrDefault(item => IdEquals(item.Id, current.Id));
         foreach (var abilityId in participant?.Abilities ?? [])
         {
-            var ability = package.Game.Abilities.FirstOrDefault(item => IdEquals(item.Id, abilityId));
-            if (ability is null) continue;
+            var abilities = package.Game.Abilities.Where(item => IdEquals(item.Id, abilityId)).ToList();
+            var ability = abilities.Count == 1 ? abilities[0] : null;
             foreach (var target in targets)
             {
                 var targetTitle = SafeTitle(target.Name, "Противник");
                 Add(result, GeneratedCampaignActionKind.UseAbility,
-                    SafeTitle(ability.Name, "Способность") + ": " + targetTitle,
-                    "Использовать способность по выбранной цели", true,
-                    GameRuntimeCommand.UseAbility(ability.Id, current.Id, target.Id),
+                    SafeTitle(ability?.Name, HumanLabel(abilityId, "Способность")) + ": " + targetTitle,
+                    ability is null
+                        ? "Способность отсутствует в точном пакете"
+                        : "Использовать способность по выбранной цели",
+                    ability is not null,
+                    GameRuntimeCommand.UseAbility(ability?.Id ?? abilityId, current.Id, target.Id),
+                    disabled: ability is null ? "Способность недоступна" : string.Empty,
                     targetTitle: targetTitle);
             }
         }
@@ -162,7 +184,7 @@ public sealed class GeneratedCampaignActionPlanner
         }
     }
 
-    private static void PlanRegionActivities(
+    private void PlanRegionActivities(
         GamePackageDefinition package,
         UnifiedRuntimeSession session,
         List<GeneratedCampaignPlannedAction> result)
@@ -185,23 +207,38 @@ public sealed class GeneratedCampaignActionPlanner
             var definition = definitions[0];
             if (session.GameplayState.ActiveEncounter is { Active: false } completed
                 && IdEquals(completed.EncounterId, definition.Id)) continue;
+            var readiness = _combatReadiness.Evaluate(package, definition);
             Add(result, GeneratedCampaignActionKind.StartEncounter,
                 SafeTitle(generated.Title, "Встреча"),
-                SafeTitle(generated.Description, "Начать встречу в текущем регионе"), true,
+                readiness.Playable
+                    ? SafeTitle(generated.Description, "Начать встречу в текущем регионе")
+                    : "Встреча не содержит исполнимого действия игрока",
+                readiness.Playable,
                 GameRuntimeCommand.StartEncounter(definition.Id),
+                disabled: readiness.Playable ? string.Empty
+                    : "Нет исполнимой обычной атаки или способности",
                 targetTitle: SafeTitle(generated.Title, "Встреча"));
         }
     }
 
-    private static void PlanCompletableQuests(
+    private void PlanCompletableQuests(
         GamePackageDefinition package,
         GameRuntimeState state,
         List<GeneratedCampaignPlannedAction> result)
     {
-        foreach (var quest in state.Quests.Where(item => item.State != "completed"
-                                                          && item.Objectives.Count > 0
-                                                          && item.Objectives.All(objective => objective.Completed)))
+        var session = new UnifiedRuntimeSession { GameplayState = state };
+        var computed = _questReadiness.EvaluateAll(package, session);
+        foreach (var quest in state.Quests.Where(item => item.State != "completed"))
         {
+            var generated = computed.SingleOrDefault(item => IdEquals(item.QuestId, quest.QuestId));
+            if (generated?.Generated == true)
+            {
+                if (!generated.Ready) continue;
+            }
+            else if (quest.Objectives.Count == 0 || quest.Objectives.Any(objective => !objective.Completed))
+            {
+                continue;
+            }
             var title = QuestTitle(package, quest.QuestId);
             Add(result, GeneratedCampaignActionKind.CompleteQuest,
                 "Завершить задание: " + title,

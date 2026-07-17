@@ -1,0 +1,8 @@
+﻿{
+    "status":  "BLOCKED_POST_MIGRATION_GENERATED_COMBAT",
+    "typedMigrationProjectionPassed":  true,
+    "preservedDroppedCountsVisible":  true,
+    "mapResetVisible":  true,
+    "migrationRegressionPassed":  true,
+    "postMigrationExactGeneratedCombatPassed":  false
+}

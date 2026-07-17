@@ -8,7 +8,7 @@ Before choosing the next milestone, read `docs/CURRENT_GENERATOR_STATE.md` and `
 
 The current state handoff, active manual gate and strategy reset override any older roadmap sequence that suggests starting a feature slice early.
 
-Goal162 is the current produced-for-review product slice: a human-facing generated campaign session over existing Runtime and save/migration seams. Its all-selectable, core-only and legacy matrices are GREEN, but `accepted=false` and independent audit remains required. The next bounded decision is consequence-depth planning; Unity presentation, media and richer authored consequences remain future work.
+Goal163 is the current product-truth repair slice and is BLOCKED. Exact package dispatch, manual turn-in semantics, consequence projection and typed build-history truth are implemented, but the generated current-region quest encounters have no executable Runtime combat route. The next bounded work is a generated encounter package-contract correction outside Goal163's forbidden generator/Runtime scope, followed by a repeat of the Goal163 real all-selectable/core-only matrix. Unity presentation, media and richer authored branching remain future work.
 
 Current locked baseline: `M4.1` remains the last completed milestone until `docs/CURRENT_GENERATOR_STATE.json` explicitly records a later milestone.
 

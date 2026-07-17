@@ -1,0 +1,9 @@
+﻿{
+    "status":  "BLOCKED_POST_TURN_IN_REAL_ROUTE",
+    "typedSaveProjectionPassed":  true,
+    "deduplicatedSaveProjectionPassed":  true,
+    "typedLoadProjectionPassed":  true,
+    "persistedEventTimelineRebuildPassed":  true,
+    "exactContinueRegressionPassed":  true,
+    "postManualTurnInRealContinuePassed":  false
+}
