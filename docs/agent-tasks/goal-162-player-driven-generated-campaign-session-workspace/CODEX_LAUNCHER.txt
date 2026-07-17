@@ -1,0 +1,54 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-162-player-driven-generated-campaign-session-workspace/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: c1bd0b7a913f2926886d95d05df5ebc2ed639dd3
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- Goal161T прошёл independent audit; Goal160 blocker закрыт; human gate не нужен;
+- это следующий крупный видимый product slice, не standalone/RC hotfix;
+- создай нормальную страницу «Играть», Runtime Simulator оставь техническим и неизменным;
+- generated campaign ready только при strict source + TRAVEL_CURRENT + current package/authoring truth;
+- session хранит WorldId/package/composition/authoring truth и блокирует команды после world/package drift;
+- primary UI не показывает raw IDs/hashes/paths;
+- map/region/NPC/cache/gate titles data-derived from package/provenance;
+- context actions планируются из actual state, IDs только внутренние;
+- existing Runtime commands only: movement/interact/dialogue/encounter/quest/travel;
+- no Runtime/GamePackage/FeatureModule changes;
+- dialogue: actor interaction → human choices;
+- encounter: data-derived participants/abilities/turns; bounded AI flow; no typed participant IDs;
+- quest: AutoStart truth, one bounded RefreshQuestObjectives after causal changes, complete without debug AdvanceObjective;
+- reward/inventory/reputation must be visible;
+- travel gate → MapChanged → destination interaction;
+- New game, Continue, Save, explicit Migrate and continue using existing generated save services;
+- exact Continue must not call Runtime Start;
+- after regeneration active session becomes STALE_PROJECT; stale commands execute zero Runtime calls;
+- Projects button: «Играть» or «Собрать и играть»; build once, navigate through typed navigation service;
+- add singleton campaign session service so session survives page navigation;
+- UI at 1100x720: map, context/actions, HUD tabs, no clipping/raw IDs;
+- core-only campaign works without AcceptedMechanics.Passed and without false RC READY;
+- legacy/template campaign unavailable; Runtime Simulator/raw snapshots unchanged;
+- RC record, immutable standalone run/pointer/history bytes unchanged;
+- Player/Unity/standalone Build counts 0;
+- no full suite, 85-case closure or all-ProductSmoke;
+- P0/P1 mandatory matrix defects fix inside Goal162; P2/P3 debt only;
+- create/push exactly one GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи campaign truth, page/navigation/build-and-play,
+map/no-ID proof, dialogue, encounter/quest/reward/reputation,
+travel, save/continue/migration, core-only/legacy,
+zero process counts и RC/standalone immutability,
+tests/regressions, evidence/artifact scope,
+final SHA, push, HEAD==origin/main и clean worktree.

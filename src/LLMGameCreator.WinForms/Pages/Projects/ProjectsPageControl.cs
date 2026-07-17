@@ -18,6 +18,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
     private readonly IGameProjectService? _gameProjectService;
     private readonly IGamePackageValidator? _validator;
     private readonly IUnifiedGameProjectWorkspaceController? _workspaceController;
+    private readonly IEditorPageNavigationService? _navigationService;
     private readonly ToolTip _workspaceToolTip = new();
     private AppSettings? _settings;
     private bool _workspaceBinding;
@@ -34,7 +35,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         IAppSettingsRepository settingsRepository,
         IGameProjectService gameProjectService,
         IGamePackageValidator validator)
-        : this(currentGamePackageService, settingsRepository, gameProjectService, validator, null)
+        : this(currentGamePackageService, settingsRepository, gameProjectService, validator, null, null)
     {
     }
 
@@ -43,13 +44,15 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         IAppSettingsRepository settingsRepository,
         IGameProjectService gameProjectService,
         IGamePackageValidator validator,
-        IUnifiedGameProjectWorkspaceController? workspaceController)
+        IUnifiedGameProjectWorkspaceController? workspaceController,
+        IEditorPageNavigationService? navigationService = null)
     {
         _currentGamePackageService = currentGamePackageService;
         _settingsRepository = settingsRepository;
         _gameProjectService = gameProjectService;
         _validator = validator;
         _workspaceController = workspaceController;
+        _navigationService = navigationService;
         InitializeComponent();
         WireEvents();
     }
@@ -78,6 +81,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _regenerateGeneratedWorldButton.Click += async (_, _) => await RegenerateGeneratedWorldAsync();
         _generatedWorldHistoryButton.Click += async (_, _) => await OpenGeneratedWorldHistoryAsync();
         _manageGeneratedGameplaySavesButton.Click += (_, _) => OpenGeneratedGameplaySaves();
+        _playGeneratedCampaignButton.Click += async (_, _) => await PlayGeneratedCampaignAsync();
         _buildWindowsStandaloneButton.Click += async (_, _) => await BuildWindowsStandaloneAsync();
         _cancelWindowsStandaloneButton.Click += (_, _) => _workspaceController?.CancelWindowsStandaloneBuild();
         _launchWindowsStandaloneButton.Click += (_, _) => LaunchWindowsStandalone();
@@ -906,6 +910,20 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             SetWorkspaceBusy(false);
             _buildUiRunning = false;
         }
+    }
+
+    private async Task PlayGeneratedCampaignAsync()
+    {
+        if (_workspaceController == null || !_workspaceController.HasOpenProject || _buildUiRunning) return;
+        var snapshot = _workspaceController.Snapshot();
+        if (snapshot.GeneratedWorld is not { Present: true, Passed: true } || snapshot.GeneratedRegionTravel is not { Passed: true })
+        {
+            await BuildAndQualifyAsync();
+            snapshot = _workspaceController.Snapshot();
+        }
+        if (snapshot.GeneratedWorld is { Present: true, Passed: true } && snapshot.GeneratedRegionTravel is { Passed: true })
+            _navigationService?.Request("generated-campaign-player");
+        else _buildResultTextBox.Text = "Кампания не готова: требуется успешная сборка с путешествиями.";
     }
 
     private async Task RegenerateGeneratedWorldAsync()

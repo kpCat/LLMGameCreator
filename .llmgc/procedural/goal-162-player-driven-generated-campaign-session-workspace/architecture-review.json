@@ -1,0 +1,23 @@
+{
+  "goal": "goal-162-player-driven-generated-campaign-session-workspace",
+  "goal161tAuditIntake": "GREEN_ACCEPTABLE_CANDIDATE_AT_C1BD0B7A; recorded without changing RC services.",
+  "runtimeSimulatorVersusPlayerBoundary": "RuntimeSimulatorPageControl remains the technical command console; GeneratedCampaignSessionService owns player orchestration over IUnifiedGameRuntimeService.",
+  "campaignSessionTruth": "GeneratedGameplaySaveValidator.CaptureProjectTruth supplies strict source, TRAVEL_CURRENT, package, authoring, world and binding truth captured at Start/Load/Migrate.",
+  "staleProjectDetection": "Every Execute recaptures GeneratedGameplaySaveProjectTruth and compares identity/world/package/composition/authoring before dispatch.",
+  "contextProjection": "GeneratedCampaignProjectionService projects GamePackageDefinition plus UnifiedRuntimeSession to human labels; raw values remain TechnicalDetails.",
+  "generatedRegionContentBinding": "GeneratedWorldRegionMapBindingService bindings and GeneratedContent provenance select current map/region activity.",
+  "actionPlanningAndDispatch": "GeneratedCampaignActionPlanner maps an opaque action token to existing PlayerCommand or GameRuntimeCommand only.",
+  "dialogueFlow": "Interact/OpenDialogue then ChooseDialogueOption/CloseDialogue, with package node choices as labels.",
+  "encounterFlow": "StartEncounter, BasicAttack/UseAbility, EndTurn and bounded RunCurrentTurnAi use current runtime participants.",
+  "questObjectiveFlow": "Causal gameplay commands may issue one RefreshQuestObjectives; completion uses CompleteQuest only.",
+  "travelFlow": "Interact remains the map runtime route and MapChanged is projected from returned events.",
+  "saveLoadMigrationFlow": "GeneratedGameplaySaveService exact load and GeneratedGameplaySaveMigrationService explicit preview/apply are consumed without Runtime.Start on Continue.",
+  "sessionLifetimeAcrossNavigation": "Singleton GeneratedCampaignSessionService retains only same-project current session.",
+  "projectsBuildAndPlay": "ProjectsPageControl calls BuildAndQualify once when stale and requests generated-campaign-player through typed navigation.",
+  "winFormsNavigation": "IEditorPageNavigationService event is handled by MainForm against IEditorPageRegistry.",
+  "uiLayout": "Campaign page uses map/context/HUD panels with scrolling action content and collapsed technical details.",
+  "failureStateMatrix": "NO_PROJECT, PROJECT_NOT_GENERATED, PROJECT_NOT_READY, READY, ACTIVE, STALE_PROJECT, SAVE_MIGRATION_REQUIRED and FAILED are projected with diagnostics.",
+  "legacyCompatibility": "Non-generated projects are unavailable to campaign player; Runtime Simulator/raw snapshot behavior is not modified.",
+  "nonGoals": "No Runtime, GamePackage, generated source/save/migration, Unity or standalone implementation mutation.",
+  "testInventory": "Goal162 planned truth, projection, action, save/migration, navigation and UI tests; focused regressions run after implementation."
+}

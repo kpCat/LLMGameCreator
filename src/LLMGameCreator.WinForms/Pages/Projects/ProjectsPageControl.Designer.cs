@@ -35,6 +35,7 @@ namespace LLMGameCreator.WinForms.Pages
         private FlowLayoutPanel _workspaceToolbar;
         private Button _backToGamesButton;
         private Button _saveCurrentButton;
+        private Button _playGeneratedCampaignButton;
         private Button _regenerateGeneratedWorldButton;
         private Button _generatedWorldHistoryButton;
         private Label _workspaceTitleLabel;
@@ -120,6 +121,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._workspaceToolbar = new FlowLayoutPanel();
             this._backToGamesButton = new Button();
             this._saveCurrentButton = new Button();
+            this._playGeneratedCampaignButton = new Button();
             this._regenerateGeneratedWorldButton = new Button();
             this._generatedWorldHistoryButton = new Button();
             this._workspaceTitleLabel = new Label();
@@ -312,6 +314,7 @@ namespace LLMGameCreator.WinForms.Pages
             //
             this._workspaceToolbar.Controls.Add(this._backToGamesButton);
             this._workspaceToolbar.Controls.Add(this._saveCurrentButton);
+            this._workspaceToolbar.Controls.Add(this._playGeneratedCampaignButton);
             this._workspaceToolbar.Controls.Add(this._regenerateGeneratedWorldButton);
             this._workspaceToolbar.Controls.Add(this._generatedWorldHistoryButton);
             this._workspaceToolbar.Controls.Add(this._workspaceTitleLabel);
@@ -322,6 +325,9 @@ namespace LLMGameCreator.WinForms.Pages
             this._saveCurrentButton.AutoSize = true;
             this._saveCurrentButton.Text = "Сохранить проект";
             this._saveCurrentButton.UseVisualStyleBackColor = true;
+            this._playGeneratedCampaignButton.AutoSize = true;
+            this._playGeneratedCampaignButton.Text = "Играть";
+            this._playGeneratedCampaignButton.UseVisualStyleBackColor = true;
             this._regenerateGeneratedWorldButton.AutoSize = true;
             this._regenerateGeneratedWorldButton.Text = "Перегенерировать мир";
             this._regenerateGeneratedWorldButton.UseVisualStyleBackColor = true;

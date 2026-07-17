@@ -18,6 +18,7 @@ using LLMGameCreator.Application.Design.ProjectStandaloneBuild;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Generation.Procedural;
+using LLMGameCreator.Application.Play.GeneratedCampaign;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.RuntimePreview;
 using LLMGameCreator.Application.Validation;
@@ -319,6 +320,17 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<GeneratedGameplaySavesSummaryService>(resolver =>
             new GeneratedGameplaySavesSummaryService(
                 resolver.Resolve<GeneratedGameplaySaveService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedCampaignSessionTruthService>(resolver => new GeneratedCampaignSessionTruthService(
+            resolver.Resolve<ICurrentGamePackageService>(), resolver.Resolve<GeneratedGameplaySaveValidator>(), resolver.Resolve<IGameProjectOperationCoordinator>()), Reuse.Singleton);
+        _container.Register<GeneratedCampaignActionPlanner>(Reuse.Singleton);
+        _container.Register<GeneratedCampaignProjectionService>(Reuse.Singleton);
+        _container.Register<GeneratedCampaignEventPresenter>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedCampaignSessionService>(resolver => new GeneratedCampaignSessionService(
+            resolver.Resolve<ICurrentGamePackageService>(), resolver.Resolve<GeneratedCampaignSessionTruthService>(), resolver.Resolve<IUnifiedGameRuntimeService>(),
+            resolver.Resolve<GeneratedGameplaySaveService>(), resolver.Resolve<GeneratedGameplaySaveMigrationService>(), resolver.Resolve<GeneratedCampaignActionPlanner>(),
+            resolver.Resolve<GeneratedCampaignProjectionService>(), resolver.Resolve<GeneratedCampaignEventPresenter>()), Reuse.Singleton);
+        _container.Register<EditorPageNavigationService>(Reuse.Singleton);
+        _container.RegisterDelegate<IEditorPageNavigationService>(resolver => resolver.Resolve<EditorPageNavigationService>(), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldChangeRecordService>(resolver =>
             new GameProjectGeneratedWorldChangeRecordService(
                 resolver.Resolve<SeededGeneratedProjectSourceService>(),
@@ -394,7 +406,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IAppSettingsRepository>(),
             resolver.Resolve<IGameProjectService>(),
             resolver.Resolve<IGamePackageValidator>(),
-            resolver.Resolve<IUnifiedGameProjectWorkspaceController>()), Reuse.Singleton);
+            resolver.Resolve<IUnifiedGameProjectWorkspaceController>(),
+            resolver.Resolve<IEditorPageNavigationService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GenerationPageControl>(resolver => new GenerationPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
@@ -426,6 +439,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IRuntimeSnapshotStore>(),
             resolver.Resolve<GeneratedGameplaySaveService>(),
             resolver.Resolve<GeneratedGameplaySaveMigrationService>()), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedCampaignPageControl>(resolver => new GeneratedCampaignPageControl(
+            resolver.Resolve<GeneratedCampaignSessionService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GeneratorLibraryPageControl>(resolver => new GeneratorLibraryPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
@@ -531,6 +546,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<UnityArchiveReviewPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),
+            resolver.Resolve<GeneratedCampaignPageControl>(),
             resolver.Resolve<RuntimeSimulatorPageControl>(),
             resolver.Resolve<AssetsPageControl>(),
             resolver.Resolve<SettingsPageControl>()
@@ -539,7 +555,8 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<MainForm>(resolver => new MainForm(
     resolver.Resolve<IEditorPageRegistry>(),
     resolver.Resolve<ICurrentGamePackageService>(),
-    resolver.Resolve<ILoggerFactory>()), Reuse.Singleton);
+    resolver.Resolve<ILoggerFactory>(),
+    resolver.Resolve<IEditorPageNavigationService>()), Reuse.Singleton);
     }
 
     public MainForm ResolveMainForm() => _container.Resolve<MainForm>();

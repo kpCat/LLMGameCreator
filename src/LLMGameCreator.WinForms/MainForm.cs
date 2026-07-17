@@ -9,6 +9,7 @@ public sealed partial class MainForm : Form
     private readonly IEditorPageRegistry? _pageRegistry;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly ILogger? _logger;
+    private readonly IEditorPageNavigationService? _navigationService;
 
     public MainForm()
     {
@@ -17,15 +18,22 @@ public sealed partial class MainForm : Form
     }
 
     public MainForm(IEditorPageRegistry pageRegistry, ICurrentGamePackageService currentGamePackageService, ILoggerFactory loggerFactory)
+        : this(pageRegistry, currentGamePackageService, loggerFactory, new EditorPageNavigationService())
+    {
+    }
+
+    public MainForm(IEditorPageRegistry pageRegistry, ICurrentGamePackageService currentGamePackageService, ILoggerFactory loggerFactory, IEditorPageNavigationService navigationService)
     {
         _pageRegistry = pageRegistry;
         _currentGamePackageService = currentGamePackageService;
         _logger = loggerFactory.CreateLogger<MainForm>();
+        _navigationService = navigationService;
 
         InitializeComponent();
         BindPages();
 
         _currentGamePackageService.CurrentChanged += CurrentGamePackageService_CurrentChanged;
+        _navigationService.NavigationRequested += NavigationRequested;
         UpdateStatus();
     }
 
@@ -40,6 +48,7 @@ public sealed partial class MainForm : Form
         {
             _currentGamePackageService.CurrentChanged -= CurrentGamePackageService_CurrentChanged;
         }
+        if (_navigationService != null) _navigationService.NavigationRequested -= NavigationRequested;
     }
 
     private void BindPages()
@@ -73,6 +82,13 @@ public sealed partial class MainForm : Form
         page.View.Dock = DockStyle.Fill;
         _workspace.Controls.Add(page.View);
         page.OnActivated();
+    }
+
+    private void NavigationRequested(object? sender, string pageId)
+    {
+        var index = _pageRegistry?.Pages.ToList().FindIndex(page => page.Id == pageId) ?? -1;
+        if (index >= 0) WinFormsUiThreadDispatcher.Post(this, () => _navigation.SelectedIndex = index);
+        else _logger?.LogWarning("Неизвестная страница навигации {PageId}", pageId);
     }
 
     private void UpdateStatus()
