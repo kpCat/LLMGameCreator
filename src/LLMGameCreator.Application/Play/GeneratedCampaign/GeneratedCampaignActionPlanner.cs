@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
@@ -26,7 +27,8 @@ public sealed class GeneratedCampaignActionPlanner
 
     public IReadOnlyList<GeneratedCampaignPlannedAction> Plan(
         GamePackageDefinition package,
-        UnifiedRuntimeSession session)
+        UnifiedRuntimeSession session,
+        IReadOnlyList<GeneratedEncounterCombatQualifiedAction>? qualifiedActions = null)
     {
         ArgumentNullException.ThrowIfNull(package);
         ArgumentNullException.ThrowIfNull(session);
@@ -41,12 +43,12 @@ public sealed class GeneratedCampaignActionPlanner
 
         if (state.ActiveEncounter is { Active: true } encounter)
         {
-            PlanEncounter(package, encounter, result);
+            PlanEncounter(package, encounter, result, qualifiedActions ?? []);
             return result;
         }
 
         PlanMap(package, session, result);
-        PlanRegionActivities(package, session, result);
+        PlanRegionActivities(package, session, result, qualifiedActions ?? []);
         PlanCompletableQuests(package, state, result);
         return result;
     }
@@ -74,7 +76,8 @@ public sealed class GeneratedCampaignActionPlanner
     private void PlanEncounter(
         GamePackageDefinition package,
         EncounterRuntimeState encounter,
-        List<GeneratedCampaignPlannedAction> result)
+        List<GeneratedCampaignPlannedAction> result,
+        IReadOnlyList<GeneratedEncounterCombatQualifiedAction> qualifiedActions)
     {
         if (encounter.Participants.Count == 0) return;
         var turnIndex = Math.Clamp(encounter.TurnIndex, 0, encounter.Participants.Count - 1);
@@ -96,11 +99,16 @@ public sealed class GeneratedCampaignActionPlanner
         var definition = package.Game.Encounters.SingleOrDefault(item =>
             IdEquals(item.Id, encounter.EncounterId));
         var readiness = _combatReadiness.Evaluate(package, definition);
-        if (readiness.BasicAttackAvailable)
+        var catalogPresent = qualifiedActions.Count > 0;
+        var basicProgresses = qualifiedActions.Any(item => item.ActionKind
+            == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK);
+        if (readiness.BasicAttackAvailable && (!catalogPresent || basicProgresses))
         foreach (var target in targets)
         {
+            var targetTitle = SafeTitle(target.Name, "Противник");
+            var primary = basicProgresses && !result.Any(item => item.Action.Tactical is { ProgressesEncounter: true });
             Add(result, GeneratedCampaignActionKind.BasicAttack,
-                "Обычная атака: " + SafeTitle(target.Name, "Противник"),
+                "Обычная атака: " + targetTitle,
                 readiness.BasicAttackAvailable
                     ? "Обычная атака по выбранной цели"
                     : "Обычная атака недоступна для точного пакета",
@@ -108,27 +116,56 @@ public sealed class GeneratedCampaignActionPlanner
                 GameRuntimeCommand.BasicAttack(current.Id, target.Id),
                 disabled: readiness.BasicAttackAvailable ? string.Empty
                     : "Встреча не содержит исполнимой обычной атаки",
-                targetTitle: SafeTitle(target.Name, "Противник"), primary: result.Count == 0);
+                targetTitle: targetTitle, primary: primary,
+                tactical: new GeneratedCampaignTacticalAction
+                {
+                    Title = "Обычная атака",
+                    TargetTitle = targetTitle,
+                    CostSummary = "Без дополнительной стоимости",
+                    EffectSummary = "Атака, подтверждённая контрактом боя",
+                    AvailabilitySummary = readiness.BasicAttackAvailable ? "Доступна" : "Недоступна",
+                    ProgressesEncounter = basicProgresses,
+                    Primary = primary
+                });
         }
 
         var participant = definition?.Participants.FirstOrDefault(item => IdEquals(item.Id, current.Id));
-        foreach (var abilityId in participant?.Abilities
-                     .Where(id => readiness.AbilityIds.Contains(id, StringComparer.OrdinalIgnoreCase)) ?? [])
+        foreach (var abilityId in participant?.Abilities.OrderBy(id => id, StringComparer.Ordinal)
+                     ?? Enumerable.Empty<string>())
         {
             var abilities = package.Game.Abilities.Where(item => IdEquals(item.Id, abilityId)).ToList();
             var ability = abilities.Count == 1 ? abilities[0] : null;
+            var progresses = ability is not null && qualifiedActions.Any(item => item.ActionKind
+                == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY
+                && IdEquals(item.AbilityId, ability.Id)
+                && string.Equals(item.AbilityDefinitionSha256, GeneratedEncounterCombatCanonical.Hash(ability),
+                    StringComparison.Ordinal));
+            var unavailableReason = string.Empty;
+            var available = ability is not null && AbilityAvailable(ability, current, out unavailableReason);
             foreach (var target in targets)
             {
                 var targetTitle = SafeTitle(target.Name, "Противник");
+                var primary = progresses && !result.Any(item => item.Action.Tactical is { ProgressesEncounter: true });
+                var title = SafeTitle(ability?.Name, HumanLabel(abilityId, "Способность"));
                 Add(result, GeneratedCampaignActionKind.UseAbility,
-                    SafeTitle(ability?.Name, HumanLabel(abilityId, "Способность")) + ": " + targetTitle,
+                    title + ": " + targetTitle,
                     ability is null
                         ? "Способность отсутствует в точном пакете"
-                        : "Использовать способность по выбранной цели",
-                    ability is not null,
+                        : AbilityEffectSummary(ability),
+                    available,
                     GameRuntimeCommand.UseAbility(ability?.Id ?? abilityId, current.Id, target.Id),
-                    disabled: ability is null ? "Способность недоступна" : string.Empty,
-                    targetTitle: targetTitle);
+                    disabled: ability is null ? "Способность недоступна" : unavailableReason,
+                    targetTitle: targetTitle, primary: primary,
+                    tactical: new GeneratedCampaignTacticalAction
+                    {
+                        Title = title,
+                        TargetTitle = targetTitle,
+                        CostSummary = ability is null ? string.Empty : AbilityCostSummary(package, ability),
+                        EffectSummary = ability is null ? "Эффект недоступен" : AbilityEffectSummary(ability),
+                        AvailabilitySummary = available ? "Доступна" : unavailableReason,
+                        ProgressesEncounter = progresses,
+                        Primary = primary
+                    });
             }
         }
 
@@ -189,7 +226,8 @@ public sealed class GeneratedCampaignActionPlanner
     private void PlanRegionActivities(
         GamePackageDefinition package,
         UnifiedRuntimeSession session,
-        List<GeneratedCampaignPlannedAction> result)
+        List<GeneratedCampaignPlannedAction> result,
+        IReadOnlyList<GeneratedEncounterCombatQualifiedAction> qualifiedActions)
     {
         var scene = package.GeneratedContent.Scenes.FirstOrDefault(item =>
             IdEquals(item.PackageMapId, session.MapState.CurrentMapId));
@@ -210,14 +248,18 @@ public sealed class GeneratedCampaignActionPlanner
             if (session.GameplayState.ActiveEncounter is { Active: false } completed
                 && IdEquals(completed.EncounterId, definition.Id)) continue;
             var readiness = _combatReadiness.Evaluate(package, definition);
+            var catalogPlayable = qualifiedActions.Count == 0 || qualifiedActions.Any(item =>
+                item.ActionKind is GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK
+                    or GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY);
+            var playable = readiness.Playable && catalogPlayable;
             Add(result, GeneratedCampaignActionKind.StartEncounter,
                 SafeTitle(generated.Title, "Встреча"),
-                readiness.Playable
+                playable
                     ? SafeTitle(generated.Description, "Начать встречу в текущем регионе")
                     : "Встреча не содержит исполнимого действия игрока",
-                readiness.Playable,
+                playable,
                 GameRuntimeCommand.StartEncounter(definition.Id),
-                disabled: readiness.Playable ? string.Empty
+                disabled: playable ? string.Empty
                     : "Нет исполнимой обычной атаки или способности",
                 targetTitle: SafeTitle(generated.Title, "Встреча"));
         }
@@ -259,7 +301,8 @@ public sealed class GeneratedCampaignActionPlanner
         PlayerCommand command,
         string disabled = "",
         string targetTitle = "",
-        bool primary = false)
+        bool primary = false,
+        GeneratedCampaignTacticalAction? tactical = null)
     {
         var token = string.Join("|", kind, command.Type, command.Direction, command.TargetId, command.Payload);
         target.Add(new GeneratedCampaignPlannedAction(new GeneratedCampaignAction
@@ -271,7 +314,8 @@ public sealed class GeneratedCampaignActionPlanner
             Enabled = enabled,
             DisabledReason = disabled,
             TargetTitle = targetTitle,
-            Primary = primary
+            Primary = primary,
+            Tactical = tactical
         }, command, null));
     }
 
@@ -284,7 +328,8 @@ public sealed class GeneratedCampaignActionPlanner
         GameRuntimeCommand command,
         string disabled = "",
         string targetTitle = "",
-        bool primary = false)
+        bool primary = false,
+        GeneratedCampaignTacticalAction? tactical = null)
     {
         var token = string.Join("|", kind, command.Type, command.Id, command.TargetId,
             command.InventoryId, command.Amount, string.Join(";", command.Args.OrderBy(item => item.Key)
@@ -298,7 +343,8 @@ public sealed class GeneratedCampaignActionPlanner
             Enabled = enabled,
             DisabledReason = disabled,
             TargetTitle = targetTitle,
-            Primary = primary
+            Primary = primary,
+            Tactical = tactical
         }, null, command));
     }
 
@@ -381,6 +427,37 @@ public sealed class GeneratedCampaignActionPlanner
         var words = last.Replace('_', ' ').Replace('-', ' ').Trim();
         if (string.IsNullOrWhiteSpace(words)) return fallback;
         return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(words.ToLowerInvariant());
+    }
+
+    private static bool AbilityAvailable(
+        AbilityDefinition ability,
+        EncounterParticipantState participant,
+        out string unavailableReason)
+    {
+        var unavailable = ability.Costs.FirstOrDefault(cost => participant.Resources.All(resource =>
+            !IdEquals(resource.ResourceId, cost.Id) || resource.Amount < cost.Amount));
+        if (unavailable is null)
+        {
+            unavailableReason = string.Empty;
+            return true;
+        }
+        unavailableReason = "Недостаточно ресурса для стоимости способности";
+        return false;
+    }
+
+    private static string AbilityCostSummary(GamePackageDefinition package, AbilityDefinition ability) =>
+        ability.Costs.Count == 0 ? "Без стоимости" : string.Join(", ", ability.Costs
+            .OrderBy(cost => cost.Id, StringComparer.Ordinal)
+            .Select(cost => HumanLabel(package.Game.Resources.FirstOrDefault(resource =>
+                IdEquals(resource.Id, cost.Id))?.Name ?? cost.Id, "Ресурс") + " " + cost.Amount));
+
+    private static string AbilityEffectSummary(AbilityDefinition ability)
+    {
+        if (ability.Effects.Count == 0)
+            return string.Equals(ability.Kind, "attack", StringComparison.OrdinalIgnoreCase)
+                ? "Атака цели" : "Поддерживающая способность";
+        return string.Join(", ", ability.Effects.OrderBy(effect => effect.Type, StringComparer.Ordinal)
+            .Select(effect => HumanLabel(effect.Type, "Эффект")));
     }
 
     private static int InteractionPriority(GamePackageDefinition package, EntityInstanceDefinition entity)

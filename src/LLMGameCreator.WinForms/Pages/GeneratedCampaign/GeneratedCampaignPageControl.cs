@@ -221,7 +221,16 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
                 UseVisualStyleBackColor = true
             };
             button.Click += ActionClick;
-            var tooltip = action.Description;
+            var tooltip = action.Tactical is null
+                ? action.Description
+                : string.Join(Environment.NewLine, new[]
+                {
+                    action.Tactical.TargetTitle,
+                    action.Tactical.CostSummary,
+                    action.Tactical.EffectSummary,
+                    action.Tactical.AvailabilitySummary,
+                    action.Tactical.ProgressesEncounter ? "Продвигает встречу" : "Поддерживающее действие"
+                }.Where(value => !string.IsNullOrWhiteSpace(value)));
             if (!action.Enabled && !string.IsNullOrWhiteSpace(action.DisabledReason))
                 tooltip += " — " + action.DisabledReason;
             _actionToolTip.SetToolTip(button, tooltip);

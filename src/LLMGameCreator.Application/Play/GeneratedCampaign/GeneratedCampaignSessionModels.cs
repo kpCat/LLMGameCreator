@@ -76,6 +76,18 @@ public sealed record GeneratedCampaignAction
     public string DisabledReason { get; init; } = string.Empty;
     public bool Primary { get; init; }
     public string TargetTitle { get; init; } = string.Empty;
+    public GeneratedCampaignTacticalAction? Tactical { get; init; }
+}
+
+public sealed record GeneratedCampaignTacticalAction
+{
+    public string Title { get; init; } = string.Empty;
+    public string TargetTitle { get; init; } = string.Empty;
+    public string CostSummary { get; init; } = string.Empty;
+    public string EffectSummary { get; init; } = string.Empty;
+    public string AvailabilitySummary { get; init; } = string.Empty;
+    public bool ProgressesEncounter { get; init; }
+    public bool Primary { get; init; }
 }
 
 public sealed record GeneratedCampaignMapCell
@@ -231,6 +243,7 @@ public enum GeneratedCampaignConsequenceKind
     Retry,
     RecoveryLoad,
     NewGame,
+    TacticalAction,
     Failure
 }
 
@@ -310,4 +323,5 @@ internal sealed record GeneratedCampaignSession(
     GeneratedCampaignProjectTruth Truth,
     GamePackageDefinition Package,
     UnifiedRuntimeSession RuntimeSession,
-    string SlotName);
+    string SlotName,
+    IReadOnlyList<GeneratedEncounterCombatQualifiedAction> QualifiedActions);

@@ -1,0 +1,52 @@
+/goal
+
+Выполни задачу из файла:
+
+docs/agent-tasks/goal-166-exact-qualified-combat-actions-and-real-recovery-qualification/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 0027404db41cd5e5564aca03b83a92800a4e1016
+
+Это новый отдельный диалог Codex.
+
+План полностью одобрен запуском задачи. Не спрашивай дополнительное подтверждение из-за количества
+изменяемых файлов.
+
+Критически важно:
+- Goal165 route modes сохраняются, но independent audit нашёл exact-action P1;
+- resolver доказывает конкретную damage ability, но забывает её ID/fingerprint;
+- qualification/victory сейчас могут взять первую просто успешную utility ability;
+- добавить exact qualified combat action catalog: BasicAttack descriptor и exact qualified ability IDs/fingerprints/effects;
+- utility/no-op ability не входит в victory catalog;
+- mixed list utility-first + damage-later обязателен;
+- per-encounter qualification и representative victory используют только exact qualified descriptors;
+- v4 history, seal и semantic validation покрывают catalog count/hash/content;
+- tactical UI показывает человеческие cost/effect/target/disabled reason, utility secondary;
+- committed Goal165 recovery evidence hardcoded и не end-to-end;
+- провести реальную generated кампанию через production GeneratedCampaignSessionService:
+  StartEncounter checkpoint → настоящий Runtime defeat → DEFEATED → Retry → exact restore →
+  StartEncounter +1 / Runtime Start 0 → victory → manual turn-in;
+- отдельно реальный save recovery и New Game recovery;
+- defeat без checkpoint не должен давать пустой экран:
+  Retry disabled, Continue/New Game доступны;
+- loaded defeated save обязан получить DEFEATED, не ACTIVE;
+- service обязан reject Save когда status не ACTIVE;
+- stale retry = 0 Runtime commands + STALE_PROJECT;
+- physical core-only portable copy без operational pointer;
+- Runtime/GamePackage/FeatureModules/source/overlay/save schema/Unity/standalone/RC не менять;
+- RC/run/pointer/history/source/sidecars byte-identical;
+- Player/Unity/standalone Build = 0;
+- required regressions, 12×2 evidence, docs/state, artifact scope 0;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать один commit и push origin/main;
+- запрещено оставлять ручной push пользователю.
+
+В финале сообщи exact catalog, mixed ability result,
+real defeat/retry/save/newgame/no-checkpoint routes,
+history/seal/tactical UI, zero process/immutability,
+tests/regressions/evidence/scope,
+SHA, push, HEAD==origin/main и clean worktree.

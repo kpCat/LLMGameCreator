@@ -116,23 +116,33 @@ public sealed class GeneratedCampaignRecoveryService
         };
     }
 
-    public GeneratedCampaignRecoveryProjection Project(bool canContinue, string continueReason)
+    public GeneratedCampaignRecoveryProjection Project(
+        GeneratedCampaignSessionStatus status,
+        bool canContinue,
+        string continueReason)
     {
-        if (Checkpoint is null) return new GeneratedCampaignRecoveryProjection();
-        var retryEnabled = !Checkpoint.Invalidated;
-        var disabled = !retryEnabled
-            ? "Точка перед встречей устарела из-за изменения мира."
-            : !canContinue ? continueReason : string.Empty;
+        if (Checkpoint is null && status != GeneratedCampaignSessionStatus.DEFEATED)
+            return new GeneratedCampaignRecoveryProjection();
+        var retryEnabled = Checkpoint is { Invalidated: false };
+        var disabled = Checkpoint is null
+            ? "Нет сохранённой точки перед встречей для повтора."
+            : !retryEnabled
+                ? "Точка перед встречей устарела из-за изменения мира."
+                : !canContinue ? continueReason : string.Empty;
         return new GeneratedCampaignRecoveryProjection
         {
             Available = true,
-            EncounterTitle = Checkpoint.EncounterTitle,
+            EncounterTitle = Checkpoint?.EncounterTitle ?? string.Empty,
             RetryEnabled = retryEnabled,
             ContinueEnabled = canContinue,
             NewGameEnabled = true,
             DisabledReason = disabled
         };
     }
+
+    public GeneratedCampaignRecoveryProjection Project(bool canContinue, string continueReason) =>
+        Project(Checkpoint is null ? GeneratedCampaignSessionStatus.READY : GeneratedCampaignSessionStatus.DEFEATED,
+            canContinue, continueReason);
 
     public IReadOnlyList<GeneratedCampaignAction> RecoveryActions(
         GeneratedCampaignRecoveryProjection recovery) =>

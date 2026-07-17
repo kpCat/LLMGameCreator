@@ -1,0 +1,112 @@
+{
+  "goal": "goal-166-exact-qualified-combat-actions-and-real-recovery-qualification",
+  "goal165IndependentAudit": {
+    "types": ["GeneratedEncounterCombatContractService", "GameProjectGeneratedEncounterCombatQualificationService"],
+    "inputs": ["Goal165 v4 contract", "participant-owned ability list"],
+    "outputs": ["BLOCKED_AT_0027404D", "exact qualified-action catalog"],
+    "behavioralTests": ["Goal166QualifiedActionCatalogTests.Behavioral_mixed_utility_is_excluded"]
+  },
+  "qualifiedCombatActionIdentity": {
+    "types": ["GeneratedEncounterCombatQualifiedAction", "GeneratedEncounterCombatObservedEffect"],
+    "inputs": ["Runtime command result", "exact ability definition", "source role fingerprint"],
+    "outputs": ["deterministically ordered action descriptors", "catalog SHA-256"],
+    "behavioralTests": ["Goal166QualifiedActionCatalogTests.Behavioral_exact_damage_ability_fingerprint_is_recorded"]
+  },
+  "mixedAbilityFailure": {
+    "types": ["GeneratedEncounterCombatContractService", "GameProjectGeneratedEncounterCombatQualificationService"],
+    "inputs": ["utility-first ability list", "damage-later ability"],
+    "outputs": ["utility excluded", "damage selected"],
+    "behavioralTests": ["Goal166MixedAbilityQualificationTests.Behavioral_utility_first_damage_later_uses_damage"]
+  },
+  "contractAndHistoryCompatibility": {
+    "types": ["GeneratedEncounterCombatContract", "GameProjectGeneratedEncounterCombatSummary", "GameProjectBuildHistoryReader"],
+    "inputs": ["v4 build history row", "qualified action count/hash/list"],
+    "outputs": ["current new v4 row", "compatible internally-consistent legacy row"],
+    "behavioralTests": ["Goal166QualifiedActionCatalogTests.Behavioral_legacy_v4_row_remains_compatible"]
+  },
+  "perEncounterActionValidation": {
+    "types": ["GameProjectGeneratedEncounterCombatQualificationService", "GeneratedEncounterCombatQualifiedAction"],
+    "inputs": ["catalog descriptor", "generated encounter Runtime session"],
+    "outputs": ["supported exact effect pass or qualified-action diagnostic"],
+    "behavioralTests": ["Goal166MixedAbilityQualificationTests.Behavioral_qualification_rejects_successful_nonprogressing_utility"]
+  },
+  "tacticalActionProjection": {
+    "types": ["GeneratedCampaignActionPlanner", "GeneratedCampaignTacticalAction", "GeneratedCampaignPageControl"],
+    "inputs": ["current Runtime session", "package ability definition", "qualified action catalog"],
+    "outputs": ["human cost/effect/target/availability summaries", "primary versus support action"],
+    "behavioralTests": ["Goal166TacticalCombatUiTests.Behavioral_utility_is_secondary_and_progressing_action_is_primary"]
+  },
+  "realGeneratedDefeatRoute": {
+    "types": ["GeneratedCampaignSessionService", "IUnifiedGameRuntimeService"],
+    "inputs": ["Goal164 all-selectable generated package", "human StartEncounter action", "bounded Runtime turns"],
+    "outputs": ["checkpoint", "DEFEATED snapshot", "Runtime command transcript"],
+    "behavioralTests": ["Goal166RealDefeatRetryTests.Behavioral_real_generated_defeat_reaches_defeated"]
+  },
+  "retryExactRestoration": {
+    "types": ["GeneratedCampaignRecoveryService", "GeneratedCampaignSessionService"],
+    "inputs": ["pre-encounter JSON checkpoint", "RetryEncounter action"],
+    "outputs": ["exact restored state", "zero Runtime Start", "one StartEncounter"],
+    "behavioralTests": ["Goal166RealDefeatRetryTests.Behavioral_retry_restores_exact_state_before_one_encounter_start"]
+  },
+  "defeatWithoutCheckpoint": {
+    "types": ["GeneratedCampaignRecoveryService", "GeneratedCampaignRecoveryProjection"],
+    "inputs": ["DEFEATED status", "missing checkpoint", "save availability"],
+    "outputs": ["disabled Retry", "available Continue/New Game recovery surface"],
+    "behavioralTests": ["Goal166DefeatWithoutCheckpointTests.Behavioral_defeat_without_checkpoint_keeps_recovery_actions"]
+  },
+  "loadedSessionStatus": {
+    "types": ["GeneratedCampaignSessionService", "GeneratedCampaignRecoveryService"],
+    "inputs": ["loaded Runtime session"],
+    "outputs": ["DEFEATED for defeated encounter", "ACTIVE for normal session"],
+    "behavioralTests": ["Goal166DefeatWithoutCheckpointTests.Behavioral_loaded_defeated_save_stays_defeated"]
+  },
+  "saveAndNewGameRecovery": {
+    "types": ["GeneratedCampaignSessionService", "GeneratedGameplaySaveService"],
+    "inputs": ["CURRENT save", "RecoveryLoad/NewGame action"],
+    "outputs": ["exact loaded state without Runtime Start", "fresh generated start with one Runtime Start"],
+    "behavioralTests": ["Goal166SaveNewGameRecoveryTests.Behavioral_real_save_and_new_game_recovery"]
+  },
+  "staleCheckpoint": {
+    "types": ["GeneratedCampaignRecoveryService", "GeneratedCampaignSessionService"],
+    "inputs": ["truth drift", "RetryEncounter action"],
+    "outputs": ["STALE_PROJECT", "invalidated checkpoint", "zero retry Runtime commands"],
+    "behavioralTests": ["Goal166RealDefeatRetryTests.Behavioral_stale_retry_dispatches_zero_runtime_commands"]
+  },
+  "uiRecoverySurface": {
+    "types": ["GeneratedCampaignPageControl", "GeneratedCampaignProjectionService"],
+    "inputs": ["DEFEATED snapshot", "recovery projection", "tactical actions"],
+    "outputs": ["human recovery controls", "tactical tooltips without raw ids"],
+    "behavioralTests": ["Goal166TacticalCombatUiTests.Behavioral_defeated_ui_has_human_disabled_reason"]
+  },
+  "regressionImmutability": {
+    "types": ["Goal165CombatRouteNeutralityTests", "GameProjectSeedRegenerationCandidateSealService"],
+    "inputs": ["Goal164/165 history", "immutable RC/standalone/source sidecars"],
+    "outputs": ["regression GREEN", "byte-identical immutable artifacts"],
+    "behavioralTests": ["Goal166RegressionImmutabilityTests.Behavioral_immutable_artifacts_and_portable_copy_remain_current"]
+  },
+  "failureMatrix": {
+    "types": ["GeneratedEncounterCombatContractService", "GeneratedCampaignSessionService"],
+    "inputs": ["neither route", "catalog tamper", "no-progress action", "defeated save"],
+    "outputs": ["causal diagnostics", "no synthetic fallback", "recovery-safe projection"],
+    "behavioralTests": ["Goal166QualifiedActionCatalogTests.Behavioral_neither_route_is_rejected", "Goal166DefeatWithoutCheckpointTests.Behavioral_save_is_rejected_when_defeated"],
+    "testInventory": {
+      "discoveredRequired": 48,
+      "behavioralRequired": 42,
+      "files": [
+        "Goal166QualifiedActionCatalogTests: 14",
+        "Goal166MixedAbilityQualificationTests: 13",
+        "Goal166RealDefeatRetryTests: 11",
+        "Goal166SaveNewGameRecoveryTests: 5",
+        "Goal166DefeatWithoutCheckpointTests: 5",
+        "Goal166TacticalCombatUiTests: 6",
+        "Goal166RegressionImmutabilityTests: 5"
+      ]
+    }
+  },
+  "nonGoals": {
+    "types": ["GeneratedCampaignSessionService", "GeneratedCampaignPageControl"],
+    "inputs": ["Application/UI contracts only"],
+    "outputs": ["no Runtime, GamePackage schema, Unity, standalone, RC, source, overlay, or save-schema mutation"],
+    "behavioralTests": ["Goal166RegressionImmutabilityTests.Behavioral_artifact_scope_is_zero"]
+  }
+}

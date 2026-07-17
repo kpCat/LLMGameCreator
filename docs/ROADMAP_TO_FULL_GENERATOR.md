@@ -2,6 +2,8 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
+Goal166 is the current completed product slice and a GREEN acceptable candidate. It closes the Goal165 independent audit P1 by retaining exact qualified combat-action descriptors and proving generated defeat/retry/save/new-game recovery through the production campaign service. Goal166 remains unaccepted and requires an independent audit.
+
 ## Source Of Truth
 
 Before choosing the next milestone, read `docs/CURRENT_GENERATOR_STATE.md` and `docs/CURRENT_GENERATOR_STATE.json`.

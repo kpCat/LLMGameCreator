@@ -35,6 +35,10 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         ArgumentNullException.ThrowIfNull(runtime);
         if (!bindings.Passed)
             return Invalid(contract, overlay, bindings.Diagnostics);
+        if (contract.QualifiedActions.Count == 0)
+            return Invalid(contract, overlay, ["generated_combat.qualified_action_missing"]);
+        if (contract.QualifiedActions.Any(item => !DescriptorDefinitionCurrent(package, item)))
+            return Invalid(contract, overlay, ["generated_combat.qualified_action_definition_changed"]);
         if (bindings.Bindings.Count == 0)
             return new GameProjectGeneratedEncounterCombatSummary
             {
@@ -46,15 +50,15 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var packageBefore = GeneratedEncounterCombatCanonical.Hash(package);
         var ordered = bindings.Bindings.OrderBy(item => item.EncounterSeedId, StringComparer.Ordinal).ToList();
         var routeResults = ordered.Select(binding => ExecuteEncounterRoute(
-            package, binding.PackageEncounterId, runtime, contract.QualificationSummary.RouteMode,
+            package, binding.PackageEncounterId, runtime, contract,
             completeQuest: false)).ToList();
         var representative = SelectRepresentative(package, strictSource, ordered);
         if (representative is null)
             return Invalid(contract, overlay, ["generated_combat.representative_campaign_missing"]);
         var campaign = ExecuteEncounterRoute(package, representative.Binding.PackageEncounterId, runtime,
-            contract.QualificationSummary.RouteMode, completeQuest: true, representative.PreparationEncounterIds);
+            contract, completeQuest: true, representative.PreparationEncounterIds);
         var replay = ExecuteEncounterRoute(package, representative.Binding.PackageEncounterId, runtime,
-            contract.QualificationSummary.RouteMode, completeQuest: true, representative.PreparationEncounterIds);
+            contract, completeQuest: true, representative.PreparationEncounterIds);
         var replayPassed = campaign.Passed && replay.Passed
                            && campaign.ActionKinds.SequenceEqual(replay.ActionKinds, StringComparer.Ordinal)
                            && string.Equals(campaign.FinalStateHash, replay.FinalStateHash, StringComparison.Ordinal)
@@ -115,6 +119,11 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
             BasicAttackPassed = allBasic,
             PackageAbilityPassed = allAbilities,
             PlayerRoutePassed = allPlayerRoutes,
+            QualifiedActionCount = contract.QualifiedActionCount,
+            QualifiedBasicAttackCount = contract.QualifiedBasicAttackCount,
+            QualifiedPackageAbilityCount = contract.QualifiedPackageAbilityCount,
+            QualifiedActionsSha256 = contract.QualifiedActionsSha256,
+            QualifiedActions = contract.QualifiedActions,
             OpponentAiPassed = allAi,
             VictoryPassed = allVictory,
             FleePassed = allFlee,
@@ -146,7 +155,7 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         GamePackageDefinition package,
         string encounterId,
         IUnifiedGameRuntimeService runtime,
-        GeneratedEncounterCombatRouteMode routeMode,
+        GeneratedEncounterCombatContract contract,
         bool completeQuest,
         IReadOnlyList<string>? preparationEncounterIds = null)
     {
@@ -154,8 +163,11 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var diagnostics = new List<string>();
         var actionKinds = new List<string>();
         var frames = new List<GeneratedEncounterCombatRuntimeFrame>();
-        var basicObserved = TrySinglePlayerAction(package, encounterId, runtime, useAbility: false, out var basicAi);
-        var abilityObserved = TrySinglePlayerAction(package, encounterId, runtime, useAbility: true, out var abilityAi);
+        var routeMode = contract.RouteMode;
+        var basicObserved = TrySinglePlayerAction(package, encounterId, runtime, contract,
+            GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK, out var basicAi);
+        var abilityObserved = TrySinglePlayerAction(package, encounterId, runtime, contract,
+            GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY, out var abilityAi);
         var basicRequired = routeMode is GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY
             or GeneratedEncounterCombatRouteMode.BOTH;
         var abilityRequired = routeMode is GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY
@@ -165,15 +177,17 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var ai = basicRequired ? basicAi : abilityRequired ? abilityAi : basicAi || abilityAi;
         var flee = ExecuteFlee(package, encounterId, runtime);
         var victory = ExecuteVictory(package, encounterId, runtime, completeQuest,
-            preparationEncounterIds ?? [], routeMode);
+            preparationEncounterIds ?? [], contract);
         actionKinds.AddRange(victory.ActionKinds);
         frames.AddRange(victory.Frames);
         if (!basic) diagnostics.Add("generated_combat.basic_attack_required_failed");
         if (!ability) diagnostics.Add("generated_combat.package_ability_required_failed");
+        if (basicRequired && !basicObserved || abilityRequired && !abilityObserved)
+            diagnostics.Add("generated_combat.qualified_action_no_progress");
         if (!basicObserved && !abilityObserved) diagnostics.Add("generated_combat.player_route_missing");
         if (!ai) diagnostics.Add("generated_combat.opponent_ai_failed");
         if (!flee) diagnostics.Add("generated_combat.flee_failed");
-        if (!victory.VictoryPassed) diagnostics.Add("generated_combat.victory_failed");
+        if (!victory.VictoryPassed) diagnostics.Add("generated_combat.victory_no_progress");
         diagnostics.AddRange(victory.Diagnostics);
         var packageAfter = GeneratedEncounterCombatCanonical.Hash(package);
         var exact = string.Equals(packageBefore, packageAfter, StringComparison.Ordinal);
@@ -209,7 +223,8 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         GamePackageDefinition package,
         string encounterId,
         IUnifiedGameRuntimeService runtime,
-        bool useAbility,
+        GeneratedEncounterCombatContract contract,
+        GeneratedEncounterCombatQualifiedActionKind actionKind,
         out bool opponentAiPassed)
     {
         opponentAiPassed = false;
@@ -221,17 +236,22 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var player = Current(encounter);
         var target = encounter.Participants.FirstOrDefault(item => item.Alive && !IsPlayer(item.Team));
         if (target is null) return false;
-        var definitions = package.Game.Encounters.Single(item => item.Id == encounterId)
-            .Participants.Single(item => string.Equals(item.Id, player.Id, StringComparison.OrdinalIgnoreCase));
-        var commands = useAbility
-            ? definitions.Abilities.OrderBy(value => value, StringComparer.Ordinal)
-                .Select(ability => GameRuntimeCommand.UseAbility(ability, player.Id, target.Id)).ToList()
-            : [GameRuntimeCommand.BasicAttack(player.Id, target.Id)];
-        foreach (var command in commands)
+        var descriptors = contract.QualifiedActions.Where(item => item.ActionKind == actionKind)
+            .OrderBy(item => item.AbilityId, StringComparer.Ordinal)
+            .ThenBy(item => item.AbilityDefinitionSha256, StringComparer.Ordinal).ToList();
+        foreach (var descriptor in descriptors)
         {
             var attempt = GeneratedEncounterCombatCanonical.Clone(session);
+            var before = GeneratedEncounterCombatCanonical.Clone(attempt);
+            if (!DescriptorDefinitionCurrent(package, descriptor)) continue;
+            var command = actionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK
+                ? GameRuntimeCommand.BasicAttack(player.Id, target.Id)
+                : GameRuntimeCommand.UseAbility(descriptor.AbilityId, player.Id, target.Id);
             var result = runtime.ExecuteGameplayCommand(package, attempt, command);
-            if (!result.Success) continue;
+            if (!result.Success || !GeneratedEncounterCombatContractService.TryObserveSupportedEffect(
+                    package, before, result.Session, target.Id,
+                    actionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY, out var observed)
+                || !GeneratedEncounterCombatContractService.MatchesObservedEffect(descriptor, observed)) continue;
             opponentAiPassed = RunOpponentAi(package, runtime, result.Session);
             return true;
         }
@@ -263,7 +283,7 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         IUnifiedGameRuntimeService runtime,
         bool completeQuest,
         IReadOnlyList<string> preparationEncounterIds,
-        GeneratedEncounterCombatRouteMode routeMode)
+        GeneratedEncounterCombatContract contract)
     {
         var session = Start(package, runtime);
         if (session is null) return VictoryRouteResult.Failed("generated_combat.start_failed");
@@ -293,7 +313,7 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                     var target = encounter.Participants.FirstOrDefault(item => item.Alive && !IsPlayer(item.Team));
                     if (target is null) break;
                     var playerAction = ExecuteVictoryPlayerAction(package, runtime, session,
-                        routeEncounterId, participant.Id, target.Id, routeMode);
+                        routeEncounterId, participant.Id, target.Id, contract);
                     if (playerAction is null)
                         return VictoryRouteResult.Failed("generated_combat.victory_command_failed");
                     result = playerAction.Value.Result;
@@ -406,26 +426,44 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         string encounterId,
         string participantId,
         string targetId,
-        GeneratedEncounterCombatRouteMode routeMode)
+        GeneratedEncounterCombatContract contract)
     {
-        if (routeMode != GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY)
+        var ordered = contract.QualifiedActions
+            .OrderBy(item => item.ActionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK ? 0 : 1)
+            .ThenBy(item => item.AbilityId, StringComparer.Ordinal)
+            .ThenBy(item => item.AbilityDefinitionSha256, StringComparer.Ordinal)
+            .ToList();
+        if (contract.RouteMode == GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY)
+            ordered = ordered.Where(item => item.ActionKind
+                == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY).ToList();
+        foreach (var descriptor in ordered)
         {
-            var basic = runtime.ExecuteGameplayCommand(package, session,
-                GameRuntimeCommand.BasicAttack(participantId, targetId));
-            return basic.Success ? (basic, nameof(GameRuntimeCommandType.BasicAttack)) : null;
-        }
-
-        var participant = package.Game.Encounters.Single(item => item.Id == encounterId).Participants
-            .SingleOrDefault(item => string.Equals(item.Id, participantId, StringComparison.OrdinalIgnoreCase));
-        foreach (var abilityId in participant?.Abilities.OrderBy(value => value, StringComparer.Ordinal)
-                     ?? Enumerable.Empty<string>())
-        {
-            var result = runtime.ExecuteGameplayCommand(package, session,
-                GameRuntimeCommand.UseAbility(abilityId, participantId, targetId));
-            if (result.Success) return (result, nameof(GameRuntimeCommandType.UseAbility));
+            if (!DescriptorDefinitionCurrent(package, descriptor)) continue;
+            var before = GeneratedEncounterCombatCanonical.Clone(session);
+            var command = descriptor.ActionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK
+                ? GameRuntimeCommand.BasicAttack(participantId, targetId)
+                : GameRuntimeCommand.UseAbility(descriptor.AbilityId, participantId, targetId);
+            var result = runtime.ExecuteGameplayCommand(package, session, command);
+            if (!result.Success || !GeneratedEncounterCombatContractService.TryObserveSupportedEffect(
+                    package, before, result.Session, targetId,
+                    descriptor.ActionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY,
+                    out var observed)
+                || !GeneratedEncounterCombatContractService.MatchesObservedEffect(descriptor, observed)) continue;
+            return (result, descriptor.ActionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK
+                ? nameof(GameRuntimeCommandType.BasicAttack) : nameof(GameRuntimeCommandType.UseAbility));
         }
         return null;
     }
+
+    private static bool DescriptorDefinitionCurrent(
+        GamePackageDefinition package,
+        GeneratedEncounterCombatQualifiedAction descriptor) =>
+        descriptor.RuntimeQualificationPassed
+        && (descriptor.ActionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK
+            || (package.Game.Abilities.SingleOrDefault(item => string.Equals(item.Id, descriptor.AbilityId,
+                    StringComparison.Ordinal)) is { } ability
+                && string.Equals(GeneratedEncounterCombatCanonical.Hash(ability), descriptor.AbilityDefinitionSha256,
+                    StringComparison.Ordinal)));
 
     private static UnifiedRuntimeSession? Start(
         GamePackageDefinition package,

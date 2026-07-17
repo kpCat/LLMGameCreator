@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 165 combat route profile neutrality and campaign defeat recovery — GREEN acceptable candidate
+Updated by: Goal 166 exact qualified combat actions and real recovery qualification — GREEN acceptable candidate
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -49,8 +49,8 @@ Goal165 independently records that Goal164 audit as `BLOCKED_AT_15A8F2AB`: the r
 The campaign player now captures an exact in-memory JSON checkpoint immediately before a successful encounter start. Genuine Runtime defeat enters `DEFEATED` and shows `Поражение` with `Повторить встречу`, `Продолжить с сохранения` and `Начать новую игру`. Retry restores exact map, inventory, quest and reputation truth, invokes Runtime Start zero times and dispatches `StartEncounter` once. Exact save recovery invokes Runtime Start zero times; New Game invokes it once. Checkpoints clear on victory, flee, successful load/migration and new game, and truth drift yields `STALE_PROJECT` before any Runtime command. The physical portable core-only copy has no operational pointer and never claims RC readiness. Goal165 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
 
 ```text
-gate_status=goal165_green_combat_route_profile_neutrality_and_campaign_defeat_recovery
-current_user_action=independent_goal165_audit_and_plan_campaign_choice_branching
+gate_status=goal166_green_exact_qualified_combat_actions_and_real_recovery_qualification
+current_user_action=independent_goal166_audit_and_plan_campaign_choice_branching
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -417,7 +417,30 @@ goal165AcceptedByHuman=false
 goal165AcceptedByCodex=false
 goal165ManualReviewRequired=false
 goal165ManualGateReady=false
-goal165IndependentAuditRequired=true
+goal165IndependentAuditRequired=false
+goal165IndependentAuditResult=BLOCKED_AT_0027404D
+goal165IndependentAuditBlocker=qualified_package_ability_identity_is_discarded_and_later_qualification_accepts_or_selects_the_first_successful_nonprogressing_ability
+goal165IndependentAuditEvidenceGap=defeat_retry_save_and_new_game_evidence_is_not_end_to_end_through_generated_campaign_session_service
+goal165AuditBlocker=closed_by_goal166
+goal166ImplementationStatus=GREEN
+goal166CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal166Accepted=false
+goal166AcceptedByHuman=false
+goal166AcceptedByCodex=false
+goal166ManualReviewRequired=false
+goal166ManualGateReady=false
+goal166IndependentAuditRequired=true
+goal166QualifiedActionCatalogPassed=true
+goal166MixedAbilityQualificationPassed=true
+goal166RealDefeatRetryPassed=true
+goal166SaveRecoveryPassed=true
+goal166NewGameRecoveryPassed=true
+goal166DefeatWithoutCheckpointPassed=true
+goal166PlayerProcessStartCount=0
+goal166UnityEditorProcessStartCount=0
+goal166StandaloneBuildInvocationCount=0
+goal166ArtifactScopeViolationCount=0
+nextAction=independent_goal166_audit_and_plan_campaign_choice_branching
 goal165BothRoutePassed=true
 goal165BasicAttackOnlyPassed=true
 goal165AbilityOnlyPassed=true

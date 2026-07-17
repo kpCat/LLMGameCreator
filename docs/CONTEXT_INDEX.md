@@ -454,6 +454,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 
 ## Current Next Work
 
+Goal166 closes the Goal165 independent P1: exact combat-action identity is retained through qualification/history/seal, utility actions are secondary, and real generated defeat/retry/save/new-game recovery is covered through the production session service. Goal166 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
+
 Recommended next work:
 
 ```text

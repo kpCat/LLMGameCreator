@@ -155,6 +155,7 @@ public sealed class GameProjectBuildHistoryReader
             ReplayPassed: true
         } combat
         && RouteEligible(combat)
+        && QualifiedActionCatalogEligible(combat)
         && combat.QualifiedEncounterCount == combat.GeneratedEncounterCount
         && string.Equals(combat.ExactPackageSha256, entry.PackageSha256, StringComparison.Ordinal)
         && string.Equals(combat.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal);
@@ -177,6 +178,42 @@ public sealed class GameProjectBuildHistoryReader
             && combat.BasicAttackPassed && combat.PackageAbilityPassed,
         _ => false
     };
+
+    private static bool QualifiedActionCatalogEligible(GameProjectGeneratedEncounterCombatSummary combat)
+    {
+        var catalogDeclared = combat.QualifiedActionCount > 0
+                              || !string.IsNullOrWhiteSpace(combat.QualifiedActionsSha256)
+                              || combat.QualifiedActions.Count > 0;
+        if (!catalogDeclared)
+            return true; // Goal164/165 v4 rows precede the exact catalog and retain route truth only.
+        var actions = combat.QualifiedActions.OrderBy(item => item.ActionKind)
+            .ThenBy(item => item.AbilityId, StringComparer.Ordinal)
+            .ThenBy(item => item.AbilityDefinitionSha256, StringComparer.Ordinal)
+            .ThenBy(item => item.ObservedEffect.Fingerprint, StringComparer.Ordinal).ToList();
+        var basic = actions.Count(item => item.ActionKind
+            == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK);
+        var abilities = actions.Count(item => item.ActionKind
+            == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY);
+        var mode = (basic > 0, abilities > 0) switch
+        {
+            (true, true) => GeneratedEncounterCombatRouteMode.BOTH,
+            (true, false) => GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY,
+            (false, true) => GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY,
+            _ => GeneratedEncounterCombatRouteMode.NONE
+        };
+        return actions.Count > 0
+               && combat.QualifiedActionCount == actions.Count
+               && combat.QualifiedBasicAttackCount == basic
+               && combat.QualifiedPackageAbilityCount == abilities
+               && string.Equals(combat.QualifiedActionsSha256, GeneratedEncounterCombatCanonical.Hash(actions),
+                   StringComparison.Ordinal)
+               && combat.RouteMode == mode
+               && actions.All(item => item.RuntimeQualificationPassed
+                   && (item.ActionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK
+                       ? string.IsNullOrWhiteSpace(item.AbilityId)
+                       : !string.IsNullOrWhiteSpace(item.AbilityId)
+                         && !string.IsNullOrWhiteSpace(item.AbilityDefinitionSha256)));
+    }
 
     private static GameProjectGeneratedWorldSummary? ProjectGeneratedWorld(GameProjectBuildHistoryEntry entry)
     {

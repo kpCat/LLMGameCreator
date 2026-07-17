@@ -1,5 +1,7 @@
 # Release Risk Register
 
+Goal166 risk update: combat contracts now retain the exact BasicAttack/package-ability actions that progressed an encounter. Mixed utility/damage lists cannot create a false victory route; checkpoints remain in-memory by design and are intentionally lost on restart.
+
 Status: Goal 097 planning register
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
 Accepted: false

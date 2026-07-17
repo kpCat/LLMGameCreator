@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
+using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.Application.Generation.Procedural;
 
@@ -14,6 +15,35 @@ public enum GeneratedEncounterCombatRouteMode
     BASIC_ATTACK_ONLY,
     PACKAGE_ABILITY_ONLY,
     BOTH
+}
+
+public enum GeneratedEncounterCombatQualifiedActionKind
+{
+    BASIC_ATTACK,
+    PACKAGE_ABILITY
+}
+
+public sealed record GeneratedEncounterCombatObservedEffect
+{
+    public string EffectClass { get; init; } = string.Empty;
+    public string Fingerprint { get; init; } = string.Empty;
+    public IReadOnlyList<string> TargetResourceIds { get; init; } = [];
+    public IReadOnlyList<string> TargetStatIds { get; init; } = [];
+    public IReadOnlyList<string> TargetStatusIds { get; init; } = [];
+}
+
+public sealed record GeneratedEncounterCombatQualifiedAction
+{
+    public GeneratedEncounterCombatQualifiedActionKind ActionKind { get; init; }
+    public string AbilityId { get; init; } = string.Empty;
+    public string AbilityDefinitionSha256 { get; init; } = string.Empty;
+    public string SourceParticipantRoleFingerprint { get; init; } = string.Empty;
+    public GeneratedEncounterCombatObservedEffect ObservedEffect { get; init; } = new();
+    public IReadOnlyList<string> TargetResourceIds { get; init; } = [];
+    public IReadOnlyList<string> TargetStatIds { get; init; } = [];
+    public IReadOnlyList<string> TargetStatusIds { get; init; } = [];
+    public GameRuntimeCommandType RuntimeCommandType { get; init; }
+    public bool RuntimeQualificationPassed { get; init; }
 }
 
 public sealed record GeneratedEncounterCombatDefinitionFingerprint
@@ -52,6 +82,11 @@ public sealed record GeneratedEncounterCombatContractQualificationSummary
     public bool ControlReturnedOrEncounterTerminated { get; init; }
     public bool ExactPackageReferencePassed { get; init; }
     public bool PackageShaUnchanged { get; init; }
+    public int QualifiedActionCount { get; init; }
+    public int QualifiedBasicAttackCount { get; init; }
+    public int QualifiedPackageAbilityCount { get; init; }
+    public string QualifiedActionsSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedEncounterCombatQualifiedAction> QualifiedActions { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
@@ -72,6 +107,11 @@ public sealed record GeneratedEncounterCombatContract
     public bool PackageAbilityRequired { get; init; }
     public bool PackageAbilityPassed { get; init; }
     public bool PlayerRoutePassed { get; init; }
+    public int QualifiedActionCount { get; init; }
+    public int QualifiedBasicAttackCount { get; init; }
+    public int QualifiedPackageAbilityCount { get; init; }
+    public string QualifiedActionsSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedEncounterCombatQualifiedAction> QualifiedActions { get; init; } = [];
     public IReadOnlyList<GeneratedEncounterCombatDefinitionFingerprint> ExactDefinitionFingerprints { get; init; } = [];
     public GeneratedEncounterCombatContractQualificationSummary QualificationSummary { get; init; } = new();
 }
@@ -156,6 +196,11 @@ public sealed record GameProjectGeneratedEncounterCombatSummary
     public bool BasicAttackPassed { get; init; }
     public bool PackageAbilityPassed { get; init; }
     public bool PlayerRoutePassed { get; init; }
+    public int QualifiedActionCount { get; init; }
+    public int QualifiedBasicAttackCount { get; init; }
+    public int QualifiedPackageAbilityCount { get; init; }
+    public string QualifiedActionsSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedEncounterCombatQualifiedAction> QualifiedActions { get; init; } = [];
     public bool OpponentAiPassed { get; init; }
     public bool VictoryPassed { get; init; }
     public bool FleePassed { get; init; }

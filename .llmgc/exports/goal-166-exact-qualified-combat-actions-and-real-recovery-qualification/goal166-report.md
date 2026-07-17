@@ -1,0 +1,3 @@
+# Goal166 report
+
+Status: GREEN. Exact qualified combat actions are catalogued deterministically; utility/no-op actions are excluded from victory qualification. The focused suite reports 59/59 behavioral tests. The production generated campaign route reaches DEFEATED, retries with Runtime Start delta 0 and StartEncounter delta 1, restores a real saved ACTIVE session, starts a real fresh session for New Game, and rejects stale retry before dispatch. Save/new-game and no-checkpoint recovery remain available with truthful status and disabled reasons. Player, Unity and standalone counts are zero; immutable artifacts and scope remain green. Goal166 is not accepted and requires independent audit.

@@ -1,5 +1,7 @@
 # Generator Strategy Reset: Playable Procedural Generator
 
+Goal166 update: exact qualified combat-action descriptors remain Application-layer contract truth, while tactical UI stays a projection over package/runtime state. Recovery is now proven through the production campaign service; persisted checkpoints and campaign choice branching remain separate tasks.
+
 Goal165 update: the player-facing campaign keeps exact package dispatch while combat contracts explicitly preserve the profile's actual player route: BasicAttack-only, package-ability-only or both. Defeat recovery restores a verified in-memory pre-encounter session through existing Runtime commands, never changes Runtime definitions or save schema, and fails stale truth before dispatch. Goal165 is unaccepted, has no manual gate and requires independent audit.
 
 Status: source-of-truth strategy pivot  

@@ -1,5 +1,7 @@
 # Full Generator Goal Queue
 
+- Goal 166 exact qualified combat actions and real recovery qualification: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, no manual gate, independent audit required. It records and closes the Goal165 exact-action/evidence audit P1, preserves route modes, makes utility actions secondary, and proves real production-session defeat/retry/save/new-game recovery with zero Player/Unity/standalone execution.
+
 - Goal 165 combat route profile neutrality and campaign defeat recovery: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, no manual gate, independent audit required. It closes the Goal164 single-route audit P1 (`BLOCKED_AT_15A8F2AB`) with typed BasicAttack-only, package-ability-only and both-route truth, vacuous optional-route passing and v4 compatibility. It adds in-memory exact checkpoint retry, save/new-game recovery and truthful `DEFEATED` UI without Runtime, GamePackage, save-schema, Unity, standalone or RC implementation changes. Next action is `independent_goal165_audit_and_plan_campaign_choice_branching`.
 
 - Goal 163 package-truth campaign combat, manual turn-in and consequence depth: implementation is now `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, no human gate. Its independent audit blocker at `d5d614a8` is closed by Goal164; exact package dispatch, quest readiness/turn-in and consequence semantics remain preserved.

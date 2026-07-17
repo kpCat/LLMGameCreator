@@ -1,5 +1,7 @@
 # Milestone Gates
 
+Goal166 independent audit is required before campaign choice branching. Exact qualified combat-action catalog, real recovery evidence and zero-scope/process evidence are automated; no human acceptance is implied.
+
 Status: Goal 097 acceptance-gate plan
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
 Accepted: false

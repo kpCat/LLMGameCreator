@@ -1,4 +1,6 @@
 using System.Text.Json;
+using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
+using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.GamePackage;
@@ -100,9 +102,7 @@ public sealed class GeneratedCampaignSessionService
 
     public GeneratedCampaignSnapshot StartNew()
     {
-        var recoveryCheckpoint = _status == GeneratedCampaignSessionStatus.DEFEATED
-            ? _recovery.Checkpoint
-            : null;
+        var recoveryNewGame = _status == GeneratedCampaignSessionStatus.DEFEATED;
         var recoveryBefore = _session?.RuntimeSession;
         var captured = _truths.Capture();
         var package = _currentProject.CurrentPackage;
@@ -149,14 +149,15 @@ public sealed class GeneratedCampaignSessionService
             return Snapshot(captured.Truth);
         }
 
-        _session = new GeneratedCampaignSession(captured.Truth, package, runtimeSession, "campaign");
+        _session = new GeneratedCampaignSession(captured.Truth, package, runtimeSession, "campaign",
+            QualifiedActionsFor(captured.Truth));
         _status = GeneratedCampaignSessionStatus.ACTIVE;
         _diagnostics = [];
         _saveState = new GeneratedCampaignSaveState { Slot = "campaign" };
         _lastActionOutcome = null;
         _consequenceTimeline.Clear();
         _recovery.Clear();
-        if (recoveryCheckpoint is not null)
+        if (recoveryNewGame)
         {
             RecordOutcome(_consequenceProjector.ProjectRecovery(
                 GeneratedCampaignConsequenceKind.NewGame,
@@ -306,6 +307,10 @@ public sealed class GeneratedCampaignSessionService
         var readinessAfter = _questReadiness.EvaluateAll(_session.Package, after);
         var mapEvents = results.SelectMany(item => item.UnifiedRuntimeResult.MapEvents).ToList();
         var gameplayEvents = results.SelectMany(item => item.UnifiedRuntimeResult.GameplayEvents).ToList();
+        if (_diagnostics.Count == 0 && (planned.Action.Kind is GeneratedCampaignActionKind.BasicAttack
+            or GeneratedCampaignActionKind.UseAbility)
+            && results.All(item => item.Passed) && !SessionStateChanged(before, after))
+            _diagnostics = ["campaign.tactical_action_no_effect"];
         var success = _diagnostics.Count == 0 && results.All(item => item.Passed);
         RecordOutcome(_consequenceProjector.ProjectAction(
             _session.Package, before, after, mapEvents, gameplayEvents, planned.Action,
@@ -348,6 +353,12 @@ public sealed class GeneratedCampaignSessionService
             _diagnostics = ["campaign.project_truth_changed"];
             return Snapshot(captured.Truth);
         }
+        if (_status != GeneratedCampaignSessionStatus.ACTIVE)
+        {
+            _diagnostics = ["campaign.save_not_available"];
+            RecordOutcome(_consequenceProjector.ProjectFailure("Сохранить игру", _session.RuntimeSession, _diagnostics));
+            return Snapshot(captured.Truth);
+        }
 
         var result = _saves.Save(_session.Truth.ProjectFolder, slotName, _session.RuntimeSession);
         _diagnostics = result.Passed ? [] : result.Diagnostics.ToList();
@@ -374,8 +385,7 @@ public sealed class GeneratedCampaignSessionService
 
     public GeneratedCampaignSnapshot Continue(string slotName)
     {
-        var recoveryLoad = _status == GeneratedCampaignSessionStatus.DEFEATED
-            && _recovery.Checkpoint is not null;
+        var recoveryLoad = _status == GeneratedCampaignSessionStatus.DEFEATED;
         var recoveryBefore = _session?.RuntimeSession;
         var captured = _truths.Capture();
         var package = _currentProject.CurrentPackage;
@@ -399,8 +409,11 @@ public sealed class GeneratedCampaignSessionService
             return Snapshot(captured.Truth);
         }
 
-        _session = new GeneratedCampaignSession(captured.Truth, package, result.Session, slotName);
-        _status = GeneratedCampaignSessionStatus.ACTIVE;
+        _session = new GeneratedCampaignSession(captured.Truth, package, result.Session, slotName,
+            QualifiedActionsFor(captured.Truth));
+        _status = GeneratedCampaignRecoveryService.IsDefeat(result.Session)
+            ? GeneratedCampaignSessionStatus.DEFEATED
+            : GeneratedCampaignSessionStatus.ACTIVE;
         _diagnostics = [];
         _recentEvents = ["Сохранённая игра продолжена."];
         UpdateSaveState(slotName, "Загружено");
@@ -468,8 +481,11 @@ public sealed class GeneratedCampaignSessionService
             return Snapshot(captured.Truth);
         }
 
-        _session = new GeneratedCampaignSession(captured.Truth, package, result.Session, preview.SlotName);
-        _status = GeneratedCampaignSessionStatus.ACTIVE;
+        _session = new GeneratedCampaignSession(captured.Truth, package, result.Session, preview.SlotName,
+            QualifiedActionsFor(captured.Truth));
+        _status = GeneratedCampaignRecoveryService.IsDefeat(result.Session)
+            ? GeneratedCampaignSessionStatus.DEFEATED
+            : GeneratedCampaignSessionStatus.ACTIVE;
         _diagnostics = [];
         _recovery.Clear();
         _recentEvents = ["Сохранение перенесено в текущий мир и продолжено."];
@@ -685,13 +701,13 @@ public sealed class GeneratedCampaignSessionService
         var package = _session?.Package ?? _currentProject.CurrentPackage;
         var runtimeSession = _session?.RuntimeSession;
         var (canContinue, continueReason) = RecoverySaveAvailability();
-        var recovery = _recovery.Project(canContinue, continueReason);
+        var recovery = _recovery.Project(_status, canContinue, continueReason);
         var actions = _status == GeneratedCampaignSessionStatus.DEFEATED
             ? _recovery.RecoveryActions(recovery)
             : _status == GeneratedCampaignSessionStatus.ACTIVE
               && package is not null
               && runtimeSession is not null
-                ? _planner.Plan(package, runtimeSession).Select(item => item.Action).ToList()
+                ? _planner.Plan(package, runtimeSession, _session?.QualifiedActions).Select(item => item.Action).ToList()
                 : [];
         IReadOnlyList<GeneratedCampaignQuestReadiness> readiness = package is null || runtimeSession is null
             ? []
@@ -730,6 +746,48 @@ public sealed class GeneratedCampaignSessionService
     private static UnifiedRuntimeSession CopySession(UnifiedRuntimeSession session) =>
         JsonSerializer.Deserialize<UnifiedRuntimeSession>(JsonSerializer.Serialize(session))
         ?? throw new InvalidOperationException("Campaign session snapshot could not be copied.");
+
+    private static bool SessionStateChanged(UnifiedRuntimeSession before, UnifiedRuntimeSession after)
+    {
+        var left = before.GameplayState.ActiveEncounter?.Participants.Select(item => new
+        {
+            item.Id,
+            item.Alive,
+            Resources = item.Resources.OrderBy(value => value.ResourceId, StringComparer.Ordinal),
+            Stats = item.Stats.OrderBy(value => value.StatId, StringComparer.Ordinal),
+            Statuses = item.Statuses.OrderBy(value => value.StatusId, StringComparer.Ordinal)
+        }).ToList() ?? [];
+        var right = after.GameplayState.ActiveEncounter?.Participants.Select(item => new
+        {
+            item.Id,
+            item.Alive,
+            Resources = item.Resources.OrderBy(value => value.ResourceId, StringComparer.Ordinal),
+            Stats = item.Stats.OrderBy(value => value.StatId, StringComparer.Ordinal),
+            Statuses = item.Statuses.OrderBy(value => value.StatusId, StringComparer.Ordinal)
+        }).ToList() ?? [];
+        return !string.Equals(JsonSerializer.Serialize(left), JsonSerializer.Serialize(right),
+            StringComparison.Ordinal);
+    }
+
+    private static IReadOnlyList<GeneratedEncounterCombatQualifiedAction> QualifiedActionsFor(
+        GeneratedCampaignProjectTruth truth)
+    {
+        if (string.IsNullOrWhiteSpace(truth.SelectedBuildHistoryFileName)) return [];
+        try
+        {
+            var path = GameProjectFeatureModuleAuthoringService.ConfinedPath(truth.ProjectFolder,
+                UnifiedGameProjectWorkspaceVocabulary.BuildHistoryRelativeRoot + "/"
+                + truth.SelectedBuildHistoryFileName);
+            var history = JsonSerializer.Deserialize<GameProjectBuildHistoryEntry>(File.ReadAllText(path),
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return history?.GeneratedEncounterCombat?.QualifiedActions ?? [];
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or JsonException
+                                           or InvalidOperationException)
+        {
+            return [];
+        }
+    }
 
     private static bool IsQuestCausal(GeneratedCampaignActionKind kind) => kind is
         GeneratedCampaignActionKind.Interact

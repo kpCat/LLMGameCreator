@@ -1,0 +1,1 @@
+{"passed":true,"route":"StartEncounter -> Runtime defeat -> DEFEATED -> Retry","checkpointCapturedBeforeStart":true,"retryRuntimeStartDelta":0,"retryStartEncounterDelta":1,"exactRestore":true,"staleRetryRuntimeCommandCount":0}

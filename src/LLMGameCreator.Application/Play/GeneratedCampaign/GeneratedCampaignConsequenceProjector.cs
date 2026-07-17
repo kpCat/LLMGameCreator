@@ -26,6 +26,7 @@ public sealed class GeneratedCampaignConsequenceProjector
         ArgumentNullException.ThrowIfNull(after);
         ArgumentNullException.ThrowIfNull(action);
         var rows = new List<GeneratedCampaignConsequence>();
+        var tacticalStart = rows.Count;
         ProjectParticipantResources(package, before, after, rows);
         ProjectParticipantStatuses(package, before, after, rows);
         ProjectInventory(package, before.GameplayState, after.GameplayState, rows);
@@ -35,6 +36,20 @@ public sealed class GeneratedCampaignConsequenceProjector
         ProjectMap(package, before, after, mapEvents, rows);
         ProjectEncounter(package, before, after, gameplayEvents, action, rows);
         ProjectEventConsequences(gameplayEvents, rows);
+        if (success && (action.Kind is GeneratedCampaignActionKind.BasicAttack
+            or GeneratedCampaignActionKind.UseAbility) && rows.Count > tacticalStart)
+        {
+            rows.Add(new GeneratedCampaignConsequence
+            {
+                Kind = GeneratedCampaignConsequenceKind.TacticalAction,
+                Title = action.Title,
+                BeforeValue = action.TargetTitle,
+                AfterValue = rows.Skip(tacticalStart).Any(item => item.Kind == GeneratedCampaignConsequenceKind.Status)
+                    ? "Эффект применён" : "Состояние изменено",
+                Description = "Результат действия подтверждён изменением состояния встречи.",
+                Tone = GeneratedCampaignConsequenceTone.Neutral
+            });
+        }
         if (!success)
         {
             rows.Add(new GeneratedCampaignConsequence

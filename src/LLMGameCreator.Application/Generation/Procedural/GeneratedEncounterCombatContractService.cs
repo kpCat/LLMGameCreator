@@ -114,6 +114,11 @@ public sealed class GeneratedEncounterCombatContractService
             PackageAbilityRequired = selected.Qualification.PackageAbilityRequired,
             PackageAbilityPassed = selected.Qualification.PackageAbilityPassed,
             PlayerRoutePassed = selected.Qualification.PlayerRoutePassed,
+            QualifiedActionCount = selected.Qualification.QualifiedActionCount,
+            QualifiedBasicAttackCount = selected.Qualification.QualifiedBasicAttackCount,
+            QualifiedPackageAbilityCount = selected.Qualification.QualifiedPackageAbilityCount,
+            QualifiedActionsSha256 = selected.Qualification.QualifiedActionsSha256,
+            QualifiedActions = selected.Qualification.QualifiedActions,
             ExactDefinitionFingerprints = definitionFingerprints,
             QualificationSummary = selected.Qualification
         };
@@ -138,14 +143,30 @@ public sealed class GeneratedEncounterCombatContractService
     {
         var packageBefore = GeneratedEncounterCombatCanonical.Hash(package);
         var diagnostics = new List<string>();
-        var basic = TryPlayerRoute(package, runtime, pair, useAbility: false, out var basicSession);
-        var ability = pair.Player.Abilities.Count > 0
-                      && TryPlayerRoute(package, runtime, pair, useAbility: true, out _);
-        var routeMode = ResolveRouteMode(basic, ability);
-        var routeSession = basicSession;
-        var playerRoute = basic;
-        if (!playerRoute)
-            playerRoute = TryPlayerRoute(package, runtime, pair, useAbility: true, out routeSession);
+        var qualified = new List<GeneratedEncounterCombatQualifiedAction>();
+        var basic = TryPlayerRoute(package, runtime, pair,
+            GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK, string.Empty,
+            out var basicSession, out var basicAction);
+        if (basicAction is not null) qualified.Add(basicAction);
+        UnifiedRuntimeSession? routeSession = basicSession;
+        foreach (var abilityId in pair.Player.Abilities.OrderBy(value => value, StringComparer.Ordinal))
+        {
+            var ability = TryPlayerRoute(package, runtime, pair,
+                GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY, abilityId,
+                out var abilitySession, out var abilityAction);
+            if (!ability || abilityAction is null) continue;
+            qualified.Add(abilityAction);
+            routeSession ??= abilitySession;
+        }
+        qualified = qualified.OrderBy(item => item.ActionKind)
+            .ThenBy(item => item.AbilityId, StringComparer.Ordinal)
+            .ThenBy(item => item.AbilityDefinitionSha256, StringComparer.Ordinal)
+            .ThenBy(item => item.ObservedEffect.Fingerprint, StringComparer.Ordinal)
+            .ToList();
+        var hasBasic = qualified.Any(item => item.ActionKind == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK);
+        var hasAbility = qualified.Any(item => item.ActionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY);
+        var routeMode = ResolveRouteMode(hasBasic, hasAbility);
+        var playerRoute = qualified.Count > 0;
         var ai = playerRoute && routeSession is not null
             ? QualifyOpponentAi(package, runtime, routeSession, out var aiEffect, out var returned)
             : (Passed: false, Effect: false, Returned: false);
@@ -154,24 +175,31 @@ public sealed class GeneratedEncounterCombatContractService
         if (!ai.Passed) diagnostics.Add("generated_combat.opponent_route_missing");
         return new GeneratedEncounterCombatContractQualificationSummary
         {
-            StartEncounterPassed = basicSession is not null || routeSession is not null,
+            StartEncounterPassed = routeSession is not null,
             RouteMode = routeMode,
-            BasicAttackAvailable = basic,
+            BasicAttackAvailable = hasBasic,
             BasicAttackRequired = routeMode is GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY
                 or GeneratedEncounterCombatRouteMode.BOTH,
             PackageAbilityRequired = routeMode is GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY
                 or GeneratedEncounterCombatRouteMode.BOTH,
-            PackageAbilityAvailable = ability,
+            PackageAbilityAvailable = hasAbility,
             BasicAttackPassed = routeMode is GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY
-                || basic,
+                || hasBasic,
             PackageAbilityPassed = routeMode is GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY
-                || ability,
+                || hasAbility,
             PlayerRoutePassed = playerRoute,
             OpponentAiPassed = ai.Passed,
             OpponentEffectObserved = ai.Effect,
             ControlReturnedOrEncounterTerminated = ai.Returned,
             ExactPackageReferencePassed = true,
             PackageShaUnchanged = string.Equals(packageBefore, packageAfter, StringComparison.Ordinal),
+            QualifiedActionCount = qualified.Count,
+            QualifiedBasicAttackCount = qualified.Count(item => item.ActionKind
+                == GeneratedEncounterCombatQualifiedActionKind.BASIC_ATTACK),
+            QualifiedPackageAbilityCount = qualified.Count(item => item.ActionKind
+                == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY),
+            QualifiedActionsSha256 = GeneratedEncounterCombatCanonical.Hash(qualified),
+            QualifiedActions = qualified,
             Diagnostics = diagnostics
         };
     }
@@ -189,10 +217,13 @@ public sealed class GeneratedEncounterCombatContractService
         GamePackageDefinition package,
         IUnifiedGameRuntimeService runtime,
         RolePair pair,
-        bool useAbility,
-        out UnifiedRuntimeSession? resultingSession)
+        GeneratedEncounterCombatQualifiedActionKind actionKind,
+        string abilityId,
+        out UnifiedRuntimeSession? resultingSession,
+        out GeneratedEncounterCombatQualifiedAction? qualifiedAction)
     {
         resultingSession = null;
+        qualifiedAction = null;
         var start = runtime.Start(package);
         if (!start.Success) return false;
         var encounter = runtime.ExecuteGameplayCommand(package, start.Session,
@@ -204,21 +235,35 @@ public sealed class GeneratedEncounterCombatContractService
         var targets = prepared.GameplayState.ActiveEncounter?.Participants
             .Where(item => item.Alive && !IsPlayer(item.Team))
             .OrderBy(item => item.Id, StringComparer.Ordinal).ToList() ?? [];
-        var abilities = useAbility
-            ? pair.Player.Abilities.OrderBy(value => value, StringComparer.Ordinal).ToList()
-            : [string.Empty];
-        foreach (var ability in abilities)
         foreach (var target in targets)
         {
             var attempt = GeneratedEncounterCombatCanonical.Clone(prepared);
-            var before = RuntimeHealth(attempt, package, playerTeam: false);
-            var command = useAbility
-                ? GameRuntimeCommand.UseAbility(ability, pair.Player.Id, target.Id)
+            var before = GeneratedEncounterCombatCanonical.Clone(attempt);
+            var command = actionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY
+                ? GameRuntimeCommand.UseAbility(abilityId, pair.Player.Id, target.Id)
                 : GameRuntimeCommand.BasicAttack(pair.Player.Id, target.Id);
             var result = runtime.ExecuteGameplayCommand(package, attempt, command);
-            if (!result.Success || !HealthChanged(before, RuntimeHealth(result.Session, package, playerTeam: false)))
+            if (!result.Success || !TryObserveSupportedEffect(package, before, result.Session, target.Id,
+                    actionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY, out var observed))
                 continue;
             resultingSession = result.Session;
+            var abilitySha = actionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY
+                ? GeneratedEncounterCombatCanonical.Hash(package.Game.Abilities.Single(item => item.Id == abilityId))
+                : string.Empty;
+            qualifiedAction = new GeneratedEncounterCombatQualifiedAction
+            {
+                ActionKind = actionKind,
+                AbilityId = actionKind == GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY
+                    ? abilityId : string.Empty,
+                AbilityDefinitionSha256 = abilitySha,
+                SourceParticipantRoleFingerprint = pair.PlayerRole.RoleFingerprint,
+                ObservedEffect = observed,
+                TargetResourceIds = observed.TargetResourceIds,
+                TargetStatIds = observed.TargetStatIds,
+                TargetStatusIds = observed.TargetStatusIds,
+                RuntimeCommandType = command.Type,
+                RuntimeQualificationPassed = true
+            };
             return true;
         }
         return false;
@@ -374,23 +419,65 @@ public sealed class GeneratedEncounterCombatContractService
         || string.Equals(definition.Kind, "health", StringComparison.OrdinalIgnoreCase)
         || definition.Tags.Any(tag => string.Equals(tag, "health", StringComparison.OrdinalIgnoreCase));
 
-    private static IReadOnlyDictionary<string, double> RuntimeHealth(
-        UnifiedRuntimeSession session,
+    internal static bool TryObserveSupportedEffect(
         GamePackageDefinition package,
-        bool playerTeam) => session.GameplayState.ActiveEncounter?.Participants
-        .Where(item => IsPlayer(item.Team) == playerTeam)
-        .SelectMany(participant => participant.Resources
-            .Where(resource => package.Game.Resources.Any(definition => definition.Id == resource.ResourceId
-                                                                    && IsRuntimeHealth(definition)))
-            .Select(resource => new KeyValuePair<string, double>(participant.Id + "|" + resource.ResourceId,
-                resource.Amount)))
-        .ToDictionary(item => item.Key, item => item.Value, StringComparer.Ordinal)
-        ?? new Dictionary<string, double>(StringComparer.Ordinal);
+        UnifiedRuntimeSession before,
+        UnifiedRuntimeSession after,
+        string targetParticipantId,
+        bool allowNonHealth,
+        out GeneratedEncounterCombatObservedEffect observed)
+    {
+        observed = new GeneratedEncounterCombatObservedEffect();
+        var oldTarget = before.GameplayState.ActiveEncounter?.Participants
+            .SingleOrDefault(item => string.Equals(item.Id, targetParticipantId, StringComparison.Ordinal));
+        var newTarget = after.GameplayState.ActiveEncounter?.Participants
+            .SingleOrDefault(item => string.Equals(item.Id, targetParticipantId, StringComparison.Ordinal));
+        if (oldTarget is null || newTarget is null || IsPlayer(newTarget.Team)) return false;
 
-    private static bool HealthChanged(
-        IReadOnlyDictionary<string, double> before,
-        IReadOnlyDictionary<string, double> after) => before.Any(item => after.TryGetValue(item.Key, out var value)
-                                                                         && value < item.Value);
+        var damagedResources = newTarget.Resources.Where(resource => package.Game.Resources.Any(definition =>
+                string.Equals(definition.Id, resource.ResourceId, StringComparison.Ordinal)
+                && IsRuntimeHealth(definition)))
+            .Where(resource => oldTarget.Resources.SingleOrDefault(previous =>
+                string.Equals(previous.ResourceId, resource.ResourceId, StringComparison.Ordinal)) is { } previous
+                               && resource.Amount < previous.Amount)
+            .Select(resource => resource.ResourceId).OrderBy(value => value, StringComparer.Ordinal).ToList();
+        var changedStats = newTarget.Stats.Where(stat => oldTarget.Stats.SingleOrDefault(previous =>
+                string.Equals(previous.StatId, stat.StatId, StringComparison.Ordinal)) is { } previous
+                         && stat.Value != previous.Value)
+            .Select(stat => stat.StatId).OrderBy(value => value, StringComparer.Ordinal).ToList();
+        var changedStatuses = newTarget.Statuses.Where(status => oldTarget.Statuses.All(previous =>
+                !string.Equals(previous.StatusId, status.StatusId, StringComparison.Ordinal)
+                || GeneratedEncounterCombatCanonical.Hash(previous) != GeneratedEncounterCombatCanonical.Hash(status)))
+            .Select(status => status.StatusId).OrderBy(value => value, StringComparer.Ordinal).ToList();
+        var effectClass = damagedResources.Count > 0 ? "TARGET_HEALTH_DECREASE"
+            : changedStats.Count > 0 ? "TARGET_STAT_CHANGED"
+            : changedStatuses.Count > 0 ? "TARGET_STATUS_CHANGED" : string.Empty;
+        if (!allowNonHealth && effectClass != "TARGET_HEALTH_DECREASE") return false;
+        if (string.IsNullOrWhiteSpace(effectClass)) return false;
+        observed = new GeneratedEncounterCombatObservedEffect
+        {
+            EffectClass = effectClass,
+            Fingerprint = GeneratedEncounterCombatCanonical.Hash(new
+            {
+                effectClass,
+                damagedResources,
+                changedStats,
+                changedStatuses
+            }),
+            TargetResourceIds = damagedResources,
+            TargetStatIds = changedStats,
+            TargetStatusIds = changedStatuses
+        };
+        return true;
+    }
+
+    internal static bool MatchesObservedEffect(
+        GeneratedEncounterCombatQualifiedAction expected,
+        GeneratedEncounterCombatObservedEffect actual) =>
+        string.Equals(expected.ObservedEffect.EffectClass, actual.EffectClass, StringComparison.Ordinal)
+        && expected.TargetResourceIds.All(actual.TargetResourceIds.Contains)
+        && expected.TargetStatIds.All(actual.TargetStatIds.Contains)
+        && expected.TargetStatusIds.All(actual.TargetStatusIds.Contains);
 
     private static string PlayerCombatState(UnifiedRuntimeSession session)
     {

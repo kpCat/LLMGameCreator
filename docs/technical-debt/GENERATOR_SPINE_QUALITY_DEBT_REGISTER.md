@@ -1,5 +1,9 @@
 # Generator Spine Quality Debt Register
 
+| ID | Priority | Area | Finding | Resolution / next action | Deferred | Closed | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| GQ-P3-GOAL166-PERSISTED-RECOVERY-CHECKPOINT | P3 | campaign-recovery | Recovery checkpoints intentionally do not survive an application restart. | Consider persisted recovery only in a separately approved save-schema task. | true | false | Goal166 preserves existing in-memory checkpoint semantics. |
+
 Goal165 closes Goal164's route-neutrality P1 without Runtime or source-sidecar mutation. Recovery checkpoints are deliberately in-memory and therefore do not provide cross-restart retry; persisted recovery and campaign choice branching remain separate future work. Unused generated action/resource definitions intentionally remain provenance and are not assigned combat roles. Rich authored combat diversity, the entity-title suffix heuristic and RC finalizer lease concern remain bounded debt.
 
 Goal162 note: the generated campaign player closes the missing human-facing Runtime route for map, dialogue, encounters, quests, travel and generated save lifecycle without changing lower-level implementation seams. `FinalizeCurrentReleaseCandidate()` remains a recovery-only mutation without an explicit shared operation lease; its package/history/pointer checks and final reread prevent false CURRENT, so this remains P2 concurrency hygiene for future RC work and is not widened into Goal162.
