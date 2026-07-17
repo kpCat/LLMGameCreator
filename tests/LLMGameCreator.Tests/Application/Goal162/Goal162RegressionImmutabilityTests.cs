@@ -159,6 +159,8 @@ internal static class Goal162ImmutabilityState
 
         var project = Goal156TestKit.Copy(Goal157BuildState.Value.Project, "goal162-immutability");
         var bundle = Goal161WorldBundle.Create(project.Path);
+        var build = bundle.Controller.BuildAndQualify();
+        Assert.True(build.Passed, string.Join(Environment.NewLine, build.Diagnostics));
         var fullBefore = Goal159TestKit.TreeHashes(project.Path);
         var nonSaveBefore = ExcludingSaves(fullBefore);
         var packageBefore = Goal156TestKit.Hash(Path.Combine(project.Path, "package.json"));

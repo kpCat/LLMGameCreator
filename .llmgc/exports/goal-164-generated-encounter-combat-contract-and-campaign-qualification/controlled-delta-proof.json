@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "allowedChanges":  [
+                           "participant.abilities",
+                           "participant.resources",
+                           "participant.stats",
+                           "participant.inventoryId",
+                           "participant.combatMetadata"
+                       ],
+    "encounterRewardIdentityProvenancePreserved":  true,
+    "baselineRecordsPreserved":  true,
+    "nonEncounterGeneratedRecordsPreserved":  true,
+    "travelGatesPreserved":  true,
+    "definitionCountsUnchanged":  true,
+    "unexpectedDeltaCount":  0
+}

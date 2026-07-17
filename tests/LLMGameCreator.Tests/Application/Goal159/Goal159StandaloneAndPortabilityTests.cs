@@ -18,7 +18,7 @@ public sealed class Goal159StandaloneAndPortabilityTests
         var fixture = Goal159SuccessState.Value;
         var reopened = Goal157TestKit.OpenTravelWorkspace(fixture.Project.Path).Snapshot();
 
-        Assert.Equal("TRAVEL_CURRENT", reopened.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", reopened.GeneratedWorld?.Status);
         Assert.True(reopened.GeneratedWorldActivation?.Passed);
         Assert.True(reopened.GeneratedRegionTravel?.Passed);
         Assert.True(reopened.AcceptedMechanics?.Passed);
@@ -98,7 +98,7 @@ public sealed class Goal159StandaloneAndPortabilityTests
         Assert.Equal(unityBefore, System.Diagnostics.Process.GetProcessesByName("Unity").Length);
         Assert.Equal(SeededGeneratedProjectVocabulary.SourceV2SchemaVersion, source.Source?.SchemaVersion);
         Assert.True(record.Passed, string.Join(Environment.NewLine, record.Diagnostics));
-        Assert.Equal("TRAVEL_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.AcceptedMechanics?.Passed);
         Assert.Equal("BUILD_GREEN_STANDALONE_PENDING", snapshot.ReleaseCandidateConfigurationStatus);
     }
@@ -183,7 +183,7 @@ public sealed class Goal159StandaloneAndPortabilityTests
         Assert.Equal(SeededGeneratedProjectVocabulary.SourceV2SchemaVersion,
             portableSource.Source?.SchemaVersion);
         Assert.True(portableRecord.Passed);
-        Assert.Equal("TRAVEL_CURRENT", portableSnapshot.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", portableSnapshot.GeneratedWorld?.Status);
         Assert.True(portableSnapshot.AcceptedMechanics?.Passed);
         Assert.Equal("CURRENT", portableSnapshot.ReleaseCandidateConfigurationStatus);
 
@@ -230,7 +230,7 @@ public sealed class Goal159StandaloneAndPortabilityTests
                 facts.Contains((expected.Label, expected.Value))) == true,
             actualPayloadHashesPassed = snapshot.FinalStateHash == snapshot.GeneratedRegionTravel?.FinalStateHash,
             releaseCandidateRecordCurrent = snapshot.ReleaseCandidateConfigurationStatus == "CURRENT",
-            portableCopyCurrent = portable.GeneratedWorld?.Status == "TRAVEL_CURRENT"
+            portableCopyCurrent = portable.GeneratedWorld?.Status == "CAMPAIGN_CURRENT"
                                   && portable.AcceptedMechanics?.Passed == true
                                   && portable.ReleaseCandidateConfigurationStatus == "CURRENT",
             goal142SourceByteIdentical,

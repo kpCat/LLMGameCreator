@@ -39,6 +39,11 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly GameProjectGeneratedWorldActivationService? _generatedActivation;
     private readonly GeneratedWorldTravelOverlayService _generatedTravelOverlay;
     private readonly GameProjectGeneratedRegionTravelActivationService? _generatedTravelActivation;
+    private readonly IUnifiedGameRuntimeService? _generatedCombatRuntime;
+    private readonly GeneratedEncounterCombatContractService _generatedCombatContract;
+    private readonly GeneratedEncounterCombatBindingService _generatedCombatBinding;
+    private readonly GeneratedWorldEncounterCombatOverlayService _generatedCombatOverlay;
+    private readonly GameProjectGeneratedEncounterCombatQualificationService _generatedCombatQualification;
     private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private int _buildRunning;
 
@@ -55,7 +60,12 @@ public sealed class GameProjectBuildAndQualificationService
         GameProjectGeneratedWorldActivationService? generatedActivation = null,
         GeneratedWorldTravelOverlayService? generatedTravelOverlay = null,
         GameProjectGeneratedRegionTravelActivationService? generatedTravelActivation = null,
-        IGameProjectOperationCoordinator? operationCoordinator = null)
+        IGameProjectOperationCoordinator? operationCoordinator = null,
+        IUnifiedGameRuntimeService? generatedCombatRuntime = null,
+        GeneratedEncounterCombatContractService? generatedCombatContract = null,
+        GeneratedEncounterCombatBindingService? generatedCombatBinding = null,
+        GeneratedWorldEncounterCombatOverlayService? generatedCombatOverlay = null,
+        GameProjectGeneratedEncounterCombatQualificationService? generatedCombatQualification = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -70,6 +80,12 @@ public sealed class GameProjectBuildAndQualificationService
         _generatedActivation = generatedActivation;
         _generatedTravelOverlay = generatedTravelOverlay ?? new GeneratedWorldTravelOverlayService();
         _generatedTravelActivation = generatedTravelActivation;
+        _generatedCombatRuntime = generatedCombatRuntime;
+        _generatedCombatContract = generatedCombatContract ?? new GeneratedEncounterCombatContractService();
+        _generatedCombatBinding = generatedCombatBinding ?? new GeneratedEncounterCombatBindingService();
+        _generatedCombatOverlay = generatedCombatOverlay ?? new GeneratedWorldEncounterCombatOverlayService();
+        _generatedCombatQualification = generatedCombatQualification
+                                        ?? new GameProjectGeneratedEncounterCombatQualificationService();
         _operationCoordinator = operationCoordinator ?? new GameProjectOperationCoordinator();
     }
 
@@ -466,6 +482,7 @@ public sealed class GameProjectBuildAndQualificationService
             GameProjectGeneratedWorldActivationSummary? generatedWorldActivation = null;
             GeneratedWorldTravelOverlayDocument? generatedWorldTravelOverlay = null;
             GameProjectGeneratedRegionTravelSummary? generatedRegionTravel = null;
+            GameProjectGeneratedEncounterCombatSummary? generatedEncounterCombat = null;
             if (generatedSource.Present)
             {
                 if (_generatedActivation is null)
@@ -580,13 +597,116 @@ public sealed class GameProjectBuildAndQualificationService
                     generatedWorldTravelOverlay = travelOverlay.Document;
                     generatedRegionTravel = travelActivation.Summary;
                 }
+                if (_generatedCombatRuntime is not null
+                    && generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
+                {
+                    var contract = _generatedCombatContract.Resolve(
+                        qualifiedPackage,
+                        generatedSource.Overlay
+                        ?? throw new InvalidOperationException("generated_combat.overlay_source_missing"),
+                        _generatedCombatRuntime);
+                    if (!contract.Passed || contract.Contract is null)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Не удалось найти исполняемый боевой контракт для сгенерированных встреч.",
+                            contract.Diagnostics,
+                            "generated_combat.contract",
+                            attempt);
+
+                    var compositionBinding = _generatedCombatBinding.Bind(
+                        generatedSource, finalCompositionPackage, contract.Contract);
+                    var packageBinding = _generatedCombatBinding.Bind(
+                        generatedSource, finalPackage, contract.Contract);
+                    if (!compositionBinding.Passed || !packageBinding.Passed)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Сгенерированные встречи не прошли точную привязку к плану.",
+                            compositionBinding.Diagnostics.Concat(packageBinding.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(),
+                            "generated_combat.binding",
+                            attempt);
+
+                    var compositionCombat = _generatedCombatOverlay.Build(
+                        finalCompositionPackage, contract.Contract, compositionBinding);
+                    var packageCombat = _generatedCombatOverlay.Build(
+                        finalPackage, contract.Contract, packageBinding);
+                    if (!compositionCombat.Passed || !packageCombat.Passed)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Боевой слой сгенерированных встреч нарушил допустимые границы пакета.",
+                            compositionCombat.Diagnostics.Concat(packageCombat.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(),
+                            "generated_combat.overlay",
+                            attempt);
+
+                    var combatPath = Path.Combine(
+                        stagingRoot,
+                        "generated-encounter-combat",
+                        "package.json");
+                    Directory.CreateDirectory(Path.GetDirectoryName(combatPath)!);
+                    File.WriteAllText(combatPath, packageCombat.CombatOverlayPackageJson,
+                        new UTF8Encoding(false));
+                    finalCompositionPackage = compositionCombat.CombatOverlayPackage;
+                    finalPackage = packageCombat.CombatOverlayPackage;
+                    finalActivatedPath = combatPath;
+                    primaryCompositionSha256 = compositionCombat.Document.OutputPackageSha256;
+                    primaryPackageSha256 = packageCombat.Document.OutputPackageSha256;
+                    generatedEncounterCombat = _generatedCombatQualification.Qualify(
+                        finalPackage,
+                        generatedSource,
+                        contract.Contract,
+                        packageBinding,
+                        packageCombat.Document,
+                        _generatedCombatRuntime);
+                    if (!generatedEncounterCombat.Passed)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Сгенерированные встречи не прошли реальную боевую кампанию.",
+                            generatedEncounterCombat.Diagnostics,
+                            "generated_combat.qualification",
+                            attempt);
+                    primaryFinalStateHash = generatedEncounterCombat.FinalStateHash;
+                    primaryCheckpointReloadPassed = generatedEncounterCombat.ReplayPassed;
+                    primaryFullReplayEquivalent = generatedEncounterCombat.ReplayPassed;
+                    primaryActionBindingPassed = generatedEncounterCombat.ExactPackageReferencePassed
+                                                 && generatedEncounterCombat.PackageShaUnchangedDuringRuntime;
+                    primaryRuntimeFrames = generatedEncounterCombat.RuntimeFrames.Select(frame =>
+                        new GameProjectRuntimeFrame
+                        {
+                            Index = frame.Index,
+                            ActionId = frame.ActionKind,
+                            Title = frame.ActionKind,
+                            Category = "generated-combat",
+                            StateHash = frame.StateHash
+                        }).ToList();
+                    primaryRuntimePlanId = "generated-encounter-combat-v1";
+                    primaryCapabilityCount = generatedEncounterCombat.GeneratedEncounterCount;
+                    primaryPlannedActionCount = generatedEncounterCombat.RuntimeFrames.Count;
+                    primaryCheckpointActionCount = generatedEncounterCombat.RuntimeFrames.Count;
+                    primaryFinalReplayActionCount = generatedEncounterCombat.RuntimeFrames.Count;
+                    primaryPlaythroughSignature = string.Join(">",
+                        generatedEncounterCombat.RuntimeFrames.Select(frame => frame.ActionKind));
+                }
                 generatedWorld = _generatedSummary.BuildCurrent(
                     generatedSource,
                     finalCompositionPackage,
                     finalPackage,
                     generatedWorldActivation,
                     generatedWorldTravelOverlay,
-                    generatedRegionTravel);
+                    generatedRegionTravel,
+                    generatedEncounterCombat);
                 if (generatedWorld is { Present: true, Passed: false })
                     return RollbackFailure(
                         authoring,
@@ -806,6 +926,9 @@ public sealed class GameProjectBuildAndQualificationService
                 summaryLines.AddRange(generatedWorldActivation.HumanFacts.Select(fact => fact.Label + ": " + fact.Value));
             if (generatedRegionTravel is { Present: true, Passed: true })
                 summaryLines.AddRange(generatedRegionTravel.HumanFacts.Select(fact => fact.Label + ": " + fact.Value));
+            if (generatedEncounterCombat is { Present: true, Passed: true })
+                summaryLines.AddRange(generatedEncounterCombat.HumanReviewFacts.Select(
+                    fact => fact.Label + ": " + fact.Value));
 
             var buildResult = new GameProjectBuildResult
             {
@@ -872,6 +995,7 @@ public sealed class GameProjectBuildAndQualificationService
                 ,GeneratedWorldActivation = generatedWorldActivation
                 ,GeneratedWorldTravelOverlay = generatedWorldTravelOverlay
                 ,GeneratedRegionTravel = generatedRegionTravel
+                ,GeneratedEncounterCombat = generatedEncounterCombat
                 ,AcceptedMechanicsCompatibility = compatibility
             };
             var acceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult);
@@ -981,9 +1105,11 @@ public sealed class GameProjectBuildAndQualificationService
         var path = Path.Combine(root, fileName);
         var entry = new GameProjectBuildHistoryEntry
         {
-            SchemaVersion = build.GeneratedRegionTravel is { Present: true, Passed: true }
-                ? "unified_game_project_build_history_v3"
-                : "unified_game_project_build_history_v2",
+            SchemaVersion = build.GeneratedEncounterCombat is { Present: true, Passed: true }
+                ? GameProjectBuildHistoryReader.SchemaVersionV4
+                : build.GeneratedRegionTravel is { Present: true, Passed: true }
+                    ? GameProjectBuildHistoryReader.SchemaVersionV3
+                    : GameProjectBuildHistoryReader.SchemaVersionV2,
             CompletedAtUtc = DateTimeOffset.UtcNow,
             Status = "GREEN",
             PackageSha256 = build.PackageSha256,
@@ -1011,6 +1137,7 @@ public sealed class GameProjectBuildAndQualificationService
             ,GeneratedWorldActivation = build.GeneratedWorldActivation
             ,GeneratedWorldTravelOverlay = build.GeneratedWorldTravelOverlay
             ,GeneratedRegionTravel = build.GeneratedRegionTravel
+            ,GeneratedEncounterCombat = build.GeneratedEncounterCombat
             ,AcceptedMechanicsCompatibility = build.AcceptedMechanicsCompatibility
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));

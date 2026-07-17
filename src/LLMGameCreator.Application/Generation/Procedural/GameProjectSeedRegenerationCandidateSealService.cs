@@ -104,6 +104,15 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
                 "regeneration.candidate_tampered", diagnostics);
             Compare(persisted.CandidateGeneratedBaseSha256, actual.CandidateGeneratedBaseSha256,
                 "regeneration.candidate_tampered", diagnostics);
+            Compare(persisted.GeneratedEncounterCombatSummarySha256,
+                actual.GeneratedEncounterCombatSummarySha256,
+                "regeneration.candidate_combat_changed", diagnostics);
+            Compare(persisted.GeneratedEncounterCombatOverlaySha256,
+                actual.GeneratedEncounterCombatOverlaySha256,
+                "regeneration.candidate_combat_changed", diagnostics);
+            Compare(persisted.GeneratedEncounterCombatContractId,
+                actual.GeneratedEncounterCombatContractId,
+                "regeneration.candidate_combat_changed", diagnostics);
             Compare(persisted.CandidateSnapshotStatus, actual.CandidateSnapshotStatus,
                 "regeneration.candidate_tampered", diagnostics);
             Compare(persisted.MechanicsProfileId, actual.MechanicsProfileId,
@@ -205,6 +214,9 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
             CandidatePlanSha256 = snapshot.GeneratedWorld?.PlanSha256 ?? string.Empty,
             CandidateOverlaySha256 = snapshot.GeneratedWorld?.OverlaySha256 ?? string.Empty,
             CandidateGeneratedBaseSha256 = snapshot.GeneratedWorld?.GeneratedBasePackageSha256 ?? string.Empty,
+            GeneratedEncounterCombatSummarySha256 = CanonicalSha256(build.GeneratedEncounterCombat),
+            GeneratedEncounterCombatOverlaySha256 = CanonicalSha256(build.GeneratedEncounterCombat?.Overlay),
+            GeneratedEncounterCombatContractId = build.GeneratedEncounterCombat?.ContractId ?? string.Empty,
             CandidateSnapshotStatus = snapshot.GeneratedWorld?.Status ?? string.Empty,
             MechanicsProfileId = snapshot.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
             AcceptedMechanicsSummarySha256 = CanonicalSha256(snapshot.AcceptedMechanics),

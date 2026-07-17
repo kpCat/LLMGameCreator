@@ -241,6 +241,10 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<GeneratedWorldTravelRoutePlanner>(resolver =>
             new GeneratedWorldTravelRoutePlanner(
                 resolver.Resolve<GeneratedWorldRegionMapBindingService>()), Reuse.Singleton);
+        _container.Register<GeneratedEncounterCombatContractService>(Reuse.Singleton);
+        _container.Register<GeneratedEncounterCombatBindingService>(Reuse.Singleton);
+        _container.Register<GeneratedWorldEncounterCombatOverlayService>(Reuse.Singleton);
+        _container.Register<GameProjectGeneratedEncounterCombatQualificationService>(Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldActivationService>(resolver =>
             new GameProjectGeneratedWorldActivationService(
                 resolver.Resolve<IGameRuntime>(),
@@ -272,7 +276,13 @@ public sealed class CompositionRoot : IDisposable
                 generatedActivation: resolver.Resolve<GameProjectGeneratedWorldActivationService>(),
                 generatedTravelOverlay: resolver.Resolve<GeneratedWorldTravelOverlayService>(),
                 generatedTravelActivation: resolver.Resolve<GameProjectGeneratedRegionTravelActivationService>(),
-                operationCoordinator: resolver.Resolve<IGameProjectOperationCoordinator>()), Reuse.Singleton);
+                operationCoordinator: resolver.Resolve<IGameProjectOperationCoordinator>(),
+                generatedCombatRuntime: resolver.Resolve<IUnifiedGameRuntimeService>(),
+                generatedCombatContract: resolver.Resolve<GeneratedEncounterCombatContractService>(),
+                generatedCombatBinding: resolver.Resolve<GeneratedEncounterCombatBindingService>(),
+                generatedCombatOverlay: resolver.Resolve<GeneratedWorldEncounterCombatOverlayService>(),
+                generatedCombatQualification:
+                    resolver.Resolve<GameProjectGeneratedEncounterCombatQualificationService>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
         _container.Register<GameProjectSeedRegenerationDiffService>(Reuse.Singleton);

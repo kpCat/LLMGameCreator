@@ -11,6 +11,7 @@ using LLMGameCreator.Runtime.Abstractions;
 using LLMGameCreator.Tests.Application.Goal156;
 using LLMGameCreator.Tests.Application.Goal157;
 using LLMGameCreator.Tests.Application.Goal159;
+using LLMGameCreator.Tests.Application.Goal161;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application.Goal160;
@@ -58,7 +59,7 @@ public sealed class Goal160WorldRollbackCandidateTests
         var state = Goal160RollbackState.Value;
         Assert.Equal("GREEN", state.Preview.Status);
         Assert.True(state.Preview.CandidateBuild?.Passed);
-        Assert.Equal("TRAVEL_CURRENT", state.Preview.CandidateSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", state.Preview.CandidateSnapshot?.GeneratedWorld?.Status);
         Assert.True(state.Preview.CandidateSnapshot?.GeneratedRegionTravel?.Passed);
         Assert.True(state.Preview.CandidateSnapshot?.AcceptedMechanicsCompatibility?.Passed);
     }
@@ -178,6 +179,7 @@ internal sealed record Goal160RollbackFixture(
         var source = new SeededGeneratedProjectSourceService(
             validator, overlayService: overlay, baselineProvider: baseline);
         var summary = new GameProjectGeneratedWorldSummaryService(overlay);
+        var combatRuntime = Goal161ServiceBundle.Create().Runtime;
         var runtime = new DefaultGameRuntime();
         var serializer = new RuntimeStateSerializer();
         var builder = new GameProjectBuildAndQualificationService(
@@ -191,7 +193,8 @@ internal sealed record Goal160RollbackFixture(
             generatedActivation: new GameProjectGeneratedWorldActivationService(runtime, serializer, validator),
             generatedTravelOverlay: new GeneratedWorldTravelOverlayService(),
             generatedTravelActivation: new GameProjectGeneratedRegionTravelActivationService(runtime, serializer),
-            operationCoordinator: coordinator);
+            operationCoordinator: coordinator,
+            generatedCombatRuntime: combatRuntime);
         var transaction = new GameProjectSeedRegenerationTransaction();
         var record = new GameProjectSeedRegenerationRecordService(repositoryRoot, source);
         var history = new GeneratedWorldHistoryService(source);

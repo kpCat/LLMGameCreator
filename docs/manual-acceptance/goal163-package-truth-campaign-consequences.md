@@ -8,4 +8,6 @@ The `Последствия` UI shows human damage, encounter outcome, reward, q
 
 The real qualified package's ordinary `encounter/goblin_duel` executes exact BasicAttack. Its generated quest encounters do not: participants own `generated/resource/health` and only `generated/ability/action_resolve_encounter`, an effectless `generated_action`. The player-facing generated encounter is therefore causally disabled. Generated victory, manual turn-in, post-turn-in continue and post-migration combat cannot be claimed until a separately scoped package-generation contract repair is completed.
 
-Next action: `repair_generated_encounter_runtime_contract_then_repeat_goal163_real_matrix`.
+Goal164 closes the independent-audit blocker at `d5d614a8` with a deterministic build-time generated encounter combat contract. Goal163 exact-package dispatch, read-only readiness, manual turn-in and consequence behavior remain unchanged and their real all-selectable/core-only routes are now GREEN.
+
+Next action: `independent_goal164_audit_and_plan_campaign_choice_branching_or_failure_recovery`.

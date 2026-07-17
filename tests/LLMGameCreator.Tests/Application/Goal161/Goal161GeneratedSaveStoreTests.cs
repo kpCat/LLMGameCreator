@@ -306,6 +306,8 @@ internal sealed record Goal161WorldBundle(
         var summary = new GameProjectGeneratedWorldSummaryService(overlay);
         var runtime = new DefaultGameRuntime();
         var serializer = new RuntimeStateSerializer();
+        var history = new GeneratedWorldHistoryService(source);
+        var saves = Goal161ServiceBundle.Create(coordinator, source, history);
         var builder = new GameProjectBuildAndQualificationService(
             repositoryRoot,
             SelectedRuntimeVariantInteractiveSessionService.CreateDefault(),
@@ -317,10 +319,10 @@ internal sealed record Goal161WorldBundle(
             generatedActivation: new GameProjectGeneratedWorldActivationService(runtime, serializer, validator),
             generatedTravelOverlay: new GeneratedWorldTravelOverlayService(),
             generatedTravelActivation: new GameProjectGeneratedRegionTravelActivationService(runtime, serializer),
-            operationCoordinator: coordinator);
+            operationCoordinator: coordinator,
+            generatedCombatRuntime: saves.Runtime);
         var transaction = new GameProjectSeedRegenerationTransaction();
         var record = new GameProjectSeedRegenerationRecordService(repositoryRoot, source);
-        var history = new GeneratedWorldHistoryService(source);
         var worldChange = new GameProjectGeneratedWorldChangeRecordService(source, history);
         var truth = new GameProjectSeedRegenerationTruthReader(repositoryRoot, source);
         var commit = new GameProjectSeedRegenerationCommitValidator(repositoryRoot, source, validator, record);
@@ -337,7 +339,6 @@ internal sealed record Goal161WorldBundle(
             truthReader: truth, commitValidator: commit, regenerationRecordService: record);
         var authoring = new GameProjectFeatureModuleAuthoringService(repositoryRoot,
             operationCoordinator: coordinator);
-        var saves = Goal161ServiceBundle.Create(coordinator, source, history);
         var controller = new UnifiedGameProjectWorkspaceController(
             current, authoring, builder,
             standaloneBuild: new ProjectStandaloneBuildService(repositoryRoot),

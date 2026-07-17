@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-164-generated-encounter-combat-contract-and-campaign-qualification",
+    "violationCount":  0,
+    "forbiddenRuntimeGamePackageUnitySourceSaveMigrationStandaloneImplementationChanges":  0,
+    "boundedIntegrationExceptions":  [
+                                         "GameProjectSeedRegenerationModels.cs: required combat seal fields were missing and caused compile failure",
+                                         "GameProjectSeedRegenerationService.cs: v4 candidates were rejected by legacy TRAVEL_CURRENT guards",
+                                         "GameProjectGeneratedWorldRollbackService.cs: v4 rollback candidates were rejected by legacy TRAVEL_CURRENT guards",
+                                         "GameProjectSeedRegenerationRecordService.cs: semantic record validation required legacy v3 history",
+                                         "Goal159, Goal160 and Goal161 fixtures: reuse the existing IUnifiedGameRuntimeService so v4 combat qualification is exercised",
+                                         "Goal159 through Goal163 regressions: assert v4 CAMPAIGN_CURRENT and the Lane B primary hash instead of v3 TRAVEL_CURRENT truth",
+                                         "Goal162 historical campaign assertions: reuse the Goal164 real route for combat, victory, reward and manual turn-in verification"
+                                     ]
+}

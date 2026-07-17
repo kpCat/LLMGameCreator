@@ -76,7 +76,7 @@ public sealed class Goal161MigrationRuntimeContinuationTests
         var state = Goal161MigrationState.Value;
         Assert.Equal(state.Saved.Revision?.WorldId,
             state.Bundle.Controller.ReadGeneratedWorldHistory().CurrentWorldId);
-        Assert.Equal("TRAVEL_CURRENT", state.Rollback.AuthoritativeSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", state.Rollback.AuthoritativeSnapshot?.GeneratedWorld?.Status);
     }
 
     [Fact]

@@ -1,0 +1,10 @@
+{
+    "status":  "GREEN",
+    "oldSaveMigrationRequired":  true,
+    "directCrossWorldLoadRejected":  true,
+    "previewZeroWriteDeterministic":  true,
+    "explicitApplyCurrent":  true,
+    "postMigrationCombat":  true,
+    "postMigrationTravel":  true,
+    "transientEncounterStateReset":  true
+}

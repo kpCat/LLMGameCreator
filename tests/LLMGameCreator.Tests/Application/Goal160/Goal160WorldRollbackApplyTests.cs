@@ -79,7 +79,7 @@ public sealed class Goal160WorldRollbackApplyTests
     {
         var snapshot = Goal160RollbackState.Value.Bundle.Controller.OpenProject(
             Goal160RollbackState.Value.Project.Path);
-        Assert.Equal("TRAVEL_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.GeneratedWorldActivation?.Passed);
         Assert.True(snapshot.GeneratedRegionTravel?.Passed);
         Assert.True(snapshot.AcceptedMechanics?.Passed);

@@ -26,13 +26,13 @@ public sealed class Goal162ProjectsNavigationTests
     }
 
     [Fact]
-    public void Behavioral_travel_current_project_offers_direct_play()
+    public void Behavioral_travel_current_project_requires_campaign_qualification_before_play()
     {
         var presentation = Goal162ProjectsTestKit.Presentation(Goal157BuildState.Value.Reopen);
 
         Assert.True(presentation.Enabled);
-        Assert.Equal("Играть", presentation.Title);
-        Assert.True(presentation.Current);
+        Assert.Equal("Собрать и играть", presentation.Title);
+        Assert.False(presentation.Current);
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public sealed class Goal162ProjectsNavigationTests
         var presentation = Goal162ProjectsTestKit.Presentation(busy);
 
         Assert.False(presentation.Enabled);
-        Assert.Equal("Играть", presentation.Title);
+        Assert.Equal("Собрать и играть", presentation.Title);
         Assert.Contains("Дождитесь", presentation.Reason, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -69,11 +69,11 @@ public sealed class Goal162ProjectsNavigationTests
     }
 
     [Fact]
-    public void Behavioral_build_and_play_requires_green_travel_current_result()
+    public void Behavioral_build_and_play_requires_green_campaign_current_result()
     {
         var snapshot = Goal162ProjectsState.Value.AfterBuild;
 
-        Assert.Equal("TRAVEL_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.GeneratedWorldActivation?.Passed);
         Assert.True(snapshot.GeneratedRegionTravel?.Passed);
         Assert.True(snapshot.AcceptedMechanicsCompatibility?.Passed);
@@ -95,7 +95,7 @@ public sealed class Goal162ProjectsNavigationTests
 
         Assert.Null(failure.NavigationPageId);
         Assert.Contains("generated", failure.DiagnosticText, StringComparison.OrdinalIgnoreCase);
-        Assert.NotEqual("TRAVEL_CURRENT", failure.Snapshot.GeneratedWorld?.Status);
+        Assert.NotEqual("CAMPAIGN_CURRENT", failure.Snapshot.GeneratedWorld?.Status);
     }
 }
 

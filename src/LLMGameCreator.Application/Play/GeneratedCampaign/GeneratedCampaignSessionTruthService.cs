@@ -44,11 +44,17 @@ public sealed class GeneratedCampaignSessionTruthService
         var build = ReadCurrentBuildHistory(folder);
         if (build.Result?.LastSuccessfulBuild is null)
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null, [build.Diagnostic]);
-        var finalStateHash = build.Result.LastSuccessfulBuild.FinalStateHash;
+        var successfulBuild = build.Result.LastSuccessfulBuild;
+        var finalStateHash = successfulBuild.FinalStateHash;
         if (string.IsNullOrWhiteSpace(finalStateHash)
             || !string.Equals(finalStateHash, build.DocumentFinalStateHash, StringComparison.Ordinal))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.current_final_state_mismatch"]);
+        var generatedEncounterCount = truth.StrictGeneratedSource.GeneratedMvpPackage?
+            .GeneratedContent.Encounters.Count ?? 0;
+        if (!CombatCurrent(successfulBuild, generatedEncounterCount))
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.generated_combat_not_current"]);
         if (string.IsNullOrWhiteSpace(truth.SelectedBuildHistorySha256))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.current_build_history_missing"]);
@@ -89,6 +95,28 @@ public sealed class GeneratedCampaignSessionTruthService
         && left.GeneratedStartMapId == right.GeneratedStartMapId
         && left.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal)
             .SequenceEqual(right.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal));
+
+    private static bool CombatCurrent(GameProjectBuildResult build, int generatedEncounterCount)
+    {
+        if (generatedEncounterCount == 0)
+            return build.GeneratedEncounterCombat is null
+                   or { Present: false, Status: "ABSENT" };
+        return build.GeneratedEncounterCombat is
+        {
+            Present: true,
+            Passed: true,
+            Status: "CAMPAIGN_CURRENT",
+            ExactPackageReferencePassed: true,
+            PackageShaUnchangedDuringRuntime: true,
+            ReplayPassed: true,
+            Overlay: { Passed: true }
+        } combat
+        && combat.GeneratedEncounterCount == generatedEncounterCount
+        && combat.QualifiedEncounterCount == generatedEncounterCount
+        && string.Equals(combat.ExactPackageSha256, build.PackageSha256, StringComparison.Ordinal)
+        && string.Equals(combat.Overlay.OutputPackageSha256, build.PackageSha256, StringComparison.Ordinal)
+        && string.Equals(combat.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal);
+    }
 
     private static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }
 

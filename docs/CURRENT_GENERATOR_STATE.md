@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 163 package-truth campaign repair — BLOCKED real generated encounter route
+Updated by: Goal 164 generated encounter combat contract and campaign qualification — GREEN acceptable candidate
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -40,9 +40,13 @@ Goal162 independent audit is `BLOCKED_AT_8164185B`. Goal163 removes the Applicat
 
 The real qualified package proves ordinary exact-package combat through `encounter/goblin_duel`, but its current-region generated quest encounters are not executable: generated participants own `generated/resource/health` and expose only `generated/ability/action_resolve_encounter` (`generated_action`, no effects), while Runtime BasicAttack requires the ordinary health contract. Goal163 correctly disables those generated encounters with a causal diagnostic and never mutates the package. Therefore the all-selectable/core-only player route cannot reach generated victory, reward, manual turn-in, same-world post-turn-in consequence continue or post-migration combat. Goal163 is honestly `BLOCKED_EXACT_GENERATED_ENCOUNTER_PACKAGE_CONTRACT`, `accepted=false`, has no human gate, and leaves the Goal162 audit blocker open.
 
+Goal164 closes the Goal163 blocker without changing Runtime, public GamePackage, generated source/save migration, standalone implementation, Unity or any persisted generation sidecar. A deterministic resolver selects an executable combat contract only from the exact Runtime-qualified Lane A package. Lane B applies that contract at build time only to generated encounter participant combat fields through strict regenerated-plan plus `GeneratedContent` provenance; definitions, encounter/reward/identity/provenance, baseline records, travel gates and all other records remain exact. Lane A AcceptedMechanics and compatibility hashes remain unchanged, while Lane B owns the combat-overlay primary hashes.
+
+Actual Runtime qualification covers BasicAttack, a participant-owned package ability, bounded opponent AI, flee, fresh victory/reward, a generated quest that remains active while ready, exactly one manual CompleteQuest, zero AdvanceQuestObjective commands, reputation consequence, travel, exact save/continue, explicit migration and post-migration combat. Package-derived preparation encounters satisfy core-only reward dependencies without fixed IDs, participant counts or numeric combat constants. v4 history restores `CAMPAIGN_CURRENT`; genuine v3 remains `COMBAT_PENDING`. Ordinary rebuild, regeneration and historical rollback rebuild the current contract without rewriting source sidecars. One cached hidden smoke is required and recorded with host reuse, no rebuild, Unity 0 and retry 0. All-selectable RC is CURRENT; portable all-selectable and core-only are current without false core-only RC readiness. Goal164 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
+
 ```text
-gate_status=goal162_green_player_driven_generated_campaign_session_workspace
-current_user_action=independent_goal162_audit_and_plan_generated_campaign_consequence_depth
+gate_status=goal164_green_generated_encounter_combat_contract_and_campaign_qualification
+current_user_action=independent_goal164_audit_and_plan_campaign_choice_branching_or_failure_recovery
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -354,27 +358,52 @@ goal162ArtifactScopeViolationCount=0
 goal162IndependentAuditResult=BLOCKED_AT_8164185B
 goal162IndependentAuditBlocker=campaign_combat_executes_against_synthetic_runtime_package_and_manual_quest_turn_in_not_proven
 goal162AuditBlocker=open_after_goal163_generated_encounter_package_contract_blocker
-goal163ImplementationStatus=BLOCKED
-goal163CandidateStatus=BLOCKED_EXACT_GENERATED_ENCOUNTER_PACKAGE_CONTRACT
+goal163IndependentAuditResult=BLOCKED_AT_D5D614A8
+goal163IndependentAuditBlocker=generated_encounters_reference_namespaced_health_and_effectless_generated_action_without_executable_runtime_combat_contract
+goal163AuditBlocker=closed_by_goal164
+goal163ImplementationStatus=GREEN
+goal163CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
 goal163Accepted=false
 goal163AcceptedByHuman=false
 goal163AcceptedByCodex=false
 goal163ManualReviewRequired=false
 goal163ManualGateReady=false
-goal163IndependentAuditRequired=true
+goal163IndependentAuditRequired=false
 goal163ExactPackageReferencePassed=true
 goal163ExactPackageCombatPassed=true
-goal163GeneratedEncounterCombatPassed=false
-goal163ManualQuestTurnInPassed=false
+goal163GeneratedEncounterCombatPassed=true
+goal163ManualQuestTurnInPassed=true
 goal163ConsequenceDepthPassed=true
-goal163SaveContinueConsequencePassed=false
-goal163MigrationConsequencePassed=false
-goal163CoreOnlyPassed=false
+goal163SaveContinueConsequencePassed=true
+goal163MigrationConsequencePassed=true
+goal163CoreOnlyPassed=true
 goal163PlayerProcessStartCount=0
 goal163UnityEditorProcessStartCount=0
 goal163StandaloneBuildInvocationCount=0
 goal163ArtifactScopeViolationCount=0
-nextAction=repair_generated_encounter_runtime_contract_then_repeat_goal163_real_matrix
+goal164ImplementationStatus=GREEN
+goal164CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal164Accepted=false
+goal164AcceptedByHuman=false
+goal164AcceptedByCodex=false
+goal164ManualReviewRequired=false
+goal164ManualGateReady=false
+goal164IndependentAuditRequired=true
+goal164CombatContractResolved=true
+goal164GeneratedCombatOverlayPassed=true
+goal164CampaignCurrentPassed=true
+goal164GeneratedVictoryPassed=true
+goal164ManualTurnInPassed=true
+goal164RegenerationRollbackPassed=true
+goal164SaveMigrationPassed=true
+goal164HostReused=true
+goal164HostRebuilt=false
+goal164UnityEditorProcessStartCount=0
+goal164HiddenSmokeInvocationCount=1
+goal164PortableAllSelectablePassed=true
+goal164PortableCoreOnlyPassed=true
+goal164ArtifactScopeViolationCount=0
+nextAction=independent_goal164_audit_and_plan_campaign_choice_branching_or_failure_recovery
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

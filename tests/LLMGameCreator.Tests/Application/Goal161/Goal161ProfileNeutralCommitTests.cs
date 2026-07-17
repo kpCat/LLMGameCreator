@@ -30,11 +30,11 @@ public sealed class Goal161ProfileNeutralCommitTests
     }
 
     [Fact]
-    public void Behavioral_real_core_only_regeneration_candidate_is_travel_current()
+    public void Behavioral_real_core_only_regeneration_candidate_is_campaign_current()
     {
         var state = Goal161CoreProfileState.Value;
         Assert.Equal("GREEN", state.RegenerationPreview.Status);
-        Assert.Equal("TRAVEL_CURRENT", state.RegenerationPreview.CandidateSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", state.RegenerationPreview.CandidateSnapshot?.GeneratedWorld?.Status);
         Assert.True(state.RegenerationPreview.CandidateSnapshot?.AcceptedMechanicsCompatibility?.Passed);
     }
 
@@ -44,15 +44,15 @@ public sealed class Goal161ProfileNeutralCommitTests
         var result = Goal161CoreProfileState.Value.Regenerated;
         Assert.True(result.Applied, string.Join(Environment.NewLine, result.Diagnostics));
         Assert.Equal("GREEN", result.Status);
-        Assert.Equal("TRAVEL_CURRENT", result.AuthoritativeSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", result.AuthoritativeSnapshot?.GeneratedWorld?.Status);
     }
 
     [Fact]
-    public void Behavioral_real_core_only_rollback_candidate_is_travel_current()
+    public void Behavioral_real_core_only_rollback_candidate_is_campaign_current()
     {
         var preview = Goal161CoreProfileState.Value.RollbackPreview;
         Assert.Equal("GREEN", preview.Status);
-        Assert.Equal("TRAVEL_CURRENT", preview.CandidateSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", preview.CandidateSnapshot?.GeneratedWorld?.Status);
         Assert.True(preview.CandidateSnapshot?.AcceptedMechanicsCompatibility?.Passed);
     }
 
@@ -62,7 +62,7 @@ public sealed class Goal161ProfileNeutralCommitTests
         var result = Goal161CoreProfileState.Value.RolledBack;
         Assert.True(result.Applied, string.Join(Environment.NewLine, result.Diagnostics));
         Assert.Equal("GREEN", result.Status);
-        Assert.Equal("TRAVEL_CURRENT", result.AuthoritativeSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", result.AuthoritativeSnapshot?.GeneratedWorld?.Status);
     }
 
     [Fact]

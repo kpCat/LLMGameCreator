@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "schemaVersion":  "generated_encounter_combat_overlay_v1",
+    "outputPackageSha256":  "ee01f68f9f03ce0f9ab5fee09f86927304213d646ac603221f9460dd72ade566",
+    "generatedEncounterCount":  4,
+    "boundEncounterCount":  4,
+    "qualifiedEncounterCount":  4,
+    "participantCount":  12,
+    "definitionCollectionsChanged":  0,
+    "dataOnlyGeneratedDefinitionsPreservedUnassigned":  true,
+    "deterministic":  true
+}

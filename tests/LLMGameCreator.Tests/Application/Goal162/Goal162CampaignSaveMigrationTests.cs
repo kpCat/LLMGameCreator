@@ -135,6 +135,8 @@ public sealed class Goal162CampaignSaveMigrationTests
     {
         var project = Goal156TestKit.Copy(Goal157BuildState.Value.Project, "goal162-regeneration-route");
         var bundle = Goal161WorldBundle.Create(project.Path);
+        var build = bundle.Controller.BuildAndQualify();
+        Assert.True(build.Passed, string.Join(Environment.NewLine, build.Diagnostics));
         var runtime = new Goal162CountingRuntime(bundle.Saves.Runtime);
         var service = Goal162TestKit.Service(bundle, runtime);
         var started = service.StartNew();

@@ -10,6 +10,7 @@ using LLMGameCreator.Runtime;
 using LLMGameCreator.Runtime.Abstractions;
 using LLMGameCreator.Tests.Application.Goal156;
 using LLMGameCreator.Tests.Application.Goal157;
+using LLMGameCreator.Tests.Application.Goal161;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application.Goal159;
@@ -167,9 +168,10 @@ public sealed class Goal159CandidateIsolationTests
         var fixture = Goal159SuccessState.Value;
 
         Assert.Equal("GREEN", fixture.Preview.Status);
-        Assert.Equal("TRAVEL_CURRENT", fixture.Preview.CandidateSnapshot?.GeneratedWorld?.Status);
-        Assert.Equal(fixture.Preview.CandidateBuild?.FinalStateHash,
+        Assert.Equal("CAMPAIGN_CURRENT", fixture.Preview.CandidateSnapshot?.GeneratedWorld?.Status);
+        Assert.NotEqual(fixture.Preview.CandidateBuild?.FinalStateHash,
             fixture.Preview.CandidateSnapshot?.GeneratedRegionTravel?.FinalStateHash);
+        Assert.True(fixture.Preview.CandidateBuild?.GeneratedEncounterCombat?.Passed);
     }
 
     [Fact]
@@ -253,6 +255,7 @@ internal static partial class Goal159TestKit
         var source = new SeededGeneratedProjectSourceService(
             validator, overlayService: overlay, baselineProvider: baseline);
         var summary = new GameProjectGeneratedWorldSummaryService(overlay);
+        var combatRuntime = Goal161ServiceBundle.Create().Runtime;
         var runtime = new DefaultGameRuntime();
         var serializer = new RuntimeStateSerializer();
         var builder = new GameProjectBuildAndQualificationService(
@@ -265,7 +268,8 @@ internal static partial class Goal159TestKit
             generatedSummary: summary,
             generatedActivation: new GameProjectGeneratedWorldActivationService(runtime, serializer, validator),
             generatedTravelOverlay: new GeneratedWorldTravelOverlayService(),
-            generatedTravelActivation: new GameProjectGeneratedRegionTravelActivationService(runtime, serializer));
+            generatedTravelActivation: new GameProjectGeneratedRegionTravelActivationService(runtime, serializer),
+            generatedCombatRuntime: combatRuntime);
         var artifactFactory = new SeededGeneratedProjectArtifactFactory(baseline, validator, overlay: overlay);
         var record = new GameProjectSeedRegenerationRecordService(Goal156TestKit.RepositoryRoot, source);
         var regeneration = new GameProjectSeedRegenerationService(

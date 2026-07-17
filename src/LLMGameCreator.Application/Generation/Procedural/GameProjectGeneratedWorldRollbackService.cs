@@ -188,7 +188,8 @@ public sealed class GameProjectGeneratedWorldRollbackService
                 current.Tokens.ProjectIdentityFingerprint, StringComparison.Ordinal);
             var diff = _diffService.Compare(current.Source, candidateSource, authoringPreserved, identityPreserved);
             if (!diff.GameplayChanged || !authoringPreserved || !identityPreserved
-                || snapshot.GeneratedWorld?.Status != "TRAVEL_CURRENT"
+                || snapshot.GeneratedWorld?.Status != "CAMPAIGN_CURRENT"
+                || snapshot.GeneratedEncounterCombat is not { Passed: true, Status: "CAMPAIGN_CURRENT" }
                 || snapshot.GeneratedWorldActivation is not { Passed: true }
                 || snapshot.GeneratedRegionTravel is not { Passed: true }
                 || snapshot.AcceptedMechanicsCompatibility is not { Passed: true }
@@ -281,7 +282,8 @@ public sealed class GameProjectGeneratedWorldRollbackService
                 freshSnapshot, cached.Diff, candidateAuthoring.State);
             if (!seal.Passed) return FailedResult(preview,
                 seal.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_tampered");
-            if (freshSnapshot.GeneratedWorld?.Status != "TRAVEL_CURRENT"
+            if (freshSnapshot.GeneratedWorld?.Status != "CAMPAIGN_CURRENT"
+                || freshSnapshot.GeneratedEncounterCombat is not { Passed: true, Status: "CAMPAIGN_CURRENT" }
                 || freshSnapshot.GeneratedWorldActivation is not { Passed: true }
                 || freshSnapshot.GeneratedRegionTravel is not { Passed: true }
                 || freshSnapshot.AcceptedMechanicsCompatibility is not { Passed: true }

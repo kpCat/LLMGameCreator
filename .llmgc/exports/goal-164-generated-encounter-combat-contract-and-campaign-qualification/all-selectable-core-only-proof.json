@@ -1,0 +1,9 @@
+{
+    "status":  "GREEN",
+    "allSelectableCampaignPassed":  true,
+    "coreOnlyCampaignPassed":  true,
+    "allSelectablePortablePassed":  true,
+    "coreOnlyPortablePassed":  true,
+    "allSelectableReleaseCandidateCurrent":  true,
+    "coreOnlyFalseReleaseCandidateReadiness":  false
+}

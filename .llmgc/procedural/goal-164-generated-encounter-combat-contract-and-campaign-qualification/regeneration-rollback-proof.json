@@ -1,0 +1,10 @@
+{
+    "status":  "GREEN",
+    "candidateCombatCurrent":  true,
+    "candidateSealCombatHashesPresent":  true,
+    "semanticCommitValidatedV4":  true,
+    "regenerationApplyCurrent":  true,
+    "rollbackRebuiltCurrentContract":  true,
+    "rollbackApplyCurrent":  true,
+    "historicalCombatOverlayRestoredDirectly":  false
+}

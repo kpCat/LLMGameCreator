@@ -130,11 +130,11 @@ public sealed class Goal161CrossWorldMigrationTests
     }
 
     [Fact]
-    public void Behavioral_original_revision_becomes_current_after_historical_world_restore()
+    public void Behavioral_original_revision_requires_migration_after_historical_world_rebuild()
     {
         var load = Goal161MigrationState.Value.OriginalRevisionAfterRollback;
-        Assert.True(load.Passed, string.Join(Environment.NewLine, load.Diagnostics));
-        Assert.Equal(GeneratedGameplaySaveStatus.CURRENT, load.Status);
+        Assert.False(load.Passed);
+        Assert.Equal(GeneratedGameplaySaveStatus.PACKAGE_REBASE_REQUIRED, load.Status);
     }
 
     [Fact]

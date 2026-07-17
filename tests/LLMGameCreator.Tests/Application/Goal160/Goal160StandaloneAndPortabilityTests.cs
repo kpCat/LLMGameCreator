@@ -44,7 +44,7 @@ public sealed class Goal160StandaloneAndPortabilityTests
         Assert.Equal(state.TargetWorldId, history.CurrentWorldId);
         Assert.True(change.Passed);
         Assert.Equal("history_rollback", change.Record?.OperationKind);
-        Assert.Equal("TRAVEL_CURRENT", snapshot.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.True(snapshot.AcceptedMechanics?.Passed);
         Assert.Equal("BUILD_GREEN_STANDALONE_PENDING", snapshot.ReleaseCandidateConfigurationStatus);
     }
@@ -130,7 +130,7 @@ public sealed class Goal160StandaloneAndPortabilityTests
         Assert.True(portableHistory.Passed);
         Assert.Equal(state.TargetWorldId, portableHistory.CurrentWorldId);
         Assert.True(portableChange.Passed);
-        Assert.Equal("TRAVEL_CURRENT", portableSnapshot.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", portableSnapshot.GeneratedWorld?.Status);
         Assert.True(portableSnapshot.AcceptedMechanics?.Passed);
         Assert.Equal("CURRENT", portableSnapshot.ReleaseCandidateConfigurationStatus);
 
@@ -170,7 +170,7 @@ public sealed class Goal160StandaloneAndPortabilityTests
             rollbackCandidateBuildPassed = state.Preview.CandidateBuild?.Status == "GREEN",
             rollbackCandidateRepeatDeterministic = state.Preview.Status == "GREEN"
                                                    && state.Preview.CandidateBuild?.Passed == true,
-            rollbackCandidateFreshReopenTravelCurrent = state.Preview.CandidateSnapshot?.GeneratedWorld?.Status == "TRAVEL_CURRENT",
+            rollbackCandidateFreshReopenTravelCurrent = state.Preview.CandidateSnapshot?.GeneratedWorld?.Status == "CAMPAIGN_CURRENT",
             rollbackAuthoringPreserved = state.OriginalSelectedModuleIds.SequenceEqual(state.CandidateSelectedModuleIds)
                                          && state.OriginalParameterJson == state.CandidateParameterJson,
             rollbackIdentityPreserved = state.OriginalIdentityJson == state.CandidateIdentityJson,
@@ -217,7 +217,7 @@ public sealed class Goal160StandaloneAndPortabilityTests
             portableCopyCurrent = portableHistory.Passed
                                   && portableHistory.CurrentWorldId == state.TargetWorldId
                                   && portableChange.Passed
-                                  && portable.GeneratedWorld?.Status == "TRAVEL_CURRENT"
+                                  && portable.GeneratedWorld?.Status == "CAMPAIGN_CURRENT"
                                   && portable.AcceptedMechanics?.Passed == true
                                   && portable.ReleaseCandidateConfigurationStatus == "CURRENT",
             generatedWorld = snapshot.GeneratedWorld,

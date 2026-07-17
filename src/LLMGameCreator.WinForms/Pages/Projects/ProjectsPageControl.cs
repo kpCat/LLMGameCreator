@@ -314,7 +314,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
     {
         ArgumentNullException.ThrowIfNull(snapshot);
         var generated = snapshot.GeneratedWorld is { Present: true };
-        var current = snapshot.GeneratedWorld is { Present: true, Passed: true, Status: "TRAVEL_CURRENT" }
+        var current = snapshot.GeneratedWorld is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" }
                       && snapshot.GeneratedWorldActivation is { Passed: true }
                       && snapshot.GeneratedRegionTravel is { Passed: true }
                       && snapshot.AcceptedMechanicsCompatibility is { Passed: true };

@@ -228,7 +228,8 @@ public sealed class GameProjectSeedRegenerationService
             if (!diff.GameplayChanged || !authoringPreserved || !identityPreserved)
                 return CandidateFailure(attemptId, candidate,
                     diff.Diagnostics.FirstOrDefault() ?? "regeneration.candidate_diff_failed", second);
-            if (candidateSnapshot.GeneratedWorld?.Status != "TRAVEL_CURRENT"
+            if (candidateSnapshot.GeneratedWorld?.Status != "CAMPAIGN_CURRENT"
+                || candidateSnapshot.GeneratedEncounterCombat is not { Passed: true, Status: "CAMPAIGN_CURRENT" }
                 || candidateSnapshot.GeneratedWorldActivation is not { Passed: true }
                 || candidateSnapshot.GeneratedRegionTravel is not { Passed: true }
                 || candidateSnapshot.AcceptedMechanicsCompatibility is not { Passed: true }
@@ -333,7 +334,8 @@ public sealed class GameProjectSeedRegenerationService
             var candidateSource = _sourceService.Validate(cached.CandidateRoot);
             if (candidateSource is not { Present: true, Passed: true, Source: not null })
                 return FailedResult(cached.PublicPreview, "regeneration.candidate_tampered");
-            if (freshCandidateSnapshot.GeneratedWorld?.Status != "TRAVEL_CURRENT"
+            if (freshCandidateSnapshot.GeneratedWorld?.Status != "CAMPAIGN_CURRENT"
+                || freshCandidateSnapshot.GeneratedEncounterCombat is not { Passed: true, Status: "CAMPAIGN_CURRENT" }
                 || freshCandidateSnapshot.GeneratedWorldActivation is not { Passed: true }
                 || freshCandidateSnapshot.GeneratedRegionTravel is not { Passed: true }
                 || freshCandidateSnapshot.AcceptedMechanicsCompatibility is not { Passed: true }

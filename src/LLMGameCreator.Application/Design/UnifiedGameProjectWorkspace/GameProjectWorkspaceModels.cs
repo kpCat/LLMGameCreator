@@ -15,7 +15,7 @@ public static class UnifiedGameProjectWorkspaceVocabulary
     public const string ReleaseCandidateRelativeRoot = ".llmgc/release-candidate";
     public const string ReleaseCandidateRecordRelativePath = ".llmgc/release-candidate/accepted-mechanics-rc1.json";
     public const string ReleaseCandidateSchemaVersion = "accepted_mechanics_release_candidate_v1";
-    public const string PrimaryActionText = "Собрать и проверить игру";
+    public const string PrimaryActionText = "Собрать и играть";
 }
 
 public sealed record GameProjectMechanicPresentation
@@ -293,6 +293,7 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
     public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
+    public GameProjectGeneratedEncounterCombatSummary? GeneratedEncounterCombat { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
     public bool CanRegenerateGeneratedWorld { get; init; }
     public bool RegenerationRunning { get; init; }
@@ -383,6 +384,7 @@ public sealed record GameProjectBuildResult
     public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
     public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
+    public GameProjectGeneratedEncounterCombatSummary? GeneratedEncounterCombat { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
@@ -397,7 +399,7 @@ public sealed record GameProjectRuntimeFrame
 
 public sealed record GameProjectBuildHistoryEntry
 {
-    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v3";
+    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v4";
     public DateTimeOffset CompletedAtUtc { get; init; }
     public string Status { get; init; } = string.Empty;
     public string PackageSha256 { get; init; } = string.Empty;
@@ -427,6 +429,7 @@ public sealed record GameProjectBuildHistoryEntry
     public GameProjectGeneratedWorldActivationSummary? GeneratedWorldActivation { get; init; }
     public GeneratedWorldTravelOverlayDocument? GeneratedWorldTravelOverlay { get; init; }
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
+    public GameProjectGeneratedEncounterCombatSummary? GeneratedEncounterCombat { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 

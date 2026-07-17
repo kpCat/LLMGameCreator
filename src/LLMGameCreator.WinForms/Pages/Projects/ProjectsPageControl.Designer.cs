@@ -458,7 +458,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._buildAndQualifyButton.Dock = DockStyle.Left;
             this._buildAndQualifyButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             this._buildAndQualifyButton.Size = new Size(270, 42);
-            this._buildAndQualifyButton.Text = "Собрать и проверить игру";
+            this._buildAndQualifyButton.Text = "Собрать и играть";
             this._buildAndQualifyButton.UseVisualStyleBackColor = true;
             this._buildStatusLabel.Dock = DockStyle.Fill;
             this._buildStatusLabel.Text = "Проверка ещё не запускалась";

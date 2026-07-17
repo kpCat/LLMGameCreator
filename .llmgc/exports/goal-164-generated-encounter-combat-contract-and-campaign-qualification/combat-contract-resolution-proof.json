@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "sourceLane":  "Lane A exact Runtime-qualified package",
+    "contractId":  "f5a2e86164cead050ee7ffa5751aa8227ebf0b5678c8025de61f2b7b921bba58",
+    "sourcePackageSha256":  "748ad1d6bfcea8c7b2b348f33e10402daeddcbd1ae2eb07f28bf3fab0f315b20",
+    "playerActionQualifiedByActualRuntime":  true,
+    "opponentAiQualifiedByActualRuntime":  true,
+    "generatedCandidatesExcluded":  true,
+    "fixedEncounterResourceAbilityIds":  0,
+    "fixedHealthDamageNumbers":  0,
+    "packageShaUnchanged":  true
+}

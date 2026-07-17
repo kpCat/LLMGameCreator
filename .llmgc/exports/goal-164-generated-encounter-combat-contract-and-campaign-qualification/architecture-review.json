@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "goal164_architecture_review_v1",
+  "requiredBase": "d5d614a8a0d401113715c9a4b7152c2bc1095a0b",
+  "primaryFilesRead": [
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectGeneratedWorldSummaryService.cs",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+    "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCandidateSealService.cs",
+    "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCommitValidator.cs",
+    "src/LLMGameCreator.Application/Generation/Procedural/GeneratedProjectOverlayService.cs",
+    "src/LLMGameCreator.Application/Generation/Procedural/GeneratedWorldTravelOverlayService.cs",
+    "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignCombatReadinessService.cs",
+    "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionTruthService.cs",
+    "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionService.cs",
+    "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignRuntimeDispatchService.cs",
+    "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignQuestReadinessService.cs",
+    "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignConsequenceProjector.cs",
+    "tests/LLMGameCreator.Tests/Application/Goal163/Goal163PackageTruthCombatTests.cs",
+    "tests/LLMGameCreator.Tests/Application/Goal163/Goal163QuestTurnInTests.cs",
+    "src/LLMGameCreator.Application/Generation/Procedural/GeneratedPackageMvpService.cs"
+  ],
+  "localAnalogs": [
+    "GeneratedProjectOverlayService: exact GeneratedProjectOverlayDocument record fingerprints and additive package preservation",
+    "GeneratedWorldTravelOverlayService: deterministic build-time Lane B transformation, controlled delta and canonical hashes",
+    "GeneratedCampaignRuntimeDispatchService: exact package reference and before/after package SHA protection",
+    "GameProjectBuildHistoryReader: typed v2/v3 compatibility recovery"
+  ],
+  "goal163IndependentAudit": {
+    "types": ["GeneratedCampaignCombatReadinessService", "GeneratedCampaignRuntimeDispatchService"],
+    "inputs": ["Goal163 exact final package", "generated encounter definitions"],
+    "outputs": ["BLOCKED_AT_D5D614A8", "campaign.encounter_no_executable_player_action"],
+    "hashes": ["required base d5d614a8a0d401113715c9a4b7152c2bc1095a0b", "package SHA unchanged during dispatch"],
+    "tests": [63],
+    "decision": "Preserve exact-package dispatch, BasicAttack identity, read-only readiness and single CompleteQuest turn-in."
+  },
+  "laneACombatContractAuthority": {
+    "types": ["GeneratedEncounterCombatContractService", "GeneratedEncounterCombatContract", "IUnifiedGameRuntimeService"],
+    "inputs": ["exact identity-qualified Lane A GamePackageDefinition", "GeneratedProjectOverlayDocument"],
+    "outputs": ["one Runtime-qualified canonical player/opponent role contract"],
+    "hashes": ["SourcePackageSha256", "ContractId", "ExactDefinitionFingerprints"],
+    "tests": [1, 6, 7, 8, 27]
+  },
+  "contractCandidateSelection": {
+    "types": ["EncounterDefinition", "EncounterParticipantDefinition", "GeneratedEncounterCombatRoleContract"],
+    "inputs": ["Lane A encounters excluding overlay game.encounters generated records"],
+    "outputs": ["ordinal encounter/participant/fingerprint ordered candidates"],
+    "hashes": ["PlayerRoleFingerprint", "OpponentRoleFingerprint"],
+    "tests": [1, 2, 3, 4, 5, 9, 10, 11, 12]
+  },
+  "runtimeQualificationOfContract": {
+    "types": ["IUnifiedGameRuntimeService", "UnifiedRuntimeSession", "GameRuntimeCommand"],
+    "inputs": ["exact Lane A package reference", "candidate encounter and roles"],
+    "outputs": ["StartEncounter/player action/opponent AI qualification"],
+    "hashes": ["package SHA before and after every qualification command"],
+    "tests": [6, 7, 8]
+  },
+  "generatedEncounterBinding": {
+    "types": ["GeneratedEncounterCombatBindingService", "GeneratedEncounterCombatBinding", "SeededGeneratedProjectSourceValidationResult"],
+    "inputs": ["strict RegeneratedPlan.EncounterSeeds", "GeneratedContent.Encounters.SourceId", "exact package encounter metadata sourceEncounterSeedId"],
+    "outputs": ["one plan seed to one generated row to one package encounter binding"],
+    "hashes": ["plan SHA", "package encounter canonical fingerprint"],
+    "tests": [13, 14],
+    "schemaConstraint": "GeneratedEncounterDefinition has no PackageEncounterId at required base and public GamePackage schema changes are forbidden; exact existing provenance metadata is therefore the package-id authority, with no prefix/title inference."
+  },
+  "combatOverlayControlledDelta": {
+    "types": ["GeneratedWorldEncounterCombatOverlayService", "GeneratedWorldEncounterCombatOverlayDocument"],
+    "inputs": ["pre-combat Lane B package", "exact bindings", "canonical contract"],
+    "outputs": ["combat-overlay Lane B package", "controlled-delta document"],
+    "hashes": ["SourcePackageSha256", "OutputPackageSha256", "before/after encounter fingerprints", "definition collection counts"],
+    "tests": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+  },
+  "buildPipelineOrder": {
+    "types": ["GameProjectBuildAndQualificationService", "GameProjectGeneratedEncounterCombatQualificationService"],
+    "inputs": ["strict source", "Lane A result", "generated start/travel Lane B"],
+    "outputs": ["combat Lane B primary package", "v4 history"],
+    "hashes": ["Lane A compatibility hashes unchanged", "Lane B primary package/composition/final hashes"],
+    "tests": [27, 28, 29, 30, 35]
+  },
+  "generatedCombatQualification": {
+    "types": ["GameProjectGeneratedEncounterCombatQualificationService", "GeneratedCampaignQuestReadinessService", "GeneratedCampaignConsequenceProjector"],
+    "inputs": ["combat-overlay package", "strict source", "exact bindings", "actual Runtime"],
+    "outputs": ["GameProjectGeneratedEncounterCombatSummary CAMPAIGN_CURRENT"],
+    "hashes": ["ExactPackageSha256", "FinalStateHash", "ordered runtime frame state hashes"],
+    "tests": [29, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+  },
+  "buildHistoryVersioning": {
+    "types": ["GameProjectBuildHistoryEntry", "GameProjectBuildHistoryReader", "GameProjectGeneratedWorldSummaryService"],
+    "inputs": ["v4", "genuine v3", "v2", "legacy history"],
+    "outputs": ["CAMPAIGN_CURRENT", "COMBAT_PENDING", "ABSENT", "existing legacy behavior"],
+    "hashes": ["selected history SHA remains separate from actual final state hash"],
+    "tests": [30, 31, 32, 33, 36, 37]
+  },
+  "campaignReadiness": {
+    "types": ["GeneratedCampaignSessionTruthService", "GeneratedCampaignSessionService", "GeneratedCampaignActionPlanner"],
+    "inputs": ["v4 current exact package/build/authoring/combat summary"],
+    "outputs": ["READY only for exact CAMPAIGN_CURRENT truth", "human actions and consequences"],
+    "hashes": ["package", "composition", "final state", "selected build history"],
+    "tests": [34, 36, 38, 45, 47, 48, 49]
+  },
+  "regenerationRollbackSeal": {
+    "types": ["GameProjectSeedRegenerationCandidateSealService", "GameProjectSeedRegenerationCommitValidator"],
+    "inputs": ["candidate combat summary/overlay/build history"],
+    "outputs": ["sealed combat-current candidate", "tamper rejection"],
+    "hashes": ["combat summary SHA", "combat overlay SHA", "combat package SHA"],
+    "tests": [51, 52, 53]
+  },
+  "standaloneFacts": {
+    "types": ["UnifiedGameProjectWorkspaceController", "ProjectStandaloneBuildRequest"],
+    "inputs": ["combat-current build human facts and runtime frames"],
+    "outputs": ["cached hidden smoke payload", "CURRENT RC"],
+    "hashes": ["combat package", "composition", "final state", "host cache key"],
+    "tests": [57, 58, 59, 60]
+  },
+  "portableTruth": {
+    "types": ["GameProjectBuildHistoryReader", "GameProjectReleaseCandidateRecordService"],
+    "inputs": ["portable all-selectable", "portable core-only"],
+    "outputs": ["campaign/save/RC current for all-selectable", "campaign/save current without false RC readiness for core-only"],
+    "hashes": ["portable package/composition/final/history correlation"],
+    "tests": [61, 62]
+  },
+  "sourceSidecarImmutability": {
+    "types": ["SeededGeneratedProjectSourceService", "GeneratedPackageMvpService"],
+    "inputs": ["Goal142", "goal148-manual", "Goal156/157 request/plan/rule/tiny/MVP/overlay/base bytes"],
+    "outputs": ["byte-identical source chain"],
+    "hashes": ["before/after SHA-256 inventory"],
+    "tests": [68, 69]
+  },
+  "allSelectableAndCoreOnly": {
+    "types": ["GameProjectBuildAndQualificationService", "UnifiedGameProjectWorkspaceController"],
+    "inputs": ["all-selectable and core-only generated project profiles"],
+    "outputs": ["CAMPAIGN_CURRENT for both", "RC CURRENT only when RC-complete"],
+    "hashes": ["Lane A unchanged profile hashes", "Lane B combat primary hashes"],
+    "tests": [60, 61, 62]
+  },
+  "failureMatrix": {
+    "types": ["GeneratedEncounterCombatContractResult", "GeneratedWorldEncounterCombatOverlayResult", "GameProjectGeneratedEncounterCombatSummary"],
+    "inputs": ["missing contract", "invalid refs", "ambiguous provenance", "forbidden delta", "tampered history/seal"],
+    "outputs": ["causal generated_combat diagnostics and transactional build failure"],
+    "hashes": ["no package activation on failure"],
+    "tests": [5, 12, 14, 21, 25, 32, 36, 52]
+  },
+  "nonGoals": {
+    "types": ["Runtime", "Runtime.Abstractions", "GamePackage schema", "FeatureModule catalog", "Unity", "GeneratedPackageMvp sidecars"],
+    "inputs": [],
+    "outputs": ["no changes"],
+    "hashes": ["forbidden scope hashes unchanged"],
+    "tests": [10, 11, 19, 20, 27, 63, 64, 65, 66, 67, 68, 69]
+  },
+  "testInventory": {
+    "totalRequired": 69,
+    "goal164MinimumDiscovered": 52,
+    "goal164MinimumBehavioral": 46,
+    "requiredCases": [
+      "1 deterministic Lane A contract", "2 generated candidates excluded", "3 player and opponent required", "4 Runtime health semantics", "5 missing health rejected", "6 actual player Runtime route", "7 actual AI Runtime route", "8 package reference/SHA stable", "9 deterministic ContractId", "10 no fixed production IDs", "11 no fixed combat numbers", "12 missing contract causal failure",
+      "13 exact plan/provenance binding", "14 missing/duplicate mapping rejected", "15 player role applied", "16 every non-player role applied", "17 participant identity preserved", "18 encounter fields preserved", "19 definitions unchanged", "20 provenance definitions unassigned", "21 references exact", "22 baseline exact", "23 other generated records exact", "24 travel exact", "25 forbidden mutation rejected", "26 deterministic overlay",
+      "27 Lane A unchanged", "28 Lane B primary hashes", "29 all generated qualified", "30 v4 persistence", "31 v4 reopen", "32 v3 pending", "33 v2 absent", "34 old project build-and-play label", "35 rebuild without source rewrite", "36 campaign exact combat truth", "37 zero encounters absent",
+      "38 human generated encounter action", "39 BasicAttack exact", "40 package ability", "41 bounded AI", "42 flee no consequence", "43 victory reward", "44 ready active quest", "45 CompleteQuest once", "46 AdvanceQuestObjective zero", "47 visible reputation", "48 travel/interaction", "49 save/continue no Start", "50 replay equivalent",
+      "51 regeneration seal combat hashes", "52 tamper rejected", "53 rollback rebuild", "54 migration required", "55 migration current", "56 post-migration route", "57 one smoke", "58 host reuse Unity zero", "59 payload facts/hashes", "60 all-selectable RC", "61 portable all-selectable", "62 portable core-only no false RC",
+      "63 Goal163", "64 Goal162", "65 Goal161 family", "66 Goal160/159/158/157", "67 generated save and Runtime simulator", "68 Goal142/148 bytes", "69 generation sidecar bytes"
+    ]
+  }
+}

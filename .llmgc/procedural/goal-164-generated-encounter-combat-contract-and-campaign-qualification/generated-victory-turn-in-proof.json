@@ -1,0 +1,21 @@
+{
+    "status":  "GREEN",
+    "commands":  [
+                     "UseAbility",
+                     "RunCurrentTurnAi",
+                     "FleeEncounter",
+                     "BasicAttack",
+                     "CompleteQuest"
+                 ],
+    "freshVictory":  true,
+    "rewardReceived":  true,
+    "questReady":  true,
+    "questActiveBeforeTurnIn":  true,
+    "completeQuestCommandCount":  1,
+    "advanceObjectiveCommandCount":  0,
+    "manualTurnIn":  true,
+    "reputationConsequence":  true,
+    "travelAndDestinationInteraction":  true,
+    "saveContinueRuntimeStartCount":  0,
+    "replayEquivalent":  true
+}

@@ -104,7 +104,7 @@ public sealed class Goal159WorkspaceUiTests
         Assert.Equal(fixture.Project.Path, fixture.Result.AuthoritativeSnapshot?.ProjectFolder);
         Assert.Equal(fixture.Record.AttemptId,
             fixture.Result.AuthoritativeSnapshot?.LastSuccessfulRegeneration?.AttemptId);
-        Assert.Equal("TRAVEL_CURRENT", fixture.Result.AuthoritativeSnapshot?.GeneratedWorld?.Status);
+        Assert.Equal("CAMPAIGN_CURRENT", fixture.Result.AuthoritativeSnapshot?.GeneratedWorld?.Status);
     }
 
     [Fact]

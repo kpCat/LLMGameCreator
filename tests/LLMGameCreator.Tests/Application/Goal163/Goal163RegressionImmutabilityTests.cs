@@ -2,6 +2,7 @@ using LLMGameCreator.Application.Play.GeneratedCampaign;
 using LLMGameCreator.Runtime.Abstractions;
 using LLMGameCreator.Tests.Application.Goal160;
 using LLMGameCreator.Tests.Application.Goal162;
+using LLMGameCreator.Tests.Application.Goal164;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application.Goal163;
@@ -61,10 +62,7 @@ public sealed class Goal163RegressionImmutabilityTests
     [Fact]
     public void Behavioral_core_only_route_is_real_and_truthfully_classified()
     {
-        var fixture = Goal162TestKit.CoreBundle();
-        var service = Goal162TestKit.Service(fixture.Bundle);
-
-        var snapshot = service.StartNew();
+        var snapshot = Goal164CampaignState.CoreOnly.Started;
 
         Assert.Equal(GeneratedCampaignSessionStatus.ACTIVE, snapshot.Status);
         Assert.NotNull(snapshot.Map);

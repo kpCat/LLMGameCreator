@@ -114,7 +114,7 @@ public sealed class Goal163PackageTruthCombatTests
     }
 
     [Fact]
-    public void Behavioral_real_qualified_nonplayable_encounter_is_disabled_causally()
+    public void Behavioral_real_qualified_generated_encounter_is_playable_after_combat_upgrade()
     {
         var package = Goal162TestKit.Package;
         var quest = package.Game.Quests.First(item => item.Objectives.Any(objective =>
@@ -124,10 +124,10 @@ public sealed class Goal163PackageTruthCombatTests
 
         var readiness = new GeneratedCampaignCombatReadinessService().Evaluate(package, encounter);
 
-        Assert.False(readiness.Playable);
-        Assert.False(readiness.BasicAttackAvailable);
-        Assert.Empty(readiness.AbilityIds);
-        Assert.Contains("campaign.encounter_no_executable_player_action", readiness.Diagnostics);
+        Assert.True(readiness.Playable);
+        Assert.True(readiness.BasicAttackAvailable);
+        Assert.NotEmpty(readiness.AbilityIds);
+        Assert.DoesNotContain("campaign.encounter_no_executable_player_action", readiness.Diagnostics);
     }
 
     [Fact]

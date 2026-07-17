@@ -392,7 +392,10 @@ internal static class Goal162TestKit
     public static (GeneratedProject Project, Goal161WorldBundle Bundle) CoreBundle()
     {
         var project = Goal156TestKit.Copy(Goal157BuildState.Value.CoreProject, "goal162-core-only");
-        return (project, Goal161WorldBundle.Create(project.Path));
+        var bundle = Goal161WorldBundle.Create(project.Path);
+        var build = bundle.Controller.BuildAndQualify();
+        Assert.True(build.Passed, string.Join(Environment.NewLine, build.Diagnostics));
+        return (project, bundle);
     }
 
     private static IEnumerable<(int X, int Y)> Neighbors((int X, int Y) cell)

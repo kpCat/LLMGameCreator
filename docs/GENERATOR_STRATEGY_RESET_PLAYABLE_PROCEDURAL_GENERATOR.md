@@ -1,6 +1,6 @@
 # Generator Strategy Reset: Playable Procedural Generator
 
-Goal163 update: the player-facing WinForms campaign workspace now preserves exact qualified package truth for every Runtime command and exposes human consequences. The prior synthetic combat package/fixed power path is removed. The package's ordinary sample combat is executable, but generated current-region quest encounters are not: their generated health/action definitions do not satisfy existing Runtime combat contracts. Strategy therefore requires a bounded generated encounter package-contract repair before campaign victory/turn-in continuation; Application orchestration must never patch definitions at action time. Goal163 remains blocked and unaccepted, with no human gate.
+Goal164 update: the player-facing campaign keeps Goal163 exact package dispatch and consequences while generated encounters receive a deterministic build-time combat overlay. The combat contract comes only from a real Runtime-qualified Lane A package; strict plan plus `GeneratedContent` provenance binds Lane B and only participant combat fields change. Application and Runtime never patch definitions at action time. Actual all-selectable/core-only campaign, v4 history, regeneration/rollback, migration, cached standalone and portable recovery are GREEN. Goal164 is unaccepted, has no manual gate and requires independent audit.
 
 Status: source-of-truth strategy pivot  
 Scope: product direction, Codex task selection, generation architecture, limit discipline  

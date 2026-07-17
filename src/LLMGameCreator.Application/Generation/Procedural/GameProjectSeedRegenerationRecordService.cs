@@ -96,7 +96,7 @@ public sealed class GameProjectSeedRegenerationRecordService
                 if (history is null
                     || history.Status != "GREEN"
                     || history.AttemptStatus != "GREEN"
-                    || history.SchemaVersion != "unified_game_project_build_history_v3"
+                    || history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV4
                     || !string.Equals(history.PackageSha256, record.NewPackageSha256, StringComparison.Ordinal)
                     || !string.Equals(history.CompositionPackageSha256, record.NewCompositionPackageSha256,
                         StringComparison.Ordinal)

@@ -1,0 +1,6 @@
+{
+    "status":  "BLOCKED_AT_D5D614A8",
+    "blocker":  "generated_encounters_reference_namespaced_health_and_effectless_generated_action_without_executable_runtime_combat_contract",
+    "blockerClosedByGoal164":  true,
+    "exactPackageDispatchQuestConsequencePreserved":  true
+}

@@ -1,0 +1,52 @@
+/goal
+
+Выполни задачу из файла:
+
+docs/agent-tasks/goal-164-generated-encounter-combat-contract-and-campaign-qualification/GOAL.md
+
+Модель: GPT-5.6 Sol
+Reasoning: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: d5d614a8a0d401113715c9a4b7152c2bc1095a0b
+
+Это новый отдельный диалог Codex.
+
+Критически важно:
+- Goal163 exact-package dispatch/quest/consequence implementation сохраняется;
+- blocker в final generated package: participants ссылаются на generated/resource/health и
+  effectless generated/ability/action_resolve_encounter;
+- Runtime и campaign-time package mutation запрещены;
+- persisted generated source/plan/rule/tiny/MVP/overlay/base sidecars менять нельзя;
+- добавить deterministic build-time generated encounter combat overlay;
+- combat contract брать только из реально существующего и Runtime-qualified Lane A package;
+- никаких fixed encounter/resource/ability IDs, participant counts, health/damage numbers;
+- actual Runtime должен квалифицировать player action и opponent AI на exact Lane A package;
+- generated encounters bind only through strict plan + GeneratedContent provenance;
+- изменять только combat fields generated encounter participants;
+- encounter/reward/identity/provenance, baseline, travel gates и все остальные records exact;
+- definitions не добавлять и не удалять;
+- generated data-only action/resource оставить provenance, но не назначать боевым ролям;
+- Lane A AcceptedMechanics/hashes unchanged; Lane B получает combat overlay и primary hashes;
+- add v4 history + GeneratedEncounterCombat/CAMPAIGN_CURRENT;
+- genuine v3 history только COMBAT_PENDING, never campaign current;
+- old project ordinary rebuild upgrades combat without source rewrite;
+- regeneration/history rollback candidates rebuild current combat contract;
+- real generated all-selectable/core-only routes: BasicAttack, package ability, AI, flee,
+  victory, reward, generated quest ready+active, manual CompleteQuest exactly 1,
+  reputation, travel, save/continue, migration/post-migration combat;
+- one cached hidden standalone smoke, host reused, Unity 0, retry 0;
+- RC CURRENT all-selectable, portable all/core, no false core-only RC readiness;
+- Goal142/Goal148 and all generation sidecars byte-identical;
+- no Runtime/GamePackage/FeatureModule/Unity/source/save-migration/standalone implementation changes;
+- required regressions, 14×2 evidence, docs/state, artifact scope 0;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать один commit и push origin/main;
+- запрещено оставлять изменения пользователю для ручного push.
+
+В финале сообщи contract resolver, controlled delta, Lane A/B,
+v4 history, real generated victory/manual turn-in,
+save/migration/regeneration/rollback, smoke/RC/portable,
+tests/regressions/source immutability/evidence/scope,
+SHA, push, HEAD==origin/main и clean worktree.

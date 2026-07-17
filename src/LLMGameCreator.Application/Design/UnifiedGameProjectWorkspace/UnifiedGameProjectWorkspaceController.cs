@@ -295,12 +295,14 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                                           currentFingerprint.Sha256, StringComparison.Ordinal);
         var generatedWorldActivation = _lastSuccessfulBuild?.GeneratedWorldActivation;
         var generatedRegionTravel = _lastSuccessfulBuild?.GeneratedRegionTravel;
+        var generatedEncounterCombat = _lastSuccessfulBuild?.GeneratedEncounterCombat;
         var generatedWorld = _generatedWorldSummaryService.Restore(
             generatedSource,
             _lastSuccessfulBuild?.GeneratedWorld,
             generatedMatchesCurrent,
             generatedWorldActivation,
-            generatedRegionTravel);
+            generatedRegionTravel,
+            generatedEncounterCombat);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -382,14 +384,17 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
             ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
             ,GeneratedWorld = generatedWorld
-            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedWorldActivation
                 : null
-            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? _lastSuccessfulBuild?.GeneratedWorldTravelOverlay
                 : null
-            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedRegionTravel
+                : null
+            ,GeneratedEncounterCombat = generatedWorld?.Status is "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+                ? generatedEncounterCombat
                 : null
             ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
             ,CanRegenerateGeneratedWorld = _regenerationService is not null
@@ -534,6 +539,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                     _lastBuild.GeneratedWorldActivation))
                 .Concat(GameProjectGeneratedWorldSummaryService.StandaloneTravelHumanFacts(
                     _lastBuild.GeneratedRegionTravel))
+                .Concat(GameProjectGeneratedWorldSummaryService.StandaloneCombatHumanFacts(
+                    _lastBuild.GeneratedEncounterCombat))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
                     _lastBuild, releaseCandidateFactsAllowed))
                 .Concat(GeneratedGameplaySavesSummaryService.StandaloneHumanFacts(
@@ -554,6 +561,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var standalone = _standaloneBuild.Build(request, cancellationToken);
         _lastStandaloneAttempt = standalone;
         if (!string.Equals(standalone.Status, "GREEN", StringComparison.Ordinal)) return standalone;
+        if (_lastBuild.AcceptedMechanics is not { Passed: true }) return standalone;
         try
         {
             _releaseCandidateRecordService.Write(state.ProjectFolder, state.Identity, _lastBuild, standalone);

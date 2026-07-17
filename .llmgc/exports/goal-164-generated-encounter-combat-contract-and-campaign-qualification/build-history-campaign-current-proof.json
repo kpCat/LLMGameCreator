@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "laneAAcceptedMechanicsHashesUnchanged":  true,
+    "laneBPrimaryPackageSha256":  "ee01f68f9f03ce0f9ab5fee09f86927304213d646ac603221f9460dd72ade566",
+    "historySchemaVersion":  "unified_game_project_build_history_v4",
+    "combatStatus":  "CAMPAIGN_CURRENT",
+    "freshReopenStatus":  "CAMPAIGN_CURRENT",
+    "genuineV3CombatStatus":  "COMBAT_PENDING",
+    "genuineV3CampaignCurrent":  false,
+    "ordinaryRebuildUpgradedWithoutSourceRewrite":  true
+}
