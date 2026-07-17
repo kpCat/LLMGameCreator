@@ -1,0 +1,21 @@
+{
+  "status": "GREEN",
+  "readyStatus": "READY",
+  "activeStatus": "ACTIVE",
+  "startRegionTitle": "Blue Ditch",
+  "startMapTitle": "Blue Ditch",
+  "runtimeStartInvocationCount": 1,
+  "strictTruthFieldsPassed": [
+    "project identity",
+    "generated source and plan",
+    "Goal142 baseline",
+    "package and composition",
+    "authoring",
+    "selected GREEN history",
+    "start map",
+    "region-map bindings"
+  ],
+  "staleBeforeCommandPassed": true,
+  "regenerationStartsNewTruthPassed": true,
+  "primaryProjectionNoRawIds": true
+}

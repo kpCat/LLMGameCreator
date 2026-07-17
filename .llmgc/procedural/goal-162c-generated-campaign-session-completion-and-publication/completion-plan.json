@@ -1,0 +1,65 @@
+{
+  "goal": "goal-162c-generated-campaign-session-completion-and-publication",
+  "routes": [
+    {
+      "route": "strict TRAVEL_CURRENT readiness and stale-before-command",
+      "types": ["GeneratedCampaignSessionTruthService", "GeneratedCampaignSessionService", "GeneratedGameplaySaveValidator"],
+      "tests": ["Goal162CampaignTruthProjectionTests.cs", "Goal162RegressionImmutabilityTests.cs"]
+    },
+    {
+      "route": "new session, arbitrary map, player, region, nearby and human HUD",
+      "types": ["GeneratedCampaignProjectionService", "GeneratedCampaignActionPlanner", "GeneratedCampaignSessionModels"],
+      "tests": ["Goal162CampaignTruthProjectionTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "route": "actor interaction, dialogue open, generated choice and close",
+      "types": ["GeneratedCampaignActionPlanner", "GeneratedCampaignSessionService", "GeneratedCampaignProjectionService"],
+      "tests": ["Goal162CampaignDialogueTests.cs"]
+    },
+    {
+      "route": "current-region encounter, attack or ability, bounded AI, resolve, reward, quest refresh, completion and reputation",
+      "types": ["GeneratedCampaignActionPlanner", "GeneratedCampaignSessionService", "GeneratedCampaignEventPresenter"],
+      "tests": ["Goal162CampaignEncounterQuestTests.cs"]
+    },
+    {
+      "route": "projected path, human gate destination, MapChanged and destination interaction",
+      "types": ["GeneratedCampaignActionPlanner", "GeneratedCampaignProjectionService", "GeneratedCampaignSessionService", "GeneratedWorldRegionMapBindingService"],
+      "tests": ["Goal162CampaignTravelTests.cs"]
+    },
+    {
+      "route": "save CURRENT, deduplicate, clear and exact continue with Runtime Start count zero",
+      "types": ["GeneratedCampaignSessionService", "GeneratedGameplaySaveService"],
+      "tests": ["Goal162CampaignSaveMigrationTests.cs"]
+    },
+    {
+      "route": "regeneration drift, direct-load rejection, preview zero-write, explicit migration and continued play",
+      "types": ["GeneratedCampaignSessionService", "GeneratedCampaignSessionTruthService", "GeneratedGameplaySaveMigrationService"],
+      "tests": ["Goal162CampaignSaveMigrationTests.cs", "Goal162CampaignTravelTests.cs"]
+    },
+    {
+      "route": "TRAVEL_CURRENT build-and-play exactly once and navigation without auto-start",
+      "types": ["ProjectsPageControl", "IUnifiedGameProjectWorkspaceController", "IEditorPageNavigationService", "MainForm"],
+      "tests": ["Goal162ProjectsNavigationTests.cs"]
+    },
+    {
+      "route": "Играть workspace input, dynamic context, save picker, no raw IDs and 1100x720 layout",
+      "types": ["GeneratedCampaignPageControl", "GeneratedCampaignMapControl", "GeneratedCampaignSavePickerDialog"],
+      "tests": ["Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "route": "core-only move, travel, interact, save and exact continue without false RC readiness",
+      "types": ["GeneratedCampaignSessionTruthService", "GeneratedCampaignSessionService"],
+      "tests": ["Goal162RegressionImmutabilityTests.cs", "Goal162CampaignTravelTests.cs", "Goal162CampaignSaveMigrationTests.cs"]
+    },
+    {
+      "route": "legacy unavailable while Runtime Simulator and raw snapshot workflow remain unchanged",
+      "types": ["GeneratedCampaignSessionTruthService", "ProjectsPageControl"],
+      "tests": ["Goal162ProjectsNavigationTests.cs", "Goal162RegressionImmutabilityTests.cs"]
+    },
+    {
+      "route": "RC, standalone run, pointer, history, Goal142 and goal148-manual byte immutability with zero process counts",
+      "types": ["Goal162 publication runner"],
+      "tests": ["Goal162RegressionImmutabilityTests.cs"]
+    }
+  ]
+}

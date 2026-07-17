@@ -6,7 +6,9 @@ Accepted: false
 
 Each milestone must produce visible product progress. Contract and proof artifacts are required, but they are not sufficient by themselves.
 
-Goal161T closure note: the historical Goal161S immutable run remains GREEN and unchanged. Typed immutable payload evidence now resolves the current pointer/run, recovers matching standalone/build histories and finalizes RC `CURRENT` with zero Player, Unity and standalone invocations. Portable all-selectable is `CURRENT` without an operational pointer; core-only is `ABSENT` without false readiness. Goal160's audit blocker is closed, while Goal161/161T remain `accepted=false` with `independentAuditRequired=true` and no human gate.
+Goal162 closure note: Goal161T independent audit is GREEN and Goal160's blocker is closed. The generated campaign workspace now proves real Runtime-backed dialogue, encounter/quest/reward/reputation, travel, save/exact continue and migration routes for all-selectable and core-only projects, while legacy projects remain unavailable. Primary UI is human-facing, Runtime Simulator and protected RC/standalone bytes are unchanged, and Player/Unity/standalone Build counts are zero. Goal162 remains `accepted=false`, requires independent audit and creates no human gate.
+
+Goal161T closure note: the historical Goal161S immutable run remains GREEN and unchanged. Typed immutable payload evidence now resolves the current pointer/run, recovers matching standalone/build histories and finalizes RC `CURRENT` with zero Player, Unity and standalone invocations. Portable all-selectable is `CURRENT` without an operational pointer; core-only is `ABSENT` without false readiness. Goal160's audit blocker is closed; Goal161/161T remain `accepted=false`, their independent-audit requirement is closed by Goal162 intake, and no human gate exists.
 
 ## Vertical Slice Final
 

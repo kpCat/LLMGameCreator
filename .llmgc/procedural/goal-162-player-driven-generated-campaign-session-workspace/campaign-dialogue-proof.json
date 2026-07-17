@@ -1,0 +1,17 @@
+{
+  "status": "GREEN",
+  "route": [
+    "actor Interact",
+    "Runtime OpenDialogue",
+    "package-backed choice",
+    "Runtime ChooseDialogueOption",
+    "Runtime CloseDialogue"
+  ],
+  "actorInteractionPassed": true,
+  "dialogueOpened": true,
+  "humanSpeakerTextAndChoices": true,
+  "choiceEffectsPassed": true,
+  "closePassed": true,
+  "directStateMutationUsed": false,
+  "primarySurfaceNoRawIds": true
+}

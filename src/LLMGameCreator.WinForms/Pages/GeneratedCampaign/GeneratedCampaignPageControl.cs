@@ -1,20 +1,253 @@
 using LLMGameCreator.Application.Play.GeneratedCampaign;
-using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.WinForms.Pages;
 
 public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorPage
 {
     private readonly GeneratedCampaignSessionService? _service;
-    public GeneratedCampaignPageControl(){InitializeComponent();}
-    public GeneratedCampaignPageControl(GeneratedCampaignSessionService service){_service=service;InitializeComponent();_map.CellClicked+=MapCellClicked;}
-    public string Id=>"generated-campaign-player"; public string Title=>"Играть"; public int SortOrder=>54; Control IEditorPage.View=>this;
-    public void OnActivated()=>Bind(_service?.Refresh());
-    private void NewGameClick(object? sender,EventArgs e)=>Bind(_service?.StartNew());
-    private void SaveClick(object? sender,EventArgs e)=>Bind(_service?.Save(_slot.Text));
-    private void ContinueClick(object? sender,EventArgs e){if(_service is null)return;using var dialog=new GeneratedCampaignSavePickerDialog(_service.ListSaves().Entries);if(dialog.ShowDialog(this)!=DialogResult.OK||dialog.SelectedEntry is null)return;if(dialog.MigrateRequested){var preview=_service.PreviewMigration(dialog.SelectedEntry.SlotName);Bind(_service.MigrateAndContinue(preview));}else Bind(_service.Continue(dialog.SelectedEntry.SlotName));}
-    private void MapCellClicked(object? sender,(int X,int Y) cell){var snapshot=_service?.Refresh();if(snapshot?.Map is null)return;var player=snapshot.Map.Cells.SingleOrDefault(x=>x.PlayerPresent);if(player is null||Math.Abs(player.X-cell.X)+Math.Abs(player.Y-cell.Y)!=1)return;var kind=cell.X>player.X?GeneratedCampaignActionKind.MoveRight:cell.X<player.X?GeneratedCampaignActionKind.MoveLeft:cell.Y>player.Y?GeneratedCampaignActionKind.MoveDown:GeneratedCampaignActionKind.MoveUp;var action=snapshot.Actions.FirstOrDefault(x=>x.Kind==kind&&x.Enabled);if(action is not null)Bind(_service!.Execute(action.ActionId));}
-    protected override bool ProcessCmdKey(ref Message msg,Keys keyData){if(ContainsFocus&&ActiveControl is TextBoxBase)return base.ProcessCmdKey(ref msg,keyData);var snapshot=_service?.Refresh();if(snapshot is null)return base.ProcessCmdKey(ref msg,keyData);var kind=keyData switch{Keys.W or Keys.Up=>GeneratedCampaignActionKind.MoveUp,Keys.S or Keys.Down=>GeneratedCampaignActionKind.MoveDown,Keys.A or Keys.Left=>GeneratedCampaignActionKind.MoveLeft,Keys.D or Keys.Right=>GeneratedCampaignActionKind.MoveRight,Keys.E or Keys.Enter=>GeneratedCampaignActionKind.Interact,_=>(GeneratedCampaignActionKind)(-1)};var action=snapshot.Actions.FirstOrDefault(x=>x.Kind==kind&&x.Enabled);if(action is null)return base.ProcessCmdKey(ref msg,keyData);Bind(_service!.Execute(action.ActionId));return true;}
-    private void Bind(GeneratedCampaignSnapshot? snapshot){if(snapshot is null)return;_status.Text=$"{snapshot.ProjectTitle} — {snapshot.CurrentRegionTitle} — {snapshot.StatusTitle}";_map.Projection=snapshot.Map;_actions.SuspendLayout();_actions.Controls.Clear();foreach(var action in snapshot.Actions){var button=new Button{Text=action.Title,AutoSize=true,Enabled=action.Enabled,Tag=action.ActionId,AccessibleDescription=action.Description};new ToolTip().SetToolTip(button,action.Description+(action.Enabled?string.Empty:" — "+action.DisabledReason));button.Click+=(sender,_)=>{if(sender is Button { Tag: string actionId }) Bind(_service?.Execute(actionId));};_actions.Controls.Add(button);}_actions.ResumeLayout();WriteTab(0,snapshot.Resources.Concat(snapshot.Stats).Concat(snapshot.Progressions));WriteTab(1,snapshot.ActiveQuests);WriteTab(2,snapshot.Inventory.Concat(snapshot.Equipment).Concat(snapshot.Factions));WriteTab(3,snapshot.RecentEvents.Select(x=>new GeneratedCampaignTextRow{Title=x}));_technical.Text=string.Join(Environment.NewLine,snapshot.TechnicalDetails.Select(x=>$"{x.Key}: {x.Value}").Concat(snapshot.Diagnostics));_map.Invalidate();}
-    private void WriteTab(int index,IEnumerable<GeneratedCampaignTextRow> rows){var tab=_hud.TabPages[index];tab.Controls.Clear();tab.Controls.Add(new Label{Dock=DockStyle.Top,AutoSize=true,MaximumSize=new Size(300,0),Text=string.Join(Environment.NewLine,rows.Select(r=>string.IsNullOrWhiteSpace(r.Value)?r.Title:r.Title+": "+r.Value))});}
+    private GeneratedCampaignSnapshot? _snapshot;
+
+    public GeneratedCampaignPageControl()
+    {
+        InitializeComponent();
+    }
+
+    public GeneratedCampaignPageControl(GeneratedCampaignSessionService service)
+    {
+        _service = service ?? throw new ArgumentNullException(nameof(service));
+        InitializeComponent();
+        WireEvents();
+    }
+
+    public string Id => "generated-campaign-player";
+    public string Title => "Играть";
+    public int SortOrder => 54;
+    Control IEditorPage.View => this;
+
+    internal string ContextTitleText => _contextTitle.Text;
+    internal IReadOnlyList<string> VisibleActionTitles => _actions.Controls.OfType<Button>()
+        .Select(button => button.Text).ToList();
+    internal bool TechnicalDetailsVisible => _technical.Visible;
+
+    public void OnActivated() => Bind(_service?.Refresh());
+
+    private void WireEvents()
+    {
+        _newGame.Click += NewGameClick;
+        _save.Click += SaveClick;
+        _continue.Click += ContinueClick;
+        _technicalToggle.CheckedChanged += TechnicalToggleChanged;
+        _map.CellClicked += MapCellClicked;
+    }
+
+    private void NewGameClick(object? sender, EventArgs eventArgs) => Bind(_service?.StartNew());
+
+    private void SaveClick(object? sender, EventArgs eventArgs) => Bind(_service?.Save(_slot.Text));
+
+    private void ContinueClick(object? sender, EventArgs eventArgs)
+    {
+        if (_service is null) return;
+        var saves = _service.ListSaves();
+        using var dialog = new GeneratedCampaignSavePickerDialog(saves.Entries);
+        if (dialog.ShowDialog(this) != DialogResult.OK || dialog.SelectedEntry is null) return;
+        if (dialog.MigrateRequested)
+        {
+            var preview = _service.PreviewMigration(dialog.SelectedEntry.SlotName);
+            Bind(_service.MigrateAndContinue(preview));
+            return;
+        }
+
+        Bind(_service.Continue(dialog.SelectedEntry.SlotName));
+    }
+
+    private void TechnicalToggleChanged(object? sender, EventArgs eventArgs)
+    {
+        _technical.Visible = _technicalToggle.Checked;
+        _rootLayout.RowStyles[2].Height = _technicalToggle.Checked ? 120F : 0F;
+    }
+
+    private void MapCellClicked(object? sender, (int X, int Y) cell)
+    {
+        if (_service is null || _snapshot?.Map is null) return;
+        var player = _snapshot.Map.Cells.SingleOrDefault(item => item.PlayerPresent);
+        if (player is null || Math.Abs(player.X - cell.X) + Math.Abs(player.Y - cell.Y) != 1) return;
+        var kind = cell.X > player.X
+            ? GeneratedCampaignActionKind.MoveRight
+            : cell.X < player.X
+                ? GeneratedCampaignActionKind.MoveLeft
+                : cell.Y > player.Y
+                    ? GeneratedCampaignActionKind.MoveDown
+                    : GeneratedCampaignActionKind.MoveUp;
+        ExecuteFirst(kind);
+    }
+
+    protected override bool ProcessCmdKey(ref Message message, Keys keyData)
+    {
+        if (!ContainsFocus) return base.ProcessCmdKey(ref message, keyData);
+        var focused = FindFocusedControl(this);
+        if (focused is TextBoxBase or ComboBox || focused is Button)
+            return base.ProcessCmdKey(ref message, keyData);
+        var kind = keyData switch
+        {
+            Keys.W or Keys.Up => GeneratedCampaignActionKind.MoveUp,
+            Keys.S or Keys.Down => GeneratedCampaignActionKind.MoveDown,
+            Keys.A or Keys.Left => GeneratedCampaignActionKind.MoveLeft,
+            Keys.D or Keys.Right => GeneratedCampaignActionKind.MoveRight,
+            Keys.E or Keys.Enter => GeneratedCampaignActionKind.Interact,
+            _ => (GeneratedCampaignActionKind)(-1)
+        };
+        return ExecuteFirst(kind) || base.ProcessCmdKey(ref message, keyData);
+    }
+
+    private bool ExecuteFirst(GeneratedCampaignActionKind kind)
+    {
+        if (_service is null || _snapshot is null) return false;
+        var action = _snapshot.Actions.FirstOrDefault(item => item.Kind == kind && item.Enabled);
+        if (action is null) return false;
+        Bind(_service.Execute(action.ActionId));
+        return true;
+    }
+
+    private void Bind(GeneratedCampaignSnapshot? snapshot)
+    {
+        if (snapshot is null) return;
+        _snapshot = snapshot;
+        _status.Text = string.Join(" — ", new[]
+        {
+            snapshot.ProjectTitle,
+            snapshot.CurrentRegionTitle,
+            snapshot.StatusTitle
+        }.Where(value => !string.IsNullOrWhiteSpace(value)));
+        _mapTitle.Text = string.IsNullOrWhiteSpace(snapshot.CurrentMapTitle)
+            ? "Карта"
+            : snapshot.CurrentMapTitle;
+        _map.Projection = snapshot.Map;
+        _save.Enabled = snapshot.Status == GeneratedCampaignSessionStatus.ACTIVE;
+        _slot.Enabled = snapshot.Status == GeneratedCampaignSessionStatus.ACTIVE;
+        _newGame.Enabled = snapshot.Status is GeneratedCampaignSessionStatus.READY
+            or GeneratedCampaignSessionStatus.ACTIVE
+            or GeneratedCampaignSessionStatus.STALE_PROJECT;
+        _continue.Enabled = snapshot.Status is not GeneratedCampaignSessionStatus.NO_PROJECT
+            and not GeneratedCampaignSessionStatus.PROJECT_NOT_GENERATED;
+        BindContext(snapshot);
+        BindActions(snapshot.Actions);
+        WriteTab(_characterTab, snapshot.Resources.Concat(snapshot.Stats).Concat(snapshot.Progressions));
+        WriteTab(_questsTab, snapshot.Quests.Select(QuestRow));
+        WriteTab(_inventoryTab, snapshot.Inventory.Concat(snapshot.Equipment).Concat(snapshot.Factions));
+        WriteTab(_eventsTab, snapshot.RecentEvents.Select(value => new GeneratedCampaignTextRow { Title = value }));
+        _technical.Text = string.Join(Environment.NewLine,
+            snapshot.TechnicalDetails.Select(item => item.Key + ": " + item.Value)
+                .Concat(snapshot.Diagnostics));
+    }
+
+    private void BindContext(GeneratedCampaignSnapshot snapshot)
+    {
+        if (snapshot.Dialogue is { Open: true } dialogue)
+        {
+            _contextTitle.Text = dialogue.Title;
+            _contextDescription.Text = dialogue.Speaker + Environment.NewLine + Environment.NewLine + dialogue.Text;
+            return;
+        }
+
+        if (snapshot.Encounter is { } encounter)
+        {
+            _contextTitle.Text = encounter.Title;
+            var participants = encounter.Participants.Select(participant =>
+                participant.Title + " — " + participant.TeamTitle
+                + (participant.Alive ? string.Empty : " — побеждён")
+                + (participant.CurrentTurn ? " — текущий ход" : string.Empty));
+            _contextDescription.Text = "Раунд " + encounter.Round
+                                       + (string.IsNullOrWhiteSpace(encounter.CurrentTurnTitle)
+                                           ? string.Empty
+                                           : ". Ход: " + encounter.CurrentTurnTitle)
+                                       + Environment.NewLine + Environment.NewLine
+                                       + string.Join(Environment.NewLine, participants);
+            return;
+        }
+
+        if (snapshot.Nearby.Count > 0)
+        {
+            _contextTitle.Text = "Рядом";
+            _contextDescription.Text = string.Join(Environment.NewLine + Environment.NewLine,
+                snapshot.Nearby.Select(item => item.Title + Environment.NewLine + item.Description));
+            return;
+        }
+
+        _contextTitle.Text = snapshot.Status == GeneratedCampaignSessionStatus.ACTIVE
+            ? "Исследование"
+            : snapshot.StatusTitle;
+        _contextDescription.Text = snapshot.Status == GeneratedCampaignSessionStatus.ACTIVE
+            ? "Используйте карту, кнопки действий или клавиши WASD/стрелки. Клавиша E выполняет доступное взаимодействие."
+            : snapshot.StatusDescription;
+    }
+
+    private void BindActions(IEnumerable<GeneratedCampaignAction> actions)
+    {
+        _actions.SuspendLayout();
+        _actions.Controls.Clear();
+        foreach (var action in actions)
+        {
+            var button = new Button
+            {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Enabled = action.Enabled,
+                Margin = new Padding(3, 3, 3, 7),
+                MinimumSize = new Size(220, 36),
+                Tag = action.ActionId,
+                Text = action.Title,
+                UseVisualStyleBackColor = true
+            };
+            button.Click += ActionClick;
+            var tooltip = action.Description;
+            if (!action.Enabled && !string.IsNullOrWhiteSpace(action.DisabledReason))
+                tooltip += " — " + action.DisabledReason;
+            _actionToolTip.SetToolTip(button, tooltip);
+            _actions.Controls.Add(button);
+        }
+
+        _actions.ResumeLayout();
+    }
+
+    private void ActionClick(object? sender, EventArgs eventArgs)
+    {
+        if (_service is null || sender is not Button { Tag: string actionId }) return;
+        Bind(_service.Execute(actionId));
+    }
+
+    private static GeneratedCampaignTextRow QuestRow(GeneratedCampaignQuest quest) => new()
+    {
+        Title = quest.Title,
+        Value = quest.StateTitle + (quest.Objectives.Count == 0
+            ? string.Empty
+            : Environment.NewLine + string.Join(Environment.NewLine,
+                quest.Objectives.Select(objective => "• " + objective.Title + ": " + objective.Progress)))
+    };
+
+    private static void WriteTab(TabPage tab, IEnumerable<GeneratedCampaignTextRow> rows)
+    {
+        tab.Controls.Clear();
+        var text = string.Join(Environment.NewLine + Environment.NewLine,
+            rows.Select(row => string.IsNullOrWhiteSpace(row.Value)
+                ? row.Title
+                : row.Title + ": " + row.Value));
+        tab.Controls.Add(new Label
+        {
+            AutoSize = true,
+            Location = new Point(8, 8),
+            MaximumSize = new Size(330, 0),
+            Text = string.IsNullOrWhiteSpace(text) ? "Пока нет данных." : text
+        });
+    }
+
+    private static Control? FindFocusedControl(Control parent)
+    {
+        foreach (Control child in parent.Controls)
+        {
+            if (child.Focused) return child;
+            if (child.ContainsFocus) return FindFocusedControl(child) ?? child;
+        }
+
+        return null;
+    }
 }

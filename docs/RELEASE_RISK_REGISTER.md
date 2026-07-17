@@ -4,6 +4,8 @@ Status: Goal 097 planning register
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
 Accepted: false
 
+Goal162 release-risk note: generated projects now have a player-facing WinForms campaign session over the existing qualified Runtime. The page supports generated map exploration, dialogue, encounters, quests, travel and save/resume/migration without exposing raw package IDs. This remains a development-player workspace; consumer-grade Unity presentation, richer authored consequences and media remain future work. Goal162 changes no Runtime, GamePackage, generated-save/migration, Unity or standalone/RC implementation and starts no Player or Unity process.
+
 Goal161S standalone release-risk note: immutable run plus atomic pointer publication removes post-smoke player-tree relocation. Its one authorized smoke reused cache, rebuilt no host, started Unity zero times, exited 0, wrote five markers/Player.log and published validated current.json. The historical build returned `FAILED` at `release_candidate_record` with `rc.payload.missing`; Goal161T closes that exact risk by correlating RC to the immutable current run and finalizing without execution. RC CURRENT and portable all/core closure are GREEN; no player retry is authorized and Goal161 remains unaccepted pending independent audit.
 
 ## P0 Release Blockers

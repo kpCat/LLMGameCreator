@@ -6033,6 +6033,63 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-162-generated-campaign-session-completion-and-publication",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal162-generated-campaign-session.ps1",
+        ".devflow/scripts/run-goal162-generated-campaign-session.cmd",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionModels.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionTruthService.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignProjectionService.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignActionPlanner.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignEventPresenter.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionService.cs",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/MainForm.cs",
+        "src/LLMGameCreator.WinForms/Pages/EditorPageNavigationService.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.Designer.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignMapControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignSavePickerDialog.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignSavePickerDialog.Designer.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.Designer.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal161-generated-gameplay-save-migration.md",
+        "docs/manual-acceptance/goal161t-immutable-payload-rc-closure.md",
+        "docs/manual-acceptance/goal162-player-driven-generated-campaign-session.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal162/",
+        "docs/agent-tasks/goal-162-player-driven-generated-campaign-session-workspace/",
+        "docs/agent-tasks/goal-162c-generated-campaign-session-completion-and-publication/",
+        ".llmgc/procedural/goal-162-player-driven-generated-campaign-session-workspace/",
+        ".llmgc/exports/goal-162-player-driven-generated-campaign-session-workspace/",
+        ".llmgc/procedural/goal-162c-generated-campaign-session-completion-and-publication/",
+        ".llmgc/exports/goal-162c-generated-campaign-session-completion-and-publication/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

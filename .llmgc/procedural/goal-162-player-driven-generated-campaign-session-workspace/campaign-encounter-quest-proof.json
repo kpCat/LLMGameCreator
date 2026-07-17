@@ -1,0 +1,24 @@
+{
+  "status": "GREEN",
+  "route": [
+    "current-region StartEncounter",
+    "existing Runtime UseAbility",
+    "bounded EndTurn and RunCurrentTurnAi",
+    "Runtime victory",
+    "reward inventory",
+    "one RefreshQuestObjectives",
+    "automatic quest completion",
+    "reputation projection"
+  ],
+  "realParticipantsPassed": true,
+  "attackChangedParticipantResource": true,
+  "boundedAiPassed": true,
+  "encounterResolved": true,
+  "rewardReceived": true,
+  "autoStartQuestActive": true,
+  "questRefreshMaximumPerCausalCommand": 1,
+  "directAdvanceObjectiveUsed": false,
+  "questCompleted": true,
+  "reputationChanged": true,
+  "primarySurfaceNoRawIds": true
+}

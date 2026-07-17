@@ -1,5 +1,7 @@
 # Generator Strategy Reset: Playable Procedural Generator
 
+Goal162 update: the strategy now has a player-facing WinForms campaign workspace over qualified generated projects. It consumes existing Runtime authority and generated-save services for real map exploration, dialogue, encounter/quest/reward/reputation, travel, exact continue and migration. All-selectable and core-only routes pass; legacy projects remain outside this player. This is a development-player workspace, not a Unity consumer or a new Runtime layer, and Goal162 remains unaccepted pending independent audit.
+
 Status: source-of-truth strategy pivot  
 Scope: product direction, Codex task selection, generation architecture, limit discipline  
 Non-scope: production implementation, schema changes, UI changes, Lua execution, provider calls

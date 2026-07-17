@@ -1,0 +1,12 @@
+{
+  "status": "GREEN",
+  "staleGeneratedProjectAction": "Собрать и играть",
+  "currentGeneratedProjectAction": "Играть",
+  "exactBuildInvocationCount": 1,
+  "navigationPassed": true,
+  "navigationAutoStartedSession": false,
+  "failedBuildStaysOnProjects": true,
+  "coreOnlyPassed": true,
+  "coreOnlyFalseRcReady": false,
+  "legacyUnavailableWithHumanReason": true
+}

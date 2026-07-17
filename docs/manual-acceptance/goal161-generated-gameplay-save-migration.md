@@ -1,10 +1,10 @@
 # Goal161 profile-neutral world change and generated gameplay save migration
 
-Status: `GREEN_IMPLEMENTATION_BLOCKED_STANDALONE_PATH_LENGTH_260`
+Status: `GREEN_ACCEPTABLE_CANDIDATE`; `accepted=false`; no human gate; independent audit closed by Goal162 intake.
 
 Goal160 independent audit is `BLOCKED_AT_D8DD05E7` because its semantic commit validator required complete AcceptedMechanics for supported core-only generated projects. Goal161 implements and tests the correction with exact sealed AcceptedMechanics, compatibility and generic RC-status projections. Real all-selectable and core-only regeneration/history rollback commit GREEN; core-only remains intentionally incomplete and never claims false RC readiness. Custom partial selection and seal-tamper rejection are profile-neutral. Formal P1 closure awaits a GREEN Goal161.
 
-Goal161T closure update: the retained generated save tree was verified byte-identical through zero-execution RC finalization. Portable all-selectable restored current save truth without a machine-local pointer; portable core-only remained non-ready without a manufactured RC record. Goal161 remains `accepted=false` and has no human gate.
+Goal161T and Goal162 closure update: the retained generated save tree was verified byte-identical through zero-execution RC finalization. Portable all-selectable restored current save truth without a machine-local pointer; portable core-only remained non-ready without a manufactured RC record. Goal162 consumes the existing service for CURRENT save, deduplication, exact continue without Runtime Start, explicit migration and post-migration continuation. Goal161 remains `accepted=false`, its independent-audit requirement is closed, and it has no human gate.
 
 Generated gameplay saves use `generated_gameplay_save_v1` immutable content-addressed revisions under `.llmgc/gameplay-saves/<slot>/revisions/` and an atomic `generated_gameplay_save_slot_v1` manifest. Each revision binds exact project identity, WorldId, generated source/build/package/authoring/history truth, serialized `UnifiedRuntimeSession` and canonical definition fingerprints. Repeated exact save deduplicates; changed state appends a child revision without rewriting prior bytes.
 

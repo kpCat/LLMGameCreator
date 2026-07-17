@@ -1,0 +1,20 @@
+{
+  "status": "GREEN",
+  "arbitraryFiniteMapProjected": true,
+  "playerProjected": true,
+  "nearbyActorAndObjectProjected": true,
+  "currentRegionAndMapHumanTitles": true,
+  "validMovementExecutedThroughRuntime": true,
+  "blockedMovementCausallyDisabled": true,
+  "hudRowsPassed": [
+    "resources",
+    "attributes",
+    "level and progression",
+    "inventory",
+    "equipment",
+    "quests",
+    "faction reputation"
+  ],
+  "mapClicksBounded": true,
+  "primarySurfaceNoRawIdsHashesPaths": true
+}

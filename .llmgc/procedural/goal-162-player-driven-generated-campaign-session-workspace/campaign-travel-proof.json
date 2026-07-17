@@ -1,0 +1,12 @@
+{
+  "status": "GREEN",
+  "originTitle": "Blue Ditch",
+  "destinationUsesHumanTitle": true,
+  "projectedMovementCommandsPassed": true,
+  "gateIsOrdinaryInteract": true,
+  "runtimeMapChangedEventPassed": true,
+  "visitedRegionCount": 2,
+  "visitedMapCount": 2,
+  "destinationInteractionPassed": true,
+  "deterministicReplayPassed": true
+}

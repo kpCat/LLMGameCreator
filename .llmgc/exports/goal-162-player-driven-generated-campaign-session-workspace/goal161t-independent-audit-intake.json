@@ -1,0 +1,24 @@
+{
+  "result": "GREEN_ACCEPTABLE_CANDIDATE_AT_C1BD0B7A",
+  "passed": true,
+  "independentAuditRequired": false,
+  "goal160AuditBlockerClosed": true,
+  "auditedTruths": [
+    "immutable current pointer and run are current standalone payload authority",
+    "RC correlates pointer, run, result, payload hashes and facts",
+    "invalid pointer never falls back to stale legacy output",
+    "portable all-selectable restores TRAVEL_CURRENT, save CURRENT and RC CURRENT without operational pointer",
+    "portable core-only restores generated play and save truth without false RC readiness",
+    "zero-execution finalization preserved run, pointer, histories and save bytes"
+  ],
+  "counts": {
+    "playerStarts": 0,
+    "unityStarts": 0,
+    "standaloneBuildCalls": 0
+  },
+  "acceptance": {
+    "goal161Accepted": false,
+    "goal161tAccepted": false,
+    "humanGate": false
+  }
+}

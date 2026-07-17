@@ -1,0 +1,15 @@
+{
+  "baseSha": "92d419862443e84e2bfafa02f1a985edd96a5889",
+  "branch": "main",
+  "headEqualsOriginMain": true,
+  "allowedContinuationTaskFilesOnly": true,
+  "buildExitCode": 0,
+  "buildWarnings": 7,
+  "buildErrors": 0,
+  "goal162Discovered": 62,
+  "goal162Passed": 62,
+  "goal162Failed": 0,
+  "realEndToEndCases": 3,
+  "scaffoldCases": 59,
+  "completionAssessment": "FAILED_INCOMPLETE_MANUALLY_PUBLISHED"
+}

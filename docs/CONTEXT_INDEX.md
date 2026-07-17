@@ -18,7 +18,7 @@ For any generator/Codex task:
 8. `docs/ROADMAP_TO_FULL_GENERATOR.md`
 9. only then task-specific docs
 
-Goal161T is the current GREEN acceptable candidate: immutable standalone payload evidence now resolves the validated `%LOCALAPPDATA%/LGC/O/<token>/runs/<run>` authority, RC correlation and current standalone/build-history recovery are execution-free, and the retained Goal161S project finalizes RC `CURRENT` with zero Player/Unity/standalone invocations. Portable all-selectable is `CURRENT` without an operational pointer; portable core-only remains `ABSENT` without false readiness. `goal161Accepted=false`, `goal161tAccepted=false`, no human gate; next action is independent Goal161T audit.
+Goal162 is the current GREEN acceptable candidate; `gate_status=goal162_green_player_driven_generated_campaign_session_workspace`. Goal161T independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_C1BD0B7A`, closes Goal160's blocker and leaves Goal161/161T unaccepted. Goal162C completes the manually published scaffold at `92d419862443e84e2bfafa02f1a985edd96a5889` with a player-facing generated campaign workspace over existing Runtime commands: map context, dialogue, encounter/quest/reward/reputation, travel, save/exact continue, regeneration staleness and explicit migration. All-selectable, core-only and legacy matrices pass; Runtime Simulator and RC/standalone bytes remain unchanged, process/build counts are zero. `goal162Accepted=false`, no human gate; next action is independent Goal162 audit and generated-campaign consequence-depth planning.
 
 For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` before any Unity invocation.
 

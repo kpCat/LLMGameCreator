@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 161T immutable payload correlation and zero-execution RC closure
+Updated by: Goal 162C generated campaign session completion and publication
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -30,11 +30,15 @@ Goal161S replaces the post-smoke tree relocation with immutable `%LOCALAPPDATA%/
 
 Goal161T closes that exact RC defect without another standalone execution. `ProjectStandalonePayloadEvidenceService` treats the validated `current.json` run under `%LOCALAPPDATA%/LGC/O/<token>/runs/<run>` as current payload authority, correlates pointer/run/result/payload hashes and facts, and retains project-local `Builds/Windows/<slug>` only as legacy compatibility. RC Read accepts absent operational output for portable copies but rejects an invalid existing pointer without stale fallback. Current standalone history is recovered only when exactly one GREEN row matches the pointer; the zero-execution finalizer then restores the current build result, writes RC and reopens `CURRENT`.
 
-The retained Goal161S project finalized GREEN with unchanged run, pointer, standalone-history, build-history and generated-save bytes; Player, Unity and standalone invocation counts were all zero. A complete portable all-selectable copy restored `CURRENT` with no operational pointer. A qualified core-only copy remained `ABSENT` and did not claim RC readiness. Goal161T is `GREEN_ACCEPTABLE_CANDIDATE`, remains `accepted=false`, and creates no human gate; independent audit is the next action.
+The retained Goal161S project finalized GREEN with unchanged run, pointer, standalone-history, build-history and generated-save bytes; Player, Unity and standalone invocation counts were all zero. A complete portable all-selectable copy restored `CURRENT` with no operational pointer. A qualified core-only copy remained `ABSENT` and did not claim RC readiness. Goal161T independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_C1BD0B7A`; Goal160's blocker is closed, Goal161/161T remain `accepted=false`, and neither creates a human gate.
+
+Goal162C closes the manually published incomplete Goal162 scaffold at `92d419862443e84e2bfafa02f1a985edd96a5889`. The player-facing WinForms campaign workspace now consumes the qualified generated project through existing Runtime commands: strict project truth and stale-session rejection, generated map context, actor dialogue, current-region encounters with bounded AI, automatic quest/reward/reputation flow, generated travel, immutable save/deduplicate/exact continue, explicit migration and post-migration continuation are all behaviorally proven. Projects Build and Play builds exactly once only when needed and navigates without auto-start. All-selectable, core-only and legacy matrices pass; primary UI exposes human titles rather than raw IDs, hashes or paths.
+
+Runtime Simulator, Runtime, Runtime.Abstractions, GamePackage schema, FeatureModule catalog, Unity, generated source/save/migration and standalone/RC implementations remain unchanged. Protected RC/run/pointer/history and source bytes are identical; Player, Unity and standalone Build counts are zero. Goal162 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, creates no human gate and requires independent audit.
 
 ```text
-gate_status=goal161t_green_immutable_payload_rc_correlation_and_qualification_closure
-current_user_action=independent_goal161t_audit_and_plan_next_major_product_vertical_slice
+gate_status=goal162_green_player_driven_generated_campaign_session_workspace
+current_user_action=independent_goal162_audit_and_plan_generated_campaign_consequence_depth
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -232,7 +236,7 @@ goal161AcceptedByHuman=false
 goal161AcceptedByCodex=false
 goal161ManualReviewRequired=false
 goal161ManualGateReady=false
-goal161IndependentAuditRequired=true
+goal161IndependentAuditRequired=false
 goal161ProfileNeutralWorldChangePassed=true
 goal161CoreOnlyRegenerationPassed=true
 goal161CoreOnlyRollbackPassed=true
@@ -305,7 +309,9 @@ goal161tImplementationStatus=GREEN
 goal161tCandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
 goal161tAccepted=false
 goal161tManualReviewRequired=false
-goal161tIndependentAuditRequired=true
+goal161tIndependentAuditResult=GREEN_ACCEPTABLE_CANDIDATE_AT_C1BD0B7A
+goal161tIndependentAuditPassed=true
+goal161tIndependentAuditRequired=false
 goal161ImmutableStandalonePayloadCorrelationPassed=true
 goal161ZeroExecutionRcFinalizationPassed=true
 goal161HistoricalHiddenPlayerInvocationCount=4
@@ -317,7 +323,31 @@ goal161ReleaseCandidateCurrent=true
 goal161tPortableAllSelectablePassed=true
 goal161tPortableCoreOnlyPassed=true
 goal161sRcPayloadDefect=closed_by_goal161t
-nextAction=independent_goal161t_audit_and_plan_next_major_product_vertical_slice
+goal162PartialManualBase=92d419862443e84e2bfafa02f1a985edd96a5889
+goal162PartialBaseStatus=FAILED_INCOMPLETE_MANUALLY_PUBLISHED
+goal162PartialBaseClosedBy=goal162c
+goal162ImplementationStatus=GREEN
+goal162CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal162Accepted=false
+goal162AcceptedByHuman=false
+goal162AcceptedByCodex=false
+goal162ManualReviewRequired=false
+goal162ManualGateReady=false
+goal162IndependentAuditRequired=true
+goal162CampaignSessionPassed=true
+goal162DialoguePassed=true
+goal162EncounterQuestPassed=true
+goal162TravelPassed=true
+goal162SaveContinuePassed=true
+goal162MigrationContinuePassed=true
+goal162BuildAndPlayPassed=true
+goal162CoreOnlyCampaignPassed=true
+goal162PrimaryUiNoRawIds=true
+goal162PlayerProcessStartCount=0
+goal162UnityEditorProcessStartCount=0
+goal162StandaloneBuildInvocationCount=0
+goal162ArtifactScopeViolationCount=0
+nextAction=independent_goal162_audit_and_plan_generated_campaign_consequence_depth
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

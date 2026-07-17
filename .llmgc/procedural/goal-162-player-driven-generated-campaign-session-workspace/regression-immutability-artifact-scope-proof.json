@@ -1,0 +1,50 @@
+{
+  "status": "GREEN",
+  "requiredFilters": {
+    "Goal162": "72/72",
+    "Goal161T": "34/34",
+    "Goal161S": "52/52",
+    "Goal161R": "19/19",
+    "Goal161Q": "24/24",
+    "Goal161": "176/176",
+    "Goal160": "80/80",
+    "Goal159": "80/80",
+    "Goal158": "63/63",
+    "Goal157": "68/68",
+    "RuntimeSimulator": "1/1",
+    "GeneratedGameplaySave": "1/1",
+    "DefaultGameRuntime": "1/1",
+    "UnifiedGameProjectWorkspace": "36/36",
+    "ProjectsPage": "5/5",
+    "ProjectLifecycle": "6/6",
+    "GameProjectOperationCoordinator": "1/1",
+    "FeatureModuleLibrary": "4/4",
+    "FeatureModuleCertification": "5/5"
+  },
+  "scripts": {
+    "capabilityRuntimeEquipment": "7/7 GREEN",
+    "characterAttributesLevelProgression": "1/1 GREEN",
+    "currentGoalGuard": "GREEN"
+  },
+  "protectedSha256": {
+    "releaseCandidateRecord": "ec578fd34f7dc0e9cfa5e591f7479b1aee2934df8a5c4550e24aebf449d41171",
+    "immutableStandaloneRunTree": "d1821461eb95b347e072cce8f65b4c3714759b803352f7b84b98fa660dce7962",
+    "standaloneCurrentPointer": "a0406515014c5d80c02e1ea91e7633d79d41aec7ec4d8af52ef9b4f5372f85d3",
+    "standaloneHistory": "524f451d085d1c636351336bdf5a71c172705a5690bfeb544dbfee6dad23a98a",
+    "goal142Source": "51b08e951bb4ade8002318eeefce3ffac3b63e8d8e040df4921f5e036a6aff4b",
+    "sourceGoal148Tree": "cc2cb1dd64057adbd153ab437c884563ec056af8311672e961a8bd3420d7547a"
+  },
+  "protectedBytesIdentical": true,
+  "runtimeSimulatorHashes": {
+    "code": "ebbff1bd7cc5ba508edc24c0080bd780916f7fbc46c2c14081afca6dd478f13e",
+    "designer": "0a9faecd26068f951f6d227b0d320128fc32cb0e12d3790f4a99cc6de12d9ce0"
+  },
+  "processAndBuildCounts": {
+    "playerStarts": 0,
+    "unityStarts": 0,
+    "standaloneBuildCalls": 0
+  },
+  "artifactScopeViolationCount": 0,
+  "fullSuiteRun": false,
+  "manualTestsRun": false
+}

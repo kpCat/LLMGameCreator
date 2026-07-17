@@ -1,0 +1,120 @@
+{
+  "goal": "goal-162c-generated-campaign-session-completion-and-publication",
+  "partialManualBaseSha": "92d419862443e84e2bfafa02f1a985edd96a5889",
+  "partialBaseStatus": "FAILED_INCOMPLETE_MANUALLY_PUBLISHED",
+  "auditedAtUtc": "2026-07-17T00:00:00Z",
+  "files": [
+    {
+      "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionModels.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Defines initial session status, action, truth, map, text, dialogue, save and snapshot records.",
+      "missingBehavior": "Player, nearby content, encounter participants and turns, dialogue choices, quest objective detail, human save entries and migration preview projections are absent.",
+      "testsThatWillProveCompletion": ["Goal162CampaignTruthProjectionTests.cs", "Goal162CampaignDialogueTests.cs", "Goal162CampaignEncounterQuestTests.cs", "Goal162CampaignSaveMigrationTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionTruthService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "currentImplementedBehavior": "Reuses GeneratedGameplaySaveValidator under the shared gameplay-load lease and maps captured generated save truth into campaign truth.",
+      "missingBehavior": "Needs explicit causal readiness diagnostics and focused proof that strict source, TRAVEL_CURRENT activation/travel, package/document bytes, authoring, identity and bindings all gate readiness.",
+      "testsThatWillProveCompletion": ["Goal162CampaignTruthProjectionTests.cs", "Goal162RegressionImmutabilityTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignProjectionService.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Projects a finite map plus basic resources, stats, progression, inventory, equipment, quests, dialogue, factions, events and technical hashes.",
+      "missingBehavior": "Projection omits player and nearby context, encounter state, dialogue choices and speaker titles, objective detail, save status, multiple entities per cell and complete raw-ID isolation.",
+      "testsThatWillProveCompletion": ["Goal162CampaignTruthProjectionTests.cs", "Goal162CampaignDialogueTests.cs", "Goal162CampaignEncounterQuestTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignActionPlanner.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Plans finite-map movement, a nearby interaction, dialogue choices, a basic encounter action set, region encounters and completable quests over existing Runtime commands.",
+      "missingBehavior": "Encounter abilities and targets are not turn- or participant-safe, dialogue close validity is assumed, region binding is weak, resolve and bounded AI are absent, action IDs can collide and causal follow-up planning is incomplete.",
+      "testsThatWillProveCompletion": ["Goal162CampaignDialogueTests.cs", "Goal162CampaignEncounterQuestTests.cs", "Goal162CampaignTravelTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignEventPresenter.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "currentImplementedBehavior": "Presents Runtime map/gameplay/diagnostic messages in bounded recent-event order.",
+      "missingBehavior": "Needs human fallbacks and preservation of command/follow-up event ordering without exposing raw codes in the primary projection.",
+      "testsThatWillProveCompletion": ["Goal162CampaignDialogueTests.cs", "Goal162CampaignEncounterQuestTests.cs", "Goal162CampaignTravelTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionService.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Starts, refreshes, executes one projected command, saves, lists, continues and applies migration while retaining an in-memory session.",
+      "missingBehavior": "It is still a thin compressed scaffold: no ClearSession, no AutoStart orchestration, no bounded EndTurn/AI/resolve flow, weak failure state handling, unconditional quest refresh categories, unsafe migration recapture, incomplete save truth and no explicit project-switch lifecycle.",
+      "testsThatWillProveCompletion": ["Goal162CampaignDialogueTests.cs", "Goal162CampaignEncounterQuestTests.cs", "Goal162CampaignTravelTests.cs", "Goal162CampaignSaveMigrationTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/EditorPageNavigationService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "currentImplementedBehavior": "Provides a singleton-compatible typed navigation request event without referencing MainForm.",
+      "missingBehavior": "Needs behavioral coverage for requested, unknown and disposed-page navigation paths.",
+      "testsThatWillProveCompletion": ["Goal162ProjectsNavigationTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignMapControl.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Paints projected map cells and emits clicked cell coordinates.",
+      "missingBehavior": "Arbitrary dimensions can clip because there is no viewport offset or desired size; click coordinates can exceed bounds and no human cell tooltip/title is surfaced.",
+      "testsThatWillProveCompletion": ["Goal162WinFormsWorkspaceTests.cs", "Goal162CampaignTravelTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Binds snapshots, new/save/continue, adjacent click, keyboard movement and dynamic action buttons.",
+      "missingBehavior": "Context/dialogue/encounter rendering, primary interaction fallback, text-input shortcut suppression, durable tooltips, status/save controls, human map titles and complete scroll/layout behavior are missing.",
+      "testsThatWillProveCompletion": ["Goal162WinFormsWorkspaceTests.cs", "Goal162CampaignDialogueTests.cs", "Goal162CampaignEncounterQuestTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.Designer.cs",
+      "classification": "REPLACE",
+      "currentImplementedBehavior": "Creates a minimal three-column campaign page.",
+      "missingBehavior": "The file violates the repository Designer contract through file-scoped namespace, compact runtime-style construction, loops, collection expressions and event wiring; required top/status/context/technical-toggle and 1100x720 layout are incomplete.",
+      "testsThatWillProveCompletion": ["Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignSavePickerDialog.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Allows CURRENT continue and migration-required selection from save entries.",
+      "missingBehavior": "It displays only slot names, does not bind human status/world/revision/migration summaries and does not update action enablement from selection.",
+      "testsThatWillProveCompletion": ["Goal162CampaignSaveMigrationTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignSavePickerDialog.Designer.cs",
+      "classification": "REPLACE",
+      "currentImplementedBehavior": "Creates a list and Continue/Migrate/Cancel buttons.",
+      "missingBehavior": "The file violates the repository Designer contract and lacks structured human save columns, selection details, disabled-state layout and conservative CodeDOM-compatible initialization.",
+      "testsThatWillProveCompletion": ["Goal162WinFormsWorkspaceTests.cs", "Goal162CampaignSaveMigrationTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "currentImplementedBehavior": "Registers campaign services/page and navigation as singletons and injects them into Projects and MainForm.",
+      "missingBehavior": "Must remain synchronized with final constructor signatures and prove one shared session service survives page navigation.",
+      "testsThatWillProveCompletion": ["Goal162ProjectsNavigationTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/MainForm.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "currentImplementedBehavior": "Subscribes to typed navigation requests, selects a registered page and logs unknown IDs.",
+      "missingBehavior": "Needs disposal-safe and UI-thread behavioral proof plus exact campaign-page selection without auto-start.",
+      "testsThatWillProveCompletion": ["Goal162ProjectsNavigationTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.cs",
+      "classification": "REFACTOR",
+      "currentImplementedBehavior": "Adds a play handler that conditionally calls BuildAndQualify and requests campaign navigation.",
+      "missingBehavior": "Readiness is reduced to Present/Passed flags instead of exact TRAVEL_CURRENT truth; button title/enabled/reason/busy states are not bound and legacy/template behavior is not completed.",
+      "testsThatWillProveCompletion": ["Goal162ProjectsNavigationTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    },
+    {
+      "path": "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.Designer.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "currentImplementedBehavior": "Adds a Designer-compatible Играть toolbar button in the existing Projects layout.",
+      "missingBehavior": "Static control placement is sufficient, but runtime binding must supply truthful title, enabled state and human tooltip without changing unrelated layout.",
+      "testsThatWillProveCompletion": ["Goal162ProjectsNavigationTests.cs", "Goal162WinFormsWorkspaceTests.cs"]
+    }
+  ]
+}

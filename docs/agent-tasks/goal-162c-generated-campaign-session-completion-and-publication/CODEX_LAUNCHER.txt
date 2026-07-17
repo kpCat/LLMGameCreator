@@ -1,0 +1,34 @@
+/goal
+
+Выполни continuation-задачу из файла:
+
+docs/agent-tasks/goal-162c-generated-campaign-session-completion-and-publication/GOAL.md
+
+Модель: GPT-5.6 Sol
+Reasoning: Extra High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 92d419862443e84e2bfafa02f1a985edd96a5889
+
+Это продолжение вручную опубликованного незавершённого Goal162.
+
+Критически важно:
+- не откатывай и не удаляй вручную запушенный scaffold;
+- сначала классифицируй каждый partial-файл KEEP/REFACTOR/REPLACE/REMOVE;
+- compile и наличие страницы не считаются завершением;
+- обязательны реальные dialogue/encounter/quest/reward/reputation/travel/save/continue/regeneration/migration routes;
+- обязательны all-selectable, core-only и legacy матрицы;
+- primary UI без raw IDs/hashes/paths;
+- Runtime Simulator неизменен;
+- Runtime/GamePackage/FeatureModule/Unity/generated-save implementation не менять;
+- RC/standalone bytes неизменны; Player/Unity/standalone Build = 0;
+- завершить 14×2 evidence, docs/state, artifact scope и regressions;
+- никаких ручных тестов;
+- самое важное: независимо от GREEN/BLOCKED/FAILED ты ОБЯЗАН создать ровно один финальный commit и запушить origin/main;
+- запрещено снова оставлять изменения незакоммиченными или просить пользователя пушить вручную.
+
+В финале сообщи status, реальные маршруты, тесты/regressions,
+evidence/docs/scope, SHA, push, HEAD==origin/main, clean worktree
+и явно подтверди, что commit/push сделал Codex.

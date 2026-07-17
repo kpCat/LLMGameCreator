@@ -34,6 +34,7 @@ public sealed class GeneratedCampaignSessionTruthService
             ProjectFolder = truth.ProjectFolder,
             ProjectIdentityFingerprint = truth.IdentityFingerprint,
             WorldId = truth.WorldId,
+            GenerationSeed = source.GenerationRequest.Seed,
             SourceRecordSha256 = Hash(Path.Combine(truth.ProjectFolder, SeededGeneratedProjectVocabulary.SourceRelativePath.Replace('/', Path.DirectorySeparatorChar))),
             SourceRequestSha256 = GameProjectSeedRegenerationDiffService.RequestSha256(source.GenerationRequest),
             PlanSha256 = source.PlanSha256,
@@ -49,9 +50,20 @@ public sealed class GeneratedCampaignSessionTruthService
     }
 
     public static bool Same(GeneratedCampaignProjectTruth left, GeneratedCampaignProjectTruth right) =>
-        left.ProjectIdentityFingerprint == right.ProjectIdentityFingerprint && left.WorldId == right.WorldId
-        && left.PackageSha256 == right.PackageSha256 && left.CompositionPackageSha256 == right.CompositionPackageSha256
-        && left.QualifiedAuthoringFingerprint == right.QualifiedAuthoringFingerprint;
+        left.ProjectIdentityFingerprint == right.ProjectIdentityFingerprint
+        && left.WorldId == right.WorldId
+        && left.SourceRecordSha256 == right.SourceRecordSha256
+        && left.SourceRequestSha256 == right.SourceRequestSha256
+        && left.PlanSha256 == right.PlanSha256
+        && left.GeneratedBasePackageSha256 == right.GeneratedBasePackageSha256
+        && left.PackageSha256 == right.PackageSha256
+        && left.CompositionPackageSha256 == right.CompositionPackageSha256
+        && left.FinalStateHash == right.FinalStateHash
+        && left.QualifiedAuthoringFingerprint == right.QualifiedAuthoringFingerprint
+        && left.SelectedBuildHistoryFileName == right.SelectedBuildHistoryFileName
+        && left.GeneratedStartMapId == right.GeneratedStartMapId
+        && left.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal)
+            .SequenceEqual(right.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal));
 
     private static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }
 }

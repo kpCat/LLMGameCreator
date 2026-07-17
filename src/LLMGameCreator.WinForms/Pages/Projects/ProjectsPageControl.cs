@@ -274,6 +274,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             _overviewLastBuildLabel.Text = "Последняя успешная сборка: " + snapshot.LastSuccessfulBuild;
             _overviewRuntimeLabel.Text = "Последняя Runtime-проверка: " + snapshot.LastRuntimeQualification;
             BindGeneratedWorldCard(snapshot);
+            BindGeneratedCampaignPlay(snapshot);
             BindGeneratedGameplaySavesCard(snapshot);
             BindMechanics(snapshot);
             BindParameters(snapshot);
@@ -305,6 +306,39 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _regenerateGeneratedWorldButton.Enabled = !_buildUiRunning && snapshot.CanRegenerateGeneratedWorld;
         _generatedWorldHistoryButton.Visible = summary is { Present: true, Passed: true };
         _generatedWorldHistoryButton.Enabled = !_buildUiRunning && snapshot.CanOpenGeneratedWorldHistory;
+    }
+
+    internal static GeneratedCampaignPlayPresentation GeneratedCampaignPlay(
+        UnifiedGameProjectWorkspaceSnapshot snapshot,
+        bool uiBusy = false)
+    {
+        ArgumentNullException.ThrowIfNull(snapshot);
+        var generated = snapshot.GeneratedWorld is { Present: true };
+        var current = snapshot.GeneratedWorld is { Present: true, Passed: true, Status: "TRAVEL_CURRENT" }
+                      && snapshot.GeneratedWorldActivation is { Passed: true }
+                      && snapshot.GeneratedRegionTravel is { Passed: true }
+                      && snapshot.AcceptedMechanicsCompatibility is { Passed: true };
+        var busy = uiBusy || snapshot.ProjectOperationBusy;
+        if (!generated)
+            return new GeneratedCampaignPlayPresentation(false, "Играть",
+                "Играть можно только в сгенерированном проекте.", false);
+        if (busy)
+            return new GeneratedCampaignPlayPresentation(false,
+                current ? "Играть" : "Собрать и играть",
+                "Дождитесь завершения текущей операции проекта.", current);
+        return current
+            ? new GeneratedCampaignPlayPresentation(true, "Играть",
+                "Открыть текущую сгенерированную кампанию.", true)
+            : new GeneratedCampaignPlayPresentation(true, "Собрать и играть",
+                "Один раз собрать и проверить проект, затем открыть кампанию.", false);
+    }
+
+    private void BindGeneratedCampaignPlay(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        var presentation = GeneratedCampaignPlay(snapshot, _buildUiRunning);
+        _playGeneratedCampaignButton.Text = presentation.Title;
+        _playGeneratedCampaignButton.Enabled = presentation.Enabled;
+        _workspaceToolTip.SetToolTip(_playGeneratedCampaignButton, presentation.Reason);
     }
 
     private static string FormatRegenerationCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
@@ -867,21 +901,23 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _technicalDetailsTextBox.Text = string.Join(Environment.NewLine, lines);
     }
 
-    private async Task BuildAndQualifyAsync()
+    private async Task<GameProjectBuildResult?> BuildAndQualifyAsync()
     {
-        if (_workspaceController == null || !_workspaceController.HasOpenProject) return;
+        if (_workspaceController == null || !_workspaceController.HasOpenProject) return null;
         if (_buildUiRunning || _workspaceController.BuildRunning)
         {
             _buildResultTextBox.Text = "Сборка уже выполняется. Дождитесь её завершения.";
-            return;
+            return null;
         }
         _buildUiRunning = true;
         SetWorkspaceBusy(true);
         _buildStatusLabel.Text = "Идёт сборка и проверка...";
         _buildResultTextBox.Text = "Проверяем механики, сохранение и повтор действий.";
+        GameProjectBuildResult? buildResult = null;
         try
         {
             var result = await Task.Run(() => _workspaceController.BuildAndQualify()).ConfigureAwait(true);
+            buildResult = result;
             _buildStatusLabel.Text = result.Passed ? "Готово" : "Есть ошибки";
             if (result.Passed)
             {
@@ -907,23 +943,39 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         }
         finally
         {
-            SetWorkspaceBusy(false);
             _buildUiRunning = false;
+            SetWorkspaceBusy(false);
+            if (_workspaceController.HasOpenProject) BindWorkspace(_workspaceController.Snapshot());
         }
+        return buildResult;
     }
 
     private async Task PlayGeneratedCampaignAsync()
     {
         if (_workspaceController == null || !_workspaceController.HasOpenProject || _buildUiRunning) return;
         var snapshot = _workspaceController.Snapshot();
-        if (snapshot.GeneratedWorld is not { Present: true, Passed: true } || snapshot.GeneratedRegionTravel is not { Passed: true })
+        var presentation = GeneratedCampaignPlay(snapshot);
+        if (!presentation.Enabled)
         {
-            await BuildAndQualifyAsync();
-            snapshot = _workspaceController.Snapshot();
+            _buildResultTextBox.Text = presentation.Reason;
+            return;
         }
-        if (snapshot.GeneratedWorld is { Present: true, Passed: true } && snapshot.GeneratedRegionTravel is { Passed: true })
+
+        if (!presentation.Current)
+        {
+            var result = await BuildAndQualifyAsync();
+            if (result is not { Passed: true }) return;
+            snapshot = _workspaceController.Snapshot();
+            presentation = GeneratedCampaignPlay(snapshot);
+        }
+
+        if (presentation is { Enabled: true, Current: true })
+        {
             _navigationService?.Request("generated-campaign-player");
-        else _buildResultTextBox.Text = "Кампания не готова: требуется успешная сборка с путешествиями.";
+            return;
+        }
+
+        _buildResultTextBox.Text = "Кампания не готова: требуется успешная сборка с текущим маршрутом между регионами.";
     }
 
     private async Task RegenerateGeneratedWorldAsync()
@@ -1107,6 +1159,9 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
     {
         _backToGamesButton.Enabled = !busy;
         _saveCurrentButton.Enabled = !busy;
+        _playGeneratedCampaignButton.Enabled = !busy
+            && _workspaceController?.HasOpenProject == true
+            && GeneratedCampaignPlay(_workspaceController.Snapshot()).Enabled;
         _regenerateGeneratedWorldButton.Enabled = !busy
             && _workspaceController?.HasOpenProject == true
             && _workspaceController.Snapshot().CanRegenerateGeneratedWorld;
@@ -1136,3 +1191,9 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                             + "Папка: " + _currentGamePackageService?.CurrentFolder;
     }
 }
+
+internal sealed record GeneratedCampaignPlayPresentation(
+    bool Enabled,
+    string Title,
+    string Reason,
+    bool Current);

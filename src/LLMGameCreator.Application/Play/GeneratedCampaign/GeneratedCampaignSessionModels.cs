@@ -1,16 +1,52 @@
 using LLMGameCreator.Application.Generation.Procedural;
+using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.Application.Play.GeneratedCampaign;
 
-public enum GeneratedCampaignSessionStatus { NO_PROJECT, PROJECT_NOT_GENERATED, PROJECT_NOT_READY, READY, ACTIVE, STALE_PROJECT, SAVE_MIGRATION_REQUIRED, FAILED }
-public enum GeneratedCampaignActionKind { MoveUp, MoveDown, MoveLeft, MoveRight, Interact, OpenDialogue, ChooseDialogue, CloseDialogue, StartEncounter, BasicAttack, UseAbility, EndTurn, RunEncounterAi, ResolveEncounter, FleeEncounter, CompleteQuest, UseItem, Save, Load, MigrateSave, RestartSession }
+public enum GeneratedCampaignSessionStatus
+{
+    NO_PROJECT,
+    PROJECT_NOT_GENERATED,
+    PROJECT_NOT_READY,
+    READY,
+    ACTIVE,
+    STALE_PROJECT,
+    SAVE_MIGRATION_REQUIRED,
+    FAILED
+}
+
+public enum GeneratedCampaignActionKind
+{
+    MoveUp,
+    MoveDown,
+    MoveLeft,
+    MoveRight,
+    Interact,
+    OpenDialogue,
+    ChooseDialogue,
+    CloseDialogue,
+    StartEncounter,
+    BasicAttack,
+    UseAbility,
+    EndTurn,
+    RunEncounterAi,
+    ResolveEncounter,
+    FleeEncounter,
+    CompleteQuest,
+    UseItem,
+    Save,
+    Load,
+    MigrateSave,
+    RestartSession
+}
 
 public sealed record GeneratedCampaignProjectTruth
 {
     public string ProjectFolder { get; init; } = string.Empty;
     public string ProjectIdentityFingerprint { get; init; } = string.Empty;
     public string WorldId { get; init; } = string.Empty;
+    public string GenerationSeed { get; init; } = string.Empty;
     public string SourceRecordSha256 { get; init; } = string.Empty;
     public string SourceRequestSha256 { get; init; } = string.Empty;
     public string PlanSha256 { get; init; } = string.Empty;
@@ -21,7 +57,8 @@ public sealed record GeneratedCampaignProjectTruth
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public string SelectedBuildHistoryFileName { get; init; } = string.Empty;
     public string GeneratedStartMapId { get; init; } = string.Empty;
-    public IReadOnlyDictionary<string, string> RegionMapBindings { get; init; } = new Dictionary<string, string>();
+    public IReadOnlyDictionary<string, string> RegionMapBindings { get; init; }
+        = new Dictionary<string, string>();
 }
 
 public sealed record GeneratedCampaignAction
@@ -36,12 +73,126 @@ public sealed record GeneratedCampaignAction
     public string TargetTitle { get; init; } = string.Empty;
 }
 
-public sealed record GeneratedCampaignMapCell { public int X { get; init; } public int Y { get; init; } public bool Walkable { get; init; } public bool PlayerPresent { get; init; } public string PrimarySymbol { get; init; } = "·"; public string PrimaryTitle { get; init; } = string.Empty; public int EntityCount { get; init; } public bool InteractionAvailable { get; init; } public bool Blocked { get; init; } }
-public sealed record GeneratedCampaignMapEntity { public string Title { get; init; } = string.Empty; public int X { get; init; } public int Y { get; init; } public string Symbol { get; init; } = "•"; public bool Interactable { get; init; } }
-public sealed record GeneratedCampaignMapProjection { public int Width { get; init; } public int Height { get; init; } public IReadOnlyList<GeneratedCampaignMapCell> Cells { get; init; } = []; public IReadOnlyList<GeneratedCampaignMapEntity> Entities { get; init; } = []; }
-public sealed record GeneratedCampaignTextRow { public string Title { get; init; } = string.Empty; public string Value { get; init; } = string.Empty; }
-public sealed record GeneratedCampaignDialogue { public string Title { get; init; } = string.Empty; public string Speaker { get; init; } = string.Empty; public string Text { get; init; } = string.Empty; public bool Open { get; init; } }
-public sealed record GeneratedCampaignSaveState { public string Slot { get; init; } = "campaign"; public string Status { get; init; } = string.Empty; public int RevisionCount { get; init; } public string LastResult { get; init; } = string.Empty; }
+public sealed record GeneratedCampaignMapCell
+{
+    public int X { get; init; }
+    public int Y { get; init; }
+    public bool Walkable { get; init; }
+    public bool PlayerPresent { get; init; }
+    public string PrimarySymbol { get; init; } = "·";
+    public string PrimaryTitle { get; init; } = string.Empty;
+    public int EntityCount { get; init; }
+    public bool InteractionAvailable { get; init; }
+    public bool Blocked { get; init; }
+}
+
+public sealed record GeneratedCampaignMapEntity
+{
+    public string Title { get; init; } = string.Empty;
+    public int X { get; init; }
+    public int Y { get; init; }
+    public string Symbol { get; init; } = "•";
+    public bool Interactable { get; init; }
+}
+
+public sealed record GeneratedCampaignMapProjection
+{
+    public int Width { get; init; }
+    public int Height { get; init; }
+    public IReadOnlyList<GeneratedCampaignMapCell> Cells { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignMapEntity> Entities { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignTextRow
+{
+    public string Title { get; init; } = string.Empty;
+    public string Value { get; init; } = string.Empty;
+}
+
+public sealed record GeneratedCampaignPlayerProjection
+{
+    public string Title { get; init; } = "Игрок";
+    public int X { get; init; }
+    public int Y { get; init; }
+}
+
+public sealed record GeneratedCampaignNearbyProjection
+{
+    public string Title { get; init; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
+    public bool InteractionAvailable { get; init; }
+}
+
+public sealed record GeneratedCampaignDialogueChoice
+{
+    public string Title { get; init; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
+}
+
+public sealed record GeneratedCampaignDialogue
+{
+    public string Title { get; init; } = string.Empty;
+    public string Speaker { get; init; } = string.Empty;
+    public string Text { get; init; } = string.Empty;
+    public bool Open { get; init; }
+    public IReadOnlyList<GeneratedCampaignDialogueChoice> Choices { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignEncounterParticipant
+{
+    public string Title { get; init; } = string.Empty;
+    public string TeamTitle { get; init; } = string.Empty;
+    public bool Alive { get; init; }
+    public bool CurrentTurn { get; init; }
+    public IReadOnlyList<GeneratedCampaignTextRow> Resources { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignEncounter
+{
+    public string Title { get; init; } = string.Empty;
+    public bool Active { get; init; }
+    public int Round { get; init; }
+    public string CurrentTurnTitle { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedCampaignEncounterParticipant> Participants { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignQuestObjective
+{
+    public string Title { get; init; } = string.Empty;
+    public string Progress { get; init; } = string.Empty;
+    public bool Completed { get; init; }
+}
+
+public sealed record GeneratedCampaignQuest
+{
+    public string Title { get; init; } = string.Empty;
+    public string StateTitle { get; init; } = string.Empty;
+    public bool Completable { get; init; }
+    public IReadOnlyList<GeneratedCampaignQuestObjective> Objectives { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignSaveState
+{
+    public string Slot { get; init; } = "campaign";
+    public string Status { get; init; } = string.Empty;
+    public int RevisionCount { get; init; }
+    public bool Deduplicated { get; init; }
+    public string LastResult { get; init; } = string.Empty;
+}
+
+public sealed record GeneratedCampaignSaveEntryProjection
+{
+    public GeneratedGameplaySaveEntry Entry { get; init; } = new();
+    public string Slot { get; init; } = string.Empty;
+    public string StatusTitle { get; init; } = string.Empty;
+    public string SavedWorldTitle { get; init; } = string.Empty;
+    public string CurrentWorldTitle { get; init; } = string.Empty;
+    public int RevisionCount { get; init; }
+    public string MigrationSummary { get; init; } = string.Empty;
+    public bool CanContinue { get; init; }
+    public bool CanMigrate { get; init; }
+}
+
 public sealed record GeneratedCampaignSnapshot
 {
     public GeneratedCampaignSessionStatus Status { get; init; }
@@ -54,6 +205,8 @@ public sealed record GeneratedCampaignSnapshot
     public string CurrentMapTitle { get; init; } = string.Empty;
     public string SessionSha256 { get; init; } = string.Empty;
     public GeneratedCampaignMapProjection? Map { get; init; }
+    public GeneratedCampaignPlayerProjection? Player { get; init; }
+    public IReadOnlyList<GeneratedCampaignNearbyProjection> Nearby { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignAction> Actions { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignTextRow> Resources { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignTextRow> Stats { get; init; } = [];
@@ -61,12 +214,19 @@ public sealed record GeneratedCampaignSnapshot
     public IReadOnlyList<GeneratedCampaignTextRow> Inventory { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignTextRow> Equipment { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignTextRow> ActiveQuests { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignQuest> Quests { get; init; } = [];
     public GeneratedCampaignDialogue? Dialogue { get; init; }
+    public GeneratedCampaignEncounter? Encounter { get; init; }
     public IReadOnlyList<GeneratedCampaignTextRow> Factions { get; init; } = [];
     public IReadOnlyList<string> RecentEvents { get; init; } = [];
     public GeneratedCampaignSaveState SaveState { get; init; } = new();
-    public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; } = new Dictionary<string, string>();
+    public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; }
+        = new Dictionary<string, string>();
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
-internal sealed record GeneratedCampaignSession(GeneratedCampaignProjectTruth Truth, UnifiedRuntimeSession RuntimeSession, string SlotName);
+internal sealed record GeneratedCampaignSession(
+    GeneratedCampaignProjectTruth Truth,
+    GamePackageDefinition Package,
+    UnifiedRuntimeSession RuntimeSession,
+    string SlotName);

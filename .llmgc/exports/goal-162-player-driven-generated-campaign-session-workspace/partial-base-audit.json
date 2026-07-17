@@ -1,0 +1,79 @@
+{
+  "partialManualBaseSha": "92d419862443e84e2bfafa02f1a985edd96a5889",
+  "baselineStatus": "FAILED_INCOMPLETE_MANUALLY_PUBLISHED",
+  "baselineTests": {
+    "discovered": 62,
+    "passed": 62,
+    "realEndToEndCases": 3,
+    "scaffoldCases": 59
+  },
+  "classificationCompletedBeforeEditing": true,
+  "classifications": [
+    [
+      "GeneratedCampaignSessionModels.cs",
+      "REFACTOR"
+    ],
+    [
+      "GeneratedCampaignSessionTruthService.cs",
+      "KEEP_AND_COMPLETE"
+    ],
+    [
+      "GeneratedCampaignProjectionService.cs",
+      "REFACTOR"
+    ],
+    [
+      "GeneratedCampaignActionPlanner.cs",
+      "REFACTOR"
+    ],
+    [
+      "GeneratedCampaignEventPresenter.cs",
+      "KEEP_AND_COMPLETE"
+    ],
+    [
+      "GeneratedCampaignSessionService.cs",
+      "REFACTOR"
+    ],
+    [
+      "EditorPageNavigationService.cs",
+      "KEEP_AND_COMPLETE"
+    ],
+    [
+      "GeneratedCampaignMapControl.cs",
+      "REFACTOR"
+    ],
+    [
+      "GeneratedCampaignPageControl.cs",
+      "REFACTOR"
+    ],
+    [
+      "GeneratedCampaignPageControl.Designer.cs",
+      "REPLACE"
+    ],
+    [
+      "GeneratedCampaignSavePickerDialog.cs",
+      "REFACTOR"
+    ],
+    [
+      "GeneratedCampaignSavePickerDialog.Designer.cs",
+      "REPLACE"
+    ],
+    [
+      "CompositionRoot.cs",
+      "KEEP_AND_COMPLETE"
+    ],
+    [
+      "MainForm.cs",
+      "KEEP_AND_COMPLETE"
+    ],
+    [
+      "ProjectsPageControl.cs",
+      "REFACTOR"
+    ],
+    [
+      "ProjectsPageControl.Designer.cs",
+      "KEEP_AND_COMPLETE"
+    ]
+  ],
+  "removedScaffoldFiles": [],
+  "completion": "All classified scaffolds were deliberately completed without deleting or rolling back the manual base."
+}

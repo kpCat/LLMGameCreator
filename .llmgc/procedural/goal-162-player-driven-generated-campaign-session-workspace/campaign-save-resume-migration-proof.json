@@ -1,0 +1,19 @@
+{
+  "status": "GREEN",
+  "currentSavePassed": true,
+  "unchangedSaveDeduplicated": true,
+  "exactContinuePassed": true,
+  "exactContinueRuntimeStartInvocationCount": 0,
+  "staleAfterRealRegeneration": true,
+  "newSessionUsesNewSeedAndTruth": true,
+  "migrationPreviewPassed": true,
+  "migrationPreviewWrites": 0,
+  "migrationApplyPassed": true,
+  "migrationRuntimeStartInvocationCount": 0,
+  "postMigrationRoutes": {
+    "move": true,
+    "travel": true,
+    "interact": true
+  },
+  "generatedSaveImplementationChanged": false
+}

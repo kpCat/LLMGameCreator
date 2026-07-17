@@ -1,0 +1,21 @@
+{
+  "status": "GREEN",
+  "technology": "WinForms",
+  "designerSafe": true,
+  "parameterlessDesignTimePath": true,
+  "minimumLayout": "1100x720",
+  "columns": [
+    "map",
+    "context and actions",
+    "HUD and saves"
+  ],
+  "dynamicBusinessLogicInDesigner": false,
+  "technicalDetailsCollapsedByDefault": true,
+  "keyboardShortcutsIgnoreTextInput": true,
+  "durableTooltips": true,
+  "savePickerHumanColumns": true,
+  "mapClickOutOfBoundsRejected": true,
+  "pageRegisteredBeforeRuntimeSimulator": true,
+  "sharedSessionSurvivesNavigation": true,
+  "primaryUiNoRawIdsHashesPaths": true
+}
