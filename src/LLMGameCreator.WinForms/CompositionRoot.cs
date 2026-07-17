@@ -335,10 +335,12 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratedCampaignActionPlanner>(Reuse.Singleton);
         _container.Register<GeneratedCampaignProjectionService>(Reuse.Singleton);
         _container.Register<GeneratedCampaignEventPresenter>(Reuse.Singleton);
+        _container.Register<GeneratedCampaignRecoveryService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratedCampaignSessionService>(resolver => new GeneratedCampaignSessionService(
             resolver.Resolve<ICurrentGamePackageService>(), resolver.Resolve<GeneratedCampaignSessionTruthService>(), resolver.Resolve<IUnifiedGameRuntimeService>(),
             resolver.Resolve<GeneratedGameplaySaveService>(), resolver.Resolve<GeneratedGameplaySaveMigrationService>(), resolver.Resolve<GeneratedCampaignActionPlanner>(),
-            resolver.Resolve<GeneratedCampaignProjectionService>(), resolver.Resolve<GeneratedCampaignEventPresenter>()), Reuse.Singleton);
+            resolver.Resolve<GeneratedCampaignProjectionService>(), resolver.Resolve<GeneratedCampaignEventPresenter>(),
+            resolver.Resolve<GeneratedCampaignRecoveryService>()), Reuse.Singleton);
         _container.Register<EditorPageNavigationService>(Reuse.Singleton);
         _container.RegisterDelegate<IEditorPageNavigationService>(resolver => resolver.Resolve<EditorPageNavigationService>(), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldChangeRecordService>(resolver =>

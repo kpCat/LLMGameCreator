@@ -182,6 +182,35 @@ public sealed class GeneratedCampaignConsequenceProjector
         };
     }
 
+    public GeneratedCampaignActionOutcome ProjectRecovery(
+        GeneratedCampaignConsequenceKind kind,
+        string actionTitle,
+        UnifiedRuntimeSession before,
+        UnifiedRuntimeSession after,
+        bool success,
+        string successTitle,
+        string successDescription,
+        IReadOnlyList<string> diagnostics)
+    {
+        var consequence = new GeneratedCampaignConsequence
+        {
+            Kind = success ? kind : GeneratedCampaignConsequenceKind.Failure,
+            Title = success ? successTitle : "Действие восстановления не выполнено",
+            Description = success ? successDescription : "Состояние кампании не было изменено.",
+            Tone = success ? GeneratedCampaignConsequenceTone.Neutral : GeneratedCampaignConsequenceTone.Negative
+        };
+        return new GeneratedCampaignActionOutcome
+        {
+            ActionTitle = actionTitle,
+            Success = success,
+            Summary = success ? successDescription : "Действие восстановления не выполнено.",
+            Consequences = [consequence],
+            BeforeSessionSha256 = HashSession(before),
+            AfterSessionSha256 = HashSession(after),
+            Diagnostics = diagnostics
+        };
+    }
+
     public IReadOnlyList<GeneratedCampaignConsequence> RebuildFromPersistedEvents(
         GamePackageDefinition package,
         UnifiedRuntimeSession session)

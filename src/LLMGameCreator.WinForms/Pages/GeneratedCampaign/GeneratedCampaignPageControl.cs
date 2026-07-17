@@ -70,7 +70,8 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
 
     private void MapCellClicked(object? sender, (int X, int Y) cell)
     {
-        if (_service is null || _snapshot?.Map is null) return;
+        if (_service is null || _snapshot?.Map is null
+            || _snapshot.Status == GeneratedCampaignSessionStatus.DEFEATED) return;
         var player = _snapshot.Map.Cells.SingleOrDefault(item => item.PlayerPresent);
         if (player is null || Math.Abs(player.X - cell.X) + Math.Abs(player.Y - cell.Y) != 1) return;
         var kind = cell.X > player.X
@@ -98,6 +99,13 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
             Keys.E or Keys.Enter => GeneratedCampaignActionKind.Interact,
             _ => (GeneratedCampaignActionKind)(-1)
         };
+        if (_snapshot?.Status == GeneratedCampaignSessionStatus.DEFEATED
+            && kind is GeneratedCampaignActionKind.MoveUp
+                or GeneratedCampaignActionKind.MoveDown
+                or GeneratedCampaignActionKind.MoveLeft
+                or GeneratedCampaignActionKind.MoveRight
+                or GeneratedCampaignActionKind.Interact)
+            return true;
         return ExecuteFirst(kind) || base.ProcessCmdKey(ref message, keyData);
     }
 
@@ -128,6 +136,7 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
         _slot.Enabled = snapshot.Status == GeneratedCampaignSessionStatus.ACTIVE;
         _newGame.Enabled = snapshot.Status is GeneratedCampaignSessionStatus.READY
             or GeneratedCampaignSessionStatus.ACTIVE
+            or GeneratedCampaignSessionStatus.DEFEATED
             or GeneratedCampaignSessionStatus.STALE_PROJECT;
         _continue.Enabled = snapshot.Status is not GeneratedCampaignSessionStatus.NO_PROJECT
             and not GeneratedCampaignSessionStatus.PROJECT_NOT_GENERATED;
@@ -145,6 +154,16 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
 
     private void BindContext(GeneratedCampaignSnapshot snapshot)
     {
+        if (snapshot.Status == GeneratedCampaignSessionStatus.DEFEATED && snapshot.Recovery.Available)
+        {
+            _contextTitle.Text = "Поражение";
+            _contextDescription.Text = string.IsNullOrWhiteSpace(snapshot.Recovery.EncounterTitle)
+                ? "Выберите способ продолжить кампанию."
+                : snapshot.Recovery.EncounterTitle + Environment.NewLine + Environment.NewLine
+                  + "Выберите способ продолжить кампанию.";
+            return;
+        }
+
         if (snapshot.Dialogue is { Open: true } dialogue)
         {
             _contextTitle.Text = dialogue.Title;

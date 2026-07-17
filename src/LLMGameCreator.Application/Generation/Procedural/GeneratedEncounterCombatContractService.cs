@@ -106,6 +106,14 @@ public sealed class GeneratedEncounterCombatContractService
             OpponentRoleFingerprint = selected.Pair.OpponentRole.RoleFingerprint,
             PlayerRole = selected.Pair.PlayerRole,
             OpponentRole = selected.Pair.OpponentRole,
+            RouteMode = selected.Qualification.RouteMode,
+            BasicAttackAvailable = selected.Qualification.BasicAttackAvailable,
+            BasicAttackRequired = selected.Qualification.BasicAttackRequired,
+            BasicAttackPassed = selected.Qualification.BasicAttackPassed,
+            PackageAbilityAvailable = selected.Qualification.PackageAbilityAvailable,
+            PackageAbilityRequired = selected.Qualification.PackageAbilityRequired,
+            PackageAbilityPassed = selected.Qualification.PackageAbilityPassed,
+            PlayerRoutePassed = selected.Qualification.PlayerRoutePassed,
             ExactDefinitionFingerprints = definitionFingerprints,
             QualificationSummary = selected.Qualification
         };
@@ -133,6 +141,7 @@ public sealed class GeneratedEncounterCombatContractService
         var basic = TryPlayerRoute(package, runtime, pair, useAbility: false, out var basicSession);
         var ability = pair.Player.Abilities.Count > 0
                       && TryPlayerRoute(package, runtime, pair, useAbility: true, out _);
+        var routeMode = ResolveRouteMode(basic, ability);
         var routeSession = basicSession;
         var playerRoute = basic;
         if (!playerRoute)
@@ -146,8 +155,17 @@ public sealed class GeneratedEncounterCombatContractService
         return new GeneratedEncounterCombatContractQualificationSummary
         {
             StartEncounterPassed = basicSession is not null || routeSession is not null,
-            BasicAttackPassed = basic,
-            PackageAbilityPassed = ability,
+            RouteMode = routeMode,
+            BasicAttackAvailable = basic,
+            BasicAttackRequired = routeMode is GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY
+                or GeneratedEncounterCombatRouteMode.BOTH,
+            PackageAbilityRequired = routeMode is GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY
+                or GeneratedEncounterCombatRouteMode.BOTH,
+            PackageAbilityAvailable = ability,
+            BasicAttackPassed = routeMode is GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY
+                || basic,
+            PackageAbilityPassed = routeMode is GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY
+                || ability,
             PlayerRoutePassed = playerRoute,
             OpponentAiPassed = ai.Passed,
             OpponentEffectObserved = ai.Effect,
@@ -157,6 +175,15 @@ public sealed class GeneratedEncounterCombatContractService
             Diagnostics = diagnostics
         };
     }
+
+    private static GeneratedEncounterCombatRouteMode ResolveRouteMode(bool basic, bool ability) =>
+        (basic, ability) switch
+        {
+            (true, true) => GeneratedEncounterCombatRouteMode.BOTH,
+            (true, false) => GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY,
+            (false, true) => GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY,
+            _ => GeneratedEncounterCombatRouteMode.NONE
+        };
 
     private static bool TryPlayerRoute(
         GamePackageDefinition package,

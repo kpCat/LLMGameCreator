@@ -8,7 +8,7 @@ Before choosing the next milestone, read `docs/CURRENT_GENERATOR_STATE.md` and `
 
 The current state handoff, active manual gate and strategy reset override any older roadmap sequence that suggests starting a feature slice early.
 
-Goal164 is the current completed product slice and is a GREEN acceptable candidate. It preserves Goal163 exact package dispatch/turn-in/consequences, derives a deterministic combat contract from the exact Runtime-qualified Lane A package, applies only generated participant combat fields in Lane B, and proves real all-selectable/core-only campaign, v4 `CAMPAIGN_CURRENT`, regeneration/rollback, migration, cached standalone and portable recovery. Goal164 remains unaccepted and requires independent audit. The next bounded planning subject is campaign choice branching or failure recovery; Unity presentation, media and richer authored combat remain future work.
+Goal165 is the current completed product slice and is a GREEN acceptable candidate. It closes the Goal164 audit P1 by making combat qualification and v4 history neutral between BasicAttack-only, package-ability-only and both-route profiles, then adds truthful in-memory defeat recovery with retry, exact save continuation and new game. Goal165 remains unaccepted and requires independent audit. The next bounded planning subject is campaign choice branching; Unity presentation, media, persisted recovery and richer authored combat remain future work.
 
 Current locked baseline: `M4.1` remains the last completed milestone until `docs/CURRENT_GENERATOR_STATE.json` explicitly records a later milestone.
 

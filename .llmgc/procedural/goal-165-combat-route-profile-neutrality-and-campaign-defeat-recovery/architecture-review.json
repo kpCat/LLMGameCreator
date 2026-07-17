@@ -1,0 +1,18 @@
+{
+    "goal164IndependentAudit":  "BLOCKED_AT_15A8F2AB closed by conditional route truth",
+    "routeModeTruthTable":  "BASIC_ATTACK_ONLY, PACKAGE_ABILITY_ONLY, BOTH, NONE",
+    "contractResolution":  "GeneratedEncounterCombatContractService independently executes actual BasicAttack and owned ability",
+    "perEncounterQualification":  "GameProjectGeneratedEncounterCombatQualificationService treats nonrequired unavailable routes as vacuous passed",
+    "historyCompatibility":  "GameProjectBuildHistoryReader retains old v4 BOTH rows",
+    "regenerationSealCompatibility":  "full summary canonical hash includes route truth",
+    "preEncounterCheckpoint":  "GeneratedCampaignRecoveryService prepares an exact JSON roundtrip before successful StartEncounter",
+    "defeatDetection":  "inactive encounter with no living player",
+    "retryTransaction":  "restore exact checkpoint then one StartEncounter, no Runtime Start",
+    "saveAndNewGameRecovery":  "Continue loads exact save; StartNew starts once",
+    "worldChangeInvalidation":  "truth drift invalidates retry before dispatch",
+    "consequenceProjection":  "Defeat Retry RecoveryLoad NewGame",
+    "uiRecoverySurface":  "GeneratedCampaignPageControl hides map actions while defeated",
+    "failureMatrix":  "stale checkpoint gives STALE_PROJECT and zero commands",
+    "regressionImmutability":  "Goal164/163/162/161 and immutable artifacts",
+    "nonGoals":  "Runtime GamePackage save schema Unity standalone and RC unchanged"
+}

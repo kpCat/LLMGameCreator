@@ -11,6 +11,7 @@ public enum GeneratedCampaignSessionStatus
     PROJECT_NOT_READY,
     READY,
     ACTIVE,
+    DEFEATED,
     STALE_PROJECT,
     SAVE_MIGRATION_REQUIRED,
     FAILED
@@ -38,7 +39,10 @@ public enum GeneratedCampaignActionKind
     Save,
     Load,
     MigrateSave,
-    RestartSession
+    RestartSession,
+    RetryEncounter,
+    RecoveryLoad,
+    NewGame
 }
 
 public sealed record GeneratedCampaignProjectTruth
@@ -194,6 +198,16 @@ public sealed record GeneratedCampaignSaveEntryProjection
     public bool CanMigrate { get; init; }
 }
 
+public sealed record GeneratedCampaignRecoveryProjection
+{
+    public bool Available { get; init; }
+    public string EncounterTitle { get; init; } = string.Empty;
+    public bool RetryEnabled { get; init; }
+    public bool ContinueEnabled { get; init; }
+    public bool NewGameEnabled { get; init; }
+    public string DisabledReason { get; init; } = string.Empty;
+}
+
 public enum GeneratedCampaignConsequenceKind
 {
     Dialogue,
@@ -213,6 +227,10 @@ public enum GeneratedCampaignConsequenceKind
     Save,
     Load,
     Migration,
+    Defeat,
+    Retry,
+    RecoveryLoad,
+    NewGame,
     Failure
 }
 
@@ -280,6 +298,7 @@ public sealed record GeneratedCampaignSnapshot
     public IReadOnlyList<GeneratedCampaignTextRow> Factions { get; init; } = [];
     public IReadOnlyList<string> RecentEvents { get; init; } = [];
     public GeneratedCampaignSaveState SaveState { get; init; } = new();
+    public GeneratedCampaignRecoveryProjection Recovery { get; init; } = new();
     public GeneratedCampaignActionOutcome? LastActionOutcome { get; init; }
     public IReadOnlyList<GeneratedCampaignConsequence> Consequences { get; init; } = [];
     public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; }

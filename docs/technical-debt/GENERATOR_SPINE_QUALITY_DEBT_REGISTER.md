@@ -1,6 +1,6 @@
 # Generator Spine Quality Debt Register
 
-Goal164 closes the Goal163 P1 blocker without Runtime or source-sidecar mutation: a deterministic exact Lane A Runtime-qualified combat contract is applied at build time only to generated participant combat fields. Unused generated action/resource definitions intentionally remain as provenance and are not assigned combat roles. Remaining richer authored combat diversity, campaign choice branching/failure recovery, the entity-title suffix heuristic and RC finalizer lease concern remain bounded future work.
+Goal165 closes Goal164's route-neutrality P1 without Runtime or source-sidecar mutation. Recovery checkpoints are deliberately in-memory and therefore do not provide cross-restart retry; persisted recovery and campaign choice branching remain separate future work. Unused generated action/resource definitions intentionally remain provenance and are not assigned combat roles. Rich authored combat diversity, the entity-title suffix heuristic and RC finalizer lease concern remain bounded debt.
 
 Goal162 note: the generated campaign player closes the missing human-facing Runtime route for map, dialogue, encounters, quests, travel and generated save lifecycle without changing lower-level implementation seams. `FinalizeCurrentReleaseCandidate()` remains a recovery-only mutation without an explicit shared operation lease; its package/history/pointer checks and final reread prevent false CURRENT, so this remains P2 concurrency hygiene for future RC work and is not widened into Goal162.
 

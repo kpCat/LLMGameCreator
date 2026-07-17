@@ -1,0 +1,10 @@
+{
+    "status":  "GREEN",
+    "basicOnlyCampaignCurrent":  true,
+    "abilityOnlyCampaignCurrent":  true,
+    "basicOnlyHasNoUseAbility":  true,
+    "abilityOnlyHasNoBasicAttack":  true,
+    "noSyntheticAbility":  true,
+    "noFixedPower":  true,
+    "packageMutationCount":  0
+}

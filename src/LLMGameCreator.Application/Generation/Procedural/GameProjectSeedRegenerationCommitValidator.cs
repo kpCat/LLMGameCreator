@@ -233,6 +233,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                     }
                     || combat.GeneratedEncounterCount != generatedEncounterCount
                     || combat.QualifiedEncounterCount != generatedEncounterCount
+                    || !RouteEligible(combat)
                     || !string.Equals(combat.ExactPackageSha256, history.PackageSha256,
                         StringComparison.Ordinal)
                     || !string.Equals(combat.FinalStateHash, history.FinalStateHash,
@@ -344,6 +345,23 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
     {
         if (!string.Equals(expected, actual, StringComparison.Ordinal)) diagnostics.Add(diagnostic);
     }
+
+    private static bool RouteEligible(GameProjectGeneratedEncounterCombatSummary combat) => combat.RouteMode switch
+    {
+        GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY =>
+            combat.PlayerRoutePassed && combat.BasicAttackRequired && !combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY =>
+            combat.PlayerRoutePassed && !combat.BasicAttackRequired && combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        GeneratedEncounterCombatRouteMode.BOTH =>
+            combat.PlayerRoutePassed && combat.BasicAttackRequired && combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        GeneratedEncounterCombatRouteMode.NONE =>
+            !combat.PlayerRoutePassed && !combat.BasicAttackRequired && !combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        _ => false
+    };
 
     private static GameProjectSeedRegenerationCommitValidationResult Failed(string diagnostic) => new()
     {

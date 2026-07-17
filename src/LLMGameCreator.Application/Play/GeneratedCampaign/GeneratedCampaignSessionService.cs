@@ -19,6 +19,7 @@ public sealed class GeneratedCampaignSessionService
     private readonly GeneratedCampaignRuntimeDispatchService _dispatch;
     private readonly GeneratedCampaignQuestReadinessService _questReadiness;
     private readonly GeneratedCampaignConsequenceProjector _consequenceProjector;
+    private readonly GeneratedCampaignRecoveryService _recovery;
     private readonly List<GeneratedCampaignConsequence> _consequenceTimeline = [];
     private GeneratedCampaignSession? _session;
     private GeneratedCampaignSessionStatus _status;
@@ -35,11 +36,13 @@ public sealed class GeneratedCampaignSessionService
         GeneratedGameplaySaveMigrationService migration,
         GeneratedCampaignActionPlanner planner,
         GeneratedCampaignProjectionService projection,
-        GeneratedCampaignEventPresenter events)
+        GeneratedCampaignEventPresenter events,
+        GeneratedCampaignRecoveryService? recovery = null)
         : this(currentProject, truths, runtime, saves, migration, planner, projection, events,
             new GeneratedCampaignRuntimeDispatchService(runtime),
             new GeneratedCampaignQuestReadinessService(),
-            new GeneratedCampaignConsequenceProjector())
+            new GeneratedCampaignConsequenceProjector(),
+            recovery ?? new GeneratedCampaignRecoveryService())
     {
     }
 
@@ -54,7 +57,8 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignEventPresenter events,
         GeneratedCampaignRuntimeDispatchService dispatch,
         GeneratedCampaignQuestReadinessService questReadiness,
-        GeneratedCampaignConsequenceProjector consequenceProjector)
+        GeneratedCampaignConsequenceProjector consequenceProjector,
+        GeneratedCampaignRecoveryService? recovery = null)
     {
         _currentProject = currentProject;
         _truths = truths;
@@ -67,10 +71,12 @@ public sealed class GeneratedCampaignSessionService
         _dispatch = dispatch;
         _questReadiness = questReadiness;
         _consequenceProjector = consequenceProjector;
+        _recovery = recovery ?? new GeneratedCampaignRecoveryService();
     }
 
     public int RuntimeStartInvocationCount { get; private set; }
     public GeneratedCampaignRuntimeDispatchResult? LastRuntimeDispatch { get; private set; }
+    public GeneratedCampaignRecoveryCheckpoint? RecoveryCheckpoint => _recovery.Checkpoint;
 
     public GeneratedCampaignSnapshot Refresh()
     {
@@ -81,6 +87,7 @@ public sealed class GeneratedCampaignSessionService
         {
             _status = GeneratedCampaignSessionStatus.STALE_PROJECT;
             _diagnostics = ["campaign.project_truth_changed"];
+            _recovery.Invalidate();
         }
         else if (_session is null)
         {
@@ -93,6 +100,10 @@ public sealed class GeneratedCampaignSessionService
 
     public GeneratedCampaignSnapshot StartNew()
     {
+        var recoveryCheckpoint = _status == GeneratedCampaignSessionStatus.DEFEATED
+            ? _recovery.Checkpoint
+            : null;
+        var recoveryBefore = _session?.RuntimeSession;
         var captured = _truths.Capture();
         var package = _currentProject.CurrentPackage;
         if (captured.Status != GeneratedCampaignSessionStatus.READY
@@ -144,6 +155,19 @@ public sealed class GeneratedCampaignSessionService
         _saveState = new GeneratedCampaignSaveState { Slot = "campaign" };
         _lastActionOutcome = null;
         _consequenceTimeline.Clear();
+        _recovery.Clear();
+        if (recoveryCheckpoint is not null)
+        {
+            RecordOutcome(_consequenceProjector.ProjectRecovery(
+                GeneratedCampaignConsequenceKind.NewGame,
+                "Начать новую игру",
+                recoveryBefore ?? runtimeSession,
+                runtimeSession,
+                true,
+                "Новая игра",
+                "Новая игра начата с начальной карты кампании.",
+                []));
+        }
         return Snapshot(captured.Truth);
     }
 
@@ -164,6 +188,16 @@ public sealed class GeneratedCampaignSessionService
         {
             _status = GeneratedCampaignSessionStatus.STALE_PROJECT;
             _diagnostics = ["campaign.project_truth_changed"];
+            _recovery.Invalidate();
+            return Snapshot(captured.Truth);
+        }
+
+        if (_status == GeneratedCampaignSessionStatus.DEFEATED)
+            return ExecuteRecovery(actionId, captured.Truth);
+
+        if (_status != GeneratedCampaignSessionStatus.ACTIVE)
+        {
+            _diagnostics = ["campaign.action_disabled"];
             return Snapshot(captured.Truth);
         }
 
@@ -198,6 +232,18 @@ public sealed class GeneratedCampaignSessionService
 
         var before = CopySession(_session.RuntimeSession);
         var readinessBefore = _questReadiness.EvaluateAll(_session.Package, before);
+        GeneratedCampaignRecoveryCheckpoint? preparedCheckpoint = null;
+        if (planned.Action.Kind == GeneratedCampaignActionKind.StartEncounter
+            && planned.RuntimeCommand?.Id is { Length: > 0 } encounterId)
+        {
+            preparedCheckpoint = _recovery.Prepare(
+                _session.Truth,
+                _session.Package,
+                before,
+                encounterId,
+                planned.Action.TargetTitle,
+                planned.Action.ActionId);
+        }
         var dispatch = _dispatch.Dispatch(_session.Package, _session.RuntimeSession, planned);
         LastRuntimeDispatch = dispatch;
         var results = new List<GeneratedCampaignRuntimeDispatchResult> { dispatch };
@@ -208,6 +254,8 @@ public sealed class GeneratedCampaignSessionService
                 dispatch.UnifiedRuntimeResult.Session.MapState.CurrentMapId;
         _recentEvents = _events.Present(dispatch.UnifiedRuntimeResult).ToList();
         _diagnostics = DispatchDiagnostics(dispatch, "campaign.runtime_command_failed");
+        if (dispatch.Passed && preparedCheckpoint is not null)
+            _recovery.Commit(preparedCheckpoint);
 
         if (dispatch.Passed && planned.Action.Kind == GeneratedCampaignActionKind.Interact)
         {
@@ -262,6 +310,25 @@ public sealed class GeneratedCampaignSessionService
         RecordOutcome(_consequenceProjector.ProjectAction(
             _session.Package, before, after, mapEvents, gameplayEvents, planned.Action,
             readinessBefore, readinessAfter, success, _diagnostics));
+        if (success && GeneratedCampaignRecoveryService.IsDefeat(after))
+        {
+            _status = GeneratedCampaignSessionStatus.DEFEATED;
+            _diagnostics = [];
+            RecordOutcome(_consequenceProjector.ProjectRecovery(
+                GeneratedCampaignConsequenceKind.Defeat,
+                "Поражение",
+                before,
+                after,
+                true,
+                "Поражение",
+                "Встреча проиграна; доступно восстановление кампании.",
+                []));
+        }
+        else if (success && (planned.Action.Kind == GeneratedCampaignActionKind.FleeEncounter
+                             || GeneratedCampaignRecoveryService.IsVictory(after)))
+        {
+            _recovery.Clear();
+        }
         return Snapshot(captured.Truth);
     }
 
@@ -307,6 +374,9 @@ public sealed class GeneratedCampaignSessionService
 
     public GeneratedCampaignSnapshot Continue(string slotName)
     {
+        var recoveryLoad = _status == GeneratedCampaignSessionStatus.DEFEATED
+            && _recovery.Checkpoint is not null;
+        var recoveryBefore = _session?.RuntimeSession;
         var captured = _truths.Capture();
         var package = _currentProject.CurrentPackage;
         if (captured.Status != GeneratedCampaignSessionStatus.READY
@@ -336,7 +406,18 @@ public sealed class GeneratedCampaignSessionService
         UpdateSaveState(slotName, "Загружено");
         _consequenceTimeline.Clear();
         _consequenceTimeline.AddRange(_consequenceProjector.RebuildFromPersistedEvents(package, result.Session));
-        RecordOutcome(_consequenceProjector.ProjectLoad(result.Session, result));
+        _recovery.Clear();
+        RecordOutcome(recoveryLoad
+            ? _consequenceProjector.ProjectRecovery(
+                GeneratedCampaignConsequenceKind.RecoveryLoad,
+                "Продолжить с сохранения",
+                recoveryBefore ?? result.Session,
+                result.Session,
+                true,
+                "Сохранение восстановлено",
+                "Кампания восстановлена из точного сохранения текущего мира.",
+                result.Diagnostics)
+            : _consequenceProjector.ProjectLoad(result.Session, result));
         return Snapshot(captured.Truth);
     }
 
@@ -390,6 +471,7 @@ public sealed class GeneratedCampaignSessionService
         _session = new GeneratedCampaignSession(captured.Truth, package, result.Session, preview.SlotName);
         _status = GeneratedCampaignSessionStatus.ACTIVE;
         _diagnostics = [];
+        _recovery.Clear();
         _recentEvents = ["Сохранение перенесено в текущий мир и продолжено."];
         UpdateSaveState(preview.SlotName, "Перенесено и загружено");
         _consequenceTimeline.Clear();
@@ -404,7 +486,83 @@ public sealed class GeneratedCampaignSessionService
         _saveState = new GeneratedCampaignSaveState();
         _lastActionOutcome = null;
         _consequenceTimeline.Clear();
+        _recovery.Clear();
         return Refresh();
+    }
+
+    private GeneratedCampaignSnapshot ExecuteRecovery(string actionId, GeneratedCampaignProjectTruth truth)
+    {
+        if (_session is null) return Snapshot(truth);
+        if (string.Equals(actionId, GeneratedCampaignRecoveryService.ContinueActionId, StringComparison.Ordinal))
+            return Continue(_session.SlotName);
+        if (string.Equals(actionId, GeneratedCampaignRecoveryService.NewGameActionId, StringComparison.Ordinal))
+            return StartNew();
+        if (!string.Equals(actionId, GeneratedCampaignRecoveryService.RetryActionId, StringComparison.Ordinal))
+        {
+            _diagnostics = ["campaign.action_unknown"];
+            RecordOutcome(_consequenceProjector.ProjectFailure("Восстановление кампании", _session.RuntimeSession,
+                _diagnostics));
+            return Snapshot(truth);
+        }
+
+        var validation = _recovery.Restore(truth, _session.Package);
+        if (!validation.Passed || validation.Session is null || _recovery.Checkpoint is null)
+        {
+            _status = validation.Stale
+                ? GeneratedCampaignSessionStatus.STALE_PROJECT
+                : GeneratedCampaignSessionStatus.DEFEATED;
+            _diagnostics = [validation.Stale ? "campaign.recovery_checkpoint_stale" : "campaign.recovery_checkpoint_missing"];
+            RecordOutcome(_consequenceProjector.ProjectFailure("Повторить встречу", _session.RuntimeSession,
+                _diagnostics));
+            return Snapshot(truth);
+        }
+
+        var before = CopySession(_session.RuntimeSession);
+        var checkpoint = _recovery.Checkpoint;
+        _session = _session with { RuntimeSession = validation.Session };
+        var dispatch = _dispatch.DispatchGameplay(_session.Package, validation.Session,
+            GameRuntimeCommand.StartEncounter(checkpoint.EncounterId));
+        LastRuntimeDispatch = dispatch;
+        ApplyRuntimeSession(dispatch.UnifiedRuntimeResult);
+        _recentEvents = _events.Present(dispatch.UnifiedRuntimeResult).ToList();
+        _diagnostics = DispatchDiagnostics(dispatch, "campaign.retry_start_encounter_failed");
+        if (!dispatch.Passed)
+        {
+            _status = GeneratedCampaignSessionStatus.DEFEATED;
+            RecordOutcome(_consequenceProjector.ProjectRecovery(
+                GeneratedCampaignConsequenceKind.Retry,
+                "Повторить встречу",
+                before,
+                _session.RuntimeSession,
+                false,
+                "Встреча повторена",
+                "Повторить встречу не удалось.",
+                _diagnostics));
+            return Snapshot(truth);
+        }
+
+        _status = GeneratedCampaignSessionStatus.ACTIVE;
+        foreach (var ai in RunBoundedEncounterAi())
+        {
+            _recentEvents.AddRange(_events.Present(ai.UnifiedRuntimeResult));
+            if (ai.Passed) continue;
+            _diagnostics = DispatchDiagnostics(ai, "campaign.encounter_ai_failed");
+            _status = GeneratedCampaignSessionStatus.DEFEATED;
+            break;
+        }
+        var after = _session.RuntimeSession;
+        if (_diagnostics.Count == 0 && GeneratedCampaignRecoveryService.IsDefeat(after))
+            _status = GeneratedCampaignSessionStatus.DEFEATED;
+        RecordOutcome(_consequenceProjector.ProjectRecovery(
+            GeneratedCampaignConsequenceKind.Retry,
+            "Повторить встречу",
+            before,
+            after,
+            _diagnostics.Count == 0,
+            "Встреча повторена",
+            "Кампания восстановлена к точке перед встречей.",
+            _diagnostics));
+        return Snapshot(truth);
     }
 
     private IReadOnlyList<GeneratedCampaignRuntimeDispatchResult> RunBoundedEncounterAi()
@@ -526,11 +684,15 @@ public sealed class GeneratedCampaignSessionService
         var truth = _session?.Truth ?? capturedTruth;
         var package = _session?.Package ?? _currentProject.CurrentPackage;
         var runtimeSession = _session?.RuntimeSession;
-        var actions = _status == GeneratedCampaignSessionStatus.ACTIVE
-                      && package is not null
-                      && runtimeSession is not null
-            ? _planner.Plan(package, runtimeSession).Select(item => item.Action).ToList()
-            : [];
+        var (canContinue, continueReason) = RecoverySaveAvailability();
+        var recovery = _recovery.Project(canContinue, continueReason);
+        var actions = _status == GeneratedCampaignSessionStatus.DEFEATED
+            ? _recovery.RecoveryActions(recovery)
+            : _status == GeneratedCampaignSessionStatus.ACTIVE
+              && package is not null
+              && runtimeSession is not null
+                ? _planner.Plan(package, runtimeSession).Select(item => item.Action).ToList()
+                : [];
         IReadOnlyList<GeneratedCampaignQuestReadiness> readiness = package is null || runtimeSession is null
             ? []
             : _questReadiness.EvaluateAll(package, runtimeSession);
@@ -546,7 +708,23 @@ public sealed class GeneratedCampaignSessionService
             _saveState,
             readiness,
             _lastActionOutcome,
-            _consequenceTimeline.ToList());
+            _consequenceTimeline.ToList(),
+            _status is GeneratedCampaignSessionStatus.DEFEATED or GeneratedCampaignSessionStatus.STALE_PROJECT
+                ? recovery
+                : new GeneratedCampaignRecoveryProjection());
+    }
+
+    private (bool CanContinue, string Reason) RecoverySaveAvailability()
+    {
+        if (_session is null) return (false, "Нет совместимого сохранения для продолжения.");
+        var list = _saves.List(_session.Truth.ProjectFolder);
+        var entry = list.Entries.SingleOrDefault(item =>
+            string.Equals(item.SlotName, _session.SlotName, StringComparison.Ordinal));
+        if (entry?.Status == GeneratedGameplaySaveStatus.CURRENT) return (true, string.Empty);
+        return (false, entry?.Status is GeneratedGameplaySaveStatus.PACKAGE_REBASE_REQUIRED
+            or GeneratedGameplaySaveStatus.WORLD_MIGRATION_REQUIRED
+            ? "Сохранение требует явного переноса в текущий мир."
+            : "Нет совместимого сохранения для продолжения.");
     }
 
     private static UnifiedRuntimeSession CopySession(UnifiedRuntimeSession session) =>

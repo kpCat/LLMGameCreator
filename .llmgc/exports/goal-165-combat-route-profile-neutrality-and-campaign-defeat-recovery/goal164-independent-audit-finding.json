@@ -1,0 +1,6 @@
+{
+    "status":  "CLOSED_BY_GOAL165",
+    "result":  "BLOCKED_AT_15A8F2AB",
+    "blocker":  "resolver accepted one route while qualification/history required two",
+    "portableCoreOnlyGapClosed":  true
+}

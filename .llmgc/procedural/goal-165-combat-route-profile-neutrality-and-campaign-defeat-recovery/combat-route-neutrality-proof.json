@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "modes":  [
+                  "BASIC_ATTACK_ONLY",
+                  "PACKAGE_ABILITY_ONLY",
+                  "BOTH"
+              ],
+    "noneRejected":  true,
+    "optionalUnavailableVacuousPassed":  true,
+    "diagnostics":  [
+                        "generated_combat.basic_attack_required_failed",
+                        "generated_combat.package_ability_required_failed",
+                        "generated_combat.player_route_missing"
+                    ]
+}

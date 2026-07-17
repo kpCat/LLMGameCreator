@@ -1,0 +1,9 @@
+{
+    "status":  "GREEN",
+    "captureBeforeSuccessfulStartEncounter":  true,
+    "exactSessionJsonRoundtrip":  true,
+    "defeatStatus":  "DEFEATED",
+    "defeatConsequence":  true,
+    "checkpointRetained":  true,
+    "victoryAndFleeClear":  true
+}

@@ -21,7 +21,8 @@ public sealed class GeneratedCampaignProjectionService
         GeneratedCampaignSaveState? saveState = null,
         IReadOnlyList<GeneratedCampaignQuestReadiness>? questReadiness = null,
         GeneratedCampaignActionOutcome? lastActionOutcome = null,
-        IReadOnlyList<GeneratedCampaignConsequence>? consequences = null)
+        IReadOnlyList<GeneratedCampaignConsequence>? consequences = null,
+        GeneratedCampaignRecoveryProjection? recovery = null)
     {
         if (package is null || session is null || truth is null)
         {
@@ -33,6 +34,7 @@ public sealed class GeneratedCampaignProjectionService
                 SaveState = saveState ?? new GeneratedCampaignSaveState { Slot = slot },
                 LastActionOutcome = lastActionOutcome,
                 Consequences = consequences ?? [],
+                Recovery = recovery ?? new GeneratedCampaignRecoveryProjection(),
                 Diagnostics = diagnostics
             };
         }
@@ -111,6 +113,7 @@ public sealed class GeneratedCampaignProjectionService
             }).ToList(),
             RecentEvents = events,
             SaveState = saveState ?? new GeneratedCampaignSaveState { Slot = slot },
+            Recovery = recovery ?? new GeneratedCampaignRecoveryProjection(),
             LastActionOutcome = lastActionOutcome,
             Consequences = consequences ?? [],
             TechnicalDetails = new Dictionary<string, string>
@@ -417,6 +420,7 @@ public sealed class GeneratedCampaignProjectionService
 
     private static string StatusTitle(GeneratedCampaignSessionStatus status) => status switch
     {
+        GeneratedCampaignSessionStatus.DEFEATED => "Поражение",
         GeneratedCampaignSessionStatus.NO_PROJECT => "Проект не открыт",
         GeneratedCampaignSessionStatus.PROJECT_NOT_GENERATED => "Кампания недоступна",
         GeneratedCampaignSessionStatus.PROJECT_NOT_READY => "Кампания не готова",

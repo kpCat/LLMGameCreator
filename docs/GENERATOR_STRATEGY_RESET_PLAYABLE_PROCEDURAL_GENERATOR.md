@@ -1,6 +1,6 @@
 # Generator Strategy Reset: Playable Procedural Generator
 
-Goal164 update: the player-facing campaign keeps Goal163 exact package dispatch and consequences while generated encounters receive a deterministic build-time combat overlay. The combat contract comes only from a real Runtime-qualified Lane A package; strict plan plus `GeneratedContent` provenance binds Lane B and only participant combat fields change. Application and Runtime never patch definitions at action time. Actual all-selectable/core-only campaign, v4 history, regeneration/rollback, migration, cached standalone and portable recovery are GREEN. Goal164 is unaccepted, has no manual gate and requires independent audit.
+Goal165 update: the player-facing campaign keeps exact package dispatch while combat contracts explicitly preserve the profile's actual player route: BasicAttack-only, package-ability-only or both. Defeat recovery restores a verified in-memory pre-encounter session through existing Runtime commands, never changes Runtime definitions or save schema, and fails stale truth before dispatch. Goal165 is unaccepted, has no manual gate and requires independent audit.
 
 Status: source-of-truth strategy pivot  
 Scope: product direction, Codex task selection, generation architecture, limit discipline  

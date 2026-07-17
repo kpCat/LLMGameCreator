@@ -96,6 +96,7 @@ public sealed class GeneratedCampaignActionPlanner
         var definition = package.Game.Encounters.SingleOrDefault(item =>
             IdEquals(item.Id, encounter.EncounterId));
         var readiness = _combatReadiness.Evaluate(package, definition);
+        if (readiness.BasicAttackAvailable)
         foreach (var target in targets)
         {
             Add(result, GeneratedCampaignActionKind.BasicAttack,
@@ -111,7 +112,8 @@ public sealed class GeneratedCampaignActionPlanner
         }
 
         var participant = definition?.Participants.FirstOrDefault(item => IdEquals(item.Id, current.Id));
-        foreach (var abilityId in participant?.Abilities ?? [])
+        foreach (var abilityId in participant?.Abilities
+                     .Where(id => readiness.AbilityIds.Contains(id, StringComparer.OrdinalIgnoreCase)) ?? [])
         {
             var abilities = package.Game.Abilities.Where(item => IdEquals(item.Id, abilityId)).ToList();
             var ability = abilities.Count == 1 ? abilities[0] : null;

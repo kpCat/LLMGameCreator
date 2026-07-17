@@ -46,14 +46,15 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var packageBefore = GeneratedEncounterCombatCanonical.Hash(package);
         var ordered = bindings.Bindings.OrderBy(item => item.EncounterSeedId, StringComparer.Ordinal).ToList();
         var routeResults = ordered.Select(binding => ExecuteEncounterRoute(
-            package, binding.PackageEncounterId, runtime, completeQuest: false)).ToList();
+            package, binding.PackageEncounterId, runtime, contract.QualificationSummary.RouteMode,
+            completeQuest: false)).ToList();
         var representative = SelectRepresentative(package, strictSource, ordered);
         if (representative is null)
             return Invalid(contract, overlay, ["generated_combat.representative_campaign_missing"]);
         var campaign = ExecuteEncounterRoute(package, representative.Binding.PackageEncounterId, runtime,
-            completeQuest: true, representative.PreparationEncounterIds);
+            contract.QualificationSummary.RouteMode, completeQuest: true, representative.PreparationEncounterIds);
         var replay = ExecuteEncounterRoute(package, representative.Binding.PackageEncounterId, runtime,
-            completeQuest: true, representative.PreparationEncounterIds);
+            contract.QualificationSummary.RouteMode, completeQuest: true, representative.PreparationEncounterIds);
         var replayPassed = campaign.Passed && replay.Passed
                            && campaign.ActionKinds.SequenceEqual(replay.ActionKinds, StringComparer.Ordinal)
                            && string.Equals(campaign.FinalStateHash, replay.FinalStateHash, StringComparison.Ordinal)
@@ -61,8 +62,8 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                            && campaign.ManualTurnInPassed == replay.ManualTurnInPassed;
         var packageAfter = GeneratedEncounterCombatCanonical.Hash(package);
         var allBasic = routeResults.All(item => item.BasicAttackPassed);
-        var allAbilities = contract.PlayerRole.Abilities.Count > 0
-                           && routeResults.All(item => item.PackageAbilityPassed);
+        var allAbilities = routeResults.All(item => item.PackageAbilityPassed);
+        var allPlayerRoutes = routeResults.All(item => item.PlayerRoutePassed);
         var allAi = routeResults.All(item => item.OpponentAiPassed);
         var allFlee = routeResults.All(item => item.FleePassed);
         var allVictory = routeResults.All(item => item.VictoryPassed);
@@ -78,7 +79,7 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                      && campaign.AdvanceObjectiveCommandCount == 0
                      && campaign.ConsequencePassed
                      && replayPassed
-                     && allBasic && allAbilities && allAi && allFlee && allVictory
+                      && allPlayerRoutes && allBasic && allAbilities && allAi && allFlee && allVictory
                      && exact && unchanged;
         var diagnostics = routeResults.SelectMany(item => item.Diagnostics)
             .Concat(campaign.Diagnostics).Concat(replay.Diagnostics)
@@ -106,8 +107,14 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
             ExactPackageSha256 = overlay.OutputPackageSha256,
             ExactPackageReferencePassed = exact,
             PackageShaUnchangedDuringRuntime = unchanged,
+            RouteMode = contract.QualificationSummary.RouteMode,
+            BasicAttackAvailable = contract.QualificationSummary.BasicAttackAvailable,
+            BasicAttackRequired = contract.QualificationSummary.BasicAttackRequired,
+            PackageAbilityAvailable = contract.QualificationSummary.PackageAbilityAvailable,
+            PackageAbilityRequired = contract.QualificationSummary.PackageAbilityRequired,
             BasicAttackPassed = allBasic,
             PackageAbilityPassed = allAbilities,
+            PlayerRoutePassed = allPlayerRoutes,
             OpponentAiPassed = allAi,
             VictoryPassed = allVictory,
             FleePassed = allFlee,
@@ -139,6 +146,7 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         GamePackageDefinition package,
         string encounterId,
         IUnifiedGameRuntimeService runtime,
+        GeneratedEncounterCombatRouteMode routeMode,
         bool completeQuest,
         IReadOnlyList<string>? preparationEncounterIds = null)
     {
@@ -146,30 +154,41 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var diagnostics = new List<string>();
         var actionKinds = new List<string>();
         var frames = new List<GeneratedEncounterCombatRuntimeFrame>();
-        var basic = TrySinglePlayerAction(package, encounterId, runtime, useAbility: false, out var basicAi);
-        var ability = TrySinglePlayerAction(package, encounterId, runtime, useAbility: true, out _);
+        var basicObserved = TrySinglePlayerAction(package, encounterId, runtime, useAbility: false, out var basicAi);
+        var abilityObserved = TrySinglePlayerAction(package, encounterId, runtime, useAbility: true, out var abilityAi);
+        var basicRequired = routeMode is GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY
+            or GeneratedEncounterCombatRouteMode.BOTH;
+        var abilityRequired = routeMode is GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY
+            or GeneratedEncounterCombatRouteMode.BOTH;
+        var basic = !basicRequired || basicObserved;
+        var ability = !abilityRequired || abilityObserved;
+        var ai = basicRequired ? basicAi : abilityRequired ? abilityAi : basicAi || abilityAi;
         var flee = ExecuteFlee(package, encounterId, runtime);
         var victory = ExecuteVictory(package, encounterId, runtime, completeQuest,
-            preparationEncounterIds ?? []);
+            preparationEncounterIds ?? [], routeMode);
         actionKinds.AddRange(victory.ActionKinds);
         frames.AddRange(victory.Frames);
-        if (!basic) diagnostics.Add("generated_combat.basic_attack_failed");
-        if (!ability) diagnostics.Add("generated_combat.package_ability_failed");
-        if (!basicAi) diagnostics.Add("generated_combat.opponent_ai_failed");
+        if (!basic) diagnostics.Add("generated_combat.basic_attack_required_failed");
+        if (!ability) diagnostics.Add("generated_combat.package_ability_required_failed");
+        if (!basicObserved && !abilityObserved) diagnostics.Add("generated_combat.player_route_missing");
+        if (!ai) diagnostics.Add("generated_combat.opponent_ai_failed");
         if (!flee) diagnostics.Add("generated_combat.flee_failed");
         if (!victory.VictoryPassed) diagnostics.Add("generated_combat.victory_failed");
         diagnostics.AddRange(victory.Diagnostics);
         var packageAfter = GeneratedEncounterCombatCanonical.Hash(package);
         var exact = string.Equals(packageBefore, packageAfter, StringComparison.Ordinal);
         if (!exact) diagnostics.Add("generated_combat.package_mutated_during_runtime");
-        var passed = basic && ability && basicAi && flee && victory.VictoryPassed && exact
+        var passed = basic && ability && ai && flee && victory.VictoryPassed && exact
                      && (!completeQuest || victory.ManualTurnInPassed && victory.ConsequencePassed);
         return new EncounterRouteResult
         {
             Passed = passed,
+            BasicAttackAvailable = basicObserved,
             BasicAttackPassed = basic,
+            PackageAbilityAvailable = abilityObserved,
             PackageAbilityPassed = ability,
-            OpponentAiPassed = basicAi,
+            PlayerRoutePassed = basicObserved || abilityObserved,
+            OpponentAiPassed = ai,
             FleePassed = flee,
             VictoryPassed = victory.VictoryPassed,
             RewardPassed = victory.RewardPassed,
@@ -243,7 +262,8 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         string encounterId,
         IUnifiedGameRuntimeService runtime,
         bool completeQuest,
-        IReadOnlyList<string> preparationEncounterIds)
+        IReadOnlyList<string> preparationEncounterIds,
+        GeneratedEncounterCombatRouteMode routeMode)
     {
         var session = Start(package, runtime);
         if (session is null) return VictoryRouteResult.Failed("generated_combat.start_failed");
@@ -272,10 +292,13 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                 {
                     var target = encounter.Participants.FirstOrDefault(item => item.Alive && !IsPlayer(item.Team));
                     if (target is null) break;
-                    result = runtime.ExecuteGameplayCommand(package, session,
-                        GameRuntimeCommand.BasicAttack(participant.Id, target.Id));
-                    actionKinds.Add(nameof(GameRuntimeCommandType.BasicAttack));
-                    AddFrame(nameof(GameRuntimeCommandType.BasicAttack), result.Session);
+                    var playerAction = ExecuteVictoryPlayerAction(package, runtime, session,
+                        routeEncounterId, participant.Id, target.Id, routeMode);
+                    if (playerAction is null)
+                        return VictoryRouteResult.Failed("generated_combat.victory_command_failed");
+                    result = playerAction.Value.Result;
+                    actionKinds.Add(playerAction.Value.ActionKind);
+                    AddFrame(playerAction.Value.ActionKind, result.Session);
                 }
                 else
                 {
@@ -374,6 +397,34 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                 ActionKind = kind,
                 StateHash = GeneratedCampaignConsequenceProjector.HashSession(value)
             });
+    }
+
+    private static (UnifiedRuntimeResult Result, string ActionKind)? ExecuteVictoryPlayerAction(
+        GamePackageDefinition package,
+        IUnifiedGameRuntimeService runtime,
+        UnifiedRuntimeSession session,
+        string encounterId,
+        string participantId,
+        string targetId,
+        GeneratedEncounterCombatRouteMode routeMode)
+    {
+        if (routeMode != GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY)
+        {
+            var basic = runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.BasicAttack(participantId, targetId));
+            return basic.Success ? (basic, nameof(GameRuntimeCommandType.BasicAttack)) : null;
+        }
+
+        var participant = package.Game.Encounters.Single(item => item.Id == encounterId).Participants
+            .SingleOrDefault(item => string.Equals(item.Id, participantId, StringComparison.OrdinalIgnoreCase));
+        foreach (var abilityId in participant?.Abilities.OrderBy(value => value, StringComparer.Ordinal)
+                     ?? Enumerable.Empty<string>())
+        {
+            var result = runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.UseAbility(abilityId, participantId, targetId));
+            if (result.Success) return (result, nameof(GameRuntimeCommandType.UseAbility));
+        }
+        return null;
     }
 
     private static UnifiedRuntimeSession? Start(
@@ -665,11 +716,20 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         EncounterRouteResult route) =>
     [
         new() { Label = "Боевая готовность", Value = passed ? "подтверждена" : "не подтверждена" },
-        new() { Label = "Действия игрока", Value = route.BasicAttackPassed && route.PackageAbilityPassed ? "обычная атака и способность выполнены" : "не подтверждены" },
+        new() { Label = "Действия игрока", Value = PlayerRouteFact(route) },
         new() { Label = "Противники", Value = route.OpponentAiPassed ? "ходы выполнены игровым Runtime" : "ходы не подтверждены" },
         new() { Label = "Победа и награда", Value = route.VictoryPassed && route.RewardPassed ? "получены" : "не подтверждены" },
         new() { Label = "Завершение задания", Value = route.ManualTurnInPassed ? "выполнено вручную" : "не подтверждено" }
     ];
+
+    private static string PlayerRouteFact(EncounterRouteResult route) =>
+        (route.BasicAttackAvailable, route.PackageAbilityAvailable) switch
+        {
+            (true, false) => "Обычная атака",
+            (false, true) => "Способность",
+            (true, true) => "Обычная атака и способность",
+            _ => "не подтверждены"
+        };
 
     private static GameProjectGeneratedEncounterCombatSummary Invalid(
         GeneratedEncounterCombatContract contract,
@@ -691,8 +751,11 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
     private sealed record EncounterRouteResult
     {
         public bool Passed { get; init; }
+        public bool BasicAttackAvailable { get; init; }
         public bool BasicAttackPassed { get; init; }
+        public bool PackageAbilityAvailable { get; init; }
         public bool PackageAbilityPassed { get; init; }
+        public bool PlayerRoutePassed { get; init; }
         public bool OpponentAiPassed { get; init; }
         public bool FleePassed { get; init; }
         public bool VictoryPassed { get; init; }

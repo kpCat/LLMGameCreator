@@ -1,0 +1,10 @@
+{
+    "status":  "GREEN",
+    "runtimeStartInvocationCount":  0,
+    "startEncounterCommandCount":  1,
+    "mapInventoryQuestReputationExact":  true,
+    "lostAttemptRewardRemoved":  true,
+    "secondRetryAvailable":  true,
+    "staleCommands":  0,
+    "staleStatus":  "STALE_PROJECT"
+}

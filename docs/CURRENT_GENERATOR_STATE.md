@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 164 generated encounter combat contract and campaign qualification — GREEN acceptable candidate
+Updated by: Goal 165 combat route profile neutrality and campaign defeat recovery — GREEN acceptable candidate
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -44,9 +44,13 @@ Goal164 closes the Goal163 blocker without changing Runtime, public GamePackage,
 
 Actual Runtime qualification covers BasicAttack, a participant-owned package ability, bounded opponent AI, flee, fresh victory/reward, a generated quest that remains active while ready, exactly one manual CompleteQuest, zero AdvanceQuestObjective commands, reputation consequence, travel, exact save/continue, explicit migration and post-migration combat. Package-derived preparation encounters satisfy core-only reward dependencies without fixed IDs, participant counts or numeric combat constants. v4 history restores `CAMPAIGN_CURRENT`; genuine v3 remains `COMBAT_PENDING`. Ordinary rebuild, regeneration and historical rollback rebuild the current contract without rewriting source sidecars. One cached hidden smoke is required and recorded with host reuse, no rebuild, Unity 0 and retry 0. All-selectable RC is CURRENT; portable all-selectable and core-only are current without false core-only RC readiness. Goal164 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
 
+Goal165 independently records that Goal164 audit as `BLOCKED_AT_15A8F2AB`: the resolver accepted a single usable player route while qualification and history required both routes. It closes that P1 without modifying Runtime or GamePackage. The contract, qualification and v4 history now distinguish `BASIC_ATTACK_ONLY`, `PACKAGE_ABILITY_ONLY` and `BOTH`; nonrequired unavailable routes are vacuously passed, while old Goal164 v4 both-route rows remain `CAMPAIGN_CURRENT`. Regeneration seals and semantic validation include the typed route truth.
+
+The campaign player now captures an exact in-memory JSON checkpoint immediately before a successful encounter start. Genuine Runtime defeat enters `DEFEATED` and shows `Поражение` with `Повторить встречу`, `Продолжить с сохранения` and `Начать новую игру`. Retry restores exact map, inventory, quest and reputation truth, invokes Runtime Start zero times and dispatches `StartEncounter` once. Exact save recovery invokes Runtime Start zero times; New Game invokes it once. Checkpoints clear on victory, flee, successful load/migration and new game, and truth drift yields `STALE_PROJECT` before any Runtime command. The physical portable core-only copy has no operational pointer and never claims RC readiness. Goal165 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
+
 ```text
-gate_status=goal164_green_generated_encounter_combat_contract_and_campaign_qualification
-current_user_action=independent_goal164_audit_and_plan_campaign_choice_branching_or_failure_recovery
+gate_status=goal165_green_combat_route_profile_neutrality_and_campaign_defeat_recovery
+current_user_action=independent_goal165_audit_and_plan_campaign_choice_branching
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -388,7 +392,10 @@ goal164AcceptedByHuman=false
 goal164AcceptedByCodex=false
 goal164ManualReviewRequired=false
 goal164ManualGateReady=false
-goal164IndependentAuditRequired=true
+goal164IndependentAuditResult=BLOCKED_AT_15A8F2AB
+goal164IndependentAuditBlocker=combat_contract_resolver_accepts_single_player_route_but_qualification_and_history_unconditionally_require_basic_attack_and_package_ability
+goal164AuditBlocker=closed_by_goal165
+goal164IndependentAuditRequired=false
 goal164CombatContractResolved=true
 goal164GeneratedCombatOverlayPassed=true
 goal164CampaignCurrentPassed=true
@@ -403,7 +410,25 @@ goal164HiddenSmokeInvocationCount=1
 goal164PortableAllSelectablePassed=true
 goal164PortableCoreOnlyPassed=true
 goal164ArtifactScopeViolationCount=0
-nextAction=independent_goal164_audit_and_plan_campaign_choice_branching_or_failure_recovery
+goal165ImplementationStatus=GREEN
+goal165CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal165Accepted=false
+goal165AcceptedByHuman=false
+goal165AcceptedByCodex=false
+goal165ManualReviewRequired=false
+goal165ManualGateReady=false
+goal165IndependentAuditRequired=true
+goal165BothRoutePassed=true
+goal165BasicAttackOnlyPassed=true
+goal165AbilityOnlyPassed=true
+goal165DefeatRecoveryPassed=true
+goal165SaveRecoveryPassed=true
+goal165NewGameRecoveryPassed=true
+goal165PlayerProcessStartCount=0
+goal165UnityEditorProcessStartCount=0
+goal165StandaloneBuildInvocationCount=0
+goal165ArtifactScopeViolationCount=0
+nextAction=independent_goal165_audit_and_plan_campaign_choice_branching
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

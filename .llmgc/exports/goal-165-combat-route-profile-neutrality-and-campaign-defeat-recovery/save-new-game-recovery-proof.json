@@ -1,0 +1,9 @@
+{
+    "status":  "GREEN",
+    "exactContinueRuntimeStartCount":  0,
+    "recoveryLoadConsequence":  true,
+    "migrationExplicit":  true,
+    "newGameRuntimeStartDelta":  1,
+    "newGameConsequence":  true,
+    "checkpointCleared":  true
+}

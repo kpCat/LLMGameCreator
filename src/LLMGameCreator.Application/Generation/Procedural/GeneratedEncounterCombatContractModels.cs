@@ -8,6 +8,14 @@ using LLMGameCreator.GamePackage;
 
 namespace LLMGameCreator.Application.Generation.Procedural;
 
+public enum GeneratedEncounterCombatRouteMode
+{
+    NONE,
+    BASIC_ATTACK_ONLY,
+    PACKAGE_ABILITY_ONLY,
+    BOTH
+}
+
 public sealed record GeneratedEncounterCombatDefinitionFingerprint
 {
     public string CollectionPath { get; init; } = string.Empty;
@@ -31,6 +39,11 @@ public sealed record GeneratedEncounterCombatRoleContract
 public sealed record GeneratedEncounterCombatContractQualificationSummary
 {
     public bool StartEncounterPassed { get; init; }
+    public GeneratedEncounterCombatRouteMode RouteMode { get; init; }
+    public bool BasicAttackAvailable { get; init; }
+    public bool BasicAttackRequired { get; init; }
+    public bool PackageAbilityRequired { get; init; }
+    public bool PackageAbilityAvailable { get; init; }
     public bool BasicAttackPassed { get; init; }
     public bool PackageAbilityPassed { get; init; }
     public bool PlayerRoutePassed { get; init; }
@@ -51,6 +64,14 @@ public sealed record GeneratedEncounterCombatContract
     public string OpponentRoleFingerprint { get; init; } = string.Empty;
     public GeneratedEncounterCombatRoleContract PlayerRole { get; init; } = new();
     public GeneratedEncounterCombatRoleContract OpponentRole { get; init; } = new();
+    public GeneratedEncounterCombatRouteMode RouteMode { get; init; }
+    public bool BasicAttackAvailable { get; init; }
+    public bool BasicAttackRequired { get; init; }
+    public bool BasicAttackPassed { get; init; }
+    public bool PackageAbilityAvailable { get; init; }
+    public bool PackageAbilityRequired { get; init; }
+    public bool PackageAbilityPassed { get; init; }
+    public bool PlayerRoutePassed { get; init; }
     public IReadOnlyList<GeneratedEncounterCombatDefinitionFingerprint> ExactDefinitionFingerprints { get; init; } = [];
     public GeneratedEncounterCombatContractQualificationSummary QualificationSummary { get; init; } = new();
 }
@@ -127,8 +148,14 @@ public sealed record GameProjectGeneratedEncounterCombatSummary
     public string ExactPackageSha256 { get; init; } = string.Empty;
     public bool ExactPackageReferencePassed { get; init; }
     public bool PackageShaUnchangedDuringRuntime { get; init; }
+    public GeneratedEncounterCombatRouteMode RouteMode { get; init; }
+    public bool BasicAttackAvailable { get; init; }
+    public bool BasicAttackRequired { get; init; }
+    public bool PackageAbilityRequired { get; init; }
+    public bool PackageAbilityAvailable { get; init; }
     public bool BasicAttackPassed { get; init; }
     public bool PackageAbilityPassed { get; init; }
+    public bool PlayerRoutePassed { get; init; }
     public bool OpponentAiPassed { get; init; }
     public bool VictoryPassed { get; init; }
     public bool FleePassed { get; init; }

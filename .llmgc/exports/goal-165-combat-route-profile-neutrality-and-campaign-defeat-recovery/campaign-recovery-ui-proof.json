@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "statusTitle":  "Поражение",
+    "recoveryActions":  [
+                            "Повторить встречу",
+                            "Продолжить с сохранения",
+                            "Начать новую игру"
+                        ],
+    "mapAndKeyboardCommands":  0,
+    "primaryUiRawTechnicalValues":  0,
+    "surface":  "1100x720"
+}

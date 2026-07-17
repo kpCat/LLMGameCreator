@@ -6234,6 +6234,64 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-165-combat-route-profile-neutrality-and-campaign-defeat-recovery",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal165-combat-recovery.ps1",
+        ".devflow/scripts/run-goal165-combat-recovery.cmd",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedEncounterCombatContractModels.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedEncounterCombatContractService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedEncounterCombatQualificationService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCandidateSealService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCommitValidator.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionModels.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignRecoveryService.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionService.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignActionPlanner.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignProjectionService.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignConsequenceProjector.cs",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.Designer.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal164/Goal164CombatContractResolutionTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal164/Goal164GeneratedCampaignRouteTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal164/Goal164BuildHistoryCampaignCurrentTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal163/Goal163PackageTruthCombatTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal162/Goal162CampaignEncounterQuestTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal164-generated-encounter-combat-contract.md",
+        "docs/manual-acceptance/goal165-combat-profile-neutrality-defeat-recovery.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal165/",
+        "docs/agent-tasks/goal-165-combat-route-profile-neutrality-and-campaign-defeat-recovery/",
+        ".llmgc/procedural/goal-165-combat-route-profile-neutrality-and-campaign-defeat-recovery/",
+        ".llmgc/exports/goal-165-combat-route-profile-neutrality-and-campaign-defeat-recovery/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

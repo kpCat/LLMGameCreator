@@ -1,0 +1,47 @@
+/goal
+
+Выполни задачу из файла:
+
+docs/agent-tasks/goal-165-combat-route-profile-neutrality-and-campaign-defeat-recovery/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 15a8f2abea06d3e7caa67f68f7d690708f612459
+
+Это новый отдельный диалог Codex.
+
+Критически важно:
+- Goal164 implementation GREEN, но independent audit BLOCKED на profile-neutral P1;
+- resolver принимает BasicAttack ИЛИ package ability, а qualification/history требуют обе;
+- добавить route mode BASIC_ATTACK_ONLY / PACKAGE_ABILITY_ONLY / BOTH;
+- unavailable optional route считается nonrequired/vacuous passed, а не false failure;
+- basic-only и ability-only v4 CAMPAIGN_CURRENT обязательны;
+- old Goal164 v4 both-route history остаётся CURRENT;
+- ни synthetic ability, ни fixed power, ни package mutation возвращать нельзя;
+- regeneration seal/semantic validation должны покрывать новые route fields;
+- добавить player-facing DEFEATED state;
+- exact pre-encounter in-memory checkpoint перед успешным StartEncounter;
+- genuine Runtime defeat → Поражение;
+- recovery actions: Повторить встречу / Продолжить с сохранения / Начать новую игру;
+- Retry restores exact map/inventory/quest/reputation checkpoint, Runtime Start=0,
+  затем StartEncounter ровно 1;
+- reward/quest/reputation проигранной попытки не переживают retry;
+- victory/flee/new game/world change/migration clears or invalidates checkpoint truthfully;
+- stale checkpoint → zero Runtime commands + STALE_PROJECT;
+- save recovery exact, migration explicit;
+- human Defeat/Retry/RecoveryLoad/NewGame consequences, no raw IDs/hashes/paths;
+- Runtime/GamePackage/FeatureModules/source/overlay/save schema/Unity/standalone/RC не менять;
+- RC/run/pointer/history/source/sidecars byte-identical;
+- Player/Unity/standalone Build = 0;
+- required regressions, 12×2 evidence, docs/state, artifact scope 0;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать один commit и push origin/main;
+- запрещено оставлять ручной push пользователю.
+
+В финале сообщи route-mode matrix, v4 compatibility,
+defeat/checkpoint/retry/save/new-game/stale recovery,
+zero process/immutability, tests/regressions/evidence/scope,
+SHA, push, HEAD==origin/main и clean worktree.

@@ -1,6 +1,6 @@
 # Goal164 generated encounter combat contract
 
-Goal164 is a GREEN acceptable automated candidate. It is not accepted by a human or Codex, creates no manual gate and requires an independent audit.
+Goal164 is a GREEN acceptable automated candidate. It is not accepted by a human or Codex and creates no manual gate. Its independent audit recorded `BLOCKED_AT_15A8F2AB` for single-route neutrality; Goal165 closes that implementation blocker while Goal164 remains unaccepted.
 
 The build resolves one deterministic combat contract only from an exact Runtime-qualified Lane A package. Generated encounters bind through the strict regenerated plan and `GeneratedContent` provenance. Lane B changes only participant abilities, resources, stats, inventory and required combat metadata; definitions, encounter rewards/identity/provenance, baseline records, travel gates and all other records remain exact. Unused generated action/resource definitions remain intentional provenance and are not assigned combat roles.
 
@@ -10,4 +10,4 @@ History v4 restores `CAMPAIGN_CURRENT`; genuine v3 restores only `COMBAT_PENDING
 
 Release risk: rich authored combat diversity and branching campaign consequences remain future work.
 
-Next action: `independent_goal164_audit_and_plan_campaign_choice_branching_or_failure_recovery`.
+Next action: `independent_goal165_audit_and_plan_campaign_choice_branching`.

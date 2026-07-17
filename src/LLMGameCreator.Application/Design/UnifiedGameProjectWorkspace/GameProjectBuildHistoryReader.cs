@@ -154,9 +154,29 @@ public sealed class GameProjectBuildHistoryReader
             ConsequencePassed: true,
             ReplayPassed: true
         } combat
+        && RouteEligible(combat)
         && combat.QualifiedEncounterCount == combat.GeneratedEncounterCount
         && string.Equals(combat.ExactPackageSha256, entry.PackageSha256, StringComparison.Ordinal)
         && string.Equals(combat.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal);
+
+    private static bool RouteEligible(GameProjectGeneratedEncounterCombatSummary combat) => combat.RouteMode switch
+    {
+        GeneratedEncounterCombatRouteMode.BASIC_ATTACK_ONLY =>
+            combat.PlayerRoutePassed && combat.BasicAttackRequired && !combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        GeneratedEncounterCombatRouteMode.PACKAGE_ABILITY_ONLY =>
+            combat.PlayerRoutePassed && !combat.BasicAttackRequired && combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        GeneratedEncounterCombatRouteMode.BOTH =>
+            combat.PlayerRoutePassed && combat.BasicAttackRequired && combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        // Goal164 v4 rows predate route fields. Their two actual passed routes are
+        // intentionally retained as current rather than rewritten as history.
+        GeneratedEncounterCombatRouteMode.NONE =>
+            !combat.PlayerRoutePassed && !combat.BasicAttackRequired && !combat.PackageAbilityRequired
+            && combat.BasicAttackPassed && combat.PackageAbilityPassed,
+        _ => false
+    };
 
     private static GameProjectGeneratedWorldSummary? ProjectGeneratedWorld(GameProjectBuildHistoryEntry entry)
     {
