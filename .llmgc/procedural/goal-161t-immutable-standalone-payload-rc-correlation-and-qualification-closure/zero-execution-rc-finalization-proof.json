@@ -1,0 +1,17 @@
+{
+    "status":  "GREEN",
+    "stage":  "rc.finalize.success",
+    "releaseCandidate":  "CURRENT",
+    "currentStandaloneHistoryResolved":  true,
+    "currentBuildHistoryResolved":  true,
+    "playerProcessStartCount":  0,
+    "unityEditorProcessStartCount":  0,
+    "standaloneBuildInvocationCount":  0,
+    "runTreeByteIdentical":  true,
+    "currentPointerByteIdentical":  true,
+    "standaloneHistoryByteIdentical":  true,
+    "buildHistoryByteIdentical":  true,
+    "generatedSaveTreeByteIdentical":  true,
+    "repeatedFinalizationTruthIdempotent":  true,
+    "rcRecordWrittenProjectLocally":  true
+}

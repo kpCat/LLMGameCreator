@@ -6,7 +6,7 @@ Accepted: false
 
 Each milestone must produce visible product progress. Contract and proof artifacts are required, but they are not sufficient by themselves.
 
-Goal161S note: immutable run publication is implemented, but qualification is `BLOCKED_RELEASE_CANDIDATE_RECORD_AFTER_GREEN_IMMUTABLE_PUBLICATION`. The one new hidden smoke reused the host with zero Unity starts, exited 0, wrote all five markers and Player.log in the immutable run, wrote GREEN run-status and atomically validated current.json. The returned controller failure is exactly `release_candidate_record: rc.payload.missing`; RC CURRENT, portable all-selectable and portable core-only were not reached, Goal160's audit blocker remains open, Goal161/161S remain unaccepted, and no human gate exists.
+Goal161T closure note: the historical Goal161S immutable run remains GREEN and unchanged. Typed immutable payload evidence now resolves the current pointer/run, recovers matching standalone/build histories and finalizes RC `CURRENT` with zero Player, Unity and standalone invocations. Portable all-selectable is `CURRENT` without an operational pointer; core-only is `ABSENT` without false readiness. Goal160's audit blocker is closed, while Goal161/161T remain `accepted=false` with `independentAuditRequired=true` and no human gate.
 
 ## Vertical Slice Final
 

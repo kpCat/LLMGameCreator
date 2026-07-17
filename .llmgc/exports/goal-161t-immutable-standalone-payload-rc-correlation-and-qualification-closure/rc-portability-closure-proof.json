@@ -1,0 +1,22 @@
+{
+    "portableAllSelectable":  {
+                                  "currentPointerPresent":  false,
+                                  "releaseCandidate":  "CURRENT",
+                                  "passed":  true
+                              },
+    "portableCoreOnly":  {
+                             "currentPointerPresent":  false,
+                             "releaseCandidate":  "ABSENT",
+                             "passed":  true
+                         },
+    "portableAllSelectableGeneratedWorld":  "TRAVEL_CURRENT",
+    "portableAllSelectableSaveTruth":  "CURRENT",
+    "portableCoreOnlyGeneratedWorld":  "TRAVEL_CURRENT",
+    "portableCoreOnlySaveTruth":  "CURRENT",
+    "portableCoreOnlyAcceptedMechanicsPassed":  false,
+    "portableCoreOnlyFalseReadiness":  true,
+    "playerProcessStartCount":  0,
+    "unityEditorProcessStartCount":  0,
+    "standaloneBuildInvocationCount":  0,
+    "runtimeExecutionStartCount":  0
+}

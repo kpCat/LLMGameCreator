@@ -9,3 +9,5 @@ Goal161R implements the operational output root `%LOCALAPPDATA%/LGC/O/<project-t
 The exact one authorized hidden player smoke ran from short staging after completeness, path-budget and 13/13 payload/legacy-parser preflight. It reused cache `6af4d5eb5b42f956110555b58fb4e276`, rebuilt no host, started Unity zero times, exited 0, wrote all five required markers and captured Player.log. This closes the proved 260-character player-read root cause.
 
 The containing build returned FAILED during publication and rolled staging back. The failed fixture did not persist the returned publication diagnostic, so `current`, RC CURRENT and the portable all-selectable/core-only post-publication assertions are not claimed. Retry is zero and no player or Unity rerun is authorized. The next action is independent publication diagnosis only.
+
+Goal161T historical update: R's short-path smoke and publication rollback remain preserved. T correlated the retained S current pointer/run directly, recovered histories and finalized RC without execution; portable all-selectable/core-only assertions are now proven, and R remains unaccepted with no human gate.

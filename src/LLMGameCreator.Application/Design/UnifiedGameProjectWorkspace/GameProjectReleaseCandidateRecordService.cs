@@ -60,6 +60,14 @@ public sealed class GameProjectReleaseCandidateRecordService
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
 
+    private readonly ProjectStandalonePayloadEvidenceService _payloadEvidence;
+
+    public GameProjectReleaseCandidateRecordService(
+        ProjectStandalonePayloadEvidenceService? payloadEvidence = null)
+    {
+        _payloadEvidence = payloadEvidence ?? new ProjectStandalonePayloadEvidenceService();
+    }
+
     public string RecordPath(string projectFolder) => Confined(
         projectFolder,
         UnifiedGameProjectWorkspaceVocabulary.ReleaseCandidateRecordRelativePath);
@@ -118,13 +126,19 @@ public sealed class GameProjectReleaseCandidateRecordService
         var packagePath = Confined(projectFolder, "package.json");
         Require(File.Exists(packagePath) && string.Equals(HashFile(packagePath), build.PackageSha256, StringComparison.Ordinal),
             "rc.write.activated_package_hash_mismatch");
-        var payload = InspectPayload(projectFolder, identity.PackageId);
+        var payload = _payloadEvidence.InspectForWrite(projectFolder, identity.PackageId, standalone);
+        Require(payload.Passed, payload.SourceKind == "absent"
+            ? "rc.write.payload_evidence_missing"
+            : payload.Diagnostics.FirstOrDefault() is { } diagnostic
+                && diagnostic.StartsWith("rc.write.", StringComparison.Ordinal)
+                    ? diagnostic
+                    : "rc.write.payload_evidence_invalid:" + (payload.Diagnostics.FirstOrDefault() ?? "unknown"));
         Require(string.Equals(payload.PackageSha256, build.PackageSha256, StringComparison.Ordinal)
                 && string.Equals(payload.CompositionPackageSha256, build.CompositionPackageSha256, StringComparison.Ordinal)
                 && string.Equals(payload.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal)
                 && string.Equals(payload.ModelFinalStateHash, build.FinalStateHash, StringComparison.Ordinal),
             "rc.write.actual_payload_hash_mismatch");
-        Require(ContainsAll(payload.HumanFacts, summary!.HumanFacts),
+        Require(ProjectStandalonePayloadEvidenceService.ContainsAll(payload.HumanFacts, summary!.HumanFacts),
             "rc.write.actual_payload_missing_accepted_fact");
         Require(payload.HumanFacts.Any(fact => fact.Label == "Release Candidate" && fact.Value == "готов"),
             "rc.write.actual_payload_missing_ready_fact");
@@ -149,7 +163,7 @@ public sealed class GameProjectReleaseCandidateRecordService
             StandalonePackageSha256 = standalone.PackageSha256,
             StandaloneFinalStateHash = standalone.FinalStateHash,
             PlayerAdapterModelSha256 = payload.PlayerAdapterModelSha256,
-            HumanFactsSha256 = HashFacts(payload.HumanFacts)
+            HumanFactsSha256 = ProjectStandalonePayloadEvidenceService.HashFacts(payload.HumanFacts)
         };
         WriteAtomic(RecordPath(projectFolder), JsonSerializer.Serialize(record, JsonOptions) + Environment.NewLine);
         return record;
@@ -189,25 +203,13 @@ public sealed class GameProjectReleaseCandidateRecordService
         if (invalid is not null) return Rejected(path, invalid);
         try
         {
-            var payloadPaths = PayloadPaths(projectFolder, record.ProjectPackageId);
-            var manifestExists = File.Exists(payloadPaths.ProjectManifestPath);
-            var modelExists = File.Exists(payloadPaths.PlayerAdapterModelPath);
-            if (manifestExists != modelExists) return Rejected(path, "rc.read.payload_incomplete");
-            if (manifestExists)
+            var payload = _payloadEvidence.InspectForRead(projectFolder, record.ProjectPackageId);
+            if (payload.SourceKind != "absent")
             {
-                var payload = InspectPayload(projectFolder, record.ProjectPackageId);
-                if (!string.Equals(payload.PackageSha256, record.PackageSha256, StringComparison.Ordinal)
-                    || !string.Equals(payload.CompositionPackageSha256, record.CompositionPackageSha256, StringComparison.Ordinal)
-                    || !string.Equals(payload.FinalStateHash, record.FinalStateHash, StringComparison.Ordinal)
-                    || !string.Equals(payload.ModelFinalStateHash, record.FinalStateHash, StringComparison.Ordinal))
-                    return Rejected(path, "rc.read.payload_hash_mismatch");
-                if (!string.Equals(payload.PlayerAdapterModelSha256, record.PlayerAdapterModelSha256, StringComparison.Ordinal))
-                    return Rejected(path, "rc.read.player_adapter_model_hash_mismatch");
-                if (!string.Equals(HashFacts(payload.HumanFacts), record.HumanFactsSha256, StringComparison.Ordinal))
-                    return Rejected(path, "rc.read.human_facts_hash_mismatch");
-                if (!ContainsAll(payload.HumanFacts, record.AcceptedMechanicsSummary.HumanFacts)
-                    || !payload.HumanFacts.Any(fact => fact.Label == "Release Candidate" && fact.Value == "готов"))
-                    return Rejected(path, "rc.read.payload_fact_mismatch");
+                if (!payload.Passed)
+                    return Rejected(path, payload.Diagnostics.FirstOrDefault() ?? "rc.read.payload_invalid");
+                var payloadFailure = ValidatePayloadRecord(payload, record);
+                if (payloadFailure is not null) return Rejected(path, payloadFailure);
             }
         }
         catch (JsonException)
@@ -315,51 +317,23 @@ public sealed class GameProjectReleaseCandidateRecordService
         return null;
     }
 
-    private static PayloadInspection InspectPayload(string projectFolder, string packageId)
+    private static string? ValidatePayloadRecord(
+        ProjectStandalonePayloadEvidenceResult payload,
+        GameProjectReleaseCandidateRecord record)
     {
-        var paths = PayloadPaths(projectFolder, packageId);
-        if (!File.Exists(paths.ProjectManifestPath) || !File.Exists(paths.PlayerAdapterModelPath))
-            throw new InvalidOperationException("rc.payload.missing");
-        using var manifest = JsonDocument.Parse(File.ReadAllText(paths.ProjectManifestPath, Encoding.UTF8));
-        using var model = JsonDocument.Parse(File.ReadAllText(paths.PlayerAdapterModelPath, Encoding.UTF8));
-        var facts = model.RootElement.GetProperty("humanReviewFacts").EnumerateArray()
-            .Select(item => new GameProjectSocialHumanFact
-            {
-                Label = item.GetProperty("label").GetString() ?? string.Empty,
-                Value = item.GetProperty("value").GetString() ?? string.Empty
-            }).ToList();
-        return new PayloadInspection(
-            manifest.RootElement.GetProperty("packageSha256").GetString() ?? string.Empty,
-            manifest.RootElement.GetProperty("compositionPackageSha256").GetString() ?? string.Empty,
-            manifest.RootElement.GetProperty("finalStateHash").GetString() ?? string.Empty,
-            model.RootElement.GetProperty("finalStateHash").GetString() ?? string.Empty,
-            HashFile(paths.PlayerAdapterModelPath),
-            facts);
-    }
-
-    private static PayloadPathSet PayloadPaths(string projectFolder, string packageId)
-    {
-        var slug = SafeSlug(string.IsNullOrWhiteSpace(packageId) ? Path.GetFileName(projectFolder) : packageId);
-        var payloadRoot = Confined(projectFolder,
-            Path.Combine("Builds", "Windows", slug, slug + "_Data", "StreamingAssets", "LLMGameCreatorProject"));
-        return new PayloadPathSet(
-            Path.Combine(payloadRoot, "project-manifest.json"),
-            Path.Combine(payloadRoot, "player-adapter-model.json"));
-    }
-
-    private static bool ContainsAll(
-        IReadOnlyList<GameProjectSocialHumanFact> actual,
-        IReadOnlyList<GameProjectSocialHumanFact> required) => required.All(expected =>
-        actual.Any(item => string.Equals(item.Label, expected.Label, StringComparison.Ordinal)
-                           && string.Equals(item.Value, expected.Value, StringComparison.Ordinal)));
-
-    private static string HashFacts(IReadOnlyList<GameProjectSocialHumanFact> facts)
-    {
-        var text = new StringBuilder();
-        foreach (var fact in facts)
-            text.Append(fact.Label.Length).Append(':').Append(fact.Label)
-                .Append(fact.Value.Length).Append(':').Append(fact.Value).Append(';');
-        return HashText(text.ToString());
+        if (!string.Equals(payload.PackageSha256, record.PackageSha256, StringComparison.Ordinal)
+            || !string.Equals(payload.CompositionPackageSha256, record.CompositionPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(payload.FinalStateHash, record.FinalStateHash, StringComparison.Ordinal)
+            || !string.Equals(payload.ModelFinalStateHash, record.FinalStateHash, StringComparison.Ordinal))
+            return "rc.read.payload_hash_mismatch";
+        if (!string.Equals(payload.PlayerAdapterModelSha256, record.PlayerAdapterModelSha256, StringComparison.Ordinal))
+            return "rc.read.player_adapter_model_hash_mismatch";
+        if (!string.Equals(ProjectStandalonePayloadEvidenceService.HashFacts(payload.HumanFacts), record.HumanFactsSha256, StringComparison.Ordinal))
+            return "rc.read.human_facts_hash_mismatch";
+        if (!ProjectStandalonePayloadEvidenceService.ContainsAll(payload.HumanFacts, record.AcceptedMechanicsSummary.HumanFacts)
+            || !payload.HumanFacts.Any(fact => fact.Label == "Release Candidate" && fact.Value == "готов"))
+            return "rc.read.payload_fact_mismatch";
+        return null;
     }
 
     private static void WriteAtomic(string path, string text)
@@ -416,29 +390,10 @@ public sealed class GameProjectReleaseCandidateRecordService
         return path;
     }
 
-    private static string SafeSlug(string value)
-    {
-        var builder = new StringBuilder();
-        foreach (var character in value.ToLowerInvariant())
-            builder.Append(char.IsLetterOrDigit(character) ? character : '-');
-        return builder.ToString().Trim('-') is { Length: > 0 } slug ? slug : "game";
-    }
-
     private static string HashFile(string path)
     {
         using var stream = File.OpenRead(path);
         return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
     }
 
-    private static string HashText(string value) =>
-        Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value))).ToLowerInvariant();
-
-    private sealed record PayloadPathSet(string ProjectManifestPath, string PlayerAdapterModelPath);
-    private sealed record PayloadInspection(
-        string PackageSha256,
-        string CompositionPackageSha256,
-        string FinalStateHash,
-        string ModelFinalStateHash,
-        string PlayerAdapterModelSha256,
-        IReadOnlyList<GameProjectSocialHumanFact> HumanFacts);
 }

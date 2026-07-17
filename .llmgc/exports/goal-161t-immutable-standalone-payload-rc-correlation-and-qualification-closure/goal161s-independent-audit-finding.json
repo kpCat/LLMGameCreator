@@ -1,0 +1,10 @@
+{
+    "priorGoal161sFailureStage":  "release_candidate_record",
+    "priorGoal161sFailureDiagnostic":  "rc.payload.missing",
+    "exactSourceCause":  "RC service resolved the removed project-local Builds/Windows/\u003cslug\u003e payload instead of the validated LocalAppData current run.",
+    "immutableCurrentAuthority":  "%LOCALAPPDATA%/LGC/O/\u003ctoken\u003e/runs/\u003crun\u003e via current.json",
+    "standaloneLayerPreserved":  true,
+    "rcDefectClosed":  true,
+    "goal161Accepted":  false,
+    "humanGateCreated":  false
+}

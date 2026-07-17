@@ -99,6 +99,14 @@ public sealed record ProjectStandaloneCurrentOutputReadResult
     public string ExecutablePath { get; init; } = string.Empty;
 }
 
+public sealed record ProjectStandaloneCurrentQualifiedResultReadResult
+{
+    public bool Passed { get; init; }
+    public ProjectStandaloneBuildResult? Result { get; init; }
+    public ProjectStandaloneCurrentPointer? Pointer { get; init; }
+    public string Diagnostics { get; init; } = string.Empty;
+}
+
 public sealed record ProjectStandaloneOutputPathBudgetResult
 {
     public int MaximumAbsolutePathLength { get; init; }
@@ -270,6 +278,10 @@ public interface IProjectStandaloneBuildService
     ProjectStandaloneCurrentOutputReadResult LoadCurrentOutput(string projectFolder, string packageId) => new()
     {
         Diagnostic = "Standalone current output is not available for this controller."
+    };
+    ProjectStandaloneCurrentQualifiedResultReadResult LoadCurrentQualifiedResult(string projectFolder, string packageId) => new()
+    {
+        Diagnostics = "standalone.current_history_missing"
     };
     void Cancel();
     void LaunchLastBuild();

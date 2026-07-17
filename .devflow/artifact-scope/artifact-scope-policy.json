@@ -5981,6 +5981,58 @@
         "unity/",
         "generator-library/"
       ]
+    },
+    {
+      "scenario": "goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal161t-rc-correlation-closure.ps1",
+        ".devflow/scripts/run-goal161t-rc-correlation-closure.cmd",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildModels.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildService.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneOutputLocationService.cs",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandalonePayloadEvidenceService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectReleaseCandidateRecordService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TImmutablePayloadCorrelationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TReleaseCandidateWriteReadTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TZeroExecutionFinalizationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TPortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161/Goal161StandaloneAndPortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal161S/Goal161SQualificationTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal155/Goal155ReleaseCandidateRecordTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal155A/Goal155ACurrentPackageCorrelationTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/manual-acceptance/goal161-generated-gameplay-save-migration.md",
+        "docs/manual-acceptance/goal161q-standalone-qualification-closure.md",
+        "docs/manual-acceptance/goal161r-short-output-qualification-closure.md",
+        "docs/manual-acceptance/goal161s-immutable-standalone-publication-closure.md",
+        "docs/manual-acceptance/goal161t-immutable-payload-rc-closure.md"
+      ],
+      "allowedPathPrefixes": [
+        "docs/agent-tasks/goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure/",
+        "tests/LLMGameCreator.Tests/Application/Goal161T/",
+        ".llmgc/procedural/goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure/",
+        ".llmgc/exports/goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

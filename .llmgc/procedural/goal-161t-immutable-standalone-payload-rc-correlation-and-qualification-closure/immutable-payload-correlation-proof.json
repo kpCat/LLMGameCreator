@@ -1,0 +1,29 @@
+{
+    "sourceKind":  "immutable_current_pointer",
+    "currentPointerResolved":  true,
+    "pointerRunDirectoryName":  "r-e59dcb4cfeaa",
+    "pointerPublishedAttemptId":  "e59dcb4cfeaa46ce90ebf8c461d0729e",
+    "pointerSha256":  "a0406515014c5d80c02e1ea91e7633d79d41aec7ec4d8af52ef9b4f5372f85d3",
+    "runOutputFolder":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\fd5fcc1d0726a9a1\\runs\\r-e59dcb4cfeaa",
+    "runStatus":  "GREEN",
+    "smokeExitCode":  0,
+    "smokeMarkersPassed":  true,
+    "playerLogPresent":  true,
+    "payloadSelfCheckPassed":  true,
+    "legacyParserCompatibilityPassed":  true,
+    "projectManifestSchemaVersion":  "llmgc_project_standalone_v2",
+    "projectManifestPackageSha256":  "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd",
+    "projectManifestCompositionPackageSha256":  "379bded6642377cb36c0bc055f82346146d2098b1dcfb97acc29b1a0af08f5d5",
+    "projectManifestFinalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e",
+    "modelFinalStateHash":  "0793d9175bf24230c9eded70f8c94cab64a29394944e183b97a0ba8afb21887e",
+    "actualPayloadSha256":  {
+                                "project-manifest.json":  "f0ef9615128192899f7dad906ed4a209da55b15d0de04b4948e9ec9247af997b",
+                                "player-adapter-model.json":  "62b66a554060e98e19273ccfa6f6c79c453b33ec8365df49716148feafa315aa",
+                                "player-adapter-frames.json":  "3e9791f0f96f8d02dab089e48ee29640ea5d5274b29e1ba1c0b752482005d3a4",
+                                "game-package.json":  "3a3b5af0c14231c0990f513a919d17390d9d682d73b4bb747646c37c039970bd"
+                            },
+    "acceptedFactPassed":  false,
+    "readyFactPassed":  false,
+    "exactCorrelationPassed":  true,
+    "arbitraryCallerOutputFolderRejected":  true
+}

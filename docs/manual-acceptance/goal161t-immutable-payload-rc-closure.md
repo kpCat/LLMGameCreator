@@ -1,0 +1,11 @@
+# Goal161T immutable payload / RC correlation closure
+
+Status: `GREEN_ACCEPTABLE_CANDIDATE`; `accepted=false`; no human gate; independent audit required.
+
+Goal161S's exact failure was `release_candidate_record: rc.payload.missing`: RC still resolved the removed project-local `Builds/Windows/<slug>` payload while Goal161S had already validated `%LOCALAPPDATA%/LGC/O/<token>/runs/<run>` through `current.json`. Goal161T adds typed immutable payload evidence backed by `ProjectStandaloneOutputLocationService` and `ProjectStandalonePayloadSelfCheckService`. Current pointer/run, payload hashes, facts, run status and exact standalone result are correlated; arbitrary caller output folders are rejected. Legacy project-local payload remains compatible only when no immutable pointer exists.
+
+RC Read validates immutable current payload when present, rejects an invalid pointer without stale fallback, and permits absent operational output for portable project-local RC truth. Current standalone history recovery selects exactly one GREEN row matching the pointer, package/final/host hashes, attempt, token, run, pointer SHA, smoke and self-check facts. The controller's `FinalizeCurrentReleaseCandidate()` restores matching current build history and writes/reopens RC `CURRENT` without build, standalone assembly, Player or Unity.
+
+The retained real Goal161S project passed finalization with unchanged immutable run, current pointer, standalone history, build history and generated-save bytes. Process/build counts were Player=0, Unity=0, standalone Build=0. A copied all-selectable project restored `CURRENT` with no operational pointer. A copied qualified core-only project remained `ABSENT` and did not claim `CURRENT`, `READY` or `BUILD_GREEN_STANDALONE_PENDING`.
+
+The Goal161T focused matrix contains more than the required 22 tests, including immutable pointer/payload correlation, accepted and ready facts, legacy and absent-output compatibility, history recovery, zero-execution finalization, idempotence, byte immutability, portable all/core closure and process-count guards. Goal161T and Goal161 remain unaccepted pending independent audit; the next action is `independent_goal161t_audit_and_plan_next_major_product_vertical_slice`.

@@ -15,6 +15,7 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true,
         WriteIndented = true,
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
@@ -320,6 +321,67 @@ public sealed class ProjectStandaloneBuildService : IProjectStandaloneBuildServi
 
     public ProjectStandaloneCurrentOutputReadResult LoadCurrentOutput(string projectFolder, string packageId) =>
         _outputLocations.LoadCurrentOutput(projectFolder, packageId);
+
+    public ProjectStandaloneCurrentQualifiedResultReadResult LoadCurrentQualifiedResult(
+        string projectFolder,
+        string packageId)
+    {
+        var current = _outputLocations.LoadCurrentOutput(projectFolder, packageId);
+        if (!current.Passed || current.Pointer is null)
+            return new ProjectStandaloneCurrentQualifiedResultReadResult
+            {
+                Diagnostics = current.Diagnostic.Contains("missing", StringComparison.OrdinalIgnoreCase)
+                    ? "standalone.current_history_missing"
+                    : "standalone.current_history_pointer_mismatch"
+            };
+
+        var historyPath = Confined(projectFolder, ProjectStandaloneBuildVocabulary.HistoryRelativePath);
+        if (!File.Exists(historyPath))
+            return new ProjectStandaloneCurrentQualifiedResultReadResult { Pointer = current.Pointer, Diagnostics = "standalone.current_history_missing" };
+        List<ProjectStandaloneBuildResult> rows;
+        try
+        {
+            rows = JsonSerializer.Deserialize<List<ProjectStandaloneBuildResult>>(
+                File.ReadAllText(historyPath, Encoding.UTF8), JsonOptions) ?? [];
+        }
+        catch (JsonException)
+        {
+            return new ProjectStandaloneCurrentQualifiedResultReadResult { Pointer = current.Pointer, Diagnostics = "standalone.current_history_missing" };
+        }
+        if (rows.Count == 0)
+            return new ProjectStandaloneCurrentQualifiedResultReadResult { Pointer = current.Pointer, Diagnostics = "standalone.current_history_missing" };
+
+        var location = _outputLocations.Resolve(projectFolder, packageId, current.Pointer.PublishedAttemptId);
+        var pointerSha = HashFile(location.CurrentPointerPath);
+        var matches = rows.Where(row =>
+            string.Equals(row.Status, "GREEN", StringComparison.Ordinal)
+            && row.OutputLocationKind == ProjectStandaloneBuildVocabulary.ImmutableOutputLocationKind
+            && string.Equals(row.AttemptId, current.Pointer!.PublishedAttemptId, StringComparison.Ordinal)
+            && string.Equals(row.PackageSha256, current.Pointer.PackageSha256, StringComparison.Ordinal)
+            && string.Equals(row.FinalStateHash, current.Pointer.FinalStateHash, StringComparison.Ordinal)
+            && string.Equals(row.HostCacheKey, current.Pointer.HostCacheKey, StringComparison.Ordinal)
+            && string.Equals(row.OutputProjectToken, current.Pointer.ProjectToken, StringComparison.Ordinal)
+            && string.Equals(row.OutputRunDirectoryName, current.Pointer.RunDirectoryName, StringComparison.Ordinal)
+            && string.Equals(row.CurrentPointerSha256, pointerSha, StringComparison.Ordinal)
+            && row.LaunchSmokePassed
+            && row.PayloadSelfCheckPassed
+            && row.LegacyHostParserCompatibilityPassed
+            && row.SmokeExitCode == 0).ToList();
+        if (matches.Count == 0)
+        {
+            return new ProjectStandaloneCurrentQualifiedResultReadResult
+            {
+                Pointer = current.Pointer,
+                Diagnostics = "standalone.current_history_pointer_mismatch"
+            };
+        }
+        if (matches.Count != 1)
+            return new ProjectStandaloneCurrentQualifiedResultReadResult { Pointer = current.Pointer, Diagnostics = "standalone.current_history_ambiguous" };
+        return new ProjectStandaloneCurrentQualifiedResultReadResult
+        {
+            Passed = true, Pointer = current.Pointer, Result = matches[0]
+        };
+    }
 
     private void BuildHost(string unityPath, string hostRoot, string cacheKey, CancellationToken token)
     {

@@ -1,0 +1,14 @@
+{
+    "scenario":  "goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure",
+    "violationCount":  0,
+    "exactEvidenceFileCountPerRoot":  8,
+    "proceduralExportTwinsByteIdentical":  true,
+    "forbiddenAreasUntouched":  [
+                                    "Runtime",
+                                    "Unity",
+                                    "GamePackage schema",
+                                    "FeatureModule catalog",
+                                    "generated saves/migration/source/history implementation"
+                                ],
+    "scopeCheckExitCode":  0
+}

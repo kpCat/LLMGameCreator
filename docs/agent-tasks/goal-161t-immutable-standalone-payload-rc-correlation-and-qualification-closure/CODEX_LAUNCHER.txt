@@ -1,0 +1,44 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Luna
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: bc669ef7865cd2a15133bab37ccc4afb98be908f
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План одобрен; не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- Goal161S standalone layer полностью GREEN: immutable run, pointer, exit 0, 5 markers;
+- final controller failed only with rc.payload.missing;
+- exact source cause: RC service still resolves old <project>\Builds\Windows\<slug> payload;
+- current authority is validated %LOCALAPPDATA%\LGC\O\<token>\runs\<run> via current.json;
+- add typed immutable payload evidence service using ProjectStandaloneOutputLocationService;
+- RC Write must correlate standalone result, pointer, run-status, actual payload and current pointer SHA;
+- never trust arbitrary caller OutputFolder;
+- RC Read validates immutable current payload when present;
+- invalid existing pointer must not silently fall back to stale legacy payload;
+- legacy project-local payload compatibility remains;
+- portable copy with no machine-local pointer/output must still read project-local RC CURRENT;
+- add current GREEN standalone history recovery matched to pointer PublishedAttemptId/hashes;
+- add zero-execution FinalizeCurrentReleaseCandidate recovery seam;
+- use the retained real Goal161S run/project; no Player, Unity, Runtime or standalone Build invocation;
+- finalization must write RC CURRENT while run/pointer/build/history/save bytes remain unchanged;
+- portable all-selectable CURRENT without pointer; portable core-only no false readiness;
+- no Unity/Runtime/GamePackage/FeatureModule/generated-save changes;
+- no full suite, 85-case closure or all-ProductSmoke;
+- create/push exactly one GREEN/BLOCKED/FAILED commit.
+
+В финале сообщи immutable payload correlation, history recovery,
+zero-execution finalization, process/build invocation counts,
+RC current, portable all/core, tests/regressions,
+evidence/artifact scope, final SHA, push,
+HEAD==origin/main и clean worktree.

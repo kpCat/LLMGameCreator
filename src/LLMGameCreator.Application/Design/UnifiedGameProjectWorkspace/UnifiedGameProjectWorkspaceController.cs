@@ -61,11 +61,26 @@ public interface IUnifiedGameProjectWorkspaceController
     {
         Status = "FAILED", Stage = "standalone_not_supported", Diagnostics = ["Standalone build is not available for this controller."]
     };
+    GameProjectReleaseCandidateFinalizationResult FinalizeCurrentReleaseCandidate() => new()
+    {
+        Stage = "rc.finalize.current_build_missing",
+        Diagnostics = ["Release-candidate finalization is not available for this controller."]
+    };
     void CancelWindowsStandaloneBuild() { }
     void LaunchWindowsStandalone() => throw new InvalidOperationException("Standalone build is not available for this controller.");
     void OpenWindowsStandaloneFolder() => throw new InvalidOperationException("Standalone build is not available for this controller.");
     ProjectStandaloneBuildSettings GetStandaloneBuildSettings() => new();
     ProjectStandaloneBuildSettings SaveStandaloneBuildSettings(ProjectStandaloneBuildSettings settings) => settings;
+}
+
+public sealed record GameProjectReleaseCandidateFinalizationResult
+{
+    public string Status { get; init; } = "FAILED";
+    public string Stage { get; init; } = "rc.finalize.current_build_missing";
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+    public GameProjectBuildResult? Build { get; init; }
+    public ProjectStandaloneBuildResult? Standalone { get; init; }
+    public GameProjectReleaseCandidateReadResult? ReleaseCandidate { get; init; }
 }
 
 public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectWorkspaceController
@@ -559,6 +574,72 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             return failed;
         }
     }
+
+    public GameProjectReleaseCandidateFinalizationResult FinalizeCurrentReleaseCandidate()
+    {
+        EnsureOpen();
+        var state = _authoring.State;
+        var history = _historyReader.ReadLatestMatchingSocialSuccess(
+            state.ProjectFolder, state.Document, state.Library);
+        var currentBuild = history.LastSuccessfulBuild;
+        if (currentBuild is null || !history.MatchesCurrentConfiguration
+            || !string.Equals(currentBuild.PackageSha256, state.Document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(currentBuild.CompositionPackageSha256, state.Document.LastCompositionPackageSha256, StringComparison.Ordinal)
+            || !string.Equals(currentBuild.FinalStateHash, state.Document.LastQualifiedFinalStateHash, StringComparison.Ordinal))
+            return FinalizationFailure("rc.finalize.current_build_missing", history.Diagnostics);
+
+        var standaloneRead = _standaloneBuild.LoadCurrentQualifiedResult(
+            state.ProjectFolder, state.Identity.PackageId);
+        if (!standaloneRead.Passed || standaloneRead.Result is null)
+            return FinalizationFailure("rc.finalize.current_standalone_missing", [standaloneRead.Diagnostics]);
+        var standalone = standaloneRead.Result;
+        try
+        {
+            var record = _releaseCandidateRecordService.Write(
+                state.ProjectFolder, state.Identity, currentBuild, standalone);
+            _lastBuild = currentBuild;
+            _lastSuccessfulBuild = currentBuild;
+            _lastStandaloneAttempt = standalone;
+            var read = _releaseCandidateRecordService.Read(new GameProjectReleaseCandidateReadRequest
+            {
+                ProjectFolder = state.ProjectFolder,
+                Document = state.Document,
+                Library = state.Library,
+                Identity = state.Identity
+            });
+            if (read.Record is null || read.ConfigurationStatus != "CURRENT")
+                return new GameProjectReleaseCandidateFinalizationResult
+                {
+                    Stage = "rc.finalize.read_not_current", Build = currentBuild, Standalone = standalone,
+                    ReleaseCandidate = read, Diagnostics = read.Diagnostics
+                };
+            return new GameProjectReleaseCandidateFinalizationResult
+            {
+                Status = "GREEN", Stage = "rc.finalize.success", Build = currentBuild,
+                Standalone = standalone, ReleaseCandidate = read
+            };
+        }
+        catch (Exception exception) when (exception is IOException
+                                          or UnauthorizedAccessException
+                                          or InvalidOperationException
+                                          or JsonException)
+        {
+            var stage = exception.Message.StartsWith("rc.write.payload", StringComparison.Ordinal)
+                        || exception.Message.StartsWith("rc.write.actual_payload", StringComparison.Ordinal)
+                ? "rc.finalize.payload_invalid"
+                : "rc.finalize.write_failed";
+            return FinalizationFailure(stage, [exception.Message], currentBuild, standalone);
+        }
+    }
+
+    private static GameProjectReleaseCandidateFinalizationResult FinalizationFailure(
+        string stage,
+        IReadOnlyList<string> diagnostics,
+        GameProjectBuildResult? build = null,
+        ProjectStandaloneBuildResult? standalone = null) => new()
+    {
+        Stage = stage, Diagnostics = diagnostics, Build = build, Standalone = standalone
+    };
 
     public GameProjectSeedRegenerationRequest CreateGeneratedWorldRegenerationRequest(
         SeededGeneratedProjectGenerationRequest generationRequest)

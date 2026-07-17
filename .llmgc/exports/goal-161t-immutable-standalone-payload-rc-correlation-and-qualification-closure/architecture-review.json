@@ -1,0 +1,58 @@
+{
+  "goal": "goal-161t-immutable-standalone-payload-rc-correlation-and-qualification-closure",
+  "requiredBase": "bc669ef7865cd2a15133bab37ccc4afb98be908f",
+  "readFiles": [
+    "docs/CONTEXT_INDEX.md",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/PRODUCT_LINE_CORE_STRATEGY.md",
+    "docs/NARROW_ALPHA_EXPANSION_POLICY.md",
+    "docs/AUTOMATED_VALIDATION_TIERS.md",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectReleaseCandidateRecordService.cs",
+    "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneOutputLocationService.cs",
+    "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildService.cs",
+    "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/ProjectStandaloneBuildModels.cs",
+    "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs",
+    "tests/LLMGameCreator.Tests/Application/Goal161S/Goal161SQualificationTests.cs",
+    "tests/LLMGameCreator.Tests/Application/Goal161/Goal161StandaloneAndPortabilityTests.cs",
+    "tests/LLMGameCreator.Tests/Application/Goal155A/Goal155ACurrentPackageCorrelationTests.cs",
+    "tests/LLMGameCreator.Tests/Application/Goal155/Goal155ReleaseCandidateRecordTests.cs"
+  ],
+  "localAnalogues": [
+    "ProjectStandaloneOutputLocationService.LoadCurrentOutput validates current.json, run layout, hashes, status, self-check and smoke",
+    "ProjectStandalonePayloadSelfCheckService.Check validates the six-file payload and 13 checks",
+    "GameProjectBuildHistoryReader.ReadLatestMatchingSocialSuccess reconstructs a read-only current GREEN build",
+    "GameProjectReleaseCandidateRecordService.Read validates project-local record identity and fingerprint"
+  ],
+  "reusedPattern": "BCL-only Application read/correlation services with deterministic diagnostics, immutable current pointer authority, project-local compatibility fallback, and atomic RC write.",
+  "exactStalePathDefect": "RC Write and Read previously treated project\u0027s Builds/Windows/<slug>/<slug>_Data/StreamingAssets/LLMGameCreatorProject as the only payload authority, causing rc.payload.missing after Goal161S moved the authoritative payload to LocalAppData LGC/O/<token>/runs/<run>/g_Data.",
+  "immutableCurrentOutputAuthority": "ProjectStandaloneOutputLocationService.LoadCurrentOutput(projectFolder, packageId) and the validated current.json/run-status chain.",
+  "writeCorrelation": "Inspect immutable payload and correlate pointer, run, result, build hashes, actual package SHA, model/facts hashes and accepted/ready facts before RC write; reject arbitrary caller OutputFolder.",
+  "readCorrelation": "Validate internal RC truth first, then immutable current payload when current.json exists, legacy project-local payload only when no current pointer exists, and permit no operational payload on portable copies.",
+  "legacyOutputCompatibility": "Retain project-local Builds/Windows/<slug> resolution for historical read and explicitly-correlated legacy write only.",
+  "portableNoOutputSemantics": "A copied project with no machine-local current pointer/output remains readable through internal RC/package/document/identity/fingerprint truth; tampered project truth is rejected.",
+  "standaloneHistoryRecovery": "Select exactly one GREEN standalone-build-history row matching the validated pointer attempt, hashes, token/run, pointer SHA and all smoke/self-check compatibility facts.",
+  "zeroExecutionQualification": "Restore current build through GameProjectBuildHistoryReader, recover current qualified standalone result, call RC Write, reopen RC and require CURRENT without build, standalone, Player or Unity execution.",
+  "rcAndPortabilityClosure": "Retained Goal161S all-selectable project is the real qualification fixture; portable all-selectable has no operational pointer and remains CURRENT; core-only remains without false RC readiness.",
+  "nonGoals": [
+    "No Player, Unity Editor, Unity host build or standalone rebuild",
+    "No Runtime, GamePackage schema, FeatureModule catalog, generated-save/migration/source/history implementation changes",
+    "No standalone payload schema changes",
+    "No full suite, 85-case closure or all-ProductSmoke"
+  ],
+  "testInventory": {
+    "goal161tMinimum": 28,
+    "behavioralMinimum": 18,
+    "plannedFiles": [
+      "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TImmutablePayloadCorrelationTests.cs",
+      "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TReleaseCandidateWriteReadTests.cs",
+      "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TZeroExecutionFinalizationTests.cs",
+      "tests/LLMGameCreator.Tests/Application/Goal161T/Goal161TPortabilityTests.cs"
+    ],
+    "regressionFilters": ["Goal161S", "Goal161R", "Goal161Q", "Goal161", "Goal160", "Goal159", "Goal158", "Goal157", "Goal155A", "Goal155", "ProjectStandaloneBuild", "UnifiedGameProjectWorkspace", "RuntimeSnapshotStore"]
+  },
+  "unverifiedBeforeImplementation": [
+    "New evidence-service and finalization seam compile/test behavior",
+    "Exact Goal161S RC finalization and portable-copy results after implementation",
+    "Final evidence, docs state synchronization, artifact scope and publication SHA"
+  ]
+}

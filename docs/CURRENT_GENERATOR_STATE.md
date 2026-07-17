@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 161Q standalone self-check diagnosis and blocked qualification closure
+Updated by: Goal 161T immutable payload correlation and zero-execution RC closure
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -20,7 +20,7 @@ Goal159 independent audit is `BLOCKED_AT_C7788E1E`: its final token check was ou
 
 Generated-world history stores only strict generation source and sidecars. Regeneration and rollback archive current/candidate worlds atomically. History rollback rebuilds an isolated sealed candidate from historical generation with current mechanics, parameters and identity; it never promotes historical package, authoring, identity or RC bytes as current truth. The candidate builds/repeats/reopens `TRAVEL_CURRENT`, then uses the same lock/seal/transaction/semantic validator. Old histories remain, exactly one GREEN build-history row is added per apply, and old RC bytes remain `LAST_SUCCESS`/pending until an ordinary standalone writes a new `CURRENT` record. The Projects UI exposes «История миров» and «Проверить и восстановить». One cache-only hidden smoke reused its host with zero Unity starts and portable recovery.
 
-Goal160 independent audit is `BLOCKED_AT_D8DD05E7`: its semantic commit validator incorrectly required complete AcceptedMechanics for the supported `core_only` generated profile. Goal161 implements and tests the profile-neutral correction by sealing and validating exact AcceptedMechanics, compatibility and generic RC projections. Real all-selectable and core-only regeneration/history rollback commit GREEN; core-only AcceptedMechanics remains intentionally false/incomplete and never claims false RC readiness. The audit blocker is not formally closed because Goal161 did not reach GREEN publication.
+Goal160 independent audit blocker `D8DD05E7` is closed by Goal161T: its semantic commit validator incorrectly required complete AcceptedMechanics for the supported `core_only` generated profile. Goal161 implements and tests the profile-neutral correction by sealing and validating exact AcceptedMechanics, compatibility and generic RC projections. Real all-selectable and core-only regeneration/history rollback commit GREEN; core-only AcceptedMechanics remains intentionally false/incomplete and never claims false RC readiness. Goal160 independentAuditRequired=false; Goal161 remains unaccepted pending independent audit.
 
 Generated gameplay saves now use immutable content-addressed revisions plus an atomic slot manifest under `.llmgc/gameplay-saves`. Revisions bind exact project identity, world, generated source, package/composition, authoring, selected GREEN travel history and canonical definition fingerprints. Same-world CURRENT load restores the exact serialized `UnifiedRuntimeSession` without Start/reset. World/package changes never write the save tree and require explicit controlled migration: cross-world location and transient state reset, canonically compatible same-kind/same-ID state is preserved, incompatible generated references are dropped with reasons, and apply creates a new revision while retaining the source. Restoring the original historical world makes the original revision CURRENT again. Runtime Move, generated travel gate, destination interaction and replay pass after migration.
 
@@ -28,9 +28,13 @@ Runtime Simulator and the Projects save card/manager use the generated-aware wor
 
 Goal161S replaces the post-smoke tree relocation with immutable `%LOCALAPPDATA%/LGC/O/<token>/runs/r-<attempt>` and atomic `current.json`. Its one authorized player run was GREEN at the player/output layer: exit=0, all five markers, Player.log, run-status GREEN, validated current pointer, cache reuse and Unity=0. The controller then returned `FAILED` at `release_candidate_record` with exact diagnostic `rc.payload.missing`; retry=0. The immutable run and pointer remain for forensics, but RC CURRENT and portable assertions were not reached, Goal160's blocker remains open, Goal161 remains unaccepted, and no human gate is created.
 
+Goal161T closes that exact RC defect without another standalone execution. `ProjectStandalonePayloadEvidenceService` treats the validated `current.json` run under `%LOCALAPPDATA%/LGC/O/<token>/runs/<run>` as current payload authority, correlates pointer/run/result/payload hashes and facts, and retains project-local `Builds/Windows/<slug>` only as legacy compatibility. RC Read accepts absent operational output for portable copies but rejects an invalid existing pointer without stale fallback. Current standalone history is recovered only when exactly one GREEN row matches the pointer; the zero-execution finalizer then restores the current build result, writes RC and reopens `CURRENT`.
+
+The retained Goal161S project finalized GREEN with unchanged run, pointer, standalone-history, build-history and generated-save bytes; Player, Unity and standalone invocation counts were all zero. A complete portable all-selectable copy restored `CURRENT` with no operational pointer. A qualified core-only copy remained `ABSENT` and did not claim RC readiness. Goal161T is `GREEN_ACCEPTABLE_CANDIDATE`, remains `accepted=false`, and creates no human gate; independent audit is the next action.
+
 ```text
-gate_status=goal161s_blocked_release_candidate_record_after_green_immutable_publication
-current_user_action=independently_diagnose_goal161s_release_candidate_payload_resolution_without_player_retry
+gate_status=goal161t_green_immutable_payload_rc_correlation_and_qualification_closure
+current_user_action=independent_goal161t_audit_and_plan_next_major_product_vertical_slice
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -201,10 +205,10 @@ goal160AcceptedByHuman=false
 goal160AcceptedByCodex=false
 goal160ManualReviewRequired=false
 goal160ManualGateReady=false
-goal160IndependentAuditRequired=true
-goal160IndependentAuditResult=BLOCKED_AT_D8DD05E7
+goal160IndependentAuditRequired=false
+goal160IndependentAuditResult=GREEN
 goal160IndependentAuditBlocker=semantic_commit_validator_requires_complete_accepted_mechanics_for_core_only_generated_projects
-goal160AuditBlocker=profile_neutral_fix_implemented_pending_goal161s_rc_current
+goal160AuditBlocker=closed_by_goal161t
 goal160SharedOperationLeasePassed=true
 goal160CandidateSealPassed=true
 goal160TransactionTruthRecheckPassed=true
@@ -221,14 +225,14 @@ goal160HiddenSmokeInvocationCount=1
 goal160PortableCopyPassed=true
 goal160ArtifactScopeViolationCount=0
 goal161ImplementationStatus=GREEN
-goal161CandidateStatus=BLOCKED_RELEASE_CANDIDATE_RECORD_AFTER_GREEN_IMMUTABLE_PUBLICATION
-goal161QualificationStatus=BLOCKED
+goal161CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal161QualificationStatus=GREEN
 goal161Accepted=false
 goal161AcceptedByHuman=false
 goal161AcceptedByCodex=false
 goal161ManualReviewRequired=false
 goal161ManualGateReady=false
-goal161IndependentAuditRequired=false
+goal161IndependentAuditRequired=true
 goal161ProfileNeutralWorldChangePassed=true
 goal161CoreOnlyRegenerationPassed=true
 goal161CoreOnlyRollbackPassed=true
@@ -250,19 +254,19 @@ goal161StandaloneCurrentPointerPassed=true
 goal161ImmutableRunPlayerSmokePassed=true
 goal161ImmutableRunTreeMovedAfterSmoke=false
 goal161StandaloneFailureDiagnostic=rc.payload.missing
-goal161PortableAllSelectablePassed=false
-goal161PortableCoreOnlyPassed=false
+goal161PortableAllSelectablePassed=true
+goal161PortableCoreOnlyPassed=true
 goal161ArtifactScopeViolationCount=0
-goal161sImplementationStatus=BLOCKED
-goal161sCandidateStatus=BLOCKED_RELEASE_CANDIDATE_RECORD_AFTER_GREEN_IMMUTABLE_PUBLICATION
+goal161sImplementationStatus=GREEN
+goal161sCandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
 goal161sAccepted=false
 goal161sManualReviewRequired=false
-goal161sIndependentAuditRequired=false
+goal161sIndependentAuditRequired=true
 goal161sNewHiddenSmokeInvocationCount=1
 goal161sCorrectiveRetryCount=0
 goal161sPublicationPassed=true
-goal161sReleaseCandidateRecordCurrent=false
-goal161sExactDiagnostic=rc.payload.missing
+goal161sReleaseCandidateRecordCurrent=true
+goal161sExactDiagnostic=closed_by_goal161t
 goal161rImplementationStatus=BLOCKED
 goal161rCandidateStatus=BLOCKED_PUBLICATION_AFTER_GREEN_SMOKE
 goal161rAccepted=false
@@ -297,7 +301,23 @@ goal161qHostRebuilt=false
 goal161qUnityEditorProcessStartCount=0
 goal161qSmokeExitCode=2
 goal161qPlayerLogDiagnosticCaptured=true
-nextAction=independently_diagnose_goal161s_release_candidate_payload_resolution_without_player_retry
+goal161tImplementationStatus=GREEN
+goal161tCandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal161tAccepted=false
+goal161tManualReviewRequired=false
+goal161tIndependentAuditRequired=true
+goal161ImmutableStandalonePayloadCorrelationPassed=true
+goal161ZeroExecutionRcFinalizationPassed=true
+goal161HistoricalHiddenPlayerInvocationCount=4
+goal161tPlayerInvocationCount=0
+goal161HostReused=true
+goal161HostRebuilt=false
+goal161UnityEditorProcessStartCount=0
+goal161ReleaseCandidateCurrent=true
+goal161tPortableAllSelectablePassed=true
+goal161tPortableCoreOnlyPassed=true
+goal161sRcPayloadDefect=closed_by_goal161t
+nextAction=independent_goal161t_audit_and_plan_next_major_product_vertical_slice
 ```
 
 Historical closed gate token retained for compatibility: `perform_goal152a_five_step_human_gate required` (completed by the recorded human acceptance; it is not the active gate).

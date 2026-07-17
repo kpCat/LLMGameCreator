@@ -18,13 +18,15 @@ For any generator/Codex task:
 8. `docs/ROADMAP_TO_FULL_GENERATOR.md`
 9. only then task-specific docs
 
+Goal161T is the current GREEN acceptable candidate: immutable standalone payload evidence now resolves the validated `%LOCALAPPDATA%/LGC/O/<token>/runs/<run>` authority, RC correlation and current standalone/build-history recovery are execution-free, and the retained Goal161S project finalizes RC `CURRENT` with zero Player/Unity/standalone invocations. Portable all-selectable is `CURRENT` without an operational pointer; portable core-only remains `ABSENT` without false readiness. `goal161Accepted=false`, `goal161tAccepted=false`, no human gate; next action is independent Goal161T audit.
+
 For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` before any Unity invocation.
 
 Before implementing or auditing any Codex Goal, read `docs/GOAL_DESIGN_QUALITY_POLICY.md` for the mandatory design review and pre-commit self-audit.
 
 Goal161R standalone qualification is `BLOCKED_PUBLICATION_AFTER_GREEN_SHORT_PATH_SMOKE`; `gate_status=goal161r_blocked_publication_after_green_short_path_smoke`. Goal161Q's exact 260-character root cause remains recorded, and Goal161R proves the short `%LOCALAPPDATA%/LGC/O` staging path lets the cached player complete with exit 0, all five markers and Player.log. Publication then returned FAILED and rolled staging back; no player retry is authorized. The next bounded work is independent publication diagnosis without Unity, host rebuild or player invocation.
 
-Goal161S replaces post-smoke relocation with immutable `runs/r-<attempt>` and atomic `current.json`; `gate_status=goal161s_blocked_release_candidate_record_after_green_immutable_publication`. Its sole player run is GREEN at the output layer (exit 0, five markers, Player.log, GREEN run status and validated pointer); the containing controller returned `release_candidate_record: rc.payload.missing`. The run and pointer are retained, retry remains zero, and independent RC payload-resolution diagnosis is the only next standalone work.
+Goal161S remains the historical output-layer run and exact prior failure record; Goal161T closes its RC defect by correlating RC with immutable `runs/r-<attempt>` and atomic `current.json` without retrying the player. Its current gate is `goal161t_green_immutable_payload_rc_correlation_and_qualification_closure`; RC CURRENT and portable all/core assertions are now proven, while Goal161 and Goal161T remain unaccepted pending independent audit.
 
 For Goal 029 specifically, read:
 

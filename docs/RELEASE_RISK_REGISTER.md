@@ -4,7 +4,7 @@ Status: Goal 097 planning register
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
 Accepted: false
 
-Goal161S standalone release-risk note: immutable run plus atomic pointer publication removes post-smoke player-tree relocation. Its one authorized smoke reused cache, rebuilt no host, started Unity zero times, exited 0, wrote five markers/Player.log and published validated current.json. The build nevertheless returned `FAILED` at `release_candidate_record` with `rc.payload.missing`; no player retry is authorized. RC/portable closure remains blocked pending independent payload-resolution diagnosis.
+Goal161S standalone release-risk note: immutable run plus atomic pointer publication removes post-smoke player-tree relocation. Its one authorized smoke reused cache, rebuilt no host, started Unity zero times, exited 0, wrote five markers/Player.log and published validated current.json. The historical build returned `FAILED` at `release_candidate_record` with `rc.payload.missing`; Goal161T closes that exact risk by correlating RC to the immutable current run and finalizing without execution. RC CURRENT and portable all/core closure are GREEN; no player retry is authorized and Goal161 remains unaccepted pending independent audit.
 
 ## P0 Release Blockers
 
