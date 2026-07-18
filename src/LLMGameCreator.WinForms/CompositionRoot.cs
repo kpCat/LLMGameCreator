@@ -245,6 +245,9 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratedEncounterCombatBindingService>(Reuse.Singleton);
         _container.Register<GeneratedWorldEncounterCombatOverlayService>(Reuse.Singleton);
         _container.Register<GameProjectGeneratedEncounterCombatQualificationService>(Reuse.Singleton);
+        _container.Register<GeneratedCampaignChoiceBindingService>(Reuse.Singleton);
+        _container.Register<GeneratedCampaignChoiceOverlayService>(Reuse.Singleton);
+        _container.Register<GameProjectGeneratedCampaignChoiceQualificationService>(Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldActivationService>(resolver =>
             new GameProjectGeneratedWorldActivationService(
                 resolver.Resolve<IGameRuntime>(),
@@ -282,7 +285,11 @@ public sealed class CompositionRoot : IDisposable
                 generatedCombatBinding: resolver.Resolve<GeneratedEncounterCombatBindingService>(),
                 generatedCombatOverlay: resolver.Resolve<GeneratedWorldEncounterCombatOverlayService>(),
                 generatedCombatQualification:
-                    resolver.Resolve<GameProjectGeneratedEncounterCombatQualificationService>()), Reuse.Singleton);
+                    resolver.Resolve<GameProjectGeneratedEncounterCombatQualificationService>(),
+                generatedChoiceBinding: resolver.Resolve<GeneratedCampaignChoiceBindingService>(),
+                generatedChoiceOverlay: resolver.Resolve<GeneratedCampaignChoiceOverlayService>(),
+                generatedChoiceQualification:
+                    resolver.Resolve<GameProjectGeneratedCampaignChoiceQualificationService>()), Reuse.Singleton);
         _container.Register<GameProjectWorkspaceStatusPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<IProjectStandaloneBuildService>(_ => new ProjectStandaloneBuildService(repositoryRoot), Reuse.Singleton);
         _container.Register<GameProjectSeedRegenerationDiffService>(Reuse.Singleton);
@@ -334,13 +341,17 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ICurrentGamePackageService>(), resolver.Resolve<GeneratedGameplaySaveValidator>(), resolver.Resolve<IGameProjectOperationCoordinator>()), Reuse.Singleton);
         _container.Register<GeneratedCampaignActionPlanner>(Reuse.Singleton);
         _container.Register<GeneratedCampaignProjectionService>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratedCampaignDialogueChoicePreviewService>(resolver =>
+            new GeneratedCampaignDialogueChoicePreviewService(resolver.Resolve<IUnifiedGameRuntimeService>()), Reuse.Singleton);
+        _container.Register<GeneratedCampaignDecisionJournalService>(Reuse.Singleton);
         _container.Register<GeneratedCampaignEventPresenter>(Reuse.Singleton);
         _container.Register<GeneratedCampaignRecoveryService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratedCampaignSessionService>(resolver => new GeneratedCampaignSessionService(
             resolver.Resolve<ICurrentGamePackageService>(), resolver.Resolve<GeneratedCampaignSessionTruthService>(), resolver.Resolve<IUnifiedGameRuntimeService>(),
             resolver.Resolve<GeneratedGameplaySaveService>(), resolver.Resolve<GeneratedGameplaySaveMigrationService>(), resolver.Resolve<GeneratedCampaignActionPlanner>(),
             resolver.Resolve<GeneratedCampaignProjectionService>(), resolver.Resolve<GeneratedCampaignEventPresenter>(),
-            resolver.Resolve<GeneratedCampaignRecoveryService>()), Reuse.Singleton);
+            resolver.Resolve<GeneratedCampaignRecoveryService>(), resolver.Resolve<GeneratedCampaignDialogueChoicePreviewService>(),
+            resolver.Resolve<GeneratedCampaignDecisionJournalService>()), Reuse.Singleton);
         _container.Register<EditorPageNavigationService>(Reuse.Singleton);
         _container.RegisterDelegate<IEditorPageNavigationService>(resolver => resolver.Resolve<EditorPageNavigationService>(), Reuse.Singleton);
         _container.RegisterDelegate<GameProjectGeneratedWorldChangeRecordService>(resolver =>

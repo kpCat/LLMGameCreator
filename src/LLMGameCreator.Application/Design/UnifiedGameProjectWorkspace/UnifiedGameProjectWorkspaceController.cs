@@ -296,6 +296,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var generatedWorldActivation = _lastSuccessfulBuild?.GeneratedWorldActivation;
         var generatedRegionTravel = _lastSuccessfulBuild?.GeneratedRegionTravel;
         var generatedEncounterCombat = _lastSuccessfulBuild?.GeneratedEncounterCombat;
+        var generatedCampaignChoices = _lastSuccessfulBuild?.GeneratedCampaignChoices;
         var generatedWorld = _generatedWorldSummaryService.Restore(
             generatedSource,
             _lastSuccessfulBuild?.GeneratedWorld,
@@ -395,6 +396,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                 : null
             ,GeneratedEncounterCombat = generatedWorld?.Status is "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedEncounterCombat
+                : null
+            ,GeneratedCampaignChoices = generatedWorld?.Status is "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+                ? generatedCampaignChoices
                 : null
             ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
             ,CanRegenerateGeneratedWorld = _regenerationService is not null

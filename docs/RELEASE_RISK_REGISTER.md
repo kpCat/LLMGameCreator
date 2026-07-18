@@ -255,3 +255,6 @@ Generated gameplay saves are now bound to exact world/package/build truth. Same-
 - Migration is definition-fingerprint based; it does not promise semantic conversion for changed definitions. Dropped state is explicit in the migration report.
 - The single permitted cached hidden standalone smoke failed with exit code 2 after emitting `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`; RC CURRENT and portable post-smoke assertions were not reached.
 - Next action is a bounded standalone diagnosis with an explicitly renewed smoke budget; broader player-driven campaign save UX remains out of scope.
+# Goal 167
+
+Risk: generated-choice changes are not release-ready until the required focused behavioral matrix is implemented and run. Mitigation: do not run standalone/RC qualification before that matrix passes.

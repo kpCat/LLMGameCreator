@@ -2593,3 +2593,6 @@ Status: `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, `manualReviewRequired=fa
 ## Goal161 - profile-neutral world change and generated gameplay save migration
 
 Status: `BLOCKED_HIDDEN_STANDALONE_SMOKE_FAILED`, `accepted=false`, `manualReviewRequired=false`, `independentAuditRequired=false`. Exact profile-neutral AcceptedMechanics/compatibility/RC projections allow real all-selectable and core-only regeneration/history rollback to commit without false RC readiness. Generated saves use immutable revisions, atomic slot manifests, exact same-world load and explicit package/world migration with canonical definition preservation, transient/location reset and dropped-reference reporting. Runtime continuation, historical revision reuse and WinForms flows pass, but the single cached smoke returned exit code 2 with `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`; RC CURRENT and portable post-smoke assertions were not reached. Next action: authorize bounded standalone diagnosis and a new smoke budget.
+# Goal 167 status
+
+FAILED — finish the required 62 focused tests (54 behavioral) before requalification; no smoke was consumed.

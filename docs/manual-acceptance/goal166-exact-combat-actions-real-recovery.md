@@ -7,3 +7,6 @@ The combat contract now retains exact qualified descriptors: BasicAttack and onl
 The real production `GeneratedCampaignSessionService` route proves checkpoint-before-StartEncounter, Runtime defeat, DEFEATED recovery, Retry with Runtime Start delta zero and StartEncounter delta one, exact save recovery, fresh New Game recovery, stale retry rejection before Runtime dispatch, and a nonempty recovery surface when no checkpoint exists. Save requests are rejected when the campaign is not ACTIVE.
 
 Runtime, GamePackage/save schema, Unity, standalone, RC, generated source and immutable sidecars remain outside the changed scope. Player, Unity and standalone process/build counts are zero.
+# Goal 167 independent-audit intake
+
+Goal166 independent audit is recorded as `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`; Goal166 remains unaccepted and has no human gate.

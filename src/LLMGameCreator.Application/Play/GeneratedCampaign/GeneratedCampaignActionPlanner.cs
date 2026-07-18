@@ -344,7 +344,8 @@ public sealed class GeneratedCampaignActionPlanner
             DisabledReason = disabled,
             TargetTitle = targetTitle,
             Primary = primary,
-            Tactical = tactical
+            Tactical = tactical,
+            TechnicalChoiceId = kind == GeneratedCampaignActionKind.ChooseDialogue ? command.Id ?? string.Empty : string.Empty
         }, null, command));
     }
 

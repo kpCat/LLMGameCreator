@@ -20,6 +20,8 @@ For any generator/Codex task:
 
 Goal165 is the current completed implementation slice and is `GREEN_ACCEPTABLE_CANDIDATE`; `gate_status=goal165_green_combat_route_profile_neutrality_and_campaign_defeat_recovery`, `goal165Accepted=false`, no human gate, independent audit required. It records the Goal164 audit result `BLOCKED_AT_15A8F2AB` and closes its single-route P1: contracts, qualification and v4 history distinguish `BASIC_ATTACK_ONLY`, `PACKAGE_ABILITY_ONLY` and `BOTH`, while old Goal164 v4 both-route history remains `CAMPAIGN_CURRENT`. Exact in-memory pre-encounter checkpoints provide defeat, retry, exact save recovery and new-game recovery without Runtime Start on retry/load; stale truth issues `STALE_PROJECT` before dispatch. Runtime, GamePackage, save schema, Unity, standalone, RC, source sidecars, Goal142 and goal148-manual remain unchanged. A physical core-only portable copy has no operational pointer or false RC readiness. Next action: `independent_goal165_audit_and_plan_campaign_choice_branching`.
 
+Goal167 is `FAILED`: the solution builds, but its focused filter discovers only 1 test against the required 62/54 behavioral matrix. Do not run standalone smoke or Unity until the test prerequisite is restored. Goal166 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`; no human gate was created.
+
 For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` before any Unity invocation.
 
 Before implementing or auditing any Codex Goal, read `docs/GOAL_DESIGN_QUALITY_POLICY.md` for the mandatory design review and pre-commit self-audit.

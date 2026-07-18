@@ -44,6 +44,9 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly GeneratedEncounterCombatBindingService _generatedCombatBinding;
     private readonly GeneratedWorldEncounterCombatOverlayService _generatedCombatOverlay;
     private readonly GameProjectGeneratedEncounterCombatQualificationService _generatedCombatQualification;
+    private readonly GeneratedCampaignChoiceBindingService _generatedChoiceBinding;
+    private readonly GeneratedCampaignChoiceOverlayService _generatedChoiceOverlay;
+    private readonly GameProjectGeneratedCampaignChoiceQualificationService _generatedChoiceQualification;
     private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private int _buildRunning;
 
@@ -65,7 +68,10 @@ public sealed class GameProjectBuildAndQualificationService
         GeneratedEncounterCombatContractService? generatedCombatContract = null,
         GeneratedEncounterCombatBindingService? generatedCombatBinding = null,
         GeneratedWorldEncounterCombatOverlayService? generatedCombatOverlay = null,
-        GameProjectGeneratedEncounterCombatQualificationService? generatedCombatQualification = null)
+        GameProjectGeneratedEncounterCombatQualificationService? generatedCombatQualification = null,
+        GeneratedCampaignChoiceBindingService? generatedChoiceBinding = null,
+        GeneratedCampaignChoiceOverlayService? generatedChoiceOverlay = null,
+        GameProjectGeneratedCampaignChoiceQualificationService? generatedChoiceQualification = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -86,6 +92,9 @@ public sealed class GameProjectBuildAndQualificationService
         _generatedCombatOverlay = generatedCombatOverlay ?? new GeneratedWorldEncounterCombatOverlayService();
         _generatedCombatQualification = generatedCombatQualification
                                         ?? new GameProjectGeneratedEncounterCombatQualificationService();
+        _generatedChoiceBinding = generatedChoiceBinding ?? new GeneratedCampaignChoiceBindingService();
+        _generatedChoiceOverlay = generatedChoiceOverlay ?? new GeneratedCampaignChoiceOverlayService();
+        _generatedChoiceQualification = generatedChoiceQualification ?? new GameProjectGeneratedCampaignChoiceQualificationService();
         _operationCoordinator = operationCoordinator ?? new GameProjectOperationCoordinator();
     }
 
@@ -483,6 +492,7 @@ public sealed class GameProjectBuildAndQualificationService
             GeneratedWorldTravelOverlayDocument? generatedWorldTravelOverlay = null;
             GameProjectGeneratedRegionTravelSummary? generatedRegionTravel = null;
             GameProjectGeneratedEncounterCombatSummary? generatedEncounterCombat = null;
+            GameProjectGeneratedCampaignChoiceSummary? generatedCampaignChoices = null;
             if (generatedSource.Present)
             {
                 if (_generatedActivation is null)
@@ -600,6 +610,22 @@ public sealed class GameProjectBuildAndQualificationService
                 if (_generatedCombatRuntime is not null
                     && generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
                 {
+                    var compositionChoiceBinding = _generatedChoiceBinding.Bind(generatedSource, finalCompositionPackage);
+                    var packageChoiceBinding = _generatedChoiceBinding.Bind(generatedSource, finalPackage);
+                    if (!compositionChoiceBinding.Passed || !packageChoiceBinding.Passed)
+                        return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
+                            "Сюжетные решения не прошли точную привязку к сгенерированным диалогам.",
+                            compositionChoiceBinding.Diagnostics.Concat(packageChoiceBinding.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(), "generated_choice.binding", attempt);
+                    var compositionChoice = _generatedChoiceOverlay.Build(finalCompositionPackage, compositionChoiceBinding);
+                    var packageChoice = _generatedChoiceOverlay.Build(finalPackage, packageChoiceBinding);
+                    if (!compositionChoice.Passed || !packageChoice.Passed)
+                        return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
+                            "Слой сюжетных решений нарушил допустимые границы пакета.",
+                            compositionChoice.Diagnostics.Concat(packageChoice.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(), "generated_choice.overlay", attempt);
+                    finalCompositionPackage = compositionChoice.ChoiceOverlayPackage;
+                    finalPackage = packageChoice.ChoiceOverlayPackage;
                     var contract = _generatedCombatContract.Resolve(
                         qualifiedPackage,
                         generatedSource.Overlay
@@ -698,6 +724,12 @@ public sealed class GameProjectBuildAndQualificationService
                     primaryFinalReplayActionCount = generatedEncounterCombat.RuntimeFrames.Count;
                     primaryPlaythroughSignature = string.Join(">",
                         generatedEncounterCombat.RuntimeFrames.Select(frame => frame.ActionKind));
+                    generatedCampaignChoices = _generatedChoiceQualification.Qualify(
+                        finalPackage, packageChoice.Document, _generatedCombatRuntime);
+                    if (!generatedCampaignChoices.Passed)
+                        return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
+                            "Сюжетные решения не прошли реальную Runtime-проверку.",
+                            generatedCampaignChoices.Diagnostics, "generated_choice.qualification", attempt);
                 }
                 generatedWorld = _generatedSummary.BuildCurrent(
                     generatedSource,
@@ -996,6 +1028,7 @@ public sealed class GameProjectBuildAndQualificationService
                 ,GeneratedWorldTravelOverlay = generatedWorldTravelOverlay
                 ,GeneratedRegionTravel = generatedRegionTravel
                 ,GeneratedEncounterCombat = generatedEncounterCombat
+                ,GeneratedCampaignChoices = generatedCampaignChoices
                 ,AcceptedMechanicsCompatibility = compatibility
             };
             var acceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult);
@@ -1105,7 +1138,9 @@ public sealed class GameProjectBuildAndQualificationService
         var path = Path.Combine(root, fileName);
         var entry = new GameProjectBuildHistoryEntry
         {
-            SchemaVersion = build.GeneratedEncounterCombat is { Present: true, Passed: true }
+            SchemaVersion = build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
+                ? GameProjectBuildHistoryReader.SchemaVersionV5
+                : build.GeneratedEncounterCombat is { Present: true, Passed: true }
                 ? GameProjectBuildHistoryReader.SchemaVersionV4
                 : build.GeneratedRegionTravel is { Present: true, Passed: true }
                     ? GameProjectBuildHistoryReader.SchemaVersionV3
@@ -1138,6 +1173,7 @@ public sealed class GameProjectBuildAndQualificationService
             ,GeneratedWorldTravelOverlay = build.GeneratedWorldTravelOverlay
             ,GeneratedRegionTravel = build.GeneratedRegionTravel
             ,GeneratedEncounterCombat = build.GeneratedEncounterCombat
+            ,GeneratedCampaignChoices = build.GeneratedCampaignChoices
             ,AcceptedMechanicsCompatibility = build.AcceptedMechanicsCompatibility
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));

@@ -26,6 +26,7 @@ partial class GeneratedCampaignPageControl
     private TabPage _inventoryTab = null!;
     private TabPage _consequencesTab = null!;
     private TabPage _eventsTab = null!;
+    private TabPage _decisionsTab = null!;
     private TextBox _technical = null!;
     private ToolTip _actionToolTip = null!;
 
@@ -61,6 +62,7 @@ partial class GeneratedCampaignPageControl
         _inventoryTab = new TabPage();
         _consequencesTab = new TabPage();
         _eventsTab = new TabPage();
+        _decisionsTab = new TabPage();
         _technical = new TextBox();
         _actionToolTip = new ToolTip(components);
         _rootLayout.SuspendLayout();
@@ -224,6 +226,7 @@ partial class GeneratedCampaignPageControl
         _hud.Controls.Add(_inventoryTab);
         _hud.Controls.Add(_consequencesTab);
         _hud.Controls.Add(_eventsTab);
+        _hud.Controls.Add(_decisionsTab);
         _hud.Dock = DockStyle.Fill;
         _hud.Margin = new Padding(3, 0, 3, 3);
         //
@@ -244,6 +247,9 @@ partial class GeneratedCampaignPageControl
         _eventsTab.AutoScroll = true;
         _eventsTab.Text = "События";
         _eventsTab.UseVisualStyleBackColor = true;
+        _decisionsTab.AutoScroll = true;
+        _decisionsTab.Text = "Решения";
+        _decisionsTab.UseVisualStyleBackColor = true;
         //
         // _technical
         //

@@ -1,0 +1,59 @@
+/goal
+
+Выполни задачу из файла:
+
+docs/agent-tasks/goal-167-generated-campaign-choice-branching-and-persistent-consequences/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: d265e8094c59908989409e1b70f21f23d2fd579b
+
+Это новый отдельный диалог Codex.
+
+План полностью одобрен запуском задачи. Не спрашивай дополнительное подтверждение из-за количества
+изменяемых файлов.
+
+Критически важно:
+- Goal166 independent audit GREEN; product P0/P1 не осталось;
+- generated dialogues сейчас имеют только одну кнопку Continue;
+- Runtime/GamePackage schema уже умеют conditions, requirements, costs, effects, rewards, flags,
+  node transitions, quests, transactions и StartEncounter — не меняй их;
+- добавить deterministic build-time generated campaign choice overlay;
+- bind actor → dialogue → faction/quest/encounter только через strict plan + overlay/provenance;
+- ветки SUPPORT / CHALLENGE / REFUSE создаются только когда поддержаны actual package relationships;
+- никаких fixed actor/quest/encounter/faction IDs, branch counts или reputation amounts;
+- branch flag ID обязан быть exact generated dialogue ID;
+- initial choices требуют пустой flag, follow-ups требуют exact branch value;
+- Support: data-derived positive reputation + active/completed quest follow-up;
+- Challenge: exact generated encounter starts through dialogue;
+- Refuse: data-derived negative reputation, no quest/encounter mutation;
+- alternatives lock after one decision;
+- overlay modifies only bound generated dialogues; everything else byte-identical;
+- actual Runtime qualification for every branch + atomic rollback + independent replay;
+- preview choice availability on cloned exact session; original session/package byte-identical;
+- add human choice consequence preview and «Решения» journal from Runtime flags/state;
+- build order: choice overlay before combat overlay; combat overlay remains final package producer;
+- add v5 history + GeneratedCampaignChoices CHOICE_CURRENT;
+- genuine v4 projects reopen combat current / choices pending and require one rebuild;
+- regeneration/history rollback produce v5 choice current and seal exact choice hashes/flags;
+- exact save/continue preserves decision and locked alternatives;
+- migration preserves compatible dialogue flag, drops incompatible/missing dialogue flag with reason;
+- no ghost journal rows after migration;
+- exactly one cached hidden smoke, retry 0, host reused, Unity 0;
+- RC CURRENT; portable all-selectable/core-only, no false core-only RC readiness;
+- Goal142/Goal148/source sidecars byte-identical;
+- no Runtime/Domain/GamePackage/FeatureModule/GeneratedPackageMvp/source/Unity/standalone/RC implementation changes;
+- required regressions, 15×2 typed evidence, docs/state, artifact scope 0;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать один commit и push origin/main;
+- запрещено оставлять ручной push пользователю.
+
+В финале сообщи bindings, branch counts, controlled delta,
+Support/Challenge/Refuse Runtime routes, preview/journal,
+v5 history/upgrade/regeneration/rollback,
+save/migration preserve-drop, smoke/RC/portable,
+tests/regressions/source immutability/evidence/scope,
+SHA, push, HEAD==origin/main и clean worktree.

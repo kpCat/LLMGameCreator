@@ -77,6 +77,7 @@ public sealed record GeneratedCampaignAction
     public bool Primary { get; init; }
     public string TargetTitle { get; init; } = string.Empty;
     public GeneratedCampaignTacticalAction? Tactical { get; init; }
+    public string TechnicalChoiceId { get; init; } = string.Empty;
 }
 
 public sealed record GeneratedCampaignTacticalAction
@@ -144,6 +145,47 @@ public sealed record GeneratedCampaignDialogueChoice
 {
     public string Title { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
+}
+
+public sealed record GeneratedCampaignChoiceOption
+{
+    public string Title { get; init; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
+    public string ActorTitle { get; init; } = string.Empty;
+    public string FactionTitle { get; init; } = string.Empty;
+    public string? QuestTitle { get; init; }
+    public string? EncounterTitle { get; init; }
+    public IReadOnlyList<string> ConsequencePreview { get; init; } = [];
+    public bool Enabled { get; init; }
+    public string DisabledReason { get; init; } = string.Empty;
+    public GeneratedCampaignBranchKind? BranchKind { get; init; }
+    public bool Primary { get; init; }
+    public string TechnicalChoiceId { get; init; } = string.Empty;
+}
+
+public sealed record GeneratedCampaignDialogueChoicePreview
+{
+    public string DialogueId { get; init; } = string.Empty;
+    public string OriginalSessionSha256 { get; init; } = string.Empty;
+    public string PackageSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedCampaignChoiceOption> Options { get; init; } = [];
+}
+
+public enum GeneratedCampaignDecisionStatus { Chosen, FollowUpAvailable, Completed }
+
+public sealed record GeneratedCampaignDecision
+{
+    public string ActorTitle { get; init; } = string.Empty;
+    public string ChosenBranch { get; init; } = string.Empty;
+    public string Consequence { get; init; } = string.Empty;
+    public string RelatedContent { get; init; } = string.Empty;
+    public GeneratedCampaignDecisionStatus Status { get; init; }
+    public bool AlternativesLocked { get; init; }
+}
+
+public sealed record GeneratedCampaignDecisionJournal
+{
+    public IReadOnlyList<GeneratedCampaignDecision> Decisions { get; init; } = [];
 }
 
 public sealed record GeneratedCampaignDialogue
@@ -307,6 +349,8 @@ public sealed record GeneratedCampaignSnapshot
     public IReadOnlyList<GeneratedCampaignTextRow> ActiveQuests { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignQuest> Quests { get; init; } = [];
     public GeneratedCampaignDialogue? Dialogue { get; init; }
+    public GeneratedCampaignDialogueChoicePreview? ChoicePreview { get; init; }
+    public GeneratedCampaignDecisionJournal DecisionJournal { get; init; } = new();
     public GeneratedCampaignEncounter? Encounter { get; init; }
     public IReadOnlyList<GeneratedCampaignTextRow> Factions { get; init; } = [];
     public IReadOnlyList<string> RecentEvents { get; init; } = [];

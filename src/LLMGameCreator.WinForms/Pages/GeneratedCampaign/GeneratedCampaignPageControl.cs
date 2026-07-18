@@ -146,6 +146,13 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
         WriteTab(_questsTab, snapshot.Quests.Select(QuestRow));
         WriteTab(_inventoryTab, snapshot.Inventory.Concat(snapshot.Equipment).Concat(snapshot.Factions));
         WriteTab(_consequencesTab, ConsequenceRows(snapshot));
+        WriteTab(_decisionsTab, snapshot.DecisionJournal.Decisions.Select(decision => new GeneratedCampaignTextRow
+        {
+            Title = decision.ActorTitle + ": " + decision.ChosenBranch,
+            Value = string.Join("; ", new[] { decision.Consequence, decision.RelatedContent,
+                decision.AlternativesLocked ? "Другие варианты недоступны" : string.Empty }
+                .Where(value => !string.IsNullOrWhiteSpace(value)))
+        }));
         WriteTab(_eventsTab, snapshot.RecentEvents.Select(value => new GeneratedCampaignTextRow { Title = value }));
         _technical.Text = string.Join(Environment.NewLine,
             snapshot.TechnicalDetails.Select(item => item.Key + ": " + item.Value)

@@ -22,6 +22,8 @@ public sealed class GeneratedCampaignSessionService
     private readonly GeneratedCampaignQuestReadinessService _questReadiness;
     private readonly GeneratedCampaignConsequenceProjector _consequenceProjector;
     private readonly GeneratedCampaignRecoveryService _recovery;
+    private readonly GeneratedCampaignDialogueChoicePreviewService _choicePreview;
+    private readonly GeneratedCampaignDecisionJournalService _decisionJournal;
     private readonly List<GeneratedCampaignConsequence> _consequenceTimeline = [];
     private GeneratedCampaignSession? _session;
     private GeneratedCampaignSessionStatus _status;
@@ -39,12 +41,14 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignActionPlanner planner,
         GeneratedCampaignProjectionService projection,
         GeneratedCampaignEventPresenter events,
-        GeneratedCampaignRecoveryService? recovery = null)
+        GeneratedCampaignRecoveryService? recovery = null,
+        GeneratedCampaignDialogueChoicePreviewService? choicePreview = null,
+        GeneratedCampaignDecisionJournalService? decisionJournal = null)
         : this(currentProject, truths, runtime, saves, migration, planner, projection, events,
             new GeneratedCampaignRuntimeDispatchService(runtime),
             new GeneratedCampaignQuestReadinessService(),
             new GeneratedCampaignConsequenceProjector(),
-            recovery ?? new GeneratedCampaignRecoveryService())
+            recovery ?? new GeneratedCampaignRecoveryService(), choicePreview, decisionJournal)
     {
     }
 
@@ -60,7 +64,9 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignRuntimeDispatchService dispatch,
         GeneratedCampaignQuestReadinessService questReadiness,
         GeneratedCampaignConsequenceProjector consequenceProjector,
-        GeneratedCampaignRecoveryService? recovery = null)
+        GeneratedCampaignRecoveryService? recovery = null,
+        GeneratedCampaignDialogueChoicePreviewService? choicePreview = null,
+        GeneratedCampaignDecisionJournalService? decisionJournal = null)
     {
         _currentProject = currentProject;
         _truths = truths;
@@ -74,6 +80,8 @@ public sealed class GeneratedCampaignSessionService
         _questReadiness = questReadiness;
         _consequenceProjector = consequenceProjector;
         _recovery = recovery ?? new GeneratedCampaignRecoveryService();
+        _choicePreview = choicePreview ?? new GeneratedCampaignDialogueChoicePreviewService(_runtime);
+        _decisionJournal = decisionJournal ?? new GeneratedCampaignDecisionJournalService();
     }
 
     public int RuntimeStartInvocationCount { get; private set; }
@@ -702,6 +710,7 @@ public sealed class GeneratedCampaignSessionService
         var runtimeSession = _session?.RuntimeSession;
         var (canContinue, continueReason) = RecoverySaveAvailability();
         var recovery = _recovery.Project(_status, canContinue, continueReason);
+        var preview = package is null || runtimeSession is null ? null : _choicePreview.Preview(package, runtimeSession);
         var actions = _status == GeneratedCampaignSessionStatus.DEFEATED
             ? _recovery.RecoveryActions(recovery)
             : _status == GeneratedCampaignSessionStatus.ACTIVE
@@ -709,6 +718,15 @@ public sealed class GeneratedCampaignSessionService
               && runtimeSession is not null
                 ? _planner.Plan(package, runtimeSession, _session?.QualifiedActions).Select(item => item.Action).ToList()
                 : [];
+        if (preview is not null)
+        {
+            var options = preview.Options.ToDictionary(item => item.TechnicalChoiceId, StringComparer.Ordinal);
+            actions = actions.Select(action => action.Kind == GeneratedCampaignActionKind.ChooseDialogue
+                && options.TryGetValue(action.TechnicalChoiceId, out var option)
+                ? action with { Enabled = option.Enabled, DisabledReason = option.DisabledReason, Description = option.Description,
+                    Primary = option.Primary }
+                : action).ToList();
+        }
         IReadOnlyList<GeneratedCampaignQuestReadiness> readiness = package is null || runtimeSession is null
             ? []
             : _questReadiness.EvaluateAll(package, runtimeSession);
@@ -727,7 +745,12 @@ public sealed class GeneratedCampaignSessionService
             _consequenceTimeline.ToList(),
             _status is GeneratedCampaignSessionStatus.DEFEATED or GeneratedCampaignSessionStatus.STALE_PROJECT
                 ? recovery
-                : new GeneratedCampaignRecoveryProjection());
+                : new GeneratedCampaignRecoveryProjection()) with
+        {
+            ChoicePreview = preview,
+            DecisionJournal = package is null || runtimeSession is null ? new GeneratedCampaignDecisionJournal()
+                : _decisionJournal.Project(package, runtimeSession)
+        };
     }
 
     private (bool CanContinue, string Reason) RecoverySaveAvailability()
