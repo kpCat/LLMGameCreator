@@ -300,6 +300,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 summary,
                 snapshot.GeneratedWorldActivation,
                 snapshot.GeneratedRegionTravel)
+              + FormatCampaignQualificationCard(snapshot)
               + FormatRegenerationCard(snapshot)
               + FormatWorldHistoryCard(snapshot)
             : string.Empty;
@@ -314,9 +315,16 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
     {
         ArgumentNullException.ThrowIfNull(snapshot);
         var generated = snapshot.GeneratedWorld is { Present: true };
+        var combatCurrent = snapshot.GeneratedWorld?.EncounterCount == 0
+            ? snapshot.GeneratedEncounterCombat is null or { Present: false, Status: "ABSENT" }
+            : snapshot.GeneratedEncounterCombat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" };
+        var choicesCurrent = snapshot.GeneratedCampaignChoices is
+            { Present: true, Passed: true, Status: "CHOICE_CURRENT" };
         var current = snapshot.GeneratedWorld is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" }
                       && snapshot.GeneratedWorldActivation is { Passed: true }
                       && snapshot.GeneratedRegionTravel is { Passed: true }
+                      && combatCurrent
+                      && choicesCurrent
                       && snapshot.AcceptedMechanicsCompatibility is { Passed: true };
         var busy = uiBusy || snapshot.ProjectOperationBusy;
         if (!generated)
@@ -331,6 +339,21 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
                 "Открыть текущую сгенерированную кампанию.", true)
             : new GeneratedCampaignPlayPresentation(true, "Собрать и играть",
                 "Один раз собрать и проверить проект, затем открыть кампанию.", false);
+    }
+
+    private static string FormatCampaignQualificationCard(UnifiedGameProjectWorkspaceSnapshot snapshot)
+    {
+        if (snapshot.GeneratedWorld is not { Present: true }) return string.Empty;
+        var combat = snapshot.GeneratedWorld.EncounterCount == 0
+            ? "не требуется"
+            : snapshot.GeneratedEncounterCombat is { Passed: true, Status: "CAMPAIGN_CURRENT" }
+                ? "проверена"
+                : "требует сборки";
+        var choices = snapshot.GeneratedCampaignChoices is { Passed: true, Status: "CHOICE_CURRENT" }
+            ? "проверены"
+            : "требуют сборки";
+        return Environment.NewLine + "Боевая кампания    " + combat
+               + Environment.NewLine + "Сюжетные решения    " + choices;
     }
 
     private void BindGeneratedCampaignPlay(UnifiedGameProjectWorkspaceSnapshot snapshot)

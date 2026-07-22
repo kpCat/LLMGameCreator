@@ -1,1 +1,12 @@
-{"status":"FAILED","implementation":"GeneratedCampaignDecisionJournalService","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_decision_journal_proof_v1",
+  "flagStateBacked": true,
+  "questStateBacked": true,
+  "encounterEventBacked": true,
+  "supportActiveAndCompletedPassed": true,
+  "challengeActiveAndResolvedPassed": true,
+  "refuseChosenPassed": true,
+  "alternativesLockedPassed": true,
+  "ghostRowsAbsent": true,
+  "metadataUsedForLabelsOnly": true
+}

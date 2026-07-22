@@ -1,1 +1,15 @@
-{"status":"FAILED","implementation":"GeneratedCampaignChoiceBindingService","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_choice_binding_proof_v1",
+  "generatedDialogueCount": 2,
+  "branchableDialogueCount": 2,
+  "qualifiedDialogueCount": 2,
+  "supportBranchCount": 1,
+  "challengeBranchCount": 2,
+  "refuseBranchCount": 1,
+  "branchFlagCount": 2,
+  "exactProvenancePassed": true,
+  "prefixGuessingAbsent": true,
+  "ambiguousRelationshipRejected": true,
+  "zeroEncounterSupportRefusePassed": true,
+  "flagInventorySha256": "e38759833d753d3bfb206267a7af88663ee859111f56e019ca7baa619839e902"
+}

@@ -303,7 +303,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             generatedMatchesCurrent,
             generatedWorldActivation,
             generatedRegionTravel,
-            generatedEncounterCombat);
+            generatedEncounterCombat,
+            generatedCampaignChoices);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -394,10 +395,10 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedRegionTravel
                 : null
-            ,GeneratedEncounterCombat = generatedWorld?.Status is "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedEncounterCombat = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedEncounterCombat
                 : null
-            ,GeneratedCampaignChoices = generatedWorld?.Status is "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedCampaignChoices = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedCampaignChoices
                 : null
             ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
@@ -545,6 +546,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                     _lastBuild.GeneratedRegionTravel))
                 .Concat(GameProjectGeneratedWorldSummaryService.StandaloneCombatHumanFacts(
                     _lastBuild.GeneratedEncounterCombat))
+                .Concat(GameProjectGeneratedWorldSummaryService.StandaloneChoiceHumanFacts(
+                    _lastBuild.GeneratedCampaignChoices))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
                     _lastBuild, releaseCandidateFactsAllowed))
                 .Concat(GeneratedGameplaySavesSummaryService.StandaloneHumanFacts(

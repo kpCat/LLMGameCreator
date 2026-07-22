@@ -493,6 +493,7 @@ public sealed class GameProjectBuildAndQualificationService
             GameProjectGeneratedRegionTravelSummary? generatedRegionTravel = null;
             GameProjectGeneratedEncounterCombatSummary? generatedEncounterCombat = null;
             GameProjectGeneratedCampaignChoiceSummary? generatedCampaignChoices = null;
+            GeneratedCampaignChoiceOverlayDocument? generatedChoiceOverlayDocument = null;
             if (generatedSource.Present)
             {
                 if (_generatedActivation is null)
@@ -607,8 +608,7 @@ public sealed class GameProjectBuildAndQualificationService
                     generatedWorldTravelOverlay = travelOverlay.Document;
                     generatedRegionTravel = travelActivation.Summary;
                 }
-                if (_generatedCombatRuntime is not null
-                    && generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
+                if (_generatedCombatRuntime is not null)
                 {
                     var compositionChoiceBinding = _generatedChoiceBinding.Bind(generatedSource, finalCompositionPackage);
                     var packageChoiceBinding = _generatedChoiceBinding.Bind(generatedSource, finalPackage);
@@ -626,6 +626,17 @@ public sealed class GameProjectBuildAndQualificationService
                                 .Distinct(StringComparer.Ordinal).ToList(), "generated_choice.overlay", attempt);
                     finalCompositionPackage = compositionChoice.ChoiceOverlayPackage;
                     finalPackage = packageChoice.ChoiceOverlayPackage;
+                    generatedChoiceOverlayDocument = packageChoice.Document;
+                    var choicePath = Path.Combine(stagingRoot, "generated-campaign-choices", "package.json");
+                    Directory.CreateDirectory(Path.GetDirectoryName(choicePath)!);
+                    File.WriteAllText(choicePath, packageChoice.ChoiceOverlayPackageJson,
+                        new UTF8Encoding(false));
+                    finalActivatedPath = choicePath;
+                    primaryCompositionSha256 = compositionChoice.Document.OutputPackageSha256;
+                    primaryPackageSha256 = packageChoice.Document.OutputPackageSha256;
+
+                    if (generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
+                    {
                     var contract = _generatedCombatContract.Resolve(
                         qualifiedPackage,
                         generatedSource.Overlay
@@ -724,12 +735,38 @@ public sealed class GameProjectBuildAndQualificationService
                     primaryFinalReplayActionCount = generatedEncounterCombat.RuntimeFrames.Count;
                     primaryPlaythroughSignature = string.Join(">",
                         generatedEncounterCombat.RuntimeFrames.Select(frame => frame.ActionKind));
+                    }
+
                     generatedCampaignChoices = _generatedChoiceQualification.Qualify(
-                        finalPackage, packageChoice.Document, _generatedCombatRuntime);
+                        finalPackage, generatedChoiceOverlayDocument, _generatedCombatRuntime);
                     if (!generatedCampaignChoices.Passed)
                         return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
                             "Сюжетные решения не прошли реальную Runtime-проверку.",
                             generatedCampaignChoices.Diagnostics, "generated_choice.qualification", attempt);
+                    if (generatedCampaignChoices.BranchableDialogueCount > 0)
+                    {
+                        primaryFinalStateHash = generatedCampaignChoices.FinalStateHash;
+                        primaryCheckpointReloadPassed = generatedCampaignChoices.ReplayPassed;
+                        primaryFullReplayEquivalent = generatedCampaignChoices.ReplayPassed;
+                        primaryActionBindingPassed = generatedCampaignChoices.RuntimeQualificationPassed
+                                                     && generatedCampaignChoices.AtomicRollbackPassed;
+                        primaryRuntimeFrames = generatedCampaignChoices.RuntimeFrames.Select((frame, index) =>
+                            new GameProjectRuntimeFrame
+                            {
+                                Index = index,
+                                ActionId = frame.DialogueId + ":" + frame.BranchKind + ":replay-" + frame.ReplayIndex,
+                                Title = frame.BranchKind.ToString(),
+                                Category = "generated-choice",
+                                StateHash = frame.StateHash
+                            }).ToList();
+                        primaryRuntimePlanId = "generated-campaign-choice-v1";
+                        primaryCapabilityCount = generatedCampaignChoices.BranchableDialogueCount;
+                        primaryPlannedActionCount = generatedCampaignChoices.RuntimeFrames.Count;
+                        primaryCheckpointActionCount = generatedCampaignChoices.RuntimeFrames.Count;
+                        primaryFinalReplayActionCount = generatedCampaignChoices.RuntimeFrames.Count;
+                        primaryPlaythroughSignature = string.Join(">", generatedCampaignChoices.RuntimeFrames
+                            .Select(frame => frame.BranchKind + ":replay-" + frame.ReplayIndex));
+                    }
                 }
                 generatedWorld = _generatedSummary.BuildCurrent(
                     generatedSource,
@@ -738,7 +775,8 @@ public sealed class GameProjectBuildAndQualificationService
                     generatedWorldActivation,
                     generatedWorldTravelOverlay,
                     generatedRegionTravel,
-                    generatedEncounterCombat);
+                    generatedEncounterCombat,
+                    generatedCampaignChoices);
                 if (generatedWorld is { Present: true, Passed: false })
                     return RollbackFailure(
                         authoring,
@@ -960,6 +998,9 @@ public sealed class GameProjectBuildAndQualificationService
                 summaryLines.AddRange(generatedRegionTravel.HumanFacts.Select(fact => fact.Label + ": " + fact.Value));
             if (generatedEncounterCombat is { Present: true, Passed: true })
                 summaryLines.AddRange(generatedEncounterCombat.HumanReviewFacts.Select(
+                    fact => fact.Label + ": " + fact.Value));
+            if (generatedCampaignChoices is { Present: true, Passed: true })
+                summaryLines.AddRange(generatedCampaignChoices.HumanReviewFacts.Select(
                     fact => fact.Label + ": " + fact.Value));
 
             var buildResult = new GameProjectBuildResult

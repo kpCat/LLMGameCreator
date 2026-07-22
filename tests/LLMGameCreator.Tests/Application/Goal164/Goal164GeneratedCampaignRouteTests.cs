@@ -128,7 +128,8 @@ internal sealed record Goal164CampaignRoute(
             new GeneratedCampaignProjectionService(),
             new GeneratedCampaignEventPresenter());
         var started = service.StartNew();
-        Assert.Equal(GeneratedCampaignSessionStatus.ACTIVE, started.Status);
+        Assert.True(started.Status == GeneratedCampaignSessionStatus.ACTIVE,
+            started.Status + ":" + string.Join(",", started.Diagnostics));
         var sourceId = build.Build.GeneratedEncounterCombat!.TechnicalDetails["representativeEncounterSource"];
         var bindingSourceId = sourceId.StartsWith("generated/", StringComparison.Ordinal)
             ? sourceId : "generated/" + sourceId;

@@ -1,1 +1,21 @@
-{"status":"FAILED","historySchemaVersion":"unified_game_project_build_history_v5","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_history_regeneration_proof_v1",
+  "historySchemaVersion": "unified_game_project_build_history_v5",
+  "packageSha256": "5fc3d7103357cb0f35618ed7838cb0eda92a6fc4d4c20a392efbc4c952f247a1",
+  "compositionPackageSha256": "d382e95db64b2bf6ca675170ce04f873df916da8fa8e82453c5447fb8dc69337",
+  "choicePrimaryFinalStateSha256": "d626ad668d3b56899d57873890d756e04756befb1cf1174577f35dbac6e2a4b9",
+  "combatFinalStateSha256": "4bef803948b313ee9f0434f66c2be6d5b0b415ee796acc4cbc2f9edb1f77bbda",
+  "v5ChoiceCurrent": true,
+  "v4ChoicesPending": true,
+  "v4CampaignNotReady": true,
+  "oldProjectBuildInvocationCount": 1,
+  "oldProjectSourceRewriteCount": 0,
+  "choiceOverlayBeforeCombatOverlay": true,
+  "choicePrimaryFinalStatePassed": true,
+  "combatSummaryExactFinalPackagePassed": true,
+  "regenerationChoiceCurrent": true,
+  "rollbackChoiceCurrent": true,
+  "choiceSummarySealTamperRejected": true,
+  "choiceOverlaySealTamperRejected": true,
+  "choiceFlagInventorySealTamperRejected": true
+}

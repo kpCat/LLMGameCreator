@@ -1,1 +1,11 @@
-{"status":"FAILED","implementation":"GeneratedCampaignChoiceOverlayService","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_choice_overlay_proof_v1",
+  "sourcePackageSha256": "b4a6dffd649320d3e42f46b15548b959fc06f7c5e81dffc20a34a08e76c8438b",
+  "outputPackageSha256": "bb3ddd0b6deddc5d349cee967e3b848f9c54798d35d5184446a7509c7d359b64",
+  "overlaySha256": "e25df45d8b2227bb82646f312382df90a06d8323e7ffdc1276962790eab14490",
+  "deterministic": true,
+  "controlledDeltaPassed": true,
+  "nonGeneratedDialoguesByteIdentical": true,
+  "nonDialogueCollectionsByteIdentical": true,
+  "placeholderOnlyReplacementPassed": true
+}

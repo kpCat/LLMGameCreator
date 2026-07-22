@@ -33,6 +33,7 @@ public sealed class GeneratedCampaignConsequenceProjector
         ProjectQuests(package, before.GameplayState, after.GameplayState,
             readinessBefore, readinessAfter, rows);
         ProjectReputation(package, before.GameplayState, after.GameplayState, rows);
+        ProjectGeneratedChoice(package, before.GameplayState, after.GameplayState, gameplayEvents, rows);
         ProjectMap(package, before, after, mapEvents, rows);
         ProjectEncounter(package, before, after, gameplayEvents, action, rows);
         ProjectEventConsequences(gameplayEvents, rows);
@@ -419,6 +420,70 @@ public sealed class GeneratedCampaignConsequenceProjector
                 Tone = delta > 0 ? GeneratedCampaignConsequenceTone.Positive
                     : GeneratedCampaignConsequenceTone.Negative
             });
+        }
+    }
+
+    private static void ProjectGeneratedChoice(
+        GamePackageDefinition package,
+        GameRuntimeState before,
+        GameRuntimeState after,
+        IReadOnlyList<GameRuntimeEvent> events,
+        List<GeneratedCampaignConsequence> rows)
+    {
+        var selected = events.LastOrDefault(item => item.Type == GameRuntimeEventType.DialogueChoiceSelected);
+        if (selected?.TargetId is not { Length: > 0 } choiceId) return;
+        foreach (var dialogue in package.Game.Dialogues.Where(item =>
+                     item.Tags.Contains("generated_choice_branching", StringComparer.Ordinal)))
+        {
+            var previous = before.Flags.SingleOrDefault(item => item.Id == dialogue.Id)?.Value ?? string.Empty;
+            var current = after.Flags.SingleOrDefault(item => item.Id == dialogue.Id)?.Value ?? string.Empty;
+            if (previous == current || !Enum.TryParse<GeneratedCampaignBranchKind>(current, out var branch)) continue;
+            var choice = dialogue.Nodes.SelectMany(item => item.Choices)
+                .SingleOrDefault(item => item.Id == choiceId && item.Effects.Any(effect =>
+                    effect.Type == "set_flag"
+                    && effect.Args.GetValueOrDefault("id") == dialogue.Id
+                    && effect.Args.GetValueOrDefault("value") == current));
+            if (choice is null) continue;
+            rows.Add(new GeneratedCampaignConsequence
+            {
+                Kind = GeneratedCampaignConsequenceKind.Decision,
+                Title = "Решение принято: " + choice.Text,
+                BeforeValue = previous,
+                AfterValue = current,
+                Description = "Ветка подтверждена сохранённым флагом Runtime.",
+                Tone = branch == GeneratedCampaignBranchKind.REFUSE
+                    ? GeneratedCampaignConsequenceTone.Negative
+                    : GeneratedCampaignConsequenceTone.Neutral
+            });
+            var initial = dialogue.Nodes.SelectMany(item => item.Choices).Where(item =>
+                item.Metadata.GetValueOrDefault("generatedChoicePhase") == "initial").ToList();
+            if (initial.Count > 1 && initial.All(item => item.Requirements.Any(requirement =>
+                    requirement.Kind == "flag_equals" && requirement.Id == dialogue.Id
+                    && requirement.Value == string.Empty)))
+                rows.Add(Simple(GeneratedCampaignConsequenceKind.BranchLocked,
+                    "Другие варианты закрыты",
+                    "Взаимоисключение подтверждено непустым флагом ветви.",
+                    GeneratedCampaignConsequenceTone.Neutral));
+
+            var questState = choice.StartQuestId is { Length: > 0 } questId
+                ? after.Quests.SingleOrDefault(item => item.QuestId == questId)?.State
+                : null;
+            var encounter = choice.StartEncounterId is { Length: > 0 } encounterId
+                            && after.ActiveEncounter?.EncounterId == encounterId
+                ? after.ActiveEncounter
+                : null;
+            var followUp = branch switch
+            {
+                GeneratedCampaignBranchKind.SUPPORT => questState is "active" or "completed",
+                GeneratedCampaignBranchKind.CHALLENGE => encounter is { Active: false },
+                GeneratedCampaignBranchKind.REFUSE => true,
+                _ => false
+            };
+            if (followUp)
+                rows.Add(Simple(GeneratedCampaignConsequenceKind.BranchFollowUp,
+                    "Открыто продолжение решения",
+                    "Продолжение подтверждено текущим состоянием Runtime.",
+                    GeneratedCampaignConsequenceTone.Neutral));
         }
     }
 

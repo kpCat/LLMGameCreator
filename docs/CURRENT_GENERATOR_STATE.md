@@ -429,7 +429,9 @@ goal166AcceptedByHuman=false
 goal166AcceptedByCodex=false
 goal166ManualReviewRequired=false
 goal166ManualGateReady=false
-goal166IndependentAuditRequired=true
+goal166IndependentAuditRequired=false
+goal166IndependentAuditResult=GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809
+goal166IndependentAuditPassed=true
 goal166QualifiedActionCatalogPassed=true
 goal166MixedAbilityQualificationPassed=true
 goal166RealDefeatRetryPassed=true
@@ -440,7 +442,33 @@ goal166PlayerProcessStartCount=0
 goal166UnityEditorProcessStartCount=0
 goal166StandaloneBuildInvocationCount=0
 goal166ArtifactScopeViolationCount=0
-nextAction=independent_goal166_audit_and_plan_campaign_choice_branching
+goal167FailedBaseSha=0c15e19d4141febddd447e792acaecaa17a98f90
+goal167FailedBaseStatus=FAILED_INCOMPLETE_PUBLISHED
+goal167FailedBaseClosedBy=goal167c
+goal167ImplementationStatus=GREEN
+goal167CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal167Accepted=false
+goal167AcceptedByHuman=false
+goal167AcceptedByCodex=false
+goal167ManualReviewRequired=false
+goal167ManualGateReady=false
+goal167IndependentAuditRequired=true
+goal167TestsDiscovered=94
+goal167BehavioralTestsPassed=94
+goal167ChoiceOverlayPassed=true
+goal167BranchRuntimeQualificationPassed=true
+goal167DecisionJournalPassed=true
+goal167SaveContinuePassed=true
+goal167MigrationPassed=true
+goal167HostReused=true
+goal167HostRebuilt=false
+goal167UnityEditorProcessStartCount=0
+goal167HiddenSmokeInvocationCount=1
+goal167HiddenSmokeRetryCount=0
+goal167PortableAllSelectablePassed=true
+goal167PortableCoreOnlyPassed=true
+goal167ArtifactScopeViolationCount=0
+nextAction=independent_goal167_audit_and_plan_campaign_relationships_and_multi_quest_arcs
 goal165BothRoutePassed=true
 goal165BasicAttackOnlyPassed=true
 goal165AbilityOnlyPassed=true
@@ -4776,9 +4804,11 @@ After Goal 021, this state should recommend:
 media_materialization_review_package_verification
 ```
 
-## Goal 167 FAILED
+## Goal 167C generated choice branching completion
 
-Goal 166 independent audit is recorded `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`. Goal 167 implementation stopped honestly after a successful solution build because the focused filter discovered only 1 test; the required minimum is 62, including 54 behavioral tests. No Unity process or hidden standalone smoke was started. Next action: `complete_goal167_behavioral_test_matrix_before_requalification`.
+Goal 166 independent audit is recorded `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`. Goal 167C closes the honestly published FAILED scaffold from `0c15e19d4141febddd447e792acaecaa17a98f90` as `GREEN_ACCEPTABLE_CANDIDATE`: 94/94 behavioral tests pass; exact Support, Challenge and Refuse routes, real rollback/two-replay proof, state-backed preview/journal/consequences, v5 `CHOICE_CURRENT`, v4 `CHOICES_PENDING`, sealed regeneration, exact save/continue, compatible/incompatible migration and portable all-selectable/core-only recovery are proven.
+
+The one permitted hidden smoke reused the cached host, started Unity zero times, passed five of five payload checks and received no retry. Its surrounding test initially read choice frames from the model file instead of `player-adapter-frames.json`; that assertion was corrected without rerunning smoke. RC is `CURRENT`. Goal167 remains unaccepted, creates no human gate and requires independent audit. Next action: `independent_goal167_audit_and_plan_campaign_relationships_and_multi_quest_arcs`.
 
 
 

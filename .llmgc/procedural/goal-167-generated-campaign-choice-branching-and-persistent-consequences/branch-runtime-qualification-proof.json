@@ -1,1 +1,31 @@
-{"status":"FAILED","implementation":"GameProjectGeneratedCampaignChoiceQualificationService","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_branch_runtime_proof_v1",
+  "support": {
+    "passed": true,
+    "reputationDelta": 1,
+    "alternativesLocked": true,
+    "activeQuestFollowUp": true,
+    "completedFollowUpAfterCombatManualTurnIn": true
+  },
+  "challenge": {
+    "passed": true,
+    "encounterStarted": true,
+    "prematureDialogueReopenAbsent": true,
+    "alternativesLockedByFlagTruth": true,
+    "fleeFollowUp": true,
+    "victoryFollowUp": true
+  },
+  "refuse": {
+    "passed": true,
+    "reputationDelta": -1,
+    "questMutationCount": 0,
+    "encounterMutationCount": 0
+  },
+  "rollback": {
+    "passed": true,
+    "beforeSessionSha256": "14bd5658245c80ac831d96388c1abcd2f7b099185e7da0447fa3474ef66cda9f",
+    "afterSessionSha256": "14bd5658245c80ac831d96388c1abcd2f7b099185e7da0447fa3474ef66cda9f"
+  },
+  "independentReplayCount": 2,
+  "replayEquivalent": true
+}

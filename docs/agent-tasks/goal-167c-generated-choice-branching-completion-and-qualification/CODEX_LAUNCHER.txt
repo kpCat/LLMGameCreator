@@ -1,0 +1,52 @@
+/goal
+
+Выполни continuation-задачу из файла:
+
+docs/agent-tasks/goal-167c-generated-choice-branching-completion-and-qualification/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 0c15e19d4141febddd447e792acaecaa17a98f90
+
+Это продолжение честно опубликованного FAILED Goal167.
+
+План полностью одобрен запуском задачи. Не спрашивай дополнительное подтверждение из-за количества
+изменяемых файлов.
+
+Критически важно:
+- не откатывай FAILED scaffold и не начинай Goal167 с нуля;
+- сначала классифицируй все partial-файлы KEEP/REFACTOR/REPLACE/REMOVE;
+- единственный текущий executable test проверяет только длину строкового inventory и не является product proof;
+- Challenge сейчас структурно падает: encounter active, а qualification сразу пытается reopen dialogue;
+- Challenge follow-up проверять только после flee/victory, при этом alternatives lock доказывать branch flag truth;
+- AtomicRollbackPassed=true и ReplayPassed в scaffold недостоверны: выполнить реальный failing choice rollback и два независимых replay;
+- Support обязан доказать exact positive reputation, active quest follow-up и completed follow-up после реального combat/manual turn-in;
+- Refuse обязан доказать exact negative reputation и отсутствие quest/encounter mutation;
+- preview/journal/consequences должны быть state/event-backed, metadata только для labels;
+- GeneratedCampaignSessionTruthService обязан требовать v5 CHOICE_CURRENT для branchable projects;
+- genuine v4 = combat current + choices pending + PROJECT_NOT_READY + «Собрать и играть»;
+- choice overlay не должен зависеть от наличия generated encounters;
+- Support/Refuse-only zero-encounter generated profile обязан быть CHOICE_CURRENT/READY;
+- choice overlay до combat overlay; v5 primary final state/frames принадлежат full choice route;
+- combat summary остаётся отдельно valid на exact final package;
+- добавить choice summary/overlay/flag inventory в regeneration seal и semantic validation;
+- exact save/continue, old-save rebase, migration compatible flag preserve / incompatible flag drop / no ghost journal;
+- один cached hidden smoke, retry 0, host reused, Unity 0;
+- RC CURRENT, portable all-selectable/core-only без false core-only readiness;
+- Runtime/Domain/GamePackage/FeatureModule/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal142/Goal148 и generation sidecars byte-identical;
+- Goal167 >=64 discovered / >=56 behavioral / all pass;
+- заменить FAILED evidence на 15×2 typed captures, scope 0, docs/state;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать ровно один commit и push origin/main;
+- запрещено оставлять ручной push пользователю.
+
+В финале сообщи scaffold classifications, реальный test count,
+bindings/branches/controlled delta, Support/Challenge/Refuse,
+rollback/replay, preview/journal, v5/readiness,
+regeneration/save/migration, smoke/RC/portable,
+regressions/source immutability/evidence/scope,
+SHA, push, HEAD==origin/main и clean worktree.

@@ -38,7 +38,9 @@ public sealed class Goal162CampaignDialogueTests
 
         Assert.NotEmpty(choiceActions);
         Assert.Equal(state.Opened.Dialogue?.Choices.Count, choiceActions.Count);
-        Assert.All(choiceActions, action => Assert.True(action.Enabled));
+        Assert.Contains(choiceActions, action => action.Enabled);
+        Assert.All(choiceActions.Where(action => !action.Enabled), action =>
+            Assert.False(string.IsNullOrWhiteSpace(action.DisabledReason)));
     }
 
     [Fact]
@@ -53,7 +55,7 @@ public sealed class Goal162CampaignDialogueTests
     }
 
     [Fact]
-    public void Behavioral_generated_continue_choice_closes_dialogue_and_returns_map_actions()
+    public void Behavioral_generated_branch_choice_closes_dialogue_and_routes_runtime_state()
     {
         var after = Goal162DialogueState.Value.AfterChoice;
 
@@ -61,7 +63,10 @@ public sealed class Goal162CampaignDialogueTests
         Assert.Contains(after.Actions, action => action.Kind is GeneratedCampaignActionKind.MoveUp
             or GeneratedCampaignActionKind.MoveDown
             or GeneratedCampaignActionKind.MoveLeft
-            or GeneratedCampaignActionKind.MoveRight);
+            or GeneratedCampaignActionKind.MoveRight
+            or GeneratedCampaignActionKind.RunEncounterAi
+            or GeneratedCampaignActionKind.BasicAttack
+            or GeneratedCampaignActionKind.UseAbility);
     }
 
     [Fact]

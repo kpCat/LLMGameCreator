@@ -1,1 +1,12 @@
-{"status":"FAILED","migrationImplementationChanged":false,"proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_migration_branch_portability_proof_v1",
+  "oldSaveRebaseRequired": true,
+  "directContinueRejectedBeforeRebase": true,
+  "previewWriteCount": 0,
+  "explicitApplyCurrent": true,
+  "compatibleFlagPreserved": true,
+  "incompatibleFlagDroppedWithReason": true,
+  "transientDialogueReset": true,
+  "ghostJournalEntryCount": 0,
+  "choiceCombatTravelUsableAfterMigration": true
+}

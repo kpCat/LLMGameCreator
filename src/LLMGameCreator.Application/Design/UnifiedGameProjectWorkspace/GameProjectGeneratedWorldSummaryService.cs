@@ -41,7 +41,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
         GameProjectGeneratedWorldActivationSummary? activation = null,
         GeneratedWorldTravelOverlayDocument? travelOverlay = null,
         GameProjectGeneratedRegionTravelSummary? travel = null,
-        GameProjectGeneratedEncounterCombatSummary? combat = null)
+        GameProjectGeneratedEncounterCombatSummary? combat = null,
+        GameProjectGeneratedCampaignChoiceSummary? choices = null)
     {
         ArgumentNullException.ThrowIfNull(validation);
         ArgumentNullException.ThrowIfNull(compositionPackage);
@@ -61,11 +62,15 @@ public sealed class GameProjectGeneratedWorldSummaryService
             .Where(diagnostic => !travelReady || !AuthorizedTravelMapChange(diagnostic, travelOverlay!))
             .Where(diagnostic => combat is not { Present: true, Passed: true }
                                  || !AuthorizedCombatEncounterChange(diagnostic, combat))
+            .Where(diagnostic => choices is not { Present: true, Passed: true }
+                                 || !AuthorizedChoiceDialogueChange(diagnostic, choices))
             .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
-        var combatReady = combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" };
+        var combatReady = validation.Source.Counts.Encounters == 0
+                          || combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" };
+        var choicesReady = choices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" };
         var status = diagnostics.Count > 0
             ? "INVALID"
-            : combatReady && travelReady && activation is { Present: true, Passed: true }
+            : combatReady && choicesReady && travelReady && activation is { Present: true, Passed: true }
                 ? "CAMPAIGN_CURRENT"
             : travelReady && activation is { Present: true, Passed: true }
                 ? "BUILD_CURRENT"
@@ -82,7 +87,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
         bool matchesCurrentAuthoring,
         GameProjectGeneratedWorldActivationSummary? activation = null,
         GameProjectGeneratedRegionTravelSummary? travel = null,
-        GameProjectGeneratedEncounterCombatSummary? combat = null)
+        GameProjectGeneratedEncounterCombatSummary? combat = null,
+        GameProjectGeneratedCampaignChoiceSummary? choices = null)
     {
         var source = ProjectSource(validation);
         if (source is null || !source.Passed || lastSuccessful is not { Present: true, Passed: true }) return source;
@@ -97,7 +103,9 @@ public sealed class GameProjectGeneratedWorldSummaryService
             Diagnostics = ["generated_summary.history_source_mismatch"]
         };
         if (activation is not { Present: true, Passed: true }) return source;
-        var status = combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" }
+        var status = choices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
+                     && (source.EncounterCount == 0
+                         || combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" })
             ? matchesCurrentAuthoring ? "CAMPAIGN_CURRENT" : "LAST_SUCCESS"
             : travel is { Present: true, Passed: true }
             ? matchesCurrentAuthoring ? "TRAVEL_CURRENT" : "LAST_SUCCESS"
@@ -150,6 +158,15 @@ public sealed class GameProjectGeneratedWorldSummaryService
         }).ToList()
         : [];
 
+    public static IReadOnlyList<StandaloneHumanReviewFact> StandaloneChoiceHumanFacts(
+        GameProjectGeneratedCampaignChoiceSummary? summary) => summary is { Present: true, Passed: true }
+        ? summary.HumanReviewFacts.Select(fact => new StandaloneHumanReviewFact
+        {
+            Label = fact.Label,
+            Value = fact.Value
+        }).ToList()
+        : [];
+
     private static bool AuthorizedTravelMapChange(
         string diagnostic,
         GeneratedWorldTravelOverlayDocument overlay)
@@ -170,6 +187,17 @@ public sealed class GameProjectGeneratedWorldSummaryService
         var encounterId = diagnostic[prefix.Length..];
         return combat.Overlay?.EncounterFingerprintsAfter.Any(item =>
             string.Equals(item.EncounterId, encounterId, StringComparison.Ordinal)) == true;
+    }
+
+    private static bool AuthorizedChoiceDialogueChange(
+        string diagnostic,
+        GameProjectGeneratedCampaignChoiceSummary choices)
+    {
+        const string prefix = "generated_overlay.record_changed:game.dialogues:";
+        if (!diagnostic.StartsWith(prefix, StringComparison.Ordinal)) return false;
+        var dialogueId = diagnostic[prefix.Length..];
+        return choices.Overlay?.DialogueFingerprintsAfter.Any(item =>
+            string.Equals(item.DialogueId, dialogueId, StringComparison.Ordinal)) == true;
     }
 
     public static string FormatCard(

@@ -13,16 +13,17 @@ namespace LLMGameCreator.Tests.Application.Goal164;
 public sealed class Goal164BuildHistoryCampaignCurrentTests
 {
     [Fact]
-    public void Behavioral_successful_generated_combat_writes_v4_history()
+    public void Behavioral_successful_generated_choice_route_writes_v5_history()
     {
         var entry = History(Goal164TestKit.AllSelectable.Build.BuildHistoryPath);
 
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV4, entry.SchemaVersion);
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV5, entry.SchemaVersion);
         Assert.Equal("CAMPAIGN_CURRENT", entry.GeneratedEncounterCombat?.Status);
+        Assert.Equal("CHOICE_CURRENT", entry.GeneratedCampaignChoices?.Status);
     }
 
     [Fact]
-    public void Behavioral_v4_history_carries_exact_primary_hashes()
+    public void Behavioral_v5_history_carries_exact_primary_hashes()
     {
         var fixture = Goal164TestKit.AllSelectable;
         var entry = History(fixture.Build.BuildHistoryPath);
@@ -93,7 +94,7 @@ public sealed class Goal164BuildHistoryCampaignCurrentTests
 
         Assert.All(fixture.GenerationSidecarHashesBefore, pair =>
             Assert.Equal(pair.Value, Goal164TestKit.FileSha(Path.Combine(generationRoot, pair.Key))));
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV4,
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV5,
             History(fixture.Build.BuildHistoryPath).SchemaVersion);
     }
 

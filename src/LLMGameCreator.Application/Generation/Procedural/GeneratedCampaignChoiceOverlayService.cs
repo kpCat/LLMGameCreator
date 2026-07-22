@@ -40,6 +40,7 @@ public sealed class GeneratedCampaignChoiceOverlayService
             }
             Apply(dialogues[0], binding);
         }
+        after.Game.Dialogues = after.Game.Dialogues.OrderBy(item => item.Id, StringComparer.Ordinal).ToList();
         var countsBefore = DefinitionCounts(before);
         var countsAfter = DefinitionCounts(after);
         if (!countsBefore.OrderBy(item => item.Key, StringComparer.Ordinal)
@@ -59,6 +60,12 @@ public sealed class GeneratedCampaignChoiceOverlayService
             Bindings = bindingResult.Bindings,
             DialogueFingerprintsBefore = Fingerprints(before, boundIds),
             DialogueFingerprintsAfter = Fingerprints(after, boundIds),
+            FlagInventory = bound.Select(item => new GeneratedCampaignChoiceFlagInventoryRow
+            {
+                DialogueId = item.DialogueId,
+                SupportedBranchKinds = item.Branches.Select(branch => branch.Kind).Distinct()
+                    .OrderBy(kind => kind).ToList()
+            }).ToList(),
             AllowedFieldPaths = AllowedFieldPaths,
             DefinitionCollectionCountsBefore = countsBefore,
             DefinitionCollectionCountsAfter = countsAfter,
@@ -75,6 +82,39 @@ public sealed class GeneratedCampaignChoiceOverlayService
         };
     }
 
+    public GeneratedCampaignChoiceOverlayValidationResult ValidateFinalPackage(
+        GamePackageDefinition preChoicePackage,
+        GamePackageDefinition finalPackage,
+        GeneratedCampaignChoiceOverlayDocument overlay)
+    {
+        ArgumentNullException.ThrowIfNull(preChoicePackage);
+        ArgumentNullException.ThrowIfNull(finalPackage);
+        ArgumentNullException.ThrowIfNull(overlay);
+        var diagnostics = new List<string>();
+        var boundIds = overlay.Bindings.Where(item => item.Branches.Count > 0)
+            .Select(item => item.DialogueId).ToHashSet(StringComparer.Ordinal);
+        ValidateControlledDelta(preChoicePackage, finalPackage, boundIds, diagnostics);
+        ValidateReferences(finalPackage, overlay.Bindings.Where(item => item.Branches.Count > 0).ToList(), diagnostics);
+        var expectedFlags = overlay.Bindings.Where(item => item.Branches.Count > 0)
+            .OrderBy(item => item.DialogueId, StringComparer.Ordinal)
+            .Select(item => new GeneratedCampaignChoiceFlagInventoryRow
+            {
+                DialogueId = item.DialogueId,
+                SupportedBranchKinds = item.Branches.Select(branch => branch.Kind).Distinct()
+                    .OrderBy(kind => kind).ToList()
+            }).ToList();
+        if (!Same(expectedFlags, overlay.FlagInventory))
+            diagnostics.Add("generated_choice.flag_inventory_mismatch");
+        if (!Same(Fingerprints(finalPackage, boundIds), overlay.DialogueFingerprintsAfter))
+            diagnostics.Add("generated_choice.dialogue_fingerprint_mismatch");
+        diagnostics = diagnostics.Distinct(StringComparer.Ordinal).OrderBy(item => item, StringComparer.Ordinal).ToList();
+        return new GeneratedCampaignChoiceOverlayValidationResult
+        {
+            Passed = diagnostics.Count == 0,
+            Diagnostics = diagnostics
+        };
+    }
+
     private static void Apply(DialogueDefinition dialogue, GeneratedCampaignChoiceBinding binding)
     {
         var start = dialogue.Nodes.SingleOrDefault(item => item.Id == dialogue.StartNodeId)
@@ -85,6 +125,7 @@ public sealed class GeneratedCampaignChoiceOverlayService
             Text = branch.Title,
             Requirements = [FlagEquals(dialogue.Id, string.Empty)],
             Effects = Effects(dialogue.Id, branch),
+            StartQuestId = branch.Kind == GeneratedCampaignBranchKind.SUPPORT ? branch.QuestId : null,
             StartEncounterId = branch.EncounterId,
             CloseDialogue = true,
             Tags = ["generated_choice", branch.Kind.ToString().ToLowerInvariant()],

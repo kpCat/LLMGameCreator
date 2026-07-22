@@ -34,14 +34,14 @@ public sealed class Goal164StandaloneAndPortabilityTests
     }
 
     [Fact]
-    public void Behavioral_standalone_payload_contains_generated_combat_runtime_frames()
+    public void Behavioral_standalone_payload_contains_generated_choice_runtime_frames()
     {
         var state = Goal164PortableState.AllSelectable;
 
         Assert.NotEmpty(state.Service.Request!.RuntimeFrames);
         Assert.Equal(state.Build.Build.RuntimeFrames.Count, state.Service.Request.RuntimeFrames.Count);
-        Assert.Contains(state.Service.Request.RuntimeFrames,
-            item => item.ActionId == nameof(LLMGameCreator.Runtime.Abstractions.GameRuntimeCommandType.BasicAttack));
+        Assert.All(state.Service.Request.RuntimeFrames,
+            item => Assert.Equal("generated-choice", item.Category));
     }
 
     [Fact]
@@ -135,6 +135,14 @@ public sealed class Goal164StandaloneAndPortabilityTests
                 Value: item.GetProperty("value").GetString() ?? string.Empty)).ToList();
         Assert.All(snapshot.GeneratedEncounterCombat!.HumanReviewFacts, expected =>
             Assert.Contains(facts, actual => actual.Label == expected.Label && actual.Value == expected.Value));
+        Assert.All(snapshot.GeneratedCampaignChoices!.HumanReviewFacts, expected =>
+            Assert.Contains(facts, actual => actual.Label == expected.Label && actual.Value == expected.Value));
+        using var framePayload = JsonDocument.Parse(File.ReadAllText(
+            Path.Combine(payloadRoot, "player-adapter-frames.json")));
+        var payloadFrames = framePayload.RootElement.EnumerateArray().ToList();
+        Assert.NotEmpty(payloadFrames);
+        Assert.All(payloadFrames, frame =>
+            Assert.Equal("generated-choice", frame.GetProperty("category").GetString()));
 
         using var portable = Goal156TestKit.Copy(fixture.Project, "goal164-real-smoke-portable");
         var portableSnapshot = Goal156TestKit.OpenWorkspace(portable.Path).Snapshot();
@@ -152,7 +160,8 @@ public sealed class Goal164StandaloneAndPortabilityTests
             sidecarsBefore == TreeHash(generationRoot),
             goal142Before == Goal156TestKit.Hash(Goal156TestKit.Goal142BaselinePath),
             goal148Before == TreeHash(goal148), usedHostBefore == TreeHash(usedHost),
-            portableSnapshot.GeneratedWorld?.Status == "CAMPAIGN_CURRENT");
+            portableSnapshot.GeneratedWorld?.Status == "CAMPAIGN_CURRENT",
+            portableSnapshot.GeneratedCampaignChoices?.Status == "CHOICE_CURRENT");
     }
 
     private static void WriteSmokeCapture(
@@ -164,7 +173,8 @@ public sealed class Goal164StandaloneAndPortabilityTests
         bool goal142Unchanged,
         bool goal148Unchanged,
         bool hostFilesUnchanged,
-        bool portableCurrent)
+        bool portableCurrent,
+        bool portableChoiceCurrent)
     {
         var path = Environment.GetEnvironmentVariable("LLMGC_GOAL164_CAPTURE_PATH");
         if (string.IsNullOrWhiteSpace(path)) return;
@@ -182,6 +192,8 @@ public sealed class Goal164StandaloneAndPortabilityTests
             standalone.SelfCheckPassedCount,
             standalone.SelfCheckTotalCount,
             actualPayloadCombatFactsPassed = true,
+            actualPayloadChoiceFactsPassed = true,
+            actualPayloadChoiceFramesPassed = true,
             combatContractId = snapshot.GeneratedEncounterCombat?.ContractId,
             contractSourcePackageSha256 = snapshot.GeneratedEncounterCombat?.ContractSourcePackageSha256,
             generatedEncounterCount = snapshot.GeneratedEncounterCombat?.GeneratedEncounterCount,
@@ -189,18 +201,20 @@ public sealed class Goal164StandaloneAndPortabilityTests
             generatedParticipantsReboundCount = generatedParticipantCount,
             laneBCombatPackageSha256 = build.PackageSha256,
             laneACompatibilityPassed = build.AcceptedMechanicsCompatibility?.Passed,
-            historySchemaVersion = GameProjectBuildHistoryReader.SchemaVersionV4,
+            historySchemaVersion = GameProjectBuildHistoryReader.SchemaVersionV5,
             completeQuestCommandCount = snapshot.GeneratedEncounterCombat?.CompleteQuestCommandCount,
             advanceObjectiveCommandCount = snapshot.GeneratedEncounterCombat?.AdvanceObjectiveCommandCount,
             representativeReplayEquivalent = snapshot.GeneratedEncounterCombat?.ReplayPassed,
             releaseCandidateRecordCurrent = snapshot.ReleaseCandidateRecordConfigurationStatus == "CURRENT",
             campaignCurrent = snapshot.GeneratedWorld?.Status == "CAMPAIGN_CURRENT",
             combatCurrent = snapshot.GeneratedEncounterCombat?.Status == "CAMPAIGN_CURRENT",
+            choiceCurrent = snapshot.GeneratedCampaignChoices?.Status == "CHOICE_CURRENT",
             sidecarsUnchanged,
             goal142Unchanged,
             goal148Unchanged,
             hostFilesUnchanged,
-            portableCurrent
+            portableCurrent,
+            portableChoiceCurrent
         }, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine,
             new UTF8Encoding(false));
     }

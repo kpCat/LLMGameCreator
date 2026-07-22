@@ -1,1 +1,22 @@
-{"status":"FAILED","hiddenSmokeInvocationCount":0,"unityEditorProcessStartCount":0,"proofExecuted":false,"reason":"precondition_test_matrix_incomplete"}
+{
+  "schemaVersion": "goal167_standalone_rc_portability_proof_v1",
+  "hostCacheKey": "6af4d5eb5b42f956110555b58fb4e276",
+  "hostReused": true,
+  "hostRebuilt": false,
+  "unityEditorProcessStartCount": 0,
+  "hiddenSmokeInvocationCount": 1,
+  "hiddenSmokeRetryCount": 0,
+  "hiddenSmokeExitCode": 0,
+  "hiddenSmokePassMarkerCount": 5,
+  "payloadSelfCheckPassedCount": 5,
+  "payloadSelfCheckTotalCount": 5,
+  "runtimePlanId": "generated-campaign-choice-v1",
+  "choiceFrameCount": 8,
+  "actualPayloadChoiceFactsPassed": true,
+  "actualPayloadChoiceFramesPassed": true,
+  "releaseCandidateRecordCurrent": true,
+  "portableAllSelectableChoiceAndRcCurrent": true,
+  "portableCoreOnlyChoiceCurrent": true,
+  "portableCoreOnlyFalseRcReady": false,
+  "postSmokeHarnessAssertionStatus": "FAILED_WRONG_FRAME_FILE_CORRECTED_NO_RETRY"
+}

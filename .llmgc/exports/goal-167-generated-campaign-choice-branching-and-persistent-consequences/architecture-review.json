@@ -1,1 +1,183 @@
-{"status":"FAILED","goal166IndependentAudit":"GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809","existingDialogueRuntimeAuthority":"DialogueRuntimeService atomically applies conditions, costs, effects and encounter starts.","generatedActorDialogueBinding":"GeneratedCampaignChoiceBindingService uses actor seed provenance and sourceActorSeedId.","branchKindsAndDataSources":"SUPPORT/CHALLENGE/REFUSE derive from exact faction, quest reward and encounter relations.","branchFlagIdentity":"exact DialogueDefinition.Id","dialogueOverlayControlledDelta":"GeneratedCampaignChoiceOverlayService","buildPipelineOrder":"choice overlay before combat overlay","failure":"test_matrix_incomplete"}
+{
+  "schemaVersion": "goal167c_architecture_review_v1",
+  "status": "GREEN",
+  "failedBaseSha": "0c15e19d4141febddd447e792acaecaa17a98f90",
+  "failedBaseStatus": "FAILED_INCOMPLETE_PUBLISHED",
+  "failedScaffoldAudit": {
+    "input": "Failed-base production/test inventory; temporary partial-scaffold-audit.json merged here and removed before publication.",
+    "output": "All 23 Goal167 scaffold files were classified before implementation; no file was removed as unused.",
+    "hashes": ["failed base commit SHA", "canonical final architecture-review SHA"],
+    "behavioralTests": ["scaffold audit inventory is complete", "temporary audit is merged then removed before publication"],
+    "classificationCounts": {
+      "KEEP_AND_COMPLETE": 5,
+      "REFACTOR": 10,
+      "REPLACE": 8,
+      "REMOVE_AS_UNUSED": 0
+    },
+    "classifications": [
+      { "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignChoiceModels.cs", "classification": "KEEP_AND_COMPLETE" },
+      { "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignChoiceBindingService.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignChoiceOverlayService.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedCampaignChoiceQualificationService.cs", "classification": "REPLACE" },
+      { "path": "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs", "classification": "KEEP_AND_COMPLETE" },
+      { "path": "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/UnifiedGameProjectWorkspaceController.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignDialogueChoicePreviewService.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignDecisionJournalService.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignActionPlanner.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionModels.cs", "classification": "KEEP_AND_COMPLETE" },
+      { "path": "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionService.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.WinForms/CompositionRoot.cs", "classification": "KEEP_AND_COMPLETE" },
+      { "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.cs", "classification": "REFACTOR" },
+      { "path": "src/LLMGameCreator.WinForms/Pages/GeneratedCampaign/GeneratedCampaignPageControl.Designer.cs", "classification": "KEEP_AND_COMPLETE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167ChoiceBindingOverlayTests.cs", "classification": "REPLACE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167BranchRuntimeQualificationTests.cs", "classification": "REPLACE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167ChoicePreviewJournalTests.cs", "classification": "REPLACE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167HistoryRegenerationTests.cs", "classification": "REPLACE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167SaveMigrationTests.cs", "classification": "REPLACE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167StandalonePortabilityTests.cs", "classification": "REPLACE" },
+      { "path": "tests/LLMGameCreator.Tests/Application/Goal167/Goal167RegressionImmutabilityTests.cs", "classification": "REPLACE" }
+    ]
+  },
+  "bindingTruth": {
+    "types": ["SeededGeneratedProjectSourceValidationResult", "GeneratedProjectOverlayDocument", "ProceduralActorSeed", "GeneratedCampaignChoiceBindingService", "GeneratedCampaignChoiceBindingResult"],
+    "inputs": ["strictSource.RegeneratedPlan.ActorSeeds", "strictSource.Overlay.GeneratedRecords where collectionPath=game.dialogues", "pre-choice GamePackageDefinition"],
+    "outputs": ["one exact GeneratedCampaignChoiceBinding per mapped generated actor", "diagnostics for missing/duplicate dialogue, entity, interaction, faction and ambiguous relationship"],
+    "hashes": ["source generated overlay SHA", "pre-choice package canonical SHA", "canonical binding inventory SHA"],
+    "behavioralTests": ["exact actor/dialogue provenance", "no blanket prefix guessing", "missing and duplicate dialogue rejected", "exact entity and interaction", "exact Support/Challenge/Refuse relationships", "no-relationship actor remains minimal"]
+  },
+  "branchFlagIdentity": {
+    "types": ["DialogueDefinition", "DialogueChoiceDefinition", "FlagRuntimeState", "GeneratedCampaignBranchKind"],
+    "inputs": ["exact generated DialogueDefinition.Id", "branch value SUPPORT, CHALLENGE or REFUSE"],
+    "outputs": ["flag id equals the dialogue id", "initial flag_equals(dialogueId, empty)", "follow-up flag_equals(dialogueId, branch value)"],
+    "hashes": ["canonical dialogue definition fingerprint", "choice flag inventory SHA"],
+    "behavioralTests": ["flag id exact", "initial empty requirement", "follow-up exact requirement", "alternatives locked by flag truth"]
+  },
+  "overlayControlledDelta": {
+    "types": ["GeneratedCampaignChoiceOverlayService", "GeneratedCampaignChoiceOverlayDocument", "GamePackageDefinition"],
+    "inputs": ["exact pre-choice package", "exact binding result"],
+    "outputs": ["choice-overlay package", "only bound generated dialogue nodes, generatedChoice metadata and generated_choice_branching tag may differ"],
+    "hashes": ["SourcePackageSha256", "OutputPackageSha256", "DialogueFingerprintsBefore", "DialogueFingerprintsAfter", "choice overlay canonical SHA"],
+    "behavioralTests": ["original placeholder replaced", "non-placeholder content preserved", "non-generated dialogues byte-identical", "non-dialogue collections byte-identical", "counts unchanged", "independent and reordered rebuild deterministic", "forbidden delta rejected"]
+  },
+  "supportRuntimeFlow": {
+    "types": ["GameProjectGeneratedCampaignChoiceQualificationService", "IUnifiedGameRuntimeService", "GeneratedCampaignSessionService", "GeneratedCampaignDecisionJournalService"],
+    "inputs": ["final package", "Support branch binding", "auto-start generated quest", "exact data-derived reputation reward"],
+    "outputs": ["flag SUPPORT", "exact positive reputation delta", "no encounter start", "active follow-up", "real combat/manual turn-in", "completed follow-up"],
+    "hashes": ["before/after session SHA", "ordered command/event SHA", "final Support route state SHA"],
+    "behavioralTests": ["Support exact positive delta", "no encounter", "active follow-up", "completed follow-up after actual quest completion", "alternatives locked"]
+  },
+  "challengeRuntimeFlow": {
+    "types": ["GameProjectGeneratedCampaignChoiceQualificationService", "GeneratedEncounterCombatContract", "GeneratedCampaignSessionService"],
+    "inputs": ["Challenge branch with exact generated encounter", "qualified combat action catalog"],
+    "outputs": ["flag CHALLENGE", "dialogue closed", "exact encounter active", "initial alternatives locked immediately", "follow-up only after flee or victory/recovery"],
+    "hashes": ["choice state SHA", "flee route SHA", "victory route SHA", "unchanged package SHA"],
+    "behavioralTests": ["challenge starts exact encounter", "does not reopen while active", "flag proves alternatives lock", "flee follow-up", "victory follow-up", "combat/recovery remains usable"]
+  },
+  "refuseRuntimeFlow": {
+    "types": ["GameProjectGeneratedCampaignChoiceQualificationService", "IUnifiedGameRuntimeService"],
+    "inputs": ["Refuse branch", "negative absolute generated quest reputation reward"],
+    "outputs": ["flag REFUSE", "exact negative reputation delta", "quest and encounter state unchanged"],
+    "hashes": ["before/after quest inventory SHA", "before/after encounter SHA", "ordered event SHA"],
+    "behavioralTests": ["exact negative delta", "no quest mutation", "no encounter mutation", "alternatives locked"]
+  },
+  "invalidBranchRollback": {
+    "types": ["DialogueRuntimeService", "IUnifiedGameRuntimeService", "GameProjectGeneratedCampaignChoiceQualificationService"],
+    "inputs": ["isolated branch choice whose set_flag succeeds before a later missing encounter/effect fails"],
+    "outputs": ["Runtime failure", "only ValidationFailed event", "exact original session/state/package retained"],
+    "hashes": ["before session SHA equals after session SHA", "before package SHA equals after package SHA", "failure event SHA"],
+    "behavioralTests": ["real failing choice rollback", "no flag/reputation/quest/encounter mutation", "no success event leak"]
+  },
+  "independentReplay": {
+    "types": ["GeneratedCampaignChoiceRuntimeFrame", "IUnifiedGameRuntimeService"],
+    "inputs": ["two independently started fresh sessions for every dialogue/branch route"],
+    "outputs": ["ordered commands, events and final state hashes from both executions"],
+    "hashes": ["execution A command/event/state SHA", "execution B command/event/state SHA", "equivalence SHA"],
+    "behavioralTests": ["two independent sessions per branch", "ordered commands equivalent", "ordered events equivalent", "final states equivalent"]
+  },
+  "previewAvailability": {
+    "types": ["GeneratedCampaignDialogueChoicePreviewService", "GeneratedCampaignDialogueChoicePreview", "GeneratedCampaignChoiceOption"],
+    "inputs": ["exact package", "open UnifiedRuntimeSession", "Runtime DialogueOpened choiceIds"],
+    "outputs": ["only current-node Runtime-available choices marked enabled", "clone-executed failure reason", "state/event deltas for consequences", "metadata only for labels"],
+    "hashes": ["OriginalSessionSha256", "PackageSha256", "preview clone before/after SHA"],
+    "behavioralTests": ["preview clone", "original byte-identical", "package unchanged", "available IDs match Runtime", "state-backed reputation/encounter/quest", "human disabled reason"]
+  },
+  "decisionJournalTruth": {
+    "types": ["GeneratedCampaignDecisionJournalService", "GeneratedCampaignDecision", "GeneratedCampaignDecisionStatus"],
+    "inputs": ["current Runtime flag", "current quest state", "current encounter state/events", "package definitions for labels"],
+    "outputs": ["Support active/completed", "Challenge active/resolved", "Refuse chosen", "alternatives locked", "no row for absent/dropped flag"],
+    "hashes": ["current session SHA", "canonical journal SHA"],
+    "behavioralTests": ["journal from flags", "quest active/completed status", "challenge active/resolved status", "refuse status", "ghost flag absent", "UI no technical values"]
+  },
+  "buildPipelineOrder": {
+    "types": ["GameProjectBuildAndQualificationService", "GeneratedCampaignChoiceOverlayService", "GeneratedWorldEncounterCombatOverlayService"],
+    "inputs": ["strict source", "generated travel package", "branchable dialogues regardless of encounter count"],
+    "outputs": ["choice overlay before optional combat overlay", "choice qualification against exact final package", "zero-encounter branchable v5 build"],
+    "hashes": ["travel package SHA", "choice overlay package SHA", "final package SHA", "combat exact package SHA"],
+    "behavioralTests": ["choices independent of encounters", "zero-encounter CHOICE_CURRENT", "overlay before combat", "combat summary final package exact"]
+  },
+  "primaryRuntimeTruth": {
+    "types": ["GameProjectBuildResult", "GameProjectGeneratedCampaignChoiceSummary", "GameProjectGeneratedEncounterCombatSummary"],
+    "inputs": ["final choice-qualified package", "full choice route frames", "independent combat qualification"],
+    "outputs": ["v5 FinalStateHash and primary frames from full choice route", "combat summary remains independently valid on exact same package"],
+    "hashes": ["choice FinalStateHash", "build FinalStateHash", "combat ExactPackageSha256", "build PackageSha256"],
+    "behavioralTests": ["v5 primary final state is choice route", "combat summary remains exact", "v4 historical equality retained"]
+  },
+  "historyV5Compatibility": {
+    "types": ["GameProjectBuildHistoryEntry", "GameProjectBuildHistoryReader"],
+    "inputs": ["v5 build", "genuine v4 history", "v3", "v2", "branchless history"],
+    "outputs": ["v5 CHOICE_CURRENT", "v4 CHOICES_PENDING", "v3/v2 historical statuses", "branchless ABSENT valid"],
+    "hashes": ["history file SHA", "package/composition/final/authoring hashes", "choice summary SHA"],
+    "behavioralTests": ["v5 current", "v4 pending", "v3/v2 compatibility", "branchless valid", "one build upgrades old project without source rewrite"]
+  },
+  "campaignReadiness": {
+    "types": ["GeneratedCampaignSessionTruthService", "UnifiedGameProjectWorkspaceController", "ProjectsPageControl"],
+    "inputs": ["strict generated source", "selected current history", "actual branchable dialogue count"],
+    "outputs": ["branchable requires v5 CHOICE_CURRENT", "genuine v4 returns PROJECT_NOT_READY and campaign.generated_choices_not_current", "Projects action Собрать и играть", "zero-encounter branchable READY"],
+    "hashes": ["selected history SHA", "package/composition/final/authoring truth hashes"],
+    "behavioralTests": ["old project not ready", "Projects human rows", "zero-encounter ready", "branchless compatibility"]
+  },
+  "regenerationSeal": {
+    "types": ["GameProjectSeedRegenerationCandidateSeal", "GameProjectSeedRegenerationCandidateSealService", "GameProjectSeedRegenerationCommitValidator"],
+    "inputs": ["candidate build/history/package", "choice summary", "choice overlay", "canonical dialogue-supported branch inventory"],
+    "outputs": ["GeneratedCampaignChoiceSummarySha256", "GeneratedCampaignChoiceOverlaySha256", "GeneratedCampaignChoiceFlagInventorySha256", "semantic validation before promotion"],
+    "hashes": ["choice summary SHA", "choice overlay SHA", "flag inventory SHA", "combat summary SHA"],
+    "behavioralTests": ["seal fields populated", "branch removal rejected", "flag value tamper rejected", "quest/encounter/reputation/follow-up tamper rejected", "overlay hash tamper rejected", "flag inventory tamper rejected"]
+  },
+  "saveExactContinue": {
+    "types": ["GeneratedGameplaySaveService", "GeneratedCampaignSessionService", "GeneratedCampaignDecisionJournalService"],
+    "inputs": ["Support post-choice CURRENT save", "pre-choice save"],
+    "outputs": ["exact flag/reputation/journal/follow-up", "Runtime Start delta zero", "pre-choice remains unchosen with empty journal"],
+    "hashes": ["save revision SHA", "saved session SHA", "continued session SHA", "journal SHA"],
+    "behavioralTests": ["exact Support continue", "zero Runtime Start", "pre-choice unchosen", "alternatives remain locked after continue"]
+  },
+  "migrationPreserveDrop": {
+    "types": ["GeneratedGameplayDefinitionFingerprintService", "GeneratedGameplaySaveMigrationService", "GeneratedGameplaySaveMigrationPreview"],
+    "inputs": ["old-save PACKAGE_REBASE_REQUIRED", "same dialogue canonical fingerprint", "changed or missing dialogue fingerprint"],
+    "outputs": ["preview zero-write", "explicit apply", "compatible dialogue flag preserved", "incompatible flag dropped with reason", "active dialogue reset", "no ghost journal"],
+    "hashes": ["source revision SHA", "target truth SHA", "dialogue fingerprint SHA", "candidate session SHA"],
+    "behavioralTests": ["old save rebase required", "direct continue rejected", "explicit apply current", "compatible flag preserved", "incompatible flag dropped", "no ghost journal", "dialogue/combat/travel usable"]
+  },
+  "standaloneRcPortable": {
+    "types": ["ProjectStandaloneBuildService", "GameProjectReleaseCandidateRecordService", "UnifiedGameProjectWorkspaceController"],
+    "inputs": ["real v5 all-selectable build", "existing StandaloneHostCache", "portable all-selectable copy", "portable core-only copy"],
+    "outputs": ["one hidden smoke", "HostReused true", "HostRebuilt false", "Unity starts zero", "payload choice facts", "RC CURRENT", "core-only no false READY/RC"],
+    "hashes": ["host cache key", "payload package/composition/final hashes", "RC record SHA", "portable history SHA"],
+    "behavioralTests": ["exactly one cached hidden smoke", "payload self-check", "RC current", "portable all-selectable", "portable core-only no false RC"]
+  },
+  "failureMatrix": {
+    "types": ["GeneratedCampaignChoiceBindingService", "GeneratedCampaignChoiceOverlayService", "DialogueRuntimeService", "GameProjectSeedRegenerationCommitValidator", "GeneratedGameplaySaveMigrationService"],
+    "inputs": ["invalid source/provenance", "forbidden overlay delta", "failing branch", "tampered candidate", "incompatible dialogue migration"],
+    "outputs": ["causal diagnostic", "no partial apply", "no success event", "no promotion", "no ghost journal"],
+    "hashes": ["before/after package SHA", "before/after session SHA", "candidate seal SHA"],
+    "behavioralTests": ["binding diagnostics", "controlled delta rejection", "atomic rollback", "tamper rejection", "migration drop"]
+  },
+  "nonGoals": {
+    "types": ["Runtime", "Runtime.Abstractions", "GamePackage public schema", "FeatureModule catalog", "GeneratedPackageMvp", "GeneratedProjectOverlay", "GeneratedWorldEncounterCombatOverlay", "Unity", "standalone and RC implementation"],
+    "inputs": ["required base source inventory and historical Goal142/Goal148/generation sidecars"],
+    "outputs": ["byte-identical forbidden sources and historical artifacts"],
+    "hashes": ["Goal142 tree SHA", "Goal148 source SHA", "generation sidecar hashes", "forbidden source tree hashes"],
+    "behavioralTests": ["source immutability", "sidecar immutability", "artifact scope violation count zero", "Unity invocation count zero"]
+  }
+}

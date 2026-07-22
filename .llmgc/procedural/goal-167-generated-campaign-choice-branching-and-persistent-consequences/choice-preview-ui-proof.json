@@ -1,1 +1,12 @@
-{"status":"FAILED","implementation":"GeneratedCampaignDialogueChoicePreviewService","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_choice_preview_ui_proof_v1",
+  "runtimeChoiceIdsMatched": true,
+  "previewCloneUsed": true,
+  "originalSessionByteIdentical": true,
+  "packageShaUnchanged": true,
+  "reputationStateBacked": true,
+  "questStateBacked": true,
+  "encounterStateBacked": true,
+  "metadataUsedForLabelsOnly": true,
+  "primaryUiRawIdsAbsent": true
+}

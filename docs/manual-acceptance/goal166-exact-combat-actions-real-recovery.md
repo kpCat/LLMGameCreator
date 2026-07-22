@@ -10,3 +10,5 @@ Runtime, GamePackage/save schema, Unity, standalone, RC, generated source and im
 # Goal 167 independent-audit intake
 
 Goal166 independent audit is recorded as `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`; Goal166 remains unaccepted and has no human gate.
+
+Goal167C consumed this audit result as its required intake. `goal166IndependentAuditRequired=false`; no Goal166 manual gate was introduced.

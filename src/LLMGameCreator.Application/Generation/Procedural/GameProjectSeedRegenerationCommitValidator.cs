@@ -175,6 +175,11 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             if (!packageValidation.IsValid) diagnostics.Add("semantic.package_invalid");
             Match(HashFile(packagePath), request.CandidateSeal.CandidatePackageSha256,
                 "semantic.package_hash_mismatch", diagnostics);
+            var choiceBinding = source is { Present: true, Passed: true }
+                ? new GeneratedCampaignChoiceBindingService().Bind(source, package)
+                : new GeneratedCampaignChoiceBindingResult();
+            if (!choiceBinding.Passed) diagnostics.Add("semantic.history_choice_binding_invalid");
+            var branchableDialogueCount = choiceBinding.Bindings.Count(item => item.Branches.Count > 0);
 
             var authoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
             var state = authoring.OpenProject(project, package, operationLease);
@@ -220,7 +225,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             if (generatedEncounterCount > 0)
             {
                 var combat = history.GeneratedEncounterCombat;
-                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV4
+                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV5
                     || combat is not
                     {
                         Present: true,
@@ -236,14 +241,48 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                     || !RouteEligible(combat)
                     || !QualifiedActionCatalogEligible(combat)
                     || !string.Equals(combat.ExactPackageSha256, history.PackageSha256,
-                        StringComparison.Ordinal)
-                    || !string.Equals(combat.FinalStateHash, history.FinalStateHash,
                         StringComparison.Ordinal))
                     diagnostics.Add("semantic.history_combat_qualification_incomplete");
             }
             else if (history.GeneratedEncounterCombat is { Present: true }
                      or { Status: "CAMPAIGN_CURRENT" })
                 diagnostics.Add("semantic.history_combat_unexpected");
+            if (branchableDialogueCount > 0)
+            {
+                var choices = history.GeneratedCampaignChoices;
+                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV5
+                    || choices is not
+                    {
+                        Present: true,
+                        Passed: true,
+                        Status: "CHOICE_CURRENT",
+                        RuntimeQualificationPassed: true,
+                        ExclusiveBranchingPassed: true,
+                        FollowUpPassed: true,
+                        ChallengeFleeFollowUpPassed: true,
+                        ChallengeVictoryFollowUpPassed: true,
+                        AtomicRollbackPassed: true,
+                        ReplayPassed: true,
+                        Overlay: { Passed: true }
+                    }
+                    || choices.BranchableDialogueCount != branchableDialogueCount
+                    || choices.QualifiedDialogueCount != branchableDialogueCount
+                    || choices.BranchFlagIds.Count != branchableDialogueCount
+                    || choices.BranchFlagIds.Distinct(StringComparer.Ordinal).Count() != branchableDialogueCount
+                    || choices.RuntimeFrames.Count != (choices.SupportBranchCount + choices.ChallengeBranchCount
+                                                       + choices.RefuseBranchCount) * 2
+                    || choices.RuntimeFrames.GroupBy(item => (item.DialogueId, item.BranchKind))
+                        .Any(group => !group.Select(item => item.ReplayIndex).OrderBy(item => item)
+                            .SequenceEqual([1, 2]))
+                    || !string.Equals(choices.FinalPackageSha256, history.PackageSha256,
+                        StringComparison.Ordinal)
+                    || !string.Equals(choices.FinalStateHash, history.FinalStateHash,
+                        StringComparison.Ordinal)
+                    || !string.Equals(choices.BranchFlagInventorySha256,
+                        GeneratedCampaignChoiceCanonical.Hash(choices.Overlay.FlagInventory),
+                        StringComparison.Ordinal))
+                    diagnostics.Add("semantic.history_choice_qualification_incomplete");
+            }
             Match(history.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
                 request.CandidateSeal.MechanicsProfileId,
                 "semantic.mechanics_profile_mismatch", diagnostics);
@@ -265,6 +304,18 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             Match(history.GeneratedEncounterCombat?.ContractId ?? string.Empty,
                 request.CandidateSeal.GeneratedEncounterCombatContractId,
                 "semantic.generated_combat_contract_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.GeneratedCampaignChoices),
+                request.CandidateSeal.GeneratedCampaignChoiceSummarySha256,
+                "semantic.generated_choice_summary_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.GeneratedCampaignChoices?.Overlay),
+                request.CandidateSeal.GeneratedCampaignChoiceOverlaySha256,
+                "semantic.generated_choice_overlay_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.GeneratedCampaignChoices?.Overlay?.FlagInventory),
+                request.CandidateSeal.GeneratedCampaignChoiceFlagInventorySha256,
+                "semantic.generated_choice_flag_inventory_mismatch", diagnostics);
             Match(history.PackageSha256, request.CandidateSeal.CandidatePackageSha256,
                 "semantic.history_package_mismatch", diagnostics);
             Match(history.CompositionPackageSha256, request.CandidateSeal.CandidateCompositionSha256,

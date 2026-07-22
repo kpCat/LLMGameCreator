@@ -52,6 +52,18 @@ public sealed record GeneratedCampaignChoiceDialogueFingerprint
     public string CanonicalSha256 { get; init; } = string.Empty;
 }
 
+public sealed record GeneratedCampaignChoiceFlagInventoryRow
+{
+    public string DialogueId { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedCampaignBranchKind> SupportedBranchKinds { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignChoiceOverlayValidationResult
+{
+    public bool Passed { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
 public sealed record GeneratedCampaignChoiceOverlayDocument
 {
     public string SchemaVersion { get; init; } = "generated_campaign_choice_overlay_v1";
@@ -63,6 +75,7 @@ public sealed record GeneratedCampaignChoiceOverlayDocument
     public IReadOnlyList<GeneratedCampaignChoiceBinding> Bindings { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignChoiceDialogueFingerprint> DialogueFingerprintsBefore { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignChoiceDialogueFingerprint> DialogueFingerprintsAfter { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignChoiceFlagInventoryRow> FlagInventory { get; init; } = [];
     public IReadOnlyList<string> AllowedFieldPaths { get; init; } = [];
     public IReadOnlyDictionary<string, int> DefinitionCollectionCountsBefore { get; init; }
         = new SortedDictionary<string, int>(StringComparer.Ordinal);
@@ -83,9 +96,25 @@ public sealed record GeneratedCampaignChoiceOverlayResult
 
 public sealed record GeneratedCampaignChoiceRuntimeFrame
 {
+    public int ReplayIndex { get; init; }
     public string DialogueId { get; init; } = string.Empty;
     public GeneratedCampaignBranchKind BranchKind { get; init; }
+    public string BeforeStateHash { get; init; } = string.Empty;
     public string StateHash { get; init; } = string.Empty;
+    public string CommandSha256 { get; init; } = string.Empty;
+    public string EventSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<string> Commands { get; init; } = [];
+    public IReadOnlyList<string> Events { get; init; } = [];
+    public string FlagValue { get; init; } = string.Empty;
+    public double ReputationBefore { get; init; }
+    public double ReputationAfter { get; init; }
+    public double ReputationDelta { get; init; }
+    public string QuestStateBefore { get; init; } = string.Empty;
+    public string QuestState { get; init; } = string.Empty;
+    public string EncounterStateBefore { get; init; } = string.Empty;
+    public string EncounterState { get; init; } = string.Empty;
+    public bool AlternativesLocked { get; init; }
+    public bool FollowUpPassed { get; init; }
     public bool Passed { get; init; }
 }
 
@@ -115,8 +144,16 @@ public sealed record GameProjectGeneratedCampaignChoiceSummary
     public bool RuntimeQualificationPassed { get; init; }
     public bool ExclusiveBranchingPassed { get; init; }
     public bool FollowUpPassed { get; init; }
+    public bool ChallengeFleeFollowUpPassed { get; init; }
+    public bool ChallengeVictoryFollowUpPassed { get; init; }
     public bool AtomicRollbackPassed { get; init; }
+    public string RollbackBeforeStateHash { get; init; } = string.Empty;
+    public string RollbackAfterStateHash { get; init; } = string.Empty;
+    public string RollbackPackageBeforeSha256 { get; init; } = string.Empty;
+    public string RollbackPackageAfterSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<string> RollbackEventTypes { get; init; } = [];
     public bool ReplayPassed { get; init; }
+    public string BranchFlagInventorySha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public IReadOnlyList<GeneratedCampaignChoiceRuntimeFrame> RuntimeFrames { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignChoiceHumanFact> HumanReviewFacts { get; init; } = [];

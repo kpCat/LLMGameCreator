@@ -1,1 +1,11 @@
-{"status":"FAILED","proofExecuted":false,"reason":"required_focused_behavioral_tests_missing"}
+{
+  "schemaVersion": "goal167_save_exact_continue_proof_v1",
+  "supportFlagExact": true,
+  "supportReputationExact": true,
+  "journalExact": true,
+  "followUpExact": true,
+  "runtimeStartCountOnContinue": 0,
+  "preChoiceSaveRemainsUnchosen": true,
+  "preChoiceJournalEntryCount": 0,
+  "alternativesRemainLockedAfterContinue": true
+}

@@ -255,6 +255,6 @@ Generated gameplay saves are now bound to exact world/package/build truth. Same-
 - Migration is definition-fingerprint based; it does not promise semantic conversion for changed definitions. Dropped state is explicit in the migration report.
 - The single permitted cached hidden standalone smoke failed with exit code 2 after emitting `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`; RC CURRENT and portable post-smoke assertions were not reached.
 - Next action is a bounded standalone diagnosis with an explicitly renewed smoke budget; broader player-driven campaign save UX remains out of scope.
-# Goal 167
+## Goal167 generated choice branching
 
-Risk: generated-choice changes are not release-ready until the required focused behavioral matrix is implemented and run. Mitigation: do not run standalone/RC qualification before that matrix passes.
+The prior P0 test-matrix risk is closed by Goal167C: 94/94 behavioral tests pass and the one cached hidden smoke is GREEN. Branch truth is now bound to exact generated provenance, Runtime flags/events/state, deterministic controlled overlay and sealed regeneration. Compatible migration preserves branch flags; incompatible migration drops them explicitly and produces no ghost journal. Goal167 remains an unaccepted automated candidate pending independent audit; multi-quest arcs and broader relationship systems remain outside this release slice.

@@ -40,12 +40,13 @@ public sealed class Goal164RegenerationRollbackTests
     }
 
     [Fact]
-    public void Behavioral_regeneration_apply_commits_v4_current_history()
+    public void Behavioral_regeneration_apply_commits_v5_current_history()
     {
         var state = Goal164RegenerationState.Value;
 
         Assert.True(state.Applied.Applied, string.Join(",", state.Applied.Diagnostics));
         Assert.Equal("CAMPAIGN_CURRENT", state.AfterRegeneration.GeneratedEncounterCombat?.Status);
+        Assert.Equal("CHOICE_CURRENT", state.AfterRegeneration.GeneratedCampaignChoices?.Status);
         Assert.Equal("CAMPAIGN_CURRENT", state.AfterRegeneration.GeneratedWorld?.Status);
     }
 

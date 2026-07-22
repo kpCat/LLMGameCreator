@@ -11,21 +11,42 @@ public sealed class GeneratedCampaignChoiceBindingService
     {
         ArgumentNullException.ThrowIfNull(strictSource);
         ArgumentNullException.ThrowIfNull(preChoicePackage);
-        if (strictSource is not { Present: true, Passed: true, RegeneratedPlan: not null, Overlay: not null })
+        if (strictSource is not
+            {
+                Present: true,
+                Passed: true,
+                RegeneratedPlan: not null,
+                Overlay: not null,
+                GeneratedMvpPackage: not null
+            })
             return Failed("generated_choice.source_invalid");
 
         var plan = strictSource.RegeneratedPlan;
-        var generatedDialogueIds = strictSource.Overlay.GeneratedRecords
+        var generatedDialogueRecords = strictSource.Overlay.GeneratedRecords
             .Where(item => string.Equals(item.CollectionPath, "game.dialogues", StringComparison.Ordinal))
-            .Select(item => item.RecordId).ToHashSet(StringComparer.Ordinal);
+            .ToList();
         var diagnostics = new List<string>();
         var bindings = new List<GeneratedCampaignChoiceBinding>();
-        foreach (var actor in plan.ActorSeeds.OrderBy(item => item.ActorSeedId, StringComparer.Ordinal))
+        foreach (var mvpDialogue in strictSource.GeneratedMvpPackage.Game.Dialogues
+                     .Where(item => generatedDialogueRecords.Any(record => record.RecordId == item.Id))
+                     .OrderBy(item => item.Id, StringComparer.Ordinal))
         {
-            var actorId = Canonical(actor.ActorSeedId);
-            var dialogues = preChoicePackage.Game.Dialogues.Where(item => generatedDialogueIds.Contains(item.Id)
+            if (generatedDialogueRecords.Count(item => item.RecordId == mvpDialogue.Id) != 1
+                || !mvpDialogue.Metadata.TryGetValue("sourceActorSeedId", out var mappedActorId))
+            {
+                diagnostics.Add("generated_choice.dialogue_provenance_invalid");
+                continue;
+            }
+            var actors = plan.ActorSeeds.Where(item => SourceMatches(item.ActorSeedId, mappedActorId)).ToList();
+            if (actors.Count != 1)
+            {
+                diagnostics.Add("generated_choice.actor_provenance_invalid");
+                continue;
+            }
+            var actor = actors[0];
+            var dialogues = preChoicePackage.Game.Dialogues.Where(item => item.Id == mvpDialogue.Id
                 && item.Metadata.TryGetValue("sourceActorSeedId", out var source)
-                && string.Equals(source, actorId, StringComparison.Ordinal)).ToList();
+                && string.Equals(source, mappedActorId, StringComparison.Ordinal)).ToList();
             if (dialogues.Count != 1)
             {
                 diagnostics.Add(dialogues.Count == 0
@@ -33,10 +54,16 @@ public sealed class GeneratedCampaignChoiceBindingService
                 continue;
             }
             var dialogue = dialogues[0];
-            var entities = preChoicePackage.Game.Maps.SelectMany(map => map.Entities).Where(entity =>
+            var mvpEntities = strictSource.GeneratedMvpPackage.Game.Maps.SelectMany(map => map.Entities).Where(entity =>
                 entity.Components.Any(component => string.Equals(component.Type, "interactable", StringComparison.OrdinalIgnoreCase)
                     && component.Args.TryGetValue("dialogueId", out var dialogueId)
                     && string.Equals(dialogueId, dialogue.Id, StringComparison.Ordinal))).ToList();
+            var entities = mvpEntities.Count == 1
+                ? preChoicePackage.Game.Maps.SelectMany(map => map.Entities).Where(entity => entity.Id == mvpEntities[0].Id
+                    && entity.Components.Any(component => string.Equals(component.Type, "interactable", StringComparison.OrdinalIgnoreCase)
+                        && component.Args.TryGetValue("dialogueId", out var dialogueId)
+                        && string.Equals(dialogueId, dialogue.Id, StringComparison.Ordinal))).ToList()
+                : [];
             if (entities.Count != 1)
             {
                 diagnostics.Add("generated_choice.actor_entity_missing");
@@ -47,17 +74,29 @@ public sealed class GeneratedCampaignChoiceBindingService
                 && component.Args.TryGetValue("dialogueId", out var dialogueId)
                 && string.Equals(dialogueId, dialogue.Id, StringComparison.Ordinal));
             if (!interactable.Args.TryGetValue("interactionId", out var interactionId)
-                || preChoicePackage.Game.Interactions.Count(item => item.Id == interactionId) != 1)
+                || string.IsNullOrWhiteSpace(interactionId))
             {
                 diagnostics.Add("generated_choice.interaction_missing");
                 continue;
             }
-            var factionId = Canonical(actor.FactionId);
-            if (preChoicePackage.Game.Factions.Count(item => item.Id == factionId) != 1)
+            var mvpInteractions = strictSource.GeneratedMvpPackage.Game.Interactions.Where(item => item.Id == interactionId
+                    && item.Metadata.TryGetValue("sourceActorSeedId", out var source)
+                    && string.Equals(source, mappedActorId, StringComparison.Ordinal)).ToList();
+            if (mvpInteractions.Count != 1 || preChoicePackage.Game.Interactions.Count(item => item.Id == interactionId
+                    && item.Metadata.TryGetValue("sourceActorSeedId", out var source)
+                    && string.Equals(source, mappedActorId, StringComparison.Ordinal)) != 1)
+            {
+                diagnostics.Add("generated_choice.interaction_missing");
+                continue;
+            }
+            var factionIds = strictSource.GeneratedMvpPackage.Game.Factions.Select(item => item.Id)
+                .Where(item => SourceMatches(actor.FactionId, item)).ToList();
+            if (factionIds.Count != 1 || preChoicePackage.Game.Factions.Count(item => item.Id == factionIds[0]) != 1)
             {
                 diagnostics.Add("generated_choice.faction_missing");
                 continue;
             }
+            var factionId = factionIds[0];
             var questCandidates = ResolveQuestCandidates(plan, preChoicePackage, actor.RegionId, actor.FactionId, factionId);
             if (questCandidates.Count > 1) diagnostics.Add("generated_choice.relationship_ambiguous");
             var quest = questCandidates.Count == 0 ? ((QuestDefinition Quest, double ReputationAmount)?)null
@@ -77,12 +116,12 @@ public sealed class GeneratedCampaignChoiceBindingService
                     encounter.Id, 0, actor.ActorSeedId, preChoicePackage));
             bindings.Add(new GeneratedCampaignChoiceBinding
             {
-                ActorSeedId = actorId,
+                ActorSeedId = mappedActorId,
                 ActorEntityId = entities[0].Id,
                 InteractionId = interactionId,
                 DialogueId = dialogue.Id,
                 FactionId = factionId,
-                RegionId = Canonical(actor.RegionId),
+                RegionId = dialogue.Metadata.GetValueOrDefault("sourceRegionId") ?? string.Empty,
                 Branches = branches.OrderBy(item => item.Kind).ToList(),
                 Status = branches.Count == 0 ? "NO_BRANCH_RELATIONSHIP" : "BRANCHABLE"
             });
@@ -104,7 +143,12 @@ public sealed class GeneratedCampaignChoiceBindingService
         var matches = new List<(QuestDefinition, double)>();
         foreach (var seed in validSeeds)
         {
-            var source = Canonical(seed.QuestEventSeedId);
+            var matchingSources = package.Game.Quests
+                .Select(item => item.Metadata.GetValueOrDefault("sourceQuestEventSeedId"))
+                .Where(item => item is not null && SourceMatches(seed.QuestEventSeedId, item))
+                .Distinct(StringComparer.Ordinal).ToList();
+            if (matchingSources.Count != 1) continue;
+            var source = matchingSources[0];
             var quests = package.Game.Quests.Where(item => item.Metadata.TryGetValue("sourceQuestEventSeedId", out var value)
                 && string.Equals(value, source, StringComparison.Ordinal)).ToList();
             if (quests.Count != 1) continue;
@@ -124,9 +168,9 @@ public sealed class GeneratedCampaignChoiceBindingService
         var selected = (actorSpecific.Count > 0 ? actorSpecific : candidates)
             .OrderBy(seed => seed.EncounterSeedId, StringComparer.Ordinal).FirstOrDefault();
         if (selected is null) return null;
-        var source = Canonical(selected.EncounterSeedId);
-        return package.Game.Encounters.SingleOrDefault(item => item.Metadata.TryGetValue("sourceEncounterSeedId", out var value)
-            && string.Equals(value, source, StringComparison.Ordinal));
+        var matches = package.Game.Encounters.Where(item => item.Metadata.TryGetValue("sourceEncounterSeedId", out var value)
+            && SourceMatches(selected.EncounterSeedId, value)).ToList();
+        return matches.Count == 1 ? matches[0] : null;
     }
 
     private static GeneratedCampaignChoiceBranch Branch(GeneratedCampaignBranchKind kind, DialogueDefinition dialogue,
@@ -162,7 +206,10 @@ public sealed class GeneratedCampaignChoiceBindingService
         };
     }
 
-    private static string Canonical(string value) => value.StartsWith("generated/", StringComparison.Ordinal)
-        ? value : "generated/" + value;
+    private static bool SourceMatches(string sourceId, string mappedId) =>
+        string.Equals(sourceId, mappedId, StringComparison.Ordinal)
+        || (!sourceId.StartsWith("generated/", StringComparison.Ordinal)
+            && !sourceId.StartsWith("seeded_generated_project/", StringComparison.Ordinal)
+            && string.Equals("generated/" + sourceId, mappedId, StringComparison.Ordinal));
     private static GeneratedCampaignChoiceBindingResult Failed(string diagnostic) => new() { Diagnostics = [diagnostic] };
 }

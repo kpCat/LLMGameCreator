@@ -271,6 +271,6 @@ Goal160 independent audit is `BLOCKED_AT_D8DD05E7` on `semantic_commit_validator
 ## Goal161 profile-neutral world change and generated gameplay save migration gate record
 
 Goal161 is BLOCKED with `accepted=false`, `manualReviewRequired=false`, `manualGateReady=false` and `independentAuditRequired=false`. Profile-neutral world-change commit validation, immutable generated save revisions, atomic slot manifests, exact same-world load, explicit cross-world/package migration, canonical preserved/dropped reporting, map/transient reset, post-load Runtime travel/replay, historical revision reuse and generated-aware WinForms flows pass. The one permitted reused-cache hidden smoke returned exit code 2 with `LLMGC_PROJECT_STANDALONE_SMOKE_FAIL`; RC CURRENT and execution-free portable recovery were not reached. This creates no human gate.
-# Goal 167 gate
+## Goal167C generated choice branching gate record
 
-FAILED: focused behavioral test matrix is incomplete (1 discovered, minimum 62).
+Goal167C is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false`, `manualGateReady=false` and `independentAuditRequired=true`. It closes the published FAILED scaffold with 94/94 tests, exact three-branch Runtime qualification, atomic rollback and independent replay, choice-current v5 readiness, save/migration/regeneration proof, one reused-cache GREEN hidden smoke, RC `CURRENT`, and portable all/core profiles. Unity Editor starts and smoke retries are both zero. This creates no human gate.

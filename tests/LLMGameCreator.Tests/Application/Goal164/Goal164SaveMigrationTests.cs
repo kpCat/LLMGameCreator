@@ -61,13 +61,15 @@ public sealed class Goal164SaveMigrationTests
     }
 
     [Fact]
-    public void Behavioral_migration_continues_on_v4_campaign_current_package()
+    public void Behavioral_migration_continues_on_v5_campaign_current_package()
     {
         var state = Goal164MigrationState.Value;
 
         Assert.Equal(GeneratedCampaignSessionStatus.ACTIVE, state.Migrated.Status);
         Assert.Equal("CAMPAIGN_CURRENT",
             state.Build.Controller.Snapshot().GeneratedEncounterCombat?.Status);
+        Assert.Equal("CHOICE_CURRENT",
+            state.Build.Controller.Snapshot().GeneratedCampaignChoices?.Status);
     }
 
     [Fact]

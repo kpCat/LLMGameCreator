@@ -203,6 +203,6 @@ No new P2/P3 finding was produced by the required RC matrix. Historical 64-test 
 ## Goal161T immutable payload / RC closure note
 
 Goal161T closes the standalone qualification debt at the Application seam. The prior `rc.payload.missing` defect was caused by RC resolving the removed project-local `Builds/Windows/<slug>` payload instead of the validated immutable `%LOCALAPPDATA%/LGC/O/<token>/runs/<run>` current pointer. Typed payload evidence, exact standalone/history correlation, legacy compatibility and absent-output portable semantics are now covered. Zero-execution finalization recovered RC `CURRENT` on the retained Goal161S project; run/pointer/history/save bytes remained unchanged and Player/Unity/standalone counts were zero. Goal161/161T remain `accepted=false` pending independent audit; no Runtime, Unity, GamePackage schema or generated-save implementation changes were made.
-# Goal 167 test debt
+## Goal167 test-debt closure
 
-P0: the required 62 focused Goal167 tests, including 54 behavioral tests, were not implemented; one inventory test was discovered. This blocks requalification.
+The published Goal167 P0 test debt is closed by Goal167C: the placeholder inventory test was replaced by a 94-test behavioral matrix and all 94 pass. The cached smoke itself passed; its surrounding test briefly used the wrong payload frame filename and was corrected without consuming a retry. No new P0/P1 debt remains from this continuation. Independent audit is still required.

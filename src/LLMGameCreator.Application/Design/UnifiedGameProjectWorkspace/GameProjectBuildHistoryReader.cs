@@ -162,7 +162,8 @@ public sealed class GameProjectBuildHistoryReader
         && QualifiedActionCatalogEligible(combat)
         && combat.QualifiedEncounterCount == combat.GeneratedEncounterCount
         && string.Equals(combat.ExactPackageSha256, entry.PackageSha256, StringComparison.Ordinal)
-        && string.Equals(combat.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal);
+        && (entry.SchemaVersion == SchemaVersionV5
+            || string.Equals(combat.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal));
 
     private static bool ChoiceEligible(GameProjectBuildHistoryEntry entry) => entry.GeneratedCampaignChoices is
         {
@@ -172,12 +173,21 @@ public sealed class GameProjectBuildHistoryReader
             RuntimeQualificationPassed: true,
             ExclusiveBranchingPassed: true,
             FollowUpPassed: true,
+            ChallengeFleeFollowUpPassed: true,
+            ChallengeVictoryFollowUpPassed: true,
             AtomicRollbackPassed: true,
             ReplayPassed: true
         } choices
         && choices.BranchableDialogueCount == choices.QualifiedDialogueCount
+        && choices.RuntimeFrames.Count == (choices.SupportBranchCount + choices.ChallengeBranchCount
+                                           + choices.RefuseBranchCount) * 2
+        && choices.RuntimeFrames.GroupBy(item => (item.DialogueId, item.BranchKind))
+            .All(group => group.Select(item => item.ReplayIndex).OrderBy(item => item).SequenceEqual([1, 2]))
         && choices.BranchFlagIds.Distinct(StringComparer.Ordinal).Count() == choices.BranchFlagIds.Count
-        && string.Equals(choices.FinalPackageSha256, entry.PackageSha256, StringComparison.Ordinal);
+        && choices.BranchFlagIds.Count == choices.BranchableDialogueCount
+        && !string.IsNullOrWhiteSpace(choices.BranchFlagInventorySha256)
+        && string.Equals(choices.FinalPackageSha256, entry.PackageSha256, StringComparison.Ordinal)
+        && string.Equals(choices.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal);
 
     private static bool RouteEligible(GameProjectGeneratedEncounterCombatSummary combat) => combat.RouteMode switch
     {

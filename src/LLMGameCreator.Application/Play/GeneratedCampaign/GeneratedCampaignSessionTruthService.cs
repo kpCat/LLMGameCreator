@@ -55,6 +55,19 @@ public sealed class GeneratedCampaignSessionTruthService
         if (!CombatCurrent(successfulBuild, generatedEncounterCount))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.generated_combat_not_current"]);
+        var currentPackage = _currentProject.CurrentPackage;
+        if (currentPackage is null)
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.current_package_missing"]);
+        var binding = new GeneratedCampaignChoiceBindingService().Bind(
+            truth.StrictGeneratedSource, currentPackage);
+        if (!binding.Passed)
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                binding.Diagnostics.Select(item => "campaign." + item).ToList());
+        var branchableCount = binding.Bindings.Count(item => item.Branches.Count > 0);
+        if (branchableCount > 0 && !ChoicesCurrent(successfulBuild, branchableCount))
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.generated_choices_not_current"]);
         if (string.IsNullOrWhiteSpace(truth.SelectedBuildHistorySha256))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.current_build_history_missing"]);
@@ -115,8 +128,31 @@ public sealed class GeneratedCampaignSessionTruthService
         && combat.QualifiedEncounterCount == generatedEncounterCount
         && string.Equals(combat.ExactPackageSha256, build.PackageSha256, StringComparison.Ordinal)
         && string.Equals(combat.Overlay.OutputPackageSha256, build.PackageSha256, StringComparison.Ordinal)
-        && string.Equals(combat.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal);
+        && (build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
+            || string.Equals(combat.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal));
     }
+
+    private static bool ChoicesCurrent(GameProjectBuildResult build, int branchableCount) =>
+        build.GeneratedCampaignChoices is
+        {
+            Present: true,
+            Passed: true,
+            Status: "CHOICE_CURRENT",
+            RuntimeQualificationPassed: true,
+            ExclusiveBranchingPassed: true,
+            FollowUpPassed: true,
+            ChallengeFleeFollowUpPassed: true,
+            ChallengeVictoryFollowUpPassed: true,
+            AtomicRollbackPassed: true,
+            ReplayPassed: true
+        } choices
+        && choices.BranchableDialogueCount == branchableCount
+        && choices.QualifiedDialogueCount == branchableCount
+        && choices.BranchFlagIds.Count == branchableCount
+        && choices.BranchFlagIds.Distinct(StringComparer.Ordinal).Count() == branchableCount
+        && !string.IsNullOrWhiteSpace(choices.BranchFlagInventorySha256)
+        && string.Equals(choices.FinalPackageSha256, build.PackageSha256, StringComparison.Ordinal)
+        && string.Equals(choices.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal);
 
     private static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }
 

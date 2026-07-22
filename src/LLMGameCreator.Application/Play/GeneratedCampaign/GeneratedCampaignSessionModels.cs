@@ -161,6 +161,13 @@ public sealed record GeneratedCampaignChoiceOption
     public GeneratedCampaignBranchKind? BranchKind { get; init; }
     public bool Primary { get; init; }
     public string TechnicalChoiceId { get; init; } = string.Empty;
+    public string BeforeStateHash { get; init; } = string.Empty;
+    public string AfterStateHash { get; init; } = string.Empty;
+    public string ObservedFlagValue { get; init; } = string.Empty;
+    public double ObservedReputationDelta { get; init; }
+    public string ObservedQuestState { get; init; } = string.Empty;
+    public string ObservedEncounterId { get; init; } = string.Empty;
+    public IReadOnlyList<string> RuntimeEventTypes { get; init; } = [];
 }
 
 public sealed record GeneratedCampaignDialogueChoicePreview
@@ -168,6 +175,7 @@ public sealed record GeneratedCampaignDialogueChoicePreview
     public string DialogueId { get; init; } = string.Empty;
     public string OriginalSessionSha256 { get; init; } = string.Empty;
     public string PackageSha256 { get; init; } = string.Empty;
+    public IReadOnlyList<string> RuntimeAvailableChoiceIds { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignChoiceOption> Options { get; init; } = [];
 }
 
@@ -286,6 +294,9 @@ public enum GeneratedCampaignConsequenceKind
     RecoveryLoad,
     NewGame,
     TacticalAction,
+    Decision,
+    BranchLocked,
+    BranchFollowUp,
     Failure
 }
 
