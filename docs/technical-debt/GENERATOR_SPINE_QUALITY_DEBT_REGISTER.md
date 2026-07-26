@@ -227,3 +227,7 @@ Goal169A closes the audited Goal169 debt without rewriting the historical blocke
 ## Goal169B package-bound replay and payload debt closure
 
 Goal169A independent audit is retained as `BLOCKED_AT_D012B8AC`. Goal169B implementation removes the six remaining proof debts: synthetic nested combat, non-exact ID ownership, package-SHA-only trust, missing prototype/map-entity migration authority, incomplete payload identities and non-sealed absent graphs. The closure reuses existing application seams and generic standalone payload fields. Runtime, public GamePackage schema, FeatureModules, generated source, Unity, standalone and RC implementations remain unchanged. The single cached smoke exposed a legacy human-fact parser incompatibility; its Base64/title correction passes focused tests but is not re-smoked because retry is 0, so the publication debt remains explicitly blocked without a waiver or human gate.
+
+## Goal169C portable core-only qualification debt
+
+Goal169C proves the published Base64 correction through the legacy parser and a real immutable standalone run. It does not add product code or a new abstraction. Pointer/run/history/package/payload correlation, frame identities, nested combat, RC CURRENT and portable all-selectable are GREEN. The one-shot qualification remains blocked only because the final core-only portable campaign-truth assertion is false. Retry is 0; no debt waiver or human gate is introduced.

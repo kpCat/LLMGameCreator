@@ -1,0 +1,43 @@
+/goal
+
+Выполни continuation-задачу из файла:
+
+docs/agent-tasks/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 91bef55bad9740897876f15893a93d596fa44800
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+План полностью одобрен. Не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- это узкий publication/qualification continuation Goal169B, не новый product slice;
+- independent audit = BLOCKED_AT_91BEF55B;
+- Goal169B code findings закрыты, но единственный smoke остановился до launch на standalone.payload.human_facts_parse_mismatch;
+- опубликованный post-smoke fix уже использует single-line `base64:` UTF-8 JSON authority и non-smoke legacy parser test GREEN;
+- старый Goal169B smoke не повторять и не переинтерпретировать;
+- создать отдельный Goal169C smoke: ровно один cached hidden smoke, retry=0;
+- до smoke: build, Goal169C non-smoke, Goal169B 72/72 с old smoke disabled, Goal169A 60/60, Goal169 108/108 и focused regressions;
+- smoke только после всех non-smoke gates;
+- smoke обязан пройти payload self-check + legacy parser, реально запустить standalone, exit=0, опубликовать immutable pointer/run-status, RC CURRENT и portable truth;
+- после закрытия in-memory объектов читать только immutable pointer/run/history/package/payload/RC;
+- human fact: single-line Base64, 24 exact signatures; frames: event/route/replay/sequence/command; nested combat proof присутствует;
+- честное название доказательства: immutable payload + selected history + actual package correlation;
+- старые Goal169, Goal169A и failed Goal169B outputs/forensics byte-identical;
+- если Goal169C smoke не проходит — не исправлять после smoke и не повторять; честно commit/push BLOCKED;
+- production code не менять без concrete pre-smoke defect;
+- Runtime/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal169C >=28 discovered / >=24 behavioral / all pass;
+- ровно 15+15 evidence, scope=0;
+- независимо от GREEN/BLOCKED/FAILED один commit и push origin/main;
+- не оставлять commit/push пользователю.
+
+В финале сообщи classification, audit intake, Base64/legacy preflight, retained immutability,
+smoke invocation/retry/launch/self-check/exit, immutable history-package-payload correlation,
+signatures/nested combat/frame identities, pointer/run/RC, portable, tests/evidence/scope,
+SHA/push/HEAD/worktree.

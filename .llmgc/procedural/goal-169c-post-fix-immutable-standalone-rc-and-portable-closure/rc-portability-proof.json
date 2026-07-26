@@ -1,0 +1,18 @@
+{
+  "status": "BLOCKED",
+  "releaseCandidatePath": "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c2e4f8439fd742c29b01fcc000f4a68f\\goal164-all-selectable\\.llmgc\\release-candidate\\accepted-mechanics-rc1.json",
+  "releaseCandidateSha256": "451afb8011cac0aaae051a6345bae58a7cf73a496c395f4fb3f0b49ce4a91e5d",
+  "releaseCandidateStatus": "GREEN",
+  "releaseCandidateCurrent": true,
+  "releaseCandidateRecordCurrent": true,
+  "rcHashesExact": true,
+  "portableCampaignCurrent": true,
+  "portableReleaseCandidateCurrent": true,
+  "portableOperationalPointerAbsent": true,
+  "portableAllSelectablePassed": true,
+  "coreOnlyCampaignCurrent": false,
+  "coreOnlyNoFalseRcReady": false,
+  "portableCoreOnlyPassed": false,
+  "failureCode": "portable.core_only.generated_campaign_regional_events_truth_mismatch",
+  "failureAssertion": "Goal169CStandaloneSmokeTests.cs:329"
+}

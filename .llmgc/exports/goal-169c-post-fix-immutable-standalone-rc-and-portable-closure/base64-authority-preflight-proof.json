@@ -1,0 +1,18 @@
+{
+  "status": "GREEN",
+  "label": "regional-event-strict-replay-authority-v1",
+  "prefix": "base64:",
+  "singleLine": true,
+  "containsQuote": false,
+  "containsCrLf": false,
+  "utf8Decoded": true,
+  "schemaVersion": "generated_campaign_regional_event_payload_authority_v1",
+  "authoritySha256": "468b525c1da41260112e744b5835f95d468cb3ce583ea17796b8e3665709192a",
+  "authorityRoundtripExact": true,
+  "eventCount": 6,
+  "signatureCount": 24,
+  "frameCountKeyCount": 24,
+  "nestedTraceKeyCount": 24,
+  "typedHistoryFrameCount": 392,
+  "nestedCombatFrameCount": 124
+}

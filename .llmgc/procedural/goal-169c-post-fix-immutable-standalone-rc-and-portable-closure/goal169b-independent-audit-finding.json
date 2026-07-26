@@ -1,0 +1,10 @@
+{
+  "goal169bImplementationCommit": "91bef55bad9740897876f15893a93d596fa44800",
+  "goal169bIndependentAuditResult": "BLOCKED_AT_91BEF55B",
+  "goal169bCodeFindingsClosed": true,
+  "goal169bPublicationBlocker": "standalone.payload.human_facts_parse_mismatch",
+  "goal169bPostSmokeFix": "single_line_base64_utf8_json_authority",
+  "goal169bPostFixLegacySelfCheckPassed": true,
+  "goal169cRequiredAction": "fresh_post_fix_immutable_standalone_rc_portable_proof",
+  "goal169cOutcome": "BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH"
+}

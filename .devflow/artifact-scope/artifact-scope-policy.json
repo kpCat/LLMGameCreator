@@ -6644,6 +6644,50 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-169c-post-fix-immutable-standalone-rc-and-portable-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal169c-post-fix-standalone-closure.ps1",
+        ".devflow/scripts/run-goal169c-post-fix-standalone-closure.cmd",
+        "tests/LLMGameCreator.Tests/Application/Goal169B/Goal169BStandaloneSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal169B/Goal169BMigrationAndPayloadTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal169B/Goal169BEvidenceCaptureTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal169b-package-bound-event-proof-payload-closure.md",
+        "docs/manual-acceptance/goal169c-post-fix-immutable-standalone-rc-portable.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal169C/",
+        "docs/agent-tasks/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/",
+        ".llmgc/procedural/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/",
+        ".llmgc/exports/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Domain/",
+        "src/LLMGameCreator.Application/Generation/Procedural/",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/",
+        "catalogs/feature-modules/",
+        "GeneratedPackageMvp/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "goal169c_scaffold_classification_v1",
+  "taskId": "goal-169c-post-fix-immutable-standalone-rc-and-portable-closure",
+  "requiredBase": "91bef55bad9740897876f15893a93d596fa44800",
+  "goal169bImplementationCommit": "91bef55bad9740897876f15893a93d596fa44800",
+  "goal169bIndependentAuditResult": "BLOCKED_AT_91BEF55B",
+  "goal169bCodeFindingsClosed": true,
+  "goal169bPublicationBlocker": "standalone.payload.human_facts_parse_mismatch",
+  "goal169bPostSmokeFix": "single_line_base64_utf8_json_authority",
+  "goal169bPostFixLegacySelfCheckPassed": true,
+  "goal169cRequiredAction": "fresh_post_fix_immutable_standalone_rc_portable_proof",
+  "classifications": [
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Goal169B production authority is retained without speculative production changes."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Standalone implementation is read-only and reused through its existing cached hidden build path."
+    },
+    {
+      "path": ".llmgc/procedural/goal-169-profile-neutral-relationships-and-reactive-regional-events/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Goal169 retained pointer, run, payload, history, RC and evidence remain immutable historical input."
+    },
+    {
+      "path": ".llmgc/procedural/goal-169a-strict-replay-v7-correlation-and-post-fix-smoke-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Goal169A retained pointer, run, payload, history, RC and evidence remain immutable historical input."
+    },
+    {
+      "path": ".llmgc/procedural/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Goal169B failed smoke and forensics remain immutable retained input and are not reinterpreted or rerun."
+    },
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal169C/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "New bounded continuation tests prove Base64, legacy parser, immutable correlation, frames, RC, portable and retained-input truth."
+    },
+    {
+      "path": ".devflow/scripts/run-goal169c-post-fix-standalone-closure.ps1",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "New dedicated runner enforces all non-smoke gates before exactly one Goal169C cached hidden smoke."
+    },
+    {
+      "path": ".devflow/scripts/run-goal169c-post-fix-standalone-closure.cmd",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "New command wrapper exposes the dedicated Goal169C runner without changing prior runners."
+    },
+    {
+      "path": ".llmgc/procedural/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "New Goal169C continuation evidence is published as exactly fifteen compact files."
+    },
+    {
+      "path": ".llmgc/exports/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "The export root mirrors the fifteen procedural evidence files byte-for-byte."
+    },
+    {
+      "path": "docs/agent-tasks/goal-169c-post-fix-immutable-standalone-rc-and-portable-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "The three supplied task-pack files are retained and tracked without content mutation."
+    },
+    {
+      "path": "listed Goal169C state, gate, risk, debt, strategy, roadmap and manual-acceptance docs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Existing source-of-truth documents receive only the bounded Goal169C publication status update."
+    },
+    {
+      "path": ".devflow/artifact-scope/artifact-scope-policy.json",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "A dedicated Goal169C exact allowlist is added while standard forbidden boundaries remain unchanged."
+    }
+  ],
+  "classificationCounts": {
+    "KEEP_AND_COMPLETE": 13,
+    "REFACTOR": 0,
+    "REPLACE": 0,
+    "REMOVE_AS_UNUSED": 0
+  },
+  "productionEditsStarted": false,
+  "boundedAdditionalProductionPath": null
+}

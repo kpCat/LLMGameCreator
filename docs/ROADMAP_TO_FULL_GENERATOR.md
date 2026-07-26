@@ -2,7 +2,7 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
-Goal169B is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK` continuation. Goal169 remains immutable `BLOCKED_AT_F861229C`; Goal169A independent audit remains `BLOCKED_AT_D012B8AC`. Goal169B implementation closes nested combat, exact identity, actual-package definition, absent-profile, migration and payload-authority proof gaps. Its one cached smoke reused the host with Unity 0 but failed pre-launch on legacy parsing of the multiline authority fact. The Base64/title correction passes focused tests but cannot be re-smoked because retry is 0. Goal169B remains unaccepted and requires independent blocker audit/follow-up before roadmap expansion.
+Goal169C is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH` continuation. Goal169B independent audit remains `BLOCKED_AT_91BEF55B` with code findings closed. Base64/legacy preflight, required regressions, Player launch, exit 0, immutable publication, selected-history/actual-package/payload correlation, RC CURRENT and portable all-selectable pass. The final core-only portable campaign-truth assertion fails. Retry remains 0; Goal169C is unaccepted and requires independent blocker audit/follow-up before roadmap expansion.
 
 ## Source Of Truth
 
@@ -343,3 +343,7 @@ This continuation does not add a product slice. It makes the Goal169 event miles
 ## Goal169B package-bound event proof, nested combat replay and payload closure
 
 This focused continuation implements closure of the Goal169A audit result `BLOCKED_AT_D012B8AC`. Actual nested combat commands/events/action/effect/state chains replace synthetic final frames; exact ID sets and actual-package event definitions bind history and save truth; absent and migration behavior are sealed; and standalone payloads expose event/route/replay/sequence identity plus 24 signatures. Retained Goal169/Goal169A artifacts remain byte-identical. The only cached smoke failed before launch/publication at `standalone.payload.human_facts_parse_mismatch`; the diagnosed Base64/title correction is focused-test GREEN but cannot be re-smoked under retry 0. The next roadmap action is `independent_goal169b_blocker_audit_and_followup_without_retrying_consumed_smoke`.
+
+## Goal169C post-fix immutable standalone RC and portable closure
+
+This focused continuation qualifies the published Goal169B Base64 correction without adding a product slice. The only cached smoke reuses the host, launches the Player, exits 0 and publishes a distinct immutable pointer/run. Selected v7 history, actual payload package and Base64 authority correlate exactly; 24 signatures, 392 frames and 124 nested-combat frames are proven, and RC plus portable all-selectable are current. The final core-only portable campaign-truth assertion fails, so no correction or retry is made. The next roadmap action is `independent_goal169c_blocker_audit_and_followup_without_retrying_consumed_smoke`.

@@ -277,3 +277,7 @@ Goal169 remains historical `BLOCKED_AT_F861229C`; its old payload is immutable a
 ## Goal169B package-bound event proof closure
 
 Goal169A independent audit is `BLOCKED_AT_D012B8AC`. Goal169B implementation closes the remaining P1 proof risks: nested combat retains actual commands/events/action/effect/state chains; event identities are exact sets; history and save truth recompute event-owned definitions from the actual package; absent profiles seal an empty graph; migration includes prototype and exact map entity behavior; standalone payload carries route/replay/sequence identity and 24 signatures. Retained Goal169/Goal169A runs and evidence remain immutable. The single cached smoke then failed pre-launch on legacy human-fact parsing. A Base64/title correction is covered by focused tests but cannot be re-smoked because retry is 0. Goal169B remains blocked and unaccepted, creates no human gate and requires independent blocker audit/follow-up.
+
+## Goal169C post-fix publication risk
+
+Goal169C closes the Base64/legacy-parser launch risk in a real cached standalone: payload self-check, legacy compatibility, Player launch, exit 0, immutable publication, selected-history/actual-package/payload correlation, RC CURRENT and portable all-selectable are GREEN. The remaining release risk is the failed final core-only portable campaign-truth assertion. No correction or retry is permitted after the one smoke. Goal169C remains blocked and unaccepted; the next step is an independent blocker audit/follow-up, not roadmap expansion.

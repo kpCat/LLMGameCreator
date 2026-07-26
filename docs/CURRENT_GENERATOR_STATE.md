@@ -1,12 +1,14 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 169B package-bound event proof, nested combat replay and payload closure — BLOCKED after single cached smoke
+Updated by: Goal 169C post-fix immutable standalone RC and portable closure — BLOCKED after single cached smoke
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal169 remains the immutable honest result `BLOCKED_AT_F861229C`. Goal169A remains substantive, but its independent audit is `BLOCKED_AT_D012B8AC`: nested exact combat was reduced to a synthetic final frame, identity sets were not sealed, history trusted package SHA without actual definitions, migration omitted prototype/map-entity compatibility, payload identity was incomplete and the absent graph was not exact.
 
 Goal169B is a focused continuation, not a new product slice. Its implementation and 71 focused non-smoke tests close all six Goal169A audit findings with real nested combat command/event/descriptor/effect/state chains, exact binding/inventory/qualification/signature/frame ID sets, actual loaded-package definition correlation, a sealed empty-event graph, expanded migration definition facts and a self-contained 24-signature standalone payload authority. The single permitted cached hidden smoke reused the host, rebuilt nothing and started Unity zero times, but failed before launch/publication at `standalone.payload.human_facts_parse_mismatch`: the new multiline JSON authority was incompatible with the legacy human-fact parser. The post-smoke correction uses a legacy-safe Base64 fact and preserves frame identity in serialized titles, and focused non-smoke tests pass, but retry is fixed at 0. Immutable Goal169B pointer/history/RC and portable assertions were therefore not reached. Goal169B is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK`, `accepted=false`, creates no human gate and requires independent blocker audit/follow-up without retrying the consumed smoke.
+
+Goal169C is the narrow publication/qualification continuation required by the independent Goal169B result `BLOCKED_AT_91BEF55B`. Base64 UTF-8 authority, the legacy parser and all required non-smoke gates pass. Its one cached hidden smoke reused the existing host, rebuilt nothing, started Unity zero times, launched the Player and exited 0; immutable pointer/run-status, selected v7 history, actual package/payload correlation, 24 signatures, exact event/route/replay/sequence/command identities, nested combat and RC CURRENT all pass. Portable all-selectable also passes. The Goal169C test nevertheless fails at the final core-only portable campaign-truth assertion, so retry remains 0 and no post-smoke correction is made. Goal169C is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH`, `accepted=false`, creates no human gate and requires an independent blocker audit/follow-up without repeating the smoke.
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
 
@@ -53,8 +55,8 @@ Goal165 independently records that Goal164 audit as `BLOCKED_AT_15A8F2AB`: the r
 The campaign player now captures an exact in-memory JSON checkpoint immediately before a successful encounter start. Genuine Runtime defeat enters `DEFEATED` and shows `Поражение` with `Повторить встречу`, `Продолжить с сохранения` and `Начать новую игру`. Retry restores exact map, inventory, quest and reputation truth, invokes Runtime Start zero times and dispatches `StartEncounter` once. Exact save recovery invokes Runtime Start zero times; New Game invokes it once. Checkpoints clear on victory, flee, successful load/migration and new game, and truth drift yields `STALE_PROJECT` before any Runtime command. The physical portable core-only copy has no operational pointer and never claims RC readiness. Goal165 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
 
 ```text
-gate_status=goal169b_blocked_after_single_cached_smoke_payload_self_check
-current_user_action=independent_goal169b_blocker_audit_and_followup_without_retrying_consumed_smoke
+gate_status=goal169c_blocked_after_single_cached_smoke_portable_core_only_campaign_truth
+current_user_action=independent_goal169c_blocker_audit_and_followup_without_retrying_consumed_smoke
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -523,12 +525,14 @@ goal169aDirectionOnlyFrameCount=0
 goal169aIndependentAuditResult=BLOCKED_AT_D012B8AC
 goal169aAuditBlockers=closed_by_goal169b
 goal169bImplementationStatus=BLOCKED
-goal169bCandidateStatus=BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK
+goal169bCandidateStatus=BLOCKED_AT_91BEF55B
 goal169bAccepted=false
 goal169bAcceptedByHuman=false
 goal169bAcceptedByCodex=false
 goal169bManualGateReady=false
-goal169bIndependentAuditRequired=true
+goal169bIndependentAuditRequired=false
+goal169bCodeFindings=closed
+goal169bPublicationBlocker=continued_by_goal169c
 goal169bNestedCombatReplayPassed=true
 goal169bExactIdSetCorrelationPassed=true
 goal169bActualPackageDefinitionCorrelationPassed=true
@@ -548,7 +552,32 @@ goal169bReleaseCandidateCurrent=false
 goal169bPortableAllSelectableCurrent=false
 goal169bCoreOnlyReleaseCandidateReady=false
 goal169bArtifactScopeViolationCount=0
-nextAction=independent_goal169b_blocker_audit_and_followup_without_retrying_consumed_smoke
+goal169cImplementationStatus=BLOCKED
+goal169cCandidateStatus=BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH
+goal169cAccepted=false
+goal169cAcceptedByHuman=false
+goal169cAcceptedByCodex=false
+goal169cManualGateReady=false
+goal169cIndependentAuditRequired=true
+goal169cBase64AuthorityPassed=true
+goal169cLegacyParserPassed=true
+goal169cImmutableCorrelationPassed=true
+goal169cHiddenSmokeInvocationCount=1
+goal169cCorrectiveSmokeRetryCount=0
+goal169cHostReused=true
+goal169cHostRebuilt=false
+goal169cUnityEditorProcessStartCount=0
+goal169cStandaloneLaunchStarted=true
+goal169cStandaloneExitCode=0
+goal169cPointerPublished=true
+goal169cRunStatusPublished=true
+goal169cReleaseCandidateCurrent=true
+goal169cPortableAllSelectablePassed=true
+goal169cPortableCoreOnlyPassed=false
+goal169cFailureStage=portable_core_only_campaign_truth
+goal169cFailureAssertion=Goal169CStandaloneSmokeTests.cs:329
+goal169cArtifactScopeViolationCount=0
+nextAction=independent_goal169c_blocker_audit_and_followup_without_retrying_consumed_smoke
 goal165BothRoutePassed=true
 goal165BasicAttackOnlyPassed=true
 goal165AbilityOnlyPassed=true

@@ -1,0 +1,27 @@
+{
+  "status": "GREEN",
+  "overallGoalStatus": "BLOCKED",
+  "requiredBase": "91bef55bad9740897876f15893a93d596fa44800",
+  "primaryFileCount": 16,
+  "continuationNotNewProductSlice": true,
+  "base64AuthoritySingleLine": true,
+  "base64AuthorityContainsQuote": false,
+  "base64AuthorityContainsCrLf": false,
+  "utf8Base64Decoded": true,
+  "deserializeHumanFactAuthoritySha256Roundtrip": true,
+  "realAssembledPayloadStructuralSelfCheckPassed": true,
+  "legacyParserCompatibilityPassed": true,
+  "frameCategoryRoundtripDimensions": [
+    "event",
+    "route",
+    "replay",
+    "sequence",
+    "command"
+  ],
+  "productionMutationCount": 0,
+  "smokeStartedAfterAllNonSmokeGates": true,
+  "proofTerminology": "immutable_payload_history_package_correlation",
+  "reducedAdapterFramesAloneClaimFullSignatures": false,
+  "postSmokeCorrectionMade": false,
+  "correctiveSmokeRun": false
+}

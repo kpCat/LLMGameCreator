@@ -1,0 +1,11 @@
+{
+  "status": "GREEN",
+  "scenario": "goal-169c-post-fix-immutable-standalone-rc-and-portable-closure",
+  "requiredBase": "91bef55bad9740897876f15893a93d596fa44800",
+  "changedPathCount": 18,
+  "allowedCount": 18,
+  "warningCount": 0,
+  "violationCount": 0,
+  "productionApplicationMutationCount": 0,
+  "forbiddenImplementationMutationCount": 0
+}

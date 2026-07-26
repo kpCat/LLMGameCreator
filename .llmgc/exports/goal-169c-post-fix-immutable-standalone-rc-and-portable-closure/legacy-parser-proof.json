@@ -1,0 +1,11 @@
+{
+  "status": "GREEN",
+  "structuralSelfCheckPassed": true,
+  "structuralPassedCount": 13,
+  "structuralTotalCount": 13,
+  "legacyParserPassed": true,
+  "legacyFrameCount": 2,
+  "legacyHumanFactCount": 1,
+  "humanFactsParseMismatchPresent": false,
+  "smokeRunStatusLegacyParserPassed": true
+}

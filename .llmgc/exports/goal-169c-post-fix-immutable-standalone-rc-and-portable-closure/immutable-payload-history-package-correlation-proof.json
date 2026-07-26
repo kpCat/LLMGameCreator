@@ -1,0 +1,37 @@
+{
+  "status": "GREEN",
+  "terminology": "immutable_payload_history_package_correlation",
+  "selectedHistoryPath": "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c2e4f8439fd742c29b01fcc000f4a68f\\goal164-all-selectable\\.llmgc\\build-history\\20260726T2253058823070Z.json",
+  "selectedHistorySha256": "916bb89716da6ccdf4030df259c54a248bd1167467d4df275afac11430cf166b",
+  "selectedHistorySchema": "unified_game_project_build_history_v7",
+  "actualPayloadPackageSha256": "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2",
+  "packageShaExact": true,
+  "finalStateHash": "693ac449b3bb07ab0df8658fcd863debbd5d20c2860594a845f4155fc8dfab8d",
+  "finalStateHashExact": true,
+  "eventCount": 6,
+  "eventIds": [
+    "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+    "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/refusal-fallout",
+    "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/support-gratitude",
+    "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+    "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/refusal-fallout",
+    "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/support-gratitude"
+  ],
+  "signatureCount": 24,
+  "signaturesRecomputedFromSelectedTypedHistory": true,
+  "authoritySha256": "468b525c1da41260112e744b5835f95d468cb3ce583ea17796b8e3665709192a",
+  "frameSchema": "generated-regional-event-frame-v1",
+  "payloadFrameCount": 392,
+  "frameIdentitiesPassed": true,
+  "frameDimensions": [
+    "event",
+    "route",
+    "replay",
+    "sequence",
+    "command"
+  ],
+  "exactCommandsPassed": true,
+  "nestedCombatFrameCount": 124,
+  "nestedCombatIdentityPassed": true,
+  "reducedAdapterFramesAloneUsedToClaimSignatures": false
+}

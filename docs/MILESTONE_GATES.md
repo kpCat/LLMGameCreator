@@ -1,6 +1,6 @@
 # Milestone Gates
 
-Goal169B is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK` continuation. Goal169 remains `BLOCKED_AT_F861229C`; Goal169A independent audit remains `BLOCKED_AT_D012B8AC`. Goal169B implementation closes all six package-bound proof findings with exact nested combat chains, ID-set and actual-package correlation, strict absent truth and expanded migration compatibility. Its single cached smoke reused the host with Unity 0 but failed pre-launch at `standalone.payload.human_facts_parse_mismatch`; the legacy-safe correction passes focused tests but retry is 0. Goal169B is not accepted, creates no human gate and requires independent blocker audit/follow-up without another smoke.
+Goal169C is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH` publication/qualification continuation. Goal169B independent audit is retained as `BLOCKED_AT_91BEF55B` with code findings closed. Base64/legacy preflight and all non-smoke gates pass. The single Goal169C cached smoke reuses the host with Unity 0, launches the Player, exits 0 and publishes immutable pointer/run/history/package/payload/RC truth. Portable all-selectable passes, but core-only portable campaign truth fails its final assertion. Goal169C is not accepted, creates no human gate and requires independent blocker audit/follow-up without another smoke.
 
 Status: Goal 097 acceptance-gate plan
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
@@ -290,3 +290,7 @@ Goal169A preserves the Goal169 gate above as `BLOCKED_AT_F861229C` and closes ev
 ## Goal169B package-bound event proof and payload closure gate record
 
 Goal169A independent audit is `BLOCKED_AT_D012B8AC`. Goal169B implementation closes nested combat trace loss, event identity-set drift, SHA-only package trust, incomplete prototype/map-entity migration, incomplete payload identity and non-exact absent truth. The single cached smoke reused the host with no rebuild and Unity 0 but failed before launch/publication at `standalone.payload.human_facts_parse_mismatch`; immutable pointer/run status, RC and portable truth were not reached. The Base64/title compatibility correction passes focused tests but is not re-smoked because retry is 0. Status is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK`, `accepted=false`, no human gate.
+
+## Goal169C post-fix immutable standalone RC and portable closure gate record
+
+Goal169B independent audit is `BLOCKED_AT_91BEF55B`; its code findings are closed. Goal169C proves single-line Base64 UTF-8 authority and legacy parsing before launch. Its one cached smoke publishes a distinct GREEN immutable run and pointer, exact selected-history/actual-package/payload correlation, 24 signatures, 392 event frames, 124 nested-combat frames and RC CURRENT. Portable all-selectable is current without an operational pointer. The final core-only portable campaign-truth assertion fails, so the overall status is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH`, retry=0, `accepted=false`, no human gate.

@@ -1,0 +1,20 @@
+{
+  "status": "GREEN",
+  "attemptId": "05f6dbdac03e4282bdc91fc83eeaa18a",
+  "pointerAttemptId": "05f6dbdac03e4282bdc91fc83eeaa18a",
+  "runStatusAttemptId": "05f6dbdac03e4282bdc91fc83eeaa18a",
+  "standaloneHistoryAttemptMatchCount": 1,
+  "attemptIdsExact": true,
+  "pointerPublished": true,
+  "runStatusPublished": true,
+  "runStatus": "GREEN",
+  "runDirectoryName": "r-05f6dbdac03e",
+  "newRunDistinctFromGoal169B": true,
+  "currentPointerPath": "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\d3cadfecfbc91980\\current.json",
+  "currentPointerSha256": "610820e5f90f35c696428b68e79d35ba3ca5cae5a9768244629a72b576980ae2",
+  "runStatusPath": "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\d3cadfecfbc91980\\runs\\r-05f6dbdac03e\\run-status.json",
+  "runStatusSha256": "0c975a56d1c1c4670cbb18cb1ad21cb1ee6d723f7c70ed09729e4abdfde863b4",
+  "packageSha256": "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2",
+  "finalStateHash": "693ac449b3bb07ab0df8658fcd863debbd5d20c2860594a845f4155fc8dfab8d",
+  "actualPayloadPackageSha256": "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2"
+}

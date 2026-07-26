@@ -1,0 +1,65 @@
+{
+    "status":  "GREEN",
+    "capturedBeforeGoal169CSmoke":  true,
+    "retained":  [
+                     {
+                         "label":  "Goal169",
+                         "pointerPath":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\52d8c7f11872389d\\current.json",
+                         "pointerSha256":  "2d2902a639b638bb6255b5bdbd782b9bf660a921bf82033fb179ece9fef006b6",
+                         "runRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\52d8c7f11872389d\\runs\\r-b301792bd0a4",
+                         "runTreeSha256":  "a640cad161110de571996531498890b0ab3b23ec69de618bebcb654782cf448d",
+                         "payloadRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\52d8c7f11872389d\\runs\\r-b301792bd0a4\\g_Data\\StreamingAssets\\LLMGameCreatorProject",
+                         "payloadTreeSha256":  "80327c747c70da063c3c53949d8f1566eaa6ef0ac7d6fe974ff85eef9ba72628",
+                         "standaloneHistoryPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\8e2696044dd049018c5fe34d4dbe72a8\\goal164-all-selectable\\.llmgc\\standalone-build-history.json",
+                         "standaloneHistorySha256":  "828e64ec241c533b7ff0a07a11ceb1838e5ad92e812dd4f3c0636d8784ee629e",
+                         "buildHistoryRoot":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\8e2696044dd049018c5fe34d4dbe72a8\\goal164-all-selectable\\.llmgc\\build-history",
+                         "buildHistoryTreeSha256":  "4727534a49e26c465362149903089abc939d9ad7d91e193b42f088fd5b4d6e6d",
+                         "releaseCandidatePath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\8e2696044dd049018c5fe34d4dbe72a8\\goal164-all-selectable\\.llmgc\\release-candidate\\accepted-mechanics-rc1.json",
+                         "releaseCandidateSha256":  "ce68e35055467a5108cabc1abc128ff7133f2a4a4cacb51a604efabd0fcf9a1d",
+                         "generationSourceSidecarsRoot":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\8e2696044dd049018c5fe34d4dbe72a8\\goal164-all-selectable\\.llmgc\\generation",
+                         "generationSourceSidecarsSha256":  "e2d3551a9d288329730e4e7615ae73f111f465bbf9caa7c7a261d84e862087f3"
+                     },
+                     {
+                         "label":  "Goal169A",
+                         "pointerPath":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\5193e86c8a23cb3d\\current.json",
+                         "pointerSha256":  "c381b37a41433a1e5500d862ae2f92a7a53155a2b0f146a69aaa1b4a86629a01",
+                         "runRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\5193e86c8a23cb3d\\runs\\r-cb7b693f4d6e",
+                         "runTreeSha256":  "d8fb40e565163995c347c1bfb2bebdc1a21a01c76026437c6b870b0d5beadf14",
+                         "payloadRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\5193e86c8a23cb3d\\runs\\r-cb7b693f4d6e\\g_Data\\StreamingAssets\\LLMGameCreatorProject",
+                         "payloadTreeSha256":  "314823be1b0ddd338d698664b9afe2ce20481b026b271ed31477914f389a7f29",
+                         "standaloneHistoryPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\02fdbd5c16d74667a3950e7bb96723f8\\goal164-all-selectable\\.llmgc\\standalone-build-history.json",
+                         "standaloneHistorySha256":  "d416610ba075877c64acb82dccb205925d240d102b51705978d976c5565477d3",
+                         "buildHistoryRoot":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\02fdbd5c16d74667a3950e7bb96723f8\\goal164-all-selectable\\.llmgc\\build-history",
+                         "buildHistoryTreeSha256":  "22cb269e87f3b5ca1836701ba6cc028f5cf66b5005ad9b21dc7d78c1fb41b294",
+                         "releaseCandidatePath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\02fdbd5c16d74667a3950e7bb96723f8\\goal164-all-selectable\\.llmgc\\release-candidate\\accepted-mechanics-rc1.json",
+                         "releaseCandidateSha256":  "cd90ca3f6a0eb5b078b9abf3f94fa36e3718b02c7bbbd669633677f4a7d1ede6",
+                         "generationSourceSidecarsRoot":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\02fdbd5c16d74667a3950e7bb96723f8\\goal164-all-selectable\\.llmgc\\generation",
+                         "generationSourceSidecarsSha256":  "e2d3551a9d288329730e4e7615ae73f111f465bbf9caa7c7a261d84e862087f3"
+                     },
+                     {
+                         "label":  "Goal169B failed staged run",
+                         "runRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\ab2a327d67146f55\\runs\\r-f0160b2fb9b0",
+                         "runTreeSha256":  "867c774152ff7b652df491be42d5e78a51836a5934b0d948ac1c3f115d112d11",
+                         "runStatusPresent":  false,
+                         "proceduralForensicsRoot":  ".llmgc\\procedural\\goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure",
+                         "proceduralForensicsTreeSha256":  "42f502db6da2ce8b4edf2f9a0134d647b813f5d5b336146e4a900c43d0610473",
+                         "exportForensicsRoot":  ".llmgc\\exports\\goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure",
+                         "exportForensicsTreeSha256":  "42f502db6da2ce8b4edf2f9a0134d647b813f5d5b336146e4a900c43d0610473"
+                     },
+                     {
+                         "label":  "cached host",
+                         "path":  "C:\\Users\\endim\\AppData\\Local\\LLMGameCreator\\StandaloneHostCache\\6af4d5eb5b42f956110555b58fb4e276\\host",
+                         "sha256":  "40d3abbf3cb55d9b90b649b18b9d93e7812aae2e729bbba0c5272c0ae00246e7"
+                     },
+                     {
+                         "label":  "Goal142",
+                         "path":  "C:\\Users\\endim\\LLMGameCreator\\.llmgc\\procedural\\goal-142-runtime-significant-product-line-variant-matrix-and-selection-handoff\\product-line-runtime-variant-matrix-result.json",
+                         "sha256":  "bb18be4d864b9ee8ec31b3cce4aeabca1bb5abcda50676ef33d643fd41f59cd4"
+                     },
+                     {
+                         "label":  "Goal148",
+                         "path":  "C:\\Users\\endim\\AppData\\Local\\LLMGameCreator\\Games\\goal148-manual",
+                         "sha256":  "d8c5fc845719947d7369171c43e1b3ddf9b89ef6e5ba4ecfb11c7c5419d7e158"
+                     }
+                 ]
+}
