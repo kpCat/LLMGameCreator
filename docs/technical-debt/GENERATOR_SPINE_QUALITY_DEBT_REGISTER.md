@@ -223,3 +223,7 @@ The single permitted hidden smoke launched the standalone successfully but expos
 ## Goal169A strict replay, correlation and migration debt closure
 
 Goal169A closes the audited Goal169 debt without rewriting the historical blocked row. Final-hash-only replay truth is replaced by complete typed route signatures; v7 readiness recomputes the relationship/event graph and requires exact qualified arc counts; Challenge region derives from encounter provenance; inventory carries full semantic identity; migration facts drive preserve/reset/drop decisions from exact source and target v7 inventories. A separate one-shot smoke closes the post-fix payload proof. No new debt waiver, abstraction layer or human gate is introduced.
+
+## Goal169B package-bound replay and payload debt closure
+
+Goal169A independent audit is retained as `BLOCKED_AT_D012B8AC`. Goal169B implementation removes the six remaining proof debts: synthetic nested combat, non-exact ID ownership, package-SHA-only trust, missing prototype/map-entity migration authority, incomplete payload identities and non-sealed absent graphs. The closure reuses existing application seams and generic standalone payload fields. Runtime, public GamePackage schema, FeatureModules, generated source, Unity, standalone and RC implementations remain unchanged. The single cached smoke exposed a legacy human-fact parser incompatibility; its Base64/title correction passes focused tests but is not re-smoked because retry is 0, so the publication debt remains explicitly blocked without a waiver or human gate.

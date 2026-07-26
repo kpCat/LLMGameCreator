@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure",
+    "requiredBase":  "d012b8ac40a9c6ded421ec4bbcbddd9cc3b8d385",
+    "changedPathCount":  35,
+    "allowedCount":  35,
+    "warningCount":  0,
+    "violationCount":  0,
+    "forbiddenRuntimeDomainGamePackageFeatureModulesGeneratedSourceUnityStandaloneRcMutationCount":  0,
+    "boundedAdditionalExistingPath":  null
+}

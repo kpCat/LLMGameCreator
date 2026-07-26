@@ -13,3 +13,5 @@ Event inventory includes actor/faction/prototype/map entity/interaction/source q
 Exactly one separate Goal169A cached hidden smoke proves explicit `Move.*` output and zero bare direction frames. It reuses the cached host, rebuilds nothing, starts Unity zero times and receives zero retry. RC and portable all-selectable are current; portable core-only does not claim false RC readiness.
 
 Goal169 and Goal169A are `accepted=false`. Goal169A creates no human gate and requires independent audit. No manual testing is requested.
+
+Independent audit result at `d012b8ac40a9c6ded421ec4bbcbddd9cc3b8d385`: `BLOCKED_AT_D012B8AC`. The six remaining proof-boundary findings—nested synthetic combat, non-exact ID ownership, SHA-only package trust, incomplete prototype/map-entity migration, incomplete payload identity and non-sealed absent truth—are closed by Goal169B. This Goal169A record and its run/pointer/history/payload/RC remain historical and byte-identical.

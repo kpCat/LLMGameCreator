@@ -32,6 +32,10 @@ public sealed class GeneratedGameplayDefinitionFingerprintService
         Add(rows, generated, "ability", package.Game.Abilities);
         Add(rows, generated, "interaction", package.Game.Interactions);
         Add(rows, generated, "entity", package.Game.Maps.SelectMany(map => map.Entities));
+        Add(rows, generated, "map_entity",
+            package.Game.Maps.SelectMany(map => map.Entities));
+        Add(rows, generated, "entity_prototype",
+            package.Game.EntityPrototypes);
         Add(rows, generated, "equipment_slot", package.Game.EquipmentSlots);
         return rows.OrderBy(row => row.Kind, StringComparer.Ordinal)
             .ThenBy(row => row.Id, StringComparer.Ordinal).ToList();
@@ -407,9 +411,18 @@ public sealed class GeneratedGameplayDefinitionFingerprintService
                         && dialogue.Metadata.ContainsKey(
                             "generatedRegionalEventId"));
                 if (eventDialogue is not null)
+                {
                     Mark("entity", entity.Id, eventDialogue.Id);
+                    Mark("map_entity", entity.Id,
+                        eventDialogue.Id);
+                    Mark("entity_prototype", entity.PrototypeId,
+                        eventDialogue.Id);
+                }
             }
         Mark("entity", GeneratedWorldTravelOverlayService.TravelPrototypeId, "generated_travel");
+        Mark("entity_prototype",
+            GeneratedWorldTravelOverlayService.TravelPrototypeId,
+            "generated_travel");
         return result;
     }
 

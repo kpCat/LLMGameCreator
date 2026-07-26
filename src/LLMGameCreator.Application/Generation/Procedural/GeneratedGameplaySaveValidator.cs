@@ -74,7 +74,8 @@ public sealed class GeneratedGameplaySaveValidator
                     StringComparison.Ordinal))
                 return TruthFailed("generated_save.package_changed");
 
-            var selected = SelectHistory(project, state, packageSha256, fingerprint.Sha256);
+            var selected = SelectHistory(project, state, package,
+                packageSha256, fingerprint.Sha256);
             if (selected.Entry is null)
                 return TruthFailed(selected.Diagnostic ?? "generated_save.history_not_current");
             var history = selected.Entry;
@@ -277,6 +278,7 @@ public sealed class GeneratedGameplaySaveValidator
         SelectHistory(
             string project,
             GameProjectAuthoringState state,
+            GamePackageDefinition actualPackage,
             string packageSha256,
             string fingerprint)
     {
@@ -304,6 +306,16 @@ public sealed class GeneratedGameplaySaveValidator
                     StringComparison.Ordinal)
                 || !string.Equals(entry.QualifiedAuthoringFingerprint, fingerprint,
                     StringComparison.Ordinal)) continue;
+            if (entry.SchemaVersion ==
+                GameProjectBuildHistoryReader.SchemaVersionV7
+                && (entry.GeneratedCampaignRegionalEvents is not
+                    { } regionalEvents
+                    || entry.GeneratedCampaignRelationships is not
+                    { } relationships
+                    || !GeneratedCampaignRegionalEventCorrelationService
+                        .Validate(actualPackage, packageSha256,
+                            regionalEvents, relationships).Passed))
+                continue;
             matches.Add((entry, Path.GetFileName(path), path));
         }
         // Stable semantic selection lets an immutable revision become CURRENT again when an

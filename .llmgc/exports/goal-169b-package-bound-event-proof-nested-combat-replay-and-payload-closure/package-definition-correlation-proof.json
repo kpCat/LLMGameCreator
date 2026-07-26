@@ -1,0 +1,24 @@
+{
+    "status":  "GREEN",
+    "exactPackageSha256":  "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2",
+    "sixDefinitionHashesPassed":  true,
+    "placementReferencesRequirementsEffectsMetadataPassed":  true,
+    "actualPackageTamperRejectedCount":  14,
+    "historyPackageCoordinatedForgeryRejected":  true,
+    "packageObjectUsedInsteadOfShaOnly":  true,
+    "definitionKinds":  [
+                            "dialogue",
+                            "interaction",
+                            "entity prototype",
+                            "map entity",
+                            "quest",
+                            "encounter"
+                        ],
+    "semanticDimensions":  [
+                               "position",
+                               "references",
+                               "requirements",
+                               "effects",
+                               "metadata"
+                           ]
+}

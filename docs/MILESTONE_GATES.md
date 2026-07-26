@@ -1,6 +1,6 @@
 # Milestone Gates
 
-Goal169A is the current `GREEN_ACCEPTABLE_CANDIDATE` automated continuation. Goal169 remains `BLOCKED_AT_F861229C` with its retained 0 explicit/84 direction-only smoke payload. Goal169A closes strict replay, v7 graph correlation, Challenge encounter-region, expanded inventory, typed migration and post-fix payload proof blockers. Its one separate cached smoke proves explicit `Move.*`, zero bare directions, host reuse, Unity 0 and retry 0. Goal169A is not accepted, creates no human gate and requires independent audit.
+Goal169B is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK` continuation. Goal169 remains `BLOCKED_AT_F861229C`; Goal169A independent audit remains `BLOCKED_AT_D012B8AC`. Goal169B implementation closes all six package-bound proof findings with exact nested combat chains, ID-set and actual-package correlation, strict absent truth and expanded migration compatibility. Its single cached smoke reused the host with Unity 0 but failed pre-launch at `standalone.payload.human_facts_parse_mismatch`; the legacy-safe correction passes focused tests but retry is 0. Goal169B is not accepted, creates no human gate and requires independent blocker audit/follow-up without another smoke.
 
 Status: Goal 097 acceptance-gate plan
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
@@ -286,3 +286,7 @@ Goal168 independent audit is `BLOCKED_AT_BBFD46A2`. Goal169 closes profile-assum
 ## Goal169A strict replay v7 correlation and post-fix smoke gate record
 
 Goal169A preserves the Goal169 gate above as `BLOCKED_AT_F861229C` and closes every independent-audit blocker through typed production truth. Each event has two fresh-start locked and two fresh-start resolution replays; v7 recomputes and correlates relationship branches, bindings, inventory, qualification and frames; exact Challenge encounter provenance controls region; semantic inventory and typed migration are sealed. The one Goal169A smoke proves the source fix in a new payload with explicit `Move.*`, no bare direction, cached host reuse, Unity 0 and retry 0. Status is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, no human gate, independent audit required.
+
+## Goal169B package-bound event proof and payload closure gate record
+
+Goal169A independent audit is `BLOCKED_AT_D012B8AC`. Goal169B implementation closes nested combat trace loss, event identity-set drift, SHA-only package trust, incomplete prototype/map-entity migration, incomplete payload identity and non-exact absent truth. The single cached smoke reused the host with no rebuild and Unity 0 but failed before launch/publication at `standalone.payload.human_facts_parse_mismatch`; immutable pointer/run status, RC and portable truth were not reached. The Base64/title compatibility correction passes focused tests but is not re-smoked because retry is 0. Status is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK`, `accepted=false`, no human gate.

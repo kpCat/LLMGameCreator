@@ -22,7 +22,8 @@ public sealed class Goal169AEvidenceCaptureTests
                 Goal168TestKit.Build.GeneratedCampaignRelationships);
         var correlation =
             GeneratedCampaignRegionalEventCorrelationService.Validate(
-                events.ExactPackageSha256, events, relationships);
+                Goal168TestKit.Package, events.ExactPackageSha256, events,
+                relationships);
         Assert.True(correlation.Passed,
             string.Join(",", correlation.Diagnostics));
         var migration = Goal169SaveMigrationState.Value;

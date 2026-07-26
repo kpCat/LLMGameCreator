@@ -1,7 +1,10 @@
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using LLMGameCreator.Application.Design.FeatureModuleAuthoring;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Generation.Procedural;
+using LLMGameCreator.GamePackage;
 
 namespace LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
 
@@ -33,6 +36,8 @@ public sealed class GameProjectBuildHistoryReader
         if (!Directory.Exists(historyRoot)) return new GameProjectBuildHistoryReadResult();
 
         var diagnostics = new List<string>();
+        var (actualPackage, actualPackageSha256) =
+            TryLoadActualPackage(projectFolder);
         var candidates = new List<(GameProjectBuildHistoryEntry Entry, string FileName)>();
         foreach (var path in Directory.EnumerateFiles(historyRoot, "*.json", SearchOption.TopDirectoryOnly))
         {
@@ -50,7 +55,9 @@ public sealed class GameProjectBuildHistoryReader
                 diagnostics.Add("social.history.unsupported_schema:" + Path.GetFileName(path));
                 continue;
             }
-            if (IsMatchingGreenSuccess(historyEntry, document)) candidates.Add((historyEntry, Path.GetFileName(path)));
+            if (IsMatchingGreenSuccess(historyEntry, document,
+                    actualPackage, actualPackageSha256))
+                candidates.Add((historyEntry, Path.GetFileName(path)));
         }
 
         var selected = candidates.OrderByDescending(candidate => candidate.Entry.CompletedAtUtc)
@@ -99,7 +106,11 @@ public sealed class GameProjectBuildHistoryReader
         };
     }
 
-    private static bool IsMatchingGreenSuccess(GameProjectBuildHistoryEntry entry, FeatureModuleCompositionDocument document) =>
+    private static bool IsMatchingGreenSuccess(
+        GameProjectBuildHistoryEntry entry,
+        FeatureModuleCompositionDocument document,
+        GamePackageDefinition? actualPackage,
+        string actualPackageSha256) =>
         string.Equals(entry.Status, "GREEN", StringComparison.Ordinal)
         && string.Equals(entry.AttemptStatus, "GREEN", StringComparison.Ordinal)
         && (entry.GeneratedWorld is { Present: true }
@@ -118,7 +129,8 @@ public sealed class GameProjectBuildHistoryReader
                   || entry.SchemaVersion == SchemaVersionV7
                   && TravelEligible(entry) && CombatEligible(entry)
                   && ChoiceEligible(entry) && RelationshipEligible(entry)
-                  && RegionalEventEligible(entry))
+                  && RegionalEventEligible(entry, actualPackage,
+                      actualPackageSha256))
             : entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true })
         && string.Equals(entry.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
@@ -370,11 +382,16 @@ public sealed class GameProjectBuildHistoryReader
             item.Required && item.Passed);
 
     private static bool RegionalEventEligible(
-        GameProjectBuildHistoryEntry entry)
+        GameProjectBuildHistoryEntry entry,
+        GamePackageDefinition? actualPackage,
+        string actualPackageSha256)
     {
         var events = entry.GeneratedCampaignRegionalEvents;
         var relationships = entry.GeneratedCampaignRelationships;
         if (events is null || relationships is null)
+            return false;
+        if (actualPackage is null
+            || actualPackageSha256 != entry.PackageSha256)
             return false;
         var expectedEventCount = relationships.BranchQualifications
             .Count(item => item.Available);
@@ -394,8 +411,38 @@ public sealed class GameProjectBuildHistoryReader
         if (!common)
             return false;
         return GeneratedCampaignRegionalEventCorrelationService
-            .Validate(entry.PackageSha256, events, relationships)
+            .Validate(actualPackage, actualPackageSha256, events,
+                relationships)
             .Passed;
+    }
+
+    private static (GamePackageDefinition? Package, string Sha256)
+        TryLoadActualPackage(string projectFolder)
+    {
+        try
+        {
+            var path = GameProjectFeatureModuleAuthoringService
+                .ConfinedPath(projectFolder, "package.json");
+            if (!File.Exists(path))
+                return (null, string.Empty);
+            var text = File.ReadAllText(path, Encoding.UTF8);
+            var package = JsonSerializer.Deserialize<
+                GamePackageDefinition>(text,
+                GeneratedEncounterCombatCanonical.JsonOptions);
+            if (package is null)
+                return (null, string.Empty);
+            using var stream = File.OpenRead(path);
+            return (package,
+                Convert.ToHexString(SHA256.HashData(stream))
+                    .ToLowerInvariant());
+        }
+        catch (Exception exception) when (exception is IOException
+                                           or UnauthorizedAccessException
+                                           or JsonException
+                                           or InvalidOperationException)
+        {
+            return (null, string.Empty);
+        }
     }
 
     private static bool RouteEligible(GameProjectGeneratedEncounterCombatSummary combat) => combat.RouteMode switch

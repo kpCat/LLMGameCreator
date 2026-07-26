@@ -1,0 +1,33 @@
+{
+    "status":  "GREEN",
+    "exactIdSetPassed":  true,
+    "bindingIds":  [
+                       "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+                       "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/refusal-fallout",
+                       "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/support-gratitude",
+                       "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+                       "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/refusal-fallout",
+                       "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/support-gratitude"
+                   ],
+    "inventoryIds":  [
+                         "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+                         "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/refusal-fallout",
+                         "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/support-gratitude",
+                         "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+                         "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/refusal-fallout",
+                         "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/support-gratitude"
+                     ],
+    "qualificationIds":  [
+                             "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+                             "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/refusal-fallout",
+                             "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/support-gratitude",
+                             "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+                             "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/refusal-fallout",
+                             "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/support-gratitude"
+                         ],
+    "replaySignatureCount":  24,
+    "runtimeFrameCount":  392,
+    "identityTamperRejectedCount":  12,
+    "coordinatedRenameQualificationSignaturesFramesWithRehashedFinalRejected":  true,
+    "duplicateOrOrphanRouteReplaySequenceCount":  0
+}

@@ -1,0 +1,48 @@
+{
+    "status":  "BLOCKED",
+    "candidateStatus":  "BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK",
+    "requiredBase":  "d012b8ac40a9c6ded421ec4bbcbddd9cc3b8d385",
+    "goal169aIndependentAuditResult":  "BLOCKED_AT_D012B8AC",
+    "scaffoldClassificationCounts":  [
+                                         {
+                                             "classification":  "KEEP_AND_COMPLETE",
+                                             "count":  20
+                                         },
+                                         {
+                                             "classification":  "REFACTOR",
+                                             "count":  10
+                                         }
+                                     ],
+    "blockerClosureCount":  6,
+    "blockersClosedByGoal169BImplementation":  true,
+    "publicationBlocker":  "standalone.payload.human_facts_parse_mismatch",
+    "postSmokeCompatibilityFixApplied":  true,
+    "eventCount":  6,
+    "nestedCombatFrameCount":  124,
+    "exactIdSetPassed":  true,
+    "actualPackageCorrelationPassed":  true,
+    "strictAbsentProfilePassed":  true,
+    "migrationDefinitionCorrelationPassed":  true,
+    "payloadSignatureCount":  24,
+    "goal169BTestsDiscovered":  72,
+    "goal169BBehavioralTestsDiscovered":  72,
+    "goal169BNonSmokeTestsPassed":  71,
+    "goal169BSmokeFailed":  1,
+    "goal169ATestsPassed":  60,
+    "goal169TestsPassed":  108,
+    "retainedGoal169AndGoal169AByteIdentical":  true,
+    "hiddenSmokeInvocationCount":  1,
+    "retryCount":  0,
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "unityStarts":  0,
+    "standaloneLaunchStarted":  false,
+    "rcCurrent":  "NOT_EVALUATED",
+    "portableCurrent":  "NOT_EVALUATED",
+    "artifactScopeViolationCount":  0,
+    "goal169Accepted":  false,
+    "goal169AAccepted":  false,
+    "goal169BAccepted":  false,
+    "humanGate":  false,
+    "independentBlockerAuditRequired":  true
+}

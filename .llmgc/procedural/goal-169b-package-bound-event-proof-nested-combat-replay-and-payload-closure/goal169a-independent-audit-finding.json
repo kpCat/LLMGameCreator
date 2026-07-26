@@ -1,0 +1,12 @@
+{
+    "goal169aImplementationCommit":  "d012b8ac40a9c6ded421ec4bbcbddd9cc3b8d385",
+    "goal169aIndependentAuditResult":  "BLOCKED_AT_D012B8AC",
+    "P1NestedCombatReplay":  "closed_by_goal169b",
+    "P1QualificationIdentity":  "closed_by_goal169b",
+    "P1ActualPackageCorrelation":  "closed_by_goal169b",
+    "P1MigrationDefinitions":  "closed_by_goal169b",
+    "P1PayloadProof":  "implemented_and_focused_test_green_but_publication_smoke_blocked",
+    "P1AbsentProfile":  "closed_by_goal169b",
+    "allImplementationFindingsClosed":  true,
+    "goal169bPublicationStatus":  "BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK"
+}

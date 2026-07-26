@@ -1,0 +1,25 @@
+{
+    "status":  "GREEN",
+    "nestedCombatFrameCount":  124,
+    "nestedCombatEventCount":  4,
+    "distinctCommandIdentityCount":  5,
+    "mapEventHashCount":  1,
+    "gameplayEventHashCount":  34,
+    "descriptorFingerprintCount":  2,
+    "effectFingerprintCount":  2,
+    "encounterStateHashCount":  33,
+    "sameFinalStateAdversarialRejectedCount":  10,
+    "sameFinalStateDivergenceRejected":  true,
+    "proofDimensions":  [
+                            "combat.Commands",
+                            "combat.Events",
+                            "qualified descriptor",
+                            "ability",
+                            "effect fingerprint",
+                            "encounter state chain",
+                            "turn",
+                            "round",
+                            "progress",
+                            "outcome"
+                        ]
+}

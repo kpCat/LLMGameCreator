@@ -831,12 +831,21 @@ public sealed class GameProjectBuildAndQualificationService
                     primaryPackageSha256 =
                         packageCombat.Document.OutputPackageSha256;
                     generatedRegionalEventOverlayDocument =
-                        generatedRegionalEventOverlayDocument with
-                        {
-                            OutputPackageSha256 =
-                                packageCombat.Document
-                                    .OutputPackageSha256
-                        };
+                        GeneratedCampaignRegionalEventDefinitionAuthorityService
+                            .RefreshOverlay(finalPackage,
+                                generatedRegionalEventOverlayDocument,
+                                primaryPackageSha256);
+                    if (!generatedRegionalEventOverlayDocument.Passed)
+                        return RollbackFailure(
+                            authoring,
+                            preBuildDocument,
+                            preBuildDirty,
+                            transaction,
+                            "Определения региональных событий не совпали с итоговым пакетом.",
+                            generatedRegionalEventOverlayDocument
+                                .Diagnostics,
+                            "generated_regional_event.definition_authority",
+                            attempt);
                     generatedEncounterCombat = _generatedCombatQualification.Qualify(
                         finalPackage,
                         generatedSource,
@@ -990,11 +999,11 @@ public sealed class GameProjectBuildAndQualificationService
                                     {
                                         Index = index,
                                         ActionId =
-                                            frame.RegionalEventId + ":"
-                                            + frame.CommandType
-                                            + ":replay-"
-                                            + frame.ReplayIndex,
-                                        Title = frame.CommandType,
+                                            GeneratedCampaignRegionalEventPayloadAuthorityService
+                                                .FrameCategory(frame),
+                                        Title =
+                                            GeneratedCampaignRegionalEventPayloadAuthorityService
+                                                .FrameCategory(frame),
                                         Category =
                                             "generated-regional-event",
                                         StateHash =
@@ -1014,8 +1023,11 @@ public sealed class GameProjectBuildAndQualificationService
                         primaryPlaythroughSignature = string.Join(">",
                             generatedCampaignRegionalEvents.RuntimeFrames
                                 .Select(frame =>
-                                    frame.RegionalEventId + ":"
-                                    + frame.CommandType));
+                                    frame.RegionalEventId + "|"
+                                    + frame.RouteKind + "|"
+                                    + frame.ReplayIndex + "|"
+                                    + frame.SequenceIndex + "|"
+                                    + frame.CommandSha256));
                     }
                 }
                 generatedWorld = _generatedSummary.BuildCurrent(

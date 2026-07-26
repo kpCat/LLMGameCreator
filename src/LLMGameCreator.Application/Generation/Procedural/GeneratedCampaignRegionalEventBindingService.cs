@@ -156,6 +156,7 @@ public sealed class GeneratedCampaignRegionalEventBindingService
                 MapEntityId = eventId + "/entity",
                 InteractionId = eventId + "/interaction",
                 DialogueId = eventId,
+                ResolutionChoiceId = eventId + "/resolve",
                 ResolutionFlagId = eventId,
                 Prerequisite = prerequisite,
                 Placement = placement,

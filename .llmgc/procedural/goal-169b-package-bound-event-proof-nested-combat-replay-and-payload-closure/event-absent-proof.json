@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "present":  false,
+    "profileStatus":  "ABSENT",
+    "eventCount":  0,
+    "bindingCount":  0,
+    "inventoryCount":  0,
+    "qualificationCount":  0,
+    "signatureCount":  0,
+    "frameCount":  0,
+    "emptyOverlayPolicy":  "EXACT_EMPTY_EVENT_GRAPH_V1",
+    "packageGeneratedRegionalEventRecordCount":  0,
+    "absentTamperRejectedCount":  7,
+    "ghostOverlayAndPackageRecordsRejected":  true
+}

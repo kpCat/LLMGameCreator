@@ -1,0 +1,44 @@
+/goal
+
+Выполни continuation-задачу из файла:
+
+docs/agent-tasks/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: d012b8ac40a9c6ded421ec4bbcbddd9cc3b8d385
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+План полностью одобрен. Не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- это focused continuation Goal169A, не новый product slice;
+- independent audit = BLOCKED_AT_D012B8AC;
+- сначала классифицируй затрагиваемые файлы KEEP_AND_COMPLETE / REFACTOR / REPLACE / REMOVE_AS_UNUSED;
+- nested exact combat сейчас схлопнут в synthetic final-state frame: включить реальные combat.Commands, combat.Events, descriptor/effect fingerprints и encounter-state chain в replay;
+- одинаковый final state при отличающемся combat route обязан отклоняться;
+- exact set equality RegionalEventId между binding/inventory/qualification/signatures/frames;
+- coordinated rename qualification+signatures+frames с пересчитанным final hash обязан отклоняться;
+- history должна перепроверять event-owned definitions по actual loaded package, а не только по package SHA string;
+- сверять dialogue, interaction, entity prototype, map entity, position, references, requirements/effects и metadata;
+- event-absent v7 profile должен иметь строго пустой overlay/inventory/package graph;
+- migration должна учитывать exact prototype/map-entity behavior, не только dialogue/interaction/quest/encounter;
+- standalone payload должен сам содержать RouteKind, ReplayIndex, SequenceIndex и 24 signature authority;
+- smoke проверяет только immutable payload/history после закрытия in-memory objects;
+- старые Goal169/Goal169A run/pointer/history/payload/RC byte-identical;
+- ровно 1 новый cached Goal169B smoke, retry=0, HostReused=true, HostRebuilt=false, Unity=0;
+- Runtime/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal169B >=52 discovered / >=46 behavioral / all pass;
+- Goal169A 60/60 и Goal169 108/108 без повторного старого smoke;
+- не запускать full suite, Goal168 85-case closure, all-ProductSmoke или Unity host build;
+- ровно 15+15 evidence, scope=0;
+- независимо от GREEN/BLOCKED/FAILED один commit и push origin/main;
+- не оставлять commit/push пользователю.
+
+В финале сообщи classifications, blockers/closure, nested combat replay, exact ID/package correlation,
+absent profile, migration definition truth, payload-only proof, retained immutability, smoke/RC/portable,
+tests/evidence/scope, SHA/push/HEAD/worktree.

@@ -12,6 +12,8 @@ public static class GeneratedCampaignRegionalEventReplayService
         ArgumentNullException.ThrowIfNull(frames);
 
         var ordered = frames.OrderBy(item => item.SequenceIndex).ToList();
+        var nestedCombat = ordered.Where(item => item.NestedCombat)
+            .ToList();
         var ownershipPassed = ordered.Count > 0
                               && ordered.Select(item => item.SequenceIndex)
                                   .SequenceEqual(Enumerable.Range(0,
@@ -19,7 +21,18 @@ public static class GeneratedCampaignRegionalEventReplayService
                               && ordered.All(item =>
                                   item.RegionalEventId == regionalEventId
                                   && item.RouteKind == routeKind
-                                  && item.ReplayIndex == replayIndex);
+                                  && item.ReplayIndex == replayIndex)
+                              && ordered.Zip(ordered.Skip(1),
+                                      (left, right) =>
+                                          !left.NestedCombat
+                                          && !right.NestedCombat
+                                          || left.AfterStateHash
+                                          == right.BeforeStateHash)
+                                  .All(item => item)
+                              && nestedCombat.Select(item =>
+                                      item.NestedCombatSequenceIndex)
+                                  .SequenceEqual(Enumerable.Range(0,
+                                      nestedCombat.Count));
         var signature = new GeneratedCampaignRegionalEventReplaySignature
         {
             RegionalEventId = regionalEventId,
@@ -63,6 +76,78 @@ public static class GeneratedCampaignRegionalEventReplayService
             EncounterStateSequenceSha256 =
                 GeneratedCampaignChoiceCanonical.Hash(ordered.Select(item =>
                     item.EncounterStateSha256).ToList()),
+            NestedCombatFrameCount = nestedCombat.Count,
+            NestedCombatCommandSequenceSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.NestedCombatSequenceIndex,
+                        item.CommandType,
+                        item.NestedCombatCommandIdentity,
+                        item.CommandSha256
+                    }).ToList()),
+            NestedCombatEventSequenceSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.NestedCombatMapEventSequenceSha256,
+                        item.NestedCombatGameplayEventSequenceSha256,
+                        item.EventSha256
+                    }).ToList()),
+            NestedCombatDescriptorSequenceSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.QualifiedDescriptorFingerprint,
+                        item.AbilityDefinitionSha256
+                    }).ToList()),
+            NestedCombatEffectSequenceSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.ObservedEffectClass,
+                        item.ObservedEffectFingerprint,
+                        item.CombatProgressObserved,
+                        item.CombatOutcome
+                    }).ToList()),
+            NestedCombatEncounterStateChainSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.EncounterStateBeforeSha256,
+                        item.EncounterStateAfterSha256
+                    }).ToList()),
+            NestedCombatTurnSequenceSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.TurnBefore,
+                        item.TurnAfter,
+                        item.RoundBefore,
+                        item.RoundAfter
+                    }).ToList()),
+            NestedCombatTraceSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(nestedCombat.Select(
+                    item => new
+                    {
+                        item.SequenceIndex,
+                        item.NestedCombatSequenceIndex,
+                        item.NestedCombatCommandIdentity,
+                        item.QualifiedDescriptorFingerprint,
+                        item.AbilityDefinitionSha256,
+                        item.ObservedEffectClass,
+                        item.ObservedEffectFingerprint,
+                        item.NestedCombatMapEventSequenceSha256,
+                        item.NestedCombatGameplayEventSequenceSha256,
+                        item.EncounterStateBeforeSha256,
+                        item.EncounterStateAfterSha256,
+                        item.TurnBefore,
+                        item.TurnAfter,
+                        item.RoundBefore,
+                        item.RoundAfter,
+                        item.CombatProgressObserved,
+                        item.CombatOutcome
+                    }).ToList()),
             FinalStateHash = ordered.LastOrDefault()?.AfterStateHash
                              ?? string.Empty,
             Passed = ownershipPassed && ordered.All(item => item.Passed)
@@ -155,6 +240,30 @@ public static class GeneratedCampaignRegionalEventReplayService
         Compare(first.EncounterStateSequenceSha256,
             second.EncounterStateSequenceSha256, "encounter_state",
             diagnostics);
+        Compare(first.NestedCombatFrameCount,
+            second.NestedCombatFrameCount, "nested_combat_frame_count",
+            diagnostics);
+        Compare(first.NestedCombatCommandSequenceSha256,
+            second.NestedCombatCommandSequenceSha256,
+            "nested_combat_command_sequence", diagnostics);
+        Compare(first.NestedCombatEventSequenceSha256,
+            second.NestedCombatEventSequenceSha256,
+            "nested_combat_event_sequence", diagnostics);
+        Compare(first.NestedCombatDescriptorSequenceSha256,
+            second.NestedCombatDescriptorSequenceSha256,
+            "nested_combat_descriptor_sequence", diagnostics);
+        Compare(first.NestedCombatEffectSequenceSha256,
+            second.NestedCombatEffectSequenceSha256,
+            "nested_combat_effect_sequence", diagnostics);
+        Compare(first.NestedCombatEncounterStateChainSha256,
+            second.NestedCombatEncounterStateChainSha256,
+            "nested_combat_encounter_state_chain", diagnostics);
+        Compare(first.NestedCombatTurnSequenceSha256,
+            second.NestedCombatTurnSequenceSha256,
+            "nested_combat_turn_sequence", diagnostics);
+        Compare(first.NestedCombatTraceSha256,
+            second.NestedCombatTraceSha256,
+            "nested_combat_trace", diagnostics);
         Compare(first.FinalStateHash, second.FinalStateHash,
             "final_state", diagnostics);
         Compare(first.SignatureSha256, second.SignatureSha256,
@@ -195,6 +304,14 @@ public static class GeneratedCampaignRegionalEventReplayService
             signature.RelationshipFlagSequenceSha256,
             signature.QuestStateSequenceSha256,
             signature.EncounterStateSequenceSha256,
+            signature.NestedCombatFrameCount,
+            signature.NestedCombatCommandSequenceSha256,
+            signature.NestedCombatEventSequenceSha256,
+            signature.NestedCombatDescriptorSequenceSha256,
+            signature.NestedCombatEffectSequenceSha256,
+            signature.NestedCombatEncounterStateChainSha256,
+            signature.NestedCombatTurnSequenceSha256,
+            signature.NestedCombatTraceSha256,
             signature.FinalStateHash,
             signature.Passed
         });
@@ -233,7 +350,28 @@ public static class GeneratedCampaignRegionalEventInventoryService
             PrerequisiteFingerprint =
                 binding.Prerequisite.Fingerprint,
             RewardDerivationFingerprint =
-                binding.SourceQuestRewardFingerprint
+                binding.SourceQuestRewardFingerprint,
+            ResolutionChoiceId = binding.ResolutionChoiceId,
+            DialogueDefinitionSha256 =
+                binding.DialogueDefinitionSha256,
+            InteractionDefinitionSha256 =
+                binding.InteractionDefinitionSha256,
+            EntityPrototypeDefinitionSha256 =
+                binding.EntityPrototypeDefinitionSha256,
+            MapEntityDefinitionSha256 =
+                binding.MapEntityDefinitionSha256,
+            SourceQuestDefinitionSha256 =
+                binding.SourceQuestDefinitionSha256,
+            ChallengeEncounterDefinitionSha256 =
+                binding.ChallengeEncounterDefinitionSha256,
+            PositionSha256 = binding.PositionSha256,
+            InteractableReferencesSha256 =
+                binding.InteractableReferencesSha256,
+            ResolutionRequirementsSha256 =
+                binding.ResolutionRequirementsSha256,
+            ResolutionEffectsSha256 =
+                binding.ResolutionEffectsSha256,
+            EventMetadataSha256 = binding.EventMetadataSha256
         };
         return row with
         {

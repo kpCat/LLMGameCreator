@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using LLMGameCreator.Application.Design.UnifiedGameProjectWorkspace;
+using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.Application.Generation.Procedural;
@@ -438,6 +439,9 @@ public sealed class GeneratedGameplaySaveMigrationService
     {
         if (!TryInventory(truth.SelectedBuildHistory,
                 truth.SelectedBuildHistorySha256,
+                truth.ActualPackage,
+                truth.PackageSha256,
+                truth.DefinitionFingerprintInventory,
                 out var target, out var targetDiagnostic))
             return new RegionalEventInventoryPair
             {
@@ -474,6 +478,9 @@ public sealed class GeneratedGameplaySaveMigrationService
                 };
             if (!TryInventory(sourceHistory,
                     sourceRevision.SelectedBuildHistorySha256,
+                    null,
+                    sourceRevision.PackageSha256,
+                    sourceRevision.DefinitionFingerprints,
                     out var source, out var sourceDiagnostic))
                 return new RegionalEventInventoryPair
                 {
@@ -505,6 +512,10 @@ public sealed class GeneratedGameplaySaveMigrationService
     private static bool TryInventory(
         GameProjectBuildHistoryEntry history,
         string historySha256,
+        GamePackageDefinition? actualPackage,
+        string actualPackageSha256,
+        IReadOnlyList<GeneratedGameplayDefinitionFingerprint>
+            definitionInventory,
         out IReadOnlyList<GeneratedCampaignRegionalEventInventoryRow>
             inventory,
         out string diagnostic)
@@ -553,13 +564,17 @@ public sealed class GeneratedGameplaySaveMigrationService
             diagnostic = "semantic_inventory_mismatch";
             return false;
         }
-        var correlation =
-            GeneratedCampaignRegionalEventCorrelationService.Validate(
-                history.PackageSha256, events, relationships);
-        if (!correlation.Passed)
+        if (actualPackage is not null)
         {
-            diagnostic = "history_correlation_mismatch";
-            return false;
+            var correlation =
+                GeneratedCampaignRegionalEventCorrelationService.Validate(
+                    actualPackage, actualPackageSha256, events,
+                    relationships);
+            if (!correlation.Passed)
+            {
+                diagnostic = "history_correlation_mismatch";
+                return false;
+            }
         }
         inventory = events.EventInventory
             .OrderBy(item => item.RegionalEventId,
@@ -594,8 +609,44 @@ public sealed class GeneratedGameplaySaveMigrationService
             {
                 sourceById.TryGetValue(id, out var sourceRow);
                 targetById.TryGetValue(id, out var targetRow);
+                var dialoguePreserved = DefinitionExact(
+                    "dialogue", sourceRow?.DialogueId,
+                    targetRow?.DialogueId, sourceDefinitions,
+                    targetDefinitions);
+                var interactionPreserved = DefinitionExact(
+                    "interaction", sourceRow?.InteractionId,
+                    targetRow?.InteractionId, sourceDefinitions,
+                    targetDefinitions);
+                var prototypePreserved = DefinitionExact(
+                    "entity_prototype",
+                    sourceRow?.EntityPrototypeId,
+                    targetRow?.EntityPrototypeId,
+                    sourceDefinitions, targetDefinitions);
+                var markerPreserved = DefinitionExact(
+                    "map_entity", sourceRow?.MapEntityId,
+                    targetRow?.MapEntityId, sourceDefinitions,
+                    targetDefinitions);
+                var placementChanged = sourceRow is not null
+                                       && targetRow is not null
+                                       && (sourceRow.MapId !=
+                                           targetRow.MapId
+                                           || sourceRow.X != targetRow.X
+                                           || sourceRow.Y != targetRow.Y
+                                           || sourceRow.PositionSha256 !=
+                                           targetRow.PositionSha256);
+                var definitionCorrelationPassed =
+                    sourceRow is not null
+                    && targetRow is not null
+                    && dialoguePreserved
+                    && interactionPreserved
+                    && prototypePreserved
+                    && markerPreserved
+                    && EventDefinitionsExact(sourceRow,
+                        sourceDefinitions, targetDefinitions);
                 var compatible = sourceRow is not null
                                  && targetRow is not null
+                                 && definitionCorrelationPassed
+                                 && !placementChanged
                                  && sourceRow.EventSemanticFingerprint
                                  == targetRow
                                      .EventSemanticFingerprint
@@ -644,6 +695,19 @@ public sealed class GeneratedGameplaySaveMigrationService
                         TargetEventFingerprint =
                             targetRow?.EventSemanticFingerprint
                             ?? string.Empty,
+                        DefinitionCorrelationPassed =
+                            definitionCorrelationPassed,
+                        MarkerDefinitionPreserved =
+                            markerPreserved,
+                        PrototypeDefinitionPreserved =
+                            prototypePreserved,
+                        DialogueDefinitionPreserved =
+                            dialoguePreserved,
+                        InteractionDefinitionPreserved =
+                            interactionPreserved,
+                        PlacementChanged = placementChanged,
+                        PlacementPolicy =
+                            "EXACT_PLACEMENT_REQUIRED",
                         DroppedReason = reason
                     };
             }).ToList();
@@ -660,6 +724,8 @@ public sealed class GeneratedGameplaySaveMigrationService
         {
             ("dialogue", row.DialogueId),
             ("interaction", row.InteractionId),
+            ("entity_prototype", row.EntityPrototypeId),
+            ("map_entity", row.MapEntityId),
             ("quest", row.SourceQuestId),
             ("encounter", row.ChallengeEncounterId)
         };
@@ -676,6 +742,28 @@ public sealed class GeneratedGameplaySaveMigrationService
                 return false;
         }
         return true;
+    }
+
+    private static bool DefinitionExact(
+        string kind,
+        string? sourceId,
+        string? targetId,
+        IReadOnlyDictionary<string,
+            GeneratedGameplayDefinitionFingerprint> source,
+        IReadOnlyDictionary<string,
+            GeneratedGameplayDefinitionFingerprint> target)
+    {
+        if (string.IsNullOrWhiteSpace(sourceId)
+            || string.IsNullOrWhiteSpace(targetId)
+            || sourceId != targetId)
+            return false;
+        var key = kind + "\n" + sourceId;
+        return source.TryGetValue(key, out var sourceDefinition)
+               && target.TryGetValue(key, out var targetDefinition)
+               && sourceDefinition.CanonicalSha256 ==
+               targetDefinition.CanonicalSha256
+               && sourceDefinition.SourceId ==
+               targetDefinition.SourceId;
     }
 
     private static CandidateBuild CandidateFailed(

@@ -1,0 +1,166 @@
+{
+    "schemaVersion":  "goal169b_scaffold_classification_v1",
+    "taskId":  "goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure",
+    "goal169aImplementationCommit":  "d012b8ac40a9c6ded421ec4bbcbddd9cc3b8d385",
+    "goal169aIndependentAuditResult":  "BLOCKED_AT_D012B8AC",
+    "boundedException":  "Goal169B explicitly authorizes the correlated application, test, runner, evidence and state-document families required to close the six audit findings.",
+    "classifications":  [
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventModels.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventReplayService.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventCorrelationService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventDefinitionAuthorityService.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventPayloadAuthorityService.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedCampaignRegionalEventQualificationService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventBindingService.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventOverlayService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignExactCombatRouteService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectWorkspaceModels.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplayDefinitionFingerprintService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveMigrationService.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveModels.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveValidator.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCandidateSealService.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCommitValidator.cs",
+                                "classification":  "REFACTOR",
+                                "reason":  "Existing local seam is minimally refactored to close the explicit Goal169B audit finding while preserving its architecture and naming."
+                            },
+                            {
+                                "path":  "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignSessionTruthService.cs",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "tests/LLMGameCreator.Tests/Application/Goal169A/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "tests/LLMGameCreator.Tests/Application/Goal169/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".devflow/scripts/run-goal169a-strict-event-closure.ps1",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".devflow/scripts/run-goal169a-strict-event-closure.cmd",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".llmgc/procedural/goal-169a-strict-replay-v7-correlation-and-post-fix-smoke-closure/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".llmgc/exports/goal-169a-strict-replay-v7-correlation-and-post-fix-smoke-closure/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  "tests/LLMGameCreator.Tests/Application/Goal169B/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".devflow/scripts/run-goal169b-package-bound-event-proof.ps1",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".devflow/scripts/run-goal169b-package-bound-event-proof.cmd",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".llmgc/procedural/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            },
+                            {
+                                "path":  ".llmgc/exports/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/**",
+                                "classification":  "KEEP_AND_COMPLETE",
+                                "reason":  "Existing or newly authorized local seam is retained and completed within the bounded Goal169B continuation scope."
+                            }
+                        ],
+    "replaceReasons":  [
+
+                       ],
+    "removeAsUnusedReasons":  [
+
+                              ],
+    "productionEditsStarted":  true
+}

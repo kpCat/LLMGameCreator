@@ -1,0 +1,19 @@
+{
+    "status":  "GREEN",
+    "compatible":  true,
+    "definitionCorrelationPassed":  true,
+    "markerDefinitionPreserved":  true,
+    "prototypeDefinitionPreserved":  true,
+    "dialogueDefinitionPreserved":  true,
+    "interactionDefinitionPreserved":  true,
+    "placementChanged":  false,
+    "placementPolicy":  "EXACT_PLACEMENT_REQUIRED",
+    "incompatibleDefinitionKinds":  [
+                                        "dialogue",
+                                        "interaction",
+                                        "entity_prototype",
+                                        "map_entity"
+                                    ],
+    "droppedWithoutGhostState":  true,
+    "publicPersistedSaveSchemaChanged":  false
+}

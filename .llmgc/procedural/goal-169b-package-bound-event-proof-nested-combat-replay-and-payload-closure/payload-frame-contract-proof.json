@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN_POST_SMOKE_FIX_NOT_RESMOKED",
+    "schema":  "generated_campaign_regional_event_payload_authority_v1",
+    "frameIdentity":  "RegionalEventId|RouteKind|ReplayIndex|SequenceIndex|CommandIdentity",
+    "serializedIdentityField":  "title",
+    "legacyCategoryPreserved":  "generated-regional-event",
+    "humanFactEncoding":  "base64:utf8-json",
+    "legacyParserSafeFocusedTestPassed":  true,
+    "eventIdCount":  6,
+    "replaySignatureCount":  24,
+    "frameCountEntryCount":  24,
+    "nestedTraceHashCount":  24,
+    "authoritySha256":  "468b525c1da41260112e744b5835f95d468cb3ce583ea17796b8e3665709192a",
+    "tamperRejectedCount":  7,
+    "correctiveSmokeInvocationCount":  0
+}

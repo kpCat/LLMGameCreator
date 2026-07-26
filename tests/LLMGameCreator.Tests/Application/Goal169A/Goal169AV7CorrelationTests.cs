@@ -30,6 +30,8 @@ public sealed class Goal169AV7CorrelationTests
     [InlineData("final_state")]
     public void Behavioral_v7_tamper_matrix_is_rejected(string tamper)
     {
+        Assert.True(Goal168TestKit.Build.Passed,
+            string.Join(",", Goal168TestKit.Build.Diagnostics));
         var events =
             Assert.IsType<GameProjectGeneratedCampaignRegionalEventSummary>(
                 Goal168TestKit.Build.GeneratedCampaignRegionalEvents);
@@ -39,12 +41,14 @@ public sealed class Goal169AV7CorrelationTests
                 Goal168TestKit.Build.GeneratedCampaignRelationships);
         var packageSha256 = events.ExactPackageSha256;
         Assert.True(GeneratedCampaignRegionalEventCorrelationService
-            .Validate(packageSha256, events, relationships).Passed);
+            .Validate(Goal168TestKit.Package, packageSha256, events,
+                relationships).Passed);
 
         (events, relationships) = Tamper(events, relationships, tamper);
         var observed =
             GeneratedCampaignRegionalEventCorrelationService.Validate(
-                packageSha256, events, relationships);
+                Goal168TestKit.Package, packageSha256, events,
+                relationships);
 
         Assert.False(observed.Passed);
         Assert.NotEmpty(observed.Diagnostics);

@@ -20,6 +20,32 @@ public sealed record GeneratedCampaignExactCombatRouteRequest
     public GeneratedCampaignExactCombatRouteGoal Goal { get; init; }
 }
 
+public sealed record GeneratedCampaignExactCombatTraceStep
+{
+    public int SequenceIndex { get; init; }
+    public GameRuntimeCommandType CommandType { get; init; }
+    public string CommandIdentity { get; init; } = string.Empty;
+    public string QualifiedDescriptorFingerprint { get; init; } = string.Empty;
+    public string AbilityDefinitionSha256 { get; init; } = string.Empty;
+    public string ObservedEffectClass { get; init; } = string.Empty;
+    public string ObservedEffectFingerprint { get; init; } = string.Empty;
+    public IReadOnlyList<RuntimeEventType> MapEvents { get; init; } = [];
+    public IReadOnlyList<GameRuntimeEventType> GameplayEvents { get; init; } = [];
+    public string MapEventSequenceSha256 { get; init; } = string.Empty;
+    public string GameplayEventSequenceSha256 { get; init; } = string.Empty;
+    public string BeforeStateHash { get; init; } = string.Empty;
+    public string AfterStateHash { get; init; } = string.Empty;
+    public string EncounterStateBeforeSha256 { get; init; } = string.Empty;
+    public string EncounterStateAfterSha256 { get; init; } = string.Empty;
+    public int TurnBefore { get; init; } = -1;
+    public int TurnAfter { get; init; } = -1;
+    public int RoundBefore { get; init; } = -1;
+    public int RoundAfter { get; init; } = -1;
+    public bool ProgressObserved { get; init; }
+    public string Outcome { get; init; } = string.Empty;
+    public bool Passed { get; init; }
+}
+
 public sealed record GeneratedCampaignExactCombatRouteResult
 {
     public bool Passed { get; init; }
@@ -36,6 +62,9 @@ public sealed record GeneratedCampaignExactCombatRouteResult
     public bool QuestProgressObserved { get; init; }
     public bool ReputationChanged { get; init; }
     public int CommandBound { get; init; }
+    public IReadOnlyList<GeneratedCampaignExactCombatTraceStep> Trace { get; init; } = [];
+    public string TraceSha256 { get; init; } = string.Empty;
+    public bool TracePassed { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
@@ -61,6 +90,7 @@ public sealed class GeneratedCampaignExactCombatRouteService
         var commands = new List<GameRuntimeCommandType>();
         var events = new List<GameRuntimeEventType>();
         var used = new List<string>();
+        var trace = new List<GeneratedCampaignExactCombatTraceStep>();
         var inventoryBefore = GeneratedEncounterCombatCanonical.Hash(session.GameplayState.Inventories);
         var questsBefore = GeneratedEncounterCombatCanonical.Hash(new
         {
@@ -77,25 +107,36 @@ public sealed class GeneratedCampaignExactCombatRouteService
             } active || !string.Equals(active.EncounterId, request.EncounterId,
                 StringComparison.Ordinal))
         {
+            var beforeStart = GeneratedEncounterCombatCanonical.Clone(session);
+            var startCommand =
+                GameRuntimeCommand.StartEncounter(request.EncounterId);
             var started = request.Runtime.ExecuteGameplayCommand(
-                request.FinalPackage, session,
-                GameRuntimeCommand.StartEncounter(request.EncounterId));
+                request.FinalPackage, session, startCommand);
             commands.Add(GameRuntimeCommandType.StartEncounter);
             events.AddRange(started.GameplayEvents.Select(item => item.Type));
+            trace.Add(TraceStep(trace.Count, beforeStart, started,
+                startCommand, null, null, progressObserved: false));
             if (!started.Success)
                 return Failed(started.Session, packageBefore, request.CombatSummary,
                     ["generated_relationship.arc_combat_failed",
-                     "generated_relationship.encounter_start_failed"], commands, events);
+                     "generated_relationship.encounter_start_failed"], commands, events,
+                    trace);
             session = started.Session;
         }
 
         if (request.Goal == GeneratedCampaignExactCombatRouteGoal.FLEE)
         {
+            var beforeFlee = GeneratedEncounterCombatCanonical.Clone(session);
+            var fleeCommand = new GameRuntimeCommand
+            {
+                Type = GameRuntimeCommandType.FleeEncounter
+            };
             var fled = request.Runtime.ExecuteGameplayCommand(
-                request.FinalPackage, session,
-                new GameRuntimeCommand { Type = GameRuntimeCommandType.FleeEncounter });
+                request.FinalPackage, session, fleeCommand);
             commands.Add(GameRuntimeCommandType.FleeEncounter);
             events.AddRange(fled.GameplayEvents.Select(item => item.Type));
+            trace.Add(TraceStep(trace.Count, beforeFlee, fled,
+                fleeCommand, null, null, progressObserved: false));
             session = fled.Session;
             rewardObserved = fled.GameplayEvents.Any(IsReward);
             var questChanged = questsBefore != GeneratedEncounterCombatCanonical.Hash(new
@@ -118,7 +159,7 @@ public sealed class GeneratedCampaignExactCombatRouteService
             if (!passed) diagnostics.Add("generated_relationship.arc_combat_failed");
             return Complete(request, session, packageBefore, commands, events, used,
                 progressObserved, rewardObserved, questChanged, reputationChanged, 1,
-                diagnostics);
+                trace, diagnostics);
         }
 
         var commandBound = DynamicCommandBound(
@@ -140,14 +181,18 @@ public sealed class GeneratedCampaignExactCombatRouteService
             UnifiedRuntimeResult result;
             if (!IsPlayer(current.Team))
             {
+                var beforeAi =
+                    GeneratedEncounterCombatCanonical.Clone(session);
+                var aiCommand = new GameRuntimeCommand
+                {
+                    Type = GameRuntimeCommandType.RunCurrentTurnAi
+                };
                 result = request.Runtime.ExecuteGameplayCommand(
-                    request.FinalPackage, session,
-                    new GameRuntimeCommand
-                    {
-                        Type = GameRuntimeCommandType.RunCurrentTurnAi
-                    });
+                    request.FinalPackage, session, aiCommand);
                 commands.Add(GameRuntimeCommandType.RunCurrentTurnAi);
                 events.AddRange(result.GameplayEvents.Select(item => item.Type));
+                trace.Add(TraceStep(trace.Count, beforeAi, result,
+                    aiCommand, null, null, progressObserved: false));
                 if (!result.Success)
                 {
                     diagnostics.Add("generated_relationship.arc_combat_failed");
@@ -180,6 +225,9 @@ public sealed class GeneratedCampaignExactCombatRouteService
                 events.AddRange(result.GameplayEvents.Select(item => item.Type));
                 used.Add(action.DescriptorFingerprint);
                 progressObserved = true;
+                trace.Add(TraceStep(trace.Count, action.Before, result,
+                    action.Command, action.Descriptor, action.ObservedEffect,
+                    progressObserved: true));
             }
 
             rewardObserved |= result.GameplayEvents.Any(IsReward);
@@ -214,7 +262,7 @@ public sealed class GeneratedCampaignExactCombatRouteService
                                          session.GameplayState.Factions);
         return Complete(request, session, packageBefore, commands, events, used,
             progressObserved, rewardObserved, questProgress, reputationChangedAfter,
-            commandBound, diagnostics);
+            commandBound, trace, diagnostics);
     }
 
     private static QualifiedActionExecution? ExecuteQualifiedPlayerAction(
@@ -249,7 +297,11 @@ public sealed class GeneratedCampaignExactCombatRouteService
                     result.Session.GameplayState.ActiveEncounter))
                 continue;
             return new QualifiedActionExecution(
+                before,
                 result,
+                command,
+                descriptor,
+                observed,
                 descriptor.RuntimeCommandType,
                 DescriptorFingerprint(descriptor));
         }
@@ -399,6 +451,7 @@ public sealed class GeneratedCampaignExactCombatRouteService
         bool questProgress,
         bool reputationChanged,
         int commandBound,
+        IReadOnlyList<GeneratedCampaignExactCombatTraceStep> trace,
         IReadOnlyList<string> diagnostics)
     {
         var after = PackageSha256(request.FinalPackage);
@@ -411,6 +464,26 @@ public sealed class GeneratedCampaignExactCombatRouteService
         if (!packageUnchanged)
             finalDiagnostics.Add(
                 "generated_relationship.qualified_action_definition_changed");
+        var tracePassed = trace.Count == commands.Count
+                          && trace.Select(item => item.SequenceIndex)
+                              .SequenceEqual(Enumerable.Range(0,
+                                  trace.Count))
+                          && trace.Select(item => item.CommandType)
+                              .SequenceEqual(commands)
+                          && trace.SelectMany(item => item.GameplayEvents)
+                              .SequenceEqual(events)
+                          && trace.Zip(trace.Skip(1),
+                                  (left, right) =>
+                                      left.AfterStateHash
+                                      == right.BeforeStateHash)
+                              .All(item => item)
+                          && (trace.Count == 0
+                              || trace[^1].AfterStateHash
+                              == StableStateHash(session))
+                          && trace.All(item => item.Passed);
+        if (!tracePassed)
+            finalDiagnostics.Add(
+                "generated_relationship.exact_combat_trace_invalid");
         finalDiagnostics = finalDiagnostics.Distinct(StringComparer.Ordinal)
             .OrderBy(item => item, StringComparer.Ordinal).ToList();
         return new GeneratedCampaignExactCombatRouteResult
@@ -429,6 +502,9 @@ public sealed class GeneratedCampaignExactCombatRouteService
             QuestProgressObserved = questProgress,
             ReputationChanged = reputationChanged,
             CommandBound = commandBound,
+            Trace = trace,
+            TraceSha256 = GeneratedEncounterCombatCanonical.Hash(trace),
+            TracePassed = tracePassed,
             Diagnostics = finalDiagnostics
         };
     }
@@ -439,7 +515,8 @@ public sealed class GeneratedCampaignExactCombatRouteService
         GameProjectGeneratedEncounterCombatSummary summary,
         IReadOnlyList<string> diagnostics,
         IReadOnlyList<GameRuntimeCommandType>? commands = null,
-        IReadOnlyList<GameRuntimeEventType>? events = null) => new()
+        IReadOnlyList<GameRuntimeEventType>? events = null,
+        IReadOnlyList<GeneratedCampaignExactCombatTraceStep>? trace = null) => new()
     {
         Session = session,
         Commands = commands ?? [],
@@ -448,6 +525,9 @@ public sealed class GeneratedCampaignExactCombatRouteService
         PackageSha256After = packageBefore,
         QualifiedActionsSha256 = summary.QualifiedActionsSha256,
         PackageReferenceUnchanged = true,
+        Trace = trace ?? [],
+        TraceSha256 =
+            GeneratedEncounterCombatCanonical.Hash(trace ?? []),
         Diagnostics = diagnostics.Distinct(StringComparer.Ordinal)
             .OrderBy(item => item, StringComparer.Ordinal).ToList()
     };
@@ -468,8 +548,90 @@ public sealed class GeneratedCampaignExactCombatRouteService
         GeneratedEncounterCombatQualifiedAction descriptor) =>
         GeneratedEncounterCombatCanonical.Hash(descriptor);
 
+    private static GeneratedCampaignExactCombatTraceStep TraceStep(
+        int sequenceIndex,
+        UnifiedRuntimeSession before,
+        UnifiedRuntimeResult result,
+        GameRuntimeCommand command,
+        GeneratedEncounterCombatQualifiedAction? descriptor,
+        GeneratedEncounterCombatObservedEffect? observedEffect,
+        bool progressObserved)
+    {
+        var beforeEncounter = before.GameplayState.ActiveEncounter;
+        var afterEncounter = result.Session.GameplayState.ActiveEncounter;
+        return new GeneratedCampaignExactCombatTraceStep
+        {
+            SequenceIndex = sequenceIndex,
+            CommandType = command.Type,
+            CommandIdentity = GeneratedEncounterCombatCanonical.Hash(
+                command),
+            QualifiedDescriptorFingerprint = descriptor is null
+                ? string.Empty
+                : DescriptorFingerprint(descriptor),
+            AbilityDefinitionSha256 =
+                descriptor?.AbilityDefinitionSha256 ?? string.Empty,
+            ObservedEffectClass =
+                observedEffect?.EffectClass ?? string.Empty,
+            ObservedEffectFingerprint =
+                observedEffect?.Fingerprint ?? string.Empty,
+            MapEvents = result.MapEvents.Select(item => item.Type)
+                .ToList(),
+            GameplayEvents = result.GameplayEvents.Select(item =>
+                item.Type).ToList(),
+            MapEventSequenceSha256 =
+                GeneratedEncounterCombatCanonical.Hash(result.MapEvents),
+            GameplayEventSequenceSha256 =
+                GeneratedEncounterCombatCanonical.Hash(
+                    result.GameplayEvents),
+            BeforeStateHash = StableStateHash(before),
+            AfterStateHash = StableStateHash(result.Session),
+            EncounterStateBeforeSha256 =
+                GeneratedEncounterCombatCanonical.Hash(beforeEncounter),
+            EncounterStateAfterSha256 =
+                GeneratedEncounterCombatCanonical.Hash(afterEncounter),
+            TurnBefore = beforeEncounter?.TurnIndex ?? -1,
+            TurnAfter = afterEncounter?.TurnIndex ?? -1,
+            RoundBefore = beforeEncounter?.Round ?? -1,
+            RoundAfter = afterEncounter?.Round ?? -1,
+            ProgressObserved = progressObserved,
+            Outcome = Outcome(afterEncounter),
+            Passed = result.Success
+                     && !string.IsNullOrWhiteSpace(
+                         GeneratedEncounterCombatCanonical.Hash(command))
+        };
+    }
+
+    private static string StableStateHash(UnifiedRuntimeSession session) =>
+        GeneratedCampaignChoiceCanonical.Hash(new
+        {
+            session.MapState,
+            session.GameplayState
+        });
+
+    private static string Outcome(EncounterRuntimeState? encounter)
+    {
+        if (encounter is null)
+            return "NO_ENCOUNTER";
+        if (encounter.Active)
+            return "ACTIVE";
+        if (encounter.ActionHistory.Any(item => string.Equals(item,
+                "flee", StringComparison.OrdinalIgnoreCase)))
+            return "FLED";
+        if (encounter.Participants.Any(item => item.Alive
+                && IsPlayer(item.Team))
+            && encounter.Participants.Where(item =>
+                    !IsPlayer(item.Team))
+                .All(item => !item.Alive))
+            return "VICTORY";
+        return "ENDED";
+    }
+
     private sealed record QualifiedActionExecution(
+        UnifiedRuntimeSession Before,
         UnifiedRuntimeResult Result,
+        GameRuntimeCommand Command,
+        GeneratedEncounterCombatQualifiedAction Descriptor,
+        GeneratedEncounterCombatObservedEffect ObservedEffect,
         GameRuntimeCommandType CommandType,
         string DescriptorFingerprint);
 }

@@ -81,6 +81,18 @@ public sealed record GeneratedCampaignRegionalEventBinding
     public string TargetRegionFingerprint { get; init; } = string.Empty;
     public string SourceQuestRewardFingerprint { get; init; } = string.Empty;
     public double ResolutionReputationDelta { get; init; }
+    public string ResolutionChoiceId { get; init; } = string.Empty;
+    public string DialogueDefinitionSha256 { get; init; } = string.Empty;
+    public string InteractionDefinitionSha256 { get; init; } = string.Empty;
+    public string EntityPrototypeDefinitionSha256 { get; init; } = string.Empty;
+    public string MapEntityDefinitionSha256 { get; init; } = string.Empty;
+    public string SourceQuestDefinitionSha256 { get; init; } = string.Empty;
+    public string ChallengeEncounterDefinitionSha256 { get; init; } = string.Empty;
+    public string PositionSha256 { get; init; } = string.Empty;
+    public string InteractableReferencesSha256 { get; init; } = string.Empty;
+    public string ResolutionRequirementsSha256 { get; init; } = string.Empty;
+    public string ResolutionEffectsSha256 { get; init; } = string.Empty;
+    public string EventMetadataSha256 { get; init; } = string.Empty;
 }
 
 public sealed record GeneratedCampaignRegionalEventBindingResult
@@ -116,6 +128,18 @@ public sealed record GeneratedCampaignRegionalEventInventoryRow
     public string TargetRegionFingerprint { get; init; } = string.Empty;
     public string PrerequisiteFingerprint { get; init; } = string.Empty;
     public string RewardDerivationFingerprint { get; init; } = string.Empty;
+    public string ResolutionChoiceId { get; init; } = string.Empty;
+    public string DialogueDefinitionSha256 { get; init; } = string.Empty;
+    public string InteractionDefinitionSha256 { get; init; } = string.Empty;
+    public string EntityPrototypeDefinitionSha256 { get; init; } = string.Empty;
+    public string MapEntityDefinitionSha256 { get; init; } = string.Empty;
+    public string SourceQuestDefinitionSha256 { get; init; } = string.Empty;
+    public string ChallengeEncounterDefinitionSha256 { get; init; } = string.Empty;
+    public string PositionSha256 { get; init; } = string.Empty;
+    public string InteractableReferencesSha256 { get; init; } = string.Empty;
+    public string ResolutionRequirementsSha256 { get; init; } = string.Empty;
+    public string ResolutionEffectsSha256 { get; init; } = string.Empty;
+    public string EventMetadataSha256 { get; init; } = string.Empty;
     public string EventSemanticFingerprint { get; init; } = string.Empty;
 }
 
@@ -132,6 +156,8 @@ public sealed record GeneratedCampaignRegionalEventOverlayDocument
         "generated_campaign_regional_event_overlay_v1";
     public string SourcePackageSha256 { get; init; } = string.Empty;
     public string OutputPackageSha256 { get; init; } = string.Empty;
+    public string EmptyOverlayPolicy { get; init; } =
+        "EXACT_EMPTY_EVENT_GRAPH_V1";
     public int EventCount { get; init; }
     public int SupportGratitudeCount { get; init; }
     public int ChallengeAftermathCount { get; init; }
@@ -190,6 +216,23 @@ public sealed record GeneratedCampaignRegionalEventRuntimeFrame
     public string RelationshipFlagsSha256 { get; init; } = string.Empty;
     public string QuestStatesSha256 { get; init; } = string.Empty;
     public string EncounterStateSha256 { get; init; } = string.Empty;
+    public bool NestedCombat { get; init; }
+    public int NestedCombatSequenceIndex { get; init; } = -1;
+    public string NestedCombatCommandIdentity { get; init; } = string.Empty;
+    public string QualifiedDescriptorFingerprint { get; init; } = string.Empty;
+    public string AbilityDefinitionSha256 { get; init; } = string.Empty;
+    public string ObservedEffectClass { get; init; } = string.Empty;
+    public string ObservedEffectFingerprint { get; init; } = string.Empty;
+    public string NestedCombatMapEventSequenceSha256 { get; init; } = string.Empty;
+    public string NestedCombatGameplayEventSequenceSha256 { get; init; } = string.Empty;
+    public string EncounterStateBeforeSha256 { get; init; } = string.Empty;
+    public string EncounterStateAfterSha256 { get; init; } = string.Empty;
+    public int TurnBefore { get; init; } = -1;
+    public int TurnAfter { get; init; } = -1;
+    public int RoundBefore { get; init; } = -1;
+    public int RoundAfter { get; init; } = -1;
+    public bool CombatProgressObserved { get; init; }
+    public string CombatOutcome { get; init; } = string.Empty;
     public bool Passed { get; init; }
 }
 
@@ -210,6 +253,14 @@ public sealed record GeneratedCampaignRegionalEventReplaySignature
     public string RelationshipFlagSequenceSha256 { get; init; } = string.Empty;
     public string QuestStateSequenceSha256 { get; init; } = string.Empty;
     public string EncounterStateSequenceSha256 { get; init; } = string.Empty;
+    public int NestedCombatFrameCount { get; init; }
+    public string NestedCombatCommandSequenceSha256 { get; init; } = string.Empty;
+    public string NestedCombatEventSequenceSha256 { get; init; } = string.Empty;
+    public string NestedCombatDescriptorSequenceSha256 { get; init; } = string.Empty;
+    public string NestedCombatEffectSequenceSha256 { get; init; } = string.Empty;
+    public string NestedCombatEncounterStateChainSha256 { get; init; } = string.Empty;
+    public string NestedCombatTurnSequenceSha256 { get; init; } = string.Empty;
+    public string NestedCombatTraceSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public string SignatureSha256 { get; init; } = string.Empty;
     public bool Passed { get; init; }
@@ -274,6 +325,8 @@ public sealed record GameProjectGeneratedCampaignRegionalEventSummary
     public string RegionalEventInventorySha256 { get; init; } = string.Empty;
     public string RelationshipBranchMatrixSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
+    public string EmptyOverlayPolicy { get; init; } =
+        "EXACT_EMPTY_EVENT_GRAPH_V1";
     public IReadOnlyList<GeneratedCampaignRegionalEventInventoryRow> EventInventory { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRegionalEventQualification> EventQualifications { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRegionalEventRuntimeFrame> RuntimeFrames { get; init; } = [];
@@ -283,7 +336,31 @@ public sealed record GameProjectGeneratedCampaignRegionalEventSummary
     public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; }
         = new SortedDictionary<string, string>(StringComparer.Ordinal);
     public GeneratedCampaignRegionalEventOverlayDocument? Overlay { get; init; }
+    public GeneratedCampaignRegionalEventPayloadAuthority PayloadAuthority { get; init; } =
+        new();
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignRegionalEventPayloadAuthority
+{
+    public const string CurrentSchema =
+        "generated_campaign_regional_event_payload_authority_v1";
+
+    public string SchemaVersion { get; init; } = CurrentSchema;
+    public string PackageSha256 { get; init; } = string.Empty;
+    public string FinalStateHash { get; init; } = string.Empty;
+    public string InventorySha256 { get; init; } = string.Empty;
+    public IReadOnlyList<string> RegionalEventIds { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignRegionalEventReplaySignature>
+        ReplaySignatures { get; init; } = [];
+    public IReadOnlyDictionary<string, string> ComponentSha256 { get; init; } =
+        new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, int> FrameCounts { get; init; } =
+        new SortedDictionary<string, int>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, string> NestedCombatTraceSha256 { get; init; } =
+        new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public string AuthoritySha256 { get; init; } = string.Empty;
+    public bool Passed { get; init; }
 }
 
 public sealed record GeneratedCampaignRegionalEventMigrationFact
@@ -294,5 +371,13 @@ public sealed record GeneratedCampaignRegionalEventMigrationFact
     public bool StatusReset { get; init; }
     public string SourceEventFingerprint { get; init; } = string.Empty;
     public string TargetEventFingerprint { get; init; } = string.Empty;
+    public bool DefinitionCorrelationPassed { get; init; }
+    public bool MarkerDefinitionPreserved { get; init; }
+    public bool PrototypeDefinitionPreserved { get; init; }
+    public bool DialogueDefinitionPreserved { get; init; }
+    public bool InteractionDefinitionPreserved { get; init; }
+    public bool PlacementChanged { get; init; }
+    public string PlacementPolicy { get; init; } =
+        "EXACT_PLACEMENT_REQUIRED";
     public string DroppedReason { get; init; } = string.Empty;
 }

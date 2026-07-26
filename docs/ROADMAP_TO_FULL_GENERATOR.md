@@ -2,7 +2,7 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
-Goal169A is the current `GREEN_ACCEPTABLE_CANDIDATE` continuation. Goal169 remains immutable `BLOCKED_AT_F861229C`; Goal169A closes strict replay, v7 relationship/event correlation, exact Challenge encounter region, semantic inventory, typed migration and post-fix payload proof gaps. The one new cached smoke proves explicit `Move.*`, zero bare directions, host reuse, Unity 0 and retry 0. Goal169A remains unaccepted and requires independent audit before roadmap expansion.
+Goal169B is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK` continuation. Goal169 remains immutable `BLOCKED_AT_F861229C`; Goal169A independent audit remains `BLOCKED_AT_D012B8AC`. Goal169B implementation closes nested combat, exact identity, actual-package definition, absent-profile, migration and payload-authority proof gaps. Its one cached smoke reused the host with Unity 0 but failed pre-launch on legacy parsing of the multiline authority fact. The Base64/title correction passes focused tests but cannot be re-smoked because retry is 0. Goal169B remains unaccepted and requires independent blocker audit/follow-up before roadmap expansion.
 
 ## Source Of Truth
 
@@ -339,3 +339,7 @@ The visible product slice adds state-backed «События мира» rows and
 ## Goal169A strict replay v7 correlation and post-fix smoke closure
 
 This continuation does not add a product slice. It makes the Goal169 event milestone auditable: independent locked/resolution replay pairs, exact v7 branch-event graph, provenance-derived Challenge region, semantic inventory and typed migration facts. The original blocked smoke stays immutable; one new smoke proves the fixed payload with explicit `Move.*` and zero bare direction frames. The next roadmap action is `independent_goal169a_audit`.
+
+## Goal169B package-bound event proof, nested combat replay and payload closure
+
+This focused continuation implements closure of the Goal169A audit result `BLOCKED_AT_D012B8AC`. Actual nested combat commands/events/action/effect/state chains replace synthetic final frames; exact ID sets and actual-package event definitions bind history and save truth; absent and migration behavior are sealed; and standalone payloads expose event/route/replay/sequence identity plus 24 signatures. Retained Goal169/Goal169A artifacts remain byte-identical. The only cached smoke failed before launch/publication at `standalone.payload.human_facts_parse_mismatch`; the diagnosed Base64/title correction is focused-test GREEN but cannot be re-smoked under retry 0. The next roadmap action is `independent_goal169b_blocker_audit_and_followup_without_retrying_consumed_smoke`.

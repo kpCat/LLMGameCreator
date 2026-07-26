@@ -39,7 +39,22 @@ public sealed class
         if (inputDiagnostics.Count > 0)
             return Invalid(overlay, inputDiagnostics);
         if (overlay.EventCount == 0)
-            return new GameProjectGeneratedCampaignRegionalEventSummary
+        {
+            var packageSha256 = overlay.OutputPackageSha256;
+            var emptyInventory =
+                Array.Empty<GeneratedCampaignRegionalEventInventoryRow>();
+            var emptyInventorySha256 =
+                GeneratedCampaignChoiceCanonical.Hash(emptyInventory);
+            var absentFinalStateHash =
+                GeneratedCampaignRegionalEventCorrelationService
+                    .EmptyFinalStateHash(packageSha256,
+                        emptyInventorySha256);
+            var absentPayloadAuthority =
+                GeneratedCampaignRegionalEventPayloadAuthorityService
+                    .Create(packageSha256, absentFinalStateHash,
+                        emptyInventorySha256, emptyInventory, [], []);
+            var absent = new
+                GameProjectGeneratedCampaignRegionalEventSummary
             {
                 StrictProofSchemaVersion =
                     GameProjectGeneratedCampaignRegionalEventSummary
@@ -56,18 +71,47 @@ public sealed class
                 ResolvedStatePassed = true,
                 ExactlyOncePassed = true,
                 ReplayPassed = true,
-                ExactPackageSha256 = PackageSha256(finalPackage),
+                ExactPackageSha256 = packageSha256,
                 RegionalEventOverlaySha256 =
                     GeneratedCampaignChoiceCanonical.Hash(overlay),
                 RegionalEventInventorySha256 =
-                    overlay.InventorySha256,
+                    emptyInventorySha256,
                 RelationshipBranchMatrixSha256 =
                     relationships.RelationshipBranchMatrixSha256,
-                FinalStateHash = overlay.InventorySha256,
-                Overlay = overlay
+                FinalStateHash = absentFinalStateHash,
+                EventInventory = emptyInventory,
+                Overlay = overlay,
+                PayloadAuthority = absentPayloadAuthority,
+                HumanReviewFacts =
+                [
+                    new GeneratedCampaignRegionalEventHumanFact
+                    {
+                        Label =
+                            GeneratedCampaignRegionalEventPayloadAuthorityService
+                                .HumanFactLabel,
+                        Value =
+                            GeneratedCampaignRegionalEventPayloadAuthorityService
+                                .SerializeHumanFact(absentPayloadAuthority)
+                    }
+                ]
             };
+            var absentCorrelation =
+                GeneratedCampaignRegionalEventCorrelationService.Validate(
+                    finalPackage, packageSha256, absent,
+                    relationships);
+            return absentCorrelation.Passed
+                ? absent
+                : absent with
+                {
+                    Passed = false,
+                    Status = "INVALID",
+                    Diagnostics = absentCorrelation.Diagnostics
+                };
+        }
 
-        var packageBefore = PackageSha256(finalPackage);
+        var packageBefore = overlay.OutputPackageSha256;
+        var packageObjectBefore =
+            GeneratedCampaignChoiceCanonical.Hash(finalPackage);
         var diagnostics = new List<string>();
         var qualifications =
             new List<GeneratedCampaignRegionalEventQualification>();
@@ -118,7 +162,7 @@ public sealed class
             var passed = locked.Passed && lockedReplay.Passed
                                        && first.Passed && replay.Passed
                                        && replayPassed;
-            var replaySignatures =
+            var eventReplaySignatures =
                 new[]
                 {
                     locked.Signature,
@@ -145,7 +189,7 @@ public sealed class
                                           + first.Frames.Count
                                           + replay.Frames.Count,
                     FinalStateHash = first.FinalStateHash,
-                    ReplaySignatures = replaySignatures,
+                    ReplaySignatures = eventReplaySignatures,
                     Diagnostics = locked.Diagnostics.Concat(
                             lockedReplay.Diagnostics)
                         .Concat(first.Diagnostics)
@@ -161,8 +205,8 @@ public sealed class
                     "generated_regional_event.runtime_route_failed");
         }
 
-        var packageAfter = PackageSha256(finalPackage);
-        if (packageBefore != packageAfter)
+        if (packageObjectBefore !=
+            GeneratedCampaignChoiceCanonical.Hash(finalPackage))
             diagnostics.Add(
                 "generated_regional_event.existing_definition_changed");
         diagnostics = diagnostics.Distinct(StringComparer.Ordinal)
@@ -177,11 +221,32 @@ public sealed class
             item.ExactlyOncePassed);
         var replayAllPassed = qualifications.All(item =>
             item.ReplayPassed);
+        var replaySignatures = qualifications
+            .SelectMany(item => item.ReplaySignatures).ToList();
+        var finalStateHash = GeneratedCampaignChoiceCanonical.Hash(
+            qualifications.Select(item => new
+            {
+                item.RegionalEventId,
+                item.FinalStateHash,
+                ResolutionSignature = item.ReplaySignatures
+                    .Single(signature =>
+                        signature.RouteKind ==
+                        GeneratedCampaignRegionalEventReplayRouteKind
+                            .RESOLUTION
+                        && signature.ReplayIndex == 1)
+                    .SignatureSha256
+            }).ToList());
+        var payloadAuthority =
+            GeneratedCampaignRegionalEventPayloadAuthorityService
+                .Create(packageBefore, finalStateHash,
+                    overlay.InventorySha256, overlay.Inventory,
+                    replaySignatures, frames);
         var allPassed = diagnostics.Count == 0
                         && qualifications.Count == overlay.EventCount
                         && lockedPassed && availablePassed
                         && resolvedPassed && oncePassed
-                        && replayAllPassed;
+                        && replayAllPassed
+                        && payloadAuthority.Passed;
         var summary = new GameProjectGeneratedCampaignRegionalEventSummary
         {
             StrictProofSchemaVersion =
@@ -219,24 +284,11 @@ public sealed class
                 overlay.InventorySha256,
             RelationshipBranchMatrixSha256 =
                 relationships.RelationshipBranchMatrixSha256,
-            FinalStateHash = GeneratedCampaignChoiceCanonical.Hash(
-                qualifications.Select(item => new
-                {
-                    item.RegionalEventId,
-                    item.FinalStateHash,
-                    ResolutionSignature = item.ReplaySignatures
-                        .Single(signature =>
-                            signature.RouteKind ==
-                            GeneratedCampaignRegionalEventReplayRouteKind
-                                .RESOLUTION
-                            && signature.ReplayIndex == 1)
-                        .SignatureSha256
-                }).ToList()),
+            FinalStateHash = finalStateHash,
             EventInventory = overlay.Inventory,
             EventQualifications = qualifications,
             RuntimeFrames = frames,
-            ReplaySignatures = qualifications
-                .SelectMany(item => item.ReplaySignatures).ToList(),
+            ReplaySignatures = replaySignatures,
             HumanReviewFacts =
             [
                 new GeneratedCampaignRegionalEventHumanFact
@@ -257,6 +309,15 @@ public sealed class
                     Value = (overlay.ChallengeAftermathCount
                              + overlay.RefusalFalloutCount).ToString(
                         System.Globalization.CultureInfo.InvariantCulture)
+                },
+                new GeneratedCampaignRegionalEventHumanFact
+                {
+                    Label =
+                        GeneratedCampaignRegionalEventPayloadAuthorityService
+                            .HumanFactLabel,
+                    Value =
+                        GeneratedCampaignRegionalEventPayloadAuthorityService
+                            .SerializeHumanFact(payloadAuthority)
                 }
             ],
             TechnicalDetails =
@@ -269,13 +330,14 @@ public sealed class
                         overlay.InventorySha256,
                     ["relationshipBranchMatrixSha256"] =
                         relationships.RelationshipBranchMatrixSha256
-                },
+            },
             Overlay = overlay,
+            PayloadAuthority = payloadAuthority,
             Diagnostics = diagnostics
         };
         var correlation =
             GeneratedCampaignRegionalEventCorrelationService.Validate(
-                packageBefore, summary, relationships);
+                finalPackage, packageBefore, summary, relationships);
         return correlation.Passed
             ? summary
             : summary with
@@ -305,7 +367,8 @@ public sealed class
             .ThenBy(item => item.EventKind)
             .Select(GeneratedCampaignRegionalEventInventoryService.Create)
             .ToList();
-        if (PackageSha256(finalPackage) != overlay.OutputPackageSha256)
+        if (!PackageSha256Matches(finalPackage,
+                overlay.OutputPackageSha256))
             diagnostics.Add(
                 "generated_regional_event.overlay_package_hash_mismatch");
         if (GeneratedCampaignChoiceCanonical.Serialize(inventory) !=
@@ -608,23 +671,16 @@ public sealed class
                     Goal =
                         GeneratedCampaignExactCombatRouteGoal.VICTORY
                 });
-            if (!combat.Passed)
+            if (!combat.Passed || !combat.TracePassed)
                 return PrerequisiteRoute.Failed(
                     combat.Diagnostics.FirstOrDefault()
                     ?? "generated_regional_event.challenge_victory_failed",
                     frames);
-            AddFrame(frames,
+            AddCombatFrames(frames,
                 GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
-                replayIndex, binding,
+                replayIndex, binding, combat,
                 GeneratedCampaignRegionalEventStatus.LOCKED,
-                Status(binding, combat.Session),
-                "Prerequisite.ExactCombatVictory:"
-                + relationship.ChallengeEncounterId, before,
-                new UnifiedRuntimeResult
-                {
-                    Success = combat.Passed,
-                    Session = combat.Session
-                });
+                Status(binding, combat.Session));
             before = StableStateHash(combat.Session);
             var reopened = runtime.ExecuteGameplayCommand(package,
                 combat.Session,
@@ -692,23 +748,16 @@ public sealed class
                         Goal =
                             GeneratedCampaignExactCombatRouteGoal.VICTORY
                     });
-                if (!combat.Passed)
+                if (!combat.Passed || !combat.TracePassed)
                     return PrerequisiteRoute.Failed(
                         combat.Diagnostics.FirstOrDefault()
                         ?? "generated_regional_event.support_combat_failed",
                         frames);
-                AddFrame(frames,
+                AddCombatFrames(frames,
                     GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
-                    replayIndex, binding,
+                    replayIndex, binding, combat,
                     Status(binding, session),
-                    Status(binding, combat.Session),
-                    "Prerequisite.ExactCombatVictory:"
-                    + step.TargetEncounterId, before,
-                    new UnifiedRuntimeResult
-                    {
-                        Success = combat.Passed,
-                        Session = combat.Session
-                    });
+                    Status(binding, combat.Session));
                 session = combat.Session;
             }
             before = StableStateHash(session);
@@ -1225,6 +1274,99 @@ public sealed class
             session.GameplayState
         });
 
+    private static void AddCombatFrames(
+        ICollection<GeneratedCampaignRegionalEventRuntimeFrame> frames,
+        GeneratedCampaignRegionalEventReplayRouteKind routeKind,
+        int replayIndex,
+        GeneratedCampaignRegionalEventBinding binding,
+        GeneratedCampaignExactCombatRouteResult combat,
+        GeneratedCampaignRegionalEventStatus beforeStatus,
+        GeneratedCampaignRegionalEventStatus afterStatus)
+    {
+        var nestedSequence = frames.Count(item => item.NestedCombat);
+        var previousReputation = frames.LastOrDefault()
+            ?.ObservedReputation ?? 0;
+        foreach (var step in combat.Trace.OrderBy(item =>
+                     item.SequenceIndex))
+        {
+            var last = step.SequenceIndex == combat.Trace.Count - 1;
+            var reputation = last
+                ? Reputation(combat.Session, binding.FactionId)
+                : previousReputation;
+            frames.Add(new GeneratedCampaignRegionalEventRuntimeFrame
+            {
+                RouteKind = routeKind,
+                ReplayIndex = replayIndex,
+                SequenceIndex = frames.Count,
+                RegionalEventId = binding.RegionalEventId,
+                StatusBefore = beforeStatus,
+                StatusAfter = last ? afterStatus : beforeStatus,
+                CommandType = "Prerequisite.ExactCombat."
+                              + step.CommandType,
+                BeforeStateHash = step.BeforeStateHash,
+                AfterStateHash = step.AfterStateHash,
+                CommandSha256 = step.CommandIdentity,
+                EventSha256 = GeneratedCampaignChoiceCanonical.Hash(
+                    new
+                    {
+                        step.MapEventSequenceSha256,
+                        step.GameplayEventSequenceSha256
+                    }),
+                MapEventSha256 = step.MapEventSequenceSha256,
+                GameplayEventSha256 =
+                    step.GameplayEventSequenceSha256,
+                AvailableChoiceIdsSha256 =
+                    GeneratedCampaignChoiceCanonical.Hash(
+                        Array.Empty<string>()),
+                ObservedReputation = reputation,
+                ObservedReputationDelta =
+                    reputation - previousReputation,
+                ObservedResolutionFlag = string.Empty,
+                RelationshipFlagsSha256 =
+                    GeneratedCampaignChoiceCanonical.Hash(new
+                    {
+                        step.AfterStateHash,
+                        Dimension = "relationship_flags"
+                    }),
+                QuestStatesSha256 =
+                    GeneratedCampaignChoiceCanonical.Hash(new
+                    {
+                        step.AfterStateHash,
+                        Dimension = "quest_states"
+                    }),
+                EncounterStateSha256 =
+                    step.EncounterStateAfterSha256,
+                NestedCombat = true,
+                NestedCombatSequenceIndex = nestedSequence++,
+                NestedCombatCommandIdentity =
+                    step.CommandIdentity,
+                QualifiedDescriptorFingerprint =
+                    step.QualifiedDescriptorFingerprint,
+                AbilityDefinitionSha256 =
+                    step.AbilityDefinitionSha256,
+                ObservedEffectClass = step.ObservedEffectClass,
+                ObservedEffectFingerprint =
+                    step.ObservedEffectFingerprint,
+                NestedCombatMapEventSequenceSha256 =
+                    step.MapEventSequenceSha256,
+                NestedCombatGameplayEventSequenceSha256 =
+                    step.GameplayEventSequenceSha256,
+                EncounterStateBeforeSha256 =
+                    step.EncounterStateBeforeSha256,
+                EncounterStateAfterSha256 =
+                    step.EncounterStateAfterSha256,
+                TurnBefore = step.TurnBefore,
+                TurnAfter = step.TurnAfter,
+                RoundBefore = step.RoundBefore,
+                RoundAfter = step.RoundAfter,
+                CombatProgressObserved = step.ProgressObserved,
+                CombatOutcome = step.Outcome,
+                Passed = step.Passed
+            });
+            previousReputation = reputation;
+        }
+    }
+
     private static void AddFrame(
         ICollection<GeneratedCampaignRegionalEventRuntimeFrame> frames,
         GeneratedCampaignRegionalEventReplayRouteKind routeKind,
@@ -1312,6 +1454,14 @@ public sealed class
         GeneratedEncounterCombatCanonical.HashText(
             GeneratedEncounterCombatCanonical.Serialize(package)
             + Environment.NewLine);
+
+    private static bool PackageSha256Matches(
+        GamePackageDefinition package,
+        string expected) =>
+        PackageSha256(package) == expected
+        || GeneratedCampaignChoiceCanonical.HashText(
+            GeneratedCampaignChoiceCanonical.Serialize(package)
+            + Environment.NewLine) == expected;
 
     private static bool Exact(double left, double right) =>
         Math.Abs(left - right) < 0.0000001;

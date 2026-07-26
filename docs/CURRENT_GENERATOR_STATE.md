@@ -1,12 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 169A strict replay v7 correlation and post-fix smoke closure — GREEN acceptable candidate
+Updated by: Goal 169B package-bound event proof, nested combat replay and payload closure — BLOCKED after single cached smoke
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
-Goal169 remains the immutable honest result `BLOCKED_AT_F861229C`: its only smoke launched standalone GREEN but recorded 84 direction-only movement frames and 0 explicit `Move.*` frames. Goal169A is a continuation, not a new product slice. It closes the independent-audit blockers with two independent `LOCKED_PROBE` and two independent `RESOLUTION` routes per event, exact command/event/status/state/choice/reputation/flag/quest/encounter replay signatures, strict v7 relationship-to-event graph correlation, exact Challenge encounter-region provenance, expanded semantic event inventory and typed v7 migration preserve/reset/drop facts.
+Goal169 remains the immutable honest result `BLOCKED_AT_F861229C`. Goal169A remains substantive, but its independent audit is `BLOCKED_AT_D012B8AC`: nested exact combat was reduced to a synthetic final frame, identity sets were not sealed, history trusted package SHA without actual definitions, migration omitted prototype/map-entity compatibility, payload identity was incomplete and the absent graph was not exact.
 
-The single new Goal169A cached hidden smoke proves explicit `Move.*` output with zero bare directions, host reuse, no host rebuild, Unity 0 and retry 0. RC and portable all-selectable are `CURRENT`; portable core-only does not claim RC readiness. Goal169A is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, creates no human gate and requires independent audit. The retained Goal169 run/evidence remains byte-identical and is not reinterpreted.
+Goal169B is a focused continuation, not a new product slice. Its implementation and 71 focused non-smoke tests close all six Goal169A audit findings with real nested combat command/event/descriptor/effect/state chains, exact binding/inventory/qualification/signature/frame ID sets, actual loaded-package definition correlation, a sealed empty-event graph, expanded migration definition facts and a self-contained 24-signature standalone payload authority. The single permitted cached hidden smoke reused the host, rebuilt nothing and started Unity zero times, but failed before launch/publication at `standalone.payload.human_facts_parse_mismatch`: the new multiline JSON authority was incompatible with the legacy human-fact parser. The post-smoke correction uses a legacy-safe Base64 fact and preserves frame identity in serialized titles, and focused non-smoke tests pass, but retry is fixed at 0. Immutable Goal169B pointer/history/RC and portable assertions were therefore not reached. Goal169B is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK`, `accepted=false`, creates no human gate and requires independent blocker audit/follow-up without retrying the consumed smoke.
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
 
@@ -53,8 +53,8 @@ Goal165 independently records that Goal164 audit as `BLOCKED_AT_15A8F2AB`: the r
 The campaign player now captures an exact in-memory JSON checkpoint immediately before a successful encounter start. Genuine Runtime defeat enters `DEFEATED` and shows `Поражение` with `Повторить встречу`, `Продолжить с сохранения` and `Начать новую игру`. Retry restores exact map, inventory, quest and reputation truth, invokes Runtime Start zero times and dispatches `StartEncounter` once. Exact save recovery invokes Runtime Start zero times; New Game invokes it once. Checkpoints clear on victory, flee, successful load/migration and new game, and truth drift yields `STALE_PROJECT` before any Runtime command. The physical portable core-only copy has no operational pointer and never claims RC readiness. Goal165 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
 
 ```text
-gate_status=goal169a_green_acceptable_candidate_independent_audit_required
-current_user_action=independent_goal169a_audit
+gate_status=goal169b_blocked_after_single_cached_smoke_payload_self_check
+current_user_action=independent_goal169b_blocker_audit_and_followup_without_retrying_consumed_smoke
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -520,7 +520,35 @@ goal169aHostRebuilt=false
 goal169aUnityEditorProcessStartCount=0
 goal169aExplicitMoveFrameCountPositive=true
 goal169aDirectionOnlyFrameCount=0
-nextAction=independent_goal169a_audit
+goal169aIndependentAuditResult=BLOCKED_AT_D012B8AC
+goal169aAuditBlockers=closed_by_goal169b
+goal169bImplementationStatus=BLOCKED
+goal169bCandidateStatus=BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK
+goal169bAccepted=false
+goal169bAcceptedByHuman=false
+goal169bAcceptedByCodex=false
+goal169bManualGateReady=false
+goal169bIndependentAuditRequired=true
+goal169bNestedCombatReplayPassed=true
+goal169bExactIdSetCorrelationPassed=true
+goal169bActualPackageDefinitionCorrelationPassed=true
+goal169bStrictAbsentProfilePassed=true
+goal169bMigrationDefinitionCompatibilityPassed=true
+goal169bPayloadSignatureCount=24
+goal169bHiddenSmokeInvocationCount=1
+goal169bHiddenSmokeRetryCount=0
+goal169bHostReused=true
+goal169bHostRebuilt=false
+goal169bUnityEditorProcessStartCount=0
+goal169bPayloadSelfCheckPassed=false
+goal169bPayloadSelfCheckFailure=standalone.payload.human_facts_parse_mismatch
+goal169bPostSmokeCompatibilityFixApplied=true
+goal169bCorrectiveSmokeProhibited=true
+goal169bReleaseCandidateCurrent=false
+goal169bPortableAllSelectableCurrent=false
+goal169bCoreOnlyReleaseCandidateReady=false
+goal169bArtifactScopeViolationCount=0
+nextAction=independent_goal169b_blocker_audit_and_followup_without_retrying_consumed_smoke
 goal165BothRoutePassed=true
 goal165BasicAttackOnlyPassed=true
 goal165AbilityOnlyPassed=true
@@ -4893,6 +4921,14 @@ Goal169A closes those blockers without changing Runtime, Runtime.Abstractions, D
 History v7 recomputes summary, overlay and inventory hashes and enforces a one-to-one relationship branch/binding/inventory/qualification/frame graph. The semantic inventory includes actor, faction, prototype, map entity, interaction, source quest, challenge encounter, provenance and canonical fingerprints. Challenge events use the exact generated encounter region when provenance exists, use an explicit home fallback only when it does not, and fail ambiguity or mismatch. Migration reads the exact source and target selected v7 inventories and exposes typed preserve/reset/drop facts without changing the public persisted save schema.
 
 The original Goal169 evidence remains byte-identical and retains its 0 explicit/84 direction-only result. Exactly one separate Goal169A cached hidden smoke proves explicit `Move.*` frames and zero bare directions with host reuse, no rebuild, Unity 0 and retry 0. Goal169A is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no human gate and requires independent audit. Next action: `independent_goal169a_audit`.
+
+## Goal 169B package-bound event proof, nested combat replay and payload closure
+
+The independent Goal169A audit is `BLOCKED_AT_D012B8AC`. Goal169B closes its six proof-boundary findings without adding a product feature. Exact nested combat now expands actual commands and Runtime events into typed frames with descriptor, ability, effect, turn/round, progress/outcome and encounter-state-chain authority; same final state with a different combat route is rejected.
+
+Correlation recomputes exact ID sets across binding, overlay inventory, summary inventory, qualifications, 24 route/replay signatures and owned frame sequences. History, regeneration and save selection validate dialogue, interaction, entity prototype, map entity, position, references, requirements/effects and metadata against the actual loaded package. The event-absent profile seals an exactly empty overlay/inventory/package graph. Migration requires exact marker/prototype/dialogue/interaction behavior under `EXACT_PLACEMENT_REQUIRED`.
+
+Standalone payload frames carry versioned event/route/replay/sequence/command identity and a strict 24-signature authority. The one Goal169B cached hidden smoke reused the host, rebuilt nothing and started Unity zero times, but pre-launch payload self-check rejected the multiline authority fact as `standalone.payload.human_facts_parse_mismatch`; no immutable pointer/run status, RC or portable proof was published. The fact is now Base64-encoded for legacy parser compatibility and frame identity is carried by serialized titles, with 71/71 non-smoke tests—including the real 13/13 structural plus legacy-parser self-check—passing after the fix. Retry remains 0, so the correction is not re-smoked. Goal169 and Goal169A outputs are byte-identical. Goal169B is `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PAYLOAD_SELF_CHECK`, `accepted=false`, has no human gate and requires an independent blocker audit/follow-up without retrying the consumed smoke.
 
 
 

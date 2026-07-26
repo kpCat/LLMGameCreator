@@ -1,3 +1,5 @@
+using LLMGameCreator.GamePackage;
+
 namespace LLMGameCreator.Application.Generation.Procedural;
 
 public sealed record GeneratedCampaignRegionalEventCorrelationResult
@@ -9,14 +11,19 @@ public sealed record GeneratedCampaignRegionalEventCorrelationResult
 public static class GeneratedCampaignRegionalEventCorrelationService
 {
     public static GeneratedCampaignRegionalEventCorrelationResult Validate(
+        GamePackageDefinition actualPackage,
         string packageSha256,
         GameProjectGeneratedCampaignRegionalEventSummary events,
         GameProjectGeneratedCampaignRelationshipSummary relationships)
     {
+        ArgumentNullException.ThrowIfNull(actualPackage);
         ArgumentException.ThrowIfNullOrWhiteSpace(packageSha256);
         ArgumentNullException.ThrowIfNull(events);
         ArgumentNullException.ThrowIfNull(relationships);
         var diagnostics = new List<string>();
+        if (!PackageSha256Matches(actualPackage, packageSha256))
+            diagnostics.Add(
+                "generated_regional_event.history.actual_package_hash");
         if (events.StrictProofSchemaVersion !=
             GameProjectGeneratedCampaignRegionalEventSummary
                 .StrictProofSchema)
@@ -43,14 +50,54 @@ public static class GeneratedCampaignRegionalEventCorrelationService
             item.Available);
         if (expectedCount == 0)
         {
+            var emptyInventory =
+                Array.Empty<GeneratedCampaignRegionalEventInventoryRow>();
+            var emptyHash =
+                GeneratedCampaignChoiceCanonical.Hash(emptyInventory);
+            var recordCounts =
+                GeneratedCampaignRegionalEventDefinitionAuthorityService
+                    .GeneratedRecordCounts(actualPackage);
             if (events.Present || events.Status != "ABSENT"
                 || !events.Passed || events.EventCount != 0
+                || events.QualifiedEventCount != 0
+                || events.SupportGratitudeCount != 0
+                || events.ChallengeAftermathCount != 0
+                || events.RefusalFalloutCount != 0
                 || events.EventInventory.Count != 0
                 || events.EventQualifications.Count != 0
                 || events.RuntimeFrames.Count != 0
-                || events.ReplaySignatures.Count != 0)
+                || events.ReplaySignatures.Count != 0
+                || events.Overlay is not { Passed: true } absentOverlay
+                || absentOverlay.EventCount != 0
+                || absentOverlay.Bindings.Count != 0
+                || absentOverlay.Inventory.Count != 0
+                || absentOverlay.AddedDefinitionFingerprints.Count != 0
+                || absentOverlay.EmptyOverlayPolicy !=
+                "EXACT_EMPTY_EVENT_GRAPH_V1"
+                || events.EmptyOverlayPolicy !=
+                "EXACT_EMPTY_EVENT_GRAPH_V1"
+                || absentOverlay.OutputPackageSha256 != packageSha256
+                || events.ExactPackageSha256 != packageSha256
+                || absentOverlay.InventorySha256 != emptyHash
+                || events.RegionalEventInventorySha256 != emptyHash
+                || events.FinalStateHash != EmptyFinalStateHash(
+                    packageSha256, emptyHash)
+                || recordCounts.Values.Any(count => count != 0))
                 diagnostics.Add(
                     "generated_regional_event.history.absent_graph");
+            var absentPayload =
+                GeneratedCampaignRegionalEventPayloadAuthorityService
+                    .Validate(events.PayloadAuthority, emptyInventory,
+                        [], []);
+            if (!absentPayload.Passed
+                || events.PayloadAuthority.PackageSha256
+                != packageSha256
+                || events.PayloadAuthority.FinalStateHash
+                != events.FinalStateHash
+                || events.PayloadAuthority.InventorySha256
+                != emptyHash)
+                diagnostics.Add(
+                    "generated_regional_event.history.absent_payload");
             return Result(diagnostics);
         }
 
@@ -81,6 +128,12 @@ public static class GeneratedCampaignRegionalEventCorrelationService
         if (overlay.InventorySha256 != inventoryHash)
             diagnostics.Add(
                 "generated_regional_event.history.overlay_inventory_hash");
+        var packageAuthority =
+            GeneratedCampaignRegionalEventDefinitionAuthorityService
+                .ValidateActualPackage(actualPackage, overlay);
+        diagnostics.AddRange(packageAuthority.Diagnostics.Select(item =>
+            "generated_regional_event.history.actual_package."
+            + item["generated_regional_event.".Length..]));
 
         if (events.EventCount != expectedCount
             || events.EventCount != overlay.EventCount
@@ -108,6 +161,33 @@ public static class GeneratedCampaignRegionalEventCorrelationService
             item.RegionalEventId), "inventory", diagnostics);
         Unique(events.EventQualifications.Select(item =>
             item.RegionalEventId), "qualification", diagnostics);
+        Unique(events.ReplaySignatures.Select(item =>
+                item.RegionalEventId + "|" + item.RouteKind + "|"
+                + item.ReplayIndex),
+            "signature_key", diagnostics);
+        Unique(events.RuntimeFrames.Select(item =>
+                item.RegionalEventId + "|" + item.RouteKind + "|"
+                + item.ReplayIndex + "|" + item.SequenceIndex),
+            "frame_key", diagnostics);
+        var bindingIds = overlay.Bindings.Select(item =>
+            item.RegionalEventId).ToHashSet(StringComparer.Ordinal);
+        var overlayInventoryIds = overlay.Inventory.Select(item =>
+            item.RegionalEventId).ToHashSet(StringComparer.Ordinal);
+        var summaryInventoryIds = events.EventInventory.Select(item =>
+            item.RegionalEventId).ToHashSet(StringComparer.Ordinal);
+        var qualificationIds = events.EventQualifications.Select(item =>
+            item.RegionalEventId).ToHashSet(StringComparer.Ordinal);
+        var signatureIds = events.ReplaySignatures.Select(item =>
+            item.RegionalEventId).ToHashSet(StringComparer.Ordinal);
+        var frameIds = events.RuntimeFrames.Select(item =>
+            item.RegionalEventId).ToHashSet(StringComparer.Ordinal);
+        if (!bindingIds.SetEquals(overlayInventoryIds)
+            || !bindingIds.SetEquals(summaryInventoryIds)
+            || !bindingIds.SetEquals(qualificationIds)
+            || !bindingIds.SetEquals(signatureIds)
+            || !bindingIds.SetEquals(frameIds))
+            diagnostics.Add(
+                "generated_regional_event.history.exact_id_set");
 
         foreach (var row in events.EventInventory)
         {
@@ -174,13 +254,33 @@ public static class GeneratedCampaignRegionalEventCorrelationService
                 "generated_regional_event.history.signature_inventory");
         foreach (var qualification in events.EventQualifications)
         {
+            var matchingInventory = events.EventInventory.Where(
+                item => item.RegionalEventId ==
+                        qualification.RegionalEventId).ToList();
+            var inventoryRow = matchingInventory.Count == 1
+                ? matchingInventory[0]
+                : null;
+            if (inventoryRow is null
+                || inventoryRow.EventKind != qualification.EventKind
+                || inventoryRow.RelationshipId !=
+                qualification.RelationshipId
+                || inventoryRow.RelationshipBranch !=
+                qualification.RelationshipBranch)
+                diagnostics.Add(
+                    "generated_regional_event.history.qualification_identity");
             var signatures = qualification.ReplaySignatures;
+            var ownedFrames = events.RuntimeFrames.Where(item =>
+                    item.RegionalEventId ==
+                    qualification.RegionalEventId)
+                .ToList();
             if (!qualification.LockedStatePassed
                 || !qualification.AvailableStatePassed
                 || !qualification.ResolvedStatePassed
                 || !qualification.ExactlyOncePassed
                 || !qualification.ReplayPassed
                 || qualification.RuntimeStartCount != 4
+                || qualification.RuntimeCommandCount !=
+                ownedFrames.Count
                 || signatures.Count != 4)
                 diagnostics.Add(
                     "generated_regional_event.history.qualification");
@@ -230,6 +330,10 @@ public static class GeneratedCampaignRegionalEventCorrelationService
                 resolution.FinalStateHash)
                 diagnostics.Add(
                     "generated_regional_event.history.qualification_final_state");
+            if (signatures.Sum(item => item.FrameCount)
+                != ownedFrames.Count)
+                diagnostics.Add(
+                    "generated_regional_event.history.signature_frame_count");
         }
         if (events.RuntimeFrames.Any(item =>
                 events.EventQualifications.All(qualification =>
@@ -241,23 +345,69 @@ public static class GeneratedCampaignRegionalEventCorrelationService
             diagnostics.Add(
                 "generated_regional_event.history.frame_failed");
 
-        var finalState = GeneratedCampaignChoiceCanonical.Hash(
-            events.EventQualifications.Select(item => new
+        var finalStateRows = new List<object>();
+        foreach (var item in events.EventQualifications)
+        {
+            var resolution = item.ReplaySignatures.Where(signature =>
+                    signature.RouteKind ==
+                    GeneratedCampaignRegionalEventReplayRouteKind
+                        .RESOLUTION
+                    && signature.ReplayIndex == 1)
+                .ToList();
+            if (resolution.Count != 1)
+            {
+                diagnostics.Add(
+                    "generated_regional_event.history.final_state_signature");
+                continue;
+            }
+            finalStateRows.Add(new
             {
                 item.RegionalEventId,
                 item.FinalStateHash,
-                ResolutionSignature = item.ReplaySignatures
-                    .Single(signature => signature.RouteKind ==
-                        GeneratedCampaignRegionalEventReplayRouteKind
-                            .RESOLUTION
-                        && signature.ReplayIndex == 1)
-                    .SignatureSha256
-            }).ToList());
+                ResolutionSignature =
+                    resolution[0].SignatureSha256
+            });
+        }
+        var finalState =
+            GeneratedCampaignChoiceCanonical.Hash(finalStateRows);
         if (events.FinalStateHash != finalState)
             diagnostics.Add(
                 "generated_regional_event.history.final_state");
+        var payloadValidation =
+            GeneratedCampaignRegionalEventPayloadAuthorityService.Validate(
+                events.PayloadAuthority, events.EventInventory,
+                events.ReplaySignatures, events.RuntimeFrames);
+        diagnostics.AddRange(payloadValidation.Diagnostics.Select(item =>
+            "generated_regional_event.history."
+            + item["generated_regional_event.".Length..]));
+        if (events.PayloadAuthority.PackageSha256 != packageSha256
+            || events.PayloadAuthority.FinalStateHash
+            != events.FinalStateHash
+            || events.PayloadAuthority.InventorySha256
+            != events.RegionalEventInventorySha256)
+            diagnostics.Add(
+                "generated_regional_event.history.payload_identity");
         return Result(diagnostics);
     }
+
+    public static GeneratedCampaignRegionalEventCorrelationResult Validate(
+        string packageSha256,
+        GameProjectGeneratedCampaignRegionalEventSummary events,
+        GameProjectGeneratedCampaignRelationshipSummary relationships) =>
+        Result(
+        [
+            "generated_regional_event.history.actual_package_required"
+        ]);
+
+    public static string EmptyFinalStateHash(
+        string packageSha256,
+        string emptyInventorySha256) =>
+        GeneratedCampaignChoiceCanonical.Hash(new
+        {
+            PackageSha256 = packageSha256,
+            InventorySha256 = emptyInventorySha256,
+            EmptyOverlayPolicy = "EXACT_EMPTY_EVENT_GRAPH_V1"
+        });
 
     private static GeneratedCampaignRegionalEventKind EventKind(
         GeneratedCampaignRelationshipBranch branch) => branch switch
@@ -283,6 +433,20 @@ public static class GeneratedCampaignRegionalEventCorrelationService
     private static bool CanonicalEqual<T>(T left, T right) =>
         GeneratedCampaignChoiceCanonical.Serialize(left) ==
         GeneratedCampaignChoiceCanonical.Serialize(right);
+
+    private static string PackageSha256(
+        GamePackageDefinition package) =>
+        GeneratedEncounterCombatCanonical.HashText(
+            GeneratedEncounterCombatCanonical.Serialize(package)
+            + Environment.NewLine);
+
+    private static bool PackageSha256Matches(
+        GamePackageDefinition package,
+        string expected) =>
+        PackageSha256(package) == expected
+        || GeneratedCampaignChoiceCanonical.HashText(
+            GeneratedCampaignChoiceCanonical.Serialize(package)
+            + Environment.NewLine) == expected;
 
     private static GeneratedCampaignRegionalEventCorrelationResult Result(
         IEnumerable<string> diagnostics)

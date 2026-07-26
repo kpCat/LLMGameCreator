@@ -1,0 +1,48 @@
+{
+    "status":  "GREEN",
+    "retained":  [
+                     {
+                         "label":  "Goal169",
+                         "packageSha256":  "1fdaac8002fa07b67d7a15a5aeffd600564c8ae2c06a083d85f464d3d0783691",
+                         "pointerPath":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\52d8c7f11872389d\\current.json",
+                         "runRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\52d8c7f11872389d\\runs\\r-b301792bd0a4",
+                         "payloadRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\52d8c7f11872389d\\runs\\r-b301792bd0a4\\g_Data\\StreamingAssets\\LLMGameCreatorProject",
+                         "standaloneHistoryPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\8e2696044dd049018c5fe34d4dbe72a8\\goal164-all-selectable\\.llmgc\\standalone-build-history.json",
+                         "pointerSha256":  "2d2902a639b638bb6255b5bdbd782b9bf660a921bf82033fb179ece9fef006b6",
+                         "runTreeSha256":  "a640cad161110de571996531498890b0ab3b23ec69de618bebcb654782cf448d",
+                         "payloadTreeSha256":  "80327c747c70da063c3c53949d8f1566eaa6ef0ac7d6fe974ff85eef9ba72628",
+                         "standaloneHistorySha256":  "828e64ec241c533b7ff0a07a11ceb1838e5ad92e812dd4f3c0636d8784ee629e",
+                         "buildHistoryTreeSha256":  "4727534a49e26c465362149903089abc939d9ad7d91e193b42f088fd5b4d6e6d",
+                         "releaseCandidateSha256":  "ce68e35055467a5108cabc1abc128ff7133f2a4a4cacb51a604efabd0fcf9a1d",
+                         "latestWriteUtc":  "2026-07-26T14:37:09.9285462Z"
+                     },
+                     {
+                         "label":  "Goal169A",
+                         "packageSha256":  "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2",
+                         "pointerPath":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\5193e86c8a23cb3d\\current.json",
+                         "runRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\5193e86c8a23cb3d\\runs\\r-cb7b693f4d6e",
+                         "payloadRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\5193e86c8a23cb3d\\runs\\r-cb7b693f4d6e\\g_Data\\StreamingAssets\\LLMGameCreatorProject",
+                         "standaloneHistoryPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\02fdbd5c16d74667a3950e7bb96723f8\\goal164-all-selectable\\.llmgc\\standalone-build-history.json",
+                         "pointerSha256":  "c381b37a41433a1e5500d862ae2f92a7a53155a2b0f146a69aaa1b4a86629a01",
+                         "runTreeSha256":  "d8fb40e565163995c347c1bfb2bebdc1a21a01c76026437c6b870b0d5beadf14",
+                         "payloadTreeSha256":  "314823be1b0ddd338d698664b9afe2ce20481b026b271ed31477914f389a7f29",
+                         "standaloneHistorySha256":  "d416610ba075877c64acb82dccb205925d240d102b51705978d976c5565477d3",
+                         "buildHistoryTreeSha256":  "22cb269e87f3b5ca1836701ba6cc028f5cf66b5005ad9b21dc7d78c1fb41b294",
+                         "releaseCandidateSha256":  "cd90ca3f6a0eb5b078b9abf3f94fa36e3718b02c7bbbd669633677f4a7d1ede6",
+                         "latestWriteUtc":  "2026-07-26T17:54:42.4298070Z"
+                     }
+                 ],
+    "goal169AndGoal169AByteIdentical":  true,
+    "latestRetainedWritePrecedesGoal169BFailedRun":  true,
+    "goal169BFailedRunFirstPayloadWriteUtc":  "2026-07-26T20:18:44Z",
+    "goal169PublishedEvidenceTreeSha256":  "2a128bfbc33f5c0c2b7fe5724b7bfb93a4cff1b8011a66ecfbb4ef720611e556",
+    "coveredArtifacts":  [
+                             "run",
+                             "pointer",
+                             "standalone-history",
+                             "build-history",
+                             "payload",
+                             "release-candidate"
+                         ],
+    "newFailedRunUsesSeparateOutputToken":  "ab2a327d67146f55"
+}

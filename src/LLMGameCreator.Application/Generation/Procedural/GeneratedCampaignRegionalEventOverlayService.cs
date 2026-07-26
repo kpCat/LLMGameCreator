@@ -29,19 +29,29 @@ public sealed class GeneratedCampaignRegionalEventOverlayService
         foreach (var binding in bindingResult.Bindings)
             AddEvent(after, binding, diagnostics);
         Canonicalize(after);
+        var authoritativeBindings =
+            new List<GeneratedCampaignRegionalEventBinding>();
+        foreach (var binding in bindingResult.Bindings)
+        {
+            if (!GeneratedCampaignRegionalEventDefinitionAuthorityService
+                    .TryEnrich(after, binding, out var enriched,
+                        out var authorityDiagnostics))
+                diagnostics.AddRange(authorityDiagnostics);
+            authoritativeBindings.Add(enriched);
+        }
 
-        ValidateControlledDelta(before, after, bindingResult.Bindings,
+        ValidateControlledDelta(before, after, authoritativeBindings,
             diagnostics);
-        ValidateReferences(after, bindingResult.Bindings, diagnostics);
-        var inventory = Inventory(bindingResult.Bindings);
+        ValidateReferences(after, authoritativeBindings, diagnostics);
+        var inventory = Inventory(authoritativeBindings);
         var countsBefore = DefinitionCounts(before);
         var countsAfter = DefinitionCounts(after);
-        var identityPassed = bindingResult.Bindings.All(item =>
+        var identityPassed = authoritativeBindings.All(item =>
             item.RegionalEventId == item.DialogueId
             && item.ResolutionFlagId == item.DialogueId);
         if (!identityPassed)
             diagnostics.Add("generated_regional_event.identity_invalid");
-        var placementPassed = bindingResult.Bindings.All(item =>
+        var placementPassed = authoritativeBindings.All(item =>
             item.Placement is
             {
                 Walkable: true,
@@ -63,22 +73,23 @@ public sealed class GeneratedCampaignRegionalEventOverlayService
             SourcePackageSha256 = PackageSha256(before),
             OutputPackageSha256 =
                 GeneratedCampaignChoiceCanonical.HashText(json),
-            EventCount = bindingResult.Bindings.Count,
-            SupportGratitudeCount = bindingResult.Bindings.Count(item =>
+            EventCount = authoritativeBindings.Count,
+            SupportGratitudeCount = authoritativeBindings.Count(item =>
                 item.EventKind ==
                 GeneratedCampaignRegionalEventKind.SUPPORT_GRATITUDE),
-            ChallengeAftermathCount = bindingResult.Bindings.Count(item =>
+            ChallengeAftermathCount = authoritativeBindings.Count(item =>
                 item.EventKind ==
                 GeneratedCampaignRegionalEventKind.CHALLENGE_AFTERMATH),
-            RefusalFalloutCount = bindingResult.Bindings.Count(item =>
+            RefusalFalloutCount = authoritativeBindings.Count(item =>
                 item.EventKind ==
                 GeneratedCampaignRegionalEventKind.REFUSAL_FALLOUT),
-            Bindings = bindingResult.Bindings,
+            Bindings = authoritativeBindings,
             Inventory = inventory,
             InventorySha256 =
                 GeneratedCampaignChoiceCanonical.Hash(inventory),
             AddedDefinitionFingerprints =
-                Fingerprints(after, bindingResult.Bindings),
+                GeneratedCampaignRegionalEventDefinitionAuthorityService
+                    .Fingerprints(after, authoritativeBindings),
             DefinitionCollectionCountsBefore = countsBefore,
             DefinitionCollectionCountsAfter = countsAfter,
             IdentityPassed = identityPassed,
@@ -130,11 +141,18 @@ public sealed class GeneratedCampaignRegionalEventOverlayService
                 overlay.InventorySha256, StringComparison.Ordinal))
             diagnostics.Add(
                 "generated_regional_event.inventory_mismatch");
-        if (!Same(Fingerprints(regionalEventOverlayPackage,
-                    overlay.Bindings),
+        if (!Same(
+                GeneratedCampaignRegionalEventDefinitionAuthorityService
+                    .Fingerprints(regionalEventOverlayPackage,
+                        overlay.Bindings),
                 overlay.AddedDefinitionFingerprints))
             diagnostics.Add(
                 "generated_regional_event.inventory_mismatch");
+        var packageAuthority =
+            GeneratedCampaignRegionalEventDefinitionAuthorityService
+                .ValidateActualPackage(regionalEventOverlayPackage,
+                    overlay);
+        diagnostics.AddRange(packageAuthority.Diagnostics);
         diagnostics = diagnostics.Distinct(StringComparer.Ordinal)
             .OrderBy(item => item, StringComparer.Ordinal).ToList();
         return new GeneratedCampaignRegionalEventOverlayValidationResult
@@ -519,49 +537,6 @@ public sealed class GeneratedCampaignRegionalEventOverlayService
             .ThenBy(item => item.EventKind)
             .Select(GeneratedCampaignRegionalEventInventoryService.Create)
             .ToList();
-
-    private static IReadOnlyList<
-        GeneratedCampaignRegionalEventDefinitionFingerprint> Fingerprints(
-        GamePackageDefinition package,
-        IReadOnlyList<GeneratedCampaignRegionalEventBinding> bindings)
-    {
-        var result = new List<
-            GeneratedCampaignRegionalEventDefinitionFingerprint>();
-        foreach (var binding in bindings)
-        {
-            result.Add(Fingerprint("game.entityPrototypes",
-                binding.EntityPrototypeId,
-                package.Game.EntityPrototypes.Single(item =>
-                    item.Id == binding.EntityPrototypeId)));
-            result.Add(Fingerprint("game.dialogues",
-                binding.DialogueId,
-                package.Game.Dialogues.Single(item =>
-                    item.Id == binding.DialogueId)));
-            result.Add(Fingerprint("game.interactions",
-                binding.InteractionId,
-                package.Game.Interactions.Single(item =>
-                    item.Id == binding.InteractionId)));
-            result.Add(Fingerprint(
-                "game.maps[" + binding.MapId + "].entities",
-                binding.MapEntityId,
-                package.Game.Maps.Single(item =>
-                        item.Id == binding.MapId).Entities
-                    .Single(item => item.Id == binding.MapEntityId)));
-        }
-        return result.OrderBy(item => item.CollectionPath,
-                StringComparer.Ordinal)
-            .ThenBy(item => item.DefinitionId, StringComparer.Ordinal)
-            .ToList();
-    }
-
-    private static GeneratedCampaignRegionalEventDefinitionFingerprint
-        Fingerprint<T>(string path, string id, T value) => new()
-        {
-            CollectionPath = path,
-            DefinitionId = id,
-            CanonicalSha256 =
-                GeneratedCampaignChoiceCanonical.Hash(value)
-        };
 
     private static IReadOnlyDictionary<string, int> DefinitionCounts(
         GamePackageDefinition package)

@@ -6589,6 +6589,61 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal169b-package-bound-event-proof.ps1",
+        ".devflow/scripts/run-goal169b-package-bound-event-proof.cmd",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventModels.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventBindingService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventOverlayService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventReplayService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventCorrelationService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventDefinitionAuthorityService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventPayloadAuthorityService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedCampaignRegionalEventQualificationService.cs",
+        "src/LLMGameCreator.Application/Play/GeneratedCampaign/GeneratedCampaignExactCombatRouteService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplayDefinitionFingerprintService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveMigrationService.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveValidator.cs",
+        "src/LLMGameCreator.Application/Generation/Procedural/GameProjectSeedRegenerationCommitValidator.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal169a-strict-replay-v7-correlation-post-fix-smoke.md",
+        "docs/manual-acceptance/goal169b-package-bound-event-proof-payload-closure.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal169B/",
+        "tests/LLMGameCreator.Tests/Application/Goal169A/",
+        "tests/LLMGameCreator.Tests/Application/Goal169/",
+        "docs/agent-tasks/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/",
+        ".llmgc/procedural/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/",
+        ".llmgc/exports/goal-169b-package-bound-event-proof-nested-combat-replay-and-payload-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Domain/",
+        "catalogs/feature-modules/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

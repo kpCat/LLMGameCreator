@@ -173,7 +173,8 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                           ?? throw new InvalidOperationException("semantic.package_invalid");
             var packageValidation = _packageValidator.Validate(package, project);
             if (!packageValidation.IsValid) diagnostics.Add("semantic.package_invalid");
-            Match(HashFile(packagePath), request.CandidateSeal.CandidatePackageSha256,
+            var actualPackageSha256 = HashFile(packagePath);
+            Match(actualPackageSha256, request.CandidateSeal.CandidatePackageSha256,
                 "semantic.package_hash_mismatch", diagnostics);
             var choiceBinding = source is { Present: true, Passed: true }
                 ? new GeneratedCampaignChoiceBindingService().Bind(source, package)
@@ -389,6 +390,13 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                 history.FinalStateHash)
                 diagnostics.Add(
                     "semantic.history_regional_event_qualification_incomplete");
+            if (regionalEvents is not null
+                && relationships is not null
+                && !GeneratedCampaignRegionalEventCorrelationService.Validate(
+                    package, actualPackageSha256, regionalEvents,
+                    relationships).Passed)
+                diagnostics.Add(
+                    "semantic.history_regional_event_package_correlation_invalid");
             Match(history.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
                 request.CandidateSeal.MechanicsProfileId,
                 "semantic.mechanics_profile_mismatch", diagnostics);
