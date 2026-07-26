@@ -122,6 +122,15 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
             Compare(persisted.GeneratedCampaignChoiceFlagInventorySha256,
                 actual.GeneratedCampaignChoiceFlagInventorySha256,
                 "regeneration.candidate_choice_changed", diagnostics);
+            Compare(persisted.GeneratedCampaignRelationshipSummarySha256,
+                actual.GeneratedCampaignRelationshipSummarySha256,
+                "regeneration.candidate_relationship_changed", diagnostics);
+            Compare(persisted.GeneratedCampaignRelationshipOverlaySha256,
+                actual.GeneratedCampaignRelationshipOverlaySha256,
+                "regeneration.candidate_relationship_changed", diagnostics);
+            Compare(persisted.GeneratedCampaignRelationshipInventorySha256,
+                actual.GeneratedCampaignRelationshipInventorySha256,
+                "regeneration.candidate_relationship_changed", diagnostics);
             Compare(persisted.CandidateSnapshotStatus, actual.CandidateSnapshotStatus,
                 "regeneration.candidate_tampered", diagnostics);
             Compare(persisted.MechanicsProfileId, actual.MechanicsProfileId,
@@ -230,6 +239,12 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
             GeneratedCampaignChoiceOverlaySha256 = CanonicalSha256(build.GeneratedCampaignChoices?.Overlay),
             GeneratedCampaignChoiceFlagInventorySha256 = CanonicalSha256(
                 build.GeneratedCampaignChoices?.Overlay?.FlagInventory),
+            GeneratedCampaignRelationshipSummarySha256 = CanonicalSha256(
+                build.GeneratedCampaignRelationships),
+            GeneratedCampaignRelationshipOverlaySha256 = CanonicalSha256(
+                build.GeneratedCampaignRelationships?.Overlay),
+            GeneratedCampaignRelationshipInventorySha256 = CanonicalSha256(
+                build.GeneratedCampaignRelationships?.RelationshipInventory),
             CandidateSnapshotStatus = snapshot.GeneratedWorld?.Status ?? string.Empty,
             MechanicsProfileId = snapshot.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
             AcceptedMechanicsSummarySha256 = CanonicalSha256(snapshot.AcceptedMechanics),

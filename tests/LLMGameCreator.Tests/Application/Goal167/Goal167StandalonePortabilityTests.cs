@@ -11,32 +11,36 @@ namespace LLMGameCreator.Tests.Application.Goal167;
 public sealed class Goal167StandalonePortabilityTests
 {
     [Fact]
-    public void Behavioral_standalone_payload_uses_exact_v5_choice_primary_hashes()
+    public void Behavioral_standalone_payload_uses_exact_v6_relationship_primary_hashes()
     {
         var state = Goal164PortableState.AllSelectable;
 
         var history = JsonSerializer.Deserialize<GameProjectBuildHistoryEntry>(
             File.ReadAllText(state.Build.Build.BuildHistoryPath),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV5, history?.SchemaVersion);
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6, history?.SchemaVersion);
         Assert.Equal(state.Build.Build.PackageSha256, state.Service.Request?.PackageSha256);
         Assert.Equal(state.Build.Build.CompositionPackageSha256,
             state.Service.Request?.CompositionPackageSha256);
-        Assert.Equal(state.Build.Build.GeneratedCampaignChoices?.FinalStateHash,
+        Assert.Equal(state.Build.Build.GeneratedCampaignRelationships?.FinalStateHash,
             state.Service.Request?.FinalStateHash);
     }
 
     [Fact]
-    public void Behavioral_standalone_payload_contains_choice_frames_and_human_facts()
+    public void Behavioral_standalone_payload_contains_relationship_frames_and_choice_human_facts()
     {
         var request = Goal164PortableState.AllSelectable.Service.Request!;
 
         Assert.NotEmpty(request.RuntimeFrames);
-        Assert.All(request.RuntimeFrames, frame => Assert.Equal("generated-choice", frame.Category));
+        Assert.All(request.RuntimeFrames,
+            frame => Assert.Equal("generated-relationship",
+                frame.Category));
         Assert.Contains(request.HumanReviewFacts, item => item.Label == "Сюжетные решения");
         Assert.Contains(request.HumanReviewFacts, item => item.Label == "Взаимоисключающие ветви"
             && item.Value == "подтверждены Runtime");
         Assert.Contains(request.HumanReviewFacts, item => item.Label == "Постоянные флаги решений");
+        Assert.Contains(request.HumanReviewFacts,
+            item => item.Label == "Отношения");
     }
 
     [Fact]

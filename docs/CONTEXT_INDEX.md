@@ -22,7 +22,9 @@ Goal165 is the current completed implementation slice and is `GREEN_ACCEPTABLE_C
 
 Goal167C is `GREEN_ACCEPTABLE_CANDIDATE`: the published FAILED scaffold was audited and completed with 94/94 behavioral tests. Exact Support/Challenge/Refuse routes, rollback and two independent replays, state-backed preview/journal/consequences, v5 `CHOICE_CURRENT`, v4 `CHOICES_PENDING`, regeneration seals, save/rebase migration and portable all/core profiles pass. One cached hidden smoke passed with host reuse, zero Unity starts and zero retries; RC is `CURRENT`. Goal166 independent audit is `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`. Goal167 creates no human gate and awaits independent audit.
 
-The retained automated gate token is `goal166_green_exact_qualified_combat_actions_and_real_recovery_qualification`; Goal167C creates no replacement human gate.
+Goal167 independent audit is `BLOCKED_AT_FD69BFC8` on duplicated raw victory qualification. Goal168 closes it with exact Goal166 catalog reuse, ability-only and utility-first proof, exact dialogue-ID relationship identity, deterministic unique quest assignment and sequential Support arcs. v6 is `RELATIONSHIPS_CURRENT`; genuine v5 is pending/not ready. Exact save continuation, explicit preserve/reset/drop migration, one cached smoke, RC and portable profiles pass. Goal168 is unaccepted, creates no human gate and requires independent audit.
+
+The retained automated gate token is `goal166_green_exact_qualified_combat_actions_and_real_recovery_qualification`; Goal168 creates no replacement human gate. Next action: `independent_goal168_audit_and_plan_world_events_or_relationship_consequences`.
 
 For Unity-host or standalone work, also read `docs/UNITY_EXECUTION_POLICY.md` before any Unity invocation.
 
@@ -380,6 +382,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/manual-acceptance/goal154b-executable-social-runtime-core.md` | Goal154B implementation record: Runtime core GREEN, no human review or acceptance, manualGateReady=false, Goal154C deferred scope explicit. |
 | `docs/manual-acceptance/goal154-family-human-acceptance.md` | Exact owner acceptance of Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`; historical implementation statuses are preserved. |
 | `docs/manual-acceptance/goal155-accepted-mechanics-release-candidate.md` | Goal155 automated RC candidate record: no human gate, accepted=false, independent audit required. |
+| `docs/manual-acceptance/goal168-choice-driven-relationships-multi-quest-arcs.md` | Goal168 automated relationship/arc candidate record: no human gate, accepted=false, independent audit required. |
 | `docs/agent-tasks/goal-155-accepted-mechanics-release-candidate-integration-and-operator-readiness/GOAL.md` | Goal155 integrates accepted mechanics across exact owner 22/10 and maximal 22/14 profiles, typed history, portable RC record, WinForms card and one cached hidden smoke. |
 | `docs/agent-tasks/goal-157-generated-world-provenance-and-runtime-start-activation-vertical-slice/GOAL.md` | Goal157 strict generated-source reproduction and generated-start two-lane activation; independent audit is GREEN at `8939aea0`, accepted=false, no human gate. |
 | `docs/agent-tasks/goal-158-generated-region-travel-runtime-and-standalone-vertical-slice/GOAL.md` | Goal158 adds exact strict-plan region-map bindings, deterministic per-connection gates, generic atomic Runtime map transitions, complete origin/travel/destination replay and standalone/portable `TRAVEL_CURRENT` truth while Lane A remains unchanged. |

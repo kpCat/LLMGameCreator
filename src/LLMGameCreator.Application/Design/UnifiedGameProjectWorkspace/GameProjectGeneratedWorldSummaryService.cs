@@ -42,7 +42,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
         GeneratedWorldTravelOverlayDocument? travelOverlay = null,
         GameProjectGeneratedRegionTravelSummary? travel = null,
         GameProjectGeneratedEncounterCombatSummary? combat = null,
-        GameProjectGeneratedCampaignChoiceSummary? choices = null)
+        GameProjectGeneratedCampaignChoiceSummary? choices = null,
+        GameProjectGeneratedCampaignRelationshipSummary? relationships = null)
     {
         ArgumentNullException.ThrowIfNull(validation);
         ArgumentNullException.ThrowIfNull(compositionPackage);
@@ -64,13 +65,19 @@ public sealed class GameProjectGeneratedWorldSummaryService
                                  || !AuthorizedCombatEncounterChange(diagnostic, combat))
             .Where(diagnostic => choices is not { Present: true, Passed: true }
                                  || !AuthorizedChoiceDialogueChange(diagnostic, choices))
+            .Where(diagnostic => relationships is not { Present: true, Passed: true }
+                                 || !AuthorizedRelationshipChange(diagnostic, relationships))
             .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
         var combatReady = validation.Source.Counts.Encounters == 0
                           || combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" };
         var choicesReady = choices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" };
+        var relationshipsReady = relationships is null
+                                 || relationships is { Present: false, Passed: true, Status: "ABSENT" }
+                                 || relationships is { Present: true, Passed: true, Status: "RELATIONSHIPS_CURRENT" };
         var status = diagnostics.Count > 0
             ? "INVALID"
-            : combatReady && choicesReady && travelReady && activation is { Present: true, Passed: true }
+            : combatReady && choicesReady && relationshipsReady && travelReady
+              && activation is { Present: true, Passed: true }
                 ? "CAMPAIGN_CURRENT"
             : travelReady && activation is { Present: true, Passed: true }
                 ? "BUILD_CURRENT"
@@ -88,7 +95,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
         GameProjectGeneratedWorldActivationSummary? activation = null,
         GameProjectGeneratedRegionTravelSummary? travel = null,
         GameProjectGeneratedEncounterCombatSummary? combat = null,
-        GameProjectGeneratedCampaignChoiceSummary? choices = null)
+        GameProjectGeneratedCampaignChoiceSummary? choices = null,
+        GameProjectGeneratedCampaignRelationshipSummary? relationships = null)
     {
         var source = ProjectSource(validation);
         if (source is null || !source.Passed || lastSuccessful is not { Present: true, Passed: true }) return source;
@@ -103,7 +111,37 @@ public sealed class GameProjectGeneratedWorldSummaryService
             Diagnostics = ["generated_summary.history_source_mismatch"]
         };
         if (activation is not { Present: true, Passed: true }) return source;
-        var status = choices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
+        var choicesCurrent = choices is
+            { Present: true, Passed: true, Status: "CHOICE_CURRENT" };
+        var combatCurrent = source.EncounterCount == 0
+                            || combat is
+                            {
+                                Present: true,
+                                Passed: true,
+                                Status: "CAMPAIGN_CURRENT"
+                            };
+        var relationshipsPending = relationships is
+            { Present: true, Passed: false, Status: "RELATIONSHIPS_PENDING" };
+        var status = choicesCurrent && relationshipsPending
+                     && combatCurrent
+                     && travel is { Present: true, Passed: true }
+            ? matchesCurrentAuthoring
+                ? "RELATIONSHIPS_PENDING"
+                : "LAST_SUCCESS"
+            : choicesCurrent
+                     && (relationships is null
+                         || relationships is
+                         {
+                             Present: false,
+                             Passed: true,
+                             Status: "ABSENT"
+                         }
+                         || relationships is
+                         {
+                             Present: true,
+                             Passed: true,
+                             Status: "RELATIONSHIPS_CURRENT"
+                         })
                      && (source.EncounterCount == 0
                          || combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" })
             ? matchesCurrentAuthoring ? "CAMPAIGN_CURRENT" : "LAST_SUCCESS"
@@ -167,6 +205,16 @@ public sealed class GameProjectGeneratedWorldSummaryService
         }).ToList()
         : [];
 
+    public static IReadOnlyList<StandaloneHumanReviewFact> StandaloneRelationshipHumanFacts(
+        GameProjectGeneratedCampaignRelationshipSummary? summary) =>
+        summary is { Present: true, Passed: true }
+            ? summary.HumanReviewFacts.Select(fact => new StandaloneHumanReviewFact
+            {
+                Label = fact.Label,
+                Value = fact.Value
+            }).ToList()
+            : [];
+
     private static bool AuthorizedTravelMapChange(
         string diagnostic,
         GeneratedWorldTravelOverlayDocument overlay)
@@ -198,6 +246,29 @@ public sealed class GameProjectGeneratedWorldSummaryService
         var dialogueId = diagnostic[prefix.Length..];
         return choices.Overlay?.DialogueFingerprintsAfter.Any(item =>
             string.Equals(item.DialogueId, dialogueId, StringComparison.Ordinal)) == true;
+    }
+
+    private static bool AuthorizedRelationshipChange(
+        string diagnostic,
+        GameProjectGeneratedCampaignRelationshipSummary relationships)
+    {
+        const string dialoguePrefix = "generated_overlay.record_changed:game.dialogues:";
+        const string questPrefix = "generated_overlay.record_changed:game.quests:";
+        if (diagnostic.StartsWith(dialoguePrefix, StringComparison.Ordinal))
+        {
+            var dialogueId = diagnostic[dialoguePrefix.Length..];
+            return relationships.Overlay?.FingerprintsAfter.Any(item =>
+                item.CollectionPath == "game.dialogues"
+                && item.DefinitionId == dialogueId) == true;
+        }
+        if (diagnostic.StartsWith(questPrefix, StringComparison.Ordinal))
+        {
+            var questId = diagnostic[questPrefix.Length..];
+            return relationships.Overlay?.FingerprintsAfter.Any(item =>
+                item.CollectionPath == "game.quests"
+                && item.DefinitionId == questId) == true;
+        }
+        return false;
     }
 
     public static string FormatCard(

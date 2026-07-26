@@ -12,6 +12,7 @@ public sealed class GameProjectBuildHistoryReader
     public const string SchemaVersionV3 = "unified_game_project_build_history_v3";
     public const string SchemaVersionV4 = "unified_game_project_build_history_v4";
     public const string SchemaVersionV5 = "unified_game_project_build_history_v5";
+    public const string SchemaVersionV6 = "unified_game_project_build_history_v6";
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
 
     public GameProjectBuildHistoryReadResult ReadLatestMatchingSocialSuccess(
@@ -41,7 +42,8 @@ public sealed class GameProjectBuildHistoryReader
 
             if (historyEntry is null
                 || historyEntry.SchemaVersion is not SchemaVersionV2
-                    and not SchemaVersionV3 and not SchemaVersionV4 and not SchemaVersionV5)
+                    and not SchemaVersionV3 and not SchemaVersionV4
+                    and not SchemaVersionV5 and not SchemaVersionV6)
             {
                 diagnostics.Add("social.history.unsupported_schema:" + Path.GetFileName(path));
                 continue;
@@ -82,6 +84,7 @@ public sealed class GameProjectBuildHistoryReader
                 GeneratedRegionTravel = IsGoal157(entry) ? null : entry.GeneratedRegionTravel,
                 GeneratedEncounterCombat = ProjectGeneratedCombat(entry),
                 GeneratedCampaignChoices = ProjectGeneratedChoices(entry),
+                GeneratedCampaignRelationships = ProjectGeneratedRelationships(entry),
                 AcceptedMechanicsCompatibility = entry.AcceptedMechanicsCompatibility
             },
             Diagnostics = diagnostics.Concat(fingerprint.Diagnostics).ToList(),
@@ -104,7 +107,10 @@ public sealed class GameProjectBuildHistoryReader
                   || entry.SchemaVersion == SchemaVersionV4
                   && TravelEligible(entry) && CombatEligible(entry)
                   || entry.SchemaVersion == SchemaVersionV5
-                  && TravelEligible(entry) && CombatEligible(entry) && ChoiceEligible(entry))
+                  && TravelEligible(entry) && CombatEligible(entry) && ChoiceEligible(entry)
+                  || entry.SchemaVersion == SchemaVersionV6
+                  && TravelEligible(entry) && CombatEligible(entry) && ChoiceEligible(entry)
+                  && RelationshipEligible(entry))
             : entry.Social is { Present: true, Passed: true, CheckpointReplayPassed: true, FullReplayEquivalent: true })
         && string.Equals(entry.PackageSha256, document.LastActivatedProjectPackageSha256, StringComparison.Ordinal)
         && string.Equals(entry.CompositionPackageSha256, document.LastCompositionPackageSha256, StringComparison.Ordinal)
@@ -133,7 +139,7 @@ public sealed class GameProjectBuildHistoryReader
         } travel
         && travel.VisitedMapIds.Distinct(StringComparer.Ordinal).Count() >= 2
         && travel.VisitedRegionIds.Distinct(StringComparer.Ordinal).Count() >= 2
-        && (entry.SchemaVersion == SchemaVersionV4 || entry.SchemaVersion == SchemaVersionV5
+        && (entry.SchemaVersion is SchemaVersionV4 or SchemaVersionV5 or SchemaVersionV6
             || string.Equals(travel.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal));
 
     private static bool CombatEligible(GameProjectBuildHistoryEntry entry) =>
@@ -162,7 +168,7 @@ public sealed class GameProjectBuildHistoryReader
         && QualifiedActionCatalogEligible(combat)
         && combat.QualifiedEncounterCount == combat.GeneratedEncounterCount
         && string.Equals(combat.ExactPackageSha256, entry.PackageSha256, StringComparison.Ordinal)
-        && (entry.SchemaVersion == SchemaVersionV5
+        && (entry.SchemaVersion is SchemaVersionV5 or SchemaVersionV6
             || string.Equals(combat.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal));
 
     private static bool ChoiceEligible(GameProjectBuildHistoryEntry entry) => entry.GeneratedCampaignChoices is
@@ -187,7 +193,60 @@ public sealed class GameProjectBuildHistoryReader
         && choices.BranchFlagIds.Count == choices.BranchableDialogueCount
         && !string.IsNullOrWhiteSpace(choices.BranchFlagInventorySha256)
         && string.Equals(choices.FinalPackageSha256, entry.PackageSha256, StringComparison.Ordinal)
-        && string.Equals(choices.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal);
+        && (entry.SchemaVersion == SchemaVersionV6
+            || string.Equals(choices.FinalStateHash, entry.FinalStateHash, StringComparison.Ordinal));
+
+    private static bool RelationshipEligible(GameProjectBuildHistoryEntry entry)
+    {
+        var relationships = entry.GeneratedCampaignRelationships;
+        if (relationships is
+            {
+                Present: false,
+                Passed: true,
+                Status: "ABSENT",
+                RelationshipCount: 0,
+                ArcQuestCount: 0
+            })
+            return true;
+        if (relationships is not
+            {
+                Present: true,
+                Passed: true,
+                Status: "RELATIONSHIPS_CURRENT",
+                AssignmentUnique: true,
+                ArcOrderingDeterministic: true,
+                OverlayControlledDeltaPassed: true,
+                RuntimeQualificationPassed: true,
+                ExclusiveBranchingPassed: true,
+                ArcProgressionPassed: true,
+                ExactCombatCatalogPassed: true,
+                SupportPassed: true,
+                SupportReplayEquivalent: true,
+                ChallengeFleePassed: true,
+                ChallengeVictoryPassed: true,
+                ChallengeRecoveryPassed: true,
+                RefusePassed: true,
+                AtomicRollbackPassed: true
+            })
+            return false;
+        return relationships.RelationshipCount == relationships.QualifiedRelationshipCount
+               && relationships.ArcQuestCount == relationships.QualifiedArcQuestCount
+               && relationships.MaximumObservedArcLength > 0
+               && relationships.RelationshipInventory.Count == relationships.RelationshipCount
+               && relationships.RelationshipInventory.SelectMany(item => item.OrderedQuestSourceIds)
+                   .Distinct(StringComparer.Ordinal).Count() == relationships.ArcQuestCount
+               && relationships.RuntimeFrames.Count > 0
+               && relationships.RuntimeFrames.All(item => item.Passed)
+               && !string.IsNullOrWhiteSpace(relationships.RelationshipOverlaySha256)
+               && !string.IsNullOrWhiteSpace(relationships.RelationshipInventorySha256)
+               && string.Equals(relationships.ExactPackageSha256, entry.PackageSha256,
+                   StringComparison.Ordinal)
+               && string.Equals(relationships.FinalStateHash, entry.FinalStateHash,
+                   StringComparison.Ordinal)
+               && entry.GeneratedEncounterCombat is { } combat
+               && string.Equals(relationships.QualifiedActionsSha256,
+                   combat.QualifiedActionsSha256, StringComparison.Ordinal);
+    }
 
     private static bool RouteEligible(GameProjectGeneratedEncounterCombatSummary combat) => combat.RouteMode switch
     {
@@ -252,6 +311,10 @@ public sealed class GameProjectBuildHistoryReader
             return generatedWorld;
 
         if (IsGoal157(entry)) return generatedWorld with { Status = "START_CURRENT" };
+        if (entry.SchemaVersion == SchemaVersionV5
+            && entry.GeneratedCampaignChoices is
+                { Present: true, Passed: true, Status: "CHOICE_CURRENT" })
+            return generatedWorld with { Status = "RELATIONSHIPS_PENDING" };
         return entry.SchemaVersion == SchemaVersionV3
             ? generatedWorld with { Status = "TRAVEL_CURRENT" }
             : generatedWorld;
@@ -264,7 +327,8 @@ public sealed class GameProjectBuildHistoryReader
         GameProjectBuildHistoryEntry entry)
     {
         if (string.Equals(entry.SchemaVersion, SchemaVersionV4, StringComparison.Ordinal)
-            || string.Equals(entry.SchemaVersion, SchemaVersionV5, StringComparison.Ordinal))
+            || string.Equals(entry.SchemaVersion, SchemaVersionV5, StringComparison.Ordinal)
+            || string.Equals(entry.SchemaVersion, SchemaVersionV6, StringComparison.Ordinal))
             return entry.GeneratedEncounterCombat;
         if (string.Equals(entry.SchemaVersion, SchemaVersionV3, StringComparison.Ordinal)
             && entry.GeneratedWorld is { Present: true })
@@ -284,7 +348,8 @@ public sealed class GameProjectBuildHistoryReader
     private static GameProjectGeneratedCampaignChoiceSummary? ProjectGeneratedChoices(
         GameProjectBuildHistoryEntry entry)
     {
-        if (string.Equals(entry.SchemaVersion, SchemaVersionV5, StringComparison.Ordinal))
+        if (string.Equals(entry.SchemaVersion, SchemaVersionV5, StringComparison.Ordinal)
+            || string.Equals(entry.SchemaVersion, SchemaVersionV6, StringComparison.Ordinal))
             return entry.GeneratedCampaignChoices;
         if (string.Equals(entry.SchemaVersion, SchemaVersionV4, StringComparison.Ordinal)
             && entry.GeneratedEncounterCombat is { Present: true, Status: "CAMPAIGN_CURRENT" })
@@ -297,6 +362,23 @@ public sealed class GameProjectBuildHistoryReader
         return entry.SchemaVersion == SchemaVersionV3 && entry.GeneratedWorld is { Present: true }
             ? new GameProjectGeneratedCampaignChoiceSummary { Status = "ABSENT" }
             : null;
+    }
+
+    private static GameProjectGeneratedCampaignRelationshipSummary? ProjectGeneratedRelationships(
+        GameProjectBuildHistoryEntry entry)
+    {
+        if (string.Equals(entry.SchemaVersion, SchemaVersionV6, StringComparison.Ordinal))
+            return entry.GeneratedCampaignRelationships;
+        if (string.Equals(entry.SchemaVersion, SchemaVersionV5, StringComparison.Ordinal)
+            && entry.GeneratedCampaignChoices is
+                { Present: true, Passed: true, Status: "CHOICE_CURRENT" })
+            return new GameProjectGeneratedCampaignRelationshipSummary
+            {
+                Present = true,
+                Status = "RELATIONSHIPS_PENDING",
+                Diagnostics = ["campaign.generated_relationships_not_current"]
+            };
+        return null;
     }
 
     private static bool HasPersistedSuccessIdentity(FeatureModuleCompositionDocument document) =>

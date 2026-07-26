@@ -2,7 +2,7 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
-Goal166 is the current completed product slice and a GREEN acceptable candidate. It closes the Goal165 independent audit P1 by retaining exact qualified combat-action descriptors and proving generated defeat/retry/save/new-game recovery through the production campaign service. Goal166 remains unaccepted and requires an independent audit.
+Goal168 is the current completed product slice and a GREEN acceptable candidate. It closes the Goal167 independent-audit P1 by reusing the exact Goal166 qualified-action catalog for ability-only and utility-first branch combat, then adds data-derived relationships and sequential multi-quest arcs. Goal168 remains unaccepted and requires an independent audit.
 
 ## Source Of Truth
 
@@ -325,3 +325,7 @@ Goal160 independent audit found a profile-neutral P1 at `d8dd05e7`: core-only wo
 ## Goal167C generated campaign choice branching
 
 Goal167C closes the published FAILED scaffold as a GREEN acceptable candidate. Exact generated dialogue provenance, deterministic controlled overlays and Runtime state/event authority now support qualified Support, Challenge and Refuse branches with persistent flags, locked alternatives, follow-ups, atomic rollback and replay. v5 choice-current readiness, v4 rebuild guidance, choice-aware regeneration seals, exact save/continue, branch-aware migration, one cached GREEN smoke, RC `CURRENT` and portable all/core recovery are proven. The next roadmap action is an independent audit before planning campaign relationships and multi-quest arcs.
+
+## Goal168 choice-driven relationships and multi-quest arcs
+
+Goal167 audit result `BLOCKED_AT_FD69BFC8` is closed by exact Goal166 qualified-action catalog reuse; successful utility/no-op actions are not combat progress. Exact generated dialogue IDs define relationships, generated quests are assigned once and ordered from data, and Support advances sequentially through dialogue, exact combat and manual turn-in. Challenge/Refuse remain exclusive. v6 readiness, sealed regeneration/rollback, exact save continuation, explicit preserve/reset/drop migration, one cached smoke, RC and portable all/core qualification are GREEN. The next roadmap action is independent Goal168 audit before world events or deeper relationship consequences.

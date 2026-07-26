@@ -64,6 +64,7 @@ public sealed record GeneratedCampaignProjectTruth
     public string GeneratedStartMapId { get; init; } = string.Empty;
     public IReadOnlyDictionary<string, string> RegionMapBindings { get; init; }
         = new Dictionary<string, string>();
+    public GeneratedCampaignRelationshipOverlayDocument? RelationshipOverlay { get; init; }
 }
 
 public sealed record GeneratedCampaignAction
@@ -295,6 +296,12 @@ public enum GeneratedCampaignConsequenceKind
     NewGame,
     TacticalAction,
     Decision,
+    RelationshipStarted,
+    RelationshipProgressed,
+    RelationshipCompleted,
+    RelationshipChallenged,
+    RelationshipRefused,
+    QuestArcAdvanced,
     BranchLocked,
     BranchFollowUp,
     Failure
@@ -364,6 +371,7 @@ public sealed record GeneratedCampaignSnapshot
     public GeneratedCampaignDecisionJournal DecisionJournal { get; init; } = new();
     public GeneratedCampaignEncounter? Encounter { get; init; }
     public IReadOnlyList<GeneratedCampaignTextRow> Factions { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignRelationshipRow> Relationships { get; init; } = [];
     public IReadOnlyList<string> RecentEvents { get; init; } = [];
     public GeneratedCampaignSaveState SaveState { get; init; } = new();
     public GeneratedCampaignRecoveryProjection Recovery { get; init; } = new();

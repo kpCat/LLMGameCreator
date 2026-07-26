@@ -18,13 +18,16 @@ namespace LLMGameCreator.Tests.Application.Goal167;
 public sealed class Goal167HistoryRegenerationTests
 {
     [Fact]
-    public void Behavioral_v5_primary_truth_belongs_to_choice_route_while_combat_stays_exact()
+    public void Behavioral_v6_primary_truth_belongs_to_relationship_route_while_choice_and_combat_stay_exact()
     {
         var build = Goal164TestKit.AllSelectable.Build;
 
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV5,
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6,
             ReadHistory(build.BuildHistoryPath).SchemaVersion);
-        Assert.Equal(build.FinalStateHash, build.GeneratedCampaignChoices?.FinalStateHash);
+        Assert.Equal(build.FinalStateHash,
+            build.GeneratedCampaignRelationships?.FinalStateHash);
+        Assert.NotEqual(build.FinalStateHash,
+            build.GeneratedCampaignChoices?.FinalStateHash);
         Assert.NotEqual(build.FinalStateHash, build.GeneratedEncounterCombat?.FinalStateHash);
         Assert.Equal(build.PackageSha256, build.GeneratedEncounterCombat?.ExactPackageSha256);
     }
@@ -212,7 +215,13 @@ internal static class Goal167ZeroEncounterState
             GeneratedMvpPackage = mvp,
             RegeneratedPlan = build.Source.RegeneratedPlan! with { EncounterSeeds = [] }
         };
-        var package = Goal164TestKit.Clone(build.Package);
+        var package = Goal164TestKit.Clone(build.LaneAPackage);
+        package.Game.Encounters = [];
+        package.GeneratedContent.Encounters = [];
+        foreach (var quest in package.Game.Quests.Where(item =>
+                     package.GeneratedContent.Quests.Any(generated =>
+                         generated.PackageQuestId == item.Id)))
+            quest.Objectives = [];
         var binding = new GeneratedCampaignChoiceBindingService().Bind(strict, package);
         var overlay = new GeneratedCampaignChoiceOverlayService().Build(package, binding);
         Assert.True(overlay.Passed, string.Join(",", overlay.Diagnostics));

@@ -1,0 +1,19 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-168-choice-driven-relationships-and-multi-quest-arcs",
+    "requiredBase":  "fd69bfc86f28b1261ec638c3d45d18d16689bf1e",
+    "changedPathCount":  50,
+    "allowedCount":  50,
+    "warningCount":  0,
+    "violationCount":  0,
+    "forbiddenRuntimeDomainGamePackageUnityStandaloneRcMutationCount":  0,
+    "boundedIntegrationExceptions":  [
+                                         "Generated combat qualification: exact signature/activation integration required because relationship-assigned quests are AutoStart=false before combat qualification.",
+                                         "Goal164 campaign route: concrete regression must make the Support dialogue decision before the now-assigned quest.",
+                                         "Goal164 history regression: v6 relationship truth supersedes the former v5 primary record.",
+                                         "Goal164 standalone regression: relationship runtime frames supersede generated-choice frames in v6 payloads.",
+                                         "Goal162 WinForms regression: the required Отношения tab increases the HUD tab count from six to seven.",
+                                         "Goal167 history regression: v6 relationship primary truth supersedes v5 choice primary truth.",
+                                         "Goal167 standalone regression: v6 relationship frames/final state supersede v5 choice payload truth."
+                                     ]
+}

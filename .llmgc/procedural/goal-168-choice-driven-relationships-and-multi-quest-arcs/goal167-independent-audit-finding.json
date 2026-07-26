@@ -1,0 +1,10 @@
+{
+    "status":  "BLOCKED_AT_FD69BFC8",
+    "blocker":  "choice_branch_qualification_reimplements_victory_without_goal166_exact_qualified_action_catalog",
+    "blockerClosedByGoal168":  true,
+    "removedDuplicateMethods":  [
+                                    "WinEncounter",
+                                    "TryAbilities"
+                                ],
+    "exactCatalogSha256":  "aca23759404640b804f82b490c7078ed1962dd8d2c5995462a36a963fea16944"
+}

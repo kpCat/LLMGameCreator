@@ -68,6 +68,15 @@ public sealed class GeneratedCampaignSessionTruthService
         if (branchableCount > 0 && !ChoicesCurrent(successfulBuild, branchableCount))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.generated_choices_not_current"]);
+        var relationshipBinding = new GeneratedCampaignRelationshipBindingService().Bind(
+            truth.StrictGeneratedSource, currentPackage, binding);
+        if (!relationshipBinding.Passed)
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                relationshipBinding.Diagnostics.Select(item => "campaign." + item).ToList());
+        var relationshipCount = relationshipBinding.Bindings.Count(item => item.QuestArc.Count > 0);
+        if (!RelationshipsCurrent(successfulBuild, relationshipCount))
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.generated_relationships_not_current"]);
         if (string.IsNullOrWhiteSpace(truth.SelectedBuildHistorySha256))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.current_build_history_missing"]);
@@ -88,7 +97,8 @@ public sealed class GeneratedCampaignSessionTruthService
             QualifiedAuthoringFingerprint = truth.QualifiedAuthoringFingerprint,
             SelectedBuildHistoryFileName = truth.SelectedBuildHistoryFileName,
             GeneratedStartMapId = truth.GeneratedStartMapId,
-            RegionMapBindings = truth.GeneratedRegionMapBindings
+            RegionMapBindings = truth.GeneratedRegionMapBindings,
+            RelationshipOverlay = successfulBuild.GeneratedCampaignRelationships?.Overlay
         }, []);
     }
 
@@ -107,7 +117,9 @@ public sealed class GeneratedCampaignSessionTruthService
         && left.SelectedBuildHistoryFileName == right.SelectedBuildHistoryFileName
         && left.GeneratedStartMapId == right.GeneratedStartMapId
         && left.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal)
-            .SequenceEqual(right.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal));
+            .SequenceEqual(right.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal))
+        && string.Equals(left.RelationshipOverlay?.InventorySha256,
+            right.RelationshipOverlay?.InventorySha256, StringComparison.Ordinal);
 
     private static bool CombatCurrent(GameProjectBuildResult build, int generatedEncounterCount)
     {
@@ -128,7 +140,8 @@ public sealed class GeneratedCampaignSessionTruthService
         && combat.QualifiedEncounterCount == generatedEncounterCount
         && string.Equals(combat.ExactPackageSha256, build.PackageSha256, StringComparison.Ordinal)
         && string.Equals(combat.Overlay.OutputPackageSha256, build.PackageSha256, StringComparison.Ordinal)
-        && (build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
+        && (build.GeneratedCampaignRelationships is { Passed: true }
+            || build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
             || string.Equals(combat.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal));
     }
 
@@ -152,7 +165,50 @@ public sealed class GeneratedCampaignSessionTruthService
         && choices.BranchFlagIds.Distinct(StringComparer.Ordinal).Count() == branchableCount
         && !string.IsNullOrWhiteSpace(choices.BranchFlagInventorySha256)
         && string.Equals(choices.FinalPackageSha256, build.PackageSha256, StringComparison.Ordinal)
-        && string.Equals(choices.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal);
+        && (build.GeneratedCampaignRelationships is { Passed: true }
+            || string.Equals(choices.FinalStateHash, build.FinalStateHash, StringComparison.Ordinal));
+
+    private static bool RelationshipsCurrent(GameProjectBuildResult build, int relationshipCount)
+    {
+        var relationships = build.GeneratedCampaignRelationships;
+        if (relationshipCount == 0)
+            return relationships is
+            {
+                Present: false,
+                Passed: true,
+                Status: "ABSENT",
+                RelationshipCount: 0,
+                ArcQuestCount: 0
+            };
+        return relationships is
+        {
+            Present: true,
+            Passed: true,
+            Status: "RELATIONSHIPS_CURRENT",
+            AssignmentUnique: true,
+            ArcOrderingDeterministic: true,
+            OverlayControlledDeltaPassed: true,
+            RuntimeQualificationPassed: true,
+            ExclusiveBranchingPassed: true,
+            ArcProgressionPassed: true,
+            ExactCombatCatalogPassed: true,
+            SupportPassed: true,
+            SupportReplayEquivalent: true,
+            ChallengeFleePassed: true,
+            ChallengeVictoryPassed: true,
+            ChallengeRecoveryPassed: true,
+            RefusePassed: true,
+            AtomicRollbackPassed: true,
+            Overlay: { Passed: true }
+        }
+        && relationships.RelationshipCount == relationshipCount
+        && relationships.QualifiedRelationshipCount == relationshipCount
+        && relationships.ArcQuestCount == relationships.QualifiedArcQuestCount
+        && string.Equals(relationships.ExactPackageSha256, build.PackageSha256,
+            StringComparison.Ordinal)
+        && string.Equals(relationships.FinalStateHash, build.FinalStateHash,
+            StringComparison.Ordinal);
+    }
 
     private static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }
 

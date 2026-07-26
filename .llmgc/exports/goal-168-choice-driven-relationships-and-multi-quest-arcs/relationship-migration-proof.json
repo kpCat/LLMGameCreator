@@ -1,0 +1,13 @@
+{
+    "status":  "GREEN",
+    "oldV5SaveRebaseRequired":  true,
+    "sameWorldDecisionPreserved":  true,
+    "sameWorldReputationPreserved":  true,
+    "sameWorldCompatibleQuestProgressPreserved":  true,
+    "worldMigrationDecisionPreserved":  true,
+    "worldMigrationReputationPreserved":  true,
+    "worldMigrationArcReset":  true,
+    "incompatibleRelationshipDropped":  true,
+    "ghostRelationshipCount":  0,
+    "postMigrationDialogueCombatTravelPassed":  true
+}

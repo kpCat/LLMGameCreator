@@ -297,6 +297,7 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var generatedRegionTravel = _lastSuccessfulBuild?.GeneratedRegionTravel;
         var generatedEncounterCombat = _lastSuccessfulBuild?.GeneratedEncounterCombat;
         var generatedCampaignChoices = _lastSuccessfulBuild?.GeneratedCampaignChoices;
+        var generatedCampaignRelationships = _lastSuccessfulBuild?.GeneratedCampaignRelationships;
         var generatedWorld = _generatedWorldSummaryService.Restore(
             generatedSource,
             _lastSuccessfulBuild?.GeneratedWorld,
@@ -304,7 +305,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             generatedWorldActivation,
             generatedRegionTravel,
             generatedEncounterCombat,
-            generatedCampaignChoices);
+            generatedCampaignChoices,
+            generatedCampaignRelationships);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -386,20 +388,24 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
             ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
             ,GeneratedWorld = generatedWorld
-            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedWorldActivation
                 : null
-            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? _lastSuccessfulBuild?.GeneratedWorldTravelOverlay
                 : null
-            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedRegionTravel
                 : null
-            ,GeneratedEncounterCombat = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedEncounterCombat = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedEncounterCombat
                 : null
-            ,GeneratedCampaignChoices = generatedWorld?.Status is "TRAVEL_CURRENT" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedCampaignChoices = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedCampaignChoices
+                : null
+            ,GeneratedCampaignRelationships = generatedWorld?.Status is
+                "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+                ? generatedCampaignRelationships
                 : null
             ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
             ,CanRegenerateGeneratedWorld = _regenerationService is not null
@@ -548,6 +554,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                     _lastBuild.GeneratedEncounterCombat))
                 .Concat(GameProjectGeneratedWorldSummaryService.StandaloneChoiceHumanFacts(
                     _lastBuild.GeneratedCampaignChoices))
+                .Concat(GameProjectGeneratedWorldSummaryService.StandaloneRelationshipHumanFacts(
+                    _lastBuild.GeneratedCampaignRelationships))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
                     _lastBuild, releaseCandidateFactsAllowed))
                 .Concat(GeneratedGameplaySavesSummaryService.StandaloneHumanFacts(

@@ -295,6 +295,7 @@ public sealed record UnifiedGameProjectWorkspaceSnapshot
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectGeneratedEncounterCombatSummary? GeneratedEncounterCombat { get; init; }
     public GameProjectGeneratedCampaignChoiceSummary? GeneratedCampaignChoices { get; init; }
+    public GameProjectGeneratedCampaignRelationshipSummary? GeneratedCampaignRelationships { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
     public bool CanRegenerateGeneratedWorld { get; init; }
     public bool RegenerationRunning { get; init; }
@@ -387,6 +388,7 @@ public sealed record GameProjectBuildResult
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectGeneratedEncounterCombatSummary? GeneratedEncounterCombat { get; init; }
     public GameProjectGeneratedCampaignChoiceSummary? GeneratedCampaignChoices { get; init; }
+    public GameProjectGeneratedCampaignRelationshipSummary? GeneratedCampaignRelationships { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 
@@ -401,7 +403,7 @@ public sealed record GameProjectRuntimeFrame
 
 public sealed record GameProjectBuildHistoryEntry
 {
-    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v5";
+    public string SchemaVersion { get; init; } = "unified_game_project_build_history_v6";
     public DateTimeOffset CompletedAtUtc { get; init; }
     public string Status { get; init; } = string.Empty;
     public string PackageSha256 { get; init; } = string.Empty;
@@ -433,6 +435,7 @@ public sealed record GameProjectBuildHistoryEntry
     public GameProjectGeneratedRegionTravelSummary? GeneratedRegionTravel { get; init; }
     public GameProjectGeneratedEncounterCombatSummary? GeneratedEncounterCombat { get; init; }
     public GameProjectGeneratedCampaignChoiceSummary? GeneratedCampaignChoices { get; init; }
+    public GameProjectGeneratedCampaignRelationshipSummary? GeneratedCampaignRelationships { get; init; }
     public GameProjectAcceptedMechanicsCompatibilityResult? AcceptedMechanicsCompatibility { get; init; }
 }
 

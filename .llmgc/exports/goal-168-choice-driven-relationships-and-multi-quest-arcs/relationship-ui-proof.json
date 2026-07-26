@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "projectionStateBacked":  true,
+    "relationshipRowsProjected":  2,
+    "statesCovered":  [
+                          "UNDECIDED",
+                          "SUPPORTED",
+                          "QUEST_ACTIVE",
+                          "QUEST_READY",
+                          "COMPLETED",
+                          "CHALLENGED",
+                          "CHALLENGE_RESOLVED",
+                          "REFUSED"
+                      ],
+    "decisionJournalConsistent":  true,
+    "primaryUiNoRawIdsOrHashes":  true,
+    "fitAt1100x720":  true
+}

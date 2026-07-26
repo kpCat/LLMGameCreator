@@ -1,6 +1,7 @@
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime.Abstractions;
+using LLMGameCreator.Application.Play.GeneratedCampaign;
 
 namespace LLMGameCreator.Application.Generation.Procedural;
 
@@ -9,11 +10,20 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
     public GameProjectGeneratedCampaignChoiceSummary Qualify(
         GamePackageDefinition finalPackage,
         GeneratedCampaignChoiceOverlayDocument overlay,
-        IUnifiedGameRuntimeService runtime)
+        IUnifiedGameRuntimeService runtime) =>
+        Qualify(finalPackage, overlay, null, runtime);
+
+    public GameProjectGeneratedCampaignChoiceSummary Qualify(
+        GamePackageDefinition finalPackage,
+        GeneratedCampaignChoiceOverlayDocument overlay,
+        GameProjectGeneratedEncounterCombatSummary? combatSummary,
+        IUnifiedGameRuntimeService runtime,
+        GeneratedCampaignExactCombatRouteService? exactCombatRoute = null)
     {
         ArgumentNullException.ThrowIfNull(finalPackage);
         ArgumentNullException.ThrowIfNull(overlay);
         ArgumentNullException.ThrowIfNull(runtime);
+        exactCombatRoute ??= new GeneratedCampaignExactCombatRouteService();
         if (!overlay.Passed)
             return Invalid(overlay, overlay.Diagnostics.Count == 0
                 ? ["generated_choice.overlay_invalid"]
@@ -50,14 +60,17 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
                 {
                     case GeneratedCampaignBranchKind.SUPPORT:
                     {
-                        var result = QualifySupport(finalPackage, runtime, binding, branch, diagnostics);
+                        var result = QualifySupport(finalPackage, runtime, binding, branch,
+                            combatSummary, exactCombatRoute, diagnostics);
                         supportPassed &= result;
                         break;
                     }
                     case GeneratedCampaignBranchKind.CHALLENGE:
                     {
-                        var flee = QualifyChallengeFlee(finalPackage, runtime, binding, branch, diagnostics);
-                        var victory = QualifyChallengeVictory(finalPackage, runtime, binding, branch, diagnostics);
+                        var flee = QualifyChallengeFlee(finalPackage, runtime, binding, branch,
+                            combatSummary, exactCombatRoute, diagnostics);
+                        var victory = QualifyChallengeVictory(finalPackage, runtime, binding, branch,
+                            combatSummary, exactCombatRoute, diagnostics);
                         challengeFleePassed &= flee;
                         challengeVictoryPassed &= victory;
                         break;
@@ -157,7 +170,15 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
                 ["challengeFleeRuntimePassed"] = challengeFleePassed.ToString(),
                 ["challengeVictoryRuntimePassed"] = challengeVictoryPassed.ToString(),
                 ["refuseRuntimePassed"] = refusePassed.ToString(),
-                ["atomicRollbackPassed"] = rollbackPassed.ToString()
+                ["atomicRollbackPassed"] = rollbackPassed.ToString(),
+                ["qualifiedActionsSha256"] =
+                    combatSummary?.QualifiedActionsSha256 ?? string.Empty,
+                ["exactCombatCatalogReused"] = (combatSummary is null
+                    ? branchable.All(item => item.Branches.All(branch =>
+                        branch.Kind != GeneratedCampaignBranchKind.CHALLENGE
+                        && branch.EncounterId is null
+                        && branch.QuestId is null))
+                    : combatSummary.QualifiedActions.Count > 0).ToString()
             },
             Overlay = overlay,
             Diagnostics = diagnostics
@@ -185,7 +206,20 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
         }
         var available = AvailableChoiceIds(opened);
         var expected = binding.Branches.Select(item => item.ChoiceId).OrderBy(item => item, StringComparer.Ordinal).ToList();
-        if (!available.SequenceEqual(expected))
+        var dialogue = package.Game.Dialogues.Single(item =>
+            item.Id == binding.DialogueId);
+        var initial = dialogue.Nodes.Single(item =>
+                item.Id == dialogue.StartNodeId).Choices
+            .Where(item => item.Metadata.GetValueOrDefault(
+                "generatedChoicePhase") == "initial")
+            .ToDictionary(item => item.Id, StringComparer.Ordinal);
+        if (expected.Any(item => !available.Contains(item, StringComparer.Ordinal))
+            || available.Where(item => !expected.Contains(item,
+                    StringComparer.Ordinal))
+                .Any(item => !initial.TryGetValue(item, out var choice)
+                             || choice.Metadata.GetValueOrDefault(
+                                 "generatedRelationshipId")
+                             != binding.DialogueId))
             diagnostics.Add("generated_choice.initial_choice_ids_mismatch");
     }
 
@@ -267,6 +301,8 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
         IUnifiedGameRuntimeService runtime,
         GeneratedCampaignChoiceBinding binding,
         GeneratedCampaignChoiceBranch branch,
+        GameProjectGeneratedEncounterCombatSummary? combatSummary,
+        GeneratedCampaignExactCombatRouteService exactCombatRoute,
         ICollection<string> diagnostics)
     {
         var initial = ExecuteInitial(package, runtime, binding, branch, 0);
@@ -279,7 +315,8 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
             return false;
         }
         var active = Reopen(package, runtime, initial.Result.Session, binding.DialogueId);
-        if (!OnlyFollowUp(active, branch.ChoiceId + "/followup/active"))
+        if (!OnlyFollowUp(active, branch.ChoiceId + "/followup/active",
+                "generatedChoice/support/followup/active/"))
         {
             diagnostics.Add("generated_choice.support_active_followup_missing");
             return false;
@@ -295,19 +332,47 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
         var encounterId = quest?.Objectives.SingleOrDefault(item => item.Kind == "complete_encounter")?.TargetId;
         if (string.IsNullOrWhiteSpace(encounterId))
         {
-            diagnostics.Add("generated_choice.support_quest_encounter_missing");
+            var completedWithoutCombat = runtime.ExecuteGameplayCommand(package, closed.Session,
+                new GameRuntimeCommand { Type = GameRuntimeCommandType.CompleteQuest, Id = questId });
+            if (!completedWithoutCombat.Success
+                || QuestState(completedWithoutCombat.Session, questId) != "completed")
+            {
+                diagnostics.Add("generated_choice.support_quest_encounter_missing");
+                return false;
+            }
+            var completedFollowUp = Reopen(package, runtime,
+                completedWithoutCombat.Session, binding.DialogueId);
+            if (!OnlyFollowUp(completedFollowUp,
+                    branch.ChoiceId + "/followup/completed",
+                    "generatedChoice/support/followup/next/",
+                    "generatedChoice/support/followup/completed"))
+            {
+                diagnostics.Add("generated_choice.support_completed_followup_missing");
+                return false;
+            }
+            return true;
+        }
+        if (combatSummary is null)
+        {
+            diagnostics.Add("generated_relationship.qualified_combat_catalog_missing");
             return false;
         }
-        var started = runtime.ExecuteGameplayCommand(package, closed.Session,
-            GameRuntimeCommand.StartEncounter(encounterId));
-        UnifiedRuntimeSession? wonSession = null;
-        var won = started.Success && WinEncounter(package, runtime, started.Session, out wonSession);
-        if (!won)
+        var combat = exactCombatRoute.Execute(new GeneratedCampaignExactCombatRouteRequest
         {
+            FinalPackage = package,
+            EncounterId = encounterId,
+            CombatSummary = combatSummary,
+            Runtime = runtime,
+            InitialSession = closed.Session,
+            Goal = GeneratedCampaignExactCombatRouteGoal.VICTORY
+        });
+        if (!combat.Passed)
+        {
+            foreach (var diagnostic in combat.Diagnostics) diagnostics.Add(diagnostic);
             diagnostics.Add("generated_choice.support_combat_failed");
             return false;
         }
-        var completed = runtime.ExecuteGameplayCommand(package, wonSession!,
+        var completed = runtime.ExecuteGameplayCommand(package, combat.Session,
             new GameRuntimeCommand { Type = GameRuntimeCommandType.CompleteQuest, Id = questId });
         if (!completed.Success || QuestState(completed.Session, questId) != "completed")
         {
@@ -315,7 +380,9 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
             return false;
         }
         var followUp = Reopen(package, runtime, completed.Session, binding.DialogueId);
-        if (!OnlyFollowUp(followUp, branch.ChoiceId + "/followup/completed"))
+        if (!OnlyFollowUp(followUp, branch.ChoiceId + "/followup/completed",
+                "generatedChoice/support/followup/next/",
+                "generatedChoice/support/followup/completed"))
         {
             diagnostics.Add("generated_choice.support_completed_followup_missing");
             return false;
@@ -328,6 +395,8 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
         IUnifiedGameRuntimeService runtime,
         GeneratedCampaignChoiceBinding binding,
         GeneratedCampaignChoiceBranch branch,
+        GameProjectGeneratedEncounterCombatSummary? combatSummary,
+        GeneratedCampaignExactCombatRouteService exactCombatRoute,
         ICollection<string> diagnostics)
     {
         var initial = ExecuteInitial(package, runtime, binding, branch, 0);
@@ -336,9 +405,27 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
             diagnostics.Add("generated_choice.challenge_initial_invalid");
             return false;
         }
-        var fled = runtime.ExecuteGameplayCommand(package, initial.Result.Session,
-            new GameRuntimeCommand { Type = GameRuntimeCommandType.FleeEncounter });
-        var followUp = fled.Success ? Reopen(package, runtime, fled.Session, binding.DialogueId) : fled;
+        if (combatSummary is null || string.IsNullOrWhiteSpace(branch.EncounterId))
+        {
+            diagnostics.Add("generated_relationship.qualified_combat_catalog_missing");
+            return false;
+        }
+        var fled = exactCombatRoute.Execute(new GeneratedCampaignExactCombatRouteRequest
+        {
+            FinalPackage = package,
+            EncounterId = branch.EncounterId,
+            CombatSummary = combatSummary,
+            Runtime = runtime,
+            InitialSession = initial.Result.Session,
+            Goal = GeneratedCampaignExactCombatRouteGoal.FLEE
+        });
+        if (!fled.Passed)
+        {
+            foreach (var diagnostic in fled.Diagnostics) diagnostics.Add(diagnostic);
+            diagnostics.Add("generated_choice.challenge_flee_followup_missing");
+            return false;
+        }
+        var followUp = Reopen(package, runtime, fled.Session, binding.DialogueId);
         if (!OnlyFollowUp(followUp, branch.ChoiceId + "/followup/chosen"))
         {
             diagnostics.Add("generated_choice.challenge_flee_followup_missing");
@@ -352,18 +439,37 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
         IUnifiedGameRuntimeService runtime,
         GeneratedCampaignChoiceBinding binding,
         GeneratedCampaignChoiceBranch branch,
+        GameProjectGeneratedEncounterCombatSummary? combatSummary,
+        GeneratedCampaignExactCombatRouteService exactCombatRoute,
         ICollection<string> diagnostics)
     {
         var initial = ExecuteInitial(package, runtime, binding, branch, 0);
-        if (!initial.Passed || !WinEncounter(package, runtime, initial.Result.Session, out var wonSession))
+        if (!initial.Passed || combatSummary is null
+                            || string.IsNullOrWhiteSpace(branch.EncounterId))
         {
+            diagnostics.Add("generated_relationship.qualified_combat_catalog_missing");
+            diagnostics.Add("generated_choice.challenge_victory_failed");
+            return false;
+        }
+        var won = exactCombatRoute.Execute(new GeneratedCampaignExactCombatRouteRequest
+        {
+            FinalPackage = package,
+            EncounterId = branch.EncounterId,
+            CombatSummary = combatSummary,
+            Runtime = runtime,
+            InitialSession = initial.Result.Session,
+            Goal = GeneratedCampaignExactCombatRouteGoal.VICTORY
+        });
+        if (!won.Passed)
+        {
+            foreach (var diagnostic in won.Diagnostics) diagnostics.Add(diagnostic);
             diagnostics.Add("generated_choice.challenge_victory_failed:"
                             + (initial.Result.Session.GameplayState.ActiveEncounter?.Active.ToString() ?? "null") + ":"
                             + (initial.Result.Session.GameplayState.ActiveEncounter?.ActionHistory.Count.ToString(
                                 System.Globalization.CultureInfo.InvariantCulture) ?? "0"));
             return false;
         }
-        var followUp = Reopen(package, runtime, wonSession!, binding.DialogueId);
+        var followUp = Reopen(package, runtime, won.Session, binding.DialogueId);
         if (!OnlyFollowUp(followUp, branch.ChoiceId + "/followup/chosen"))
         {
             diagnostics.Add("generated_choice.challenge_victory_followup_missing");
@@ -450,70 +556,6 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
             failed.GameplayEvents.Select(item => item.Type.ToString()).ToList());
     }
 
-    private static bool WinEncounter(
-        GamePackageDefinition package,
-        IUnifiedGameRuntimeService runtime,
-        UnifiedRuntimeSession initial,
-        out UnifiedRuntimeSession? wonSession)
-    {
-        var session = initial;
-        var commandBound = Math.Max(128, session.GameplayState.ActiveEncounter?.Participants
-            .SelectMany(item => item.Resources).Sum(item => Math.Max(0, item.Amount)) * 8 ?? 128);
-        for (var index = 0; index < commandBound
-             && session.GameplayState.ActiveEncounter is { Active: true } encounter; index++)
-        {
-            var current = encounter.Participants[Math.Clamp(encounter.TurnIndex, 0, encounter.Participants.Count - 1)];
-            UnifiedRuntimeResult action;
-            if (!string.Equals(current.Team, "player", StringComparison.OrdinalIgnoreCase))
-            {
-                action = runtime.ExecuteGameplayCommand(package, session,
-                    new GameRuntimeCommand { Type = GameRuntimeCommandType.RunCurrentTurnAi });
-            }
-            else
-            {
-                var target = encounter.Participants.FirstOrDefault(item => item.Alive
-                    && !string.Equals(item.Team, current.Team, StringComparison.OrdinalIgnoreCase));
-                if (target is null) break;
-                var definition = package.Game.Encounters.Single(item => item.Id == encounter.EncounterId)
-                    .Participants.Single(item => item.Id == current.Id);
-                var basic = runtime.ExecuteGameplayCommand(package, session,
-                    GameRuntimeCommand.BasicAttack(current.Id, target.Id));
-                action = basic.Success
-                    ? basic
-                    : TryAbilities(package, runtime, session, definition, current.Id, target.Id)
-                      ?? basic;
-            }
-            if (!action.Success)
-            {
-                wonSession = null;
-                return false;
-            }
-            session = action.Session;
-        }
-        wonSession = session;
-        var endedEncounter = session.GameplayState.ActiveEncounter;
-        return endedEncounter is { Active: false } && endedEncounter.Participants.Any(item => item.Alive
-            && string.Equals(item.Team, "player", StringComparison.OrdinalIgnoreCase));
-    }
-
-    private static UnifiedRuntimeResult? TryAbilities(
-        GamePackageDefinition package,
-        IUnifiedGameRuntimeService runtime,
-        UnifiedRuntimeSession session,
-        EncounterParticipantDefinition participant,
-        string sourceId,
-        string targetId)
-    {
-        foreach (var ability in participant.Abilities)
-        {
-            var candidate = GeneratedCampaignChoiceCanonical.Clone(session);
-            var result = runtime.ExecuteGameplayCommand(package, candidate,
-                GameRuntimeCommand.UseAbility(ability, sourceId, targetId));
-            if (result.Success) return result;
-        }
-        return null;
-    }
-
     private static bool InitialAlternativesRequireEmptyFlag(
         GamePackageDefinition package,
         GeneratedCampaignChoiceBinding binding)
@@ -534,8 +576,20 @@ public sealed class GameProjectGeneratedCampaignChoiceQualificationService
         ? new UnifiedRuntimeResult { Success = false, Session = session }
         : runtime.ExecuteGameplayCommand(package, session, GameRuntimeCommand.OpenDialogue(dialogueId));
 
-    private static bool OnlyFollowUp(UnifiedRuntimeResult result, string expectedChoiceId) =>
-        result.Success && AvailableChoiceIds(result).SequenceEqual([expectedChoiceId]);
+    private static bool OnlyFollowUp(
+        UnifiedRuntimeResult result,
+        string expectedChoiceId,
+        params string[] allowedPrefixes)
+    {
+        var available = AvailableChoiceIds(result);
+        return result.Success
+               && available.Count == 1
+               && (string.Equals(available[0], expectedChoiceId,
+                       StringComparison.Ordinal)
+                   || allowedPrefixes.Any(prefix =>
+                       available[0].StartsWith(prefix,
+                           StringComparison.Ordinal)));
+    }
 
     private static IReadOnlyList<string> AvailableChoiceIds(UnifiedRuntimeResult result) => result.GameplayEvents
         .Where(item => item.Type is GameRuntimeEventType.DialogueOpened or GameRuntimeEventType.DialogueNodeChanged)

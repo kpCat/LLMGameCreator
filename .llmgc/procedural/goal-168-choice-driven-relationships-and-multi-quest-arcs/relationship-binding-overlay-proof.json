@@ -1,0 +1,24 @@
+{
+    "status":  "GREEN",
+    "relationshipCount":  2,
+    "qualifiedRelationshipCount":  2,
+    "relationshipIds":  [
+                            "generated/dialogue/actor_seed_npc_archetype_forager_03",
+                            "generated/dialogue/actor_seed_npc_archetype_mechanic_05"
+                        ],
+    "relationshipIdentityEqualsDialogueId":  true,
+    "arcQuestCount":  2,
+    "assignedQuestIds":  [
+                             "quest_event_seed/settle_debt",
+                             "quest_event_seed/restore_signal"
+                         ],
+    "assignmentUnique":  true,
+    "maximumObservedArcLength":  2,
+    "arbitraryQuestCountPassed":  true,
+    "arcOrderingDeterministic":  true,
+    "assignedAutoStartFalse":  true,
+    "unassignedAutoStartUnchanged":  true,
+    "controlledDeltaPassed":  true,
+    "overlaySha256":  "a191c934e2abe34905e5b4d31145128f6f91bf62c64e65a9094421c3506cc726",
+    "inventorySha256":  "b59f314ecdaf82124dfd6f818df0b07593aff1c83250003b0fd4b731448bda76"
+}

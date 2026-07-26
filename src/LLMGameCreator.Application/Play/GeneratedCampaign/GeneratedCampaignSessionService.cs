@@ -24,6 +24,7 @@ public sealed class GeneratedCampaignSessionService
     private readonly GeneratedCampaignRecoveryService _recovery;
     private readonly GeneratedCampaignDialogueChoicePreviewService _choicePreview;
     private readonly GeneratedCampaignDecisionJournalService _decisionJournal;
+    private readonly GeneratedCampaignRelationshipProjectionService _relationshipProjection;
     private readonly List<GeneratedCampaignConsequence> _consequenceTimeline = [];
     private GeneratedCampaignSession? _session;
     private GeneratedCampaignSessionStatus _status;
@@ -43,12 +44,14 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignEventPresenter events,
         GeneratedCampaignRecoveryService? recovery = null,
         GeneratedCampaignDialogueChoicePreviewService? choicePreview = null,
-        GeneratedCampaignDecisionJournalService? decisionJournal = null)
+        GeneratedCampaignDecisionJournalService? decisionJournal = null,
+        GeneratedCampaignRelationshipProjectionService? relationshipProjection = null)
         : this(currentProject, truths, runtime, saves, migration, planner, projection, events,
             new GeneratedCampaignRuntimeDispatchService(runtime),
             new GeneratedCampaignQuestReadinessService(),
             new GeneratedCampaignConsequenceProjector(),
-            recovery ?? new GeneratedCampaignRecoveryService(), choicePreview, decisionJournal)
+            recovery ?? new GeneratedCampaignRecoveryService(), choicePreview, decisionJournal,
+            relationshipProjection)
     {
     }
 
@@ -66,7 +69,8 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignConsequenceProjector consequenceProjector,
         GeneratedCampaignRecoveryService? recovery = null,
         GeneratedCampaignDialogueChoicePreviewService? choicePreview = null,
-        GeneratedCampaignDecisionJournalService? decisionJournal = null)
+        GeneratedCampaignDecisionJournalService? decisionJournal = null,
+        GeneratedCampaignRelationshipProjectionService? relationshipProjection = null)
     {
         _currentProject = currentProject;
         _truths = truths;
@@ -82,6 +86,8 @@ public sealed class GeneratedCampaignSessionService
         _recovery = recovery ?? new GeneratedCampaignRecoveryService();
         _choicePreview = choicePreview ?? new GeneratedCampaignDialogueChoicePreviewService(_runtime);
         _decisionJournal = decisionJournal ?? new GeneratedCampaignDecisionJournalService();
+        _relationshipProjection = relationshipProjection
+                                  ?? new GeneratedCampaignRelationshipProjectionService();
     }
 
     public int RuntimeStartInvocationCount { get; private set; }
@@ -140,7 +146,12 @@ public sealed class GeneratedCampaignSessionService
         }
 
         var runtimeSession = start.Session;
-        foreach (var quest in package.Game.Quests.Where(quest => quest.AutoStart))
+        var assignedQuestIds = captured.Truth.RelationshipOverlay?.Bindings
+            .SelectMany(item => item.QuestArc)
+            .Select(item => item.QuestId)
+            .ToHashSet(StringComparer.Ordinal) ?? [];
+        foreach (var quest in package.Game.Quests.Where(quest =>
+                     quest.AutoStart && !assignedQuestIds.Contains(quest.Id)))
         {
             if (runtimeSession.GameplayState.Quests.Any(item => IdEquals(item.QuestId, quest.Id))) continue;
             var questStart = _dispatch.DispatchGameplay(package, runtimeSession,
@@ -210,7 +221,8 @@ public sealed class GeneratedCampaignSessionService
             return Snapshot(captured.Truth);
         }
 
-        var planned = _planner.Plan(_session.Package, _session.RuntimeSession)
+        var planned = _planner.Plan(
+                _session.Package, _session.RuntimeSession, _session.QualifiedActions)
             .SingleOrDefault(item => item.Action.ActionId == actionId);
         if (planned is null)
         {
@@ -749,7 +761,12 @@ public sealed class GeneratedCampaignSessionService
         {
             ChoicePreview = preview,
             DecisionJournal = package is null || runtimeSession is null ? new GeneratedCampaignDecisionJournal()
-                : _decisionJournal.Project(package, runtimeSession)
+                : _decisionJournal.Project(package, runtimeSession),
+            Relationships = package is null || runtimeSession is null
+                || truth?.RelationshipOverlay is null
+                ? []
+                : _relationshipProjection.Project(
+                    package, runtimeSession, truth.RelationshipOverlay, readiness).Rows
         };
     }
 

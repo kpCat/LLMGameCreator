@@ -378,6 +378,18 @@ public sealed class GeneratedCampaignConsequenceProjector
         IReadOnlyList<GeneratedCampaignQuestReadiness> readinessAfter,
         List<GeneratedCampaignConsequence> rows)
     {
+        foreach (var quest in after.Quests.Where(item =>
+                     before.Quests.All(previous => !IdEquals(previous.QuestId, item.QuestId))))
+        {
+            var definition = package.Game.Quests.SingleOrDefault(item =>
+                IdEquals(item.Id, quest.QuestId));
+            if (definition?.Metadata.ContainsKey("generatedRelationshipId") != true) continue;
+            rows.Add(Simple(
+                GeneratedCampaignConsequenceKind.RelationshipProgressed,
+                "Начато задание отношений: " + QuestTitle(package, quest.QuestId),
+                "Следующий этап арки отношений открыт выбранным продолжением диалога.",
+                GeneratedCampaignConsequenceTone.Positive));
+        }
         foreach (var current in readinessAfter.Where(item => item.Generated && item.Ready))
         {
             var previous = readinessBefore.SingleOrDefault(item => IdEquals(item.QuestId, current.QuestId));
@@ -391,6 +403,30 @@ public sealed class GeneratedCampaignConsequenceProjector
         {
             var previous = before.Quests.SingleOrDefault(item => IdEquals(item.QuestId, quest.QuestId));
             if (previous is null || KindEquals(previous.State, "completed")) continue;
+            var definition = package.Game.Quests.SingleOrDefault(item =>
+                IdEquals(item.Id, quest.QuestId));
+            if (definition?.Metadata.TryGetValue("generatedRelationshipId",
+                    out var relationshipId) == true)
+            {
+                var arc = package.Game.Quests.Where(item =>
+                        item.Metadata.GetValueOrDefault("generatedRelationshipId")
+                        == relationshipId)
+                    .ToList();
+                var allCompleted = arc.All(item =>
+                    after.Quests.SingleOrDefault(state =>
+                        IdEquals(state.QuestId, item.Id))?.State == "completed");
+                rows.Add(Simple(
+                    allCompleted
+                        ? GeneratedCampaignConsequenceKind.RelationshipCompleted
+                        : GeneratedCampaignConsequenceKind.QuestArcAdvanced,
+                    allCompleted
+                        ? "Арка отношений завершена"
+                        : "Арка отношений продвинулась",
+                    allCompleted
+                        ? "Все назначенные задания отношений завершены."
+                        : "Завершён текущий этап; следующее задание открывается через диалог.",
+                    GeneratedCampaignConsequenceTone.Positive));
+            }
             rows.Add(Simple(GeneratedCampaignConsequenceKind.QuestCompleted,
                 "Задание завершено: " + QuestTitle(package, quest.QuestId),
                 "Награды задания применены игровым Runtime.", GeneratedCampaignConsequenceTone.Positive));
@@ -455,6 +491,21 @@ public sealed class GeneratedCampaignConsequenceProjector
                     ? GeneratedCampaignConsequenceTone.Negative
                     : GeneratedCampaignConsequenceTone.Neutral
             });
+            if (dialogue.Tags.Contains("generated_relationship",
+                    StringComparer.Ordinal))
+                rows.Add(Simple(branch switch
+                    {
+                        GeneratedCampaignBranchKind.CHALLENGE =>
+                            GeneratedCampaignConsequenceKind.RelationshipChallenged,
+                        GeneratedCampaignBranchKind.REFUSE =>
+                            GeneratedCampaignConsequenceKind.RelationshipRefused,
+                        _ => GeneratedCampaignConsequenceKind.RelationshipStarted
+                    },
+                    "Изменение отношений",
+                    "Решение подтверждено состоянием Runtime и отражено в отношениях.",
+                    branch == GeneratedCampaignBranchKind.REFUSE
+                        ? GeneratedCampaignConsequenceTone.Negative
+                        : GeneratedCampaignConsequenceTone.Neutral));
             var initial = dialogue.Nodes.SelectMany(item => item.Choices).Where(item =>
                 item.Metadata.GetValueOrDefault("generatedChoicePhase") == "initial").ToList();
             if (initial.Count > 1 && initial.All(item => item.Requirements.Any(requirement =>

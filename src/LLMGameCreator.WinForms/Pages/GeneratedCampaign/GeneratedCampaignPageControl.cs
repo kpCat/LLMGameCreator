@@ -30,6 +30,8 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
     internal bool TechnicalDetailsVisible => _technical.Visible;
     internal string ConsequenceText => _consequencesTab.Controls.OfType<Label>()
         .FirstOrDefault()?.Text ?? string.Empty;
+    internal string RelationshipText => _relationshipsTab.Controls.OfType<Label>()
+        .FirstOrDefault()?.Text ?? string.Empty;
 
     public void OnActivated() => Bind(_service?.Refresh());
 
@@ -145,6 +147,7 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
         WriteTab(_characterTab, snapshot.Resources.Concat(snapshot.Stats).Concat(snapshot.Progressions));
         WriteTab(_questsTab, snapshot.Quests.Select(QuestRow));
         WriteTab(_inventoryTab, snapshot.Inventory.Concat(snapshot.Equipment).Concat(snapshot.Factions));
+        WriteTab(_relationshipsTab, snapshot.Relationships.Select(RelationshipRow));
         WriteTab(_consequencesTab, ConsequenceRows(snapshot));
         WriteTab(_decisionsTab, snapshot.DecisionJournal.Decisions.Select(decision => new GeneratedCampaignTextRow
         {
@@ -260,6 +263,25 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
             ? string.Empty
             : Environment.NewLine + string.Join(Environment.NewLine,
                 quest.Objectives.Select(objective => "• " + objective.Title + ": " + objective.Progress)))
+    };
+
+    private static GeneratedCampaignTextRow RelationshipRow(
+        GeneratedCampaignRelationshipRow relationship) => new()
+    {
+        Title = relationship.Actor + " — " + relationship.Faction,
+        Value = string.Join(Environment.NewLine, new[]
+        {
+            "Решение: " + relationship.Branch,
+            "Статус: " + relationship.StatusTitle,
+            "Репутация: " + relationship.Reputation,
+            "Арка: " + relationship.CompletedQuestCount + "/"
+                     + relationship.TotalQuestCount,
+            string.IsNullOrWhiteSpace(relationship.CurrentQuest)
+                ? string.Empty
+                : "Текущее задание: " + relationship.CurrentQuest,
+            "Дальше: " + relationship.NextAction,
+            relationship.Consequences
+        }.Where(value => !string.IsNullOrWhiteSpace(value)))
     };
 
     private static IEnumerable<GeneratedCampaignTextRow> ConsequenceRows(

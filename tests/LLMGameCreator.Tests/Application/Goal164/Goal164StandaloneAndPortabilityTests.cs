@@ -34,14 +34,14 @@ public sealed class Goal164StandaloneAndPortabilityTests
     }
 
     [Fact]
-    public void Behavioral_standalone_payload_contains_generated_choice_runtime_frames()
+    public void Behavioral_standalone_payload_contains_generated_relationship_runtime_frames()
     {
         var state = Goal164PortableState.AllSelectable;
 
         Assert.NotEmpty(state.Service.Request!.RuntimeFrames);
         Assert.Equal(state.Build.Build.RuntimeFrames.Count, state.Service.Request.RuntimeFrames.Count);
         Assert.All(state.Service.Request.RuntimeFrames,
-            item => Assert.Equal("generated-choice", item.Category));
+            item => Assert.Equal("generated-relationship", item.Category));
     }
 
     [Fact]

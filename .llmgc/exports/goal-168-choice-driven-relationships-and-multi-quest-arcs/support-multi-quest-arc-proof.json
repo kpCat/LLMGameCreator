@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "supportReputationDelta":  1,
+    "assignedArcQuestCount":  2,
+    "completedArcQuestCount":  2,
+    "maximumObservedArcLength":  2,
+    "completeQuestCommandCount":  2,
+    "nextQuestDialogueCount":  2,
+    "decisionStartsFirstQuest":  true,
+    "combatAndManualTurnInPerStep":  true,
+    "nextQuestStartsThroughDialogue":  true,
+    "finalRelationshipCompleted":  true,
+    "replayEquivalent":  true
+}

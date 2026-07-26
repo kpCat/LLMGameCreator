@@ -258,3 +258,8 @@ Generated gameplay saves are now bound to exact world/package/build truth. Same-
 ## Goal167 generated choice branching
 
 The prior P0 test-matrix risk is closed by Goal167C: 94/94 behavioral tests pass and the one cached hidden smoke is GREEN. Branch truth is now bound to exact generated provenance, Runtime flags/events/state, deterministic controlled overlay and sealed regeneration. Compatible migration preserves branch flags; incompatible migration drops them explicitly and produces no ghost journal. Goal167 remains an unaccepted automated candidate pending independent audit; multi-quest arcs and broader relationship systems remain outside this release slice.
+
+## Goal168 generated relationships and multi-quest arcs
+
+Goal167 independent audit P1 `choice_branch_qualification_reimplements_victory_without_goal166_exact_qualified_action_catalog` is closed. Exact catalog matching rejects successful utility/no-op commands as encounter progress and supports ability-only and utility-first profiles. The remaining release risk is independent review of the new relationship assignment/arc/migration semantics before expanding into world events or deeper relationship consequences.
+Goal168 release-risk note: generated decisions now form actor/faction relationships and deterministic quest arcs of arbitrary data-defined length. Support unlocks assigned quests sequentially; Challenge and Refuse remain exclusive. All branch combat consumes the exact Goal166 qualified-action catalog. Exact saves preserve relationship progress, while migration applies explicit compatible-preserve/reset/drop rules. Goal168 remains unaccepted pending independent audit.

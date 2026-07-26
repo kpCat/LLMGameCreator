@@ -1,0 +1,13 @@
+{
+    "status":  "GREEN",
+    "exactCatalogSha256":  "aca23759404640b804f82b490c7078ed1962dd8d2c5995462a36a963fea16944",
+    "challengeFleeNoProgress":  true,
+    "challengeVictory":  true,
+    "challengeDefeatRetry":  true,
+    "refusePassed":  true,
+    "refuseReputationDelta":  -1,
+    "refuseQuestStartCount":  0,
+    "refuseEncounterStartCount":  0,
+    "exclusiveBranches":  true,
+    "atomicRollback":  true
+}

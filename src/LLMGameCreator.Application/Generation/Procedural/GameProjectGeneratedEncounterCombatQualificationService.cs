@@ -56,9 +56,11 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         if (representative is null)
             return Invalid(contract, overlay, ["generated_combat.representative_campaign_missing"]);
         var campaign = ExecuteEncounterRoute(package, representative.Binding.PackageEncounterId, runtime,
-            contract, completeQuest: true, representative.PreparationEncounterIds);
+            contract, completeQuest: true, representative.PreparationEncounterIds,
+            representative.QuestId);
         var replay = ExecuteEncounterRoute(package, representative.Binding.PackageEncounterId, runtime,
-            contract, completeQuest: true, representative.PreparationEncounterIds);
+            contract, completeQuest: true, representative.PreparationEncounterIds,
+            representative.QuestId);
         var replayPassed = campaign.Passed && replay.Passed
                            && campaign.ActionKinds.SequenceEqual(replay.ActionKinds, StringComparer.Ordinal)
                            && string.Equals(campaign.FinalStateHash, replay.FinalStateHash, StringComparison.Ordinal)
@@ -157,7 +159,8 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         IUnifiedGameRuntimeService runtime,
         GeneratedEncounterCombatContract contract,
         bool completeQuest,
-        IReadOnlyList<string>? preparationEncounterIds = null)
+        IReadOnlyList<string>? preparationEncounterIds = null,
+        string? questId = null)
     {
         var packageBefore = GeneratedEncounterCombatCanonical.Hash(package);
         var diagnostics = new List<string>();
@@ -177,7 +180,7 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var ai = basicRequired ? basicAi : abilityRequired ? abilityAi : basicAi || abilityAi;
         var flee = ExecuteFlee(package, encounterId, runtime);
         var victory = ExecuteVictory(package, encounterId, runtime, completeQuest,
-            preparationEncounterIds ?? [], contract);
+            preparationEncounterIds ?? [], contract, questId);
         actionKinds.AddRange(victory.ActionKinds);
         frames.AddRange(victory.Frames);
         if (!basic) diagnostics.Add("generated_combat.basic_attack_required_failed");
@@ -283,12 +286,30 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         IUnifiedGameRuntimeService runtime,
         bool completeQuest,
         IReadOnlyList<string> preparationEncounterIds,
-        GeneratedEncounterCombatContract contract)
+        GeneratedEncounterCombatContract contract,
+        string? questId)
     {
         var session = Start(package, runtime);
         if (session is null) return VictoryRouteResult.Failed("generated_combat.start_failed");
         var actionKinds = new List<string>();
         var frames = new List<GeneratedEncounterCombatRuntimeFrame>();
+        if (completeQuest && !string.IsNullOrWhiteSpace(questId)
+                          && !QuestActive(session, questId))
+        {
+            var activated = ActivateAssignedQuestThroughDialogue(
+                package, runtime, session, questId);
+            if (activated is null)
+                return VictoryRouteResult.Failed(
+                    "generated_combat.generated_quest_start_failed");
+            session = activated.Value.Session;
+            actionKinds.Add(nameof(GameRuntimeCommandType.OpenDialogue));
+            AddFrame(nameof(GameRuntimeCommandType.OpenDialogue),
+                activated.Value.OpenedSession);
+            actionKinds.Add(
+                nameof(GameRuntimeCommandType.ChooseDialogueOption));
+            AddFrame(nameof(GameRuntimeCommandType.ChooseDialogueOption),
+                session);
+        }
         var rewardsBefore = RewardState(session);
         var rewardEvent = false;
         EncounterRuntimeState? encounter = null;
@@ -418,6 +439,57 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                 StateHash = GeneratedCampaignConsequenceProjector.HashSession(value)
             });
     }
+
+    private static (UnifiedRuntimeSession OpenedSession,
+        UnifiedRuntimeSession Session)?
+        ActivateAssignedQuestThroughDialogue(
+            GamePackageDefinition package,
+            IUnifiedGameRuntimeService runtime,
+            UnifiedRuntimeSession session,
+            string questId)
+    {
+        var candidates = package.Game.Dialogues.SelectMany(dialogue =>
+                dialogue.Nodes.SelectMany(node => node.Choices)
+                    .Where(choice => string.Equals(choice.StartQuestId,
+                        questId, StringComparison.Ordinal)
+                                     && choice.Metadata.GetValueOrDefault(
+                                         "generatedChoiceKind") == "SUPPORT"
+                                     && choice.Metadata.GetValueOrDefault(
+                                         "generatedChoicePhase") == "initial")
+                    .Select(choice => new
+                    {
+                        DialogueId = dialogue.Id,
+                        ChoiceId = choice.Id
+                    }))
+            .OrderBy(item => item.DialogueId, StringComparer.Ordinal)
+            .ThenBy(item => item.ChoiceId, StringComparer.Ordinal)
+            .ToList();
+        foreach (var candidate in candidates)
+        {
+            var opened = runtime.ExecuteGameplayCommand(package, session,
+                GameRuntimeCommand.OpenDialogue(candidate.DialogueId));
+            if (!opened.Success) continue;
+            var chosen = runtime.ExecuteGameplayCommand(package,
+                opened.Session,
+                GameRuntimeCommand.ChooseDialogueOption(
+                    candidate.ChoiceId));
+            if (chosen.Success && QuestActive(chosen.Session, questId))
+                return (opened.Session, chosen.Session);
+        }
+        return null;
+    }
+
+    private static bool QuestActive(UnifiedRuntimeSession session,
+        string questId) =>
+        session.GameplayState.Quests.Any(item =>
+            string.Equals(item.QuestId, questId,
+                StringComparison.OrdinalIgnoreCase)
+            && string.Equals(item.State, "active",
+                StringComparison.OrdinalIgnoreCase))
+        || session.GameplayState.QuestStates.TryGetValue(questId,
+            out var state)
+        && string.Equals(state, "active",
+            StringComparison.OrdinalIgnoreCase);
 
     private static (UnifiedRuntimeResult Result, string ActionKind)? ExecuteVictoryPlayerAction(
         GamePackageDefinition package,
@@ -581,9 +653,8 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
         var distances = RegionDistances(plan, startRegion);
         var generatedEncounterIds = bindings.Select(item => item.PackageEncounterId)
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var candidates = bindings.SelectMany(binding => package.Game.Quests
+            var candidates = bindings.SelectMany(binding => package.Game.Quests
                 .Where(quest => GeneratedQuest(package, quest.Id)
-                                && quest.AutoStart
                                 && quest.Objectives.Any(objective =>
                                     string.Equals(objective.Kind, "complete_encounter",
                                         StringComparison.OrdinalIgnoreCase)
@@ -606,7 +677,8 @@ public sealed class GameProjectGeneratedEncounterCombatQualificationService
                     .ThenBy(id => id, StringComparer.Ordinal)
                     .Select(id => RegionForEncounter(plan, bindings, id))
                     .Append(RegionForEncounter(plan, bindings, candidate.Binding.PackageEncounterId))))
-            .OrderBy(candidate => distances.GetValueOrDefault(plan.EncounterSeeds.Single(seed =>
+            .OrderByDescending(candidate => candidate.Quest.AutoStart)
+            .ThenBy(candidate => distances.GetValueOrDefault(plan.EncounterSeeds.Single(seed =>
                 seed.EncounterSeedId == candidate.Binding.EncounterSeedId).RegionId, int.MaxValue))
             .ThenBy(candidate => candidate.QuestSourceId, StringComparer.Ordinal)
             .ThenBy(candidate => candidate.Binding.GeneratedContentSourceId, StringComparer.Ordinal)

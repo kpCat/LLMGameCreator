@@ -84,7 +84,9 @@ public sealed class Goal162WinFormsWorkspaceTests
 
             Assert.Equal(snapshot.Map?.Width, map.Projection?.Width);
             Assert.Equal(snapshot.Actions.Count, actions.Controls.OfType<Button>().Count());
-            Assert.Equal(6, hud.TabPages.Count);
+            Assert.Equal(7, hud.TabPages.Count);
+            Assert.Contains(hud.TabPages.Cast<TabPage>(),
+                tab => tab.Text == "Отношения");
             Assert.All(hud.TabPages.Cast<TabPage>(), tab => Assert.NotEmpty(tab.Controls));
         });
     }

@@ -1,0 +1,32 @@
+{
+    "status":  "GREEN",
+    "testCounts":  {
+                       "Goal168":  85,
+                       "Goal167":  94,
+                       "Goal166":  59,
+                       "Goal165":  55,
+                       "Goal164":  61,
+                       "Goal163":  54,
+                       "Goal162":  72,
+                       "Goal161":  176,
+                       "Goal160":  80,
+                       "Goal159":  80,
+                       "Goal158":  63,
+                       "Goal157":  67,
+                       "GeneratedCampaign":  8,
+                       "GeneratedGameplaySave":  1,
+                       "RuntimeSimulator":  1,
+                       "UnifiedGameProjectWorkspace":  36,
+                       "GameProjectOperationCoordinator":  1,
+                       "ProjectStandaloneBuild":  9,
+                       "Goal168HiddenSmoke":  1
+                   },
+    "goal142ByteIdentical":  true,
+    "goal148ByteIdentical":  true,
+    "generationSidecarsByteIdentical":  true,
+    "hostFilesByteIdentical":  true,
+    "forbiddenImplementationMutationCount":  0,
+    "fullSuiteRun":  false,
+    "allProductSmokeRun":  false,
+    "unityHostBuildRun":  false
+}

@@ -182,6 +182,29 @@ public sealed class GeneratedGameplaySaveMigrationService
             .ToDictionary(group => group.Key, group => group.Single(), StringComparer.Ordinal);
         var targetByKey = truth.DefinitionFingerprintInventory.GroupBy(Key, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.Single(), StringComparer.Ordinal);
+        var worldMigration =
+            sourceStatus == GeneratedGameplaySaveStatus.WORLD_MIGRATION_REQUIRED;
+        var compatibleRelationshipIds = truth.ActualPackage.Game.Dialogues
+            .Where(dialogue =>
+                dialogue.Metadata.GetValueOrDefault("generatedRelationshipId")
+                == dialogue.Id
+                && sourceByKey.TryGetValue("dialogue\n" + dialogue.Id,
+                    out var sourceDialogue)
+                && targetByKey.TryGetValue("dialogue\n" + dialogue.Id,
+                    out var targetDialogue)
+                && sourceDialogue.Generated
+                && targetDialogue.Generated
+                && string.Equals(sourceDialogue.SourceId, targetDialogue.SourceId,
+                    StringComparison.Ordinal))
+            .Select(dialogue => dialogue.Id)
+            .ToHashSet(StringComparer.Ordinal);
+        var compatibleRelationshipFactionIds = truth.ActualPackage.Game.Dialogues
+            .Where(dialogue => compatibleRelationshipIds.Contains(dialogue.Id))
+            .Select(dialogue => dialogue.Metadata.GetValueOrDefault(
+                "generatedRelationshipFactionId"))
+            .Where(id => !string.IsNullOrWhiteSpace(id))
+            .Select(id => id!)
+            .ToHashSet(StringComparer.Ordinal);
 
         bool Portable(string kind, string id, bool generatedAllowed = true)
         {
@@ -276,17 +299,26 @@ public sealed class GeneratedGameplaySaveMigrationService
         }).ToList();
         session.GameplayState.Factions = session.GameplayState.Factions.Where(item =>
         {
-            var keep = Keep("faction", item.FactionId, Portable, Preserved, Dropped);
+            var relationshipPortable = worldMigration
+                                       && compatibleRelationshipFactionIds.Contains(item.FactionId)
+                                       && SameSource("faction", item.FactionId,
+                                           sourceByKey, targetByKey);
+            var keep = relationshipPortable
+                       || Keep("faction", item.FactionId, Portable, Preserved, Dropped);
+            if (relationshipPortable)
+                Preserved("relationship_reputation", item.FactionId);
             if (keep) item.Metadata = FilterDictionary(item.Metadata, sourceRevision, Portable, Dropped);
             return keep;
         }).ToList();
 
         session.GameplayState.QuestStates = session.GameplayState.QuestStates
-            .Where(pair => KeepQuest(pair.Key, sourceByKey, Portable, Preserved, Dropped))
+            .Where(pair => KeepQuest(pair.Key, !worldMigration, sourceByKey,
+                Portable, Preserved, Dropped))
             .ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal);
         session.GameplayState.Quests = session.GameplayState.Quests.Where(quest =>
         {
-            var keep = KeepQuest(quest.QuestId, sourceByKey, Portable, Preserved, Dropped);
+            var keep = KeepQuest(quest.QuestId, !worldMigration, sourceByKey,
+                Portable, Preserved, Dropped);
             if (keep)
             {
                 quest.Metadata = FilterDictionary(quest.Metadata, sourceRevision, Portable, Dropped);
@@ -328,10 +360,15 @@ public sealed class GeneratedGameplaySaveMigrationService
         session.GameplayState.Tick = 0;
         session.MapEvents = [];
         session.GameplayEvents = [];
-        session.MapState.Flags = FilterDictionary(
-            session.MapState.Flags, sourceRevision, Portable, Dropped);
+        session.MapState.Flags = session.MapState.Flags.Where(pair =>
+            KeepRelationshipDecision(pair.Key, pair.Value, worldMigration,
+                compatibleRelationshipIds, sourceRevision, Portable,
+                Preserved, Dropped)).ToDictionary(pair => pair.Key,
+            pair => pair.Value, StringComparer.Ordinal);
         session.GameplayState.Flags = session.GameplayState.Flags.Where(flag =>
-            PairPortable(flag.Id, flag.Value, sourceRevision, Portable, Dropped)).ToList();
+            KeepRelationshipDecision(flag.Id, flag.Value, worldMigration,
+                compatibleRelationshipIds, sourceRevision, Portable,
+                Preserved, Dropped)).ToList();
         session.GameplayState.Metadata = FilterDictionary(
             session.GameplayState.Metadata, sourceRevision, Portable, Dropped);
         session.Metadata = FilterDictionary(session.Metadata, sourceRevision, Portable, Dropped);
@@ -394,19 +431,61 @@ public sealed class GeneratedGameplaySaveMigrationService
 
     private static bool KeepQuest(
         string id,
+        bool preserveGenerated,
         IReadOnlyDictionary<string, GeneratedGameplayDefinitionFingerprint> sourceByKey,
         Func<string, string, bool, bool> portable,
         Action<string, string> preserved,
         Action<string, string, string> dropped)
     {
         var generated = sourceByKey.TryGetValue("quest\n" + id, out var source) && source.Generated;
+        if (generated && preserveGenerated && portable("quest", id, true))
+        {
+            preserved("quest", id);
+            return true;
+        }
         if (!generated && portable("quest", id, false))
         {
             preserved("quest", id);
             return true;
         }
-        dropped("quest", id, generated ? "generated_world_bound_quest" : "definition_missing_or_changed");
+        dropped("quest", id, generated
+            ? "generated_relationship_arc_reset"
+            : "definition_missing_or_changed");
         return false;
+    }
+
+    private static bool KeepRelationshipDecision(
+        string key,
+        string value,
+        bool worldMigration,
+        IReadOnlySet<string> compatibleRelationshipIds,
+        GeneratedGameplaySaveRevision revision,
+        Func<string, string, bool, bool> portable,
+        Action<string, string> preserved,
+        Action<string, string, string> dropped)
+    {
+        if (worldMigration && compatibleRelationshipIds.Contains(key)
+            && value is "SUPPORT" or "CHALLENGE" or "REFUSE")
+        {
+            preserved("relationship_decision", key);
+            return true;
+        }
+        return PairPortable(key, value, revision, portable, dropped);
+    }
+
+    private static bool SameSource(
+        string kind,
+        string id,
+        IReadOnlyDictionary<string, GeneratedGameplayDefinitionFingerprint> source,
+        IReadOnlyDictionary<string, GeneratedGameplayDefinitionFingerprint> target)
+    {
+        var key = kind + "\n" + id;
+        return source.TryGetValue(key, out var left)
+               && target.TryGetValue(key, out var right)
+               && left.Generated
+               && right.Generated
+               && string.Equals(left.SourceId, right.SourceId,
+                   StringComparison.Ordinal);
     }
 
     private static Dictionary<string, string> FilterDictionary(

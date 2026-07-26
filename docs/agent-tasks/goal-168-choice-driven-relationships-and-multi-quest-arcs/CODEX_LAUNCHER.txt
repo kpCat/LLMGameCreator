@@ -1,0 +1,63 @@
+/goal
+
+Выполни задачу из файла:
+
+docs/agent-tasks/goal-168-choice-driven-relationships-and-multi-quest-arcs/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: fd69bfc86f28b1261ec638c3d45d18d16689bf1e
+
+Это новый отдельный диалог Codex.
+
+План полностью одобрен запуском задачи. Не спрашивай дополнительное подтверждение из-за количества
+изменяемых файлов.
+
+Критически важно:
+- Goal167 implementation GREEN, но independent audit нашёл один profile-neutral P1;
+- Support/Challenge qualification снова использует самописный WinEncounter:
+  BasicAttack Success или первая успешная raw ability;
+- удалить этот цикл и переиспользовать exact Goal166 QualifiedActions catalog;
+- ability-only и mixed utility-first branch qualification обязательны;
+- no-op/utility success не является encounter progress;
+- package reference/SHA неизменны;
+- следующий product slice — отношения NPC/фракций и multi-quest arcs;
+- relationship ID = exact generated dialogue ID;
+- каждую generated quest назначать максимум одному actor relationship;
+- assignment/order data-derived, arbitrary quest count, no fixed IDs/counts;
+- Support становится последовательной аркой:
+  decision → quest1 → combat/manual turn-in → next quest through dialogue → ... → completed;
+- assigned arc quests AutoStart=false, unassigned behavior unchanged;
+- Challenge/Refuse остаются exclusive и используют exact Runtime consequences;
+- controlled overlay меняет только bound generated dialogues и assigned generated quest AutoStart/metadata;
+- add «Отношения» UI projected from flags/reputation/quest/encounter state;
+- build order: choices → relationships → combat → combat qual → choice qual exact catalog → relationship qual;
+- add history v6 RELATIONSHIPS_CURRENT;
+- genuine v5 = relationships pending + PROJECT_NOT_READY + Собрать и играть;
+- old project one-build upgrade;
+- regeneration/rollback seal summary/overlay/inventory;
+- exact save middle-arc continue;
+- explicit migration:
+  same-world compatible quest progress preserve,
+  world migration decision/reputation preserve + arc reset,
+  incompatible relationship drop,
+  no ghost row;
+- exactly one cached hidden smoke, retry 0, host reused, Unity 0;
+- RC CURRENT, portable all-selectable/core-only, no false core-only RC readiness;
+- Runtime/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal142/Goal148/source sidecars byte-identical;
+- Goal168 >=66 discovered / >=58 behavioral / all pass;
+- 15×2 typed evidence, docs/state, artifact scope 0;
+- независимо от GREEN/BLOCKED/FAILED Codex обязан создать один commit и push origin/main;
+- запрещено оставлять ручной push пользователю.
+
+В финале сообщи exact catalog reuse, ability-only/utility-first,
+relationship assignment/arc length, Support full arc,
+Challenge/Refuse, UI, v6/readiness,
+regeneration/save/migration, smoke/RC/portable,
+tests/regressions/source immutability/evidence/scope,
+SHA, push, HEAD==origin/main и clean worktree.

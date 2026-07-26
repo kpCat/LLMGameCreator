@@ -1,0 +1,10 @@
+{
+    "status":  "GREEN",
+    "exactMiddleArcContinuePassed":  true,
+    "runtimeStartCountDuringContinue":  0,
+    "decisionFlagPreserved":  true,
+    "reputationPreserved":  true,
+    "activeQuestAndArcStepPreserved":  true,
+    "preDecisionContinuePassed":  true,
+    "relationshipSaveFactsPassed":  true
+}

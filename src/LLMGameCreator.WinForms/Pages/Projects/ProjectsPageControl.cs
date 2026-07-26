@@ -320,11 +320,14 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             : snapshot.GeneratedEncounterCombat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" };
         var choicesCurrent = snapshot.GeneratedCampaignChoices is
             { Present: true, Passed: true, Status: "CHOICE_CURRENT" };
+        var relationshipsCurrent = snapshot.GeneratedCampaignRelationships is
+            { Passed: true, Status: "RELATIONSHIPS_CURRENT" or "ABSENT" };
         var current = snapshot.GeneratedWorld is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" }
                       && snapshot.GeneratedWorldActivation is { Passed: true }
                       && snapshot.GeneratedRegionTravel is { Passed: true }
                       && combatCurrent
                       && choicesCurrent
+                      && relationshipsCurrent
                       && snapshot.AcceptedMechanicsCompatibility is { Passed: true };
         var busy = uiBusy || snapshot.ProjectOperationBusy;
         if (!generated)
@@ -352,8 +355,13 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         var choices = snapshot.GeneratedCampaignChoices is { Passed: true, Status: "CHOICE_CURRENT" }
             ? "проверены"
             : "требуют сборки";
+        var relationships = snapshot.GeneratedCampaignRelationships is
+            { Passed: true, Status: "RELATIONSHIPS_CURRENT" or "ABSENT" }
+            ? "проверены"
+            : "требуют сборки";
         return Environment.NewLine + "Боевая кампания    " + combat
-               + Environment.NewLine + "Сюжетные решения    " + choices;
+               + Environment.NewLine + "Сюжетные решения    " + choices
+               + Environment.NewLine + "Отношения    " + relationships;
     }
 
     private void BindGeneratedCampaignPlay(UnifiedGameProjectWorkspaceSnapshot snapshot)

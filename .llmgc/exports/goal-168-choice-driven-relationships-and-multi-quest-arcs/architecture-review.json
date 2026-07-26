@@ -1,0 +1,636 @@
+{
+  "schemaVersion": "goal168_architecture_review_v1",
+  "goal167IndependentAudit": {
+    "types": [
+      "GameProjectGeneratedCampaignChoiceQualificationService"
+    ],
+    "inputs": [
+      "GamePackageDefinition",
+      "GameProjectGeneratedEncounterCombatSummary",
+      "GeneratedCampaignChoiceOverlayDocument",
+      "IUnifiedGameRuntimeService"
+    ],
+    "outputs": [
+      "GameProjectGeneratedCampaignChoiceSummary"
+    ],
+    "hashes": [
+      "exact final package SHA-256",
+      "qualified action catalog SHA-256"
+    ],
+    "behavioralTests": [
+      "choice_qualification_receives_exact_catalog",
+      "old_raw_win_encounter_removed",
+      "utility_success_excluded"
+    ],
+    "finding": "choice_branch_qualification_reimplements_victory_without_goal166_exact_qualified_action_catalog"
+  },
+  "exactQualifiedCombatReuse": {
+    "types": [
+      "GeneratedCampaignExactCombatRouteService",
+      "GeneratedCampaignExactCombatRouteRequest",
+      "GeneratedCampaignExactCombatRouteResult",
+      "GameProjectGeneratedEncounterCombatSummary",
+      "GeneratedEncounterCombatQualifiedAction"
+    ],
+    "inputs": [
+      "exact final GamePackageDefinition",
+      "exact encounter ID",
+      "exact Goal166 qualified-action catalog",
+      "IUnifiedGameRuntimeService",
+      "initial UnifiedRuntimeSession",
+      "FLEE or VICTORY"
+    ],
+    "outputs": [
+      "bounded Runtime route result",
+      "ordered commands/events",
+      "final session",
+      "causal diagnostics"
+    ],
+    "hashes": [
+      "ExactPackageSha256",
+      "QualifiedActionsSha256",
+      "AbilityDefinitionSha256",
+      "ObservedEffect.Fingerprint",
+      "package SHA before/after"
+    ],
+    "behavioralTests": [
+      "ability_only_support_combat_succeeds",
+      "ability_only_challenge_combat_succeeds",
+      "basic_attack_observed_effect_matched",
+      "ability_definition_sha_checked",
+      "no_progress_command_rejected",
+      "package_sha_reference_unchanged",
+      "bounded_route_failure_causal"
+    ]
+  },
+  "relationshipIdentity": {
+    "types": [
+      "GeneratedCampaignRelationshipBinding"
+    ],
+    "inputs": [
+      "exact generated DialogueDefinition",
+      "strict generated actor provenance"
+    ],
+    "outputs": [
+      "RelationshipId equal to DialogueDefinition.Id",
+      "DecisionFlagId equal to DialogueDefinition.Id"
+    ],
+    "hashes": [
+      "canonical relationship inventory SHA-256"
+    ],
+    "behavioralTests": [
+      "relationship_identity_exact_dialogue_id"
+    ]
+  },
+  "questAssignment": {
+    "types": [
+      "GeneratedCampaignRelationshipBindingService",
+      "GeneratedCampaignQuestArcStep"
+    ],
+    "inputs": [
+      "strict generated plan",
+      "exact choice-overlay package",
+      "generated quest provenance",
+      "generated region graph"
+    ],
+    "outputs": [
+      "at-most-one relationship assignment per generated quest",
+      "actor-specific encounter priority",
+      "deterministic faction/region fallback"
+    ],
+    "hashes": [
+      "canonical quest assignment inventory SHA-256"
+    ],
+    "behavioralTests": [
+      "quest_assigned_exactly_once",
+      "actor_specific_encounter_assignment_preferred",
+      "faction_region_fallback_deterministic",
+      "arbitrary_quest_count_supported"
+    ]
+  },
+  "arcOrdering": {
+    "types": [
+      "GeneratedCampaignQuestArcStep"
+    ],
+    "inputs": [
+      "actor home region",
+      "generated directed region graph",
+      "target encounter source ID",
+      "quest source ID"
+    ],
+    "outputs": [
+      "shortest-distance then encounter-source then quest-source canonical order"
+    ],
+    "hashes": [
+      "ordered quest source inventory SHA-256"
+    ],
+    "behavioralTests": [
+      "arc_order_deterministic",
+      "reordered_inputs_deterministic",
+      "no_support_without_valid_quest"
+    ]
+  },
+  "relationshipOverlayControlledDelta": {
+    "types": [
+      "GeneratedCampaignRelationshipOverlayService",
+      "GeneratedCampaignRelationshipOverlayDocument"
+    ],
+    "inputs": [
+      "exact Goal167 choice-overlay package",
+      "relationship bindings"
+    ],
+    "outputs": [
+      "bound generated dialogue nodes and generatedRelationship metadata only",
+      "assigned generated quest AutoStart and generatedRelationship metadata only"
+    ],
+    "hashes": [
+      "source package SHA-256",
+      "output package SHA-256",
+      "bound dialogue fingerprints",
+      "assigned quest fingerprints"
+    ],
+    "behavioralTests": [
+      "assigned_autostart_false",
+      "unassigned_autostart_preserved",
+      "support_starts_first_quest",
+      "next_followup_starts_next_quest",
+      "final_followup_has_no_next_quest",
+      "controlled_delta_only",
+      "quest_content_preserved",
+      "independent_overlay_deterministic",
+      "forbidden_delta_rejected"
+    ]
+  },
+  "supportArcLifecycle": {
+    "types": [
+      "GameProjectGeneratedCampaignRelationshipQualificationService",
+      "GeneratedCampaignRelationshipRuntimeFrame"
+    ],
+    "inputs": [
+      "exact final package",
+      "relationship overlay",
+      "exact combat summary/catalog",
+      "IUnifiedGameRuntimeService"
+    ],
+    "outputs": [
+      "Support decision",
+      "positive reputation",
+      "sequential quest activation",
+      "exact combat/manual turn-in per step",
+      "Completed relationship"
+    ],
+    "hashes": [
+      "ordered command SHA-256",
+      "ordered event SHA-256",
+      "final Runtime state SHA-256"
+    ],
+    "behavioralTests": [
+      "support_positive_reputation_exact",
+      "first_quest_active",
+      "later_quests_not_started",
+      "combat_manual_turn_in_step_one",
+      "next_quest_through_dialogue",
+      "all_arc_steps_complete_in_order",
+      "final_relationship_completed",
+      "support_independent_replay"
+    ]
+  },
+  "challengeLifecycle": {
+    "types": [
+      "GameProjectGeneratedCampaignRelationshipQualificationService",
+      "GeneratedCampaignExactCombatRouteService"
+    ],
+    "inputs": [
+      "Challenge branch",
+      "exact assigned encounter",
+      "exact qualified-action catalog"
+    ],
+    "outputs": [
+      "flee without reward/progress",
+      "victory resolved follow-up",
+      "defeat/retry compatibility"
+    ],
+    "hashes": [
+      "pre/post state SHA-256",
+      "package SHA-256"
+    ],
+    "behavioralTests": [
+      "challenge_flee_no_reward_progress",
+      "challenge_victory_exact_catalog",
+      "challenge_defeat_retry_compatible"
+    ]
+  },
+  "refuseLifecycle": {
+    "types": [
+      "GameProjectGeneratedCampaignRelationshipQualificationService"
+    ],
+    "inputs": [
+      "Refuse branch"
+    ],
+    "outputs": [
+      "exact negative reputation",
+      "no quest start",
+      "no encounter",
+      "REFUSED status"
+    ],
+    "hashes": [
+      "pre/post state SHA-256"
+    ],
+    "behavioralTests": [
+      "refuse_negative_reputation",
+      "refuse_starts_no_quest_or_encounter",
+      "relationship_failure_atomicity_exact"
+    ]
+  },
+  "relationshipProjection": {
+    "types": [
+      "GeneratedCampaignRelationshipProjectionService",
+      "GeneratedCampaignRelationshipProjection",
+      "GeneratedCampaignRelationshipRow",
+      "GeneratedCampaignQuestArcProjection"
+    ],
+    "inputs": [
+      "relationship overlay/bindings",
+      "Runtime flags",
+      "Runtime faction reputation",
+      "Runtime quest readiness/state",
+      "Runtime active encounter"
+    ],
+    "outputs": [
+      "human relationship rows",
+      "data-derived completed/total counts",
+      "human next action"
+    ],
+    "hashes": [
+      "projection canonical SHA-256"
+    ],
+    "behavioralTests": [
+      "undecided_row",
+      "supported_row",
+      "quest_active_row",
+      "between_quest_next_action",
+      "completed_row",
+      "challenged_resolved_row",
+      "refused_row",
+      "counts_data_derived",
+      "decision_relationship_consistent",
+      "primary_ui_no_technical_values",
+      "relationships_fit_1100x720",
+      "state_backed_relationship_consequences"
+    ]
+  },
+  "historyV6": {
+    "types": [
+      "GameProjectBuildHistoryEntry",
+      "GameProjectBuildHistoryReader",
+      "GameProjectGeneratedCampaignRelationshipSummary"
+    ],
+    "inputs": [
+      "v6 relationship-bearing GREEN build history",
+      "historical v5/v4/v3/v2 rows"
+    ],
+    "outputs": [
+      "RELATIONSHIPS_CURRENT",
+      "RELATIONSHIPS_PENDING for genuine v5",
+      "existing older projections"
+    ],
+    "hashes": [
+      "entry package SHA-256",
+      "relationship overlay SHA-256",
+      "relationship inventory SHA-256",
+      "primary final state SHA-256"
+    ],
+    "behavioralTests": [
+      "v6_relationship_current",
+      "genuine_v5_relationship_pending",
+      "v4_v3_v2_compatibility",
+      "old_project_one_build_upgrade",
+      "branchless_summary_absent_valid"
+    ]
+  },
+  "campaignReadiness": {
+    "types": [
+      "GeneratedCampaignSessionTruthService",
+      "GameProjectGeneratedWorldSummaryService"
+    ],
+    "inputs": [
+      "selected current history",
+      "data-derived relationship arc count"
+    ],
+    "outputs": [
+      "READY only with RELATIONSHIPS_CURRENT when arcs exist",
+      "PROJECT_NOT_READY and Собрать и играть for genuine v5",
+      "no relationship requirement when arcs are absent"
+    ],
+    "hashes": [
+      "selected build history SHA-256"
+    ],
+    "behavioralTests": [
+      "old_project_not_ready",
+      "branchless_readiness_unchanged"
+    ]
+  },
+  "regenerationSeal": {
+    "types": [
+      "GameProjectSeedRegenerationCandidateSeal",
+      "GameProjectSeedRegenerationCandidateSealService",
+      "GameProjectSeedRegenerationCommitValidator"
+    ],
+    "inputs": [
+      "v6 relationship summary",
+      "relationship overlay",
+      "relationship assignment/order inventory"
+    ],
+    "outputs": [
+      "sealed summary/overlay/inventory",
+      "semantic tamper rejection before commit"
+    ],
+    "hashes": [
+      "GeneratedCampaignRelationshipSummarySha256",
+      "GeneratedCampaignRelationshipOverlaySha256",
+      "GeneratedCampaignRelationshipInventorySha256"
+    ],
+    "behavioralTests": [
+      "seal_summary_overlay_inventory",
+      "assignment_order_autostart_tamper_rejected",
+      "regeneration_v6_current",
+      "rollback_v6_current"
+    ]
+  },
+  "exactSaveContinue": {
+    "types": [
+      "GeneratedGameplaySaveService",
+      "GeneratedCampaignSessionService"
+    ],
+    "inputs": [
+      "middle-arc Runtime session",
+      "pre-decision Runtime session"
+    ],
+    "outputs": [
+      "exact flags/reputation/quest step/relationship row restored",
+      "Runtime Start invocation delta zero"
+    ],
+    "hashes": [
+      "saved session SHA-256",
+      "continued session SHA-256"
+    ],
+    "behavioralTests": [
+      "exact_middle_arc_continue",
+      "pre_decision_continue",
+      "old_v5_save_rebase_required"
+    ]
+  },
+  "migrationCompatibility": {
+    "types": [
+      "GeneratedGameplaySaveMigrationService",
+      "GeneratedGameplayDefinitionFingerprintService",
+      "GeneratedCampaignRelationshipInventoryRow"
+    ],
+    "inputs": [
+      "source and target build history relationship inventories",
+      "PACKAGE_REBASE_REQUIRED or WORLD_MIGRATION_REQUIRED"
+    ],
+    "outputs": [
+      "same-world compatible quest progress preserved",
+      "world migration decision/reputation preserved with arc reset",
+      "incompatible relationship dropped",
+      "no ghost projection row"
+    ],
+    "hashes": [
+      "source/target relationship inventory SHA-256",
+      "candidate session SHA-256"
+    ],
+    "behavioralTests": [
+      "same_world_quest_progress_preserved",
+      "world_migration_decision_preserved",
+      "world_migration_arc_reset",
+      "incompatible_relationship_dropped",
+      "no_ghost_relationship",
+      "post_migration_dialogue_combat_travel"
+    ]
+  },
+  "standaloneRcPortable": {
+    "types": [
+      "existing ProjectStandaloneBuild and release-candidate consumers"
+    ],
+    "inputs": [
+      "v6 current build payload",
+      "cached standalone host",
+      "all-selectable and core-only portable copies"
+    ],
+    "outputs": [
+      "one hidden smoke",
+      "RC CURRENT",
+      "portable relationship current",
+      "no false core-only RC readiness"
+    ],
+    "hashes": [
+      "host cache key",
+      "payload package/build-history hashes"
+    ],
+    "behavioralTests": [
+      "one_hidden_smoke",
+      "rc_current",
+      "portable_all_selectable",
+      "portable_core_only_no_false_rc"
+    ]
+  },
+  "failureMatrix": {
+    "types": [
+      "GeneratedCampaignExactCombatRouteResult",
+      "GeneratedCampaignRelationshipOverlayValidationResult",
+      "GameProjectGeneratedCampaignRelationshipSummary"
+    ],
+    "inputs": [
+      "missing catalog",
+      "changed ability definition",
+      "successful no-progress command",
+      "invalid next quest",
+      "forbidden overlay delta"
+    ],
+    "outputs": [
+      "causal stable diagnostic",
+      "atomic unchanged Runtime state",
+      "unchanged package"
+    ],
+    "hashes": [
+      "before/after package SHA-256",
+      "before/after Runtime state SHA-256"
+    ],
+    "behavioralTests": [
+      "failure_atomicity_exact",
+      "forbidden_delta_rejected",
+      "bounded_route_failure_causal"
+    ]
+  },
+  "regressionImmutability": {
+    "types": [
+      "Goal167/166/165/164 regressions",
+      "RuntimeSimulator regressions",
+      "source and sidecar byte inventories"
+    ],
+    "inputs": [
+      "required focused regression filters",
+      "Goal142 source",
+      "Goal148 source",
+      "generation sidecars"
+    ],
+    "outputs": [
+      "all required regressions GREEN",
+      "byte-identical protected sources"
+    ],
+    "hashes": [
+      "protected file SHA-256 inventories"
+    ],
+    "behavioralTests": [
+      "goal167_94_of_94",
+      "goal166_59_of_59",
+      "goal165_55_of_55",
+      "goal164_61_of_61",
+      "goal163_162_161",
+      "runtime_simulator",
+      "source_sidecar_immutability"
+    ]
+  },
+  "nonGoals": {
+    "types": [],
+    "inputs": [],
+    "outputs": [
+      "no Runtime or Runtime.Abstractions changes",
+      "no Domain or GamePackage public schema changes",
+      "no FeatureModule catalog changes",
+      "no GeneratedPackageMvp/source/sidecar changes",
+      "no Unity/standalone/RC implementation changes"
+    ],
+    "hashes": [
+      "artifact scope allowlist result"
+    ],
+    "behavioralTests": [
+      "artifact_scope_zero",
+      "protected_sources_byte_identical"
+    ]
+  },
+  "testInventory": {
+    "targetDiscovered": 84,
+    "targetBehavioral": 84,
+    "files": {
+      "Goal168ExactCombatReuseTests.cs": [
+        "Behavioral_choice_qualification_receives_exact_catalog",
+        "Behavioral_old_raw_win_encounter_is_removed",
+        "Behavioral_utility_success_is_excluded",
+        "Behavioral_ability_only_support_combat_succeeds",
+        "Behavioral_ability_only_challenge_combat_succeeds",
+        "Behavioral_basic_attack_descriptor_matches_observed_effect",
+        "Behavioral_ability_descriptor_definition_sha_is_checked",
+        "Behavioral_no_progress_command_is_rejected",
+        "Behavioral_package_sha_and_reference_are_unchanged",
+        "Behavioral_bounded_route_failure_is_causal"
+      ],
+      "Goal168RelationshipBindingOverlayTests.cs": [
+        "Behavioral_relationship_identity_is_exact_dialogue_id",
+        "Behavioral_quest_is_assigned_exactly_once",
+        "Behavioral_actor_specific_encounter_assignment_is_preferred",
+        "Behavioral_faction_region_fallback_is_deterministic",
+        "Behavioral_arbitrary_quest_count_is_supported",
+        "Behavioral_arc_order_is_deterministic",
+        "Behavioral_support_absent_without_valid_quest",
+        "Behavioral_challenge_and_refuse_are_independent",
+        "Behavioral_assigned_quest_autostart_is_false",
+        "Behavioral_unassigned_quest_autostart_is_preserved",
+        "Behavioral_support_starts_first_quest",
+        "Behavioral_next_followup_starts_next_quest",
+        "Behavioral_final_followup_has_no_next_quest",
+        "Behavioral_controlled_delta_changes_only_allowed_fields",
+        "Behavioral_source_metadata_objectives_rewards_are_preserved",
+        "Behavioral_independent_overlay_is_deterministic",
+        "Behavioral_reordered_inputs_are_deterministic",
+        "Behavioral_forbidden_delta_is_rejected"
+      ],
+      "Goal168SupportArcTests.cs": [
+        "Behavioral_support_positive_reputation_is_exact",
+        "Behavioral_first_quest_is_active",
+        "Behavioral_later_quests_are_not_started",
+        "Behavioral_first_step_uses_exact_combat_and_manual_turn_in",
+        "Behavioral_next_quest_starts_through_dialogue",
+        "Behavioral_all_steps_complete_in_order",
+        "Behavioral_final_relationship_is_completed",
+        "Behavioral_support_replay_is_equivalent"
+      ],
+      "Goal168ChallengeRefuseTests.cs": [
+        "Behavioral_challenge_flee_has_no_reward_or_progress",
+        "Behavioral_challenge_victory_uses_exact_catalog",
+        "Behavioral_challenge_defeat_retry_remains_compatible",
+        "Behavioral_refuse_applies_negative_reputation",
+        "Behavioral_refuse_starts_no_quest_or_encounter",
+        "Behavioral_relationship_failure_is_atomic"
+      ],
+      "Goal168RelationshipUiTests.cs": [
+        "Behavioral_relationship_projection_has_undecided_row",
+        "Behavioral_relationship_projection_has_supported_row",
+        "Behavioral_relationship_projection_has_quest_active_row",
+        "Behavioral_between_quest_row_has_next_action",
+        "Behavioral_relationship_projection_has_completed_row",
+        "Behavioral_relationship_projection_has_challenged_resolved_row",
+        "Behavioral_relationship_projection_has_refused_row",
+        "Behavioral_relationship_counts_are_data_derived",
+        "Behavioral_decision_and_relationship_journals_are_consistent",
+        "Behavioral_primary_ui_has_no_technical_values",
+        "Behavioral_relationships_fit_1100x720",
+        "Behavioral_relationship_consequences_are_state_backed"
+      ],
+      "Goal168HistoryRegenerationTests.cs": [
+        "Behavioral_v6_relationship_summary_is_current",
+        "Behavioral_genuine_v5_projects_relationships_pending",
+        "Behavioral_v4_v3_v2_history_remains_compatible",
+        "Behavioral_old_project_is_not_ready",
+        "Behavioral_one_build_upgrades_old_project",
+        "Behavioral_branchless_summary_is_absent_and_valid",
+        "Behavioral_seal_contains_relationship_summary_overlay_inventory",
+        "Behavioral_assignment_order_autostart_tamper_is_rejected",
+        "Behavioral_regeneration_restores_v6_relationships",
+        "Behavioral_rollback_restores_v6_relationships"
+      ],
+      "Goal168SaveMigrationTests.cs": [
+        "Behavioral_exact_middle_arc_continue",
+        "Behavioral_pre_decision_continue",
+        "Behavioral_old_v5_save_requires_rebase",
+        "Behavioral_same_world_compatible_quest_progress_is_preserved",
+        "Behavioral_world_migration_preserves_decision",
+        "Behavioral_world_migration_resets_arc",
+        "Behavioral_incompatible_relationship_is_dropped",
+        "Behavioral_no_ghost_relationship_row",
+        "Behavioral_post_migration_dialogue_combat_travel"
+      ],
+      "Goal168StandalonePortabilityTests.cs": [
+        "Behavioral_exactly_one_hidden_smoke_passes",
+        "Behavioral_release_candidate_is_current",
+        "Behavioral_portable_all_selectable_passes",
+        "Behavioral_portable_core_only_has_no_false_rc"
+      ],
+      "Goal168RegressionImmutabilityTests.cs": [
+        "Behavioral_goal167_regression_passes",
+        "Behavioral_goal166_regression_passes",
+        "Behavioral_goal165_regression_passes",
+        "Behavioral_goal164_regression_passes",
+        "Behavioral_goal163_goal162_goal161_regressions_pass",
+        "Behavioral_runtime_simulator_regression_passes",
+        "Behavioral_source_and_sidecars_are_immutable"
+      ]
+    }
+  },
+  "qualityReview": {
+    "userVisibleClaim": "Generated choices become actor/faction relationships with deterministic sequential multi-quest arcs and a human Relationships UI.",
+    "gameplaySourceOfTruth": "exact final GamePackageDefinition plus canonical Runtime session state",
+    "proofOnlyData": "mixed utility-first, ability-only and multi-quest fixtures exist only in tests and disposable projects",
+    "activatedPackageForbiddenData": "no fixture-only entities, abilities, encounters or fixed quest counts",
+    "parameterDomain": "arc length is data-derived from zero through arbitrary generated quest count; no fixed maximum is introduced",
+    "transactionBoundary": "Runtime commands, controlled overlay validation, regeneration promotion and migration preview/apply retain existing atomic boundaries",
+    "unexecutedValidCombinations": [],
+    "newGenericProductionLiterals": [
+      "generated_relationship protocol metadata and diagnostic vocabulary"
+    ],
+    "rollbackEventLeaks": "must remain absent and is covered by atomic failure tests",
+    "maximumValidRuntimeStateRisk": "bounded by live encounter participant/resource/turn state and arbitrary quest inventory count",
+    "oldProjectBehavior": "genuine v5 is relationships pending and upgrades in one explicit build without source rewrite"
+  }
+}

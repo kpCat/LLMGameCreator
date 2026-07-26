@@ -24,6 +24,7 @@ partial class GeneratedCampaignPageControl
     private TabPage _characterTab = null!;
     private TabPage _questsTab = null!;
     private TabPage _inventoryTab = null!;
+    private TabPage _relationshipsTab = null!;
     private TabPage _consequencesTab = null!;
     private TabPage _eventsTab = null!;
     private TabPage _decisionsTab = null!;
@@ -60,6 +61,7 @@ partial class GeneratedCampaignPageControl
         _characterTab = new TabPage();
         _questsTab = new TabPage();
         _inventoryTab = new TabPage();
+        _relationshipsTab = new TabPage();
         _consequencesTab = new TabPage();
         _eventsTab = new TabPage();
         _decisionsTab = new TabPage();
@@ -224,6 +226,7 @@ partial class GeneratedCampaignPageControl
         _hud.Controls.Add(_characterTab);
         _hud.Controls.Add(_questsTab);
         _hud.Controls.Add(_inventoryTab);
+        _hud.Controls.Add(_relationshipsTab);
         _hud.Controls.Add(_consequencesTab);
         _hud.Controls.Add(_eventsTab);
         _hud.Controls.Add(_decisionsTab);
@@ -241,6 +244,9 @@ partial class GeneratedCampaignPageControl
         _inventoryTab.AutoScroll = true;
         _inventoryTab.Text = "Инвентарь";
         _inventoryTab.UseVisualStyleBackColor = true;
+        _relationshipsTab.AutoScroll = true;
+        _relationshipsTab.Text = "Отношения";
+        _relationshipsTab.UseVisualStyleBackColor = true;
         _consequencesTab.AutoScroll = true;
         _consequencesTab.Text = "Последствия";
         _consequencesTab.UseVisualStyleBackColor = true;

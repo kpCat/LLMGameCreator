@@ -10,6 +10,7 @@ using LLMGameCreator.Application.Design.FeatureModuleCertification;
 using LLMGameCreator.Application.Design.FeatureModuleComposition;
 using LLMGameCreator.Application.Design.ProductLineRuntimeQualification;
 using LLMGameCreator.Application.Generation.Procedural;
+using LLMGameCreator.Application.Play.GeneratedCampaign;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Runtime.Abstractions;
@@ -47,6 +48,10 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly GeneratedCampaignChoiceBindingService _generatedChoiceBinding;
     private readonly GeneratedCampaignChoiceOverlayService _generatedChoiceOverlay;
     private readonly GameProjectGeneratedCampaignChoiceQualificationService _generatedChoiceQualification;
+    private readonly GeneratedCampaignRelationshipBindingService _generatedRelationshipBinding;
+    private readonly GeneratedCampaignRelationshipOverlayService _generatedRelationshipOverlay;
+    private readonly GeneratedCampaignExactCombatRouteService _generatedExactCombatRoute;
+    private readonly GameProjectGeneratedCampaignRelationshipQualificationService _generatedRelationshipQualification;
     private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private int _buildRunning;
 
@@ -71,7 +76,11 @@ public sealed class GameProjectBuildAndQualificationService
         GameProjectGeneratedEncounterCombatQualificationService? generatedCombatQualification = null,
         GeneratedCampaignChoiceBindingService? generatedChoiceBinding = null,
         GeneratedCampaignChoiceOverlayService? generatedChoiceOverlay = null,
-        GameProjectGeneratedCampaignChoiceQualificationService? generatedChoiceQualification = null)
+        GameProjectGeneratedCampaignChoiceQualificationService? generatedChoiceQualification = null,
+        GeneratedCampaignRelationshipBindingService? generatedRelationshipBinding = null,
+        GeneratedCampaignRelationshipOverlayService? generatedRelationshipOverlay = null,
+        GeneratedCampaignExactCombatRouteService? generatedExactCombatRoute = null,
+        GameProjectGeneratedCampaignRelationshipQualificationService? generatedRelationshipQualification = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -95,6 +104,12 @@ public sealed class GameProjectBuildAndQualificationService
         _generatedChoiceBinding = generatedChoiceBinding ?? new GeneratedCampaignChoiceBindingService();
         _generatedChoiceOverlay = generatedChoiceOverlay ?? new GeneratedCampaignChoiceOverlayService();
         _generatedChoiceQualification = generatedChoiceQualification ?? new GameProjectGeneratedCampaignChoiceQualificationService();
+        _generatedRelationshipBinding = generatedRelationshipBinding ?? new GeneratedCampaignRelationshipBindingService();
+        _generatedRelationshipOverlay = generatedRelationshipOverlay ?? new GeneratedCampaignRelationshipOverlayService();
+        _generatedExactCombatRoute = generatedExactCombatRoute ?? new GeneratedCampaignExactCombatRouteService();
+        _generatedRelationshipQualification = generatedRelationshipQualification
+                                              ?? new GameProjectGeneratedCampaignRelationshipQualificationService(
+                                                  _generatedExactCombatRoute);
         _operationCoordinator = operationCoordinator ?? new GameProjectOperationCoordinator();
     }
 
@@ -493,7 +508,9 @@ public sealed class GameProjectBuildAndQualificationService
             GameProjectGeneratedRegionTravelSummary? generatedRegionTravel = null;
             GameProjectGeneratedEncounterCombatSummary? generatedEncounterCombat = null;
             GameProjectGeneratedCampaignChoiceSummary? generatedCampaignChoices = null;
+            GameProjectGeneratedCampaignRelationshipSummary? generatedCampaignRelationships = null;
             GeneratedCampaignChoiceOverlayDocument? generatedChoiceOverlayDocument = null;
+            GeneratedCampaignRelationshipOverlayDocument? generatedRelationshipOverlayDocument = null;
             if (generatedSource.Present)
             {
                 if (_generatedActivation is null)
@@ -635,6 +652,40 @@ public sealed class GameProjectBuildAndQualificationService
                     primaryCompositionSha256 = compositionChoice.Document.OutputPackageSha256;
                     primaryPackageSha256 = packageChoice.Document.OutputPackageSha256;
 
+                    var compositionRelationshipBinding = _generatedRelationshipBinding.Bind(
+                        generatedSource, finalCompositionPackage, compositionChoiceBinding);
+                    var packageRelationshipBinding = _generatedRelationshipBinding.Bind(
+                        generatedSource, finalPackage, packageChoiceBinding);
+                    if (!compositionRelationshipBinding.Passed || !packageRelationshipBinding.Passed)
+                        return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
+                            "Отношения с персонажами не прошли точную привязку к сгенерированным заданиям.",
+                            compositionRelationshipBinding.Diagnostics
+                                .Concat(packageRelationshipBinding.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(),
+                            "generated_relationship.binding", attempt);
+                    var compositionRelationship = _generatedRelationshipOverlay.Build(
+                        finalCompositionPackage, compositionRelationshipBinding);
+                    var packageRelationship = _generatedRelationshipOverlay.Build(
+                        finalPackage, packageRelationshipBinding);
+                    if (!compositionRelationship.Passed || !packageRelationship.Passed)
+                        return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
+                            "Слой отношений нарушил допустимые границы сгенерированного пакета.",
+                            compositionRelationship.Diagnostics.Concat(packageRelationship.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(),
+                            "generated_relationship.overlay", attempt);
+                    finalCompositionPackage = compositionRelationship.RelationshipOverlayPackage;
+                    finalPackage = packageRelationship.RelationshipOverlayPackage;
+                    generatedRelationshipOverlayDocument = packageRelationship.Document;
+                    var relationshipPath = Path.Combine(
+                        stagingRoot, "generated-campaign-relationships", "package.json");
+                    Directory.CreateDirectory(Path.GetDirectoryName(relationshipPath)!);
+                    File.WriteAllText(relationshipPath,
+                        packageRelationship.RelationshipOverlayPackageJson,
+                        new UTF8Encoding(false));
+                    finalActivatedPath = relationshipPath;
+                    primaryCompositionSha256 = compositionRelationship.Document.OutputPackageSha256;
+                    primaryPackageSha256 = packageRelationship.Document.OutputPackageSha256;
+
                     if (generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
                     {
                     var contract = _generatedCombatContract.Resolve(
@@ -738,7 +789,11 @@ public sealed class GameProjectBuildAndQualificationService
                     }
 
                     generatedCampaignChoices = _generatedChoiceQualification.Qualify(
-                        finalPackage, generatedChoiceOverlayDocument, _generatedCombatRuntime);
+                        finalPackage,
+                        generatedChoiceOverlayDocument,
+                        generatedEncounterCombat,
+                        _generatedCombatRuntime,
+                        _generatedExactCombatRoute);
                     if (!generatedCampaignChoices.Passed)
                         return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
                             "Сюжетные решения не прошли реальную Runtime-проверку.",
@@ -767,6 +822,49 @@ public sealed class GameProjectBuildAndQualificationService
                         primaryPlaythroughSignature = string.Join(">", generatedCampaignChoices.RuntimeFrames
                             .Select(frame => frame.BranchKind + ":replay-" + frame.ReplayIndex));
                     }
+
+                    generatedCampaignRelationships = _generatedRelationshipQualification.Qualify(
+                        finalPackage,
+                        generatedRelationshipOverlayDocument,
+                        generatedEncounterCombat,
+                        _generatedCombatRuntime);
+                    if (!generatedCampaignRelationships.Passed)
+                        return RollbackFailure(authoring, preBuildDocument, preBuildDirty, transaction,
+                            "Арки отношений не прошли полную Runtime-проверку.",
+                            generatedCampaignRelationships.Diagnostics,
+                            "generated_relationship.qualification", attempt);
+                    if (generatedCampaignRelationships.Present)
+                    {
+                        primaryFinalStateHash = generatedCampaignRelationships.FinalStateHash;
+                        primaryCheckpointReloadPassed =
+                            generatedCampaignRelationships.SupportReplayEquivalent;
+                        primaryFullReplayEquivalent =
+                            generatedCampaignRelationships.SupportReplayEquivalent;
+                        primaryActionBindingPassed =
+                            generatedCampaignRelationships.RuntimeQualificationPassed
+                            && generatedCampaignRelationships.AtomicRollbackPassed
+                            && generatedCampaignRelationships.ExactCombatCatalogPassed;
+                        primaryRuntimeFrames = generatedCampaignRelationships.RuntimeFrames.Select(
+                            (frame, index) => new GameProjectRuntimeFrame
+                            {
+                                Index = index,
+                                ActionId = frame.RelationshipId + ":" + frame.Branch
+                                           + ":" + frame.ArcStep.ToString(
+                                               CultureInfo.InvariantCulture),
+                                Title = frame.Branch.ToString(),
+                                Category = "generated-relationship",
+                                StateHash = frame.AfterStateHash
+                            }).ToList();
+                        primaryRuntimePlanId = "generated-campaign-relationship-v1";
+                        primaryCapabilityCount = generatedCampaignRelationships.RelationshipCount;
+                        primaryPlannedActionCount = generatedCampaignRelationships.RuntimeFrames.Count;
+                        primaryCheckpointActionCount = generatedCampaignRelationships.RuntimeFrames.Count;
+                        primaryFinalReplayActionCount = generatedCampaignRelationships.RuntimeFrames.Count;
+                        primaryPlaythroughSignature = string.Join(">",
+                            generatedCampaignRelationships.RuntimeFrames.Select(frame =>
+                                frame.Branch + ":arc-"
+                                + frame.ArcStep.ToString(CultureInfo.InvariantCulture)));
+                    }
                 }
                 generatedWorld = _generatedSummary.BuildCurrent(
                     generatedSource,
@@ -776,7 +874,8 @@ public sealed class GameProjectBuildAndQualificationService
                     generatedWorldTravelOverlay,
                     generatedRegionTravel,
                     generatedEncounterCombat,
-                    generatedCampaignChoices);
+                    generatedCampaignChoices,
+                    generatedCampaignRelationships);
                 if (generatedWorld is { Present: true, Passed: false })
                     return RollbackFailure(
                         authoring,
@@ -1002,6 +1101,9 @@ public sealed class GameProjectBuildAndQualificationService
             if (generatedCampaignChoices is { Present: true, Passed: true })
                 summaryLines.AddRange(generatedCampaignChoices.HumanReviewFacts.Select(
                     fact => fact.Label + ": " + fact.Value));
+            if (generatedCampaignRelationships is { Passed: true })
+                summaryLines.AddRange(generatedCampaignRelationships.HumanReviewFacts.Select(
+                    fact => fact.Label + ": " + fact.Value));
 
             var buildResult = new GameProjectBuildResult
             {
@@ -1070,6 +1172,7 @@ public sealed class GameProjectBuildAndQualificationService
                 ,GeneratedRegionTravel = generatedRegionTravel
                 ,GeneratedEncounterCombat = generatedEncounterCombat
                 ,GeneratedCampaignChoices = generatedCampaignChoices
+                ,GeneratedCampaignRelationships = generatedCampaignRelationships
                 ,AcceptedMechanicsCompatibility = compatibility
             };
             var acceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult);
@@ -1179,7 +1282,9 @@ public sealed class GameProjectBuildAndQualificationService
         var path = Path.Combine(root, fileName);
         var entry = new GameProjectBuildHistoryEntry
         {
-            SchemaVersion = build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
+            SchemaVersion = build.GeneratedCampaignRelationships is { Passed: true }
+                ? GameProjectBuildHistoryReader.SchemaVersionV6
+                : build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
                 ? GameProjectBuildHistoryReader.SchemaVersionV5
                 : build.GeneratedEncounterCombat is { Present: true, Passed: true }
                 ? GameProjectBuildHistoryReader.SchemaVersionV4
@@ -1215,6 +1320,7 @@ public sealed class GameProjectBuildAndQualificationService
             ,GeneratedRegionTravel = build.GeneratedRegionTravel
             ,GeneratedEncounterCombat = build.GeneratedEncounterCombat
             ,GeneratedCampaignChoices = build.GeneratedCampaignChoices
+            ,GeneratedCampaignRelationships = build.GeneratedCampaignRelationships
             ,AcceptedMechanicsCompatibility = build.AcceptedMechanicsCompatibility
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));

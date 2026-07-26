@@ -168,6 +168,26 @@ internal sealed record Goal164CampaignRoute(
         var flee = Assert.Single(warmupFight.Actions, item => item.Enabled
             && item.Kind == GeneratedCampaignActionKind.FleeEncounter);
         current = service.Execute(flee.ActionId);
+        var relationship = build.Build.GeneratedCampaignRelationships?
+            .Overlay?.Bindings.SingleOrDefault(item =>
+                item.QuestArc.Any(step => step.QuestId == questId));
+        if (relationship is not null)
+        {
+            foreach (var region in RegionPath(build,
+                         RegionForMap(build, current.CurrentMapTitle),
+                         relationship.RegionId).Skip(1))
+                current = Goal162TestKit.TravelTo(service,
+                    MapForRegion(build, region).Name);
+            var dialogueTitle = build.Package.Game.Dialogues.Single(item =>
+                item.Id == relationship.DialogueId).Title;
+            current = Goal162TestKit.Interact(service, dialogueTitle);
+            var support = Assert.Single(current.Actions, item =>
+                item.Enabled
+                && item.Kind == GeneratedCampaignActionKind.ChooseDialogue
+                && item.Title.Contains("Поддерж",
+                    StringComparison.Ordinal));
+            current = service.Execute(support.ActionId);
+        }
 
         foreach (var preparationId in preparationIds)
         {

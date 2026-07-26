@@ -452,7 +452,10 @@ goal167AcceptedByHuman=false
 goal167AcceptedByCodex=false
 goal167ManualReviewRequired=false
 goal167ManualGateReady=false
-goal167IndependentAuditRequired=true
+goal167IndependentAuditRequired=false
+goal167IndependentAuditResult=BLOCKED_AT_FD69BFC8
+goal167IndependentAuditBlocker=choice_branch_qualification_reimplements_victory_without_goal166_exact_qualified_action_catalog
+goal167AuditBlocker=closed_by_goal168
 goal167TestsDiscovered=94
 goal167BehavioralTestsPassed=94
 goal167ChoiceOverlayPassed=true
@@ -468,7 +471,29 @@ goal167HiddenSmokeRetryCount=0
 goal167PortableAllSelectablePassed=true
 goal167PortableCoreOnlyPassed=true
 goal167ArtifactScopeViolationCount=0
-nextAction=independent_goal167_audit_and_plan_campaign_relationships_and_multi_quest_arcs
+goal168ImplementationStatus=GREEN
+goal168CandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal168Accepted=false
+goal168AcceptedByHuman=false
+goal168AcceptedByCodex=false
+goal168ManualReviewRequired=false
+goal168ManualGateReady=false
+goal168IndependentAuditRequired=true
+goal168TestsDiscovered=85
+goal168BehavioralTestsPassed=81
+goal168ExactCombatReusePassed=true
+goal168RelationshipOverlayPassed=true
+goal168MultiQuestArcPassed=true
+goal168RelationshipSaveContinuePassed=true
+goal168RelationshipMigrationPassed=true
+goal168HostReused=true
+goal168HostRebuilt=false
+goal168UnityEditorProcessStartCount=0
+goal168HiddenSmokeInvocationCount=1
+goal168PortableAllSelectablePassed=true
+goal168PortableCoreOnlyPassed=true
+goal168ArtifactScopeViolationCount=0
+nextAction=independent_goal168_audit_and_plan_world_events_or_relationship_consequences
 goal165BothRoutePassed=true
 goal165BasicAttackOnlyPassed=true
 goal165AbilityOnlyPassed=true
@@ -4809,6 +4834,16 @@ media_materialization_review_package_verification
 Goal 166 independent audit is recorded `GREEN_ACCEPTABLE_CANDIDATE_AT_D265E809`. Goal 167C closes the honestly published FAILED scaffold from `0c15e19d4141febddd447e792acaecaa17a98f90` as `GREEN_ACCEPTABLE_CANDIDATE`: 94/94 behavioral tests pass; exact Support, Challenge and Refuse routes, real rollback/two-replay proof, state-backed preview/journal/consequences, v5 `CHOICE_CURRENT`, v4 `CHOICES_PENDING`, sealed regeneration, exact save/continue, compatible/incompatible migration and portable all-selectable/core-only recovery are proven.
 
 The one permitted hidden smoke reused the cached host, started Unity zero times, passed five of five payload checks and received no retry. Its surrounding test initially read choice frames from the model file instead of `player-adapter-frames.json`; that assertion was corrected without rerunning smoke. RC is `CURRENT`. Goal167 remains unaccepted, creates no human gate and requires independent audit. Next action: `independent_goal167_audit_and_plan_campaign_relationships_and_multi_quest_arcs`.
+
+## Goal 168 choice-driven relationships and multi-quest arcs
+
+Goal167 independent audit is recorded `BLOCKED_AT_FD69BFC8`: branch qualification duplicated encounter victory and accepted the first successful raw ability instead of the exact Goal166 qualified-action catalog. Goal168 closes that P1 by routing Support and Challenge through the exact catalog, including ability-only and mixed utility-first profiles where utility/no-op success is not encounter progress.
+
+Generated dialogue IDs are exact relationship IDs. Generated quests are assigned to at most one actor relationship and ordered from generated data for arbitrary quest counts. Assigned quests use `AutoStart=false`; Support progresses decision → quest → exact combat/manual turn-in → next quest through dialogue until completion. Challenge flee/victory/recovery and Refuse remain exclusive Runtime consequences. The controlled overlay changes only bound generated dialogues and assigned generated quest relationship metadata/AutoStart.
+
+History v6 restores `RELATIONSHIPS_CURRENT`; genuine v5 remains `RELATIONSHIPS_PENDING` and `PROJECT_NOT_READY` until one ordinary build. Regeneration/rollback seal summary, overlay and inventory. Exact middle-arc saves continue without Runtime start. Migration preserves same-world compatible quest progress, preserves decision/reputation but resets arcs across worlds, drops incompatible relationships and creates no ghost row.
+
+Goal168 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no human gate and requires independent audit. One cached hidden smoke reused its host, rebuilt nothing, started Unity zero times and had no retry; RC and portable all-selectable are current, while portable core-only has no false RC readiness. Next action: `independent_goal168_audit_and_plan_world_events_or_relationship_consequences`.
 
 
 

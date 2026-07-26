@@ -1,6 +1,6 @@
 # Milestone Gates
 
-Goal166 independent audit is required before campaign choice branching. Exact qualified combat-action catalog, real recovery evidence and zero-scope/process evidence are automated; no human acceptance is implied.
+Goal168 is the current GREEN automated candidate. Goal167 audit P1 is closed through exact Goal166 qualified-action catalog reuse and relationship/multi-quest arc qualification. Goal168 is not accepted, creates no human gate and requires independent audit before world events or deeper relationship consequences.
 
 Status: Goal 097 acceptance-gate plan
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
@@ -274,3 +274,7 @@ Goal161 is BLOCKED with `accepted=false`, `manualReviewRequired=false`, `manualG
 ## Goal167C generated choice branching gate record
 
 Goal167C is a GREEN acceptable automated candidate with `accepted=false`, `manualReviewRequired=false`, `manualGateReady=false` and `independentAuditRequired=true`. It closes the published FAILED scaffold with 94/94 tests, exact three-branch Runtime qualification, atomic rollback and independent replay, choice-current v5 readiness, save/migration/regeneration proof, one reused-cache GREEN hidden smoke, RC `CURRENT`, and portable all/core profiles. Unity Editor starts and smoke retries are both zero. This creates no human gate.
+
+## Goal168 choice-driven relationship arc gate record
+
+Goal167 independent audit is `BLOCKED_AT_FD69BFC8`; Goal168 closes the exact-catalog P1. Relationship identity/assignment/order, controlled overlay, full Support arcs, exclusive Challenge/Refuse, relationship projection, v6 readiness, regeneration/rollback seals, exact save continuation, explicit migration and portable RC qualification are automated and GREEN. Goal168 remains `accepted=false`, has no manual gate and requires independent audit.

@@ -1,0 +1,23 @@
+{
+    "status":  "GREEN",
+    "currentSchemaVersion":  "unified_game_project_build_history_v6",
+    "currentRelationshipStatus":  "RELATIONSHIPS_CURRENT",
+    "genuineV5RelationshipStatus":  "RELATIONSHIPS_PENDING",
+    "genuineV5CampaignStatus":  "PROJECT_NOT_READY",
+    "legacyVersionsRead":  [
+                               "v4",
+                               "v3",
+                               "v2"
+                           ],
+    "oldProjectBuildInvocationCount":  1,
+    "oldProjectUpgradedWithoutSourceRewrite":  true,
+    "combatChoiceSummariesPreserved":  true,
+    "sealIncludes":  [
+                         "summary",
+                         "overlay",
+                         "inventory"
+                     ],
+    "tamperRejected":  true,
+    "regenerationCurrent":  true,
+    "rollbackCurrent":  true
+}

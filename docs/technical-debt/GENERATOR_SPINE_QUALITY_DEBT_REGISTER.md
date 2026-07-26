@@ -206,3 +206,8 @@ Goal161T closes the standalone qualification debt at the Application seam. The p
 ## Goal167 test-debt closure
 
 The published Goal167 P0 test debt is closed by Goal167C: the placeholder inventory test was replaced by a 94-test behavioral matrix and all 94 pass. The cached smoke itself passed; its surrounding test briefly used the wrong payload frame filename and was corrected without consuming a retry. No new P0/P1 debt remains from this continuation. Independent audit is still required.
+
+## Goal168 exact-catalog and relationship-arc closure
+
+The Goal167 audit blocker at `fd69bfc8` is closed by a shared exact combat route that consumes the Goal166 descriptor/effect catalog. Relationship assignment is unique and deterministic for arbitrary generated quest counts, assigned quests are dialogue-started, and migration has explicit preserve/reset/drop outcomes with no ghost rows. Broader world events and richer relationship consequences are future slices, not hidden debt in Goal168.
+Goal168 closes the Goal167 profile-neutral P1 by replacing duplicate raw ability victory selection with the exact Goal166 qualified-action catalog. Utility/no-op success no longer counts as encounter progress. Data-derived relationship arcs, v6 history and explicit save migration are covered without Runtime, public GamePackage, Unity, standalone or RC implementation changes. No new P0/P1 debt is carried; independent audit remains required.

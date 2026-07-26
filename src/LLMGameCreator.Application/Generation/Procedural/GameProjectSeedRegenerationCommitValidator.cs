@@ -180,6 +180,14 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                 : new GeneratedCampaignChoiceBindingResult();
             if (!choiceBinding.Passed) diagnostics.Add("semantic.history_choice_binding_invalid");
             var branchableDialogueCount = choiceBinding.Bindings.Count(item => item.Branches.Count > 0);
+            var relationshipBinding = source is { Present: true, Passed: true } && choiceBinding.Passed
+                ? new GeneratedCampaignRelationshipBindingService().Bind(
+                    source, package, choiceBinding)
+                : new GeneratedCampaignRelationshipBindingResult();
+            if (!relationshipBinding.Passed)
+                diagnostics.Add("semantic.history_relationship_binding_invalid");
+            var relationshipCount = relationshipBinding.Bindings.Count(item =>
+                item.QuestArc.Count > 0);
 
             var authoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
             var state = authoring.OpenProject(project, package, operationLease);
@@ -225,7 +233,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             if (generatedEncounterCount > 0)
             {
                 var combat = history.GeneratedEncounterCombat;
-                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV5
+                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV6
                     || combat is not
                     {
                         Present: true,
@@ -250,7 +258,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             if (branchableDialogueCount > 0)
             {
                 var choices = history.GeneratedCampaignChoices;
-                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV5
+                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV6
                     || choices is not
                     {
                         Present: true,
@@ -276,13 +284,58 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                             .SequenceEqual([1, 2]))
                     || !string.Equals(choices.FinalPackageSha256, history.PackageSha256,
                         StringComparison.Ordinal)
-                    || !string.Equals(choices.FinalStateHash, history.FinalStateHash,
+                    || relationshipCount == 0
+                    && !string.Equals(choices.FinalStateHash, history.FinalStateHash,
                         StringComparison.Ordinal)
                     || !string.Equals(choices.BranchFlagInventorySha256,
                         GeneratedCampaignChoiceCanonical.Hash(choices.Overlay.FlagInventory),
                         StringComparison.Ordinal))
                     diagnostics.Add("semantic.history_choice_qualification_incomplete");
             }
+            var relationships = history.GeneratedCampaignRelationships;
+            if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV6
+                || relationshipCount == 0
+                && relationships is not
+                {
+                    Present: false,
+                    Passed: true,
+                    Status: "ABSENT",
+                    RelationshipCount: 0,
+                    ArcQuestCount: 0
+                }
+                || relationshipCount > 0
+                && (relationships is not
+                    {
+                        Present: true,
+                        Passed: true,
+                        Status: "RELATIONSHIPS_CURRENT",
+                        AssignmentUnique: true,
+                        ArcOrderingDeterministic: true,
+                        OverlayControlledDeltaPassed: true,
+                        RuntimeQualificationPassed: true,
+                        ExclusiveBranchingPassed: true,
+                        ArcProgressionPassed: true,
+                        ExactCombatCatalogPassed: true,
+                        SupportPassed: true,
+                        SupportReplayEquivalent: true,
+                        ChallengeFleePassed: true,
+                        ChallengeVictoryPassed: true,
+                        ChallengeRecoveryPassed: true,
+                        RefusePassed: true,
+                        AtomicRollbackPassed: true,
+                        Overlay: { Passed: true }
+                    }
+                    || relationships.RelationshipCount != relationshipCount
+                    || relationships.QualifiedRelationshipCount != relationshipCount
+                    || relationships.ArcQuestCount != relationships.QualifiedArcQuestCount
+                    || !string.Equals(relationships.ExactPackageSha256,
+                        history.PackageSha256, StringComparison.Ordinal)
+                    || !string.Equals(relationships.FinalStateHash,
+                        history.FinalStateHash, StringComparison.Ordinal)
+                    || !string.Equals(relationships.QualifiedActionsSha256,
+                        history.GeneratedEncounterCombat?.QualifiedActionsSha256,
+                        StringComparison.Ordinal)))
+                diagnostics.Add("semantic.history_relationship_qualification_incomplete");
             Match(history.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
                 request.CandidateSeal.MechanicsProfileId,
                 "semantic.mechanics_profile_mismatch", diagnostics);
@@ -316,6 +369,18 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                     history.GeneratedCampaignChoices?.Overlay?.FlagInventory),
                 request.CandidateSeal.GeneratedCampaignChoiceFlagInventorySha256,
                 "semantic.generated_choice_flag_inventory_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.GeneratedCampaignRelationships),
+                request.CandidateSeal.GeneratedCampaignRelationshipSummarySha256,
+                "semantic.generated_relationship_summary_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.GeneratedCampaignRelationships?.Overlay),
+                request.CandidateSeal.GeneratedCampaignRelationshipOverlaySha256,
+                "semantic.generated_relationship_overlay_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService.CanonicalSha256(
+                    history.GeneratedCampaignRelationships?.RelationshipInventory),
+                request.CandidateSeal.GeneratedCampaignRelationshipInventorySha256,
+                "semantic.generated_relationship_inventory_mismatch", diagnostics);
             Match(history.PackageSha256, request.CandidateSeal.CandidatePackageSha256,
                 "semantic.history_package_mismatch", diagnostics);
             Match(history.CompositionPackageSha256, request.CandidateSeal.CandidateCompositionSha256,
