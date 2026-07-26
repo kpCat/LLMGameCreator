@@ -131,6 +131,21 @@ public sealed record GeneratedCampaignRelationshipRuntimeFrame
     public bool Passed { get; init; }
 }
 
+public sealed record GeneratedCampaignRelationshipBranchQualification
+{
+    public string RelationshipId { get; init; } = string.Empty;
+    public GeneratedCampaignRelationshipBranch Branch { get; init; }
+    public bool Available { get; init; }
+    public bool Required { get; init; }
+    public bool Passed { get; init; }
+    public bool ReplayEquivalent { get; init; }
+    public int RuntimeStartCount { get; init; }
+    public int RuntimeCommandCount { get; init; }
+    public int ArcLength { get; init; }
+    public string FinalStateHash { get; init; } = string.Empty;
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
+}
+
 public sealed record GeneratedCampaignRelationshipHumanFact
 {
     public string Label { get; init; } = string.Empty;
@@ -162,12 +177,27 @@ public sealed record GameProjectGeneratedCampaignRelationshipSummary
     public bool RefusePassed { get; init; }
     public bool AtomicRollbackPassed { get; init; }
     public bool SaveContinuationFactsPassed { get; init; }
+    public string SaveContinuationFactsEvaluationStatus { get; init; } =
+        "NOT_EVALUATED_AT_BUILD";
+    public int SupportAvailableCount { get; init; }
+    public int SupportRequiredCount { get; init; }
+    public int SupportQualifiedCount { get; init; }
+    public int ChallengeAvailableCount { get; init; }
+    public int ChallengeRequiredCount { get; init; }
+    public int ChallengeQualifiedCount { get; init; }
+    public int RefuseAvailableCount { get; init; }
+    public int RefuseRequiredCount { get; init; }
+    public int RefuseQualifiedCount { get; init; }
+    public int UnavailableBranchRuntimeStartCount { get; init; }
     public string ExactPackageSha256 { get; init; } = string.Empty;
     public string RelationshipOverlaySha256 { get; init; } = string.Empty;
     public string RelationshipInventorySha256 { get; init; } = string.Empty;
+    public string RelationshipBranchMatrixSha256 { get; init; } = string.Empty;
     public string QualifiedActionsSha256 { get; init; } = string.Empty;
     public string FinalStateHash { get; init; } = string.Empty;
     public IReadOnlyList<GeneratedCampaignRelationshipInventoryRow> RelationshipInventory { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignRelationshipBranchQualification>
+        BranchQualifications { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRelationshipRuntimeFrame> RuntimeFrames { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRelationshipHumanFact> HumanReviewFacts { get; init; } = [];
     public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; }

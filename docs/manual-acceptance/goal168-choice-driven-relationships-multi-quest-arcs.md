@@ -10,4 +10,4 @@ The Отношения UI projects flags, reputation, quest and encounter state.
 
 One cached hidden smoke reused the host, rebuilt nothing, started Unity zero times and received no retry. RC, portable all-selectable and portable core-only without false readiness pass. Goal142, Goal148 and generation sidecars remain byte-identical.
 
-Goal168 is not accepted by a human or Codex. No manual gate exists. Independent audit is required before world events or deeper relationship consequences.
+Goal168 is not accepted by a human or Codex. No manual gate exists. Its independent audit is `BLOCKED_AT_BBFD46A2`: v6 relationship truth required all branches and a nonempty Support arc, exact relationship combat accepted only health decrease, and build save-continuation truth was hardcoded. Goal169 closes those findings without changing Goal168 acceptance; Goal169 itself remains `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION` pending independent blocker audit.

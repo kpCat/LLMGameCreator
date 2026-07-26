@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 166 exact qualified combat actions and real recovery qualification — GREEN acceptable candidate
+Updated by: Goal 169 profile-neutral relationships and reactive regional events — BLOCKED after the single hidden-smoke Move-frame assertion
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
@@ -49,8 +49,8 @@ Goal165 independently records that Goal164 audit as `BLOCKED_AT_15A8F2AB`: the r
 The campaign player now captures an exact in-memory JSON checkpoint immediately before a successful encounter start. Genuine Runtime defeat enters `DEFEATED` and shows `Поражение` with `Повторить встречу`, `Продолжить с сохранения` and `Начать новую игру`. Retry restores exact map, inventory, quest and reputation truth, invokes Runtime Start zero times and dispatches `StartEncounter` once. Exact save recovery invokes Runtime Start zero times; New Game invokes it once. Checkpoints clear on victory, flee, successful load/migration and new game, and truth drift yields `STALE_PROJECT` before any Runtime command. The physical portable core-only copy has no operational pointer and never claims RC readiness. Goal165 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
 
 ```text
-gate_status=goal166_green_exact_qualified_combat_actions_and_real_recovery_qualification
-current_user_action=independent_goal166_audit_and_plan_campaign_choice_branching
+gate_status=goal169_blocked_after_single_hidden_smoke_move_frame_assertion
+current_user_action=independent_goal169_blocker_audit_and_followup_without_retrying_consumed_smoke
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -4843,7 +4843,19 @@ Generated dialogue IDs are exact relationship IDs. Generated quests are assigned
 
 History v6 restores `RELATIONSHIPS_CURRENT`; genuine v5 remains `RELATIONSHIPS_PENDING` and `PROJECT_NOT_READY` until one ordinary build. Regeneration/rollback seal summary, overlay and inventory. Exact middle-arc saves continue without Runtime start. Migration preserves same-world compatible quest progress, preserves decision/reputation but resets arcs across worlds, drops incompatible relationships and creates no ghost row.
 
-Goal168 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no human gate and requires independent audit. One cached hidden smoke reused its host, rebuilt nothing, started Unity zero times and had no retry; RC and portable all-selectable are current, while portable core-only has no false RC readiness. Next action: `independent_goal168_audit_and_plan_world_events_or_relationship_consequences`.
+Goal168 implementation remains GREEN, but its independent audit is `BLOCKED_AT_BBFD46A2`. Goal169 closes both P1 findings and the hardcoded build-time save-continuation truth debt. Goal168 remains `accepted=false`, has no human gate and no further independent-audit action of its own.
+
+## Goal 169 profile-neutral relationships and reactive regional events
+
+Relationship qualification now executes only branches actually present in generated data and records per-relationship `Available`/`Required`/`Passed` truth. The all-branch, Challenge-only with `QuestArc=0`, Support/Refuse without Challenge, Support-only, Refuse-only and no-branch profiles are GREEN; unavailable branches start Runtime zero times. Legacy Goal168 v6 all-branch GREEN rows remain compatible, while partial/false rows are rejected.
+
+Exact relationship combat is effect-neutral across exact `TARGET_HEALTH_DECREASE`, `TARGET_STAT_CHANGED` and `TARGET_STATUS_CHANGED` descriptors, including delayed status progress. Runtime success without an exact descriptor match and encounter-state change is not progress. Build qualification now records `SaveContinuationFactsEvaluationStatus=NOT_EVALUATED_AT_BUILD` and `SaveContinuationFactsPassed=false`; real AVAILABLE/RESOLVED save proofs remain a separate GREEN matrix.
+
+Data-derived Support gratitude, Challenge aftermath and Refusal fallout events use exact event-dialogue identity, deterministic safe reachable placement and a controlled overlay limited to event prototypes, dialogues, interactions, map entities and metadata. Ordinary relationship, movement, interaction, dialogue and choice Runtime routes prove `LOCKED` → `AVAILABLE` → exactly-once `RESOLVED`. Support reputation derives from the final quest reward; Challenge/Refuse do not duplicate the original consequence. The state-backed «События мира» tab, human map markers and consequence projection expose no raw IDs, hashes or paths.
+
+History v7 restores `REGIONAL_EVENTS_CURRENT` with event qualification as primary runtime truth. Genuine v6 remains relationships-current/events-pending/`PROJECT_NOT_READY` with «Собрать и играть», and one ordinary build upgrades it without rewriting source. Regeneration/rollback seal the branch matrix and event summary/overlay/inventory. Exact AVAILABLE and RESOLVED continuation, compatible preservation, incompatible drop and no-ghost migration are GREEN.
+
+Goal169 product matrices and the generated standalone launch are GREEN, but the candidate is `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION`, `accepted=false`, has no manual gate and requires independent audit. Of 108 discovered behavioral cases, all 107 non-smoke cases pass and the sole hidden-smoke case is blocked. Exactly one cached hidden smoke reused the host, rebuilt nothing, started Unity zero times, exited 0 with 5/5 self-checks and received no retry. Its payload had the required event/relationship/choice facts, CURRENT RC and portable truth, but 84 movement frames used direction-only titles and zero had the required explicit `Move.` prefix, so Goal169 payload qualification failed. The post-smoke fix now emits `Move.<Direction>` while retaining ordinary `PlayerCommand.Move`; policy forbids reinterpreting or rerunning the consumed smoke, so retry remains zero. Portable all-selectable and core-only checks pass without false core-only RC readiness. Next action: `independent_goal169_blocker_audit_and_followup_without_retrying_consumed_smoke`.
 
 
 

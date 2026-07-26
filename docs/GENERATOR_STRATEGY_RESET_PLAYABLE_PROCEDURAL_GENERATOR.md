@@ -374,3 +374,13 @@ The relationship seam is a projection over exact generated dialogue provenance, 
 
 Support starts and advances one assigned quest at a time through dialogue, exact catalog-qualified combat and manual turn-in until completion. Challenge flee/victory/recovery and Refuse use exact Runtime consequences. History v6, sealed regeneration/rollback, exact middle-arc continuation and explicit compatible-preserve/world-reset/incompatible-drop migration retain GamePackage and Runtime as authority.
 Goal168 update: exact generated dialogue IDs now define actor/faction relationships, with uniquely assigned data-ordered generated quests forming sequential Support arcs. Challenge and Refuse remain exclusive Runtime consequences. All relationship combat consumes the exact Goal166 qualified-action catalog; v6 history, exact saves and explicit migration preserve Runtime/GamePackage authority.
+
+## 23. Goal169 profile-neutral relationships and reactive regional events
+
+Relationship qualification follows the selected profile instead of imposing a universal three-branch shape. Every relationship persists exact branch availability, requirement and qualification truth; absent branches execute no Runtime route. Exact combat consumes the existing qualified-action catalog across health, stat and status effects and accepts progress only when the exact descriptor matches a changed encounter state.
+
+Reactive regional events are a controlled authoring-time overlay derived from Support completion, Challenge victory aftermath and Refusal fallout. Exact event-dialogue identity, source-derived reward/prerequisite fingerprints and deterministic reachable placement retain GamePackage as authority. Runtime reaches and resolves events only through ordinary relationship, movement, interaction, dialogue and choice commands. The state-backed projection/UI reads Runtime flags and exact event inventory.
+
+History v7 makes event qualification the primary complete route while retaining independent combat, choice and relationship summaries. Genuine v6 remains rebuild-required. Regeneration seals event and relationship matrices; exact continuation and fingerprint migration preserve only compatible event state. Runtime, public GamePackage schema, Unity, standalone and RC implementations remain unchanged.
+
+Goal169 product matrices and standalone launch are GREEN, but publication is `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION`: the single permitted smoke emitted direction-only movement frame titles instead of the required explicit `Move.` prefix. The post-smoke fix emits `Move.<Direction>` without changing the Runtime command route; retry remains zero and an independent blocker audit is required.

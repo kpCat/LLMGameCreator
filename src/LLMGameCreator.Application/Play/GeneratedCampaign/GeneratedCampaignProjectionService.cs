@@ -342,6 +342,15 @@ public sealed class GeneratedCampaignProjectionService
     private static string Symbol(GamePackageDefinition package, EntityInstanceDefinition entity)
     {
         var components = GeneratedCampaignActionPlanner.Components(package, entity).ToList();
+        var dialogueId = components.Select(component =>
+                component.Args.GetValueOrDefault("dialogueId"))
+            .FirstOrDefault(value => !string.IsNullOrWhiteSpace(value));
+        if (dialogueId is not null
+            && package.Game.Dialogues.Any(item =>
+                item.Id == dialogueId
+                && item.Metadata.ContainsKey(
+                    "generatedRegionalEventId")))
+            return "★";
         if (components.Any(component => component.Args.ContainsKey("dialogueId"))) return "☺";
         if (components.Any(component => component.Args.ContainsKey(
                 MapTransitionInteractionContract.DestinationMapIdKey))) return "⇥";

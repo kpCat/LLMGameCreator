@@ -43,7 +43,8 @@ public sealed class GameProjectGeneratedWorldSummaryService
         GameProjectGeneratedRegionTravelSummary? travel = null,
         GameProjectGeneratedEncounterCombatSummary? combat = null,
         GameProjectGeneratedCampaignChoiceSummary? choices = null,
-        GameProjectGeneratedCampaignRelationshipSummary? relationships = null)
+        GameProjectGeneratedCampaignRelationshipSummary? relationships = null,
+        GameProjectGeneratedCampaignRegionalEventSummary? regionalEvents = null)
     {
         ArgumentNullException.ThrowIfNull(validation);
         ArgumentNullException.ThrowIfNull(compositionPackage);
@@ -67,6 +68,10 @@ public sealed class GameProjectGeneratedWorldSummaryService
                                  || !AuthorizedChoiceDialogueChange(diagnostic, choices))
             .Where(diagnostic => relationships is not { Present: true, Passed: true }
                                  || !AuthorizedRelationshipChange(diagnostic, relationships))
+            .Where(diagnostic => regionalEvents is not
+                                 { Present: true, Passed: true }
+                                 || !AuthorizedRegionalEventChange(
+                                     diagnostic, regionalEvents))
             .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToList();
         var combatReady = validation.Source.Counts.Encounters == 0
                           || combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" };
@@ -74,9 +79,18 @@ public sealed class GameProjectGeneratedWorldSummaryService
         var relationshipsReady = relationships is null
                                  || relationships is { Present: false, Passed: true, Status: "ABSENT" }
                                  || relationships is { Present: true, Passed: true, Status: "RELATIONSHIPS_CURRENT" };
+        var regionalEventsReady = regionalEvents is
+            { Present: false, Passed: true, Status: "ABSENT" }
+            or
+            {
+                Present: true,
+                Passed: true,
+                Status: "REGIONAL_EVENTS_CURRENT"
+            };
         var status = diagnostics.Count > 0
             ? "INVALID"
-            : combatReady && choicesReady && relationshipsReady && travelReady
+            : combatReady && choicesReady && relationshipsReady
+              && regionalEventsReady && travelReady
               && activation is { Present: true, Passed: true }
                 ? "CAMPAIGN_CURRENT"
             : travelReady && activation is { Present: true, Passed: true }
@@ -96,7 +110,9 @@ public sealed class GameProjectGeneratedWorldSummaryService
         GameProjectGeneratedRegionTravelSummary? travel = null,
         GameProjectGeneratedEncounterCombatSummary? combat = null,
         GameProjectGeneratedCampaignChoiceSummary? choices = null,
-        GameProjectGeneratedCampaignRelationshipSummary? relationships = null)
+        GameProjectGeneratedCampaignRelationshipSummary? relationships = null,
+        GameProjectGeneratedCampaignRegionalEventSummary?
+            regionalEvents = null)
     {
         var source = ProjectSource(validation);
         if (source is null || !source.Passed || lastSuccessful is not { Present: true, Passed: true }) return source;
@@ -122,12 +138,28 @@ public sealed class GameProjectGeneratedWorldSummaryService
                             };
         var relationshipsPending = relationships is
             { Present: true, Passed: false, Status: "RELATIONSHIPS_PENDING" };
+        var regionalEventsPending = regionalEvents is
+            {
+                Passed: false,
+                Status: "REGIONAL_EVENTS_PENDING"
+            };
         var status = choicesCurrent && relationshipsPending
                      && combatCurrent
                      && travel is { Present: true, Passed: true }
             ? matchesCurrentAuthoring
                 ? "RELATIONSHIPS_PENDING"
                 : "LAST_SUCCESS"
+            : choicesCurrent && regionalEventsPending
+              && (relationships is
+                  {
+                      Passed: true,
+                      Status: "RELATIONSHIPS_CURRENT"
+                  })
+              && combatCurrent
+              && travel is { Present: true, Passed: true }
+                ? matchesCurrentAuthoring
+                    ? "REGIONAL_EVENTS_PENDING"
+                    : "LAST_SUCCESS"
             : choicesCurrent
                      && (relationships is null
                          || relationships is
@@ -142,6 +174,11 @@ public sealed class GameProjectGeneratedWorldSummaryService
                              Passed: true,
                              Status: "RELATIONSHIPS_CURRENT"
                          })
+                     && regionalEvents is
+                     {
+                         Passed: true,
+                         Status: "REGIONAL_EVENTS_CURRENT" or "ABSENT"
+                     }
                      && (source.EncounterCount == 0
                          || combat is { Present: true, Passed: true, Status: "CAMPAIGN_CURRENT" })
             ? matchesCurrentAuthoring ? "CAMPAIGN_CURRENT" : "LAST_SUCCESS"
@@ -215,6 +252,18 @@ public sealed class GameProjectGeneratedWorldSummaryService
             }).ToList()
             : [];
 
+    public static IReadOnlyList<StandaloneHumanReviewFact>
+        StandaloneRegionalEventHumanFacts(
+            GameProjectGeneratedCampaignRegionalEventSummary? summary) =>
+        summary is { Passed: true }
+            ? summary.HumanReviewFacts.Select(fact =>
+                new StandaloneHumanReviewFact
+                {
+                    Label = fact.Label,
+                    Value = fact.Value
+                }).ToList()
+            : [];
+
     private static bool AuthorizedTravelMapChange(
         string diagnostic,
         GeneratedWorldTravelOverlayDocument overlay)
@@ -269,6 +318,20 @@ public sealed class GameProjectGeneratedWorldSummaryService
                 && item.DefinitionId == questId) == true;
         }
         return false;
+    }
+
+    private static bool AuthorizedRegionalEventChange(
+        string diagnostic,
+        GameProjectGeneratedCampaignRegionalEventSummary regionalEvents)
+    {
+        const string mapPrefix =
+            "generated_overlay.record_changed:game.maps:";
+        if (!diagnostic.StartsWith(mapPrefix,
+                StringComparison.Ordinal))
+            return false;
+        var mapId = diagnostic[mapPrefix.Length..];
+        return regionalEvents.Overlay?.Bindings.Any(item =>
+            item.MapId == mapId) == true;
     }
 
     public static string FormatCard(

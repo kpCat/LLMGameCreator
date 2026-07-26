@@ -14,7 +14,7 @@ namespace LLMGameCreator.Tests.Application.Goal168;
 public sealed class Goal168StandalonePortabilityTests
 {
     [Fact]
-    public void Behavioral_standalone_payload_uses_exact_v6_relationship_primary()
+    public void Behavioral_standalone_payload_uses_exact_v7_regional_event_primary()
     {
         var state = Goal164PortableState.AllSelectable;
         var history = JsonSerializer.Deserialize<GameProjectBuildHistoryEntry>(
@@ -24,39 +24,41 @@ public sealed class Goal168StandalonePortabilityTests
                 PropertyNameCaseInsensitive = true
             });
 
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6,
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV7,
             history?.SchemaVersion);
         Assert.Equal(state.Build.Build.PackageSha256,
             state.Service.Request?.PackageSha256);
         Assert.Equal(
-            state.Build.Build.GeneratedCampaignRelationships?.FinalStateHash,
+            state.Build.Build.GeneratedCampaignRegionalEvents?.FinalStateHash,
             state.Service.Request?.FinalStateHash);
     }
 
     [Fact]
-    public void Behavioral_standalone_payload_contains_relationship_frames_and_facts()
+    public void Behavioral_standalone_payload_contains_regional_event_frames_and_facts()
     {
         var request = Goal164PortableState.AllSelectable.Service.Request!;
 
         Assert.NotEmpty(request.RuntimeFrames);
         Assert.All(request.RuntimeFrames, frame =>
-            Assert.Equal("generated-relationship", frame.Category));
+            Assert.Equal("generated-regional-event", frame.Category));
         Assert.Contains(request.HumanReviewFacts,
-            item => item.Label == "Отношения");
+            item => item.Label == "События мира");
         Assert.Contains(request.HumanReviewFacts,
-            item => item.Label == "Заданий в арках");
+            item => item.Label == "Благодарности");
         Assert.Contains(request.HumanReviewFacts,
-            item => item.Label == "Максимальная длина арки");
+            item => item.Label == "Последствия вызовов и отказов");
     }
 
     [Fact]
-    public void Behavioral_all_selectable_portable_is_relationship_and_rc_current()
+    public void Behavioral_all_selectable_portable_is_regional_event_and_rc_current()
     {
         var state = Goal164PortableState.AllSelectable;
 
         Assert.Equal("GREEN", state.Standalone.Status);
         Assert.Equal("RELATIONSHIPS_CURRENT",
             state.Snapshot.GeneratedCampaignRelationships?.Status);
+        Assert.Equal("REGIONAL_EVENTS_CURRENT",
+            state.Snapshot.GeneratedCampaignRegionalEvents?.Status);
         Assert.Equal("CAMPAIGN_CURRENT",
             state.Snapshot.GeneratedWorld?.Status);
         Assert.Equal("CURRENT",
@@ -73,6 +75,8 @@ public sealed class Goal168StandalonePortabilityTests
         Assert.Equal("GREEN", state.Standalone.Status);
         Assert.True(state.Snapshot.GeneratedCampaignRelationships is
             { Passed: true, Status: "RELATIONSHIPS_CURRENT" or "ABSENT" });
+        Assert.True(state.Snapshot.GeneratedCampaignRegionalEvents is
+            { Passed: true, Status: "REGIONAL_EVENTS_CURRENT" or "ABSENT" });
         Assert.Equal("CAMPAIGN_CURRENT",
             state.Snapshot.GeneratedWorld?.Status);
         Assert.NotEqual("CURRENT",
@@ -82,7 +86,7 @@ public sealed class Goal168StandalonePortabilityTests
     }
 
     [Fact]
-    public void Behavioral_physical_all_selectable_copy_restores_v6_and_rc()
+    public void Behavioral_physical_all_selectable_copy_restores_v7_and_rc()
     {
         var source = Goal164PortableState.AllSelectable.Build;
         using var portable = Goal156TestKit.Copy(source.Project,
@@ -92,6 +96,8 @@ public sealed class Goal168StandalonePortabilityTests
 
         Assert.Equal("RELATIONSHIPS_CURRENT",
             snapshot.GeneratedCampaignRelationships?.Status);
+        Assert.Equal("REGIONAL_EVENTS_CURRENT",
+            snapshot.GeneratedCampaignRegionalEvents?.Status);
         Assert.Equal("CAMPAIGN_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.Equal("CURRENT",
             snapshot.ReleaseCandidateConfigurationStatus);
@@ -108,6 +114,8 @@ public sealed class Goal168StandalonePortabilityTests
 
         Assert.True(snapshot.GeneratedCampaignRelationships is
             { Passed: true, Status: "RELATIONSHIPS_CURRENT" or "ABSENT" });
+        Assert.True(snapshot.GeneratedCampaignRegionalEvents is
+            { Passed: true, Status: "REGIONAL_EVENTS_CURRENT" or "ABSENT" });
         Assert.Equal("CAMPAIGN_CURRENT", snapshot.GeneratedWorld?.Status);
         Assert.NotEqual("CURRENT",
             snapshot.ReleaseCandidateConfigurationStatus);

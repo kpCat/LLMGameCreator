@@ -25,6 +25,8 @@ public sealed class GeneratedCampaignSessionService
     private readonly GeneratedCampaignDialogueChoicePreviewService _choicePreview;
     private readonly GeneratedCampaignDecisionJournalService _decisionJournal;
     private readonly GeneratedCampaignRelationshipProjectionService _relationshipProjection;
+    private readonly GeneratedCampaignRegionalEventProjectionService
+        _regionalEventProjection;
     private readonly List<GeneratedCampaignConsequence> _consequenceTimeline = [];
     private GeneratedCampaignSession? _session;
     private GeneratedCampaignSessionStatus _status;
@@ -45,13 +47,15 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignRecoveryService? recovery = null,
         GeneratedCampaignDialogueChoicePreviewService? choicePreview = null,
         GeneratedCampaignDecisionJournalService? decisionJournal = null,
-        GeneratedCampaignRelationshipProjectionService? relationshipProjection = null)
+        GeneratedCampaignRelationshipProjectionService? relationshipProjection = null,
+        GeneratedCampaignRegionalEventProjectionService?
+            regionalEventProjection = null)
         : this(currentProject, truths, runtime, saves, migration, planner, projection, events,
             new GeneratedCampaignRuntimeDispatchService(runtime),
             new GeneratedCampaignQuestReadinessService(),
             new GeneratedCampaignConsequenceProjector(),
             recovery ?? new GeneratedCampaignRecoveryService(), choicePreview, decisionJournal,
-            relationshipProjection)
+            relationshipProjection, regionalEventProjection)
     {
     }
 
@@ -70,7 +74,9 @@ public sealed class GeneratedCampaignSessionService
         GeneratedCampaignRecoveryService? recovery = null,
         GeneratedCampaignDialogueChoicePreviewService? choicePreview = null,
         GeneratedCampaignDecisionJournalService? decisionJournal = null,
-        GeneratedCampaignRelationshipProjectionService? relationshipProjection = null)
+        GeneratedCampaignRelationshipProjectionService? relationshipProjection = null,
+        GeneratedCampaignRegionalEventProjectionService?
+            regionalEventProjection = null)
     {
         _currentProject = currentProject;
         _truths = truths;
@@ -88,6 +94,8 @@ public sealed class GeneratedCampaignSessionService
         _decisionJournal = decisionJournal ?? new GeneratedCampaignDecisionJournalService();
         _relationshipProjection = relationshipProjection
                                   ?? new GeneratedCampaignRelationshipProjectionService();
+        _regionalEventProjection = regionalEventProjection
+                                   ?? new GeneratedCampaignRegionalEventProjectionService();
     }
 
     public int RuntimeStartInvocationCount { get; private set; }
@@ -766,7 +774,12 @@ public sealed class GeneratedCampaignSessionService
                 || truth?.RelationshipOverlay is null
                 ? []
                 : _relationshipProjection.Project(
-                    package, runtimeSession, truth.RelationshipOverlay, readiness).Rows
+                    package, runtimeSession, truth.RelationshipOverlay, readiness).Rows,
+            RegionalEvents = package is null || runtimeSession is null
+                || truth?.RegionalEventOverlay is null
+                ? []
+                : _regionalEventProjection.Project(package,
+                    runtimeSession, truth.RegionalEventOverlay)
         };
     }
 

@@ -186,8 +186,9 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                 : new GeneratedCampaignRelationshipBindingResult();
             if (!relationshipBinding.Passed)
                 diagnostics.Add("semantic.history_relationship_binding_invalid");
-            var relationshipCount = relationshipBinding.Bindings.Count(item =>
-                item.QuestArc.Count > 0);
+            var relationshipCount = relationshipBinding.Bindings.Count;
+            var regionalEventCount = relationshipBinding.Bindings.Sum(item =>
+                item.Branches.Count);
 
             var authoring = new GameProjectFeatureModuleAuthoringService(_repositoryRoot);
             var state = authoring.OpenProject(project, package, operationLease);
@@ -233,7 +234,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             if (generatedEncounterCount > 0)
             {
                 var combat = history.GeneratedEncounterCombat;
-                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV6
+                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV7
                     || combat is not
                     {
                         Present: true,
@@ -258,7 +259,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
             if (branchableDialogueCount > 0)
             {
                 var choices = history.GeneratedCampaignChoices;
-                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV6
+                if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV7
                     || choices is not
                     {
                         Present: true,
@@ -293,7 +294,7 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                     diagnostics.Add("semantic.history_choice_qualification_incomplete");
             }
             var relationships = history.GeneratedCampaignRelationships;
-            if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV6
+            if (history.SchemaVersion != GameProjectBuildHistoryReader.SchemaVersionV7
                 || relationshipCount == 0
                 && relationships is not
                 {
@@ -327,15 +328,67 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                     }
                     || relationships.RelationshipCount != relationshipCount
                     || relationships.QualifiedRelationshipCount != relationshipCount
-                    || relationships.ArcQuestCount != relationships.QualifiedArcQuestCount
+                    || relationships.BranchQualifications.Count !=
+                    relationshipCount * 3
+                    || relationships.BranchQualifications.Any(item =>
+                        !item.Passed || !item.ReplayEquivalent
+                        || !item.Available
+                        && (item.Required
+                            || item.RuntimeStartCount != 0
+                            || item.RuntimeCommandCount != 0))
+                    || relationships.UnavailableBranchRuntimeStartCount != 0
+                    || relationships.SaveContinuationFactsPassed
+                    || relationships
+                        .SaveContinuationFactsEvaluationStatus !=
+                    "NOT_EVALUATED_AT_BUILD"
                     || !string.Equals(relationships.ExactPackageSha256,
                         history.PackageSha256, StringComparison.Ordinal)
-                    || !string.Equals(relationships.FinalStateHash,
-                        history.FinalStateHash, StringComparison.Ordinal)
-                    || !string.Equals(relationships.QualifiedActionsSha256,
+                    || !string.IsNullOrWhiteSpace(
+                        relationships.QualifiedActionsSha256)
+                    && !string.Equals(relationships.QualifiedActionsSha256,
                         history.GeneratedEncounterCombat?.QualifiedActionsSha256,
                         StringComparison.Ordinal)))
                 diagnostics.Add("semantic.history_relationship_qualification_incomplete");
+            var regionalEvents =
+                history.GeneratedCampaignRegionalEvents;
+            if (regionalEventCount == 0
+                ? regionalEvents is not
+                {
+                    Present: false,
+                    Passed: true,
+                    Status: "ABSENT",
+                    EventCount: 0,
+                    Overlay: { Passed: true }
+                }
+                : regionalEvents is not
+                {
+                    Present: true,
+                    Passed: true,
+                    Status: "REGIONAL_EVENTS_CURRENT",
+                    IdentityPassed: true,
+                    PlacementPassed: true,
+                    OverlayControlledDeltaPassed: true,
+                    RuntimeQualificationPassed: true,
+                    LockedStatePassed: true,
+                    AvailableStatePassed: true,
+                    ResolvedStatePassed: true,
+                    ExactlyOncePassed: true,
+                    ReplayPassed: true,
+                    Overlay: { Passed: true }
+                }
+                || regionalEvents.EventCount != regionalEventCount
+                || regionalEvents.QualifiedEventCount !=
+                regionalEventCount
+                || regionalEvents.EventInventory.Count !=
+                regionalEventCount
+                || regionalEvents.RelationshipBranchMatrixSha256 !=
+                relationships?.RelationshipBranchMatrixSha256
+                || regionalEvents.ExactPackageSha256 !=
+                history.PackageSha256
+                || regionalEvents.FinalStateHash !=
+                history.FinalStateHash)
+                diagnostics.Add(
+                    "semantic.history_regional_event_qualification_incomplete");
             Match(history.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
                 request.CandidateSeal.MechanicsProfileId,
                 "semantic.mechanics_profile_mismatch", diagnostics);
@@ -381,6 +434,35 @@ public sealed class GameProjectSeedRegenerationCommitValidator : IGameProjectSee
                     history.GeneratedCampaignRelationships?.RelationshipInventory),
                 request.CandidateSeal.GeneratedCampaignRelationshipInventorySha256,
                 "semantic.generated_relationship_inventory_mismatch", diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService
+                    .CanonicalSha256(history.GeneratedCampaignRelationships
+                        ?.BranchQualifications),
+                request.CandidateSeal
+                    .GeneratedCampaignRelationshipBranchMatrixSha256,
+                "semantic.generated_relationship_branch_matrix_mismatch",
+                diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService
+                    .CanonicalSha256(
+                        history.GeneratedCampaignRegionalEvents),
+                request.CandidateSeal
+                    .GeneratedCampaignRegionalEventSummarySha256,
+                "semantic.generated_regional_event_summary_mismatch",
+                diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService
+                    .CanonicalSha256(
+                        history.GeneratedCampaignRegionalEvents?.Overlay),
+                request.CandidateSeal
+                    .GeneratedCampaignRegionalEventOverlaySha256,
+                "semantic.generated_regional_event_overlay_mismatch",
+                diagnostics);
+            Match(GameProjectSeedRegenerationCandidateSealService
+                    .CanonicalSha256(
+                        history.GeneratedCampaignRegionalEvents
+                            ?.EventInventory),
+                request.CandidateSeal
+                    .GeneratedCampaignRegionalEventInventorySha256,
+                "semantic.generated_regional_event_inventory_mismatch",
+                diagnostics);
             Match(history.PackageSha256, request.CandidateSeal.CandidatePackageSha256,
                 "semantic.history_package_mismatch", diagnostics);
             Match(history.CompositionPackageSha256, request.CandidateSeal.CandidateCompositionSha256,

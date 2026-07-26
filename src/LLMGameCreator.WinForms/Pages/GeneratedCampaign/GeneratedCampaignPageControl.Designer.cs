@@ -251,7 +251,7 @@ partial class GeneratedCampaignPageControl
         _consequencesTab.Text = "Последствия";
         _consequencesTab.UseVisualStyleBackColor = true;
         _eventsTab.AutoScroll = true;
-        _eventsTab.Text = "События";
+        _eventsTab.Text = "События мира";
         _eventsTab.UseVisualStyleBackColor = true;
         _decisionsTab.AutoScroll = true;
         _decisionsTab.Text = "Решения";

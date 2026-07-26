@@ -84,13 +84,22 @@ public sealed class Goal168RelationshipBindingOverlayTests
         var binding = Goal168RelationshipFixture.Binding with
         {
             Bindings = Goal168RelationshipFixture.Binding.Bindings.Select(item =>
-                item with { QuestArc = [] }).ToList()
+                item with
+                {
+                    QuestArc = [],
+                    Branches = item.Branches
+                        .Where(branch =>
+                            branch !=
+                            GeneratedCampaignRelationshipBranch.SUPPORT)
+                        .ToList()
+                }).ToList()
         };
         var overlay = new GeneratedCampaignRelationshipOverlayService().Build(
             Goal168RelationshipFixture.ChoicePackage, binding);
         Assert.True(overlay.Passed,
             string.Join(Environment.NewLine, overlay.Diagnostics));
-        Assert.Equal(0, overlay.Document.RelationshipCount);
+        Assert.Equal(binding.Bindings.Count,
+            overlay.Document.RelationshipCount);
         Assert.Equal(0, overlay.Document.ArcQuestCount);
     }
 

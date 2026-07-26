@@ -375,17 +375,40 @@ public sealed class GeneratedGameplayDefinitionFingerprintService
         foreach (var dialogue in package.Game.Dialogues)
             if (dialogue.Metadata.TryGetValue("sourceActorSeedId", out var source))
                 Mark("dialogue", dialogue.Id, source);
+            else if (dialogue.Metadata.TryGetValue(
+                         "generatedRegionalEventRelationshipId",
+                         out var relationshipSource))
+                Mark("dialogue", dialogue.Id, relationshipSource);
         foreach (var mechanic in package.GeneratedContent.Mechanics)
             Mark("ability", mechanic.PackageAbilityId, mechanic.SourceId);
         foreach (var interaction in package.Game.Interactions)
             if (interaction.Metadata.TryGetValue("sourceActorSeedId", out var source))
                 Mark("interaction", interaction.Id, source);
+            else if (interaction.Metadata.TryGetValue(
+                         "generatedRegionalEventRelationshipId",
+                         out var relationshipSource))
+                Mark("interaction", interaction.Id,
+                    relationshipSource);
         foreach (var map in package.Game.Maps)
         foreach (var entity in map.Entities)
             if (entity.Id.StartsWith(GeneratedWorldTravelOverlayService.TravelEntityIdPrefix,
                     StringComparison.Ordinal)
                 || entity.PrototypeId is "entity_prototype/generated_actor" or "entity_prototype/generated_cache")
                 Mark("entity", entity.Id, map.Id);
+            else
+            {
+                var eventDialogueId = entity.Components
+                    .Select(component =>
+                        component.Args.GetValueOrDefault("dialogueId"))
+                    .FirstOrDefault(id => !string.IsNullOrWhiteSpace(id));
+                var eventDialogue = package.Game.Dialogues
+                    .SingleOrDefault(dialogue =>
+                        dialogue.Id == eventDialogueId
+                        && dialogue.Metadata.ContainsKey(
+                            "generatedRegionalEventId"));
+                if (eventDialogue is not null)
+                    Mark("entity", entity.Id, eventDialogue.Id);
+            }
         Mark("entity", GeneratedWorldTravelOverlayService.TravelPrototypeId, "generated_travel");
         return result;
     }

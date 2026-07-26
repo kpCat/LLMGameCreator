@@ -247,7 +247,7 @@ internal static class Goal168TestKit
         var observed = new GeneratedEncounterCombatObservedEffect
         {
             EffectClass = "TARGET_STATUS_CHANGED",
-            TargetStatusIds = ["status/goal168-utility"]
+            TargetStatusIds = ["status/goal168-never-produced"]
         };
         observed = observed with
         {

@@ -1,0 +1,18 @@
+{
+    "status":  "GREEN",
+    "schemaVersion":  "unified_game_project_build_history_v7",
+    "v7RegionalEventsCurrent":  true,
+    "genuineV6RegionalEventsPending":  true,
+    "genuineV6CampaignNotReady":  true,
+    "oldProjectBuildInvocationCount":  1,
+    "upgradedWithoutSourceRewrite":  true,
+    "eventPrimaryFinalState":  true,
+    "combatChoiceRelationshipSummariesPreserved":  true,
+    "regenerationCurrent":  true,
+    "rollbackCurrent":  true,
+    "sealTamperRejected":  true,
+    "sealBranchMatrixSha256":  "9507c5dbb613a72d8ceb1b43fb02e45ed558846c7d648e9f3f7146ca3e45f8a7",
+    "sealEventSummarySha256":  "5a030b190e3dc07937e8da2631614dc00fd1f173b5d5a95fb6ea430ced8008c3",
+    "sealEventOverlaySha256":  "0e93b4fad89d6c93c0dbac3bb05f958581e706a868b8c9d7f58f25552824ffbc",
+    "sealEventInventorySha256":  "8ab5664a0ae14c9cb872a0d103a9cb3571242c007592a0abf85fd5c907a695fb"
+}

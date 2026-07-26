@@ -18,13 +18,15 @@ namespace LLMGameCreator.Tests.Application.Goal167;
 public sealed class Goal167HistoryRegenerationTests
 {
     [Fact]
-    public void Behavioral_v6_primary_truth_belongs_to_relationship_route_while_choice_and_combat_stay_exact()
+    public void Behavioral_v7_primary_truth_belongs_to_regional_event_route_while_earlier_summaries_stay_exact()
     {
         var build = Goal164TestKit.AllSelectable.Build;
 
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6,
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV7,
             ReadHistory(build.BuildHistoryPath).SchemaVersion);
         Assert.Equal(build.FinalStateHash,
+            build.GeneratedCampaignRegionalEvents?.FinalStateHash);
+        Assert.NotEqual(build.FinalStateHash,
             build.GeneratedCampaignRelationships?.FinalStateHash);
         Assert.NotEqual(build.FinalStateHash,
             build.GeneratedCampaignChoices?.FinalStateHash);
@@ -90,12 +92,12 @@ public sealed class Goal167HistoryRegenerationTests
     }
 
     [Fact]
-    public void Behavioral_zero_encounter_choice_profile_projects_campaign_current_without_combat()
+    public void Behavioral_zero_encounter_choice_profile_does_not_claim_current_without_later_slices()
     {
         var state = Goal167ZeroEncounterState.Value;
 
         Assert.Null(state.Combat);
-        Assert.Equal("CAMPAIGN_CURRENT", state.World.Status);
+        Assert.Equal("TRAVEL_CURRENT", state.World.Status);
     }
 
     [Theory]

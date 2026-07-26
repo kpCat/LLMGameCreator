@@ -73,10 +73,15 @@ public sealed class GeneratedCampaignSessionTruthService
         if (!relationshipBinding.Passed)
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 relationshipBinding.Diagnostics.Select(item => "campaign." + item).ToList());
-        var relationshipCount = relationshipBinding.Bindings.Count(item => item.QuestArc.Count > 0);
+        var relationshipCount = relationshipBinding.Bindings.Count;
         if (!RelationshipsCurrent(successfulBuild, relationshipCount))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.generated_relationships_not_current"]);
+        var eventCount = relationshipBinding.Bindings.Sum(item =>
+            item.Branches.Count);
+        if (!RegionalEventsCurrent(successfulBuild, eventCount))
+            return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
+                ["campaign.generated_regional_events_not_current"]);
         if (string.IsNullOrWhiteSpace(truth.SelectedBuildHistorySha256))
             return (GeneratedCampaignSessionStatus.PROJECT_NOT_READY, null,
                 ["campaign.current_build_history_missing"]);
@@ -98,7 +103,9 @@ public sealed class GeneratedCampaignSessionTruthService
             SelectedBuildHistoryFileName = truth.SelectedBuildHistoryFileName,
             GeneratedStartMapId = truth.GeneratedStartMapId,
             RegionMapBindings = truth.GeneratedRegionMapBindings,
-            RelationshipOverlay = successfulBuild.GeneratedCampaignRelationships?.Overlay
+            RelationshipOverlay = successfulBuild.GeneratedCampaignRelationships?.Overlay,
+            RegionalEventOverlay =
+                successfulBuild.GeneratedCampaignRegionalEvents?.Overlay
         }, []);
     }
 
@@ -119,7 +126,10 @@ public sealed class GeneratedCampaignSessionTruthService
         && left.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal)
             .SequenceEqual(right.RegionMapBindings.OrderBy(item => item.Key, StringComparer.Ordinal))
         && string.Equals(left.RelationshipOverlay?.InventorySha256,
-            right.RelationshipOverlay?.InventorySha256, StringComparison.Ordinal);
+            right.RelationshipOverlay?.InventorySha256, StringComparison.Ordinal)
+        && string.Equals(left.RegionalEventOverlay?.InventorySha256,
+            right.RegionalEventOverlay?.InventorySha256,
+            StringComparison.Ordinal);
 
     private static bool CombatCurrent(GameProjectBuildResult build, int generatedEncounterCount)
     {
@@ -203,11 +213,55 @@ public sealed class GeneratedCampaignSessionTruthService
         }
         && relationships.RelationshipCount == relationshipCount
         && relationships.QualifiedRelationshipCount == relationshipCount
-        && relationships.ArcQuestCount == relationships.QualifiedArcQuestCount
         && string.Equals(relationships.ExactPackageSha256, build.PackageSha256,
             StringComparison.Ordinal)
-        && string.Equals(relationships.FinalStateHash, build.FinalStateHash,
-            StringComparison.Ordinal);
+        && relationships.BranchQualifications.Count ==
+        relationshipCount * 3
+        && relationships.BranchQualifications.All(item =>
+            item.Passed && item.ReplayEquivalent)
+        && relationships.UnavailableBranchRuntimeStartCount == 0
+        && !relationships.SaveContinuationFactsPassed
+        && relationships.SaveContinuationFactsEvaluationStatus ==
+        "NOT_EVALUATED_AT_BUILD";
+    }
+
+    private static bool RegionalEventsCurrent(
+        GameProjectBuildResult build,
+        int eventCount)
+    {
+        var events = build.GeneratedCampaignRegionalEvents;
+        if (eventCount == 0)
+            return events is
+            {
+                Present: false,
+                Passed: true,
+                Status: "ABSENT",
+                EventCount: 0,
+                Overlay: { Passed: true }
+            }
+            && events.ExactPackageSha256 == build.PackageSha256
+            && events.FinalStateHash == build.FinalStateHash;
+        return events is
+        {
+            Present: true,
+            Passed: true,
+            Status: "REGIONAL_EVENTS_CURRENT",
+            IdentityPassed: true,
+            PlacementPassed: true,
+            OverlayControlledDeltaPassed: true,
+            RuntimeQualificationPassed: true,
+            LockedStatePassed: true,
+            AvailableStatePassed: true,
+            ResolvedStatePassed: true,
+            ExactlyOncePassed: true,
+            ReplayPassed: true,
+            Overlay: { Passed: true }
+        }
+        && events.EventCount == eventCount
+        && events.QualifiedEventCount == eventCount
+        && events.EventInventory.Count == eventCount
+        && events.ExactPackageSha256 == build.PackageSha256
+        && events.FinalStateHash == build.FinalStateHash;
     }
 
     private static string Hash(string path) { using var stream = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant(); }

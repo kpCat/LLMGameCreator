@@ -1,0 +1,67 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-169-profile-neutral-relationships-and-reactive-regional-events/GOAL.md
+
+Рекомендуемая модель Codex: GPT-5.6 Terra
+Уровень мышления: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: bbfd46a23cd6c6d2012626cac77bda316cb9c7a3
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+
+План полностью одобрен запуском задачи. Не спрашивай дополнительное подтверждение из-за количества изменяемых файлов и не проси ручного тестирования.
+
+Критически важно:
+- Goal168 implementation GREEN, но independent audit = BLOCKED_AT_BBFD46A2;
+- закрыть два P1: profile-neutral relationship branch qualification/history и effect-neutral exact combat;
+- qualification обязана выполнять только реально присутствующие Support/Challenge/Refuse ветви;
+- добавить per-relationship Available/Required/Passed truth;
+- Challenge-only с QuestArc=0 и Support/Refuse-only без Challenge обязаны становиться CURRENT;
+- старые Goal168 v6 all-branch GREEN rows совместимы; старые partial/false rows нельзя переосмысливать как N/A;
+- удалить из GeneratedCampaignExactCombatRouteService жёсткое требование TARGET_HEALTH_DECREASE;
+- принимать exact Goal166 TARGET_HEALTH_DECREASE, TARGET_STAT_CHANGED и TARGET_STATUS_CHANGED, включая progressing/delayed status route;
+- Runtime Success без exact descriptor match и без изменения encounter state не является progress;
+- build SaveContinuationFacts нельзя hardcode true: NOT_EVALUATED_AT_BUILD + Passed=false; реальные save proofs остаются отдельной матрицей;
+- следующий visible slice — reactive regional events;
+- события data-derived: Support completion, Challenge victory aftermath, Refusal fallout;
+- RegionalEventId = exact generated event dialogue ID; ResolutionFlagId = exact event dialogue ID;
+- deterministic safe reachable map placement, arbitrary map size/event count, no fixed coordinates/counts/IDs;
+- overlay добавляет только event prototypes/dialogues/interactions/map entities и generatedRegionalEvent metadata;
+- все существующие package records, relationships, combat, travel, GeneratedContent/Manifest и source sidecars должны остаться exact;
+- event interaction использует обычные Move/Interact/OpenDialogue/ChooseDialogue Runtime routes, без прямой мутации state;
+- event LOCKED до фактической предпосылки, AVAILABLE после реального relationship route, RESOLVED ровно один раз;
+- Support event reputation delta data-derived из финальной quest reward; Challenge/Refuse events не дублируют исходный штраф/награду;
+- добавить state-backed вкладку «События мира» и человеческие map markers без raw IDs/hashes/paths;
+- build order: choice → relationship → regional event → combat → combat/choice/relationship/event qualifications;
+- добавить history v7 REGIONAL_EVENTS_CURRENT;
+- genuine v6 = relationships current + events pending + PROJECT_NOT_READY + «Собрать и играть»;
+- regeneration/rollback seal event summary/overlay/inventory и branch matrix;
+- exact save/continue для AVAILABLE и RESOLVED event states;
+- migration сохраняет только совместимые event flags, удаляет несовместимые и не создаёт ghost events;
+- ровно один cached hidden smoke, retry 0, host reused, host rebuilt false, Unity starts 0;
+- RC CURRENT; portable all-selectable/core-only; no false core-only RC readiness;
+- Runtime/Runtime.Abstractions/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal142, Goal148 и generation sidecars byte-identical;
+- Goal169 >=72 discovered / >=64 behavioral / all pass;
+- ровно 15+15 typed evidence, artifact scope 0;
+- не запускать full suite, 85-case closure, all-ProductSmoke или Unity host build;
+- независимо от GREEN/BLOCKED/FAILED создать ровно один commit и push origin/main;
+- запрещено оставлять commit или push пользователю.
+
+В финале сообщи:
+- branch availability/required/passed matrix и все обязательные profile fixtures;
+- exact effect matrix и удаление health-only restriction;
+- honest SaveContinuationFacts truth;
+- event counts/kinds/identity/placement/controlled overlay;
+- LOCKED/AVAILABLE/RESOLVED и exactly-once Runtime routes;
+- UI/map marker/state-backed consequences;
+- v7/v6 readiness;
+- regeneration/rollback/save/migration;
+- smoke/host/Unity/payload/RC/portable;
+- tests/regressions/source immutability/evidence/artifact scope;
+- итоговый SHA, commit message, push, HEAD==origin/main и clean worktree.

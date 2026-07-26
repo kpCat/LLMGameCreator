@@ -99,6 +99,7 @@ public sealed class GameProjectSeedRegenerationRecordService
                     || history.SchemaVersion is not GameProjectBuildHistoryReader.SchemaVersionV4
                         and not GameProjectBuildHistoryReader.SchemaVersionV5
                         and not GameProjectBuildHistoryReader.SchemaVersionV6
+                        and not GameProjectBuildHistoryReader.SchemaVersionV7
                     || !string.Equals(history.PackageSha256, record.NewPackageSha256, StringComparison.Ordinal)
                     || !string.Equals(history.CompositionPackageSha256, record.NewCompositionPackageSha256,
                         StringComparison.Ordinal)

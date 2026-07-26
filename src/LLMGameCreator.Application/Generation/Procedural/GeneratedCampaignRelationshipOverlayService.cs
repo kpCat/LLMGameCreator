@@ -28,7 +28,6 @@ public sealed class GeneratedCampaignRelationshipOverlayService
                 : bindingResult.Diagnostics);
 
         var relationships = bindingResult.Bindings
-            .Where(item => item.QuestArc.Count > 0)
             .OrderBy(item => item.RelationshipId, StringComparer.Ordinal)
             .ToList();
         var before = GeneratedCampaignChoiceCanonical.Clone(choiceOverlayPackage);
@@ -205,33 +204,94 @@ public sealed class GeneratedCampaignRelationshipOverlayService
         var refuse = start.Choices.SingleOrDefault(item =>
             IsChoice(item, GeneratedCampaignRelationshipBranch.REFUSE,
                 "initial"));
-        if (support is null)
+        var supportAvailable = relationship.Branches.Contains(
+            GeneratedCampaignRelationshipBranch.SUPPORT);
+        var challengeAvailable = relationship.Branches.Contains(
+            GeneratedCampaignRelationshipBranch.CHALLENGE);
+        var refuseAvailable = relationship.Branches.Contains(
+            GeneratedCampaignRelationshipBranch.REFUSE);
+        if (supportAvailable && relationship.QuestArc.Count == 0)
+        {
+            diagnostics.Add("generated_relationship.support_requires_arc");
+            return;
+        }
+        if (supportAvailable && support is null)
         {
             support = InitialRelationshipChoice(
                 GeneratedCampaignRelationshipBranch.SUPPORT, relationship);
             start.Choices.Add(support);
         }
-        if (refuse is null)
+        if (refuseAvailable && refuse is null)
         {
             refuse = InitialRelationshipChoice(
                 GeneratedCampaignRelationshipBranch.REFUSE, relationship);
             start.Choices.Add(refuse);
         }
 
-        support.StartQuestId = relationship.QuestArc[0].QuestId;
-        AddRelationshipMetadata(support.Metadata, relationship,
-            "initial", 0);
-        AddRelationshipMetadata(refuse.Metadata, relationship,
-            "initial", -1);
-        if (challenge is not null)
+        if (supportAvailable && support is not null)
+        {
+            support.StartQuestId = relationship.QuestArc[0].QuestId;
+            AddRelationshipMetadata(support.Metadata, relationship,
+                "initial", 0);
+        }
+        if (refuseAvailable && refuse is not null)
+            AddRelationshipMetadata(refuse.Metadata, relationship,
+                "initial", -1);
+        if (challengeAvailable && challenge is not null)
             AddRelationshipMetadata(challenge.Metadata, relationship,
                 "initial", -1);
+        if (challengeAvailable)
+        {
+            var challengeFollowUp = start.Choices.SingleOrDefault(item =>
+                IsChoice(item,
+                    GeneratedCampaignRelationshipBranch.CHALLENGE,
+                    "followup"));
+            if (challengeFollowUp is null)
+            {
+                diagnostics.Add(
+                    "generated_relationship.challenge_followup_missing");
+            }
+            else
+            {
+                challengeFollowUp.Effects = challengeFollowUp.Effects
+                    .Where(item => !(string.Equals(item.Type, "set_flag",
+                                         StringComparison.OrdinalIgnoreCase)
+                                     && item.Args.GetValueOrDefault("id") ==
+                                     relationship.RelationshipId
+                                     + "/challenge-victory"))
+                    .Append(new LLMGameCreator.Domain.Definitions
+                        .EffectDefinition
+                        {
+                            Type = "set_flag",
+                            Args = new Dictionary<string, string>(
+                                StringComparer.Ordinal)
+                            {
+                                ["id"] = relationship.RelationshipId
+                                         + "/challenge-victory",
+                                ["value"] = "VICTORY"
+                            }
+                        })
+                    .ToList();
+                AddRelationshipMetadata(challengeFollowUp.Metadata,
+                    relationship, "followup/victory", -1);
+            }
+        }
 
         var retained = start.Choices.Where(item =>
                 !IsChoice(item, GeneratedCampaignRelationshipBranch.SUPPORT,
-                    "followup"))
+                    "followup")
+                && (!IsChoice(item,
+                        GeneratedCampaignRelationshipBranch.SUPPORT,
+                        "initial") || supportAvailable)
+                && (!IsChoice(item,
+                        GeneratedCampaignRelationshipBranch.CHALLENGE,
+                        "initial") || challengeAvailable)
+                && (!IsChoice(item,
+                        GeneratedCampaignRelationshipBranch.REFUSE,
+                        "initial") || refuseAvailable))
             .ToList();
         var followUps = new List<DialogueChoiceDefinition>();
+        if (supportAvailable)
         foreach (var step in relationship.QuestArc)
         {
             var quest = package.Game.Quests.Single(item =>
@@ -280,8 +340,8 @@ public sealed class GeneratedCampaignRelationshipOverlayService
             }
         }
         start.Choices = retained.Concat(followUps)
-            .OrderBy(item => ChoiceOrder(item, support.Id,
-                challenge?.Id, refuse.Id))
+            .OrderBy(item => ChoiceOrder(item, support?.Id,
+                challenge?.Id, refuse?.Id))
             .ThenBy(item => item.Id, StringComparer.Ordinal)
             .ToList();
         dialogue.Tags = dialogue.Tags.Append("generated_relationship")
@@ -360,7 +420,8 @@ public sealed class GeneratedCampaignRelationshipOverlayService
                 ["generatedChoicePhase"] = "initial",
                 ["generatedChoiceFactionId"] = relationship.FactionId,
                 ["generatedChoiceQuestId"] =
-                    relationship.QuestArc[0].QuestId,
+                    relationship.QuestArc.FirstOrDefault()?.QuestId
+                    ?? string.Empty,
                 ["generatedChoiceEncounterId"] = string.Empty,
                 ["generatedChoiceReputationAmount"] = amount.ToString(
                     System.Globalization.CultureInfo.InvariantCulture)
@@ -436,9 +497,9 @@ public sealed class GeneratedCampaignRelationshipOverlayService
 
     private static int ChoiceOrder(
         DialogueChoiceDefinition choice,
-        string supportId,
+        string? supportId,
         string? challengeId,
-        string refuseId)
+        string? refuseId)
     {
         if (choice.Id == supportId) return 0;
         if (choice.Id == challengeId) return 1;

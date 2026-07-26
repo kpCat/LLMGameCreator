@@ -298,6 +298,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
         var generatedEncounterCombat = _lastSuccessfulBuild?.GeneratedEncounterCombat;
         var generatedCampaignChoices = _lastSuccessfulBuild?.GeneratedCampaignChoices;
         var generatedCampaignRelationships = _lastSuccessfulBuild?.GeneratedCampaignRelationships;
+        var generatedCampaignRegionalEvents =
+            _lastSuccessfulBuild?.GeneratedCampaignRegionalEvents;
         var generatedWorld = _generatedWorldSummaryService.Restore(
             generatedSource,
             _lastSuccessfulBuild?.GeneratedWorld,
@@ -306,7 +308,8 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             generatedRegionTravel,
             generatedEncounterCombat,
             generatedCampaignChoices,
-            generatedCampaignRelationships);
+            generatedCampaignRelationships,
+            generatedCampaignRegionalEvents);
         return new UnifiedGameProjectWorkspaceSnapshot
         {
             ProjectFolder = state.ProjectFolder,
@@ -388,24 +391,28 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
             ,ReleaseCandidateConfigurationStatus = releaseCandidateStatus
             ,ReleaseCandidateRecordPath = releaseCandidate.RecordPath
             ,GeneratedWorld = generatedWorld
-            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldActivation = generatedWorld?.Status is "BUILD_CURRENT" or "START_CURRENT" or "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedWorldActivation
                 : null
-            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedWorldTravelOverlay = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? _lastSuccessfulBuild?.GeneratedWorldTravelOverlay
                 : null
-            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedRegionTravel = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedRegionTravel
                 : null
-            ,GeneratedEncounterCombat = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedEncounterCombat = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedEncounterCombat
                 : null
-            ,GeneratedCampaignChoices = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+            ,GeneratedCampaignChoices = generatedWorld?.Status is "TRAVEL_CURRENT" or "RELATIONSHIPS_PENDING" or "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedCampaignChoices
                 : null
             ,GeneratedCampaignRelationships = generatedWorld?.Status is
-                "RELATIONSHIPS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+                "RELATIONSHIPS_PENDING" or "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
                 ? generatedCampaignRelationships
+                : null
+            ,GeneratedCampaignRegionalEvents = generatedWorld?.Status is
+                "REGIONAL_EVENTS_PENDING" or "CAMPAIGN_CURRENT" or "LAST_SUCCESS"
+                ? generatedCampaignRegionalEvents
                 : null
             ,AcceptedMechanicsCompatibility = acceptedMechanicsCompatibility
             ,CanRegenerateGeneratedWorld = _regenerationService is not null
@@ -556,6 +563,9 @@ public sealed class UnifiedGameProjectWorkspaceController : IUnifiedGameProjectW
                     _lastBuild.GeneratedCampaignChoices))
                 .Concat(GameProjectGeneratedWorldSummaryService.StandaloneRelationshipHumanFacts(
                     _lastBuild.GeneratedCampaignRelationships))
+                .Concat(GameProjectGeneratedWorldSummaryService
+                    .StandaloneRegionalEventHumanFacts(
+                        _lastBuild.GeneratedCampaignRegionalEvents))
                 .Concat(_acceptedMechanicsSummaryService.StandaloneHumanFacts(
                     _lastBuild, releaseCandidateFactsAllowed))
                 .Concat(GeneratedGameplaySavesSummaryService.StandaloneHumanFacts(

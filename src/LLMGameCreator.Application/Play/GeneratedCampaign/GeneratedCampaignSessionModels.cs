@@ -65,6 +65,7 @@ public sealed record GeneratedCampaignProjectTruth
     public IReadOnlyDictionary<string, string> RegionMapBindings { get; init; }
         = new Dictionary<string, string>();
     public GeneratedCampaignRelationshipOverlayDocument? RelationshipOverlay { get; init; }
+    public GeneratedCampaignRegionalEventOverlayDocument? RegionalEventOverlay { get; init; }
 }
 
 public sealed record GeneratedCampaignAction
@@ -120,6 +121,20 @@ public sealed record GeneratedCampaignMapProjection
     public int Height { get; init; }
     public IReadOnlyList<GeneratedCampaignMapCell> Cells { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignMapEntity> Entities { get; init; } = [];
+}
+
+public sealed record GeneratedCampaignRegionalEventRow
+{
+    public string Title { get; init; } = string.Empty;
+    public string KindTitle { get; init; } = string.Empty;
+    public string RegionTitle { get; init; } = string.Empty;
+    public string MapTitle { get; init; } = string.Empty;
+    public GeneratedCampaignRegionalEventStatus Status { get; init; }
+    public string StatusTitle { get; init; } = string.Empty;
+    public string NextAction { get; init; } = string.Empty;
+    public bool OnCurrentMap { get; init; }
+    public int X { get; init; }
+    public int Y { get; init; }
 }
 
 public sealed record GeneratedCampaignTextRow
@@ -304,6 +319,8 @@ public enum GeneratedCampaignConsequenceKind
     QuestArcAdvanced,
     BranchLocked,
     BranchFollowUp,
+    RegionalEventAvailable,
+    RegionalEventResolved,
     Failure
 }
 
@@ -372,6 +389,7 @@ public sealed record GeneratedCampaignSnapshot
     public GeneratedCampaignEncounter? Encounter { get; init; }
     public IReadOnlyList<GeneratedCampaignTextRow> Factions { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRelationshipRow> Relationships { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignRegionalEventRow> RegionalEvents { get; init; } = [];
     public IReadOnlyList<string> RecentEvents { get; init; } = [];
     public GeneratedCampaignSaveState SaveState { get; init; } = new();
     public GeneratedCampaignRecoveryProjection Recovery { get; init; } = new();

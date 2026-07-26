@@ -2,7 +2,7 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
-Goal168 is the current completed product slice and a GREEN acceptable candidate. It closes the Goal167 independent-audit P1 by reusing the exact Goal166 qualified-action catalog for ability-only and utility-first branch combat, then adds data-derived relationships and sequential multi-quest arcs. Goal168 remains unaccepted and requires an independent audit.
+Goal169 is the current completed product slice but is `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION`. Goal168 implementation remains GREEN but its independent audit is `BLOCKED_AT_BBFD46A2`; Goal169 closes profile-assuming relationship qualification/history, health-only exact combat and hardcoded build save truth, then adds reactive regional events. Product matrices, standalone launch, CURRENT RC and portable profiles are GREEN, while the one permitted smoke failed the explicit Move-frame payload assertion. The post-smoke fix is implemented without retry. Goal169 remains unaccepted and requires an independent blocker audit.
 
 ## Source Of Truth
 
@@ -329,3 +329,9 @@ Goal167C closes the published FAILED scaffold as a GREEN acceptable candidate. E
 ## Goal168 choice-driven relationships and multi-quest arcs
 
 Goal167 audit result `BLOCKED_AT_FD69BFC8` is closed by exact Goal166 qualified-action catalog reuse; successful utility/no-op actions are not combat progress. Exact generated dialogue IDs define relationships, generated quests are assigned once and ordered from data, and Support advances sequentially through dialogue, exact combat and manual turn-in. Challenge/Refuse remain exclusive. v6 readiness, sealed regeneration/rollback, exact save continuation, explicit preserve/reset/drop migration, one cached smoke, RC and portable all/core qualification are GREEN. The next roadmap action is independent Goal168 audit before world events or deeper relationship consequences.
+
+## Goal169 profile-neutral relationships and reactive regional events
+
+Goal168 independent audit `BLOCKED_AT_BBFD46A2` is closed by branch-availability truth, exact health/stat/status combat progress and honest build-time save facts. Six relationship profiles qualify without executing absent branches. Support completion, Challenge victory aftermath and Refusal fallout derive deterministic regional events with exact dialogue/flag identity, safe reachable placement, controlled overlay and ordinary Runtime resolution.
+
+The visible product slice adds state-backed «События мира» rows and human map markers. History v7, genuine-v6 pending upgrade, sealed regeneration/rollback, AVAILABLE/RESOLVED continuation, exact-compatible migration, CURRENT RC and portable all/core qualification are GREEN. The single cached standalone launch passed, but Goal169 payload qualification rejected direction-only movement frame titles. The post-smoke fix emits `Move.<Direction>` and was verified only by non-smoke contracts because corrective retry is zero. The next roadmap action is `independent_goal169_blocker_audit_and_followup_without_retrying_consumed_smoke`.

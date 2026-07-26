@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "lockedRoutesPassed":  true,
+    "availableRoutesPassed":  true,
+    "resolvedRoutesPassed":  true,
+    "exactlyOncePassed":  true,
+    "replayEquivalent":  true,
+    "atomicRollbackPassed":  true,
+    "supportReputationDelta":  2,
+    "challengeDuplicateReputationDelta":  0,
+    "refuseDuplicateReputationDelta":  0,
+    "prerequisiteFrameCount":  52,
+    "eventInteractionFrameCount":  180,
+    "runtimeFrameCount":  232
+}

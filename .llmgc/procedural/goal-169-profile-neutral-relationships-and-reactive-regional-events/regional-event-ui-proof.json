@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "projectionStateBacked":  true,
+    "states":  [
+                   "LOCKED",
+                   "AVAILABLE",
+                   "RESOLVED"
+               ],
+    "primaryUiNoRawIds":  true,
+    "currentMapMarkerHuman":  true,
+    "otherRegionHuman":  true,
+    "eventsTabPresent":  true,
+    "fitAt1100x720":  true,
+    "decisionRelationshipEventConsistency":  true
+}

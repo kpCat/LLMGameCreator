@@ -243,8 +243,6 @@ public sealed class GeneratedCampaignExactCombatRouteService
                     GeneratedEncounterCombatQualifiedActionKind.PACKAGE_ABILITY,
                     out var observed)
                 || !ExactObservedEffect(descriptor, observed)
-                || !string.Equals(observed.EffectClass,
-                    "TARGET_HEALTH_DECREASE", StringComparison.Ordinal)
                 || GeneratedEncounterCombatCanonical.Hash(
                     before.GameplayState.ActiveEncounter)
                 == GeneratedEncounterCombatCanonical.Hash(

@@ -16,14 +16,14 @@ public sealed class Goal167BranchRuntimeQualificationTests
             string.Join(",", Choices.Diagnostics));
 
     [Fact]
-    public void Behavioral_v6_primary_route_belongs_to_relationships() =>
-        Assert.Equal("generated-campaign-relationship-v1",
+    public void Behavioral_v7_primary_route_belongs_to_regional_events() =>
+        Assert.Equal("generated-campaign-regional-event-v1",
             Goal164TestKit.AllSelectable.Build.RuntimePlaythroughPlanId);
 
     [Fact]
-    public void Behavioral_v6_primary_final_state_is_relationship_final_state() =>
+    public void Behavioral_v7_primary_final_state_is_regional_event_final_state() =>
         Assert.Equal(
-            Goal164TestKit.AllSelectable.Build.GeneratedCampaignRelationships?
+            Goal164TestKit.AllSelectable.Build.GeneratedCampaignRegionalEvents?
                 .FinalStateHash,
             Goal164TestKit.AllSelectable.Build.FinalStateHash);
 

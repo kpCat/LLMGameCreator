@@ -223,6 +223,10 @@ public sealed record GameProjectSeedRegenerationCandidateSeal
     public string GeneratedCampaignRelationshipSummarySha256 { get; init; } = string.Empty;
     public string GeneratedCampaignRelationshipOverlaySha256 { get; init; } = string.Empty;
     public string GeneratedCampaignRelationshipInventorySha256 { get; init; } = string.Empty;
+    public string GeneratedCampaignRelationshipBranchMatrixSha256 { get; init; } = string.Empty;
+    public string GeneratedCampaignRegionalEventSummarySha256 { get; init; } = string.Empty;
+    public string GeneratedCampaignRegionalEventOverlaySha256 { get; init; } = string.Empty;
+    public string GeneratedCampaignRegionalEventInventorySha256 { get; init; } = string.Empty;
     public string CandidateSnapshotStatus { get; init; } = string.Empty;
     public string MechanicsProfileId { get; init; } = string.Empty;
     public string AcceptedMechanicsSummarySha256 { get; init; } = string.Empty;

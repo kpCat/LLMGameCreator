@@ -50,8 +50,12 @@ public sealed class GameProjectBuildAndQualificationService
     private readonly GameProjectGeneratedCampaignChoiceQualificationService _generatedChoiceQualification;
     private readonly GeneratedCampaignRelationshipBindingService _generatedRelationshipBinding;
     private readonly GeneratedCampaignRelationshipOverlayService _generatedRelationshipOverlay;
+    private readonly GeneratedCampaignRegionalEventBindingService _generatedRegionalEventBinding;
+    private readonly GeneratedCampaignRegionalEventOverlayService _generatedRegionalEventOverlay;
     private readonly GeneratedCampaignExactCombatRouteService _generatedExactCombatRoute;
     private readonly GameProjectGeneratedCampaignRelationshipQualificationService _generatedRelationshipQualification;
+    private readonly GameProjectGeneratedCampaignRegionalEventQualificationService
+        _generatedRegionalEventQualification;
     private readonly IGameProjectOperationCoordinator _operationCoordinator;
     private int _buildRunning;
 
@@ -79,8 +83,12 @@ public sealed class GameProjectBuildAndQualificationService
         GameProjectGeneratedCampaignChoiceQualificationService? generatedChoiceQualification = null,
         GeneratedCampaignRelationshipBindingService? generatedRelationshipBinding = null,
         GeneratedCampaignRelationshipOverlayService? generatedRelationshipOverlay = null,
+        GeneratedCampaignRegionalEventBindingService? generatedRegionalEventBinding = null,
+        GeneratedCampaignRegionalEventOverlayService? generatedRegionalEventOverlay = null,
         GeneratedCampaignExactCombatRouteService? generatedExactCombatRoute = null,
-        GameProjectGeneratedCampaignRelationshipQualificationService? generatedRelationshipQualification = null)
+        GameProjectGeneratedCampaignRelationshipQualificationService? generatedRelationshipQualification = null,
+        GameProjectGeneratedCampaignRegionalEventQualificationService?
+            generatedRegionalEventQualification = null)
     {
         _repositoryRoot = Path.GetFullPath(repositoryRoot);
         _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -106,10 +114,18 @@ public sealed class GameProjectBuildAndQualificationService
         _generatedChoiceQualification = generatedChoiceQualification ?? new GameProjectGeneratedCampaignChoiceQualificationService();
         _generatedRelationshipBinding = generatedRelationshipBinding ?? new GeneratedCampaignRelationshipBindingService();
         _generatedRelationshipOverlay = generatedRelationshipOverlay ?? new GeneratedCampaignRelationshipOverlayService();
+        _generatedRegionalEventBinding = generatedRegionalEventBinding
+                                         ?? new GeneratedCampaignRegionalEventBindingService();
+        _generatedRegionalEventOverlay = generatedRegionalEventOverlay
+                                         ?? new GeneratedCampaignRegionalEventOverlayService();
         _generatedExactCombatRoute = generatedExactCombatRoute ?? new GeneratedCampaignExactCombatRouteService();
         _generatedRelationshipQualification = generatedRelationshipQualification
                                               ?? new GameProjectGeneratedCampaignRelationshipQualificationService(
                                                   _generatedExactCombatRoute);
+        _generatedRegionalEventQualification =
+            generatedRegionalEventQualification
+            ?? new GameProjectGeneratedCampaignRegionalEventQualificationService(
+                _generatedExactCombatRoute);
         _operationCoordinator = operationCoordinator ?? new GameProjectOperationCoordinator();
     }
 
@@ -509,8 +525,12 @@ public sealed class GameProjectBuildAndQualificationService
             GameProjectGeneratedEncounterCombatSummary? generatedEncounterCombat = null;
             GameProjectGeneratedCampaignChoiceSummary? generatedCampaignChoices = null;
             GameProjectGeneratedCampaignRelationshipSummary? generatedCampaignRelationships = null;
+            GameProjectGeneratedCampaignRegionalEventSummary?
+                generatedCampaignRegionalEvents = null;
             GeneratedCampaignChoiceOverlayDocument? generatedChoiceOverlayDocument = null;
             GeneratedCampaignRelationshipOverlayDocument? generatedRelationshipOverlayDocument = null;
+            GeneratedCampaignRegionalEventOverlayDocument?
+                generatedRegionalEventOverlayDocument = null;
             if (generatedSource.Present)
             {
                 if (_generatedActivation is null)
@@ -685,6 +705,65 @@ public sealed class GameProjectBuildAndQualificationService
                     finalActivatedPath = relationshipPath;
                     primaryCompositionSha256 = compositionRelationship.Document.OutputPackageSha256;
                     primaryPackageSha256 = packageRelationship.Document.OutputPackageSha256;
+
+                    var compositionRegionalEventBinding =
+                        _generatedRegionalEventBinding.Bind(
+                            finalCompositionPackage,
+                            compositionRelationship.Document);
+                    var packageRegionalEventBinding =
+                        _generatedRegionalEventBinding.Bind(
+                            finalPackage,
+                            packageRelationship.Document);
+                    if (!compositionRegionalEventBinding.Passed
+                        || !packageRegionalEventBinding.Passed)
+                        return RollbackFailure(authoring,
+                            preBuildDocument, preBuildDirty, transaction,
+                            "Региональные события не прошли точную привязку к отношениям и картам.",
+                            compositionRegionalEventBinding.Diagnostics
+                                .Concat(packageRegionalEventBinding
+                                    .Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(),
+                            "generated_regional_event.binding", attempt);
+                    var compositionRegionalEvent =
+                        _generatedRegionalEventOverlay.Build(
+                            finalCompositionPackage,
+                            compositionRegionalEventBinding);
+                    var packageRegionalEvent =
+                        _generatedRegionalEventOverlay.Build(
+                            finalPackage,
+                            packageRegionalEventBinding);
+                    if (!compositionRegionalEvent.Passed
+                        || !packageRegionalEvent.Passed)
+                        return RollbackFailure(authoring,
+                            preBuildDocument, preBuildDirty, transaction,
+                            "Слой региональных событий нарушил допустимые границы сгенерированного пакета.",
+                            compositionRegionalEvent.Diagnostics.Concat(
+                                    packageRegionalEvent.Diagnostics)
+                                .Distinct(StringComparer.Ordinal).ToList(),
+                            "generated_regional_event.overlay", attempt);
+                    finalCompositionPackage =
+                        compositionRegionalEvent
+                            .RegionalEventOverlayPackage;
+                    finalPackage = packageRegionalEvent
+                        .RegionalEventOverlayPackage;
+                    generatedRegionalEventOverlayDocument =
+                        packageRegionalEvent.Document;
+                    var regionalEventPath = Path.Combine(stagingRoot,
+                        "generated-campaign-regional-events",
+                        "package.json");
+                    Directory.CreateDirectory(
+                        Path.GetDirectoryName(regionalEventPath)!);
+                    File.WriteAllText(regionalEventPath,
+                        packageRegionalEvent
+                            .RegionalEventOverlayPackageJson,
+                        new UTF8Encoding(false));
+                    finalActivatedPath = regionalEventPath;
+                    primaryCompositionSha256 =
+                        compositionRegionalEvent.Document
+                            .OutputPackageSha256;
+                    primaryPackageSha256 =
+                        packageRegionalEvent.Document
+                            .OutputPackageSha256;
 
                     if (generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
                     {
@@ -865,6 +944,69 @@ public sealed class GameProjectBuildAndQualificationService
                                 frame.Branch + ":arc-"
                                 + frame.ArcStep.ToString(CultureInfo.InvariantCulture)));
                     }
+
+                    generatedCampaignRegionalEvents =
+                        _generatedRegionalEventQualification.Qualify(
+                            finalPackage,
+                            generatedRegionalEventOverlayDocument,
+                            generatedCampaignRelationships,
+                            generatedEncounterCombat,
+                            _generatedCombatRuntime);
+                    if (!generatedCampaignRegionalEvents.Passed)
+                        return RollbackFailure(authoring,
+                            preBuildDocument, preBuildDirty, transaction,
+                            "Региональные события не прошли полную Runtime-проверку.",
+                            generatedCampaignRegionalEvents.Diagnostics,
+                            "generated_regional_event.qualification",
+                            attempt);
+                    if (generatedCampaignRegionalEvents.Present)
+                    {
+                        primaryFinalStateHash =
+                            generatedCampaignRegionalEvents
+                                .FinalStateHash;
+                        primaryCheckpointReloadPassed =
+                            generatedCampaignRegionalEvents.ReplayPassed;
+                        primaryFullReplayEquivalent =
+                            generatedCampaignRegionalEvents.ReplayPassed;
+                        primaryActionBindingPassed =
+                            generatedCampaignRegionalEvents
+                                .RuntimeQualificationPassed
+                            && generatedCampaignRegionalEvents
+                                .ExactlyOncePassed;
+                        primaryRuntimeFrames =
+                            generatedCampaignRegionalEvents.RuntimeFrames
+                                .Select((frame, index) =>
+                                    new GameProjectRuntimeFrame
+                                    {
+                                        Index = index,
+                                        ActionId =
+                                            frame.RegionalEventId + ":"
+                                            + frame.CommandType
+                                            + ":replay-"
+                                            + frame.ReplayIndex,
+                                        Title = frame.CommandType,
+                                        Category =
+                                            "generated-regional-event",
+                                        StateHash =
+                                            frame.AfterStateHash
+                                    }).ToList();
+                        primaryRuntimePlanId =
+                            "generated-campaign-regional-event-v1";
+                        primaryCapabilityCount =
+                            generatedCampaignRegionalEvents.EventCount;
+                        primaryPlannedActionCount =
+                            generatedCampaignRegionalEvents.RuntimeFrames
+                                .Count;
+                        primaryCheckpointActionCount =
+                            primaryPlannedActionCount;
+                        primaryFinalReplayActionCount =
+                            primaryPlannedActionCount;
+                        primaryPlaythroughSignature = string.Join(">",
+                            generatedCampaignRegionalEvents.RuntimeFrames
+                                .Select(frame =>
+                                    frame.RegionalEventId + ":"
+                                    + frame.CommandType));
+                    }
                 }
                 generatedWorld = _generatedSummary.BuildCurrent(
                     generatedSource,
@@ -875,7 +1017,8 @@ public sealed class GameProjectBuildAndQualificationService
                     generatedRegionTravel,
                     generatedEncounterCombat,
                     generatedCampaignChoices,
-                    generatedCampaignRelationships);
+                    generatedCampaignRelationships,
+                    generatedCampaignRegionalEvents);
                 if (generatedWorld is { Present: true, Passed: false })
                     return RollbackFailure(
                         authoring,
@@ -1104,6 +1247,10 @@ public sealed class GameProjectBuildAndQualificationService
             if (generatedCampaignRelationships is { Passed: true })
                 summaryLines.AddRange(generatedCampaignRelationships.HumanReviewFacts.Select(
                     fact => fact.Label + ": " + fact.Value));
+            if (generatedCampaignRegionalEvents is { Passed: true })
+                summaryLines.AddRange(generatedCampaignRegionalEvents
+                    .HumanReviewFacts.Select(
+                        fact => fact.Label + ": " + fact.Value));
 
             var buildResult = new GameProjectBuildResult
             {
@@ -1173,6 +1320,8 @@ public sealed class GameProjectBuildAndQualificationService
                 ,GeneratedEncounterCombat = generatedEncounterCombat
                 ,GeneratedCampaignChoices = generatedCampaignChoices
                 ,GeneratedCampaignRelationships = generatedCampaignRelationships
+                ,GeneratedCampaignRegionalEvents =
+                    generatedCampaignRegionalEvents
                 ,AcceptedMechanicsCompatibility = compatibility
             };
             var acceptedMechanics = new GameProjectAcceptedMechanicsSummaryService().Project(buildResult);
@@ -1282,7 +1431,13 @@ public sealed class GameProjectBuildAndQualificationService
         var path = Path.Combine(root, fileName);
         var entry = new GameProjectBuildHistoryEntry
         {
-            SchemaVersion = build.GeneratedCampaignRelationships is { Passed: true }
+            SchemaVersion = build.GeneratedCampaignRegionalEvents is
+                {
+                    Passed: true,
+                    Status: "REGIONAL_EVENTS_CURRENT" or "ABSENT"
+                }
+                ? GameProjectBuildHistoryReader.SchemaVersionV7
+                : build.GeneratedCampaignRelationships is { Passed: true }
                 ? GameProjectBuildHistoryReader.SchemaVersionV6
                 : build.GeneratedCampaignChoices is { Present: true, Passed: true, Status: "CHOICE_CURRENT" }
                 ? GameProjectBuildHistoryReader.SchemaVersionV5
@@ -1321,6 +1476,8 @@ public sealed class GameProjectBuildAndQualificationService
             ,GeneratedEncounterCombat = build.GeneratedEncounterCombat
             ,GeneratedCampaignChoices = build.GeneratedCampaignChoices
             ,GeneratedCampaignRelationships = build.GeneratedCampaignRelationships
+            ,GeneratedCampaignRegionalEvents =
+                build.GeneratedCampaignRegionalEvents
             ,AcceptedMechanicsCompatibility = build.AcceptedMechanicsCompatibility
         };
         File.WriteAllText(path, JsonSerializer.Serialize(entry, JsonOptions) + Environment.NewLine, new UTF8Encoding(false));

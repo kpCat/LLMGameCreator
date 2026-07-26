@@ -1,0 +1,10 @@
+{
+    "status":  "BLOCKED_AT_BBFD46A2",
+    "implementationCommit":  "bbfd46a23cd6c6d2012626cac77bda316cb9c7a3",
+    "p1A":  "profile-neutral relationship qualification/history",
+    "p1B":  "effect-neutral exact combat",
+    "saveTruthDebt":  "hardcoded build-time proof",
+    "p1AClosed":  true,
+    "p1BClosed":  true,
+    "saveTruthDebtClosed":  true
+}

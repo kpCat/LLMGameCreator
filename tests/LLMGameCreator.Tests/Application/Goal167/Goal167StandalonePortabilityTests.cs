@@ -11,29 +11,29 @@ namespace LLMGameCreator.Tests.Application.Goal167;
 public sealed class Goal167StandalonePortabilityTests
 {
     [Fact]
-    public void Behavioral_standalone_payload_uses_exact_v6_relationship_primary_hashes()
+    public void Behavioral_standalone_payload_uses_exact_v7_regional_event_primary_hashes()
     {
         var state = Goal164PortableState.AllSelectable;
 
         var history = JsonSerializer.Deserialize<GameProjectBuildHistoryEntry>(
             File.ReadAllText(state.Build.Build.BuildHistoryPath),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6, history?.SchemaVersion);
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV7, history?.SchemaVersion);
         Assert.Equal(state.Build.Build.PackageSha256, state.Service.Request?.PackageSha256);
         Assert.Equal(state.Build.Build.CompositionPackageSha256,
             state.Service.Request?.CompositionPackageSha256);
-        Assert.Equal(state.Build.Build.GeneratedCampaignRelationships?.FinalStateHash,
+        Assert.Equal(state.Build.Build.GeneratedCampaignRegionalEvents?.FinalStateHash,
             state.Service.Request?.FinalStateHash);
     }
 
     [Fact]
-    public void Behavioral_standalone_payload_contains_relationship_frames_and_choice_human_facts()
+    public void Behavioral_standalone_payload_contains_regional_event_frames_and_earlier_human_facts()
     {
         var request = Goal164PortableState.AllSelectable.Service.Request!;
 
         Assert.NotEmpty(request.RuntimeFrames);
         Assert.All(request.RuntimeFrames,
-            frame => Assert.Equal("generated-relationship",
+            frame => Assert.Equal("generated-regional-event",
                 frame.Category));
         Assert.Contains(request.HumanReviewFacts, item => item.Label == "Сюжетные решения");
         Assert.Contains(request.HumanReviewFacts, item => item.Label == "Взаимоисключающие ветви"
@@ -41,6 +41,8 @@ public sealed class Goal167StandalonePortabilityTests
         Assert.Contains(request.HumanReviewFacts, item => item.Label == "Постоянные флаги решений");
         Assert.Contains(request.HumanReviewFacts,
             item => item.Label == "Отношения");
+        Assert.Contains(request.HumanReviewFacts,
+            item => item.Label == "События мира");
     }
 
     [Fact]

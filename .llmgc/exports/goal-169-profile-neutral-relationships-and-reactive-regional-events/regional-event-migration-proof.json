@@ -1,0 +1,8 @@
+{
+    "status":  "GREEN",
+    "oldV6SaveRebaseRequired":  true,
+    "compatibleResolutionPreserved":  true,
+    "incompatibleEventDropped":  true,
+    "ghostEventAbsent":  true,
+    "postMigrationEventTravelPassed":  true
+}

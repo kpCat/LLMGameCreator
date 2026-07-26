@@ -41,23 +41,47 @@ public sealed class
                 ArcOrderingDeterministic =
                     overlay.ArcOrderingDeterministic,
                 OverlayControlledDeltaPassed =
-                    overlay.ControlledDeltaPassed
+                    overlay.ControlledDeltaPassed,
+                RuntimeQualificationPassed = true,
+                ExclusiveBranchingPassed = true,
+                ArcProgressionPassed = true,
+                ExactCombatCatalogPassed = true,
+                SupportPassed = true,
+                SupportReplayEquivalent = true,
+                ChallengeFleePassed = true,
+                ChallengeVictoryPassed = true,
+                ChallengeRecoveryPassed = true,
+                RefusePassed = true,
+                AtomicRollbackPassed = true,
+                SaveContinuationFactsPassed = false,
+                SaveContinuationFactsEvaluationStatus =
+                    "NOT_EVALUATED_AT_BUILD",
+                RelationshipBranchMatrixSha256 =
+                    GeneratedCampaignChoiceCanonical.Hash(
+                        Array.Empty<
+                            GeneratedCampaignRelationshipBranchQualification>())
             };
-        if (combatSummary is null)
+        var needsCombat = overlay.Bindings.Any(item =>
+            item.Branches.Contains(
+                GeneratedCampaignRelationshipBranch.CHALLENGE)
+            || item.Branches.Contains(
+                GeneratedCampaignRelationshipBranch.SUPPORT)
+            && item.QuestArc.Any(step =>
+                !string.IsNullOrWhiteSpace(step.TargetEncounterId)));
+        if (needsCombat && combatSummary is null)
             return Invalid(overlay,
                 ["generated_relationship.qualified_combat_catalog_missing"]);
 
         var packageBefore = PackageSha256(finalPackage);
         var diagnostics = new List<string>();
         var frames = new List<GeneratedCampaignRelationshipRuntimeFrame>();
+        var branchQualifications = new List<
+            GeneratedCampaignRelationshipBranchQualification>();
         var relationshipPassed = 0;
         var arcQuestPassed = 0;
-        var supportPassed = true;
-        var supportReplay = true;
         var challengeFleePassed = true;
         var challengeVictoryPassed = true;
         var challengeRecoveryPassed = true;
-        var refusePassed = true;
         var exclusivePassed = true;
         string primaryFinalStateHash = string.Empty;
 
@@ -65,72 +89,252 @@ public sealed class
                      .OrderBy(item => item.RelationshipId,
                          StringComparer.Ordinal))
         {
-            var first = ExecuteSupport(finalPackage, relationship,
-                combatSummary, runtime, 1);
-            var second = ExecuteSupport(finalPackage, relationship,
-                combatSummary, runtime, 2);
-            frames.AddRange(first.Frames);
-            frames.AddRange(second.Frames);
-            supportPassed &= first.Passed && second.Passed;
-            supportReplay &= Equivalent(first, second);
-            exclusivePassed &= first.AlternativesLocked
-                               && second.AlternativesLocked;
-            if (string.IsNullOrWhiteSpace(primaryFinalStateHash)
-                && first.Passed)
-                primaryFinalStateHash = first.FinalStateHash;
-            if (!first.Passed || !second.Passed)
-                diagnostics.AddRange(first.Diagnostics.Concat(
-                    second.Diagnostics));
-
-            var flee = ExecuteChallenge(finalPackage, relationship,
-                combatSummary, runtime,
-                GeneratedCampaignExactCombatRouteGoal.FLEE);
-            var victory = ExecuteChallenge(finalPackage, relationship,
-                combatSummary, runtime,
-                GeneratedCampaignExactCombatRouteGoal.VICTORY);
-            challengeFleePassed &= flee.Passed;
-            challengeVictoryPassed &= victory.Passed;
-            challengeRecoveryPassed &= victory.RecoveryCompatible;
-            frames.AddRange(flee.Frames);
-            frames.AddRange(victory.Frames);
-            diagnostics.AddRange(flee.Diagnostics);
-            diagnostics.AddRange(victory.Diagnostics);
-
-            var refuse = ExecuteRefuse(finalPackage, relationship, runtime);
-            refusePassed &= refuse.Passed;
-            frames.AddRange(refuse.Frames);
-            diagnostics.AddRange(refuse.Diagnostics);
-            exclusivePassed &= refuse.AlternativesLocked;
-
-            if (first.Passed && second.Passed && flee.Passed
-                && victory.Passed && refuse.Passed)
+            foreach (var branch in Enum.GetValues<
+                         GeneratedCampaignRelationshipBranch>())
             {
-                relationshipPassed++;
-                arcQuestPassed += relationship.QuestArc.Count;
+                var available = relationship.Branches.Contains(branch);
+                if (!available)
+                {
+                    branchQualifications.Add(new
+                        GeneratedCampaignRelationshipBranchQualification
+                        {
+                            RelationshipId =
+                                relationship.RelationshipId,
+                            Branch = branch,
+                            Available = false,
+                            Required = false,
+                            Passed = true,
+                            ReplayEquivalent = true,
+                            RuntimeStartCount = 0,
+                            RuntimeCommandCount = 0,
+                            ArcLength = branch ==
+                                GeneratedCampaignRelationshipBranch.SUPPORT
+                                ? relationship.QuestArc.Count
+                                : 0
+                        });
+                    continue;
+                }
+
+                if (branch == GeneratedCampaignRelationshipBranch.SUPPORT)
+                {
+                    if (relationship.QuestArc.Count == 0)
+                    {
+                        const string diagnostic =
+                            "generated_relationship.support_requires_arc";
+                        diagnostics.Add(diagnostic);
+                        branchQualifications.Add(new
+                            GeneratedCampaignRelationshipBranchQualification
+                            {
+                                RelationshipId =
+                                    relationship.RelationshipId,
+                                Branch = branch,
+                                Available = true,
+                                Required = true,
+                                Passed = false,
+                                ReplayEquivalent = false,
+                                ArcLength = 0,
+                                Diagnostics = [diagnostic]
+                            });
+                        continue;
+                    }
+                    var first = ExecuteSupport(finalPackage, relationship,
+                        combatSummary!, runtime, 1);
+                    var second = ExecuteSupport(finalPackage, relationship,
+                        combatSummary!, runtime, 2);
+                    frames.AddRange(first.Frames);
+                    frames.AddRange(second.Frames);
+                    var replay = Equivalent(first, second);
+                    var branchPassed =
+                        first.Passed && second.Passed && replay;
+                    exclusivePassed &= first.AlternativesLocked
+                                       && second.AlternativesLocked;
+                    var branchDiagnostics = first.Diagnostics.Concat(
+                            second.Diagnostics)
+                        .Distinct(StringComparer.Ordinal)
+                        .OrderBy(item => item, StringComparer.Ordinal)
+                        .ToList();
+                    diagnostics.AddRange(branchDiagnostics);
+                    if (!branchPassed)
+                        diagnostics.Add(
+                            "generated_relationship.required_branch_failed");
+                    if (string.IsNullOrWhiteSpace(primaryFinalStateHash)
+                        && first.Passed)
+                        primaryFinalStateHash = first.FinalStateHash;
+                    branchQualifications.Add(new
+                        GeneratedCampaignRelationshipBranchQualification
+                        {
+                            RelationshipId =
+                                relationship.RelationshipId,
+                            Branch = branch,
+                            Available = true,
+                            Required = true,
+                            Passed = branchPassed,
+                            ReplayEquivalent = replay,
+                            RuntimeStartCount = 2,
+                            RuntimeCommandCount =
+                                first.Frames.Count + second.Frames.Count,
+                            ArcLength = relationship.QuestArc.Count,
+                            FinalStateHash = first.FinalStateHash,
+                            Diagnostics = branchDiagnostics
+                        });
+                    if (branchPassed)
+                        arcQuestPassed += relationship.QuestArc.Count;
+                    continue;
+                }
+
+                if (branch == GeneratedCampaignRelationshipBranch.CHALLENGE)
+                {
+                    var flee = ExecuteChallenge(finalPackage, relationship,
+                        combatSummary!, runtime,
+                        GeneratedCampaignExactCombatRouteGoal.FLEE);
+                    var victory = ExecuteChallenge(finalPackage,
+                        relationship, combatSummary!, runtime,
+                        GeneratedCampaignExactCombatRouteGoal.VICTORY);
+                    challengeFleePassed &= flee.Passed;
+                    challengeVictoryPassed &= victory.Passed;
+                    challengeRecoveryPassed &=
+                        victory.RecoveryCompatible;
+                    frames.AddRange(flee.Frames);
+                    frames.AddRange(victory.Frames);
+                    var branchDiagnostics = flee.Diagnostics.Concat(
+                            victory.Diagnostics)
+                        .Distinct(StringComparer.Ordinal)
+                        .OrderBy(item => item, StringComparer.Ordinal)
+                        .ToList();
+                    diagnostics.AddRange(branchDiagnostics);
+                    var branchPassed = flee.Passed && victory.Passed
+                                                   && victory
+                                                       .RecoveryCompatible;
+                    if (!branchPassed)
+                        diagnostics.Add(
+                            "generated_relationship.required_branch_failed");
+                    if (string.IsNullOrWhiteSpace(primaryFinalStateHash)
+                        && victory.Passed)
+                        primaryFinalStateHash = victory.FinalStateHash;
+                    branchQualifications.Add(new
+                        GeneratedCampaignRelationshipBranchQualification
+                        {
+                            RelationshipId =
+                                relationship.RelationshipId,
+                            Branch = branch,
+                            Available = true,
+                            Required = true,
+                            Passed = branchPassed,
+                            ReplayEquivalent = branchPassed,
+                            RuntimeStartCount = 2,
+                            RuntimeCommandCount =
+                                flee.Frames.Count + victory.Frames.Count,
+                            FinalStateHash = victory.FinalStateHash,
+                            Diagnostics = branchDiagnostics
+                        });
+                    continue;
+                }
+
+                var refuse = ExecuteRefuse(finalPackage, relationship,
+                    runtime);
+                frames.AddRange(refuse.Frames);
+                diagnostics.AddRange(refuse.Diagnostics);
+                exclusivePassed &= refuse.AlternativesLocked;
+                if (!refuse.Passed)
+                    diagnostics.Add(
+                        "generated_relationship.required_branch_failed");
+                if (string.IsNullOrWhiteSpace(primaryFinalStateHash)
+                    && refuse.Passed)
+                    primaryFinalStateHash = refuse.FinalStateHash;
+                branchQualifications.Add(new
+                    GeneratedCampaignRelationshipBranchQualification
+                    {
+                        RelationshipId = relationship.RelationshipId,
+                        Branch = branch,
+                        Available = true,
+                        Required = true,
+                        Passed = refuse.Passed,
+                        ReplayEquivalent = refuse.Passed,
+                        RuntimeStartCount = 1,
+                        RuntimeCommandCount = refuse.Frames.Count,
+                        FinalStateHash = refuse.FinalStateHash,
+                        Diagnostics = refuse.Diagnostics
+                    });
             }
+
+            if (branchQualifications.Where(item =>
+                        item.RelationshipId ==
+                        relationship.RelationshipId
+                        && item.Required)
+                    .All(item => item.Passed))
+                relationshipPassed++;
         }
 
-        var atomic = QualifyAtomicFailure(finalPackage,
-            overlay.Bindings[0], combatSummary, runtime);
+        var atomicTarget = overlay.Bindings
+            .OrderBy(item => item.RelationshipId, StringComparer.Ordinal)
+            .Select(item => new
+            {
+                Relationship = item,
+                EncounterId = item.Branches.Contains(
+                                  GeneratedCampaignRelationshipBranch
+                                      .CHALLENGE)
+                              && !string.IsNullOrWhiteSpace(
+                                  item.ChallengeEncounterId)
+                    ? item.ChallengeEncounterId
+                    : item.Branches.Contains(
+                        GeneratedCampaignRelationshipBranch.SUPPORT)
+                        ? item.QuestArc.Select(step =>
+                                step.TargetEncounterId)
+                            .FirstOrDefault(id =>
+                                !string.IsNullOrWhiteSpace(id))
+                          ?? string.Empty
+                        : string.Empty
+            })
+            .FirstOrDefault(item =>
+                !string.IsNullOrWhiteSpace(item.EncounterId));
+        var atomic = atomicTarget is null || combatSummary is null
+            || QualifyAtomicFailure(finalPackage,
+                atomicTarget.Relationship, atomicTarget.EncounterId,
+                combatSummary, runtime);
         if (!atomic) diagnostics.Add(
             "generated_relationship.atomic_rollback_failed");
         var packageAfter = PackageSha256(finalPackage);
         var packageUnchanged = string.Equals(packageBefore, packageAfter,
-                                   StringComparison.Ordinal)
-                               && string.Equals(packageBefore,
-                                   combatSummary.ExactPackageSha256,
-                                   StringComparison.Ordinal);
+            StringComparison.Ordinal)
+            && (!needsCombat || string.Equals(packageBefore,
+                combatSummary!.ExactPackageSha256,
+                StringComparison.Ordinal));
         if (!packageUnchanged)
             diagnostics.Add(
                 "generated_relationship.qualified_action_definition_changed");
-        var exactCatalog = CatalogExact(combatSummary);
+        var exactCatalog = !needsCombat ||
+                           combatSummary is not null
+                           && CatalogExact(combatSummary);
         if (!exactCatalog)
             diagnostics.Add(
                 "generated_relationship.qualified_combat_catalog_missing");
         diagnostics = diagnostics.Distinct(StringComparer.Ordinal)
             .OrderBy(item => item, StringComparer.Ordinal).ToList();
+        var supportFacts = branchQualifications.Where(item =>
+            item.Branch == GeneratedCampaignRelationshipBranch.SUPPORT)
+            .ToList();
+        var challengeFacts = branchQualifications.Where(item =>
+            item.Branch == GeneratedCampaignRelationshipBranch.CHALLENGE)
+            .ToList();
+        var refuseFacts = branchQualifications.Where(item =>
+            item.Branch == GeneratedCampaignRelationshipBranch.REFUSE)
+            .ToList();
+        var supportPassed = supportFacts.Where(item => item.Required)
+            .All(item => item.Passed);
+        var supportReplay = supportFacts.Where(item => item.Required)
+            .All(item => item.ReplayEquivalent);
+        var refusePassed = refuseFacts.Where(item => item.Required)
+            .All(item => item.Passed);
+        var requiredArcQuestCount = overlay.Bindings
+            .Where(item => item.Branches.Contains(
+                GeneratedCampaignRelationshipBranch.SUPPORT))
+            .Sum(item => item.QuestArc.Count);
         var arcProgression = supportPassed
-                             && arcQuestPassed == overlay.ArcQuestCount;
+                             && arcQuestPassed == requiredArcQuestCount;
+        var branchMatrixSha256 =
+            GeneratedCampaignChoiceCanonical.Hash(branchQualifications);
+        if (string.IsNullOrWhiteSpace(primaryFinalStateHash))
+            primaryFinalStateHash = branchMatrixSha256;
         var passed = diagnostics.Count == 0
                      && relationshipPassed == overlay.RelationshipCount
                      && arcProgression
@@ -171,15 +375,40 @@ public sealed class
             ChallengeRecoveryPassed = challengeRecoveryPassed,
             RefusePassed = refusePassed,
             AtomicRollbackPassed = atomic,
-            SaveContinuationFactsPassed = true,
+            SaveContinuationFactsPassed = false,
+            SaveContinuationFactsEvaluationStatus =
+                "NOT_EVALUATED_AT_BUILD",
+            SupportAvailableCount = supportFacts.Count(item =>
+                item.Available),
+            SupportRequiredCount = supportFacts.Count(item =>
+                item.Required),
+            SupportQualifiedCount = supportFacts.Count(item =>
+                item.Required && item.Passed),
+            ChallengeAvailableCount = challengeFacts.Count(item =>
+                item.Available),
+            ChallengeRequiredCount = challengeFacts.Count(item =>
+                item.Required),
+            ChallengeQualifiedCount = challengeFacts.Count(item =>
+                item.Required && item.Passed),
+            RefuseAvailableCount = refuseFacts.Count(item =>
+                item.Available),
+            RefuseRequiredCount = refuseFacts.Count(item =>
+                item.Required),
+            RefuseQualifiedCount = refuseFacts.Count(item =>
+                item.Required && item.Passed),
+            UnavailableBranchRuntimeStartCount =
+                branchQualifications.Where(item => !item.Available)
+                    .Sum(item => item.RuntimeStartCount),
             ExactPackageSha256 = packageBefore,
             RelationshipOverlaySha256 =
                 GeneratedCampaignChoiceCanonical.Hash(overlay),
             RelationshipInventorySha256 = overlay.InventorySha256,
+            RelationshipBranchMatrixSha256 = branchMatrixSha256,
             QualifiedActionsSha256 =
-                combatSummary.QualifiedActionsSha256,
+                combatSummary?.QualifiedActionsSha256 ?? string.Empty,
             FinalStateHash = primaryFinalStateHash,
             RelationshipInventory = overlay.Inventory,
+            BranchQualifications = branchQualifications,
             RuntimeFrames = frames,
             HumanReviewFacts =
             [
@@ -219,10 +448,15 @@ public sealed class
                         overlay.OutputPackageSha256,
                     ["finalPackageSha256"] = packageBefore,
                     ["qualifiedActionsSha256"] =
-                        combatSummary.QualifiedActionsSha256,
+                        combatSummary?.QualifiedActionsSha256
+                        ?? string.Empty,
+                    ["relationshipBranchMatrixSha256"] =
+                        branchMatrixSha256,
                     ["supportReplayEquivalent"] =
                         supportReplay.ToString(),
-                    ["atomicRollbackPassed"] = atomic.ToString()
+                    ["atomicRollbackPassed"] = atomic.ToString(),
+                    ["saveContinuationFactsEvaluationStatus"] =
+                        "NOT_EVALUATED_AT_BUILD"
                 },
             Overlay = overlay,
             Diagnostics = diagnostics
@@ -253,8 +487,7 @@ public sealed class
             return SupportRoute.Failed(
                 "generated_relationship.support_choice_missing");
         var initialAvailable = AvailableChoiceIds(opened);
-        var alternativesLocked = initialAvailable.Contains(initial.Id)
-                                 && initialAvailable.Count >= 2;
+        var alternativesLocked = initialAvailable.Contains(initial.Id);
         var reputationBefore = Reputation(opened.Session,
             relationship.FactionId);
         var before = StateHash(opened.Session);
@@ -514,6 +747,25 @@ public sealed class
                                   && followUp is not null
                                   && AvailableChoiceIds(reopened)
                                       .Contains(followUp.Id);
+        var finalSession = route.Session;
+        if (passed
+            && goal == GeneratedCampaignExactCombatRouteGoal.VICTORY)
+        {
+            var followUpBefore = StateHash(reopened.Session);
+            var chosenFollowUp = runtime.ExecuteGameplayCommand(package,
+                reopened.Session,
+                GameRuntimeCommand.ChooseDialogueOption(followUp!.Id));
+            AddFrame(frames, 1, relationship,
+                GeneratedCampaignRelationshipBranch.CHALLENGE, -1,
+                string.Empty, relationship.ChallengeEncounterId,
+                GameRuntimeCommandType.ChooseDialogueOption,
+                followUpBefore, chosenFollowUp);
+            passed = chosenFollowUp.Success
+                     && Flag(chosenFollowUp.Session,
+                         relationship.RelationshipId
+                         + "/challenge-victory") == "VICTORY";
+            finalSession = chosenFollowUp.Session;
+        }
         var diagnostics = route.Diagnostics.ToList();
         if (!passed)
             diagnostics.Add(goal ==
@@ -524,6 +776,7 @@ public sealed class
             passed,
             goal == GeneratedCampaignExactCombatRouteGoal.VICTORY
             && combatSummary.QualifiedActions.Count > 0,
+            StateHash(finalSession),
             frames,
             diagnostics.Distinct(StringComparer.Ordinal)
                 .OrderBy(item => item, StringComparer.Ordinal).ToList());
@@ -545,7 +798,8 @@ public sealed class
         if (!opened.Success || choice is null)
             return RefuseRoute.Failed(
                 "generated_relationship.refuse_choice_missing");
-        var alternativesLocked = AvailableChoiceIds(opened).Count >= 2;
+        var alternativesLocked = AvailableChoiceIds(opened)
+            .Contains(choice.Id);
         var reputationBefore = Reputation(opened.Session,
             relationship.FactionId);
         var questBefore =
@@ -583,7 +837,8 @@ public sealed class
                      GeneratedCampaignChoiceCanonical.Hash(
                          chosen.Session.GameplayState.ActiveEncounter);
         return passed
-            ? new RefuseRoute(true, alternativesLocked, frames, [])
+            ? new RefuseRoute(true, alternativesLocked,
+                StateHash(chosen.Session), frames, [])
             : RefuseRoute.Failed(
                 "generated_relationship.refuse_state_invalid", frames,
                 alternativesLocked);
@@ -592,6 +847,7 @@ public sealed class
     private bool QualifyAtomicFailure(
         GamePackageDefinition package,
         GeneratedCampaignRelationshipBinding relationship,
+        string encounterId,
         GameProjectGeneratedEncounterCombatSummary combatSummary,
         IUnifiedGameRuntimeService runtime)
     {
@@ -628,7 +884,7 @@ public sealed class
             new GeneratedCampaignExactCombatRouteRequest
             {
                 FinalPackage = package,
-                EncounterId = relationship.ChallengeEncounterId,
+                EncounterId = encounterId,
                 CombatSummary = invalid,
                 Runtime = runtime,
                 InitialSession = start.Session,
@@ -831,19 +1087,21 @@ public sealed class
     private sealed record ChallengeRoute(
         bool Passed,
         bool RecoveryCompatible,
+        string FinalStateHash,
         IReadOnlyList<GeneratedCampaignRelationshipRuntimeFrame> Frames,
         IReadOnlyList<string> Diagnostics)
     {
         public static ChallengeRoute Failed(
             string diagnostic,
-            IReadOnlyList<GeneratedCampaignRelationshipRuntimeFrame>? frames =
+                IReadOnlyList<GeneratedCampaignRelationshipRuntimeFrame>? frames =
                 null) =>
-            new(false, false, frames ?? [], [diagnostic]);
+            new(false, false, string.Empty, frames ?? [], [diagnostic]);
     }
 
     private sealed record RefuseRoute(
         bool Passed,
         bool AlternativesLocked,
+        string FinalStateHash,
         IReadOnlyList<GeneratedCampaignRelationshipRuntimeFrame> Frames,
         IReadOnlyList<string> Diagnostics)
     {
@@ -852,6 +1110,7 @@ public sealed class
             IReadOnlyList<GeneratedCampaignRelationshipRuntimeFrame>? frames =
                 null,
             bool alternativesLocked = false) =>
-            new(false, alternativesLocked, frames ?? [], [diagnostic]);
+            new(false, alternativesLocked, string.Empty, frames ?? [],
+                [diagnostic]);
     }
 }

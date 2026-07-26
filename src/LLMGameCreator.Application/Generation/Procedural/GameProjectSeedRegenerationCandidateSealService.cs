@@ -131,6 +131,23 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
             Compare(persisted.GeneratedCampaignRelationshipInventorySha256,
                 actual.GeneratedCampaignRelationshipInventorySha256,
                 "regeneration.candidate_relationship_changed", diagnostics);
+            Compare(
+                persisted.GeneratedCampaignRelationshipBranchMatrixSha256,
+                actual.GeneratedCampaignRelationshipBranchMatrixSha256,
+                "regeneration.relationship_branch_matrix_changed",
+                diagnostics);
+            Compare(persisted.GeneratedCampaignRegionalEventSummarySha256,
+                actual.GeneratedCampaignRegionalEventSummarySha256,
+                "regeneration.regional_event_summary_changed",
+                diagnostics);
+            Compare(persisted.GeneratedCampaignRegionalEventOverlaySha256,
+                actual.GeneratedCampaignRegionalEventOverlaySha256,
+                "regeneration.regional_event_overlay_changed",
+                diagnostics);
+            Compare(persisted.GeneratedCampaignRegionalEventInventorySha256,
+                actual.GeneratedCampaignRegionalEventInventorySha256,
+                "regeneration.regional_event_inventory_changed",
+                diagnostics);
             Compare(persisted.CandidateSnapshotStatus, actual.CandidateSnapshotStatus,
                 "regeneration.candidate_tampered", diagnostics);
             Compare(persisted.MechanicsProfileId, actual.MechanicsProfileId,
@@ -245,6 +262,18 @@ public sealed class GameProjectSeedRegenerationCandidateSealService
                 build.GeneratedCampaignRelationships?.Overlay),
             GeneratedCampaignRelationshipInventorySha256 = CanonicalSha256(
                 build.GeneratedCampaignRelationships?.RelationshipInventory),
+            GeneratedCampaignRelationshipBranchMatrixSha256 =
+                CanonicalSha256(build.GeneratedCampaignRelationships
+                    ?.BranchQualifications),
+            GeneratedCampaignRegionalEventSummarySha256 =
+                CanonicalSha256(
+                    build.GeneratedCampaignRegionalEvents),
+            GeneratedCampaignRegionalEventOverlaySha256 =
+                CanonicalSha256(build.GeneratedCampaignRegionalEvents
+                    ?.Overlay),
+            GeneratedCampaignRegionalEventInventorySha256 =
+                CanonicalSha256(build.GeneratedCampaignRegionalEvents
+                    ?.EventInventory),
             CandidateSnapshotStatus = snapshot.GeneratedWorld?.Status ?? string.Empty,
             MechanicsProfileId = snapshot.GeneratedWorld?.MechanicsProfileId ?? string.Empty,
             AcceptedMechanicsSummarySha256 = CanonicalSha256(snapshot.AcceptedMechanics),

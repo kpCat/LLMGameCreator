@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-169-profile-neutral-relationships-and-reactive-regional-events",
+    "requiredBase":  "bbfd46a23cd6c6d2012626cac77bda316cb9c7a3",
+    "changedPathCount":  91,
+    "allowedCount":  91,
+    "warningCount":  0,
+    "violationCount":  0,
+    "forbiddenRuntimeDomainGamePackageUnityStandaloneRcMutationCount":  0,
+    "boundedIntegrationExceptions":  [
+                                         "GeneratedCampaignRelationshipOverlayService.cs: the concrete Challenge-only QuestArc=0 and Support/Refuse-only profile failures required branch-neutral overlay production; this is the single bounded additional existing campaign path.",
+                                         "GameProjectSeedRegenerationRecordService.cs: v7 regeneration failed with semantic.regeneration_record_invalid until the explicitly allowed history schema reader accepted v7.",
+                                         "Goal168 history, exact-combat and standalone assertions were updated to the effect-neutral v7 event-primary contract; no Goal168 85-case closure was run.",
+                                         "Goal167 history/standalone and Goal164 standalone current-build assertions were test-only contract maintenance after the required pre-smoke regressions exposed mutually exclusive v6 relationship-primary expectations."
+                                     ]
+}

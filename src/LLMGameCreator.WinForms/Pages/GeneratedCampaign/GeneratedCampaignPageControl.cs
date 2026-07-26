@@ -32,6 +32,8 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
         .FirstOrDefault()?.Text ?? string.Empty;
     internal string RelationshipText => _relationshipsTab.Controls.OfType<Label>()
         .FirstOrDefault()?.Text ?? string.Empty;
+    internal string RegionalEventText => _eventsTab.Controls.OfType<Label>()
+        .FirstOrDefault()?.Text ?? string.Empty;
 
     public void OnActivated() => Bind(_service?.Refresh());
 
@@ -156,7 +158,18 @@ public sealed partial class GeneratedCampaignPageControl : UserControl, IEditorP
                 decision.AlternativesLocked ? "Другие варианты недоступны" : string.Empty }
                 .Where(value => !string.IsNullOrWhiteSpace(value)))
         }));
-        WriteTab(_eventsTab, snapshot.RecentEvents.Select(value => new GeneratedCampaignTextRow { Title = value }));
+        WriteTab(_eventsTab, snapshot.RegionalEvents.Select(item =>
+            new GeneratedCampaignTextRow
+            {
+                Title = item.Title,
+                Value = string.Join("; ", new[]
+                {
+                    item.KindTitle,
+                    item.StatusTitle,
+                    item.RegionTitle,
+                    item.NextAction
+                }.Where(value => !string.IsNullOrWhiteSpace(value)))
+            }));
         _technical.Text = string.Join(Environment.NewLine,
             snapshot.TechnicalDetails.Select(item => item.Key + ": " + item.Value)
                 .Concat(snapshot.Diagnostics));

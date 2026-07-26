@@ -1,0 +1,8 @@
+{
+    "status":  "GREEN",
+    "buildEvaluationStatus":  "NOT_EVALUATED_AT_BUILD",
+    "buildPassed":  false,
+    "availableContinuePassed":  true,
+    "resolvedContinuePassed":  true,
+    "runtimeStartCount":  0
+}

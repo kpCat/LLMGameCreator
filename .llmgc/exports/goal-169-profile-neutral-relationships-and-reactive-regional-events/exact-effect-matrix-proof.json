@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "acceptedEffectClasses":  [
+                                  "TARGET_HEALTH_DECREASE",
+                                  "TARGET_STAT_CHANGED",
+                                  "TARGET_STATUS_CHANGED"
+                              ],
+    "healthEffectPassed":  true,
+    "statEffectPassed":  true,
+    "statusEffectPassed":  true,
+    "delayedStatusDamagePassed":  true,
+    "utilityNoOpRejected":  true,
+    "abilityOnlyEffectNeutralPassed":  true,
+    "exactPackageShaUnchanged":  true
+}

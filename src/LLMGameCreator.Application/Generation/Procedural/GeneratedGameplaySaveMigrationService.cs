@@ -205,6 +205,25 @@ public sealed class GeneratedGameplaySaveMigrationService
             .Where(id => !string.IsNullOrWhiteSpace(id))
             .Select(id => id!)
             .ToHashSet(StringComparer.Ordinal);
+        var targetRegionalEventIds = truth.ActualPackage.Game.Dialogues
+            .Where(dialogue =>
+                dialogue.Metadata.GetValueOrDefault(
+                    "generatedRegionalEventId") == dialogue.Id)
+            .Select(dialogue => dialogue.Id)
+            .ToHashSet(StringComparer.Ordinal);
+        var compatibleRegionalEventIds = targetRegionalEventIds
+            .Where(id =>
+                sourceByKey.TryGetValue("dialogue\n" + id,
+                    out var sourceDialogue)
+                && targetByKey.TryGetValue("dialogue\n" + id,
+                    out var targetDialogue)
+                && sourceDialogue.Generated
+                && targetDialogue.Generated
+                && sourceDialogue.SourceId ==
+                targetDialogue.SourceId
+                && sourceDialogue.CanonicalSha256 ==
+                targetDialogue.CanonicalSha256)
+            .ToHashSet(StringComparer.Ordinal);
 
         bool Portable(string kind, string id, bool generatedAllowed = true)
         {
@@ -362,12 +381,14 @@ public sealed class GeneratedGameplaySaveMigrationService
         session.GameplayEvents = [];
         session.MapState.Flags = session.MapState.Flags.Where(pair =>
             KeepRelationshipDecision(pair.Key, pair.Value, worldMigration,
-                compatibleRelationshipIds, sourceRevision, Portable,
+                compatibleRelationshipIds, targetRegionalEventIds,
+                compatibleRegionalEventIds, sourceRevision, Portable,
                 Preserved, Dropped)).ToDictionary(pair => pair.Key,
             pair => pair.Value, StringComparer.Ordinal);
         session.GameplayState.Flags = session.GameplayState.Flags.Where(flag =>
             KeepRelationshipDecision(flag.Id, flag.Value, worldMigration,
-                compatibleRelationshipIds, sourceRevision, Portable,
+                compatibleRelationshipIds, targetRegionalEventIds,
+                compatibleRegionalEventIds, sourceRevision, Portable,
                 Preserved, Dropped)).ToList();
         session.GameplayState.Metadata = FilterDictionary(
             session.GameplayState.Metadata, sourceRevision, Portable, Dropped);
@@ -459,11 +480,45 @@ public sealed class GeneratedGameplaySaveMigrationService
         string value,
         bool worldMigration,
         IReadOnlySet<string> compatibleRelationshipIds,
+        IReadOnlySet<string> targetRegionalEventIds,
+        IReadOnlySet<string> compatibleRegionalEventIds,
         GeneratedGameplaySaveRevision revision,
         Func<string, string, bool, bool> portable,
         Action<string, string> preserved,
         Action<string, string, string> dropped)
     {
+        if (value == "RESOLVED"
+            && key.Contains("/regional-event/",
+                StringComparison.Ordinal))
+        {
+            if (compatibleRegionalEventIds.Contains(key))
+            {
+                preserved("regional_event_resolution", key);
+                return true;
+            }
+            dropped("regional_event_resolution", key,
+                "generated_regional_event_incompatible");
+            return false;
+        }
+        if (value == "VICTORY"
+            && key.EndsWith("/challenge-victory",
+                StringComparison.Ordinal))
+        {
+            var relationshipId = key[
+                ..^"/challenge-victory".Length];
+            if (compatibleRelationshipIds.Contains(relationshipId)
+                && targetRegionalEventIds.Any(id =>
+                    id.StartsWith(relationshipId
+                                  + "/regional-event/challenge-aftermath",
+                        StringComparison.Ordinal)))
+            {
+                preserved("regional_event_prerequisite", key);
+                return true;
+            }
+            dropped("regional_event_prerequisite", key,
+                "generated_regional_event_incompatible");
+            return false;
+        }
         if (worldMigration && compatibleRelationshipIds.Contains(key)
             && value is "SUPPORT" or "CHALLENGE" or "REFUSE")
         {

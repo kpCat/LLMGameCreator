@@ -17,16 +17,16 @@ namespace LLMGameCreator.Tests.Application.Goal168;
 public sealed class Goal168HistoryRegenerationTests
 {
     [Fact]
-    public void Behavioral_v6_primary_truth_belongs_to_relationship_route()
+    public void Behavioral_v7_primary_truth_belongs_to_regional_event_route()
     {
         var build = Goal168TestKit.Build;
         var history = ReadHistory(build.BuildHistoryPath);
 
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6,
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV7,
             history.SchemaVersion);
-        Assert.Equal(build.GeneratedCampaignRelationships?.FinalStateHash,
+        Assert.Equal(build.GeneratedCampaignRegionalEvents?.FinalStateHash,
             build.FinalStateHash);
-        Assert.Equal("generated-campaign-relationship-v1",
+        Assert.Equal("generated-campaign-regional-event-v1",
             build.RuntimePlaythroughPlanId);
     }
 
@@ -54,10 +54,18 @@ public sealed class Goal168HistoryRegenerationTests
             seal.GeneratedCampaignRelationshipOverlaySha256.Length);
         Assert.Equal(64,
             seal.GeneratedCampaignRelationshipInventorySha256.Length);
+        Assert.Equal(64,
+            seal.GeneratedCampaignRelationshipBranchMatrixSha256.Length);
+        Assert.Equal(64,
+            seal.GeneratedCampaignRegionalEventSummarySha256.Length);
+        Assert.Equal(64,
+            seal.GeneratedCampaignRegionalEventOverlaySha256.Length);
+        Assert.Equal(64,
+            seal.GeneratedCampaignRegionalEventInventorySha256.Length);
     }
 
     [Fact]
-    public void Behavioral_regeneration_and_rollback_restore_relationship_current()
+    public void Behavioral_regeneration_and_rollback_restore_regional_events_current()
     {
         var state = Goal164RegenerationState.Value;
 
@@ -65,10 +73,14 @@ public sealed class Goal168HistoryRegenerationTests
             string.Join(",", state.Applied.Diagnostics));
         Assert.Equal("RELATIONSHIPS_CURRENT",
             state.AfterRegeneration.GeneratedCampaignRelationships?.Status);
+        Assert.Equal("REGIONAL_EVENTS_CURRENT",
+            state.AfterRegeneration.GeneratedCampaignRegionalEvents?.Status);
         Assert.True(state.RolledBack.Applied,
             string.Join(",", state.RolledBack.Diagnostics));
         Assert.Equal("RELATIONSHIPS_CURRENT",
             state.AfterRollback.GeneratedCampaignRelationships?.Status);
+        Assert.Equal("REGIONAL_EVENTS_CURRENT",
+            state.AfterRollback.GeneratedCampaignRegionalEvents?.Status);
     }
 
     [Fact]

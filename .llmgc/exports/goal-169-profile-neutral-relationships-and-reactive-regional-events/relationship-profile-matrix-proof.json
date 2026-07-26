@@ -1,0 +1,268 @@
+{
+    "status":  "GREEN",
+    "profileCount":  6,
+    "profiles":  [
+                     {
+                         "profileId":  "all-branches",
+                         "passed":  true,
+                         "status":  "RELATIONSHIPS_CURRENT",
+                         "relationshipCount":  1,
+                         "arcQuestCount":  1,
+                         "runtimeStartCount":  5,
+                         "unavailableBranchRuntimeStartCount":  0,
+                         "branchMatrixSha256":  "7e8bb22aa453d3388afa39ae94b1eec192283b27f1aaef0c4d5946180f3b5a35",
+                         "branches":  [
+                                          {
+                                              "branch":  "SUPPORT",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  2,
+                                              "RuntimeCommandCount":  38,
+                                              "ArcLength":  1
+                                          },
+                                          {
+                                              "branch":  "CHALLENGE",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  2,
+                                              "RuntimeCommandCount":  19,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "REFUSE",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  1,
+                                              "RuntimeCommandCount":  1,
+                                              "ArcLength":  0
+                                          }
+                                      ],
+                         "eventCount":  3
+                     },
+                     {
+                         "profileId":  "challenge-only-zero-arc",
+                         "passed":  true,
+                         "status":  "RELATIONSHIPS_CURRENT",
+                         "relationshipCount":  1,
+                         "arcQuestCount":  0,
+                         "runtimeStartCount":  2,
+                         "unavailableBranchRuntimeStartCount":  0,
+                         "branchMatrixSha256":  "a04cfdf39d315e0e30fc0eecd222ad14f9a632fbeda5b7fe382f80ebe5ffb8c2",
+                         "branches":  [
+                                          {
+                                              "branch":  "SUPPORT",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "CHALLENGE",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  2,
+                                              "RuntimeCommandCount":  19,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "REFUSE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          }
+                                      ],
+                         "eventCount":  1
+                     },
+                     {
+                         "profileId":  "no-branches",
+                         "passed":  true,
+                         "status":  "RELATIONSHIPS_CURRENT",
+                         "relationshipCount":  1,
+                         "arcQuestCount":  0,
+                         "runtimeStartCount":  0,
+                         "unavailableBranchRuntimeStartCount":  0,
+                         "branchMatrixSha256":  "34d3b458930c38b48132113cf323cec7acd84798d09c7655c1282704fb7c2877",
+                         "branches":  [
+                                          {
+                                              "branch":  "SUPPORT",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "CHALLENGE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "REFUSE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          }
+                                      ],
+                         "eventCount":  0
+                     },
+                     {
+                         "profileId":  "refuse-only",
+                         "passed":  true,
+                         "status":  "RELATIONSHIPS_CURRENT",
+                         "relationshipCount":  1,
+                         "arcQuestCount":  0,
+                         "runtimeStartCount":  1,
+                         "unavailableBranchRuntimeStartCount":  0,
+                         "branchMatrixSha256":  "e90e35d9b525e3f4c118a95caa62069f7584fa6855ed80e489ba3aba76711bb3",
+                         "branches":  [
+                                          {
+                                              "branch":  "SUPPORT",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "CHALLENGE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "REFUSE",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  1,
+                                              "RuntimeCommandCount":  1,
+                                              "ArcLength":  0
+                                          }
+                                      ],
+                         "eventCount":  1
+                     },
+                     {
+                         "profileId":  "support-only",
+                         "passed":  true,
+                         "status":  "RELATIONSHIPS_CURRENT",
+                         "relationshipCount":  1,
+                         "arcQuestCount":  1,
+                         "runtimeStartCount":  2,
+                         "unavailableBranchRuntimeStartCount":  0,
+                         "branchMatrixSha256":  "bfeb4cbe0ace18dd0c861945f5283717a069ca13eec78a44e0a050563bb89d26",
+                         "branches":  [
+                                          {
+                                              "branch":  "SUPPORT",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  2,
+                                              "RuntimeCommandCount":  38,
+                                              "ArcLength":  1
+                                          },
+                                          {
+                                              "branch":  "CHALLENGE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "REFUSE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          }
+                                      ],
+                         "eventCount":  1
+                     },
+                     {
+                         "profileId":  "support-refuse",
+                         "passed":  true,
+                         "status":  "RELATIONSHIPS_CURRENT",
+                         "relationshipCount":  1,
+                         "arcQuestCount":  1,
+                         "runtimeStartCount":  3,
+                         "unavailableBranchRuntimeStartCount":  0,
+                         "branchMatrixSha256":  "76c11e469b63f3972c992c6f3d10745806cfb01b30aa3a223f5267cf71c2e1ea",
+                         "branches":  [
+                                          {
+                                              "branch":  "SUPPORT",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  2,
+                                              "RuntimeCommandCount":  38,
+                                              "ArcLength":  1
+                                          },
+                                          {
+                                              "branch":  "CHALLENGE",
+                                              "Available":  false,
+                                              "Required":  false,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  0,
+                                              "RuntimeCommandCount":  0,
+                                              "ArcLength":  0
+                                          },
+                                          {
+                                              "branch":  "REFUSE",
+                                              "Available":  true,
+                                              "Required":  true,
+                                              "Passed":  true,
+                                              "ReplayEquivalent":  true,
+                                              "RuntimeStartCount":  1,
+                                              "RuntimeCommandCount":  1,
+                                              "ArcLength":  0
+                                          }
+                                      ],
+                         "eventCount":  2
+                     }
+                 ],
+    "unavailableBranchRuntimeStartCount":  0,
+    "branchMatrixSha256":  "ea6d2edb585d2ece8d9932191d10fcf53abfc2cbf706c44094b191028da0d45b",
+    "legacyV6AllBranchCompatible":  true,
+    "legacyV6PartialRejected":  true
+}

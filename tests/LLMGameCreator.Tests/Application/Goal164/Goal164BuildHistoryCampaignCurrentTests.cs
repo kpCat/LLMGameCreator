@@ -13,19 +13,21 @@ namespace LLMGameCreator.Tests.Application.Goal164;
 public sealed class Goal164BuildHistoryCampaignCurrentTests
 {
     [Fact]
-    public void Behavioral_successful_generated_relationship_route_writes_v6_history()
+    public void Behavioral_successful_generated_regional_event_route_writes_v7_history()
     {
         var entry = History(Goal164TestKit.AllSelectable.Build.BuildHistoryPath);
 
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6, entry.SchemaVersion);
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV7, entry.SchemaVersion);
         Assert.Equal("CAMPAIGN_CURRENT", entry.GeneratedEncounterCombat?.Status);
         Assert.Equal("CHOICE_CURRENT", entry.GeneratedCampaignChoices?.Status);
         Assert.Equal("RELATIONSHIPS_CURRENT",
             entry.GeneratedCampaignRelationships?.Status);
+        Assert.Equal("REGIONAL_EVENTS_CURRENT",
+            entry.GeneratedCampaignRegionalEvents?.Status);
     }
 
     [Fact]
-    public void Behavioral_v6_history_carries_exact_primary_hashes()
+    public void Behavioral_v7_history_carries_exact_primary_hashes()
     {
         var fixture = Goal164TestKit.AllSelectable;
         var entry = History(fixture.Build.BuildHistoryPath);
@@ -88,7 +90,7 @@ public sealed class Goal164BuildHistoryCampaignCurrentTests
     }
 
     [Fact]
-    public void Behavioral_old_project_rebuild_upgrades_combat_without_source_rewrite()
+    public void Behavioral_current_rebuild_upgrades_history_without_source_rewrite()
     {
         var fixture = Goal164TestKit.AllSelectable;
         var generationRoot = Path.Combine(fixture.Project.Path,
@@ -96,7 +98,7 @@ public sealed class Goal164BuildHistoryCampaignCurrentTests
 
         Assert.All(fixture.GenerationSidecarHashesBefore, pair =>
             Assert.Equal(pair.Value, Goal164TestKit.FileSha(Path.Combine(generationRoot, pair.Key))));
-        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV6,
+        Assert.Equal(GameProjectBuildHistoryReader.SchemaVersionV7,
             History(fixture.Build.BuildHistoryPath).SchemaVersion);
     }
 

@@ -1,0 +1,383 @@
+{
+  "schemaVersion": "goal169-architecture-review-v1",
+  "goal168IndependentAudit": {
+    "types": [
+      "GameProjectGeneratedCampaignRelationshipQualificationService",
+      "GeneratedCampaignExactCombatRouteService"
+    ],
+    "inputs": "Goal168 v6 relationship summaries and exact-combat qualified actions",
+    "outputs": "P1-A/P1-B closure facts",
+    "hashes": [
+      "ExactPackageSha256",
+      "QualifiedActionsSha256"
+    ],
+    "diagnostics": [
+      "generated_relationship.required_branch_failed",
+      "generated_relationship.qualified_action_no_progress"
+    ],
+    "behavioralTests": "Goal169 tests 1-30"
+  },
+  "relationshipBranchMatrix": {
+    "types": [
+      "GeneratedCampaignRelationshipBranchQualification",
+      "GameProjectGeneratedCampaignRelationshipSummary",
+      "GameProjectGeneratedCampaignRelationshipQualificationService"
+    ],
+    "inputs": "GeneratedCampaignRelationshipBinding.Branches and QuestArc",
+    "outputs": "Available/Required/Passed/ReplayEquivalent facts and branch counters",
+    "hashes": [
+      "RelationshipBranchMatrixSha256",
+      "FinalStateHash"
+    ],
+    "diagnostics": [
+      "generated_relationship.required_branch_failed",
+      "generated_relationship.support_requires_arc",
+      "generated_relationship.unavailable_branch_runtime_started"
+    ],
+    "behavioralTests": "Goal169 tests 1-13, 16-18",
+    "boundedScopeException": "GeneratedCampaignRelationshipOverlayService.cs is the one additional existing campaign path required after the concrete Challenge-only QuestArc=0 and Support/Refuse-only profile failures proved that branch-neutral qualification could not be fixed without producing a branch-neutral overlay."
+  },
+  "legacyV6Compatibility": {
+    "types": [
+      "GameProjectBuildHistoryReader"
+    ],
+    "inputs": "Persisted schema v6 history entry",
+    "outputs": "Fully proven all-branch compatibility or relationship pending",
+    "hashes": [
+      "ExactPackageSha256",
+      "RelationshipInventorySha256",
+      "FinalStateHash"
+    ],
+    "diagnostics": [
+      "build.history.relationships_pending",
+      "build.history.legacy_relationship_partial"
+    ],
+    "behavioralTests": "Goal169 tests 14-15, 88-91"
+  },
+  "honestSaveContinuationTruth": {
+    "types": [
+      "GameProjectGeneratedCampaignRelationshipSummary"
+    ],
+    "inputs": "Build-time relationship qualification",
+    "outputs": "SaveContinuationFactsEvaluationStatus=NOT_EVALUATED_AT_BUILD and Passed=false",
+    "hashes": [
+      "RelationshipBranchMatrixSha256"
+    ],
+    "diagnostics": [
+      "generated_relationship.save_continuation_not_evaluated_at_build"
+    ],
+    "behavioralTests": "Goal169 honest build/save truth tests and tests 97-99"
+  },
+  "exactEffectMatrix": {
+    "types": [
+      "GeneratedCampaignExactCombatRouteService",
+      "GeneratedEncounterCombatObservedEffect"
+    ],
+    "inputs": "Exact qualified health/stat/status descriptors and Runtime observations",
+    "outputs": "Exact descriptor match plus encounter-state progress and actual victory",
+    "hashes": [
+      "QualifiedActionsSha256",
+      "AbilityDefinitionSha256",
+      "ObservedEffect.Fingerprint"
+    ],
+    "diagnostics": [
+      "generated_relationship.qualified_action_no_progress",
+      "generated_relationship.arc_combat_failed",
+      "generated_relationship.qualified_action_definition_changed"
+    ],
+    "behavioralTests": "Goal169 tests 19-30"
+  },
+  "regionalEventIdentity": {
+    "types": [
+      "GeneratedCampaignRegionalEventBinding",
+      "GeneratedCampaignRegionalEventBindingService"
+    ],
+    "inputs": "Relationship branches, final quest reward, challenge encounter and source region",
+    "outputs": "Deterministic Support/Challenge/Refuse event bindings",
+    "hashes": [
+      "RegionalEventInventorySha256",
+      "PrerequisiteFingerprint",
+      "RewardDerivationFingerprint"
+    ],
+    "diagnostics": [
+      "generated_regional_event.identity_invalid",
+      "generated_regional_event.inventory_mismatch"
+    ],
+    "behavioralTests": "Goal169 tests 31-41, 50"
+  },
+  "regionalEventPrerequisites": {
+    "types": [
+      "GeneratedCampaignRegionalEventPrerequisite"
+    ],
+    "inputs": "Support completion, Challenge victory aftermath or Refusal fallout Runtime state",
+    "outputs": "Typed branch-specific prerequisite",
+    "hashes": [
+      "PrerequisiteFingerprint"
+    ],
+    "diagnostics": [
+      "generated_regional_event.prerequisite_mismatch"
+    ],
+    "behavioralTests": "Goal169 tests 31-35, 60-68"
+  },
+  "regionalEventPlacement": {
+    "types": [
+      "GeneratedCampaignRegionalEventPlacement",
+      "GeneratedCampaignRegionalEventBindingService"
+    ],
+    "inputs": "Arbitrary map topology, start, gates, blocking entities and event inventory",
+    "outputs": "Unique deterministic safe reachable coordinates",
+    "hashes": [
+      "RegionalEventInventorySha256",
+      "RegionalEventOverlaySha256"
+    ],
+    "diagnostics": [
+      "generated_regional_event.safe_placement_unavailable",
+      "generated_regional_event.output_nondeterministic"
+    ],
+    "behavioralTests": "Goal169 tests 42-50"
+  },
+  "regionalEventOverlayControlledDelta": {
+    "types": [
+      "GeneratedCampaignRegionalEventOverlayDocument",
+      "GeneratedCampaignRegionalEventOverlayService"
+    ],
+    "inputs": "Exact relationship package and event bindings",
+    "outputs": "Only event prototypes/dialogues/interactions/map entities and generatedRegionalEvent metadata",
+    "hashes": [
+      "InputPackageSha256",
+      "OutputPackageSha256",
+      "RegionalEventOverlaySha256",
+      "RegionalEventInventorySha256"
+    ],
+    "diagnostics": [
+      "generated_regional_event.overlay_delta_outside_scope",
+      "generated_regional_event.existing_definition_changed",
+      "generated_regional_event.inventory_mismatch",
+      "generated_regional_event.output_nondeterministic"
+    ],
+    "behavioralTests": "Goal169 tests 51-59"
+  },
+  "regionalEventRuntimeLifecycle": {
+    "types": [
+      "GameProjectGeneratedCampaignRegionalEventQualificationService",
+      "GeneratedCampaignRegionalEventQualification"
+    ],
+    "inputs": "Move/Interact/OpenDialogue/ChooseDialogue Runtime commands",
+    "outputs": "LOCKED, AVAILABLE and RESOLVED exactly-once typed facts",
+    "hashes": [
+      "ExactPackageSha256",
+      "InitialStateHash",
+      "FinalStateHash"
+    ],
+    "diagnostics": [
+      "generated_regional_event.locked_mutation",
+      "generated_regional_event.resolution_unavailable",
+      "generated_regional_event.duplicate_resolution",
+      "generated_regional_event.malformed_resolution_not_atomic"
+    ],
+    "behavioralTests": "Goal169 tests 60-76"
+  },
+  "regionalEventProjection": {
+    "types": [
+      "GeneratedCampaignRegionalEventProjectionService",
+      "GeneratedCampaignRegionalEventRow",
+      "GeneratedCampaignPageControl",
+      "GeneratedCampaignMapControl"
+    ],
+    "inputs": "Exact package, Runtime state and event overlay",
+    "outputs": "State-backed world-event rows and human map markers",
+    "hashes": [
+      "RegionalEventInventorySha256"
+    ],
+    "diagnostics": [
+      "campaign.generated_regional_events_not_current"
+    ],
+    "behavioralTests": "Goal169 tests 77-86"
+  },
+  "historyV7": {
+    "types": [
+      "GameProjectBuildHistoryEntry",
+      "GameProjectBuildHistoryReader"
+    ],
+    "inputs": "Relationship summary, regional-event summary and exact package",
+    "outputs": "Schema v7 REGIONAL_EVENTS_CURRENT truth",
+    "hashes": [
+      "GeneratedCampaignRelationshipBranchMatrixSha256",
+      "GeneratedCampaignRegionalEventOverlaySha256",
+      "GeneratedCampaignRegionalEventInventorySha256",
+      "FinalStateHash"
+    ],
+    "diagnostics": [
+      "build.history.regional_events_pending",
+      "build.history.regional_events_invalid"
+    ],
+    "behavioralTests": "Goal169 tests 87-92"
+  },
+  "campaignReadiness": {
+    "types": [
+      "GeneratedCampaignSessionTruthService",
+      "GameProjectGeneratedWorldSummaryService"
+    ],
+    "inputs": "Current schema v7 history and generated event inventory",
+    "outputs": "CAMPAIGN_CURRENT or PROJECT_NOT_READY with one build action",
+    "hashes": [
+      "PackageSha256",
+      "FinalStateHash"
+    ],
+    "diagnostics": [
+      "campaign.generated_regional_events_not_current"
+    ],
+    "behavioralTests": "Goal169 tests 87-92, 108-110"
+  },
+  "regenerationRollbackSeal": {
+    "types": [
+      "GameProjectSeedRegenerationCandidateSeal",
+      "GameProjectSeedRegenerationCandidateSealService",
+      "GameProjectSeedRegenerationCommitValidator"
+    ],
+    "inputs": "Relationship branch matrix and regional-event summary/overlay/inventory",
+    "outputs": "Strict candidate and rollback validation",
+    "hashes": [
+      "GeneratedCampaignRelationshipBranchMatrixSha256",
+      "GeneratedCampaignRegionalEventSummarySha256",
+      "GeneratedCampaignRegionalEventOverlaySha256",
+      "GeneratedCampaignRegionalEventInventorySha256"
+    ],
+    "diagnostics": [
+      "regeneration.relationship_branch_matrix_changed",
+      "regeneration.regional_event_summary_changed",
+      "regeneration.regional_event_overlay_changed",
+      "regeneration.regional_event_inventory_changed"
+    ],
+    "behavioralTests": "Goal169 tests 93-96"
+  },
+  "exactSaveContinue": {
+    "types": [
+      "GeneratedCampaignSessionService",
+      "GeneratedGameplaySaveService"
+    ],
+    "inputs": "AVAILABLE and RESOLVED exact event Runtime sessions",
+    "outputs": "Exact continued lifecycle with zero Runtime Start calls",
+    "hashes": [
+      "PackageSha256",
+      "DefinitionFingerprintsSha256",
+      "SessionSha256"
+    ],
+    "diagnostics": [
+      "save.package_mismatch",
+      "save.regional_event_state_invalid"
+    ],
+    "behavioralTests": "Goal169 tests 97-100"
+  },
+  "migrationCompatibility": {
+    "types": [
+      "GeneratedGameplaySaveMigrationService",
+      "GeneratedGameplayDefinitionFingerprintService"
+    ],
+    "inputs": "Source event flags and target definition fingerprints",
+    "outputs": "Compatible flags preserved; incompatible flags dropped; no ghost events",
+    "hashes": [
+      "DefinitionFingerprintsSha256",
+      "CandidateSessionSha256"
+    ],
+    "diagnostics": [
+      "save_migration.generated_regional_event_incompatible",
+      "save_migration.generated_regional_event_removed"
+    ],
+    "behavioralTests": "Goal169 tests 100-105"
+  },
+  "standaloneRcPortable": {
+    "types": [
+      "ProjectStandaloneBuildService",
+      "UnifiedGameProjectWorkspaceController"
+    ],
+    "inputs": "Current all-selectable/core-only projects and cached standalone host",
+    "outputs": "One hidden smoke, host reuse, Unity zero, correct RC/portable truth",
+    "hashes": [
+      "PackageSha256",
+      "FinalStateHash",
+      "StandaloneHostTreeSha256"
+    ],
+    "diagnostics": [
+      "standalone.generated_regional_events_not_current",
+      "release_candidate.generated_regional_events_not_current"
+    ],
+    "behavioralTests": "Goal169 tests 106-110"
+  },
+  "failureMatrix": {
+    "types": [
+      "GameProjectGeneratedCampaignRelationshipQualificationService",
+      "GeneratedCampaignExactCombatRouteService",
+      "GeneratedCampaignRegionalEventBindingService",
+      "GeneratedCampaignRegionalEventOverlayService",
+      "GameProjectGeneratedCampaignRegionalEventQualificationService"
+    ],
+    "inputs": "Missing required branch, no-op effect, unsafe placement, forbidden overlay delta and malformed resolution",
+    "outputs": "Causal typed failure without partial mutation",
+    "hashes": [
+      "ExactPackageSha256",
+      "InitialStateHash",
+      "FinalStateHash"
+    ],
+    "diagnostics": [
+      "generated_relationship.required_branch_failed",
+      "generated_relationship.qualified_action_no_progress",
+      "generated_regional_event.safe_placement_unavailable",
+      "generated_regional_event.overlay_delta_outside_scope",
+      "generated_regional_event.malformed_resolution_not_atomic"
+    ],
+    "behavioralTests": "Goal169 tests 10, 23, 29-30, 49, 59, 71-72"
+  },
+  "regressionImmutability": {
+    "types": [
+      "Goal169RegressionImmutabilityTests"
+    ],
+    "inputs": "Goal168 through Goal157 focused routes, Goal142/Goal148 baselines and generation sidecars",
+    "outputs": "Focused green regressions and byte-identical forbidden artifacts",
+    "hashes": [
+      "Goal142Sha256",
+      "Goal148TreeSha256",
+      "GenerationSidecarsTreeSha256"
+    ],
+    "diagnostics": [
+      "goal169.regression_failed",
+      "goal169.source_artifact_changed"
+    ],
+    "behavioralTests": "Goal169 tests 111-119"
+  },
+  "boundedRegressionContractMaintenance": {
+    "types": [
+      "Goal168ExactCombatReuseTests",
+      "Goal167BranchRuntimeQualificationTests",
+      "Goal167HistoryRegenerationTests",
+      "Goal167StandalonePortabilityTests",
+      "Goal164BuildHistoryCampaignCurrentTests",
+      "Goal164StandaloneAndPortabilityTests"
+    ],
+    "inputs": "Concrete pre-smoke failures caused by superseded health-only/no-op and v6 relationship-primary expectations",
+    "outputs": "Legacy regressions retain causal no-op proof while current-build assertions follow v7 regional-event primary truth",
+    "hashes": [
+      "ObservedEffect.Fingerprint",
+      "FinalStateHash",
+      "SchemaVersionV7"
+    ],
+    "diagnostics": [
+      "generated_relationship.qualified_action_no_progress",
+      "goal169.legacy_current_contract_superseded"
+    ],
+    "behavioralTests": "Goal168 exact 10/10, Goal167 94/94 and Goal164 61/61 required pre-smoke regressions",
+    "scopeReason": "The concrete pre-smoke matrix proved that three additional legacy test files asserted mutually exclusive v6/relationship-primary current truth. They are test-only expectation maintenance required by the mandatory v7/event-primary contract; no production family was added."
+  },
+  "nonGoals": {
+    "types": [],
+    "inputs": "None",
+    "outputs": "No Runtime, Runtime.Abstractions, Domain, GamePackage, FeatureModules, GeneratedPackageMvp, Unity, standalone host or RC implementation changes",
+    "hashes": [
+      "ArtifactScopeSha256"
+    ],
+    "diagnostics": [
+      "goal169.artifact_scope_violation"
+    ],
+    "behavioralTests": "Goal169 artifact-scope and immutable-source tests"
+  }
+}

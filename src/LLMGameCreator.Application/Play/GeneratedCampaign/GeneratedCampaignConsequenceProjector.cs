@@ -34,6 +34,8 @@ public sealed class GeneratedCampaignConsequenceProjector
             readinessBefore, readinessAfter, rows);
         ProjectReputation(package, before.GameplayState, after.GameplayState, rows);
         ProjectGeneratedChoice(package, before.GameplayState, after.GameplayState, gameplayEvents, rows);
+        ProjectRegionalEvents(package, before.GameplayState,
+            after.GameplayState, rows);
         ProjectMap(package, before, after, mapEvents, rows);
         ProjectEncounter(package, before, after, gameplayEvents, action, rows);
         ProjectEventConsequences(gameplayEvents, rows);
@@ -537,6 +539,69 @@ public sealed class GeneratedCampaignConsequenceProjector
                     GeneratedCampaignConsequenceTone.Neutral));
         }
     }
+
+    private static void ProjectRegionalEvents(
+        GamePackageDefinition package,
+        GameRuntimeState before,
+        GameRuntimeState after,
+        ICollection<GeneratedCampaignConsequence> rows)
+    {
+        foreach (var dialogue in package.Game.Dialogues.Where(item =>
+                     item.Metadata.ContainsKey(
+                         "generatedRegionalEventId")))
+        {
+            var resolve = dialogue.Nodes.SelectMany(item => item.Choices)
+                .SingleOrDefault(item =>
+                    item.Tags.Contains("resolution",
+                        StringComparer.Ordinal));
+            if (resolve is null)
+                continue;
+            var wasAvailable = RequirementsSatisfied(before,
+                resolve.Requirements);
+            var isAvailable = RequirementsSatisfied(after,
+                resolve.Requirements);
+            var oldFlag = before.Flags.SingleOrDefault(item =>
+                item.Id == dialogue.Id)?.Value ?? string.Empty;
+            var newFlag = after.Flags.SingleOrDefault(item =>
+                item.Id == dialogue.Id)?.Value ?? string.Empty;
+            if (!wasAvailable && isAvailable)
+                rows.Add(Simple(
+                    GeneratedCampaignConsequenceKind
+                        .RegionalEventAvailable,
+                    "Открылось событие мира: " + dialogue.Title,
+                    "Событие доступно благодаря фактическому исходу отношений.",
+                    GeneratedCampaignConsequenceTone.Neutral));
+            if (oldFlag != "RESOLVED" && newFlag == "RESOLVED")
+                rows.Add(Simple(
+                    GeneratedCampaignConsequenceKind
+                        .RegionalEventResolved,
+                    "Завершено событие мира: " + dialogue.Title,
+                    "Последствие подтверждено сохранённым флагом Runtime.",
+                    GeneratedCampaignConsequenceTone.Positive));
+        }
+    }
+
+    private static bool RequirementsSatisfied(
+        GameRuntimeState state,
+        IEnumerable<LLMGameCreator.Domain.Definitions
+            .RequirementDefinition> requirements) =>
+        requirements.All(requirement =>
+            requirement.Kind switch
+            {
+                "flag_equals" =>
+                    (state.Flags.SingleOrDefault(item =>
+                         item.Id == requirement.Id)?.Value
+                     ?? string.Empty) ==
+                    (requirement.Value ?? "true"),
+                "quest_state" =>
+                    (state.Quests.SingleOrDefault(item =>
+                         item.QuestId == requirement.Id)?.State
+                     ?? state.QuestStates.GetValueOrDefault(
+                         requirement.Id)
+                     ?? "not_started") ==
+                    (requirement.Value ?? "completed"),
+                _ => false
+            });
 
     private static void ProjectMap(
         GamePackageDefinition package,

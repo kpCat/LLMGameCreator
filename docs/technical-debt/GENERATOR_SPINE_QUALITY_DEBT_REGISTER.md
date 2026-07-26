@@ -211,3 +211,11 @@ The published Goal167 P0 test debt is closed by Goal167C: the placeholder invent
 
 The Goal167 audit blocker at `fd69bfc8` is closed by a shared exact combat route that consumes the Goal166 descriptor/effect catalog. Relationship assignment is unique and deterministic for arbitrary generated quest counts, assigned quests are dialogue-started, and migration has explicit preserve/reset/drop outcomes with no ghost rows. Broader world events and richer relationship consequences are future slices, not hidden debt in Goal168.
 Goal168 closes the Goal167 profile-neutral P1 by replacing duplicate raw ability victory selection with the exact Goal166 qualified-action catalog. Utility/no-op success no longer counts as encounter progress. Data-derived relationship arcs, v6 history and explicit save migration are covered without Runtime, public GamePackage, Unity, standalone or RC implementation changes. No new P0/P1 debt is carried; independent audit remains required.
+
+## Goal169 Goal168-audit debt closure
+
+Goal168 independent audit is `BLOCKED_AT_BBFD46A2` on three concrete debts: all-branch/nonempty-arc assumptions, health-only exact combat and hardcoded build-time save proof. Goal169 closes them with explicit per-branch availability/requirement/pass truth, exact health/stat/status effect matching plus real encounter-state progress, and honest `NOT_EVALUATED_AT_BUILD` save truth backed by a separate real continuation matrix.
+
+Reactive regional events use branch-derived prerequisites, deterministic safe placement, a confined overlay and ordinary Runtime routes. Compatible migration preserves exact event resolution; incompatible and ghost flags are dropped. No Runtime, public GamePackage, FeatureModule, Unity, standalone or RC implementation debt is introduced.
+
+The single permitted hidden smoke launched the standalone successfully but exposed one publication blocker: direction-only movement frame titles did not satisfy the explicit `Move.` payload contract. The post-smoke fix emits `Move.<Direction>`, with non-smoke regression coverage, but policy leaves corrective retry at zero. Goal169 therefore remains `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION` pending an independent blocker audit/follow-up.
