@@ -2,7 +2,7 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
-Goal169 is the current completed product slice but is `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION`. Goal168 implementation remains GREEN but its independent audit is `BLOCKED_AT_BBFD46A2`; Goal169 closes profile-assuming relationship qualification/history, health-only exact combat and hardcoded build save truth, then adds reactive regional events. Product matrices, standalone launch, CURRENT RC and portable profiles are GREEN, while the one permitted smoke failed the explicit Move-frame payload assertion. The post-smoke fix is implemented without retry. Goal169 remains unaccepted and requires an independent blocker audit.
+Goal169A is the current `GREEN_ACCEPTABLE_CANDIDATE` continuation. Goal169 remains immutable `BLOCKED_AT_F861229C`; Goal169A closes strict replay, v7 relationship/event correlation, exact Challenge encounter region, semantic inventory, typed migration and post-fix payload proof gaps. The one new cached smoke proves explicit `Move.*`, zero bare directions, host reuse, Unity 0 and retry 0. Goal169A remains unaccepted and requires independent audit before roadmap expansion.
 
 ## Source Of Truth
 
@@ -335,3 +335,7 @@ Goal167 audit result `BLOCKED_AT_FD69BFC8` is closed by exact Goal166 qualified-
 Goal168 independent audit `BLOCKED_AT_BBFD46A2` is closed by branch-availability truth, exact health/stat/status combat progress and honest build-time save facts. Six relationship profiles qualify without executing absent branches. Support completion, Challenge victory aftermath and Refusal fallout derive deterministic regional events with exact dialogue/flag identity, safe reachable placement, controlled overlay and ordinary Runtime resolution.
 
 The visible product slice adds state-backed «События мира» rows and human map markers. History v7, genuine-v6 pending upgrade, sealed regeneration/rollback, AVAILABLE/RESOLVED continuation, exact-compatible migration, CURRENT RC and portable all/core qualification are GREEN. The single cached standalone launch passed, but Goal169 payload qualification rejected direction-only movement frame titles. The post-smoke fix emits `Move.<Direction>` and was verified only by non-smoke contracts because corrective retry is zero. The next roadmap action is `independent_goal169_blocker_audit_and_followup_without_retrying_consumed_smoke`.
+
+## Goal169A strict replay v7 correlation and post-fix smoke closure
+
+This continuation does not add a product slice. It makes the Goal169 event milestone auditable: independent locked/resolution replay pairs, exact v7 branch-event graph, provenance-derived Challenge region, semantic inventory and typed migration facts. The original blocked smoke stays immutable; one new smoke proves the fixed payload with explicit `Move.*` and zero bare direction frames. The next roadmap action is `independent_goal169a_audit`.

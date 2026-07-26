@@ -1,8 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 169 profile-neutral relationships and reactive regional events — BLOCKED after the single hidden-smoke Move-frame assertion
+Updated by: Goal 169A strict replay v7 correlation and post-fix smoke closure — GREEN acceptable candidate
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal169 remains the immutable honest result `BLOCKED_AT_F861229C`: its only smoke launched standalone GREEN but recorded 84 direction-only movement frames and 0 explicit `Move.*` frames. Goal169A is a continuation, not a new product slice. It closes the independent-audit blockers with two independent `LOCKED_PROBE` and two independent `RESOLUTION` routes per event, exact command/event/status/state/choice/reputation/flag/quest/encounter replay signatures, strict v7 relationship-to-event graph correlation, exact Challenge encounter-region provenance, expanded semantic event inventory and typed v7 migration preserve/reset/drop facts.
+
+The single new Goal169A cached hidden smoke proves explicit `Move.*` output with zero bare directions, host reuse, no host rebuild, Unity 0 and retry 0. RC and portable all-selectable are `CURRENT`; portable core-only does not claim RC readiness. Goal169A is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, creates no human gate and requires independent audit. The retained Goal169 run/evidence remains byte-identical and is not reinterpreted.
 
 The owner accepted Goals154/154A/154B/154B1/154C/154C1/154C2/154C3/154D at `fc2ac34db60d2627e1cafc86493396937bf63fe4`. The first Goal154 combined human gate at `2c95ee8f689ef104946859432706fd6d4b22deb2` remains recorded as a historical failed attempt: Alchemy Focus supplied 4 herbs, `start_or_update_quest` completed the 3-herb quest during refresh, and the later redundant capability advance reached strict Runtime as `quest.not_active`. Goal154D closed that blocker without weakening Runtime strictness. The accepted retry proved exact 22 selected mechanics / 10 configured parameters, both completion paths, causal effect/projection correlation, replay, source immutability and cached host reuse.
 
@@ -49,8 +53,8 @@ Goal165 independently records that Goal164 audit as `BLOCKED_AT_15A8F2AB`: the r
 The campaign player now captures an exact in-memory JSON checkpoint immediately before a successful encounter start. Genuine Runtime defeat enters `DEFEATED` and shows `Поражение` with `Повторить встречу`, `Продолжить с сохранения` and `Начать новую игру`. Retry restores exact map, inventory, quest and reputation truth, invokes Runtime Start zero times and dispatches `StartEncounter` once. Exact save recovery invokes Runtime Start zero times; New Game invokes it once. Checkpoints clear on victory, flee, successful load/migration and new game, and truth drift yields `STALE_PROJECT` before any Runtime command. The physical portable core-only copy has no operational pointer and never claims RC readiness. Goal165 is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no manual gate and requires an independent audit.
 
 ```text
-gate_status=goal169_blocked_after_single_hidden_smoke_move_frame_assertion
-current_user_action=independent_goal169_blocker_audit_and_followup_without_retrying_consumed_smoke
+gate_status=goal169a_green_acceptable_candidate_independent_audit_required
+current_user_action=independent_goal169a_audit
 goal154ImplementationStatus=GREEN
 goal154Accepted=true
 goal154AcceptedByHuman=true
@@ -493,7 +497,30 @@ goal168HiddenSmokeInvocationCount=1
 goal168PortableAllSelectablePassed=true
 goal168PortableCoreOnlyPassed=true
 goal168ArtifactScopeViolationCount=0
-nextAction=independent_goal168_audit_and_plan_world_events_or_relationship_consequences
+goal169ImplementationStatus=BLOCKED_AT_F861229C
+goal169Accepted=false
+goal169IndependentAuditResult=BLOCKED_AT_F861229C
+goal169AuditBlockers=closed_by_goal169a
+goal169aImplementationStatus=GREEN
+goal169aCandidateStatus=GREEN_ACCEPTABLE_CANDIDATE
+goal169aAccepted=false
+goal169aAcceptedByHuman=false
+goal169aAcceptedByCodex=false
+goal169aManualGateReady=false
+goal169aIndependentAuditRequired=true
+goal169aStrictReplayPassed=true
+goal169aV7CorrelationPassed=true
+goal169aChallengeRegionPassed=true
+goal169aExpandedInventoryPassed=true
+goal169aTypedMigrationPassed=true
+goal169aHiddenSmokeInvocationCount=1
+goal169aHiddenSmokeRetryCount=0
+goal169aHostReused=true
+goal169aHostRebuilt=false
+goal169aUnityEditorProcessStartCount=0
+goal169aExplicitMoveFrameCountPositive=true
+goal169aDirectionOnlyFrameCount=0
+nextAction=independent_goal169a_audit
 goal165BothRoutePassed=true
 goal165BasicAttackOnlyPassed=true
 goal165AbilityOnlyPassed=true
@@ -4856,6 +4883,16 @@ Data-derived Support gratitude, Challenge aftermath and Refusal fallout events u
 History v7 restores `REGIONAL_EVENTS_CURRENT` with event qualification as primary runtime truth. Genuine v6 remains relationships-current/events-pending/`PROJECT_NOT_READY` with «Собрать и играть», and one ordinary build upgrades it without rewriting source. Regeneration/rollback seal the branch matrix and event summary/overlay/inventory. Exact AVAILABLE and RESOLVED continuation, compatible preservation, incompatible drop and no-ghost migration are GREEN.
 
 Goal169 product matrices and the generated standalone launch are GREEN, but the candidate is `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION`, `accepted=false`, has no manual gate and requires independent audit. Of 108 discovered behavioral cases, all 107 non-smoke cases pass and the sole hidden-smoke case is blocked. Exactly one cached hidden smoke reused the host, rebuilt nothing, started Unity zero times, exited 0 with 5/5 self-checks and received no retry. Its payload had the required event/relationship/choice facts, CURRENT RC and portable truth, but 84 movement frames used direction-only titles and zero had the required explicit `Move.` prefix, so Goal169 payload qualification failed. The post-smoke fix now emits `Move.<Direction>` while retaining ordinary `PlayerCommand.Move`; policy forbids reinterpreting or rerunning the consumed smoke, so retry remains zero. Portable all-selectable and core-only checks pass without false core-only RC readiness. Next action: `independent_goal169_blocker_audit_and_followup_without_retrying_consumed_smoke`.
+
+## Goal 169A strict replay v7 correlation and post-fix smoke closure
+
+The independent Goal169 audit is `BLOCKED_AT_F861229C`: replay truth previously reduced equivalence to passed/final-hash fields, v7 history did not recompute the complete event graph, Challenge placement used relationship home rather than exact encounter provenance, event inventory and migration facts were incomplete, and relationship v7 readiness did not require `ArcQuestCount == QualifiedArcQuestCount`.
+
+Goal169A closes those blockers without changing Runtime, Runtime.Abstractions, Domain, GamePackage, generated source, Unity, standalone or RC implementation. Every event now has two fresh-start locked probes and two fresh-start resolution routes. Typed signatures cover ordered commands, Runtime events, status transitions, before/after state hashes, available choices, reputation, resolution/relationship flags, quest truth, encounter truth and final state. Equal final hashes with divergent frames, events or choices are rejected.
+
+History v7 recomputes summary, overlay and inventory hashes and enforces a one-to-one relationship branch/binding/inventory/qualification/frame graph. The semantic inventory includes actor, faction, prototype, map entity, interaction, source quest, challenge encounter, provenance and canonical fingerprints. Challenge events use the exact generated encounter region when provenance exists, use an explicit home fallback only when it does not, and fail ambiguity or mismatch. Migration reads the exact source and target selected v7 inventories and exposes typed preserve/reset/drop facts without changing the public persisted save schema.
+
+The original Goal169 evidence remains byte-identical and retains its 0 explicit/84 direction-only result. Exactly one separate Goal169A cached hidden smoke proves explicit `Move.*` frames and zero bare directions with host reuse, no rebuild, Unity 0 and retry 0. Goal169A is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, has no human gate and requires independent audit. Next action: `independent_goal169a_audit`.
 
 
 

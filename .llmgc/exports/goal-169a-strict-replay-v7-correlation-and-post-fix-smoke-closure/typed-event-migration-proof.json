@@ -1,0 +1,118 @@
+{
+    "status":  "GREEN",
+    "compatibilityUsesExactV7Inventories":  true,
+    "publicPersistedSaveSchemaChanged":  false,
+    "compatibleFacts":  [
+                            {
+                                "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+                                "Compatible":  false,
+                                "ResolutionFlagPreserved":  false,
+                                "StatusReset":  true,
+                                "SourceEventFingerprint":  "fcbbb35ef2a6427668d09bc2f90c2cb49e504582ce82a38f725d2fbfdee43a58",
+                                "TargetEventFingerprint":  "fcbbb35ef2a6427668d09bc2f90c2cb49e504582ce82a38f725d2fbfdee43a58",
+                                "DroppedReason":  "event_definition_mismatch"
+                            },
+                            {
+                                "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/refusal-fallout",
+                                "Compatible":  false,
+                                "ResolutionFlagPreserved":  false,
+                                "StatusReset":  true,
+                                "SourceEventFingerprint":  "bbf25fd5172eab96466cd35302772c73aa549754a43df9e7dfcd343c7a668657",
+                                "TargetEventFingerprint":  "bbf25fd5172eab96466cd35302772c73aa549754a43df9e7dfcd343c7a668657",
+                                "DroppedReason":  "event_definition_mismatch"
+                            },
+                            {
+                                "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/support-gratitude",
+                                "Compatible":  true,
+                                "ResolutionFlagPreserved":  true,
+                                "StatusReset":  true,
+                                "SourceEventFingerprint":  "bec646a89d18572e581014b02bc3f3ef6afafda406d2f05f13996fb46b7650e3",
+                                "TargetEventFingerprint":  "bec646a89d18572e581014b02bc3f3ef6afafda406d2f05f13996fb46b7650e3",
+                                "DroppedReason":  "active_dialogue_reset"
+                            },
+                            {
+                                "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+                                "Compatible":  false,
+                                "ResolutionFlagPreserved":  false,
+                                "StatusReset":  true,
+                                "SourceEventFingerprint":  "62826ad78def9a62edfee70425db981a8f39d67753c3d219aefd539f4258d849",
+                                "TargetEventFingerprint":  "62826ad78def9a62edfee70425db981a8f39d67753c3d219aefd539f4258d849",
+                                "DroppedReason":  "event_definition_mismatch"
+                            },
+                            {
+                                "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/refusal-fallout",
+                                "Compatible":  false,
+                                "ResolutionFlagPreserved":  false,
+                                "StatusReset":  true,
+                                "SourceEventFingerprint":  "9f6fc3516f86b4db5397b61e6e876d1d559f0f4aec3786fb8d3853e46dd92f99",
+                                "TargetEventFingerprint":  "9f6fc3516f86b4db5397b61e6e876d1d559f0f4aec3786fb8d3853e46dd92f99",
+                                "DroppedReason":  "event_definition_mismatch"
+                            },
+                            {
+                                "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/support-gratitude",
+                                "Compatible":  false,
+                                "ResolutionFlagPreserved":  false,
+                                "StatusReset":  true,
+                                "SourceEventFingerprint":  "a7fc24ff9302ac3cb5eae3094e2ad06ec92d4f41800569c543be86e82d5d4595",
+                                "TargetEventFingerprint":  "a7fc24ff9302ac3cb5eae3094e2ad06ec92d4f41800569c543be86e82d5d4595",
+                                "DroppedReason":  "event_definition_mismatch"
+                            }
+                        ],
+    "incompatibleFacts":  [
+                              {
+                                  "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+                                  "Compatible":  false,
+                                  "ResolutionFlagPreserved":  false,
+                                  "StatusReset":  true,
+                                  "SourceEventFingerprint":  "fcbbb35ef2a6427668d09bc2f90c2cb49e504582ce82a38f725d2fbfdee43a58",
+                                  "TargetEventFingerprint":  "fcbbb35ef2a6427668d09bc2f90c2cb49e504582ce82a38f725d2fbfdee43a58",
+                                  "DroppedReason":  "event_definition_mismatch"
+                              },
+                              {
+                                  "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/refusal-fallout",
+                                  "Compatible":  false,
+                                  "ResolutionFlagPreserved":  false,
+                                  "StatusReset":  true,
+                                  "SourceEventFingerprint":  "bbf25fd5172eab96466cd35302772c73aa549754a43df9e7dfcd343c7a668657",
+                                  "TargetEventFingerprint":  "bbf25fd5172eab96466cd35302772c73aa549754a43df9e7dfcd343c7a668657",
+                                  "DroppedReason":  "event_definition_mismatch"
+                              },
+                              {
+                                  "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/support-gratitude",
+                                  "Compatible":  false,
+                                  "ResolutionFlagPreserved":  false,
+                                  "StatusReset":  true,
+                                  "SourceEventFingerprint":  "bec646a89d18572e581014b02bc3f3ef6afafda406d2f05f13996fb46b7650e3",
+                                  "TargetEventFingerprint":  "bec646a89d18572e581014b02bc3f3ef6afafda406d2f05f13996fb46b7650e3",
+                                  "DroppedReason":  "event_definition_mismatch"
+                              },
+                              {
+                                  "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+                                  "Compatible":  false,
+                                  "ResolutionFlagPreserved":  false,
+                                  "StatusReset":  true,
+                                  "SourceEventFingerprint":  "62826ad78def9a62edfee70425db981a8f39d67753c3d219aefd539f4258d849",
+                                  "TargetEventFingerprint":  "62826ad78def9a62edfee70425db981a8f39d67753c3d219aefd539f4258d849",
+                                  "DroppedReason":  "event_definition_mismatch"
+                              },
+                              {
+                                  "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/refusal-fallout",
+                                  "Compatible":  false,
+                                  "ResolutionFlagPreserved":  false,
+                                  "StatusReset":  true,
+                                  "SourceEventFingerprint":  "9f6fc3516f86b4db5397b61e6e876d1d559f0f4aec3786fb8d3853e46dd92f99",
+                                  "TargetEventFingerprint":  "9f6fc3516f86b4db5397b61e6e876d1d559f0f4aec3786fb8d3853e46dd92f99",
+                                  "DroppedReason":  "event_definition_mismatch"
+                              },
+                              {
+                                  "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/support-gratitude",
+                                  "Compatible":  false,
+                                  "ResolutionFlagPreserved":  false,
+                                  "StatusReset":  true,
+                                  "SourceEventFingerprint":  "a7fc24ff9302ac3cb5eae3094e2ad06ec92d4f41800569c543be86e82d5d4595",
+                                  "TargetEventFingerprint":  "a7fc24ff9302ac3cb5eae3094e2ad06ec92d4f41800569c543be86e82d5d4595",
+                                  "DroppedReason":  "event_definition_mismatch"
+                              }
+                          ],
+    "noGhostFlagMarkerActionDialogue":  true
+}

@@ -1,0 +1,11 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-169a-strict-replay-v7-correlation-and-post-fix-smoke-closure",
+    "requiredBase":  "f861229c0202b4b372127cb25e2c135345f0b0a6",
+    "changedPathCount":  29,
+    "allowedCount":  29,
+    "warningCount":  0,
+    "violationCount":  0,
+    "forbiddenRuntimeDomainGamePackageUnityStandaloneRcMutationCount":  0,
+    "boundedAdditionalExistingPath":  null
+}

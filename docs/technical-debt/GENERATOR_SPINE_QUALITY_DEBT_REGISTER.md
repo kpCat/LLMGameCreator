@@ -219,3 +219,7 @@ Goal168 independent audit is `BLOCKED_AT_BBFD46A2` on three concrete debts: all-
 Reactive regional events use branch-derived prerequisites, deterministic safe placement, a confined overlay and ordinary Runtime routes. Compatible migration preserves exact event resolution; incompatible and ghost flags are dropped. No Runtime, public GamePackage, FeatureModule, Unity, standalone or RC implementation debt is introduced.
 
 The single permitted hidden smoke launched the standalone successfully but exposed one publication blocker: direction-only movement frame titles did not satisfy the explicit `Move.` payload contract. The post-smoke fix emits `Move.<Direction>`, with non-smoke regression coverage, but policy leaves corrective retry at zero. Goal169 therefore remains `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION` pending an independent blocker audit/follow-up.
+
+## Goal169A strict replay, correlation and migration debt closure
+
+Goal169A closes the audited Goal169 debt without rewriting the historical blocked row. Final-hash-only replay truth is replaced by complete typed route signatures; v7 readiness recomputes the relationship/event graph and requires exact qualified arc counts; Challenge region derives from encounter provenance; inventory carries full semantic identity; migration facts drive preserve/reset/drop decisions from exact source and target v7 inventories. A separate one-shot smoke closes the post-fix payload proof. No new debt waiver, abstraction layer or human gate is introduced.

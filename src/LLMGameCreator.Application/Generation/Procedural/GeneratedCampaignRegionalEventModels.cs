@@ -16,6 +16,20 @@ public enum GeneratedCampaignRegionalEventStatus
     RESOLVED
 }
 
+public enum GeneratedCampaignRegionalEventReplayRouteKind
+{
+    LOCKED_PROBE,
+    RESOLUTION
+}
+
+public enum GeneratedCampaignRegionalEventTargetRegionDerivation
+{
+    SUPPORT_FINAL_QUEST_REGION,
+    EXACT_CHALLENGE_ENCOUNTER_REGION,
+    RELATIONSHIP_HOME_FALLBACK,
+    RELATIONSHIP_HOME_REGION
+}
+
 public sealed record GeneratedCampaignRegionalEventPrerequisite
 {
     public string DecisionFlagId { get; init; } = string.Empty;
@@ -60,6 +74,11 @@ public sealed record GeneratedCampaignRegionalEventBinding
     public GeneratedCampaignRegionalEventPrerequisite Prerequisite { get; init; } = new();
     public GeneratedCampaignRegionalEventPlacement Placement { get; init; } = new();
     public string SourceQuestId { get; init; } = string.Empty;
+    public string ChallengeEncounterId { get; init; } = string.Empty;
+    public string ChallengeEncounterSourceId { get; init; } = string.Empty;
+    public GeneratedCampaignRegionalEventTargetRegionDerivation
+        TargetRegionDerivation { get; init; }
+    public string TargetRegionFingerprint { get; init; } = string.Empty;
     public string SourceQuestRewardFingerprint { get; init; } = string.Empty;
     public double ResolutionReputationDelta { get; init; }
 }
@@ -77,14 +96,27 @@ public sealed record GeneratedCampaignRegionalEventInventoryRow
     public GeneratedCampaignRegionalEventKind EventKind { get; init; }
     public string RelationshipId { get; init; } = string.Empty;
     public GeneratedCampaignRelationshipBranch RelationshipBranch { get; init; }
+    public string ActorSeedId { get; init; } = string.Empty;
+    public string ActorEntityId { get; init; } = string.Empty;
+    public string FactionId { get; init; } = string.Empty;
     public string RegionId { get; init; } = string.Empty;
     public string MapId { get; init; } = string.Empty;
+    public string EntityPrototypeId { get; init; } = string.Empty;
+    public string MapEntityId { get; init; } = string.Empty;
+    public string InteractionId { get; init; } = string.Empty;
     public int X { get; init; }
     public int Y { get; init; }
     public string DialogueId { get; init; } = string.Empty;
     public string ResolutionFlagId { get; init; } = string.Empty;
+    public string SourceQuestId { get; init; } = string.Empty;
+    public string ChallengeEncounterId { get; init; } = string.Empty;
+    public string ChallengeEncounterSourceId { get; init; } = string.Empty;
+    public GeneratedCampaignRegionalEventTargetRegionDerivation
+        TargetRegionDerivation { get; init; }
+    public string TargetRegionFingerprint { get; init; } = string.Empty;
     public string PrerequisiteFingerprint { get; init; } = string.Empty;
     public string RewardDerivationFingerprint { get; init; } = string.Empty;
+    public string EventSemanticFingerprint { get; init; } = string.Empty;
 }
 
 public sealed record GeneratedCampaignRegionalEventDefinitionFingerprint
@@ -138,7 +170,9 @@ public sealed record GeneratedCampaignRegionalEventOverlayValidationResult
 
 public sealed record GeneratedCampaignRegionalEventRuntimeFrame
 {
+    public GeneratedCampaignRegionalEventReplayRouteKind RouteKind { get; init; }
     public int ReplayIndex { get; init; }
+    public int SequenceIndex { get; init; }
     public string RegionalEventId { get; init; } = string.Empty;
     public GeneratedCampaignRegionalEventStatus StatusBefore { get; init; }
     public GeneratedCampaignRegionalEventStatus StatusAfter { get; init; }
@@ -147,13 +181,52 @@ public sealed record GeneratedCampaignRegionalEventRuntimeFrame
     public string AfterStateHash { get; init; } = string.Empty;
     public string CommandSha256 { get; init; } = string.Empty;
     public string EventSha256 { get; init; } = string.Empty;
+    public string MapEventSha256 { get; init; } = string.Empty;
+    public string GameplayEventSha256 { get; init; } = string.Empty;
+    public string AvailableChoiceIdsSha256 { get; init; } = string.Empty;
+    public double ObservedReputation { get; init; }
+    public double ObservedReputationDelta { get; init; }
+    public string ObservedResolutionFlag { get; init; } = string.Empty;
+    public string RelationshipFlagsSha256 { get; init; } = string.Empty;
+    public string QuestStatesSha256 { get; init; } = string.Empty;
+    public string EncounterStateSha256 { get; init; } = string.Empty;
     public bool Passed { get; init; }
+}
+
+public sealed record GeneratedCampaignRegionalEventReplaySignature
+{
+    public string RegionalEventId { get; init; } = string.Empty;
+    public GeneratedCampaignRegionalEventReplayRouteKind RouteKind { get; init; }
+    public int ReplayIndex { get; init; }
+    public int FrameCount { get; init; }
+    public string CommandSequenceSha256 { get; init; } = string.Empty;
+    public string MapEventSequenceSha256 { get; init; } = string.Empty;
+    public string GameplayEventSequenceSha256 { get; init; } = string.Empty;
+    public string StatusTransitionSequenceSha256 { get; init; } = string.Empty;
+    public string StateHashChainSha256 { get; init; } = string.Empty;
+    public string AvailableChoiceSequenceSha256 { get; init; } = string.Empty;
+    public string ReputationSequenceSha256 { get; init; } = string.Empty;
+    public string ResolutionFlagSequenceSha256 { get; init; } = string.Empty;
+    public string RelationshipFlagSequenceSha256 { get; init; } = string.Empty;
+    public string QuestStateSequenceSha256 { get; init; } = string.Empty;
+    public string EncounterStateSequenceSha256 { get; init; } = string.Empty;
+    public string FinalStateHash { get; init; } = string.Empty;
+    public string SignatureSha256 { get; init; } = string.Empty;
+    public bool Passed { get; init; }
+}
+
+public sealed record GeneratedCampaignRegionalEventReplayComparison
+{
+    public bool Passed { get; init; }
+    public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
 public sealed record GeneratedCampaignRegionalEventQualification
 {
     public string RegionalEventId { get; init; } = string.Empty;
     public GeneratedCampaignRegionalEventKind EventKind { get; init; }
+    public string RelationshipId { get; init; } = string.Empty;
+    public GeneratedCampaignRelationshipBranch RelationshipBranch { get; init; }
     public bool LockedStatePassed { get; init; }
     public bool AvailableStatePassed { get; init; }
     public bool ResolvedStatePassed { get; init; }
@@ -162,6 +235,8 @@ public sealed record GeneratedCampaignRegionalEventQualification
     public int RuntimeStartCount { get; init; }
     public int RuntimeCommandCount { get; init; }
     public string FinalStateHash { get; init; } = string.Empty;
+    public IReadOnlyList<GeneratedCampaignRegionalEventReplaySignature>
+        ReplaySignatures { get; init; } = [];
     public IReadOnlyList<string> Diagnostics { get; init; } = [];
 }
 
@@ -173,6 +248,10 @@ public sealed record GeneratedCampaignRegionalEventHumanFact
 
 public sealed record GameProjectGeneratedCampaignRegionalEventSummary
 {
+    public const string StrictProofSchema =
+        "generated_campaign_regional_event_strict_proof_v1";
+
+    public string StrictProofSchemaVersion { get; init; } = string.Empty;
     public bool Present { get; init; }
     public bool Passed { get; init; }
     public string Status { get; init; } = "ABSENT";
@@ -198,6 +277,8 @@ public sealed record GameProjectGeneratedCampaignRegionalEventSummary
     public IReadOnlyList<GeneratedCampaignRegionalEventInventoryRow> EventInventory { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRegionalEventQualification> EventQualifications { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRegionalEventRuntimeFrame> RuntimeFrames { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignRegionalEventReplaySignature>
+        ReplaySignatures { get; init; } = [];
     public IReadOnlyList<GeneratedCampaignRegionalEventHumanFact> HumanReviewFacts { get; init; } = [];
     public IReadOnlyDictionary<string, string> TechnicalDetails { get; init; }
         = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -210,5 +291,8 @@ public sealed record GeneratedCampaignRegionalEventMigrationFact
     public string RegionalEventId { get; init; } = string.Empty;
     public bool Compatible { get; init; }
     public bool ResolutionFlagPreserved { get; init; }
+    public bool StatusReset { get; init; }
+    public string SourceEventFingerprint { get; init; } = string.Empty;
+    public string TargetEventFingerprint { get; init; } = string.Empty;
     public string DroppedReason { get; init; } = string.Empty;
 }

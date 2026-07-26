@@ -9,6 +9,19 @@ public sealed class GeneratedCampaignRegionalEventBindingService
 {
     public GeneratedCampaignRegionalEventBindingResult Bind(
         GamePackageDefinition relationshipOverlayPackage,
+        GeneratedCampaignRelationshipOverlayDocument relationshipOverlay) =>
+        BindCore(null, relationshipOverlayPackage, relationshipOverlay);
+
+    public GeneratedCampaignRegionalEventBindingResult Bind(
+        SeededGeneratedProjectSourceValidationResult strictSource,
+        GamePackageDefinition relationshipOverlayPackage,
+        GeneratedCampaignRelationshipOverlayDocument relationshipOverlay) =>
+        BindCore(strictSource,
+            relationshipOverlayPackage, relationshipOverlay);
+
+    private static GeneratedCampaignRegionalEventBindingResult BindCore(
+        SeededGeneratedProjectSourceValidationResult? strictSource,
+        GamePackageDefinition relationshipOverlayPackage,
         GeneratedCampaignRelationshipOverlayDocument relationshipOverlay)
     {
         ArgumentNullException.ThrowIfNull(relationshipOverlayPackage);
@@ -67,7 +80,9 @@ public sealed class GeneratedCampaignRegionalEventBindingService
                                 finalStep.QuestId,
                                 Reward = rewards[0]
                             }),
-                            rewards[0].Amount));
+                            rewards[0].Amount,
+                            GeneratedCampaignRegionalEventTargetRegionDerivation
+                                .SUPPORT_FINAL_QUEST_REGION));
                     }
                 }
             }
@@ -75,27 +90,28 @@ public sealed class GeneratedCampaignRegionalEventBindingService
             if (relationship.Branches.Contains(
                     GeneratedCampaignRelationshipBranch.CHALLENGE))
             {
-                if (string.IsNullOrWhiteSpace(
-                        relationship.ChallengeEncounterId)
-                    || relationshipOverlayPackage.Game.Encounters.Count(
-                        item => string.Equals(item.Id,
-                            relationship.ChallengeEncounterId,
-                            StringComparison.Ordinal)) != 1)
-                    diagnostics.Add(
-                        "generated_regional_event.challenge_encounter_missing");
-                else
+                var target = ResolveChallengeTarget(strictSource,
+                    relationshipOverlayPackage, relationship,
+                    diagnostics);
+                if (target is not null)
                     drafts.Add(Draft(relationship,
                         GeneratedCampaignRegionalEventKind
                             .CHALLENGE_AFTERMATH,
-                        relationship.RegionId, string.Empty,
-                        string.Empty, 0));
+                        target.RegionId, string.Empty,
+                        string.Empty, 0,
+                        target.Derivation,
+                        relationship.ChallengeEncounterId,
+                        target.EncounterSourceId,
+                        target.MapId));
             }
 
             if (relationship.Branches.Contains(
                     GeneratedCampaignRelationshipBranch.REFUSE))
                 drafts.Add(Draft(relationship,
                     GeneratedCampaignRegionalEventKind.REFUSAL_FALLOUT,
-                    relationship.RegionId, string.Empty, string.Empty, 0));
+                    relationship.RegionId, string.Empty, string.Empty, 0,
+                    GeneratedCampaignRegionalEventTargetRegionDerivation
+                        .RELATIONSHIP_HOME_REGION));
         }
 
         var occupied = new Dictionary<string, HashSet<(int X, int Y)>>(
@@ -144,6 +160,20 @@ public sealed class GeneratedCampaignRegionalEventBindingService
                 Prerequisite = prerequisite,
                 Placement = placement,
                 SourceQuestId = draft.SourceQuestId,
+                ChallengeEncounterId = draft.ChallengeEncounterId,
+                ChallengeEncounterSourceId =
+                    draft.ChallengeEncounterSourceId,
+                TargetRegionDerivation = draft.TargetRegionDerivation,
+                TargetRegionFingerprint =
+                    GeneratedCampaignChoiceCanonical.Hash(new
+                    {
+                        draft.RegionId,
+                        MapId = map.Id,
+                        draft.TargetRegionDerivation,
+                        draft.SourceQuestId,
+                        draft.ChallengeEncounterId,
+                        draft.ChallengeEncounterSourceId
+                    }),
                 SourceQuestRewardFingerprint =
                     draft.RewardFingerprint,
                 ResolutionReputationDelta =
@@ -188,7 +218,12 @@ public sealed class GeneratedCampaignRegionalEventBindingService
         string regionId,
         string sourceQuestId,
         string rewardFingerprint,
-        double resolutionReputationDelta) => new(
+        double resolutionReputationDelta,
+        GeneratedCampaignRegionalEventTargetRegionDerivation
+            targetRegionDerivation,
+        string challengeEncounterId = "",
+        string challengeEncounterSourceId = "",
+        string targetMapId = "") => new(
         relationship,
         kind,
         string.IsNullOrWhiteSpace(regionId)
@@ -196,7 +231,11 @@ public sealed class GeneratedCampaignRegionalEventBindingService
             : regionId,
         sourceQuestId,
         rewardFingerprint,
-        resolutionReputationDelta);
+        resolutionReputationDelta,
+        challengeEncounterId,
+        challengeEncounterSourceId,
+        targetRegionDerivation,
+        targetMapId);
 
     private static GeneratedCampaignRegionalEventPrerequisite Prerequisite(
         EventDraft draft)
@@ -238,11 +277,147 @@ public sealed class GeneratedCampaignRegionalEventBindingService
         };
     }
 
+    private static ChallengeTarget? ResolveChallengeTarget(
+        SeededGeneratedProjectSourceValidationResult? strictSource,
+        GamePackageDefinition package,
+        GeneratedCampaignRelationshipBinding relationship,
+        ICollection<string> diagnostics)
+    {
+        if (string.IsNullOrWhiteSpace(
+                relationship.ChallengeEncounterId))
+        {
+            diagnostics.Add(
+                "generated_regional_event.challenge_encounter_missing");
+            return null;
+        }
+        var encounters = package.Game.Encounters.Where(item =>
+                string.Equals(item.Id,
+                    relationship.ChallengeEncounterId,
+                    StringComparison.Ordinal))
+            .ToList();
+        if (encounters.Count != 1)
+        {
+            diagnostics.Add(encounters.Count == 0
+                ? "generated_regional_event.challenge_encounter_missing"
+                : "generated_regional_event.challenge_encounter_ambiguous");
+            return null;
+        }
+
+        var sourceId = encounters[0].Metadata.GetValueOrDefault(
+                           "sourceEncounterSeedId")
+                       ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(sourceId)
+            || strictSource is null)
+            return ResolveChallengeFallback(package, relationship,
+                sourceId, diagnostics);
+        if (strictSource is not
+            {
+                Present: true,
+                Passed: true,
+                RegeneratedPlan: not null
+            })
+        {
+            diagnostics.Add(
+                "generated_regional_event.challenge_provenance_invalid");
+            return null;
+        }
+
+        var seeds = strictSource.RegeneratedPlan.EncounterSeeds
+            .Where(item => SourceMatches(item.EncounterSeedId,
+                sourceId)).ToList();
+        if (seeds.Count != 1)
+        {
+            diagnostics.Add(seeds.Count == 0
+                ? "generated_regional_event.challenge_provenance_missing"
+                : "generated_regional_event.challenge_provenance_ambiguous");
+            return null;
+        }
+        var seed = seeds[0];
+        var declaredRegion = encounters[0].Metadata.GetValueOrDefault(
+            "sourceRegionId");
+        if (!string.IsNullOrWhiteSpace(declaredRegion)
+            && !SourceMatches(seed.RegionId, declaredRegion))
+        {
+            diagnostics.Add(
+                "generated_regional_event.challenge_region_mismatch");
+            return null;
+        }
+        var maps = RegionMaps(package, seed.RegionId);
+        if (maps.Count != 1)
+        {
+            diagnostics.Add(maps.Count == 0
+                ? "generated_regional_event.challenge_region_map_missing"
+                : "generated_regional_event.challenge_region_map_ambiguous");
+            return null;
+        }
+        return new ChallengeTarget(seed.RegionId, maps[0].Id,
+            sourceId,
+            GeneratedCampaignRegionalEventTargetRegionDerivation
+                .EXACT_CHALLENGE_ENCOUNTER_REGION);
+    }
+
+    private static ChallengeTarget? ResolveChallengeFallback(
+        GamePackageDefinition package,
+        GeneratedCampaignRelationshipBinding relationship,
+        string encounterSourceId,
+        ICollection<string> diagnostics)
+    {
+        var maps = RegionMaps(package, relationship.RegionId);
+        if (maps.Count == 0)
+            maps = package.Game.Maps.Where(map =>
+                    map.Entities.Count(entity => string.Equals(entity.Id,
+                        relationship.ActorEntityId,
+                        StringComparison.Ordinal)) == 1)
+                .ToList();
+        if (maps.Count != 1)
+        {
+            diagnostics.Add(maps.Count == 0
+                ? "generated_regional_event.home_fallback_map_missing"
+                : "generated_regional_event.home_fallback_ambiguous");
+            return null;
+        }
+        return new ChallengeTarget(relationship.RegionId, maps[0].Id,
+            encounterSourceId,
+            GeneratedCampaignRegionalEventTargetRegionDerivation
+                .RELATIONSHIP_HOME_FALLBACK);
+    }
+
+    private static List<MapDefinition> RegionMaps(
+        GamePackageDefinition package,
+        string regionId)
+    {
+        var regions = package.GeneratedContent.Regions.Where(item =>
+                SourceMatches(regionId, item.SourceId))
+            .ToList();
+        if (regions.Count > 1)
+            return [];
+        if (regions.Count == 1)
+            return package.Game.Maps.Where(item =>
+                    regions[0].SceneIds.Contains(item.Id,
+                        StringComparer.Ordinal))
+                .ToList();
+        var expectedId = "map/" + IdSegment(regionId);
+        return package.Game.Maps.Where(item =>
+                string.Equals(item.Id, expectedId,
+                    StringComparison.Ordinal))
+            .ToList();
+    }
+
     private static MapDefinition? ResolveMap(
         GamePackageDefinition package,
         EventDraft draft,
         ICollection<string> diagnostics)
     {
+        if (!string.IsNullOrWhiteSpace(draft.TargetMapId))
+        {
+            var target = package.Game.Maps.Where(item =>
+                item.Id == draft.TargetMapId).ToList();
+            if (target.Count == 1)
+                return target[0];
+            diagnostics.Add(
+                "generated_regional_event.challenge_region_map_missing");
+            return null;
+        }
         var region = package.GeneratedContent.Regions
             .SingleOrDefault(item =>
                 string.Equals(item.SourceId, draft.RegionId,
@@ -473,6 +648,17 @@ public sealed class GeneratedCampaignRegionalEventBindingService
             : segment;
     }
 
+    private static bool SourceMatches(
+        string sourceId,
+        string mappedId) =>
+        string.Equals(sourceId, mappedId, StringComparison.Ordinal)
+        || (!sourceId.StartsWith("generated/",
+                StringComparison.Ordinal)
+            && !sourceId.StartsWith("seeded_generated_project/",
+                StringComparison.Ordinal)
+            && string.Equals("generated/" + sourceId, mappedId,
+                StringComparison.Ordinal));
+
     private static GeneratedCampaignRegionalEventBindingResult Failed(
         IReadOnlyList<string> diagnostics) => new()
     {
@@ -485,5 +671,16 @@ public sealed class GeneratedCampaignRegionalEventBindingService
         string RegionId,
         string SourceQuestId,
         string RewardFingerprint,
-        double ResolutionReputationDelta);
+        double ResolutionReputationDelta,
+        string ChallengeEncounterId,
+        string ChallengeEncounterSourceId,
+        GeneratedCampaignRegionalEventTargetRegionDerivation
+            TargetRegionDerivation,
+        string TargetMapId);
+
+    private sealed record ChallengeTarget(
+        string RegionId,
+        string MapId,
+        string EncounterSourceId,
+        GeneratedCampaignRegionalEventTargetRegionDerivation Derivation);
 }

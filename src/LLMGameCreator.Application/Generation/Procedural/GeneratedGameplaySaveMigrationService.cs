@@ -161,6 +161,7 @@ public sealed class GeneratedGameplaySaveMigrationService
             SourceRevisionSha256 = request.SourceRevisionSha256,
             MigratedRevisionSha256 = revision.RevisionSha256,
             Preview = recomputedPreview,
+            RegionalEventFacts = recomputedPreview.RegionalEventFacts,
             Revision = revision,
             Session = current.Session
         };
@@ -184,6 +185,14 @@ public sealed class GeneratedGameplaySaveMigrationService
             .ToDictionary(group => group.Key, group => group.Single(), StringComparer.Ordinal);
         var worldMigration =
             sourceStatus == GeneratedGameplaySaveStatus.WORLD_MIGRATION_REQUIRED;
+        var eventInventories = LoadRegionalEventInventories(truth,
+            sourceRevision);
+        if (!eventInventories.Passed)
+            return CandidateFailed(sourceRevision, sourceStatus,
+                eventInventories.Diagnostic);
+        var regionalEventFacts = BuildRegionalEventMigrationFacts(
+            eventInventories.Source, eventInventories.Target,
+            sourceSession, sourceByKey, targetByKey);
         var compatibleRelationshipIds = truth.ActualPackage.Game.Dialogues
             .Where(dialogue =>
                 dialogue.Metadata.GetValueOrDefault("generatedRelationshipId")
@@ -205,24 +214,12 @@ public sealed class GeneratedGameplaySaveMigrationService
             .Where(id => !string.IsNullOrWhiteSpace(id))
             .Select(id => id!)
             .ToHashSet(StringComparer.Ordinal);
-        var targetRegionalEventIds = truth.ActualPackage.Game.Dialogues
-            .Where(dialogue =>
-                dialogue.Metadata.GetValueOrDefault(
-                    "generatedRegionalEventId") == dialogue.Id)
-            .Select(dialogue => dialogue.Id)
+        var targetRegionalEventIds = eventInventories.Target
+            .Select(item => item.RegionalEventId)
             .ToHashSet(StringComparer.Ordinal);
-        var compatibleRegionalEventIds = targetRegionalEventIds
-            .Where(id =>
-                sourceByKey.TryGetValue("dialogue\n" + id,
-                    out var sourceDialogue)
-                && targetByKey.TryGetValue("dialogue\n" + id,
-                    out var targetDialogue)
-                && sourceDialogue.Generated
-                && targetDialogue.Generated
-                && sourceDialogue.SourceId ==
-                targetDialogue.SourceId
-                && sourceDialogue.CanonicalSha256 ==
-                targetDialogue.CanonicalSha256)
+        var compatibleRegionalEventIds = regionalEventFacts
+            .Where(item => item.Compatible)
+            .Select(item => item.RegionalEventId)
             .ToHashSet(StringComparer.Ordinal);
 
         bool Portable(string kind, string id, bool generatedAllowed = true)
@@ -425,6 +422,7 @@ public sealed class GeneratedGameplaySaveMigrationService
             PreservedDefinitionIds = migration.PreservedDefinitionIds,
             DroppedDefinitionIds = migration.DroppedDefinitionIds,
             DroppedReasons = migration.DroppedReasons,
+            RegionalEventFacts = regionalEventFacts,
             CandidateSessionSha256 = GeneratedGameplaySaveJson.HashText(candidateJson),
             CandidateMapStateSha256 = GeneratedGameplaySaveJson.HashCanonical(session.MapState),
             CandidateGameplayStateSha256 = GeneratedGameplaySaveJson.HashCanonical(session.GameplayState),
@@ -433,6 +431,265 @@ public sealed class GeneratedGameplaySaveMigrationService
         };
         return new CandidateBuild(session, migration, preview);
     }
+
+    private static RegionalEventInventoryPair LoadRegionalEventInventories(
+        GeneratedGameplaySaveProjectTruth truth,
+        GeneratedGameplaySaveRevision sourceRevision)
+    {
+        if (!TryInventory(truth.SelectedBuildHistory,
+                truth.SelectedBuildHistorySha256,
+                out var target, out var targetDiagnostic))
+            return new RegionalEventInventoryPair
+            {
+                Diagnostic =
+                    "generated_save.target_event_inventory_invalid:"
+                    + targetDiagnostic
+            };
+        try
+        {
+            var historyRoot = GameProjectFeatureModuleAuthoringService
+                .ConfinedPath(truth.ProjectFolder,
+                    UnifiedGameProjectWorkspaceVocabulary
+                        .BuildHistoryRelativeRoot);
+            var sourcePath = GameProjectFeatureModuleAuthoringService
+                .ConfinedPath(historyRoot,
+                    sourceRevision.SelectedBuildHistoryFileName);
+            if (!File.Exists(sourcePath)
+                || !string.Equals(HashFile(sourcePath),
+                    sourceRevision.SelectedBuildHistorySha256,
+                    StringComparison.Ordinal))
+                return new RegionalEventInventoryPair
+                {
+                    Diagnostic =
+                        "generated_save.source_event_history_changed"
+                };
+            var sourceHistory = GeneratedGameplaySaveJson.Deserialize<
+                GameProjectBuildHistoryEntry>(File.ReadAllText(sourcePath));
+            if (sourceHistory is null)
+                return new RegionalEventInventoryPair
+                {
+                    Diagnostic =
+                        "generated_save.source_event_inventory_invalid:"
+                        + "history_deserialize_failed"
+                };
+            if (!TryInventory(sourceHistory,
+                    sourceRevision.SelectedBuildHistorySha256,
+                    out var source, out var sourceDiagnostic))
+                return new RegionalEventInventoryPair
+                {
+                    Diagnostic =
+                        "generated_save.source_event_inventory_invalid:"
+                        + sourceDiagnostic
+                };
+            return new RegionalEventInventoryPair
+            {
+                Passed = true,
+                Source = source,
+                Target = target
+            };
+        }
+        catch (Exception exception) when (exception is IOException
+                                           or UnauthorizedAccessException
+                                           or System.Text.Json.JsonException
+                                           or InvalidOperationException)
+        {
+            return new RegionalEventInventoryPair
+            {
+                Diagnostic =
+                    "generated_save.source_event_inventory_invalid:"
+                    + exception.Message
+            };
+        }
+    }
+
+    private static bool TryInventory(
+        GameProjectBuildHistoryEntry history,
+        string historySha256,
+        out IReadOnlyList<GeneratedCampaignRegionalEventInventoryRow>
+            inventory,
+        out string diagnostic)
+    {
+        inventory = [];
+        diagnostic = string.Empty;
+        if (history.SchemaVersion !=
+            GameProjectBuildHistoryReader.SchemaVersionV7)
+        {
+            if (history.GeneratedCampaignRegionalEvents is
+                { Present: true, EventCount: > 0 })
+            {
+                diagnostic =
+                    "legacy_history_contains_regional_events";
+                return false;
+            }
+            return true;
+        }
+        if (history.GeneratedCampaignRegionalEvents is not
+            {
+                Passed: true,
+                StrictProofSchemaVersion:
+                GameProjectGeneratedCampaignRegionalEventSummary
+                    .StrictProofSchema
+            } events
+            || history.GeneratedCampaignRelationships is null)
+        {
+            diagnostic = "v7_history_required";
+            return false;
+        }
+        var relationships =
+            history.GeneratedCampaignRelationships;
+        if (string.IsNullOrWhiteSpace(historySha256)
+            || events.EventCount != events.EventInventory.Count
+            || events.EventInventory.Select(item => item.RegionalEventId)
+                .Distinct(StringComparer.Ordinal).Count()
+            != events.EventInventory.Count
+            || events.EventInventory.Any(item =>
+                item.EventSemanticFingerprint !=
+                GeneratedCampaignRegionalEventInventoryService
+                    .SemanticFingerprint(item))
+            || events.RegionalEventInventorySha256 !=
+            GeneratedCampaignChoiceCanonical.Hash(
+                events.EventInventory))
+        {
+            diagnostic = "semantic_inventory_mismatch";
+            return false;
+        }
+        var correlation =
+            GeneratedCampaignRegionalEventCorrelationService.Validate(
+                history.PackageSha256, events, relationships);
+        if (!correlation.Passed)
+        {
+            diagnostic = "history_correlation_mismatch";
+            return false;
+        }
+        inventory = events.EventInventory
+            .OrderBy(item => item.RegionalEventId,
+                StringComparer.Ordinal).ToList();
+        return true;
+    }
+
+    private static IReadOnlyList<
+        GeneratedCampaignRegionalEventMigrationFact>
+        BuildRegionalEventMigrationFacts(
+            IReadOnlyList<GeneratedCampaignRegionalEventInventoryRow>
+                source,
+            IReadOnlyList<GeneratedCampaignRegionalEventInventoryRow>
+                target,
+            UnifiedRuntimeSession sourceSession,
+            IReadOnlyDictionary<string,
+                GeneratedGameplayDefinitionFingerprint> sourceDefinitions,
+            IReadOnlyDictionary<string,
+                GeneratedGameplayDefinitionFingerprint> targetDefinitions)
+    {
+        var sourceById = source.ToDictionary(
+            item => item.RegionalEventId, StringComparer.Ordinal);
+        var targetById = target.ToDictionary(
+            item => item.RegionalEventId, StringComparer.Ordinal);
+        var activeDialogueId =
+            sourceSession.GameplayState.ActiveDialogue?.DialogueId
+            ?? string.Empty;
+        return sourceById.Keys.Concat(targetById.Keys)
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(id => id, StringComparer.Ordinal)
+            .Select(id =>
+            {
+                sourceById.TryGetValue(id, out var sourceRow);
+                targetById.TryGetValue(id, out var targetRow);
+                var compatible = sourceRow is not null
+                                 && targetRow is not null
+                                 && sourceRow.EventSemanticFingerprint
+                                 == targetRow
+                                     .EventSemanticFingerprint
+                                 && GeneratedCampaignChoiceCanonical
+                                     .Serialize(sourceRow)
+                                 == GeneratedCampaignChoiceCanonical
+                                     .Serialize(targetRow)
+                                 && EventDefinitionsExact(sourceRow,
+                                     sourceDefinitions,
+                                     targetDefinitions);
+                var resolved = sourceSession.MapState.Flags
+                                   .GetValueOrDefault(id) == "RESOLVED"
+                               || sourceSession.GameplayState.Flags.Any(
+                                   item => item.Id == id
+                                           && item.Value == "RESOLVED");
+                var activeDialogueReset =
+                    sourceRow?.DialogueId == activeDialogueId;
+                var reason = compatible
+                    ? activeDialogueReset
+                        ? "active_dialogue_reset"
+                        : string.Empty
+                    : sourceRow is null
+                        ? "source_event_missing"
+                        : targetRow is null
+                            ? "target_event_missing"
+                            : sourceRow.EventSemanticFingerprint !=
+                              targetRow.EventSemanticFingerprint
+                              || GeneratedCampaignChoiceCanonical
+                                  .Serialize(sourceRow)
+                              != GeneratedCampaignChoiceCanonical
+                                  .Serialize(targetRow)
+                                ? "semantic_identity_mismatch"
+                                : "event_definition_mismatch";
+                return new
+                    GeneratedCampaignRegionalEventMigrationFact
+                    {
+                        RegionalEventId = id,
+                        Compatible = compatible,
+                        ResolutionFlagPreserved =
+                            compatible && resolved,
+                        StatusReset =
+                            !compatible || activeDialogueReset,
+                        SourceEventFingerprint =
+                            sourceRow?.EventSemanticFingerprint
+                            ?? string.Empty,
+                        TargetEventFingerprint =
+                            targetRow?.EventSemanticFingerprint
+                            ?? string.Empty,
+                        DroppedReason = reason
+                    };
+            }).ToList();
+    }
+
+    private static bool EventDefinitionsExact(
+        GeneratedCampaignRegionalEventInventoryRow row,
+        IReadOnlyDictionary<string,
+            GeneratedGameplayDefinitionFingerprint> source,
+        IReadOnlyDictionary<string,
+            GeneratedGameplayDefinitionFingerprint> target)
+    {
+        var definitions = new[]
+        {
+            ("dialogue", row.DialogueId),
+            ("interaction", row.InteractionId),
+            ("quest", row.SourceQuestId),
+            ("encounter", row.ChallengeEncounterId)
+        };
+        foreach (var (kind, id) in definitions.Where(item =>
+                     !string.IsNullOrWhiteSpace(item.Item2)))
+        {
+            var key = kind + "\n" + id;
+            if (!source.TryGetValue(key, out var sourceDefinition)
+                || !target.TryGetValue(key, out var targetDefinition)
+                || sourceDefinition.CanonicalSha256 !=
+                targetDefinition.CanonicalSha256
+                || sourceDefinition.SourceId !=
+                targetDefinition.SourceId)
+                return false;
+        }
+        return true;
+    }
+
+    private static CandidateBuild CandidateFailed(
+        GeneratedGameplaySaveRevision revision,
+        GeneratedGameplaySaveStatus status,
+        string diagnostic) => new(
+        new UnifiedRuntimeSession(),
+        new GeneratedGameplaySaveMigration(),
+        new GeneratedGameplaySaveMigrationPreview
+        {
+            SourceRevisionSha256 = revision.RevisionSha256,
+            SourceStatus = status,
+            Diagnostics = [diagnostic]
+        });
 
     private static bool Keep(
         string kind,
@@ -649,6 +906,18 @@ public sealed class GeneratedGameplaySaveMigrationService
         UnifiedRuntimeSession Session,
         GeneratedGameplaySaveMigration Migration,
         GeneratedGameplaySaveMigrationPreview Preview);
+
+    private sealed record RegionalEventInventoryPair
+    {
+        public bool Passed { get; init; }
+        public IReadOnlyList<
+            GeneratedCampaignRegionalEventInventoryRow> Source
+            { get; init; } = [];
+        public IReadOnlyList<
+            GeneratedCampaignRegionalEventInventoryRow> Target
+            { get; init; } = [];
+        public string Diagnostic { get; init; } = string.Empty;
+    }
 
     private sealed record CachedPreview
     {

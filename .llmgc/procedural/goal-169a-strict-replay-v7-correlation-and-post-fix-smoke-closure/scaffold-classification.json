@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "goal169a_scaffold_classification_v1",
+  "taskId": "goal-169a-strict-replay-v7-correlation-and-post-fix-smoke-closure",
+  "goal169ImplementationCommit": "f861229c0202b4b372127cb25e2c135345f0b0a6",
+  "goal169OriginalStatus": "BLOCKED",
+  "classifications": [
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventModels.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Существующие типизированные модели региональных событий сохраняются и аддитивно дополняются route identity, replay signatures, expanded inventory и migration facts."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventBindingService.cs",
+      "classification": "REFACTOR",
+      "reason": "Существующая детерминированная привязка и placement сохраняются, а Challenge region переводится на строгую generated encounter provenance с узким fallback."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventOverlayService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Контролируемый overlay сохраняется и дополняется полной семантической inventory identity и canonical seal."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GameProjectGeneratedCampaignRegionalEventQualificationService.cs",
+      "classification": "REFACTOR",
+      "reason": "Runtime routes сохраняются, но final-hash-only replay truth заменяется двумя независимыми LOCKED_PROBE и двумя RESOLUTION traces с exact typed comparison."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventReplayService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Новый bounded helper канонически строит и сравнивает typed signatures без изменения Runtime или event behavior."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRegionalEventCorrelationService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Новый bounded validator пересчитывает v7 event graph и не вводит новый архитектурный слой."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRelationshipModels.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Profile-neutral relationship contract сохраняется; v7 history дополнительно требует точного QualifiedArcQuestCount и branch/event correlation."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedCampaignRelationshipBindingService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Существующая data-derived relationship и challenge encounter identity остаются authority для строгой event correlation."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildHistoryReader.cs",
+      "classification": "REFACTOR",
+      "reason": "v2-v6 compatibility сохраняется; v7 eligibility усиливается пересчётом hashes и one-to-one graph correlation без default-value promotion старого Goal169 row."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/GameProjectBuildAndQualificationService.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Существующий build pipeline сохраняет порядок overlay/combat и публикует strict event proof как primary v7 truth."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveModels.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Persisted public save schema остаётся неизменной; application preview/result аддитивно получает typed regional-event migration facts."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveValidator.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Существующая project truth сохраняется и держит выбранный history row только как JsonIgnore application authority для exact migration inventory."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/Generation/Procedural/GeneratedGameplaySaveMigrationService.cs",
+      "classification": "REFACTOR",
+      "reason": "Общий fingerprint migration сохраняется, а regional-event compatibility переводится с dialogue-only equality на exact source/target v7 inventories и typed preserve/reset/drop facts."
+    },
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal169",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "108-case Goal169 focused suite сохраняется как regression authority; consumed Goal169 smoke не запускается и не переинтерпретируется."
+    },
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal169/Goal169StandaloneSmokeTests.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Старый smoke contract сохраняется для regression и запускается только disabled; новый smoke получает отдельный Goal169A test."
+    },
+    {
+      "path": ".devflow/scripts/run-goal169-regional-events.ps1",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Goal169 runner и его historical BLOCKED evidence остаются неизменными; continuation использует отдельный Goal169A runner."
+    },
+    {
+      "path": ".llmgc/procedural/goal-169-profile-neutral-relationships-and-reactive-regional-events",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Retained Goal169 run, pointer, history, payload, RC и evidence являются immutable historical truth и должны остаться byte-identical."
+    },
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal169A",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Новый bounded continuation test family доказывает strict replay, v7 correlation, region provenance, inventory, migration, immutability и post-fix smoke."
+    },
+    {
+      "path": ".devflow/scripts/run-goal169a-strict-event-closure.ps1",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Новый отдельный runner оркестрирует non-smoke gates, ровно один Goal169A smoke и 15+15 typed evidence."
+    }
+  ],
+  "replaceReasons": [],
+  "removeReasons": [],
+  "replaceCount": 0,
+  "removeAsUnusedCount": 0
+}

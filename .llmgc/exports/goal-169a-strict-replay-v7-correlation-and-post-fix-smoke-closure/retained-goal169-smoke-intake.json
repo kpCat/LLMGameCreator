@@ -1,0 +1,17 @@
+{
+    "status":  "IMMUTABLE_BLOCKED_HISTORY",
+    "retainedTreeSha256":  "2a128bfbc33f5c0c2b7fe5724b7bfb93a4cff1b8011a66ecfbb4ef720611e556",
+    "evidenceFileCount":  15,
+    "proceduralExportByteIdentical":  true,
+    "standaloneGreen":  true,
+    "selfChecksPassed":  5,
+    "selfChecksTotal":  5,
+    "explicitMoveFrameCount":  0,
+    "directionOnlyFrameCount":  84,
+    "hiddenSmokeInvocationCount":  1,
+    "retryCount":  0,
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "unityStarts":  0,
+    "payloadReinterpreted":  false
+}

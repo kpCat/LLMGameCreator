@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "requiredBase":  "f861229c0202b4b372127cb25e2c135345f0b0a6",
+    "originalGoal169Status":  "BLOCKED_AT_F861229C",
+    "continuationNotNewSlice":  true,
+    "runtimeLlmProviderUnityStandaloneRcImplementationChanged":  false,
+    "blockers":  {
+                     "finalStateOnlyReplayTruth":  "closed_by_goal169a",
+                     "v7CorrelationGap":  "closed_by_goal169a",
+                     "challengeHomeRegionBug":  "closed_by_goal169a",
+                     "incompleteInventoryAndUnusedMigrationFact":  "closed_by_goal169a",
+                     "qualifiedArcCountGap":  "closed_by_goal169a",
+                     "postFixPayloadProofGap":  "closed_by_goal169a"
+                 }
+}

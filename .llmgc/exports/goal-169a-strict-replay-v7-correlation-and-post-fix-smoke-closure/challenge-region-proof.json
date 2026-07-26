@@ -1,0 +1,29 @@
+{
+    "status":  "GREEN",
+    "sameRegionPassed":  true,
+    "crossRegionPassed":  true,
+    "homeFallbackPassed":  true,
+    "ambiguityRejected":  true,
+    "mismatchRejected":  true,
+    "reorderedDeterministic":  true,
+    "derivations":  [
+                        {
+                            "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_mechanic_05/regional-event/challenge-aftermath",
+                            "RegionId":  "region/blue_ditch",
+                            "MapId":  "generated/map/region_blue_ditch",
+                            "ChallengeEncounterId":  "generated/encounter/encounter_seed_contested_cache",
+                            "ChallengeEncounterSourceId":  "generated/encounter_seed/contested_cache",
+                            "TargetRegionDerivation":  1,
+                            "TargetRegionFingerprint":  "5914e9c92937e80688bf4254d5ecff93833a326f0e81e6ccf8363c3bedf3dc1c"
+                        },
+                        {
+                            "RegionalEventId":  "generated/dialogue/actor_seed_npc_archetype_forager_03/regional-event/challenge-aftermath",
+                            "RegionId":  "region/lantern_fold",
+                            "MapId":  "generated/map/region_lantern_fold",
+                            "ChallengeEncounterId":  "generated/encounter/encounter_seed_lost_signal",
+                            "ChallengeEncounterSourceId":  "generated/encounter_seed/lost_signal",
+                            "TargetRegionDerivation":  1,
+                            "TargetRegionFingerprint":  "9129147254d99bd4ab0b21c7df74f41fbf234c21b1e2f2c66de3708c15100ddd"
+                        }
+                    ]
+}

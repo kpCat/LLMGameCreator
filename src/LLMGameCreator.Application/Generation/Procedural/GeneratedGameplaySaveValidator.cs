@@ -117,6 +117,7 @@ public sealed class GeneratedGameplaySaveValidator
                     QualifiedAuthoringFingerprint = fingerprint.Sha256,
                     SelectedBuildHistoryFileName = selected.FileName,
                     SelectedBuildHistorySha256 = HashFile(selected.Path),
+                    SelectedBuildHistory = selected.Entry,
                     GeneratedStartMapId = source.Source.GeneratedStartMapId,
                     GeneratedRegionMapBindings = new SortedDictionary<string, string>(
                         bindings.RegionBindings.ToDictionary(item => item.RegionId, item => item.MapId,

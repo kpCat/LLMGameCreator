@@ -708,10 +708,12 @@ public sealed class GameProjectBuildAndQualificationService
 
                     var compositionRegionalEventBinding =
                         _generatedRegionalEventBinding.Bind(
+                            generatedSource,
                             finalCompositionPackage,
                             compositionRelationship.Document);
                     var packageRegionalEventBinding =
                         _generatedRegionalEventBinding.Bind(
+                            generatedSource,
                             finalPackage,
                             packageRelationship.Document);
                     if (!compositionRegionalEventBinding.Passed
@@ -764,7 +766,6 @@ public sealed class GameProjectBuildAndQualificationService
                     primaryPackageSha256 =
                         packageRegionalEvent.Document
                             .OutputPackageSha256;
-
                     if (generatedSource.GeneratedMvpPackage?.GeneratedContent.Encounters.Count > 0)
                     {
                     var contract = _generatedCombatContract.Resolve(
@@ -825,8 +826,17 @@ public sealed class GameProjectBuildAndQualificationService
                     finalCompositionPackage = compositionCombat.CombatOverlayPackage;
                     finalPackage = packageCombat.CombatOverlayPackage;
                     finalActivatedPath = combatPath;
-                    primaryCompositionSha256 = compositionCombat.Document.OutputPackageSha256;
-                    primaryPackageSha256 = packageCombat.Document.OutputPackageSha256;
+                    primaryCompositionSha256 =
+                        compositionCombat.Document.OutputPackageSha256;
+                    primaryPackageSha256 =
+                        packageCombat.Document.OutputPackageSha256;
+                    generatedRegionalEventOverlayDocument =
+                        generatedRegionalEventOverlayDocument with
+                        {
+                            OutputPackageSha256 =
+                                packageCombat.Document
+                                    .OutputPackageSha256
+                        };
                     generatedEncounterCombat = _generatedCombatQualification.Qualify(
                         finalPackage,
                         generatedSource,

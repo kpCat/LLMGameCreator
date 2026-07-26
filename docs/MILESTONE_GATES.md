@@ -1,6 +1,6 @@
 # Milestone Gates
 
-Goal169 is the current `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION` automated candidate. Goal168 implementation is GREEN but its independent audit is `BLOCKED_AT_BBFD46A2`; Goal169 closes its two P1 findings and save-truth debt, then adds reactive regional events. Product matrices, standalone launch, CURRENT RC and portable profiles are GREEN, but the only permitted smoke failed Goal169 payload qualification because movement frame titles lacked an explicit `Move.` prefix. The post-smoke fix is implemented, retry remains zero, and Goal169 is not accepted, creates no human gate and requires independent blocker audit.
+Goal169A is the current `GREEN_ACCEPTABLE_CANDIDATE` automated continuation. Goal169 remains `BLOCKED_AT_F861229C` with its retained 0 explicit/84 direction-only smoke payload. Goal169A closes strict replay, v7 graph correlation, Challenge encounter-region, expanded inventory, typed migration and post-fix payload proof blockers. Its one separate cached smoke proves explicit `Move.*`, zero bare directions, host reuse, Unity 0 and retry 0. Goal169A is not accepted, creates no human gate and requires independent audit.
 
 Status: Goal 097 acceptance-gate plan
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
@@ -282,3 +282,7 @@ Goal167 independent audit is `BLOCKED_AT_FD69BFC8`; Goal168 closes the exact-cat
 ## Goal169 profile-neutral relationships and reactive regional events gate record
 
 Goal168 independent audit is `BLOCKED_AT_BBFD46A2`. Goal169 closes profile-assuming relationship qualification/history, health-only exact combat and hardcoded build save truth. Six relationship profiles, exact health/stat/status effects, branch-derived regional events, safe deterministic placement, controlled overlay, `LOCKED`/`AVAILABLE`/exactly-once `RESOLVED`, state-backed UI, v7/v6 readiness, regeneration/rollback and exact save/migration are automated and GREEN. The single cached standalone launch also passed with CURRENT RC, host reuse, 5/5 self-checks and zero Unity starts, but Goal169 payload qualification found 84 direction-only movement frame titles and zero explicit `Move.` titles. The post-smoke fix emits `Move.<Direction>`; retry remains zero. Goal169 is `BLOCKED_AFTER_SINGLE_HIDDEN_SMOKE_MOVE_FRAME_ASSERTION`, `accepted=false`, has no manual gate and requires independent blocker audit.
+
+## Goal169A strict replay v7 correlation and post-fix smoke gate record
+
+Goal169A preserves the Goal169 gate above as `BLOCKED_AT_F861229C` and closes every independent-audit blocker through typed production truth. Each event has two fresh-start locked and two fresh-start resolution replays; v7 recomputes and correlates relationship branches, bindings, inventory, qualification and frames; exact Challenge encounter provenance controls region; semantic inventory and typed migration are sealed. The one Goal169A smoke proves the source fix in a new payload with explicit `Move.*`, no bare direction, cached host reuse, Unity 0 and retry 0. Status is `GREEN_ACCEPTABLE_CANDIDATE`, `accepted=false`, no human gate, independent audit required.

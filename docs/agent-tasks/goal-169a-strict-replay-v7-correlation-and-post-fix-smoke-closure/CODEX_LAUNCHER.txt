@@ -1,0 +1,45 @@
+/goal
+
+Выполни continuation-задачу из файла:
+
+docs/agent-tasks/goal-169a-strict-replay-v7-correlation-and-post-fix-smoke-closure/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: f861229c0202b4b372127cb25e2c135345f0b0a6
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+План полностью одобрен. Не спрашивай дополнительное подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- это continuation честно опубликованного BLOCKED Goal169, не новый product slice;
+- сначала классифицируй затрагиваемые Goal169-файлы KEEP_AND_COMPLETE / REFACTOR / REPLACE / REMOVE_AS_UNUSED;
+- independent audit = BLOCKED_AT_F861229C;
+- старый Goal169 smoke: standalone GREEN, 84 bare direction frames, 0 explicit Move.*; старый payload не доказывает post-smoke source fix;
+- не нормализуй старые Up/Down/Left/Right как новое доказательство;
+- после всех исправлений разрешён ровно 1 новый cached hidden smoke Goal169A, retry=0, host reused, no rebuild, Unity=0;
+- старый immutable Goal169 run/pointer/history/payload/RC сохранить byte-identical;
+- ReplayPassed сейчас сравнивает только Passed и FinalStateHash — заменить настоящим сравнением двух независимых LOCKED и двух RESOLUTION routes;
+- сравнивать exact commands, map/gameplay Runtime events, statuses, before/after states, available choices, flags/reputation/quests/encounter и final state;
+- одинаковый final hash при отличающихся frames/events/choices обязан отклоняться;
+- v7 history обязана пересчитывать overlay/inventory hashes и one-to-one коррелировать available relationship branches с event binding/inventory/qualification/frames;
+- v7 relationship history обязана проверять ArcQuestCount == QualifiedArcQuestCount;
+- расширить event inventory actor/faction/prototype/map entity/interaction/source quest/challenge encounter и semantic fingerprints;
+- Challenge event размещать в exact generated encounter region; home fallback только при отсутствии точной provenance, ambiguity=failure;
+- migration compatibility брать из exact source/target v7 event inventories; реально использовать typed GeneratedCampaignRegionalEventMigrationFact с source/target fingerprints и preserve/reset/drop truth;
+- no ghost event flag/marker/action/dialogue;
+- Runtime/Runtime.Abstractions/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal169A >=48 discovered / >=42 behavioral / all pass;
+- Goal169 focused 108/108 без повторного Goal169 smoke;
+- не запускать full suite, 85-case closure, all-ProductSmoke или Unity host build;
+- ровно 15+15 typed evidence, artifact scope=0;
+- независимо от GREEN/BLOCKED/FAILED создать ровно один commit и push origin/main;
+- запрещено оставлять commit/push пользователю.
+
+В финале сообщи classifications, replay signatures и mismatch rejection, strict v7 correlation/tampers,
+challenge region, expanded inventory, typed migration facts, retained-run immutability, новый smoke
+и Move counts, RC/portable, tests/evidence/scope, SHA/push/HEAD/worktree.

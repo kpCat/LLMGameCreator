@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "hostCacheKey":  "6af4d5eb5b42f956110555b58fb4e276",
+    "hostReused":  true,
+    "hostRebuilt":  false,
+    "unityStarts":  0,
+    "releaseCandidateCurrent":  true,
+    "releaseCandidateRecordCurrent":  true,
+    "portableAllSelectableCurrent":  true,
+    "portableReleaseCandidateCurrent":  true,
+    "portableCoreOnlyNoFalseRcReady":  true
+}

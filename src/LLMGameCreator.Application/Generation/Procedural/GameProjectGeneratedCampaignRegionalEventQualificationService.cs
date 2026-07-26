@@ -34,9 +34,16 @@ public sealed class
                     .DefaultIfEmpty(
                         "generated_regional_event.overlay_invalid")
                     .ToList());
+        var inputDiagnostics = ValidateInputCorrelation(finalPackage,
+            overlay, relationships);
+        if (inputDiagnostics.Count > 0)
+            return Invalid(overlay, inputDiagnostics);
         if (overlay.EventCount == 0)
             return new GameProjectGeneratedCampaignRegionalEventSummary
             {
+                StrictProofSchemaVersion =
+                    GameProjectGeneratedCampaignRegionalEventSummary
+                        .StrictProofSchema,
                 Passed = true,
                 Status = "ABSENT",
                 IdentityPassed = overlay.IdentityPassed,
@@ -77,8 +84,16 @@ public sealed class
                 continue;
             }
             var locked = ExecuteLocked(finalPackage, binding, runtime, 1);
+            var lockedReplay = ExecuteLocked(finalPackage, binding,
+                runtime, 2);
             frames.AddRange(locked.Frames);
+            frames.AddRange(lockedReplay.Frames);
             diagnostics.AddRange(locked.Diagnostics);
+            diagnostics.AddRange(lockedReplay.Diagnostics);
+            var lockedComparison =
+                GeneratedCampaignRegionalEventReplayService.Compare(
+                    locked.Signature, lockedReplay.Signature);
+            diagnostics.AddRange(lockedComparison.Diagnostics);
 
             var first = ExecuteResolved(finalPackage, binding,
                 relationship, combatSummary, runtime, 1);
@@ -88,31 +103,55 @@ public sealed class
                 relationship, combatSummary, runtime, 2);
             frames.AddRange(replay.Frames);
             diagnostics.AddRange(replay.Diagnostics);
-            var replayPassed = first.Passed && replay.Passed
-                                            && first.FinalStateHash ==
-                                            replay.FinalStateHash;
+            var resolutionComparison =
+                GeneratedCampaignRegionalEventReplayService.Compare(
+                    first.Signature, replay.Signature);
+            diagnostics.AddRange(resolutionComparison.Diagnostics);
+            var replayPassed = locked.Passed && lockedReplay.Passed
+                                             && lockedComparison.Passed
+                                             && first.Passed
+                                             && replay.Passed
+                                             && resolutionComparison.Passed;
             if (!replayPassed)
                 diagnostics.Add(
                     "generated_regional_event.replay_not_equivalent");
-            var passed = locked.Passed && first.Passed && replayPassed;
+            var passed = locked.Passed && lockedReplay.Passed
+                                       && first.Passed && replay.Passed
+                                       && replayPassed;
+            var replaySignatures =
+                new[]
+                {
+                    locked.Signature,
+                    lockedReplay.Signature,
+                    first.Signature,
+                    replay.Signature
+                };
             qualifications.Add(new
                 GeneratedCampaignRegionalEventQualification
                 {
                     RegionalEventId = binding.RegionalEventId,
                     EventKind = binding.EventKind,
-                    LockedStatePassed = locked.Passed,
+                    RelationshipId = binding.RelationshipId,
+                    RelationshipBranch = binding.RelationshipBranch,
+                    LockedStatePassed = locked.Passed
+                                        && lockedReplay.Passed,
                     AvailableStatePassed = first.AvailablePassed,
                     ResolvedStatePassed = first.ResolvedPassed,
                     ExactlyOncePassed = first.ExactlyOncePassed,
                     ReplayPassed = replayPassed,
-                    RuntimeStartCount = 3,
+                    RuntimeStartCount = 4,
                     RuntimeCommandCount = locked.Frames.Count
+                                          + lockedReplay.Frames.Count
                                           + first.Frames.Count
                                           + replay.Frames.Count,
                     FinalStateHash = first.FinalStateHash,
+                    ReplaySignatures = replaySignatures,
                     Diagnostics = locked.Diagnostics.Concat(
-                            first.Diagnostics)
+                            lockedReplay.Diagnostics)
+                        .Concat(first.Diagnostics)
                         .Concat(replay.Diagnostics)
+                        .Concat(lockedComparison.Diagnostics)
+                        .Concat(resolutionComparison.Diagnostics)
                         .Distinct(StringComparer.Ordinal)
                         .OrderBy(item => item, StringComparer.Ordinal)
                         .ToList()
@@ -143,8 +182,11 @@ public sealed class
                         && lockedPassed && availablePassed
                         && resolvedPassed && oncePassed
                         && replayAllPassed;
-        return new GameProjectGeneratedCampaignRegionalEventSummary
+        var summary = new GameProjectGeneratedCampaignRegionalEventSummary
         {
+            StrictProofSchemaVersion =
+                GameProjectGeneratedCampaignRegionalEventSummary
+                    .StrictProofSchema,
             Present = true,
             Passed = allPassed,
             Status = allPassed
@@ -181,11 +223,20 @@ public sealed class
                 qualifications.Select(item => new
                 {
                     item.RegionalEventId,
-                    item.FinalStateHash
+                    item.FinalStateHash,
+                    ResolutionSignature = item.ReplaySignatures
+                        .Single(signature =>
+                            signature.RouteKind ==
+                            GeneratedCampaignRegionalEventReplayRouteKind
+                                .RESOLUTION
+                            && signature.ReplayIndex == 1)
+                        .SignatureSha256
                 }).ToList()),
             EventInventory = overlay.Inventory,
             EventQualifications = qualifications,
             RuntimeFrames = frames,
+            ReplaySignatures = qualifications
+                .SelectMany(item => item.ReplaySignatures).ToList(),
             HumanReviewFacts =
             [
                 new GeneratedCampaignRegionalEventHumanFact
@@ -222,6 +273,84 @@ public sealed class
             Overlay = overlay,
             Diagnostics = diagnostics
         };
+        var correlation =
+            GeneratedCampaignRegionalEventCorrelationService.Validate(
+                packageBefore, summary, relationships);
+        return correlation.Passed
+            ? summary
+            : summary with
+            {
+                Passed = false,
+                Status = "INVALID",
+                RuntimeQualificationPassed = false,
+                Diagnostics = summary.Diagnostics.Concat(
+                        correlation.Diagnostics)
+                    .Distinct(StringComparer.Ordinal)
+                    .OrderBy(item => item, StringComparer.Ordinal)
+                    .ToList()
+            };
+    }
+
+    private static IReadOnlyList<string> ValidateInputCorrelation(
+        GamePackageDefinition finalPackage,
+        GeneratedCampaignRegionalEventOverlayDocument overlay,
+        GameProjectGeneratedCampaignRelationshipSummary relationships)
+    {
+        var diagnostics = new List<string>();
+        var inventory = overlay.Bindings
+            .OrderBy(item => item.RegionId, StringComparer.Ordinal)
+            .ThenBy(item => item.MapId, StringComparer.Ordinal)
+            .ThenBy(item => item.RelationshipId,
+                StringComparer.Ordinal)
+            .ThenBy(item => item.EventKind)
+            .Select(GeneratedCampaignRegionalEventInventoryService.Create)
+            .ToList();
+        if (PackageSha256(finalPackage) != overlay.OutputPackageSha256)
+            diagnostics.Add(
+                "generated_regional_event.overlay_package_hash_mismatch");
+        if (GeneratedCampaignChoiceCanonical.Serialize(inventory) !=
+            GeneratedCampaignChoiceCanonical.Serialize(
+                overlay.Inventory)
+            || overlay.InventorySha256 !=
+            GeneratedCampaignChoiceCanonical.Hash(inventory))
+            diagnostics.Add(
+                "generated_regional_event.inventory_mismatch");
+        if (overlay.EventCount != overlay.Bindings.Count
+            || overlay.EventCount != overlay.Inventory.Count
+            || overlay.SupportGratitudeCount != overlay.Inventory.Count(
+                item => item.EventKind ==
+                        GeneratedCampaignRegionalEventKind
+                            .SUPPORT_GRATITUDE)
+            || overlay.ChallengeAftermathCount !=
+            overlay.Inventory.Count(item => item.EventKind ==
+                GeneratedCampaignRegionalEventKind.CHALLENGE_AFTERMATH)
+            || overlay.RefusalFalloutCount !=
+            overlay.Inventory.Count(item => item.EventKind ==
+                GeneratedCampaignRegionalEventKind.REFUSAL_FALLOUT))
+            diagnostics.Add(
+                "generated_regional_event.inventory_count_mismatch");
+        foreach (var fact in relationships.BranchQualifications)
+        {
+            var kind = fact.Branch switch
+            {
+                GeneratedCampaignRelationshipBranch.SUPPORT =>
+                    GeneratedCampaignRegionalEventKind
+                        .SUPPORT_GRATITUDE,
+                GeneratedCampaignRelationshipBranch.CHALLENGE =>
+                    GeneratedCampaignRegionalEventKind
+                        .CHALLENGE_AFTERMATH,
+                _ => GeneratedCampaignRegionalEventKind.REFUSAL_FALLOUT
+            };
+            var count = overlay.Bindings.Count(item =>
+                item.RelationshipId == fact.RelationshipId
+                && item.RelationshipBranch == fact.Branch
+                && item.EventKind == kind);
+            if (count != (fact.Available ? 1 : 0))
+                diagnostics.Add(
+                    "generated_regional_event.branch_event_correlation");
+        }
+        return diagnostics.Distinct(StringComparer.Ordinal)
+            .OrderBy(item => item, StringComparer.Ordinal).ToList();
     }
 
     private static LockedRoute ExecuteLocked(
@@ -242,6 +371,7 @@ public sealed class
             new List<GeneratedCampaignRegionalEventRuntimeFrame>();
         var opened = NavigateAndOpen(package, binding, runtime,
             started.Session, replayIndex,
+            GeneratedCampaignRegionalEventReplayRouteKind.LOCKED_PROBE,
             GeneratedCampaignRegionalEventStatus.LOCKED, frames);
         var status = Status(binding, opened.Session);
         var available = AvailableChoiceIds(opened)
@@ -254,8 +384,13 @@ public sealed class
                      && !available
                      && beforeSections.SequenceEqual(
                          afterSections, StringComparer.Ordinal);
+        var signature =
+            GeneratedCampaignRegionalEventReplayService.CreateSignature(
+                binding.RegionalEventId,
+                GeneratedCampaignRegionalEventReplayRouteKind.LOCKED_PROBE,
+                replayIndex, frames);
         if (passed)
-            return new LockedRoute(true, frames, []);
+            return new LockedRoute(true, frames, signature, []);
         var diagnostic = !opened.Success
             ? "generated_regional_event.locked_route_failed"
             : status != GeneratedCampaignRegionalEventStatus.LOCKED
@@ -265,7 +400,7 @@ public sealed class
                     : "generated_regional_event.locked_mutation:"
                       + ChangedGameplaySections(beforeSections,
                           afterSections);
-        return LockedRoute.Failed(diagnostic, frames);
+        return LockedRoute.Failed(diagnostic, frames, signature);
     }
 
     private ResolvedRoute ExecuteResolved(
@@ -289,6 +424,7 @@ public sealed class
         var frames = prerequisite.Frames.ToList();
         var opened = NavigateAndOpen(package, binding, runtime,
             prerequisite.Session, replayIndex,
+            GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
             GeneratedCampaignRegionalEventStatus.AVAILABLE, frames);
         var resolveId = binding.DialogueId + "/resolve";
         var availablePassed = opened.Success
@@ -308,10 +444,13 @@ public sealed class
         var resolved = runtime.ExecuteGameplayCommand(package,
             opened.Session,
             GameRuntimeCommand.ChooseDialogueOption(resolveId));
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames,
+            GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+            replayIndex, binding,
             GeneratedCampaignRegionalEventStatus.AVAILABLE,
             GeneratedCampaignRegionalEventStatus.RESOLVED,
-            nameof(GameRuntimeCommandType.ChooseDialogueOption),
+            nameof(GameRuntimeCommandType.ChooseDialogueOption) + ":"
+            + resolveId,
             before, resolved);
         var expectedDelta = binding.EventKind ==
                             GeneratedCampaignRegionalEventKind
@@ -336,7 +475,9 @@ public sealed class
         var exactBeforeReplay = GameplayContractHash(resolved.Session);
         var interacted = runtime.ExecutePlayerCommand(package,
             resolved.Session, PlayerCommand.Interact());
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames,
+            GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+            replayIndex, binding,
             GeneratedCampaignRegionalEventStatus.RESOLVED,
             GeneratedCampaignRegionalEventStatus.RESOLVED,
             nameof(PlayerCommandType.Interact),
@@ -344,10 +485,13 @@ public sealed class
         var reopened = runtime.ExecuteGameplayCommand(package,
             interacted.Session,
             GameRuntimeCommand.OpenDialogue(binding.DialogueId));
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames,
+            GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+            replayIndex, binding,
             GeneratedCampaignRegionalEventStatus.RESOLVED,
             GeneratedCampaignRegionalEventStatus.RESOLVED,
-            nameof(GameRuntimeCommandType.OpenDialogue),
+            nameof(GameRuntimeCommandType.OpenDialogue) + ":"
+            + binding.DialogueId,
             StableStateHash(interacted.Session), reopened);
         var availableIds = AvailableChoiceIds(reopened);
         var resolvedFollowUpId = binding.DialogueId + "/resolved";
@@ -360,10 +504,13 @@ public sealed class
                 reopened.Session,
                 GameRuntimeCommand.ChooseDialogueOption(
                     resolvedFollowUpId));
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 GeneratedCampaignRegionalEventStatus.RESOLVED,
                 GeneratedCampaignRegionalEventStatus.RESOLVED,
-                nameof(GameRuntimeCommandType.ChooseDialogueOption),
+                nameof(GameRuntimeCommandType.ChooseDialogueOption) + ":"
+                + resolvedFollowUpId,
                 StableStateHash(reopened.Session), observed);
             exactlyOnce = observed.Success
                           && exactBeforeReplay ==
@@ -374,6 +521,11 @@ public sealed class
             return ResolvedRoute.Failed(
                 "generated_regional_event.duplicate_resolution",
                 frames);
+        var signature =
+            GeneratedCampaignRegionalEventReplayService.CreateSignature(
+                binding.RegionalEventId,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, frames);
         return new ResolvedRoute(
             true,
             true,
@@ -381,6 +533,7 @@ public sealed class
             true,
             StableStateHash(reopened.Session),
             frames,
+            signature,
             []);
     }
 
@@ -399,10 +552,13 @@ public sealed class
         var opened = runtime.ExecuteGameplayCommand(package, initial,
             GameRuntimeCommand.OpenDialogue(
                 relationship.DialogueId));
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames,
+            GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+            replayIndex, binding,
             GeneratedCampaignRegionalEventStatus.LOCKED,
             GeneratedCampaignRegionalEventStatus.LOCKED,
-            "Prerequisite.OpenDialogue", before, opened);
+            "Prerequisite.OpenDialogue:"
+            + relationship.DialogueId, before, opened);
         var initialChoice = FindRelationshipChoice(package,
             relationship.DialogueId, binding.RelationshipBranch,
             "initial");
@@ -416,10 +572,13 @@ public sealed class
         var chosen = runtime.ExecuteGameplayCommand(package,
             opened.Session,
             GameRuntimeCommand.ChooseDialogueOption(initialChoice.Id));
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames,
+            GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+            replayIndex, binding,
             GeneratedCampaignRegionalEventStatus.LOCKED,
             Status(binding, chosen.Session),
-            "Prerequisite.ChooseDialogueOption", before, chosen);
+            "Prerequisite.ChooseDialogueOption:"
+            + initialChoice.Id, before, chosen);
         if (!chosen.Success)
             return PrerequisiteRoute.Failed(
                 "generated_regional_event.relationship_route_failed",
@@ -454,10 +613,13 @@ public sealed class
                     combat.Diagnostics.FirstOrDefault()
                     ?? "generated_regional_event.challenge_victory_failed",
                     frames);
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 GeneratedCampaignRegionalEventStatus.LOCKED,
                 Status(binding, combat.Session),
-                "Prerequisite.ExactCombatVictory", before,
+                "Prerequisite.ExactCombatVictory:"
+                + relationship.ChallengeEncounterId, before,
                 new UnifiedRuntimeResult
                 {
                     Success = combat.Passed,
@@ -468,10 +630,13 @@ public sealed class
                 combat.Session,
                 GameRuntimeCommand.OpenDialogue(
                     relationship.DialogueId));
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 Status(binding, combat.Session),
                 Status(binding, reopened.Session),
-                "Prerequisite.OpenDialogue", before, reopened);
+                "Prerequisite.OpenDialogue:"
+                + relationship.DialogueId, before, reopened);
             var followUp = FindRelationshipChoice(package,
                 relationship.DialogueId,
                 GeneratedCampaignRelationshipBranch.CHALLENGE,
@@ -486,10 +651,13 @@ public sealed class
             var confirmed = runtime.ExecuteGameplayCommand(package,
                 reopened.Session,
                 GameRuntimeCommand.ChooseDialogueOption(followUp.Id));
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 Status(binding, reopened.Session),
                 Status(binding, confirmed.Session),
-                "Prerequisite.ChooseDialogueOption", before,
+                "Prerequisite.ChooseDialogueOption:"
+                + followUp.Id, before,
                 confirmed);
             return confirmed.Success
                    && Status(binding, confirmed.Session) ==
@@ -529,10 +697,13 @@ public sealed class
                         combat.Diagnostics.FirstOrDefault()
                         ?? "generated_regional_event.support_combat_failed",
                         frames);
-                AddFrame(frames, replayIndex, binding,
+                AddFrame(frames,
+                    GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                    replayIndex, binding,
                     Status(binding, session),
                     Status(binding, combat.Session),
-                    "Prerequisite.ExactCombatVictory", before,
+                    "Prerequisite.ExactCombatVictory:"
+                    + step.TargetEncounterId, before,
                     new UnifiedRuntimeResult
                     {
                         Success = combat.Passed,
@@ -552,20 +723,26 @@ public sealed class
                 return PrerequisiteRoute.Failed(
                     "generated_regional_event.support_arc_failed",
                     frames);
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 Status(binding, session),
                 Status(binding, completed.Session),
-                "Prerequisite.CompleteQuest", before, completed);
+                "Prerequisite.CompleteQuest:"
+                + step.QuestId, before, completed);
             session = completed.Session;
             before = StableStateHash(session);
             var reopened = runtime.ExecuteGameplayCommand(package,
                 session,
                 GameRuntimeCommand.OpenDialogue(
                     relationship.DialogueId));
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 Status(binding, session),
                 Status(binding, reopened.Session),
-                "Prerequisite.OpenDialogue", before, reopened);
+                "Prerequisite.OpenDialogue:"
+                + relationship.DialogueId, before, reopened);
             var followUp = step.Order + 1 <
                            relationship.QuestArc.Count
                 ? package.Game.Dialogues.Single(item =>
@@ -591,10 +768,13 @@ public sealed class
             var observed = runtime.ExecuteGameplayCommand(package,
                 reopened.Session,
                 GameRuntimeCommand.ChooseDialogueOption(followUp.Id));
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames,
+                GeneratedCampaignRegionalEventReplayRouteKind.RESOLUTION,
+                replayIndex, binding,
                 Status(binding, reopened.Session),
                 Status(binding, observed.Session),
-                "Prerequisite.ChooseDialogueOption", before,
+                "Prerequisite.ChooseDialogueOption:"
+                + followUp.Id, before,
                 observed);
             if (!observed.Success)
                 return PrerequisiteRoute.Failed(
@@ -616,6 +796,7 @@ public sealed class
         IUnifiedGameRuntimeService runtime,
         UnifiedRuntimeSession initial,
         int replayIndex,
+        GeneratedCampaignRegionalEventReplayRouteKind routeKind,
         GeneratedCampaignRegionalEventStatus expectedStatus,
         ICollection<GeneratedCampaignRegionalEventRuntimeFrame> frames)
     {
@@ -630,7 +811,7 @@ public sealed class
                 transition.EntityId);
             foreach (var result in moved.Results)
             {
-                AddFrame(frames, replayIndex, binding,
+                AddFrame(frames, routeKind, replayIndex, binding,
                     expectedStatus, expectedStatus,
                     result.CommandType, result.BeforeHash,
                     result.Result);
@@ -641,9 +822,10 @@ public sealed class
             var before = StableStateHash(session);
             var interacted = runtime.ExecutePlayerCommand(package,
                 session, PlayerCommand.Interact());
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames, routeKind, replayIndex, binding,
                 expectedStatus, expectedStatus,
-                nameof(PlayerCommandType.Interact), before,
+                nameof(PlayerCommandType.Interact) + ":"
+                + transition.EntityId, before,
                 interacted);
             if (!interacted.Success
                 || interacted.Session.MapState.CurrentMapId !=
@@ -656,7 +838,7 @@ public sealed class
             binding.MapEntityId);
         foreach (var result in eventMove.Results)
         {
-            AddFrame(frames, replayIndex, binding,
+            AddFrame(frames, routeKind, replayIndex, binding,
                 expectedStatus, expectedStatus,
                 result.CommandType, result.BeforeHash,
                 result.Result);
@@ -667,9 +849,10 @@ public sealed class
         var interactBefore = StableStateHash(session);
         var eventInteraction = runtime.ExecutePlayerCommand(package,
             session, PlayerCommand.Interact());
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames, routeKind, replayIndex, binding,
             expectedStatus, expectedStatus,
-            nameof(PlayerCommandType.Interact), interactBefore,
+            nameof(PlayerCommandType.Interact) + ":"
+            + binding.MapEntityId, interactBefore,
             eventInteraction);
         if (!eventInteraction.Success
             || !eventInteraction.MapEvents.Any(item =>
@@ -680,9 +863,10 @@ public sealed class
         var opened = runtime.ExecuteGameplayCommand(package,
             eventInteraction.Session,
             GameRuntimeCommand.OpenDialogue(binding.DialogueId));
-        AddFrame(frames, replayIndex, binding,
+        AddFrame(frames, routeKind, replayIndex, binding,
             expectedStatus, expectedStatus,
-            nameof(GameRuntimeCommandType.OpenDialogue), openBefore,
+            nameof(GameRuntimeCommandType.OpenDialogue) + ":"
+            + binding.DialogueId, openBefore,
             opened);
         return opened;
     }
@@ -1043,6 +1227,7 @@ public sealed class
 
     private static void AddFrame(
         ICollection<GeneratedCampaignRegionalEventRuntimeFrame> frames,
+        GeneratedCampaignRegionalEventReplayRouteKind routeKind,
         int replayIndex,
         GeneratedCampaignRegionalEventBinding binding,
         GeneratedCampaignRegionalEventStatus beforeStatus,
@@ -1051,12 +1236,32 @@ public sealed class
         string before,
         UnifiedRuntimeResult result)
     {
+        var afterReputation = Reputation(result.Session,
+            binding.FactionId);
+        var previousReputation = frames
+            .Where(item => item.RegionalEventId ==
+                           binding.RegionalEventId
+                           && item.RouteKind == routeKind
+                           && item.ReplayIndex == replayIndex)
+            .LastOrDefault()?.ObservedReputation;
+        var beforeReputation = previousReputation is null
+            ? afterReputation
+            : previousReputation.Value;
+        var mapEventSha256 =
+            GeneratedCampaignChoiceCanonical.Hash(result.MapEvents);
+        var gameplayEventSha256 =
+            GeneratedCampaignChoiceCanonical.Hash(
+                result.GameplayEvents);
+        var choices = AvailableChoiceIds(result)
+            .OrderBy(item => item, StringComparer.Ordinal).ToList();
         frames.Add(new GeneratedCampaignRegionalEventRuntimeFrame
         {
+            RouteKind = routeKind,
             ReplayIndex = replayIndex,
+            SequenceIndex = frames.Count,
             RegionalEventId = binding.RegionalEventId,
             StatusBefore = beforeStatus,
-            StatusAfter = afterStatus,
+            StatusAfter = Status(binding, result.Session),
             CommandType = command,
             BeforeStateHash = before,
             AfterStateHash = StableStateHash(result.Session),
@@ -1067,6 +1272,31 @@ public sealed class
                 result.MapEvents,
                 result.GameplayEvents
             }),
+            MapEventSha256 = mapEventSha256,
+            GameplayEventSha256 = gameplayEventSha256,
+            AvailableChoiceIdsSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(choices),
+            ObservedReputation = afterReputation,
+            ObservedReputationDelta =
+                afterReputation - beforeReputation,
+            ObservedResolutionFlag =
+                Flag(result.Session, binding.ResolutionFlagId),
+            RelationshipFlagsSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(new
+                {
+                    MapFlags = result.Session.MapState.Flags,
+                    GameplayFlags =
+                        result.Session.GameplayState.Flags
+                }),
+            QuestStatesSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(new
+                {
+                    result.Session.GameplayState.QuestStates,
+                    result.Session.GameplayState.Quests
+                }),
+            EncounterStateSha256 =
+                GeneratedCampaignChoiceCanonical.Hash(
+                    result.Session.GameplayState.ActiveEncounter),
             Passed = result.Success
         });
     }
@@ -1101,13 +1331,16 @@ public sealed class
     private sealed record LockedRoute(
         bool Passed,
         IReadOnlyList<GeneratedCampaignRegionalEventRuntimeFrame> Frames,
+        GeneratedCampaignRegionalEventReplaySignature Signature,
         IReadOnlyList<string> Diagnostics)
     {
         public static LockedRoute Failed(
             string diagnostic,
             IReadOnlyList<GeneratedCampaignRegionalEventRuntimeFrame>?
-                frames = null) =>
-            new(false, frames ?? [], [diagnostic]);
+                frames = null,
+            GeneratedCampaignRegionalEventReplaySignature?
+                signature = null) =>
+            new(false, frames ?? [], signature ?? new(), [diagnostic]);
     }
 
     private sealed record ResolvedRoute(
@@ -1117,14 +1350,17 @@ public sealed class
         bool ExactlyOncePassed,
         string FinalStateHash,
         IReadOnlyList<GeneratedCampaignRegionalEventRuntimeFrame> Frames,
+        GeneratedCampaignRegionalEventReplaySignature Signature,
         IReadOnlyList<string> Diagnostics)
     {
         public static ResolvedRoute Failed(
             string diagnostic,
             IReadOnlyList<GeneratedCampaignRegionalEventRuntimeFrame>?
-                frames = null) =>
+                frames = null,
+            GeneratedCampaignRegionalEventReplaySignature?
+                signature = null) =>
             new(false, false, false, false, string.Empty,
-                frames ?? [], [diagnostic]);
+                frames ?? [], signature ?? new(), [diagnostic]);
     }
 
     private sealed record PrerequisiteRoute(

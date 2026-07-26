@@ -345,8 +345,30 @@ public sealed class GeneratedCampaignRegionalEventOverlayService
                 binding.RelationshipBranch.ToString(),
             ["generatedRegionalEventRegionId"] = binding.RegionId,
             ["generatedRegionalEventMapId"] = binding.MapId,
+            ["generatedRegionalEventActorSeedId"] =
+                binding.ActorSeedId,
+            ["generatedRegionalEventActorEntityId"] =
+                binding.ActorEntityId,
+            ["generatedRegionalEventFactionId"] =
+                binding.FactionId,
+            ["generatedRegionalEventPrototypeId"] =
+                binding.EntityPrototypeId,
+            ["generatedRegionalEventMapEntityId"] =
+                binding.MapEntityId,
+            ["generatedRegionalEventInteractionId"] =
+                binding.InteractionId,
             ["generatedRegionalEventResolutionFlagId"] =
                 binding.ResolutionFlagId,
+            ["generatedRegionalEventSourceQuestId"] =
+                binding.SourceQuestId,
+            ["generatedRegionalEventChallengeEncounterId"] =
+                binding.ChallengeEncounterId,
+            ["generatedRegionalEventChallengeEncounterSourceId"] =
+                binding.ChallengeEncounterSourceId,
+            ["generatedRegionalEventTargetRegionDerivation"] =
+                binding.TargetRegionDerivation.ToString(),
+            ["generatedRegionalEventTargetRegionFingerprint"] =
+                binding.TargetRegionFingerprint,
             ["generatedRegionalEventPrerequisiteFingerprint"] =
                 binding.Prerequisite.Fingerprint,
             ["generatedRegionalEventRewardFingerprint"] =
@@ -495,23 +517,8 @@ public sealed class GeneratedCampaignRegionalEventOverlayService
             .ThenBy(item => item.RelationshipId,
                 StringComparer.Ordinal)
             .ThenBy(item => item.EventKind)
-            .Select(item => new GeneratedCampaignRegionalEventInventoryRow
-            {
-                RegionalEventId = item.RegionalEventId,
-                EventKind = item.EventKind,
-                RelationshipId = item.RelationshipId,
-                RelationshipBranch = item.RelationshipBranch,
-                RegionId = item.RegionId,
-                MapId = item.MapId,
-                X = item.Placement.X,
-                Y = item.Placement.Y,
-                DialogueId = item.DialogueId,
-                ResolutionFlagId = item.ResolutionFlagId,
-                PrerequisiteFingerprint =
-                    item.Prerequisite.Fingerprint,
-                RewardDerivationFingerprint =
-                    item.SourceQuestRewardFingerprint
-            }).ToList();
+            .Select(GeneratedCampaignRegionalEventInventoryService.Create)
+            .ToList();
 
     private static IReadOnlyList<
         GeneratedCampaignRegionalEventDefinitionFingerprint> Fingerprints(

@@ -281,7 +281,9 @@ public sealed class GameProjectBuildHistoryReader
         if (entry.SchemaVersion != SchemaVersionV7)
             return false;
         var matrix = relationships.BranchQualifications;
-        if (matrix.Count != relationships.RelationshipCount * 3
+        if (relationships.ArcQuestCount !=
+            relationships.QualifiedArcQuestCount
+            || matrix.Count != relationships.RelationshipCount * 3
             || string.IsNullOrWhiteSpace(
                 relationships.RelationshipBranchMatrixSha256)
             || !string.Equals(
@@ -376,61 +378,24 @@ public sealed class GameProjectBuildHistoryReader
             return false;
         var expectedEventCount = relationships.BranchQualifications
             .Count(item => item.Available);
-        if (events is
-            {
-                Present: false,
-                Passed: true,
-                Status: "ABSENT",
-                EventCount: 0
-            })
-            return expectedEventCount == 0
-                   && relationships.RelationshipInventory.All(item =>
-                       item.BranchKinds.Count == 0)
-                   && events.RegionalEventInventorySha256.Length > 0
-                   && events.RelationshipBranchMatrixSha256 ==
-                   relationships.RelationshipBranchMatrixSha256
-                   && events.FinalStateHash == entry.FinalStateHash
-                   && events.ExactPackageSha256 ==
-                   entry.PackageSha256;
-        if (events is not
-            {
-                Present: true,
-                Passed: true,
-                Status: "REGIONAL_EVENTS_CURRENT",
-                IdentityPassed: true,
-                PlacementPassed: true,
-                OverlayControlledDeltaPassed: true,
-                RuntimeQualificationPassed: true,
-                LockedStatePassed: true,
-                AvailableStatePassed: true,
-                ResolvedStatePassed: true,
-                ExactlyOncePassed: true,
-                ReplayPassed: true
-            })
+        var common = events.EventCount == expectedEventCount
+                     && events.QualifiedEventCount ==
+                     events.EventCount
+                     && events.IdentityPassed
+                     && events.PlacementPassed
+                     && events.OverlayControlledDeltaPassed
+                     && events.RuntimeQualificationPassed
+                     && events.LockedStatePassed
+                     && events.AvailableStatePassed
+                     && events.ResolvedStatePassed
+                     && events.ExactlyOncePassed
+                     && events.ReplayPassed
+                     && events.FinalStateHash == entry.FinalStateHash;
+        if (!common)
             return false;
-        return events.EventCount == expectedEventCount
-               && events.QualifiedEventCount == events.EventCount
-               && events.EventInventory.Count == events.EventCount
-               && events.EventQualifications.Count == events.EventCount
-               && events.EventQualifications.All(item =>
-                   item.LockedStatePassed
-                   && item.AvailableStatePassed
-                   && item.ResolvedStatePassed
-                   && item.ExactlyOncePassed
-                   && item.ReplayPassed)
-               && events.EventInventory.All(item =>
-                   item.RegionalEventId == item.DialogueId
-                   && item.ResolutionFlagId == item.DialogueId)
-               && events.RuntimeFrames.Count > 0
-               && events.RuntimeFrames.All(item => item.Passed)
-               && !string.IsNullOrWhiteSpace(
-                   events.RegionalEventOverlaySha256)
-               && !string.IsNullOrWhiteSpace(
-                   events.RegionalEventInventorySha256)
-               && events.RelationshipBranchMatrixSha256 ==
-               relationships.RelationshipBranchMatrixSha256
-               && events.ExactPackageSha256 == entry.PackageSha256
-               && events.FinalStateHash == entry.FinalStateHash;
+        return GeneratedCampaignRegionalEventCorrelationService
+            .Validate(entry.PackageSha256, events, relationships)
+            .Passed;
     }
 
     private static bool RouteEligible(GameProjectGeneratedEncounterCombatSummary combat) => combat.RouteMode switch

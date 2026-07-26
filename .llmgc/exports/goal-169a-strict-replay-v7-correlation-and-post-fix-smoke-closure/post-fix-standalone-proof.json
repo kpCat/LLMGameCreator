@@ -1,0 +1,13 @@
+{
+    "status":  "GREEN",
+    "hiddenSmokeInvocationCount":  1,
+    "retryCount":  0,
+    "explicitMoveFrameCount":  112,
+    "directionOnlyFrameCount":  0,
+    "interactCount":  12,
+    "openDialogueCount":  36,
+    "chooseDialogueOptionCount":  24,
+    "packageSha256":  "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2",
+    "finalStateHash":  "404eaebe68b3e9c8c0702565e47382baea57e644170456c99295a61bd4e8d404",
+    "replaySignatureCount":  24
+}

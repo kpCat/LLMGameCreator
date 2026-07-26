@@ -133,6 +133,8 @@ public sealed record GeneratedGameplaySaveProjectTruth
     public string QualifiedAuthoringFingerprint { get; init; } = string.Empty;
     public string SelectedBuildHistoryFileName { get; init; } = string.Empty;
     public string SelectedBuildHistorySha256 { get; init; } = string.Empty;
+    [JsonIgnore]
+    public GameProjectBuildHistoryEntry SelectedBuildHistory { get; init; } = new();
     public string GeneratedStartMapId { get; init; } = string.Empty;
     public IReadOnlyDictionary<string, string> GeneratedRegionMapBindings { get; init; }
         = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -228,6 +230,8 @@ public sealed record GeneratedGameplaySaveMigrationPreview
     public IReadOnlyList<string> PreservedDefinitionIds { get; init; } = [];
     public IReadOnlyList<string> DroppedDefinitionIds { get; init; } = [];
     public IReadOnlyList<string> DroppedReasons { get; init; } = [];
+    public IReadOnlyList<GeneratedCampaignRegionalEventMigrationFact>
+        RegionalEventFacts { get; init; } = [];
     public string CandidateSessionSha256 { get; init; } = string.Empty;
     public string CandidateMapStateSha256 { get; init; } = string.Empty;
     public string CandidateGameplayStateSha256 { get; init; } = string.Empty;
@@ -250,6 +254,8 @@ public sealed record GeneratedGameplaySaveMigrationResult
     public string SourceRevisionSha256 { get; init; } = string.Empty;
     public string MigratedRevisionSha256 { get; init; } = string.Empty;
     public GeneratedGameplaySaveMigrationPreview? Preview { get; init; }
+    public IReadOnlyList<GeneratedCampaignRegionalEventMigrationFact>
+        RegionalEventFacts { get; init; } = [];
     public GeneratedGameplaySaveRevision? Revision { get; init; }
     public UnifiedRuntimeSession? Session { get; init; }
     public IReadOnlyList<string> Diagnostics { get; init; } = [];

@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "strictSchemaVersion":  "generated_campaign_regional_event_strict_proof_v1",
+    "branchMatrixSha256":  "ea6d2edb585d2ece8d9932191d10fcf53abfc2cbf706c44094b191028da0d45b",
+    "arcQuestCount":  2,
+    "qualifiedArcQuestCount":  2,
+    "eventCount":  6,
+    "bindingCount":  6,
+    "inventoryCount":  6,
+    "qualificationCount":  6,
+    "runtimeFrameCount":  276,
+    "strictCorrelationPassed":  true,
+    "tamperMatrixCaseCount":  20,
+    "allTamperCasesRejected":  true
+}
