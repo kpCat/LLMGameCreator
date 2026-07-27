@@ -321,11 +321,15 @@ public sealed class Goal169CStandaloneSmokeTests
                 .ReleaseCandidateRecordConfigurationStatus);
         Assert.False(portablePointer.Passed);
 
-        using var coreOnly = Goal156TestKit.Copy(
-            Goal156TestKit.CoreOnly,
+        var qualifiedCoreOnly = Goal164BuildFixture.Create(
+            coreOnly: true);
+        using var coreOnly = Goal169CPortableCopy.Create(
+            qualifiedCoreOnly.Project.Path,
             "goal169c-core-only-portable");
         var coreSnapshot =
             Goal156TestKit.OpenWorkspace(coreOnly.Path).Snapshot();
+        Assert.Equal("CAMPAIGN_CURRENT",
+            coreSnapshot.GeneratedWorld?.Status);
         Assert.True(coreSnapshot.GeneratedCampaignRegionalEvents is
         {
             Passed: true,
@@ -718,6 +722,9 @@ internal sealed class Goal169CPortableCopy : IDisposable
             "Goal169CPortable", Guid.NewGuid().ToString("N"));
         var target = System.IO.Path.Combine(root, folderName);
         CopyDirectory(source, target);
+        var builds = System.IO.Path.Combine(target, "Builds");
+        if (Directory.Exists(builds))
+            Directory.Delete(builds, recursive: true);
         return new Goal169CPortableCopy(root, target);
     }
 

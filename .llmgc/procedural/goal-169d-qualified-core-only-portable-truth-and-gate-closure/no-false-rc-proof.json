@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "qualifiedReleaseCandidateConfigurationStatus":  "ABSENT",
+    "qualifiedReleaseCandidateRecordConfigurationStatus":  "ABSENT",
+    "portableReleaseCandidateConfigurationStatus":  "ABSENT",
+    "portableReleaseCandidateRecordConfigurationStatus":  "ABSENT",
+    "acceptedMechanicsPassed":  false,
+    "acceptedMechanicsMissingFactCount":  6,
+    "coreOnlyRcConfigurationCurrent":  false,
+    "coreOnlyRcRecordCurrent":  false,
+    "falseReadinessClaimed":  false
+}

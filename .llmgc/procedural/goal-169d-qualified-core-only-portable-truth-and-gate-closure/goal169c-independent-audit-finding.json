@@ -1,0 +1,15 @@
+{
+    "status":  "BLOCKED_AT_72F69BE1",
+    "implementationCommit":  "72f69be12b898583d902237ae99e5bc1fe890d2c",
+    "standaloneProof":  "GREEN",
+    "immutablePublication":  "GREEN",
+    "packageHistoryPayloadCorrelation":  "GREEN",
+    "releaseCandidateCurrent":  true,
+    "allSelectablePortable":  "GREEN",
+    "coreOnlyFailure":  "INVALID_CREATION_ONLY_FIXTURE",
+    "productionDefect":  false,
+    "goal169cAccepted":  false,
+    "goal169cIndependentAuditRequired":  false,
+    "closure":  "closed_by_goal169d",
+    "smokeRepeated":  false
+}

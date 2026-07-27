@@ -2,6 +2,7 @@
 
 | ID | Priority | Area | Finding | Resolution / next action | Deferred | Closed | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| GQ-P1-GOAL169C-CORE-ONLY-CREATION-FIXTURE | P1 | test-fixture | Goal169C copied raw creation-only `Goal156TestKit.CoreOnly` and expected v7 campaign history before build. | Goal169D uses one real qualified core-only build, then copies the built project physically without operational `Builds`/pointer state. | false | true | Production behavior is unchanged; v7 `CAMPAIGN_CURRENT`, branch-dependent relationship/event truth and no false RC readiness pass. |
 | GQ-P3-GOAL166-PERSISTED-RECOVERY-CHECKPOINT | P3 | campaign-recovery | Recovery checkpoints intentionally do not survive an application restart. | Consider persisted recovery only in a separately approved save-schema task. | true | false | Goal166 preserves existing in-memory checkpoint semantics. |
 
 Goal165 closes Goal164's route-neutrality P1 without Runtime or source-sidecar mutation. Recovery checkpoints are deliberately in-memory and therefore do not provide cross-restart retry; persisted recovery and campaign choice branching remain separate future work. Unused generated action/resource definitions intentionally remain provenance and are not assigned combat roles. Rich authored combat diversity, the entity-title suffix heuristic and RC finalizer lease concern remain bounded debt.

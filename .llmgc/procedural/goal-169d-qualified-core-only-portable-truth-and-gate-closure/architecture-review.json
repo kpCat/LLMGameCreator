@@ -1,0 +1,17 @@
+{
+    "status":  "GREEN",
+    "taskClassification":  "TEST_FIXTURE_PORTABLE_TRUTH_CONTINUATION",
+    "productSliceAdded":  false,
+    "productionDefectFound":  false,
+    "productionApplicationCodeChanged":  false,
+    "runtimeChanged":  false,
+    "runtimeAbstractionsChanged":  false,
+    "domainChanged":  false,
+    "gamePackageChanged":  false,
+    "featureCatalogChanged":  false,
+    "generatedSourceChanged":  false,
+    "unityChanged":  false,
+    "standaloneOrRcImplementationChanged":  false,
+    "reusedQualifiedFixture":  "Goal164BuildFixture.Create(coreOnly:true)",
+    "reusedPortablePattern":  "physical copy after build; operational Builds removed"
+}

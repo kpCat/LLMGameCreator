@@ -1,0 +1,44 @@
+/goal
+
+Выполни continuation-задачу из файла:
+
+docs/agent-tasks/goal-169d-qualified-core-only-portable-truth-and-gate-closure/GOAL.md
+
+Модель: GPT-5.6 Terra
+Reasoning: High
+
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+Required base: 72f69be12b898583d902237ae99e5bc1fe890d2c
+
+Это новый отдельный диалог Codex. Весь обязательный контекст находится в GOAL.md.
+План полностью одобрен. Не спрашивай подтверждение и не проси ручное тестирование.
+
+Критически важно:
+- это узкий test-fixture/portable-truth continuation Goal169C, не новый product slice;
+- independent audit = BLOCKED_AT_72F69BE1;
+- Goal169C standalone, immutable publication, package/history/payload correlation, RC и all-selectable portable GREEN;
+- единственный blocker возник потому, что тест скопировал сырой Goal156TestKit.CoreOnly, который создаёт проект, но не выполняет BuildAndQualify;
+- отсутствие v7 campaign summary у creation-only проекта ожидаемо и не является production-багом;
+- proof должен использовать настоящий current-code qualified core-only build: Goal164BuildFixture.Create(coreOnly:true) или эквивалент;
+- затем физическая portable-копия уже построенного проекта без operational Builds/pointer;
+- core-only GeneratedWorld = CAMPAIGN_CURRENT;
+- relationships/events = ABSENT или CURRENT строго по измеренной branch availability;
+- core-only RC configuration/record не CURRENT;
+- отдельно доказать, что raw creation-only CoreOnly не должен заявляться CURRENT до build;
+- успешный Goal169C run/pointer/run-status/history/payload/RC сохранить byte-identical;
+- Goal169C smoke не повторять; Goal169D real Player smoke budget=0;
+- production code не менять без дефекта на правильно построенном core-only fixture;
+- устранить старый nongating CurrentState assertion mismatch, если он воспроизводится; final check-current-goal должен быть чистым;
+- Runtime/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation не менять;
+- Goal169D >=30 discovered / >=26 behavioral / all pass;
+- Goal169C 34/34, Goal169B 72/72, Goal169A 60/60, Goal169 108/108 без старых smokes;
+- не запускать full suite, Goal168 85-case closure, all-ProductSmoke, Unity host build или Player;
+- ровно 15+15 evidence, artifact scope=0;
+- независимо от GREEN/BLOCKED/FAILED один commit и push origin/main;
+- не оставлять commit/push пользователю.
+
+В финале сообщи classification, audit/root cause, qualified core-only build, branch/event truth,
+portable copy/pointer absence, no false RC, retained Goal169C publication, clean current-goal gate,
+Player/Unity counts, tests/evidence/scope, SHA/push/HEAD/worktree.

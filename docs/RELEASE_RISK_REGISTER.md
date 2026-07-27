@@ -1,5 +1,7 @@
 # Release Risk Register
 
+Goal169D risk update: Goal169C's core-only failure was an invalid creation-only test fixture, not a package/history/RC production defect. Qualified core-only v7 and physical portable truth are GREEN. Core-only RC configuration and record remain intentionally not CURRENT, and the retained Goal169C publication stays byte-identical. No Player, Unity Editor or Unity host build was invoked.
+
 Goal166 risk update: combat contracts now retain the exact BasicAttack/package-ability actions that progressed an encounter. Mixed utility/damage lists cannot create a false victory route; checkpoints remain in-memory by design and are intentionally lost on restart.
 
 Status: Goal 097 planning register

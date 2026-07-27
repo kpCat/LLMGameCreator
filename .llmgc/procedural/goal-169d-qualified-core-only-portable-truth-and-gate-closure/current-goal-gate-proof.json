@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "initialReproductionStatus":  "REPRODUCED_AT_72F69BE1",
+    "initialDiscovered":  16,
+    "initialPassed":  15,
+    "initialFailed":  1,
+    "exactStaleTest":  "PackageAssemblyCombatProgressionAcceptanceTests.CurrentStatePreservesGoal028AcceptedBeforeGoal029",
+    "exactStaleExpectedToken":  "goal169c_blocked_after_single_cached_smoke_portable_core_only_campaign_truth",
+    "narrowHistoricalAssertionRepairApplied":  true,
+    "checkCurrentGoalExitCode":  0,
+    "passedMarkerPresent":  true,
+    "failedMarkerPresent":  false,
+    "assertionMismatchCount":  0,
+    "staleGoal169CActionAbsent":  true,
+    "markdownJsonAgree":  true
+}

@@ -6688,6 +6688,51 @@
         "LLM/",
         "RAG/"
       ]
+    },
+    {
+      "scenario": "goal-169d-qualified-core-only-portable-truth-and-gate-closure",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/run-goal169d-core-only-portable-closure.ps1",
+        ".devflow/scripts/run-goal169d-core-only-portable-closure.cmd",
+        "tests/LLMGameCreator.Tests/Application/Goal169C/Goal169CStandaloneSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/Application/Goal168/Goal168StandalonePortabilityTests.cs",
+        "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md",
+        "docs/manual-acceptance/goal169c-post-fix-immutable-standalone-rc-portable.md",
+        "docs/manual-acceptance/goal169d-qualified-core-only-portable-truth-gate-closure.md"
+      ],
+      "allowedPathPrefixes": [
+        "tests/LLMGameCreator.Tests/Application/Goal169D/",
+        "docs/agent-tasks/goal-169d-qualified-core-only-portable-truth-and-gate-closure/",
+        ".llmgc/procedural/goal-169d-qualified-core-only-portable-truth-and-gate-closure/",
+        ".llmgc/exports/goal-169d-qualified-core-only-portable-truth-and-gate-closure/"
+      ],
+      "excludedPathPrefixes": [
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/",
+        "src/LLMGameCreator.GamePackage/",
+        "src/LLMGameCreator.Domain/",
+        "src/LLMGameCreator.Application/Generation/Procedural/",
+        "src/LLMGameCreator.Application/Design/ProjectStandaloneBuild/",
+        "src/LLMGameCreator.Application/Design/UnifiedGameProjectWorkspace/",
+        "catalogs/feature-modules/",
+        "GeneratedPackageMvp/",
+        "unity/",
+        "samples/",
+        "generator-library/",
+        "provider/",
+        "LLM/",
+        "RAG/"
+      ]
     }
   ]
 }

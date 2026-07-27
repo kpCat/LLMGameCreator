@@ -1,0 +1,16 @@
+{
+    "status":  "GREEN",
+    "availableBranchCount":  6,
+    "relationshipStatus":  "RELATIONSHIPS_CURRENT",
+    "expectedRelationshipStatus":  "RELATIONSHIPS_CURRENT",
+    "relationshipCount":  2,
+    "relationshipBranchMatrixSha256":  "33e02fe8019ee5cf0b6e951113a9854e805430b017d64f072a1c299a9fb9ba8b",
+    "regionalEventStatus":  "REGIONAL_EVENTS_CURRENT",
+    "expectedRegionalEventStatus":  "REGIONAL_EVENTS_CURRENT",
+    "regionalEventCount":  6,
+    "qualifiedRegionalEventCount":  6,
+    "regionalEventInventorySha256":  "9bdb7dc5cfe25cecafb4e44e9536b00bdf11d48ecbae910eee335841fc31ea65",
+    "strictEmptyPolicy":  "EXACT_EMPTY_EVENT_GRAPH_V1",
+    "branchDependentTruthPassed":  true,
+    "actualPackageCorrelationPassed":  true
+}

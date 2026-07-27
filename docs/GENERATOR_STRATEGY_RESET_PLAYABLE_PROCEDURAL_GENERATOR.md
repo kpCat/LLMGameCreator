@@ -1,5 +1,7 @@
 # Generator Strategy Reset: Playable Procedural Generator
 
+Goal169D update: the Goal169C blocker was confined to a raw creation-only core fixture. One qualified core-only build and a physical pointer-free copy now prove v7 campaign, measured relationship/event and portable truth without changing product architecture or claiming core-only RC readiness. Goal169D is not a product slice; independent audit precedes selection of the next visible campaign slice.
+
 Goal166 update: exact qualified combat-action descriptors remain Application-layer contract truth, while tactical UI stays a projection over package/runtime state. Recovery is now proven through the production campaign service; persisted checkpoints and campaign choice branching remain separate tasks.
 
 Goal167 attempt: Application-layer choice binding, overlay, preview and journal code was started, but the mandatory behavioral matrix is incomplete. This is not a candidate for product progression or standalone qualification.

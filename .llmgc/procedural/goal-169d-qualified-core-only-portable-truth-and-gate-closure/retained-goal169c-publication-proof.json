@@ -1,0 +1,22 @@
+{
+    "status":  "GREEN",
+    "pointerPath":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\d3cadfecfbc91980\\current.json",
+    "pointerSha256":  "610820e5f90f35c696428b68e79d35ba3ca5cae5a9768244629a72b576980ae2",
+    "runRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\d3cadfecfbc91980\\runs\\r-05f6dbdac03e",
+    "runTreeSha256":  "902b4c9067465e712c1202c390aa667f908840fdd019d994f360eb36bab43719",
+    "runStatusPath":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\d3cadfecfbc91980\\runs\\r-05f6dbdac03e\\run-status.json",
+    "runStatusSha256":  "0c975a56d1c1c4670cbb18cb1ad21cb1ee6d723f7c70ed09729e4abdfde863b4",
+    "payloadRoot":  "C:\\Users\\endim\\AppData\\Local\\LGC\\O\\d3cadfecfbc91980\\runs\\r-05f6dbdac03e\\g_Data\\StreamingAssets\\LLMGameCreatorProject",
+    "payloadTreeSha256":  "95708c7128c1731868bca5dddfbe3673e3ebe081c0925e72a7c280018f82d422",
+    "standaloneHistoryPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c2e4f8439fd742c29b01fcc000f4a68f\\goal164-all-selectable\\.llmgc\\standalone-build-history.json",
+    "standaloneHistorySha256":  "f0aed4bf8682e957427de58f460e3daa8ceb168c48d4d754064644757ecd48a8",
+    "selectedHistoryPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c2e4f8439fd742c29b01fcc000f4a68f\\goal164-all-selectable\\.llmgc\\build-history\\20260726T2253058823070Z.json",
+    "selectedHistorySha256":  "916bb89716da6ccdf4030df259c54a248bd1167467d4df275afac11430cf166b",
+    "releaseCandidatePath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c2e4f8439fd742c29b01fcc000f4a68f\\goal164-all-selectable\\.llmgc\\release-candidate\\accepted-mechanics-rc1.json",
+    "releaseCandidateSha256":  "451afb8011cac0aaae051a6345bae58a7cf73a496c395f4fb3f0b49ce4a91e5d",
+    "packagePath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c2e4f8439fd742c29b01fcc000f4a68f\\goal164-all-selectable\\package.json",
+    "packageSha256":  "3a3dcf7ca38bf82c2a7edaa72a11de4c32c72552bb8c792c061cb46825962ac2",
+    "finalStateHash":  "693ac449b3bb07ab0df8658fcd863debbd5d20c2860594a845f4155fc8dfab8d",
+    "beforeAfterByteIdentical":  true,
+    "goal169cSmokeRepeated":  false
+}

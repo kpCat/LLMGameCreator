@@ -1,0 +1,12 @@
+{
+    "status":  "GREEN",
+    "scenario":  "goal-169d-qualified-core-only-portable-truth-and-gate-closure",
+    "requiredBase":  "72f69be12b898583d902237ae99e5bc1fe890d2c",
+    "changedPathCount":  20,
+    "allowedCount":  20,
+    "warningCount":  0,
+    "violationCount":  0,
+    "productionApplicationMutationCount":  0,
+    "forbiddenRuntimeDomainGamePackageFeatureModulesGeneratedSourceUnityStandaloneRcMutationCount":  0,
+    "boundedAdditionalProductionPath":  null
+}

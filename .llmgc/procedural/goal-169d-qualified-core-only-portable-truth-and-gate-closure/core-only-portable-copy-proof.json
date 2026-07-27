@@ -1,0 +1,21 @@
+{
+    "status":  "GREEN",
+    "physicalCopy":  true,
+    "sourceProjectPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\075dcad2437e462d81effc609d92e1e2\\goal164-core-only",
+    "copyProjectPath":  "C:\\Users\\endim\\AppData\\Local\\Temp\\LLMGameCreator\\Goal156Copies\\c0e9c55d71494d1ca2f812af3ab4b769\\goal169d-qualified-core-portable",
+    "buildsPresent":  false,
+    "operationalPointerResolved":  false,
+    "operationalPointerDiagnostic":  "standalone.current_pointer_missing",
+    "packageSha256":  "369244d2796fa05a6641986bb1ec90345d85bfb4d4b1e891655cb8ea172489b1",
+    "selectedHistorySha256":  "6a034bed6aa4ef2e97b0427356174f332f33440aef41570e4f0a09205ac13e31",
+    "authoringSha256":  "00fd90feb28ac12b986c130a9dba29be05f6df5fa8f0b6bf6af73734a3192865",
+    "generationSha256":  "174c21aa4bcb869d0dec3610f3b8593595a37907bb0b6854d31ed831704d54b7",
+    "generatedWorldStatus":  "CAMPAIGN_CURRENT",
+    "relationshipStatus":  "RELATIONSHIPS_CURRENT",
+    "regionalEventStatus":  "REGIONAL_EVENTS_CURRENT",
+    "packageCorrelationPassed":  true,
+    "reopenPreservedPackage":  true,
+    "reopenPreservedHistory":  true,
+    "reopenPreservedAuthoring":  true,
+    "reopenPreservedGeneration":  true
+}

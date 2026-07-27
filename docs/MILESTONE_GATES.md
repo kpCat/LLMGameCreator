@@ -1,6 +1,6 @@
 # Milestone Gates
 
-Goal169C is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH` publication/qualification continuation. Goal169B independent audit is retained as `BLOCKED_AT_91BEF55B` with code findings closed. Base64/legacy preflight and all non-smoke gates pass. The single Goal169C cached smoke reuses the host with Unity 0, launches the Player, exits 0 and publishes immutable pointer/run/history/package/payload/RC truth. Portable all-selectable passes, but core-only portable campaign truth fails its final assertion. Goal169C is not accepted, creates no human gate and requires independent blocker audit/follow-up without another smoke.
+Goal169D is the current `GREEN_ACCEPTABLE_CANDIDATE` automated closure. Goal169C is retained as immutable `BLOCKED_AT_72F69BE1`, but its standalone, immutable publication, RC and all-selectable portable proofs remain GREEN. Goal169D proves the only blocker was a creation-only test fixture: one qualified core-only build produces v7 `CAMPAIGN_CURRENT`, and a physical pointer-free copy preserves package/history/source truth without false RC readiness. Goal169D is not accepted, creates no human gate and requires independent audit before the next visible campaign slice.
 
 Status: Goal 097 acceptance-gate plan
 Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`

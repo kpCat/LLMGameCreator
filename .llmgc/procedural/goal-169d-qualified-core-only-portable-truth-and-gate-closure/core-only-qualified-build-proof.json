@@ -1,0 +1,14 @@
+{
+    "status":  "GREEN",
+    "fixture":  "Goal164BuildFixture.Create(coreOnly:true)",
+    "buildInvocationCount":  1,
+    "buildPassed":  true,
+    "buildStatus":  "GREEN",
+    "historyCount":  1,
+    "historySchema":  "unified_game_project_build_history_v7",
+    "historySha256":  "6a034bed6aa4ef2e97b0427356174f332f33440aef41570e4f0a09205ac13e31",
+    "packageSha256":  "369244d2796fa05a6641986bb1ec90345d85bfb4d4b1e891655cb8ea172489b1",
+    "finalStateHash":  "f96274f88364b066a0a80ed1489517f9db5a8cbf87b1c450908462d6a36dd0a6",
+    "generatedWorldStatus":  "CAMPAIGN_CURRENT",
+    "packageCorrelationPassed":  true
+}

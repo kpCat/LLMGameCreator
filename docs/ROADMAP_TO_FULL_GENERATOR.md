@@ -2,7 +2,7 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
-Goal169C is the current `BLOCKED_AFTER_SINGLE_CACHED_SMOKE_PORTABLE_CORE_ONLY_CAMPAIGN_TRUTH` continuation. Goal169B independent audit remains `BLOCKED_AT_91BEF55B` with code findings closed. Base64/legacy preflight, required regressions, Player launch, exit 0, immutable publication, selected-history/actual-package/payload correlation, RC CURRENT and portable all-selectable pass. The final core-only portable campaign-truth assertion fails. Retry remains 0; Goal169C is unaccepted and requires independent blocker audit/follow-up before roadmap expansion.
+Goal169D is the current `GREEN_ACCEPTABLE_CANDIDATE` continuation. Goal169C remains immutable `BLOCKED_AT_72F69BE1`, while its standalone publication, RC and all-selectable portable proofs remain GREEN. Goal169D closes the blocker as a creation-only fixture error: one qualified core-only build produces v7 `CAMPAIGN_CURRENT`, measured six-branch relationship/event truth, and a physical pointer-free portable copy without false RC readiness. Goal169D is unaccepted and requires independent audit before roadmap expansion.
 
 ## Source Of Truth
 

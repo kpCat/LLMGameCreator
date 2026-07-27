@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "goal169d_scaffold_classification_v1",
+  "taskId": "goal-169d-qualified-core-only-portable-truth-and-gate-closure",
+  "requiredBase": "72f69be12b898583d902237ae99e5bc1fe890d2c",
+  "goal169cImplementationCommit": "72f69be12b898583d902237ae99e5bc1fe890d2c",
+  "goal169cIndependentAuditResult": "BLOCKED_AT_72F69BE1",
+  "goal169cStandaloneProof": "GREEN",
+  "goal169cImmutablePublication": "GREEN",
+  "goal169cAllSelectablePortable": "GREEN",
+  "goal169cRcCurrent": true,
+  "goal169cBlocker": "invalid_creation_only_core_fixture",
+  "goal169cRawFixture": "Goal156TestKit.CoreOnly",
+  "goal169cRawFixtureBuildInvocationCount": 0,
+  "goal169dAuthority": "qualified_current_code_core_only_build_then_physical_portable_copy",
+  "classifications": [
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal169D/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Add the bounded behavioral proof for creation-only, qualified core-only, physical portability, RC separation and retained publication truth."
+    },
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal169C/Goal169CStandaloneSmokeTests.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Replace only the invalid creation-only core fixture assertion path; the consumed Goal169C smoke remains disabled and is never rerun."
+    },
+    {
+      "path": "tests/LLMGameCreator.Tests/Application/Goal168/Goal168StandalonePortabilityTests.cs",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Reuse the existing physical portable-copy test pattern without broad refactoring."
+    },
+    {
+      "path": "one exact CurrentState test file if the stale Goal169B assertion reproduces",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "A narrow authority correction is allowed only after reproducing the nongating stale assertion."
+    },
+    {
+      "path": ".devflow/scripts/run-goal169d-core-only-portable-closure.ps1",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Add the dedicated Goal169D runner with zero old smoke, Player and Unity budgets."
+    },
+    {
+      "path": ".devflow/scripts/run-goal169d-core-only-portable-closure.cmd",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Expose the dedicated bounded runner through the local command-wrapper pattern."
+    },
+    {
+      "path": ".devflow/artifact-scope/artifact-scope-policy.json",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Add an exact Goal169D allowlist while retaining all forbidden implementation boundaries."
+    },
+    {
+      "path": ".llmgc/procedural/goal-169d-qualified-core-only-portable-truth-and-gate-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Publish exactly fifteen compact Goal169D evidence files."
+    },
+    {
+      "path": ".llmgc/exports/goal-169d-qualified-core-only-portable-truth-and-gate-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Mirror the fifteen procedural evidence files byte-for-byte."
+    },
+    {
+      "path": "docs/agent-tasks/goal-169d-qualified-core-only-portable-truth-and-gate-closure/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Retain and track the three supplied task-pack files without content mutation."
+    },
+    {
+      "path": "listed current-state, context, queue, gate, risk, debt, strategy and roadmap documents",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Apply only the bounded Goal169D closure and next-action state update."
+    },
+    {
+      "path": "docs/manual-acceptance/goal169d-qualified-core-only-portable-truth-gate-closure.md",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Create the required no-human-gate independent-audit handoff."
+    },
+    {
+      "path": "src/LLMGameCreator.Application/**",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Read-only unless a correctly qualified core-only build reproduces a production defect."
+    },
+    {
+      "path": "Runtime/Domain/GamePackage/FeatureModules/GeneratedPackageMvp/source/Unity/standalone/RC implementation",
+      "classification": "KEEP_AND_COMPLETE",
+      "reason": "Forbidden implementation families remain byte-identical."
+    }
+  ],
+  "classificationCounts": {
+    "KEEP_AND_COMPLETE": 14,
+    "REFACTOR": 0,
+    "REPLACE": 0,
+    "REMOVE_AS_UNUSED": 0
+  },
+  "productionEditsStarted": false,
+  "boundedAdditionalProductionPath": null
+}

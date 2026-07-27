@@ -1,0 +1,15 @@
+{
+    "status":  "GREEN",
+    "rawFixture":  "Goal156TestKit.CoreOnly",
+    "creationMethod":  "Goal156TestKit.CreateGenerated",
+    "buildAndQualifyCalled":  false,
+    "buildInvocationCount":  0,
+    "historyCount":  0,
+    "creationStatus":  "CREATION_ONLY_NOT_QUALIFIED",
+    "generatedWorldStatus":  "SOURCE_READY",
+    "packageValid":  true,
+    "sourcePassed":  true,
+    "cannotClaimCampaignCurrent":  true,
+    "absenceOfV7IsExpected":  true,
+    "productionBug":  false
+}

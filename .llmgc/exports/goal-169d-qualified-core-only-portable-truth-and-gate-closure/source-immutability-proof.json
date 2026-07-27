@@ -1,0 +1,19 @@
+{
+    "status":  "GREEN",
+    "rawPackageSha256":  "0d9f2017ebe51568a4ca429807d670dc4113d23ffd06d996f414190b1424bc46",
+    "rawSourceSha256":  "c03cfa2ec9823d847ab6598b188f723b2920cdcc229d4fb28fdfef694bc65280",
+    "rawAuthoringSha256":  "8779c64123aa2b7faa9f6d27bceb4722c1c922ca0401097d5d6187e10a012b7c",
+    "rawGenerationSha256":  "174c21aa4bcb869d0dec3610f3b8593595a37907bb0b6854d31ed831704d54b7",
+    "qualifiedSourceSha256":  "c03cfa2ec9823d847ab6598b188f723b2920cdcc229d4fb28fdfef694bc65280",
+    "qualifiedAuthoringSha256":  "00fd90feb28ac12b986c130a9dba29be05f6df5fa8f0b6bf6af73734a3192865",
+    "qualifiedGenerationSha256":  "174c21aa4bcb869d0dec3610f3b8593595a37907bb0b6854d31ed831704d54b7",
+    "portableAuthoringSha256":  "00fd90feb28ac12b986c130a9dba29be05f6df5fa8f0b6bf6af73734a3192865",
+    "portableGenerationSha256":  "174c21aa4bcb869d0dec3610f3b8593595a37907bb0b6854d31ed831704d54b7",
+    "rawCreationSourcePreserved":  true,
+    "rawGenerationSidecarsPreserved":  true,
+    "qualifiedPortableAuthoringExact":  true,
+    "qualifiedPortableGenerationExact":  true,
+    "cachedHostBeforeSha256":  "cdfa0af93f0aab03d2a304f454333d017f87ca131bf8f909d85b6acbce17eb04",
+    "cachedHostAfterSha256":  "cdfa0af93f0aab03d2a304f454333d017f87ca131bf8f909d85b6acbce17eb04",
+    "cachedHostByteIdentical":  true
+}
